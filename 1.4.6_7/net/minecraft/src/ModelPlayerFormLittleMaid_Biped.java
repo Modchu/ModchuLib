@@ -416,6 +416,11 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 		return 0.6F;
 	}
 
+	@Override
+	public float[] getArmorModelsSize() {
+		return new float[] {0.5F, 0.1F};
+	}
+
     @Override
     public void action1(Entity entity) {
     	super.action1(entity);
@@ -450,5 +455,4 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 		leftLeg2.rotationPointZ = 0.0F;
 
     }
-
 }

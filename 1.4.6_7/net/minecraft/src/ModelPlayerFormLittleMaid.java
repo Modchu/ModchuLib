@@ -585,14 +585,14 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     		};
     		setParts(s, 0);
     		setPartsSetFlag(1);
-    		setFieldObject(PFLM_Gui, "partsSetFlag", null, 2);
+    		setFieldObject(PFLM_Gui, "partsSetFlag", 2);
     	}
 
     	//GUI パーツ表示・非表示反映
     	if((Boolean) getFieldObject(PFLM_Gui, "showModelFlag")) {
     		setShowModelFlag(0);
     		superShowModelSettingReflects(0);
-    		setFieldObject(PFLM_Gui, "showModelFlag", null, false);
+    		setFieldObject(PFLM_Gui, "showModelFlag", false);
     	} else {
     		setShowModelFlag(-1);
     	}
@@ -672,6 +672,11 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     @Override
     public float getyOffset() {
     	return 1.17F;
+    }
+
+    @Override
+    public float[] getArmorModelsSize() {
+    	return new float[] {0.1F, 0.5F};
     }
 
     /**

@@ -659,10 +659,10 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	sittingBan = false;
 
     	boolean b = true;
-    	((Modchu_ModelRenderer) bipedLeftArm).setVisible(b);
-    	((Modchu_ModelRenderer) bipedRightArm).setVisible(b);
-    	((Modchu_ModelRenderer) bipedLeftLeg).setVisible(b);
-    	((Modchu_ModelRenderer) bipedRightLeg).setVisible(b);
+    	setVisible(bipedLeftArm, b);
+    	setVisible(bipedRightArm, b);
+    	setVisible(bipedLeftLeg, b);
+    	setVisible(bipedRightLeg, b);
     	b = false;
     	if (rightArm != null) rightArm.setVisible(b);
     	if (rightArm2 != null) rightArm2.setVisible(b);
@@ -1349,6 +1349,14 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
 
     public Object getObjectInvokeMethod(Object o, Class[] c, String s, Object ... o1) {
     	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(o.getClass(), s, c), o, o1);
+    }
+
+    public void setFieldObject(Class c, String s, Object o2) {
+    	Modchu_Reflect.setFieldObject(c, s, null, o2);
+    }
+
+    public void setFieldObject(Object o, String s, Object o2) {
+    	Modchu_Reflect.setFieldObject(o.getClass(), s, null, o2);
     }
 
     public void setFieldObject(Class c, String s, Object o2, Object b) {
