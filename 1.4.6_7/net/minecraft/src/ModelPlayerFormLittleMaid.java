@@ -303,7 +303,6 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     	//f5 = スケール値？
     	reset(f, f1, f2, f3, f4, f5, entity);
     	if (!getFirstPerson()) {
-    		//Modchu_Debug.mDebug("!getFirstPerson()");
     		bipedHead.rotateAngleY = f3 / 57.29578F;
     		bipedHead.rotateAngleX = f4 / 57.29578F;
     		bipedRightArm.rotateAngleX = MathHelper
@@ -522,7 +521,6 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     		bipedLeftArm.rotationPointZ = 0.0F;
     	} else {
     		//素手時
-
     		//setOnGround(((EntityPlayer) entity).getSwingProgress(1.0F));
     		bipedRightArm.rotateAngleX = 0.0F;
     		bipedRightArm.rotateAngleY = 0.0F;

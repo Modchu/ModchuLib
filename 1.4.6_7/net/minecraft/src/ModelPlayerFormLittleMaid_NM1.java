@@ -63,6 +63,8 @@ public class ModelPlayerFormLittleMaid_NM1 extends ModelPlayerFormLittleMaid_SR2
 	public ModelPlayerFormLittleMaid_NM1(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
 //@-@132
+    	Arms[0].setRotationPointLM(0.5F, 9.0F, 0F);
+    	Arms[1].setRotationPointLM(-0.5F, 9.0F, 0F);
 	}
 
     @Override
@@ -312,6 +314,7 @@ public class ModelPlayerFormLittleMaid_NM1 extends ModelPlayerFormLittleMaid_SR2
     	actionPartsInit(f, f1);
     }
 
+    @Override
 	public void actionPartsInit(float f, float f1) {
 		rightArm = new Modchu_ModelRenderer(this, 0, 16);
 		rightArm.addBox(-1.0F, 0.0F, -1.0F, 2, 4, 2, f);
@@ -427,68 +430,80 @@ public class ModelPlayerFormLittleMaid_NM1 extends ModelPlayerFormLittleMaid_SR2
 		sleepingBan = false;
 	}
 
+    @Override
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-//未チェックコメントアウト
-/*
-        if ((entityliving instanceof EntityPlayer)
-        		&& !getaimedBow())
-        {
-        	EntityPlayer entityplayer = (EntityPlayer) entityliving;
-            float f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
 
-            if (entitylittlemaid.isWorkingDelay() && entitylittlemaid.getMaidMode() == 4)
-            {
-                f3 *= 8F;
-                float f4 = -0.2F;
-                eyeR1.showModel = eyeL1.showModel = true;
-                Skirt.showModel = false;
-                HornR1.showModel = HornR2.showModel = true;
-                HornR3.showModel = HornR4.showModel = true;
-                HornL1.showModel = HornL2.showModel = true;
-                HornL3.showModel = HornL4.showModel = true;
-                ArmR1.showModel = HandR1.showModel = true;
-                HandR2.showModel = ArmL1.showModel = true;
-                HandL1.showModel = HandL2.showModel = true;
-                LegR1.showModel = LegR2.showModel = true;
-                LegR3.showModel = LegR4.showModel = true;
-                LegR5.showModel = LegL1.showModel = true;
-                LegL2.showModel = LegL3.showModel = true;
-                LegL4.showModel = LegL5.showModel = true;
-                LegR6.showModel = LegR6.showModel = false;
-                bipedLeftLeg.showModel = bipedRightLeg.showModel = true;
-                bootR1.showModel = bootR2.showModel = true;
-                bootL1.showModel = bootL2.showModel = true;
-            }
+    	if (LMM_EntityLittleMaid != null
+    			&& LMM_EntityLittleMaid.isInstance(entityliving)
+    			&& !getaimedBow()) {
+    		float entityIdFactor = (Float) getFieldObject(LMM_EntityLittleMaid, "entityIdFactor", entityliving);
+    		float f3 = (float)entityliving.ticksExisted + f2 + entityIdFactor;
 
-            if (entitylittlemaid.isWorkingDelay() && entitylittlemaid.getMaidMode() == 7)
-            {
-                f3 *= 8F;
-                float f5 = -0.2F;
-                eyeR1.showModel = eyeL1.showModel = true;
-                Skirt.showModel = false;
-                HornR1.showModel = HornR2.showModel = true;
-                HornR3.showModel = HornR4.showModel = true;
-                HornL1.showModel = HornL2.showModel = true;
-                HornL3.showModel = HornL4.showModel = true;
-                ArmR1.showModel = HandR1.showModel = true;
-                HandR2.showModel = ArmL1.showModel = true;
-                HandL1.showModel = HandL2.showModel = true;
-                LegR1.showModel = LegR2.showModel = true;
-                LegR3.showModel = LegR4.showModel = true;
-                LegR5.showModel = LegL1.showModel = true;
-                LegL2.showModel = LegL3.showModel = true;
-                LegL4.showModel = LegL5.showModel = true;
-                LegR6.showModel = LegR6.showModel = false;
-                bipedLeftLeg.showModel = bipedRightLeg.showModel = true;
-                bootR1.showModel = bootR2.showModel = true;
-                bootL1.showModel = bootL2.showModel = true;
-            }
-        }
-*/
+    		if (mh_sin(f3 * 0.05F) + mh_sin(f3 * 0.13F) + mh_sin(f3 * 0.7F) + 2.55F < 0.0F)
+    		{
+    		}
+    		else
+    		{
+    			eyeR.showModel = eyeL.showModel = false;
+    			eyeR1.showModel = eyeL1.showModel = false;
+    			Skirt.showModel = true;
+    			HornR1.showModel = HornR2.showModel = false;
+    			HornR3.showModel = HornR4.showModel = false;
+    			HornL1.showModel = HornL2.showModel = false;
+    			HornL3.showModel = HornL4.showModel = false;
+    			ArmR1.showModel = HandR1.showModel = false;
+    			HandR2.showModel = ArmL1.showModel = false;
+    			HandL1.showModel = HandL2.showModel = false;
+    			LegR1.showModel = LegR2.showModel = false;
+    			LegR3.showModel = LegR4.showModel = false;
+    			LegR5.showModel = LegL1.showModel = false;
+    			LegL2.showModel = LegL3.showModel = false;
+    			LegL4.showModel = LegL5.showModel = false;
+    			LegR6.showModel = LegR6.showModel = true;
+    			bipedLeftLeg.showModel = bipedRightLeg.showModel = false;
+    			bootR1.showModel = bootR2.showModel = false;
+    			bootL1.showModel = bootL2.showModel = false;
+    		}
+    		boolean isWorkingDelay = (Boolean)getObjectInvokeMethod(LMM_EntityLittleMaid, "isWorkingDelay", entityliving);
+    		if (isWorkingDelay) {
+//-@-125
+    			int maidMode = (Integer)getObjectInvokeMethod(LMM_EntityLittleMaid, "getMaidModeInt", entityliving);
+    			int i = 0x00C0;
+    			int i1 = 0x0021;
+//@-@125
+/*//125delete
+    			int maidMode = (Integer)getObjectInvokeMethod(LMM_EntityLittleMaid, "getMaidMode", entityliving);
+    			int i = 4;
+    			int i1 = 7;
+*///125delete
+    			if (maidMode == i
+    					| maidMode == i1) {
+    				eyeR1.showModel = eyeL1.showModel = true;
+    				Skirt.showModel = false;
+    				HornR1.showModel = HornR2.showModel = true;
+    				HornR3.showModel = HornR4.showModel = true;
+    				HornL1.showModel = HornL2.showModel = true;
+    				HornL3.showModel = HornL4.showModel = true;
+    				ArmR1.showModel = HandR1.showModel = true;
+    				HandR2.showModel = ArmL1.showModel = true;
+    				HandL1.showModel = HandL2.showModel = true;
+    				LegR1.showModel = LegR2.showModel = true;
+    				LegR3.showModel = LegR4.showModel = true;
+    				LegR5.showModel = LegL1.showModel = true;
+    				LegL2.showModel = LegL3.showModel = true;
+    				LegL4.showModel = LegL5.showModel = true;
+    				LegR6.showModel = LegR6.showModel = false;
+    				bipedLeftLeg.showModel = bipedRightLeg.showModel = true;
+    				bootR1.showModel = bootR2.showModel = true;
+    				bootL1.showModel = bootL2.showModel = true;
+    			}
+    		}
+    	}
     }
 
+    @Override
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
     {
     	bipedHead.rotateAngleY = f3 / (180F / (float)Math.PI);
@@ -863,8 +878,4 @@ public class ModelPlayerFormLittleMaid_NM1 extends ModelPlayerFormLittleMaid_SR2
     			HandL1.rotationPointY = HandL2.rotationPointY = 0.0F;
    }
 
-    @Override
-    public void action1(Entity entity) {
-    	super.action1(entity);
-    }
 }
