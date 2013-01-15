@@ -1327,6 +1327,14 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(o.getClass(), s), o);
     }
 
+    public Object getObjectInvokeMethod(Class c, String s, Object o1) {
+    	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(c, s), o1);
+    }
+
+    public Object getObjectInvokeMethod(Object o, String s, Object o1) {
+    	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(o.getClass(), s), o1);
+    }
+
     public Object getObjectInvokeMethod(Class c, Class[] c1, String s, Object o1) {
     	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(c, s, c1), o1);
     }

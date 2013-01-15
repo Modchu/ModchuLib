@@ -134,10 +134,6 @@ public class ModelPlayerFormLittleMaid_chrno extends ModelPlayerFormLittleMaid
     	Leftarm2.setRotationPoint(0.0F, -4.0F + f1, 0.0F);
     	bipedBody.addChild(Leftarm2);
 
-    	Rightarm1.setVisible(false);
-    	Rightarm2.setVisible(false);
-    	Leftarm1.setVisible(false);
-    	Leftarm2.setVisible(false);
     }
 
     @Override
@@ -153,10 +149,6 @@ public class ModelPlayerFormLittleMaid_chrno extends ModelPlayerFormLittleMaid
     	Rightarm2.rotateAngleZ = -1.047F;
     	Leftarm1.rotateAngleZ = -1.047F;
     	Leftarm2.rotateAngleZ = 1.047F;
-    	Rightarm1.setVisible(false);
-    	Rightarm2.setVisible(false);
-    	Leftarm1.setVisible(false);
-    	Leftarm2.setVisible(false);
     }
 
     @Override
@@ -186,8 +178,6 @@ public class ModelPlayerFormLittleMaid_chrno extends ModelPlayerFormLittleMaid
     			Leftarm2.setVisible(true);
     			Rightarm1.setVisible(true);
     			Rightarm2.setVisible(true);
-    			setVisible(bipedRightArm, false);
-    			setVisible(bipedLeftArm, false);
     			((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[0]);
     			((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[2]);
     			((Modchu_ModelRenderer) bipedLeftArm).removeChild(Arms[1]);
@@ -198,6 +188,8 @@ public class ModelPlayerFormLittleMaid_chrno extends ModelPlayerFormLittleMaid
     			Leftarm2.addChild(Arms[3]);
     			Arms[0].setRotationPointLM(-5.0F, 0.0F, 0F);
     		}
+    		setVisible(bipedRightArm, false);
+    		setVisible(bipedLeftArm, false);
     		Icewing3.setRotateAngleX(Icewing6.setRotateAngleX(mh_sin(f2 * f2 * 0.6662F) * 0.2F));
     		((Modchu_ModelRenderer) bipedRightArm).setRotateAngleX(0.0F);
     		((Modchu_ModelRenderer) bipedRightArm).setRotateAngleY(0.0F);
@@ -207,6 +199,10 @@ public class ModelPlayerFormLittleMaid_chrno extends ModelPlayerFormLittleMaid
     	} else {
     		if (initWait) {
     			initWait = false;
+    			Rightarm1.isHidden = true;
+    			Rightarm2.isHidden = true;
+    			Leftarm1.isHidden = true;
+    			Leftarm2.isHidden = true;
     			Leftarm1.setVisible(false);
     			Leftarm2.setVisible(false);
     			Rightarm1.setVisible(false);
@@ -377,6 +373,30 @@ public class ModelPlayerFormLittleMaid_chrno extends ModelPlayerFormLittleMaid
     			if (getHandedness() == 0) return bipedRightArm;
     			return bipedLeftArm;
     		}
+    	}
+    }
+
+    @Override
+    public void setArmorBipedRightArmShowModel(boolean b) {
+    	super.setArmorBipedRightArmShowModel(b);
+    	if(getIsWait() && !getaimedBow()) {
+    		Rightarm1.isHidden = b;
+    		Rightarm2.isHidden = b;
+    	} else {
+    		Rightarm1.isHidden = !b;
+    		Rightarm2.isHidden = !b;
+    	}
+    }
+
+    @Override
+    public void setArmorBipedLeftArmShowModel(boolean b) {
+    	super.setArmorBipedLeftArmShowModel(b);
+    	if(getIsWait() && !getaimedBow()) {
+    		Leftarm1.isHidden = b;
+    		Leftarm2.isHidden = b;
+    	} else {
+    		Leftarm1.isHidden = !b;
+    		Leftarm2.isHidden = !b;
     	}
     }
 }

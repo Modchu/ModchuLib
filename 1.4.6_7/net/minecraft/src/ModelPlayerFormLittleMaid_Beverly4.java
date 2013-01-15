@@ -124,7 +124,7 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
 
     	shield = new Modchu_ModelRenderer(this, 24, 0);
     	shield.addBox(-3.5F, -7F, -1F, 7, 7, 1, f);
-    	shield.setRotationPoint(3.5F, 5F, 0F);
+    	shield.setRotationPoint(2.0F, 5F, 0F);
     	shield.rotateAngleX = 0.15F;
     	shield.rotateAngleY = -1.5F;
     	shield.rotateAngleZ = 0.0F;
@@ -545,6 +545,7 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
 		leftLeg.rotateAngleZ = 0.07F;
 		rightLeg2.rotateAngleZ = 0.07F;
 		leftLeg2.rotateAngleZ = -0.07F;
+    	shield.setRotationPoint(1.5F, 5F, 0F);
 	}
 
     @Override
@@ -762,24 +763,6 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
     public void setArmorBipedLeftArmShowModel(boolean b) {
     	super.setArmorBipedLeftArmShowModel(b);
     	leftArm.isHidden = !b;
-    }
-
-    @Override
-    public void setArmorBipedRightLegShowModel(boolean b) {
-    	super.setArmorBipedRightLegShowModel(b);
-    	//rightLeg.isHidden = !b;
-    }
-
-    @Override
-    public void setArmorBipedLeftLegShowModel(boolean b) {
-    	super.setArmorBipedLeftLegShowModel(b);
-    	//leftLeg.isHidden = !b;
-    }
-
-    @Override
-    public void setArmorSkirtShowModel(boolean b) {
-    	super.setArmorSkirtShowModel(b);
-    	Skirt.isHidden = !b;
     }
 
 }
