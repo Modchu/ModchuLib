@@ -103,7 +103,7 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     	SideTailL.setRotationPoint(4.5F, -5.5F, 1.7F);
     	bipedHead.addChild(SideTailL);
 
-    	// ’Ç‰Áƒp[ƒc
+    	// è¿½åŠ ãƒ‘ãƒ¼ãƒ„
     	eyeR = new Modchu_ModelRenderer(this, 17, 0);
     	eyeR.addPlate(-3.0F, -4F, -4.01F, 2, 3, 0, f);
     	eyeR.setRotationPointLM(0.0F, 0.0F, 0.0F);
@@ -122,31 +122,31 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
 
     public void skirtFloatsInit(float f, float f1) {
     	if(!skirtFloats) return;
-    	//ã
+    	//ä¸Š
     	SkirtTop2 = new Modchu_ModelRenderer(this, 6, 16);
     	SkirtTop2.addPlate(0.0F, 0.0F, 0.0F, 8, 6, 0);
     	SkirtTop2.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	Skirt.addChild(SkirtTop2);
 
-    	//‘O
+    	//å‰
     	SkirtFront = new Modchu_ModelRenderer(this, 6, 22);
     	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 8, 10, 0);
     	SkirtFront.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	Skirt.addChild(SkirtFront);
 
-    	//‰E
+    	//å³
     	SkirtRight = new Modchu_ModelRenderer(this, 0, 22);
     	SkirtRight.addPlate(-4.0F, 0.0F, -6.0F, 6, 10, 1);
     	SkirtRight.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	Skirt.addChild(SkirtRight);
 
-    	//¶
+    	//å·¦
     	SkirtLeft = new Modchu_ModelRenderer(this, 14, 22);
     	SkirtLeft.addPlate(4.0F, 0.0F, -6.0F, 6, 10, 1);
     	SkirtLeft.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	Skirt.addChild(SkirtLeft);
 
-    	//Œã‚ë
+    	//å¾Œã‚
     	SkirtBack = new Modchu_ModelRenderer(this, 20, 22);
     	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 8, 10, 0);
     	SkirtBack.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
@@ -169,7 +169,7 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
 
     	if(getIsRiding())
     	{
-    		// æ‚è•¨‚Éæ‚Á‚Ä‚¢‚é
+    		// ä¹—ã‚Šç‰©ã«ä¹—ã£ã¦ã„ã‚‹
     		bipedRightArm.rotateAngleX += -0.6283185F;
     		bipedLeftArm.rotateAngleX += -0.6283185F;
     		bipedRightLeg.rotateAngleX = -1.256637F;
@@ -177,7 +177,7 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     		bipedRightLeg.rotateAngleY = 0.3141593F;
     		bipedLeftLeg.rotateAngleY = -0.3141593F;
     	}
-    	// ƒAƒCƒeƒ€‚Á‚Ä‚é‚Æ‚«‚Ì˜rU‚è‚ğ—}‚¦‚é
+    	// ã‚¢ã‚¤ãƒ†ãƒ æŒã£ã¦ã‚‹ã¨ãã®è…•æŒ¯ã‚Šã‚’æŠ‘ãˆã‚‹
     	if(heldItemLeft != 0) {
     		bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX * 0.5F - 0.3141593F * (float)heldItemLeft;
     	}
@@ -189,7 +189,7 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     	bipedLeftArm.rotateAngleY = 0.0F;
     	if(getOnGround() > -9990F && !getaimedBow())
     	{
-    		// ˜rU‚è
+    		// è…•æŒ¯ã‚Š
     		float f6 = getOnGround();
     		bipedBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * 3.141593F * 2.0F) * 0.2F;
     		//Skirt.rotateAngleY = bipedBody.rotateAngleY;
@@ -212,7 +212,7 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     	}
     	if(getIsSneak())
     	{
-    		// ‚µ‚á‚ª‚İ
+    		// ã—ã‚ƒãŒã¿
     		bipedBody.rotateAngleX = 0.5F;
     		Skirt.rotateAngleX = -0.5F;
     		bipedRightLeg.rotateAngleX -= 0.5F;
@@ -226,7 +226,7 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     		Skirt.rotationPointZ = 0.0F;
     	} else
     	{
-    		// ’Êí—§‚¿
+    		// é€šå¸¸ç«‹ã¡
     		bipedBody.rotateAngleX = 0.0F;
     		Skirt.rotationPointZ = 0.0F;
     		Skirt.rotateAngleX = 0.0F;
@@ -237,7 +237,7 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     		bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 9.0F;
     	}
     	if (getIsWait() && !getaimedBow()) {
-    		//‘Ò‹@ó‘Ô‚Ì“Á•Ê•\¦
+    		//å¾…æ©ŸçŠ¶æ…‹ã®ç‰¹åˆ¥è¡¨ç¤º
     		bipedRightArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F -0.7F;
     		bipedRightArm.rotateAngleY = 0.0F;
     		bipedRightArm.rotateAngleZ = -0.4F;
@@ -247,7 +247,7 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     	}
     	if (getaimedBow())
     	{
-    		// ‹|\‚¦
+    		// å¼“æ§‹ãˆ
     		float f6 = MathHelper.sin(getOnGround() * 3.141593F);
     		float f7 = MathHelper.sin((1.0F - (1.0F - getOnGround()) * (1.0F - getOnGround())) * 3.141593F);
     		bipedRightArm.rotateAngleZ = 0.0F;
@@ -268,7 +268,7 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     		bipedLeftArm.rotateAngleY += bipedHead.rotateAngleY;
     	} else {
     		if (!getIsWait()) {
-    			// ŒÄ‹z ˜r“™
+    			// å‘¼å¸ è…•ç­‰
     			bipedRightArm.rotateAngleZ += 0.3F;
     			bipedLeftArm.rotateAngleZ -= 0.3F;
     			bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;

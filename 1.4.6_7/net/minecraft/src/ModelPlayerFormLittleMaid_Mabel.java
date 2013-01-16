@@ -248,61 +248,61 @@ public class ModelPlayerFormLittleMaid_Mabel extends ModelPlayerFormLittleMaid
     @Override
     public void skirtFloatsInit(float f, float f1) {
     	if(!skirtFloats) return;
-    	//ƒXƒJ[ƒgã
+    	//ã‚¹ã‚«ãƒ¼ãƒˆä¸Š
     	SkirtTop2 = new Modchu_ModelRenderer(this, 4, 24);
     	SkirtTop2.addPlate(0.0F, 0.0F, 0.0F, 4, 4, 0, f + 2.0F);
     	SkirtTop2.setRotationPoint(0.0F, 0.0F, 0.0F);
     	Skirt.addChild(SkirtTop2);
 
-    	//ƒXƒJ[ƒg‘O
+    	//ã‚¹ã‚«ãƒ¼ãƒˆå‰
     	SkirtFront = new Modchu_ModelRenderer(this, 4, 28);
     	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 4, 4, 0, f + 2.0F);
     	SkirtFront.setRotationPoint(0.0F, 0.0F, 0.0F);
     	Skirt.addChild(SkirtFront);
 
-    	//ƒXƒJ[ƒg‰E
+    	//ã‚¹ã‚«ãƒ¼ãƒˆå³
     	SkirtRight = new Modchu_ModelRenderer(this, 0, 28);
     	SkirtRight.addPlate(0.0F, 0.0F, 0.0F, 4, 4, 1, f + 2.0F);
     	SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
     	Skirt.addChild(SkirtRight);
 
-    	//ƒXƒJ[ƒg¶
+    	//ã‚¹ã‚«ãƒ¼ãƒˆå·¦
     	SkirtLeft = new Modchu_ModelRenderer(this, 8, 28);
     	SkirtLeft.addPlate(0.0F, 0.0F, 0.0F, 4, 4, 1, f + 2.0F);
     	SkirtLeft.setRotationPoint(0.0F, 0.0F, 0.0F);
     	Skirt.addChild(SkirtLeft);
 
-    	//ƒXƒJ[ƒgŒã‚ë
+    	//ã‚¹ã‚«ãƒ¼ãƒˆå¾Œã‚
     	SkirtBack = new Modchu_ModelRenderer(this, 12, 28);
     	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 4, 4, 0, f + 2.0F);
     	SkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
     	Skirt.addChild(SkirtBack);
 
-    	//ƒCƒ“ƒi[ƒXƒJ[ƒgã
+    	//ã‚¤ãƒ³ãƒŠãƒ¼ã‚¹ã‚«ãƒ¼ãƒˆä¸Š
     	innerSkirtTop = new Modchu_ModelRenderer(this, 4, 24);
     	innerSkirtTop.addPlate(0.0F, 0.0F, 0.0F, 3, 3, 0, f + 1.6F);
     	innerSkirtTop.setRotationPoint(0.0F, 0.0F, 0.0F);
     	innerSkirt.addChild(innerSkirtTop);
 
-    	//ƒCƒ“ƒi[ƒXƒJ[ƒg‘O
+    	//ã‚¤ãƒ³ãƒŠãƒ¼ã‚¹ã‚«ãƒ¼ãƒˆå‰
     	innerSkirtFront = new Modchu_ModelRenderer(this, 19, 29);
     	innerSkirtFront.addPlate(0.0F, 0.0F, 0.0F, 3, 3, 0, f + 1.6F);
     	innerSkirtFront.setRotationPoint(0.0F, 0.0F, 0.0F);
     	Skirt.addChild(innerSkirtFront);
 
-    	//ƒCƒ“ƒi[ƒXƒJ[ƒg‰E
+    	//ã‚¤ãƒ³ãƒŠãƒ¼ã‚¹ã‚«ãƒ¼ãƒˆå³
     	innerSkirtRight = new Modchu_ModelRenderer(this, 16, 29);
     	innerSkirtRight.addPlate(0.0F, 0.0F, 0.0F, 3, 3, 1, f + 1.6F);
     	innerSkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
     	Skirt.addChild(innerSkirtRight);
 
-    	//ƒCƒ“ƒi[ƒXƒJ[ƒg¶
+    	//ã‚¤ãƒ³ãƒŠãƒ¼ã‚¹ã‚«ãƒ¼ãƒˆå·¦
     	innerSkirtLeft = new Modchu_ModelRenderer(this, 22, 29);
     	innerSkirtLeft.addPlate(0.0F, 0.0F, 0.0F, 3, 3, 1, f + 1.6F);
     	innerSkirtLeft.setRotationPoint(0.0F, 0.0F, 0.0F);
     	Skirt.addChild(innerSkirtLeft);
 
-    	//ƒCƒ“ƒi[ƒXƒJ[ƒgŒã‚ë
+    	//ã‚¤ãƒ³ãƒŠãƒ¼ã‚¹ã‚«ãƒ¼ãƒˆå¾Œã‚
     	innerSkirtBack = new Modchu_ModelRenderer(this, 25, 29);
     	innerSkirtBack.addPlate(0.0F, 0.0F, 0.0F, 3, 3, 0, f + 1.6F);
     	innerSkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -336,7 +336,7 @@ public class ModelPlayerFormLittleMaid_Mabel extends ModelPlayerFormLittleMaid
     	SideTailL.rotateAngleX = SideTailR.rotateAngleX = -bipedHead.rotateAngleX / 2.0F;
     	if(getIsSneak())
     	{
-    		// ‚µ‚á‚ª‚İ
+    		// ã—ã‚ƒãŒã¿
     		Skirt.rotateAngleX += 0.4F;
     		Skirt.rotationPointZ = 0.0F;
     	}
@@ -404,8 +404,8 @@ public class ModelPlayerFormLittleMaid_Mabel extends ModelPlayerFormLittleMaid
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–Ú‚©‚çİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®ã‹ã‚‰è¨­å®š
     	overridePartsNumber = 0;
     	int k = getPartsNumber();
     	if(k < 0) k = 0;

@@ -309,73 +309,73 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 
 	public void skirtFloatsInit(float f, float f1) {
 		if(!skirtFloats) return;
-		//SkirtR ã
+		//SkirtR ä¸Š
 		SkirtTop = new Modchu_ModelRenderer(this, 5, 40);
 		SkirtTop.addPlate(-2.5F, 0.0F, -2.5F, 5, 5, 0);
 		SkirtTop.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		Skirt.addChild(SkirtTop);
 
-		//SkirtR ãŒã
+		//SkirtR ä¸Šå¾Œ
 		SkirtTopBack = new Modchu_ModelRenderer(this, 5, 52);
 		SkirtTopBack.addPlate(-2.5F, 0.0F, -2.5F, 5, 5, 0);
 		SkirtTopBack.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		Skirt.addChild(SkirtTopBack);
 
-		//SkirtR ‘O
+		//SkirtR å‰
 		SkirtFront = new Modchu_ModelRenderer(this, 5, 45);
 		SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 5, 7, 0);
 		SkirtFront.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		Skirt.addChild(SkirtFront);
 
-		//SkirtR ‰E‘O
+		//SkirtR å³å‰
 		SkirtRightFront = new Modchu_ModelRenderer(this, 0, 45);
 		SkirtRightFront.addPlate(-2.5F, 0.0F, -3.5F, 5, 7, 1);
 		SkirtRightFront.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		Skirt.addChild(SkirtRightFront);
 
-		//SkirtR ‰EŒã
+		//SkirtR å³å¾Œ
 		SkirtRightBack = new Modchu_ModelRenderer(this, 0, 57);
 		SkirtRightBack.addPlate(-2.5F, 0.0F, -3.5F, 5, 7, 1);
 		SkirtRightBack.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		Skirt.addChild(SkirtRightBack);
 
-		//SkirtR Œã‚ë
+		//SkirtR å¾Œã‚
 		SkirtBack = new Modchu_ModelRenderer(this, 15, 57);
 		SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 5, 7, 0);
 		SkirtBack.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		Skirt.addChild(SkirtBack);
 
-		//SkirtL ã‘O
+		//SkirtL ä¸Šå‰
 		SkirtTopL = new Modchu_ModelRenderer(this, 25, 40);
 		SkirtTopL.addPlate(-2.5F, 0.0F, -2.5F, 5, 5, 0);
 		SkirtTopL.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		Skirt.addChild(SkirtTopL);
 
-		//SkirtL ãŒã
+		//SkirtL ä¸Šå¾Œ
 		SkirtTopBackL = new Modchu_ModelRenderer(this, 25, 52);
 		SkirtTopBackL.addPlate(-2.5F, 0.0F, -2.5F, 5, 5, 0);
 		SkirtTopBackL.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		Skirt.addChild(SkirtTopBackL);
 
-		//SkirtL ‘O
+		//SkirtL å‰
 		SkirtFrontL = new Modchu_ModelRenderer(this, 25, 45);
 		SkirtFrontL.addPlate(0.0F, 0.0F, 0.0F, 5, 7, 0);
 		SkirtFrontL.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		Skirt.addChild(SkirtFrontL);
 
-		//SkirtL ¶‘O
+		//SkirtL å·¦å‰
 		SkirtLeftFront = new Modchu_ModelRenderer(this, 20, 45);
 		SkirtLeftFront.addPlate(-2.5F, 0.0F, -3.5F, 5, 7, 1);
 		SkirtLeftFront.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		Skirt.addChild(SkirtLeftFront);
 
-		//SkirtL ¶Œã
+		//SkirtL å·¦å¾Œ
 		SkirtLeftBack = new Modchu_ModelRenderer(this, 20, 57);
 		SkirtLeftBack.addPlate(-2.5F, 0.0F, -3.5F, 5, 7, 1);
 		SkirtLeftBack.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		Skirt.addChild(SkirtLeftBack);
 
-		//SkirtL Œã‚ë
+		//SkirtL å¾Œã‚
 		SkirtBackL = new Modchu_ModelRenderer(this, 35, 57);
 		SkirtBackL.addPlate(0.0F, 0.0F, 0.0F, 5, 7, 0);
 		SkirtBackL.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
@@ -387,7 +387,7 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
     {
         super.setLivingAnimationsLM(entityliving, f, f1, f2);
 
-        // ‘ºl”ÉB
+        // æ‘äººç¹æ®–
         if(entityliving instanceof EntityVillager)
         {
              EntityVillager ev = (EntityVillager)entityliving;
@@ -402,7 +402,7 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
              }
         }
 
-        // ”w•‰‚í‚ê
+        // èƒŒè² ã‚ã‚Œ
         isRidingMaster = entityliving.ridingEntity instanceof EntityPlayer;
 
     }
@@ -446,7 +446,7 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 		rightLeg.rotationPointY = 4.0F;
 		leftLeg.rotationPointY = 4.0F;
 
-		if(getIsRiding())  // æ‚è•¨‚Éæ‚Á‚Ä‚¢‚é
+		if(getIsRiding())  // ä¹—ã‚Šç‰©ã«ä¹—ã£ã¦ã„ã‚‹
 		{
 			//shiftY = 0F;
 			if(isRidingMaster)
@@ -469,7 +469,7 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 			}
 		}
 
-		// ƒAƒCƒeƒ€‚Á‚Ä‚é‚Æ‚«‚Ì˜rU‚è‚ğ—}‚¦‚é
+		// ã‚¢ã‚¤ãƒ†ãƒ æŒã£ã¦ã‚‹ã¨ãã®è…•æŒ¯ã‚Šã‚’æŠ‘ãˆã‚‹
 		if(heldItemLeft != 0) {
 			bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX * 0.5F - 0.3141593F * (float)heldItemLeft;
 		}
@@ -484,7 +484,7 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 		Skirt.rotateAngleX = bipedBody.rotateAngleX;
 		if(getIsSneak())
 		{
-			// ‚µ‚á‚ª‚İ
+			// ã—ã‚ƒãŒã¿
 			bipedBody.rotateAngleX = -0.05F + 0.4F;
 			BodyR.rotateAngleX = BodyL.rotateAngleX = 0.55F;
 			if(!getIsWait())
@@ -509,14 +509,14 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 			bipedHeadwear.rotateAngleX += 0.5F;
 		} else
 		{
-			// ’Êí—§‚¿
+			// é€šå¸¸ç«‹ã¡
 			bipedBody.rotateAngleX = -0.05F;
 			rightLeg.rotationPointZ = 0F;
 			leftLeg.rotationPointZ = 0F;
 			bipedHead.rotationPointZ = 0F;
 		}
 		if (getIsWait() && !getaimedBow()) {
-			//‘Ò‹@ó‘Ô‚Ì“Á•Ê•\¦
+			//å¾…æ©ŸçŠ¶æ…‹ã®ç‰¹åˆ¥è¡¨ç¤º
 			bipedRightArm.rotateAngleX -= 0.5F - MathHelper.sin(f2 * 0.067F) * 0.05F;
 			bipedRightArm.rotateAngleY = 0.0F;
 			bipedRightArm.rotateAngleZ = -0.4F;
@@ -528,7 +528,7 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 		} else {
 			if (getaimedBow())
 			{
-				// ‹|\‚¦
+				// å¼“æ§‹ãˆ
 				float f6 = MathHelper.sin(getOnGround() * 3.141593F);
 				float f7 = MathHelper.sin((1.0F - (1.0F - getOnGround()) * (1.0F - getOnGround())) * 3.141593F);
 				bipedRightArm.rotateAngleZ = MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
@@ -538,7 +538,7 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 				bipedRightArm.rotateAngleX = bipedHead.rotateAngleX + MathHelper.sin(f2 * 0.067F) * 0.05F - 1.5F - f6 * 1.2F + f7 * 0.4F;
 				bipedLeftArm.rotateAngleX = -bipedHead.rotateAngleX - MathHelper.sin(f2 * 0.067F) * 0.05F - 1.5F - f6 * 1.2F + f7 * 0.4F;
 			} else {
-				// ’Êí
+				// é€šå¸¸
 				bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F;
 				bipedLeftArm.rotateAngleZ -= MathHelper.cos(f2 * 0.09F) * 0.05F;
 				bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
@@ -546,7 +546,7 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 			}
 		}
 
-		//‘S‘Ì‚Ìã‰º
+		//å…¨ä½“ã®ä¸Šä¸‹
 		bipedHead.rotationPointY += shiftY;
 		bipedBody.rotationPointY += shiftY;
 		//bipedRightArm.rotationPointY += shiftY;
@@ -555,7 +555,7 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 		//upperRightLeg.rotationPointY += shiftY;
 		//upperLeftLeg.rotationPointY += shiftY;
 
-		//ƒXƒJ[ƒg follow Legs
+		//ã‚¹ã‚«ãƒ¼ãƒˆ follow Legs
 		Skirt1.rotateAngleX = rightLeg.rotateAngleX;
 		Skirt2.rotateAngleX = leftLeg.rotateAngleX;
 		Skirt3.rotateAngleX = leftLeg.rotateAngleX * 0.7F + 0.2F;
@@ -575,16 +575,16 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 		Skirt3.rotateAngleZ += MathHelper.cos(f2 * 0.106F) * 0.02F;
 		Skirt4.rotateAngleZ -= MathHelper.cos(f2 * 0.105F) * 0.02F;
 
-		//ƒ‚ƒ‚ƒEƒ‰
+		//ãƒ¢ãƒ¢ã‚¦ãƒ©
 		backRightLeg.rotateAngleX = rightLeg.rotateAngleX < 0 ? rightLeg.rotateAngleX * -0.3F - 0.2F : -0.2F;
 		backLeftLeg.rotateAngleX = leftLeg.rotateAngleX < 0 ? leftLeg.rotateAngleX * -0.3F - 0.2F : -0.2F;
 		backRightLeg.rotateAngleX = backRightLeg.rotateAngleX > -0.05F ? -0.05F : backRightLeg.rotateAngleX;
 		backLeftLeg.rotateAngleX = backLeftLeg.rotateAngleX > -0.05F ? -0.05F : backLeftLeg.rotateAngleX;
 
-		//‘§
+		//æ¯
 		BodyR.rotateAngleX = BodyL.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.03F;
 
-		//ƒ|ƒjƒeƒcƒCƒ“ƒe follow Gravity
+		//ãƒãƒ‹ãƒ†ãƒ„ã‚¤ãƒ³ãƒ† follow Gravity
 		Tail.rotateAngleX = SideTailR.rotateAngleX = SideTailL.rotateAngleX = -bipedHead.rotateAngleX;
 		Tail.rotateAngleZ = -bipedHead.rotateAngleZ;
 		Tail.rotateAngleX += 0.05F;
@@ -663,8 +663,8 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã[partsNumber]‚©‚çİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œ[partsNumber]ã‹ã‚‰è¨­å®š
     	overridePartsNumber = 0;
     	int k = getPartsNumber();
     	if(k < 0) k = 0;
@@ -676,7 +676,7 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
     		setParts(s, k);
     		setPartsSetFlag(3);
     	}
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 1) {
     		boolean b = getGuiShowModel(6);
     		Skirt1.setVisible(b);

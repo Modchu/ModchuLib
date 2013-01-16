@@ -125,7 +125,7 @@ public class ModelPlayerFormLittleMaid_ExtraArms extends ModelPlayerFormLittleMa
     	{
     		EntityPlayer entityplayer = (EntityPlayer) entityliving;
     		float f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
-    		// –Úƒpƒ`
+    		// ç›®ãƒ‘ãƒ
     		if( 0 > MathHelper.sin(f3 * 0.05F) + MathHelper.sin(f3 * 0.13F) + MathHelper.sin(f3 * 0.7F) + 2.55F) {
     			eyeR.setVisible(false);
     			eyeL.setVisible(false);
@@ -242,8 +242,8 @@ public class ModelPlayerFormLittleMaid_ExtraArms extends ModelPlayerFormLittleMa
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã‚©‚ç7ŒÂã‘‚«‚µ‚Äİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œã‹ã‚‰7å€‹ä¸Šæ›¸ãã—ã¦è¨­å®š
     	overridePartsNumber = 7;
     	int k = getPartsNumber() - overridePartsNumber;
     	if(k < 0) k = 0;
@@ -258,7 +258,7 @@ public class ModelPlayerFormLittleMaid_ExtraArms extends ModelPlayerFormLittleMa
     		setPartsSetFlag(2);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 0) {
     		boolean b = getGuiShowModel(k);
     		ChignonR.setVisible(b);

@@ -53,8 +53,8 @@ public class ModelPlayerFormLittleMaid_long extends ModelPlayerFormLittleMaid_SR
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã‚©‚ç6ŒÂã‘‚«‚µ‚Äİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œã‹ã‚‰6å€‹ä¸Šæ›¸ãã—ã¦è¨­å®š
     	overridePartsNumber = 6;
     	int k = getPartsNumber() - overridePartsNumber;
     	if(k < 0) k = 0;
@@ -66,7 +66,7 @@ public class ModelPlayerFormLittleMaid_long extends ModelPlayerFormLittleMaid_SR
     		setPartsSetFlag(3);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 1) {
     		boolean b = getGuiShowModel(k);
     		eyeR.setVisible(b);

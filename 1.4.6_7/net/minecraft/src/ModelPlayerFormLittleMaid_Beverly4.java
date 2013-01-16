@@ -112,7 +112,7 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
     	SkirtL.rotateAngleZ = -0.02F;
     	leftLeg.addChild(SkirtL);
 
-    	// ’Ç‰Áƒp[ƒc
+    	// è¿½åŠ ãƒ‘ãƒ¼ãƒ„
     	eyeR = new Modchu_ModelRenderer(this, 17, 0);
     	eyeR.addPlate(-2.6F, -4.3F, -3.51F, 2, 2, 0, f);
     	eyeR.setRotationPointLM(0.0F, 0.0F, 0.0F);
@@ -172,49 +172,49 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
 
     public void skirtFloatsInit(float f, float f1) {
     	if(!skirtFloats) return;
-    	//SkirtR ã
+    	//SkirtR ä¸Š
     	SkirtTop = new Modchu_ModelRenderer(this, 47, 20);
     	SkirtTop.addPlate(-2.5F, 0.0F, -3.5F, 5, 7, 0);
     	SkirtTop.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	rightLeg.addChild(SkirtTop);
 
-    	//SkirtR ‘O
+    	//SkirtR å‰
     	SkirtFront = new Modchu_ModelRenderer(this, 47, 27);
     	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 5, 12, 0);
     	SkirtFront.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	SkirtR.addChild(SkirtFront);
 
-    	//SkirtR ‰E
+    	//SkirtR å³
     	SkirtRight = new Modchu_ModelRenderer(this, 40, 27);
     	SkirtRight.addPlate(-3.5F, 0.0F, -6.0F, 7, 12, 1);
     	SkirtRight.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	SkirtR.addChild(SkirtRight);
 
-    	//SkirtR Œã‚ë
+    	//SkirtR å¾Œã‚
     	SkirtBack = new Modchu_ModelRenderer(this, 58, 27);
     	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 5, 12, 0);
     	SkirtBack.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	SkirtR.addChild(SkirtBack);
 
-    	//SkirtL ã
+    	//SkirtL ä¸Š
     	SkirtTopL = new Modchu_ModelRenderer(this, 47, 39);
     	SkirtTopL.addPlate(-2.5F, 0.0F, -3.5F, 5, 7, 0);
     	SkirtTopL.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	leftLeg.addChild(SkirtTopL);
 
-    	//SkirtL ‘O
+    	//SkirtL å‰
     	SkirtFrontL = new Modchu_ModelRenderer(this, 47, 46);
     	SkirtFrontL.addPlate(0.0F, 0.0F, 0.0F, 5, 12, 0);
     	SkirtFrontL.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	SkirtL.addChild(SkirtFrontL);
 
-    	//SkirtL ¶
+    	//SkirtL å·¦
     	SkirtLeftL = new Modchu_ModelRenderer(this, 53, 46);
     	SkirtLeftL.addPlate(-3.5F, 0.0F, -6.0F, 7, 12, 1);
     	SkirtLeftL.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	SkirtL.addChild(SkirtLeftL);
 
-    	//SkirtL Œã‚ë
+    	//SkirtL å¾Œã‚
     	SkirtBackL = new Modchu_ModelRenderer(this, 58, 46);
     	SkirtBackL.addPlate(0.0F, 0.0F, 0.0F, 5, 12, 0);
     	SkirtBackL.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
@@ -235,7 +235,7 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
     		isSneak = !entityliving.worldObj.isAirBlock(i, j, k);
     	}
 
-    	//”w•‰‚í‚ê
+    	//èƒŒè² ã‚ã‚Œ
     	if (entityliving.ridingEntity instanceof EntityPlayer)
     	{
     		rightLeg.rotateAngleY = 0.5F;
@@ -323,7 +323,7 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
     		leftLeg2.rotateAngleX = -f14 * 1.2F * f1 + 0.06F - leftLeg.rotateAngleX;
     	}
 
-    	//‹|\‚¦ ˜r
+    	//å¼“æ§‹ãˆ è…•
     	if(getaimedBow()){
     		float f15 = (float)Math.sin(getOnGround() * 3.141593F);
     		float f16 = (float)Math.sin((1.0F - (1.0F - getOnGround()) * (1.0F - getOnGround())) * 3.141593F);
@@ -346,7 +346,7 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
     	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
     	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
     	if ((onGroundR > -9990F || onGroundL > -9990F) && !getaimedBow() && !getOldwalking()) {
-    		// ˜rU‚è
+    		// è…•æŒ¯ã‚Š
     		float f15;
     		float f16, f17;
     		f16 = MathHelper.sin(MathHelper.sqrt_float(onGroundR) * (float)Math.PI * 2.0F);
@@ -382,7 +382,7 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
     		}
     	}
 
-    	//ŒÄ‹z ˜r
+    	//å‘¼å¸ è…•
     	float fb = (float)Math.cos(f2 * 0.07F) * 0.06F;
     	rightArm.rotateAngleZ = 0.2F + fb;
     	leftArm.rotateAngleZ = -rightArm.rotateAngleZ;
@@ -442,8 +442,8 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//Å‰‚©‚çİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//æœ€åˆã‹ã‚‰è¨­å®š
     	overridePartsNumber = 0;
     	int k1 = 0;
     	if(getPartsSetFlag() == 2) {
@@ -456,7 +456,7 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
     		setPartsSetFlag(3);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 1) {
     		boolean b = getGuiShowModel(k1);
     		((Modchu_ModelRenderer) bipedHead).setVisible(b);

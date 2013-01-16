@@ -182,8 +182,8 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 
     @Override
     public void settingShowParts() {
-		//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-		//Å‰‚©‚çİ’è
+		//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+		//æœ€åˆã‹ã‚‰è¨­å®š
 		int k = 0;
     	if((Integer) getFieldObject(PFLM_Gui, "partsSetFlag") == 1) {
 			String s[] = {
@@ -195,7 +195,7 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 			setFieldObject(PFLM_Gui, "partsSetFlag", null, 2);
 		}
 
-		//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+		//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
 		if(getShowModelFlag() == 0) {
 			bipedHead.showModel = getGuiShowModel(k);
 			k++;
@@ -263,7 +263,7 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
     	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
     	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
     	if ((onGroundR > -9990F || onGroundL > -9990F) && !getaimedBow() && !getOldwalking()) {
-    		// ˜rU‚è
+    		// è…•æŒ¯ã‚Š
     		float f6, f7, f8;
     		f6 = MathHelper.sin(MathHelper.sqrt_float(onGroundR) * (float)Math.PI * 2.0F);
     		f7 = MathHelper.sin(MathHelper.sqrt_float(onGroundL) * (float)Math.PI * 2.0F);
@@ -328,7 +328,7 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 			bipedLeftArm.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.05F;
 		} else {
 			if (getIsWait()) {
-				// ‘Ò‹@ó‘Ô
+				// å¾…æ©ŸçŠ¶æ…‹
 				bipedRightArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F - 0.5F;
 				bipedRightArm.rotateAngleY = 0.0F;
 				bipedRightArm.rotateAngleZ = -0.4F;
@@ -336,7 +336,7 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 				bipedLeftArm.rotateAngleY = 0.0F;
 				bipedLeftArm.rotateAngleZ = 0.4F;
 			} else {
-				// ŒÄ‹z ˜r“™
+				// å‘¼å¸ è…•ç­‰
 				bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
 				bipedLeftArm.rotateAngleZ -= MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
 				bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
@@ -380,19 +380,19 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 
     @Override
 	public int showArmorParts(int parts) {
-		// ŠZ‚Ì•\¦—p
+		// é§ã®è¡¨ç¤ºç”¨
 		boolean f;
-		// Š•
+		// å…œ
 		f = parts == 3 ? true : false;
 		setArmorBipedHeadShowModel(f);
-		// ŠZ
+		// é§
 		f = parts == 2 ? true : false;
 		setArmorBipedBodyShowModel(f);
 		setArmorBipedRightArmShowModel(f);
 		setArmorBipedLeftArmShowModel(f);
-		// ‹rb
+		// è„šç”²
 		//f = parts == 1 | parts == 0 ? true : false;
-		// äa“–
+		// è‡‘å½“
 		f = parts == 0 ? true : false;
 		setArmorBipedRightLegShowModel(f);
 		setArmorBipedLeftLegShowModel(f);

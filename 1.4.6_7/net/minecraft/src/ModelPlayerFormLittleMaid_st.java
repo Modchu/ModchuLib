@@ -435,8 +435,8 @@ public class ModelPlayerFormLittleMaid_st extends ModelPlayerFormLittleMaid_SR2
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã‚©‚ç6ŒÂã‘‚«‚µ‚Äİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œã‹ã‚‰6å€‹ä¸Šæ›¸ãã—ã¦è¨­å®š
     	overridePartsNumber = 6;
     	int k = getPartsNumber() - 6;
     	if(k < 0) k = 0;
@@ -450,7 +450,7 @@ public class ModelPlayerFormLittleMaid_st extends ModelPlayerFormLittleMaid_SR2
     		setPartsSetFlag(2);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 0) {
     		Tailroot.showModel = Tailroot1.showModel = Tailroot2.showModel = Tailroot3.showModel =
     				Tailroot4.showModel = Tail1.showModel = Tail2.showModel =

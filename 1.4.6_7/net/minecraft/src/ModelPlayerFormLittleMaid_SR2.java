@@ -30,7 +30,7 @@ public class ModelPlayerFormLittleMaid_SR2 extends ModelPlayerFormLittleMaid {
 	public void initModel(float psize, float pyoffset) {
 		super.initModel(psize, pyoffset);
 
-		// ’Ç‰Áƒp[ƒc
+		// è¿½åŠ ãƒ‘ãƒ¼ãƒ„
 		eyeR = new Modchu_ModelRenderer(this, 32, 19);
 		eyeR.addPlate(-4.0F, -5.0F, -4.001F, 4, 4, 0, psize);
 		eyeR.setRotationPointLM(0.0F, 0.0F, 0.0F);
@@ -58,7 +58,7 @@ public class ModelPlayerFormLittleMaid_SR2 extends ModelPlayerFormLittleMaid {
 			f3 = (float)entityliving.ticksExisted + renderPartialTicks + (Float) Modchu_Reflect.getFieldObject(Modchu_Reflect.getField(LMM_EntityLittleMaid, "entityIdFactor"), entityliving);
 		}
 
-		// –Úƒpƒ`
+		// ç›®ãƒ‘ãƒ
 		if( 0 > MathHelper.sin(f3 * 0.05F) + MathHelper.sin(f3 * 0.13F) + MathHelper.sin(f3 * 0.7F) + 2.55F) {
 			eyeR.setVisible(true);
 			eyeL.setVisible(true);
@@ -82,8 +82,8 @@ public class ModelPlayerFormLittleMaid_SR2 extends ModelPlayerFormLittleMaid {
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã[partsNumber]‚©‚çİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œ[partsNumber]ã‹ã‚‰è¨­å®š
     	overridePartsNumber = 0;
     	int k = getPartsNumber();
     	if(k < 0) k = 0;
@@ -95,7 +95,7 @@ public class ModelPlayerFormLittleMaid_SR2 extends ModelPlayerFormLittleMaid {
     		setPartsSetFlag(2);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 0) {
     		showModelSettingReflects(k);
     		setShowModelFlag(1);

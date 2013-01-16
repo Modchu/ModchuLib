@@ -644,8 +644,8 @@ public class ModelPlayerFormLittleMaid_NM1 extends ModelPlayerFormLittleMaid_SR2
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã‚©‚ç9ŒÂã‘‚«‚µ‚Äİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œã‹ã‚‰9å€‹ä¸Šæ›¸ãã—ã¦è¨­å®š
     	overridePartsNumber = 9;
     	int k = getPartsNumber() - overridePartsNumber;
     	if(k < 0) k = 0;
@@ -684,7 +684,7 @@ public class ModelPlayerFormLittleMaid_NM1 extends ModelPlayerFormLittleMaid_SR2
     		setPartsSetFlag(3);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 1) {
     		showModelSettingReflects(k + 2);
     		setShowModelFlag(2);

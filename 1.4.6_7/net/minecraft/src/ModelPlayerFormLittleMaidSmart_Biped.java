@@ -4,7 +4,7 @@ public class ModelPlayerFormLittleMaidSmart_Biped extends
 		ModelPlayerFormLittleMaidSmart {
 
 	public ModelPlayerFormLittleMaidSmart_Biped(float f) {
-		// TODO ©“®¶¬‚³‚ê‚½ƒRƒ“ƒXƒgƒ‰ƒNƒ^[EƒXƒ^ƒu
+		// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ãƒ»ã‚¹ã‚¿ãƒ–
 	}
 
 }
