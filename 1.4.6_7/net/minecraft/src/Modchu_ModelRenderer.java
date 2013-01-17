@@ -1140,6 +1140,10 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
 		return this;
 	}
+
+    public void setCompiled(boolean b) {
+    	compiled = b;
+    }
 /*//b181delete
     private void compileDisplayList(float par1)
     {

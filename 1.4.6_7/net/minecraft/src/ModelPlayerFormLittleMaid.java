@@ -355,12 +355,12 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     			bipedRightLeg.rotateAngleX -= 0.5F;
     			bipedLeftLeg.rotateAngleX -= 0.5F;
     			bipedHead.rotationPointY = 1.0F;
-    			bipedBody.rotationPointY = 4.0F;
-    			bipedBody.rotationPointZ = 2.0F;
+    			bipedBody.rotationPointY = 3.5F;
+    			bipedBody.rotationPointZ = 1.0F;
     			bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 3.5F - 1.0F;
     			bipedRightLeg.rotationPointZ = bipedLeftLeg.rotationPointZ = 0.25F;
     			Skirt.rotationPointY = 5.5F - 0.5F;
-    			Skirt.rotationPointZ = -2.0F;
+    			Skirt.rotationPointZ = -1.0F;
     			if (skirtFloats) {
     				SkirtFront.rotationPointY = SkirtLeft.rotationPointY = 3.5F;
     				SkirtRight.rotationPointY = 7.3F;
@@ -413,15 +413,12 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     			bipedLeftArm.rotateAngleY = (0.1F - f6 * 0.6F)
     					+ bipedHead.rotateAngleY + 0.4F;
     			bipedRightArm.rotateAngleX = -1.470796F;
-    			bipedLeftArm.rotateAngleX = -1.470796F;
     			bipedRightArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
-    			bipedLeftArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
     			bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
     			bipedLeftArm.rotateAngleZ -= MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
     			bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
-    			bipedLeftArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
     			bipedRightArm.rotateAngleX += bipedHead.rotateAngleX;
-    			bipedLeftArm.rotateAngleX += bipedHead.rotateAngleX;
+    			bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX + 0.4F;
     			bipedRightArm.rotationPointX = -3F;
     			bipedLeftArm.rotationPointX = 3F;
     		} else {
@@ -463,9 +460,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
 
     public void armSwing(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
-    	//Modchu_Debug.mDebug("firstPersonHand onGroundR="+onGroundR+" getOnGround()="+getOnGround());
     	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
-    	//Modchu_Debug.mDebug("firstPersonHand onGroundL="+onGroundL+" getOnGround()="+getOnGround());
     	if ((onGroundR > -9990F || onGroundL > -9990F) && !getaimedBow() && !getOldwalking()) {
     		// 腕振り
     		float f6, f7, f8;
@@ -498,11 +493,9 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     			f6 = 1.0F - f6;
     			f7 = MathHelper.sin(f6 * (float)Math.PI);
     			f8 = MathHelper.sin(onGroundL * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
-    			//if (!getFirstPerson()) {
-    				bipedLeftArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
-    				bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-    				bipedLeftArm.rotateAngleZ = MathHelper.sin(onGroundL * 3.141593F) * 0.4F;
-    			//}
+    			bipedLeftArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
+    			bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
+    			bipedLeftArm.rotateAngleZ = MathHelper.sin(onGroundL * 3.141593F) * 0.4F;
     		} else {
     			bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
     		}

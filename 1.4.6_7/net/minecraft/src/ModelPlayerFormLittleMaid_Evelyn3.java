@@ -442,7 +442,7 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 		bipedBody.rotationPointY = 6F;
 		bipedRightArm.rotationPointY = -6.5F;
 		bipedLeftArm.rotationPointY = -6.5F;
-		Skirt.rotationPointY = 2.0F;
+		Skirt.rotationPointY = 0.0F;
 		rightLeg.rotationPointY = 4.0F;
 		leftLeg.rotationPointY = 4.0F;
 
@@ -535,8 +535,8 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
 				bipedLeftArm.rotateAngleZ = -MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
 				bipedRightArm.rotateAngleY = f6 * 0.6F - 0.1F + bipedHead.rotateAngleY;
 				bipedLeftArm.rotateAngleY = -f6 * 0.6F + 0.1F + bipedHead.rotateAngleY;
-				bipedRightArm.rotateAngleX = bipedHead.rotateAngleX + MathHelper.sin(f2 * 0.067F) * 0.05F - 1.5F - f6 * 1.2F + f7 * 0.4F;
-				bipedLeftArm.rotateAngleX = -bipedHead.rotateAngleX - MathHelper.sin(f2 * 0.067F) * 0.05F - 1.5F - f6 * 1.2F + f7 * 0.4F;
+				bipedRightArm.rotateAngleX = bipedLeftArm.rotateAngleX = bipedHead.rotateAngleX + MathHelper.sin(f2 * 0.067F) * 0.05F - 1.5F - f6 * 1.2F + f7 * 0.4F;
+				bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX + 0.4F;
 			} else {
 				// 通常
 				bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F;
@@ -732,8 +732,8 @@ public class ModelPlayerFormLittleMaid_Evelyn3 extends ModelPlayerFormLittleMaid
     	Skirt2.setRotationPoint(1.0F, 4.0F, -1.0F);
     	Skirt3.setRotationPoint(1.0F, 4.0F, 1.0F);
     	Skirt4.setRotationPoint(-1.0F, 4.0F, 1.0F);
-    	rightLeg.setRotationPoint(-1.0F, 10.0F, 0.0F);
-    	leftLeg.setRotationPoint(1.0F, 10.0F, 0.0F);
+    	rightLeg.setRotationPoint(-2.0F, 10.0F, 0.0F);
+    	leftLeg.setRotationPoint(2.0F, 10.0F, 0.0F);
     	backRightLeg.setRotationPoint(0.0F, 6.0F, 0.0F);
     	backLeftLeg.setRotationPoint(0.0F, 6.0F, 0.0F);
     	rightLeg2.setRotationPoint(0.0F, 5.5F, 0.0F);

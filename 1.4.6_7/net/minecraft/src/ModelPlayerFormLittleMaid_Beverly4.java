@@ -696,17 +696,17 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
 
     public float getHeight()
     {
-        return 1.99F;
+    	return 1.99F;
     }
 
     public float getWidth()
     {
-        return 0.6F;
+    	return 0.6F;
     }
 
     public float getRidingHeight()
     {
-        return 0.99F;
+    	return 0.99F;
     }
 
 	public float getyOffset() {
@@ -718,15 +718,11 @@ public class ModelPlayerFormLittleMaid_Beverly4 extends ModelPlayerFormLittleMai
 	}
 
 	public double getMountedYOffset() {
-		double d = 0.7D;
-		//if(getIsRiding()) {
-	    	//d -= 0.5D;
-	    //};
-	    return d;
+		return 0.7D;
 	}
 
 	public double getSittingyOffset() {
-	    return -0.5D;
+		return -0.5D;
 	}
 
 	@Override
