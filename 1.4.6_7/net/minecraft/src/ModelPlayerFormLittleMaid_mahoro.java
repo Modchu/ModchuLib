@@ -104,7 +104,7 @@ public class ModelPlayerFormLittleMaid_mahoro extends ModelPlayerFormLittleMaid 
     	ShoulderL.setRotationPoint(0.0F, -3.0F, 0.0F);
     	bipedBody.addChild(ShoulderL);
 
-    	// –Ú
+    	// ç›®
     	eyeR = new Modchu_ModelRenderer(this, 0, 16);
     	eyeR.addPlate(-4.0F, -5.0F, -4.001F, 4, 4, 0, f);
     	eyeR.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -114,7 +114,7 @@ public class ModelPlayerFormLittleMaid_mahoro extends ModelPlayerFormLittleMaid 
     	eyeL.setRotationPoint(0.0F, 0.0F, 0.0F);
     	bipedHead.addChild(eyeL);
 
-    	// •\¦‚µ‚È‚¢
+    	// è¡¨ç¤ºã—ãªã„
     	((Modchu_ModelRenderer) bipedHead).removeChild(Tail);
     	((Modchu_ModelRenderer) bipedHead).removeChild(SideTailR);
     	((Modchu_ModelRenderer) bipedHead).removeChild(SideTailL);
@@ -123,7 +123,7 @@ public class ModelPlayerFormLittleMaid_mahoro extends ModelPlayerFormLittleMaid 
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
 
-    	// “Áêƒ‚[ƒVƒ‡ƒ“
+    	// ç‰¹æ®Šãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³
     	SensorR.rotateAngleZ = bipedRightArm.rotateAngleX * 0.3F + mh_sin(f2 * 0.067F) * 0.1F + (-10F / 180F * 3.141526F);
     	SensorL.rotateAngleZ = -SensorR.rotateAngleZ;
     	//DropTail.rotateAngleX = 10F / 180F * 3.141526F - bipedHead.rotateAngleX;
@@ -147,8 +147,8 @@ public class ModelPlayerFormLittleMaid_mahoro extends ModelPlayerFormLittleMaid 
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã‚©‚ç3ŒÂã‘‚«‚µ‚Äİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œã‹ã‚‰3å€‹ä¸Šæ›¸ãã—ã¦è¨­å®š
     	overridePartsNumber = 3;
     	int k = getPartsNumber() - overridePartsNumber;
     	if(k < 0) k = 0;
@@ -161,7 +161,7 @@ public class ModelPlayerFormLittleMaid_mahoro extends ModelPlayerFormLittleMaid 
     		setPartsSetFlag(2);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 0) {
     		boolean b = getGuiShowModel(k);
     		Prim.setVisible(b);

@@ -282,8 +282,8 @@ public class ModelPlayerFormLittleMaid_Pawapro extends ModelPlayerFormLittleMaid
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã‚©‚ç7ŒÂã‘‚«‚µ‚Äİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œã‹ã‚‰7å€‹ä¸Šæ›¸ãã—ã¦è¨­å®š
     	overridePartsNumber = 7;
     	int k = getPartsNumber() - overridePartsNumber;
     	if(k < 0) k = 0;
@@ -296,7 +296,7 @@ public class ModelPlayerFormLittleMaid_Pawapro extends ModelPlayerFormLittleMaid
     		setPartsSetFlag(2);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 0) {
     		boolean b = getGuiShowModel(k);
     		tuba1.setVisible(b);

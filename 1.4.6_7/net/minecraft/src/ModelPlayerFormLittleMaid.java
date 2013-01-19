@@ -114,7 +114,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     }
 
     /**
-     * action—pè‘«•ªŠ„ƒp[ƒc‰Šú‰»
+     * actionç”¨æ‰‹è¶³åˆ†å‰²ãƒ‘ãƒ¼ãƒ„åˆæœŸåŒ–
      */
     public void actionPartsInit(float f, float f1) {
     	rightArm = new Modchu_ModelRenderer(this, 48, 0);
@@ -232,36 +232,36 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     }
 
     /**
-     * ‚Ó‚ñ‚í‚èƒXƒJ[ƒg‰Šú‰»
-     * Vd—l‚É‚Ü‚¾–¢‘Î‰skirtFloats=true‚É‚·‚×‚©‚ç‚¸
+     * ãµã‚“ã‚ã‚Šã‚¹ã‚«ãƒ¼ãƒˆåˆæœŸåŒ–
+     * æ–°ä»•æ§˜ã«ã¾ã æœªå¯¾å¿œskirtFloats=trueã«ã™ã¹ã‹ã‚‰ãš
      */
     public void skirtFloatsInit(float f, float f1) {
     	if(!skirtFloats) return;
-    	//‚Ó‚ñ‚í‚èƒXƒJ[ƒgã
+    	//ãµã‚“ã‚ã‚Šã‚¹ã‚«ãƒ¼ãƒˆä¸Š
     	SkirtTop = new Modchu_ModelRenderer(this, 8, 16);
     	SkirtTop.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0);
     	SkirtTop.setRotationPoint(-4.0F, 5.0F + f, 4.0F);
     	bipedBody.addChild(SkirtTop);
 
-    	//‚Ó‚ñ‚í‚èƒXƒJ[ƒg‘O
+    	//ãµã‚“ã‚ã‚Šã‚¹ã‚«ãƒ¼ãƒˆå‰
     	SkirtFront = new Modchu_ModelRenderer(this, 8, 24);
     	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0);
     	SkirtFront.setRotationPoint(-4.0F, 0.0F + f, -4.0F);
     	bipedBody.addChild(SkirtFront);
 
-    	//‚Ó‚ñ‚í‚èƒXƒJ[ƒg‰E
+    	//ãµã‚“ã‚ã‚Šã‚¹ã‚«ãƒ¼ãƒˆå³
     	SkirtRight = new Modchu_ModelRenderer(this, 0, 24);
     	SkirtRight.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1);
     	SkirtRight.setRotationPoint(-4.0F, 0.0F + f, 4.0F);
     	bipedBody.addChild(SkirtRight);
 
-    	//‚Ó‚ñ‚í‚èƒXƒJ[ƒg¶
+    	//ãµã‚“ã‚ã‚Šã‚¹ã‚«ãƒ¼ãƒˆå·¦
     	SkirtLeft = new Modchu_ModelRenderer(this, 16, 24);
     	SkirtLeft.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1);
     	SkirtLeft.setRotationPoint(4.0F, 0.0F + f, -4.0F);
     	bipedBody.addChild(SkirtLeft);
 
-    	//‚Ó‚ñ‚í‚èƒXƒJ[ƒgŒã‚ë
+    	//ãµã‚“ã‚ã‚Šã‚¹ã‚«ãƒ¼ãƒˆå¾Œã‚
     	SkirtBack = new Modchu_ModelRenderer(this, 24, 24);
     	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0);
     	SkirtBack.setRotationPoint(-4.0F, 0.0F + f, 4.0F);
@@ -295,12 +295,12 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
 
     @Override
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	//f = ˆÚ“®‚É‘‰Á‚·‚é
-    	//f1 = ‘‰Á‚µ‚½‚è–ß‚Á‚½‚èBƒXƒj[ƒNAˆÚ“®‚Í•Ï‰»—Ê‚ª­‚µB
-    	//f2 = ŠÔ‚Åí‚É‘‚¦‘±‚¯‚Ä‚¢‚é
-    	//f3 = Œü‚¢‚Ä‚¢‚é•ûŠp•ûŒü‚Å•Ï‰»
-    	//f4 = Œü‚¢‚Ä‚¢‚éã‰º•ûŒü‚Å•Ï‰»
-    	//f5 = ƒXƒP[ƒ‹’lH
+    	//f = ç§»å‹•æ™‚ã«å¢—åŠ ã™ã‚‹
+    	//f1 = å¢—åŠ ã—ãŸã‚Šæˆ»ã£ãŸã‚Šã€‚ã‚¹ãƒ‹ãƒ¼ã‚¯ã€ç§»å‹•æ™‚ã¯å¤‰åŒ–é‡ãŒå°‘ã—ã€‚
+    	//f2 = æ™‚é–“ã§å¸¸ã«å¢—ãˆç¶šã‘ã¦ã„ã‚‹
+    	//f3 = å‘ã„ã¦ã„ã‚‹æ–¹è§’æ–¹å‘ã§å¤‰åŒ–
+    	//f4 = å‘ã„ã¦ã„ã‚‹ä¸Šä¸‹æ–¹å‘ã§å¤‰åŒ–
+    	//f5 = ã‚¹ã‚±ãƒ¼ãƒ«å€¤ï¼Ÿ
     	reset(f, f1, f2, f3, f4, f5, entity);
     	if (!getFirstPerson()) {
     		bipedHead.rotateAngleY = f3 / 57.29578F;
@@ -325,7 +325,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     		bipedRightLeg.rotateAngleY = 0.0F;
     		bipedLeftLeg.rotateAngleY = 0.0F;
     		if (getIsRiding()) {
-    			// æ‚è•¨‚Éæ‚Á‚Ä‚¢‚é
+    			// ä¹—ã‚Šç‰©ã«ä¹—ã£ã¦ã„ã‚‹
     			bipedRightArm.rotateAngleX += -0.6283185F;
     			bipedLeftArm.rotateAngleX += -0.6283185F;
     			bipedRightLeg.rotateAngleX = -1.256637F;
@@ -333,7 +333,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     			bipedRightLeg.rotateAngleY = 0.3141593F;
     			bipedLeftLeg.rotateAngleY = -0.3141593F;
     		}
-    		// ƒAƒCƒeƒ€‚Á‚Ä‚é‚Æ‚«‚Ì˜rU‚è‚ğ—}‚¦‚é
+    		// ã‚¢ã‚¤ãƒ†ãƒ æŒã£ã¦ã‚‹ã¨ãã®è…•æŒ¯ã‚Šã‚’æŠ‘ãˆã‚‹
     		if (heldItemLeft != 0 && !getOldwalking()) {
     			bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX * 0.5F
     					- 0.3141593F * (float) heldItemLeft;
@@ -349,18 +349,18 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
 
     		bipedRightLeg.rotationPointZ = bipedLeftLeg.rotationPointZ = 0.0F;
     		if (getIsSneak()) {
-    			// ‚µ‚á‚ª‚İ
+    			// ã—ã‚ƒãŒã¿
     			bipedBody.rotateAngleX = 0.5F;
     			Skirt.rotateAngleX = -0.5F;
     			bipedRightLeg.rotateAngleX -= 0.5F;
     			bipedLeftLeg.rotateAngleX -= 0.5F;
     			bipedHead.rotationPointY = 1.0F;
-    			bipedBody.rotationPointY = 4.0F;
-    			bipedBody.rotationPointZ = 2.0F;
+    			bipedBody.rotationPointY = 3.5F;
+    			bipedBody.rotationPointZ = 1.0F;
     			bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 3.5F - 1.0F;
     			bipedRightLeg.rotationPointZ = bipedLeftLeg.rotationPointZ = 0.25F;
     			Skirt.rotationPointY = 5.5F - 0.5F;
-    			Skirt.rotationPointZ = -2.0F;
+    			Skirt.rotationPointZ = -1.0F;
     			if (skirtFloats) {
     				SkirtFront.rotationPointY = SkirtLeft.rotationPointY = 3.5F;
     				SkirtRight.rotationPointY = 7.3F;
@@ -374,7 +374,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     				SkirtTop.rotateAngleX = -1.570796313F - bipedBody.rotateAngleX;
     			}
     		} else {
-    			// ’Êí—§‚¿
+    			// é€šå¸¸ç«‹ã¡
     			bipedBody.rotateAngleX = 0.0F;
     			Skirt.rotationPointZ = 0.0F;
     			Skirt.rotateAngleX = 0.0F;
@@ -402,7 +402,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     			SkirtBack.rotateAngleX -= getMotionY();
     		}
     		if (getaimedBow()) {
-    			// ‹|\‚¦
+    			// å¼“æ§‹ãˆ
     			float f6 = MathHelper.sin(onGround * 3.141593F);
     			float f7 = MathHelper.sin((1.0F - (1.0F - onGround)
     					* (1.0F - onGround)) * 3.141593F);
@@ -413,20 +413,17 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     			bipedLeftArm.rotateAngleY = (0.1F - f6 * 0.6F)
     					+ bipedHead.rotateAngleY + 0.4F;
     			bipedRightArm.rotateAngleX = -1.470796F;
-    			bipedLeftArm.rotateAngleX = -1.470796F;
     			bipedRightArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
-    			bipedLeftArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
     			bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
     			bipedLeftArm.rotateAngleZ -= MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
     			bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
-    			bipedLeftArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
     			bipedRightArm.rotateAngleX += bipedHead.rotateAngleX;
-    			bipedLeftArm.rotateAngleX += bipedHead.rotateAngleX;
+    			bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX + 0.4F;
     			bipedRightArm.rotationPointX = -3F;
     			bipedLeftArm.rotationPointX = 3F;
     		} else {
     			if (getIsWait()) {
-    				// ‘Ò‹@ó‘Ô
+    				// å¾…æ©ŸçŠ¶æ…‹
     				bipedRightArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F - 0.7F;
     				bipedRightArm.rotateAngleY = 0.0F;
     				bipedRightArm.rotateAngleZ = -0.4F;
@@ -434,7 +431,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     				bipedLeftArm.rotateAngleY = 0.0F;
     				bipedLeftArm.rotateAngleZ = 0.4F;
     			} else {
-    				// ŒÄ‹z ˜r“™
+    				// å‘¼å¸ è…•ç­‰
     				bipedRightArm.rotateAngleZ += 0.5F;
     				bipedLeftArm.rotateAngleZ -= 0.5F;
     				bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
@@ -463,11 +460,9 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
 
     public void armSwing(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
-    	//Modchu_Debug.mDebug("firstPersonHand onGroundR="+onGroundR+" getOnGround()="+getOnGround());
     	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
-    	//Modchu_Debug.mDebug("firstPersonHand onGroundL="+onGroundL+" getOnGround()="+getOnGround());
     	if ((onGroundR > -9990F || onGroundL > -9990F) && !getaimedBow() && !getOldwalking()) {
-    		// ˜rU‚è
+    		// è…•æŒ¯ã‚Š
     		float f6, f7, f8;
     		f6 = MathHelper.sin(MathHelper.sqrt_float(onGroundR) * (float)Math.PI * 2.0F);
     		f7 = MathHelper.sin(MathHelper.sqrt_float(onGroundL) * (float)Math.PI * 2.0F);
@@ -498,11 +493,9 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     			f6 = 1.0F - f6;
     			f7 = MathHelper.sin(f6 * (float)Math.PI);
     			f8 = MathHelper.sin(onGroundL * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
-    			//if (!getFirstPerson()) {
-    				bipedLeftArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
-    				bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-    				bipedLeftArm.rotateAngleZ = MathHelper.sin(onGroundL * 3.141593F) * 0.4F;
-    			//}
+    			bipedLeftArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
+    			bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
+    			bipedLeftArm.rotateAngleZ = MathHelper.sin(onGroundL * 3.141593F) * 0.4F;
     		} else {
     			bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
     		}
@@ -512,7 +505,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     @Override
     public void setRotationAnglesfirstPerson(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	if (((EntityPlayer) entity).inventory.getCurrentItem() != null) {
-    		//’n}‚ğ‚Á‚Ä‚¢‚é
+    		//åœ°å›³ã‚’æŒã£ã¦ã„ã‚‹æ™‚
     		bipedRightArm.rotationPointX = -3.0F;
     		bipedRightArm.rotationPointY = 1.5F;
     		bipedRightArm.rotationPointZ = 0.0F;
@@ -520,7 +513,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     		bipedLeftArm.rotationPointY = 1.5F;
     		bipedLeftArm.rotationPointZ = 0.0F;
     	} else {
-    		//‘fè
+    		//ç´ æ‰‹æ™‚
     		//setOnGround(((EntityPlayer) entity).getSwingProgress(1.0F));
     		bipedRightArm.rotateAngleX = 0.0F;
     		bipedRightArm.rotateAngleY = 0.0F;
@@ -538,7 +531,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
 
     @Override
     public void showAllParts() {
-    	// •\¦§ŒÀ‚ğ‰ğœ‚µ‚Ä‚·‚×‚Ä‚Ì•”•i‚ğ•\¦
+    	// è¡¨ç¤ºåˆ¶é™ã‚’è§£é™¤ã—ã¦ã™ã¹ã¦ã®éƒ¨å“ã‚’è¡¨ç¤º
     	setVisible(bipedHead, true);
     	setVisible(bipedBody, true);
     	setVisible(bipedRightArm, true);
@@ -550,20 +543,20 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
 
     @Override
     public int showArmorParts(int parts) {
-    	// ŠZ‚Ì•\¦—p
+    	// é§ã®è¡¨ç¤ºç”¨
     	boolean f;
-    	// Š•
+    	// å…œ
     	f = parts == 3 ? true : false;
     	setArmorBipedHeadShowModel(f);
-    	// ŠZ
+    	// é§
     	f = parts == 2 ? true : false;
     	setArmorBipedBodyShowModel(f);
     	setArmorBipedRightArmShowModel(f);
     	setArmorBipedLeftArmShowModel(f);
-    	// ‹rb
+    	// è„šç”²
     	f = parts == 1 ? true : false;
     	setArmorSkirtShowModel(f);
-    	// äa“–
+    	// è‡‘å½“
     	f = parts == 0 ? true : false;
     	setArmorBipedRightLegShowModel(f);
     	setArmorBipedLeftLegShowModel(f);
@@ -572,11 +565,11 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     }
 
     /**
-     * GUI ƒp[ƒc•\¦E”ñ•\¦İ’è
+     * GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºè¨­å®š
      */
     @Override
     public void settingShowParts() {
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
     	if((Integer) getFieldObject(PFLM_Gui, "partsSetFlag") == 1) {
     		String s[] = {
     				"Head",	"Body", "RightArm", "LeftArm", "RightLeg",
@@ -585,14 +578,14 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     		};
     		setParts(s, 0);
     		setPartsSetFlag(1);
-    		setFieldObject(PFLM_Gui, "partsSetFlag", null, 2);
+    		setFieldObject(PFLM_Gui, "partsSetFlag", 2);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if((Boolean) getFieldObject(PFLM_Gui, "showModelFlag")) {
     		setShowModelFlag(0);
     		superShowModelSettingReflects(0);
-    		setFieldObject(PFLM_Gui, "showModelFlag", null, false);
+    		setFieldObject(PFLM_Gui, "showModelFlag", false);
     	} else {
     		setShowModelFlag(-1);
     	}
@@ -654,7 +647,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     }
 
     /**
-     * g’·
+     * èº«é•·
      */
     @Override
     public float getHeight() {
@@ -662,7 +655,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     }
 
     /**
-     * ‰¡•
+     * æ¨ªå¹…
      */
     @Override
     public float getWidth() {
@@ -674,8 +667,13 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     	return 1.17F;
     }
 
+    @Override
+    public float[] getArmorModelsSize() {
+    	return new float[] {0.1F, 0.5F};
+    }
+
     /**
-     * ‘¼Mob‚ğ“ª‚Éæ‚¹‚½‚Ì‘¼MobŠî€ˆÊ’u’²®
+     * ä»–Mobã‚’é ­ã«ä¹—ã›ãŸæ™‚ã®ä»–MobåŸºæº–ä½ç½®èª¿æ•´
      */
     @Override
     public double getMountedYOffset() {
@@ -701,7 +699,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     }
 
     /**
-     * ‹|‘•”õ‚ÌˆÊ’u’²®
+     * å¼“è£…å‚™æ™‚ã®ä½ç½®èª¿æ•´
      */
     @Override
     public void equippedItemBow() {

@@ -987,8 +987,8 @@ public class ModelPlayerFormLittleMaid_Tenshi extends ModelPlayerFormLittleMaid_
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã[partsNumber]‚©‚ç8ŒÂã‘‚«‚µ‚Äİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œ[partsNumber]ã‹ã‚‰8å€‹ä¸Šæ›¸ãã—ã¦è¨­å®š
     	overridePartsNumber = 8;
     	int k = getPartsNumber() - overridePartsNumber;
     	if(k < 0) k = 0;
@@ -1002,7 +1002,7 @@ public class ModelPlayerFormLittleMaid_Tenshi extends ModelPlayerFormLittleMaid_
     		setPartsSetFlag(3);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 1) {
     		boolean b = getGuiShowModel(6);
     		Skirt1.setVisible(b);

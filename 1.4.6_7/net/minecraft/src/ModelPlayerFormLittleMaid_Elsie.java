@@ -109,37 +109,37 @@ public class ModelPlayerFormLittleMaid_Elsie extends ModelPlayerFormLittleMaid
 
 	public void skirtFloatsInit(float f, float f1) {
 		if(!skirtFloats) return;
-		//RightSkirt ‘O
+		//RightSkirt å‰
 		SkirtFront = new Modchu_ModelRenderer(this, 21, 22);
 		SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 5, 10, 0);
 		SkirtFront.setRotationPoint(0.0F, 0.0F, 0.0F);
 		RightSkirt.addChild(SkirtFront);
 
-		//RightSkirt ‰E
+		//RightSkirt å³
 		SkirtRight = new Modchu_ModelRenderer(this, 14, 22);
 		SkirtRight.addPlate(-3.0F, 0.0F, -6.0F, 6, 10, 1);
 		SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
 		RightSkirt.addChild(SkirtRight);
 
-		//RightSkirt Œã‚ë
+		//RightSkirt å¾Œã‚
 		SkirtBack = new Modchu_ModelRenderer(this, 31, 22);
 		SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 5, 10, 0);
 		SkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
 		RightSkirt.addChild(SkirtBack);
 
-		//LeftSkirt ‘O
+		//LeftSkirt å‰
 		SkirtFrontL = new Modchu_ModelRenderer(this, 21, 22);
 		SkirtFrontL.addPlate(0.0F, 0.0F, 0.0F, 5, 10, 0);
 		SkirtFrontL.setRotationPoint(0.0F, 0.0F, 0.0F);
 		LeftSkirt.addChild(SkirtFrontL);
 
-		//LeftSkirt ¶
+		//LeftSkirt å·¦
 		SkirtLeftL = new Modchu_ModelRenderer(this, 25, 22);
 		SkirtLeftL.addPlate(-3.0F, 0.0F, -6.0F, 6, 10, 1);
 		SkirtLeftL.setRotationPoint(0.0F, 0.0F, 0.0F);
 		LeftSkirt.addChild(SkirtLeftL);
 
-		//LeftSkirt Œã‚ë
+		//LeftSkirt å¾Œã‚
 		SkirtBackL = new Modchu_ModelRenderer(this, 31, 22);
 		SkirtBackL.addPlate(0.0F, 0.0F, 0.0F, 5, 10, 0);
 		SkirtBackL.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -204,7 +204,7 @@ public class ModelPlayerFormLittleMaid_Elsie extends ModelPlayerFormLittleMaid
     		bipedLeftArm.rotateAngleY = 0.0F;
     		bipedLeftArm.rotateAngleZ = 0.4F;
     	}
-    	//ƒXƒJ[ƒg‚Æ”¯‚ä‚ç‚ä‚ç
+    	//ã‚¹ã‚«ãƒ¼ãƒˆã¨é«ªã‚†ã‚‰ã‚†ã‚‰
     	RightSkirt.rotateAngleZ += mh_cos(f2 * 0.06F) * 0.03F + 0.03F;
     	LeftSkirt.rotateAngleZ -= mh_cos(f2 * 0.06F) * 0.03F + 0.03F;
     	RightSkirt.rotateAngleX += mh_sin(f2 * 0.04F) * 0.03F;
@@ -261,8 +261,8 @@ public class ModelPlayerFormLittleMaid_Elsie extends ModelPlayerFormLittleMaid
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã‚©‚ç7ŒÂã‘‚«‚µ‚Äİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œã‹ã‚‰7å€‹ä¸Šæ›¸ãã—ã¦è¨­å®š
     	overridePartsNumber = 7;
     	int k = getPartsNumber() - overridePartsNumber;
     	if(k < 0) k = 0;
@@ -274,7 +274,7 @@ public class ModelPlayerFormLittleMaid_Elsie extends ModelPlayerFormLittleMaid
     		setPartsSetFlag(2);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 0) {
     		boolean b = getGuiShowModel(6);
     		RightSkirt.setVisible(b);

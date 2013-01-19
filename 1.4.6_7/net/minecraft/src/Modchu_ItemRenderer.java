@@ -32,7 +32,7 @@ public class Modchu_ItemRenderer extends MMM_ItemRenderer {
     		prevEquippedProgress = 0.0F;
 
     		try {
-    			// ƒ[ƒJƒ‹•Ï”‚ğŠm•Û
+    			// ãƒ­ãƒ¼ã‚«ãƒ«å¤‰æ•°ã‚’ç¢ºä¿
     			itemToRender = (ItemStack)ModLoader.getPrivateValue(ItemRenderer.class, this, 1);
     			equippedProgress = (Float)ModLoader.getPrivateValue(ItemRenderer.class, this, 2);
     			prevEquippedProgress = (Float)ModLoader.getPrivateValue(ItemRenderer.class, this, 3);

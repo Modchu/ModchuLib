@@ -30,7 +30,7 @@ public class Modchu_Config
 	}
 
 	public static void writerConfig(File file, String[] s) {
-		//İ’èƒtƒ@ƒCƒ‹‘‚«‚İ
+		//è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«æ›¸ãè¾¼ã¿
 		try {
 			BufferedWriter bwriter = new BufferedWriter(new FileWriter(
 					file));
@@ -53,7 +53,7 @@ public class Modchu_Config
 	}
 
 	public static Object loadConfig(List configList, File file, String s, Object o) {
-		// cfgİ’è€–Ú“Ç‚İ‚İ
+		// cfgè¨­å®šé …ç›®èª­ã¿è¾¼ã¿
 		List list = new ArrayList();
 		list = (ArrayList) cfgData.get(file);
 		if (list == null) {
@@ -112,7 +112,7 @@ public class Modchu_Config
 	}
 
 	public static void writerSupplementConfig(File file, String[] k, String[] k1) {
-		//İ’èƒtƒ@ƒCƒ‹‚É‚È‚¢€–Ú’Ç‰Á‘‚«‚İ
+		//è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã«ãªã„é …ç›®è¿½åŠ æ›¸ãè¾¼ã¿
 		if (file.exists() && file.canRead() && file.canWrite()) {
 			List lines = new LinkedList();
 			try {
@@ -145,7 +145,7 @@ public class Modchu_Config
 						}
 					}
 				}
-				// “Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚Á‚½‚©ƒ`ƒFƒbƒNA“Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚é‚Æì¬‚µ‚È‚¨‚µ
+				// èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã£ãŸã‹ãƒã‚§ãƒƒã‚¯ã€èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã‚‹ã¨ä½œæˆã—ãªãŠã—
 				Boolean e1 = false;
 				for (int i = 0; i < k.length; i++) {
 					if (e[i] == false) {
@@ -172,7 +172,7 @@ public class Modchu_Config
 				er.printStackTrace();
 			}
 			try {
-			// •Û‘¶
+			// ä¿å­˜
 				if (!lines.isEmpty()
 						&& (file.exists() || file.createNewFile())
 						&& file.canWrite()) {
@@ -194,7 +194,7 @@ public class Modchu_Config
 	}
 
 	public static void saveParamater(File file, String[] k, String[] k1) {
-		// Guiİ’è€–Ú‚ğcfgƒtƒ@ƒCƒ‹‚É•Û‘¶
+		// Guiè¨­å®šé …ç›®ã‚’cfgãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜
 		String textureName = getTextureName();
 		String defaultTexture = getDefaultTexture();
 		int maidColor = getMaidColor();
@@ -235,7 +235,7 @@ public class Modchu_Config
 					}
 				}
 				breader = new BufferedReader(new FileReader(file));
-				//showModel[]ê—p
+				//showModel[]å°‚ç”¨
 				while ((rl = breader.readLine()) != null) {
 					if (partsSaveFlag) {
 						//Modchu_Debug.mDebug("cfg file save.0 rl=" + rl);
@@ -282,7 +282,7 @@ public class Modchu_Config
 						continue;
 					}
 				}
-				// “Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚Á‚½‚©ƒ`ƒFƒbƒNA“Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚é‚Æì¬‚µ‚È‚¨‚µ
+				// èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã£ãŸã‹ãƒã‚§ãƒƒã‚¯ã€èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã‚‹ã¨ä½œæˆã—ãªãŠã—
 				Boolean e1 = false;
 				for (int i = 0; i < k.length; i++) {
 					if (e[i] == false) {
@@ -328,7 +328,7 @@ public class Modchu_Config
 				er.printStackTrace();
 			}
 			try {
-			// •Û‘¶
+			// ä¿å­˜
 				if (!lines.isEmpty()
 						&& (file.exists() || file.createNewFile())
 						&& file.canWrite()) {
@@ -350,7 +350,7 @@ public class Modchu_Config
 	}
 
 	public static void loadConfigShowModel(List configList, File file) {
-		// cfgİ’è€–ÚShowModel[]“Ç‚İ‚İ
+		// cfgè¨­å®šé …ç›®ShowModel[]èª­ã¿è¾¼ã¿
 		try {
 			BufferedReader breader = new BufferedReader(new FileReader(
 					file));
@@ -428,7 +428,7 @@ public class Modchu_Config
 	}
 
 	public static void writerModelList(String[] s, File file, List<String> list) {
-		//Listƒtƒ@ƒCƒ‹‘‚«‚İ
+		//Listãƒ•ã‚¡ã‚¤ãƒ«æ›¸ãè¾¼ã¿
 		try {
 			BufferedWriter bwriter = new BufferedWriter(new FileWriter(file));
 			for (int i = 0; i < s.length ; i++)
@@ -450,7 +450,7 @@ public class Modchu_Config
 	}
 
 	public static void loadList(File file, List<String> list,String listName) {
-		// ModelList“Ç‚İ‚İ
+		// ModelListèª­ã¿è¾¼ã¿
 		List<String> lines = new ArrayList<String>();
 		try {
 			BufferedReader breader = new BufferedReader(new FileReader(
@@ -483,7 +483,7 @@ public class Modchu_Config
 	}
 
 	public static void saveOthersPlayerParamater(String playerName, HashMap map, File file, String[] k, String[] k1, boolean flag) {
-		// GuiOthersPlayerİ’è€–Ú‚ğcfgƒtƒ@ƒCƒ‹‚É•Û‘¶
+		// GuiOthersPlayerè¨­å®šé …ç›®ã‚’cfgãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜
 		if (file.exists() && file.canRead() && file.canWrite()) {
 			List lines = new LinkedList();
 			try {
@@ -517,7 +517,7 @@ public class Modchu_Config
 					}
 				}
 				breader = new BufferedReader(new FileReader(file));
-				//OthersPlayer[]ê—p
+				//OthersPlayer[]å°‚ç”¨
 				while ((rl = breader.readLine()) != null) {
 					String m = (String) rl;
 					if (flag) {
@@ -555,7 +555,7 @@ public class Modchu_Config
 						continue;
 					}
 				}
-				// “Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚Á‚½‚©ƒ`ƒFƒbƒNA“Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚é‚Æì¬‚µ‚È‚¨‚µ
+				// èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã£ãŸã‹ãƒã‚§ãƒƒã‚¯ã€èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã‚‹ã¨ä½œæˆã—ãªãŠã—
 				Boolean e1 = false;
 				for (int i = 0; i < k.length; i++) {
 					if (e[i] == false) {
@@ -593,7 +593,7 @@ public class Modchu_Config
 				er.printStackTrace();
 			}
 			try {
-			// •Û‘¶
+			// ä¿å­˜
 				if (!lines.isEmpty()
 						&& (file.exists() || file.createNewFile())
 						&& file.canWrite()) {
@@ -615,7 +615,7 @@ public class Modchu_Config
 	}
 
 	public static void loadConfigPlayerLocalData(HashMap map, File file) {
-		// GuiOthersPlayerİ’è€–ÚPlayerLocalData“Ç‚İ‚İ
+		// GuiOthersPlayerè¨­å®šé …ç›®PlayerLocalDataèª­ã¿è¾¼ã¿
 		int modeOthersSettingOffline = getModeOthersSettingOffline();
 		try {
 			BufferedReader breader = new BufferedReader(new FileReader(
@@ -694,7 +694,7 @@ public class Modchu_Config
 	}
 
 	public static void removeOthersPlayerParamater(File file, String name) {
-		// GuiOthersPlayerİ’è‚©‚çw’è“à—eíœ
+		// GuiOthersPlayerè¨­å®šã‹ã‚‰æŒ‡å®šå†…å®¹å‰Šé™¤
 		if (file.exists() && file.canRead() && file.canWrite()) {
 			List lines = new LinkedList();
 			try {
@@ -725,7 +725,7 @@ public class Modchu_Config
 				er.printStackTrace();
 			}
 			try {
-			// •Û‘¶
+			// ä¿å­˜
 				if (!lines.isEmpty()
 						&& (file.exists() || file.createNewFile())
 						&& file.canWrite()) {

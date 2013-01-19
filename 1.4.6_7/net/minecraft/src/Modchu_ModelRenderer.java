@@ -23,7 +23,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public String boxName;
     private static Random rnd = new Random();
 
-	//littleMaidMob‹¤’Ê
+	//littleMaidMobå…±é€š
 	/**
 	 * (180F / (float)Math.PI)
 	 */
@@ -49,7 +49,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public FloatBuffer matrix;
 	public boolean isInvertX;
 
-	//SmartMoving‹¤’Ê
+	//SmartMovingå…±é€š
 	protected ModelRenderer base;
 	public static final int XYZ = RotZYX;
 	public static final int XZY = RotYZX;
@@ -115,8 +115,8 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	scaleY = 1.0F;
     	scaleZ = 1.0F;
     	rotatePriority = RotXYZ;
-    	angleFirst = false;	// •ÏŠ·‚ğ“–‚Ä‚é‡”Ô
-    	parentModel = null;	// “¯‚¶‰ñ“]²‚É‚È‚ée
+    	angleFirst = false;	// å¤‰æ›ã‚’å½“ã¦ã‚‹é †ç•ª
+    	parentModel = null;	// åŒã˜å›è»¢è»¸ã«ãªã‚‹è¦ª
     	textureOffsetX = i;
     	textureOffsetY = j;
     	boxName = s;
@@ -170,7 +170,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     }
 
     /**
-     * •`‰æ—p‚Ìƒ{ƒbƒNƒXAq‹Ÿ‚ğƒNƒŠƒA‚·‚é
+     * æç”»ç”¨ã®ãƒœãƒƒã‚¯ã‚¹ã€å­ä¾›ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
      */
     public void clearCubeList() {
     	cubeList.clear();
@@ -208,11 +208,11 @@ public class Modchu_ModelRenderer extends ModelRenderer
     public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale) {
     	if (itemstack == null) return;
 
-    	// ƒAƒCƒeƒ€‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒO
+    	// ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
     	GL11.glPushMatrix();
 
 		Item item = itemstack.getItem();
-    	// ƒAƒCƒeƒ€‚Ìí—Ş‚É‚æ‚é•\¦ˆÊ’u‚Ì•â³
+    	// ã‚¢ã‚¤ãƒ†ãƒ ã®ç¨®é¡ã«ã‚ˆã‚‹è¡¨ç¤ºä½ç½®ã®è£œæ­£
     	if (adjust) {
 //    		GL11.glTranslatef(-0.0625F, 0.4375F, 0.0625F);
 
@@ -303,7 +303,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		pRender.renderBlocks.renderBlockAsItem(Block.blocksList[itemstack.itemID], itemstack.getItemDamage(), 1.0F);
     		GL11.glDisable(GL11.GL_CULL_FACE);
     	} else {
-    		// ƒAƒCƒeƒ€‚ÉF•t‚¯
+    		// ã‚¢ã‚¤ãƒ†ãƒ ã«è‰²ä»˜ã‘
     		pRender.loadTexture("/gui/items.png");
     		for (int j = 0; j <= (itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0); j++) {
     			int k = itemstack.getItem().getColorFromItemStack(itemstack, j);
@@ -319,7 +319,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     }
 
     public boolean renderDecoBlock(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale, int addSupport) {
-    	//DecoBlock, FavBlock—p•`‰æ
+    	//DecoBlock, FavBlockç”¨æç”»
     	Item item = itemstack.getItem();
     	Block block = Block.blocksList[item.itemID];
     	boolean flag = false;
@@ -392,12 +392,12 @@ public class Modchu_ModelRenderer extends ModelRenderer
     }
 
     public void setRotatePriority(int pValue) {
-    	// ‰ñ“]•ÏŠ·‚ğs‚¤‡˜Arot???‚ğw’è‚·‚é
+    	// å›è»¢å¤‰æ›ã‚’è¡Œã†é †åºã€rot???ã‚’æŒ‡å®šã™ã‚‹
     	rotatePriority = pValue;
     }
 
 	protected void setRotation() {
-		// •ÏŠ·‡ˆÊ‚Ìİ’è
+		// å¤‰æ›é †ä½ã®è¨­å®š
 		switch (rotatePriority) {
 		case RotXYZ:
 			if (rotateAngleZ != 0.0F) {
@@ -469,7 +469,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	}
 
     public void renderObject(float par1, EntityLiving pEntityLiving) {
-    	// ƒŒƒ“ƒ_ƒŠƒ“ƒOA‚ ‚Æq‹Ÿ‚à
+    	// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã€ã‚ã¨å­ä¾›ã‚‚
     	if (showModel) {
     		GL11.glScalef(scaleX, scaleY, scaleZ);
     		GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, matrix);
@@ -597,7 +597,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	} else if (rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F) {
     		GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
     	}
-    	// ƒ|ƒXƒgƒŒƒ“ƒ_ƒŠƒ“ƒOA‚ ‚Æq‹Ÿ‚à
+    	// ãƒã‚¹ãƒˆãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã€ã‚ã¨å­ä¾›ã‚‚
     	GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, matrix);
 
     	if (childModels != null) {
@@ -625,8 +625,8 @@ public class Modchu_ModelRenderer extends ModelRenderer
     }
 
     /**
-     * ƒp[ƒc•`‰æ“_‚Ìƒ}ƒgƒŠƒNƒX‚ğİ’è‚·‚éB
-     * ‚±‚êˆÈ‘O‚Éİ’è‚³‚ê‚½ƒ}ƒgƒŠƒNƒX‚Í”jŠü‚³‚ê‚éB
+     * ãƒ‘ãƒ¼ãƒ„æç”»æ™‚ç‚¹ã®ãƒãƒˆãƒªã‚¯ã‚¹ã‚’è¨­å®šã™ã‚‹ã€‚
+     * ã“ã‚Œä»¥å‰ã«è¨­å®šã•ã‚ŒãŸãƒãƒˆãƒªã‚¯ã‚¹ã¯ç ´æ£„ã•ã‚Œã‚‹ã€‚
      */
     public Modchu_ModelRenderer loadMatrix() {
     	GL11.glLoadMatrix(matrix);
@@ -676,7 +676,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	return flag;
     }
 
-    // Deg•t‚«‚ÍŠp“xw’è‚ª“x”–@
+    // Degä»˜ãã¯è§’åº¦æŒ‡å®šãŒåº¦æ•°æ³•
     public float getRotateAngleX() {
     	return rotateAngleX;
     }
@@ -820,7 +820,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     }
 
     public void preRotateRenderDeg(float f) {
-    	// preRotationAngle‚Ì’l‚ğŠp“x‚Å“ü‚ê‚éi90‹‚Æ‚©j
+    	// preRotationAngleã®å€¤ã‚’è§’åº¦ã§å…¥ã‚Œã‚‹ï¼ˆ90Â°ã¨ã‹ï¼‰
         if(setParentsRotate() && !parentModel.showModel) {
             return;
         }
@@ -870,7 +870,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     }
 
     protected boolean setParentsRotate() {
-    	// e‚ª‚ ‚é‚È‚ç‚»‚ÌŠÔÚî•ñ‚ğƒRƒs[
+    	// è¦ªãŒã‚ã‚‹ãªã‚‰ãã®é–“æ¥æƒ…å ±ã‚’ã‚³ãƒ”ãƒ¼
         if(parentModel != null) {
             rotationPointX = parentModel.rotationPointX;
             rotationPointY = parentModel.rotationPointY;
@@ -890,7 +890,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	preRotationPointZ = f2;
     }
 
-    // ƒo[ƒWƒ‡ƒ“•ÏX‚ÉˆË‘¶‚³‚¹‚È‚¢‚½‚ß‚ÌŠÖ”ŒQ
+    // ãƒãƒ¼ã‚¸ãƒ§ãƒ³å¤‰æ›´ã«ä¾å­˜ã•ã›ãªã„ãŸã‚ã®é–¢æ•°ç¾¤
 
     public void addBoxLM(float f, float f1, float f2, int i, int j, int k) {
         addBox(f, f1, f2, i, j, k);
@@ -1140,6 +1140,10 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
 		return this;
 	}
+
+    public void setCompiled(boolean b) {
+    	compiled = b;
+    }
 /*//b181delete
     private void compileDisplayList(float par1)
     {

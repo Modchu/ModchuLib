@@ -27,6 +27,8 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     public ModelPlayerFormLittleMaid_Elsa2(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
 //@-@132
+    	Arms[0].setRotationPointLM(-0.7F, 8.5F, 0F);
+    	Arms[1].setRotationPointLM(0.7F, 8.5F, 0F);
     }
 
     @Override
@@ -103,7 +105,7 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     	SideTailL.setRotationPoint(4.5F, -5.5F, 1.7F);
     	bipedHead.addChild(SideTailL);
 
-    	// ’Ç‰Áƒp[ƒc
+    	// è¿½åŠ ãƒ‘ãƒ¼ãƒ„
     	eyeR = new Modchu_ModelRenderer(this, 17, 0);
     	eyeR.addPlate(-3.0F, -4F, -4.01F, 2, 3, 0, f);
     	eyeR.setRotationPointLM(0.0F, 0.0F, 0.0F);
@@ -120,33 +122,124 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     	actionPartsInit(f, f1);
     }
 
+    @Override
+    public void actionPartsInit(float f, float f1) {
+    	rightArm = new Modchu_ModelRenderer(this, 42, 17);
+    	rightArm.addBox(-1.0F, 0.0F, -1.0F, 2, 5, 2, f);
+    	rightArm.setRotationPoint(-3.0F, 9.5F, 0.0F);
+    	bipedBody.addChild(rightArm);
+
+    	rightArmPlus = new Modchu_ModelRenderer(this);
+
+    	rightArm2 = new Modchu_ModelRenderer(this, 42, 22);
+    	rightArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 3, 2, f);
+    	rightArm2.setRotationPoint(0.0F, 5.0F, 0.0F);
+    	rightArm.addChild(rightArm2);
+
+    	rightArmPlus2 = new Modchu_ModelRenderer(this);
+
+    	rightHand = new Modchu_ModelRenderer(this, 42, 25);
+    	rightHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	rightHand.setRotationPoint(0.0F, 3.0F, 0.0F);
+    	rightArm2.addChild(rightHand);
+
+    	leftArm = new Modchu_ModelRenderer(this, 50, 17);
+    	leftArm.addBox(-1.0F, 0.0F, -1.0F, 2, 5, 2, f);
+    	leftArm.setRotationPoint(3.0F, 9.5F, 0.0F);
+    	bipedBody.addChild(leftArm);
+
+    	leftArmPlus = new Modchu_ModelRenderer(this);
+
+    	leftArm2 = new Modchu_ModelRenderer(this, 50, 22);
+    	leftArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 2, 2, f);
+    	leftArm2.setRotationPoint(0.0F, 2.0F, 0.0F);
+    	leftArm.addChild(leftArm2);
+
+    	leftArmPlus2 = new Modchu_ModelRenderer(this);
+
+    	leftHand = new Modchu_ModelRenderer(this, 50, 25);
+    	leftHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	leftHand.setRotationPoint(0.0F, 3.0F, 0.0F);
+    	leftArm2.addChild(leftHand);
+
+    	rightLeg = new Modchu_ModelRenderer(this, 28, 17);
+    	rightLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
+    	rightLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	bipedBody.addChild(rightLeg);
+
+    	rightLegPlus = new Modchu_ModelRenderer(this);
+
+    	rightLeg2 = new Modchu_ModelRenderer(this, 28, 22);
+    	rightLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+    	rightLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	rightLeg.addChild(rightLeg2);
+
+    	rightLegPlus2 = new Modchu_ModelRenderer(this);
+
+    	leftLeg = new Modchu_ModelRenderer(this, 28, 17);
+    	leftLeg.mirror = true;
+    	leftLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
+    	leftLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	bipedBody.addChild(leftLeg);
+
+    	leftLegPlus = new Modchu_ModelRenderer(this);
+    	leftLegPlus.mirror = true;
+    	leftLegPlus.setTextureOffset(36, 19).addPlate(-1.5F, -2.0F, -4.01F, 3, 4, 4, f);
+    	leftLegPlus.rotateAngleX = 1.570796313F;
+    	leftLeg.addChild(leftLegPlus);
+
+    	leftLeg2 = new Modchu_ModelRenderer(this, 28, 22);
+    	leftLeg2.mirror = true;
+    	leftLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+    	leftLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	leftLeg.addChild(leftLeg2);
+
+    	leftLegPlus2 = new Modchu_ModelRenderer(this);
+
+    	rightHand.showModel = leftHand.showModel =
+    		rightArm.showModel = leftArm.showModel =
+    			rightArmPlus.showModel = rightArmPlus2.showModel =
+    				leftArmPlus.showModel = leftArmPlus2.showModel =
+    					rightLegPlus.showModel = rightLegPlus2.showModel =
+    						leftLegPlus.showModel = leftLegPlus2.showModel =
+    							rightArm2.showModel = leftArm2.showModel =
+    								rightLeg.showModel = rightLeg2.showModel =
+    									leftLeg.showModel = leftLeg2.showModel = false;
+    	aimedBowBan = false;
+    	sneakBan = false;
+    	waitBan = false;
+    	sittingBan = false;
+    	sleepingBan = false;
+    }
+
+    @Override
     public void skirtFloatsInit(float f, float f1) {
     	if(!skirtFloats) return;
-    	//ã
+    	//ä¸Š
     	SkirtTop2 = new Modchu_ModelRenderer(this, 6, 16);
     	SkirtTop2.addPlate(0.0F, 0.0F, 0.0F, 8, 6, 0);
     	SkirtTop2.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	Skirt.addChild(SkirtTop2);
 
-    	//‘O
+    	//å‰
     	SkirtFront = new Modchu_ModelRenderer(this, 6, 22);
     	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 8, 10, 0);
     	SkirtFront.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	Skirt.addChild(SkirtFront);
 
-    	//‰E
+    	//å³
     	SkirtRight = new Modchu_ModelRenderer(this, 0, 22);
     	SkirtRight.addPlate(-4.0F, 0.0F, -6.0F, 6, 10, 1);
     	SkirtRight.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	Skirt.addChild(SkirtRight);
 
-    	//¶
+    	//å·¦
     	SkirtLeft = new Modchu_ModelRenderer(this, 14, 22);
     	SkirtLeft.addPlate(4.0F, 0.0F, -6.0F, 6, 10, 1);
     	SkirtLeft.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
     	Skirt.addChild(SkirtLeft);
 
-    	//Œã‚ë
+    	//å¾Œã‚
     	SkirtBack = new Modchu_ModelRenderer(this, 20, 22);
     	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 8, 10, 0);
     	SkirtBack.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
@@ -154,30 +247,35 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     	Skirt.showModel = false;
     }
 
+    @Override
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
     {
-    	bipedHead.rotateAngleY = f3 / 57.29578F;
-    	bipedHead.rotateAngleX = f4 / 57.29578F;
+    	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
+    	bipedHead.rotationPointY += 4.0F;
+    	bipedBody.rotationPointY += 1.0F;
+    	bipedRightArm.rotationPointX += 1.0F;
+    	bipedLeftArm.rotationPointX -= 1.0F;
+    	bipedRightArm.rotationPointY += 4.5F;
+    	bipedLeftArm.rotationPointY += 4.5F;
+    	bipedRightLeg.rotationPointX = -1.0F;
+    	bipedLeftLeg.rotationPointX = 1.0F;
+    	bipedRightLeg.rotationPointY += 5.0F;
+    	bipedLeftLeg.rotationPointY += 5.0F;
+    	Skirt.rotationPointY += 3.5F;
     	bipedRightArm.rotateAngleX = MathHelper.cos(f * 0.5656F + 3.141593F) * 1.6F * f1 * 0.5F;
     	bipedLeftArm.rotateAngleX = MathHelper.cos(f * 0.5656F) * 1.6F * f1 * 0.5F;
-    	bipedRightArm.rotateAngleZ = 0.0F;
-    	bipedLeftArm.rotateAngleZ = 0.0F;
     	bipedRightLeg.rotateAngleX = MathHelper.cos(f * 0.5656F) * 1.0F * f1;
     	bipedLeftLeg.rotateAngleX = MathHelper.cos(f * 0.5656F + 3.141593F) * 1.0F * f1;
-    	bipedRightLeg.rotateAngleY = 0.0F;
-    	bipedLeftLeg.rotateAngleY = 0.0F;
 
     	if(getIsRiding())
     	{
-    		// æ‚è•¨‚Éæ‚Á‚Ä‚¢‚é
+    		// ä¹—ã‚Šç‰©ã«ä¹—ã£ã¦ã„ã‚‹
     		bipedRightArm.rotateAngleX += -0.6283185F;
     		bipedLeftArm.rotateAngleX += -0.6283185F;
     		bipedRightLeg.rotateAngleX = -1.256637F;
     		bipedLeftLeg.rotateAngleX = -1.256637F;
-    		bipedRightLeg.rotateAngleY = 0.3141593F;
-    		bipedLeftLeg.rotateAngleY = -0.3141593F;
     	}
-    	// ƒAƒCƒeƒ€Ž‚Á‚Ä‚é‚Æ‚«‚Ì˜rU‚è‚ð—}‚¦‚é
+    	// ã‚¢ã‚¤ãƒ†ãƒ æŒã£ã¦ã‚‹ã¨ãã®è…•æŒ¯ã‚Šã‚’æŠ‘ãˆã‚‹
     	if(heldItemLeft != 0) {
     		bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX * 0.5F - 0.3141593F * (float)heldItemLeft;
     	}
@@ -185,94 +283,64 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     		bipedRightArm.rotateAngleX = bipedRightArm.rotateAngleX * 0.5F - 0.3141593F * (float)heldItemRight;
     	}
 
-    	bipedRightArm.rotateAngleY = 0.0F;
-    	bipedLeftArm.rotateAngleY = 0.0F;
-    	if(getOnGround() > -9990F && !getaimedBow())
-    	{
-    		// ˜rU‚è
-    		float f6 = getOnGround();
-    		bipedBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * 3.141593F * 2.0F) * 0.2F;
-    		//Skirt.rotateAngleY = bipedBody.rotateAngleY;
-    		bipedRightArm.rotationPointZ = MathHelper.sin(bipedBody.rotateAngleY) * 4F;
-    		bipedRightArm.rotationPointX = -MathHelper.cos(bipedBody.rotateAngleY) * 4F + 1.0F;
-    		bipedLeftArm.rotationPointZ = -MathHelper.sin(bipedBody.rotateAngleY) * 4F;
-    		bipedLeftArm.rotationPointX = MathHelper.cos(bipedBody.rotateAngleY) * 4F - 1.0F;
-    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
-    		bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
-    		bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
-    		f6 = 1.0F - getOnGround();
-    		f6 *= f6;
-    		f6 *= f6;
-    		f6 = 1.0F - f6;
-    		float f7 = MathHelper.sin(f6 * 3.141593F);
-    		float f8 = MathHelper.sin(getOnGround() * 3.141593F) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
-    		bipedRightArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
-    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-    		bipedRightArm.rotateAngleZ = MathHelper.sin(getOnGround() * 3.141593F) * -0.4F;
+    	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
+    	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
+    	if ((onGroundR > -9990F || onGroundL > -9990F) && !getaimedBow() && !getOldwalking()) {
+    		// è…•æŒ¯ã‚Š
+    		float f6, f7, f8;
+    		f6 = MathHelper.sin(MathHelper.sqrt_float(onGroundR) * (float)Math.PI * 2.0F);
+    		f7 = MathHelper.sin(MathHelper.sqrt_float(onGroundL) * (float)Math.PI * 2.0F);
+    		// R
+    		if (onGroundR > 0F) {
+    			f6 = 1.0F - onGroundR;
+    			f6 *= f6;
+    			f6 *= f6;
+    			f6 = 1.0F - f6;
+    			f7 = MathHelper.sin(f6 * (float)Math.PI);
+    			f8 = MathHelper.sin(onGroundR * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
+    			bipedRightArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
+    		} else {
+    			bipedRightArm.rotateAngleX += bipedBody.rotateAngleY;
+    		}
+    		// L
+    		if (onGroundL > 0F) {
+    			f6 = 1.0F - onGroundL;
+    			f6 *= f6;
+    			f6 *= f6;
+    			f6 = 1.0F - f6;
+    			f7 = MathHelper.sin(f6 * (float)Math.PI);
+    			f8 = MathHelper.sin(onGroundL * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
+    			bipedLeftArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
+    		} else {
+    			bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
+    		}
     	}
     	if(getIsSneak())
     	{
-    		// ‚µ‚á‚ª‚Ý
-    		bipedBody.rotateAngleX = 0.5F;
-    		Skirt.rotateAngleX = -0.5F;
+    		// ã—ã‚ƒãŒã¿
     		bipedRightLeg.rotateAngleX -= 0.5F;
     		bipedLeftLeg.rotateAngleX -= 0.5F;
-    		bipedHead.rotationPointY = 5.5F;
-    		bipedBody.rotationPointY = 5.0F;
-    		bipedBody.rotationPointZ = 1.5F;
-    		bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 9.0F - 1.0F;
-    		bipedRightLeg.rotationPointZ = bipedLeftLeg.rotationPointZ = 0.25F;
-    		Skirt.rotationPointY = 9.0F - 0.5F;
-    		Skirt.rotationPointZ = 0.0F;
-    	} else
-    	{
-    		// ’Êí—§‚¿
-    		bipedBody.rotateAngleX = 0.0F;
-    		Skirt.rotationPointZ = 0.0F;
-    		Skirt.rotateAngleX = 0.0F;
-    		Skirt.rotationPointY = 9.0F;
-    		bipedHead.rotationPointY = 4.0F;
-    		bipedBody.rotationPointY = 4.5F;
-    		bipedBody.rotationPointZ = 0.0F;
-    		bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 9.0F;
+        	bipedHead.rotationPointY += 1.0F;
+        	bipedBody.rotationPointY += 1.0F;
     	}
     	if (getIsWait() && !getaimedBow()) {
-    		//‘Ò‹@ó‘Ô‚Ì“Á•Ê•\Ž¦
+    		//å¾…æ©ŸçŠ¶æ…‹ã®ç‰¹åˆ¥è¡¨ç¤º
     		bipedRightArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F -0.7F;
-    		bipedRightArm.rotateAngleY = 0.0F;
-    		bipedRightArm.rotateAngleZ = -0.4F;
     		bipedLeftArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F -0.7F;
-    		bipedLeftArm.rotateAngleY = 0.0F;
-    		bipedLeftArm.rotateAngleZ = 0.4F;
     	}
     	if (getaimedBow())
     	{
-    		// ‹|\‚¦
+    		// å¼“æ§‹ãˆ
     		float f6 = MathHelper.sin(getOnGround() * 3.141593F);
     		float f7 = MathHelper.sin((1.0F - (1.0F - getOnGround()) * (1.0F - getOnGround())) * 3.141593F);
-    		bipedRightArm.rotateAngleZ = 0.0F;
-    		bipedLeftArm.rotateAngleZ = 0.0F;
-    		bipedRightArm.rotateAngleY = -(0.1F - f6 * 0.6F);
-    		bipedLeftArm.rotateAngleY = 0.1F - f6 * 0.6F;
     		bipedRightArm.rotateAngleX = -1.470796F;
-    		bipedLeftArm.rotateAngleX = -1.470796F;
     		bipedRightArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
-    		bipedLeftArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
-    		bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
-    		bipedLeftArm.rotateAngleZ -= MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
     		bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
-    		bipedLeftArm.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.05F;
     		bipedRightArm.rotateAngleX += bipedHead.rotateAngleX;
-    		bipedLeftArm.rotateAngleX -= bipedHead.rotateAngleX;
-    		bipedRightArm.rotateAngleY += bipedHead.rotateAngleY;
-    		bipedLeftArm.rotateAngleY += bipedHead.rotateAngleY;
+    		bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX + 0.4F;
     	} else {
     		if (!getIsWait()) {
-    			// ŒÄ‹z ˜r“™
-    			bipedRightArm.rotateAngleZ += 0.3F;
-    			bipedLeftArm.rotateAngleZ -= 0.3F;
-    			bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
-    			bipedLeftArm.rotateAngleZ -= MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
+    			// å‘¼å¸ è…•ç­‰
     			bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
     			bipedLeftArm.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.05F;
     		}
@@ -307,25 +375,42 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     	}
     }
 
+    @Override
+    public void action1(Entity entity) {
+    	super.action1(entity);
+    	float f1 = bipedBody.rotateAngleZ;
+    	if (f1 > 0.0F) {
+    		bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F + (f1 * 1.30889264F);
+    	} else {
+    		bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F - (f1 * 1.30889264F);
+    	}
+    	rightArm2.rotationPointY += 1.0F;
+    	leftArm2.rotationPointY += 1.0F;
+    	bipedHead.rotationPointX = 0.0F;
+    	rightLeg.rotationPointX -= 0.5F;
+    	leftLeg.rotationPointX += 0.5F;
+    	rightLeg2.rotationPointY -= 4.5F;
+    	leftLeg2.rotationPointY -= 4.5F;
+    }
+
+    @Override
     public float getHeight() {
     	return 1.58F;
     }
 
+    @Override
     public float getWidth()
     {
     	return 0.5F;
     }
 
+    @Override
     public float getyOffset() {
     	return 1.4F;
     }
 
+    @Override
     public double getMountedYOffset() {
     	return 0.85D;
     }
-
-    public float firstPersonY() {
-    	return 0.0F;
-    }
-
 }

@@ -804,8 +804,8 @@ public class ModelPlayerFormLittleMaid_Angel extends ModelPlayerFormLittleMaid_S
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã‚©‚ç8ŒÂã‘‚«‚µ‚Äİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œã‹ã‚‰8å€‹ä¸Šæ›¸ãã—ã¦è¨­å®š
     	overridePartsNumber = 8;
     	int k = getPartsNumber() - overridePartsNumber;
     	if(k < 0) k = 0;
@@ -818,7 +818,7 @@ public class ModelPlayerFormLittleMaid_Angel extends ModelPlayerFormLittleMaid_S
     		setParts(s, k);
     		setPartsSetFlag(3);
     	}
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 1) {
     		showModelSettingReflects(k);
     		setShowModelFlag(2);

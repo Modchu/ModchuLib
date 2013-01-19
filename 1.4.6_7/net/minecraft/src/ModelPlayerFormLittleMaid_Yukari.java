@@ -725,8 +725,8 @@ public class ModelPlayerFormLittleMaid_Yukari extends ModelPlayerFormLittleMaid_
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã‚©‚ç17ŒÂã‘‚«‚µ‚Äİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œã‹ã‚‰17å€‹ä¸Šæ›¸ãã—ã¦è¨­å®š
     	overridePartsNumber = 17;
     	int k = getPartsNumber() - overridePartsNumber;
     	if(k < 0) k = 0;
@@ -743,7 +743,7 @@ public class ModelPlayerFormLittleMaid_Yukari extends ModelPlayerFormLittleMaid_
     		setPartsSetFlag(4);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 2) {
     		boolean b = getGuiShowModel(k);
     		Parka_1.setVisible(b);

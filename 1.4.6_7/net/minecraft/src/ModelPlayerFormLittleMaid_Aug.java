@@ -37,7 +37,7 @@ public class ModelPlayerFormLittleMaid_Aug extends ModelPlayerFormLittleMaid_SR2
 	public void initModel(float psize, float pyoffset) {
 		super.initModel(psize, pyoffset);
 
-		// Ä\¬ƒp[ƒc
+		// å†æ§‹æˆãƒ‘ãƒ¼ãƒ„
 		((Modchu_ModelRenderer) bipedHead).removeChild(SideTailR);
 		((Modchu_ModelRenderer) bipedHead).removeChild(SideTailL);
 		SideTailR = new Modchu_ModelRenderer(this);
@@ -49,7 +49,7 @@ public class ModelPlayerFormLittleMaid_Aug extends ModelPlayerFormLittleMaid_SR2
 		SideTailL.setRotationPointLM(4F, -7.8F, 1.9F);
 		bipedHead.addChild(SideTailL);
 
-		// ‘‰Áƒp[ƒc
+		// å¢—åŠ ãƒ‘ãƒ¼ãƒ„
 		shaggyB = new Modchu_ModelRenderer(this, 24, 0);
 		shaggyB.addPlate(-5.0F, 0.0F, 0.0F, 10, 4, 4, psize);
 		shaggyB.setRotationPointLM(0.0F, -1.0F, 4.0F);
@@ -92,7 +92,7 @@ public class ModelPlayerFormLittleMaid_Aug extends ModelPlayerFormLittleMaid_SR2
 		sidetailUpperL.setRotationPointLM(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(sidetailUpperL);
 
-		// –¢g—pƒp[ƒc
+		// æœªä½¿ç”¨ãƒ‘ãƒ¼ãƒ„
 		((Modchu_ModelRenderer) bipedHeadwear).setVisible(false);
 		Tail.setVisible(false);
 		ChignonB.setVisible(false);
@@ -154,8 +154,8 @@ public class ModelPlayerFormLittleMaid_Aug extends ModelPlayerFormLittleMaid_SR2
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã[partsNumber]‚©‚çİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œ[partsNumber]ã‹ã‚‰è¨­å®š
     	overridePartsNumber = 0;
     	int k = getPartsNumber();
     	if(k < 0) k = 0;
@@ -169,7 +169,7 @@ public class ModelPlayerFormLittleMaid_Aug extends ModelPlayerFormLittleMaid_SR2
     		setPartsSetFlag(3);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 1) {
     		sidetailUpperR.setVisible(getGuiShowModel(k));
     		k++;

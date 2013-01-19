@@ -35,7 +35,9 @@ public class ModelPlayerFormLittleMaid_QB extends ModelPlayerFormLittleMaid {
 	public ModelPlayerFormLittleMaid_QB(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
 //@-@132
-    	HeadMount.setRotationPoint(0F, 2.51F, 0F);
+		HeadMount.setRotationPoint(0F, 2.51F, 0F);
+		Arms[0].setRotationPointLM(0.5F, 2.2F, 0F);
+		Arms[1].setRotationPointLM(-0.5F, 2.2F, 0F);
 	}
 
     @Override
@@ -121,12 +123,13 @@ public class ModelPlayerFormLittleMaid_QB extends ModelPlayerFormLittleMaid {
     @Override
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	float ff1 = mh_sin(f2 * 0.09F) * 0.05F;
+		Arms[0].setRotationPointLM(0.5F, 3.0F, 0F);
+		Arms[1].setRotationPointLM(-0.5F, 3.0F, 0F);
     	bipedHead.rotateAngleY = f3 / 57.29578F;
     	bipedHead.rotateAngleX = f4 / 57.29578F;
     	bipedHead.rotateAngleZ = 0.0F;
     	bipedBody.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F
     			* f1 * 0.1F;
-    	bipedBody.rotateAngleZ = 0.0F;
     	bipedBody.rotationPointX = 0.0F;
     	bipedBody.rotationPointZ = 2.0F;
     	bipedRightArm.rotationPointY = bipedLeftArm.rotationPointY = 0.0F;
@@ -157,7 +160,7 @@ public class ModelPlayerFormLittleMaid_QB extends ModelPlayerFormLittleMaid {
     	bipedRightArm.rotateAngleZ = bipedLeftArm.rotateAngleZ = 0.0F;
     	tail1.rotateAngleX = -0.2F;
     	if (getIsRiding()) {
-    		// æ‚è•¨‚Éæ‚Á‚Ä‚¢‚é
+    		// ä¹—ã‚Šç‰©ã«ä¹—ã£ã¦ã„ã‚‹
     		float f15 = 1.5F;
     		if (getIsSitting()) f15 = 1.0F;
     		float f9 = MathHelper.cos(f * 0.3F);
@@ -203,7 +206,7 @@ public class ModelPlayerFormLittleMaid_QB extends ModelPlayerFormLittleMaid {
     		bipedHead.rotationPointZ = bipedBody.rotationPointZ - 2.0F;
     	}
     	if (getIsSneak()) {
-    		// ‚µ‚á‚ª‚İ
+    		// ã—ã‚ƒãŒã¿
     		float f12 = getIsRiding() ? -5F : 0F;
     		bipedHead.rotationPointY = 6.0F + f12;
     		bipedBody.rotationPointY = 10.0F + f12;
@@ -223,32 +226,7 @@ public class ModelPlayerFormLittleMaid_QB extends ModelPlayerFormLittleMaid {
     		bipedRightArm.rotateAngleX = bipedLeftArm.rotateAngleX = MathHelper
     				.cos(f * 0.6662F + 3.141593F) * 2.0F * f1 * 0.5F;
     	}
-    	float f10 = bipedRightArm.rotateAngleX;
-    	if (getOnGround() > -9990F && !getaimedBow()) {
-    		// ˜rU‚è
-    		float f6 = getOnGround();
-    		float f7 = MathHelper.sin(f6 * 3.141593F);
-    		float f8 = MathHelper.sin(getOnGround() * 3.141593F)
-    				* -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
-    		bipedBody.rotateAngleY = MathHelper.sin(MathHelper
-    				.sqrt_float(f6) * 3.141593F * 2.0F) * 0.2F;
-    		if (getIsRiding()) {
-    			bipedRightArm.rotateAngleX += (double)f10;
-    			bipedLeftArm.rotateAngleX += (double)f10;
-    		}
-    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
-    		bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
-    		bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
-    		f6 = 1.0F - getOnGround();
-    		f6 *= f6;
-    		f6 *= f6;
-    		f6 = 1.0F - f6;
-    		bipedRightArm.rotateAngleX -= (double) f7 * 1.2D
-    				+ (double) f8;
-    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-    		bipedRightArm.rotateAngleZ = MathHelper
-    				.sin(getOnGround() * 3.141593F) * -0.4F;
-    	}
+    	armSwing(f, f1, f2, f3, f4, f5, entity);
     	bipedHead.rotationPointX = 0F;
     	bipedRightArm.rotationPointX = -1.5F;
     	bipedLeftArm.rotationPointX = 1.5F;
@@ -266,7 +244,7 @@ public class ModelPlayerFormLittleMaid_QB extends ModelPlayerFormLittleMaid {
     		}
     	}
     	if (getaimedBow()) {
-    		// ‹|\‚¦
+    		// å¼“æ§‹ãˆ
     		float f13 = MathHelper.sin(getOnGround() * 3.141593F);
     		float f14 = MathHelper.sin((1.0F - (1.0F - getOnGround())
     				* (1.0F - getOnGround())) * 3.141593F);
@@ -361,11 +339,81 @@ public class ModelPlayerFormLittleMaid_QB extends ModelPlayerFormLittleMaid {
     	}
     }
 
+    public void armSwing(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
+    	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
+    	if ((onGroundR > -9990F || onGroundL > -9990F) && !getaimedBow() && !getOldwalking()) {
+    		// è…•æŒ¯ã‚Š
+    		float f6, f7, f8;
+    		f6 = MathHelper.sin(MathHelper.sqrt_float(onGroundR) * (float)Math.PI * 2.0F);
+    		f7 = MathHelper.sin(MathHelper.sqrt_float(onGroundL) * (float)Math.PI * 2.0F);
+    		bipedBody.rotateAngleY = (f6 - f7) * 0.2F;
+    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
+    		bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
+    		// R
+    		if (onGroundR > 0F) {
+    			f6 = 1.0F - onGroundR;
+    			f6 *= f6;
+    			f6 *= f6;
+    			f6 = 1.0F - f6;
+    			f7 = MathHelper.sin(f6 * (float)Math.PI);
+    			f8 = MathHelper.sin(onGroundR * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
+    			bipedRightArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
+    			bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
+    			bipedRightArm.rotateAngleZ = MathHelper.sin(onGroundR * 3.141593F) * -0.4F;
+    		} else {
+    			bipedRightArm.rotateAngleX += bipedBody.rotateAngleY;
+    		}
+    		// L
+    		if (onGroundL > 0F) {
+    			f6 = 1.0F - onGroundL;
+    			f6 *= f6;
+    			f6 *= f6;
+    			f6 = 1.0F - f6;
+    			f7 = MathHelper.sin(f6 * (float)Math.PI);
+    			f8 = MathHelper.sin(onGroundL * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
+    			bipedLeftArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
+    			bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
+    			bipedLeftArm.rotateAngleZ = MathHelper.sin(onGroundL * 3.141593F) * 0.4F;
+    		} else {
+    			bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
+    		}
+    	}
+    }
+
+    @Override
+    public void setRotationAnglesfirstPerson(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    	if (((EntityPlayer) entity).inventory.getCurrentItem() != null) {
+    		//åœ°å›³ã‚’æŒã£ã¦ã„ã‚‹æ™‚
+    		bipedRightArm.rotationPointX = -8.0F;
+    		bipedRightArm.rotationPointY = 5.5F;
+    		bipedRightArm.rotationPointZ = 0.0F;
+    		bipedLeftArm.rotationPointX = -7.5F;
+    		bipedLeftArm.rotationPointY = 5.5F;
+    		bipedLeftArm.rotationPointZ = 0.0F;
+    	} else {
+    		//ç´ æ‰‹æ™‚
+    		//setOnGround(((EntityPlayer) entity).getSwingProgress(1.0F));
+    		bipedRightArm.rotateAngleX = 0.0F;
+    		bipedRightArm.rotateAngleY = 0.0F;
+    		bipedRightArm.rotateAngleZ = 0.5F;
+    		bipedLeftArm.rotateAngleX = 0.0F;
+    		bipedLeftArm.rotateAngleY = 0.0F;
+    		bipedLeftArm.rotateAngleZ = 0.0F;
+
+    		bipedRightArm.rotationPointY = 4.0F;
+    		bipedRightArm.rotationPointX = -4.0F;
+    		bipedLeftArm.rotationPointX = 4.0F;
+    		bipedLeftArm.rotationPointY = 8.0F;
+    		bipedLeftArm.rotationPointZ = -2.0F;
+    	}
+    }
+
     @Override
     public void settingShowParts() {
     	super.settingShowParts();
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦‰Šúİ’è
-    	//‘O‰ñ‚Ì€–ÚÅŒã‚©‚ç10ŒÂã‘‚«‚µ‚Äİ’è
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåˆæœŸè¨­å®š
+    	//å‰å›ã®é …ç›®æœ€å¾Œã‹ã‚‰10å€‹ä¸Šæ›¸ãã—ã¦è¨­å®š
     	overridePartsNumber = 10;
     	int k = getPartsNumber() - 10;
     	if(k < 0) k = 0;
@@ -379,7 +427,7 @@ public class ModelPlayerFormLittleMaid_QB extends ModelPlayerFormLittleMaid {
     		setPartsSetFlag(2);
     	}
 
-    	//GUI ƒp[ƒc•\¦E”ñ•\¦”½‰f
+    	//GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ 
     	if(getShowModelFlag() == 0) {
     		boolean b = getGuiShowModel(k);
     		rightLeg.setVisible(b);
@@ -421,6 +469,72 @@ public class ModelPlayerFormLittleMaid_QB extends ModelPlayerFormLittleMaid {
     		ringL.setVisible(b);
     		setShowModelFlag(1);
     	}
+    }
+
+    @Override
+    public void actionInit1() {
+    	setShortcutKeysAction(true);
+    	sneakBan = true;
+    	waitBan = true;
+    	sittingBan = true;
+    }
+
+    @Override
+    public void actionRelease1() {
+    	setShortcutKeysAction(false);
+    	actionTime = 0;
+    	sneakBan = false;
+    	waitBan = false;
+    	sittingBan = false;
+
+    	bipedBody.rotateAngleX = 0.0F;
+    	bipedBody.rotateAngleY = 0.0F;
+    	bipedBody.rotateAngleZ = 0.0F;
+    	bipedHead.rotateAngleX = 0.0F;
+    	bipedHead.rotateAngleY = 0.0F;
+    	bipedHead.rotateAngleZ = 0.0F;
+    	bipedHead.rotationPointX = 0.0F;
+    	bipedHead.rotationPointZ = 0.0F;
+    }
+
+    @Override
+    public void action1(Entity entity) {
+    	if (actionTime == 0) actionTime = (int) mc.theWorld.getWorldTime();
+    	float actionSpeed = (float)(mc.theWorld.getWorldTime() - actionTime) / 10;
+    	actionTime = (int) mc.theWorld.getWorldTime();
+    	//Modchu_Debug.dDebug("actionSpeed="+actionSpeed);
+    	if (actionSpeed < 0.0F) return;
+
+    	float f1 = bipedBody.rotateAngleZ;
+
+    	bipedRightArm.rotateAngleX = -f1 * 1.86567233F;
+    	bipedRightArm.rotateAngleY = 0.0F;
+    	bipedRightArm.rotateAngleZ = 0.0F;
+    	if (!actionReverseBody) {
+    		if (f1 < 0.5F) {
+    			f1 += actionSpeed;
+    		} else actionReverseBody = true;
+    	} else {
+    		if (f1 > -0.3F) {
+    			f1 -= actionSpeed;
+    		} else actionReverseBody = false;
+    	}
+    	if (f1 > 0.5449998F) f1 = 0.5449998F;
+    	if (f1 < -0.3880023F) f1 = -0.3880023F;
+    	if (f1 > 0.0F) {
+    		bipedHead.rotationPointY = bipedBody.rotationPointY - 3.5F + (f1 * 2.61778528F);
+    	} else {
+    		bipedBody.rotationPointY -= f1 * 4.10447914F;
+    		bipedHead.rotationPointY = bipedBody.rotationPointY - 3.5F - (f1 * 2.61778528F);
+    	}
+    	bipedHead.rotationPointX = f1 * 2.10447914F;
+    	bipedHead.rotateAngleX = -f1 * 0.2F;
+    	bipedHead.rotateAngleY = f1 * 0.2F;
+    	bipedHead.rotateAngleZ = f1;
+    	bipedLeftArm.rotateAngleX = -bipedRightArm.rotateAngleX;
+    	bipedLeftArm.rotateAngleY = bipedRightArm.rotateAngleY;
+    	bipedLeftArm.rotateAngleZ = bipedRightArm.rotateAngleZ;
+    	bipedBody.rotateAngleZ = f1;
     }
 
     @Override

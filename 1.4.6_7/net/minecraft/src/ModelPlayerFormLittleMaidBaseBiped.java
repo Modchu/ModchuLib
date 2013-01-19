@@ -11,7 +11,7 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
 /**
- * PlayerFormLittleMaid‹¤’ÊƒNƒ‰ƒX
+ * PlayerFormLittleMaidå…±é€šã‚¯ãƒ©ã‚¹
  */
 public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped {
 
@@ -85,21 +85,21 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     //b173deletepublic List boxList;
 
     /**
-     * ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Í‘S‚ÄŒp³‚³‚¹‚é‚±‚Æ
+     * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¯å…¨ã¦ç¶™æ‰¿ã•ã›ã‚‹ã“ã¨
      */
     public ModelPlayerFormLittleMaidBaseBiped() {
     	this(0.0F);
     }
 
     /**
-     * ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Í‘S‚ÄŒp³‚³‚¹‚é‚±‚Æ
+     * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¯å…¨ã¦ç¶™æ‰¿ã•ã›ã‚‹ã“ã¨
      */
     public ModelPlayerFormLittleMaidBaseBiped(float psize) {
     	this(psize, 0.0F);
     }
 
     /**
-     * ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Í‘S‚ÄŒp³‚³‚¹‚é‚±‚Æ
+     * ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¯å…¨ã¦ç¶™æ‰¿ã•ã›ã‚‹ã“ã¨
      */
     public ModelPlayerFormLittleMaidBaseBiped(float psize, float pyoffset) {
 //-@-132
@@ -146,17 +146,17 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * è‚¿ƒAƒCƒeƒ€•`‰æ—pƒp[ƒc‰Šú‰»‚ÉŒÄ‚Î‚ê‚é
+     * æ‰‹æŒã¡ã‚¢ã‚¤ãƒ†ãƒ æç”»ç”¨ãƒ‘ãƒ¼ãƒ„åˆæœŸåŒ–æ™‚ã«å‘¼ã°ã‚Œã‚‹
      */
     public void armsinit(float f, float f1) {
     	Arms = new Modchu_ModelRenderer[18];
-    	// è‚¿
+    	// æ‰‹æŒã¡
     	Arms[0] = new Modchu_ModelRenderer(this, 0, 0);
     	Arms[0].setRotationPointLM(0.5F, 6.5F, 0F);
     	Arms[1] = new Modchu_ModelRenderer(this, 0, 0);
     	Arms[1].setRotationPoint(-0.5F, 6.5F, 0F);
     	Arms[1].isInvertX = true;
-    	// ƒoƒCƒvƒƒ_ƒNƒgƒGƒtƒFƒNƒ^[
+    	// ãƒã‚¤ãƒ—ãƒ­ãƒ€ã‚¯ãƒˆã‚¨ãƒ•ã‚§ã‚¯ã‚¿ãƒ¼
     	Arms[2] = new Modchu_ModelRenderer(this, 0, 0);
     	Arms[2].setRotationPoint(-3F, 9F, 6F);
     	Arms[2].setRotateAngle(0.78539816339744830961566084581988F, 0F, 0F);
@@ -164,7 +164,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	Arms[3].setRotationPoint(3F, 9F, 6F);
     	Arms[3].setRotateAngle(0.78539816339744830961566084581988F, 0F, 0F);
     	Arms[3].isInvertX = true;
-    	// ƒe[ƒ‹ƒ\[ƒh
+    	// ãƒ†ãƒ¼ãƒ«ã‚½ãƒ¼ãƒ‰
     	Arms[4] = new Modchu_ModelRenderer(this, 0, 0);
     	Arms[4].setRotationPoint(-2F, 0F, 0F);
     	Arms[4].setRotateAngle(3.1415926535897932384626433832795F, 0F, 0F);
@@ -233,7 +233,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     public void renderItemsLM(EntityLiving pEntity, Render pRender) {
-    	// è‚¿‚Ì•\¦
+    	// æ‰‹æŒã¡ã®è¡¨ç¤º
     	GL11.glPushMatrix();
 
     	ItemStack litemstack = null;
@@ -266,7 +266,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     		}
     	}
 
-    	// “ª•”‘•ü•i
+    	// é ­éƒ¨è£…é£¾å“
     	Object maidInventory = getFieldObject(pEntity, "maidInventory");
     	litemstack = (ItemStack) getObjectInvokeMethod(maidInventory, "getHeadMount");
     	if (litemstack != null) {
@@ -310,7 +310,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     public void renderItemsPFLM(EntityLiving pEntity, Render pRender) {
-    	// è‚¿‚Ì•\¦ PFLM
+    	// æ‰‹æŒã¡ã®è¡¨ç¤º PFLM
     	EntityPlayer entityplayer = ((EntityPlayer) pEntity);
     	GL11.glPushMatrix();
 
@@ -332,7 +332,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     		}
     	}
 
-    	// “ª•”‘•ü•i
+    	// é ­éƒ¨è£…é£¾å“
     	litemstack = entityplayer.inventory.getStackInSlot(9);
     	if (litemstack != null) {
     		int addSupport = addSupportChecks(entityplayer, litemstack);
@@ -340,7 +340,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     		headMountRenderItems(entityplayer, pRender, litemstack, addSupport);
     	}
 
-    	// ƒA[ƒ}[“ª•”‘•ü•i “Áê‘Î‰
+    	// ã‚¢ãƒ¼ãƒãƒ¼é ­éƒ¨è£…é£¾å“ ç‰¹æ®Šå¯¾å¿œ
     	litemstack = entityplayer.inventory.armorItemInSlot(3);
     	if (litemstack != null) {
     		int addSupport = addSupportChecks(entityplayer, litemstack);
@@ -395,7 +395,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * PlayerFormLittleMaid‚Å’Ç‰Á‘Î‰‚µ‚½ƒuƒƒbƒNEƒAƒCƒeƒ€‚©ƒ`ƒFƒbƒN
+     * PlayerFormLittleMaidã§è¿½åŠ å¯¾å¿œã—ãŸãƒ–ãƒ­ãƒƒã‚¯ãƒ»ã‚¢ã‚¤ãƒ†ãƒ ã‹ãƒã‚§ãƒƒã‚¯
      * DecoBlock = 0, DecoBlockBase = 1, FavBlock = 2, Item.skull = 3,
      * BlockPumpkin = 4
      */
@@ -440,8 +440,8 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * PlayerFormLittleMaidê—pˆ—
-     * setLivingAnimations ŒÄ‚Ño‚µŒã‚ÉŒÄ‚Î‚ê‚éB
+     * PlayerFormLittleMaidå°‚ç”¨å‡¦ç†
+     * setLivingAnimations å‘¼ã³å‡ºã—å¾Œã«å‘¼ã°ã‚Œã‚‹ã€‚
      */
     public void PFLMLivingAnimationsSpecialOperations(Entity entity, float f, float f1, float f2) {
     	isRiding = !getIsRiding() ? getIsSitting() : getIsRiding();
@@ -450,8 +450,8 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * PlayerFormLittleMaidê—pˆ—
-     * setRotationAngles ŒÄ‚Ño‚µŒã‚ÉŒÄ‚Î‚ê‚éB
+     * PlayerFormLittleMaidå°‚ç”¨å‡¦ç†
+     * setRotationAngles å‘¼ã³å‡ºã—å¾Œã«å‘¼ã°ã‚Œã‚‹ã€‚
      */
     public void PFLMRotationAnglesSpecialOperations(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	if (getFirstPerson()) setRotationAnglesfirstPerson(f, f1, f2, f3, f4, f5, entity);
@@ -459,15 +459,15 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * PlayerFormLittleMaidê—pPlayer—pˆ—
-     * setRotationAngles ŒÄ‚Ño‚µŒã‚É’Êí‹“_‚È‚çŒÄ‚Î‚ê‚éB
-     * ’Êí‹“_‚Ìè‚Ì•`‰æˆÊ’uAŠp“x’²®‚ğ“ü‚ê‚éB
+     * PlayerFormLittleMaidå°‚ç”¨Playerç”¨å‡¦ç†
+     * setRotationAngles å‘¼ã³å‡ºã—å¾Œã«é€šå¸¸è¦–ç‚¹æ™‚ãªã‚‰å‘¼ã°ã‚Œã‚‹ã€‚
+     * é€šå¸¸è¦–ç‚¹æ™‚ã®æ‰‹ã®æç”»ä½ç½®ã€è§’åº¦èª¿æ•´ã‚’å…¥ã‚Œã‚‹ã€‚
      */
     public void setRotationAnglesfirstPerson(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     }
 
     /**
-     * GUI ƒp[ƒc•\¦E”ñ•\¦İ’è
+     * GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºè¨­å®š
      */
     public void settingShowParts() {
     }
@@ -488,7 +488,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * GUI ƒp[ƒc•\¦E”ñ•\¦”½‰fŒÄ‚Ño‚µ
+     * GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ å‘¼ã³å‡ºã—
      */
     public void settingReflects(int i) {
     	superShowModelSettingReflects(i);
@@ -496,19 +496,19 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * GUI ƒp[ƒc•\¦E”ñ•\¦”½‰fƒƒCƒ“ƒ‚ƒfƒ‹—p
+     * GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ ãƒ¡ã‚¤ãƒ³ãƒ¢ãƒ‡ãƒ«ç”¨
      */
     public void superShowModelSettingReflects(int i) {
     }
 
     /**
-     * GUI ƒp[ƒc•\¦E”ñ•\¦”½‰fƒ}ƒ‹ƒ`ƒ‚ƒfƒ‹—p
+     * GUI ãƒ‘ãƒ¼ãƒ„è¡¨ç¤ºãƒ»éè¡¨ç¤ºåæ˜ ãƒãƒ«ãƒãƒ¢ãƒ‡ãƒ«ç”¨
      */
     public void showModelSettingReflects(int i) {
     }
 
     /**
-     * ƒVƒ‡[ƒgƒJƒbƒgƒAƒNƒVƒ‡ƒ“‚ÉŒÄ‚Î‚ê‚é
+     * ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚¢ã‚¯ã‚·ãƒ§ãƒ³æ™‚ã«å‘¼ã°ã‚Œã‚‹
      */
     public void actionInit(int i) {
     	setRunActionNumber(i);
@@ -573,10 +573,14 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[2]);
     	((Modchu_ModelRenderer) bipedLeftArm).removeChild(Arms[1]);
     	((Modchu_ModelRenderer) bipedLeftArm).removeChild(Arms[3]);
-    	rightHand.addChild(Arms[0]);
-    	rightHand.addChild(Arms[2]);
-    	leftHand.addChild(Arms[1]);
-    	leftHand.addChild(Arms[3]);
+    	if (rightHand != null) {
+    		rightHand.addChild(Arms[0]);
+    		rightHand.addChild(Arms[2]);
+    	}
+    	if (leftHand != null) {
+    		leftHand.addChild(Arms[1]);
+    		leftHand.addChild(Arms[3]);
+    	}
     	Arms[0].setRotationPointLM(0.5F, 0.0F, 0F);
     	Arms[1].setRotationPointLM(-0.5F, 0.0F, 0F);
     	sneakBan = true;
@@ -617,7 +621,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * ƒVƒ‡[ƒgƒJƒbƒgƒAƒNƒVƒ‡ƒ“‰ğœ‚ÉŒÄ‚Î‚ê‚éB
+     * ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚¢ã‚¯ã‚·ãƒ§ãƒ³è§£é™¤æ™‚ã«å‘¼ã°ã‚Œã‚‹ã€‚
      */
     public void actionRelease(int i) {
     	switch(getRunActionNumber()) {
@@ -659,10 +663,10 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	sittingBan = false;
 
     	boolean b = true;
-    	((Modchu_ModelRenderer) bipedLeftArm).setVisible(b);
-    	((Modchu_ModelRenderer) bipedRightArm).setVisible(b);
-    	((Modchu_ModelRenderer) bipedLeftLeg).setVisible(b);
-    	((Modchu_ModelRenderer) bipedRightLeg).setVisible(b);
+    	setVisible(bipedLeftArm, b);
+    	setVisible(bipedRightArm, b);
+    	setVisible(bipedLeftLeg, b);
+    	setVisible(bipedRightLeg, b);
     	b = false;
     	if (rightArm != null) rightArm.setVisible(b);
     	if (rightArm2 != null) rightArm2.setVisible(b);
@@ -688,10 +692,14 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     		if (Arms[2] != null) bipedRightArm.addChild(Arms[2]);
     		if (Arms[1] != null) bipedLeftArm.addChild(Arms[1]);
     		if (Arms[3] != null) bipedLeftArm.addChild(Arms[3]);
-    		if (Arms[0] != null) rightHand.removeChild(Arms[0]);
-    		if (Arms[2] != null) rightHand.removeChild(Arms[2]);
-    		if (Arms[1] != null) leftHand.removeChild(Arms[1]);
-    		if (Arms[3] != null) leftHand.removeChild(Arms[3]);
+    		if (Arms[0] != null
+    				&& rightHand != null) rightHand.removeChild(Arms[0]);
+    		if (Arms[2] != null
+    				&& rightHand != null) rightHand.removeChild(Arms[2]);
+    		if (Arms[1] != null
+    				&& leftHand != null) leftHand.removeChild(Arms[1]);
+    		if (Arms[3] != null
+    				&& leftHand != null) leftHand.removeChild(Arms[3]);
     		if (Arms[0] != null) Arms[0].setRotationPointLM(0.5F, 6.5F, 0F);
     		if (Arms[1] != null) Arms[1].setRotationPointLM(-0.5F, 6.5F, 0F);
     	}
@@ -767,7 +775,6 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	if (actionTime == 0) actionTime = (int) mc.theWorld.getWorldTime();
     	float actionSpeed = (float)(mc.theWorld.getWorldTime() - actionTime) / 10;
     	actionTime = (int) mc.theWorld.getWorldTime();
-    	//mod_ResurrectionFeather.mDebug("actionSpeed="+actionSpeed);
     	if (actionSpeed < 0.0F) return;
 
     	rightArm.rotationPointX = bipedRightArm.rotationPointX;
@@ -945,15 +952,15 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * ƒA[ƒ}[ƒ‚ƒfƒ‹‚ÆƒƒCƒ“ƒ‚ƒfƒ‹‚Ì“¯ŠúB
-     * ƒA[ƒ}[ƒ‚ƒfƒ‹‚É‘Î‚µ‚ÄAƒƒCƒ“ƒ‚ƒfƒ‹‚Ìƒf[ƒ^‚ª“n‚³‚ê‚Ä‚­‚é‚Ì‚Å‚»‚ê‚É‡‚í‚¹‚éƒp[ƒc‚ğ“¯Šú‚³‚¹‚é
+     * ã‚¢ãƒ¼ãƒãƒ¼ãƒ¢ãƒ‡ãƒ«ã¨ãƒ¡ã‚¤ãƒ³ãƒ¢ãƒ‡ãƒ«ã®åŒæœŸã€‚
+     * ã‚¢ãƒ¼ãƒãƒ¼ãƒ¢ãƒ‡ãƒ«ã«å¯¾ã—ã¦ã€ãƒ¡ã‚¤ãƒ³ãƒ¢ãƒ‡ãƒ«ã®ãƒ‡ãƒ¼ã‚¿ãŒæ¸¡ã•ã‚Œã¦ãã‚‹ã®ã§ãã‚Œã«åˆã‚ã›ã‚‹ãƒ‘ãƒ¼ãƒ„ã‚’åŒæœŸã•ã›ã‚‹
      */
     public void syncModel(ModelPlayerFormLittleMaidBaseBiped model) {
     }
 
     /**
-     * setRotationAnglesLMÀs‘O‚ÉŒÄ‚Î‚ê‚éB
-     * Šeƒp[ƒc‚Ì‰Šú‰»‚È‚ÇB
+     * setRotationAnglesLMå®Ÿè¡Œå‰ã«å‘¼ã°ã‚Œã‚‹ã€‚
+     * å„ãƒ‘ãƒ¼ãƒ„ã®åˆæœŸåŒ–ãªã©ã€‚
      */
     public abstract void reset(float f, float f1, float f2, float f3, float f4, float f5, Entity entity);
 
@@ -974,70 +981,70 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * ‘¼Mob‚ğ“ª‚Éæ‚¹‚½‚Ì‘¼MobŠî€ˆÊ’u’²®
+     * ä»–Mobã‚’é ­ã«ä¹—ã›ãŸæ™‚ã®ä»–MobåŸºæº–ä½ç½®èª¿æ•´
      */
     public double getMountedYOffset() {
     	return 0.75D;
     }
 
     /**
-     * À‚Á‚Ä‚¢‚éƒ|[ƒYuæ‚è•¨‚Éæ‚Á‚Ä‚¢‚È‚¢v‚ÌˆÊ’u’²®
+     * åº§ã£ã¦ã„ã‚‹ãƒãƒ¼ã‚ºã€Œä¹—ã‚Šç‰©ã«ä¹—ã£ã¦ã„ãªã„ã€æ™‚ã®ä½ç½®èª¿æ•´
      */
     public double getSittingyOffset() {
     	return -0.35D;
     }
 
     /**
-     * Q‚Ä‚¢‚éƒ|[ƒY‚ÌˆÊ’u’²®
+     * å¯ã¦ã„ã‚‹ãƒãƒ¼ã‚ºæ™‚ã®ä½ç½®èª¿æ•´
      */
     public double getSleepingyOffset() {
     	return -0.9D;
     }
 
     /**
-     * isModelSize=true‚Éæ‚è•¨‚Éæ‚Á‚Ä‚¢‚éó‘Ô‚Å‚ÌƒJƒƒ‰ˆÊ’u’²®
+     * isModelSize=trueæ™‚ã«ä¹—ã‚Šç‰©ã«ä¹—ã£ã¦ã„ã‚‹çŠ¶æ…‹ã§ã®ã‚«ãƒ¡ãƒ©ä½ç½®èª¿æ•´
      */
     public float ridingViewCorrection() {
     	return 0.0F;
     }
 
     /**
-     * ƒfƒtƒHƒ‹ƒgƒ‚ƒfƒ‹ƒXƒP[ƒ‹
+     * ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ¢ãƒ‡ãƒ«ã‚¹ã‚±ãƒ¼ãƒ«
      */
     public float getModelScale() {
     	return 0.9375F;
     }
 
     /**
-     * “Áê“ª•\¦ƒAƒCƒeƒ€u‰ÔŒnv‚ÌˆÊ’u’²®
+     * ç‰¹æ®Šé ­è¡¨ç¤ºã‚¢ã‚¤ãƒ†ãƒ ã€ŒèŠ±ç³»ã€ã®ä½ç½®èª¿æ•´
      */
     public void equippedItemPositionFlower() {
     	GL11.glTranslatef(0F, -0.5F, 0F);
     }
 
     /**
-     * “Áê“ª•\¦ƒAƒCƒeƒ€u‰ÔŒn&œ•²Šg‘åv‚ÌˆÊ’u’²®
+     * ç‰¹æ®Šé ­è¡¨ç¤ºã‚¢ã‚¤ãƒ†ãƒ ã€ŒèŠ±ç³»&éª¨ç²‰æ‹¡å¤§æ™‚ã€ã®ä½ç½®èª¿æ•´
      */
     public void equippedItemPositionFlowerDyePowder() {
     	GL11.glTranslatef(0.0F, 0.0F, 0.0F);
     }
 
     /**
-     * ‹|‘•”õ‚ÌˆÊ’u’²®
+     * å¼“è£…å‚™æ™‚ã®ä½ç½®èª¿æ•´
      */
     public void equippedItemBow() {
     	GL11.glTranslatef(0.0F, 0.0F, 0.0F);
     }
 
     /**
-     * ‹|‘•”õ‚ÌŠp“x’²®
+     * å¼“è£…å‚™æ™‚ã®è§’åº¦èª¿æ•´
      */
     public void equippedItemBowRotatef() {
     	//GL11.glRotatef(-20F, 0.0F, 1.0F, 0.0F);
     }
 
     /**
-     * ‹|‘•”õ‚ÌŠp“x’²®2
+     * å¼“è£…å‚™æ™‚ã®è§’åº¦èª¿æ•´2
      */
     public void equippedItemBowRotatef2() {
     	//GL11.glRotatef(-100F, 1.0F, 0.0F, 0.0F);
@@ -1045,7 +1052,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * ’Ş‚èŠÆ‚È‚Ç
+     * é‡£ã‚Šç«¿ãªã©
      */
     public void equippedItemPositionshouldRotateAroundWhenRendering() {
     	//GL11.glTranslatef(-0.1F, 0.0F, 0.0F);
@@ -1351,6 +1358,14 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(o.getClass(), s, c), o, o1);
     }
 
+    public void setFieldObject(Class c, String s, Object o2) {
+    	Modchu_Reflect.setFieldObject(c, s, null, o2);
+    }
+
+    public void setFieldObject(Object o, String s, Object o2) {
+    	Modchu_Reflect.setFieldObject(o.getClass(), s, null, o2);
+    }
+
     public void setFieldObject(Class c, String s, Object o2, Object b) {
     	Modchu_Reflect.setFieldObject(c, s, o2, b);
     }
@@ -1359,14 +1374,14 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	Modchu_Reflect.setFieldObject(o.getClass(), s, o2, b);
     }
 
-    // ˆÈ‰ºAMMM_ModelBiped‘¤‚É‚ ‚Á‚Ä‚Ù‚µ‚¢‚à‚Ì
+    // ä»¥ä¸‹ã€MMM_ModelBipedå´ã«ã‚ã£ã¦ã»ã—ã„ã‚‚ã®
     /**
-     * littleMaidMobê—pˆ—
-     * setLivingAnimations ŒÄ‚Ño‚µŒã‚ÉŒÄ‚Î‚ê‚éB
+     * littleMaidMobå°‚ç”¨å‡¦ç†
+     * setLivingAnimations å‘¼ã³å‡ºã—å¾Œã«å‘¼ã°ã‚Œã‚‹ã€‚
      */
     public void LMMLivingAnimationsSpecialOperations(Entity entity, float f, float f1, float f2) {
     	float skirtFloatsVolume = 1.0F;
-    	//ƒRƒ“ƒtƒBƒO‚É“ü‚ê‚Ä‚à‚ç‚¦‚é‚ÆƒRƒƒ“ƒg‰ğœ
+    	//ã‚³ãƒ³ãƒ•ã‚£ã‚°ã«å…¥ã‚Œã¦ã‚‚ã‚‰ãˆã‚‹ã¨ã‚³ãƒ¡ãƒ³ãƒˆè§£é™¤
     	//skirtFloatsVolume = (Float) Modchu_Reflect.getFieldObject(mod_LMM_littleMaidMob, "skirtFloatsVolume");
     	if (skirtFloatsVolume <= 0.0F) skirtFloatsVolume = 1.0F;
     	if (skirtFloatsVolume > 2.0F) skirtFloatsVolume = 2.0F;
@@ -1376,8 +1391,8 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * LittleMaidMobê—pˆ—
-     * setRotationAngles ŒÄ‚Ño‚µŒã‚ÉŒÄ‚Î‚ê‚éB
+     * LittleMaidMobå°‚ç”¨å‡¦ç†
+     * setRotationAngles å‘¼ã³å‡ºã—å¾Œã«å‘¼ã°ã‚Œã‚‹ã€‚
      */
     public void LMMRotationAnglesSpecialOperations(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     }
