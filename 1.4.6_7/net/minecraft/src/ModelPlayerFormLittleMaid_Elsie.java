@@ -107,6 +107,7 @@ public class ModelPlayerFormLittleMaid_Elsie extends ModelPlayerFormLittleMaid
     	actionPartsInit(f, f1);
     }
 
+    @Override
 	public void skirtFloatsInit(float f, float f1) {
 		if(!skirtFloats) return;
 		//RightSkirt ‘O
@@ -147,6 +148,95 @@ public class ModelPlayerFormLittleMaid_Elsie extends ModelPlayerFormLittleMaid
 		RightSkirt.setVisible(false);
 		LeftSkirt.setVisible(false);
 	}
+
+    @Override
+    public void actionPartsInit(float f, float f1) {
+    	rightArm = new Modchu_ModelRenderer(this, 56, 20);
+    	rightArm.addBox(-1.0F, 0.0F, -1.0F, 2, 5, 2, f);
+    	rightArm.setRotationPoint(-3.0F, 9.5F, 0.0F);
+    	bipedBody.addChild(rightArm);
+
+    	rightArmPlus = new Modchu_ModelRenderer(this);
+
+    	rightArm2 = new Modchu_ModelRenderer(this, 56, 25);
+    	rightArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 3, 2, f);
+    	rightArm2.setRotationPoint(0.0F, 2.0F, 0.0F);
+    	rightArm.addChild(rightArm2);
+
+    	rightArmPlus2 = new Modchu_ModelRenderer(this);
+
+    	rightHand = new Modchu_ModelRenderer(this, 56, 28);
+    	rightHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	rightHand.setRotationPoint(0.0F, 3.0F, 0.0F);
+    	rightArm2.addChild(rightHand);
+
+    	leftArm = new Modchu_ModelRenderer(this, 56, 20);
+    	leftArm.setMirror(true);
+    	leftArm.addBox(-1.0F, 0.0F, -1.0F, 2, 5, 2, f);
+    	leftArm.setRotationPoint(3.0F, 9.5F, 0.0F);
+    	bipedBody.addChild(leftArm);
+
+    	leftArmPlus = new Modchu_ModelRenderer(this);
+
+    	leftArm2 = new Modchu_ModelRenderer(this, 56, 25);
+    	leftArm2.setMirror(true);
+    	leftArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 3, 2, f);
+    	leftArm2.setRotationPoint(0.0F, 2.0F, 0.0F);
+    	leftArm.addChild(leftArm2);
+
+    	leftArmPlus2 = new Modchu_ModelRenderer(this);
+
+    	leftHand = new Modchu_ModelRenderer(this, 56, 28);
+    	leftHand.setMirror(true);
+    	leftHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	leftHand.setRotationPoint(0.0F, 3.0F, 0.0F);
+    	leftArm2.addChild(leftHand);
+
+    	rightLeg = new Modchu_ModelRenderer(this, 0, 16);
+    	rightLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+    	rightLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	bipedBody.addChild(rightLeg);
+
+    	rightLegPlus = new Modchu_ModelRenderer(this);
+
+    	rightLeg2 = new Modchu_ModelRenderer(this, 0, 22);
+    	rightLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+    	rightLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	rightLeg.addChild(rightLeg2);
+
+    	rightLegPlus2 = new Modchu_ModelRenderer(this);
+
+    	leftLeg = new Modchu_ModelRenderer(this, 0, 16);
+    	leftLeg.setMirror(true);
+    	leftLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+    	leftLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	bipedBody.addChild(leftLeg);
+
+    	leftLegPlus = new Modchu_ModelRenderer(this);
+
+    	leftLeg2 = new Modchu_ModelRenderer(this, 0, 22);
+    	leftLeg2.setMirror(true);
+    	leftLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+    	leftLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	leftLeg.addChild(leftLeg2);
+
+    	leftLegPlus2 = new Modchu_ModelRenderer(this);
+
+    	rightHand.showModel = leftHand.showModel =
+    		rightArm.showModel = leftArm.showModel =
+    			rightArmPlus.showModel = rightArmPlus2.showModel =
+    				leftArmPlus.showModel = leftArmPlus2.showModel =
+    					rightLegPlus.showModel = rightLegPlus2.showModel =
+    						leftLegPlus.showModel = leftLegPlus2.showModel =
+    							rightArm2.showModel = leftArm2.showModel =
+    								rightLeg.showModel = rightLeg2.showModel =
+    									leftLeg.showModel = leftLeg2.showModel = false;
+    	aimedBowBan = false;
+    	sneakBan = false;
+    	waitBan = false;
+    	sittingBan = false;
+    	sleepingBan = false;
+    }
 
     @Override
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
@@ -292,6 +382,42 @@ public class ModelPlayerFormLittleMaid_Elsie extends ModelPlayerFormLittleMaid
     		SideTailL.setVisible(b);
     		setShowModelFlag(1);
     	}
+    }
+
+    @Override
+    public void actionInit1() {
+    	super.actionInit1();
+    	((Modchu_ModelRenderer) bipedRightLeg).removeChild(RightSkirt);
+    	((Modchu_ModelRenderer) bipedLeftLeg).removeChild(LeftSkirt);
+    	rightLeg.addChild(RightSkirt);
+    	leftLeg.addChild(LeftSkirt);
+    }
+
+    @Override
+    public void actionRelease1() {
+    	super.actionRelease1();
+    	rightLeg.removeChild(RightSkirt);
+    	leftLeg.removeChild(LeftSkirt);
+    	bipedRightLeg.addChild(RightSkirt);
+    	bipedLeftLeg.addChild(LeftSkirt);
+    }
+
+	@Override
+    public void action1(Entity entity) {
+    	super.action1(entity);
+    	float f1 = bipedBody.rotateAngleZ;
+    	if (f1 > 0.0F) {
+    		bipedHead.rotationPointY = bipedBody.rotationPointY - 0.5F + (f1 * 1.30889264F);
+    	} else {
+    		bipedHead.rotationPointY = bipedBody.rotationPointY - 0.5F - (f1 * 1.30889264F);
+    	}
+    	rightArm2.rotationPointY += 1.0F;
+    	leftArm2.rotationPointY += 1.0F;
+    	bipedHead.rotationPointX = 0.0F;
+    	rightLeg.rotationPointX -= 0.5F;
+    	leftLeg.rotationPointX += 0.5F;
+    	rightLeg2.rotationPointY -= 2.5F;
+    	leftLeg2.rotationPointY -= 2.5F;
     }
 
     @Override

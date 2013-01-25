@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 //b181deleteimport java.util.List;
+import modelAppend.ModelPlateFreeShape;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -157,6 +159,20 @@ public class Modchu_ModelRenderer extends ModelRenderer
         cubeList.add(new MMM_ModelPlate(this, textureOffsetX, textureOffsetY, f, f1, f2, i, j, k, f3));
         return this;
     }
+
+	public Modchu_ModelRenderer addPlateFreeShape(float[][] vertex, float[][] vertexN, int px, int py)
+	{
+		float[][] vt = { { this.textureOffsetX / this.textureWidth, (this.textureOffsetY + 1) / this.textureHeight }, { (this.textureOffsetX + 1) / this.textureWidth, (this.textureOffsetY + 1) / this.textureHeight }, { (this.textureOffsetX + 1) / this.textureWidth, this.textureOffsetY / this.textureHeight }, { this.textureOffsetX / this.textureWidth, this.textureOffsetY / this.textureHeight } };
+
+		cubeList.add(new ModelPlateFreeShape(this, this.textureOffsetX, this.textureOffsetY, vertex, vt, vertexN, null, 0.0F));
+		return this;
+	}
+
+	public Modchu_ModelRenderer addPlateFreeShape(float[][] vertex, float[][] texUV, float[][] vertexN)
+	{
+		cubeList.add(new ModelPlateFreeShape(this, this.textureOffsetX, this.textureOffsetY, vertex, texUV, vertexN, null, 0.0F));
+		return this;
+	}
 
     public Modchu_ModelRenderer addPlateFreeShape(float[][] var1, float[][] var2, float[][] var3, float[] var4)
     {

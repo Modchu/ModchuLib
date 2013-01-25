@@ -211,8 +211,8 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
-    	if (PFLM_EntityPlayerDummy != null
-    			&& PFLM_EntityPlayerDummy.isInstance(entity)) {
+    	if (LMM_EntityLittleMaid != null
+    			&& LMM_EntityLittleMaid.isInstance(entity)) {
     		LMMRotationAnglesSpecialOperations(f, f1, f2, f3, f4, f5, entity);
     	} else {
     		PFLMRotationAnglesSpecialOperations(f, f1, f2, f3, f4, f5, entity);

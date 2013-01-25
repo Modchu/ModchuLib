@@ -281,11 +281,16 @@ public class Modchu_Reflect
 
     public static Class loadClass(String var0)
     {
+    	return loadClass(var0, debugMessage);
+    }
+
+    public static Class loadClass(String var0, boolean b)
+    {
     	Class c = null;
     	try {
     		c = Class.forName(var0);
     	} catch (ClassNotFoundException e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (b) e.printStackTrace();
     	}
     	return c;
     }

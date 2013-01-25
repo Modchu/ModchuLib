@@ -574,6 +574,7 @@ public class ModelPlayerFormLittleMaid_VUD1 extends ModelPlayerFormLittleMaid_Au
     	actionPartsInit(f, f1);
     }
 
+	@Override
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
         super.setLivingAnimationsLM(entityliving, f, f1, f2);
@@ -612,6 +613,7 @@ public class ModelPlayerFormLittleMaid_VUD1 extends ModelPlayerFormLittleMaid_Au
 		}
     }
 
+	@Override
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
     {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
