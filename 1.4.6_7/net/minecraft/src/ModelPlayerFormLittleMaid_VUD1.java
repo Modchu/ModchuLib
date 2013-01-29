@@ -570,52 +570,23 @@ public class ModelPlayerFormLittleMaid_VUD1 extends ModelPlayerFormLittleMaid_Au
     	bipedLeftArm.addChild(Negi1);
     	bipedLeftArm.addChild(Negi2);
     	bipedLeftArm.addChild(Negi3);
-    	skirtFloatsInit(f, f1);
     	actionPartsInit(f, f1);
     }
 
-	@Override
-    public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
-    {
-        super.setLivingAnimationsLM(entityliving, f, f1, f2);
-
-		float entityIdFactor;
-		boolean isLookSuger = false;
-		float f3 = 0.0F;
-		float f4 = 0.0F;
-		if ((entityliving instanceof EntityPlayer)
-				&& !getaimedBow())
-		{
-			EntityPlayer entityplayer = (EntityPlayer) entityliving;
-			f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
-			ItemStack itemstack2 = entityplayer.inventory.getCurrentItem();
-			if (itemstack2 != null) {
-				Item item = itemstack2.getItem();
-				if (item == Item.sugar) {
-					isLookSuger = true;
-				}
-			}
-		}
-		if (LMM_EntityLittleMaid != null
-				&& LMM_EntityLittleMaid.isInstance(entityliving)) {
-			entityIdFactor = (Float) Modchu_Reflect.getFieldObject(Modchu_Reflect.getField(LMM_EntityLittleMaid, "entityIdFactor"), entityliving);
-			isLookSuger = (Boolean) Modchu_Reflect.invoke(Modchu_Reflect.getMethod(LMM_EntityLittleMaid, "isLookSuger", null), entityliving);
-			f3 = (float)entityliving.ticksExisted + f2 + entityIdFactor;
-		}
-		if (isLookSuger) {
-			Cheek_R.setVisible(true);
-			Cheek_L.setVisible(true);
-		}
-		else
-		{
-			Cheek_R.setVisible(false);
-			Cheek_L.setVisible(false);
-		}
+    @Override
+    public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
+    	super.setLivingAnimationsLM(entityliving, f, f1, f2);
+    	if (getIsLookSuger(entityliving)) {
+    		Cheek_R.setVisible(true);
+    		Cheek_L.setVisible(true);
+    	} else {
+    		Cheek_R.setVisible(false);
+    		Cheek_L.setVisible(false);
+    	}
     }
 
-	@Override
-    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    @Override
+    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
 
     	SideTailR_R.setRotateAngleX(-((Modchu_ModelRenderer) bipedHead).getRotateAngleX());
@@ -657,16 +628,18 @@ public class ModelPlayerFormLittleMaid_VUD1 extends ModelPlayerFormLittleMaid_Au
     		Tail_U.setRotateAngleX(0.0F);
     		Tail_B.setRotateAngleX(-((Modchu_ModelRenderer) bipedHead).getRotateAngleX() + Skirt.getRotateAngleX());
     	}
-/*
-        if (getIsSneak())
-        {
-            Negi1.showModel = Negi2.showModel = Negi3.showModel = true;
-        }
-        else
-        {
-            Negi1.showModel = Negi2.showModel = Negi3.showModel = false;
-        }
-*/
+    	if (LMM_EntityLittleMaid != null
+    			&& LMM_EntityLittleMaid.isInstance(entity)) {
+    		if (getIsSneak()) {
+    			Negi1.setVisible(true);
+    			Negi2.setVisible(true);
+    			Negi3.setVisible(true);
+    		} else {
+    			Negi1.setVisible(false);
+    			Negi2.setVisible(false);
+    			Negi3.setVisible(false);
+    		}
+    	}
     	float f6 = mh_sin(f2 * 0.09F) * 0.05F + 0.05F;
     	SideTailM_RU.rotateAngleZ = SideTailF_RU.rotateAngleZ =
     			SideTailN_LU.rotateAngleZ = SideTailR_R.rotateAngleZ = f6;
@@ -679,178 +652,28 @@ public class ModelPlayerFormLittleMaid_VUD1 extends ModelPlayerFormLittleMaid_Au
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後[partsNumber]から設定
-    	overridePartsNumber = 0;
-    	int k = getPartsNumber();
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-    		String s[] = {
-    				"eyeR", "eyeL", "SideTailRoot", "SideTailM", "SideTailF",
-    				"SideTailN", "SideTailR", "Tail_TUB", "DropTail", "Roll_R",
-    				"Roll_L", "Dump H_L", "HairO M", "HairO F", "HairO N",
-    				"Ribon_R", "Ribon_L", "Ribon_BU", "Ribon_BB", "Ribon_T",
-    				"Headw FBRL", "Shaggy", "LongHair", "Sensor", "Cheek",
-    				"Body_FB", "Breast", "Belt", "Number", "Negi"
-    		};
-    		setParts(s, k);
-    		//Cheek Default off
-    		setGuiShowModel(k + 24, false);
-    		//Negi Default off
-    		setGuiShowModel(k + 29, false);
-    		setPartsSetFlag(3);
-    	}
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s1 = {
+    			"SideTailRoot_R", "SideTailRoot_L", "SideTailM_RU", "SideTailM_RB", "SideTailM_LU",
+    			"SideTailM_LB", "SideTailF_RU", "SideTailF_RB", "SideTailF_LU", "SideTailF_LB",
+    			"SideTailN_LU", "SideTailN_LB", "SideTailR_R", "SideTailR_L", "DumplingHari_L",
+    			"HairOrnamentM_R", "HairOrnamentM_L", "HairOrnamentF_R", "HairOrnamentF_L", "HairOrnamentN_L"
+    	};
+    	String[] s2 = {
+    			"SideT_R", "SideT_L", "SideTM_RU", "SideTM_RB", "SideTM_LU",
+    			"SideTM_LB", "SideTF_RU", "SideTF_RB", "SideTF_LU", "SideTF_LB",
+    			"SideTN_LU", "SideTN_LB", "SideTR_R", "SideTR_L", "D_Hari_L",
+    			"HOM_R", "HOM_L", "HOF_R", "HOF_L", "HON_L"
+    	};
+    	addShowPartsReneme(s1, s2);
+    }
 
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		boolean b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailRoot_R.setVisible(b);
-    		SideTailRoot_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailM_RU.setVisible(b);
-    		SideTailM_RB.setVisible(b);
-    		SideTailM_LU.setVisible(b);
-    		SideTailM_LB.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailF_RU.setVisible(b);
-    		SideTailF_RB.setVisible(b);
-    		SideTailF_LU.setVisible(b);
-    		SideTailF_LB.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailN_LU.setVisible(b);
-    		SideTailN_LB.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailR_R.setVisible(b);
-    		SideTailR_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Tail_T.setVisible(b);
-    		Tail_U.setVisible(b);
-    		Tail_B.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		DropTail.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Roll1_R.setVisible(b);
-    		Roll2_R.setVisible(b);
-    		Roll3_R.setVisible(b);
-    		Roll4_R.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Roll1_L.setVisible(b);
-    		Roll2_L.setVisible(b);
-    		Roll3_L.setVisible(b);
-    		Roll4_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		DumplingHari_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HairOrnamentM_R.setVisible(b);
-    		HairOrnamentM_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HairOrnamentF_R.setVisible(b);
-    		HairOrnamentF_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HairOrnamentN_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Ribon1_R.setVisible(b);
-    		Ribon2_R.setVisible(b);
-    		Ribon3_R.setVisible(b);
-    		Ribon4_R.setVisible(b);
-    		Ribon5_R.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Ribon1_L.setVisible(b);
-    		Ribon2_L.setVisible(b);
-    		Ribon3_L.setVisible(b);
-    		Ribon4_L.setVisible(b);
-    		Ribon5_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Ribon1_BU.setVisible(b);
-    		Ribon2_BU.setVisible(b);
-    		Ribon3_BU.setVisible(b);
-    		Ribon4_BU.setVisible(b);
-    		Ribon5_BU.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Ribon1_BB.setVisible(b);
-    		Ribon2_BB.setVisible(b);
-    		Ribon3_BB.setVisible(b);
-    		Ribon4_BB.setVisible(b);
-    		Ribon5_BB.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Ribon1_T.setVisible(b);
-    		Ribon2_T.setVisible(b);
-    		Ribon3_T.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Headwear_F.setVisible(b);
-    		Headwear_B.setVisible(b);
-    		Headwear_R.setVisible(b);
-    		Headwear_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Shaggy_F.setVisible(b);
-    		shaggyB.setVisible(b);
-    		shaggyR.setVisible(b);
-    		shaggyL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		LongHair_F.setVisible(b);
-    		LongHair_B.setVisible(b);
-    		LongHair_R.setVisible(b);
-    		LongHair_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		sensor1.setVisible(b);
-    		sensor2.setVisible(b);
-    		sensor3.setVisible(b);
-    		sensor4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Cheek_R.setVisible(b);
-    		Cheek_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Body_F.setVisible(b);
-    		Body_B.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Breast1.setVisible(b);
-    		Breast2.setVisible(b);
-    		Breast3.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Belt_R.setVisible(b);
-    		Belt_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Number.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Negi1.setVisible(b);
-    		Negi2.setVisible(b);
-    		Negi3.setVisible(b);
-    		setShowModelFlag(2);
-    	}
+    @Override
+    public void defaultPartsSettingAfter() {
+    	//Cheek Default off
+    	setGuiShowModel("Cheek", false);
+    	//Negi Default off
+    	setGuiShowModel("Negi", false);
     }
 }

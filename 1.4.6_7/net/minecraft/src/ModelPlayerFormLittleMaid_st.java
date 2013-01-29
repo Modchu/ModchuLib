@@ -357,34 +357,13 @@ public class ModelPlayerFormLittleMaid_st extends ModelPlayerFormLittleMaid_SR2
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
         super.setLivingAnimationsLM(entityliving, f, f1, f2);
-		if ((entityliving instanceof EntityPlayer)
-				&& !getaimedBow())
-		{
-			EntityPlayer entityplayer = (EntityPlayer) entityliving;
-			float f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
-
-			float f4 = 0.0F;
-			ItemStack itemstack2 = entityplayer.inventory.getCurrentItem();
-			boolean flag = false;
-			if (itemstack2 != null) {
-				Item item = itemstack2.getItem();
-				if (item == Item.sugar) {
-					flag = true;
-				}
-			}
-			if (flag) {
-				f3 *= 8F;
-				f4 = -0.2F;
-				Cheek_R.setVisible(true);
-				Cheek_L.setVisible(true);
-			}
-			else
-			{
-				float f5 = (1.0F - (float)entityplayer.health / 20F) * 0.5F;
-				Cheek_R.setVisible(false);
-				Cheek_L.setVisible(false);
-			}
-		}
+    	if (getIsLookSuger(entityliving)) {
+    		Cheek_R.setVisible(true);
+    		Cheek_L.setVisible(true);
+    	} else {
+    		Cheek_R.setVisible(false);
+    		Cheek_L.setVisible(false);
+    	}
     }
 
 	@Override
@@ -433,38 +412,9 @@ public class ModelPlayerFormLittleMaid_st extends ModelPlayerFormLittleMaid_SR2
 	}
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から6個上書きして設定
-    	overridePartsNumber = 6;
-    	int k = getPartsNumber() - 6;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"Tailroot" ,"Parka" ,"Mahura" ,"Breast" , "Cheek"
-    		};
-    		setParts(s, k);
-    		//Cheek Default off
-    		setGuiShowModel(k + 4, false);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		Tailroot.showModel = Tailroot1.showModel = Tailroot2.showModel = Tailroot3.showModel =
-    				Tailroot4.showModel = Tail1.showModel = Tail2.showModel =
-    						Tail3.showModel = getGuiShowModel(k);
-    		k++;
-    		Parka.showModel = getGuiShowModel(k);
-    		k++;
-    		Mahura.showModel = getGuiShowModel(k);
-    		k++;
-    		Breast1.showModel = getGuiShowModel(k);
-    		k++;
-    		Cheek_R.showModel = Cheek_L.showModel = getGuiShowModel(k);
-    		setShowModelFlag(1);
-    	}
+    public void defaultPartsSettingAfter() {
+    	//Cheek Default off
+    	setGuiShowModel("Cheek", false);
     }
 
     @Override

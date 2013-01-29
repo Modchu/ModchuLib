@@ -6,6 +6,7 @@ import java.util.Map;
 *///b181delete
 //b173deleteimport java.util.List;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
@@ -27,7 +28,6 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     public Modchu_ModelRenderer SkirtRight;
     public Modchu_ModelRenderer SkirtLeft;
     public Modchu_ModelRenderer SkirtBack;
-    public boolean skirtFloats = false;
 
     public ModelPlayerFormLittleMaid() {
     	this(0.0F);
@@ -46,7 +46,6 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     public ModelPlayerFormLittleMaid(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
 //@-@132
-    	if (isPFLM) skirtFloats = getSkirtFloats();
     }
 
     @Override
@@ -109,7 +108,6 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     	mainFrame.addChild(bipedHead);
     	mainFrame.addChild(bipedBody);
 
-    	skirtFloatsInit(f, f1);
     	actionPartsInit(f, f1);
     }
 
@@ -233,39 +231,40 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
 
     /**
      * ふんわりスカート初期化
-     * 新仕様にまだ未対応skirtFloats=trueにすべからず
      */
     public void skirtFloatsInit(float f, float f1) {
-    	if(!skirtFloats) return;
+    	if(!getSkirtFloats()) return;
     	//ふんわりスカート上
     	SkirtTop = new Modchu_ModelRenderer(this, 8, 16);
     	SkirtTop.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0);
-    	SkirtTop.setRotationPoint(-4.0F, 5.0F + f, 4.0F);
-    	bipedBody.addChild(SkirtTop);
+    	SkirtTop.setRotationPoint(-4.0F, -4.0F, 4.0F);
+    	if (Skirt != null) Skirt.addChild(SkirtTop);
 
     	//ふんわりスカート前
     	SkirtFront = new Modchu_ModelRenderer(this, 8, 24);
     	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0);
-    	SkirtFront.setRotationPoint(-4.0F, 0.0F + f, -4.0F);
-    	bipedBody.addChild(SkirtFront);
+    	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	SkirtTop.addChild(SkirtFront);
 
     	//ふんわりスカート右
     	SkirtRight = new Modchu_ModelRenderer(this, 0, 24);
     	SkirtRight.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1);
-    	SkirtRight.setRotationPoint(-4.0F, 0.0F + f, 4.0F);
-    	bipedBody.addChild(SkirtRight);
+    	SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	SkirtTop.addChild(SkirtRight);
 
     	//ふんわりスカート左
     	SkirtLeft = new Modchu_ModelRenderer(this, 16, 24);
+    	SkirtLeft.setMirror(true);
     	SkirtLeft.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1);
-    	SkirtLeft.setRotationPoint(4.0F, 0.0F + f, -4.0F);
-    	bipedBody.addChild(SkirtLeft);
+    	SkirtLeft.setRotationPoint(8.0F, 8.0F, 0.0F);
+    	SkirtTop.addChild(SkirtLeft);
 
     	//ふんわりスカート後ろ
     	SkirtBack = new Modchu_ModelRenderer(this, 24, 24);
     	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0);
-    	SkirtBack.setRotationPoint(-4.0F, 0.0F + f, 4.0F);
-    	bipedBody.addChild(SkirtBack);
+    	SkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	SkirtTop.addChild(SkirtBack);
+    	if (Skirt != null) Skirt.setVisible(false);
     }
 
     @Override
@@ -274,18 +273,8 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     }
 
     public void renderLM(Entity entity, float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5) {
-    	//this.entity = entity;
     	setRotationAngles(f, f1, ticksExisted, pheadYaw, pheadPitch, f5, entity);
     	mainFrame.render(f5);
-/*
-		if(skirtFloats) {
-			if(SkirtTop.showModel) {
-				Skirt.showModel = false;
-				SkirtFront.scaleX = SkirtBack.scaleX = 1.0F - (getMotionY() * 1.0F);
-				SkirtRight.scaleZ= SkirtLeft.scaleZ = 1.0F - (getMotionY() * 1.0F);
-			}
-		}
-*/
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entity)) {
     		Map map = (Map) getFieldObject(LMM_EntityLittleMaid, "maidStabilizer", entity);
@@ -361,18 +350,6 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     			bipedRightLeg.rotationPointZ = bipedLeftLeg.rotationPointZ = 0.25F;
     			Skirt.rotationPointY = 5.5F - 0.5F;
     			Skirt.rotationPointZ = -1.0F;
-    			if (skirtFloats) {
-    				SkirtFront.rotationPointY = SkirtLeft.rotationPointY = 3.5F;
-    				SkirtRight.rotationPointY = 7.3F;
-    				SkirtTop.rotationPointY = 7.4F;
-    				SkirtBack.rotationPointY = 7.3F;
-    				SkirtRight.rotationPointZ = 3.0F;
-    				SkirtTop.rotationPointZ = 3.0F;
-    				SkirtBack.rotationPointZ = 2.95F;
-    				SkirtFront.rotateAngleX = SkirtLeft.rotateAngleX = SkirtBack.rotateAngleX = -bipedBody.rotateAngleX;
-    				SkirtRight.rotateAngleX = bipedBody.rotateAngleX;
-    				SkirtTop.rotateAngleX = -1.570796313F - bipedBody.rotateAngleX;
-    			}
     		} else {
     			// 通常立ち
     			bipedBody.rotateAngleX = 0.0F;
@@ -383,23 +360,6 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     			bipedBody.rotationPointY = 3.5F;
     			bipedBody.rotationPointZ = 0.0F;
     			bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 3.5F;
-    			if (skirtFloats) {
-    				SkirtFront.rotationPointY = SkirtRight.rotationPointY =
-    						SkirtLeft.rotationPointY = SkirtBack.rotationPointY = SkirtTop.rotationPointY = 5.0F;
-    				SkirtTop.rotationPointZ = 4.0F;
-    				SkirtRight.rotationPointZ = 4.0F;
-    				SkirtBack.rotationPointZ = SkirtTop.rotationPointZ = 4.0F;
-    				SkirtFront.rotateAngleX = SkirtRight.rotateAngleX =
-    						SkirtLeft.rotateAngleX = SkirtBack.rotateAngleX = 0.0F;
-    				SkirtRight.rotateAngleY = 3.141592653F;
-    				SkirtTop.rotateAngleX = -1.570796313F;
-    			}
-    		}
-    		if (skirtFloats) {
-    			SkirtFront.rotateAngleX += getMotionY();
-    			SkirtRight.rotateAngleZ = -getMotionY();
-    			SkirtLeft.rotateAngleZ = getMotionY();
-    			SkirtBack.rotateAngleX -= getMotionY();
     		}
     		if (getaimedBow()) {
     			// 弓構え
@@ -440,10 +400,33 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     				bipedLeftArm.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.05F;
     			}
     		}
+    		skirtFloats(f, f1, f2, f3, f4, f5, entity);
     	}
     	//
     	Arms[2].setRotateAngle(-0.78539816339744830961566084581988F - ((Modchu_ModelRenderer) bipedRightArm).getRotateAngleX(), 0F, 0F);
     	Arms[3].setRotateAngle(-0.78539816339744830961566084581988F - ((Modchu_ModelRenderer) bipedLeftArm).getRotateAngleX(), 0F, 0F);
+    }
+
+    public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    	if (!getSkirtFloats()) return;
+    	SkirtFront.rotationPointX =
+    			SkirtBack.rotationPointX = getMotionY() * 4.0F;
+    	SkirtRight.rotationPointY = getMotionY() * 4.0F;
+    	SkirtLeft.rotationPointY = 8.0F - getMotionY() * 4.0F;
+
+    	SkirtTop.rotateAngleX = -1.570796313F;
+    	SkirtBack.rotateAngleX = 1.570796313F;
+    	SkirtFront.rotateAngleX = 1.570796313F;
+    	SkirtRight.rotateAngleX = -1.570796313F;
+    	SkirtRight.rotateAngleY = 3.141592653F;
+    	SkirtLeft.rotateAngleX = 1.570796313F;
+    	SkirtFront.rotateAngleX += getMotionY();
+    	SkirtRight.rotateAngleY += getMotionY();
+    	SkirtLeft.rotateAngleY = -getMotionY();
+    	SkirtBack.rotateAngleX -= getMotionY();
+
+    	SkirtFront.scaleX = SkirtBack.scaleX = 1.0F - (getMotionY() * 1.0F);
+    	SkirtRight.scaleZ = SkirtLeft.scaleZ = 1.0F - (getMotionY() * 1.0F);
     }
 
     @Override
@@ -532,6 +515,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     @Override
     public void showAllParts() {
     	// 表示制限を解除してすべての部品を表示
+/*
     	setVisible(bipedHead, true);
     	setVisible(bipedBody, true);
     	setVisible(bipedRightArm, true);
@@ -539,6 +523,7 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     	setVisible(Skirt, true);
     	setVisible(bipedRightLeg, true);
     	setVisible(bipedLeftLeg, true);
+*/
     }
 
     @Override
@@ -564,80 +549,43 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     	return -1;
     }
 
-    /**
-     * GUI パーツ表示・非表示設定
-     */
     @Override
-    public void settingShowParts() {
-    	//GUI パーツ表示・非表示初期設定
-    	if((Integer) getFieldObject(PFLM_Gui, "partsSetFlag") == 1) {
-    		String s[] = {
-    				"Head",	"Body", "RightArm", "LeftArm", "RightLeg",
-    				"LeftLeg", "Skirt", "Headwear", "ChignonR" ,"ChignonL",
-    				"ChignonB", "SideTailR", "SideTailL", "Tail"
+    public void defaultPartsSettingBefore() {
+    	if (getShowPartsList().contains("bipedCloak")) {
+    		String[] s = {
+    				"bipedCloak", "bipedEars", "SkirtTop", "SkirtFront", "SkirtLeft",
+    				"SkirtRight", "SkirtBack", "rightArm", "rightArm2", "rightArmPlus",
+    				"rightArmPlus2", "rightHand", "rightLeg", "rightLeg2", "rightLegPlus",
+    				"rightLegPlus2", "leftArm", "leftArm2", "leftArmPlus", "leftArmPlus2",
+    				"leftHand", "leftLeg", "leftLeg2", "leftLegPlus", "leftLegPlus2",
+    				"HeadMount", "mainFrame"
     		};
-    		setParts(s, 0);
-    		setPartsSetFlag(1);
-    		setFieldObject(PFLM_Gui, "partsSetFlag", 2);
+    		showPartsHideListadd(s);
     	}
-
-    	//GUI パーツ表示・非表示反映
-    	if((Boolean) getFieldObject(PFLM_Gui, "showModelFlag")) {
-    		setShowModelFlag(0);
-    		superShowModelSettingReflects(0);
-    		setFieldObject(PFLM_Gui, "showModelFlag", false);
-    	} else {
-    		setShowModelFlag(-1);
-    	}
+    	String[] s1 = {
+    			"bipedHead", "bipedHeadwear", "bipedBody", "bipedRightArm", "bipedLeftArm",
+    			"bipedRightLeg", "bipedLeftLeg"
+    	};
+    	String[] s2 = {
+    			"Head", "Headwear", "Body", "RightArm", "LeftArm",
+    			"RightLeg", "LeftLeg"
+    	};
+    	addShowPartsReneme(s1, s2);
     }
 
     @Override
-    public void superShowModelSettingReflects(int i) {
-    	boolean[] b0 = (boolean[]) Modchu_Reflect.getFieldObject(PFLM_Gui, "showModel");
-    	boolean b = b0[i];
-    	if (bipedHead != null) setVisible(bipedHead, b);
-    	i++;
-    	b = b0[i];
-    	if (bipedBody != null) setVisible(bipedBody, b);
-    	i++;
-    	b = b0[i];
-    	if (bipedRightArm != null) setVisible(bipedRightArm, b);
-    	i++;
-    	b = b0[i];
-    	if (bipedLeftArm != null) setVisible(bipedLeftArm, b);
-    	i++;
-    	b = b0[i];
-    	if (bipedRightLeg != null) setVisible(bipedRightLeg, b);
-    	i++;
-    	b = b0[i];
-    	if (bipedLeftLeg != null) setVisible(bipedLeftLeg, b);
-    	i++;
-    	b = b0[i];
-    	if (Skirt != null) Skirt.setVisible(b);
-    	i++;
-    	b = b0[i];
-    	if (bipedHeadwear != null) setVisible(bipedHeadwear, b);
-    	i++;
-    	b = b0[i];
-    	if (ChignonR != null) ChignonR.setVisible(b);
-    	i++;
-    	b = b0[i];
-    	if (ChignonL != null) ChignonL.setVisible(b);
-    	i++;
-    	b = b0[i];
-    	if (ChignonB != null) ChignonB.setVisible(b);
-    	i++;
-    	b = b0[i];
-    	if (SideTailR != null) SideTailR.setVisible(b);
-    	i++;
-    	b = b0[i];
-    	if (SideTailL != null) SideTailL.setVisible(b);
-    	i++;
-    	b = b0[i];
-    	if (Tail != null) Tail.setVisible(b);
-    	i++;
-    	b = b0[i];
-    	setPartsNumber(i);
+    public void defaultPartsSettingAfter() {
+    	super.defaultPartsSettingAfter();
+    }
+
+    @Override
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	if (getSkirtFloats()) {
+    		if (getGuiShowModelInt("Skirt") > -1) indexOfAllSetVisible("Skirt");
+    	}
+    	if (getSkirtFloats()
+    			&& Skirt != null) Skirt.setVisible(false);
     }
 
     @Override
@@ -698,20 +646,10 @@ public class ModelPlayerFormLittleMaid extends ModelPlayerFormLittleMaidBaseBipe
     	}
     }
 
-    /**
-     * 弓装備時の位置調整
-     */
-    @Override
-    public void equippedItemBow() {
-/*
-    	if (getIsWait()) GL11.glTranslatef(-0.2F, 0.1F, 0.3125F);
-    	else GL11.glTranslatef(-0.15F, 0.0F, 0.35F);
-*/
-    }
-
     @Override
     public void setArmorSkirtShowModel(boolean b) {
-    	if (Skirt != null) {
+    	if (Skirt != null
+    			&& !getSkirtFloats()) {
     		Skirt.isHidden = !b;
     		Skirt.setVisible(b);
     	}

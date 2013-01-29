@@ -363,186 +363,125 @@ public class ModelPlayerFormLittleMaid_bgs extends ModelPlayerFormLittleMaid_SR2
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から10個上書きして設定
-    	overridePartsNumber = 10;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-    		String s[] = {
-    				"eyeR", "eyeL", "Headwear" ,"HornR" ,"HornL",
-    				"HeadwearR" ,"HeadwearL" , "bootR" ,"bootL" ,"Breast"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(3);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		boolean b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Headwear.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HornR1.setVisible(b);
-    		HornR2.setVisible(b);
-    		HornR3.setVisible(b);
-    		HornR4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HornL1.setVisible(b);
-    		HornL2.setVisible(b);
-    		HornL3.setVisible(b);
-    		HornL4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HeadwearR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HeadwearL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		bootR1.setVisible(b);
-    		bootR2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		bootL1.setVisible(b);
-    		bootL2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Breast.setVisible(b);
-    		Skirt.setVisible(false);
-    		setShowModelFlag(2);
-    	}
+    public void actionInit1() {
+    	super.actionInit1();
+    	bipedLeftArm.isHidden = true;
+    	bipedRightArm.isHidden = true;
+    	bipedLeftLeg.isHidden = true;
+    	bipedRightLeg.isHidden = true;
+    	rightHand.isHidden = leftHand.isHidden =
+    			rightArm.isHidden = leftArm.isHidden =
+    			rightArm2.isHidden = leftArm2.isHidden =
+    			rightLeg.isHidden = rightLeg2.isHidden =
+    			leftLeg.isHidden = leftLeg2.isHidden = false;
     }
 
-	@Override
-	public void actionInit1() {
-		super.actionInit1();
-		bipedLeftArm.isHidden = true;
-		bipedRightArm.isHidden = true;
-		bipedLeftLeg.isHidden = true;
-		bipedRightLeg.isHidden = true;
-		rightHand.isHidden = leftHand.isHidden =
-				rightArm.isHidden = leftArm.isHidden =
-						rightArm2.isHidden = leftArm2.isHidden =
-								rightLeg.isHidden = rightLeg2.isHidden =
-										leftLeg.isHidden = leftLeg2.isHidden = false;
-	}
+    @Override
+    public void actionInit2() {
+    	actionInit1();
+    }
 
-	@Override
-	public void actionInit2() {
-		actionInit1();
-	}
+    @Override
+    public void actionRelease1() {
+    	super.actionRelease1();
+    	bipedLeftArm.isHidden = false;
+    	bipedRightArm.isHidden = false;
+    	bipedLeftLeg.isHidden = false;
+    	bipedRightLeg.isHidden = false;
+    	rightHand.isHidden = leftHand.isHidden =
+    			rightArm.isHidden = leftArm.isHidden =
+    			rightArm2.isHidden = leftArm2.isHidden =
+    			rightLeg.isHidden = rightLeg2.isHidden =
+    			leftLeg.isHidden = leftLeg2.isHidden = true;
+    	bootR1.rotationPointY =
+    			bootR2.rotationPointY =
+    			bootL1.rotationPointY =
+    			bootL2.rotationPointY =
+    			ArmR1.rotationPointY =
+    			ArmL1.rotationPointY =
+    			HandR1.rotationPointX =
+    			HandR2.rotationPointX =
+    			HandR1.rotationPointY =
+    			HandR2.rotationPointY =
+    			HandL1.rotationPointX =
+    			HandL2.rotationPointX =
+    			HandL1.rotationPointY =
+    			HandL2.rotationPointY = 0.0F;
+    }
 
-	@Override
-	public void actionRelease1() {
-		super.actionRelease1();
-		bipedLeftArm.isHidden = false;
-		bipedRightArm.isHidden = false;
-		bipedLeftLeg.isHidden = false;
-		bipedRightLeg.isHidden = false;
-		rightHand.isHidden = leftHand.isHidden =
-				rightArm.isHidden = leftArm.isHidden =
-						rightArm2.isHidden = leftArm2.isHidden =
-								rightLeg.isHidden = rightLeg2.isHidden =
-										leftLeg.isHidden = leftLeg2.isHidden = true;
-		bootR1.rotationPointY =
-		bootR2.rotationPointY =
-		bootL1.rotationPointY =
-		bootL2.rotationPointY =
-		ArmR1.rotationPointY =
-		ArmL1.rotationPointY =
-		HandR1.rotationPointX =
-		HandR2.rotationPointX =
-		HandR1.rotationPointY =
-		HandR2.rotationPointY =
-		HandL1.rotationPointX =
-		HandL2.rotationPointX =
-		HandL1.rotationPointY =
-		HandL2.rotationPointY = 0.0F;
-	}
+    @Override
+    public void actionRelease2() {
+    	actionRelease1();
+    }
 
-	@Override
-	public void actionRelease2() {
-		actionRelease1();
-	}
+    @Override
+    public void action1(Entity entity) {
+    	super.action1(entity);
+    	//Modchu_Debug.mDebug("action1");
+    	float f1 = bipedBody.rotateAngleZ;
+    	if (f1 > 0.0F) {
+    		bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F + (f1 * 1.30889264F);
+    	} else {
+    		bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F - (f1 * 1.30889264F);
+    	}
+    	bipedHead.rotationPointX = 0.0F;
+    	rightArm2.rotationPointY = 4.5F;
+    	rightLeg.rotationPointX -= 0.5F;
+    	rightLeg2.rotationPointY -= 5.0F;
+    	rightHand.rotationPointY = 4.0F;
+    	ArmR1.rotationPointY = -4.0F;
+    	HandR1.rotationPointX =
+    			HandR2.rotationPointX = 1.0F;
+    	HandR1.rotationPointY =
+    			HandR2.rotationPointY = -8.0F;
+    	bootR1.rotationPointY = -5.0F;
+    	bootR2.rotationPointY = -5.0F;
 
-	@Override
-	public void action1(Entity entity) {
-		super.action1(entity);
-		//Modchu_Debug.mDebug("action1");
-		float f1 = bipedBody.rotateAngleZ;
-		if (f1 > 0.0F) {
-			bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F + (f1 * 1.30889264F);
-		} else {
-			bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F - (f1 * 1.30889264F);
-		}
-		bipedHead.rotationPointX = 0.0F;
-		rightArm2.rotationPointY = 4.5F;
-		rightLeg.rotationPointX -= 0.5F;
-		rightLeg2.rotationPointY -= 5.0F;
-		rightHand.rotationPointY = 4.0F;
-		ArmR1.rotationPointY = -4.0F;
-		HandR1.rotationPointX =
-		HandR2.rotationPointX = 1.0F;
-		HandR1.rotationPointY =
-		HandR2.rotationPointY = -8.0F;
-		bootR1.rotationPointY = -5.0F;
-		bootR2.rotationPointY = -5.0F;
+    	leftArm2.rotationPointY = 4.5F;
+    	leftLeg.rotationPointX += 0.5F;
+    	leftLeg2.rotationPointY -= 5.0F;
+    	leftHand.rotationPointY = 4.0F;
+    	HandL1.rotationPointX =
+    			HandL2.rotationPointX = 1.0F;
+    	HandL1.rotationPointY =
+    			HandL2.rotationPointY = -8.0F;
+    	ArmL1.rotationPointY = -4.0F;
+    	bootL1.rotationPointY = -5.0F;
+    	bootL2.rotationPointY = -5.0F;
+    }
 
-		leftArm2.rotationPointY = 4.5F;
-		leftLeg.rotationPointX += 0.5F;
-		leftLeg2.rotationPointY -= 5.0F;
-		leftHand.rotationPointY = 4.0F;
-		HandL1.rotationPointX =
-		HandL2.rotationPointX = 1.0F;
-		HandL1.rotationPointY =
-		HandL2.rotationPointY = -8.0F;
-		ArmL1.rotationPointY = -4.0F;
-		bootL1.rotationPointY = -5.0F;
-		bootL2.rotationPointY = -5.0F;
-	}
+    @Override
+    public void action2(Entity entity) {
+    	super.action2(entity);
+    	float f1 = bipedBody.rotateAngleZ;
+    	if (f1 > 0.0F) {
+    		bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F + (f1 * 1.30889264F);
+    	} else {
+    		bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F - (f1 * 1.30889264F);
+    	}
 
-	@Override
-	public void action2(Entity entity) {
-		super.action2(entity);
-		float f1 = bipedBody.rotateAngleZ;
-		if (f1 > 0.0F) {
-			bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F + (f1 * 1.30889264F);
-		} else {
-			bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F - (f1 * 1.30889264F);
-		}
+    	rightArm2.rotationPointY = 4.5F;
+    	rightLeg.rotationPointX -= 0.5F;
+    	rightLeg2.rotationPointY -= 5.0F;
+    	rightHand.rotationPointY = 4.0F;
+    	ArmR1.rotationPointY = -4.0F;
+    	HandR1.rotationPointX =
+    			HandR2.rotationPointX = 1.0F;
+    	HandR1.rotationPointY =
+    			HandR2.rotationPointY = -8.0F;
+    	bootR1.rotationPointY = -5.0F;
+    	bootR2.rotationPointY = -5.0F;
 
-		rightArm2.rotationPointY = 4.5F;
-		rightLeg.rotationPointX -= 0.5F;
-		rightLeg2.rotationPointY -= 5.0F;
-		rightHand.rotationPointY = 4.0F;
-		ArmR1.rotationPointY = -4.0F;
-		HandR1.rotationPointX =
-		HandR2.rotationPointX = 1.0F;
-		HandR1.rotationPointY =
-		HandR2.rotationPointY = -8.0F;
-		bootR1.rotationPointY = -5.0F;
-		bootR2.rotationPointY = -5.0F;
-
-		leftArm2.rotationPointY = 4.5F;
-		leftLeg.rotationPointX += 0.5F;
-		leftLeg2.rotationPointY -= 5.0F;
-		leftHand.rotationPointY = 4.0F;
-		HandL1.rotationPointX =
-		HandL2.rotationPointX = 1.0F;
-		HandL1.rotationPointY =
-		HandL2.rotationPointY = -8.0F;
-		ArmL1.rotationPointY = -4.0F;
-		bootL1.rotationPointY = -5.0F;
-		bootL2.rotationPointY = -5.0F;
-	}
+    	leftArm2.rotationPointY = 4.5F;
+    	leftLeg.rotationPointX += 0.5F;
+    	leftLeg2.rotationPointY -= 5.0F;
+    	leftHand.rotationPointY = 4.0F;
+    	HandL1.rotationPointX =
+    			HandL2.rotationPointX = 1.0F;
+    	HandL1.rotationPointY =
+    			HandL2.rotationPointY = -8.0F;
+    	ArmL1.rotationPointY = -4.0F;
+    	bootL1.rotationPointY = -5.0F;
+    	bootL2.rotationPointY = -5.0F;
+    }
 }

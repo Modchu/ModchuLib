@@ -167,40 +167,6 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 		}
 	}
 
-    @Override
-    public void settingShowParts() {
-		//GUI パーツ表示・非表示初期設定
-		//最初から設定
-		int k = 0;
-    	if((Integer) getFieldObject(PFLM_Gui, "partsSetFlag") == 1) {
-			String s[] = {
-					"Head",	"Body", "RightArm", "LeftArm", "RightLeg",
-					"LeftLeg", "Headwear"
-			};
-			setParts(s, 0);
-			setPartsSetFlag(1);
-			setFieldObject(PFLM_Gui, "partsSetFlag", null, 2);
-		}
-
-		//GUI パーツ表示・非表示反映
-		if(getShowModelFlag() == 0) {
-			bipedHead.showModel = getGuiShowModel(k);
-			k++;
-			bipedBody.showModel = getGuiShowModel(k);
-			k++;
-			bipedRightArm.showModel = getGuiShowModel(k);
-			k++;
-			bipedLeftArm.showModel = getGuiShowModel(k);
-			k++;
-			bipedRightLeg.showModel = getGuiShowModel(k);
-			k++;
-			bipedLeftLeg.showModel = getGuiShowModel(k);
-			k++;
-			bipedHeadwear.showModel = getGuiShowModel(k);
-			setShowModelFlag(1);
-		}
-	}
-
 	/**
 	 * Sets the models various rotation angles.
 	 */
@@ -246,48 +212,7 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 		bipedLeftArm.rotateAngleY = 0.0F;
 		float var7;
 		float var8;
-
-    	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
-    	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
-    	if ((onGroundR > -9990F || onGroundL > -9990F) && !getaimedBow() && !getOldwalking()) {
-    		// 腕振り
-    		float f6, f7, f8;
-    		f6 = MathHelper.sin(MathHelper.sqrt_float(onGroundR) * (float)Math.PI * 2.0F);
-    		f7 = MathHelper.sin(MathHelper.sqrt_float(onGroundL) * (float)Math.PI * 2.0F);
-    		bipedBody.rotateAngleY = (f6 - f7) * 0.2F;
-    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
-    		bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
-    		// R
-    		if (onGroundR > 0F) {
-    			f6 = 1.0F - onGroundR;
-    			f6 *= f6;
-    			f6 *= f6;
-    			f6 = 1.0F - f6;
-    			f7 = MathHelper.sin(f6 * (float)Math.PI);
-    			f8 = MathHelper.sin(onGroundR * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
-    			bipedRightArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
-    			bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-    			bipedRightArm.rotateAngleZ = MathHelper.sin(onGroundR * 3.141593F) * -0.4F;
-    		} else {
-    			bipedRightArm.rotateAngleX += bipedBody.rotateAngleY;
-    		}
-    		// L
-    		if (onGroundL > 0F) {
-    			f6 = 1.0F - onGroundL;
-    			f6 *= f6;
-    			f6 *= f6;
-    			f6 = 1.0F - f6;
-    			f7 = MathHelper.sin(f6 * (float)Math.PI);
-    			f8 = MathHelper.sin(onGroundL * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
-    			//if (!getFirstPerson()) {
-    				bipedLeftArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
-    				bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-    				bipedLeftArm.rotateAngleZ = MathHelper.sin(onGroundL * 3.141593F) * 0.4F;
-    			//}
-    		} else {
-    			bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
-    		}
-    	}
+		armSwing(f, f1, f2, f3, f4, f5, entity);
 		if (getIsSneak()) {
 			bipedBody.rotateAngleX = 0.5F;
 			bipedHead.rotationPointY = 1.0F;
@@ -331,6 +256,50 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 			}
 		}
 	}
+
+    public void armSwing(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
+    	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
+    	if ((onGroundR > -9990F || onGroundL > -9990F) && !getaimedBow() && !getOldwalking()) {
+    		// 腕振り
+    		float f6, f7, f8;
+    		f6 = MathHelper.sin(MathHelper.sqrt_float(onGroundR) * (float)Math.PI * 2.0F);
+    		f7 = MathHelper.sin(MathHelper.sqrt_float(onGroundL) * (float)Math.PI * 2.0F);
+    		bipedBody.rotateAngleY = (f6 - f7) * 0.2F;
+    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
+    		bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
+    		// R
+    		if (onGroundR > 0F) {
+    			f6 = 1.0F - onGroundR;
+    			f6 *= f6;
+    			f6 *= f6;
+    			f6 = 1.0F - f6;
+    			f7 = MathHelper.sin(f6 * (float)Math.PI);
+    			f8 = MathHelper.sin(onGroundR * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
+    			bipedRightArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
+    			bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
+    			bipedRightArm.rotateAngleZ = MathHelper.sin(onGroundR * 3.141593F) * -0.4F;
+    		} else {
+    			bipedRightArm.rotateAngleX += bipedBody.rotateAngleY;
+    		}
+    		// L
+    		if (onGroundL > 0F) {
+    			f6 = 1.0F - onGroundL;
+    			f6 *= f6;
+    			f6 *= f6;
+    			f6 = 1.0F - f6;
+    			f7 = MathHelper.sin(f6 * (float)Math.PI);
+    			f8 = MathHelper.sin(onGroundL * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
+    			//if (!getFirstPerson()) {
+    				bipedLeftArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
+    				bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
+    				bipedLeftArm.rotateAngleZ = MathHelper.sin(onGroundL * 3.141593F) * 0.4F;
+    			//}
+    		} else {
+    			bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
+    		}
+    	}
+    }
 
     @Override
     public void reset(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -411,6 +380,28 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 	}
 
     @Override
+    public void defaultPartsSettingBefore() {
+    	if (getShowPartsList().contains("bipedCloak")) {
+    		String[] s = {
+    				"rightArm", "rightArm2", "rightArmPlus", "rightArmPlus2", "rightHand",
+    				"rightLeg", "rightLeg2", "rightLegPlus", "rightLegPlus2", "leftArm",
+    				"leftArm2", "leftArmPlus", "leftArmPlus2", "leftHand", "leftLeg",
+    				"leftLeg2", "leftLegPlus", "leftLegPlus2", "HeadMount", "mainFrame"
+    		};
+    		showPartsHideListadd(s);
+    	}
+    	String[] s1 = {
+    			"bipedHead", "bipedHeadwear", "bipedBody", "bipedRightArm", "bipedLeftArm",
+    			"bipedRightLeg", "bipedLeftLeg"
+    	};
+    	String[] s2 = {
+    			"Head", "Headwear", "Body", "RightArm", "LeftArm",
+    			"RightLeg", "LeftLeg"
+    	};
+    	addShowPartsReneme(s1, s2);
+    }
+
+    @Override
     public void action1(Entity entity) {
     	super.action1(entity);
 		float f1 = bipedBody.rotateAngleZ;
@@ -442,6 +433,5 @@ public class ModelPlayerFormLittleMaid_Biped extends ModelPlayerFormLittleMaidBa
 		leftLeg2.rotationPointX = 0.0F;
 		leftLeg2.rotationPointY = 5.5F;
 		leftLeg2.rotationPointZ = 0.0F;
-
     }
 }

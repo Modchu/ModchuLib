@@ -508,6 +508,10 @@ public class ModelPlayerFormLittleMaid_ChibiNeko extends ModelPlayerFormLittleMa
 	}
 
     @Override
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
+    @Override
     public void reset(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	bipedHead.setRotationPoint(0.0F, 1.0F, 0.0F);
     	bipedBody.setRotationPoint(0.0F, -3.0F*Scale, 0.0F);
@@ -521,38 +525,28 @@ public class ModelPlayerFormLittleMaid_ChibiNeko extends ModelPlayerFormLittleMa
 	{
 		super.setLivingAnimationsLM(entityliving, f, f1, f2);
 
-        if ((entityliving instanceof EntityPlayer)
-        		&& !getaimedBow())
-        {
-        	EntityPlayer entityplayer = (EntityPlayer) entityliving;
-            float f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
+		float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
+		if (0.0F > mh_sin(f3 * 0.17F) + mh_sin(f3 * 0.17F + 0.02F) + mh_sin(f3 * 0.11F) + mh_sin(f3 * 0.7F) + 3.1F) {
+			EarL1.rotateAngleZ = EarR1.rotateAngleZ = EarLi1.rotateAngleZ = EarRi1.rotateAngleZ = -0.5235988F;
+			EarL2.rotateAngleZ = EarR2.rotateAngleZ = EarLi2.rotateAngleZ = EarRi2.rotateAngleZ = 0.5235988F;
+			EarL1.rotateAngleY = EarLi1.rotateAngleY = ((float)Math.PI / 2F);
+			EarL2.rotateAngleY = EarLi2.rotateAngleY = -((float)Math.PI / 2F);
+			EarR1.rotateAngleY = EarRi1.rotateAngleY = ((float)Math.PI / 2F);
+			EarR2.rotateAngleY = EarRi2.rotateAngleY = -((float)Math.PI / 2F);
+		} else {
+			EarL1.rotateAngleZ = EarR1.rotateAngleZ = EarLi1.rotateAngleZ = EarRi1.rotateAngleZ = -((float)Math.PI * 2F / 9F);
+			EarL2.rotateAngleZ = EarR2.rotateAngleZ = EarLi2.rotateAngleZ = EarRi2.rotateAngleZ = ((float)Math.PI * 2F / 9F);
+			EarL1.rotateAngleY = EarLi1.rotateAngleY = 1.396263F;
+			EarL2.rotateAngleY = EarLi2.rotateAngleY = -1.745329F;
+			EarR1.rotateAngleY = EarRi1.rotateAngleY = 1.745329F;
+			EarR2.rotateAngleY = EarRi2.rotateAngleY = -1.396263F;
+		}
 
-            if (0.0F > mh_sin(f3 * 0.17F) + mh_sin(f3 * 0.17F + 0.02F) + mh_sin(f3 * 0.11F) + mh_sin(f3 * 0.7F) + 3.1F)
-            {
-                EarL1.rotateAngleZ = EarR1.rotateAngleZ = EarLi1.rotateAngleZ = EarRi1.rotateAngleZ = -0.5235988F;
-                EarL2.rotateAngleZ = EarR2.rotateAngleZ = EarLi2.rotateAngleZ = EarRi2.rotateAngleZ = 0.5235988F;
-                EarL1.rotateAngleY = EarLi1.rotateAngleY = ((float)Math.PI / 2F);
-                EarL2.rotateAngleY = EarLi2.rotateAngleY = -((float)Math.PI / 2F);
-                EarR1.rotateAngleY = EarRi1.rotateAngleY = ((float)Math.PI / 2F);
-                EarR2.rotateAngleY = EarRi2.rotateAngleY = -((float)Math.PI / 2F);
-            }
-            else
-            {
-                EarL1.rotateAngleZ = EarR1.rotateAngleZ = EarLi1.rotateAngleZ = EarRi1.rotateAngleZ = -((float)Math.PI * 2F / 9F);
-                EarL2.rotateAngleZ = EarR2.rotateAngleZ = EarLi2.rotateAngleZ = EarRi2.rotateAngleZ = ((float)Math.PI * 2F / 9F);
-                EarL1.rotateAngleY = EarLi1.rotateAngleY = 1.396263F;
-                EarL2.rotateAngleY = EarLi2.rotateAngleY = -1.745329F;
-                EarR1.rotateAngleY = EarRi1.rotateAngleY = 1.745329F;
-                EarR2.rotateAngleY = EarRi2.rotateAngleY = -1.396263F;
-            }
-
-            IdOffset = entityplayer.entityId;
-        }
+		IdOffset = entityliving.entityId;
 	}
 
 	@Override
-	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-	{
+	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
 
 		Ahoge.rotateAngleY = MathHelper.cos(f2 * 0.2F + MathHelper.cos(f2 * 0.05F + (float)IdOffset) * 1.0F) * 0.2F;
@@ -636,149 +630,68 @@ public class ModelPlayerFormLittleMaid_ChibiNeko extends ModelPlayerFormLittleMa
 			EarR1.rotateAngleY=EarRi1.rotateAngleY=100F/180F*(float)Math.PI;
 			EarR2.rotateAngleY=EarRi2.rotateAngleY=-80F/180F*(float)Math.PI;
 		}
-		if (skirtFloats) {
-			Skirt21.setRotateAngleDeg(-118F, 113F, 47F);
-			Skirt22.setRotateAngleDeg(-65F, 113F, 47F);
-			Skirt23.setRotateAngleDeg(-122F, 158F, 47F);
-			Skirt24.setRotateAngleDeg(-67F, 158F, 47F);
-			Skirt25.setRotateAngleDeg(-113F, -159F, 47F);
-			Skirt26.setRotateAngleDeg(-58F, -159F, 47F);
-			Skirt27.setRotateAngleDeg(-114F, -114F, 47F);
-			Skirt28.setRotateAngleDeg(-65F, -114F, 47F);
-			Skirt29.setRotateAngleDeg(-115F, -68F, 47F);
-			Skirt210.setRotateAngleDeg(-65F, -68F, 47F);
-			Skirt211.setRotateAngleDeg(-122F, -23F, 47F);
-			Skirt212.setRotateAngleDeg(-66F, -23F, 47F);
-			Skirt213.setRotateAngleDeg(-114F, 22F, 47F);
-			Skirt214.setRotateAngleDeg(-58F, 22F, 47F);
-			Skirt215.setRotateAngleDeg(-115F, 67F, 47F);
-			Skirt216.setRotateAngleDeg(-62F, 67F, 47F);
+		skirtFloats(f, f1, f2, f3, f4, f5, entity);
+	}
 
-			Skirt21.rotateAngleZ += motionY;
-			Skirt22.rotateAngleX += motionY;
-			Skirt22.rotateAngleZ += motionY;
-			Skirt23.rotateAngleX += motionY;
-			Skirt23.rotateAngleZ += motionY;
-			Skirt24.rotateAngleX += motionY;
-			Skirt24.rotateAngleZ += motionY;
-			Skirt25.rotateAngleX += motionY;
-			Skirt25.rotateAngleZ += motionY;
-			Skirt26.rotateAngleX += motionY;
-			Skirt26.rotateAngleZ += motionY;
-			Skirt27.rotateAngleZ += motionY;
-			Skirt28.rotateAngleZ += motionY;
-			Skirt29.rotateAngleZ += motionY;
-			Skirt210.rotateAngleY += motionY;
-			Skirt210.rotateAngleZ += motionY;
-			Skirt211.rotateAngleY += motionY;
-			Skirt211.rotateAngleZ += motionY;
-			Skirt212.rotateAngleY += motionY;
-			Skirt212.rotateAngleZ += motionY;
-			Skirt213.rotateAngleY += motionY;
-			Skirt213.rotateAngleZ += motionY;
-			Skirt214.rotateAngleY += motionY;
-			Skirt214.rotateAngleZ += motionY;
-			Skirt215.rotateAngleY += motionY;
-			Skirt215.rotateAngleZ += motionY;
-			Skirt216.rotateAngleZ += motionY;
-		}
+	@Override
+	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+		if (!getSkirtFloats()) return;
+		Skirt21.setRotateAngleDeg(-118F, 113F, 47F);
+		Skirt22.setRotateAngleDeg(-65F, 113F, 47F);
+		Skirt23.setRotateAngleDeg(-122F, 158F, 47F);
+		Skirt24.setRotateAngleDeg(-67F, 158F, 47F);
+		Skirt25.setRotateAngleDeg(-113F, -159F, 47F);
+		Skirt26.setRotateAngleDeg(-58F, -159F, 47F);
+		Skirt27.setRotateAngleDeg(-114F, -114F, 47F);
+		Skirt28.setRotateAngleDeg(-65F, -114F, 47F);
+		Skirt29.setRotateAngleDeg(-115F, -68F, 47F);
+		Skirt210.setRotateAngleDeg(-65F, -68F, 47F);
+		Skirt211.setRotateAngleDeg(-122F, -23F, 47F);
+		Skirt212.setRotateAngleDeg(-66F, -23F, 47F);
+		Skirt213.setRotateAngleDeg(-114F, 22F, 47F);
+		Skirt214.setRotateAngleDeg(-58F, 22F, 47F);
+		Skirt215.setRotateAngleDeg(-115F, 67F, 47F);
+		Skirt216.setRotateAngleDeg(-62F, 67F, 47F);
+
+		Skirt21.rotateAngleZ += motionY;
+		Skirt22.rotateAngleX += motionY;
+		Skirt22.rotateAngleZ += motionY;
+		Skirt23.rotateAngleX += motionY;
+		Skirt23.rotateAngleZ += motionY;
+		Skirt24.rotateAngleX += motionY;
+		Skirt24.rotateAngleZ += motionY;
+		Skirt25.rotateAngleX += motionY;
+		Skirt25.rotateAngleZ += motionY;
+		Skirt26.rotateAngleX += motionY;
+		Skirt26.rotateAngleZ += motionY;
+		Skirt27.rotateAngleZ += motionY;
+		Skirt28.rotateAngleZ += motionY;
+		Skirt29.rotateAngleZ += motionY;
+		Skirt210.rotateAngleY += motionY;
+		Skirt210.rotateAngleZ += motionY;
+		Skirt211.rotateAngleY += motionY;
+		Skirt211.rotateAngleZ += motionY;
+		Skirt212.rotateAngleY += motionY;
+		Skirt212.rotateAngleZ += motionY;
+		Skirt213.rotateAngleY += motionY;
+		Skirt213.rotateAngleZ += motionY;
+		Skirt214.rotateAngleY += motionY;
+		Skirt214.rotateAngleZ += motionY;
+		Skirt215.rotateAngleY += motionY;
+		Skirt215.rotateAngleZ += motionY;
+		Skirt216.rotateAngleZ += motionY;
 	}
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後[partsNumber]から9個上書きして設定
-    	overridePartsNumber = 9;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-    		String s[] = {
-    				"eyeR", "eyeL", "ChignonB", "Prim", "Tail",
-    				"Ahoge", "Band1", "EarL", "EarR", "Shippo",
-    				"Glass", "DrowaR", "DrowaL"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(3);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		boolean b = getGuiShowModel(6);
-    		Skirt21.setVisible(b);
-    		Skirt22.setVisible(b);
-    		Skirt23.setVisible(b);
-    		Skirt24.setVisible(b);
-    		Skirt25.setVisible(b);
-    		Skirt26.setVisible(b);
-    		Skirt27.setVisible(b);
-    		Skirt28.setVisible(b);
-    		Skirt29.setVisible(b);
-    		Skirt210.setVisible(b);
-    		Skirt211.setVisible(b);
-    		Skirt212.setVisible(b);
-    		Skirt213.setVisible(b);
-    		Skirt214.setVisible(b);
-    		Skirt215.setVisible(b);
-    		Skirt216.setVisible(b);
-    		b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ChignonB.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Prim.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Tail.setVisible(b);
-    		Tail2.setVisible(b);
-    		Tail3.setVisible(b);
-    		Tail4.setVisible(b);
-    		Tail5.setVisible(b);
-    		Tail6.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Ahoge.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Band1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		EarL1.setVisible(b);
-    		EarL2.setVisible(b);
-    		EarLi1.setVisible(b);
-    		EarLi2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		EarR1.setVisible(b);
-    		EarR2.setVisible(b);
-    		EarRi1.setVisible(b);
-    		EarRi2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Shippo1.setVisible(b);
-    		Shippo2.setVisible(b);
-    		Shippo3.setVisible(b);
-    		Shippo4.setVisible(b);
-    		Shippo5.setVisible(b);
-    		Shippo6.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Glass.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		DrowaR1.setVisible(b);
-    		DrowaR2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		DrowaL1.setVisible(b);
-    		DrowaL2.setVisible(b);
-    		setShowModelFlag(2);
-    	}
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s = {
+    			"Skirt21", "Skirt22", "Skirt23", "Skirt24", "Skirt25",
+    			"Skirt26", "Skirt27", "Skirt27", "Skirt28", "Skirt29",
+    			"Skirt210", "Skirt211", "Skirt212", "Skirt213", "Skirt214",
+    			"Skirt215", "Skirt216"
+    	};
+    	showPartsHideListadd(s);
     }
 
 	@Override

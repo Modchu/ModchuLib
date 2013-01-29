@@ -654,123 +654,21 @@ public class ModelPlayerFormLittleMaid_Yukkuri extends ModelPlayerFormLittleMaid
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から10個上書きして設定
-    	overridePartsNumber = 10;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"Skirt", "ChignonR" ,"ChignonL", "ChignonB", "SideTailR",
-    				"SideTailL", "Tail","Item", "Head", "HatF",
-    				"HatB", "Bangs", "Mariribon", "Hat", "THat",
-    				"RSidehair", "LSidehair", "ribon", "Backhair", "HaneL",
-    				"HaneR"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		boolean b = getGuiShowModel(k);
-    		Skirt.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ChignonR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ChignonL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ChignonB.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Tail.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Item1.setVisible(b);
-    		Item2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HeadR.setVisible(b);
-    		HeadL.setVisible(b);
-    		HeadU.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HatFL.setVisible(b);
-    		HatFR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HatBL.setVisible(b);
-    		HatBR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Bangs1.setVisible(b);
-    		Bangs2.setVisible(b);
-    		Bangs3.setVisible(b);
-    		Bangs4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		MariribonL.setVisible(b);
-    		MariribonR.setVisible(b);
-    		MariribonC.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Hat1.setVisible(b);
-    		Hat2.setVisible(b);
-    		Hat3.setVisible(b);
-    		Hat4.setVisible(b);
-    		Hat5.setVisible(b);
-    		Hat6.setVisible(b);
-    		Hat7.setVisible(b);
-    		Hat8.setVisible(b);
-    		Hat9.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		THat1.setVisible(b);
-    		THat2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		RSidehair1.setVisible(b);
-    		RSidehair2.setVisible(b);
-    		RSidehair3.setVisible(b);
-    		RSidehair4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		LSidehair1.setVisible(b);
-    		LSidehair2.setVisible(b);
-    		LSidehair3.setVisible(b);
-    		LSidehair4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Lribon.setVisible(b);
-    		Rribon.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Backhair1.setVisible(b);
-    		Backhair2.setVisible(b);
-    		Backhair3.setVisible(b);
-    		Backhair4.setVisible(b);
-    		Backhair5.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HaneL1.setVisible(b);
-    		HaneL2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HaneR1.setVisible(b);
-    		HaneR2.setVisible(b);
-    		setShowModelFlag(1);
-    	}
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s1 = {
+    			"MariribonL", "MariribonR", "MariribonC", "RSidehair1", "RSidehair2",
+    			"RSidehair3", "RSidehair4", "LSidehair1", "LSidehair2", "LSidehair3",
+    			"LSidehair4", "Backhair1", "Backhair2", "Backhair3", "Backhair4",
+    			"Backhair5"
+    	};
+    	String[] s2 = {
+    			"M_ribonL", "M_ribonR", "M_ribonC", "R_hair1", "R_hair2",
+    			"R_hair3", "R_hair4", "L_hair1", "L_hair2", "L_hair3",
+    			"L_hair4", "B_hair1", "B_hair2", "B_hair3", "B_hair4",
+    			"B_hair5"
+    	};
+    	addShowPartsReneme(s1, s2);
     }
 
     @Override

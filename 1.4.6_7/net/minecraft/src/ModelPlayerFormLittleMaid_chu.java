@@ -62,82 +62,34 @@ public class ModelPlayerFormLittleMaid_chu extends ModelPlayerFormLittleMaid
 		CatTail.setRotateAngleX(-4.363323F);
     }
 
-    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
         super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
         CatTail.setRotateAngleX(mh_sin(f * 0.6662F) * 0.5F - 4.363323F);
 
-        if(getOnGround() > -9990F && !getaimedBow())
-        {
+        if(getOnGround() > -9990F && !getaimedBow()) {
             CatTail.setRotateAngleY(((Modchu_ModelRenderer) bipedBody).getRotateAngleY());
         }
 
-        if(getIsSneak())
-        {
+        if(getIsSneak()) {
             CatTail.setRotateAngleX(CatTail.getRotateAngleX() + 0.2F);
         }
 
-        if(getIsWait() && !getaimedBow())
-        {
+        if(getIsWait() && !getaimedBow()) {
             CatTail.setRotateAngleX(mh_sin(f2 * 0.6662F) * 0.1F - 4.363323F);
         }
 
-        if(getaimedBow())
-        {
+        if(getaimedBow()) {
             eyeR.setVisible(false);
-        } else
-        {
+        } else {
             eyeR.setVisible(true);
         }
 
-        if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D)
-        {
+        if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
             eyeL.setVisible(false);
             eyeR.setVisible(false);
-        } else
-        {
+        } else {
             eyeL.setVisible(true);
             eyeR.setVisible(true);
         }
-    }
-
-    @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後[partsNumber]から設定
-    	overridePartsNumber = 0;
-    	int k = getPartsNumber();
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"eyeR", "eyeL", "CatEL", "CatER", "CatTail",
-    				"Prim"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		boolean b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		CatEL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		CatER.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		CatTail.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Prim.setVisible(b);
-    		setShowModelFlag(1);
-    	}
     }
 }

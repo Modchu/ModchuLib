@@ -116,29 +116,21 @@ public class ModelPlayerFormLittleMaid_ExtraArms extends ModelPlayerFormLittleMa
     }
 
     @Override
-    public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
-    {
+    public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-
-    	if ((entityliving instanceof EntityPlayer)
-    			&& !getaimedBow())
-    	{
-    		EntityPlayer entityplayer = (EntityPlayer) entityliving;
-    		float f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
-    		// 目パチ
-    		if( 0 > MathHelper.sin(f3 * 0.05F) + MathHelper.sin(f3 * 0.13F) + MathHelper.sin(f3 * 0.7F) + 2.55F) {
-    			eyeR.setVisible(false);
-    			eyeL.setVisible(false);
-    		} else {
-    			eyeR.setVisible(true);
-    			eyeL.setVisible(true);
-    		}
+    	float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
+    	// 目パチ
+    	if( 0 > MathHelper.sin(f3 * 0.05F) + MathHelper.sin(f3 * 0.13F) + MathHelper.sin(f3 * 0.7F) + 2.55F) {
+    		eyeR.setVisible(false);
+    		eyeL.setVisible(false);
+    	} else {
+    		eyeR.setVisible(true);
+    		eyeL.setVisible(true);
     	}
     }
 
     @Override
-    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
     	Cwave.setVisible(false);
 
@@ -220,86 +212,20 @@ public class ModelPlayerFormLittleMaid_ExtraArms extends ModelPlayerFormLittleMa
     	Bullet1.rotateAngleX = Bullet2.rotateAngleX = Bullet3.rotateAngleX = 0.7854F;
     	Bullet1.rotateAngleY = Bullet2.rotateAngleY = Bullet3.rotateAngleY = 0.0F;
     	Bullet1.rotateAngleZ = Bullet2.rotateAngleZ = Bullet3.rotateAngleZ = 0.5236F;
-/*
-    	Binoculars.rotateAngleX = 0.0F;
-    	Binoculars.rotateAngleY = 1.6057F;
-    	Binoculars.rotateAngleZ = 0.0F;
-    	BinocularsL1.rotateAngleX = 0.05236F;
-    	BinocularsL1.rotateAngleY = 0.7854F;
-    	BinocularsL1.rotateAngleZ = 0.05236F;
-    	BinocularsL2.rotateAngleX = 0.05236F;
-    	BinocularsL2.rotateAngleY = 0.7854F;
-    	BinocularsL2.rotateAngleZ = 0.05236F;
-    	BinocularsR1.rotateAngleX = -0.05236F;
-    	BinocularsR1.rotateAngleY = 0.7854F;
-    	BinocularsR1.rotateAngleZ = -0.05236F;
-    	BinocularsR2.rotateAngleX = -0.05236F;
-    	BinocularsR2.rotateAngleY = 0.7854F;
-    	BinocularsR2.rotateAngleZ = -0.05236F;
-*/
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から7個上書きして設定
-    	overridePartsNumber = 7;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"ChignonR" ,"ChignonL", "SideTailR", "SideTailL", "Tail",
-    				"Cwave", "FirstAidSet", "FAstamp", "Binoculars", "BinocularsL1",
-    				"BinocularsL2", "BinocularsR1", "BinocularsR2", "Bullet1", "Bullet2",
-    				"Bullet3", "Backpack", "Antena"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		boolean b = getGuiShowModel(k);
-    		ChignonR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ChignonL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailR.setVisible(b);
-    		k++;
-    		SideTailL.setVisible(b);
-    		k++;
-    		Tail.setVisible(b);
-    		k++;
-    		Cwave.setVisible(b);
-    		k++;
-    		FirstAidSet.setVisible(b);
-    		k++;
-    		FAstamp.setVisible(b);
-    		k++;
-    		Binoculars.setVisible(b);
-    		k++;
-    		BinocularsL1.setVisible(b);
-    		k++;
-    		BinocularsL2.setVisible(b);
-    		k++;
-    		BinocularsR1.setVisible(b);
-    		k++;
-    		BinocularsR2.setVisible(b);
-    		k++;
-    		Bullet1.setVisible(b);
-    		k++;
-    		Bullet2.setVisible(b);
-    		k++;
-    		Bullet3.setVisible(b);
-    		k++;
-    		Backpack.setVisible(b);
-    		k++;
-    		Antena.setVisible(b);
-    		setShowModelFlag(1);
-    	}
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s1 = {
+    			"FirstAidSet" ,"Binoculars", "BinocularsL1", "BinocularsL2", "BinocularsR1",
+    			"BinocularsR2", "BinocularsR1", "BinocularsR2"
+    	};
+    	String[] s2 = {
+    			"FA_Set" ,"Bino", "BinoL1", "Bino_L2", "Bino_R1",
+    			"Bino_R2", "Bino_R1", "Bino_R2"
+    	};
+    	addShowPartsReneme(s1, s2);
     }
 
     @Override

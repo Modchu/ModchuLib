@@ -642,45 +642,18 @@ public class ModelPlayerFormLittleMaid_Yukari extends ModelPlayerFormLittleMaid_
     	Breast_C.addChild(Breast_L);
     	Breast_L.addChild(Breast_LU);
     	Breast_L.addChild(Breast_LB);
-    	skirtFloatsInit(f, f1);
     	actionPartsInit(f, f1);
     }
 
-    public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
-    {
+    public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-
-    	float entityIdFactor;
-    	boolean isLookSuger = false;
-    	float f3 = 0.0F;
-    	float f4 = 0.0F;
-    	if ((entityliving instanceof EntityPlayer)
-    			&& !getaimedBow())
-    	{
-    		EntityPlayer entityplayer = (EntityPlayer) entityliving;
-    		f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
-    		ItemStack itemstack2 = entityplayer.inventory.getCurrentItem();
-    		if (itemstack2 != null) {
-    			Item item = itemstack2.getItem();
-    			if (item == Item.sugar) {
-    				isLookSuger = true;
-    			}
-    		}
-    	}
-    	if (LMM_EntityLittleMaid != null
-    			&& LMM_EntityLittleMaid.isInstance(entityliving)) {
-    		entityIdFactor = (Float) Modchu_Reflect.getFieldObject(Modchu_Reflect.getField(LMM_EntityLittleMaid, "entityIdFactor"), entityliving);
-    		isLookSuger = (Boolean) Modchu_Reflect.invoke(Modchu_Reflect.getMethod(LMM_EntityLittleMaid, "isLookSuger", null), entityliving);
-    		f3 = (float)entityliving.ticksExisted + f2 + entityIdFactor;
-    	}
-    	if (isLookSuger) {
+    	float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
+    	if (getIsLookSuger(entityliving)) {
     		Cheek_R.setVisible(true);
     		Cheek_L.setVisible(true);
     		RabbitEar_R3.rotateAngleZ = mh_sin(f3 * 0.09F) * 0.09F + 0.87F;
     		RabbitEar_L3.rotateAngleZ = -(mh_sin(f3 * 0.09F) * 0.09F + 0.87F);
-    	}
-    	else
-    	{
+    	} else {
     		Cheek_R.setVisible(false);
     		Cheek_L.setVisible(false);
     		RabbitEar_R3.rotateAngleZ = ((float)Math.PI / 4F);
@@ -733,154 +706,35 @@ public class ModelPlayerFormLittleMaid_Yukari extends ModelPlayerFormLittleMaid_
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から17個上書きして設定
-    	overridePartsNumber = 17;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 3) {
-    		String s[] = {
-    				"eyeR", "eyeL", "Parka" ,"RabbitEarR" ,"RabbitEarL" ,"HairO_R" , "HairO_L",
-    				"PigTailR" ,"PigTailL" ,"Accessory" ,"ArmAcces" , "BeltR",
-    				"BeltL" ,"BeltAcces" ,"Incom" ,"ShaggyB" , "ShaggyR",
-    				"ShaggyL" ,"Sensor" ,"CheekR" ,"CheekL" , "Breast"
-    		};
-    		setParts(s, k);
-    		//Cheek Default off
-    		setGuiShowModel(k + 36, false);
-    		setPartsSetFlag(4);
-    	}
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s1 = {
+    			"RabbitEar_RB1", "RabbitEar_RB2", "RabbitEar_R1", "RabbitEar_R2", "RabbitEar_R3",
+    			"RabbitEar_R4", "RabbitEar_LB1", "RabbitEar_LB2", "RabbitEar_L1", "RabbitEar_L2",
+    			"RabbitEar_L3", "RabbitEar_L4", "HairOrnament_R", "HairOrnament_L", "Accessory_S1",
+    			"Accessory_S2", "Accessory_B1", "Accessory_B2", "Accessory_H", "Accessory_HRF1",
+    			"Accessory_HRF2", "Accessory_HRF3", "Accessory_HR1", "Accessory_HR2", "Accessory_HLF1",
+    			"Accessory_HLF2", "Accessory_HL1", "Accessory_HL2", "Accessory_HB1", "Accessory_HB2",
+    			"ArmAccessory_RF", "ArmAccessory_RB", "ArmAccessory_RR", "ArmAccessory_RL", "ArmAccessory_R",
+    			"BeltAccessory_L"
+    	};
+    	String[] s2 = {
+    			"RabbitE_RB1", "RabbitE_RB2", "RabbitE_R1", "RabbitE_R2", "RabbitE_R3",
+    			"RabbitE_R4", "RabbitE_LB1", "RabbitE_LB2", "RabbitE_L1", "RabbitE_L2",
+    			"RabbitE_L3", "RabbitE_L4", "HairO_R", "HairO_L", "Ac_S1",
+    			"Ac_S2", "Ac_B1", "Ac_B2", "Ac_H", "Ac_HRF1",
+    			"Ac_HRF2", "Ac_HRF3", "Ac_HR1", "Ac_HR2", "Ac_HLF1",
+    			"Ac_HLF2", "Ac_HL1", "Ac_HL2", "Ac_HB1", "Ac_HB2",
+    			"ArmAc_RF", "ArmAc_RB", "ArmAc_RR", "ArmAc_RL", "ArmAc_R",
+    			"BeltAc_L"
+    	};
+    	addShowPartsReneme(s1, s2);
+    }
 
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 2) {
-    		boolean b = getGuiShowModel(k);
-    		Parka_1.setVisible(b);
-    		Parka_2.setVisible(b);
-    		Parka_F.setVisible(b);
-    		Parka_B.setVisible(b);
-    		Parka_R.setVisible(b);
-    		Parka_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Parka_1.setVisible(b);
-    		RabbitEar_RB1.setVisible(b);
-    		RabbitEar_RB2.setVisible(b);
-    		RabbitEar_R1.setVisible(b);
-    		RabbitEar_R2.setVisible(b);
-    		RabbitEar_R3.setVisible(b);
-    		RabbitEar_R4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		RabbitEar_LB1.setVisible(b);
-    		RabbitEar_LB2.setVisible(b);
-    		RabbitEar_L1.setVisible(b);
-    		RabbitEar_L2.setVisible(b);
-    		RabbitEar_L3.setVisible(b);
-    		RabbitEar_L4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		RabbitEar_R1.setVisible(b);
-    		RabbitEar_R2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HairOrnament_R.setVisible(b);
-    		HairOrnament_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		PigTail_R1.setVisible(b);
-    		PigTail_R2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		PigTail_L1.setVisible(b);
-    		PigTail_L2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Accessory_S1.setVisible(b);
-    		Accessory_S2.setVisible(b);
-    		Accessory_B1.setVisible(b);
-    		Accessory_B2.setVisible(b);
-    		Accessory_H.setVisible(b);
-    		Accessory_HRF1.setVisible(b);
-    		Accessory_HRF2.setVisible(b);
-    		Accessory_HRF3.setVisible(b);
-    		Accessory_HR1.setVisible(b);
-    		Accessory_HR2.setVisible(b);
-    		Accessory_HLF1.setVisible(b);
-    		Accessory_HLF2.setVisible(b);
-    		Accessory_HL1.setVisible(b);
-    		Accessory_HL2.setVisible(b);
-    		Accessory_HB1.setVisible(b);
-    		Accessory_HB2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ArmAccessory_RF.setVisible(b);
-    		ArmAccessory_RB.setVisible(b);
-    		ArmAccessory_RR.setVisible(b);
-    		ArmAccessory_RL.setVisible(b);
-    		ArmAccessory_R.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Belt_R.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Belt_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		BeltAccessory_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Incom_1.setVisible(b);
-    		Incom_2.setVisible(b);
-    		Incom_3.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		shaggyB.setVisible(b);
-    		Shaggy_B2.setVisible(b);
-    		Shaggy_B3.setVisible(b);
-    		Shaggy_B4.setVisible(b);
-    		Shaggy_B5.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		shaggyR.setVisible(b);
-    		Shaggy_R2.setVisible(b);
-    		Shaggy_R3.setVisible(b);
-    		Shaggy_R4.setVisible(b);
-    		Shaggy_R5.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		shaggyL.setVisible(b);
-    		Shaggy_L2.setVisible(b);
-    		Shaggy_L3.setVisible(b);
-    		Shaggy_L4.setVisible(b);
-    		Shaggy_L5.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		sensor1.setVisible(b);
-    		sensor2.setVisible(b);
-    		sensor3.setVisible(b);
-    		sensor4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Cheek_R.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Cheek_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Breast.setVisible(b);
-    		Breast_C.setVisible(b);
-    		Breast_U.setVisible(b);
-    		Breast_B.setVisible(b);
-    		Breast_R.setVisible(b);
-    		Breast_L.setVisible(b);
-    		Breast_RU.setVisible(b);
-    		Breast_LU.setVisible(b);
-    		Breast_RB.setVisible(b);
-    		Breast_LB.setVisible(b);
-    		setShowModelFlag(3);
-    	}
+    @Override
+    public void defaultPartsSettingAfter() {
+    	//Cheek Default off
+    	setGuiShowModel("Cheek", false);
     }
 
     @Override

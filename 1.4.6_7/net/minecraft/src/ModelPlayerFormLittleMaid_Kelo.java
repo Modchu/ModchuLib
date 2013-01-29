@@ -402,98 +402,15 @@ public class ModelPlayerFormLittleMaid_Kelo extends ModelPlayerFormLittleMaid
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から7個上書きして設定
-    	overridePartsNumber = 7;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"Headwear", "ChignonR" ,"ChignonL", "SideTailR", "SideTailL",
-    				"tailL1", "tailL2" ,"tailR1", "tailR2", "SleeveL",
-    				"SleeveR", "KeloeyeR1","KeloeyeL1", "KeloeyeR2", "KeloeyeL2",
-    				"ShoesL", "ShoesR", "BreastP", "LsideP", "RsideP",
-    				"Backpack", "Zipper"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		boolean b = getGuiShowModel(k);
-    		bipedHeadwear.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ChignonR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ChignonL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		tailL1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		tailL2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		tailR1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		tailR2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SleeveL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SleeveR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		KeloeyeR1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		KeloeyeL1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		KeloeyeR2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		KeloeyeL2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ShoesL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ShoesR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		BreastPocket.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		LsidePocket.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		RsidePocket.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Backpack.setVisible(b);
-    		BackpackPocket.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Zipper.setVisible(b);
-    		((Modchu_ModelRenderer) super.bipedHeadwear).setVisible(false);
-    		ChignonB.setVisible(false);
-    		Tail.setVisible(false);
-    		setShowModelFlag(1);
-    	}
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s1 = {
+    			"BreastPocket", "LsidePocket", "RsidePocket", "BackpackPocket"
+    	};
+    	String[] s2 = {
+    			"B_Pocket", "L_Pocket", "R_Pocket", "B_packPocket"
+    	};
+    	addShowPartsReneme(s1, s2);
     }
 
     @Override

@@ -813,41 +813,56 @@ public class ModelPlayerFormLittleMaid_Tenshi extends ModelPlayerFormLittleMaid_
 		PlateL4.setScale(0.25F, 0.25F, 0.25F);
 		PlateL5.setScale(0.25F, 0.25F, 0.25F);
 		PlateL6.setScale(0.25F, 0.25F, 0.25F);
+
 		actionPartsInit(f, f1);
 	}
 
-	public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
-	{
+    @Override
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
+	public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
 		super.setLivingAnimationsLM(entityliving, f, f1, f2);
 
-        if ((entityliving instanceof EntityPlayer)
-        		&& !getaimedBow())
-        {
-        	EntityPlayer entityplayer = (EntityPlayer) entityliving;
-            float f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
-/*
-			if(entityPlayerFormLittleMaid.isMaskedMaid==true){
-				Hat1.isHidden=Hat2.isHidden=Hat3.isHidden=Hat4.isHidden=Hat5.isHidden=Hat6.isHidden=Hat7.isHidden=Hat8.isHidden=Hat9.isHidden=Hat10.isHidden=Hat11.isHidden=Hat12.isHidden=Hat13.isHidden=Hat14.isHidden=false;
-				Peach1.isHidden=false;
-				Line1.isHidden=Line2.isHidden=Line3.isHidden=Line4.isHidden=false;
-				Leaf1.isHidden=Leaf2.isHidden=false;
+		ItemStack is;
+		boolean isHelmet = false;
+		if (entityliving instanceof EntityPlayer) {
+			is = ((EntityPlayer) entityliving).inventory.armorItemInSlot(3);
+			if (is != null && is.stackSize > 0) {
+				Item item = is.getItem();
+				if(item instanceof ItemArmor) isHelmet = true;
 			}
-			else{
-				Hat1.isHidden=Hat2.isHidden=Hat3.isHidden=Hat4.isHidden=Hat5.isHidden=Hat6.isHidden=Hat7.isHidden=Hat8.isHidden=Hat9.isHidden=Hat10.isHidden=Hat11.isHidden=Hat12.isHidden=Hat13.isHidden=Hat14.isHidden=true;
-				Peach1.isHidden=true;
-				Line1.isHidden=Line2.isHidden=Line3.isHidden=Line4.isHidden=true;
-				Leaf1.isHidden=Leaf2.isHidden=true;
+		} else if (LMM_EntityLittleMaid != null
+					&& LMM_EntityLittleMaid.isInstance(entityliving)) {
+			//isHelmet = ((LMM_EntityLittleMaid) entityliving).maidInventory.armorInventory[3] != null;
+			Class c = loadClass(getClassName("LMM_InventoryLittleMaid"));
+			if (c != null) {
+				Object[] o = (Object[]) getFieldObject(c, "armorInventory", getFieldObject(LMM_EntityLittleMaid, "maidInventory", entityliving));
+				if (o != null
+						&& o[3] != null) isHelmet = true;
 			}
-*/
-        }
-
+		}
+		if(isHelmet){
+			Hat1.isHidden = Hat2.isHidden = Hat3.isHidden =
+					Hat4.isHidden = Hat5.isHidden = Hat6.isHidden =
+					Hat7.isHidden = Hat8.isHidden = Hat9.isHidden =
+					Hat10.isHidden = Hat11.isHidden = Hat12.isHidden =
+					Hat13.isHidden = Hat14.isHidden = Peach1.isHidden =
+					Line1.isHidden = Line2.isHidden = Line3.isHidden =
+					Line4.isHidden = Leaf1.isHidden = Leaf2.isHidden = false;
+		} else {
+			Hat1.isHidden = Hat2.isHidden = Hat3.isHidden =
+					Hat4.isHidden = Hat5.isHidden = Hat6.isHidden =
+					Hat7.isHidden = Hat8.isHidden = Hat9.isHidden =
+					Hat10.isHidden = Hat11.isHidden = Hat12.isHidden =
+					Hat13.isHidden = Hat14.isHidden = Peach1.isHidden =
+					Line1.isHidden = Line2.isHidden = Line3.isHidden =
+					Line4.isHidden = Leaf1.isHidden = Leaf2.isHidden = true;
+		}
 	}
 
-	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-	{
+	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
-
-
 		if(getIsSneak()){
 			Skirt.rotationPointZ = -0.5F;
 		} else {
@@ -855,282 +870,179 @@ public class ModelPlayerFormLittleMaid_Tenshi extends ModelPlayerFormLittleMaid_
 		}
 		Skirt.rotationPointY = 3.5F;
 		Skirt.rotateAngleX = 0.0F;
-		if (skirtFloats) {
-			Skirt1.setRotateAngleDeg(-118F, 113F, 47F);
-			Skirt2.setRotateAngleDeg(-65F, 113F, 47F);
-			Skirt3.setRotateAngleDeg(-122F, 158F, 47F);
-			Skirt4.setRotateAngleDeg(-67F, 158F, 47F);
-			Skirt5.setRotateAngleDeg(-113F, -159F, 47F);
-			Skirt6.setRotateAngleDeg(-58F, -159F, 47F);
-			Skirt7.setRotateAngleDeg(-114F, -114F, 47F);
-			Skirt8.setRotateAngleDeg(-65F, -114F, 47F);
-			Skirt9.setRotateAngleDeg(-115F, -68F, 47F);
-			Skirt10.setRotateAngleDeg(-65F, -68F, 47F);
-			Skirt11.setRotateAngleDeg(-122F, -23F, 47F);
-			Skirt12.setRotateAngleDeg(-66F, -23F, 47F);
-			Skirt13.setRotateAngleDeg(-114F, 22F, 47F);
-			Skirt14.setRotateAngleDeg(-58F, 22F, 47F);
-			Skirt15.setRotateAngleDeg(-115F, 67F, 47F);
-			Skirt16.setRotateAngleDeg(-62F, 67F, 47F);
-			Skirt21.setRotateAngleDeg(-118F, 113F, 43F);
-			Skirt22.setRotateAngleDeg(-65F, 113F, 43F);
-			Skirt23.setRotateAngleDeg(-122F, 158F, 44F);
-			Skirt24.setRotateAngleDeg(-67F, 158F, 44F);
-			Skirt25.setRotateAngleDeg(-113F, -159F, 44F);
-			Skirt26.setRotateAngleDeg(-58F, -159F, 44F);
-			Skirt27.setRotateAngleDeg(-114F, -114F, 43F);
-			Skirt28.setRotateAngleDeg(-65F, -114F, 43F);
-			Skirt29.setRotateAngleDeg(-115F, -68F, 43F);
-			Skirt210.setRotateAngleDeg(-65F, -68F, 43F);
-			Skirt211.setRotateAngleDeg(-122F, -23F, 44F);
-			Skirt212.setRotateAngleDeg(-66F, -23F, 44F);
-			Skirt213.setRotateAngleDeg(-114F, 22F, 44F);
-			Skirt214.setRotateAngleDeg(-58F, 22F, 44F);
-			Skirt215.setRotateAngleDeg(-115F, 67F, 43F);
-			Skirt216.setRotateAngleDeg(-62F, 67F, 43F);
+		skirtFloats(f, f1, f2, f3, f4, f5, entity);
+	}
 
-			float f6 = -motionY * 10.0F - 7F;
-			Skirt1.rotationPointY = 2.5F + f6;
-			Skirt2.rotationPointY = 2.5F + f6;
-			Skirt3.rotationPointY = 2F + f6;
-			Skirt4.rotationPointY = 2F + f6;
-			Skirt5.rotationPointY = 2F + f6;
-			Skirt6.rotationPointY = 2F + f6;
-			Skirt7.rotationPointY = 2.5F + f6;
-			Skirt8.rotationPointY = 2.5F + f6;
-			Skirt9.rotationPointY = 2.5F + f6;
-			Skirt10.rotationPointY = 2.5F + f6;
-			Skirt11.rotationPointY = 2F + f6;
-			Skirt12.rotationPointY = 2F + f6;
-			Skirt13.rotationPointY = 2F + f6;
-			Skirt14.rotationPointY = 2F + f6;
-			Skirt15.rotationPointY = 2.5F + f6;
-			Skirt16.rotationPointY = 2.5F + f6;
-			Skirt21.rotationPointY = 2.5F + f6;
-			Skirt22.rotationPointY = 2.5F + f6;
-			Skirt23.rotationPointY = 2F + f6;
-			Skirt24.rotationPointY = 2F + f6;
-			Skirt25.rotationPointY = 2F + f6;
-			Skirt26.rotationPointY = 2F + f6;
-			Skirt27.rotationPointY = 2.5F + f6;
-			Skirt28.rotationPointY = 2.5F + f6;
-			Skirt29.rotationPointY = 2.5F + f6;
-			Skirt210.rotationPointY = 2.5F + f6;
-			Skirt211.rotationPointY = 2F + f6;
-			Skirt212.rotationPointY = 2F + f6;
-			Skirt213.rotationPointY = 2F + f6;
-			Skirt214.rotationPointY = 2F + f6;
-			Skirt215.rotationPointY = 2.5F + f6;
-			Skirt216.rotationPointY = 2.5F + f6;
+	@Override
+	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+		if (!getSkirtFloats()) return;
+		Skirt1.setRotateAngleDeg(-118F, 113F, 47F);
+		Skirt2.setRotateAngleDeg(-65F, 113F, 47F);
+		Skirt3.setRotateAngleDeg(-122F, 158F, 47F);
+		Skirt4.setRotateAngleDeg(-67F, 158F, 47F);
+		Skirt5.setRotateAngleDeg(-113F, -159F, 47F);
+		Skirt6.setRotateAngleDeg(-58F, -159F, 47F);
+		Skirt7.setRotateAngleDeg(-114F, -114F, 47F);
+		Skirt8.setRotateAngleDeg(-65F, -114F, 47F);
+		Skirt9.setRotateAngleDeg(-115F, -68F, 47F);
+		Skirt10.setRotateAngleDeg(-65F, -68F, 47F);
+		Skirt11.setRotateAngleDeg(-122F, -23F, 47F);
+		Skirt12.setRotateAngleDeg(-66F, -23F, 47F);
+		Skirt13.setRotateAngleDeg(-114F, 22F, 47F);
+		Skirt14.setRotateAngleDeg(-58F, 22F, 47F);
+		Skirt15.setRotateAngleDeg(-115F, 67F, 47F);
+		Skirt16.setRotateAngleDeg(-62F, 67F, 47F);
+		Skirt21.setRotateAngleDeg(-118F, 113F, 43F);
+		Skirt22.setRotateAngleDeg(-65F, 113F, 43F);
+		Skirt23.setRotateAngleDeg(-122F, 158F, 44F);
+		Skirt24.setRotateAngleDeg(-67F, 158F, 44F);
+		Skirt25.setRotateAngleDeg(-113F, -159F, 44F);
+		Skirt26.setRotateAngleDeg(-58F, -159F, 44F);
+		Skirt27.setRotateAngleDeg(-114F, -114F, 43F);
+		Skirt28.setRotateAngleDeg(-65F, -114F, 43F);
+		Skirt29.setRotateAngleDeg(-115F, -68F, 43F);
+		Skirt210.setRotateAngleDeg(-65F, -68F, 43F);
+		Skirt211.setRotateAngleDeg(-122F, -23F, 44F);
+		Skirt212.setRotateAngleDeg(-66F, -23F, 44F);
+		Skirt213.setRotateAngleDeg(-114F, 22F, 44F);
+		Skirt214.setRotateAngleDeg(-58F, 22F, 44F);
+		Skirt215.setRotateAngleDeg(-115F, 67F, 43F);
+		Skirt216.setRotateAngleDeg(-62F, 67F, 43F);
 
-			Skirt1.rotateAngleX += motionY;
-			Skirt1.rotateAngleZ += motionY;
-			Skirt2.rotateAngleX += motionY;
-			Skirt2.rotateAngleZ += motionY;
-			Skirt3.rotateAngleX += motionY;
-			Skirt3.rotateAngleZ += motionY;
-			Skirt4.rotateAngleX += motionY;
-			Skirt4.rotateAngleZ += motionY;
-			Skirt5.rotateAngleX += motionY;
-			Skirt5.rotateAngleZ += motionY;
-			Skirt6.rotateAngleX += motionY;
-			Skirt6.rotateAngleZ += motionY;
-			Skirt7.rotateAngleZ += motionY;
-			Skirt8.rotateAngleZ += motionY;
-			Skirt9.rotateAngleX += motionY;
-			Skirt9.rotateAngleZ += motionY;
-			Skirt10.rotateAngleX += motionY;
-			Skirt10.rotateAngleZ += motionY;
-			Skirt11.rotateAngleX += motionY;
-			Skirt11.rotateAngleZ += motionY;
-			Skirt12.rotateAngleX += motionY;
-			Skirt12.rotateAngleZ += motionY;
-			Skirt13.rotateAngleX += motionY;
-			Skirt13.rotateAngleZ += motionY;
-			Skirt14.rotateAngleX += motionY;
-			Skirt14.rotateAngleZ += motionY;
-			Skirt15.rotateAngleX += motionY;
-			Skirt15.rotateAngleZ += motionY;
-			Skirt16.rotateAngleX += motionY;
-			Skirt16.rotateAngleZ += motionY;
-			Skirt21.rotateAngleZ += motionY;
-			Skirt22.rotateAngleX += motionY;
-			Skirt22.rotateAngleZ += motionY;
-			Skirt23.rotateAngleX += motionY;
-			Skirt23.rotateAngleZ += motionY;
-			Skirt24.rotateAngleX += motionY;
-			Skirt24.rotateAngleZ += motionY;
-			Skirt25.rotateAngleX += motionY;
-			Skirt25.rotateAngleZ += motionY;
-			Skirt26.rotateAngleX += motionY;
-			Skirt26.rotateAngleZ += motionY;
-			Skirt27.rotateAngleZ += motionY;
-			Skirt28.rotateAngleZ += motionY;
-			Skirt29.rotateAngleZ += motionY;
-			Skirt210.rotateAngleY += motionY;
-			Skirt210.rotateAngleZ += motionY;
-			Skirt211.rotateAngleY += motionY;
-			Skirt211.rotateAngleZ += motionY;
-			Skirt212.rotateAngleY += motionY;
-			Skirt212.rotateAngleZ += motionY;
-			Skirt213.rotateAngleY += motionY;
-			Skirt213.rotateAngleZ += motionY;
-			Skirt214.rotateAngleY += motionY;
-			Skirt214.rotateAngleZ += motionY;
-			Skirt215.rotateAngleY += motionY;
-			Skirt215.rotateAngleZ += motionY;
-			Skirt216.rotateAngleZ += motionY;
-		}
+		float f6 = -motionY * 2.0F - 7F;
+		Skirt1.rotationPointY = 2.5F + f6;
+		Skirt2.rotationPointY = 2.5F + f6;
+		Skirt3.rotationPointY = 2F + f6;
+		Skirt4.rotationPointY = 2F + f6;
+		Skirt5.rotationPointY = 2F + f6;
+		Skirt6.rotationPointY = 2F + f6;
+		Skirt7.rotationPointY = 2.5F + f6;
+		Skirt8.rotationPointY = 2.5F + f6;
+		Skirt9.rotationPointY = 2.5F + f6;
+		Skirt10.rotationPointY = 2.5F + f6;
+		Skirt11.rotationPointY = 2F + f6;
+		Skirt12.rotationPointY = 2F + f6;
+		Skirt13.rotationPointY = 2F + f6;
+		Skirt14.rotationPointY = 2F + f6;
+		Skirt15.rotationPointY = 2.5F + f6;
+		Skirt16.rotationPointY = 2.5F + f6;
+		Skirt21.rotationPointY = 2.5F + f6;
+		Skirt22.rotationPointY = 2.5F + f6;
+		Skirt23.rotationPointY = 2F + f6;
+		Skirt24.rotationPointY = 2F + f6;
+		Skirt25.rotationPointY = 2F + f6;
+		Skirt26.rotationPointY = 2F + f6;
+		Skirt27.rotationPointY = 2.5F + f6;
+		Skirt28.rotationPointY = 2.5F + f6;
+		Skirt29.rotationPointY = 2.5F + f6;
+		Skirt210.rotationPointY = 2.5F + f6;
+		Skirt211.rotationPointY = 2F + f6;
+		Skirt212.rotationPointY = 2F + f6;
+		Skirt213.rotationPointY = 2F + f6;
+		Skirt214.rotationPointY = 2F + f6;
+		Skirt215.rotationPointY = 2.5F + f6;
+		Skirt216.rotationPointY = 2.5F + f6;
 
+		Skirt1.rotateAngleX += motionY;
+		Skirt1.rotateAngleZ += motionY;
+		Skirt2.rotateAngleX += motionY;
+		Skirt2.rotateAngleZ += motionY;
+		Skirt3.rotateAngleX += motionY;
+		Skirt3.rotateAngleZ += motionY;
+		Skirt4.rotateAngleX += motionY;
+		Skirt4.rotateAngleZ += motionY;
+		Skirt5.rotateAngleX += motionY;
+		Skirt5.rotateAngleZ += motionY;
+		Skirt6.rotateAngleX += motionY;
+		Skirt6.rotateAngleZ += motionY;
+		Skirt7.rotateAngleZ += motionY;
+		Skirt8.rotateAngleZ += motionY;
+		Skirt9.rotateAngleX += motionY;
+		Skirt9.rotateAngleZ += motionY;
+		Skirt10.rotateAngleX += motionY;
+		Skirt10.rotateAngleZ += motionY;
+		Skirt11.rotateAngleX += motionY;
+		Skirt11.rotateAngleZ += motionY;
+		Skirt12.rotateAngleX += motionY;
+		Skirt12.rotateAngleZ += motionY;
+		Skirt13.rotateAngleX += motionY;
+		Skirt13.rotateAngleZ += motionY;
+		Skirt14.rotateAngleX += motionY;
+		Skirt14.rotateAngleZ += motionY;
+		Skirt15.rotateAngleX += motionY;
+		Skirt15.rotateAngleZ += motionY;
+		Skirt16.rotateAngleX += motionY;
+		Skirt16.rotateAngleZ += motionY;
+		Skirt21.rotateAngleZ += motionY;
+		Skirt22.rotateAngleX += motionY;
+		Skirt22.rotateAngleZ += motionY;
+		Skirt23.rotateAngleX += motionY;
+		Skirt23.rotateAngleZ += motionY;
+		Skirt24.rotateAngleX += motionY;
+		Skirt24.rotateAngleZ += motionY;
+		Skirt25.rotateAngleX += motionY;
+		Skirt25.rotateAngleZ += motionY;
+		Skirt26.rotateAngleX += motionY;
+		Skirt26.rotateAngleZ += motionY;
+		Skirt27.rotateAngleZ += motionY;
+		Skirt28.rotateAngleZ += motionY;
+		Skirt29.rotateAngleZ += motionY;
+		Skirt210.rotateAngleY += motionY;
+		Skirt210.rotateAngleZ += motionY;
+		Skirt211.rotateAngleY += motionY;
+		Skirt211.rotateAngleZ += motionY;
+		Skirt212.rotateAngleY += motionY;
+		Skirt212.rotateAngleZ += motionY;
+		Skirt213.rotateAngleY += motionY;
+		Skirt213.rotateAngleZ += motionY;
+		Skirt214.rotateAngleY += motionY;
+		Skirt214.rotateAngleZ += motionY;
+		Skirt215.rotateAngleY += motionY;
+		Skirt215.rotateAngleZ += motionY;
+		Skirt216.rotateAngleZ += motionY;
 	}
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後[partsNumber]から8個上書きして設定
-    	overridePartsNumber = 8;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-    		String s[] = {
-    				"eyeR", "eyeL", "Hip", "Neck", "Ribon",
-    				"ColorPlate", "Hat", "Peach", "Leaf", "Patch",
-    				"Calar", "Line", "PlateR", "PlateL"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(3);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		boolean b = getGuiShowModel(6);
-    		Skirt1.setVisible(b);
-    		Skirt2.setVisible(b);
-    		Skirt3.setVisible(b);
-    		Skirt4.setVisible(b);
-    		Skirt5.setVisible(b);
-    		Skirt6.setVisible(b);
-    		Skirt7.setVisible(b);
-    		Skirt8.setVisible(b);
-    		Skirt9.setVisible(b);
-    		Skirt10.setVisible(b);
-    		Skirt11.setVisible(b);
-    		Skirt12.setVisible(b);
-    		Skirt13.setVisible(b);
-    		Skirt14.setVisible(b);
-    		Skirt15.setVisible(b);
-    		Skirt16.setVisible(b);
-    		Skirt21.setVisible(b);
-    		Skirt22.setVisible(b);
-    		Skirt23.setVisible(b);
-    		Skirt24.setVisible(b);
-    		Skirt25.setVisible(b);
-    		Skirt26.setVisible(b);
-    		Skirt27.setVisible(b);
-    		Skirt28.setVisible(b);
-    		Skirt29.setVisible(b);
-    		Skirt210.setVisible(b);
-    		Skirt211.setVisible(b);
-    		Skirt212.setVisible(b);
-    		Skirt213.setVisible(b);
-    		Skirt214.setVisible(b);
-    		Skirt215.setVisible(b);
-    		Skirt216.setVisible(b);
-    		b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HipR.setVisible(b);HipL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Neck.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Ribon4.setVisible(b);
-    		Ribon5.setVisible(b);
-    		Ribon6.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ColorPlate1.setVisible(b);
-    		ColorPlate2.setVisible(b);
-    		ColorPlate3.setVisible(b);
-    		ColorPlate4.setVisible(b);
-    		ColorPlate5.setVisible(b);
-    		ColorPlate6.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Hat1.setVisible(b);
-    		Hat2.setVisible(b);
-    		Hat3.setVisible(b);
-    		Hat4.setVisible(b);
-    		Hat5.setVisible(b);
-    		Hat6.setVisible(b);
-    		Hat7.setVisible(b);
-    		Hat8.setVisible(b);
-    		Hat9.setVisible(b);
-    		Hat10.setVisible(b);
-    		Hat11.setVisible(b);
-    		Hat12.setVisible(b);
-    		Hat13.setVisible(b);
-    		Hat14.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Peach1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Leaf1.setVisible(b);
-    		Leaf2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Patch1.setVisible(b);
-    		Patch2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Calar1.setVisible(b);
-    		Calar2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Line1.setVisible(b);
-    		Line2.setVisible(b);
-    		Line3.setVisible(b);
-    		Line4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		PlateR1.setVisible(b);
-    		PlateR2.setVisible(b);
-    		PlateR3.setVisible(b);
-    		PlateR4.setVisible(b);
-    		PlateR5.setVisible(b);
-    		PlateR6.setVisible(b);
-    		PlateL1.setVisible(b);
-    		PlateL2.setVisible(b);
-    		PlateL3.setVisible(b);
-    		PlateL4.setVisible(b);
-    		PlateL5.setVisible(b);
-    		PlateL6.setVisible(b);
-    		setShowModelFlag(2);
-    	}
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s = {
+    			"Skirt1", "Skirt2", "Skirt3", "Skirt4", "Skirt5",
+    			"Skirt6", "Skirt7", "Skirt8", "Skirt9", "Skirt10",
+    			"Skirt11", "Skirt12", "Skirt13", "Skirt14", "Skirt15",
+    			"Skirt16", "Skirt21", "Skirt22", "Skirt23", "Skirt24",
+    			"Skirt25", "Skirt26", "Skirt27", "Skirt27", "Skirt28",
+    			"Skirt29", "Skirt210", "Skirt211", "Skirt212", "Skirt213",
+    			"Skirt214", "Skirt215", "Skirt216"
+    	};
+    	showPartsHideListadd(s);
     }
 
-	@Override
-	public void actionInit1() {
-		super.actionInit1();
-		((Modchu_ModelRenderer) bipedRightArm).removeChild(Patch1);
-		((Modchu_ModelRenderer) bipedLeftArm).removeChild(Patch2);
-		rightArm.addChild(Patch1);
-		leftArm.addChild(Patch2);
-	}
+    @Override
+    public void actionInit1() {
+    	super.actionInit1();
+    	((Modchu_ModelRenderer) bipedRightArm).removeChild(Patch1);
+    	((Modchu_ModelRenderer) bipedLeftArm).removeChild(Patch2);
+    	rightArm.addChild(Patch1);
+    	leftArm.addChild(Patch2);
+    }
 
-	@Override
-	public void actionRelease1() {
-		super.actionRelease1();
-		bipedRightArm.addChild(Patch1);
-		bipedLeftArm.addChild(Patch2);
-		rightArm.removeChild(Patch1);
-		leftArm.removeChild(Patch2);
-	}
+    @Override
+    public void actionRelease1() {
+    	super.actionRelease1();
+    	bipedRightArm.addChild(Patch1);
+    	bipedLeftArm.addChild(Patch2);
+    	rightArm.removeChild(Patch1);
+    	leftArm.removeChild(Patch2);
+    }
+
+    public void setArmorBipedHeadShowModel(boolean b) {
+    	super.setArmorBipedHeadShowModel(b);
+    	Hat1.isHidden = Hat2.isHidden = Hat3.isHidden =
+    			Hat4.isHidden = Hat5.isHidden = Hat6.isHidden =
+    			Hat7.isHidden = Hat8.isHidden = Hat9.isHidden =
+    			Hat10.isHidden = Hat11.isHidden = Hat12.isHidden =
+    			Hat13.isHidden = Hat14.isHidden = Peach1.isHidden =
+    			Line1.isHidden = Line2.isHidden = Line3.isHidden =
+    			Line4.isHidden = Leaf1.isHidden = Leaf2.isHidden = !b;
+    }
 }

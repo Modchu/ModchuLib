@@ -147,86 +147,18 @@ public class ModelPlayerFormLittleMaid_brs extends ModelPlayerFormLittleMaid_SR2
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-
-    	if ((entityliving instanceof EntityPlayer)
-    			&& !getaimedBow())
-    	{
-    		EntityPlayer entityplayer = (EntityPlayer) entityliving;
-    		float f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
-
-    		float f4 = 0.0F;
-    		ItemStack itemstack2 = entityplayer.inventory.getCurrentItem();
-    		boolean flag = false;
-    		if (itemstack2 != null) {
-    			Item item = itemstack2.getItem();
-    			if (item == Item.sugar) {
-    				flag = true;
-    			}
-    		}
-    		if (flag) {
-    			f3 *= 8F;
-    			f4 = -0.2F;
-    			Cheek_R.setVisible(true);
-    			Cheek_L.setVisible(true);
-    		}
-    		else
-    		{
-    			float f5 = (1.0F - (float)entityplayer.health / 20F) * 0.5F;
-    			Cheek_R.setVisible(false);
-    			Cheek_L.setVisible(false);
-    		}
+    	if (getIsLookSuger(entityliving)) {
+    		Cheek_R.setVisible(true);
+    		Cheek_L.setVisible(true);
+    	} else {
+    		Cheek_R.setVisible(false);
+    		Cheek_L.setVisible(false);
     	}
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から8個上書きして設定
-    	overridePartsNumber = 8;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-
-    		String s[] = {
-    				"eyeR", "eyeL", "TailR" ,"TailL" ,"Parkar",
-    				"Breast", "Cheek"
-    		};
-    		setParts(s, k);
-    		//Cheek Default off
-    		setGuiShowModel(k + 6, false);
-    		setPartsSetFlag(3);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		boolean b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		TailR1.setVisible(b);
-    		TailR2.setVisible(b);
-    		TailR3.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		TailL1.setVisible(b);
-    		TailL2.setVisible(b);
-    		TailL3.setVisible(b);
-    		TailL4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Parkar.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Breast1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Cheek_R.setVisible(b);
-    		Cheek_L.setVisible(b);
-    		setShowModelFlag(2);
-    	}
+    public void defaultPartsSettingAfter() {
+    	//Cheek Default off
+    	setGuiShowModel("Cheek", false);
     }
 }

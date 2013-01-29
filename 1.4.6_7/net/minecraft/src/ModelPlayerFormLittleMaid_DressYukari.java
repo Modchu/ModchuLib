@@ -92,38 +92,23 @@ public class ModelPlayerFormLittleMaid_DressYukari extends ModelPlayerFormLittle
 	}
 
 	@Override
-	public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
-	{
+	public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
 		super.setLivingAnimationsLM(entityliving, f, f1, f2);
-		boolean isLookSuger = false;
-		if ((entityliving instanceof EntityPlayer)
-				&& !getaimedBow())
-		{
-			EntityPlayer entityplayer = (EntityPlayer) entityliving;
-			ItemStack itemstack2 = entityplayer.inventory.getCurrentItem();
-			if (itemstack2 != null) {
-				Item item = itemstack2.getItem();
-				if (item == Item.sugar) {
-					isLookSuger = true;
-				}
-			}
-		}
 		IdOffset=entityliving.entityId;
-		if (isLookSuger)
+		if (getIsLookSuger(entityliving))
 			pink.setVisible(true);
 		else
 			pink.setVisible(false);
 	}
 
 	@Override
-	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5,Entity maid)
-	{
-		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, maid);
+	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
 
 		float t;
 		if(isRiding
-				&& maid.ridingEntity != null)
-			t=maid.ridingEntity.ticksExisted;
+				&& entity.ridingEntity != null)
+			t=entity.ridingEntity.ticksExisted;
 		else
 			t=f2;
 
@@ -134,7 +119,7 @@ public class ModelPlayerFormLittleMaid_DressYukari extends ModelPlayerFormLittle
 		Skirt.rotationPointY -= 9F;
 		Skirt.rotationPointZ=0f;
 
-		if(isRiding){
+		if(isRiding) {
 			Skirt.rotationPointY-=0.2f;
 			Skirt.rotationPointZ+=1.0f;
 			Skirt.rotateAngleX = convertDegtoRad(-25F);
@@ -142,15 +127,16 @@ public class ModelPlayerFormLittleMaid_DressYukari extends ModelPlayerFormLittle
 	}
 
 	@Override
-	 public float getHeight()
-	 {
-		 return 1.35F;
-	 }
+	public float getHeight()
+	{
+		return 1.35F;
+	}
+
 	@Override
-	 public float getWidth()
-	 {
-		 return 0.5F;
-	 }
+	public float getWidth()
+	{
+		return 0.5F;
+	}
 
 	private void initSpecialModel(float psize){
 		float v[][]={

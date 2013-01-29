@@ -118,11 +118,11 @@ public class ModelPlayerFormLittleMaid_MS1 extends ModelPlayerFormLittleMaid_SR2
 		ChignonR.setVisible(false);
 		ChignonL.setVisible(false);
 		ChignonB.setVisible(false);
-		Goggles1.setVisible(false);
-		Goggles2.setVisible(false);
-		Goggles3.setVisible(false);
-		GogglesR.setVisible(false);
-		GogglesL.setVisible(false);
+		Goggles1.setVisible(true);
+		Goggles2.setVisible(true);
+		Goggles3.setVisible(true);
+		GogglesR.setVisible(true);
+		GogglesL.setVisible(true);
 		Goggles1A.setVisible(false);
 		Goggles2A.setVisible(false);
 		Goggles3A.setVisible(false);
@@ -130,43 +130,51 @@ public class ModelPlayerFormLittleMaid_MS1 extends ModelPlayerFormLittleMaid_SR2
 		GogglesLA.setVisible(false);
 	}
 
+	public void skirtFloatsInit(float f, float f1) {
+    	if(!getSkirtFloats()) return;
+    	//ふんわりスカート上
+    	SkirtTop = new Modchu_ModelRenderer(this, 6, 16);
+    	SkirtTop.addPlate(0.0F, 0.0F, 0.0F, 7, 6, 0);
+    	SkirtTop.setRotationPoint(-4.0F, -4.0F, 4.0F);
+    	Skirt.addChild(SkirtTop);
+
+    	//ふんわりスカート前
+    	SkirtFront = new Modchu_ModelRenderer(this, 6, 22);
+    	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 7, 7, 0);
+    	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	SkirtTop.addChild(SkirtFront);
+
+    	//ふんわりスカート右
+    	SkirtRight = new Modchu_ModelRenderer(this, 0, 22);
+    	SkirtRight.addPlate(0.0F, 0.0F, 0.0F, 6, 7, 1);
+    	SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	SkirtTop.addChild(SkirtRight);
+
+    	//ふんわりスカート左
+    	SkirtLeft = new Modchu_ModelRenderer(this, 13, 22);
+    	SkirtLeft.setMirror(true);
+    	SkirtLeft.addPlate(0.0F, 0.0F, 0.0F, 6, 7, 1);
+    	SkirtLeft.setRotationPoint(8.0F, 8.0F, 0.0F);
+    	SkirtTop.addChild(SkirtLeft);
+
+    	//ふんわりスカート後ろ
+    	SkirtBack = new Modchu_ModelRenderer(this, 18, 22);
+    	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 7, 7, 0);
+    	SkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	SkirtTop.addChild(SkirtBack);
+    	Skirt.setVisible(false);
+    }
+
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
         super.setLivingAnimationsLM(entityliving, f, f1, f2);
-
-		float f3 = 0.0F;
-		boolean flag = false;
-		if ((entityliving instanceof EntityPlayer)
-				&& !getaimedBow()) {
-			EntityPlayer entityplayer = (EntityPlayer) entityliving;
-			f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
-			ItemStack itemstack2 = entityplayer.inventory.getCurrentItem();
-			if (itemstack2 != null) {
-				Item item = itemstack2.getItem();
-				if (item == Item.sugar) {
-					flag = true;
-				}
-			}
-		}
-
-		if (LMM_EntityLittleMaid != null
-				&& LMM_EntityLittleMaid.isInstance(entityliving)) {
-			f3 = (float)entityliving.ticksExisted + f2 + (Float) Modchu_Reflect.getFieldObject(Modchu_Reflect.getField(LMM_EntityLittleMaid, "entityIdFactor"), entityliving);
-			flag = (Boolean) Modchu_Reflect.invoke(Modchu_Reflect.getMethod(LMM_EntityLittleMaid, "isLookSuger", null), entityliving);
-		}
-
-		if (flag) {
-			f3 *= 8F;
-			float f6 = -0.2F;
-			Cheek_R.setVisible(true);
-			Cheek_L.setVisible(true);
-		}
-		else
-		{
-			float f7 = (1.0F - (float)entityliving.health / 20F) * 0.5F;
-			Cheek_R.setVisible(false);
-			Cheek_L.setVisible(false);
-		}
+    	if (getIsLookSuger(entityliving)) {
+    		Cheek_R.setVisible(true);
+    		Cheek_L.setVisible(true);
+    	} else {
+    		Cheek_R.setVisible(false);
+    		Cheek_L.setVisible(false);
+    	}
     }
 
     @Override
@@ -185,51 +193,45 @@ public class ModelPlayerFormLittleMaid_MS1 extends ModelPlayerFormLittleMaid_SR2
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から8個上書きして設定
-    	overridePartsNumber = 8;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-    		String s[] = {
-    				"Goggles" ,"GogglesA" ,"Cheek"
-    		};
-    		setParts(s, k);
-    		//Goggles Default off
-    		setGuiShowModel(k + 1, false);
-    		//Cheek Default off
-    		setGuiShowModel(k + 2, false);
-    		setPartsSetFlag(3);
-    	}
+    public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    	super.skirtFloats(f, f1, f2, f3, f4, f5, entity);
+    	SkirtTop.setRotationPoint(-3.5F, -2.5F, 3.0F);
+    	SkirtFront.setRotationPoint(0.0F, 6.0F, 0.0F);
+    	SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	SkirtLeft.setRotationPoint(7.0F, 6.0F, 0.0F);
+    	SkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	SkirtFront.rotationPointX += getMotionY() * 4.0F;
+    	SkirtBack.rotationPointX += getMotionY() * 4.0F;
+    	SkirtRight.rotationPointY += getMotionY() * 4.0F;
+    	SkirtLeft.rotationPointY -= getMotionY() * 4.0F;
+    }
 
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		boolean b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Goggles1.setVisible(b);
-    		Goggles2.setVisible(b);
-    		Goggles3.setVisible(b);
-    		GogglesR.setVisible(b);
-    		GogglesL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Goggles1A.setVisible(b);
-    		Goggles2A.setVisible(b);
-    		Goggles3A.setVisible(b);
-    		GogglesLA.setVisible(b);
-    		GogglesRA.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Cheek_R.setVisible(b);
-    		Cheek_L.setVisible(b);
-    		setShowModelFlag(2);
-    	}
+    @Override
+    public void defaultPartsSettingAfter() {
+    	//GogglesA Default off
+    	setGuiShowModel("GogglesA", false);
+    	//Cheek Default off
+    	setGuiShowModel("Cheek", false);
+    }
+
+    @Override
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	Tail.setVisible(false);
+    	SideTailR.setVisible(false);
+    	SideTailL.setVisible(false);
+    	ChignonR.setVisible(false);
+    	ChignonL.setVisible(false);
+    	ChignonB.setVisible(false);
+    	Goggles1.setVisible(true);
+    	Goggles2.setVisible(true);
+    	Goggles3.setVisible(true);
+    	GogglesR.setVisible(true);
+    	GogglesL.setVisible(true);
+    	Goggles1A.setVisible(false);
+    	Goggles2A.setVisible(false);
+    	Goggles3A.setVisible(false);
+    	GogglesRA.setVisible(false);
+    	GogglesLA.setVisible(false);
     }
 }

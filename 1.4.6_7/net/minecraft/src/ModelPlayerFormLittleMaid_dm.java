@@ -301,113 +301,18 @@ public class ModelPlayerFormLittleMaid_dm extends ModelPlayerFormLittleMaid_SR2
     public void setLivingAnimations(EntityLiving entityliving, float f, float f1, float f2)
     {
     	super.setLivingAnimations(entityliving, f, f1, f2);
-    	if ((entityliving instanceof EntityPlayer)
-    			&& !getaimedBow())
-    	{
-    		EntityPlayer entityplayer = (EntityPlayer) entityliving;
-    		float f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
-
-    		ItemStack itemstack2 = entityplayer.inventory.getCurrentItem();
-    		boolean flag = false;
-    		if (itemstack2 != null) {
-    			Item item = itemstack2.getItem();
-    			if (item == Item.sugar) {
-    				flag = true;
-    			}
-    		}
-    		if (flag) {
-    			f3 *= 8F;
-    			float f4 = -0.2F;
-    			Cheek_R.setVisible(true);
-    			Cheek_L.setVisible(true);
-    		}
-    		else
-    		{
-    			float f5 = (1.0F - (float)entityplayer.health / 20F) * 0.5F;
-    			Cheek_R.setVisible(false);
-    			Cheek_L.setVisible(false);
-    		}
+    	if (getIsLookSuger(entityliving)) {
+    		Cheek_R.setVisible(true);
+    		Cheek_L.setVisible(true);
+    	} else {
+    		Cheek_R.setVisible(false);
+    		Cheek_L.setVisible(false);
     	}
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から8個上書きして設定
-    	overridePartsNumber = 8;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-    		String s[] = {
-    				"eyeR", "eyeL", "HornR" ,"HornL" ,"HairR" ,
-    				"HairL" , "WingR", "WingL", "Cachusya", "Bribon",
-    				"Breast", "Cheek"
-    		};
-    		setParts(s, k);
-    		//Cheek Default off
-    		setGuiShowModel(k + 11, false);
-    		setPartsSetFlag(3);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		boolean b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HornR1.setVisible(b);
-    		HornR2.setVisible(b);
-    		HornR3.setVisible(b);
-    		HornR4.setVisible(b);
-    		HornR5.setVisible(b);
-    		HornR6.setVisible(b);
-    		HornR7.setVisible(b);
-    		HornR8.setVisible(b);
-    		HornR9.setVisible(b);
-    		HornR10.setVisible(b);
-    		k++;
-    		HornL1.setVisible(b);
-    		HornL2.setVisible(b);
-    		HornL3.setVisible(b);
-    		HornL4.setVisible(b);
-    		HornL5.setVisible(b);
-    		HornL6.setVisible(b);
-    		HornL7.setVisible(b);
-    		HornL8.setVisible(b);
-    		HornL9.setVisible(b);
-    		HornL10.setVisible(b);
-    		k++;
-    		HairR1.setVisible(b);
-    		HairR2.setVisible(b);
-    		HairR3.setVisible(b);
-    		k++;
-    		HairL1.setVisible(b);
-    		HairL2.setVisible(b);
-    		HairL3.setVisible(b);
-    		k++;
-    		WingR1.setVisible(b);
-    		WingR2.setVisible(b);
-    		WingR3.setVisible(b);
-    		k++;
-    		WingL1.setVisible(b);
-    		WingL2.setVisible(b);
-    		WingL3.setVisible(b);
-    		k++;
-    		Cachusya.setVisible(b);
-    		k++;
-    		Bribonc.setVisible(b);
-    		BribonR.setVisible(b);
-    		BribonL.setVisible(b);
-    		k++;
-    		Breast1.setVisible(b);
-    		k++;
-    		Cheek_R.setVisible(b);
-    		Cheek_L.setVisible(b);
-    		setShowModelFlag(2);
-    	}
+    public void defaultPartsSettingAfter() {
+    	//Cheek Default off
+    	setGuiShowModel("Cheek", false);
     }
 }

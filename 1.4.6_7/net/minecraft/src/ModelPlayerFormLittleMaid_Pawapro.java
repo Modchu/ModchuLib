@@ -149,6 +149,14 @@ public class ModelPlayerFormLittleMaid_Pawapro extends ModelPlayerFormLittleMaid
     }
 
     @Override
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
+    @Override
+    public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    }
+
+    @Override
     public void actionPartsInit(float f, float f1) {
     	rightArm = new Modchu_ModelRenderer(this, 20, 22);
     	rightArm.addBox(-1.0F, 0.0F, -1.0F, 2, 4, 2, f);
@@ -198,8 +206,6 @@ public class ModelPlayerFormLittleMaid_Pawapro extends ModelPlayerFormLittleMaid
     	rightLeg2 = new Modchu_ModelRenderer(this);
     	rightLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
     	rightLeg.addChild(rightLeg2);
-    	//rightLeg2.addChild(bipedRightLeg);
-    	//rightLeg2.addChild(RLeg2);
 
     	rightLegPlus2 = new Modchu_ModelRenderer(this);
 
@@ -211,8 +217,6 @@ public class ModelPlayerFormLittleMaid_Pawapro extends ModelPlayerFormLittleMaid
     	leftLeg2 = new Modchu_ModelRenderer(this, 32, 23);
     	leftLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
     	leftLeg.addChild(leftLeg2);
-    	//leftLeg2.addChild(bipedLeftLeg);
-    	//leftLeg2.addChild(LLeg2);
 
     	leftLegPlus2 = new Modchu_ModelRenderer(this);
 
@@ -233,8 +237,7 @@ public class ModelPlayerFormLittleMaid_Pawapro extends ModelPlayerFormLittleMaid
     }
 
     @Override
-    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
     	bipedHead.rotationPointY += 1.0F;
     	bipedBody.rotationPointY -= 3.0F;
@@ -246,20 +249,15 @@ public class ModelPlayerFormLittleMaid_Pawapro extends ModelPlayerFormLittleMaid
     	eyeLniko.setVisible(false);	eyeRniko.setVisible(false);
     	eyeLFire.setVisible(false);	eyeRFire.setVisible(false);
 
-    	if (getIsWait() && !getaimedBow())
-    	{
-
+    	if (getIsWait() && !getaimedBow()) {
     		eyeL.setVisible(false);	eyeR.setVisible(false);
     		eyeLniko.setVisible(true);	eyeRniko.setVisible(true);
-
     	}
-    	if (getaimedBow())
-    	{
+    	if (getaimedBow()){
     		eyeL.showModel = false; eyeR.showModel = false;
     		eyeLFire.setVisible(true);	eyeRFire.setVisible(true);
     	}
-    	if (getIsSneak())
-    	{
+    	if (getIsSneak()){
     		Skirt.rotationPointY = 0.0F;
     		Skirt.rotationPointZ = 0.0F;
     		Skirt.rotateAngleX = 0.0F;
@@ -267,60 +265,13 @@ public class ModelPlayerFormLittleMaid_Pawapro extends ModelPlayerFormLittleMaid
 
     	double Eye =(double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D;
 
-    	if(0.0D > Eye)
-    	{
+    	if(0.0D > Eye) {
     		eyeL.setVisible(false);eyeR.setVisible(false);
-
-    	} else
-    	{
+    	} else {
     		eyeL.setVisible(true);eyeR.setVisible(true);
     	}
     	bipedRightLeg.rotateAngleY = 0.5235988F;
     	bipedLeftLeg.rotateAngleY = -0.5235988F;
-    }
-
-    @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から7個上書きして設定
-    	overridePartsNumber = 7;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"tuba" ,"HandR", "HandL", "RightLeg2", "LeftLeg2",
-    				"Logo1" ,"Logo2"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		boolean b = getGuiShowModel(k);
-    		tuba1.setVisible(b);
-    		tuba2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HandR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HandL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		RLeg2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		LLeg2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Logo1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Logo2.setVisible(b);
-    		setShowModelFlag(1);
-    	}
     }
 
     @Override
@@ -436,18 +387,15 @@ public class ModelPlayerFormLittleMaid_Pawapro extends ModelPlayerFormLittleMaid
     @Override
     public void action1(Entity entity) {
     	super.action1(entity);
-		float f1 = bipedBody.rotateAngleZ;
-		if (f1 > 0.0F) {
-			bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F + (f1 * 1.30889264F);
-		} else {
-			bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F - (f1 * 1.30889264F);
-		}
-		bipedHead.rotationPointX = 0.0F;
-    	//Modchu_Debug.mDebug("rightHand.rotationPointX="+rightHand.rotationPointX);
-    	//rightHand.rotationPointX = 0.0F;
+    	float f1 = bipedBody.rotateAngleZ;
+    	if (f1 > 0.0F) {
+    		bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F + (f1 * 1.30889264F);
+    	} else {
+    		bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F - (f1 * 1.30889264F);
+    	}
+    	bipedHead.rotationPointX = 0.0F;
     	rightHand.rotationPointY = -3.0F;
     	leftHand.rotationPointY = -3.0F;
-    	//rightHand.rotationPointZ = 0.0F;
     	rightLeg2.rotationPointY = -6.0F;
     	leftLeg2.rotationPointY = -6.0F;
     }

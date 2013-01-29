@@ -5,8 +5,6 @@ import org.lwjgl.opengl.GL11;
 
 public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_SR2 {
 
-    public Modchu_ModelRenderer SkirtTop2;
-
     public ModelPlayerFormLittleMaid_Elsa2()
     {
     	this(0.0F);
@@ -118,7 +116,6 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     	mainFrame.setRotationPoint(0F, 0F + f1, 0F);
     	mainFrame.addChild(bipedHead);
     	mainFrame.addChild(bipedBody);
-    	skirtFloatsInit(f, f1);
     	actionPartsInit(f, f1);
     }
 
@@ -214,42 +211,41 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
 
     @Override
     public void skirtFloatsInit(float f, float f1) {
-    	if(!skirtFloats) return;
+    	if(!getSkirtFloats()) return;
     	//è„
-    	SkirtTop2 = new Modchu_ModelRenderer(this, 6, 16);
-    	SkirtTop2.addPlate(0.0F, 0.0F, 0.0F, 8, 6, 0);
-    	SkirtTop2.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
-    	Skirt.addChild(SkirtTop2);
+    	SkirtTop = new Modchu_ModelRenderer(this, 6, 16);
+    	SkirtTop.addPlate(0.0F, 0.0F, 0.0F, 8, 6, 0);
+    	SkirtTop.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	Skirt.addChild(SkirtTop);
 
     	//ëO
     	SkirtFront = new Modchu_ModelRenderer(this, 6, 22);
     	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 8, 10, 0);
-    	SkirtFront.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
+    	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
     	Skirt.addChild(SkirtFront);
 
     	//âE
     	SkirtRight = new Modchu_ModelRenderer(this, 0, 22);
     	SkirtRight.addPlate(-4.0F, 0.0F, -6.0F, 6, 10, 1);
-    	SkirtRight.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
+    	SkirtRight.setRotationPoint(0.0F, 8.0F, 0.0F);
     	Skirt.addChild(SkirtRight);
 
     	//ç∂
     	SkirtLeft = new Modchu_ModelRenderer(this, 14, 22);
     	SkirtLeft.addPlate(4.0F, 0.0F, -6.0F, 6, 10, 1);
-    	SkirtLeft.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
+    	SkirtLeft.setRotationPoint(0.0F, 8.0F, 0.0F);
     	Skirt.addChild(SkirtLeft);
 
     	//å„ÇÎ
     	SkirtBack = new Modchu_ModelRenderer(this, 20, 22);
     	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 8, 10, 0);
-    	SkirtBack.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
+    	SkirtBack.setRotationPoint(0.0F, 8.0F, 0.0F);
     	Skirt.addChild(SkirtBack);
-    	Skirt.showModel = false;
+    	Skirt.setVisible(false);
     }
 
     @Override
-    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
     	bipedHead.rotationPointY += 4.0F;
     	bipedBody.rotationPointY += 1.0F;
@@ -345,33 +341,32 @@ public class ModelPlayerFormLittleMaid_Elsa2 extends ModelPlayerFormLittleMaid_S
     			bipedLeftArm.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.05F;
     		}
     	}
-    	if (skirtFloats) {
+    	if (getSkirtFloats()) {
     		SkirtBack.rotateAngleX = SkirtRight.rotateAngleX = SkirtLeft.rotateAngleX = SkirtFront.rotateAngleX = 0.0F;
     		SkirtBack.rotateAngleY = SkirtRight.rotateAngleY = SkirtLeft.rotateAngleY = SkirtFront.rotateAngleY = 0.0F;
     		SkirtBack.rotateAngleZ = SkirtRight.rotateAngleZ = SkirtLeft.rotateAngleZ = SkirtFront.rotateAngleZ = 0.0F;
 
-    		SkirtRight.rotateAngleY = 3.141592653F;
-    		SkirtTop2.rotateAngleX = -1.570796313F;
-    		SkirtTop2.setRotationPoint(-4.0F, -3.0F, 3.0F);
+    		SkirtTop.setRotationPoint(-4.0F, -3.0F, 3.0F);
     		SkirtFront.setRotationPoint(-4.0F, -3.0F, -2.5F);
     		SkirtRight.setRotationPoint(-8.0F, -3.0F, -2.5F);
     		SkirtLeft.setRotationPoint(0.0F, -3.0F, 3.0F);
     		SkirtBack.setRotationPoint(-4.0F, -3.0F, 3.0F);
-    		SkirtFront.rotationPointX -= motionY;
-    		SkirtFront.rotationPointY += motionY * 2.0F;
-    		SkirtFront.rotationPointZ -= motionY * 4.0F;
-    		SkirtRight.rotationPointX -= motionY * 4.0F;
+    		SkirtFront.rotationPointX += motionY * 4.0F;
+    		SkirtBack.rotationPointX += motionY * 4.0F;
     		SkirtRight.rotationPointY += motionY * 2.0F;
-    		SkirtLeft.rotationPointX += motionY * 4.0F;
-    		SkirtLeft.rotationPointY += motionY * 2.0F;
-    		SkirtBack.rotationPointX -= motionY;
-    		SkirtBack.rotationPointY += motionY * 2.0F;
-    		SkirtBack.rotationPointZ += motionY * 4.0F;
+    		SkirtRight.rotationPointZ += motionY * 4.0F;
+    		SkirtLeft.rotationPointY -= motionY * 2.0F;
+    		SkirtLeft.rotationPointZ -= motionY * 4.0F;
 
+    		SkirtRight.rotateAngleY = 3.141592653F;
+    		SkirtTop.rotateAngleX = -1.570796313F;
     		SkirtFront.rotateAngleX += motionY;
     		SkirtRight.rotateAngleZ += -motionY / 2.0F;
     		SkirtLeft.rotateAngleZ += motionY / 2.0F;
     		SkirtBack.rotateAngleX += -motionY;
+
+    		SkirtFront.scaleX = SkirtBack.scaleX = 1.0F - (getMotionY() * 1.0F);
+    		SkirtRight.scaleZ = SkirtLeft.scaleZ = 1.0F - (getMotionY() * 1.0F);
     	}
     }
 

@@ -106,7 +106,6 @@ public class ModelPlayerFormLittleMaid_Petit extends ModelPlayerFormLittleMaid
     	mainFrame.addChild(bipedHead);
     	mainFrame.addChild(bipedBody);
 
-    	skirtFloatsInit(f, f1);
     	actionPartsInit(f, f1);
     }
 
@@ -202,41 +201,42 @@ public class ModelPlayerFormLittleMaid_Petit extends ModelPlayerFormLittleMaid
 
     @Override
     public void skirtFloatsInit(float f, float f1) {
-    	if(!skirtFloats) return;
+    	if(!getSkirtFloats()) return;
     	//上
     	SkirtTop = new Modchu_ModelRenderer(this, 8, 16);
     	SkirtTop.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
-    	SkirtTop.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
+    	SkirtTop.setRotationPoint(0.0F, 8.0F, 0.0F);
     	SkirtTop.setRotationPointLM(-4.0F, 5.0F, 4.0F);
-    	bipedHead.addChild(SkirtTop);
+    	Skirt.addChild(SkirtTop);
 
     	//前
     	SkirtFront = new Modchu_ModelRenderer(this, 8, 24);
     	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
-    	SkirtFront.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
+    	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
     	SkirtFront.setRotationPointLM(-4.0F, 0.0F, -4.0F);
     	SkirtTop.addChild(SkirtFront);
 
     	//右
     	SkirtRight = new Modchu_ModelRenderer(this, 0, 24);
     	SkirtRight.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1, f - 1.9F);
-    	SkirtRight.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
+    	SkirtRight.setRotationPoint(0.0F, 8.0F, 0.0F);
     	SkirtRight.setRotationPointLM(-4.0F, 0.0F, 4.0F);
     	SkirtTop.addChild(SkirtRight);
 
     	//左
     	SkirtLeft = new Modchu_ModelRenderer(this, 16, 24);
     	SkirtLeft.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1, f - 1.9F);
-    	SkirtLeft.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
+    	SkirtLeft.setRotationPoint(0.0F, 8.0F, 0.0F);
     	SkirtLeft.setRotationPointLM(4.0F, 0.0F, -4.0F);
     	SkirtTop.addChild(SkirtLeft);
 
     	//後ろ
     	SkirtBack = new Modchu_ModelRenderer(this, 24, 24);
     	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
-    	SkirtBack.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
+    	SkirtBack.setRotationPoint(0.0F, 8.0F, 0.0F);
     	SkirtBack.setRotationPointLM(-4.0F, 0.0F, 4.0F);
     	SkirtTop.addChild(SkirtBack);
+    	Skirt.setVisible(false);
     }
 
     @Override
@@ -262,8 +262,7 @@ public class ModelPlayerFormLittleMaid_Petit extends ModelPlayerFormLittleMaid
     	eyeR.setRotationPoint(0.9F, -2.65F, 0.0F);
     }
 
-    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
     	Arms[0].setRotationPointLM(0.5F, 2.5F, 0F);
     	Arms[1].setRotationPointLM(-0.5F, 2.5F, 0F);
@@ -275,116 +274,72 @@ public class ModelPlayerFormLittleMaid_Petit extends ModelPlayerFormLittleMaid
     	bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 5.0F;
     	Skirt.rotationPointY = 4.0F;
     	bipedHead.rotationPointZ = 0.0F;
-    	if(getIsRiding())
-    	{
+    	if(getIsRiding()) {
     		bipedHead.rotationPointY -= 2.5F;
     		bipedBody.rotationPointY -= 2.5F;
     	}
 
-    	if(getIsSneak())
-    	{
+    	if(getIsSneak()) {
     		bipedHead.rotationPointY += 0.5F;
     		bipedHead.rotationPointZ = 2.0F;
     		Skirt.rotationPointZ = 0.0F;
     	}
 
-    	if(getaimedBow())
-    	{
+    	if(getaimedBow()) {
     		eyeR.setVisible(false);
     		FaceR.setVisible(false);
     	}
 
-    	if( 0 > mh_sin(f2 * 0.1F) * 0.3F + (Math.random() * 0.1F) + 0.18F)
-    	{
+    	if( 0 > mh_sin(f2 * 0.1F) * 0.3F + (Math.random() * 0.1F) + 0.18F) {
     		eyeL.setVisible(false);
     		eyeR.setVisible(false);
     		FaceL.setVisible(false);
     		FaceR.setVisible(false);
-    	} else
-    	{
+    	} else {
     		eyeL.setVisible(true);
     		eyeR.setVisible(true);
     		FaceL.setVisible(true);
     		FaceR.setVisible(true);
     	}
-
-    	if (skirtFloats) {
-    		SkirtTop.setRotationPointLM(-4.0F, 5.0F, 4.0F);
-    		SkirtFront.setRotationPointLM(-4.0F, 0.0F, -4.0F);
-    		SkirtRight.setRotationPointLM(-4.0F, 0.0F, 4.0F);
-    		SkirtLeft.setRotationPointLM(4.0F, 0.0F, -4.0F);
-    		SkirtBack.setRotationPointLM(-4.0F, 0.0F, 4.0F);
-    		if (getIsSneak()) {
-    			SkirtFront.rotationPointY = SkirtLeft.rotationPointY = 0.8F;
-    			SkirtRight.rotationPointY = 3.8F;
-    			SkirtTop.rotationPointY = 3.9F;
-    			SkirtBack.rotationPointY = 2.5F;
-    			SkirtFront.rotationPointZ = -3.4F;
-    			SkirtRight.rotationPointZ = 4.0F;
-    			SkirtLeft.rotationPointZ = -3.4F;
-    			SkirtTop.rotationPointZ = 4.0F;
-    			SkirtBack.rotationPointZ = 0.45F;
-    			SkirtFront.rotateAngleX = SkirtLeft.rotateAngleX = SkirtBack.rotateAngleX = -bipedBody.rotateAngleX;
-    			SkirtRight.rotateAngleX = bipedBody.rotateAngleX;
-    			SkirtTop.rotateAngleX = -1.570796313F - bipedBody.rotateAngleX;
-    		} else {
-    			SkirtFront.rotationPointY = SkirtRight.rotationPointY =
-    					SkirtLeft.rotationPointY = SkirtBack.rotationPointY = SkirtTop.rotationPointY = 2.5F;
-    			SkirtTop.rotationPointZ = 4.0F;
-    			SkirtFront.rotationPointZ = -4.0F;
-    			SkirtRight.rotationPointZ = 4.0F;
-    			SkirtLeft.rotationPointZ = -4.0F;
-    			SkirtTop.rotationPointZ = 4.0F;
-    			SkirtBack.rotationPointZ = 0.2F;
-    			SkirtFront.rotateAngleX = SkirtRight.rotateAngleX =
-    					SkirtLeft.rotateAngleX = SkirtBack.rotateAngleX = 0.0F;
-    			SkirtRight.rotateAngleY = 3.141592653F;
-    			SkirtTop.rotateAngleX = -1.570796313F;
-    		}
-    		SkirtFront.rotationPointY += motionY;
-    		SkirtFront.rotationPointZ -= motionY * 3.0F;
-    		SkirtRight.rotationPointX -= motionY * 2.0F;
-    		SkirtRight.rotationPointY += motionY;
-    		SkirtLeft.rotationPointX += motionY * 2.0F;
-    		SkirtLeft.rotationPointY += motionY;
-    		SkirtBack.rotationPointY -= motionY * 3.5F;
-    		SkirtBack.rotationPointZ += motionY * 3.0F;
-
-    		SkirtFront.rotateAngleX += motionY;
-    		SkirtRight.rotateAngleZ = -motionY;
-    		SkirtLeft.rotateAngleZ = motionY;
-    		SkirtBack.rotateAngleX -= motionY;
-    	}
+    	skirtFloats(f, f1, f2, f3, f4, f5, entity);
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後[partsNumber]から設定
-    	overridePartsNumber = 0;
-    	int k = getPartsNumber();
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"eyeR", "eyeL", "Prim"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
+    public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    	SkirtTop.setRotationPointLM(-4.0F, -2.0F, 4.0F);
+    	SkirtFront.setRotationPointLM(0.0F, 8.0F, 0.0F);
+    	SkirtRight.setRotationPointLM(0.0F, 0.0F, 0.0F);
+    	SkirtLeft.setRotationPointLM(8.0F, 8.0F, 0.0F);
+    	SkirtBack.setRotationPointLM(0.0F, 3.8F, 0.0F);
 
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		boolean b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Prim.setVisible(b);
-    		setShowModelFlag(1);
-    	}
+    	SkirtFront.rotationPointX += getMotionY() * 4.0F;
+    	SkirtFront.rotationPointY += getMotionY() * 2.0F;
+    	SkirtFront.rotationPointZ += getMotionY() * 2.0F;
+    	SkirtBack.rotationPointX += getMotionY() * 4.0F;
+    	SkirtBack.rotationPointY -= getMotionY() * 2.0F;
+    	SkirtBack.rotationPointZ -= getMotionY() * 2.0F;
+    	SkirtRight.rotationPointX -= getMotionY() * 2.0F;
+    	SkirtRight.rotationPointY += getMotionY() * 5.0F;
+    	SkirtRight.rotationPointZ += getMotionY() * 3.0F;
+    	SkirtLeft.rotationPointX += getMotionY() * 3.0F;
+    	SkirtLeft.rotationPointY -= getMotionY() * 2.0F;
+    	SkirtLeft.rotationPointZ += getMotionY() * 2.0F;
+
+    	SkirtTop.rotateAngleX = -1.570796313F;
+    	SkirtBack.rotateAngleX = 1.570796313F;
+    	SkirtFront.rotateAngleX = 1.570796313F;
+    	SkirtRight.rotateAngleX = -1.570796313F;
+    	SkirtRight.rotateAngleY = 3.141592653F;
+    	SkirtLeft.rotateAngleX = 1.570796313F;
+    	SkirtFront.rotateAngleX += getMotionY();
+    	SkirtRight.rotateAngleX += getMotionY() / 8.0F;
+    	SkirtRight.rotateAngleZ = getMotionY() / 8.0F;
+    	SkirtRight.rotateAngleY += getMotionY();
+    	SkirtLeft.rotateAngleY = -getMotionY();
+    	SkirtBack.rotateAngleX -= getMotionY();
+
+    	SkirtFront.scaleX = SkirtBack.scaleX = 1.0F - (getMotionY() * 1.0F);
+    	SkirtRight.scaleZ = SkirtLeft.scaleZ = 1.0F - (getMotionY() * 1.0F);
     }
 
     @Override

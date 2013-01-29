@@ -118,6 +118,7 @@ public class ModelPlayerFormLittleMaid_QB extends ModelPlayerFormLittleMaid {
     	mainFrame.setRotationPoint(0F, 0F + f1, 0F);
     	mainFrame.addChild(bipedHead);
     	mainFrame.addChild(bipedBody);
+    	Skirt = new Modchu_ModelRenderer(this);
     }
 
     @Override
@@ -410,65 +411,15 @@ public class ModelPlayerFormLittleMaid_QB extends ModelPlayerFormLittleMaid {
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から10個上書きして設定
-    	overridePartsNumber = 10;
-    	int k = getPartsNumber() - 10;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"rightLeg", "leftLeg", "rightear", "leftear", "rightLegb",
-    				"leftLegb", "r_earhair", "l_earhair", "tail1", "tail2",
-    				"tail3", "ringR", "ringL"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		boolean b = getGuiShowModel(k);
-    		rightLeg.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		leftLeg.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		rightear.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		leftear.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		rightLegbottom.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		leftLegbottom.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		rightearhair.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		leftearhair.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		tail1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		tail2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		tail3.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ringR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		ringL.setVisible(b);
-    		setShowModelFlag(1);
-    	}
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s1 = {
+    			"rightLegbottom", "leftLegbottom", "rightearhair", "leftearhair"
+    	};
+    	String[] s2 = {
+    			"rightLeg_b", "leftLeg_b", "r_earhair", "l_earhair"
+    	};
+    	addShowPartsReneme(s1, s2);
     }
 
     @Override

@@ -639,9 +639,12 @@ public class ModelPlayerFormLittleMaid_Angel extends ModelPlayerFormLittleMaid_S
 		actionPartsInit(f, f1);
 	}
 
+    @Override
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
 	@Override
-	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-	{
+	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
 		Ribon0.setRotationPointLM(0F, 0.8F, 1.5F);
 
@@ -672,255 +675,151 @@ public class ModelPlayerFormLittleMaid_Angel extends ModelPlayerFormLittleMaid_S
 		}
 		Skirt.rotationPointY = -4.5F;
 		Skirt.rotateAngleX = 0.0F;
-		if (skirtFloats) {
-			Skirt1.setRotateAngleDeg(-118F, 113F, 47F);
-			Skirt2.setRotateAngleDeg(-65F, 113F, 47F);
-			Skirt3.setRotateAngleDeg(-122F, 158F, 47F);
-			Skirt4.setRotateAngleDeg(-67F, 158F, 47F);
-			Skirt5.setRotateAngleDeg(-113F, -159F, 47F);
-			Skirt6.setRotateAngleDeg(-58F, -159F, 47F);
-			Skirt7.setRotateAngleDeg(-114F, -114F, 47F);
-			Skirt8.setRotateAngleDeg(-65F, -114F, 47F);
-			Skirt9.setRotateAngleDeg(-115F, -68F, 47F);
-			Skirt10.setRotateAngleDeg(-65F, -68F, 47F);
-			Skirt11.setRotateAngleDeg(-122F, -23F, 47F);
-			Skirt12.setRotateAngleDeg(-66F, -23F, 47F);
-			Skirt13.setRotateAngleDeg(-114F, 22F, 47F);
-			Skirt14.setRotateAngleDeg(-58F, 22F, 47F);
-			Skirt15.setRotateAngleDeg(-115F, 67F, 47F);
-			Skirt16.setRotateAngleDeg(-62F, 67F, 47F);
-			Skirt21.setRotateAngleDeg(-118F, 113F, 47F);
-			Skirt22.setRotateAngleDeg(-65F, 113F, 47F);
-			Skirt23.setRotateAngleDeg(-122F, 158F, 47F);
-			Skirt24.setRotateAngleDeg(-67F, 158F, 47F);
-			Skirt25.setRotateAngleDeg(-113F, -159F, 47F);
-			Skirt26.setRotateAngleDeg(-58F, -159F, 47F);
-			Skirt27.setRotateAngleDeg(-114F, -114F, 47F);
-			Skirt28.setRotateAngleDeg(-65F, -114F, 47F);
-			Skirt29.setRotateAngleDeg(-115F, -68F, 47F);
-			Skirt210.setRotateAngleDeg(-65F, -68F, 47F);
-			Skirt211.setRotateAngleDeg(-122F, -23F, 47F);
-			Skirt212.setRotateAngleDeg(-66F, -23F, 47F);
-			Skirt213.setRotateAngleDeg(-114F, 22F, 47F);
-			Skirt214.setRotateAngleDeg(-58F, 22F, 47F);
-			Skirt215.setRotateAngleDeg(-115F, 67F, 47F);
-			Skirt216.setRotateAngleDeg(-62F, 67F, 47F);
+		skirtFloats(f, f1, f2, f3, f4, f5, entity);
+	}
 
-			float f6 = -motionY * 2.0F - 8F;
-			Skirt1.rotationPointY = 2.5F + f6;
-			Skirt2.rotationPointY = 2.5F + f6;
-			Skirt3.rotationPointY = 2F + f6;
-			Skirt4.rotationPointY = 2F + f6;
-			Skirt5.rotationPointY = 2F + f6;
-			Skirt6.rotationPointY = 2F + f6;
-			Skirt7.rotationPointY = 2.5F + f6;
-			Skirt8.rotationPointY = 2.5F + f6;
-			Skirt9.rotationPointY = 2.5F + f6;
-			Skirt10.rotationPointY = 2.5F + f6;
-			Skirt11.rotationPointY = 2F + f6;
-			Skirt12.rotationPointY = 2F + f6;
-			Skirt13.rotationPointY = 2F + f6;
-			Skirt14.rotationPointY = 2F + f6;
-			Skirt15.rotationPointY = 2.5F + f6;
-			Skirt16.rotationPointY = 2.5F + f6;
-			Skirt21.rotationPointY = 2.5F + f6;
-			Skirt22.rotationPointY = 2.5F + f6;
-			Skirt23.rotationPointY = 2F + f6;
-			Skirt24.rotationPointY = 2F + f6;
-			Skirt25.rotationPointY = 2F + f6;
-			Skirt26.rotationPointY = 2F + f6;
-			Skirt27.rotationPointY = 2.5F + f6;
-			Skirt28.rotationPointY = 2.5F + f6;
-			Skirt29.rotationPointY = 2.5F + f6;
-			Skirt210.rotationPointY = 2.5F + f6;
-			Skirt211.rotationPointY = 2F + f6;
-			Skirt212.rotationPointY = 2F + f6;
-			Skirt213.rotationPointY = 2F + f6;
-			Skirt214.rotationPointY = 2F + f6;
-			Skirt215.rotationPointY = 2.5F + f6;
-			Skirt216.rotationPointY = 2.5F + f6;
+	@Override
+	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+		if (!getSkirtFloats()) return;
+		Skirt1.setRotateAngleDeg(-118F, 113F, 47F);
+		Skirt2.setRotateAngleDeg(-65F, 113F, 47F);
+		Skirt3.setRotateAngleDeg(-122F, 158F, 47F);
+		Skirt4.setRotateAngleDeg(-67F, 158F, 47F);
+		Skirt5.setRotateAngleDeg(-113F, -159F, 47F);
+		Skirt6.setRotateAngleDeg(-58F, -159F, 47F);
+		Skirt7.setRotateAngleDeg(-114F, -114F, 47F);
+		Skirt8.setRotateAngleDeg(-65F, -114F, 47F);
+		Skirt9.setRotateAngleDeg(-115F, -68F, 47F);
+		Skirt10.setRotateAngleDeg(-65F, -68F, 47F);
+		Skirt11.setRotateAngleDeg(-122F, -23F, 47F);
+		Skirt12.setRotateAngleDeg(-66F, -23F, 47F);
+		Skirt13.setRotateAngleDeg(-114F, 22F, 47F);
+		Skirt14.setRotateAngleDeg(-58F, 22F, 47F);
+		Skirt15.setRotateAngleDeg(-115F, 67F, 47F);
+		Skirt16.setRotateAngleDeg(-62F, 67F, 47F);
+		Skirt21.setRotateAngleDeg(-118F, 113F, 47F);
+		Skirt22.setRotateAngleDeg(-65F, 113F, 47F);
+		Skirt23.setRotateAngleDeg(-122F, 158F, 47F);
+		Skirt24.setRotateAngleDeg(-67F, 158F, 47F);
+		Skirt25.setRotateAngleDeg(-113F, -159F, 47F);
+		Skirt26.setRotateAngleDeg(-58F, -159F, 47F);
+		Skirt27.setRotateAngleDeg(-114F, -114F, 47F);
+		Skirt28.setRotateAngleDeg(-65F, -114F, 47F);
+		Skirt29.setRotateAngleDeg(-115F, -68F, 47F);
+		Skirt210.setRotateAngleDeg(-65F, -68F, 47F);
+		Skirt211.setRotateAngleDeg(-122F, -23F, 47F);
+		Skirt212.setRotateAngleDeg(-66F, -23F, 47F);
+		Skirt213.setRotateAngleDeg(-114F, 22F, 47F);
+		Skirt214.setRotateAngleDeg(-58F, 22F, 47F);
+		Skirt215.setRotateAngleDeg(-115F, 67F, 47F);
+		Skirt216.setRotateAngleDeg(-62F, 67F, 47F);
 
-			Skirt1.rotateAngleX += motionY;
-			Skirt1.rotateAngleZ += motionY;
-			Skirt2.rotateAngleX += motionY;
-			Skirt2.rotateAngleZ += motionY;
-			Skirt3.rotateAngleX += motionY;
-			Skirt3.rotateAngleZ += motionY;
-			Skirt4.rotateAngleX += motionY;
-			Skirt4.rotateAngleZ += motionY;
-			Skirt5.rotateAngleX += motionY;
-			Skirt5.rotateAngleZ += motionY;
-			Skirt6.rotateAngleX += motionY;
-			Skirt6.rotateAngleZ += motionY;
-			Skirt7.rotateAngleZ += motionY;
-			Skirt8.rotateAngleZ += motionY;
-			Skirt9.rotateAngleX += motionY;
-			Skirt9.rotateAngleZ += motionY;
-			Skirt10.rotateAngleX += motionY;
-			Skirt10.rotateAngleZ += motionY;
-			Skirt11.rotateAngleX += motionY;
-			Skirt11.rotateAngleZ += motionY;
-			Skirt12.rotateAngleX += motionY;
-			Skirt12.rotateAngleZ += motionY;
-			Skirt13.rotateAngleX += motionY;
-			Skirt13.rotateAngleZ += motionY;
-			Skirt14.rotateAngleX += motionY;
-			Skirt14.rotateAngleZ += motionY;
-			Skirt15.rotateAngleX += motionY;
-			Skirt15.rotateAngleZ += motionY;
-			Skirt16.rotateAngleX += motionY;
-			Skirt16.rotateAngleZ += motionY;
-			Skirt21.rotateAngleZ += motionY;
-			Skirt22.rotateAngleX += motionY;
-			Skirt22.rotateAngleZ += motionY;
-			Skirt23.rotateAngleX += motionY;
-			Skirt23.rotateAngleZ += motionY;
-			Skirt24.rotateAngleX += motionY;
-			Skirt24.rotateAngleZ += motionY;
-			Skirt25.rotateAngleX += motionY;
-			Skirt25.rotateAngleZ += motionY;
-			Skirt26.rotateAngleX += motionY;
-			Skirt26.rotateAngleZ += motionY;
-			Skirt27.rotateAngleZ += motionY;
-			Skirt28.rotateAngleZ += motionY;
-			Skirt29.rotateAngleZ += motionY;
-			Skirt210.rotateAngleY += motionY;
-			Skirt210.rotateAngleZ += motionY;
-			Skirt211.rotateAngleY += motionY;
-			Skirt211.rotateAngleZ += motionY;
-			Skirt212.rotateAngleY += motionY;
-			Skirt212.rotateAngleZ += motionY;
-			Skirt213.rotateAngleY += motionY;
-			Skirt213.rotateAngleZ += motionY;
-			Skirt214.rotateAngleY += motionY;
-			Skirt214.rotateAngleZ += motionY;
-			Skirt215.rotateAngleY += motionY;
-			Skirt215.rotateAngleZ += motionY;
-			Skirt216.rotateAngleZ += motionY;
-		}
+		float f6 = -motionY * 2.0F;
+		Skirt1.rotationPointY = 2.5F + f6;
+		Skirt2.rotationPointY = 2.5F + f6;
+		Skirt3.rotationPointY = 2F + f6;
+		Skirt4.rotationPointY = 2F + f6;
+		Skirt5.rotationPointY = 2F + f6;
+		Skirt6.rotationPointY = 2F + f6;
+		Skirt7.rotationPointY = 2.5F + f6;
+		Skirt8.rotationPointY = 2.5F + f6;
+		Skirt9.rotationPointY = 2.5F + f6;
+		Skirt10.rotationPointY = 2.5F + f6;
+		Skirt11.rotationPointY = 2F + f6;
+		Skirt12.rotationPointY = 2F + f6;
+		Skirt13.rotationPointY = 2F + f6;
+		Skirt14.rotationPointY = 2F + f6;
+		Skirt15.rotationPointY = 2.5F + f6;
+		Skirt16.rotationPointY = 2.5F + f6;
+		Skirt21.rotationPointY = 2.5F + f6;
+		Skirt22.rotationPointY = 2.5F + f6;
+		Skirt23.rotationPointY = 2F + f6;
+		Skirt24.rotationPointY = 2F + f6;
+		Skirt25.rotationPointY = 2F + f6;
+		Skirt26.rotationPointY = 2F + f6;
+		Skirt27.rotationPointY = 2.5F + f6;
+		Skirt28.rotationPointY = 2.5F + f6;
+		Skirt29.rotationPointY = 2.5F + f6;
+		Skirt210.rotationPointY = 2.5F + f6;
+		Skirt211.rotationPointY = 2F + f6;
+		Skirt212.rotationPointY = 2F + f6;
+		Skirt213.rotationPointY = 2F + f6;
+		Skirt214.rotationPointY = 2F + f6;
+		Skirt215.rotationPointY = 2.5F + f6;
+		Skirt216.rotationPointY = 2.5F + f6;
 
+		Skirt1.rotateAngleX += motionY;
+		Skirt1.rotateAngleZ += motionY;
+		Skirt2.rotateAngleX += motionY;
+		Skirt2.rotateAngleZ += motionY;
+		Skirt3.rotateAngleX += motionY;
+		Skirt3.rotateAngleZ += motionY;
+		Skirt4.rotateAngleX += motionY;
+		Skirt4.rotateAngleZ += motionY;
+		Skirt5.rotateAngleX += motionY;
+		Skirt5.rotateAngleZ += motionY;
+		Skirt6.rotateAngleX += motionY;
+		Skirt6.rotateAngleZ += motionY;
+		Skirt7.rotateAngleZ += motionY;
+		Skirt8.rotateAngleZ += motionY;
+		Skirt9.rotateAngleX += motionY;
+		Skirt9.rotateAngleZ += motionY;
+		Skirt10.rotateAngleX += motionY;
+		Skirt10.rotateAngleZ += motionY;
+		Skirt11.rotateAngleX += motionY;
+		Skirt11.rotateAngleZ += motionY;
+		Skirt12.rotateAngleX += motionY;
+		Skirt12.rotateAngleZ += motionY;
+		Skirt13.rotateAngleX += motionY;
+		Skirt13.rotateAngleZ += motionY;
+		Skirt14.rotateAngleX += motionY;
+		Skirt14.rotateAngleZ += motionY;
+		Skirt15.rotateAngleX += motionY;
+		Skirt15.rotateAngleZ += motionY;
+		Skirt16.rotateAngleX += motionY;
+		Skirt16.rotateAngleZ += motionY;
+		Skirt21.rotateAngleZ += motionY;
+		Skirt22.rotateAngleX += motionY;
+		Skirt22.rotateAngleZ += motionY;
+		Skirt23.rotateAngleX += motionY;
+		Skirt23.rotateAngleZ += motionY;
+		Skirt24.rotateAngleX += motionY;
+		Skirt24.rotateAngleZ += motionY;
+		Skirt25.rotateAngleX += motionY;
+		Skirt25.rotateAngleZ += motionY;
+		Skirt26.rotateAngleX += motionY;
+		Skirt26.rotateAngleZ += motionY;
+		Skirt27.rotateAngleZ += motionY;
+		Skirt28.rotateAngleZ += motionY;
+		Skirt29.rotateAngleZ += motionY;
+		Skirt210.rotateAngleY += motionY;
+		Skirt210.rotateAngleZ += motionY;
+		Skirt211.rotateAngleY += motionY;
+		Skirt211.rotateAngleZ += motionY;
+		Skirt212.rotateAngleY += motionY;
+		Skirt212.rotateAngleZ += motionY;
+		Skirt213.rotateAngleY += motionY;
+		Skirt213.rotateAngleZ += motionY;
+		Skirt214.rotateAngleY += motionY;
+		Skirt214.rotateAngleZ += motionY;
+		Skirt215.rotateAngleY += motionY;
+		Skirt215.rotateAngleZ += motionY;
+		Skirt216.rotateAngleZ += motionY;
 	}
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から8個上書きして設定
-    	overridePartsNumber = 8;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-    		String s[] = {
-    				"eyeR", "eyeL", "ChignonB", "Prim", "WingL",
-    				"WingR", "Tail", "Ahoge", "RibonL", "RibonR",
-    				"Circle", "Glass"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(3);
-    	}
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		showModelSettingReflects(k);
-    		setShowModelFlag(2);
-    	}
-    }
-
-    @Override
-    public void showModelSettingReflects(int i) {
-    	super.showModelSettingReflects(i);
-    	i = getPartsNumber();
-    	boolean b = getGuiShowModel(6);
-    	Skirt1.setVisible(b);
-    	Skirt2.setVisible(b);
-    	Skirt3.setVisible(b);
-    	Skirt4.setVisible(b);
-    	Skirt5.setVisible(b);
-    	Skirt6.setVisible(b);
-    	Skirt7.setVisible(b);
-    	Skirt8.setVisible(b);
-    	Skirt9.setVisible(b);
-    	Skirt10.setVisible(b);
-    	Skirt11.setVisible(b);
-    	Skirt12.setVisible(b);
-    	Skirt13.setVisible(b);
-    	Skirt14.setVisible(b);
-    	Skirt15.setVisible(b);
-    	Skirt16.setVisible(b);
-    	Skirt21.setVisible(b);
-    	Skirt22.setVisible(b);
-    	Skirt23.setVisible(b);
-    	Skirt24.setVisible(b);
-    	Skirt25.setVisible(b);
-    	Skirt26.setVisible(b);
-    	Skirt27.setVisible(b);
-    	Skirt28.setVisible(b);
-    	Skirt29.setVisible(b);
-    	Skirt210.setVisible(b);
-    	Skirt211.setVisible(b);
-    	Skirt212.setVisible(b);
-    	Skirt213.setVisible(b);
-    	Skirt214.setVisible(b);
-    	Skirt215.setVisible(b);
-    	Skirt216.setVisible(b);
-    	b = getGuiShowModel(i);
-    	eyeR.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	eyeL.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	ChignonB.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	Prim.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	WingLroot.setVisible(b);
-    	WingL2.setVisible(b);
-    	WingL3.setVisible(b);
-    	WingL4.setVisible(b);
-    	WingL5.setVisible(b);
-    	WingL6.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	WingRroot.setVisible(b);
-    	WingR2.setVisible(b);
-    	WingR3.setVisible(b);
-    	WingR4.setVisible(b);
-    	WingR5.setVisible(b);
-    	WingR6.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	Tail3.setVisible(b);
-    	Tail4.setVisible(b);
-    	Tail5.setVisible(b);
-    	Tail6.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	Ahoge.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	Ribon0.setVisible(b);
-    	RibonLU2.setVisible(b);
-    	RibonLU3.setVisible(b);
-    	RibonLU4.setVisible(b);
-    	RibonLD1.setVisible(b);
-    	RibonLD2.setVisible(b);
-    	RibonLD3.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	RibonRU2.setVisible(b);
-    	RibonRU3.setVisible(b);
-    	RibonRU4.setVisible(b);
-    	RibonRD1.setVisible(b);
-    	RibonRD2.setVisible(b);
-    	RibonRD3.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	Circle.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	Glass.setVisible(b);
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s = {
+    			"Skirt1", "Skirt2", "Skirt3", "Skirt4", "Skirt5",
+    			"Skirt6", "Skirt7", "Skirt8", "Skirt9", "Skirt10",
+    			"Skirt11", "Skirt12", "Skirt13", "Skirt14", "Skirt15",
+    			"Skirt16", "Skirt21", "Skirt22", "Skirt23", "Skirt24",
+    			"Skirt25", "Skirt26", "Skirt27", "Skirt27", "Skirt28",
+    			"Skirt29", "Skirt210", "Skirt211", "Skirt212", "Skirt213",
+    			"Skirt214", "Skirt215", "Skirt216"
+    	};
+    	showPartsHideListadd(s);
     }
 
     @Override

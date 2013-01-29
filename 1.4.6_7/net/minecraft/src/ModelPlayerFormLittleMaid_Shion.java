@@ -127,8 +127,16 @@ public class ModelPlayerFormLittleMaid_Shion extends ModelPlayerFormLittleMaid
 		Skirt.setVisible(false);
    }
 
-    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    @Override
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
+    @Override
+    public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    }
+
+    @Override
+    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
 
     	bipedRightLeg.rotateAngleX = (MathHelper.cos(f * 0.6662F) * 1.4F * f1) / 1.5F;
@@ -137,13 +145,11 @@ public class ModelPlayerFormLittleMaid_Shion extends ModelPlayerFormLittleMaid
     	sodeR.setVisible(true);
     	WsodeL.setVisible(false);
     	WsodeR.setVisible(false);
-    	if(getIsRiding())
-    	{
+    	if(getIsRiding()) {
     		bipedRightLeg.rotateAngleY = 0.0F;
     		bipedLeftLeg.rotateAngleY = 0.0F;
     	}
-    	if(getIsSneak())
-    	{
+    	if(getIsSneak()) {
     		if (!modchuRemodelingModel) {
     			bipedRightLeg.rotateAngleX -= 0.5F;
     			bipedLeftLeg.rotateAngleX -= 0.5F;
@@ -170,15 +176,14 @@ public class ModelPlayerFormLittleMaid_Shion extends ModelPlayerFormLittleMaid
     			SkirtL.setRotationPoint(-0.5F, 0.0F, 0.0F);
     		}
     	}
-    	if(getIsWait() && !getaimedBow())
-    	{
+    	if(getIsWait() && !getaimedBow()) {
     		sodeL.setVisible(false);
     		sodeR.setVisible(false);
     		WsodeL.setVisible(true);
     		WsodeR.setVisible(true);
     	}
-    	if(getaimedBow())
-    	{
+    	if(getaimedBow()) {
+    		eyeR.setVisible(false);
     		eyeL.setVisible(true);
     	}
     	ChignonB.rotateAngleX = 0.0873F;
@@ -235,45 +240,6 @@ public class ModelPlayerFormLittleMaid_Shion extends ModelPlayerFormLittleMaid
     	} else {
     		eyeL.setVisible(true);
     		eyeR.setVisible(true);
-    	}
-    }
-
-    @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後[partsNumber]から設定
-    	overridePartsNumber = 0;
-    	int k = getPartsNumber();
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"longtail", "HeadwearR", "HeadwearL", "kanzasi"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		boolean b = getGuiShowModel(6);
-    		SkirtR.setVisible(b);
-    		SkirtL.setVisible(b);
-    		b = getGuiShowModel(7);
-    		Headwear.setVisible(b);
-    		b = getGuiShowModel(k);
-    		longtail.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HeadwearR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		HeadwearL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		kanzasi.setVisible(b);
-    		Skirt.setVisible(false);
-    		setShowModelFlag(1);
     	}
     }
 

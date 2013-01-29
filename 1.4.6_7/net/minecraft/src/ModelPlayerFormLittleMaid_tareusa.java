@@ -95,8 +95,7 @@ public class ModelPlayerFormLittleMaid_tareusa extends ModelPlayerFormLittleMaid
 		if (getIsSneak()) {
 			Usasippo.setRotateAngleY(0.0F);
 		}
-		if(getIsWait() && !getaimedBow())
-		{
+		if(getIsWait() && !getaimedBow()) {
 			Usasippo.setRotateAngleY(0.0F);
 			Usasippo.setRotateAngleX(mh_sin(f2 * 0.3F) * 0.1F);
 			UsaER.rotateAngleX = UsaEL.rotateAngleX = mh_sin(f2 * 0.1F) * 0.06F + 0.2F;
@@ -110,8 +109,7 @@ public class ModelPlayerFormLittleMaid_tareusa extends ModelPlayerFormLittleMaid
 					* 0.10000000149011612D + 0.18000000715255737D) {
 				eyeL.setVisible(false);
 				eyeR.setVisible(false);
-			} else
-			{
+			} else {
 				eyeL.setVisible(true);
 				eyeR.setVisible(true);
 			}
@@ -130,51 +128,4 @@ public class ModelPlayerFormLittleMaid_tareusa extends ModelPlayerFormLittleMaid
 				* -0.06F + 1.920F;
 
 	}
-
-    @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後[partsNumber]から設定
-    	overridePartsNumber = 0;
-    	int k = getPartsNumber();
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"eyeR", "eyeL", "Prim", "UsaEL", "UsaER",
-    				"UsaEL1", "UsaER1", "Usasippo"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		boolean b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Prim.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		UsaEL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		UsaER.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		UsaEL1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		UsaER1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Usasippo.setVisible(b);
-    		bipedHeadwear.showModel = false;
-    		setShowModelFlag(1);
-    	}
-    }
 }

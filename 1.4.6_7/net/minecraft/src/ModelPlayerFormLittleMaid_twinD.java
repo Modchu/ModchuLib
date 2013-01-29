@@ -65,49 +65,4 @@ public class ModelPlayerFormLittleMaid_twinD extends ModelPlayerFormLittleMaid_S
 		SideTailR.setVisible(false);
 		ChignonB.setVisible(false);
     }
-
-    @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から6個上書きして設定
-    	overridePartsNumber = 6;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-
-    		String s[] = {
-    				"eyeR", "eyeL", "longhearR", "longhearL", "kamidomeR",
-    				"kamidomeL"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(3);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		boolean b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		longhearR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		longhearL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		kamidomeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		kamidomeL.setVisible(b);
-    		Tail.setVisible(false);
-    		SideTailL.setVisible(false);
-    		SideTailR.setVisible(false);
-    		ChignonB.setVisible(false);
-    		setShowModelFlag(2);
-    	}
-    }
 }

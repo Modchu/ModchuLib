@@ -1,5 +1,9 @@
 package net.minecraft.src;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Map.Entry;
@@ -33,7 +37,6 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     public Modchu_ModelRenderer leftLeg2;
     public Modchu_ModelRenderer leftLegPlus;
     public Modchu_ModelRenderer leftLegPlus2;
-    public int actionTime;
     public Modchu_ModelRenderer Arms[];
     public Modchu_ModelRenderer HeadMount;
     public Modchu_ModelRenderer mainFrame;
@@ -42,13 +45,19 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     public static int partsSetFlag = 1;
     public static int showModelFlag = 0;
     public static int overridePartsNumber = 0;
+    public static int handedness = -2;
+    public int actionTime;
+    public int runActionNumber;
+    public float motionY;
+    public float[] pastX = new float[10];
+    public float[] pastY = new float[10];
+    public float[] pastZ = new float[10];
     public static boolean isSitting = false;
     public static boolean isSleeping = false;
+    public static boolean oldwalking = false;
     public boolean isInventory = false;
     public boolean firstPerson = false;
     public boolean isPlayer = false;
-    public float motionY;
-    public static boolean oldwalking = false;
     public boolean shortcutKeysAction = false;
     public boolean actionReverseBody = false;
     public boolean sneakBan = false;
@@ -58,16 +67,14 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     public boolean sleepingBan = false;
     public boolean ridingBan = false;
     public boolean modchuRemodelingModel = false;
-    public int runActionNumber;
-    public float[] pastX=new float[10];
-    public float[] pastY=new float[10];
-    public float[] pastZ=new float[10];
-    //public Entity entity;
-    public static int handedness = -2;
     public static boolean isLMM;
     public static boolean isPFLM;
     public static boolean isDecoBlock;
     public static boolean isFavBlock;
+    public static boolean skirtFloats = false;
+    public List<String> showPartsList = new ArrayList<String>();
+    public List<String> showPartsHideList = new ArrayList<String>();
+    public HashMap<String, Field> modelRendererMap = new HashMap();
     public static Class mod_PFLM_PlayerFormLittleMaid;
     public static Class PFLM_Gui;
     public static Class PFLM_EntityPlayerDummy;
@@ -77,6 +84,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     public static Class mod_LMM_littleMaidMob;
     public static Class LMM_EntityLittleMaid;
 /*//b181delete
+    //public Entity entity;
     public int textureWidth = Modchu_ModelRenderer.textureWidthPFLM;
     public int textureHeight = Modchu_ModelRenderer.textureHeightPFLM;
     public boolean field_40333_u;
@@ -135,14 +143,14 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     		modchuRemodelingModel = (Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "modchuRemodelingModel");
     		Modchu_Reflect.setDebugMessage((Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "debugReflect"));
     		Modchu_Reflect.setDebugMessageDetail((Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "debugReflectDetail"));
-    	}
-
-    	if (isPFLM) {
+    		skirtFloats = (Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "skirtFloats");
     		if ((Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "isOlddays")) {
     			setOldwalking((Boolean) getFieldObject(ModelBiped.class, "oldwalking"));
     		}
+    		setFieldObject(PFLM_Gui, "partsSetFlag", 1);
     	}
     	armsinit(psize, pyoffset);
+    	skirtFloatsInit(psize, pyoffset);
     }
 
     /**
@@ -193,16 +201,24 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	bipedLeftArm.addChild(Arms[3]);
     }
 
+    /**
+     * ふんわりスカート初期化
+     */
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
     @Override
     public void setLivingAnimations(EntityLiving entityliving, float f, float f1, float f2) {
-    	if (entityliving instanceof EntityPlayer) {
-    		setMotionY(entityliving.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entityliving.motionY + 0.0784000015258789D)) * (Float) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "skirtFloatsVolume"));
-    	}
+    	setMotionY(entityliving.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entityliving.motionY + 0.0784000015258789D)) * (Float) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "skirtFloatsVolume"));
+    	if (LMM_EntityLittleMaid != null
+    			&& LMM_EntityLittleMaid.isInstance(entityliving)) {
+    		LMMLivingAnimationsSpecialOperationsBefore(entityliving, f, f1, f2);
+    	} else PFLMLivingAnimationsSpecialOperationsBefore(entityliving, f, f1, f2);
     	setLivingAnimationsLM(entityliving, f, f1, f2);
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entityliving)) {
-    		LMMLivingAnimationsSpecialOperations(entityliving, f, f1, f2);
-    	} else PFLMLivingAnimationsSpecialOperations(entityliving, f, f1, f2);
+    		LMMLivingAnimationsSpecialOperationsAfter(entityliving, f, f1, f2);
+    	} else PFLMLivingAnimationsSpecialOperationsAfter(entityliving, f, f1, f2);
     }
 
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
@@ -243,8 +259,8 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	// int i = 0 R
     	// int i = 1 L
     	for (int i = 0; i < 2 ; i++) {
-    		obj = getObjectInvokeMethod(pEntity, new Class[]{ int.class }, "getSwingStatus", i);
-    		litemstack = (ItemStack) getObjectInvokeMethod(obj, new Class[]{ pEntity.getClass() }, "getItemStack", pEntity);
+    		obj = getObjectInvokeMethod(pEntity, "getSwingStatus", new Class[]{ int.class }, i);
+    		litemstack = (ItemStack) getObjectInvokeMethod(obj, "getItemStack", new Class[]{ pEntity.getClass() }, pEntity);
     		//litemstack = ((LMM_EntityLittleMaid) pEntity).mstatSwingStatus[i].getItemStack((LMM_EntityLittleMaid) pEntity);
     		int maidDominantArm = (Integer) getFieldObject(pEntity, "maidDominantArm");
     		Object maidAvatar = getFieldObject(pEntity, "maidAvatar");
@@ -430,7 +446,7 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     public Object getSwingStatus(Entity entity, int i) {
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entity)) {
-    		return getObjectInvokeMethod(entity, new Class[]{ int.class }, "getSwingStatus", i);
+    		return getObjectInvokeMethod(entity, "getSwingStatus", new Class[]{ int.class }, i);
     	}
     	if (getHandedness() == i) {
         	//Modchu_Debug.mDebug("getOnGround()="+getOnGround() +" i="+i);
@@ -441,12 +457,20 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
 
     /**
      * PlayerFormLittleMaid専用処理
+     * setLivingAnimations 呼び出し前に呼ばれる。
+     */
+    public void PFLMLivingAnimationsSpecialOperationsBefore(Entity entity, float f, float f1, float f2) {
+    	entityIdFactor = getEntityIdFactor(entity);
+    }
+
+    /**
+     * PlayerFormLittleMaid専用処理
      * setLivingAnimations 呼び出し後に呼ばれる。
      */
-    public void PFLMLivingAnimationsSpecialOperations(Entity entity, float f, float f1, float f2) {
+    public void PFLMLivingAnimationsSpecialOperationsAfter(Entity entity, float f, float f1, float f2) {
     	isRiding = !getIsRiding() ? getIsSitting() : getIsRiding();
     	setMotionY(entity.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entity.motionY + 0.0784000015258789D)) * (Float) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "skirtFloatsVolume"));
-    	settingShowParts();
+    	if (entity instanceof EntityPlayer) settingShowParts();
     }
 
     /**
@@ -467,18 +491,141 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     /**
-     * GUI パーツ表示・非表示設定
+     * GUI パーツ表示・非表示 初期設定 すべてのパーツを自動取得しリストに追加
+     */
+    public void showPartsInit() {
+    	getShowPartsList().clear();
+    	getModelRendererMap().clear();
+    	int k = 0;
+    	Field[] fields = this.getClass().getFields();
+    	String s1;
+    	for (int i = 0; i < fields.length; i++) {
+    		//Modchu_Debug.mDebug("fields["+i+"].getType() = "+fields[i].getType());
+    		Class c = fields[i].getType();
+    		if (c == ModelRenderer.class
+    				| c == Modchu_ModelRenderer.class) {
+    			try {
+    				s1 = fields[i].getName();
+    				getShowPartsList().add(s1);
+    				if (fields[i].get(this) != null) {
+    					getModelRendererMap().put(s1, fields[i]);
+    					//Modchu_Debug.mDebug("ok. fields["+i+"].getName() = "+s1);
+    				}
+    			} catch (Exception e) {
+    				//e.printStackTrace();
+    			}
+    			k++;
+    		}
+    	}
+    }
+
+    /**
+     * GUI パーツ表示・非表示実行
      */
     public void settingShowParts() {
+    	//GUI パーツ表示・非表示初期設定
+    	if((Integer) getFieldObject(PFLM_Gui, "partsSetFlag") == 1) {
+    		if (getShowPartsList().isEmpty()) showPartsInit();
+    		defaultPartsSettingBefore();
+    		setParts(0);
+    		defaultPartsSettingAfter();
+    		setFieldObject(PFLM_Gui, "partsSetFlag", 2);
+    	}
+
+    	//GUI パーツ表示・非表示反映
+    	if((Boolean) getFieldObject(PFLM_Gui, "showModelFlag")) {
+    		settingReflects();
+    		setFieldObject(PFLM_Gui, "showModelFlag", false);
+    	}
     }
 
-    public void setParts(String[] s, int i) {
-    	setPartsNumber((Integer) getObjectInvokeMethod(PFLM_Gui, new Class[]{ String[].class, int.class}, "setParts", null, new Object[]{ s, i }));
+    /**
+     * GUI パーツ表示・非表示用リスト追加
+     */
+    public void addShowParts(String[] s) {
+    	if (s != null) ;else return;
+    	for(int i1 = 0; i1 < s.length; i1++) {
+    		getShowPartsList().add(s[i1]);
+    	}
     }
 
-    public boolean getGuiShowModel(int i) {
-    	boolean[] b1 = (boolean[]) getFieldObject(PFLM_Gui, "showModel");
-    	return b1[i];
+    /**
+     * GUI パーツ表示・非表示用 ボタン非表示リスト追加
+     */
+    public void showPartsHideListadd(String[] s) {
+    	for(int i = 0; i < s.length; i++) {
+    		getShowPartsHideList().add(s[i]);
+    	}
+    }
+
+    /**
+     * GUI パーツ表示・非表示用リスト削除
+     */
+    public void showPartsListRemove(String s) {
+   		getShowPartsList().remove(s);
+    }
+
+    /**
+     * GUI パーツ表示・非表示用リスト削除
+     */
+    public void showPartsListRemove(String[] s) {
+    	for(int i = 0; i < s.length; i++) {
+    		getShowPartsList().remove(s[i]);
+    	}
+    }
+
+    /**
+     * GUI パーツ表示・非表示用 ボタン表示名リネーム用追加
+     */
+    public void addShowPartsReneme(String[] s1, String[] s2) {
+    	for(int i = 0; i < s1.length && i < s2.length; i++) {
+    		getShowPartsReneme().put(s1[i], s2[i]);
+    	}
+    }
+
+    /**
+     * GUI パーツ表示・非表示用モデルパーツリスト追加
+     */
+    public void addModelRendererMap(String[] s, Field[] model) {
+    	if (s != null
+    			&& model != null) ;else return;
+    	for(int i = 0; i < s.length; i++) {
+    		getModelRendererMap().put(s[i], model[i]);
+    	}
+    }
+
+    /**
+     * GUI パーツ表示・非表示 モデル初期化時とPFLM_Gui Customize Defaultボタンが押された時、
+     * setPartsの前に呼ばれる。自動取得されたリストの編集など
+     */
+    public void defaultPartsSettingBefore() {
+    }
+
+    /**
+     * GUI パーツ表示・非表示 モデル初期化時とPFLM_Gui Customize Defaultボタンが押された時、
+     * setPartsの後に呼ばれる。デフォルトOFFにする設定など
+     */
+    public void defaultPartsSettingAfter() {
+    }
+
+    public List<String> getShowPartsList() {
+    	return showPartsList;
+    }
+
+    public List<String> getShowPartsHideList() {
+    	return showPartsHideList;
+    }
+
+    public HashMap<String, Field> getModelRendererMap() {
+    	return modelRendererMap;
+    }
+
+    public void setParts(int i) {
+    	setPartsNumber((Integer) getObjectInvokeMethod(PFLM_Gui, "setParts", new Class[]{ List.class, List.class, int.class}, null, new Object[]{ getShowPartsList(), getShowPartsHideList(), i }));
+    }
+
+    public String[] getGuiParts() {
+    	return (String[]) getFieldObject(PFLM_Gui, "parts");
     }
 
     public void setGuiShowModel(int i, boolean b) {
@@ -487,24 +634,107 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	setFieldObject(PFLM_Gui, "showModel", null, b1);
     }
 
+    public boolean[] getGuiShowModel() {
+    	return (boolean[]) getFieldObject(PFLM_Gui, "showModel");
+    }
+
+    public boolean getGuiShowModel(String s) {
+    	int i = (Integer) getObjectInvokeMethod(PFLM_Gui, "getShowModel", new Class[]{ String.class }, null, new Object[]{ s });
+    	if (i > 0) {
+    		return true;
+    	}
+    	return false;
+    }
+
+    public boolean setGuiShowModel(String s, boolean b) {
+    	int i = (Integer) getObjectInvokeMethod(PFLM_Gui, "setShowModel", new Class[]{ String.class, boolean.class }, null, new Object[]{ s, b });
+    	if (i > -1) {
+    		return true;
+    	}
+    	return false;
+    }
+
+    /**
+     * true 1, false 0, 取得失敗 -1 が返る。
+     */
+    public int getGuiShowModelInt(String s) {
+    	return (Integer) getObjectInvokeMethod(PFLM_Gui, "getShowModel", new Class[]{ String.class }, null, new Object[]{ s });
+    }
+
+    /**
+     * セット成功 1, セット失敗 -1 が返る。
+     */
+    public int setGuiShowModelInt(String s, boolean b) {
+    	return (Integer) getObjectInvokeMethod(PFLM_Gui, "setShowModel", new Class[]{ String.class, boolean.class }, null, new Object[]{ s, b });
+    }
+
+    public HashMap<String, String> getShowPartsReneme() {
+    	return (HashMap<String, String>) getFieldObject(PFLM_Gui, "showPartsReneme");
+    }
+
     /**
      * GUI パーツ表示・非表示反映呼び出し
      */
-    public void settingReflects(int i) {
-    	superShowModelSettingReflects(i);
-    	showModelSettingReflects(getPartsNumber() - overridePartsNumber);
+    public void settingReflects() {
+    	showModelSettingReflects();
     }
 
     /**
-     * GUI パーツ表示・非表示反映メインモデル用
+     * GUI パーツ表示・非表示反映
      */
-    public void superShowModelSettingReflects(int i) {
+    public void showModelSettingReflects() {
+    	String[] s = getGuiParts();
+    	boolean[] b0 = getGuiShowModel();
+    	Field f = null;
+    	ModelRenderer model = null;
+    	for(int i1 = 0; i1 < s.length; i1++) {
+    		f = getModelRendererMap().get(s[i1]);
+    		if (f != null) {
+    			try {
+    				model = (ModelRenderer) f.get(this);
+    				if (model != null) setVisible(model, b0[i1]);
+    			} catch (Exception e) {
+    				e.printStackTrace();
+    			}
+    		}
+    	}
     }
 
     /**
-     * GUI パーツ表示・非表示反映マルチモデル用
+     * indexOfで検索対象のパーツをまとめて指定パーツと同じ状態にセットする
      */
-    public void showModelSettingReflects(int i) {
+    public void indexOfAllSetVisible(String s) {
+    	String s0 = null;
+    	int i = getGuiShowModelInt(s);
+    	if (i > -1) {
+    		for(int i1 = 0; i1 < getShowPartsList().size(); i1++) {
+    			s0 = getShowPartsList().get(i1);
+    			if (s0.indexOf(s) > -1) {
+    				try {
+    					setVisible((ModelRenderer) getModelRendererMap().get(s0).get(this), i == 1 ? true : false);
+    				} catch (Exception e) {
+    					//e.printStackTrace();
+    				}
+    			}
+    		}
+    	}
+    }
+
+    /**
+     * indexOfで検索対象のパーツをまとめて指定booleanにセットする
+     */
+    public void indexOfAllSetVisible(String s, boolean b) {
+    	String s0 = null;
+    	for(int i1 = 0; i1 < getShowPartsList().size(); i1++) {
+    		s0 = getShowPartsList().get(i1);
+    		if (s0.indexOf(s) > -1) {
+    			try {
+    				setVisible((ModelRenderer) getModelRendererMap().get(s0).get(this), b);
+    			} catch (Exception e) {
+    				e.printStackTrace();
+    			}
+    		}
+    	}
     }
 
     /**
@@ -1238,9 +1468,9 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	isWait = b;
     }
 
-    public Boolean getSkirtFloats() {
-		return (Boolean) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "skirtFloats");
-	}
+    public boolean getSkirtFloats() {
+    	return skirtFloats;
+    }
 
     public void renderFirstPersonHand(float f) {
     	getBipedRightArm().render(f);
@@ -1271,6 +1501,39 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
 
     public float Physical_Hammer() {
     	return (Float) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "Physical_Hammer");
+    }
+
+    public boolean getIsLookSuger(Entity entity) {
+    	if (entity instanceof EntityPlayer) {
+        	EntityPlayer entityplayer = (EntityPlayer) entity;
+        	ItemStack itemstack2 = entityplayer.inventory.getCurrentItem();
+        	if (itemstack2 != null) {
+        		Item item = itemstack2.getItem();
+        		if (item == Item.sugar) return true;
+        	}
+    	}
+    	if (LMM_EntityLittleMaid != null
+    			&& LMM_EntityLittleMaid.isInstance(entity)) {
+    		return (Boolean) getObjectInvokeMethod(LMM_EntityLittleMaid, "isLookSuger", entity);
+    	}
+    	return false;
+    }
+
+    public float getEntityIdFactor(Entity entity) {
+    	if (LMM_EntityLittleMaid != null
+    			&& LMM_EntityLittleMaid.isInstance(entity)) {
+    		return (Float) getFieldObject(LMM_EntityLittleMaid, "entityIdFactor", entity);
+    	}
+    	return (float)entity.entityId * 70;
+    }
+
+    public boolean getIsInventory(Entity entity) {
+    	if (entity instanceof EntityPlayer) return isInventory;
+    	if (LMM_EntityLittleMaid != null
+    			&& LMM_EntityLittleMaid.isInstance(entity)) {
+    		return (Boolean) getObjectInvokeMethod(LMM_EntityLittleMaid, "isOpenInventory", entity);
+    	}
+    	return false;
     }
 
     public float convertDegtoRad(float deg) {
@@ -1327,35 +1590,35 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     }
 
     public Object getObjectInvokeMethod(Class c, String s) {
-    	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(c, s));
+    	return Modchu_Reflect.invokeMethod(c, s);
     }
 
     public Object getObjectInvokeMethod(Object o, String s) {
-    	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(o.getClass(), s), o);
+    	return Modchu_Reflect.invokeMethod(o.getClass(), s, o);
     }
 
     public Object getObjectInvokeMethod(Class c, String s, Object o1) {
-    	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(c, s), o1);
+    	return Modchu_Reflect.invokeMethod(c, s, o1);
     }
 
     public Object getObjectInvokeMethod(Object o, String s, Object o1) {
-    	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(o.getClass(), s), o1);
+    	return Modchu_Reflect.invokeMethod(o.getClass(), s, o1);
     }
 
-    public Object getObjectInvokeMethod(Class c, Class[] c1, String s, Object o1) {
-    	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(c, s, c1), o1);
+    public Object getObjectInvokeMethod(Class c, String s, Class[] c1, Object o1) {
+    	return Modchu_Reflect.invokeMethod(c, s, c1, o1);
     }
 
-    public Object getObjectInvokeMethod(Class c, Class[] c1, String s, Object o1, Object ... o2) {
-    	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(c, s, c1), o1, o2);
+    public Object getObjectInvokeMethod(Class c, String s, Class[] c1, Object o1, Object ... o2) {
+    	return Modchu_Reflect.invokeMethod(c, s, c1, o1, o2);
     }
 
-    public Object getObjectInvokeMethod(Object o, Class[] c, String s, Object o1) {
-    	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(o.getClass(), s, c), o, o1);
+    public Object getObjectInvokeMethod(Object o, String s, Class[] c, Object o1) {
+    	return Modchu_Reflect.invokeMethod(o.getClass(), s, c, o, o1);
     }
 
-    public Object getObjectInvokeMethod(Object o, Class[] c, String s, Object ... o1) {
-    	return Modchu_Reflect.invoke(Modchu_Reflect.getMethod(o.getClass(), s, c), o, o1);
+    public Object getObjectInvokeMethod(Object o, String s, Class[] c, Object ... o1) {
+    	return Modchu_Reflect.invokeMethod(o.getClass(), s, c, o, o1);
     }
 
     public void setFieldObject(Class c, String s, Object o2) {
@@ -1374,19 +1637,30 @@ public abstract class ModelPlayerFormLittleMaidBaseBiped extends MMM_ModelBiped 
     	Modchu_Reflect.setFieldObject(o.getClass(), s, o2, b);
     }
 
+    public Class loadClass(String s) {
+    	return Modchu_Reflect.loadClass(s);
+    }
+
     // 以下、MMM_ModelBiped側にあってほしいもの
     /**
      * littleMaidMob専用処理
+     * setLivingAnimations 呼び出し前に呼ばれる。
+     */
+    public void LMMLivingAnimationsSpecialOperationsBefore(Entity entity, float f, float f1, float f2) {
+    }
+
+	/**
+     * littleMaidMob専用処理
      * setLivingAnimations 呼び出し後に呼ばれる。
      */
-    public void LMMLivingAnimationsSpecialOperations(Entity entity, float f, float f1, float f2) {
+    public void LMMLivingAnimationsSpecialOperationsAfter(Entity entity, float f, float f1, float f2) {
     	float skirtFloatsVolume = 1.0F;
     	//コンフィグに入れてもらえるとコメント解除
     	//skirtFloatsVolume = (Float) Modchu_Reflect.getFieldObject(mod_LMM_littleMaidMob, "skirtFloatsVolume");
     	if (skirtFloatsVolume <= 0.0F) skirtFloatsVolume = 1.0F;
     	if (skirtFloatsVolume > 2.0F) skirtFloatsVolume = 2.0F;
     	setMotionY(entity.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entity.motionY + 0.0784000015258789D)) * skirtFloatsVolume);
-    	float angle = (Float) getObjectInvokeMethod(entity, new Class[]{ float.class }, "getInterestedAngle", f2);
+    	float angle = (Float) getObjectInvokeMethod(entity, "getInterestedAngle", new Class[]{ float.class }, f2);
     	bipedHead.rotateAngleZ = angle;
     }
 

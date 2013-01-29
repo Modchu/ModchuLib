@@ -152,22 +152,18 @@ public class ModelPlayerFormLittleMaid_chrno extends ModelPlayerFormLittleMaid
     }
 
     @Override
-    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
-    	if(31.41593F >= mh_abs(f2))
-    	{
+    	if(31.41593F >= mh_abs(f2)) {
     		f2 %= 31.41593F;
     	}
     	Icewing1.setRotateAngleX(Icewing2.setRotateAngleX(Icewing3.setRotateAngleX(mh_sin(f * f * 0.6662F) * 0.15F)));
     	Icewing4.setRotateAngleX(Icewing5.setRotateAngleX(Icewing6.setRotateAngleX(mh_sin(f * f * 0.6662F) * 0.15F)));
-    	if(getOnGround() > -9990F && !getaimedBow())
-    	{
+    	if(getOnGround() > -9990F && !getaimedBow()) {
     		Icewing1.setRotateAngleY(Icewing2.setRotateAngleY(Icewing3.setRotateAngleY(((Modchu_ModelRenderer) bipedBody).getRotateAngleY())));
     		Icewing4.setRotateAngleY(Icewing5.setRotateAngleY(Icewing6.setRotateAngleY(((Modchu_ModelRenderer) bipedBody).getRotateAngleY())));
     	}
-    	if(getIsWait() && !getaimedBow())
-    	{
+    	if(getIsWait() && !getaimedBow()) {
     		if (!initWait) {
     			initWait = true;
     			Rightarm1.isHidden = false;
@@ -220,89 +216,17 @@ public class ModelPlayerFormLittleMaid_chrno extends ModelPlayerFormLittleMaid
     			Arms[0].setRotationPointLM(0.5F, 6.5F, 0F);
     		}
     	}
-    	if(getaimedBow())
-    	{
+    	if(getaimedBow()) {
     		eyeL.setVisible(true);
     		eyeR.setVisible(false);
-    	} else
-    	{
-    		if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D)
-    		{
+    	} else {
+    		if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
     			eyeL.setVisible(false);
     			eyeR.setVisible(false);
-    		} else
-    		{
+    		} else {
     			eyeL.setVisible(true);
     			eyeR.setVisible(true);
     		}
-    	}
-    }
-
-    @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から7つ上書き設定
-    	overridePartsNumber = 7;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"eyeR", "eyeL", "RibonL", "RibonR", "CatEL",
-    				"CatER", "Prim2", "Icewing1", "Icewing2", "Icewing3",
-    				"Icewing4", "Icewing5", "Icewing6"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		boolean b = getGuiShowModel(2);
-    		Rightarm1.setVisible(b);
-    		Rightarm2.setVisible(b);
-    		b = getGuiShowModel(3);
-    		Leftarm1.setVisible(b);
-    		Leftarm2.setVisible(b);
-    		b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		RibonL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		RibonR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		CatEL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		CatER.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Prim.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Icewing1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Icewing2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Icewing3.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Icewing4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Icewing5.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Icewing6.setVisible(b);
-    		setShowModelFlag(1);
     	}
     }
 

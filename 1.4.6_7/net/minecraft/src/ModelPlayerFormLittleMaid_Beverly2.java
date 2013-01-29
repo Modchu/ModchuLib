@@ -28,7 +28,6 @@ public class ModelPlayerFormLittleMaid_Beverly2 extends ModelPlayerFormLittleMai
     @Override
     public void initModel(float f, float f1) {
     	super.initModel(f, f1);
-    	//((Modchu_ModelRenderer) bipedBody).removeChild(leftArm2);
     	leftArm2.removeChild(shield);
     	((Modchu_ModelRenderer) bipedHead).clearChildModels();
     	mainFrame.clearChildModels();
@@ -36,7 +35,6 @@ public class ModelPlayerFormLittleMaid_Beverly2 extends ModelPlayerFormLittleMai
     	eyeL = new Modchu_ModelRenderer(this);
     	shield = new Modchu_ModelRenderer(this);
 
-    	//bipedBody.addChild(leftArm2);
     	bipedHead.addChild(Headwear);
     	mainFrame.addChild(bipedHead);
     	mainFrame.addChild(bipedBody);

@@ -251,7 +251,6 @@ public class ModelPlayerFormLittleMaid_NM extends ModelPlayerFormLittleMaid_SR2
     	bipedHead.addChild(sensor);
     	bipedLeftLeg.addChild(LeftLeg);
     	bipedRightLeg.addChild(RightLeg);
-    	skirtFloatsInit(f, f1);
     	actionPartsInit(f, f1);
     }
 
@@ -354,109 +353,14 @@ public class ModelPlayerFormLittleMaid_NM extends ModelPlayerFormLittleMaid_SR2
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から6個上書きして設定
-    	overridePartsNumber = 6;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-    		String s[] = {
-    				"eyeR", "eyeL", "SideTailR", "SideTailL", "RightArm2" ,
-    				"LeftArm2" ,"hairR" , "hairL" ,"Cachusya" , "Zukin" ,
-    				"RibonR", "RibonL", "Bribonc", "BribonR", "BribonL" ,
-    				"Breast", "Cheek", "SideTail1R", "SideTail1L", "sensor" ,
-    				"tie", "bow"
-    		};
-    		setParts(s, k);
-    		//RightArm2 Default off
-    		setGuiShowModel(k + 4, false);
-    		//LeftArm2 Default off
-    		setGuiShowModel(k + 5, false);
-    		//Zukin Default off
-    		setGuiShowModel(k + 9, false);
-    		//Cheek Default off
-    		setGuiShowModel(k + 16, false);
-    		setPartsSetFlag(3);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		boolean b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTailL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		RightArm1.setVisible(b);
-    		RightArm2.setVisible(b);
-    		RightArm3.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		LeftArm1.setVisible(b);
-    		LeftArm2.setVisible(b);
-    		LeftArm3.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		hairR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		hairL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Cachusya.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Zukin.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Ribon1R.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Ribon1L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Bribonc.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Bribon1R.setVisible(b);
-    		Bribon2R.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Bribon1L.setVisible(b);
-    		Bribon2L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Breast1.setVisible(b);
-    		BreastA.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Cheek_R.setVisible(b);
-    		Cheek_L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTail1R.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		SideTail1L.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		sensor.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		tie.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		bow.setVisible(b);
-    		setShowModelFlag(2);
-    	}
+    public void defaultPartsSettingAfter() {
+    	//RightArm2 Default off
+    	setGuiShowModel("RightArm2", false);
+    	//LeftArm2 Default off
+    	setGuiShowModel("LeftArm2", false);
+    	//Zukin Default off
+    	setGuiShowModel("Zukin", false);
+    	//Cheek Default off
+    	setGuiShowModel("Cheek", false);
     }
 }

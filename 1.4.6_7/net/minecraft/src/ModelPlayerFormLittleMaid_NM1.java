@@ -63,8 +63,6 @@ public class ModelPlayerFormLittleMaid_NM1 extends ModelPlayerFormLittleMaid_SR2
 	public ModelPlayerFormLittleMaid_NM1(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
 //@-@132
-    	Arms[0].setRotationPointLM(0.5F, 9.0F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 9.0F, 0F);
 	}
 
     @Override
@@ -431,41 +429,43 @@ public class ModelPlayerFormLittleMaid_NM1 extends ModelPlayerFormLittleMaid_SR2
 	}
 
     @Override
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
+    @Override
+    public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    }
+
+    @Override
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
+    	Arms[0].setRotationPointLM(0.5F, 9.0F, 0F);
+    	Arms[1].setRotationPointLM(-0.5F, 9.0F, 0F);
+    	float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
 
+    	eyeR.showModel = eyeL.showModel = false;
+    	eyeR1.showModel = eyeL1.showModel = false;
+    	Skirt.showModel = true;
+    	HornR1.showModel = HornR2.showModel = false;
+    	HornR3.showModel = HornR4.showModel = false;
+    	HornL1.showModel = HornL2.showModel = false;
+    	HornL3.showModel = HornL4.showModel = false;
+    	ArmR1.showModel = HandR1.showModel = false;
+    	HandR2.showModel = ArmL1.showModel = false;
+    	HandL1.showModel = HandL2.showModel = false;
+    	LegR1.showModel = LegR2.showModel = false;
+    	LegR3.showModel = LegR4.showModel = false;
+    	LegR5.showModel = LegL1.showModel = false;
+    	LegL2.showModel = LegL3.showModel = false;
+    	LegL4.showModel = LegL5.showModel = false;
+    	LegR6.showModel = LegR6.showModel = true;
+    	bipedLeftLeg.showModel = bipedRightLeg.showModel = false;
+    	bootR1.showModel = bootR2.showModel = false;
+    	bootL1.showModel = bootL2.showModel = false;
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entityliving)
     			&& !getaimedBow()) {
-    		float entityIdFactor = (Float) getFieldObject(LMM_EntityLittleMaid, "entityIdFactor", entityliving);
-    		float f3 = (float)entityliving.ticksExisted + f2 + entityIdFactor;
-
-    		if (mh_sin(f3 * 0.05F) + mh_sin(f3 * 0.13F) + mh_sin(f3 * 0.7F) + 2.55F < 0.0F)
-    		{
-    		}
-    		else
-    		{
-    			eyeR.showModel = eyeL.showModel = false;
-    			eyeR1.showModel = eyeL1.showModel = false;
-    			Skirt.showModel = true;
-    			HornR1.showModel = HornR2.showModel = false;
-    			HornR3.showModel = HornR4.showModel = false;
-    			HornL1.showModel = HornL2.showModel = false;
-    			HornL3.showModel = HornL4.showModel = false;
-    			ArmR1.showModel = HandR1.showModel = false;
-    			HandR2.showModel = ArmL1.showModel = false;
-    			HandL1.showModel = HandL2.showModel = false;
-    			LegR1.showModel = LegR2.showModel = false;
-    			LegR3.showModel = LegR4.showModel = false;
-    			LegR5.showModel = LegL1.showModel = false;
-    			LegL2.showModel = LegL3.showModel = false;
-    			LegL4.showModel = LegL5.showModel = false;
-    			LegR6.showModel = LegR6.showModel = true;
-    			bipedLeftLeg.showModel = bipedRightLeg.showModel = false;
-    			bootR1.showModel = bootR2.showModel = false;
-    			bootL1.showModel = bootL2.showModel = false;
-    		}
     		boolean isWorkingDelay = (Boolean)getObjectInvokeMethod(LMM_EntityLittleMaid, "isWorkingDelay", entityliving);
     		if (isWorkingDelay) {
 //-@-125
@@ -642,135 +642,43 @@ public class ModelPlayerFormLittleMaid_NM1 extends ModelPlayerFormLittleMaid_SR2
     }
 
     @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後から9個上書きして設定
-    	overridePartsNumber = 9;
-    	int k = getPartsNumber() - overridePartsNumber;
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-    		String s[] = {
-    				"eyeR", "eyeL", "ChignonB", "HornR", "HornL" ,
-    				"HeadwearR" ,"HeadwearL" , "ArmR" ,"ArmL" , "LegR" ,
-    				"LegL" , "HandR" , "HandL", "bootR", "bootL",
-    				"Breast", "Cachusya" , "tie"
-    		};
-    		setParts(s, k);
-    		//bipedRightLeg Default off
-    		setGuiShowModel(4, false);
-    		//bipedLeftLeg Default off
-    		setGuiShowModel(5, false);
-    		//HornR Default off
-    		setGuiShowModel(k + 3, false);
-    		//HornL Default off
-    		setGuiShowModel(k + 4, false);
-    		//ArmR Default off
-    		setGuiShowModel(k + 7, false);
-    		//ArmL Default off
-    		setGuiShowModel(k + 8, false);
-    		//LegR Default off
-    		setGuiShowModel(k + 9, false);
-    		//LegL Default off
-    		setGuiShowModel(k + 10, false);
-    		//HandR Default off
-    		setGuiShowModel(k + 11, false);
-    		//HandL Default off
-    		setGuiShowModel(k + 12, false);
-    		//bootR Default off
-    		setGuiShowModel(k + 13, false);
-    		//bootL Default off
-    		setGuiShowModel(k + 14, false);
-    		setPartsSetFlag(3);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		showModelSettingReflects(k + 2);
-    		setShowModelFlag(2);
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	if (getSkirtFloats()) {
+    		Skirt.setVisible(true);
     	}
     }
 
     @Override
-    public void showModelSettingReflects(int i) {
-    	boolean b = getGuiShowModel(i);
-    	eyeR.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	eyeL.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	ChignonB.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	HornR1.setVisible(b);
-    	HornR2.setVisible(b);
-    	HornR3.setVisible(b);
-    	HornR4.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	HornL1.setVisible(b);
-    	HornL2.setVisible(b);
-    	HornL3.setVisible(b);
-    	HornL4.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	HeadwearR.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	HeadwearL.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	ArmR1.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	ArmL1.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	LegR1.setVisible(b);
-    	LegR2.setVisible(b);
-    	LegR3.setVisible(b);
-    	LegR4.setVisible(b);
-    	LegR5.setVisible(b);
-    	LegR6.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	LegL1.setVisible(b);
-    	LegL2.setVisible(b);
-    	LegL3.setVisible(b);
-    	LegL4.setVisible(b);
-    	LegL5.setVisible(b);
-    	LegL6.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	HandR1.setVisible(b);
-    	HandR2.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	HandL1.setVisible(b);
-    	HandL2.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	bootR1.setVisible(b);
-    	bootR2.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	bootL1.setVisible(b);
-    	bootL2.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	Breast.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	Cachusya.setVisible(b);
-    	i++;
-    	b = getGuiShowModel(i);
-    	tie.setVisible(b);
+    public void defaultPartsSettingAfter() {
+    	//bipedRightLeg Default off
+    	setGuiShowModel("bipedRightLeg", false);
+    	//bipedLeftLeg Default off
+    	setGuiShowModel("bipedLeftLeg", false);
+    	//HornR Default off
+    	setGuiShowModel("HornR", false);
+    	//HornL Default off
+    	setGuiShowModel("HornL", false);
+    	//ArmR Default off
+    	setGuiShowModel("ArmR", false);
+    	//ArmL Default off
+    	setGuiShowModel("ArmL", false);
+    	//LegR Default off
+    	setGuiShowModel("LegR", false);
+    	//LegL Default off
+    	setGuiShowModel("LegL", false);
+    	//HandR Default off
+    	setGuiShowModel("HandR", false);
+    	//HandL Default off
+    	setGuiShowModel("HandL", false);
+    	//bootR Default off
+    	setGuiShowModel("bootR", false);
+    	//bootL Default off
+    	setGuiShowModel("bootL", false);
     }
 
     @Override
     public void actionInit1() {
-    	settingReflects(0);
     	boolean b = bipedRightLeg.showModel;
     	boolean b1 = bipedLeftLeg.showModel;
     	super.actionInit1();
@@ -831,7 +739,6 @@ public class ModelPlayerFormLittleMaid_NM1 extends ModelPlayerFormLittleMaid_SR2
     @Override
     public void actionRelease1() {
     	super.actionRelease1();
-    	settingReflects(0);
     	bipedRightArm.addChild(ArmR1);
     	bipedRightArm.addChild(HandR1);
     	bipedRightArm.addChild(HandR2);

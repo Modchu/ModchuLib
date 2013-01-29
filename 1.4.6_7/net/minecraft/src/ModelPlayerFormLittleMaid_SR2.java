@@ -42,22 +42,10 @@ public class ModelPlayerFormLittleMaid_SR2 extends ModelPlayerFormLittleMaid {
 	}
 
 	@Override
-	public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float renderPartialTicks)
-	{
+	public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float renderPartialTicks) {
 		super.setLivingAnimationsLM(entityliving, f, f1, renderPartialTicks);
 
-		float f3 = 0.0F;
-		if ((entityliving instanceof EntityPlayer)
-				&& !getaimedBow()) {
-			EntityPlayer entityplayer = (EntityPlayer) entityliving;
-			f3 = (float)entityplayer.ticksExisted + renderPartialTicks + ((float)entityplayer.entityId * 70);
-		}
-
-		if (LMM_EntityLittleMaid != null
-				&& LMM_EntityLittleMaid.isInstance(entityliving)) {
-			f3 = (float)entityliving.ticksExisted + renderPartialTicks + (Float) Modchu_Reflect.getFieldObject(Modchu_Reflect.getField(LMM_EntityLittleMaid, "entityIdFactor"), entityliving);
-		}
-
+		float f3 = (float)entityliving.ticksExisted + renderPartialTicks + getEntityIdFactor(entityliving);
 		// 目パチ
 		if( 0 > MathHelper.sin(f3 * 0.05F) + MathHelper.sin(f3 * 0.13F) + MathHelper.sin(f3 * 0.7F) + 2.55F) {
 			eyeR.setVisible(true);
@@ -69,46 +57,11 @@ public class ModelPlayerFormLittleMaid_SR2 extends ModelPlayerFormLittleMaid {
 	}
 
 	@Override
-	public void setRotationAnglesLM(float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5, Entity entity)
-	{
+	public void setRotationAnglesLM(float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5, Entity entity) {
 		super.setRotationAnglesLM(f, f1, ticksExisted, pheadYaw, pheadPitch, f5, entity);
-
 		if (getaimedBow()) {
 			eyeL.setVisible(true);
 			eyeR.setVisible(false);
 		}
 	}
-
-    @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後[partsNumber]から設定
-    	overridePartsNumber = 0;
-    	int k = getPartsNumber();
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"eyeR", "eyeL"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		showModelSettingReflects(k);
-    		setShowModelFlag(1);
-    	}
-    }
-
-    @Override
-    public void showModelSettingReflects(int i) {
-    	eyeR.setVisible(getGuiShowModel(i));
-    	i++;
-    	eyeL.setVisible(getGuiShowModel(i));
-    	i++;
-    	setPartsNumber(i);
-    }
-
 }

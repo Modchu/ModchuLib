@@ -103,30 +103,9 @@ public class ModelPlayerFormLittleMaid_Aug extends ModelPlayerFormLittleMaid_SR2
 	{
 		super.setLivingAnimationsLM(entityliving, f, f1, renderPartialTicks);
 
-		float entityIdFactor;
-		boolean isLookSuger = false;
-		float f3 = 0.0F;
+		float f3 = (float)entityliving.ticksExisted + renderPartialTicks + getEntityIdFactor(entityliving);
 		float f4 = 0.0F;
-		if ((entityliving instanceof EntityPlayer)
-				&& !getaimedBow())
-		{
-			EntityPlayer entityplayer = (EntityPlayer) entityliving;
-			f3 = (float)entityplayer.ticksExisted + renderPartialTicks + ((float)entityplayer.entityId * 70);
-			ItemStack itemstack2 = entityplayer.inventory.getCurrentItem();
-			if (itemstack2 != null) {
-				Item item = itemstack2.getItem();
-				if (item == Item.sugar) {
-					isLookSuger = true;
-				}
-			}
-		}
-		if (LMM_EntityLittleMaid != null
-				&& LMM_EntityLittleMaid.isInstance(entityliving)) {
-			entityIdFactor = (Float) Modchu_Reflect.getFieldObject(Modchu_Reflect.getField(LMM_EntityLittleMaid, "entityIdFactor"), entityliving);
-			isLookSuger = (Boolean) Modchu_Reflect.invoke(Modchu_Reflect.getMethod(LMM_EntityLittleMaid, "isLookSuger", null), entityliving);
-			f3 = (float)entityliving.ticksExisted + renderPartialTicks + entityIdFactor;
-		}
-		if (isLookSuger) {
+		if (getIsLookSuger(entityliving)) {
 			f3 *= 8.0F;
 			f4 = -0.2F;
 		} else {
@@ -141,8 +120,7 @@ public class ModelPlayerFormLittleMaid_Aug extends ModelPlayerFormLittleMaid_SR2
 	}
 
 	@Override
-	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-	{
+	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
 		SideTailR.rotateAngleX = SideTailL.rotateAngleX = -bipedHead.rotateAngleX / 1.5F;
 		float y = -8.0F;
@@ -151,44 +129,15 @@ public class ModelPlayerFormLittleMaid_Aug extends ModelPlayerFormLittleMaid_SR2
 		shaggyB.rotationPointY = shaggyR.rotationPointY = shaggyL.rotationPointY = y;
 	}
 
-    @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後[partsNumber]から設定
-    	overridePartsNumber = 0;
-    	int k = getPartsNumber();
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 2) {
-
-    		String s[] = {
-    				"sidetailUpperR", "sidetailUpperL", "shaggyB", "shaggyR", "shaggyL",
-    				"sensor1", "sensor2", "sensor3", "sensor4"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(3);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 1) {
-    		sidetailUpperR.setVisible(getGuiShowModel(k));
-    		k++;
-    		sidetailUpperL.setVisible(getGuiShowModel(k));
-    		k++;
-    		shaggyB.setVisible(getGuiShowModel(k));
-    		k++;
-    		shaggyR.setVisible(getGuiShowModel(k));
-    		k++;
-    		shaggyL.setVisible(getGuiShowModel(k));
-    		k++;
-    		sensor1.setVisible(getGuiShowModel(k));
-    		k++;
-    		sensor2.setVisible(getGuiShowModel(k));
-    		k++;
-    		sensor3.setVisible(getGuiShowModel(k));
-    		k++;
-    		sensor4.setVisible(getGuiShowModel(k));
-    		setShowModelFlag(2);
-    	}
-    }
+	@Override
+	public void defaultPartsSettingBefore() {
+		super.defaultPartsSettingBefore();
+		String[] s1 = {
+				"sidetailUpperR", "sidetailUpperL"
+		};
+		String[] s2 = {
+				"s_tailUR", "s_tailUL"
+		};
+		addShowPartsReneme(s1, s2);
+	}
 }

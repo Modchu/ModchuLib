@@ -139,13 +139,11 @@ public class ModelPlayerFormLittleMaid_suika extends ModelPlayerFormLittleMaid
 		bipedHead.addChild(eyeR);
     }
 
-    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
+    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
     	Hyoutan1.rotateAngleX = Hyoutan2.rotateAngleX = Hyoutan1.rotateAngleY = Hyoutan2.rotateAngleY = -0.7853982F;
 
-    	if(getaimedBow())
-    	{
+    	if(getaimedBow()) {
     		eyeL.setVisible(true);
     		eyeR.setVisible(false);
     		if (!initAimedBow) {
@@ -157,8 +155,7 @@ public class ModelPlayerFormLittleMaid_suika extends ModelPlayerFormLittleMaid
     			Hyoutan2.setRotationPoint(4.0F, -2.0F, 0.0F);
     			initAimedBow = true;
     		}
-    	} else
-    	{
+    	} else {
     		if (initAimedBow) {
     			initAimedBow = false;
     			((Modchu_ModelRenderer) bipedBody).removeChild(Hyoutan1);
@@ -168,12 +165,10 @@ public class ModelPlayerFormLittleMaid_suika extends ModelPlayerFormLittleMaid
     			Hyoutan1.setRotationPoint(-1.0F, 1.0F, 0.0F);
     			Hyoutan2.setRotationPoint(-1.0F, 1.0F, 0.0F);
     		}
-    		if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.10000000149011612D)
-    		{
+    		if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.10000000149011612D) {
     			eyeL.setVisible(false);
     			eyeR.setVisible(false);
-    		} else
-    		{
+    		} else {
     			eyeL.setVisible(true);
     			eyeR.setVisible(true);
     		}
@@ -191,86 +186,23 @@ public class ModelPlayerFormLittleMaid_suika extends ModelPlayerFormLittleMaid
     	return 0.8F;
     }
 
-	public void actionInit1() {
-		super.actionInit1();
-		((Modchu_ModelRenderer) bipedLeftArm).removeChild(Hyoutan1);
-		((Modchu_ModelRenderer) bipedLeftArm).removeChild(Hyoutan2);
-		bipedBody.addChild(Hyoutan1);
-		bipedBody.addChild(Hyoutan2);
-		Hyoutan1.setRotationPoint(4.0F, -2.0F, 0.0F);
-		Hyoutan2.setRotationPoint(4.0F, -2.0F, 0.0F);
-	}
-
-	public void actionRelease1() {
-		super.actionRelease1();
-		((Modchu_ModelRenderer) bipedBody).removeChild(Hyoutan1);
-		((Modchu_ModelRenderer) bipedBody).removeChild(Hyoutan2);
-		bipedLeftArm.addChild(Hyoutan1);
-		bipedLeftArm.addChild(Hyoutan2);
-		Hyoutan1.setRotationPoint(-1.0F, 1.0F, 0.0F);
-		Hyoutan2.setRotationPoint(-1.0F, 1.0F, 0.0F);
-	}
-
-    @Override
-    public void settingShowParts() {
-    	super.settingShowParts();
-    	//GUI パーツ表示・非表示初期設定
-    	//前回の項目最後[partsNumber]から設定
-    	overridePartsNumber = 0;
-    	int k = getPartsNumber();
-    	if(k < 0) k = 0;
-    	if(getPartsSetFlag() == 1) {
-    		String s[] = {
-    				"RibonL", "RibonR", "CatEL", "CatER", "Prim",
-    				"Tuno1", "Tuno2", "Tuno3", "Tuno4", "Tuno5",
-    				"Hyoutan1", "Hyoutan2"
-    		};
-    		setParts(s, k);
-    		setPartsSetFlag(2);
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getShowModelFlag() == 0) {
-    		boolean b = getGuiShowModel(k);
-    		eyeR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		eyeL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		RibonL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		RibonR.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		CatEL.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		CatER.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Prim.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Tuno1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Tuno2.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Tuno3.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Tuno4.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Hyoutan1.setVisible(b);
-    		k++;
-    		b = getGuiShowModel(k);
-    		Hyoutan2.setVisible(b);
-    		setShowModelFlag(1);
-    	}
+    public void actionInit1() {
+    	super.actionInit1();
+    	((Modchu_ModelRenderer) bipedLeftArm).removeChild(Hyoutan1);
+    	((Modchu_ModelRenderer) bipedLeftArm).removeChild(Hyoutan2);
+    	bipedBody.addChild(Hyoutan1);
+    	bipedBody.addChild(Hyoutan2);
+    	Hyoutan1.setRotationPoint(4.0F, -2.0F, 0.0F);
+    	Hyoutan2.setRotationPoint(4.0F, -2.0F, 0.0F);
     }
 
+    public void actionRelease1() {
+    	super.actionRelease1();
+    	((Modchu_ModelRenderer) bipedBody).removeChild(Hyoutan1);
+    	((Modchu_ModelRenderer) bipedBody).removeChild(Hyoutan2);
+    	bipedLeftArm.addChild(Hyoutan1);
+    	bipedLeftArm.addChild(Hyoutan2);
+    	Hyoutan1.setRotationPoint(-1.0F, 1.0F, 0.0F);
+    	Hyoutan2.setRotationPoint(-1.0F, 1.0F, 0.0F);
+    }
 }
