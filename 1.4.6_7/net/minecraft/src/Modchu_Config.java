@@ -200,9 +200,8 @@ public class Modchu_Config
 		String textureName = getTextureName();
 		int maidColor = getMaidColor();
 		boolean partsSaveFlag = getPartsSaveFlag();
-		int partsNumberMax = getPartsNumberMax();
-		String[] parts = getParts();
-		boolean[] showModel = getShowModel();
+		HashMap<String, Boolean> parts = getParts();
+		HashMap<Integer, String> showPartsNemeList = getShowPartsNemeList();
 		if (file.exists() && file.canRead() && file.canWrite()) {
 			List lines = new LinkedList();
 			try {
@@ -258,13 +257,12 @@ public class Modchu_Config
 										if (i1 == maidColor) {
 											StringBuilder sb1 = new StringBuilder();
 											sb1.append(s).append(".").append(maidColor).append(".showModel[]=");
-											for (int i2 = 0; i2 <= partsNumberMax && parts[i2] != null; i2++) {
-												sb1.append(showModel[i2]);
-												if(i2 + 1 <= partsNumberMax) {
-													if(i2 != partsNumberMax && parts[i2 + 1] != null) sb1.append(",");
-												} else {
-													if(i2 != partsNumberMax) sb1.append(",");
-												}
+											String s2 = null;
+											for (int i2 = 0; i2 < parts.size(); i2++) {
+												s2 = showPartsNemeList.get(i2);
+												//sb1.append(s2).append(":");
+												sb1.append(parts.get(showPartsNemeList.get(i2)));
+												if(i2 != parts.size() - 1) sb1.append(",");
 											}
 											sb.append(sb1);
 											lines.add(sb.toString());
@@ -309,13 +307,11 @@ public class Modchu_Config
 						s = textureName != null ? textureName : "default";
 						StringBuilder sb1 = new StringBuilder();
 						sb1.append(s).append(".").append(maidColor).append(".showModel[]=");
-						for (int i = 0; i <= partsNumberMax && parts[i] != null; i++) {
-							sb1.append(showModel[i]);
-							if(i + 1 <= partsNumberMax) {
-								if(i != partsNumberMax && parts[i + 1] != null) sb1.append(",");
-							} else {
-								if(i != partsNumberMax) sb1.append(",");
-							}
+						String s2 = null;
+						for (int i = 0; i < parts.size(); i++) {
+							s2 = (String) Modchu_Reflect.invokeMethod(mod_PFLM_PlayerFormLittleMaid, "getHashMapKey", new Class[]{ HashMap.class, int.class }, null, new Object[]{ parts, i });
+							sb1.append(parts.get(s2));
+							if(i != parts.size() - 1) sb1.append(",");
 						}
 						sb.append(sb1);
 						lines.add(sb.toString());
@@ -380,8 +376,8 @@ public class Modchu_Config
 	public static void loadShowModelList(List<String> list) {
 		String textureName = getTextureName();
 		int maidColor = getMaidColor();
-		int partsNumberMax = getPartsNumberMax();
-		boolean[] showModel = getShowModel();
+		HashMap<String, Boolean> map = getParts();
+		HashMap<Integer, String> showPartsNemeList = getShowPartsNemeList();
 		try {
 			//Modchu_Debug.mDebug("loadShowModelList showModelList="+showModelList);
 			if(!list.isEmpty()) {
@@ -405,12 +401,14 @@ public class Modchu_Config
 									if (i1 > -1) {
 										int i2 = Integer.parseInt(rl.substring(0, i1));
 										//Modchu_Debug.mDebug("loadShowModelList i2="+rl.substring(0, i1));
+										String s1 = null;
 										if(maidColor == i2) {
 											rl = rl.substring(rl.indexOf('=') + 1);
-											for(int i3 = 0; i3 <= partsNumberMax && rl != null; i3++) {
+											for(int i3 = 0; i3 <= map.size() && rl != null; i3++) {
 												i1 = rl.indexOf(',');
-												showModel[i3] = i1 != -1 ? Boolean.parseBoolean(rl.substring(0, i1)): Boolean.parseBoolean(rl);
-												//Modchu_Debug.mDebug("loadShowModelList showModel["+i3+"]="+showModel[i3]);
+												s1 = showPartsNemeList.get(i3);
+												map.put(s1, i1 != -1 ? Boolean.parseBoolean(rl.substring(0, i1)): Boolean.parseBoolean(rl));
+												//Modchu_Debug.mDebug("loadShowModelList s1="+(i1 != -1 ? Boolean.parseBoolean(rl.substring(0, i1)): Boolean.parseBoolean(rl)));
 												rl = i1 != -1 ? rl.substring(i1 + 1): null;
 											}
 										}
@@ -776,16 +774,12 @@ public class Modchu_Config
 		return (Boolean) Modchu_Reflect.getFieldObject(PFLM_Gui, "partsSaveFlag");
 	}
 
-	private static int getPartsNumberMax() {
-		return (Integer) Modchu_Reflect.getFieldObject(PFLM_Gui, "partsNumberMax");
+	private static HashMap<String, Boolean> getParts() {
+		return (HashMap<String, Boolean>) Modchu_Reflect.getFieldObject(PFLM_Gui, "parts");
 	}
 
-	private static String[] getParts() {
-		return (String[]) Modchu_Reflect.getFieldObject(PFLM_Gui, "parts");
-	}
-
-	private static boolean[] getShowModel() {
-		return (boolean[]) Modchu_Reflect.getFieldObject(PFLM_Gui, "showModel");
+	private static HashMap<Integer, String> getShowPartsNemeList() {
+		return (HashMap<Integer, String>) Modchu_Reflect.getFieldObject(PFLM_Gui, "showPartsNemeList");
 	}
 
 	private static int getModeOthersSettingOffline() {

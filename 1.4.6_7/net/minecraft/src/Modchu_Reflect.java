@@ -141,6 +141,14 @@ public class Modchu_Reflect
     	return null;
     }
 
+    public static Method getMethod(Class var0, String var1, String var2)
+    {
+    	Method method = null;
+    	method = getMethod(var0, var2, (Class[]) null);
+    	if (method != null) return method;
+    	return getMethod(var0, var1, (Class[]) null);
+    }
+
     public static Method getMethod(Class var0, String var1, String var2, Class[] var3)
     {
     	Method method = null;
@@ -239,12 +247,40 @@ public class Modchu_Reflect
     	return null;
     }
 
+    public static Object invokeMethod(Class var0, String var1, String var2)
+    {
+    	try {
+    		return getMethod(var0, var1, (Class[]) null).invoke(null);
+    	} catch (Exception ee) {
+    		try {
+    			return getMethod(var0, var2, (Class[]) null).invoke(null);
+    		} catch (Exception e) {
+    			if (debugMessage) e.printStackTrace();
+    		}
+    	}
+    	return null;
+    }
+
     public static Object invokeMethod(Class var0, String var1, Object var3)
     {
     	try {
     		return getMethod(var0, var1, (Class[]) null).invoke(var3);
     	} catch (Exception e) {
     		if (debugMessage) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    public static Object invokeMethod(Class var0, String var1, String var2, Object var3)
+    {
+    	try {
+    		return getMethod(var0, var1, (Class[]) null).invoke(var3);
+    	} catch (Exception ee) {
+    		try {
+    			return getMethod(var0, var2, (Class[]) null).invoke(var3);
+    		} catch (Exception e) {
+    			if (debugMessage) e.printStackTrace();
+    		}
     	}
     	return null;
     }
@@ -269,12 +305,40 @@ public class Modchu_Reflect
     	return null;
     }
 
+    public static Object invokeMethod(Class var0, String var1, String var2, Class[] var3, Object var4, Object var5)
+    {
+    	try {
+    		return getMethod(var0, var1, var3).invoke(var4, var5);
+    	} catch (Exception ee) {
+    		try {
+    			return getMethod(var0, var2, var3).invoke(var4, var5);
+    		} catch (Exception e) {
+    			if (debugMessage) e.printStackTrace();
+    		}
+    	}
+    	return null;
+    }
+
     public static Object invokeMethod(Class var0, String var1, Class[] var2, Object var3, Object ... var4)
     {
     	try {
     		return getMethod(var0, var1, var2).invoke(var3, var4);
     	} catch (Exception e) {
     		if (debugMessage) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    public static Object invokeMethod(Class var0, String var1, String var2, Class[] var3, Object var4, Object ... var5)
+    {
+    	try {
+    		return getMethod(var0, var1, var3).invoke(var4, var5);
+    	} catch (Exception ee) {
+    		try {
+    			return getMethod(var0, var2, var3).invoke(var4, var5);
+    		} catch (Exception e) {
+    			if (debugMessage) e.printStackTrace();
+    		}
     	}
     	return null;
     }

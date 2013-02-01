@@ -129,7 +129,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	baseModel = modelbase;
 /*//b181delete
         cubeList = new ArrayList();
-        setTextureSize((int)((ModelPlayerFormLittleMaid) modelbase).textureWidth, (int)((ModelPlayerFormLittleMaid) modelbase).textureHeight);
+        setTextureSize((int)((MultiModel) modelbase).textureWidth, (int)((MultiModel) modelbase).textureHeight);
         modelbase.boxList.add(this);
 *///b181delete
     }
