@@ -190,7 +190,7 @@ public class Modchu_Reflect
     			try {
     				return var0.getMethod(var1, var2);
     			} catch (Exception e) {
-    				if (debugMessage) e.printStackTrace();
+    				if (debugMessageDetail) e.printStackTrace();
     	   		}
     		}
     	}

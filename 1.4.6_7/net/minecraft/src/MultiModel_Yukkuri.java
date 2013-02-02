@@ -74,6 +74,7 @@ public class MultiModel_Yukkuri extends MultiModel
 	public MultiModel_Yukkuri(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
 //@-@132
+		HeadMount.setRotationPoint(0.0F, -1.0F, 0.0F);
 	}
 
     @Override
@@ -358,7 +359,6 @@ public class MultiModel_Yukkuri extends MultiModel
     	mainFrame.setRotationPoint(0F, 0F + f1, 0F);
     	mainFrame.addChild(bipedHead);
     	mainFrame.addChild(bipedBody);
-    	HeadMount.setRotationPoint(0.0F, -1.0F, 0.0F);
     }
 
     @Override
