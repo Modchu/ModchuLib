@@ -77,7 +77,7 @@ public class MultiModel_tareusa extends MultiModel
 		bipedHead.addChild(eyeR);
 
 		Usasippo.setRotationPointZ(2.0F);
-		((Modchu_ModelRenderer) bipedHeadwear).setVisible(false);
+		setVisible(bipedHeadwear, false);
 	}
 
 	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -128,4 +128,19 @@ public class MultiModel_tareusa extends MultiModel
 				* -0.06F + 1.920F;
 
 	}
+
+    @Override
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s = {
+    			"bipedHeadwear", "d"
+    	};
+    	showPartsHideListadd(s);
+    }
+
+    @Override
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	setVisible(bipedHeadwear, false);
+    }
 }

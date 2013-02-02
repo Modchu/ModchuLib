@@ -257,6 +257,15 @@ public class MultiModel_Elsie extends MultiModel
     }
 
     @Override
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s = {
+    			"bipedHeadwear", "ChignonB", "Tail", "d"
+    	};
+    	showPartsHideListadd(s);
+    }
+
+    @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
     	if (getSkirtFloats()) {

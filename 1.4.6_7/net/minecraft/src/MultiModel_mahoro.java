@@ -143,4 +143,13 @@ public class MultiModel_mahoro extends MultiModel {
 			}
 		}
     }
+
+    @Override
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s = {
+    			"SideTailR", "SideTailL", "Tail"
+    	};
+    	showPartsHideListadd(s);
+    }
 }

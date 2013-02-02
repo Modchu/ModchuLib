@@ -36,8 +36,6 @@ public class MultiModel_QB extends MultiModel {
 		super(f, f1, i, j);
 //@-@132
 		HeadMount.setRotationPoint(0F, 2.51F, 0F);
-		Arms[0].setRotationPointLM(0.5F, 2.2F, 0F);
-		Arms[1].setRotationPointLM(-0.5F, 2.2F, 0F);
 	}
 
     @Override

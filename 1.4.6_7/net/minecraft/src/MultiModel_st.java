@@ -420,11 +420,9 @@ public class MultiModel_st extends MultiModel_SR2
     @Override
     public void action1(Entity entity) {
     	super.action1(entity);
-    	//Modchu_Debug.mDebug("action1");
     	LegAR.rotationPointY = -11.0F;
     	LegAL.rotationPointY = -11.0F;
     	rightHand.rotateAngleY = 0.785398163F;
     	leftHand.rotateAngleY = 0.785398163F;
     }
-
 }

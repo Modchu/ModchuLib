@@ -270,8 +270,8 @@ public class MultiModel_Shion extends MultiModel
     }
 
     @Override
-    public void action1(Entity entity) {
-    	super.action1(entity);
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	Skirt.setVisible(false);
     }
-
 }

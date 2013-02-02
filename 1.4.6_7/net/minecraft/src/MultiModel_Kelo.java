@@ -25,7 +25,7 @@ public class MultiModel_Kelo extends MultiModel
 
     public Modchu_ModelRenderer eyeL;
     public Modchu_ModelRenderer eyeR;
-    public Modchu_ModelRenderer bipedHeadwear;
+    public Modchu_ModelRenderer headwear;
     public Modchu_ModelRenderer rightHandPlus;
     public Modchu_ModelRenderer leftHandPlus;
 
@@ -86,10 +86,10 @@ public class MultiModel_Kelo extends MultiModel
 		SideTailR.addBox(-4.1F, -4.1F, -3.5F, 1, 4, 1, f);
 		SideTailR.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(SideTailR);
-		bipedHeadwear = new Modchu_ModelRenderer(this, 32, 0);
-		bipedHeadwear.addBox(-4F, -8F, -4.5F, 8, 4, 8, f + 0.5F);
-		bipedHeadwear.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bipedHead.addChild(bipedHeadwear);
+		headwear = new Modchu_ModelRenderer(this, 32, 0);
+		headwear.addBox(-4F, -8F, -4.5F, 8, 4, 8, f + 0.5F);
+		headwear.setRotationPoint(0.0F, 0.0F, 0.0F);
+		bipedHead.addChild(headwear);
 		ChignonR = new Modchu_ModelRenderer(this, 24, 2);
 		ChignonR.addBox(-5F, -11F, -2.5F, 4, 3, 3, f);
 		ChignonR.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -193,7 +193,7 @@ public class MultiModel_Kelo extends MultiModel
 		mainFrame.addChild(bipedHead);
 		mainFrame.addChild(bipedBody);
 		mainFrame.setRotationPoint(0.0F, 0.0F, 0.0F);
-		((Modchu_ModelRenderer) super.bipedHeadwear).setVisible(false);
+		setVisible(bipedHeadwear, false);
 		ChignonB.setVisible(false);
 		Tail.setVisible(false);
 		actionPartsInit(f, f1);
@@ -398,12 +398,16 @@ public class MultiModel_Kelo extends MultiModel
     			eyeR.setVisible(false);
     		}
     	}
-        bipedHeadwear.rotateAngleX = -0.087F;
+        headwear.rotateAngleX = -0.087F;
     }
 
     @Override
     public void defaultPartsSettingBefore() {
     	super.defaultPartsSettingBefore();
+    	String[] s = {
+    			"bipedHeadwear", "ChignonB", "Tail", "d"
+    	};
+    	showPartsHideListadd(s);
     	String[] s1 = {
     			"BreastPocket", "LsidePocket", "RsidePocket", "BackpackPocket"
     	};
@@ -411,6 +415,14 @@ public class MultiModel_Kelo extends MultiModel
     			"B_Pocket", "L_Pocket", "R_Pocket", "B_packPocket"
     	};
     	addShowPartsReneme(s1, s2);
+    }
+
+    @Override
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	setVisible(bipedHeadwear, false);
+    	ChignonB.setVisible(false);
+    	Tail.setVisible(false);
     }
 
     @Override
@@ -429,11 +441,6 @@ public class MultiModel_Kelo extends MultiModel
     }
 
     @Override
-    public void actionInit2() {
-    	actionInit1();
-    }
-
-    @Override
     public void actionRelease1() {
     	super.actionRelease1();
     	rightHandPlus.showModel = leftHandPlus.showModel = false;
@@ -449,11 +456,6 @@ public class MultiModel_Kelo extends MultiModel
     	SleeveL.setRotationPoint(-1.5F, 2.0F, 0.5F);
     	ShoesR.setRotationPoint(0.5F, 0.0F, 0.5F);
     	ShoesL.setRotationPoint(0.5F, 0.0F, 0.5F);
-    }
-
-    @Override
-    public void actionRelease2() {
-    	actionRelease1();
     }
 
     @Override

@@ -32,8 +32,6 @@ public class MultiModel_Petit extends MultiModel
     public MultiModel_Petit(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
 //@-@132
-    	Arms[0].setRotationPointLM(0.5F, 2.2F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 2.2F, 0F);
     }
 
     @Override
@@ -260,12 +258,12 @@ public class MultiModel_Petit extends MultiModel
     	FaceL.setRotationPoint(0.0F, 0.0F, 0.0F);
     	eyeL.setRotationPoint(-0.9F, -2.65F, 0.0F);
     	eyeR.setRotationPoint(0.9F, -2.65F, 0.0F);
+    	Arms[0].setRotationPointLM(0.5F, 2.5F, 0F);
+    	Arms[1].setRotationPointLM(-0.5F, 2.5F, 0F);
     }
 
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
-    	Arms[0].setRotationPointLM(0.5F, 2.5F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 2.5F, 0F);
     	bipedHead.rotationPointY = 15.6F;
     	bipedBody.rotationPointY = 14.6F;
     	bipedRightArm.rotationPointX = -1.7F;
@@ -360,8 +358,6 @@ public class MultiModel_Petit extends MultiModel
     			rightLegPlus.showModel = rightLegPlus2.showModel =
     			leftLegPlus.showModel = leftLegPlus2.showModel =
     			rightHandPlus.showModel = leftHandPlus.showModel = false;
-    	Arms[0].setRotationPointLM(0.5F, 2.2F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 2.2F, 0F);
     }
 
     @Override
@@ -414,8 +410,7 @@ public class MultiModel_Petit extends MultiModel
     }
 
     @Override
-    public void equippedItemPositionFlower()
-    {
+    public void equippedItemPositionFlower() {
     	GL11.glTranslatef(0.0F, -0.25F, 0.0F);
     }
 
@@ -423,5 +418,4 @@ public class MultiModel_Petit extends MultiModel
     public float Physical_Hammer() {
     	return super.Physical_Hammer() == 1.0F ? 1.3F : super.Physical_Hammer();
     }
-
 }

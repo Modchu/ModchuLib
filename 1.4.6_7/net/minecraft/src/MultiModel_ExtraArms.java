@@ -145,17 +145,6 @@ public class MultiModel_ExtraArms extends MultiModel
     	if (getIsWait())
     	{
     		Antena.rotationPointY = 0.0F;
-/*
-    		Binoculars.setRotateAngleX(0.0F);
-    		BinocularsL1.setRotateAngleX(BinocularsL2.setRotateAngleX(0.0F));
-    		BinocularsR1.setRotateAngleX(BinocularsR2.setRotateAngleX(0.0F));
-    		Binoculars.setRotateAngleZ(0.0F);
-    		BinocularsL1.setRotateAngleY(BinocularsL2.setRotateAngleY(0.0F));
-    		BinocularsR1.setRotateAngleY(BinocularsR2.setRotateAngleY(0.0F));
-    		Binoculars.setRotateAngleZ(0.0F);
-    		BinocularsL1.setRotateAngleZ(BinocularsL2.setRotateAngleZ(0.0F));
-    		BinocularsR1.setRotateAngleZ(BinocularsR2.setRotateAngleZ(0.0F));
-*/
     		if (0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.15000000596046448D + 0.10000000149011612D)
     		{
     			Cwave.rotationPointX = (float)(int)(Math.random() * 4D) + 0.0F;
@@ -217,6 +206,10 @@ public class MultiModel_ExtraArms extends MultiModel
     @Override
     public void defaultPartsSettingBefore() {
     	super.defaultPartsSettingBefore();
+    	String[] s = {
+    			"bipedHeadwear", "d"
+    	};
+    	showPartsHideListadd(s);
     	String[] s1 = {
     			"FirstAidSet" ,"Binoculars", "BinocularsL1", "BinocularsL2", "BinocularsR1",
     			"BinocularsR2", "BinocularsR1", "BinocularsR2"

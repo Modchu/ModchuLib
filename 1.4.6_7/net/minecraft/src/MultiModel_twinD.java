@@ -65,4 +65,22 @@ public class MultiModel_twinD extends MultiModel_SR2
 		SideTailR.setVisible(false);
 		ChignonB.setVisible(false);
     }
+
+    @Override
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s = {
+    			"Tail", "SideTailL", "SideTailR", "ChignonB"
+    	};
+    	showPartsHideListadd(s);
+    }
+
+    @Override
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	Tail.setVisible(false);
+    	SideTailL.setVisible(false);
+    	SideTailR.setVisible(false);
+    	ChignonB.setVisible(false);
+    }
 }

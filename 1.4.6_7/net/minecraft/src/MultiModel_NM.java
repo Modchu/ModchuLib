@@ -257,99 +257,81 @@ public class MultiModel_NM extends MultiModel_SR2
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
         super.setLivingAnimationsLM(entityliving, f, f1, f2);
+    	float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
+    	RightArm1.setVisible(false);
+    	LeftArm1.setVisible(false);
+    	RightArm2.setVisible(false);
+    	LeftArm2.setVisible(false);
+    	RightArm3.setVisible(false);
+    	LeftArm3.setVisible(false);
+    	Zukin.setVisible(false);
+    	sensor.setVisible(true);
+    	Cachusya.setVisible(true);
+    	RightLeg.setVisible(false);
+    	LeftLeg.setVisible(false);
+    	BodyA.setVisible(false);
+    	BreastA.setVisible(false);
+    	bow.setVisible(false);
+    	if (LMM_EntityLittleMaid != null
+    			&& LMM_EntityLittleMaid.isInstance(entityliving)
+    			&& !getaimedBow()) {
+    		boolean isWorkingDelay = (Boolean)getObjectInvokeMethod(LMM_EntityLittleMaid, "isWorkingDelay", entityliving);
+    		if (isWorkingDelay) {
+//-@-125
+    			int maidMode = (Integer)getObjectInvokeMethod(LMM_EntityLittleMaid, "getMaidModeInt", entityliving);
+    			int i = 0x0080;
+    			int i1 = 0x0021;
+    			int i2 = 0x0083;
+//@-@125
+/*//125delete
+    			int maidMode = (Integer)getObjectInvokeMethod(LMM_EntityLittleMaid, "getMaidMode", entityliving);
+    			int i = 4;
+    			int i1 = 6;
+    			int i2 = 8;
+*///125delete
+    			if (maidMode == i) {
+    				f3 *= 8F;
+    				float f4 = -0.2F;
+    				RightArm1.showModel = LeftArm1.showModel = true;
+    				RightArm2.showModel = LeftArm2.showModel = false;
+    				RightArm3.showModel = LeftArm3.showModel = true;
+    				BodyA.showModel = true;
+    				RightLeg.showModel = LeftLeg.showModel = true;
+    			}
+    			if (maidMode == i1) {
+    				f3 *= 8F;
+    				float f5 = -0.2F;
+    				RightArm2.showModel = LeftArm2.showModel = true;
+    				RightArm3.showModel = LeftArm3.showModel = false;
+    				Zukin.showModel = true;
+    				sensor.showModel = Cachusya.showModel = false;
+    			}
+    			if (maidMode == i2) {
+    				f3 *= 8F;
+    				float f6 = -0.2F;
+    				RightArm2.showModel = LeftArm2.showModel = false;
+    				RightArm3.showModel = LeftArm3.showModel = true;
+    				BodyA.showModel = bow.showModel = true;
+    				RightLeg.showModel = LeftLeg.showModel = true;
+    				BreastA.showModel = true;
+    			}
+    		}
+    	}
+    	float f7 = 0.0F;
+    	if (getIsLookSuger(entityliving)) {
+    		f3 *= 8F;
+    		f7 = -0.2F;
+    		Cheek_R.setVisible(true);
+    		Cheek_L.setVisible(true);
+    	} else {
+    		f7 = (1.0F - (float)entityliving.health / 20F) * 0.5F;
+    		Cheek_R.setVisible(false);
+    		Cheek_L.setVisible(false);
+    	}
 
-		if ((entityliving instanceof EntityPlayer)
-				&& !getaimedBow())
-		{
-			EntityPlayer entityplayer = (EntityPlayer) entityliving;
-			float f3 = (float)entityplayer.ticksExisted + f2 + ((float)entityplayer.entityId * 70);
-
-			if (mh_sin(f3 * 0.05F) + mh_sin(f3 * 0.13F) + mh_sin(f3 * 0.7F) + 2.55F < 0.0F)
-			{
-			}
-			else
-			{
-				RightArm1.setVisible(false);
-				LeftArm1.setVisible(false);
-				RightArm2.setVisible(false);
-				LeftArm2.setVisible(false);
-				RightArm3.setVisible(false);
-				LeftArm3.setVisible(false);
-				Zukin.setVisible(false);
-				sensor.setVisible(true);
-				Cachusya.setVisible(true);
-				RightLeg.setVisible(false);
-				LeftLeg.setVisible(false);
-				BodyA.setVisible(false);
-				BreastA.setVisible(false);
-				bow.setVisible(false);
-			}
-/*
-            if (entitylittlemaid.isWorkingDelay() && entitylittlemaid.getMaidMode() == 4)
-            {
-                f3 *= 8F;
-                float f4 = -0.2F;
-                RightArm1.showModel = LeftArm1.showModel = true;
-                RightArm2.showModel = LeftArm2.showModel = false;
-                RightArm3.showModel = LeftArm3.showModel = true;
-                BodyA.showModel = true;
-                RightLeg.showModel = LeftLeg.showModel = true;
-            }
-
-            if (entitylittlemaid.isWorkingDelay() && entitylittlemaid.getMaidMode() == 6)
-            {
-                f3 *= 8F;
-                float f5 = -0.2F;
-                RightArm2.showModel = LeftArm2.showModel = true;
-                RightArm3.showModel = LeftArm3.showModel = false;
-                Zukin.showModel = true;
-                sensor.showModel = Cachusya.showModel = false;
-            }
-
-            if (entitylittlemaid.isWorkingDelay() && entitylittlemaid.getMaidMode() == 8)
-            {
-                f3 *= 8F;
-                float f6 = -0.2F;
-                RightArm2.showModel = LeftArm2.showModel = false;
-                RightArm3.showModel = LeftArm3.showModel = true;
-                BodyA.showModel = bow.showModel = true;
-                RightLeg.showModel = LeftLeg.showModel = true;
-                BreastA.showModel = true;
-            }
-*/
-            float f7;
-            ItemStack itemstack2 = entityplayer.inventory.getCurrentItem();
-            boolean flag = false;
-            if (itemstack2 != null) {
-            	Item item = itemstack2.getItem();
-            	if (item == Item.sugar) {
-            		flag = true;
-            	}
-            }
-            if (flag) {
-            	f3 *= 8F;
-            	f7 = -0.2F;
-            	Cheek_R.setVisible(true);
-            	Cheek_L.setVisible(true);
-            }
-            else
-            {
-            	f7 = (1.0F - (float)entityplayer.health / 20F) * 0.5F;
-            	Cheek_R.setVisible(false);
-            	Cheek_L.setVisible(false);
-            }
-
-            float f8 = mh_sin(f3 * 0.067F) * 0.05F - f7;
-            float f9 = ((float)Math.PI * 2F / 9F);
-            sensor.setRotateAngle(mh_sin(f3 * 0.067F) * 0.05F + f7, mh_cos(f3 * 0.09F) * 0.5F, mh_sin(f3 * 0.09F) * 0.2F);
-        }
-
-    }
-
-    public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-    {
-    	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
-    	sensor.setRotateAngle(mh_sin(f2 * 0.067F) * 0.05F, mh_cos(f2 * 0.09F) * 0.5F, mh_sin(f2 * 0.09F) * 0.2F);
+    	//float f8 = mh_sin(f3 * 0.067F) * 0.05F - f7;
+    	//float f9 = ((float)Math.PI * 2F / 9F);
+    	sensor.setRotateAngle(mh_sin(f3 * 0.067F) * 0.05F + f7, mh_cos(f3 * 0.09F) * 0.5F, mh_sin(f3 * 0.09F) * 0.2F);
     }
 
     @Override

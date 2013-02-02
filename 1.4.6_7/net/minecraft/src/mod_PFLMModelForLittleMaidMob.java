@@ -13,6 +13,8 @@ public class mod_PFLMModelForLittleMaidMob extends BaseMod
 			//System.out.println("mod_PlayerFormLittleMaidModelForLittleMaidMob-!PFLM_PlayerFormLittleMaid");
 			MMM_FileManager.getModFile("MultiModel", "MultiModel");
 			MMM_TextureManager.addSearch("MultiModel", "/mob/littleMaid/", "MultiModel_");
+			MMM_FileManager.getModFile("playerformlittlemaid", "playerformlittlemaid");
+			MMM_TextureManager.addSearch("playerformlittlemaid", "/mob/littleMaid/", "MultiModel_");
 		} else {
 			//System.out.println("mod_PlayerFormLittleMaidModelForLittleMaidMob-load PFLM_PlayerFormLittleMaid");
 		}

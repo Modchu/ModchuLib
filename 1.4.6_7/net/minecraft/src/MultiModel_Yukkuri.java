@@ -564,38 +564,6 @@ public class MultiModel_Yukkuri extends MultiModel
     		bipedHead.rotationPointY = 15F;
     	}
     	armSwing(f, f1, f2, f3, f4, f5, entity);
-/*
-    	if(getOnGround() > -9990F && !getaimedBow()) {
-    		// òrêUÇË
-    		float f6 = getOnGround();
-    		float f7 = MathHelper.sin(f6 * 3.141593F);
-    		float f8 = MathHelper.sin(getOnGround() * 3.141593F)
-    				* -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
-    		bipedBody.rotateAngleY = MathHelper.sin(MathHelper
-    				.sqrt_float(f6) * 3.141593F * 2.0F) * 0.2F;
-    		Skirt.rotateAngleY = bipedBody.rotateAngleY;
-    		bipedRightArm.rotationPointZ = MathHelper
-    				.sin(bipedBody.rotateAngleY) * 4F;
-    		bipedRightArm.rotationPointX = -MathHelper
-    				.cos(bipedBody.rotateAngleY) * 4F - 3.0F;
-    		bipedLeftArm.rotationPointZ = -MathHelper
-    				.sin(bipedBody.rotateAngleY) * 4F;
-    		bipedLeftArm.rotationPointX = MathHelper
-    				.cos(bipedBody.rotateAngleY) * 4F - 0.0F;
-    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
-    		bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
-    		bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
-    		f6 = 1.0F - getOnGround();
-    		f6 *= f6;
-    		f6 *= f6;
-    		f6 = 1.0F - f6;
-    		bipedRightArm.rotateAngleX -= (double) f7 * 1.2D
-    				+ (double) f8;
-    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-    		bipedRightArm.rotateAngleZ = bipedLeftArm.rotateAngleZ = MathHelper
-    				.sin(getOnGround() * 3.141593F) * -0.4F;
-    	}
-*/
     	if(getIsSneak()) {
     		bipedHead.rotationPointY = bipedRightLeg.rotateAngleX < 0.0F ? 20F : 20F - bipedRightLeg.rotateAngleX * 8F;
     	}

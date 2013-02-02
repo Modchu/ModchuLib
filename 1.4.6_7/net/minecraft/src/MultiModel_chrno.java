@@ -255,6 +255,8 @@ public class MultiModel_chrno extends MultiModel
 		Rightarm2.removeChild(Arms[2]);
 		Leftarm2.removeChild(Arms[1]);
 		Leftarm2.removeChild(Arms[3]);
+		if (Arms[0] != null) Arms[0].setRotationPointLM(0.5F, 0.0F, 0F);
+		if (Arms[1] != null) Arms[1].setRotationPointLM(-0.5F, 0.0F, 0F);
 	}
 
 	@Override

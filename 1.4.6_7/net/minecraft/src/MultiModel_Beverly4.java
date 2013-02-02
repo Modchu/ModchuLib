@@ -525,7 +525,7 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	super.defaultPartsSettingBefore();
     	String[] s = {
     			"bipedHeadwear", "SkirtR", "SkirtL", "SkirtTopL", "SkirtFrontL",
-    			"SkirtLeftL", "SkirtBackL"
+    			"SkirtLeftL", "SkirtBackL", "d"
     	};
     	showPartsHideListadd(s);
     }
