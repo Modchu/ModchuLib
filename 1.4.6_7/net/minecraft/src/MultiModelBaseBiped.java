@@ -224,7 +224,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 
     @Override
     public void setLivingAnimations(EntityLiving entityliving, float f, float f1, float f2) {
-    	setMotionY(entityliving.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entityliving.motionY + 0.0784000015258789D)) * (Float) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "skirtFloatsVolume"));
+    	if (mod_PFLM_PlayerFormLittleMaid != null) setMotionY(entityliving.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entityliving.motionY + 0.0784000015258789D)) * (Float) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "skirtFloatsVolume"));
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entityliving)) {
     		LMMLivingAnimationsSpecialOperationsBefore(entityliving, f, f1, f2);
