@@ -55,7 +55,7 @@ public class Modchu_Config
 	}
 
 	public static Object loadConfig(List configList, File file, String s, Object o) {
-		// cfgÝ’è€–Ú“Ç‚Ýž‚Ý
+		// cfgÝ’è€–Ú“Ç‚Ýž‚Ý showModel“Ç‚Ýž‚Ý—L‚è
 		List list = new ArrayList();
 		list = (ArrayList) cfgData.get(file);
 		if (list == null) {
@@ -76,6 +76,59 @@ public class Modchu_Config
 							//Modchu_Debug.mDebug("cfg "+ file.toString() +" load " + rl);
 						}
 					}
+					if (rl.startsWith(s)) {
+						i1 = rl.indexOf('=');
+						if (i1 > -1) {
+							if (s.length() == i1) {
+								o = rl.substring(i1 + 1);
+								//Modchu_Debug.mDebug("cfg "+ file.toString() +" load ok s.length()="+s.length()+" i1="+i1+" rl="+rl);
+							} else {
+								//Modchu_Debug.mDebug("cfg "+ file.toString() +" load s.length()="+s.length()+" i1="+i1+" rl="+rl);
+							}
+						}
+					}
+				}
+				cfgData.put(file, list);
+				breader.close();
+				//Modchu_Debug.mDebug("Modchu_Config loadConfig1 o = "+o.toString());
+			} catch (Exception e) {
+				Modchu_Debug.Debug("Modchu_Config loadConfig "+ file.toString() +" load fail.");
+				e.printStackTrace();
+			}
+		} else {
+			String s2;
+			for (int i = 0; i < list.size() ; i++) {
+				s2 = (String) list.get(i);
+				if (s2.startsWith(s)) {
+					int i1 = s2.indexOf('=');
+					if (i1 > -1
+							&& s.length() == i1) {
+						o = s2.substring(i1 + 1);
+						break;
+					}
+				}
+			}
+			//Modchu_Debug.mDebug("Modchu_Config loadConfig2 o = "+o.toString());
+		}
+		return o;
+	}
+
+
+	public static Object loadConfig(File file, String s, Object o) {
+		// cfgÝ’è€–Ú“Ç‚Ýž‚Ý showModel“Ç‚Ýž‚Ý–³‚µ
+		List list = new ArrayList();
+		list = (ArrayList) cfgData.get(file);
+		if (list == null) {
+			list = new ArrayList();
+			try {
+				BufferedReader breader = new BufferedReader(new FileReader(
+						file));
+				String rl;
+				for (int i = 0; (rl = breader.readLine()) != null ; i++) {
+					int i1;
+					list.add(rl);
+					if (rl.startsWith("#")
+							| rl.startsWith("/")) continue;
 					if (rl.startsWith(s)) {
 						i1 = rl.indexOf('=');
 						if (i1 > -1) {
@@ -309,7 +362,7 @@ public class Modchu_Config
 						sb1.append(s).append(".").append(maidColor).append(".showModel[]=");
 						String s2 = null;
 						for (int i = 0; i < parts.size(); i++) {
-							s2 = (String) Modchu_Reflect.invokeMethod(mod_PFLM_PlayerFormLittleMaid, "getHashMapKey", new Class[]{ HashMap.class, int.class }, null, new Object[]{ parts, i });
+							s2 = mod_Modchu_ModchuLib.getHashMapKey(parts, i);
 							sb1.append(parts.get(s2));
 							if(i != parts.size() - 1) sb1.append(",");
 						}

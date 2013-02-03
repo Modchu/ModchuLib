@@ -355,22 +355,24 @@ public class MultiModel_Biped extends MultiModelBaseBiped
 
     @Override
     public void defaultPartsSettingBefore() {
-    	if (getShowPartsList().contains("bipedCloak")) {
-    		String[] s = {
-    				"rightArm", "rightArm2", "rightArmPlus", "rightArmPlus2", "rightHand",
-    				"rightLeg", "rightLeg2", "rightLegPlus", "rightLegPlus2", "leftArm",
-    				"leftArm2", "leftArmPlus", "leftArmPlus2", "leftHand", "leftLeg",
-    				"leftLeg2", "leftLegPlus", "leftLegPlus2", "HeadMount", "mainFrame"
-    		};
-    		showPartsHideListadd(s);
-    	}
+    	String[] s = {
+    			"rightArm", "rightArm2", "rightArmPlus", "rightArmPlus2", "rightHand",
+    			"rightLeg", "rightLeg2", "rightLegPlus", "rightLegPlus2", "leftArm",
+    			"leftArm2", "leftArmPlus", "leftArmPlus2", "leftHand", "leftLeg",
+    			"leftLeg2", "leftLegPlus", "leftLegPlus2", "HeadMount", "mainFrame"
+    	};
+    	showPartsHideListadd(s);
     	String[] s1 = {
     			"bipedHead", "bipedHeadwear", "bipedBody", "bipedRightArm", "bipedLeftArm",
-    			"bipedRightLeg", "bipedLeftLeg"
+    			"bipedRightLeg", "bipedLeftLeg", "c", "d", "e",
+    			"f", "g", "h", "i", "j",
+    			"k"
     	};
     	String[] s2 = {
     			"Head", "Headwear", "Body", "RightArm", "LeftArm",
-    			"RightLeg", "LeftLeg"
+    			"RightLeg", "LeftLeg", "Head", "Headwear", "Body",
+    			"RightArm", "LeftArm", "RightLeg", "LeftLeg", "bipedCloak",
+    			"bipedEars"
     	};
     	addShowPartsReneme(s1, s2);
     }

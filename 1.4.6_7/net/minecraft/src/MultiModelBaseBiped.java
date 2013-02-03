@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.Map.Entry;
-
-import javax.crypto.spec.PSource;
 
 import net.minecraft.client.Minecraft;
 
@@ -70,10 +66,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public boolean ridingBan = false;
     public boolean modchuRemodelingModel = false;
     public boolean actionFlag = false;
-    public static boolean isLMM;
-    public static boolean isPFLM;
-    public static boolean isDecoBlock;
-    public static boolean isFavBlock;
+    public static boolean isLMM = false;
+    public static boolean isPFLM = false;
     public static boolean skirtFloats = false;
     private boolean partsSetInit = false;
     public List<String> showPartsList = new ArrayList<String>();
@@ -82,9 +76,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public static Class mod_PFLM_PlayerFormLittleMaid;
     public static Class PFLM_Gui;
     public static Class PFLM_EntityPlayerDummy;
-    public static Class decoBlock;
-    public static Class decoBlockBase;
-    public static Class favBlock;
     public static Class mod_LMM_littleMaidMob;
     public static Class LMM_EntityLittleMaid;
 /*//b181delete
@@ -131,23 +122,18 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	//b173deleteboxList = new ArrayList();
 
     	Modchu_Reflect.setDebugMessage(false);
-    	mod_LMM_littleMaidMob = Modchu_Reflect.loadClass(getClassName("mod_LMM_littleMaidMob"));
+    	mod_LMM_littleMaidMob = mod_Modchu_ModchuLib.mod_LMM_littleMaidMob;
     	if (mod_LMM_littleMaidMob != null) {
     		isLMM = true;
-    		LMM_EntityLittleMaid = (Class) Modchu_Reflect.loadClass(getClassName("LMM_EntityLittleMaid"));
+    		LMM_EntityLittleMaid = mod_Modchu_ModchuLib.LMM_EntityLittleMaid;
     	}
-    	mod_PFLM_PlayerFormLittleMaid = Modchu_Reflect.loadClass(getClassName("mod_PFLM_PlayerFormLittleMaid"));
+    	mod_PFLM_PlayerFormLittleMaid = mod_Modchu_ModchuLib.mod_PFLM_PlayerFormLittleMaid;
     	if (mod_PFLM_PlayerFormLittleMaid != null) {
     		isPFLM = true;
-    		PFLM_Gui = Modchu_Reflect.loadClass(getClassName("PFLM_Gui"));
-    		PFLM_EntityPlayerDummy = Modchu_Reflect.loadClass(getClassName("PFLM_EntityPlayerDummy"));
-    		decoBlock = (Class) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "decoBlock");
-    		decoBlockBase = (Class) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "decoBlockBase");
-    		favBlock = (Class) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "favBlock");
-    		modchuRemodelingModel = (Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "modchuRemodelingModel");
-    		Modchu_Reflect.setDebugMessage((Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "debugReflect"));
-    		Modchu_Reflect.setDebugMessageDetail((Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "debugReflectDetail"));
-    		skirtFloats = (Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "skirtFloats");
+    		PFLM_Gui = mod_Modchu_ModchuLib.PFLM_Gui;
+    		PFLM_EntityPlayerDummy = mod_Modchu_ModchuLib.PFLM_EntityPlayerDummy;
+    		modchuRemodelingModel = mod_Modchu_ModchuLib.modchuRemodelingModel;
+    		skirtFloats = mod_Modchu_ModchuLib.skirtFloats;
     		if ((Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "isOlddays")) {
     			setOldwalking((Boolean) getFieldObject(ModelBiped.class, "oldwalking"));
     		}
@@ -224,7 +210,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 
     @Override
     public void setLivingAnimations(EntityLiving entityliving, float f, float f1, float f2) {
-    	if (mod_PFLM_PlayerFormLittleMaid != null) setMotionY(entityliving.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entityliving.motionY + 0.0784000015258789D)) * (Float) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "skirtFloatsVolume"));
+    	setMotionY(entityliving.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entityliving.motionY + 0.0784000015258789D)) * mod_Modchu_ModchuLib.skirtFloatsVolume);
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entityliving)) {
     		LMMLivingAnimationsSpecialOperationsBefore(entityliving, f, f1, f2);
@@ -339,32 +325,34 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     				|| isPlanter
     				|| addSupport > -1) {
     		//if (((LMM_EntityLittleMaid) pEntity).isCamouflage() || ((LMM_EntityLittleMaid) pEntity).isPlanter()) {
-    			ItemStack[] litemstack1 = (ItemStack[]) getFieldObject(InventoryPlayer.class, "mainInventory", maidInventory);
-    			ItemStack litemstack2 = litemstack1[litemstack1.length - 2];
-    			Object HeadMount = getHeadMount();
-    			if (HeadMount instanceof MMM_ModelRenderer) {
-    				((MMM_ModelRenderer) HeadMount).loadMatrix();
-    			} else {
-    				((Modchu_ModelRenderer) HeadMount).loadMatrix();
-    			}
-    			if (isPlanter
-    					|| (addSupport > -1 && addSupport < 3)) {
-    			//if (((LMM_EntityLittleMaid) pEntity).isPlanter()) {
-    				equippedItemPositionFlower();
-    			}
-    			float scale = 1.0F;
-    			if (litemstack2 != null) {
-    				Item item2 = litemstack2.getItem();
-    				if (item2 == item2.dyePowder) {
-    					scale = 1.0F + (0.2F * litemstack2.getItemDamage());
+    			ItemStack[] litemstack1 = (ItemStack[]) getFieldObject(InventoryPlayer.class, "a", "mainInventory", maidInventory);
+    			if (litemstack1 != null) {
+    				ItemStack litemstack2 = litemstack1[litemstack1.length - 2];
+    				Object HeadMount = getHeadMount();
+    				if (HeadMount instanceof MMM_ModelRenderer) {
+    					((MMM_ModelRenderer) HeadMount).loadMatrix();
+    				} else {
+    					((Modchu_ModelRenderer) HeadMount).loadMatrix();
     				}
+    				if (isPlanter
+    						|| (addSupport > -1 && addSupport < 3)) {
+    					//if (((LMM_EntityLittleMaid) pEntity).isPlanter()) {
+    					equippedItemPositionFlower();
+    				}
+    				float scale = 1.0F;
+    				if (litemstack2 != null) {
+    					Item item2 = litemstack2.getItem();
+    					if (item2 == item2.dyePowder) {
+    						scale = 1.0F + (0.2F * litemstack2.getItemDamage());
+    					}
+    				}
+    				if (HeadMount instanceof MMM_ModelRenderer) {
+    					((MMM_ModelRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack);
+    				} else {
+    					((Modchu_ModelRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack, scale, addSupport);
+    				}
+    				//HeadMount.renderItems(pEntity, pRender, true, null, ((LMM_EntityLittleMaid) pEntity).maidInventory.getHeadMount());
     			}
-    			if (HeadMount instanceof MMM_ModelRenderer) {
-    				((MMM_ModelRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack);
-    			} else {
-    				((Modchu_ModelRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack, scale, addSupport);
-    			}
-    			//HeadMount.renderItems(pEntity, pRender, true, null, ((LMM_EntityLittleMaid) pEntity).maidInventory.getHeadMount());
     		}
     	}
 
@@ -467,11 +455,13 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	Block block = null;
     	try {
     		block = Block.blocksList[item.itemID];
-    		if (isDecoBlock
-    				|| isFavBlock) {
-    			if (decoBlock.isInstance(block)) return 0;
-    			if (decoBlockBase.isInstance(block)) return 1;
-    			if (favBlock.isInstance(block)) return 2;
+    		if (mod_Modchu_ModchuLib.isDecoBlock) {
+    			if (mod_Modchu_ModchuLib.decoBlock.isInstance(block)) return 0;
+    			if (mod_Modchu_ModchuLib.decoBlockBase.isInstance(block)) return 1;
+    		}
+    		if (mod_Modchu_ModchuLib.isFavBlock
+    				&& mod_Modchu_ModchuLib.favBlock.isInstance(block)) {
+    			return 2;
     		}
     	} catch(Exception e) {
     	}
@@ -515,7 +505,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      */
     public void PFLMLivingAnimationsSpecialOperationsAfter(Entity entity, float f, float f1, float f2) {
     	isRiding = !getIsRiding() ? getIsSitting() : getIsRiding();
-    	setMotionY(entity.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entity.motionY + 0.0784000015258789D)) * (Float) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "skirtFloatsVolume"));
     	if (entity instanceof EntityPlayer) settingShowParts();
     }
 
@@ -728,11 +717,12 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      */
     public void indexOfAllSetVisible(String s) {
     	String s0 = null;
-    	HashMap<Integer, String> showPartsNemeList = getShowPartsNemeList();
+    	HashMap<String, Field> modelRendererMap = getModelRendererMap();
     	boolean b = getGuiParts().get(s);
-    	for(int i1 = 0; i1 < getShowPartsList().size(); i1++) {
-    		s0 = showPartsNemeList.get(i1);
-    		if (s0.indexOf(s) > -1) {
+    	for(int i1 = 0; i1 < modelRendererMap.size(); i1++) {
+    		s0 = mod_Modchu_ModchuLib.getHashMapKey(getModelRendererMap(), i1);
+    		if (s0 != null
+    				&& s0.indexOf(s) > -1) {
     			try {
     				setVisible((ModelRenderer) getModelRendererMap().get(s0).get(this), b);
     			} catch (Exception e) {
@@ -1340,35 +1330,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	GL11.glTranslatef(0.0F, 0.0F, 0.0F);
     }
 
-    /**
-     * 弓装備時の位置調整
-     */
-    public void equippedItemBow() {
-    	GL11.glTranslatef(0.0F, 0.0F, 0.0F);
-    }
-
-    /**
-     * 弓装備時の角度調整
-     */
-    public void equippedItemBowRotatef() {
-    	//GL11.glRotatef(-20F, 0.0F, 1.0F, 0.0F);
-    }
-
-    /**
-     * 弓装備時の角度調整2
-     */
-    public void equippedItemBowRotatef2() {
-    	//GL11.glRotatef(-100F, 1.0F, 0.0F, 0.0F);
-    	//GL11.glRotatef(45F, 0.0F, 1.0F, 0.0F);
-    }
-
-    /**
-     * 釣り竿など
-     */
-    public void equippedItemPositionshouldRotateAroundWhenRendering() {
-    	//GL11.glTranslatef(-0.1F, 0.0F, 0.0F);
-    }
-
     public void setArmorBipedHeadShowModel(boolean b) {
     	setVisible(bipedHead, b);
     }
@@ -1382,9 +1343,9 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			&& getRunActionNumber() == 0
     			| getRunActionNumber() == 1) {
     		setVisible(bipedRightArm, false);
-    		rightArm.setVisible(b);
-    		rightArm2.setVisible(b);
-    		rightHand.setVisible(b);
+    		if (rightArm != null) rightArm.setVisible(b);
+    		if (rightArm2 != null) rightArm2.setVisible(b);
+    		if (rightHand != null) rightHand.setVisible(b);
     	}
     	else setVisible(bipedRightArm, b);
     }
@@ -1394,9 +1355,9 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			&& getRunActionNumber() == 0
     			| getRunActionNumber() == 1) {
     		setVisible(bipedLeftArm, false);
-    		leftArm.setVisible(b);
-    		leftArm2.setVisible(b);
-    		leftHand.setVisible(b);
+    		if (leftArm != null) leftArm.setVisible(b);
+    		if (leftArm2 != null) leftArm2.setVisible(b);
+    		if (leftHand != null) leftHand.setVisible(b);
     	}
     	else setVisible(bipedLeftArm, b);
     }
@@ -1406,8 +1367,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			&& getRunActionNumber() == 0
     			| getRunActionNumber() == 1) {
     		setVisible(bipedRightLeg, false);
-    		rightLeg.setVisible(b);
-    		rightLeg2.setVisible(b);
+    		if (rightLeg != null) rightLeg.setVisible(b);
+    		if (rightLeg2 != null) rightLeg2.setVisible(b);
     	}
     	else setVisible(bipedRightLeg, b);
     }
@@ -1417,8 +1378,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			&& getRunActionNumber() == 0
     			| getRunActionNumber() == 1) {
     		setVisible(bipedLeftLeg, false);
-    		leftLeg.setVisible(b);
-    		leftLeg2.setVisible(b);
+    		if (leftLeg != null) leftLeg.setVisible(b);
+    		if (leftLeg2 != null) leftLeg2.setVisible(b);
     	}
     	else setVisible(bipedLeftLeg, b);
     }
@@ -1666,8 +1627,16 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	return Modchu_Reflect.getFieldObject(c, s, o2);
     }
 
+    public Object getFieldObject(Class c, String s, String s1, Object o2) {
+    	return Modchu_Reflect.getFieldObject(c, s, s1, o2);
+    }
+
     public Object getFieldObject(Object o, String s, Object o2) {
     	return Modchu_Reflect.getFieldObject(o.getClass(), s, o2);
+    }
+
+    public Object getFieldObject(Object o, String s, String s1, Object o2) {
+    	return Modchu_Reflect.getFieldObject(o.getClass(), s, s1, o2);
     }
 
     public Object getObjectInvokeMethod(Class c, String s) {
@@ -1771,12 +1740,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      * setLivingAnimations 呼び出し後に呼ばれる。
      */
     public void LMMLivingAnimationsSpecialOperationsAfter(Entity entity, float f, float f1, float f2) {
-    	float skirtFloatsVolume = 1.0F;
-    	//コンフィグに入れてもらえるとコメント解除
-    	//skirtFloatsVolume = (Float) Modchu_Reflect.getFieldObject(mod_LMM_littleMaidMob, "skirtFloatsVolume");
-    	if (skirtFloatsVolume <= 0.0F) skirtFloatsVolume = 1.0F;
-    	if (skirtFloatsVolume > 2.0F) skirtFloatsVolume = 2.0F;
-    	setMotionY(entity.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entity.motionY + 0.0784000015258789D)) * skirtFloatsVolume);
     	float angle = (Float) getObjectInvokeMethod(entity, "getInterestedAngle", new Class[]{ float.class }, f2);
     	bipedHead.rotateAngleZ = angle;
     }

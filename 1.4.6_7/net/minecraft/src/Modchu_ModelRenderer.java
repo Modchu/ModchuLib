@@ -6,8 +6,6 @@ import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-//b181deleteimport java.util.List;
-import modelAppend.ModelPlateFreeShape;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -164,13 +162,13 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	{
 		float[][] vt = { { this.textureOffsetX / this.textureWidth, (this.textureOffsetY + 1) / this.textureHeight }, { (this.textureOffsetX + 1) / this.textureWidth, (this.textureOffsetY + 1) / this.textureHeight }, { (this.textureOffsetX + 1) / this.textureWidth, this.textureOffsetY / this.textureHeight }, { this.textureOffsetX / this.textureWidth, this.textureOffsetY / this.textureHeight } };
 
-		cubeList.add(new ModelPlateFreeShape(this, this.textureOffsetX, this.textureOffsetY, vertex, vt, vertexN, null, 0.0F));
+		cubeList.add(new Modchu_ModelPlateFreeShape(this, this.textureOffsetX, this.textureOffsetY, vertex, vt, vertexN, null, 0.0F));
 		return this;
 	}
 
 	public Modchu_ModelRenderer addPlateFreeShape(float[][] vertex, float[][] texUV, float[][] vertexN)
 	{
-		cubeList.add(new ModelPlateFreeShape(this, this.textureOffsetX, this.textureOffsetY, vertex, texUV, vertexN, null, 0.0F));
+		cubeList.add(new Modchu_ModelPlateFreeShape(this, this.textureOffsetX, this.textureOffsetY, vertex, texUV, vertexN, null, 0.0F));
 		return this;
 	}
 
@@ -345,11 +343,12 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	int particleFrequency = 98;
     	String particleString = null;
     	float translatefX = 0.0F;
-    	float translatefY = 0.0F;
+    	float translatefY = mod_Modchu_ModchuLib.isForge ? 0.5F : 0.0F;
     	float translatefZ = 0.0F;
     	//addSupport = 0 DecoBlock
     	//addSupport = 1 DecoBlockBase
     	if (addSupport < 2) {
+    		translatef = true;
     		if (addSupport == 0) {
     			flag = rotate = true;
     			particle = true;
@@ -364,12 +363,13 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		flag = rotate = true;
     		translatef = true;
     		translatefX = 0.0F;
-    		translatefY = -0.1F;
+    		translatefY = mod_Modchu_ModchuLib.isForge ? 0.4F : -0.1F;
     		translatefZ = 0.0F;
     		particle = true;
     		particleString = "instantSpell";
-    		particleFrequency = 92;
+    		particleFrequency = 80;
     	}
+		if (mod_Modchu_ModchuLib.isForge) GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
 
     	if (flag) {
     		pRender.loadTexture("/terrain.png");
@@ -385,15 +385,12 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		GL11.glColor4f(f9, f10, f12, 1.0F);
 */
 //@-@b173
-    		if (scale > 1.0F) {
-    			if (addSupport == 2) {
-    				particleFrequency = 80;
-    			} else particleFrequency = 90;
-    			GL11.glScalef(scale, scale, scale);
-    		}
+    		if (scale > 1.0F) GL11.glScalef(scale, scale, scale);
     		// b166deleteGL11.glColor4f(f20, f20, f20, 1.0F);
     		if (translatef) GL11.glTranslatef(translatefX, translatefY, translatefZ);
     		pRender.renderBlocks.renderBlockAsItem(block, itemstack.getItemDamage(), 1.0F);
+    		particleFrequency -= (int)((scale - 1.0F) * 10F);
+    		//Modchu_Debug.mDebug("particleFrequency ="+particleFrequency+" (int)(scale - 1.0F * 10F)="+((int)((scale - 1.0F) * 10F))+" scale="+scale);
     		if (particle
     				&& rnd.nextInt(100) > particleFrequency) {
     			double d = rnd.nextGaussian() * 0.02D;

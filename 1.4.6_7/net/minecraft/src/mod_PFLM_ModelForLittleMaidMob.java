@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public class mod_PFLMModelForLittleMaidMob extends BaseMod
+public class mod_PFLM_ModelForLittleMaidMob extends BaseMod
 {
 	public String getVersion()
 	{
