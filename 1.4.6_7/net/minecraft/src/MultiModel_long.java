@@ -20,15 +20,12 @@ public class MultiModel_long extends MultiModel_SR2
 
     public MultiModel_long(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 32);
-	}
+    	this(f, f1 , 64, 32);
+    }
 
-	public MultiModel_long(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_long(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
 	@Override
 	public void initModel(float f, float f1) {
@@ -44,10 +41,10 @@ public class MultiModel_long extends MultiModel_SR2
 
 		kamidome.rotateAngleX=0.2974289F;
 		longhear.rotateAngleX=0.2974289F;
-		Tail.setVisible(false);
-		SideTailL.setVisible(false);
-		SideTailR.setVisible(false);
-		ChignonB.setVisible(false);
+		setVisible(Tail, false);
+		setVisible(SideTailL, false);
+		setVisible(SideTailR, false);
+		setVisible(ChignonB, false);
     }
 
     @Override
@@ -62,9 +59,9 @@ public class MultiModel_long extends MultiModel_SR2
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	Tail.setVisible(false);
-    	SideTailL.setVisible(false);
-    	SideTailR.setVisible(false);
-    	ChignonB.setVisible(false);
+    	setVisible(Tail, false);
+    	setVisible(SideTailL, false);
+    	setVisible(SideTailR, false);
+    	setVisible(ChignonB, false);
     }
 }

@@ -16,20 +16,17 @@ public class MultiModel_DogAngel2 extends MultiModel_DogAngel {
 
 	public MultiModel_DogAngel2(float f, float f1)
 	{
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 64);
 	}
 
 	public MultiModel_DogAngel2(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
 	}
 
 	@Override
 	public void initModel(float f, float f1) {
 		super.initModel(f, f1);
-		Skirt.clearCubeList();
+		((Modchu_ModelRenderer) Skirt).clearCubeList();
 		Skirt1 = new Modchu_ModelRenderer(this, -2, 32, Skirt);
 		Skirt1.addBoxLM(0F, 0F, 0F, 12, 4, 4,f);
 		Skirt1.setRotationPointLM(2.4F, -3.0F, -0.6F);

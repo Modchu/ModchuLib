@@ -40,15 +40,12 @@ public class MultiModel_Shion extends MultiModel
 
     public MultiModel_Shion(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 32);
-	}
+    	this(f, f1 , 64, 32);
+    }
 
-	public MultiModel_Shion(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_Shion(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
 	@Override
 	public void initModel(float f, float f1) {
@@ -124,7 +121,7 @@ public class MultiModel_Shion extends MultiModel
 		((Modchu_ModelRenderer) bipedHead).removeChild(Tail);
 		((Modchu_ModelRenderer) bipedHead).removeChild(ChignonR);
 		((Modchu_ModelRenderer) bipedHead).removeChild(ChignonL);
-		Skirt.setVisible(false);
+		setVisible(Skirt, false);
    }
 
     @Override
@@ -227,9 +224,18 @@ public class MultiModel_Shion extends MultiModel
     			bipedLeftArm.rotationPointZ = 0.0F;
     		}
     		if (getIsRiding()) {
-    			bipedRightLeg.rotateAngleX = bipedLeftLeg.rotateAngleX = 1.570796313F;
-    			bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 6.0F;
-    			bipedRightLeg.rotationPointZ = bipedLeftLeg.rotationPointZ = -2.0F;
+    			if (entity.ridingEntity != null) {
+    				bipedRightArm.rotateAngleX += -0.6283185F;
+    				bipedLeftArm.rotateAngleX += -0.6283185F;
+    				bipedRightLeg.rotateAngleX = -1.256637F;
+    				bipedLeftLeg.rotateAngleX = -1.256637F;
+    				bipedRightLeg.rotateAngleY = 0.3141593F;
+    				bipedLeftLeg.rotateAngleY = -0.3141593F;
+    			} else {
+    				bipedRightLeg.rotateAngleX = bipedLeftLeg.rotateAngleX = 1.570796313F;
+    				bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 6.0F;
+    				bipedRightLeg.rotationPointZ = bipedLeftLeg.rotationPointZ = -2.0F;
+    			}
     		}
     	}
     	if (0.0D > (double) (mh_sin(f2 * 0.1F) * 0.3F)
@@ -259,10 +265,10 @@ public class MultiModel_Shion extends MultiModel
     @Override
     public void actionRelease1() {
     	super.actionRelease1();
-    	rightArm.removeChild(sodeR);
-    	leftArm.removeChild(sodeL);
-    	rightArm.removeChild(WsodeR);
-    	leftArm.removeChild(WsodeL);
+    	((Modchu_ModelRenderer) rightArm).removeChild(sodeR);
+    	((Modchu_ModelRenderer) leftArm).removeChild(sodeL);
+    	((Modchu_ModelRenderer) rightArm).removeChild(WsodeR);
+    	((Modchu_ModelRenderer) leftArm).removeChild(WsodeL);
     	bipedRightArm.addChild(sodeR);
     	bipedLeftArm.addChild(sodeL);
     	bipedRightArm.addChild(WsodeR);
@@ -272,6 +278,6 @@ public class MultiModel_Shion extends MultiModel
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	Skirt.setVisible(false);
+    	setVisible(Skirt, false);
     }
 }

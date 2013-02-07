@@ -29,14 +29,11 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
 
     public MultiModel_Beverly4(float f, float f1)
     {
-    	// 132deletesuper(f, f1);
-//-@-132
     	this(f, f1 , 64, 64);
     }
 
     public MultiModel_Beverly4(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
-//@-@132
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[0]);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[2]);
     	((Modchu_ModelRenderer) bipedLeftArm).removeChild(Arms[1]);
@@ -146,11 +143,11 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     @Override
     public void actionPartsInit(float f, float f1) {
     	rightHand = new Modchu_ModelRenderer(this, 0, 55);
-    	rightHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	rightHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
     	rightArm2.addChild(rightHand);
 
     	leftHand = new Modchu_ModelRenderer(this, 8, 55);
-    	leftHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	leftHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
     	leftArm2.addChild(leftHand);
 
     	rightArmPlus = new Modchu_ModelRenderer(this);
@@ -162,8 +159,8 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	leftLegPlus = new Modchu_ModelRenderer(this);
     	leftLegPlus2 = new Modchu_ModelRenderer(this);
 
-    	rightHand.setVisible(false);
-    	leftHand.setVisible(false);
+    	setVisible(rightHand, false);
+    	setVisible(leftHand, false);
     	aimedBowBan = false;
     	sneakBan = false;
     	waitBan = false;
@@ -175,25 +172,25 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	if(!getSkirtFloats()) return;
     	//SkirtR 上
     	SkirtTop = new Modchu_ModelRenderer(this, 47, 20);
-    	SkirtTop.addPlate(-2.5F, 0.0F, -3.5F, 5, 7, 0);
+    	((Modchu_ModelRenderer) SkirtTop).addPlate(-2.5F, 0.0F, -3.5F, 5, 7, 0);
     	SkirtTop.setRotationPoint(0.0F, 8.0F, 0.0F);
     	rightLeg.addChild(SkirtTop);
 
     	//SkirtR 前
     	SkirtFront = new Modchu_ModelRenderer(this, 47, 27);
-    	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 5, 12, 0);
+    	((Modchu_ModelRenderer) SkirtFront).addPlate(0.0F, 0.0F, 0.0F, 5, 12, 0);
     	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
     	SkirtTop.addChild(SkirtFront);
 
     	//SkirtR 右
     	SkirtRight = new Modchu_ModelRenderer(this, 40, 27);
-    	SkirtRight.addPlate(-3.5F, 0.0F, -6.0F, 7, 12, 1);
+    	((Modchu_ModelRenderer) SkirtRight).addPlate(-3.5F, 0.0F, -6.0F, 7, 12, 1);
     	SkirtRight.setRotationPoint(0.0F, 8.0F, 0.0F);
     	SkirtTop.addChild(SkirtRight);
 
     	//SkirtR 後ろ
     	SkirtBack = new Modchu_ModelRenderer(this, 58, 27);
-    	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 5, 12, 0);
+    	((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 5, 12, 0);
     	SkirtBack.setRotationPoint(0.0F, 8.0F, 0.0F);
     	SkirtTop.addChild(SkirtBack);
 
@@ -222,8 +219,8 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	SkirtTopL.addChild(SkirtBackL);
 
     	SkirtLeft = new Modchu_ModelRenderer(this);
-    	rightLeg.removeChild(SkirtR);
-    	leftLeg.removeChild(SkirtL);
+    	((Modchu_ModelRenderer) rightLeg).removeChild(SkirtR);
+    	((Modchu_ModelRenderer) leftLeg).removeChild(SkirtL);
     	SkirtR.setVisible(false);
     	SkirtL.setVisible(false);
     }
@@ -465,9 +462,9 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	SkirtLeftL.rotateAngleY -= motionY / 2.0F;
     	SkirtBackL.rotateAngleX += -motionY;
 
-    	SkirtFront.scaleX = SkirtBack.scaleX =
+    	((Modchu_ModelRenderer) SkirtFront).scaleX = ((Modchu_ModelRenderer) SkirtBack).scaleX =
     			SkirtFrontL.scaleX = SkirtBackL.scaleX = 1.0F - (getMotionY() * 1.2F);
-    	SkirtRight.scaleZ =
+    	((Modchu_ModelRenderer) SkirtRight).scaleZ =
     			SkirtLeftL.scaleZ = 1.0F - (getMotionY() * 1.2F);
     }
 
@@ -516,8 +513,8 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	rightLeg2.rotateAngleZ = 0.07F;
     	leftLeg2.rotateAngleZ = -0.07F;
     	shield.setRotationPoint(1.5F, 5F, 0F);
-    	Arms[0].setRotationPointLM(0.5F, 4.5F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 4.5F, 0F);
+    	Arms[0].setRotationPoint(0.5F, 4.5F, 0F);
+    	Arms[1].setRotationPoint(-0.5F, 4.5F, 0F);
     }
 
     @Override
@@ -547,24 +544,24 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     public void actionInit1() {
     	setShortcutKeysAction(true);
     	boolean b = true;
-    	rightArm.setVisible(b);
-    	rightArm2.setVisible(b);
-    	rightArmPlus.setVisible(b);
-    	rightArmPlus2.setVisible(b);
-    	rightHand.setVisible(b);
-    	leftArm.setVisible(b);
-    	leftArm2.setVisible(b);
-    	leftArmPlus.setVisible(b);
-    	leftArmPlus2.setVisible(b);
-    	leftHand.setVisible(b);
-    	rightLeg.setVisible(b);
-    	rightLeg2.setVisible(b);
-    	rightLegPlus.setVisible(b);
-    	rightLegPlus2.setVisible(b);
-    	leftLeg.setVisible(b);
-    	leftLeg2.setVisible(b);
-    	leftLegPlus.setVisible(b);
-    	leftLegPlus2.setVisible(b);
+    	setVisible(rightArm, b);
+    	setVisible(rightArm2, b);
+    	setVisible(rightArmPlus, b);
+    	setVisible(rightArmPlus2, b);
+    	setVisible(rightHand, b);
+    	setVisible(leftArm, b);
+    	setVisible(leftArm2, b);
+    	setVisible(leftArmPlus, b);
+    	setVisible(leftArmPlus2, b);
+    	setVisible(leftHand, b);
+    	setVisible(rightLeg, b);
+    	setVisible(rightLeg2, b);
+    	setVisible(rightLegPlus, b);
+    	setVisible(rightLegPlus2, b);
+    	setVisible(leftLeg, b);
+    	setVisible(leftLeg2, b);
+    	setVisible(leftLegPlus, b);
+    	setVisible(leftLegPlus2, b);
     	sneakBan = true;
     	waitBan = true;
     	sittingBan = true;
@@ -574,17 +571,17 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
 	public void actionRelease1() {
 		setShortcutKeysAction(false);
 		boolean b = true;
-		rightArm.setVisible(b);
-		rightArm2.setVisible(b);
-		leftArm.setVisible(b);
-		leftArm2.setVisible(b);
+		setVisible(rightArm, b);
+		setVisible(rightArm2, b);
+		setVisible(leftArm, b);
+  	 	setVisible(leftArm2, b);
 		b = false;
-		rightArmPlus.setVisible(b);
-		rightArmPlus2.setVisible(b);
-		rightHand.setVisible(b);
-		leftArmPlus.setVisible(b);
-		leftArmPlus2.setVisible(b);
-		leftHand.setVisible(b);
+		setVisible(rightArmPlus, b);
+		setVisible(rightArmPlus2, b);
+		setVisible(rightHand, b);
+		setVisible(leftArmPlus, b);
+		setVisible(leftArmPlus2, b);
+		setVisible(leftHand, b);
 
 		bipedHead.rotateAngleX = 0.0F;
 		bipedHead.rotateAngleY = 0.0F;
@@ -638,6 +635,22 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
 		leftLeg2.rotationPointX += 0.5F;
 		leftLeg2.rotationPointY += 8.5F;
 	}
+
+    @Override
+    public void action4(Entity entity) {
+    	// 両手を前に出すモーション
+    	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
+    	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
+    	if (getOnGround(getSwingStatus(entity, getHandedness()), entity) > 0.0F) {
+    		rightArm.rotateAngleX += leftArm.rotateAngleX += -1.57F;
+    		rightArm.rotateAngleY = leftArm.rotateAngleY = 0.0F;
+    		rightArm.rotateAngleZ = leftArm.rotateAngleZ = 0.0F;
+    	} else {
+    		rightArm.rotateAngleX = leftArm.rotateAngleX = -1.57F;
+    		rightArm.rotateAngleY = leftArm.rotateAngleY = 0.0F;
+    		rightArm.rotateAngleZ = leftArm.rotateAngleZ = 0.0F;
+    	}
+    }
 
     public float getHeight()
     {

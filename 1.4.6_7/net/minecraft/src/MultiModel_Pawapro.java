@@ -31,15 +31,12 @@ public class MultiModel_Pawapro extends MultiModel
 
     public MultiModel_Pawapro(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 32);
-	}
+    	this(f, f1 , 64, 32);
+    }
 
-	public MultiModel_Pawapro(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_Pawapro(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
     @Override
     public void initModel(float f, float f1) {
@@ -281,24 +278,24 @@ public class MultiModel_Pawapro extends MultiModel
     	setVisible(bipedLeftArm, b);
     	setVisible(bipedRightArm, b);
     	b = true;
-    	if (rightArm != null) rightArm.setVisible(b);
-    	if (rightArm2 != null) rightArm2.setVisible(b);
-    	if (rightArmPlus != null) rightArmPlus.setVisible(b);
-    	if (rightArmPlus2 != null) rightArmPlus2.setVisible(b);
-    	if (rightHand != null) rightHand.setVisible(b);
-    	if (leftArm != null) leftArm.setVisible(b);
-    	if (leftArm2 != null) leftArm2.setVisible(b);
-    	if (leftArmPlus != null) leftArmPlus.setVisible(b);
-    	if (leftArmPlus2 != null) leftArmPlus2.setVisible(b);
-    	if (leftHand != null) leftHand.setVisible(b);
-    	if (rightLeg != null) rightLeg.isHidden = !b;
-    	if (rightLeg2 != null) rightLeg2.isHidden = !b;
-    	if (rightLegPlus != null) rightLegPlus.setVisible(b);
-    	if (rightLegPlus2 != null) rightLegPlus2.setVisible(b);
-    	if (leftLeg != null) leftLeg.isHidden = !b;
-    	if (leftLeg2 != null) leftLeg2.isHidden = !b;
-    	if (leftLegPlus != null) leftLegPlus.setVisible(b);
-    	if (leftLegPlus2 != null) leftLegPlus2.setVisible(b);
+    	setVisible(rightArm, b);
+    	setVisible(rightArm2, b);
+    	setVisible(rightArmPlus, b);
+    	setVisible(rightArmPlus2, b);
+    	setVisible(rightHand, b);
+    	setVisible(leftArm, b);
+    	setVisible(leftArm2, b);
+    	setVisible(leftArmPlus, b);
+    	setVisible(leftArmPlus2, b);
+    	setVisible(leftHand, b);
+    	rightLeg.isHidden = !b;
+    	rightLeg2.isHidden = !b;
+    	setVisible(rightLegPlus, b);
+    	setVisible(rightLegPlus2, b);
+    	leftLeg.isHidden = !b;
+    	leftLeg2.isHidden = !b;
+    	setVisible(leftLegPlus, b);
+    	setVisible(leftLegPlus2, b);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[0]);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[2]);
     	((Modchu_ModelRenderer) bipedLeftArm).removeChild(Arms[1]);
@@ -315,8 +312,8 @@ public class MultiModel_Pawapro extends MultiModel
     	leftHand.addChild(HandL);
     	rightLeg2.addChild(bipedRightLeg);
     	leftLeg2.addChild(bipedLeftLeg);
-    	Arms[0].setRotationPointLM(0.5F, 0.0F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 0.0F, 0F);
+    	Arms[0].setRotationPoint(0.0F, 3.0F, 0.0F);
+    	Arms[1].setRotationPoint(0.0F, 3.0F, 0.0F);
     	sneakBan = true;
     	waitBan = true;
     	sittingBan = true;
@@ -333,41 +330,40 @@ public class MultiModel_Pawapro extends MultiModel
     	((Modchu_ModelRenderer) bipedLeftArm).setVisible(b);
     	((Modchu_ModelRenderer) bipedRightArm).setVisible(b);
     	b = false;
-    	if (rightArm != null) rightArm.setVisible(b);
-    	if (rightArm2 != null) rightArm2.setVisible(b);
-    	if (rightArmPlus != null) rightArmPlus.setVisible(b);
-    	if (rightArmPlus2 != null) rightArmPlus2.setVisible(b);
-    	if (rightHand != null) rightHand.setVisible(b);
-    	if (leftArm != null) leftArm.setVisible(b);
-    	if (leftArm2 != null) leftArm2.setVisible(b);
-    	if (leftArmPlus != null) leftArmPlus.setVisible(b);
-    	if (leftArmPlus2 != null) leftArmPlus2.setVisible(b);
-    	if (leftHand != null) leftHand.setVisible(b);
-    	if (rightLeg != null) rightLeg.isHidden = !b;
-    	if (rightLeg2 != null) rightLeg2.isHidden = !b;
-    	if (rightLegPlus != null) rightLegPlus.setVisible(b);
-    	if (rightLegPlus2 != null) rightLegPlus2.setVisible(b);
-    	if (leftLeg != null) leftLeg.isHidden = !b;
-    	if (leftLeg2 != null) leftLeg2.isHidden = !b;
-    	if (leftLegPlus != null) leftLegPlus.setVisible(b);
-    	if (leftLegPlus2 != null) leftLegPlus2.setVisible(b);
+    	setVisible(rightArm, b);
+    	setVisible(rightArm2, b);
+    	setVisible(rightArmPlus, b);
+    	setVisible(rightArmPlus2, b);
+    	setVisible(rightHand, b);
+    	setVisible(leftArm, b);
+    	setVisible(leftArm2, b);
+    	setVisible(leftArmPlus, b);
+    	setVisible(leftArmPlus2, b);
+    	setVisible(leftHand, b);
+    	rightLeg.isHidden = !b;
+    	rightLeg2.isHidden = !b;
+    	setVisible(rightLegPlus, b);
+    	setVisible(rightLegPlus2, b);
+    	leftLeg.isHidden = !b;
+    	leftLeg2.isHidden = !b;
+    	setVisible(leftLegPlus, b);
+    	setVisible(leftLegPlus2, b);
 
-    	if (Arms != null) {
-    		if (Arms[0] != null) bipedRightArm.addChild(Arms[0]);
-    		if (Arms[2] != null) bipedRightArm.addChild(Arms[2]);
-    		if (Arms[1] != null) bipedLeftArm.addChild(Arms[1]);
-    		if (Arms[3] != null) bipedLeftArm.addChild(Arms[3]);
-    		if (Arms[0] != null) rightHand.removeChild(Arms[0]);
-    		if (Arms[2] != null) rightHand.removeChild(Arms[2]);
-    		if (Arms[1] != null) leftHand.removeChild(Arms[1]);
-    		if (Arms[3] != null) leftHand.removeChild(Arms[3]);
-    		if (Arms[0] != null) Arms[0].setRotationPointLM(0.5F, 6.5F, 0F);
-    		if (Arms[1] != null) Arms[1].setRotationPointLM(-0.5F, 6.5F, 0F);
-    	}
-    	rightLeg2.removeChild(bipedRightLeg);
-    	leftLeg2.removeChild(bipedLeftLeg);
-    	rightHand.removeChild(HandR);
-    	leftHand.removeChild(HandL);
+    	bipedRightArm.addChild(Arms[0]);
+    	bipedRightArm.addChild(Arms[2]);
+    	bipedLeftArm.addChild(Arms[1]);
+    	bipedLeftArm.addChild(Arms[3]);
+    	((Modchu_ModelRenderer) rightHand).removeChild(Arms[0]);
+    	((Modchu_ModelRenderer) rightHand).removeChild(Arms[2]);
+    	((Modchu_ModelRenderer) leftHand).removeChild(Arms[1]);
+    	((Modchu_ModelRenderer) leftHand).removeChild(Arms[3]);
+    	Arms[0].setRotationPoint(0.5F, 6.5F, 0F);
+    	Arms[1].setRotationPoint(-0.5F, 6.5F, 0F);
+
+    	((Modchu_ModelRenderer) rightLeg2).removeChild(bipedRightLeg);
+    	((Modchu_ModelRenderer) leftLeg2).removeChild(bipedLeftLeg);
+    	((Modchu_ModelRenderer) rightHand).removeChild(HandR);
+    	((Modchu_ModelRenderer) leftHand).removeChild(HandL);
     	bipedBody.addChild(bipedRightLeg);
     	bipedBody.addChild(bipedLeftLeg);
     	bipedRightArm.addChild(HandR);

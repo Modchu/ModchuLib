@@ -56,26 +56,23 @@ public class MultiModel_Yukkuri extends MultiModel
 
     public MultiModel_Yukkuri()
     {
-        this(0.0F);
+    	this(0.0F);
     }
 
     public MultiModel_Yukkuri(float f)
     {
-        this(f, 0.0F);
+    	this(f, 0.0F);
     }
 
     public MultiModel_Yukkuri(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 32);
-	}
+    	this(f, f1 , 64, 32);
+    }
 
-	public MultiModel_Yukkuri(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-		HeadMount.setRotationPoint(0.0F, -1.0F, 0.0F);
-	}
+    public MultiModel_Yukkuri(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    	HeadMount.setRotationPoint(0.0F, -1.0F, 0.0F);
+    }
 
     @Override
     public void initModel(float f, float f1) {

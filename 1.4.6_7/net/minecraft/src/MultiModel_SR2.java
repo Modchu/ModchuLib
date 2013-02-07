@@ -17,14 +17,11 @@ public class MultiModel_SR2 extends MultiModel {
 
 	public MultiModel_SR2(float f, float f1)
 	{
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 32);
 	}
 
 	public MultiModel_SR2(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
 	}
 
 	@Override

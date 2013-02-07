@@ -76,15 +76,12 @@ public class MultiModel_ch extends MultiModel_SR2
 
     public MultiModel_ch(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 64);
-	}
+    	this(f, f1 , 64, 64);
+    }
 
-	public MultiModel_ch(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_ch(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
 	@Override
 	public void initModel(float f, float f1) {
@@ -119,7 +116,7 @@ public class MultiModel_ch extends MultiModel_SR2
 		bipedLeftLeg.setRotationPoint(1.5F, 7F + f1, 0.0F);
 		bipedBody.addChild(bipedLeftLeg);
 		Skirt = new Modchu_ModelRenderer(this, 0, 16);
-		Skirt.addBoxLM(-3.5F, -2F, -2.5F, 7, 2, 5, f + 0.2F);
+		Skirt.addBox(-3.5F, -2F, -2.5F, 7, 2, 5, f + 0.2F);
 		Skirt.setRotationPoint(0.0F, 13F, 0.0F);
 		Skirt1 = new Modchu_ModelRenderer(this, 0, 23);
 		Skirt1.addBoxLM(-3.5F, -1.5F, -2.5F, 7, 2, 5, f);
@@ -435,6 +432,16 @@ public class MultiModel_ch extends MultiModel_SR2
 		actionPartsInit(f, f1);
 	}
 
+    @Override
+    public void actionPartsInit(float f, float f1) {
+    	super.actionPartsInit(f, f1);
+    	//if (rightLeg != null) rightLeg.isHidden = true;
+    	if (rightLegPlus != null) rightLegPlus.isHidden = true;
+    	//if (leftLeg != null) leftLeg.isHidden = true;
+    	if (leftLegPlus != null) leftLegPlus.isHidden = true;
+    }
+
+    @Override
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);

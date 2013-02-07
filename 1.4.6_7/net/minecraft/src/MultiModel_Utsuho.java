@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 public class MultiModel_Utsuho extends MultiModel_SR2 {
 
-    public Modchu_ModelRenderer Prim;
+	public Modchu_ModelRenderer Prim;
 	public Modchu_ModelRenderer WingLroot;
 	public Modchu_ModelRenderer WingL2;
 	public Modchu_ModelRenderer WingL3;
@@ -85,14 +85,11 @@ public class MultiModel_Utsuho extends MultiModel_SR2 {
 
 	public MultiModel_Utsuho(float f, float f1)
 	{
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 64);
 	}
 
 	public MultiModel_Utsuho(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
     	HeadMount.setRotationPoint(0.0F, 1.0F, 0.0F);
 	}
 
@@ -129,7 +126,7 @@ public class MultiModel_Utsuho extends MultiModel_SR2 {
 		bipedLeftLeg.setRotationPoint(1.5F, 15F, 0.0F);
 		bipedBody.addChild(bipedLeftLeg);
 		Skirt = new Modchu_ModelRenderer(this, 0, 16);
-		Skirt.setRotationPointLM(0.0F, 4.0F, 0.0F);
+		Skirt.setRotationPoint(0.0F, 4.0F, 0.0F);
 		bipedBody.addChild(Skirt);
 
 		CS1 = new Modchu_ModelRenderer(this, 0, 20);
@@ -291,7 +288,7 @@ public class MultiModel_Utsuho extends MultiModel_SR2 {
 		WingRroot.addChild(WingR6);
 
 		Tail = new Modchu_ModelRenderer(this, 46, 19);
-		Tail.addBoxLM(-1F, -8.5F, 5.9F, 2, 2, 2,f+0.1F);
+		Tail.addBox(-1F, -8.5F, 5.9F, 2, 2, 2,f+0.1F);
 		Tail.setRotationPoint(0.0F, 0.8F, 0.0F);
 		bipedHead.addChild(Tail);
 
@@ -742,18 +739,18 @@ public class MultiModel_Utsuho extends MultiModel_SR2 {
     @Override
     public void actionRelease1() {
     	super.actionRelease1();
-    	rightLeg2.removeChild(RightShoo);
-    	leftLeg2.removeChild(Circle1);
-    	leftLeg2.removeChild(Circle2);
-    	leftArm2.removeChild(CS1);
-    	leftArm2.removeChild(CS2);
-    	leftArm2.removeChild(CS3);
-    	leftArm2.removeChild(CS4);
-    	leftArm2.removeChild(CS5);
-    	leftArm2.removeChild(CS6);
-    	leftArm2.removeChild(CS7);
-    	leftArm2.removeChild(CS8);
-    	leftArm2.removeChild(CS9);
+    	((Modchu_ModelRenderer) rightLeg2).removeChild(RightShoo);
+    	((Modchu_ModelRenderer) leftLeg2).removeChild(Circle1);
+    	((Modchu_ModelRenderer) leftLeg2).removeChild(Circle2);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(CS1);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(CS2);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(CS3);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(CS4);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(CS5);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(CS6);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(CS7);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(CS8);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(CS9);
     	bipedLeftArm.addChild(CS1);
     	bipedLeftArm.addChild(CS2);
     	bipedLeftArm.addChild(CS3);

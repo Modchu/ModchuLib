@@ -36,14 +36,11 @@ public class MultiModel_chrno extends MultiModel
 
     public MultiModel_chrno(float f, float f1)
     {
-    	// 132deletesuper(f, f1);
-//-@-132
     	this(f, f1 , 64, 32);
     }
 
     public MultiModel_chrno(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
-//@-@132
     }
 
     @Override
@@ -182,7 +179,7 @@ public class MultiModel_chrno extends MultiModel
     			Rightarm2.addChild(Arms[2]);
     			Leftarm2.addChild(Arms[1]);
     			Leftarm2.addChild(Arms[3]);
-    			Arms[0].setRotationPointLM(-5.0F, 0.0F, 0F);
+    			Arms[0].setRotationPoint(-5.0F, 0.0F, 0F);
     		}
     		setVisible(bipedRightArm, false);
     		setVisible(bipedLeftArm, false);
@@ -213,7 +210,7 @@ public class MultiModel_chrno extends MultiModel
     			bipedRightArm.addChild(Arms[2]);
     			bipedLeftArm.addChild(Arms[1]);
     			bipedLeftArm.addChild(Arms[3]);
-    			Arms[0].setRotationPointLM(0.5F, 6.5F, 0F);
+    			Arms[0].setRotationPoint(0.5F, 6.5F, 0F);
     		}
     	}
     	if(getaimedBow()) {
@@ -255,8 +252,8 @@ public class MultiModel_chrno extends MultiModel
 		Rightarm2.removeChild(Arms[2]);
 		Leftarm2.removeChild(Arms[1]);
 		Leftarm2.removeChild(Arms[3]);
-		if (Arms[0] != null) Arms[0].setRotationPointLM(0.5F, 0.0F, 0F);
-		if (Arms[1] != null) Arms[1].setRotationPointLM(-0.5F, 0.0F, 0F);
+		if (Arms[0] != null) Arms[0].setRotationPoint(0.5F, 0.0F, 0F);
+		if (Arms[1] != null) Arms[1].setRotationPoint(-0.5F, 0.0F, 0F);
 	}
 
 	@Override

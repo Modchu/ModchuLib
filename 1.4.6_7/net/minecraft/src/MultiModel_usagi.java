@@ -12,25 +12,23 @@ public class MultiModel_usagi extends MultiModel
     public Modchu_ModelRenderer UsaER;
     public Modchu_ModelRenderer eyeL;
     public Modchu_ModelRenderer eyeR;
-	private boolean isTaremimi = false;
-	private boolean isTareRightmimi;
+    private boolean isTaremimi = false;
+    private boolean isTareRightmimi;
 
     public MultiModel_usagi()
     {
-        this(0.0F);
+    	this(0.0F);
     }
 
     public MultiModel_usagi(float f)
     {
-        this(f, 0.0F);
+    	this(f, 0.0F);
     }
 
     public MultiModel_usagi(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 32);
-	}
+    	this(f, f1 , 64, 32);
+    }
 
 	public MultiModel_usagi(float f, float f1, int i, int j) {
 		super(f, f1, i, j);

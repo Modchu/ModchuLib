@@ -49,14 +49,11 @@ public class MultiModel_bgs extends MultiModel_SR2
 
     public MultiModel_bgs(float f, float f1)
     {
-    	// 132deletesuper(f, f1);
-//-@-132
     	this(f, f1 , 64, 64);
     }
 
     public MultiModel_bgs(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
-//@-@132
     }
 
     @Override
@@ -377,11 +374,6 @@ public class MultiModel_bgs extends MultiModel_SR2
     }
 
     @Override
-    public void actionInit2() {
-    	actionInit1();
-    }
-
-    @Override
     public void actionRelease1() {
     	super.actionRelease1();
     	bipedLeftArm.isHidden = false;
@@ -407,11 +399,6 @@ public class MultiModel_bgs extends MultiModel_SR2
     			HandL2.rotationPointX =
     			HandL1.rotationPointY =
     			HandL2.rotationPointY = 0.0F;
-    }
-
-    @Override
-    public void actionRelease2() {
-    	actionRelease1();
     }
 
     @Override

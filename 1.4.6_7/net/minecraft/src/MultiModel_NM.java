@@ -46,15 +46,12 @@ public class MultiModel_NM extends MultiModel_SR2
 
     public MultiModel_NM(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 64);
-	}
+    	this(f, f1 , 64, 64);
+    }
 
-	public MultiModel_NM(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_NM(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
     @Override
     public void initModel(float f, float f1) {
@@ -131,13 +128,13 @@ public class MultiModel_NM extends MultiModel_SR2
     	SideTailR = new Modchu_ModelRenderer(this, 52, 10);
     	SideTailR.addBox(-5.6F, -6.8F, 0.0F, 1, 7, 2, f);
     	SideTailR.setRotationPoint(0.0F, 0.0F, 0.0F);
-    	SideTailR.setRotateAngleZ(0.0872665F);
+    	((Modchu_ModelRenderer) SideTailR).setRotateAngleZ(0.0872665F);
     	bipedHead.addChild(SideTailR);
     	SideTailL = new Modchu_ModelRenderer(this, 58, 10);
     	SideTailL.mirror = true;
     	SideTailL.addBox(4.6F, -6.8F, 0.0F, 1, 7, 2, f);
     	SideTailL.setRotationPoint(0.0F, 0.0F, 0.0F);
-    	SideTailL.setRotateAngleZ(0.0872665F);
+    	((Modchu_ModelRenderer) SideTailL).setRotateAngleZ(0.0872665F);
     	bipedHead.addChild(SideTailL);
     	SideTail1R = new Modchu_ModelRenderer(this, 34, 32);
     	SideTail1R.addBox(-8F, -7F, 0.0F, 3, 7, 2, f);

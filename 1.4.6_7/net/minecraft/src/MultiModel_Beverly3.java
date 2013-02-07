@@ -15,14 +15,11 @@ public class MultiModel_Beverly3 extends MultiModel_Beverly4
 
     public MultiModel_Beverly3(float f, float f1)
     {
-    	// 132deletesuper(f, f1);
-//-@-132
     	this(f, f1 , 64, 64);
     }
 
     public MultiModel_Beverly3(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
-//@-@132
     }
 
     @Override
@@ -37,7 +34,7 @@ public class MultiModel_Beverly3 extends MultiModel_Beverly4
     	bipedHead.addChild(Headwear);
     	bipedHead.addChild(eyeR);
     	bipedHead.addChild(eyeL);
-    	mainFrame.clearChildModels();
+    	((Modchu_ModelRenderer) mainFrame).clearChildModels();
     	mainFrame.addChild(bipedHead);
     	mainFrame.addChild(bipedBody);
     }

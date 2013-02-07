@@ -23,14 +23,11 @@ public class MultiModel_Aug extends MultiModel_SR2 {
 	}
 
 	public MultiModel_Aug(float f, float f1) {
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 32);
 	}
 
 	public MultiModel_Aug(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
 	}
 
 	@Override
@@ -42,11 +39,11 @@ public class MultiModel_Aug extends MultiModel_SR2 {
 		((Modchu_ModelRenderer) bipedHead).removeChild(SideTailL);
 		SideTailR = new Modchu_ModelRenderer(this);
 		SideTailR.setTextureOffset(46, 20).addBox(-1.5F, -0.5F, -1.0F, 2, 10, 2, psize);
-		SideTailR.setRotationPointLM(-5F, -7.8F, 1.9F);
+		SideTailR.setRotationPoint(-5F, -7.8F, 1.9F);
 		bipedHead.addChild(SideTailR);
 		SideTailL = new Modchu_ModelRenderer(this);
 		SideTailL.setTextureOffset(54, 20).addBox(0.5F, -0.5F, -1.0F, 2, 10, 2, psize);
-		SideTailL.setRotationPointLM(4F, -7.8F, 1.9F);
+		SideTailL.setRotationPoint(4F, -7.8F, 1.9F);
 		bipedHead.addChild(SideTailL);
 
 		// 増加パーツ
@@ -93,9 +90,9 @@ public class MultiModel_Aug extends MultiModel_SR2 {
 		bipedHead.addChild(sidetailUpperL);
 
 		// 未使用パーツ
-		((Modchu_ModelRenderer) bipedHeadwear).setVisible(false);
-		Tail.setVisible(false);
-		ChignonB.setVisible(false);
+		setVisible(bipedHeadwear, false);
+		setVisible(Tail, false);
+		setVisible(ChignonB, false);
 	}
 
 	@Override

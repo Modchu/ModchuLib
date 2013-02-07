@@ -30,15 +30,12 @@ public class MultiModel_suika extends MultiModel
 
     public MultiModel_suika(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 32);
-	}
+    	this(f, f1 , 64, 32);
+    }
 
-	public MultiModel_suika(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_suika(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
 	@Override
 	public void initModel(float f, float f1) {
@@ -73,7 +70,7 @@ public class MultiModel_suika extends MultiModel
 		SideTailR.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(SideTailR);
 		SideTailL = new Modchu_ModelRenderer(this, 58, 21);
-		SideTailL.setMirror(true);
+		((Modchu_ModelRenderer) SideTailL).setMirror(true);
 		SideTailL.addBox(3.5F, -5F, -3F, 1, 8, 2, f);
 		SideTailL.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(SideTailL);

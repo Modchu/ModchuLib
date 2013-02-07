@@ -84,14 +84,11 @@ public class MultiModel_Angel extends MultiModel_SR2 {
 
 	public MultiModel_Angel(float f, float f1)
 	{
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 64);
 	}
 
 	public MultiModel_Angel(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
 		HeadMount.setRotationPoint(0.0F, 1.0F, 0.0F);
 	}
 
@@ -128,7 +125,7 @@ public class MultiModel_Angel extends MultiModel_SR2 {
 		bipedLeftLeg.setRotationPoint(1.5F, 15F, 0.0F);
 		bipedBody.addChild(bipedLeftLeg);
 		Skirt = new Modchu_ModelRenderer(this, 0, 16);
-		Skirt.setRotationPointLM(0.0F, 2.0F, 0.0F);
+		Skirt.setRotationPoint(0.0F, 2.0F, 0.0F);
 		bipedBody.addChild(Skirt);
 
 		eyeR = new Modchu_ModelRenderer(this, 32, 19);
@@ -151,8 +148,8 @@ public class MultiModel_Angel extends MultiModel_SR2 {
 		bipedHead.addChild(Prim);
 
 		ChignonB = new Modchu_ModelRenderer(this, 52, 10);
-		ChignonB.addBoxLM(-2F, -8F, 3.3F, 4, 4, 2, f - 0.5F);
-		ChignonB.setRotationPointLM(0.0F, 0.0F, 0.0F);
+		ChignonB.addBox(-2F, -8F, 3.3F, 4, 4, 2, f - 0.5F);
+		ChignonB.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(ChignonB);
 
 		WingLroot = new Modchu_ModelRenderer(this, 0, 0);

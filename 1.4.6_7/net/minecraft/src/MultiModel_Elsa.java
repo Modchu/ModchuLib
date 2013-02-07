@@ -14,14 +14,11 @@ public class MultiModel_Elsa extends MultiModel_Elsa2 {
 
     public MultiModel_Elsa(float f, float f1)
     {
-    	// 132deletesuper(f, f1);
-//-@-132
     	this(f, f1 , 64, 32);
     }
 
     public MultiModel_Elsa(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
-//@-@132
     }
 
     @Override
@@ -80,7 +77,7 @@ public class MultiModel_Elsa extends MultiModel_Elsa2 {
 
     	((Modchu_ModelRenderer) bipedBody).removeChild(rightHand);
     	rightHand = new Modchu_ModelRenderer(this, 52, 16);
-    	rightHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	rightHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
     	rightHand.setRotationPoint(0.0F, 3.0F, 0.0F);
     	rightArm2.addChild(rightHand);
 
@@ -98,7 +95,7 @@ public class MultiModel_Elsa extends MultiModel_Elsa2 {
 
     	((Modchu_ModelRenderer) bipedBody).removeChild(leftHand);
     	leftHand = new Modchu_ModelRenderer(this, 52, 16);
-    	leftHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	leftHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
     	leftHand.setRotationPoint(0.0F, 3.0F, 0.0F);
     	leftArm2.addChild(leftHand);
 

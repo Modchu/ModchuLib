@@ -41,21 +41,18 @@ public class MultiModel_Kelo extends MultiModel
 
     public MultiModel_Kelo(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 32);
-	}
+    	this(f, f1 , 64, 32);
+    }
 
-	public MultiModel_Kelo(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_Kelo(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
 	@Override
 	public void initModel(float f, float f1) {
 		super.initModel(f, f1);
-		mainFrame.removeChild(bipedHead);
-		mainFrame.removeChild(bipedBody);
+		((Modchu_ModelRenderer) mainFrame).removeChild(bipedHead);
+		((Modchu_ModelRenderer) mainFrame).removeChild(bipedBody);
 		((Modchu_ModelRenderer) bipedHead).removeChild(ChignonR);
 		((Modchu_ModelRenderer) bipedHead).removeChild(ChignonL);
 		((Modchu_ModelRenderer) bipedHead).removeChild(ChignonB);
@@ -194,8 +191,8 @@ public class MultiModel_Kelo extends MultiModel
 		mainFrame.addChild(bipedBody);
 		mainFrame.setRotationPoint(0.0F, 0.0F, 0.0F);
 		setVisible(bipedHeadwear, false);
-		ChignonB.setVisible(false);
-		Tail.setVisible(false);
+		setVisible(ChignonB, false);
+		setVisible(Tail, false);
 		actionPartsInit(f, f1);
     }
 
@@ -206,7 +203,7 @@ public class MultiModel_Kelo extends MultiModel
 		bipedBody.addChild(rightArm);
 
 		rightArmPlus = new Modchu_ModelRenderer(this);
-		rightArmPlus.setTextureOffset(39, 19).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, -3.01F - 0.4F, 3, 3, 4, f - 0.3F);
+		((Modchu_ModelRenderer) rightArmPlus.setTextureOffset(39, 19)).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, -3.01F - 0.4F, 3, 3, 4, f - 0.3F);
 		rightArmPlus.rotateAngleX = 1.570796313F;
 		rightArm.addChild(rightArmPlus);
 
@@ -216,13 +213,13 @@ public class MultiModel_Kelo extends MultiModel
 		rightArm.addChild(rightArm2);
 
 		rightArmPlus2 = new Modchu_ModelRenderer(this);
-		rightArmPlus2.setTextureOffset(39, 19).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, 0.01F, 3, 3, 4, f - 0.3F);
-		rightArmPlus2.setTextureOffset(42, 19).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, -3.01F - 0.4F, 3, 3, 4, f - 0.3F);
+		((Modchu_ModelRenderer) rightArmPlus2.setTextureOffset(39, 19)).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, 0.01F, 3, 3, 4, f - 0.3F);
+		((Modchu_ModelRenderer) rightArmPlus2.setTextureOffset(42, 19)).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, -3.01F - 0.4F, 3, 3, 4, f - 0.3F);
 		rightArmPlus2.rotateAngleX = 1.570796313F;
 		rightArm2.addChild(rightArmPlus2);
 
 		rightHand = new Modchu_ModelRenderer(this, 36, 26);
-		rightHand.addBoxLM(-1.5F, -1.5F, -1.5F, 3, 3, 3, f - 0.3F);
+		rightHand.addBox(-1.5F, -1.5F, -1.5F, 3, 3, 3, f - 0.3F);
 		rightHand.setRotationPoint(0.0F, 4.0F, 0.0F);
 		rightArm2.addChild(rightHand);
 
@@ -238,7 +235,7 @@ public class MultiModel_Kelo extends MultiModel
 		bipedBody.addChild(leftArm);
 
 		leftArmPlus = new Modchu_ModelRenderer(this);
-		leftArmPlus.setTextureOffset(39, 19).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, -3.01F - 0.4F, 3, 3, 4, f - 0.3F);
+		((Modchu_ModelRenderer) leftArmPlus.setTextureOffset(39, 19)).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, -3.01F - 0.4F, 3, 3, 4, f - 0.3F);
 		leftArmPlus.rotateAngleX = 1.570796313F;
 		leftArm.addChild(leftArmPlus);
 
@@ -248,13 +245,13 @@ public class MultiModel_Kelo extends MultiModel
 		leftArm.addChild(leftArm2);
 
 		leftArmPlus2 = new Modchu_ModelRenderer(this);
-		leftArmPlus2.setTextureOffset(39, 19).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, 0.01F, 3, 3, 4, f - 0.3F);
-		leftArmPlus2.setTextureOffset(42, 19).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, -3.01F - 0.4F, 3, 3, 4, f - 0.3F);
+		((Modchu_ModelRenderer) leftArmPlus2.setTextureOffset(39, 19)).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, 0.01F, 3, 3, 4, f - 0.3F);
+		((Modchu_ModelRenderer) leftArmPlus2.setTextureOffset(42, 19)).addPlate(-1.5F + 0.5F, -1.5F + 0.5F, -3.01F - 0.4F, 3, 3, 4, f - 0.3F);
 		leftArmPlus2.rotateAngleX = 1.570796313F;
 		leftArm2.addChild(leftArmPlus2);
 
 		leftHand = new Modchu_ModelRenderer(this, 36, 26);
-		leftHand.addBoxLM(-1.5F, -1.5F, -1.5F, 3, 3, 3, f - 0.3F);
+		leftHand.addBox(-1.5F, -1.5F, -1.5F, 3, 3, 3, f - 0.3F);
 		leftHand.setRotationPoint(0.0F, 4.0F, 0.0F);
 		leftArm2.addChild(leftHand);
 
@@ -265,48 +262,48 @@ public class MultiModel_Kelo extends MultiModel
 		leftHand.addChild(leftHandPlus);
 
 		rightLeg = new Modchu_ModelRenderer(this, 0, 19);
-		rightLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 5, 3, f);
+		rightLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 3, f);
 		rightLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
 		bipedBody.addChild(rightLeg);
 
 		rightLegPlus = new Modchu_ModelRenderer(this);
-		rightLegPlus.setTextureOffset(3, 24).addPlate(-1.5F, -1.5F - 0.5F, -5.01F, 3, 3, 4, f);
+		((Modchu_ModelRenderer) rightLegPlus.setTextureOffset(3, 24)).addPlate(-1.5F, -1.5F - 0.5F, -5.01F, 3, 3, 4, f);
 		rightLegPlus.rotateAngleX = 1.570796313F;
 		rightLeg.addChild(rightLegPlus);
 
 		rightLeg2 = new Modchu_ModelRenderer(this, 0, 24);
-		rightLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 5, 3, f);
+		rightLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 3, f);
 		rightLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
 		rightLeg.addChild(rightLeg2);
 
 		rightLegPlus2 = new Modchu_ModelRenderer(this);
 		//rightLegPlus2.setTextureOffset(3, 24).addPlate(-1.5F, -1.5F - 0.5F, 0.01F, 3, 3, 4, f);
-		rightLegPlus2.setTextureOffset(6, 19).addPlate(-1.5F, -1.5F - 0.5F, -5.01F, 3, 3, 4, f);
+		((Modchu_ModelRenderer) rightLegPlus2.setTextureOffset(6, 19)).addPlate(-1.5F, -1.5F - 0.5F, -5.01F, 3, 3, 4, f);
 		rightLegPlus2.rotateAngleX = 1.570796313F;
 		rightLeg2.addChild(rightLegPlus2);
 
 		leftLeg = new Modchu_ModelRenderer(this, 0, 19);
 		leftLeg.mirror = true;
-		leftLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 5, 3, f);
+		leftLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 3, f);
 		leftLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
 		bipedBody.addChild(leftLeg);
 
 		leftLegPlus = new Modchu_ModelRenderer(this);
 		leftLegPlus.mirror = true;
-		leftLegPlus.setTextureOffset(3, 24).addPlate(-1.5F, -1.5F - 0.5F, -5.01F, 3, 3, 4, f);
+		((Modchu_ModelRenderer) leftLegPlus.setTextureOffset(3, 24)).addPlate(-1.5F, -1.5F - 0.5F, -5.01F, 3, 3, 4, f);
 		leftLegPlus.rotateAngleX = 1.570796313F;
 		leftLeg.addChild(leftLegPlus);
 
 		leftLeg2 = new Modchu_ModelRenderer(this, 0, 24);
 		leftLeg2.mirror = true;
-		leftLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 5, 3, f);
+		leftLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 3, f);
 		leftLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
 		leftLeg.addChild(leftLeg2);
 
 		leftLegPlus2 = new Modchu_ModelRenderer(this);
 		leftLegPlus2.mirror = true;
 		//leftLegPlus2.setTextureOffset(3, 24).addPlate(-1.5F, -1.5F, 0.01F, 3, 3, 4, f);
-		leftLegPlus2.setTextureOffset(6, 19).addPlate(-1.5F, -1.5F - 0.5F, -5.01F, 3, 3, 4, f);
+		((Modchu_ModelRenderer) leftLegPlus2.setTextureOffset(6, 19)).addPlate(-1.5F, -1.5F - 0.5F, -5.01F, 3, 3, 4, f);
 		leftLegPlus2.rotateAngleX = 1.570796313F;
 		leftLeg2.addChild(leftLegPlus2);
 
@@ -421,8 +418,8 @@ public class MultiModel_Kelo extends MultiModel
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
     	setVisible(bipedHeadwear, false);
-    	ChignonB.setVisible(false);
-    	Tail.setVisible(false);
+    	setVisible(ChignonB, false);
+    	setVisible(Tail, false);
     }
 
     @Override
@@ -448,10 +445,10 @@ public class MultiModel_Kelo extends MultiModel
     	bipedLeftArm.addChild(SleeveL);
     	bipedRightLeg.addChild(ShoesR);
     	bipedLeftLeg.addChild(ShoesL);
-    	rightArm2.removeChild(SleeveR);
-    	leftArm2.removeChild(SleeveL);
-    	rightLeg2.removeChild(ShoesR);
-    	leftLeg2.removeChild(ShoesL);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(SleeveR);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(SleeveL);
+    	((Modchu_ModelRenderer) rightLeg2).removeChild(ShoesR);
+    	((Modchu_ModelRenderer) leftLeg2).removeChild(ShoesL);
     	SleeveR.setRotationPoint(1.5F, 2.0F, 0.5F);
     	SleeveL.setRotationPoint(-1.5F, 2.0F, 0.5F);
     	ShoesR.setRotationPoint(0.5F, 0.0F, 0.5F);

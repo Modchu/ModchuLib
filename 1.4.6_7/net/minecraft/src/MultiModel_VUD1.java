@@ -82,25 +82,22 @@ public class MultiModel_VUD1 extends MultiModel_Aug
 
     public MultiModel_VUD1()
     {
-        this(0.0F);
+    	this(0.0F);
     }
 
     public MultiModel_VUD1(float f)
     {
-        this(f, 0.0F);
+    	this(f, 0.0F);
     }
 
     public MultiModel_VUD1(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 64);
-	}
+    	this(f, f1 , 64, 64);
+    }
 
-	public MultiModel_VUD1(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_VUD1(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
     @Override
     public void initModel(float f, float f1) {
@@ -130,7 +127,7 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     	bipedLeftLeg.setRotationPoint(1.5F, 15F, 0.0F);
     	bipedBody.addChild(bipedLeftLeg);
     	Skirt = new Modchu_ModelRenderer(this, 2, 18);
-    	Skirt.addBoxLM(-4F, -2F, -3F, 8, 8, 6, f);
+    	Skirt.addBox(-4F, -2F, -3F, 8, 8, 6, f);
     	Skirt.setRotationPoint(0.0F, 2.0F, 0.0F);
     	bipedBody.addChild(Skirt);
     	SideTailR = new Modchu_ModelRenderer(this);
@@ -611,22 +608,22 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     		SideTailN_LU.setRotateAngleX(-((Modchu_ModelRenderer) bipedHead).getRotateAngleX());
     		SideTailN_LB.setRotateAngleX(0.0F);
     		Tail_U.setRotateAngleX(-((Modchu_ModelRenderer) bipedHead).getRotateAngleX());
-    		Tail_B.setRotateAngleX(0.0F + Skirt.getRotateAngleX());
+    		Tail_B.setRotateAngleX(0.0F + ((Modchu_ModelRenderer) Skirt).getRotateAngleX());
     	}
     	else
     	{
     		SideTailM_RU.setRotateAngleX(0.0F);
     		SideTailM_LU.setRotateAngleX(0.0F);
-    		SideTailM_RB.setRotateAngleX((0.08726461F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX()) + Skirt.getRotateAngleX());
-    		SideTailM_LB.setRotateAngleX((0.08726461F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX()) + Skirt.getRotateAngleX());
+    		SideTailM_RB.setRotateAngleX((0.08726461F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX()) + ((Modchu_ModelRenderer) Skirt).getRotateAngleX());
+    		SideTailM_LB.setRotateAngleX((0.08726461F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX()) + ((Modchu_ModelRenderer) Skirt).getRotateAngleX());
     		SideTailF_RU.setRotateAngleX(0.0F);
     		SideTailF_LU.setRotateAngleX(0.0F);
-    		SideTailF_RB.setRotateAngleX((0.08726461F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX()) + Skirt.getRotateAngleX());
-    		SideTailF_LB.setRotateAngleX((0.08726461F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX()) + Skirt.getRotateAngleX());
+    		SideTailF_RB.setRotateAngleX((0.08726461F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX()) + ((Modchu_ModelRenderer) Skirt).getRotateAngleX());
+    		SideTailF_LB.setRotateAngleX((0.08726461F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX()) + ((Modchu_ModelRenderer) Skirt).getRotateAngleX());
     		SideTailN_LU.setRotateAngleX(0.0F);
-    		SideTailN_LB.setRotateAngleX((0.0F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX()) + Skirt.getRotateAngleX());
+    		SideTailN_LB.setRotateAngleX((0.0F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX()) + ((Modchu_ModelRenderer) Skirt).getRotateAngleX());
     		Tail_U.setRotateAngleX(0.0F);
-    		Tail_B.setRotateAngleX(-((Modchu_ModelRenderer) bipedHead).getRotateAngleX() + Skirt.getRotateAngleX());
+    		Tail_B.setRotateAngleX(-((Modchu_ModelRenderer) bipedHead).getRotateAngleX() + ((Modchu_ModelRenderer) Skirt).getRotateAngleX());
     	}
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entity)) {

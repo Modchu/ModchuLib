@@ -24,14 +24,11 @@ public class MultiModel_DressYukari extends MultiModel_SR2 {
 
 	public MultiModel_DressYukari(float f, float f1)
 	{
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 64);
 	}
 
 	public MultiModel_DressYukari(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
 		HeadMount.setRotationPoint(0.0F, 1.0F, 0.0F);
 	}
 
@@ -55,19 +52,19 @@ public class MultiModel_DressYukari extends MultiModel_SR2 {
 
 		SideTailL = new Modchu_ModelRenderer(this, 46, 26);
 		SideTailL.addBox(4.7F, -6F, 1F, 1, 1, 1,psize+0.2F);
-		SideTailL.setRotationPointLM(0F, 0F, 0F);
+		SideTailL.setRotationPoint(0F, 0F, 0F);
 		bipedHead.addChild(SideTailL);
 		SideTailL.isHidden=true;
 
 		SideTailR = new Modchu_ModelRenderer(this, 50, 26);
 		SideTailR.addBox(-5.7F, -6F, 1F, 1, 1, 1,psize+0.2F);
-		SideTailR.setRotationPointLM(0F, 0F, 0F);
+		SideTailR.setRotationPoint(0F, 0F, 0F);
 		bipedHead.addChild(SideTailR);
 		SideTailR.isHidden=true;
 
 		Tail = new Modchu_ModelRenderer(this, 46, 19);
 		Tail.addBox(-1F, -7F, 4.8F, 2, 2, 2,psize+0.1F);
-		Tail.setRotationPointLM(0F, 0F, 0F);
+		Tail.setRotationPoint(0F, 0F, 0F);
 		bipedHead.addChild(Tail);
 
 		Ahoge = new Modchu_ModelRenderer(this, 0, 1);

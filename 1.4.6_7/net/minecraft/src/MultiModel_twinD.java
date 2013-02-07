@@ -22,15 +22,12 @@ public class MultiModel_twinD extends MultiModel_SR2
 
     public MultiModel_twinD(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 32);
-	}
+    	this(f, f1 , 64, 32);
+    }
 
-	public MultiModel_twinD(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_twinD(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
 	@Override
 	public void initModel(float f, float f1) {
@@ -60,10 +57,10 @@ public class MultiModel_twinD extends MultiModel_SR2
 		longhearL.rotateAngleY=kamidomeL.rotateAngleY=-0.296706F;
 		longhearR.rotateAngleZ=-0.1745329F;
 		longhearL.rotateAngleZ=0.1745329F;
-		Tail.setVisible(false);
-		SideTailL.setVisible(false);
-		SideTailR.setVisible(false);
-		ChignonB.setVisible(false);
+		setVisible(Tail, false);
+		setVisible(SideTailL, false);
+		setVisible(SideTailR, false);
+		setVisible(ChignonB, false);
     }
 
     @Override
@@ -78,9 +75,9 @@ public class MultiModel_twinD extends MultiModel_SR2
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	Tail.setVisible(false);
-    	SideTailL.setVisible(false);
-    	SideTailR.setVisible(false);
-    	ChignonB.setVisible(false);
+    	setVisible(Tail, false);
+    	setVisible(SideTailL, false);
+    	setVisible(SideTailR, false);
+    	setVisible(ChignonB, false);
     }
 }

@@ -55,15 +55,12 @@ public class MultiModel_NM1 extends MultiModel_SR2
 
     public MultiModel_NM1(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 64);
-	}
+    	this(f, f1 , 64, 64);
+    }
 
-	public MultiModel_NM1(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_NM1(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
     @Override
     public void initModel(float f, float f1) {
@@ -320,7 +317,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
 		bipedBody.addChild(rightArm);
 
 		rightArmPlus = new Modchu_ModelRenderer(this);
-		rightArmPlus.setTextureOffset(4, 16).addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) rightArmPlus.setTextureOffset(4, 16)).addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
 		rightArmPlus.rotateAngleX = 1.570796313F;
 		rightArm.addChild(rightArmPlus);
 
@@ -330,13 +327,13 @@ public class MultiModel_NM1 extends MultiModel_SR2
 		rightArm.addChild(rightArm2);
 
 		rightArmPlus2 = new Modchu_ModelRenderer(this);
-		rightArmPlus2.setTextureOffset(4, 16).addPlate(-1.0F, -1.0F, 0.01F, 2, 2, 4, f);
-		rightArmPlus2.setTextureOffset(4, 16).addPlate(-1.0F, -1.0F, -4.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) rightArmPlus2.setTextureOffset(4, 16)).addPlate(-1.0F, -1.0F, 0.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) rightArmPlus2.setTextureOffset(4, 16)).addPlate(-1.0F, -1.0F, -4.01F, 2, 2, 4, f);
 		rightArmPlus2.rotateAngleX = 1.570796313F;
 		rightArm2.addChild(rightArmPlus2);
 
 		rightHand = new Modchu_ModelRenderer(this, 0, 22);
-		rightHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+		rightHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
 		rightHand.setRotationPoint(0.0F, 4.0F, 0.0F);
 		rightArm2.addChild(rightHand);
 
@@ -346,7 +343,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
 		bipedBody.addChild(leftArm);
 
 		leftArmPlus = new Modchu_ModelRenderer(this);
-		leftArmPlus.setTextureOffset(12, 16).addPlate(-1.0F, -1.0F, -4.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) leftArmPlus.setTextureOffset(12, 16)).addPlate(-1.0F, -1.0F, -4.01F, 2, 2, 4, f);
 		leftArmPlus.rotateAngleX = 1.570796313F;
 		leftArm.addChild(leftArmPlus);
 
@@ -356,59 +353,59 @@ public class MultiModel_NM1 extends MultiModel_SR2
 		leftArm.addChild(leftArm2);
 
 		leftArmPlus2 = new Modchu_ModelRenderer(this);
-		leftArmPlus2.setTextureOffset(12, 16).addPlate(-1.0F, -1.0F, 0.01F, 2, 2, 4, f);
-		leftArmPlus2.setTextureOffset(12, 16).addPlate(-1.0F, -1.0F, -4.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) leftArmPlus2.setTextureOffset(12, 16)).addPlate(-1.0F, -1.0F, 0.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) leftArmPlus2.setTextureOffset(12, 16)).addPlate(-1.0F, -1.0F, -4.01F, 2, 2, 4, f);
 		leftArmPlus2.rotateAngleX = 1.570796313F;
 		leftArm2.addChild(leftArmPlus2);
 
 		leftHand = new Modchu_ModelRenderer(this, 8, 24);
-		leftHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+		leftHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
 		leftHand.setRotationPoint(0.0F, 4.0F, 0.0F);
 		leftArm2.addChild(leftHand);
 
 		rightLeg = new Modchu_ModelRenderer(this, 32, 13);
-		rightLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
+		rightLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
 		rightLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
 		bipedBody.addChild(rightLeg);
 
 		rightLegPlus = new Modchu_ModelRenderer(this);
-		rightLegPlus.setTextureOffset(36, 19).addPlate(-1.5F, -2.0F, -5.01F, 3, 4, 4, f);
+		((Modchu_ModelRenderer) rightLegPlus.setTextureOffset(36, 19)).addPlate(-1.5F, -2.0F, -5.01F, 3, 4, 4, f);
 		rightLegPlus.rotateAngleX = 1.570796313F;
 		rightLeg.addChild(rightLegPlus);
 
 		rightLeg2 = new Modchu_ModelRenderer(this, 32, 18);
-		rightLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+		rightLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
 		rightLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
 		rightLeg.addChild(rightLeg2);
 
 		rightLegPlus2 = new Modchu_ModelRenderer(this);
-		rightLegPlus2.setTextureOffset(36, 19).addPlate(-1.5F, -2.0F, 0.01F, 3, 4, 4, f);
-		rightLegPlus2.setTextureOffset(39, 19).addPlate(-1.5F, -2.0F, -6.01F, 3, 4, 4, f);
+		((Modchu_ModelRenderer) rightLegPlus2.setTextureOffset(36, 19)).addPlate(-1.5F, -2.0F, 0.01F, 3, 4, 4, f);
+		((Modchu_ModelRenderer) rightLegPlus2.setTextureOffset(39, 19)).addPlate(-1.5F, -2.0F, -6.01F, 3, 4, 4, f);
 		rightLegPlus2.rotateAngleX = 1.570796313F;
 		rightLeg2.addChild(rightLegPlus2);
 
 		leftLeg = new Modchu_ModelRenderer(this, 32, 13);
 		leftLeg.mirror = true;
-		leftLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
+		leftLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
 		leftLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
 		bipedBody.addChild(leftLeg);
 
 		leftLegPlus = new Modchu_ModelRenderer(this);
 		leftLegPlus.mirror = true;
-		leftLegPlus.setTextureOffset(36, 19).addPlate(-1.5F, -2.0F, -5.01F, 3, 4, 4, f);
+		((Modchu_ModelRenderer) leftLegPlus.setTextureOffset(36, 19)).addPlate(-1.5F, -2.0F, -5.01F, 3, 4, 4, f);
 		leftLegPlus.rotateAngleX = 1.570796313F;
 		leftLeg.addChild(leftLegPlus);
 
 		leftLeg2 = new Modchu_ModelRenderer(this, 32, 18);
 		leftLeg2.mirror = true;
-		leftLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+		leftLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
 		leftLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
 		leftLeg.addChild(leftLeg2);
 
 		leftLegPlus2 = new Modchu_ModelRenderer(this);
 		leftLegPlus2.mirror = true;
-		leftLegPlus2.setTextureOffset(36, 13).addPlate(-1.5F, -2.0F, 0.01F, 3, 4, 4, f);
-		leftLegPlus2.setTextureOffset(39, 13).addPlate(-1.5F, -2.0F, -6.01F, 3, 4, 4, f);
+		((Modchu_ModelRenderer) leftLegPlus2.setTextureOffset(36, 13)).addPlate(-1.5F, -2.0F, 0.01F, 3, 4, 4, f);
+		((Modchu_ModelRenderer) leftLegPlus2.setTextureOffset(39, 13)).addPlate(-1.5F, -2.0F, -6.01F, 3, 4, 4, f);
 		leftLegPlus2.rotateAngleX = 1.570796313F;
 		leftLeg2.addChild(leftLegPlus2);
 
@@ -440,8 +437,8 @@ public class MultiModel_NM1 extends MultiModel_SR2
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	Arms[0].setRotationPointLM(0.5F, 9.0F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 9.0F, 0F);
+    	Arms[0].setRotationPoint(0.5F, 9.0F, 0F);
+    	Arms[1].setRotationPoint(-0.5F, 9.0F, 0F);
     	float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
 
     	eyeR.showModel = eyeL.showModel = false;
@@ -645,7 +642,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
     	if (getSkirtFloats()) {
-    		Skirt.setVisible(true);
+    		setVisible(Skirt, false);
     	}
     }
 
@@ -682,14 +679,14 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	boolean b = bipedRightLeg.showModel;
     	boolean b1 = bipedLeftLeg.showModel;
     	super.actionInit1();
-    	rightLeg.setVisible(b);
-    	rightLeg2.setVisible(b);
-    	rightLegPlus.setVisible(b);
-    	rightLegPlus2.setVisible(b);
-    	leftLeg.setVisible(b1);
-    	leftLeg2.setVisible(b1);
-    	leftLegPlus.setVisible(b1);
-    	leftLegPlus2.setVisible(b1);
+    	setVisible(rightLeg, b);
+    	setVisible(rightLeg2, b);
+    	setVisible(rightLegPlus, b);
+    	setVisible(rightLegPlus2, b);
+    	setVisible(leftLeg, b);
+    	setVisible(leftLeg2, b);
+    	setVisible(leftLegPlus, b);
+    	setVisible(leftLegPlus2, b);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(ArmR1);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(HandR1);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(HandR2);
@@ -759,26 +756,26 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	bipedLeftLeg.addChild(LegL5);
     	bipedLeftLeg.addChild(bootL1);
     	bipedLeftLeg.addChild(bootL2);
-    	rightArm2.removeChild(ArmR1);
-    	rightArm2.removeChild(HandR1);
-    	rightArm2.removeChild(HandR2);
-    	leftArm2.removeChild(ArmL1);
-    	leftArm2.removeChild(HandL1);
-    	leftArm2.removeChild(HandL2);
-    	rightLeg.removeChild(LegR1);
-    	rightLeg.removeChild(LegR2);
-    	rightLeg.removeChild(LegR3);
-    	rightLeg.removeChild(LegR4);
-    	rightLeg.removeChild(LegR5);
-    	rightLeg2.removeChild(bootR1);
-    	rightLeg2.removeChild(bootR2);
-    	leftLeg.removeChild(LegL1);
-    	leftLeg.removeChild(LegL2);
-    	leftLeg.removeChild(LegL3);
-    	leftLeg.removeChild(LegL4);
-    	leftLeg.removeChild(LegL5);
-    	leftLeg2.removeChild(bootL1);
-    	leftLeg2.removeChild(bootL2);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(ArmR1);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(HandR1);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(HandR2);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(ArmL1);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(HandL1);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(HandL2);
+    	((Modchu_ModelRenderer) rightLeg).removeChild(LegR1);
+    	((Modchu_ModelRenderer) rightLeg).removeChild(LegR2);
+    	((Modchu_ModelRenderer) rightLeg).removeChild(LegR3);
+    	((Modchu_ModelRenderer) rightLeg).removeChild(LegR4);
+    	((Modchu_ModelRenderer) rightLeg).removeChild(LegR5);
+    	((Modchu_ModelRenderer) rightLeg2).removeChild(bootR1);
+    	((Modchu_ModelRenderer) rightLeg2).removeChild(bootR2);
+    	((Modchu_ModelRenderer) leftLeg).removeChild(LegL1);
+    	((Modchu_ModelRenderer) leftLeg).removeChild(LegL2);
+    	((Modchu_ModelRenderer) leftLeg).removeChild(LegL3);
+    	((Modchu_ModelRenderer) leftLeg).removeChild(LegL4);
+    	((Modchu_ModelRenderer) leftLeg).removeChild(LegL5);
+    	((Modchu_ModelRenderer) leftLeg2).removeChild(bootL1);
+    	((Modchu_ModelRenderer) leftLeg2).removeChild(bootL2);
     	bootR1.rotationPointY = bootR2.rotationPointY =
     			bootL1.rotationPointY = bootL2.rotationPointY = 0.0F;
     	HandR1.rotationPointY = HandR2.rotationPointY =

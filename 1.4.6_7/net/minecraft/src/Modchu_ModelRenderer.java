@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+import net.smart.render.RendererData;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -60,11 +62,26 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public float scaleX;
 	public float scaleY;
 	public float scaleZ;
+	public boolean ignoreRender;
+	public boolean forceRender;
+	public boolean ignoreBase;
+	public boolean ignoreSuperRotation;
+	public boolean fadeEnabled;
+	public boolean fadeOffsetX;
+	public boolean fadeOffsetY;
+	public boolean fadeOffsetZ;
+	public boolean fadeRotateAngleX;
+	public boolean fadeRotateAngleY;
+	public boolean fadeRotateAngleZ;
+	public boolean fadeRotationPointX;
+	public boolean fadeRotationPointY;
+	public boolean fadeRotationPointZ;
+	public RendererData previous;
 
 //-@-132
-	public float field_82906_o = 0.0F;
-	public float field_82908_p = 0.0F;
-	public float field_82907_q = 0.0F;
+	public float offsetX = 0.0F;
+	public float offsetY = 0.0F;
+	public float offsetZ = 0.0F;
 //@-@132
 /*//b181delete
     public List cubeList;
@@ -87,9 +104,9 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	init(modelbase, i, j, s);
     }
 
-	public Modchu_ModelRenderer(ModelBase modelbase, int i, int j, Modchu_ModelRenderer modelRendererPlayerFormLittleMaid) {
+	public Modchu_ModelRenderer(ModelBase modelbase, int i, int j, ModelRenderer modelRenderer) {
 		this(modelbase, i, j);
-		base = modelRendererPlayerFormLittleMaid;
+		base = modelRenderer;
 		if (base != null)
 		{
 			base.addChild(this);
@@ -160,15 +177,15 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
 	public Modchu_ModelRenderer addPlateFreeShape(float[][] vertex, float[][] vertexN, int px, int py)
 	{
-		float[][] vt = { { this.textureOffsetX / this.textureWidth, (this.textureOffsetY + 1) / this.textureHeight }, { (this.textureOffsetX + 1) / this.textureWidth, (this.textureOffsetY + 1) / this.textureHeight }, { (this.textureOffsetX + 1) / this.textureWidth, this.textureOffsetY / this.textureHeight }, { this.textureOffsetX / this.textureWidth, this.textureOffsetY / this.textureHeight } };
+		float[][] vt = { { textureOffsetX / textureWidth, (textureOffsetY + 1) / textureHeight }, { (textureOffsetX + 1) / textureWidth, (textureOffsetY + 1) / textureHeight }, { (textureOffsetX + 1) / textureWidth, textureOffsetY / textureHeight }, { textureOffsetX / textureWidth, textureOffsetY / textureHeight } };
 
-		cubeList.add(new Modchu_ModelPlateFreeShape(this, this.textureOffsetX, this.textureOffsetY, vertex, vt, vertexN, null, 0.0F));
+		cubeList.add(new Modchu_ModelPlateFreeShape(this, textureOffsetX, textureOffsetY, vertex, vt, vertexN, null, 0.0F));
 		return this;
 	}
 
 	public Modchu_ModelRenderer addPlateFreeShape(float[][] vertex, float[][] texUV, float[][] vertexN)
 	{
-		cubeList.add(new Modchu_ModelPlateFreeShape(this, this.textureOffsetX, this.textureOffsetY, vertex, texUV, vertexN, null, 0.0F));
+		cubeList.add(new Modchu_ModelPlateFreeShape(this, textureOffsetX, textureOffsetY, vertex, texUV, vertexN, null, 0.0F));
 		return this;
 	}
 
@@ -496,6 +513,8 @@ public class Modchu_ModelRenderer extends ModelRenderer
     			if (modelRenderer != null) {
     				if (modelRenderer instanceof Modchu_ModelRenderer) {
     					((Modchu_ModelRenderer) modelRenderer).render(par1, pEntityLiving);
+    				} else if (modelRenderer instanceof Modchu_ModelRotationRenderer) {
+    					((Modchu_ModelRotationRenderer) modelRenderer).render(par1, pEntityLiving);
     				} else {
     					modelRenderer.render(par1);
     				}
@@ -512,18 +531,18 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
     public void render(float par1, EntityLiving pEntityLiving)
     {
-		if (isHidden) {
-			return;
-		}
+    	if (isHidden) {
+    		return;
+    	}
 
-		if (showModel
-				&& !compiled) {
-			compileDisplayList(par1);
-		}
+    	if (showModel
+    			&& !compiled) {
+    		compileDisplayList(par1);
+    	}
 
     		GL11.glPushMatrix();
-    		if (field_82906_o != 0.0F | field_82908_p != 0.0F | field_82907_q != 0.0F)
-    			GL11.glTranslatef(field_82906_o, field_82908_p, field_82907_q);
+    		if (offsetX != 0.0F | offsetY != 0.0F | offsetZ != 0.0F)
+    			GL11.glTranslatef(offsetX, offsetY, offsetZ);
 
     		if (rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F) {
     			GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
@@ -535,23 +554,15 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		else if (rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F)
     		{
     			GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
-
-    			//if (scaleX != 1.0F | scaleY != 1.0F | scaleZ != 1.0F)
-    				//GL11.glScalef(scaleX, scaleY, scaleZ);
     			renderObject(par1, pEntityLiving);
-
     			GL11.glTranslatef(-rotationPointX * par1, -rotationPointY * par1, -rotationPointZ * par1);
     		}
     		else
     		{
-    			//if (scaleX != 1.0F | scaleY != 1.0F | scaleZ != 1.0F)
-    				//GL11.glScalef(scaleX, scaleY, scaleZ);
     			renderObject(par1, pEntityLiving);
     		}
-    		//if (scaleX != 1.0F || scaleY != 1.0F || scaleZ != 1.0F)
-    			//GL11.glScalef(1.0F / scaleX, 1.0F / scaleY, 1.0F / scaleZ);
-    		if (field_82906_o != 0.0F | field_82908_p != 0.0F | field_82907_q != 0.0F)
-    			GL11.glTranslatef(-field_82906_o, -field_82908_p, -field_82907_q);
+    		if (offsetX != 0.0F | offsetY != 0.0F | offsetZ != 0.0F)
+    			GL11.glTranslatef(-offsetX, -offsetY, -offsetZ);
     		GL11.glPopMatrix();
     }
 
@@ -1157,6 +1168,119 @@ public class Modchu_ModelRenderer extends ModelRenderer
     public void setCompiled(boolean b) {
     	compiled = b;
     }
+
+    //SmartMovingä÷òAÅ´
+    public void reset()
+    {
+        this.rotatePriority = XYZ;
+        this.scaleX = 1.0F;
+        this.scaleY = 1.0F;
+        this.scaleZ = 1.0F;
+        this.rotationPointX = 0.0F;
+        this.rotationPointY = 0.0F;
+        this.rotationPointZ = 0.0F;
+        this.rotateAngleX = 0.0F;
+        this.rotateAngleY = 0.0F;
+        this.rotateAngleZ = 0.0F;
+        this.ignoreBase = false;
+        this.ignoreSuperRotation = false;
+        this.forceRender = false;
+        this.offsetX = 0.0F;
+        this.offsetY = 0.0F;
+        this.offsetZ = 0.0F;
+        this.fadeOffsetX = false;
+        this.fadeOffsetY = false;
+        this.fadeOffsetZ = false;
+        this.fadeRotateAngleX = false;
+        this.fadeRotateAngleY = false;
+        this.fadeRotateAngleZ = false;
+        this.fadeRotationPointX = false;
+        this.fadeRotationPointY = false;
+        this.fadeRotationPointZ = false;
+        this.previous = null;
+    }
+
+    public void fadeStore(float var1)
+    {
+        if (previous != null)
+        {
+            previous.offsetX = offsetX;
+            previous.offsetY = offsetY;
+            previous.offsetZ = offsetZ;
+            previous.rotateAngleX = rotateAngleX;
+            previous.rotateAngleY = rotateAngleY;
+            previous.rotateAngleZ = rotateAngleZ;
+            previous.rotationPointX = rotationPointX;
+            previous.rotationPointY = rotationPointY;
+            previous.rotationPointZ = rotationPointZ;
+            previous.totalTime = var1;
+        }
+    }
+
+    public void fadeIntermediate(float var1)
+    {
+        if (previous != null && var1 - previous.totalTime <= 2.0F)
+        {
+            offsetX = GetIntermediatePosition(previous.offsetX, offsetX, fadeOffsetX, previous.totalTime, var1);
+            offsetY = GetIntermediatePosition(previous.offsetY, offsetY, fadeOffsetY, previous.totalTime, var1);
+            offsetZ = GetIntermediatePosition(previous.offsetZ, offsetZ, fadeOffsetZ, previous.totalTime, var1);
+            rotateAngleX = GetIntermediateAngle(previous.rotateAngleX, rotateAngleX, fadeRotateAngleX, previous.totalTime, var1);
+            rotateAngleY = GetIntermediateAngle(previous.rotateAngleY, rotateAngleY, fadeRotateAngleY, previous.totalTime, var1);
+            rotateAngleZ = GetIntermediateAngle(previous.rotateAngleZ, rotateAngleZ, fadeRotateAngleZ, previous.totalTime, var1);
+            rotationPointX = GetIntermediatePosition(previous.rotationPointX, rotationPointX, fadeRotationPointX, previous.totalTime, var1);
+            rotationPointY = GetIntermediatePosition(previous.rotationPointY, rotationPointY, fadeRotationPointY, previous.totalTime, var1);
+            rotationPointZ = GetIntermediatePosition(previous.rotationPointZ, rotationPointZ, fadeRotationPointZ, previous.totalTime, var1);
+        }
+    }
+
+    private float GetIntermediatePosition(float var1, float var2, boolean var3, float var4, float var5)
+    {
+        return var3 && var2 != var1 ? var1 + (var2 - var1) * (var5 - var4) * 0.2F : var2;
+    }
+
+    private float GetIntermediateAngle(float var1, float var2, boolean var3, float var4, float var5)
+    {
+        if (var3 && var2 != var1)
+        {
+            while (var1 >= ((float)Math.PI * 2F))
+            {
+                var1 -= ((float)Math.PI * 2F);
+            }
+
+            while (var1 < 0.0F)
+            {
+                var1 += ((float)Math.PI * 2F);
+            }
+
+            while (var2 >= ((float)Math.PI * 2F))
+            {
+                var2 -= ((float)Math.PI * 2F);
+            }
+
+            while (var2 < 0.0F)
+            {
+                var2 += ((float)Math.PI * 2F);
+            }
+
+            if (var2 > var1 && var2 - var1 > (float)Math.PI)
+            {
+                var1 += ((float)Math.PI * 2F);
+            }
+
+            if (var2 < var1 && var1 - var2 > (float)Math.PI)
+            {
+                var2 += ((float)Math.PI * 2F);
+            }
+
+            return var1 + (var2 - var1) * (var5 - var4) * 0.2F;
+        }
+        else
+        {
+            return var2;
+        }
+    }
+    //SmartMovingä÷òAÅ™
+
 /*//b181delete
     private void compileDisplayList(float par1)
     {

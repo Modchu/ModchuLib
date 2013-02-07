@@ -5,7 +5,7 @@ import java.util.*;
 
 public class MultiModel_Yomu extends MultiModel_SR2 {
 
-    public Modchu_ModelRenderer Prim;
+	public Modchu_ModelRenderer Prim;
 	public Modchu_ModelRenderer Tail2;
 	public Modchu_ModelRenderer Skirt1;
 	public Modchu_ModelRenderer Skirt2;
@@ -105,15 +105,12 @@ public class MultiModel_Yomu extends MultiModel_SR2 {
 
 	public MultiModel_Yomu(float f, float f1)
 	{
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 64);
 	}
 
 	public MultiModel_Yomu(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
-    	HeadMount.setRotationPoint(0.0F, 1.0F, 0.0F);
+		HeadMount.setRotationPoint(0.0F, 1.0F, 0.0F);
 	}
 
 	@Override
@@ -148,7 +145,7 @@ public class MultiModel_Yomu extends MultiModel_SR2 {
 		bipedLeftLeg.setRotationPoint(1.5F, 15F, 0.0F);
 		bipedBody.addChild(bipedLeftLeg);
 		Skirt = new Modchu_ModelRenderer(this, 0, 16);
-		Skirt.setRotationPointLM(0.0F, 2.0F, 0.0F);
+		Skirt.setRotationPoint(0.0F, 2.0F, 0.0F);
 		bipedBody.addChild(Skirt);
 		HipR = new Modchu_ModelRenderer(this, 57, 28);
 		HipR.addBox(-1.5F, -0F, -0F, 3, 2, 2, f);

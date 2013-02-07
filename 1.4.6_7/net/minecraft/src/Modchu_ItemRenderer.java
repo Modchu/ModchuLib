@@ -7,11 +7,14 @@ import net.minecraft.client.Minecraft;
 
 public class Modchu_ItemRenderer extends MMM_ItemRenderer {
 
-    public static boolean flipHorizontal = false;
-    public static boolean leftHandedness = false;
+	public static boolean flipHorizontal = false;
+	public static boolean leftHandedness = false;
+	public static boolean isOlddays = false;
 
     public Modchu_ItemRenderer(Minecraft minecraft) {
     	super(minecraft);
+    	Object o = Modchu_Reflect.getFieldObject(ItemRenderer.class, "olddays");
+    	if (o != null) isOlddays = true;
     }
 
     public void renderItemInFirstPerson(float f) {
@@ -163,5 +166,18 @@ public class Modchu_ItemRenderer extends MMM_ItemRenderer {
 
     public void setFlipHorizontal(boolean b) {
     	flipHorizontal = b;
+    }
+
+    public void drawFirstPersonHand(Render r, int h)
+    {
+    	//olddays—p
+    	boolean b = false;
+    	if (isOlddays) b = (Boolean) Modchu_Reflect.getFieldObject(ItemRenderer.class, "olddays");
+    	if (!b) {
+    		((RenderPlayer)r).func_82441_a(mc.thePlayer);
+    		return;
+    	}
+    	Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.mod_PFLM_PlayerFormLittleMaid, "func_82441_a", new Class[]{ EntityClientPlayerMP.class, int.class }, new Object[]{ mc.thePlayer, h });
+    	return;
     }
 }

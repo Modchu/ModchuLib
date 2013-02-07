@@ -29,15 +29,12 @@ public class MultiModel_Mabel extends MultiModel
 
     public MultiModel_Mabel(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 32);
-	}
+    	this(f, f1 , 64, 32);
+    }
 
-	public MultiModel_Mabel(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_Mabel(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
     @Override
     public void initModel(float f, float f1) {
@@ -116,7 +113,7 @@ public class MultiModel_Mabel extends MultiModel
     	SideTailR.setRotationPoint(0.0F, 0.0F, 0.0F);
     	bipedHead.addChild(SideTailR);
     	SideTailL = new Modchu_ModelRenderer(this, 56, 13);
-    	SideTailL.setMirror(true);
+    	((Modchu_ModelRenderer) SideTailL).setMirror(true);
     	SideTailL.addBox(0.0F, -0.5F, 0.25F, 2, 17, 2, f);
     	SideTailL.setRotationPoint(0.0F, 0.0F, 0.0F);
     	bipedHead.addChild(SideTailL);
@@ -145,13 +142,13 @@ public class MultiModel_Mabel extends MultiModel
     	rightArm.addChild(rightArm2);
 
     	rightArmPlus2 = new Modchu_ModelRenderer(this);
-    	rightArmPlus2.setTextureOffset(32, 22).addPlate(-1.0F, -1.0F, 0.001F, 2, 2, 4, f);
-    	rightArmPlus2.setTextureOffset(32, 22).addPlate(-1.0F, -1.0F, -2.001F, 2, 2, 0, f);
+    	((Modchu_ModelRenderer) rightArmPlus2.setTextureOffset(32, 22)).addPlate(-1.0F, -1.0F, 0.001F, 2, 2, 4, f);
+    	((Modchu_ModelRenderer) rightArmPlus2.setTextureOffset(32, 22)).addPlate(-1.0F, -1.0F, -2.001F, 2, 2, 0, f);
     	rightArmPlus2.rotateAngleX = 1.570796313F;
     	rightArm2.addChild(rightArmPlus2);
 
     	rightHand = new Modchu_ModelRenderer(this, 28, 28);
-    	rightHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	rightHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
     	rightHand.setRotationPoint(0.0F, 3.0F, 0.0F);
     	rightArm2.addChild(rightHand);
 
@@ -171,59 +168,59 @@ public class MultiModel_Mabel extends MultiModel
     	leftArm.addChild(leftArm2);
 
     	leftArmPlus2 = new Modchu_ModelRenderer(this);
-    	leftArmPlus2.setTextureOffset(40, 22).addPlate(-1.0F, -1.0F, 0.001F, 2, 2, 4, f);
-    	leftArmPlus2.setTextureOffset(40, 22).addPlate(-1.0F, -1.0F, -2.001F, 2, 2, 0, f);
+    	((Modchu_ModelRenderer) leftArmPlus2.setTextureOffset(40, 22)).addPlate(-1.0F, -1.0F, 0.001F, 2, 2, 4, f);
+    	((Modchu_ModelRenderer) leftArmPlus2.setTextureOffset(40, 22)).addPlate(-1.0F, -1.0F, -2.001F, 2, 2, 0, f);
     	leftArmPlus2.rotateAngleX = 1.570796313F;
     	leftArm2.addChild(leftArmPlus2);
 
     	leftHand = new Modchu_ModelRenderer(this, 36, 28);
-    	leftHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	leftHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
     	leftHand.setRotationPoint(0.0F, 3.0F, 0.0F);
     	leftArm2.addChild(leftHand);
 
     	rightLeg = new Modchu_ModelRenderer(this, 32, 0);
-    	rightLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 4, 4, f);
+    	rightLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 4, 4, f);
     	rightLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
     	bipedBody.addChild(rightLeg);
 
     	rightLegPlus = new Modchu_ModelRenderer(this);
-    	rightLegPlus.setTextureOffset(36, 6).addPlate(-1.5F, -2.0F, -4.01F, 3, 4, 4, f);
+    	((Modchu_ModelRenderer) rightLegPlus.setTextureOffset(36, 6)).addPlate(-1.5F, -2.0F, -4.01F, 3, 4, 4, f);
     	rightLegPlus.rotateAngleX = 1.570796313F;
     	rightLeg.addChild(rightLegPlus);
 
     	rightLeg2 = new Modchu_ModelRenderer(this, 32, 4);
-    	rightLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
+    	rightLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
     	rightLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
     	rightLeg.addChild(rightLeg2);
 
     	rightLegPlus2 = new Modchu_ModelRenderer(this);
-    	rightLegPlus2.setTextureOffset(36, 6).addPlate(-1.5F, -2.0F, 0.01F, 3, 4, 4, f);
-    	rightLegPlus2.setTextureOffset(39, 6).addPlate(-1.5F, -2.0F, -5.01F, 3, 4, 4, f);
+    	((Modchu_ModelRenderer) rightLegPlus2.setTextureOffset(36, 6)).addPlate(-1.5F, -2.0F, 0.01F, 3, 4, 4, f);
+    	((Modchu_ModelRenderer) rightLegPlus2.setTextureOffset(39, 6)).addPlate(-1.5F, -2.0F, -5.01F, 3, 4, 4, f);
     	rightLegPlus2.rotateAngleX = 1.570796313F;
     	rightLeg2.addChild(rightLegPlus2);
 
     	leftLeg = new Modchu_ModelRenderer(this, 32, 0);
     	leftLeg.mirror = true;
-    	leftLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 4, 4, f);
+    	leftLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 4, 4, f);
     	leftLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
     	bipedBody.addChild(leftLeg);
 
     	leftLegPlus = new Modchu_ModelRenderer(this);
     	leftLegPlus.mirror = true;
-    	leftLegPlus.setTextureOffset(36, 6).addPlate(-1.5F, -2.0F, -4.01F, 3, 4, 4, f);
+    	((Modchu_ModelRenderer) leftLegPlus.setTextureOffset(36, 6)).addPlate(-1.5F, -2.0F, -4.01F, 3, 4, 4, f);
     	leftLegPlus.rotateAngleX = 1.570796313F;
     	leftLeg.addChild(leftLegPlus);
 
     	leftLeg2 = new Modchu_ModelRenderer(this, 32, 4);
     	leftLeg2.mirror = true;
-    	leftLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
+    	leftLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
     	leftLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
     	leftLeg.addChild(leftLeg2);
 
     	leftLegPlus2 = new Modchu_ModelRenderer(this);
     	leftLegPlus2.mirror = true;
-    	leftLegPlus2.setTextureOffset(36, 6).addPlate(-1.5F, -2.0F, 0.01F, 3, 4, 4, f);
-    	leftLegPlus2.setTextureOffset(39, 6).addPlate(-1.5F, -2.0F, -5.01F, 3, 4, 4, f);
+    	((Modchu_ModelRenderer) leftLegPlus2.setTextureOffset(36, 6)).addPlate(-1.5F, -2.0F, 0.01F, 3, 4, 4, f);
+    	((Modchu_ModelRenderer) leftLegPlus2.setTextureOffset(39, 6)).addPlate(-1.5F, -2.0F, -5.01F, 3, 4, 4, f);
     	leftLegPlus2.rotateAngleX = 1.570796313F;
     	leftLeg2.addChild(leftLegPlus2);
 
@@ -248,31 +245,31 @@ public class MultiModel_Mabel extends MultiModel
     	if(!getSkirtFloats()) return;
     	//スカート上
     	SkirtTop = new Modchu_ModelRenderer(this, 4, 24);
-    	SkirtTop.addPlate(0.0F, 0.0F, 0.0F, 4, 4, 0, f + 2.0F);
+    	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 4, 4, 0, f + 2.0F);
     	SkirtTop.setRotationPoint(0.0F, 0.0F, 0.0F);
     	Skirt.addChild(SkirtTop);
 
     	//スカート前
     	SkirtFront = new Modchu_ModelRenderer(this, 4, 28);
-    	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 4, 4, 0, f + 2.0F);
+    	((Modchu_ModelRenderer) SkirtFront).addPlate(0.0F, 0.0F, 0.0F, 4, 4, 0, f + 2.0F);
     	SkirtFront.setRotationPoint(0.0F, 0.0F, 0.0F);
     	SkirtTop.addChild(SkirtFront);
 
     	//スカート右
     	SkirtRight = new Modchu_ModelRenderer(this, 0, 28);
-    	SkirtRight.addPlate(0.0F, 0.0F, 0.0F, 4, 4, 1, f + 2.0F);
+    	((Modchu_ModelRenderer) SkirtRight).addPlate(0.0F, 0.0F, 0.0F, 4, 4, 1, f + 2.0F);
     	SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
     	SkirtTop.addChild(SkirtRight);
 
     	//スカート左
     	SkirtLeft = new Modchu_ModelRenderer(this, 8, 28);
-    	SkirtLeft.addPlate(0.0F, 0.0F, 0.0F, 4, 4, 1, f + 2.0F);
+    	((Modchu_ModelRenderer) SkirtLeft).addPlate(0.0F, 0.0F, 0.0F, 4, 4, 1, f + 2.0F);
     	SkirtLeft.setRotationPoint(0.0F, 0.0F, 0.0F);
     	SkirtTop.addChild(SkirtLeft);
 
     	//スカート後ろ
     	SkirtBack = new Modchu_ModelRenderer(this, 12, 28);
-    	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 4, 4, 0, f + 2.0F);
+    	((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 4, 4, 0, f + 2.0F);
     	SkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
     	SkirtTop.addChild(SkirtBack);
 
@@ -305,15 +302,15 @@ public class MultiModel_Mabel extends MultiModel
     	innerSkirtBack.addPlate(0.0F, 0.0F, 0.0F, 3, 3, 0, f + 1.6F);
     	innerSkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
     	innerSkirtTop.addChild(innerSkirtBack);
-    	Skirt.setVisible(false);
+    	setVisible(Skirt, false);
     	innerSkirt.setVisible(false);
     }
 
     @Override
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
-    	Arms[0].setRotationPointLM(-0.5F, 4.5F, 0F);
-    	Arms[1].setRotationPointLM(0.5F, 4.5F, 0F);
+    	Arms[0].setRotationPoint(-0.5F, 4.5F, 0F);
+    	Arms[1].setRotationPoint(0.5F, 4.5F, 0F);
     	bipedBody.rotationPointY -= 3.5F;
     	bipedRightArm.rotationPointY += 4.5F;
     	bipedLeftArm.rotationPointY += 4.5F;
@@ -467,8 +464,8 @@ public class MultiModel_Mabel extends MultiModel
     	super.actionRelease1();
     	bipedLeftLeg.addChild(innerLeftLeg);
     	bipedRightLeg.addChild(innerRightLeg);
-    	leftLeg.removeChild(innerLeftLeg);
-    	rightLeg.removeChild(innerRightLeg);
+    	((Modchu_ModelRenderer) leftLeg).removeChild(innerLeftLeg);
+    	((Modchu_ModelRenderer) rightLeg).removeChild(innerRightLeg);
     	bipedLeftLeg.isHidden = false;
     	bipedRightLeg.isHidden = false;
     }
@@ -483,7 +480,7 @@ public class MultiModel_Mabel extends MultiModel
     		bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F - (f1 * 1.30889264F);
     	}
     	bipedHead.rotationPointX = 0.0F;
-    	Arms[0].setRotationPointLM(0.5F, 0.0F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 0.0F, 0F);
+    	Arms[0].setRotationPoint(0.5F, 0.0F, 0F);
+    	Arms[1].setRotationPoint(-0.5F, 0.0F, 0F);
     }
 }

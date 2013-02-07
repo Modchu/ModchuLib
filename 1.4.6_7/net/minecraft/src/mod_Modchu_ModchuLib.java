@@ -12,16 +12,18 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	//cfg書き込み項目
 	public static boolean skirtFloats = false;
-	public static boolean debugMessage = true;
-	public static boolean debugMessageDetail = false;
 	public static float skirtFloatsVolume = 1.0F;
+	public static boolean modchuRemodelingModel = true;
+	public static boolean useInvisibilityBody = true;
+	public static boolean useInvisibilityArmor = false;
+	public static boolean useInvisibilityItem = false;
 
 	public static boolean isForge = false;
 	public static boolean isLMM = false;
 	public static boolean isPFLM = false;
 	public static boolean isFavBlock = false;
 	public static boolean isDecoBlock = false;
-	public static Boolean modchuRemodelingModel = false;
+	public static mod_Modchu_ModchuLib mod_modchu_modchulib;
 	public static Class MMM_TextureManager;
 	public static Class MMM_FileManager;
 	public static Class MMM_TextureBox;
@@ -39,13 +41,6 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	private static final File cfgdir = new File(Minecraft.getMinecraftDir(), "/config/");
 	private static File mainCfgfile = new File(cfgdir, ("Modchu_ModchuLib.cfg"));
 
-	public static void Debug(String pText) {
-		// デバッグメッセージ
-		if (debugMessage) {
-			System.out.println(String.format("ModchuLib-%s", pText));
-		}
-	}
-
 	@Override
 	public String getName() {
 		return "ModchuLib";
@@ -53,12 +48,16 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.4.6~7-1a";
+		return "1.4.6~7-1b";
 	}
 
 	@Override
 	public void load() {
-		Modchu_Reflect.debugMessage = false;
+		mod_modchu_modchulib = this;
+		if (Modchu_Debug.debugMessage
+				&& !mod_modchu_modchulib.isRelease()) Modchu_Debug.debugString = new String[10];
+		ModLoader.setInGameHook(this, true, true);
+		Modchu_Reflect.setDebugMessage(false);
 		//minecraft旧バージョン用
 		isModchu = Modchu_Reflect.loadClass(getClassName("Modchu_TextureManager")) != null;
 		if (isModchu) {
@@ -83,13 +82,8 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 			isPFLM = true;
 			PFLM_Gui = Modchu_Reflect.loadClass(getClassName("PFLM_Gui"));
 			PFLM_EntityPlayerDummy = Modchu_Reflect.loadClass(getClassName("PFLM_EntityPlayerDummy"));
-			modchuRemodelingModel = (Boolean) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "modchuRemodelingModel");
-			Modchu_Reflect.setDebugMessage(debugMessage);
-			Modchu_Reflect.setDebugMessageDetail(debugMessageDetail);
-		} else {
-			Modchu_Reflect.debugMessage = false;
 		}
-		mod_Modchu_ModchuLib.Debug("load() end");
+		Modchu_Debug.Debug("load() end");
 	}
 
 	@Override
@@ -105,7 +99,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 			}
 
 			// テクスチャインデックスの構築
-			Debug("Localmode: InitTextureList.");
+			Modchu_Debug.Debug("Localmode: InitTextureList.");
 			Modchu_Reflect.invokeMethod(MMM_TextureManager, "initTextureList", new Class[]{ boolean.class}, null, new Object[]{ true });
 		}
 
@@ -188,26 +182,46 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 			if (!mainCfgfile.exists()) {
 				// cfgファイルが無い = 新規作成
 				String s[] = {
-						"skirtFloats=false", "skirtFloatsVolume=1.0F", "debugMessage=true", "debugMessageDetail=false"
+						"skirtFloats=false", "skirtFloatsVolume=1.0F", "debugMessage=true", "debugMessagetexture=true", "debugReflectMessage=true",
+						"debugReflectMessageDetail=false", "modchuRemodelingModel=true", "useInvisibilityBody=true", "useInvisibilityArmor=false", "useInvisibilityItem=false"
 				};
 				Modchu_Config.writerConfig(mainCfgfile, s);
 			} else {
 				// cfgファイルがある
 				skirtFloats = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "skirtFloats", skirtFloats)).toString());
 				skirtFloatsVolume = Float.valueOf((Modchu_Config.loadConfig(mainCfgfile, "skirtFloatsVolume", skirtFloatsVolume)).toString());
-				debugMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugMessage", debugMessage)).toString());
-				debugMessageDetail = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugMessageDetail", debugMessageDetail)).toString());
+				Modchu_Debug.debugMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugMessage", Modchu_Debug.debugMessage)).toString());
+				Modchu_Debug.debugMessagetexture = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugMessagetexture", Modchu_Debug.debugMessagetexture)).toString());
+				Modchu_Reflect.debugReflectMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugReflectMessage", Modchu_Reflect.debugReflectMessage)).toString());
+				Modchu_Reflect.debugReflectMessageDetail = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugReflectMessageDetail", Modchu_Reflect.debugReflectMessageDetail)).toString());
+				modchuRemodelingModel = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "modchuRemodelingModel", modchuRemodelingModel)).toString());
+				useInvisibilityBody = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityBody", useInvisibilityBody)).toString());
+				useInvisibilityArmor = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityArmor", useInvisibilityArmor)).toString());
+				useInvisibilityItem = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityItem", useInvisibilityItem)).toString());
 				String k[] = {
-						"skirtFloats", "skirtFloatsVolume", "debugMessage", "debugMessageDetail"
+						"skirtFloats", "skirtFloatsVolume", "debugMessage", "debugMessagetexture", "debugReflectMessage",
+						"debugReflectMessageDetail", "modchuRemodelingModel", "useInvisibilityBody", "useInvisibilityArmor", "useInvisibilityItem"
 				};
 				String k1[] = {
-						""+skirtFloats, ""+skirtFloatsVolume, ""+debugMessage, ""+debugMessageDetail
+						""+skirtFloats, ""+skirtFloatsVolume, ""+Modchu_Debug.debugMessage, ""+Modchu_Debug.debugMessagetexture, ""+Modchu_Reflect.debugReflectMessage,
+						""+Modchu_Reflect.debugReflectMessageDetail, ""+modchuRemodelingModel, ""+useInvisibilityBody, ""+useInvisibilityArmor, ""+useInvisibilityItem
 				};
 				if (skirtFloatsVolume < 0.0F) skirtFloatsVolume = 0.0F;
 				if (skirtFloatsVolume > 2.0F) skirtFloatsVolume = 2.0F;
 				Modchu_Config.writerSupplementConfig(mainCfgfile, k, k1);
 			}
 		}
+	}
+
+	public boolean onTickInGame(float f, Minecraft minecraft)
+	{
+		if (Modchu_Debug.debugMessage
+				&& !mod_modchu_modchulib.isRelease()) Modchu_Debug.dDebugDrow();
+		return true;
+	}
+
+	public boolean isRelease() {
+		return getClass().getPackage() == null;
 	}
 
 	public String getClassName(String s) {
@@ -234,7 +248,6 @@ public class mod_Modchu_ModchuLib extends BaseMod {
     		++j1;
     		if (!iterator.hasNext()) break;
     		Entry entry = (Entry)iterator.next();
-    		//if (flag && ((Map)entry.getValue()).get(i) != null) return (String)entry.getKey();
     		if (j1 == i) return (String)entry.getKey();
     	} while (true);
     	for (Iterator iterator1 = hashMap.entrySet().iterator(); iterator1.hasNext();) {

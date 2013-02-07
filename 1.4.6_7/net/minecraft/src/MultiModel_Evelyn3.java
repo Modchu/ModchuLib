@@ -39,17 +39,14 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
 
     public MultiModel_Evelyn3(float f, float f1)
     {
-    	// 132deletesuper(f, f1);
-//-@-132
     	this(f, f1 , 64, 64);
     }
 
     public MultiModel_Evelyn3(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
-//@-@132
     	HeadMount.setRotationPoint(0F, 1.5F, 0F);
-    	Arms[0].setRotationPointLM(0.5F, 11.0F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 11.0F, 0F);
+    	Arms[0].setRotationPoint(0.5F, 11.0F, 0F);
+    	Arms[1].setRotationPoint(-0.5F, 11.0F, 0F);
     }
 
     @Override
@@ -234,7 +231,7 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
 		bipedBody.addChild(rightArm);
 
 		rightArmPlus = new Modchu_ModelRenderer(this);
-		rightArmPlus.setTextureOffset(52, 0).addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) rightArmPlus.setTextureOffset(52, 0)).addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
 		rightArmPlus.rotateAngleX = 1.570796313F;
 		rightArm.addChild(rightArmPlus);
 
@@ -244,13 +241,13 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
 		rightArm.addChild(rightArm2);
 
 		rightArmPlus2 = new Modchu_ModelRenderer(this);
-		rightArmPlus2.setTextureOffset(52, 0).addPlate(-1.0F, -1.0F, 0.01F, 2, 2, 4, f);
-		rightArmPlus2.setTextureOffset(52, 0).addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) rightArmPlus2.setTextureOffset(52, 0)).addPlate(-1.0F, -1.0F, 0.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) rightArmPlus2.setTextureOffset(52, 0)).addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
 		rightArmPlus2.rotateAngleX = 1.570796313F;
 		rightArm2.addChild(rightArmPlus2);
 
-		rightHand = new Modchu_ModelRenderer(this, 48, 6);
-		rightHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+		rightHand = new Modchu_ModelRenderer(this, 48, 10);
+		rightHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
 		rightHand.setRotationPoint(0.0F, 4.0F, 0.0F);
 		rightArm2.addChild(rightHand);
 
@@ -260,7 +257,7 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
 		bipedBody.addChild(leftArm);
 
 		leftArmPlus = new Modchu_ModelRenderer(this);
-		leftArmPlus.setTextureOffset(60, 0).addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) leftArmPlus.setTextureOffset(60, 0)).addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
 		leftArmPlus.rotateAngleX = 1.570796313F;
 		leftArm.addChild(leftArmPlus);
 
@@ -270,13 +267,13 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
 		leftArm.addChild(leftArm2);
 
 		leftArmPlus2 = new Modchu_ModelRenderer(this);
-		leftArmPlus2.setTextureOffset(60, 0).addPlate(-1.0F, -1.0F, 0.01F, 2, 2, 4, f);
-		leftArmPlus2.setTextureOffset(60, 0).addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) leftArmPlus2.setTextureOffset(60, 0)).addPlate(-1.0F, -1.0F, 0.01F, 2, 2, 4, f);
+		((Modchu_ModelRenderer) leftArmPlus2.setTextureOffset(60, 0)).addPlate(-1.0F, -1.0F, -3.01F, 2, 2, 4, f);
 		leftArmPlus2.rotateAngleX = 1.570796313F;
 		leftArm2.addChild(leftArmPlus2);
 
-		leftHand = new Modchu_ModelRenderer(this, 56, 6);
-		leftHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+		leftHand = new Modchu_ModelRenderer(this, 56, 10);
+		leftHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
 		leftHand.setRotationPoint(0.0F, 4.0F, 0.0F);
 		leftArm2.addChild(leftHand);
 
@@ -296,7 +293,7 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
 		if(!getSkirtFloats()) return;
 		//SkirtR 上
 		SkirtTop = new Modchu_ModelRenderer(this, 5, 40);
-		SkirtTop.addPlate(-2.5F, 0.0F, -2.5F, 5, 5, 0);
+		((Modchu_ModelRenderer) SkirtTop).addPlate(-2.5F, 0.0F, -2.5F, 5, 5, 0);
 		Skirt1.addChild(SkirtTop);
 
 		//SkirtR 上後
@@ -306,7 +303,7 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
 
 		//SkirtR 前
 		SkirtFront = new Modchu_ModelRenderer(this, 5, 45);
-		SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 5, 7, 0);
+		((Modchu_ModelRenderer) SkirtFront).addPlate(0.0F, 0.0F, 0.0F, 5, 7, 0);
 		SkirtTop.addChild(SkirtFront);
 
 		//SkirtR 右前
@@ -321,7 +318,7 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
 
 		//SkirtR 後ろ
 		SkirtBack = new Modchu_ModelRenderer(this, 15, 57);
-		SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 5, 7, 0);
+		((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 5, 7, 0);
 		SkirtTopBack.addChild(SkirtBack);
 
 		//SkirtL 上前
@@ -642,7 +639,7 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
 		SkirtLeftBack.rotateAngleY += motionY * 1.2F;
 		SkirtBackL.rotateAngleX += motionY;
 
-		SkirtFront.scaleX = SkirtBack.scaleX =
+		((Modchu_ModelRenderer) SkirtFront).scaleX = ((Modchu_ModelRenderer) SkirtBack).scaleX =
 				SkirtFrontL.scaleX = SkirtBackL.scaleX = 1.0F - (getMotionY() * 1.2F);
 		SkirtLeftFront.scaleZ = SkirtLeftBack.scaleZ =
 				SkirtRightFront.scaleZ = SkirtRightBack.scaleZ = 1.0F - (getMotionY() * 1.5F);
@@ -720,10 +717,10 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
     public void actionRelease1() {
     	super.actionRelease1();
     	boolean b = true;
-    	if (rightLeg != null) rightLeg.setVisible(b);
-    	if (rightLeg2 != null) rightLeg2.setVisible(b);
-    	if (leftLeg != null) leftLeg.setVisible(b);
-    	if (leftLeg2 != null) leftLeg2.setVisible(b);
+    	if (rightLeg != null) setVisible(rightLeg, b);
+    	if (rightLeg2 != null) setVisible(rightLeg2, b);
+    	if (leftLeg != null) setVisible(leftLeg, b);
+    	if (leftLeg2 != null) setVisible(leftLeg2, b);
     	rightLeg.rotateAngleX = 0.0F;
     	rightLeg.rotateAngleY = 0.0F;
     	rightLeg.rotateAngleZ = 0.0F;
@@ -736,8 +733,8 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
     	leftLeg2.rotateAngleX = 0.0F;
     	leftLeg2.rotateAngleY = 0.0F;
     	leftLeg2.rotateAngleZ = 0.0F;
-    	Arms[0].setRotationPointLM(0.5F, 11.0F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 11.0F, 0F);
+    	Arms[0].setRotationPoint(0.5F, 11.0F, 0F);
+    	Arms[1].setRotationPoint(-0.5F, 11.0F, 0F);
     }
 
     @Override

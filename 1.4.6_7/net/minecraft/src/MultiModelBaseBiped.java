@@ -15,27 +15,27 @@ import org.lwjgl.opengl.GL11;
  */
 public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 
-    public Modchu_ModelRenderer rightArm;
-    public Modchu_ModelRenderer rightArm2;
-    public Modchu_ModelRenderer rightArmPlus;
-    public Modchu_ModelRenderer rightArmPlus2;
-    public Modchu_ModelRenderer rightHand;
-    public Modchu_ModelRenderer rightLeg;
-    public Modchu_ModelRenderer rightLeg2;
-    public Modchu_ModelRenderer rightLegPlus;
-    public Modchu_ModelRenderer rightLegPlus2;
-    public Modchu_ModelRenderer leftArm;
-    public Modchu_ModelRenderer leftArm2;
-    public Modchu_ModelRenderer leftArmPlus;
-    public Modchu_ModelRenderer leftArmPlus2;
-    public Modchu_ModelRenderer leftHand;
-    public Modchu_ModelRenderer leftLeg;
-    public Modchu_ModelRenderer leftLeg2;
-    public Modchu_ModelRenderer leftLegPlus;
-    public Modchu_ModelRenderer leftLegPlus2;
-    public Modchu_ModelRenderer Arms[];
-    public Modchu_ModelRenderer HeadMount;
-    public Modchu_ModelRenderer mainFrame;
+    public ModelRenderer rightArm;
+    public ModelRenderer rightArm2;
+    public ModelRenderer rightArmPlus;
+    public ModelRenderer rightArmPlus2;
+    public ModelRenderer rightHand;
+    public ModelRenderer rightLeg;
+    public ModelRenderer rightLeg2;
+    public ModelRenderer rightLegPlus;
+    public ModelRenderer rightLegPlus2;
+    public ModelRenderer leftArm;
+    public ModelRenderer leftArm2;
+    public ModelRenderer leftArmPlus;
+    public ModelRenderer leftArmPlus2;
+    public ModelRenderer leftHand;
+    public ModelRenderer leftLeg;
+    public ModelRenderer leftLeg2;
+    public ModelRenderer leftLegPlus;
+    public ModelRenderer leftLegPlus2;
+    public ModelRenderer Arms[];
+    public ModelRenderer HeadMount;
+    public ModelRenderer mainFrame;
     public static Minecraft mc = Minecraft.getMinecraft();
     //public static int partsNumber = 0;
     public static int partsSetFlag = 1;
@@ -150,25 +150,25 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	Arms = new Modchu_ModelRenderer[18];
     	// 手持ち
     	Arms[0] = new Modchu_ModelRenderer(this, 0, 0);
-    	Arms[0].setRotationPointLM(0.5F, 6.5F, 0F);
+    	Arms[0].setRotationPoint(0.5F, 6.5F, 0F);
     	Arms[1] = new Modchu_ModelRenderer(this, 0, 0);
     	Arms[1].setRotationPoint(-0.5F, 6.5F, 0F);
-    	Arms[1].isInvertX = true;
+    	((Modchu_ModelRenderer) Arms[1]).isInvertX = true;
     	// バイプロダクトエフェクター
     	Arms[2] = new Modchu_ModelRenderer(this, 0, 0);
     	Arms[2].setRotationPoint(-3F, 9F, 6F);
-    	Arms[2].setRotateAngle(0.78539816339744830961566084581988F, 0F, 0F);
+    	((Modchu_ModelRenderer) Arms[2]).setRotateAngle(0.78539816339744830961566084581988F, 0F, 0F);
     	Arms[3] = new Modchu_ModelRenderer(this, 0, 0);
     	Arms[3].setRotationPoint(3F, 9F, 6F);
-    	Arms[3].setRotateAngle(0.78539816339744830961566084581988F, 0F, 0F);
-    	Arms[3].isInvertX = true;
+    	((Modchu_ModelRenderer) Arms[3]).setRotateAngle(0.78539816339744830961566084581988F, 0F, 0F);
+    	((Modchu_ModelRenderer) Arms[3]).isInvertX = true;
     	// テールソード
     	Arms[4] = new Modchu_ModelRenderer(this, 0, 0);
     	Arms[4].setRotationPoint(-2F, 0F, 0F);
-    	Arms[4].setRotateAngle(3.1415926535897932384626433832795F, 0F, 0F);
+    	((Modchu_ModelRenderer) Arms[4]).setRotateAngle(3.1415926535897932384626433832795F, 0F, 0F);
     	Arms[5] = new Modchu_ModelRenderer(this, 0, 0);
     	Arms[5].setRotationPoint(2F, 0F, 0F);
-    	Arms[5].setRotateAngle(3.1415926535897932384626433832795F, 0F, 0F);
+    	((Modchu_ModelRenderer) Arms[5]).setRotateAngle(3.1415926535897932384626433832795F, 0F, 0F);
 
 
 //		Arms[8] = new Modchu_ModelRenderer(this, "HeadTop");
@@ -201,7 +201,9 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public void render(Entity entity, float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5) {
     	if (entity instanceof EntityLiving) {
     		setRotationAngles(f, f1, ticksExisted, pheadYaw, pheadPitch, f5, entity);
-    		mainFrame.render(f5, (EntityLiving)entity);
+    		if (mainFrame instanceof Modchu_ModelRenderer) ((Modchu_ModelRenderer) mainFrame).render(f5, (EntityLiving)entity);
+    		else if (mainFrame instanceof MMM_ModelRenderer) ((MMM_ModelRenderer) mainFrame).render(f5, (EntityLiving)entity);
+    		else mainFrame.render(f5);
     		if (modelCaps != null) {
     			renderStabilizer(entity, (Map) modelCaps.getCapsValue(caps_stabiliser), f, f1, ticksExisted, pheadYaw, pheadPitch, f5);
     		}
@@ -306,9 +308,12 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     				if (Arms instanceof MMM_ModelRenderer) {
     					((MMM_ModelRenderer) Arms).loadMatrix();
     					((MMM_ModelRenderer) Arms).renderItems(pEntity, pRender, false, laction, litemstack);
-    				} else {
+    				} else if (Arms instanceof Modchu_ModelRenderer) {
     					((Modchu_ModelRenderer) Arms).loadMatrix();
     					((Modchu_ModelRenderer) Arms).renderItems(pEntity, pRender, false, laction, litemstack);
+    				} else if (Arms instanceof Modchu_ModelRotationRenderer) {
+    					((Modchu_ModelRotationRenderer) Arms).loadMatrix();
+    					((Modchu_ModelRotationRenderer) Arms).renderItems(pEntity, pRender, false, laction, litemstack);
     				}
     			}
     		}
@@ -331,8 +336,10 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     				Object HeadMount = getHeadMount();
     				if (HeadMount instanceof MMM_ModelRenderer) {
     					((MMM_ModelRenderer) HeadMount).loadMatrix();
-    				} else {
+    				} else if (HeadMount instanceof Modchu_ModelRenderer) {
     					((Modchu_ModelRenderer) HeadMount).loadMatrix();
+    				} else if (HeadMount instanceof Modchu_ModelRotationRenderer) {
+    					((Modchu_ModelRotationRenderer) HeadMount).loadMatrix();
     				}
     				if (isPlanter
     						|| (addSupport > -1 && addSupport < 3)) {
@@ -348,8 +355,10 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     				}
     				if (HeadMount instanceof MMM_ModelRenderer) {
     					((MMM_ModelRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack);
-    				} else {
+    				} else if (HeadMount instanceof Modchu_ModelRenderer) {
     					((Modchu_ModelRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack, scale, addSupport);
+    				} else if (HeadMount instanceof Modchu_ModelRotationRenderer) {
+    					((Modchu_ModelRotationRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack, scale, addSupport);
     				}
     				//HeadMount.renderItems(pEntity, pRender, true, null, ((LMM_EntityLittleMaid) pEntity).maidInventory.getHeadMount());
     			}
@@ -375,9 +384,12 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			if (Arms instanceof MMM_ModelRenderer) {
     				((MMM_ModelRenderer) Arms).loadMatrix();
     				((MMM_ModelRenderer) Arms).renderItems(entityplayer, pRender, false, laction, litemstack);
-    			} else {
+    			} else if (Arms instanceof Modchu_ModelRenderer) {
     				((Modchu_ModelRenderer) Arms).loadMatrix();
     				((Modchu_ModelRenderer) Arms).renderItems(entityplayer, pRender, false, laction, litemstack);
+    			} else if (Arms instanceof Modchu_ModelRotationRenderer) {
+    				((Modchu_ModelRotationRenderer) Arms).loadMatrix();
+    				((Modchu_ModelRotationRenderer) Arms).renderItems(entityplayer, pRender, false, laction, litemstack);
     			}
     		}
     	}
@@ -800,24 +812,24 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	setVisible(bipedLeftLeg, b);
     	setVisible(bipedRightLeg, b);
     	b = true;
-    	if (rightArm != null) rightArm.setVisible(b);
-    	if (rightArm2 != null) rightArm2.setVisible(b);
-    	if (rightArmPlus != null) rightArmPlus.setVisible(b);
-    	if (rightArmPlus2 != null) rightArmPlus2.setVisible(b);
-    	if (rightHand != null) rightHand.setVisible(b);
-    	if (leftArm != null) leftArm.setVisible(b);
-    	if (leftArm2 != null) leftArm2.setVisible(b);
-    	if (leftArmPlus != null) leftArmPlus.setVisible(b);
-    	if (leftArmPlus2 != null) leftArmPlus2.setVisible(b);
-    	if (leftHand != null) leftHand.setVisible(b);
-    	if (rightLeg != null) rightLeg.setVisible(b);
-    	if (rightLeg2 != null) rightLeg2.setVisible(b);
-    	if (rightLegPlus != null) rightLegPlus.setVisible(b);
-    	if (rightLegPlus2 != null) rightLegPlus2.setVisible(b);
-    	if (leftLeg != null) leftLeg.setVisible(b);
-    	if (leftLeg2 != null) leftLeg2.setVisible(b);
-    	if (leftLegPlus != null) leftLegPlus.setVisible(b);
-    	if (leftLegPlus2 != null) leftLegPlus2.setVisible(b);
+    	if (rightArm != null) setVisible(rightArm, b);
+    	if (rightArm2 != null) setVisible(rightArm2, b);
+    	if (rightArmPlus != null) setVisible(rightArmPlus, b);
+    	if (rightArmPlus2 != null) setVisible(rightArmPlus2, b);
+    	if (rightHand != null) setVisible(rightHand, b);
+    	if (leftArm != null) setVisible(leftArm, b);
+    	if (leftArm2 != null) setVisible(leftArm2, b);
+    	if (leftArmPlus != null) setVisible(leftArmPlus, b);
+    	if (leftArmPlus2 != null) setVisible(leftArmPlus2, b);
+    	if (leftHand != null) setVisible(leftHand, b);
+    	if (rightLeg != null) setVisible(rightLeg, b);
+    	if (rightLeg2 != null) setVisible(rightLeg2, b);
+    	if (rightLegPlus != null) setVisible(rightLegPlus, b);
+    	if (rightLegPlus2 != null) setVisible(rightLegPlus2, b);
+    	if (leftLeg != null) setVisible(leftLeg, b);
+    	if (leftLeg2 != null) setVisible(leftLeg2, b);
+    	if (leftLegPlus != null) setVisible(leftLegPlus, b);
+    	if (leftLegPlus2 != null) setVisible(leftLegPlus2, b);
     	if (bipedRightArm != null
     			&& bipedRightArm instanceof Modchu_ModelRenderer) {
     		((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[0]);
@@ -836,8 +848,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     		leftHand.addChild(Arms[1]);
     		leftHand.addChild(Arms[3]);
     	}
-    	Arms[0].setRotationPointLM(0.5F, 0.0F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 0.0F, 0F);
+    	Arms[0].setRotationPoint(0.5F, 0.0F, 0.0F);
+    	Arms[1].setRotationPoint(-0.5F, 0.0F, 0.0F);
     	sneakBan = true;
     	waitBan = true;
     	sittingBan = true;
@@ -846,14 +858,17 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public void actionInit2() {
     	setShortcutKeysAction(true);
     	actionCount = 0;
+    	waitBan = true;
     }
 
     public void actionInit3() {
     	setShortcutKeysAction(true);
+    	waitBan = true;
     }
 
     public void actionInit4() {
     	setShortcutKeysAction(true);
+    	waitBan = true;
     }
 
     public void actionInit5() {
@@ -930,24 +945,24 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	setVisible(bipedLeftLeg, b);
     	setVisible(bipedRightLeg, b);
     	b = false;
-    	if (rightArm != null) rightArm.setVisible(b);
-    	if (rightArm2 != null) rightArm2.setVisible(b);
-    	if (rightArmPlus != null) rightArmPlus.setVisible(b);
-    	if (rightArmPlus2 != null) rightArmPlus2.setVisible(b);
-    	if (rightHand != null) rightHand.setVisible(b);
-    	if (leftArm != null) leftArm.setVisible(b);
-    	if (leftArm2 != null) leftArm2.setVisible(b);
-    	if (leftArmPlus != null) leftArmPlus.setVisible(b);
-    	if (leftArmPlus2 != null) leftArmPlus2.setVisible(b);
-    	if (leftHand != null) leftHand.setVisible(b);
-    	if (rightLeg != null) rightLeg.setVisible(b);
-    	if (rightLeg2 != null) rightLeg2.setVisible(b);
-    	if (rightLegPlus != null) rightLegPlus.setVisible(b);
-    	if (rightLegPlus2 != null) rightLegPlus2.setVisible(b);
-    	if (leftLeg != null) leftLeg.setVisible(b);
-    	if (leftLeg2 != null) leftLeg2.setVisible(b);
-    	if (leftLegPlus != null) leftLegPlus.setVisible(b);
-    	if (leftLegPlus2 != null) leftLegPlus2.setVisible(b);
+    	if (rightArm != null) setVisible(rightArm, b);
+    	if (rightArm2 != null) setVisible(rightArm2, b);
+    	if (rightArmPlus != null) setVisible(rightArmPlus, b);
+    	if (rightArmPlus2 != null) setVisible(rightArmPlus2, b);
+    	if (rightHand != null) setVisible(rightHand, b);
+    	if (leftArm != null) setVisible(leftArm, b);
+    	if (leftArm2 != null) setVisible(leftArm2, b);
+    	if (leftArmPlus != null) setVisible(leftArmPlus, b);
+    	if (leftArmPlus2 != null) setVisible(leftArmPlus2, b);
+    	if (leftHand != null) setVisible(leftHand, b);
+    	if (rightLeg != null) setVisible(rightLeg, b);
+    	if (rightLeg2 != null) setVisible(rightLeg2, b);
+    	if (rightLegPlus != null) setVisible(rightLegPlus, b);
+    	if (rightLegPlus2 != null) setVisible(rightLegPlus2, b);
+    	if (leftLeg != null) setVisible(leftLeg, b);
+    	if (leftLeg2 != null) setVisible(leftLeg2, b);
+    	if (leftLegPlus != null) setVisible(leftLegPlus, b);
+    	if (leftLegPlus2 != null) setVisible(leftLegPlus2, b);
 
     	if (Arms != null) {
     		if (Arms[0] != null) bipedRightArm.addChild(Arms[0]);
@@ -955,15 +970,15 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     		if (Arms[1] != null) bipedLeftArm.addChild(Arms[1]);
     		if (Arms[3] != null) bipedLeftArm.addChild(Arms[3]);
     		if (Arms[0] != null
-    				&& rightHand != null) rightHand.removeChild(Arms[0]);
+    				&& rightHand != null) ((Modchu_ModelRenderer) rightHand).removeChild(Arms[0]);
     		if (Arms[2] != null
-    				&& rightHand != null) rightHand.removeChild(Arms[2]);
+    				&& rightHand != null) ((Modchu_ModelRenderer) rightHand).removeChild(Arms[2]);
     		if (Arms[1] != null
-    				&& leftHand != null) leftHand.removeChild(Arms[1]);
+    				&& leftHand != null) ((Modchu_ModelRenderer) leftHand).removeChild(Arms[1]);
     		if (Arms[3] != null
-    				&& leftHand != null) leftHand.removeChild(Arms[3]);
-    		if (Arms[0] != null) Arms[0].setRotationPointLM(0.5F, 6.5F, 0F);
-    		if (Arms[1] != null) Arms[1].setRotationPointLM(-0.5F, 6.5F, 0F);
+    				&& leftHand != null) ((Modchu_ModelRenderer) leftHand).removeChild(Arms[3]);
+    		if (Arms[0] != null) Arms[0].setRotationPoint(0.5F, 6.5F, 0F);
+    		if (Arms[1] != null) Arms[1].setRotationPoint(-0.5F, 6.5F, 0F);
     	}
 
     	bipedBody.rotateAngleX = 0.0F;
@@ -978,14 +993,17 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 
     public void actionRelease2() {
     	setShortcutKeysAction(false);
+    	waitBan = false;
     }
 
     public void actionRelease3() {
     	setShortcutKeysAction(false);
+    	waitBan = false;
     }
 
     public void actionRelease4() {
     	setShortcutKeysAction(false);
+    	waitBan = false;
     }
 
     public void actionRelease5() {
@@ -1230,24 +1248,25 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public void action30(Entity entity) {
     	//デバック用
     	if (getClass().getPackage() == null) return;
-    	rightArm.setVisible(true);
-    	rightArm2.setVisible(true);
-    	rightArmPlus.setVisible(true);
-    	rightArmPlus2.setVisible(true);
-    	rightHand.setVisible(true);
-    	leftArm.setVisible(true);
-    	leftArm2.setVisible(true);
-    	leftArmPlus.setVisible(true);
-    	leftArmPlus2.setVisible(true);
-    	leftHand.setVisible(true);
-    	rightLeg.setVisible(false);
-    	rightLeg2.setVisible(true);
-    	rightLegPlus.setVisible(false);
-    	rightLegPlus2.setVisible(true);
-    	leftLeg.setVisible(false);
-    	leftLeg2.setVisible(true);
-    	leftLegPlus.setVisible(false);
-    	leftLegPlus2.setVisible(true);
+    	boolean b = true;
+    	if (rightArm != null) setVisible(rightArm, b);
+    	if (rightArm2 != null) setVisible(rightArm2, b);
+    	if (rightArmPlus != null) setVisible(rightArmPlus, b);
+    	if (rightArmPlus2 != null) setVisible(rightArmPlus2, b);
+    	if (rightHand != null) setVisible(rightHand, b);
+    	if (leftArm != null) setVisible(leftArm, b);
+    	if (leftArm2 != null) setVisible(leftArm2, b);
+    	if (leftArmPlus != null) setVisible(leftArmPlus, b);
+    	if (leftArmPlus2 != null) setVisible(leftArmPlus2, b);
+    	if (leftHand != null) setVisible(leftHand, b);
+    	if (rightLeg != null) setVisible(rightLeg, b);
+    	if (rightLeg2 != null) setVisible(rightLeg2, b);
+    	if (rightLegPlus != null) setVisible(rightLegPlus, b);
+    	if (rightLegPlus2 != null) setVisible(rightLegPlus2, b);
+    	if (leftLeg != null) setVisible(leftLeg, b);
+    	if (leftLeg2 != null) setVisible(leftLeg2, b);
+    	if (leftLegPlus != null) setVisible(leftLegPlus, b);
+    	if (leftLegPlus2 != null) setVisible(leftLegPlus2, b);
     }
 
     /**
@@ -1343,9 +1362,9 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			&& getRunActionNumber() == 0
     			| getRunActionNumber() == 1) {
     		setVisible(bipedRightArm, false);
-    		if (rightArm != null) rightArm.setVisible(b);
-    		if (rightArm2 != null) rightArm2.setVisible(b);
-    		if (rightHand != null) rightHand.setVisible(b);
+    		if (rightArm != null) setVisible(rightArm, b);
+    		if (rightArm2 != null) setVisible(rightArm2, b);
+    		if (rightHand != null) setVisible(rightHand, b);
     	}
     	else setVisible(bipedRightArm, b);
     }
@@ -1355,9 +1374,9 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			&& getRunActionNumber() == 0
     			| getRunActionNumber() == 1) {
     		setVisible(bipedLeftArm, false);
-    		if (leftArm != null) leftArm.setVisible(b);
-    		if (leftArm2 != null) leftArm2.setVisible(b);
-    		if (leftHand != null) leftHand.setVisible(b);
+    		if (leftArm != null) setVisible(leftArm, b);
+    		if (leftArm2 != null) setVisible(leftArm2, b);
+    		if (leftHand != null) setVisible(leftHand, b);
     	}
     	else setVisible(bipedLeftArm, b);
     }
@@ -1367,8 +1386,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			&& getRunActionNumber() == 0
     			| getRunActionNumber() == 1) {
     		setVisible(bipedRightLeg, false);
-    		if (rightLeg != null) rightLeg.setVisible(b);
-    		if (rightLeg2 != null) rightLeg2.setVisible(b);
+    		if (rightLeg != null) setVisible(rightLeg, b);
+    		if (rightLeg2 != null) setVisible(rightLeg2, b);
     	}
     	else setVisible(bipedRightLeg, b);
     }
@@ -1378,8 +1397,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			&& getRunActionNumber() == 0
     			| getRunActionNumber() == 1) {
     		setVisible(bipedLeftLeg, false);
-    		if (leftLeg != null) leftLeg.setVisible(b);
-    		if (leftLeg2 != null) leftLeg2.setVisible(b);
+    		if (leftLeg != null) setVisible(leftLeg, b);
+    		if (leftLeg2 != null) setVisible(leftLeg2, b);
     	}
     	else setVisible(bipedLeftLeg, b);
     }

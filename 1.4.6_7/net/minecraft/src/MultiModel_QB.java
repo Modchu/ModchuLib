@@ -27,14 +27,11 @@ public class MultiModel_QB extends MultiModel {
 	}
 
 	public MultiModel_QB(float f, float f1) {
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 32);
 	}
 
 	public MultiModel_QB(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
 		HeadMount.setRotationPoint(0F, 2.51F, 0F);
 	}
 
@@ -122,8 +119,8 @@ public class MultiModel_QB extends MultiModel {
     @Override
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	float ff1 = mh_sin(f2 * 0.09F) * 0.05F;
-		Arms[0].setRotationPointLM(0.5F, 3.0F, 0F);
-		Arms[1].setRotationPointLM(-0.5F, 3.0F, 0F);
+		Arms[0].setRotationPoint(0.5F, 3.0F, 0F);
+		Arms[1].setRotationPoint(-0.5F, 3.0F, 0F);
     	bipedHead.rotateAngleY = f3 / 57.29578F;
     	bipedHead.rotateAngleX = f4 / 57.29578F;
     	bipedHead.rotateAngleZ = 0.0F;

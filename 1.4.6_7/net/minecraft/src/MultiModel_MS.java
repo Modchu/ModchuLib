@@ -15,15 +15,12 @@ public class MultiModel_MS extends MultiModel_MS1
 
     public MultiModel_MS(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 64);
-	}
+    	this(f, f1 , 64, 64);
+    }
 
-	public MultiModel_MS(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_MS(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
     @Override
     public void setRotationAnglesLM(float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5, Entity entity)

@@ -52,15 +52,12 @@ public class MultiModel_DogAngel extends MultiModel_SR2 {
 
 	public MultiModel_DogAngel(float f, float f1)
 	{
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 64);
 	}
 
 	public MultiModel_DogAngel(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
-    	HeadMount.setRotationPoint(0.0F, 1.0F, 0.0F);
+		HeadMount.setRotationPoint(0.0F, 1.0F, 0.0F);
 	}
 
 	@Override
@@ -96,7 +93,7 @@ public class MultiModel_DogAngel extends MultiModel_SR2 {
 		bipedLeftLeg.setRotationPoint(1.5F, 15F, 0.0F);
 		bipedBody.addChild(bipedLeftLeg);
 		Skirt = new Modchu_ModelRenderer(this, 0, 16);
-		Skirt.setRotationPointLM(0.0F, 2.0F, 0.0F);
+		Skirt.setRotationPoint(0.0F, 2.0F, 0.0F);
 		bipedBody.addChild(Skirt);
 		eyeR = new Modchu_ModelRenderer(this, 32, 19);
 		eyeR.addPlate(-4.0F, -5.0F, -4.001F, 4, 4, 0, f);
@@ -113,18 +110,18 @@ public class MultiModel_DogAngel extends MultiModel_SR2 {
 		bipedHead.addChild(Prim);
 
 		ChignonR = new Modchu_ModelRenderer(this, 24, 18);
-		ChignonR.addBoxLM(-5F, -7F, 0.2F, 1, 3, 3, f);
-		ChignonR.setRotationPointLM(0.0F, 0.0F, 0.0F);
+		ChignonR.addBox(-5F, -7F, 0.2F, 1, 3, 3, f);
+		ChignonR.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(ChignonR);
 
 		ChignonL = new Modchu_ModelRenderer(this, 24, 18);
-		ChignonL.addBoxLM(4F, -7F, 0.2F, 1, 3, 3,f);
-		ChignonL.setRotationPointLM(0.0F, 0.0F, 0.0F);
+		ChignonL.addBox(4F, -7F, 0.2F, 1, 3, 3,f);
+		ChignonL.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(ChignonL);
 
 		ChignonB = new Modchu_ModelRenderer(this, 52, 10);
-		ChignonB.addBoxLM(-2F, -7.2F, 4F, 4, 4, 2,f);
-		ChignonB.setRotationPointLM(0.0F, 0.0F, 0.0F);
+		ChignonB.addBox(-2F, -7.2F, 4F, 4, 4, 2,f);
+		ChignonB.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(ChignonB);
 
 		EarL1 = new Modchu_ModelRenderer(this, 0, 20);
@@ -206,8 +203,8 @@ public class MultiModel_DogAngel extends MultiModel_SR2 {
 		WingRroot.addChild(WingR6);
 
 		SideTailL = new Modchu_ModelRenderer(this, 46, 26);
-		SideTailL.addBoxLM(4.7F, -6F, 1F, 1, 1, 1,f+0.2F);
-		SideTailL.setRotationPointLM(0.0F, 0.0F, 0.0F);
+		SideTailL.addBox(4.7F, -6F, 1F, 1, 1, 1,f+0.2F);
+		SideTailL.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(SideTailL);
 
 		SideTailL2 = new Modchu_ModelRenderer(this, 46, 26);
@@ -216,8 +213,8 @@ public class MultiModel_DogAngel extends MultiModel_SR2 {
 		bipedHead.addChild(SideTailL2);
 
 		SideTailR = new Modchu_ModelRenderer(this, 50, 26);
-		SideTailR.addBoxLM(-5.7F, -6F, 1F, 1, 1, 1,f+0.2F);
-		SideTailR.setRotationPointLM(0.0F, 0.0F, 0.0F);
+		SideTailR.addBox(-5.7F, -6F, 1F, 1, 1, 1,f+0.2F);
+		SideTailR.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(SideTailR);
 
 		SideTailR2 = new Modchu_ModelRenderer(this, 50, 26);
@@ -226,8 +223,8 @@ public class MultiModel_DogAngel extends MultiModel_SR2 {
 		bipedHead.addChild(SideTailR2);
 
 		Tail = new Modchu_ModelRenderer(this, 46, 19);
-		Tail.addBoxLM(-1F, -6F, 6.F, 2, 2, 2,f+0.1F);
-		Tail.setRotationPointLM(0.0F, 0.0F, 0.0F);
+		Tail.addBox(-1F, -6F, 6.F, 2, 2, 2,f+0.1F);
+		Tail.setRotationPoint(0.0F, 0.0F, 0.0F);
 		bipedHead.addChild(Tail);
 
 		Tail2 = new Modchu_ModelRenderer(this, 46, 19);

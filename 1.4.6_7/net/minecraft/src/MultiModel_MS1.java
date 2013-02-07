@@ -27,15 +27,12 @@ public class MultiModel_MS1 extends MultiModel_SR2
 
     public MultiModel_MS1(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 64);
-	}
+    	this(f, f1 , 64, 64);
+    }
 
-	public MultiModel_MS1(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_MS1(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
 	@Override
 	public void initModel(float f, float f1) {
@@ -44,8 +41,8 @@ public class MultiModel_MS1 extends MultiModel_SR2
 		super.initModel(f, f1);
 		((Modchu_ModelRenderer) bipedBody).removeChild(Skirt);
 		Skirt = new Modchu_ModelRenderer(this, 0, 16);
-		Skirt.addBoxLM(-3.5F, -2F, -3F, 7, 7, 6, f);
-		Skirt.setRotationPointLM(0.0F, 7F + f1, 0.0F);
+		Skirt.addBox(-3.5F, -2F, -3F, 7, 7, 6, f);
+		Skirt.setRotationPoint(0.0F, 7F + f1, 0.0F);
 		bipedBody.addChild(Skirt);
 		Goggles1A = new Modchu_ModelRenderer(this, 0, 32);
 		Goggles1A.addBoxLM(-4F, -5.5F, -5F, 8, 4, 1, f);
@@ -112,12 +109,12 @@ public class MultiModel_MS1 extends MultiModel_SR2
 		bipedHead.addChild(GogglesL);
 		bipedHead.addChild(Cheek_R);
 		bipedHead.addChild(Cheek_L);
-		Tail.setVisible(false);
-		SideTailR.setVisible(false);
-		SideTailL.setVisible(false);
-		ChignonR.setVisible(false);
-		ChignonL.setVisible(false);
-		ChignonB.setVisible(false);
+		setVisible(Tail, false);
+		setVisible(SideTailR, false);
+		setVisible(SideTailL, false);
+		setVisible(ChignonR, false);
+		setVisible(ChignonL, false);
+		setVisible(ChignonB, false);
 		Goggles1.setVisible(true);
 		Goggles2.setVisible(true);
 		Goggles3.setVisible(true);
@@ -134,35 +131,35 @@ public class MultiModel_MS1 extends MultiModel_SR2
     	if(!getSkirtFloats()) return;
     	//ふんわりスカート上
     	SkirtTop = new Modchu_ModelRenderer(this, 6, 16);
-    	SkirtTop.addPlate(0.0F, 0.0F, 0.0F, 7, 6, 0);
+    	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 7, 6, 0);
     	SkirtTop.setRotationPoint(-4.0F, -4.0F, 4.0F);
     	Skirt.addChild(SkirtTop);
 
     	//ふんわりスカート前
     	SkirtFront = new Modchu_ModelRenderer(this, 6, 22);
-    	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 7, 7, 0);
+    	((Modchu_ModelRenderer) SkirtFront).addPlate(0.0F, 0.0F, 0.0F, 7, 7, 0);
     	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
     	SkirtTop.addChild(SkirtFront);
 
     	//ふんわりスカート右
     	SkirtRight = new Modchu_ModelRenderer(this, 0, 22);
-    	SkirtRight.addPlate(0.0F, 0.0F, 0.0F, 6, 7, 1);
+    	((Modchu_ModelRenderer) SkirtRight).addPlate(0.0F, 0.0F, 0.0F, 6, 7, 1);
     	SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
     	SkirtTop.addChild(SkirtRight);
 
     	//ふんわりスカート左
     	SkirtLeft = new Modchu_ModelRenderer(this, 13, 22);
-    	SkirtLeft.setMirror(true);
-    	SkirtLeft.addPlate(0.0F, 0.0F, 0.0F, 6, 7, 1);
+    	((Modchu_ModelRenderer) SkirtLeft).setMirror(true);
+    	((Modchu_ModelRenderer) SkirtLeft).addPlate(0.0F, 0.0F, 0.0F, 6, 7, 1);
     	SkirtLeft.setRotationPoint(8.0F, 8.0F, 0.0F);
     	SkirtTop.addChild(SkirtLeft);
 
     	//ふんわりスカート後ろ
     	SkirtBack = new Modchu_ModelRenderer(this, 18, 22);
-    	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 7, 7, 0);
+    	((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 7, 7, 0);
     	SkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
     	SkirtTop.addChild(SkirtBack);
-    	Skirt.setVisible(false);
+    	setVisible(Skirt, false);
     }
 
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
@@ -218,12 +215,12 @@ public class MultiModel_MS1 extends MultiModel_SR2
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	Tail.setVisible(false);
-    	SideTailR.setVisible(false);
-    	SideTailL.setVisible(false);
-    	ChignonR.setVisible(false);
-    	ChignonL.setVisible(false);
-    	ChignonB.setVisible(false);
+    	setVisible(Tail, false);
+    	setVisible(SideTailR, false);
+    	setVisible(SideTailL, false);
+    	setVisible(ChignonR, false);
+    	setVisible(ChignonL, false);
+    	setVisible(ChignonB, false);
     	Goggles1.setVisible(true);
     	Goggles2.setVisible(true);
     	Goggles3.setVisible(true);

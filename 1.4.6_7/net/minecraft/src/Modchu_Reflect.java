@@ -6,15 +6,15 @@ import java.lang.reflect.Modifier;
 
 public class Modchu_Reflect
 {
-    public static boolean debugMessage = true;
-    public static boolean debugMessageDetail = true;
+    public static boolean debugReflectMessage = true;
+    public static boolean debugReflectMessageDetail = false;
 
     public static void setDebugMessage(boolean b) {
-    	debugMessage = b;
+    	debugReflectMessage = b;
     }
 
     public static void setDebugMessageDetail(boolean b) {
-    	debugMessageDetail = b;
+    	debugReflectMessageDetail = b;
     }
 
     public static void copyFields(Class var0, Object var1, Object var2)
@@ -35,7 +35,7 @@ public class Modchu_Reflect
     	try {
     		var0.set(var1, var2);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     }
 
@@ -44,7 +44,7 @@ public class Modchu_Reflect
     	try {
     		getField(var0, var1).set(null, var2);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     }
 
@@ -53,7 +53,7 @@ public class Modchu_Reflect
     	try {
     		getField(var0, var1).set(var2, var4);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     }
 
@@ -62,7 +62,7 @@ public class Modchu_Reflect
     	try {
     		return var0.get(var1);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -72,7 +72,7 @@ public class Modchu_Reflect
     	try {
     		return getField(var0, null).get(var1);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -82,7 +82,7 @@ public class Modchu_Reflect
     	try {
     		return getField(var0, var2).get(null);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -92,7 +92,7 @@ public class Modchu_Reflect
     	try {
     		return getField(var0, var1).get(var2);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -102,7 +102,7 @@ public class Modchu_Reflect
     	try {
     		return getField(var0, var1, var2).get(var3);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -120,7 +120,7 @@ public class Modchu_Reflect
     		var4 = getRawField(var0, var1);
     		var4.setAccessible(true);
     	} catch (Exception e) {
-    		if (debugMessageDetail) e.printStackTrace();
+    		if (debugReflectMessageDetail) e.printStackTrace();
     	}
     	return var4;
     }
@@ -134,7 +134,7 @@ public class Modchu_Reflect
     			try {
     				return var0.getField(var1);
     			} catch (Exception e) {
-    				if (debugMessageDetail) e.printStackTrace();
+    				if (debugReflectMessageDetail) e.printStackTrace();
     			}
     		}
     	}
@@ -164,7 +164,7 @@ public class Modchu_Reflect
     		var5 = getRawMethod(var0, var1, null);
     		var5.setAccessible(true);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return var5;
     }
@@ -176,7 +176,7 @@ public class Modchu_Reflect
     		var5 = getRawMethod(var0, var1, var2);
     		var5.setAccessible(true);
     	} catch (Exception e) {
-    		if (debugMessageDetail) e.printStackTrace();
+    		if (debugReflectMessageDetail) e.printStackTrace();
     	}
     	return var5;
     }
@@ -190,7 +190,7 @@ public class Modchu_Reflect
     			try {
     				return var0.getMethod(var1, var2);
     			} catch (Exception e) {
-    				if (debugMessageDetail) e.printStackTrace();
+    				if (debugReflectMessageDetail) e.printStackTrace();
     	   		}
     		}
     	}
@@ -202,7 +202,7 @@ public class Modchu_Reflect
     	try {
     		return var0.invoke(null);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -212,7 +212,7 @@ public class Modchu_Reflect
     	try {
     		return var0.invoke(var1);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -222,7 +222,7 @@ public class Modchu_Reflect
     	try {
     		return var0.invoke(var1, var2);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -232,7 +232,7 @@ public class Modchu_Reflect
     	try {
     		return var0.invoke(var1, var2);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -242,7 +242,7 @@ public class Modchu_Reflect
     	try {
     		return getMethod(var0, var1, (Class[]) null).invoke(null);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -255,7 +255,7 @@ public class Modchu_Reflect
     		try {
     			return getMethod(var0, var2, (Class[]) null).invoke(null);
     		} catch (Exception e) {
-    			if (debugMessage) e.printStackTrace();
+    			if (debugReflectMessage) e.printStackTrace();
     		}
     	}
     	return null;
@@ -266,7 +266,7 @@ public class Modchu_Reflect
     	try {
     		return getMethod(var0, var1, (Class[]) null).invoke(var3);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -279,7 +279,7 @@ public class Modchu_Reflect
     		try {
     			return getMethod(var0, var2, (Class[]) null).invoke(var3);
     		} catch (Exception e) {
-    			if (debugMessage) e.printStackTrace();
+    			if (debugReflectMessage) e.printStackTrace();
     		}
     	}
     	return null;
@@ -290,7 +290,7 @@ public class Modchu_Reflect
     	try {
     		return getMethod(var0, var1, (Class[]) null).invoke(var3, var4);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -300,7 +300,7 @@ public class Modchu_Reflect
     	try {
     		return getMethod(var0, var1, var2).invoke(var3, var4);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -313,7 +313,7 @@ public class Modchu_Reflect
     		try {
     			return getMethod(var0, var2, var3).invoke(var4, var5);
     		} catch (Exception e) {
-    			if (debugMessage) e.printStackTrace();
+    			if (debugReflectMessage) e.printStackTrace();
     		}
     	}
     	return null;
@@ -324,7 +324,7 @@ public class Modchu_Reflect
     	try {
     		return getMethod(var0, var1, var2).invoke(var3, var4);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -337,7 +337,7 @@ public class Modchu_Reflect
     		try {
     			return getMethod(var0, var2, var3).invoke(var4, var5);
     		} catch (Exception e) {
-    			if (debugMessage) e.printStackTrace();
+    			if (debugReflectMessage) e.printStackTrace();
     		}
     	}
     	return null;
@@ -345,7 +345,7 @@ public class Modchu_Reflect
 
     public static Class loadClass(String var0)
     {
-    	return loadClass(var0, debugMessage);
+    	return loadClass(var0, debugReflectMessage);
     }
 
     public static Class loadClass(String var0, boolean b)
@@ -364,7 +364,7 @@ public class Modchu_Reflect
     	try {
     		return loadClass(var1).getConstructor(var2).newInstance(var3);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }
@@ -374,7 +374,7 @@ public class Modchu_Reflect
     	try {
     		return var1.getConstructor(var2).newInstance(var3);
     	} catch (Exception e) {
-    		if (debugMessage) e.printStackTrace();
+    		if (debugReflectMessage) e.printStackTrace();
     	}
     	return null;
     }

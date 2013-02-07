@@ -26,14 +26,11 @@ public class MultiModel_Elsie extends MultiModel
 
     public MultiModel_Elsie(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 32);
 	}
 
 	public MultiModel_Elsie(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
 	}
 
     @Override
@@ -132,12 +129,12 @@ public class MultiModel_Elsie extends MultiModel
     	rightArmPlus2 = new Modchu_ModelRenderer(this);
 
     	rightHand = new Modchu_ModelRenderer(this, 56, 28);
-    	rightHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	rightHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
     	rightHand.setRotationPoint(0.0F, 3.0F, 0.0F);
     	rightArm2.addChild(rightHand);
 
     	leftArm = new Modchu_ModelRenderer(this, 56, 20);
-    	leftArm.setMirror(true);
+    	((Modchu_ModelRenderer) leftArm).setMirror(true);
     	leftArm.addBox(-1.0F, 0.0F, -1.0F, 2, 5, 2, f);
     	leftArm.setRotationPoint(3.0F, 9.5F, 0.0F);
     	bipedBody.addChild(leftArm);
@@ -145,7 +142,7 @@ public class MultiModel_Elsie extends MultiModel
     	leftArmPlus = new Modchu_ModelRenderer(this);
 
     	leftArm2 = new Modchu_ModelRenderer(this, 56, 25);
-    	leftArm2.setMirror(true);
+    	((Modchu_ModelRenderer) leftArm2).setMirror(true);
     	leftArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 3, 2, f);
     	leftArm2.setRotationPoint(0.0F, 2.0F, 0.0F);
     	leftArm.addChild(leftArm2);
@@ -153,36 +150,36 @@ public class MultiModel_Elsie extends MultiModel
     	leftArmPlus2 = new Modchu_ModelRenderer(this);
 
     	leftHand = new Modchu_ModelRenderer(this, 56, 28);
-    	leftHand.setMirror(true);
-    	leftHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
+    	((Modchu_ModelRenderer) leftHand).setMirror(true);
+    	leftHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
     	leftHand.setRotationPoint(0.0F, 3.0F, 0.0F);
     	leftArm2.addChild(leftHand);
 
     	rightLeg = new Modchu_ModelRenderer(this, 0, 16);
-    	rightLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+    	rightLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
     	rightLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
     	bipedBody.addChild(rightLeg);
 
     	rightLegPlus = new Modchu_ModelRenderer(this);
 
     	rightLeg2 = new Modchu_ModelRenderer(this, 0, 22);
-    	rightLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+    	rightLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
     	rightLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
     	rightLeg.addChild(rightLeg2);
 
     	rightLegPlus2 = new Modchu_ModelRenderer(this);
 
     	leftLeg = new Modchu_ModelRenderer(this, 0, 16);
-    	leftLeg.setMirror(true);
-    	leftLeg.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+    	((Modchu_ModelRenderer) leftLeg).setMirror(true);
+    	leftLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
     	leftLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
     	bipedBody.addChild(leftLeg);
 
     	leftLegPlus = new Modchu_ModelRenderer(this);
 
     	leftLeg2 = new Modchu_ModelRenderer(this, 0, 22);
-    	leftLeg2.setMirror(true);
-    	leftLeg2.addBoxLM(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
+    	((Modchu_ModelRenderer) leftLeg2).setMirror(true);
+    	leftLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
     	leftLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
     	leftLeg.addChild(leftLeg2);
 
@@ -207,8 +204,8 @@ public class MultiModel_Elsie extends MultiModel
     @Override
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
-    	Arms[0].setRotationPointLM(0.5F, 9.0F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 9.0F, 0F);
+    	Arms[0].setRotationPoint(0.5F, 9.0F, 0F);
+    	Arms[1].setRotationPoint(-0.5F, 9.0F, 0F);
     	RightSkirt.rotationPointZ = 0.0F;
     	LeftSkirt.rotationPointZ = 0.0F;
     	RightSkirt.rotateAngleX = -0.01F;
@@ -269,7 +266,7 @@ public class MultiModel_Elsie extends MultiModel
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
     	if (getSkirtFloats()) {
-    		Skirt.setVisible(true);
+    		setVisible(Skirt, true);
     	}
     }
 
@@ -285,8 +282,8 @@ public class MultiModel_Elsie extends MultiModel
     @Override
     public void actionRelease1() {
     	super.actionRelease1();
-    	rightLeg.removeChild(RightSkirt);
-    	leftLeg.removeChild(LeftSkirt);
+    	((Modchu_ModelRenderer) rightLeg).removeChild(RightSkirt);
+    	((Modchu_ModelRenderer) leftLeg).removeChild(LeftSkirt);
     	bipedRightLeg.addChild(RightSkirt);
     	bipedLeftLeg.addChild(LeftSkirt);
     }

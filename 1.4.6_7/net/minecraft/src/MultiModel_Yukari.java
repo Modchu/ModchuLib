@@ -3,7 +3,7 @@ package net.minecraft.src;
 public class MultiModel_Yukari extends MultiModel_Aug
 {
 
-	public Modchu_ModelRenderer Skirt_R;
+    public Modchu_ModelRenderer Skirt_R;
     public Modchu_ModelRenderer Skirt_L;
     public Modchu_ModelRenderer Skirt_RF;
     public Modchu_ModelRenderer Skirt_RB;
@@ -102,25 +102,22 @@ public class MultiModel_Yukari extends MultiModel_Aug
 
     public MultiModel_Yukari()
     {
-        this(0.0F);
+    	this(0.0F);
     }
 
     public MultiModel_Yukari(float f)
     {
-        this(f, 0.0F);
+    	this(f, 0.0F);
     }
 
     public MultiModel_Yukari(float f, float f1)
     {
-		// 132deletesuper(f, f1);
-//-@-132
-		this(f, f1 , 64, 64);
-	}
+    	this(f, f1 , 64, 64);
+    }
 
-	public MultiModel_Yukari(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_Yukari(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
     @Override
     public void initModel(float f, float f1) {
@@ -150,7 +147,7 @@ public class MultiModel_Yukari extends MultiModel_Aug
     	bipedLeftLeg.setRotationPoint(1.5F, 15F, 0.0F);
     	bipedBody.addChild(bipedLeftLeg);
     	Skirt = new Modchu_ModelRenderer(this, 0, 20);
-    	Skirt.addBoxLM(-3F, -2F, -2F, 6, 2, 4, f + 0.15F);
+    	Skirt.addBox(-3F, -2F, -2F, 6, 2, 4, f + 0.15F);
     	Skirt.setRotationPoint(0.0F, 0.0F, 0.0F);
     	bipedBody.addChild(Skirt);
     	SideTailR = new Modchu_ModelRenderer(this);
@@ -768,20 +765,20 @@ public class MultiModel_Yukari extends MultiModel_Aug
     @Override
     public void actionRelease1() {
     	super.actionRelease1();
-    	rightLeg.removeChild(Skirt_R);
-    	rightArm2.removeChild(Arm_RF);
-    	rightArm2.removeChild(Arm_RB);
-    	rightArm2.removeChild(Arm_RR);
-    	rightArm2.removeChild(Arm_RL);
-    	rightArm2.removeChild(ArmAccessory_RF);
-    	rightArm2.removeChild(ArmAccessory_RB);
-    	rightArm2.removeChild(ArmAccessory_RR);
-    	rightArm2.removeChild(ArmAccessory_RL);
-    	leftLeg.removeChild(Skirt_L);
-    	leftArm2.removeChild(Arm_LF);
-    	leftArm2.removeChild(Arm_LB);
-    	leftArm2.removeChild(Arm_LR);
-    	leftArm2.removeChild(Arm_LL);
+    	((Modchu_ModelRenderer) rightLeg).removeChild(Skirt_R);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(Arm_RF);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(Arm_RB);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(Arm_RR);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(Arm_RL);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(ArmAccessory_RF);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(ArmAccessory_RB);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(ArmAccessory_RR);
+    	((Modchu_ModelRenderer) rightArm2).removeChild(ArmAccessory_RL);
+    	((Modchu_ModelRenderer) leftLeg).removeChild(Skirt_L);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(Arm_LF);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(Arm_LB);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(Arm_LR);
+    	((Modchu_ModelRenderer) leftArm2).removeChild(Arm_LL);
     	bipedRightLeg.addChild(Skirt_R);
     	bipedRightArm.addChild(Arm_RF);
     	bipedRightArm.addChild(Arm_RB);

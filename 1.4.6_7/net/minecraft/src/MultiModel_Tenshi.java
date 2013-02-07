@@ -115,14 +115,11 @@ public class MultiModel_Tenshi extends MultiModel_SR2 {
 
 	public MultiModel_Tenshi(float f, float f1)
 	{
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 64);
 	}
 
 	public MultiModel_Tenshi(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
     	HeadMount.setRotationPoint(0.0F, 1.0F, 0.0F);
 	}
 
@@ -159,7 +156,7 @@ public class MultiModel_Tenshi extends MultiModel_SR2 {
 		bipedLeftLeg.setRotationPoint(1.5F, 15F, 0.0F);
 		bipedBody.addChild(bipedLeftLeg);
 		Skirt = new Modchu_ModelRenderer(this, 0, 16);
-		Skirt.setRotationPointLM(0.0F, 2.0F, 0.0F);
+		Skirt.setRotationPoint(0.0F, 2.0F, 0.0F);
 		bipedBody.addChild(Skirt);
 
 		Patch3 = new Modchu_ModelRenderer(this, 31, 16);
@@ -1031,8 +1028,8 @@ public class MultiModel_Tenshi extends MultiModel_SR2 {
     	super.actionRelease1();
     	bipedRightArm.addChild(Patch1);
     	bipedLeftArm.addChild(Patch2);
-    	rightArm.removeChild(Patch1);
-    	leftArm.removeChild(Patch2);
+    	((Modchu_ModelRenderer) rightArm).removeChild(Patch1);
+    	((Modchu_ModelRenderer) leftArm).removeChild(Patch2);
     }
 
     public void setArmorBipedHeadShowModel(boolean b) {

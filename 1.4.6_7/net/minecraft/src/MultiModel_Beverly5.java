@@ -45,14 +45,11 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
 	 */
 	public MultiModel_Beverly5(float f, float f1)
 	{
-    	// 132deletesuper(f, f1);
-//-@-132
     	this(f, f1 , 64, 64);
     }
 
     public MultiModel_Beverly5(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
-//@-@132
     	if (getMethod(EntityVillager.class, "isMating") != null) isMatingFlag = true;
     }
 
@@ -205,11 +202,11 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
     @Override
     public void actionPartsInit(float f, float f1) {
     	rightHand = new Modchu_ModelRenderer(this, 0, 31);
-    	rightHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 3, f);
+    	rightHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 3, f);
     	rightArm2.addChild(rightHand);
 
     	leftHand = new Modchu_ModelRenderer(this, 10, 31);
-    	leftHand.addBoxLM(-1.0F, -1.0F, -1.0F, 2, 2, 3, f);
+    	leftHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 3, f);
     	leftArm2.addChild(leftHand);
 
     	rightArmPlus = new Modchu_ModelRenderer(this);
@@ -221,8 +218,8 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
     	leftLegPlus = new Modchu_ModelRenderer(this);
     	leftLegPlus2 = new Modchu_ModelRenderer(this);
 
-    	rightHand.setVisible(false);
-    	leftHand.setVisible(false);
+    	setVisible(rightHand, false);
+    	setVisible(leftHand, false);
     	aimedBowBan = false;
     	sneakBan = false;
     	waitBan = false;
@@ -523,8 +520,8 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
 		}
 
 		//
-		Arms[2].setRotateAngle(-0.78539816339744830961566084581988F - rightArm.getRotateAngleX(), 0F, 0F);
-		Arms[3].setRotateAngle(-0.78539816339744830961566084581988F - leftArm.getRotateAngleX(), 0F, 0F);
+		((Modchu_ModelRenderer) Arms[2]).setRotateAngle(-0.78539816339744830961566084581988F - ((Modchu_ModelRenderer) rightArm).getRotateAngleX(), 0F, 0F);
+		((Modchu_ModelRenderer) Arms[3]).setRotateAngle(-0.78539816339744830961566084581988F - ((Modchu_ModelRenderer) leftArm).getRotateAngleX(), 0F, 0F);
 
 		//‹r•”’Ç]
 		float sinBody1X = MathHelper.sin(bipedBody.rotateAngleX);
@@ -551,7 +548,7 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
 
 		rightArm.setRotationPoint(-4F, bodyPosY - 7.5F, 0F);
 		 rightArm2.setRotationPoint(0F, 5F, 0.5F);
-		  Arms[0].setRotationPointLM(-0.5F, 7F, 0F);
+		  Arms[0].setRotationPoint(-0.5F, 7F, 0F);
 		leftArm.setRotationPoint(4F, bodyPosY - 7.5F, 0F);
 		 leftArm2.setRotationPoint(0F, 5F, 0.5F);
 		  Arms[1].setRotationPoint(0.5F, 7F, 0F);
@@ -720,53 +717,53 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
     public void actionInit1() {
     	setShortcutKeysAction(true);
     	boolean b = true;
-    	rightArm.setVisible(b);
-    	rightArm2.setVisible(b);
-    	rightHand.setVisible(b);
-    	leftArm.setVisible(b);
-    	leftArm2.setVisible(b);
-    	leftHand.setVisible(b);
-    	rightLeg.setVisible(b);
-    	rightLeg2.setVisible(b);
-    	leftLeg.setVisible(b);
-    	leftLeg2.setVisible(b);
+    	setVisible(rightArm, b);
+    	setVisible(rightArm2, b);
+    	setVisible(rightHand, b);
+    	setVisible(leftArm, b);
+    	setVisible(leftArm2, b);
+    	setVisible(leftHand, b);
+    	setVisible(rightLeg, b);
+    	setVisible(rightLeg2, b);
+    	setVisible(leftLeg, b);
+    	setVisible(leftLeg2, b);
     	sneakBan = true;
     	waitBan = true;
     	sittingBan = true;
     }
 
-	@Override
-	public void actionRelease1() {
-		setShortcutKeysAction(false);
-		boolean b = true;
-		rightArm.setVisible(b);
-		rightArm2.setVisible(b);
-		leftArm.setVisible(b);
-		leftArm2.setVisible(b);
-		b = false;
-		rightHand.setVisible(b);
-		leftHand.setVisible(b);
+    @Override
+    public void actionRelease1() {
+    	setShortcutKeysAction(false);
+    	boolean b = true;
+    	setVisible(rightArm, b);
+    	setVisible(rightArm2, b);
+    	setVisible(leftArm, b);
+    	setVisible(leftArm2, b);
+    	b = false;
+    	setVisible(rightHand, b);
+    	setVisible(leftHand, b);
 
-		bipedHead.rotateAngleX = 0.0F;
-		bipedHead.rotateAngleY = 0.0F;
-		bipedHead.rotateAngleZ = 0.0F;
-		bipedBody.rotateAngleX = 0.0F;
-		bipedBody.rotateAngleY = 0.0F;
-		bipedBody.rotateAngleZ = 0.0F;
-		rightHand.rotateAngleX = 0.0F;
-		rightHand.rotateAngleY = 0.0F;
-		rightHand.rotateAngleZ = 0.0F;
-		leftHand.rotateAngleX = 0.0F;
-		leftHand.rotateAngleY = 0.0F;
-		leftHand.rotateAngleZ = 0.0F;
+    	bipedHead.rotateAngleX = 0.0F;
+    	bipedHead.rotateAngleY = 0.0F;
+    	bipedHead.rotateAngleZ = 0.0F;
+    	bipedBody.rotateAngleX = 0.0F;
+    	bipedBody.rotateAngleY = 0.0F;
+    	bipedBody.rotateAngleZ = 0.0F;
+    	rightHand.rotateAngleX = 0.0F;
+    	rightHand.rotateAngleY = 0.0F;
+    	rightHand.rotateAngleZ = 0.0F;
+    	leftHand.rotateAngleX = 0.0F;
+    	leftHand.rotateAngleY = 0.0F;
+    	leftHand.rotateAngleZ = 0.0F;
 
-		sneakBan = false;
-		waitBan = false;
-		sittingBan = false;
-	}
+    	sneakBan = false;
+    	waitBan = false;
+    	sittingBan = false;
+    }
 
-	@Override
-	public void action1(Entity entity) {
+    @Override
+    public void action1(Entity entity) {
     	bipedRightArm.rotationPointX = rightArm.rotationPointX;
     	bipedRightArm.rotationPointY = rightArm.rotationPointY;
     	bipedRightArm.rotationPointZ = rightArm.rotationPointZ;
@@ -796,6 +793,22 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
     	leftHand.rotationPointZ = -0.5F;
     	rightLeg.rotationPointY -= 1.0F;
 	}
+
+    @Override
+    public void action4(Entity entity) {
+    	// —¼Žè‚ð‘O‚Éo‚·ƒ‚[ƒVƒ‡ƒ“
+    	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
+    	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
+    	if (getOnGround(getSwingStatus(entity, getHandedness()), entity) > 0.0F) {
+    		rightArm.rotateAngleX += leftArm.rotateAngleX += -1.57F;
+    		rightArm.rotateAngleY = leftArm.rotateAngleY = 0.0F;
+    		rightArm.rotateAngleZ = leftArm.rotateAngleZ = 0.0F;
+    	} else {
+    		rightArm.rotateAngleX = leftArm.rotateAngleX = -1.57F;
+    		rightArm.rotateAngleY = leftArm.rotateAngleY = 0.0F;
+    		rightArm.rotateAngleZ = leftArm.rotateAngleZ = 0.0F;
+    	}
+    }
 
     public float getRidingHeight()
     {

@@ -24,14 +24,11 @@ public class MultiModel_Petit extends MultiModel
 
     public MultiModel_Petit(float f, float f1)
     {
-    	// 132deletesuper(f, f1);
-//-@-132
     	this(f, f1 , 64, 32);
     }
 
     public MultiModel_Petit(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
-//@-@132
     }
 
     @Override
@@ -202,39 +199,34 @@ public class MultiModel_Petit extends MultiModel
     	if(!getSkirtFloats()) return;
     	//è„
     	SkirtTop = new Modchu_ModelRenderer(this, 8, 16);
-    	SkirtTop.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
-    	SkirtTop.setRotationPoint(0.0F, 8.0F, 0.0F);
-    	SkirtTop.setRotationPointLM(-4.0F, 5.0F, 4.0F);
+    	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
+    	SkirtTop.setRotationPoint(-4.0F, 5.0F, 4.0F);
     	Skirt.addChild(SkirtTop);
 
     	//ëO
     	SkirtFront = new Modchu_ModelRenderer(this, 8, 24);
-    	SkirtFront.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
-    	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
-    	SkirtFront.setRotationPointLM(-4.0F, 0.0F, -4.0F);
+    	((Modchu_ModelRenderer) SkirtFront).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
+    	SkirtFront.setRotationPoint(-4.0F, 0.0F, -4.0F);
     	SkirtTop.addChild(SkirtFront);
 
     	//âE
     	SkirtRight = new Modchu_ModelRenderer(this, 0, 24);
-    	SkirtRight.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1, f - 1.9F);
-    	SkirtRight.setRotationPoint(0.0F, 8.0F, 0.0F);
-    	SkirtRight.setRotationPointLM(-4.0F, 0.0F, 4.0F);
+    	((Modchu_ModelRenderer) SkirtRight).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1, f - 1.9F);
+    	SkirtRight.setRotationPoint(-4.0F, 0.0F, 4.0F);
     	SkirtTop.addChild(SkirtRight);
 
     	//ç∂
     	SkirtLeft = new Modchu_ModelRenderer(this, 16, 24);
-    	SkirtLeft.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1, f - 1.9F);
-    	SkirtLeft.setRotationPoint(0.0F, 8.0F, 0.0F);
-    	SkirtLeft.setRotationPointLM(4.0F, 0.0F, -4.0F);
+    	((Modchu_ModelRenderer) SkirtLeft).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1, f - 1.9F);
+    	SkirtLeft.setRotationPoint(4.0F, 0.0F, -4.0F);
     	SkirtTop.addChild(SkirtLeft);
 
     	//å„ÇÎ
     	SkirtBack = new Modchu_ModelRenderer(this, 24, 24);
-    	SkirtBack.addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
-    	SkirtBack.setRotationPoint(0.0F, 8.0F, 0.0F);
-    	SkirtBack.setRotationPointLM(-4.0F, 0.0F, 4.0F);
+    	((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
+    	SkirtBack.setRotationPoint(-4.0F, 0.0F, 4.0F);
     	SkirtTop.addChild(SkirtBack);
-    	Skirt.setVisible(false);
+    	setVisible(Skirt, false);
     }
 
     @Override
@@ -258,8 +250,8 @@ public class MultiModel_Petit extends MultiModel
     	FaceL.setRotationPoint(0.0F, 0.0F, 0.0F);
     	eyeL.setRotationPoint(-0.9F, -2.65F, 0.0F);
     	eyeR.setRotationPoint(0.9F, -2.65F, 0.0F);
-    	Arms[0].setRotationPointLM(0.5F, 2.5F, 0F);
-    	Arms[1].setRotationPointLM(-0.5F, 2.5F, 0F);
+    	Arms[0].setRotationPoint(0.5F, 2.5F, 0F);
+    	Arms[1].setRotationPoint(-0.5F, 2.5F, 0F);
     }
 
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -304,11 +296,11 @@ public class MultiModel_Petit extends MultiModel
     @Override
     public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	if (!getSkirtFloats()) return;
-    	SkirtTop.setRotationPointLM(-4.0F, -2.0F, 4.0F);
-    	SkirtFront.setRotationPointLM(0.0F, 8.0F, 0.0F);
-    	SkirtRight.setRotationPointLM(0.0F, 0.0F, 0.0F);
-    	SkirtLeft.setRotationPointLM(8.0F, 8.0F, 0.0F);
-    	SkirtBack.setRotationPointLM(0.0F, 3.8F, 0.0F);
+    	SkirtTop.setRotationPoint(-4.0F, -2.0F, 4.0F);
+    	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	SkirtLeft.setRotationPoint(8.0F, 8.0F, 0.0F);
+    	SkirtBack.setRotationPoint(0.0F, 3.8F, 0.0F);
 
     	SkirtFront.rotationPointX += getMotionY() * 4.0F;
     	SkirtFront.rotationPointY += getMotionY() * 2.0F;
@@ -336,8 +328,8 @@ public class MultiModel_Petit extends MultiModel
     	SkirtLeft.rotateAngleY = -getMotionY();
     	SkirtBack.rotateAngleX -= getMotionY();
 
-    	SkirtFront.scaleX = SkirtBack.scaleX = 1.0F - (getMotionY() * 1.0F);
-    	SkirtRight.scaleZ = SkirtLeft.scaleZ = 1.0F - (getMotionY() * 1.0F);
+    	((Modchu_ModelRenderer) SkirtFront).scaleX = ((Modchu_ModelRenderer) SkirtBack).scaleX = 1.0F - (getMotionY() * 1.0F);
+    	((Modchu_ModelRenderer) SkirtRight).scaleZ = ((Modchu_ModelRenderer) SkirtLeft).scaleZ = 1.0F - (getMotionY() * 1.0F);
     }
 
     @Override

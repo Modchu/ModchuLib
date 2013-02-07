@@ -29,14 +29,11 @@ public class MultiModel_Biped extends MultiModelBaseBiped
 	}
 
 	public MultiModel_Biped(float f, float f1) {
-		// 132deletesuper(f, f1);
-//-@-132
 		this(f, f1 , 64, 32);
 	}
 
 	public MultiModel_Biped(float f, float f1, int i, int j) {
 		super(f, f1, i, j);
-//@-@132
 	}
 
 	@Override
@@ -112,13 +109,13 @@ public class MultiModel_Biped extends MultiModelBaseBiped
     	leftLeg.addChild(leftLeg2);
 
     	rightHand = new Modchu_ModelRenderer(this, 40, 24);
-    	rightHand.addBoxLM(-1.0F, -1.0F, -1.0F, 4, 4, 4, f);
+    	rightHand.addBox(-1.0F, -1.0F, -1.0F, 4, 4, 4, f);
     	rightHand.setRotationPoint(0.0F, 3.0F, 0.0F);
     	rightArm2.addChild(rightHand);
 
     	leftHand = new Modchu_ModelRenderer(this, 40, 24);
     	leftHand.mirror = true;
-    	leftHand.addBoxLM(-1.0F, -1.0F, -1.0F, 4, 4, 4, f);
+    	leftHand.addBox(-1.0F, -1.0F, -1.0F, 4, 4, 4, f);
     	leftHand.setRotationPoint(0.0F, 3.0F, 0.0F);
     	leftArm2.addChild(leftHand);
 
@@ -246,8 +243,6 @@ public class MultiModel_Biped extends MultiModelBaseBiped
     		f6 = MathHelper.sin(MathHelper.sqrt_float(onGroundR) * (float)Math.PI * 2.0F);
     		f7 = MathHelper.sin(MathHelper.sqrt_float(onGroundL) * (float)Math.PI * 2.0F);
     		bipedBody.rotateAngleY = (f6 - f7) * 0.2F;
-    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
-    		bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
     		// R
     		if (onGroundR > 0F) {
     			f6 = 1.0F - onGroundR;
@@ -259,8 +254,6 @@ public class MultiModel_Biped extends MultiModelBaseBiped
     			bipedRightArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
     			bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
     			bipedRightArm.rotateAngleZ = MathHelper.sin(onGroundR * 3.141593F) * -0.4F;
-    		} else {
-    			bipedRightArm.rotateAngleX += bipedBody.rotateAngleY;
     		}
     		// L
     		if (onGroundL > 0F) {
@@ -270,28 +263,24 @@ public class MultiModel_Biped extends MultiModelBaseBiped
     			f6 = 1.0F - f6;
     			f7 = MathHelper.sin(f6 * (float)Math.PI);
     			f8 = MathHelper.sin(onGroundL * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
-    			//if (!getFirstPerson()) {
-    				bipedLeftArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
-    				bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-    				bipedLeftArm.rotateAngleZ = MathHelper.sin(onGroundL * 3.141593F) * 0.4F;
-    			//}
-    		} else {
-    			bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
+    			bipedLeftArm.rotateAngleX -= (double)f7 * 1.2D + (double)f8;
+    			bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
+    			bipedLeftArm.rotateAngleZ = MathHelper.sin(onGroundL * 3.141593F) * 0.4F;
     		}
     	}
     }
 
     @Override
     public void reset(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bipedBody.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bipedHeadwear.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bipedRightArm.setRotationPoint(-6.0F, 0.0F, 0.0F);
-		bipedLeftArm.setRotationPoint(6.0F, 0.0F, 0.0F);
-		bipedRightLeg.setRotationPoint(-2.0F, 12.0F, 0.0F);
-		bipedLeftLeg.setRotationPoint(1.9F, 12.0F, 0.0F);
-		Arms[0].setRotationPointLM(0.0F, 9.5F, 0F);
-		Arms[1].setRotationPointLM(0.0F, 9.5F, 0F);
+    	bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	bipedBody.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	bipedHeadwear.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	bipedRightArm.setRotationPoint(-6.0F, 0.0F, 0.0F);
+    	bipedLeftArm.setRotationPoint(6.0F, 0.0F, 0.0F);
+    	bipedRightLeg.setRotationPoint(-2.0F, 12.0F, 0.0F);
+    	bipedLeftLeg.setRotationPoint(1.9F, 12.0F, 0.0F);
+    	Arms[0].setRotationPoint(0.0F, 9.5F, 0F);
+    	Arms[1].setRotationPoint(0.0F, 9.5F, 0F);
     }
 
     /**
@@ -409,5 +398,20 @@ public class MultiModel_Biped extends MultiModelBaseBiped
 		leftLeg2.rotationPointX = 0.0F;
 		leftLeg2.rotationPointY = 5.5F;
 		leftLeg2.rotationPointZ = 0.0F;
+		Arms[0].setRotationPoint(0.0F, 0.0F, 0.0F);
+		Arms[1].setRotationPoint(0.0F, 0.0F, 0.0F);
+    }
+
+    @Override
+    public void action2(Entity entity) {
+    	// 手を上げるモーション
+    	super.action2(entity);
+    	getBipedRightArm().rotationPointX += getHandedness() == 0 ? 2.0F : -2.0F;
+    }
+
+    public void action3(Entity entity) {
+    	// 手を上げて振るモーション
+    	super.action3(entity);
+    	getBipedRightArm().rotationPointX += getHandedness() == 0 ? 2.0F : -2.0F;
     }
 }
