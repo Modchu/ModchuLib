@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import net.smart.render.RendererData;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -76,7 +74,8 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public boolean fadeRotationPointX;
 	public boolean fadeRotationPointY;
 	public boolean fadeRotationPointZ;
-	public RendererData previous;
+	public Class RendererData;
+	public Object previous;
 
 //-@-132
 	public float offsetX = 0.0F;
@@ -142,6 +141,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	matrix = BufferUtils.createFloatBuffer(16);
     	isInvertX = false;
     	baseModel = modelbase;
+    	RendererData = mod_Modchu_ModchuLib.RendererData;
 /*//b181delete
         cubeList = new ArrayList();
         setTextureSize((int)((MultiModel) modelbase).textureWidth, (int)((MultiModel) modelbase).textureHeight);
@@ -513,9 +513,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     			if (modelRenderer != null) {
     				if (modelRenderer instanceof Modchu_ModelRenderer) {
     					((Modchu_ModelRenderer) modelRenderer).render(par1, pEntityLiving);
-    				} else if (modelRenderer instanceof Modchu_ModelRotationRenderer) {
-    					((Modchu_ModelRotationRenderer) modelRenderer).render(par1, pEntityLiving);
-    				} else {
+    				} else{
     					modelRenderer.render(par1);
     				}
     			}
@@ -1202,35 +1200,45 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
     public void fadeStore(float var1)
     {
-        if (previous != null)
-        {
-            previous.offsetX = offsetX;
-            previous.offsetY = offsetY;
-            previous.offsetZ = offsetZ;
-            previous.rotateAngleX = rotateAngleX;
-            previous.rotateAngleY = rotateAngleY;
-            previous.rotateAngleZ = rotateAngleZ;
-            previous.rotationPointX = rotationPointX;
-            previous.rotationPointY = rotationPointY;
-            previous.rotationPointZ = rotationPointZ;
-            previous.totalTime = var1;
-        }
+    	if (previous != null)
+    	{
+    		Modchu_Reflect.setFieldObject(RendererData, "offsetX", previous, offsetX);
+    		Modchu_Reflect.setFieldObject(RendererData, "offsetY", previous, offsetY);
+    		Modchu_Reflect.setFieldObject(RendererData, "offsetZ", previous, offsetZ);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotateAngleX", previous, rotateAngleX);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotateAngleY", previous, rotateAngleY);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotateAngleZ", previous, rotateAngleZ);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotationPointX", previous, rotationPointX);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotationPointY", previous, rotationPointY);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotationPointZ", previous, rotationPointZ);
+    		Modchu_Reflect.setFieldObject(RendererData, "totalTime", previous, var1);
+    	}
     }
 
     public void fadeIntermediate(float var1)
     {
-        if (previous != null && var1 - previous.totalTime <= 2.0F)
-        {
-            offsetX = GetIntermediatePosition(previous.offsetX, offsetX, fadeOffsetX, previous.totalTime, var1);
-            offsetY = GetIntermediatePosition(previous.offsetY, offsetY, fadeOffsetY, previous.totalTime, var1);
-            offsetZ = GetIntermediatePosition(previous.offsetZ, offsetZ, fadeOffsetZ, previous.totalTime, var1);
-            rotateAngleX = GetIntermediateAngle(previous.rotateAngleX, rotateAngleX, fadeRotateAngleX, previous.totalTime, var1);
-            rotateAngleY = GetIntermediateAngle(previous.rotateAngleY, rotateAngleY, fadeRotateAngleY, previous.totalTime, var1);
-            rotateAngleZ = GetIntermediateAngle(previous.rotateAngleZ, rotateAngleZ, fadeRotateAngleZ, previous.totalTime, var1);
-            rotationPointX = GetIntermediatePosition(previous.rotationPointX, rotationPointX, fadeRotationPointX, previous.totalTime, var1);
-            rotationPointY = GetIntermediatePosition(previous.rotationPointY, rotationPointY, fadeRotationPointY, previous.totalTime, var1);
-            rotationPointZ = GetIntermediatePosition(previous.rotationPointZ, rotationPointZ, fadeRotationPointZ, previous.totalTime, var1);
-        }
+    	float totalTime = (Float)Modchu_Reflect.getFieldObject(RendererData, "totalTime", previous);
+    	float previousOffsetX = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetX", previous);
+    	float previousOffsetY = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetY", previous);
+    	float previousOffsetZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetZ", previous);
+    	float previousRotateAngleX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleX", previous);
+    	float previousRotateAngleY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleY", previous);
+    	float previousRotateAngleZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleZ", previous);
+    	float previousRotationPointX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointX", previous);
+    	float previousRotationPointY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointY", previous);
+    	float previousRotationPointZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointZ", previous);
+    	if (previous != null && var1 - totalTime <= 2.0F)
+    	{
+    		offsetX = GetIntermediatePosition(previousOffsetX, offsetX, fadeOffsetX, totalTime, var1);
+    		offsetY = GetIntermediatePosition(previousOffsetY, offsetY, fadeOffsetY, totalTime, var1);
+    		offsetZ = GetIntermediatePosition(previousOffsetZ, offsetZ, fadeOffsetZ, totalTime, var1);
+    		rotateAngleX = GetIntermediateAngle(previousRotateAngleX, rotateAngleX, fadeRotateAngleX, totalTime, var1);
+    		rotateAngleY = GetIntermediateAngle(previousRotateAngleY, rotateAngleY, fadeRotateAngleY, totalTime, var1);
+    		rotateAngleZ = GetIntermediateAngle(previousRotateAngleZ, rotateAngleZ, fadeRotateAngleZ, totalTime, var1);
+    		rotationPointX = GetIntermediatePosition(previousRotationPointX, rotationPointX, fadeRotationPointX, totalTime, var1);
+    		rotationPointY = GetIntermediatePosition(previousRotationPointY, rotationPointY, fadeRotationPointY, totalTime, var1);
+    		rotationPointZ = GetIntermediatePosition(previousRotationPointZ, rotationPointZ, fadeRotationPointZ, totalTime, var1);
+    	}
     }
 
     private float GetIntermediatePosition(float var1, float var2, boolean var3, float var4, float var5)

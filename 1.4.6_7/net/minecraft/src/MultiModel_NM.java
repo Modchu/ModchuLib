@@ -73,7 +73,7 @@ public class MultiModel_NM extends MultiModel_SR2
     	bipedBody.setRotationPoint(0.0F, -3.0F, 0.0F);
     	tie = new Modchu_ModelRenderer(this, 0, 6);
     	tie.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, f + 0.1F);
-    	tie.setRotationPoint(-0.5F, 0.0F, -2.1F);
+    	tie.setRotationPoint(-0.5F, -3.5F, -2.1F);
     	bow = new Modchu_ModelRenderer(this, 40, 42);
     	bow.addBox(2.0F, -2F, 2.0F, 2, 6, 2, f);
     	bow.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -84,26 +84,26 @@ public class MultiModel_NM extends MultiModel_SR2
     	bipedBody.addChild(bipedRightArm);
     	RightArm1 = new Modchu_ModelRenderer(this, 48, 42);
     	RightArm1.addBox(1.0F, 3F, -1F, 2, 1, 2, f + 0.4F);
-    	RightArm1.setRotationPoint(-3.0F, 0.5F, 0.0F);
+		RightArm1.setRotationPoint(-2.0F, 1.0F, 0.0F);
     	RightArm2 = new Modchu_ModelRenderer(this, 48, 45);
     	RightArm2.addBox(1.0F, 4F, -1F, 2, 3, 2, f + 0.2F);
-    	RightArm2.setRotationPoint(-3.0F, 0.5F, 0.0F);
+		RightArm2.setRotationPoint(-2.0F, 1.0F, 0.0F);
     	RightArm3 = new Modchu_ModelRenderer(this, 48, 50);
     	RightArm3.addBox(1.0F, 3F, -1F, 2, 4, 2, f + 0.2F);
-    	RightArm3.setRotationPoint(-3.0F, 0.5F, 0.0F);
+		RightArm3.setRotationPoint(-2.0F, 1.0F, 0.0F);
     	bipedLeftArm = new Modchu_ModelRenderer(this, 56, 0);
     	bipedLeftArm.addBox(-1.0F, 0.0F, -1.0F, 2, 8, 2, f);
     	bipedLeftArm.setRotationPoint(3.0F, 4.5F, 0.0F);
     	bipedBody.addChild(bipedLeftArm);
     	LeftArm1 = new Modchu_ModelRenderer(this, 56, 42);
     	LeftArm1.addBox(-3F, 4F, -1F, 2, 1, 2, f + 0.4F);
-    	LeftArm1.setRotationPoint(3F, 0.5F, 0.0F);
+		LeftArm1.setRotationPoint(2.0F, 1.0F, 0.0F);
     	LeftArm2 = new Modchu_ModelRenderer(this, 56, 45);
     	LeftArm2.addBox(-3F, 4F, -1F, 2, 3, 2, f + 0.2F);
-    	LeftArm2.setRotationPoint(3F, 0.5F, 0.0F);
+		LeftArm2.setRotationPoint(2.0F, 1.0F, 0.0F);
     	LeftArm3 = new Modchu_ModelRenderer(this, 56, 50);
     	LeftArm3.addBox(-3F, 3F, -1F, 2, 4, 2, f + 0.2F);
-    	LeftArm3.setRotationPoint(3F, 0.5F, 0.0F);
+		LeftArm3.setRotationPoint(2.0F, 1.0F, 0.0F);
     	bipedRightLeg = new Modchu_ModelRenderer(this, 32, 19);
     	bipedRightLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 9, 4, f);
     	bipedRightLeg.setRotationPoint(-1.5F, 15F, 0.0F);
@@ -255,20 +255,6 @@ public class MultiModel_NM extends MultiModel_SR2
     {
         super.setLivingAnimationsLM(entityliving, f, f1, f2);
     	float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
-    	RightArm1.setVisible(false);
-    	LeftArm1.setVisible(false);
-    	RightArm2.setVisible(false);
-    	LeftArm2.setVisible(false);
-    	RightArm3.setVisible(false);
-    	LeftArm3.setVisible(false);
-    	Zukin.setVisible(false);
-    	sensor.setVisible(true);
-    	Cachusya.setVisible(true);
-    	RightLeg.setVisible(false);
-    	LeftLeg.setVisible(false);
-    	BodyA.setVisible(false);
-    	BreastA.setVisible(false);
-    	bow.setVisible(false);
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entityliving)
     			&& !getaimedBow()) {
@@ -286,31 +272,56 @@ public class MultiModel_NM extends MultiModel_SR2
     			int i1 = 6;
     			int i2 = 8;
 *///125delete
+    			RightArm1.setVisible(false);
+    			LeftArm1.setVisible(false);
+    			RightArm2.setVisible(false);
+    			LeftArm2.setVisible(false);
+    			RightArm3.setVisible(false);
+    			LeftArm3.setVisible(false);
+    			Zukin.setVisible(false);
+    			sensor.setVisible(true);
+    			Cachusya.setVisible(true);
+    			RightLeg.setVisible(false);
+    			LeftLeg.setVisible(false);
+    			BodyA.setVisible(false);
+    			BreastA.setVisible(false);
+    			bow.setVisible(false);
     			if (maidMode == i) {
     				f3 *= 8F;
-    				float f4 = -0.2F;
-    				RightArm1.showModel = LeftArm1.showModel = true;
-    				RightArm2.showModel = LeftArm2.showModel = false;
-    				RightArm3.showModel = LeftArm3.showModel = true;
-    				BodyA.showModel = true;
-    				RightLeg.showModel = LeftLeg.showModel = true;
+    				//float f4 = -0.2F;
+    				RightArm1.setVisible(true);
+    				LeftArm1.setVisible(true);
+    				RightArm2.setVisible(false);
+    				LeftArm2.setVisible(false);
+    				RightArm3.setVisible(true);
+    				LeftArm3.setVisible(true);
+    				BodyA.setVisible(true);
+    				RightLeg.setVisible(true);
+    				LeftLeg.setVisible(true);
     			}
     			if (maidMode == i1) {
     				f3 *= 8F;
     				float f5 = -0.2F;
-    				RightArm2.showModel = LeftArm2.showModel = true;
-    				RightArm3.showModel = LeftArm3.showModel = false;
-    				Zukin.showModel = true;
-    				sensor.showModel = Cachusya.showModel = false;
+    				RightArm2.setVisible(true);
+    				LeftArm2.setVisible(true);
+    				RightArm3.setVisible(false);
+    				LeftArm3.setVisible(false);
+    				Zukin.setVisible(true);
+    				sensor.setVisible(false);
+    				Cachusya.setVisible(false);
     			}
     			if (maidMode == i2) {
     				f3 *= 8F;
     				float f6 = -0.2F;
-    				RightArm2.showModel = LeftArm2.showModel = false;
-    				RightArm3.showModel = LeftArm3.showModel = true;
-    				BodyA.showModel = bow.showModel = true;
-    				RightLeg.showModel = LeftLeg.showModel = true;
-    				BreastA.showModel = true;
+    				RightArm2.setVisible(false);
+    				LeftArm2.setVisible(false);
+    				RightArm3.setVisible(true);
+    				LeftArm3.setVisible(true);
+    				BodyA.setVisible(true);
+    				bow.setVisible(true);
+    				RightLeg.setVisible(true);
+    				LeftLeg.setVisible(true);
+    				BreastA.setVisible(true);
     			}
     		}
     	}

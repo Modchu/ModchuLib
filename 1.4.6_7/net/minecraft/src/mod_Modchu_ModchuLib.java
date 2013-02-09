@@ -37,6 +37,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static Class decoBlock;
 	public static Class decoBlockBase;
 	public static Class favBlock;
+	public static Class RendererData;
 	private boolean isModchu;
 	private static final File cfgdir = new File(Minecraft.getMinecraftDir(), "/config/");
 	private static File mainCfgfile = new File(cfgdir, ("Modchu_ModchuLib.cfg"));
@@ -69,7 +70,6 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 			Modchu_Reflect.invokeMethod(MMM_TextureManager, "init");
 			Modchu_Reflect.invokeMethod(MMM_StabilizerManager, "init");
 		}
-		loadcfg();
 
 		mod_LMM_littleMaidMob = Modchu_Reflect.loadClass(getClassName("mod_LMM_littleMaidMob"));
 		if (mod_LMM_littleMaidMob != null) {
@@ -83,6 +83,9 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 			PFLM_Gui = Modchu_Reflect.loadClass(getClassName("PFLM_Gui"));
 			PFLM_EntityPlayerDummy = Modchu_Reflect.loadClass(getClassName("PFLM_EntityPlayerDummy"));
 		}
+
+		RendererData = Modchu_Reflect.loadClass("net.smart.render.RendererData");
+		loadcfg();
 		Modchu_Debug.Debug("load() end");
 	}
 

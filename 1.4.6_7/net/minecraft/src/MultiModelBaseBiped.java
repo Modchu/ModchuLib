@@ -37,7 +37,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public ModelRenderer HeadMount;
     public ModelRenderer mainFrame;
     public static Minecraft mc = Minecraft.getMinecraft();
-    //public static int partsNumber = 0;
     public static int partsSetFlag = 1;
     public static int showModelFlag = 0;
     public static int overridePartsNumber = 0;
@@ -105,7 +104,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      * コンストラクタは全て継承させること
      */
     public MultiModelBaseBiped(float psize, float pyoffset) {
-//-@-132
     	this(psize, pyoffset, 64, 32);
     }
 
@@ -113,12 +111,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	super(psize, pyoffset);
     	textureWidth = par3;
     	textureHeight = par4;
-//@-@132
-/*//132delete
-    	super();
-    	textureWidth = 64;
-    	textureHeight = 32;
-*///132delete
     	//b173deleteboxList = new ArrayList();
 
     	Modchu_Reflect.setDebugMessage(false);
@@ -311,9 +303,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     				} else if (Arms instanceof Modchu_ModelRenderer) {
     					((Modchu_ModelRenderer) Arms).loadMatrix();
     					((Modchu_ModelRenderer) Arms).renderItems(pEntity, pRender, false, laction, litemstack);
-    				} else if (Arms instanceof Modchu_ModelRotationRenderer) {
-    					((Modchu_ModelRotationRenderer) Arms).loadMatrix();
-    					((Modchu_ModelRotationRenderer) Arms).renderItems(pEntity, pRender, false, laction, litemstack);
     				}
     			}
     		}
@@ -338,8 +327,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     					((MMM_ModelRenderer) HeadMount).loadMatrix();
     				} else if (HeadMount instanceof Modchu_ModelRenderer) {
     					((Modchu_ModelRenderer) HeadMount).loadMatrix();
-    				} else if (HeadMount instanceof Modchu_ModelRotationRenderer) {
-    					((Modchu_ModelRotationRenderer) HeadMount).loadMatrix();
     				}
     				if (isPlanter
     						|| (addSupport > -1 && addSupport < 3)) {
@@ -357,8 +344,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     					((MMM_ModelRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack);
     				} else if (HeadMount instanceof Modchu_ModelRenderer) {
     					((Modchu_ModelRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack, scale, addSupport);
-    				} else if (HeadMount instanceof Modchu_ModelRotationRenderer) {
-    					((Modchu_ModelRotationRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack, scale, addSupport);
     				}
     				//HeadMount.renderItems(pEntity, pRender, true, null, ((LMM_EntityLittleMaid) pEntity).maidInventory.getHeadMount());
     			}
@@ -387,9 +372,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			} else if (Arms instanceof Modchu_ModelRenderer) {
     				((Modchu_ModelRenderer) Arms).loadMatrix();
     				((Modchu_ModelRenderer) Arms).renderItems(entityplayer, pRender, false, laction, litemstack);
-    			} else if (Arms instanceof Modchu_ModelRotationRenderer) {
-    				((Modchu_ModelRotationRenderer) Arms).loadMatrix();
-    				((Modchu_ModelRotationRenderer) Arms).renderItems(entityplayer, pRender, false, laction, litemstack);
     			}
     		}
     	}
@@ -1409,6 +1391,11 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public boolean getIsRiding()
     {
     	return isRiding && !ridingBan;
+    }
+
+    public boolean getIsSleeping()
+    {
+    	return isSleeping && !sleepingBan;
     }
 
     public float getOnGround()

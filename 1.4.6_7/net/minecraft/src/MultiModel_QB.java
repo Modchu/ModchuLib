@@ -291,7 +291,7 @@ public class MultiModel_QB extends MultiModel {
     	ringR.rotationPointY = -ff1 + 1.0F;
     	ringL.rotationPointY = -ff1 + 1.0F;
 
-    	if (isSleeping) {
+    	if (getIsSleeping()) {
     		bipedHead.rotationPointX = -4F;
     		bipedHead.rotationPointY = 2F;
     		bipedHead.rotationPointZ = -2F;
