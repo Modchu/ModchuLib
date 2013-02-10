@@ -401,6 +401,27 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     		leftArm2.rotateAngleZ = 0.0F;
     		rightArm2.rotateAngleX = 0.0F;
     		leftArm2.rotateAngleX = 0.0F;
+    		if (getIsRiding()) {
+    			Arms[0].rotationPointX -= 1.0F;
+    			Arms[0].rotationPointY -= 2.0F;
+    			Arms[0].rotateAngleZ -= 2.0F;
+    			Arms[0].rotateAngleX -= 1.5F;
+    			Arms[0].rotateAngleY += 1.5F;
+    			Arms[1].rotationPointX -= 1.0F;
+    			Arms[1].rotationPointY += 2.0F;
+    			Arms[1].rotateAngleZ += 2.0F;
+    			Arms[1].rotateAngleX -= 1.5F;
+    			Arms[1].rotateAngleY += 1.5F;
+    		} else {
+    			Arms[0].rotationPointX -= 2.0F;
+    			Arms[0].rotateAngleZ -= 1.5F;
+    			Arms[0].rotateAngleX -= 0.5F;
+    			Arms[0].rotateAngleY += 1.5F;
+    			Arms[1].rotationPointX += 2.0F;
+    			Arms[1].rotateAngleZ += 1.5F;
+    			Arms[1].rotateAngleX -= 0.5F;
+    			Arms[1].rotateAngleY -= 1.5F;
+    		}
     	}
     	skirtFloats(f, f1, f2, f3, f4, f5, entity);
     }
@@ -515,6 +536,12 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	shield.setRotationPoint(1.5F, 5F, 0F);
     	Arms[0].setRotationPoint(0.5F, 4.5F, 0F);
     	Arms[1].setRotationPoint(-0.5F, 4.5F, 0F);
+    	Arms[0].rotateAngleX = 0F;
+    	Arms[0].rotateAngleY = 0F;
+    	Arms[0].rotateAngleZ = 0F;
+    	Arms[1].rotateAngleX = 0F;
+    	Arms[1].rotateAngleY = 0F;
+    	Arms[1].rotateAngleZ = 0F;
     }
 
     @Override

@@ -499,6 +499,14 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
 			bipedLeftArm.rotateAngleZ = 0.4F;
 			BodyR.rotateAngleZ = -0.2F;
 			BodyL.rotateAngleZ = 0.2F;
+			Arms[0].rotationPointX -= 2.0F;
+			Arms[0].rotateAngleZ -= 1.5F;
+			Arms[0].rotateAngleX -= 0.5F;
+			Arms[0].rotateAngleY += 1.5F;
+			Arms[1].rotationPointX += 2.0F;
+			Arms[1].rotateAngleZ += 1.5F;
+			Arms[1].rotateAngleX -= 0.5F;
+			Arms[1].rotateAngleY -= 1.5F;
 		} else {
 			if (getaimedBow())
 			{
@@ -703,6 +711,8 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
     	rightLeg2.setRotationPoint(0.0F, 5.5F, 0.0F);
     	leftLeg2.setRotationPoint(0.0F, 5.5F, 0.0F);
     	rightLeg.setRotationPoint(-2F, 10F, 0F);
+    	Arms[0].setRotationPoint(0.5F, 11.0F, 0F);
+    	Arms[1].setRotationPoint(-0.5F, 11.0F, 0F);
     	rightLeg.rotateAngleZ = -0.15F;
     	leftLeg.rotateAngleZ = 0.15F;
     	backRightLeg.rotateAngleX = -0.2F;
@@ -711,6 +721,12 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
     	backLeftLeg.rotateAngleZ = -0.1F;
     	rightLeg2.rotateAngleZ = 0.15F;
     	leftLeg2.rotateAngleZ = -0.15F;
+    	Arms[0].rotateAngleX = 0F;
+    	Arms[0].rotateAngleY = 0F;
+    	Arms[0].rotateAngleZ = 0F;
+    	Arms[1].rotateAngleX = 0F;
+    	Arms[1].rotateAngleY = 0F;
+    	Arms[1].rotateAngleZ = 0F;
     }
 
     @Override
@@ -733,8 +749,6 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
     	leftLeg2.rotateAngleX = 0.0F;
     	leftLeg2.rotateAngleY = 0.0F;
     	leftLeg2.rotateAngleZ = 0.0F;
-    	Arms[0].setRotationPoint(0.5F, 11.0F, 0F);
-    	Arms[1].setRotationPoint(-0.5F, 11.0F, 0F);
     }
 
     @Override
@@ -760,6 +774,8 @@ public class MultiModel_Evelyn3 extends MultiModel_SR2 {
     			leftHand.rotationPointY = 6.0F;
     	rightArm.rotationPointY =
     			leftArm.rotationPointY = -5.5F;
+    	Arms[0].setRotationPoint(0.5F, 0.0F, 0F);
+    	Arms[1].setRotationPoint(-0.5F, 0.0F, 0F);
     }
 
     @Override

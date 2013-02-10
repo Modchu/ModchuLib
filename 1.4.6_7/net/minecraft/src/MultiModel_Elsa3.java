@@ -407,11 +407,13 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     		//ë“ã@èÛë‘ÇÃì¡ï ï\é¶
     		bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.062F) * 0.05F -0.6F;
     		bipedRightArm.rotateAngleZ -= 0.4F;
+    		Arms[0].rotationPointX -= 2.0F;
     		Arms[0].rotateAngleZ -= 1.5F;
     		Arms[0].rotateAngleX -= 0.5F;
     		Arms[0].rotateAngleY += 1.5F;
     		bipedLeftArm.rotateAngleX += MathHelper.sin(f2 * 0.062F) * 0.05F -0.6F;
     		bipedLeftArm.rotateAngleZ += 0.4F;
+    		Arms[1].rotationPointX += 2.0F;
     		Arms[1].rotateAngleZ += 1.5F;
     		Arms[1].rotateAngleX -= 0.5F;
     		Arms[1].rotateAngleY -= 1.5F;

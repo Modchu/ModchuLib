@@ -322,6 +322,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
     	if (pRealBlock && item.itemID == Item.skull.itemID)
     	{
+    		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     		String var6 = "";
     		if (itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("SkullOwner"))
     		{
@@ -335,8 +336,20 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		GL11.glDisable(GL11.GL_CULL_FACE);
     	} else {
     		// アイテムに色付け
-    		pRender.loadTexture("/gui/items.png");
-    		for (int j = 0; j <= (itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0); j++) {
+    		String s1 = "/gui/items.png";
+    		int renderPasses = itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0;
+    		if (mod_Modchu_ModchuLib.isForge) {
+    			if (renderPasses == 1) renderPasses =
+    					(Integer) Modchu_Reflect.invokeMethod(Item.class, "getRenderPasses", new Class[]{ int.class },
+    							itemstack.getItem(), new Object[]{ itemstack.getItemDamage() }) - 1;
+    			s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", itemstack.getItem());
+    			//Modchu_Debug.Debug("isForge pRender.loadTexture s1="+s1+" renderPasses="+renderPasses);
+    		} else if (mod_Modchu_ModchuLib.isBTW
+    				&& isBTWItem(itemstack.getItem())) {
+    			s1 = "/btwmodtex/btwitems01.png";
+    		}
+    		pRender.loadTexture(s1);
+    		for (int j = 0; j <= renderPasses; j++) {
     			int k = itemstack.getItem().getColorFromItemStack(itemstack, j);
     			float f15 = (float)(k >> 16 & 0xff) / 255F;
     			float f17 = (float)(k >> 8 & 0xff) / 255F;
@@ -419,6 +432,25 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		/*b173//*/GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     	}
     	return flag;
+    }
+
+    private boolean isBTWItem(Item var1) {
+        Class c = Modchu_Reflect.loadClass("net.minecraft.src.forge.ITextureProvider");
+        if (c != null) ;else Modchu_Reflect.loadClass("forge.ITextureProvider");
+        if (c != null) {
+            Class[] var3 = var1.getClass().getInterfaces();
+            for (int var4 = 0; var4 < var3.length; ++var4) {
+                if (var3[var4] == c) return true;
+            }
+        } else {
+        	c = Modchu_Reflect.loadClass("net.minecraft.src.FCItemMattock");
+        	if (c!= null
+        			&& c.isInstance(var1)) return true;
+        	c = Modchu_Reflect.loadClass("FCItemMattock");
+        	if (c!= null
+        			&& c.isInstance(var1)) return true;
+        }
+        return false;
     }
 
     public void setRotatePriority(int pValue) {

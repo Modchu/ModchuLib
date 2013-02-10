@@ -17,12 +17,15 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static boolean useInvisibilityBody = true;
 	public static boolean useInvisibilityArmor = false;
 	public static boolean useInvisibilityItem = false;
+	public static boolean versionCheck = true;
 
 	public static boolean isForge = false;
 	public static boolean isLMM = false;
 	public static boolean isPFLM = false;
 	public static boolean isFavBlock = false;
 	public static boolean isDecoBlock = false;
+	public static boolean isBTW = false;
+	public static boolean newRelease = false;
 	public static mod_Modchu_ModchuLib mod_modchu_modchulib;
 	public static Class MMM_TextureManager;
 	public static Class MMM_FileManager;
@@ -39,8 +42,108 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static Class favBlock;
 	public static Class RendererData;
 	private boolean isModchu;
+	public final String minecraftVersion;
+	public static String newVersion = "";
+	public static int modchuLibVersion;
 	private static final File cfgdir = new File(Minecraft.getMinecraftDir(), "/config/");
 	private static File mainCfgfile = new File(cfgdir, ("Modchu_ModchuLib.cfg"));
+
+	public mod_Modchu_ModchuLib()
+	{
+		// b181deleteload();
+		if (getVersion().startsWith("1.4.6~7")) {
+			minecraftVersion = "1.4.7";
+			modchuLibVersion = 147;
+			return;
+		}
+		if (getVersion().startsWith("1.4.6")) {
+			modchuLibVersion = 146;
+			minecraftVersion = "1.4.6";
+			return;
+		}
+		if (getVersion().startsWith("1.4.4~5")) {
+			modchuLibVersion = 145;
+			minecraftVersion = "1.4.5";
+			return;
+		}
+		if (getVersion().startsWith("1.4.4")) {
+			modchuLibVersion = 144;
+			minecraftVersion = "1.4.4";
+			return;
+		}
+		if (getVersion().startsWith("1.4.2")) {
+			modchuLibVersion = 142;
+			minecraftVersion = "1.4.2";
+			return;
+		}
+		if (getVersion().startsWith("1.4.1")) {
+			modchuLibVersion = 141;
+			minecraftVersion = "1.4.1";
+			return;
+		}
+		if (getVersion().startsWith("1.4")) {
+			modchuLibVersion = 140;
+			minecraftVersion = "1.4";
+			return;
+		}
+		if (getVersion().startsWith("1.3.2")) {
+			modchuLibVersion = 132;
+			minecraftVersion = "1.3.2";
+			return;
+		}
+		if (getVersion().startsWith("1.3.1")) {
+			modchuLibVersion = 131;
+			minecraftVersion = "1.3.1";
+			return;
+		}
+		if (getVersion().startsWith("1-2-4")) {
+			modchuLibVersion = 124;
+			minecraftVersion = "1.2.4";
+			return;
+		}
+		if (getVersion().startsWith("1-2-3")) {
+			modchuLibVersion = 123;
+			minecraftVersion = "1.2.3";
+			return;
+		}
+		if (getVersion().startsWith("1-1")) {
+			modchuLibVersion = 110;
+			minecraftVersion = "1.1.0";
+			return;
+		}
+		if (getVersion().startsWith("1-0-0")) {
+			modchuLibVersion = 100;
+			minecraftVersion = "1.0.0";
+			return;
+		}
+		if (getVersion().startsWith("1-9pre")) {
+			modchuLibVersion = 90;
+			minecraftVersion = "1.9pre";
+			return;
+		}
+		if (getVersion().startsWith("1-8-1")) {
+			modchuLibVersion = 81;
+			minecraftVersion = "beta1.8.1";
+			return;
+		}
+		if (getVersion().startsWith("1-7-3")) {
+			modchuLibVersion = 73;
+			minecraftVersion = "beta1.7.3";
+			return;
+		}
+		if (getVersion().startsWith("1-6-6")) {
+			modchuLibVersion = 66;
+			minecraftVersion = "beta1.6.6";
+			return;
+		}
+		if (getVersion().startsWith("1-5-1")) {
+			modchuLibVersion = 51;
+			minecraftVersion = "beta1.5.1";
+			return;
+		}
+		modchuLibVersion = 0;
+		minecraftVersion = "";
+	}
 
 	@Override
 	public String getName() {
@@ -49,7 +152,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.4.6~7-1b";
+		return "1.4.6~7-1c";
 	}
 
 	@Override
@@ -86,6 +189,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 		RendererData = Modchu_Reflect.loadClass("net.smart.render.RendererData");
 		loadcfg();
+		if (versionCheck) startVersionCheckThread();
 		Modchu_Debug.Debug("load() end");
 	}
 
@@ -122,6 +226,11 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				isFavBlock = true;
 				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_FavBlock Check ok.");
 				Modchu_Debug.Debug("FavBlock Check ok.");
+			}
+			else if (name.equals("mod_FCBetterThanWolves")) {
+				isBTW = true;
+				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_FCBetterThanWolves Check ok.");
+				Modchu_Debug.Debug("mod_FCBetterThanWolves Check ok.");
 			}
 		}
 
@@ -186,7 +295,8 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				// cfgファイルが無い = 新規作成
 				String s[] = {
 						"skirtFloats=false", "skirtFloatsVolume=1.0F", "debugMessage=true", "debugMessagetexture=true", "debugReflectMessage=true",
-						"debugReflectMessageDetail=false", "modchuRemodelingModel=true", "useInvisibilityBody=true", "useInvisibilityArmor=false", "useInvisibilityItem=false"
+						"debugReflectMessageDetail=false", "modchuRemodelingModel=true", "useInvisibilityBody=true", "useInvisibilityArmor=false", "useInvisibilityItem=false",
+						"versionCheck=true"
 				};
 				Modchu_Config.writerConfig(mainCfgfile, s);
 			} else {
@@ -201,13 +311,16 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				useInvisibilityBody = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityBody", useInvisibilityBody)).toString());
 				useInvisibilityArmor = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityArmor", useInvisibilityArmor)).toString());
 				useInvisibilityItem = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityItem", useInvisibilityItem)).toString());
+				versionCheck = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "versionCheck", versionCheck)).toString());
 				String k[] = {
 						"skirtFloats", "skirtFloatsVolume", "debugMessage", "debugMessagetexture", "debugReflectMessage",
-						"debugReflectMessageDetail", "modchuRemodelingModel", "useInvisibilityBody", "useInvisibilityArmor", "useInvisibilityItem"
+						"debugReflectMessageDetail", "modchuRemodelingModel", "useInvisibilityBody", "useInvisibilityArmor", "useInvisibilityItem",
+						"versionCheck"
 				};
 				String k1[] = {
 						""+skirtFloats, ""+skirtFloatsVolume, ""+Modchu_Debug.debugMessage, ""+Modchu_Debug.debugMessagetexture, ""+Modchu_Reflect.debugReflectMessage,
-						""+Modchu_Reflect.debugReflectMessageDetail, ""+modchuRemodelingModel, ""+useInvisibilityBody, ""+useInvisibilityArmor, ""+useInvisibilityItem
+						""+Modchu_Reflect.debugReflectMessageDetail, ""+modchuRemodelingModel, ""+useInvisibilityBody, ""+useInvisibilityArmor, ""+useInvisibilityItem,
+						""+versionCheck
 				};
 				if (skirtFloatsVolume < 0.0F) skirtFloatsVolume = 0.0F;
 				if (skirtFloatsVolume > 2.0F) skirtFloatsVolume = 2.0F;
@@ -260,4 +373,63 @@ public class mod_Modchu_ModchuLib extends BaseMod {
     	return null;
     }
 
+    private static void startVersionCheckThread() {
+    	Modchu_ThreadVersionCheck var0 = new Modchu_ThreadVersionCheck();
+    	var0.start();
+    }
+
+	public static boolean checkRelease(String s) {
+		if (s != null) {
+			if (s.length() > 1) {
+				String ck = s.substring(s.length() - 1, s.length());
+				String mck = mod_modchu_modchulib.getVersion();
+				String k = mck;
+				if (k.lastIndexOf("-") > -1) k = k.substring(k.lastIndexOf("-") + 1);
+				mck = k.substring(k.length() - 1);
+				if (integerCheck(mck)) mck = "";
+				boolean check = integerCheck(k);
+				while(!check
+						&& k.length() > 1){
+					//Modchu_Debug.mDebug("Modchulib checkRelease k="+k);
+					check = integerCheck(k.substring(0, k.length() - 1));
+					k = k.substring(0, k.length() - 1);
+				}
+				int m = Integer.valueOf(k);
+				//Modchu_Debug.mDebug("Modchulib checkRelease m="+m+" mck="+mck);
+				if (integerCheck(ck)) ck = "";
+				check = integerCheck(s);
+				while(!check
+						&& s.length() > 1){
+					//Modchu_Debug.mDebug("Modchulib checkRelease s="+s);
+					check = integerCheck(s.substring(0, s.length() - 1));
+					s = s.substring(0, s.length() - 1);
+				}
+				int i = Integer.valueOf(s);
+				Modchu_Debug.mDebug("Modchulib checkRelease m="+m+" mck="+mck+" i="+i+" ck="+ck);
+				if (i > m) {
+					return true;
+				}
+				if (i == m
+						&& ck.compareTo(mck) > 0) {
+					return true;
+				}
+				return false;
+			}
+		}
+		return false;
+	}
+
+	public static boolean integerCheck(String s) {
+		try {
+			Integer.valueOf(s);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
+	public static void setNewRelease(String s) {
+		newRelease = true;
+		newVersion = s;
+	}
 }

@@ -439,6 +439,12 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
     	Arms[0].setRotationPoint(0.5F, 9.0F, 0F);
     	Arms[1].setRotationPoint(-0.5F, 9.0F, 0F);
+    	Arms[0].rotateAngleX = 0F;
+    	Arms[0].rotateAngleY = 0F;
+    	Arms[0].rotateAngleZ = 0F;
+    	Arms[1].rotateAngleX = 0F;
+    	Arms[1].rotateAngleY = 0F;
+    	Arms[1].rotateAngleZ = 0F;
     	float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
 
     	eyeR.showModel = eyeL.showModel = false;
@@ -539,29 +545,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
 
     	bipedRightArm.rotateAngleY = 0.0F;
     	bipedLeftArm.rotateAngleY = 0.0F;
-
-    	if (getOnGround() > -9990F && !getaimedBow())
-    	{
-    		float f6 = getOnGround();
-    		bipedBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float)Math.PI * 2.0F) * 0.2F;
-    		Skirt.rotateAngleY = bipedBody.rotateAngleY;
-    		bipedRightArm.rotationPointZ = MathHelper.sin(bipedBody.rotateAngleY) * 4F;
-    		bipedRightArm.rotationPointX = -MathHelper.cos(bipedBody.rotateAngleY) * 4F + 1.0F;
-    		bipedLeftArm.rotationPointZ = -MathHelper.sin(bipedBody.rotateAngleY) * 4F;
-    		bipedLeftArm.rotationPointX = MathHelper.cos(bipedBody.rotateAngleY) * 4F - 1.0F;
-    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
-    		bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
-    		bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
-    		f6 = 1.0F - getOnGround();
-    		f6 *= f6;
-    		f6 *= f6;
-    		f6 = 1.0F - f6;
-    		float f8 = MathHelper.sin(f6 * (float)Math.PI);
-    		float f10 = MathHelper.sin(getOnGround() * (float)Math.PI) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
-    		bipedRightArm.rotateAngleX -= (double)f8 * 1.2D + (double)f10;
-    		bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-    		bipedRightArm.rotateAngleZ = MathHelper.sin(getOnGround() * (float)Math.PI) * -0.4F;
-    	}
+    	armSwing(f, f1, f2, f3, f4, f5, entity);
 
     	if (getIsSneak())
     	{
@@ -603,6 +587,14 @@ public class MultiModel_NM1 extends MultiModel_SR2
     		bipedLeftArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F - 0.7F;
     		bipedLeftArm.rotateAngleY = 0.0F;
     		bipedLeftArm.rotateAngleZ = 0.4F;
+    		Arms[0].rotationPointX -= 2.0F;
+    		Arms[0].rotateAngleZ -= 1.5F;
+    		Arms[0].rotateAngleX -= 0.5F;
+    		Arms[0].rotateAngleY += 1.5F;
+    		Arms[1].rotationPointX += 2.0F;
+    		Arms[1].rotateAngleZ += 1.5F;
+    		Arms[1].rotateAngleX -= 0.5F;
+    		Arms[1].rotateAngleY -= 1.5F;
     	}
     	if (getaimedBow())
     	{
