@@ -23,14 +23,16 @@ public class Modchu_Config
 	private static Class PFLM_Gui;
 	private static Class PFLM_GuiOthersPlayer;
 
-	public static void init() {
-		mod_PFLM_PlayerFormLittleMaid = Modchu_Reflect.loadClass("net.minecraft.src.mod_PFLM_PlayerFormLittleMaid");
-		PFLM_Gui = Modchu_Reflect.loadClass("net.minecraft.src.PFLM_Gui");
-		PFLM_GuiOthersPlayer = Modchu_Reflect.loadClass("net.minecraft.src.PFLM_GuiOthersPlayer");
+	public static void init(String s) {
+		if (s != null) s = s.concat(".");
+		else s = "";
+		mod_PFLM_PlayerFormLittleMaid = Modchu_Reflect.loadClass(s.concat("mod_PFLM_PlayerFormLittleMaid").toString());
+		PFLM_Gui = Modchu_Reflect.loadClass(s.concat("PFLM_Gui").toString());
+		PFLM_GuiOthersPlayer = Modchu_Reflect.loadClass(s.concat("PFLM_GuiOthersPlayer").toString());
 	}
 
 	public static void writerConfig(File file, String[] s) {
-		//è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«æ›¸ãè¾¼ã¿
+		//İ’èƒtƒ@ƒCƒ‹‘‚«‚İ
 		try {
 			BufferedWriter bwriter = new BufferedWriter(new FileWriter(
 					file));
@@ -53,7 +55,7 @@ public class Modchu_Config
 	}
 
 	public static Object loadConfig(List configList, File file, String s, Object o) {
-		// cfgè¨­å®šé …ç›®èª­ã¿è¾¼ã¿
+		// cfgİ’è€–Ú“Ç‚İ‚İ showModel“Ç‚İ‚İ—L‚è
 		List list = new ArrayList();
 		list = (ArrayList) cfgData.get(file);
 		if (list == null) {
@@ -71,7 +73,7 @@ public class Modchu_Config
 						i1 = rl.indexOf('.');
 						if (i1 > -1) {
 							configList.add(rl);
-							Modchu_Debug.mDebug("cfg "+ file.toString() +" load " + rl);
+							//Modchu_Debug.mDebug("cfg "+ file.toString() +" load " + rl);
 						}
 					}
 					if (rl.startsWith(s)) {
@@ -111,8 +113,61 @@ public class Modchu_Config
 		return o;
 	}
 
+
+	public static Object loadConfig(File file, String s, Object o) {
+		// cfgİ’è€–Ú“Ç‚İ‚İ showModel“Ç‚İ‚İ–³‚µ
+		List list = new ArrayList();
+		list = (ArrayList) cfgData.get(file);
+		if (list == null) {
+			list = new ArrayList();
+			try {
+				BufferedReader breader = new BufferedReader(new FileReader(
+						file));
+				String rl;
+				for (int i = 0; (rl = breader.readLine()) != null ; i++) {
+					int i1;
+					list.add(rl);
+					if (rl.startsWith("#")
+							| rl.startsWith("/")) continue;
+					if (rl.startsWith(s)) {
+						i1 = rl.indexOf('=');
+						if (i1 > -1) {
+							if (s.length() == i1) {
+								o = rl.substring(i1 + 1);
+								//Modchu_Debug.mDebug("cfg "+ file.toString() +" load ok s.length()="+s.length()+" i1="+i1+" rl="+rl);
+							} else {
+								//Modchu_Debug.mDebug("cfg "+ file.toString() +" load s.length()="+s.length()+" i1="+i1+" rl="+rl);
+							}
+						}
+					}
+				}
+				cfgData.put(file, list);
+				breader.close();
+				//Modchu_Debug.mDebug("Modchu_Config loadConfig1 o = "+o.toString());
+			} catch (Exception e) {
+				Modchu_Debug.Debug("Modchu_Config loadConfig "+ file.toString() +" load fail.");
+				e.printStackTrace();
+			}
+		} else {
+			String s2;
+			for (int i = 0; i < list.size() ; i++) {
+				s2 = (String) list.get(i);
+				if (s2.startsWith(s)) {
+					int i1 = s2.indexOf('=');
+					if (i1 > -1
+							&& s.length() == i1) {
+						o = s2.substring(i1 + 1);
+						break;
+					}
+				}
+			}
+			//Modchu_Debug.mDebug("Modchu_Config loadConfig2 o = "+o.toString());
+		}
+		return o;
+	}
+
 	public static void writerSupplementConfig(File file, String[] k, String[] k1) {
-		//è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã«ãªã„é …ç›®è¿½åŠ æ›¸ãè¾¼ã¿
+		//İ’èƒtƒ@ƒCƒ‹‚É‚È‚¢€–Ú’Ç‰Á‘‚«‚İ
 		if (file.exists() && file.canRead() && file.canWrite()) {
 			List lines = new LinkedList();
 			try {
@@ -145,7 +200,7 @@ public class Modchu_Config
 						}
 					}
 				}
-				// èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã£ãŸã‹ãƒã‚§ãƒƒã‚¯ã€èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã‚‹ã¨ä½œæˆã—ãªãŠã—
+				// “Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚Á‚½‚©ƒ`ƒFƒbƒNA“Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚é‚Æì¬‚µ‚È‚¨‚µ
 				Boolean e1 = false;
 				for (int i = 0; i < k.length; i++) {
 					if (e[i] == false) {
@@ -172,7 +227,7 @@ public class Modchu_Config
 				er.printStackTrace();
 			}
 			try {
-			// ä¿å­˜
+			// •Û‘¶
 				if (!lines.isEmpty()
 						&& (file.exists() || file.createNewFile())
 						&& file.canWrite()) {
@@ -194,14 +249,12 @@ public class Modchu_Config
 	}
 
 	public static void saveParamater(File file, String[] k, String[] k1) {
-		// Guiè¨­å®šé …ç›®ã‚’cfgãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜
+		// Guiİ’è€–Ú‚ğcfgƒtƒ@ƒCƒ‹‚É•Û‘¶
 		String textureName = getTextureName();
-		String defaultTexture = getDefaultTexture();
 		int maidColor = getMaidColor();
 		boolean partsSaveFlag = getPartsSaveFlag();
-		int partsNumberMax = getPartsNumberMax();
-		String[] parts = getParts();
-		boolean[] showModel = getShowModel();
+		HashMap<String, Boolean> parts = getParts();
+		HashMap<Integer, String> showPartsNemeList = getShowPartsNemeList();
 		if (file.exists() && file.canRead() && file.canWrite()) {
 			List lines = new LinkedList();
 			try {
@@ -235,7 +288,7 @@ public class Modchu_Config
 					}
 				}
 				breader = new BufferedReader(new FileReader(file));
-				//showModel[]å°‚ç”¨
+				//showModel[]ê—p
 				while ((rl = breader.readLine()) != null) {
 					if (partsSaveFlag) {
 						//Modchu_Debug.mDebug("cfg file save.0 rl=" + rl);
@@ -257,13 +310,12 @@ public class Modchu_Config
 										if (i1 == maidColor) {
 											StringBuilder sb1 = new StringBuilder();
 											sb1.append(s).append(".").append(maidColor).append(".showModel[]=");
-											for (int i2 = 0; i2 <= partsNumberMax && parts[i2] != null; i2++) {
-												sb1.append(showModel[i2]);
-												if(i2 + 1 <= partsNumberMax) {
-													if(i2 != partsNumberMax && parts[i2 + 1] != null) sb1.append(",");
-												} else {
-													if(i2 != partsNumberMax) sb1.append(",");
-												}
+											String s2 = null;
+											for (int i2 = 0; i2 < parts.size(); i2++) {
+												s2 = showPartsNemeList.get(i2);
+												//sb1.append(s2).append(":");
+												sb1.append(parts.get(showPartsNemeList.get(i2)));
+												if(i2 != parts.size() - 1) sb1.append(",");
 											}
 											sb.append(sb1);
 											lines.add(sb.toString());
@@ -282,7 +334,7 @@ public class Modchu_Config
 						continue;
 					}
 				}
-				// èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã£ãŸã‹ãƒã‚§ãƒƒã‚¯ã€èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã‚‹ã¨ä½œæˆã—ãªãŠã—
+				// “Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚Á‚½‚©ƒ`ƒFƒbƒNA“Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚é‚Æì¬‚µ‚È‚¨‚µ
 				Boolean e1 = false;
 				for (int i = 0; i < k.length; i++) {
 					if (e[i] == false) {
@@ -308,13 +360,11 @@ public class Modchu_Config
 						s = textureName != null ? textureName : "default";
 						StringBuilder sb1 = new StringBuilder();
 						sb1.append(s).append(".").append(maidColor).append(".showModel[]=");
-						for (int i = 0; i <= partsNumberMax && parts[i] != null; i++) {
-							sb1.append(showModel[i]);
-							if(i + 1 <= partsNumberMax) {
-								if(i != partsNumberMax && parts[i + 1] != null) sb1.append(",");
-							} else {
-								if(i != partsNumberMax) sb1.append(",");
-							}
+						String s2 = null;
+						for (int i = 0; i < parts.size(); i++) {
+							s2 = mod_Modchu_ModchuLib.getHashMapKey(parts, i);
+							sb1.append(parts.get(s2));
+							if(i != parts.size() - 1) sb1.append(",");
 						}
 						sb.append(sb1);
 						lines.add(sb.toString());
@@ -328,7 +378,7 @@ public class Modchu_Config
 				er.printStackTrace();
 			}
 			try {
-			// ä¿å­˜
+			// •Û‘¶
 				if (!lines.isEmpty()
 						&& (file.exists() || file.createNewFile())
 						&& file.canWrite()) {
@@ -350,7 +400,7 @@ public class Modchu_Config
 	}
 
 	public static void loadConfigShowModel(List configList, File file) {
-		// cfgè¨­å®šé …ç›®ShowModel[]èª­ã¿è¾¼ã¿
+		// cfgİ’è€–ÚShowModel[]“Ç‚İ‚İ
 		try {
 			BufferedReader breader = new BufferedReader(new FileReader(
 					file));
@@ -378,10 +428,9 @@ public class Modchu_Config
 
 	public static void loadShowModelList(List<String> list) {
 		String textureName = getTextureName();
-		String defaultTexture = getDefaultTexture();
 		int maidColor = getMaidColor();
-		int partsNumberMax = getPartsNumberMax();
-		boolean[] showModel = getShowModel();
+		HashMap<String, Boolean> map = getParts();
+		HashMap<Integer, String> showPartsNemeList = getShowPartsNemeList();
 		try {
 			//Modchu_Debug.mDebug("loadShowModelList showModelList="+showModelList);
 			if(!list.isEmpty()) {
@@ -394,7 +443,7 @@ public class Modchu_Config
 						if (rl.indexOf(s) > -1) {
 							//Modchu_Debug.mDebug("loadShowModelList showModelList="+showModelList);
 							//Modchu_Debug.mDebug("loadShowModelList rl="+rl);
-							s = textureName != null ? defaultTexture != null ? textureName : defaultTexture : "default";
+							s = textureName != null ? textureName : "default";
 							//Modchu_Debug.mDebug("loadShowModelList s="+s);
 							if (rl.indexOf(s) > -1) {
 								rl = rl.substring(s.length());
@@ -405,12 +454,14 @@ public class Modchu_Config
 									if (i1 > -1) {
 										int i2 = Integer.parseInt(rl.substring(0, i1));
 										//Modchu_Debug.mDebug("loadShowModelList i2="+rl.substring(0, i1));
+										String s1 = null;
 										if(maidColor == i2) {
 											rl = rl.substring(rl.indexOf('=') + 1);
-											for(int i3 = 0; i3 <= partsNumberMax && rl != null; i3++) {
+											for(int i3 = 0; i3 <= map.size() && rl != null; i3++) {
 												i1 = rl.indexOf(',');
-												showModel[i3] = i1 != -1 ? Boolean.parseBoolean(rl.substring(0, i1)): Boolean.parseBoolean(rl);
-												//Modchu_Debug.mDebug("loadShowModelList showModel["+i3+"]="+showModel[i3]);
+												s1 = showPartsNemeList.get(i3);
+												map.put(s1, i1 != -1 ? Boolean.parseBoolean(rl.substring(0, i1)): Boolean.parseBoolean(rl));
+												//Modchu_Debug.mDebug("loadShowModelList s1="+(i1 != -1 ? Boolean.parseBoolean(rl.substring(0, i1)): Boolean.parseBoolean(rl)));
 												rl = i1 != -1 ? rl.substring(i1 + 1): null;
 											}
 										}
@@ -428,20 +479,21 @@ public class Modchu_Config
 	}
 
 	public static void writerModelList(String[] s, File file, List<String> list) {
-		//Listãƒ•ã‚¡ã‚¤ãƒ«æ›¸ãè¾¼ã¿
+		//Listƒtƒ@ƒCƒ‹‘‚«‚İ
 		try {
 			BufferedWriter bwriter = new BufferedWriter(new FileWriter(file));
+			list.clear();
 			for (int i = 0; i < s.length ; i++)
 			{
-				//mDebug("s[i]="+s[i]);
+				//Modchu_Debug.mDebug("s[i]="+s[i]);
 				if (s[i] != null) {
 					bwriter.write(s[i]);
-					list.add(s[i]);
+					if (i != 0) list.add(s[i]);
 					bwriter.newLine();
 				}
 			}
 			bwriter.close();
-			Modchu_Debug.Debug("file new file create.");
+			//Modchu_Debug.Debug("file new file create.");
 		} catch (Exception e) {
 			Modchu_Debug.Debug("file writer fail.");
 			e.printStackTrace();
@@ -449,8 +501,8 @@ public class Modchu_Config
 		}
 	}
 
-	public static void loadList(File file, List<String> list,String listName) {
-		// ModelListèª­ã¿è¾¼ã¿
+	public static boolean loadList(File file, List<String> list,String listName) {
+		// ModelList“Ç‚İ‚İ
 		List<String> lines = new ArrayList<String>();
 		try {
 			BufferedReader breader = new BufferedReader(new FileReader(
@@ -459,16 +511,29 @@ public class Modchu_Config
 			int i = 0;
 			while ((rl = breader.readLine()) != null) {
 				//Modchu_Debug.mDebug("rl="+rl);
-				list.add(rl);
+				if (i == 0) {
+					if (rl.startsWith("autoUpdates")) {
+						int k = rl.indexOf("=");
+						if (k > -1) {
+							if (Boolean.valueOf(rl.substring(k + 1))) return false;
+						} else return false;
+					} else {
+						return false;
+					}
+				} else {
+					list.add(rl);
+				}
 				i++;
 			}
 			breader.close();
-			Modchu_Debug.mDebug("modelList "+listName+" load end.");
+			//Modchu_Debug.mDebug("modelList "+listName+" load end.");
 		} catch (Exception e) {
 			Modchu_Debug.Debug("modelList file "+listName+" load fail.");
 			e.printStackTrace();
 			Modchu_Debug.Debug(" ");
+			return false;
 		}
+		return true;
 	}
 
 	public String getClassName(String s) {
@@ -483,7 +548,7 @@ public class Modchu_Config
 	}
 
 	public static void saveOthersPlayerParamater(String playerName, HashMap map, File file, String[] k, String[] k1, boolean flag) {
-		// GuiOthersPlayerè¨­å®šé …ç›®ã‚’cfgãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜
+		// GuiOthersPlayerİ’è€–Ú‚ğcfgƒtƒ@ƒCƒ‹‚É•Û‘¶
 		if (file.exists() && file.canRead() && file.canWrite()) {
 			List lines = new LinkedList();
 			try {
@@ -517,7 +582,7 @@ public class Modchu_Config
 					}
 				}
 				breader = new BufferedReader(new FileReader(file));
-				//OthersPlayer[]å°‚ç”¨
+				//OthersPlayer[]ê—p
 				while ((rl = breader.readLine()) != null) {
 					String m = (String) rl;
 					if (flag) {
@@ -539,8 +604,11 @@ public class Modchu_Config
 								sb.delete(0, sb.length());
 								//Modchu_Debug.mDebug("cfg file save.3 i1=" + i1);
 								StringBuilder sb1 = new StringBuilder();
-								sb1.append("OthersPlayer[]").append("[").append(s).append("][").append(t[0]).append("][")
-									.append(t[1]).append("][").append(t[2]).append("][").append(t[3]).append("][").append(t[4]).append("]");
+								sb1.append("OthersPlayer[]").append("[").append(s);
+								for(int i = 0; i < t.length ;i++) {
+									sb1.append("][").append(t[i]);
+								}
+								sb1.append("]");
 								lines.add(sb1.toString());
 								Modchu_Debug.mDebug("cfgOthersPlayer file save. " + s);
 								ee = true;
@@ -555,7 +623,7 @@ public class Modchu_Config
 						continue;
 					}
 				}
-				// èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã£ãŸã‹ãƒã‚§ãƒƒã‚¯ã€èª­ã¿è¾¼ã‚ãªã„é …ç›®ãŒã‚ã‚‹ã¨ä½œæˆã—ãªãŠã—
+				// “Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚Á‚½‚©ƒ`ƒFƒbƒNA“Ç‚İ‚ß‚È‚¢€–Ú‚ª‚ ‚é‚Æì¬‚µ‚È‚¨‚µ
 				Boolean e1 = false;
 				for (int i = 0; i < k.length; i++) {
 					if (e[i] == false) {
@@ -593,7 +661,7 @@ public class Modchu_Config
 				er.printStackTrace();
 			}
 			try {
-			// ä¿å­˜
+			// •Û‘¶
 				if (!lines.isEmpty()
 						&& (file.exists() || file.createNewFile())
 						&& file.canWrite()) {
@@ -615,7 +683,7 @@ public class Modchu_Config
 	}
 
 	public static void loadConfigPlayerLocalData(HashMap map, File file) {
-		// GuiOthersPlayerè¨­å®šé …ç›®PlayerLocalDataèª­ã¿è¾¼ã¿
+		// GuiOthersPlayerİ’è€–ÚPlayerLocalData“Ç‚İ‚İ
 		int modeOthersSettingOffline = getModeOthersSettingOffline();
 		try {
 			BufferedReader breader = new BufferedReader(new FileReader(
@@ -631,7 +699,7 @@ public class Modchu_Config
 					if (rl.startsWith("[")
 							| rl.startsWith(".")) {
 						String k1 = null;
-						String t[] = new String[5];
+						String t[] = new String[6];
 						if (rl.startsWith("[")) {
 							for(int j = 0; rl.indexOf("[") != -1 ; j++) {
 								rl = rl.substring(1);
@@ -676,10 +744,11 @@ public class Modchu_Config
 									}
 								}
 							}
+							t[5] = "0";
 						}
 						if (k1 != null) {
 							map.put(k1, t);
-							//Modchu_Debug.mDebug("cfgOthersPlayer load "+k1+" t[0]="+t[0]+" t[1]="+t[1]+" t[2]="+t[2]+" t[3]="+t[3]+" t[4]="+t[4]);
+							//Modchu_Debug.mDebug("cfgOthersPlayer load "+k1+" t[0]="+t[0]+" t[1]="+t[1]+" t[2]="+t[2]+" t[3]="+t[3]+" t[4]="+t[4]+" t[5]="+t[5]);
 						}
 					}
 				}
@@ -694,7 +763,7 @@ public class Modchu_Config
 	}
 
 	public static void removeOthersPlayerParamater(File file, String name) {
-		// GuiOthersPlayerè¨­å®šã‹ã‚‰æŒ‡å®šå†…å®¹å‰Šé™¤
+		// GuiOthersPlayerİ’è‚©‚çw’è“à—eíœ
 		if (file.exists() && file.canRead() && file.canWrite()) {
 			List lines = new LinkedList();
 			try {
@@ -725,7 +794,7 @@ public class Modchu_Config
 				er.printStackTrace();
 			}
 			try {
-			// ä¿å­˜
+			// •Û‘¶
 				if (!lines.isEmpty()
 						&& (file.exists() || file.createNewFile())
 						&& file.canWrite()) {
@@ -750,10 +819,6 @@ public class Modchu_Config
 		return (String) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "textureName");
 	}
 
-	private static String getDefaultTexture() {
-		return (String) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "defaultTexture");
-	}
-
 	private static int getMaidColor() {
 		return (Integer) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "maidColor");
 	}
@@ -762,16 +827,12 @@ public class Modchu_Config
 		return (Boolean) Modchu_Reflect.getFieldObject(PFLM_Gui, "partsSaveFlag");
 	}
 
-	private static int getPartsNumberMax() {
-		return (Integer) Modchu_Reflect.getFieldObject(PFLM_Gui, "partsNumberMax");
+	private static HashMap<String, Boolean> getParts() {
+		return (HashMap<String, Boolean>) Modchu_Reflect.getFieldObject(PFLM_Gui, "parts");
 	}
 
-	private static String[] getParts() {
-		return (String[]) Modchu_Reflect.getFieldObject(PFLM_Gui, "parts");
-	}
-
-	private static boolean[] getShowModel() {
-		return (boolean[]) Modchu_Reflect.getFieldObject(PFLM_Gui, "showModel");
+	private static HashMap<Integer, String> getShowPartsNemeList() {
+		return (HashMap<Integer, String>) Modchu_Reflect.getFieldObject(PFLM_Gui, "showPartsNemeList");
 	}
 
 	private static int getModeOthersSettingOffline() {

@@ -6,7 +6,7 @@ import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-//b181deleteimport java.util.List;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -23,7 +23,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public String boxName;
     private static Random rnd = new Random();
 
-	//littleMaidMobå…±é€š
+	//littleMaidMob‹¤’Ê
 	/**
 	 * (180F / (float)Math.PI)
 	 */
@@ -49,7 +49,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public FloatBuffer matrix;
 	public boolean isInvertX;
 
-	//SmartMovingå…±é€š
+	//SmartMoving‹¤’Ê
 	protected ModelRenderer base;
 	public static final int XYZ = RotZYX;
 	public static final int XZY = RotYZX;
@@ -60,11 +60,27 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public float scaleX;
 	public float scaleY;
 	public float scaleZ;
+	public boolean ignoreRender;
+	public boolean forceRender;
+	public boolean ignoreBase;
+	public boolean ignoreSuperRotation;
+	public boolean fadeEnabled;
+	public boolean fadeOffsetX;
+	public boolean fadeOffsetY;
+	public boolean fadeOffsetZ;
+	public boolean fadeRotateAngleX;
+	public boolean fadeRotateAngleY;
+	public boolean fadeRotateAngleZ;
+	public boolean fadeRotationPointX;
+	public boolean fadeRotationPointY;
+	public boolean fadeRotationPointZ;
+	public Class RendererData;
+	public Object previous;
 
 //-@-132
-	public float field_82906_o = 0.0F;
-	public float field_82908_p = 0.0F;
-	public float field_82907_q = 0.0F;
+	public float offsetX = 0.0F;
+	public float offsetY = 0.0F;
+	public float offsetZ = 0.0F;
 //@-@132
 /*//b181delete
     public List cubeList;
@@ -87,9 +103,9 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	init(modelbase, i, j, s);
     }
 
-	public Modchu_ModelRenderer(ModelBase modelbase, int i, int j, Modchu_ModelRenderer modelRendererPlayerFormLittleMaid) {
+	public Modchu_ModelRenderer(ModelBase modelbase, int i, int j, ModelRenderer modelRenderer) {
 		this(modelbase, i, j);
-		base = modelRendererPlayerFormLittleMaid;
+		base = modelRenderer;
 		if (base != null)
 		{
 			base.addChild(this);
@@ -115,8 +131,8 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	scaleY = 1.0F;
     	scaleZ = 1.0F;
     	rotatePriority = RotXYZ;
-    	angleFirst = false;	// å¤‰æ›ã‚’å½“ã¦ã‚‹é †ç•ª
-    	parentModel = null;	// åŒã˜å›è»¢è»¸ã«ãªã‚‹è¦ª
+    	angleFirst = false;	// •ÏŠ·‚ğ“–‚Ä‚é‡”Ô
+    	parentModel = null;	// “¯‚¶‰ñ“]²‚É‚È‚ée
     	textureOffsetX = i;
     	textureOffsetY = j;
     	boxName = s;
@@ -125,9 +141,10 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	matrix = BufferUtils.createFloatBuffer(16);
     	isInvertX = false;
     	baseModel = modelbase;
+    	RendererData = mod_Modchu_ModchuLib.RendererData;
 /*//b181delete
         cubeList = new ArrayList();
-        setTextureSize((int)((ModelPlayerFormLittleMaid) modelbase).textureWidth, (int)((ModelPlayerFormLittleMaid) modelbase).textureHeight);
+        setTextureSize((int)((MultiModel) modelbase).textureWidth, (int)((MultiModel) modelbase).textureHeight);
         modelbase.boxList.add(this);
 *///b181delete
     }
@@ -158,6 +175,20 @@ public class Modchu_ModelRenderer extends ModelRenderer
         return this;
     }
 
+	public Modchu_ModelRenderer addPlateFreeShape(float[][] vertex, float[][] vertexN, int px, int py)
+	{
+		float[][] vt = { { textureOffsetX / textureWidth, (textureOffsetY + 1) / textureHeight }, { (textureOffsetX + 1) / textureWidth, (textureOffsetY + 1) / textureHeight }, { (textureOffsetX + 1) / textureWidth, textureOffsetY / textureHeight }, { textureOffsetX / textureWidth, textureOffsetY / textureHeight } };
+
+		cubeList.add(new Modchu_ModelPlateFreeShape(this, textureOffsetX, textureOffsetY, vertex, vt, vertexN, null, 0.0F));
+		return this;
+	}
+
+	public Modchu_ModelRenderer addPlateFreeShape(float[][] vertex, float[][] texUV, float[][] vertexN)
+	{
+		cubeList.add(new Modchu_ModelPlateFreeShape(this, textureOffsetX, textureOffsetY, vertex, texUV, vertexN, null, 0.0F));
+		return this;
+	}
+
     public Modchu_ModelRenderer addPlateFreeShape(float[][] var1, float[][] var2, float[][] var3, float[] var4)
     {
         cubeList.add(new Modchu_ModelPlateFreeShape(this, textureOffsetX, textureOffsetY, var1, var2, var3, var4, 0.0F));
@@ -170,7 +201,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     }
 
     /**
-     * æç”»ç”¨ã®ãƒœãƒƒã‚¯ã‚¹ã€å­ä¾›ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
+     * •`‰æ—p‚Ìƒ{ƒbƒNƒXAq‹Ÿ‚ğƒNƒŠƒA‚·‚é
      */
     public void clearCubeList() {
     	cubeList.clear();
@@ -208,11 +239,11 @@ public class Modchu_ModelRenderer extends ModelRenderer
     public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale) {
     	if (itemstack == null) return;
 
-    	// ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°
+    	// ƒAƒCƒeƒ€‚ÌƒŒƒ“ƒ_ƒŠƒ“ƒO
     	GL11.glPushMatrix();
 
 		Item item = itemstack.getItem();
-    	// ã‚¢ã‚¤ãƒ†ãƒ ã®ç¨®é¡ã«ã‚ˆã‚‹è¡¨ç¤ºä½ç½®ã®è£œæ­£
+    	// ƒAƒCƒeƒ€‚Ìí—Ş‚É‚æ‚é•\¦ˆÊ’u‚Ì•â³
     	if (adjust) {
 //    		GL11.glTranslatef(-0.0625F, 0.4375F, 0.0625F);
 
@@ -291,6 +322,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
     	if (pRealBlock && item.itemID == Item.skull.itemID)
     	{
+    		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     		String var6 = "";
     		if (itemstack.hasTagCompound() && itemstack.getTagCompound().hasKey("SkullOwner"))
     		{
@@ -303,9 +335,21 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		pRender.renderBlocks.renderBlockAsItem(Block.blocksList[itemstack.itemID], itemstack.getItemDamage(), 1.0F);
     		GL11.glDisable(GL11.GL_CULL_FACE);
     	} else {
-    		// ã‚¢ã‚¤ãƒ†ãƒ ã«è‰²ä»˜ã‘
-    		pRender.loadTexture("/gui/items.png");
-    		for (int j = 0; j <= (itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0); j++) {
+    		// ƒAƒCƒeƒ€‚ÉF•t‚¯
+    		String s1 = "/gui/items.png";
+    		int renderPasses = itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0;
+    		if (mod_Modchu_ModchuLib.isForge) {
+    			if (renderPasses == 1) renderPasses =
+    					(Integer) Modchu_Reflect.invokeMethod(Item.class, "getRenderPasses", new Class[]{ int.class },
+    							itemstack.getItem(), new Object[]{ itemstack.getItemDamage() }) - 1;
+    			s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", itemstack.getItem());
+    			//Modchu_Debug.Debug("isForge pRender.loadTexture s1="+s1+" renderPasses="+renderPasses);
+    		} else if (mod_Modchu_ModchuLib.isBTW
+    				&& isBTWItem(itemstack.getItem())) {
+    			s1 = "/btwmodtex/btwitems01.png";
+    		}
+    		pRender.loadTexture(s1);
+    		for (int j = 0; j <= renderPasses; j++) {
     			int k = itemstack.getItem().getColorFromItemStack(itemstack, j);
     			float f15 = (float)(k >> 16 & 0xff) / 255F;
     			float f17 = (float)(k >> 8 & 0xff) / 255F;
@@ -319,7 +363,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     }
 
     public boolean renderDecoBlock(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale, int addSupport) {
-    	//DecoBlock, FavBlockç”¨æç”»
+    	//DecoBlock, FavBlock—p•`‰æ
     	Item item = itemstack.getItem();
     	Block block = Block.blocksList[item.itemID];
     	boolean flag = false;
@@ -329,11 +373,12 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	int particleFrequency = 98;
     	String particleString = null;
     	float translatefX = 0.0F;
-    	float translatefY = 0.0F;
+    	float translatefY = mod_Modchu_ModchuLib.isForge ? 0.5F : 0.0F;
     	float translatefZ = 0.0F;
     	//addSupport = 0 DecoBlock
     	//addSupport = 1 DecoBlockBase
     	if (addSupport < 2) {
+    		translatef = true;
     		if (addSupport == 0) {
     			flag = rotate = true;
     			particle = true;
@@ -348,12 +393,13 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		flag = rotate = true;
     		translatef = true;
     		translatefX = 0.0F;
-    		translatefY = -0.1F;
+    		translatefY = mod_Modchu_ModchuLib.isForge ? 0.4F : -0.1F;
     		translatefZ = 0.0F;
     		particle = true;
     		particleString = "instantSpell";
-    		particleFrequency = 92;
+    		particleFrequency = 80;
     	}
+		if (mod_Modchu_ModchuLib.isForge) GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
 
     	if (flag) {
     		pRender.loadTexture("/terrain.png");
@@ -369,15 +415,12 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		GL11.glColor4f(f9, f10, f12, 1.0F);
 */
 //@-@b173
-    		if (scale > 1.0F) {
-    			if (addSupport == 2) {
-    				particleFrequency = 80;
-    			} else particleFrequency = 90;
-    			GL11.glScalef(scale, scale, scale);
-    		}
+    		if (scale > 1.0F) GL11.glScalef(scale, scale, scale);
     		// b166deleteGL11.glColor4f(f20, f20, f20, 1.0F);
     		if (translatef) GL11.glTranslatef(translatefX, translatefY, translatefZ);
     		pRender.renderBlocks.renderBlockAsItem(block, itemstack.getItemDamage(), 1.0F);
+    		particleFrequency -= (int)((scale - 1.0F) * 10F);
+    		//Modchu_Debug.mDebug("particleFrequency ="+particleFrequency+" (int)(scale - 1.0F * 10F)="+((int)((scale - 1.0F) * 10F))+" scale="+scale);
     		if (particle
     				&& rnd.nextInt(100) > particleFrequency) {
     			double d = rnd.nextGaussian() * 0.02D;
@@ -391,13 +434,32 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	return flag;
     }
 
+    private boolean isBTWItem(Item var1) {
+        Class c = Modchu_Reflect.loadClass("net.minecraft.src.forge.ITextureProvider");
+        if (c != null) ;else Modchu_Reflect.loadClass("forge.ITextureProvider");
+        if (c != null) {
+            Class[] var3 = var1.getClass().getInterfaces();
+            for (int var4 = 0; var4 < var3.length; ++var4) {
+                if (var3[var4] == c) return true;
+            }
+        } else {
+        	c = Modchu_Reflect.loadClass("net.minecraft.src.FCItemMattock");
+        	if (c!= null
+        			&& c.isInstance(var1)) return true;
+        	c = Modchu_Reflect.loadClass("FCItemMattock");
+        	if (c!= null
+        			&& c.isInstance(var1)) return true;
+        }
+        return false;
+    }
+
     public void setRotatePriority(int pValue) {
-    	// å›è»¢å¤‰æ›ã‚’è¡Œã†é †åºã€rot???ã‚’æŒ‡å®šã™ã‚‹
+    	// ‰ñ“]•ÏŠ·‚ğs‚¤‡˜Arot???‚ğw’è‚·‚é
     	rotatePriority = pValue;
     }
 
 	protected void setRotation() {
-		// å¤‰æ›é †ä½ã®è¨­å®š
+		// •ÏŠ·‡ˆÊ‚Ìİ’è
 		switch (rotatePriority) {
 		case RotXYZ:
 			if (rotateAngleZ != 0.0F) {
@@ -469,7 +531,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	}
 
     public void renderObject(float par1, EntityLiving pEntityLiving) {
-    	// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã€ã‚ã¨å­ä¾›ã‚‚
+    	// ƒŒƒ“ƒ_ƒŠƒ“ƒOA‚ ‚Æq‹Ÿ‚à
     	if (showModel) {
     		GL11.glScalef(scaleX, scaleY, scaleZ);
     		GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, matrix);
@@ -483,7 +545,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     			if (modelRenderer != null) {
     				if (modelRenderer instanceof Modchu_ModelRenderer) {
     					((Modchu_ModelRenderer) modelRenderer).render(par1, pEntityLiving);
-    				} else {
+    				} else{
     					modelRenderer.render(par1);
     				}
     			}
@@ -499,18 +561,18 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
     public void render(float par1, EntityLiving pEntityLiving)
     {
-		if (isHidden) {
-			return;
-		}
+    	if (isHidden) {
+    		return;
+    	}
 
-		if (showModel
-				&& !compiled) {
-			compileDisplayList(par1);
-		}
+    	if (showModel
+    			&& !compiled) {
+    		compileDisplayList(par1);
+    	}
 
     		GL11.glPushMatrix();
-    		if (field_82906_o != 0.0F | field_82908_p != 0.0F | field_82907_q != 0.0F)
-    			GL11.glTranslatef(field_82906_o, field_82908_p, field_82907_q);
+    		if (offsetX != 0.0F | offsetY != 0.0F | offsetZ != 0.0F)
+    			GL11.glTranslatef(offsetX, offsetY, offsetZ);
 
     		if (rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F) {
     			GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
@@ -522,23 +584,15 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		else if (rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F)
     		{
     			GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
-
-    			//if (scaleX != 1.0F | scaleY != 1.0F | scaleZ != 1.0F)
-    				//GL11.glScalef(scaleX, scaleY, scaleZ);
     			renderObject(par1, pEntityLiving);
-
     			GL11.glTranslatef(-rotationPointX * par1, -rotationPointY * par1, -rotationPointZ * par1);
     		}
     		else
     		{
-    			//if (scaleX != 1.0F | scaleY != 1.0F | scaleZ != 1.0F)
-    				//GL11.glScalef(scaleX, scaleY, scaleZ);
     			renderObject(par1, pEntityLiving);
     		}
-    		//if (scaleX != 1.0F || scaleY != 1.0F || scaleZ != 1.0F)
-    			//GL11.glScalef(1.0F / scaleX, 1.0F / scaleY, 1.0F / scaleZ);
-    		if (field_82906_o != 0.0F | field_82908_p != 0.0F | field_82907_q != 0.0F)
-    			GL11.glTranslatef(-field_82906_o, -field_82908_p, -field_82907_q);
+    		if (offsetX != 0.0F | offsetY != 0.0F | offsetZ != 0.0F)
+    			GL11.glTranslatef(-offsetX, -offsetY, -offsetZ);
     		GL11.glPopMatrix();
     }
 
@@ -597,7 +651,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	} else if (rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F) {
     		GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
     	}
-    	// ãƒã‚¹ãƒˆãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã€ã‚ã¨å­ä¾›ã‚‚
+    	// ƒ|ƒXƒgƒŒƒ“ƒ_ƒŠƒ“ƒOA‚ ‚Æq‹Ÿ‚à
     	GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, matrix);
 
     	if (childModels != null) {
@@ -625,8 +679,8 @@ public class Modchu_ModelRenderer extends ModelRenderer
     }
 
     /**
-     * ãƒ‘ãƒ¼ãƒ„æç”»æ™‚ç‚¹ã®ãƒãƒˆãƒªã‚¯ã‚¹ã‚’è¨­å®šã™ã‚‹ã€‚
-     * ã“ã‚Œä»¥å‰ã«è¨­å®šã•ã‚ŒãŸãƒãƒˆãƒªã‚¯ã‚¹ã¯ç ´æ£„ã•ã‚Œã‚‹ã€‚
+     * ƒp[ƒc•`‰æ“_‚Ìƒ}ƒgƒŠƒNƒX‚ğİ’è‚·‚éB
+     * ‚±‚êˆÈ‘O‚Éİ’è‚³‚ê‚½ƒ}ƒgƒŠƒNƒX‚Í”jŠü‚³‚ê‚éB
      */
     public Modchu_ModelRenderer loadMatrix() {
     	GL11.glLoadMatrix(matrix);
@@ -676,7 +730,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	return flag;
     }
 
-    // Degä»˜ãã¯è§’åº¦æŒ‡å®šãŒåº¦æ•°æ³•
+    // Deg•t‚«‚ÍŠp“xw’è‚ª“x”–@
     public float getRotateAngleX() {
     	return rotateAngleX;
     }
@@ -820,7 +874,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     }
 
     public void preRotateRenderDeg(float f) {
-    	// preRotationAngleã®å€¤ã‚’è§’åº¦ã§å…¥ã‚Œã‚‹ï¼ˆ90Â°ã¨ã‹ï¼‰
+    	// preRotationAngle‚Ì’l‚ğŠp“x‚Å“ü‚ê‚éi90‹‚Æ‚©j
         if(setParentsRotate() && !parentModel.showModel) {
             return;
         }
@@ -870,7 +924,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     }
 
     protected boolean setParentsRotate() {
-    	// è¦ªãŒã‚ã‚‹ãªã‚‰ãã®é–“æ¥æƒ…å ±ã‚’ã‚³ãƒ”ãƒ¼
+    	// e‚ª‚ ‚é‚È‚ç‚»‚ÌŠÔÚî•ñ‚ğƒRƒs[
         if(parentModel != null) {
             rotationPointX = parentModel.rotationPointX;
             rotationPointY = parentModel.rotationPointY;
@@ -890,7 +944,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	preRotationPointZ = f2;
     }
 
-    // ãƒãƒ¼ã‚¸ãƒ§ãƒ³å¤‰æ›´ã«ä¾å­˜ã•ã›ãªã„ãŸã‚ã®é–¢æ•°ç¾¤
+    // ƒo[ƒWƒ‡ƒ“•ÏX‚ÉˆË‘¶‚³‚¹‚È‚¢‚½‚ß‚ÌŠÖ”ŒQ
 
     public void addBoxLM(float f, float f1, float f2, int i, int j, int k) {
         addBox(f, f1, f2, i, j, k);
@@ -1144,6 +1198,129 @@ public class Modchu_ModelRenderer extends ModelRenderer
     public void setCompiled(boolean b) {
     	compiled = b;
     }
+
+    //SmartMovingŠÖ˜A«
+    public void reset()
+    {
+        this.rotatePriority = XYZ;
+        this.scaleX = 1.0F;
+        this.scaleY = 1.0F;
+        this.scaleZ = 1.0F;
+        this.rotationPointX = 0.0F;
+        this.rotationPointY = 0.0F;
+        this.rotationPointZ = 0.0F;
+        this.rotateAngleX = 0.0F;
+        this.rotateAngleY = 0.0F;
+        this.rotateAngleZ = 0.0F;
+        this.ignoreBase = false;
+        this.ignoreSuperRotation = false;
+        this.forceRender = false;
+        this.offsetX = 0.0F;
+        this.offsetY = 0.0F;
+        this.offsetZ = 0.0F;
+        this.fadeOffsetX = false;
+        this.fadeOffsetY = false;
+        this.fadeOffsetZ = false;
+        this.fadeRotateAngleX = false;
+        this.fadeRotateAngleY = false;
+        this.fadeRotateAngleZ = false;
+        this.fadeRotationPointX = false;
+        this.fadeRotationPointY = false;
+        this.fadeRotationPointZ = false;
+        this.previous = null;
+    }
+
+    public void fadeStore(float var1)
+    {
+    	if (previous != null)
+    	{
+    		Modchu_Reflect.setFieldObject(RendererData, "offsetX", previous, offsetX);
+    		Modchu_Reflect.setFieldObject(RendererData, "offsetY", previous, offsetY);
+    		Modchu_Reflect.setFieldObject(RendererData, "offsetZ", previous, offsetZ);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotateAngleX", previous, rotateAngleX);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotateAngleY", previous, rotateAngleY);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotateAngleZ", previous, rotateAngleZ);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotationPointX", previous, rotationPointX);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotationPointY", previous, rotationPointY);
+    		Modchu_Reflect.setFieldObject(RendererData, "rotationPointZ", previous, rotationPointZ);
+    		Modchu_Reflect.setFieldObject(RendererData, "totalTime", previous, var1);
+    	}
+    }
+
+    public void fadeIntermediate(float var1)
+    {
+    	float totalTime = (Float)Modchu_Reflect.getFieldObject(RendererData, "totalTime", previous);
+    	float previousOffsetX = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetX", previous);
+    	float previousOffsetY = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetY", previous);
+    	float previousOffsetZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetZ", previous);
+    	float previousRotateAngleX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleX", previous);
+    	float previousRotateAngleY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleY", previous);
+    	float previousRotateAngleZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleZ", previous);
+    	float previousRotationPointX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointX", previous);
+    	float previousRotationPointY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointY", previous);
+    	float previousRotationPointZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointZ", previous);
+    	if (previous != null && var1 - totalTime <= 2.0F)
+    	{
+    		offsetX = GetIntermediatePosition(previousOffsetX, offsetX, fadeOffsetX, totalTime, var1);
+    		offsetY = GetIntermediatePosition(previousOffsetY, offsetY, fadeOffsetY, totalTime, var1);
+    		offsetZ = GetIntermediatePosition(previousOffsetZ, offsetZ, fadeOffsetZ, totalTime, var1);
+    		rotateAngleX = GetIntermediateAngle(previousRotateAngleX, rotateAngleX, fadeRotateAngleX, totalTime, var1);
+    		rotateAngleY = GetIntermediateAngle(previousRotateAngleY, rotateAngleY, fadeRotateAngleY, totalTime, var1);
+    		rotateAngleZ = GetIntermediateAngle(previousRotateAngleZ, rotateAngleZ, fadeRotateAngleZ, totalTime, var1);
+    		rotationPointX = GetIntermediatePosition(previousRotationPointX, rotationPointX, fadeRotationPointX, totalTime, var1);
+    		rotationPointY = GetIntermediatePosition(previousRotationPointY, rotationPointY, fadeRotationPointY, totalTime, var1);
+    		rotationPointZ = GetIntermediatePosition(previousRotationPointZ, rotationPointZ, fadeRotationPointZ, totalTime, var1);
+    	}
+    }
+
+    private float GetIntermediatePosition(float var1, float var2, boolean var3, float var4, float var5)
+    {
+        return var3 && var2 != var1 ? var1 + (var2 - var1) * (var5 - var4) * 0.2F : var2;
+    }
+
+    private float GetIntermediateAngle(float var1, float var2, boolean var3, float var4, float var5)
+    {
+        if (var3 && var2 != var1)
+        {
+            while (var1 >= ((float)Math.PI * 2F))
+            {
+                var1 -= ((float)Math.PI * 2F);
+            }
+
+            while (var1 < 0.0F)
+            {
+                var1 += ((float)Math.PI * 2F);
+            }
+
+            while (var2 >= ((float)Math.PI * 2F))
+            {
+                var2 -= ((float)Math.PI * 2F);
+            }
+
+            while (var2 < 0.0F)
+            {
+                var2 += ((float)Math.PI * 2F);
+            }
+
+            if (var2 > var1 && var2 - var1 > (float)Math.PI)
+            {
+                var1 += ((float)Math.PI * 2F);
+            }
+
+            if (var2 < var1 && var1 - var2 > (float)Math.PI)
+            {
+                var2 += ((float)Math.PI * 2F);
+            }
+
+            return var1 + (var2 - var1) * (var5 - var4) * 0.2F;
+        }
+        else
+        {
+            return var2;
+        }
+    }
+    //SmartMovingŠÖ˜Aª
+
 /*//b181delete
     private void compileDisplayList(float par1)
     {
