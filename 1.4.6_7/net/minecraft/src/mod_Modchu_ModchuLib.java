@@ -25,6 +25,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static boolean isFavBlock = false;
 	public static boolean isDecoBlock = false;
 	public static boolean isBTW = false;
+	public static boolean isSSP = false;
 	public static boolean newRelease = false;
 	public static mod_Modchu_ModchuLib mod_modchu_modchulib;
 	public static Class MMM_TextureManager;
@@ -41,6 +42,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static Class decoBlockBase;
 	public static Class favBlock;
 	public static Class RendererData;
+	public static Class PFLM_RenderPlayer2;
 	private boolean isModchu;
 	public final String minecraftVersion;
 	public static String newVersion = "";
@@ -152,7 +154,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.4.6~7-1c";
+		return "1.4.6~7-1d";
 	}
 
 	@Override
@@ -236,7 +238,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 		//対応MOD導入チェック class直チェック
 		String className1[] = {
-				"FMLRenderAccessLibrary", "net.minecraft.decoblock.DecoBlock", "net.minecraft.favstar.BlockFav"
+				"FMLRenderAccessLibrary", "net.minecraft.decoblock.DecoBlock", "net.minecraft.favstar.BlockFav", "EntityPlayerSP2"
 		};
 		String test2 = null;
 		for(int n = 0 ; n < className1.length ; n++){
@@ -248,6 +250,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				if(n == 0) isForge = true;
 				if(n == 1) isDecoBlock = true;
 				if(n == 2) isFavBlock = true;
+				if(n == 3) isSSP = true;
 			} catch (ClassNotFoundException e) {
 			}
 		}
@@ -285,6 +288,9 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		} else  {
 			ModLoader.getLogger().fine("playerFormLittleMaid-isFavBlock false.");
 			Modchu_Debug.Debug("isFavBlock false.");
+		}
+		if (isSSP) {
+			PFLM_RenderPlayer2 = Modchu_Reflect.loadClass("PFLM_RenderPlayer2");
 		}
 	}
 

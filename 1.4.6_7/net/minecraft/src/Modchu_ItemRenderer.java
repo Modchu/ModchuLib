@@ -148,11 +148,11 @@ public class Modchu_ItemRenderer extends MMM_ItemRenderer {
                 GL11.glScalef(1.0F, 1.0F, 1.0F);
                 GL11.glTranslatef(5.6F, 0.0F, 0.0F);
                 var17 = RenderManager.instance.getEntityRenderObject(this.mc.thePlayer);
-                var18 = (RenderPlayer)var17;
             	var16 = 1.0F;
             	GL11.glScalef(var16, var16, var16);
             }
-            var18.func_82441_a(this.mc.thePlayer);
+            if (var17 instanceof RenderPlayer) ((RenderPlayer) var17).func_82441_a(this.mc.thePlayer);
+            else Modchu_Reflect.invokeMethod(var17.getClass(), "func_82441_a", var17, new Object[]{ this.mc.thePlayer });
             GL11.glPopMatrix();
         }
 
@@ -170,14 +170,16 @@ public class Modchu_ItemRenderer extends MMM_ItemRenderer {
 
     public void drawFirstPersonHand(Render r, int h)
     {
+    	//Modchu_Debug.Debug("drawFirstPersonHand h="+h);
     	//olddays—p
     	boolean b = false;
     	if (isOlddays) b = (Boolean) Modchu_Reflect.getFieldObject(ItemRenderer.class, "olddays");
     	if (!b) {
+        	//Modchu_Debug.Debug("drawFirstPersonHand b!");
     		((RenderPlayer)r).func_82441_a(mc.thePlayer);
     		return;
     	}
-    	Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.mod_PFLM_PlayerFormLittleMaid, "func_82441_a", new Class[]{ EntityClientPlayerMP.class, int.class }, new Object[]{ mc.thePlayer, h });
+    	Modchu_Reflect.invokeMethod(RenderPlayer.class, "a", "func_82441_a", new Class[]{ EntityPlayer.class, int.class }, r, new Object[]{ mc.thePlayer, h });
     	return;
     }
 }

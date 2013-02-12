@@ -87,6 +87,16 @@ public class Modchu_Reflect
     	return null;
     }
 
+    public static Object getFieldObject(Class var0, String var1, String var2)
+    {
+    	try {
+    		return getField(var0, var1, var2).get(null);
+    	} catch (Exception e) {
+    		if (debugReflectMessage) e.printStackTrace();
+    	}
+    	return null;
+    }
+
     public static Object getFieldObject(Class var0, String var1, Object var2)
     {
     	try {
@@ -107,6 +117,46 @@ public class Modchu_Reflect
     	return null;
     }
 
+    public static Object getFieldObject(String var0, String var2)
+    {
+    	try {
+    		return getField(loadClass(var0), var2).get(null);
+    	} catch (Exception e) {
+    		if (debugReflectMessage) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    public static Object getFieldObject(String var0, String var1, String var2)
+    {
+    	try {
+    		return getField(loadClass(var0), var1, var2).get(null);
+    	} catch (Exception e) {
+    		if (debugReflectMessage) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    public static Object getFieldObject(String var0, String var1, Object var2)
+    {
+    	try {
+    		return getField(loadClass(var0), var1).get(var2);
+    	} catch (Exception e) {
+    		if (debugReflectMessage) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    public static Object getFieldObject(String var0, String var1, String var2, Object var3)
+    {
+    	try {
+    		return getField(loadClass(var0), var1, var2).get(var3);
+    	} catch (Exception e) {
+    		if (debugReflectMessage) e.printStackTrace();
+    	}
+    	return null;
+    }
+
     public static Field getField(Class var0, String var1, String var2) {
     	Field field = getField(var0, var2);
     	if (field != null) return field;
@@ -118,6 +168,24 @@ public class Modchu_Reflect
     	Field var4 = null;
     	try {
     		var4 = getRawField(var0, var1);
+    		var4.setAccessible(true);
+    	} catch (Exception e) {
+    		if (debugReflectMessageDetail) e.printStackTrace();
+    	}
+    	return var4;
+    }
+
+    public static Field getField(String var0, String var1, String var2) {
+    	Field field = getField(loadClass(var0), var2);
+    	if (field != null) return field;
+    	return getField(var0, var1);
+    }
+
+    public static Field getField(String var0, String var1)
+    {
+    	Field var4 = null;
+    	try {
+    		var4 = getRawField(loadClass(var0), var1);
     		var4.setAccessible(true);
     	} catch (Exception e) {
     		if (debugReflectMessageDetail) e.printStackTrace();

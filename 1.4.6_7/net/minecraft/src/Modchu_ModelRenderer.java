@@ -335,27 +335,33 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		pRender.renderBlocks.renderBlockAsItem(Block.blocksList[itemstack.itemID], itemstack.getItemDamage(), 1.0F);
     		GL11.glDisable(GL11.GL_CULL_FACE);
     	} else {
-    		// アイテムに色付け
-    		String s1 = "/gui/items.png";
-    		int renderPasses = itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0;
-    		if (mod_Modchu_ModchuLib.isForge) {
-    			if (renderPasses == 1) renderPasses =
-    					(Integer) Modchu_Reflect.invokeMethod(Item.class, "getRenderPasses", new Class[]{ int.class },
-    							itemstack.getItem(), new Object[]{ itemstack.getItemDamage() }) - 1;
-    			s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", itemstack.getItem());
-    			//Modchu_Debug.Debug("isForge pRender.loadTexture s1="+s1+" renderPasses="+renderPasses);
-    		} else if (mod_Modchu_ModchuLib.isBTW
-    				&& isBTWItem(itemstack.getItem())) {
-    			s1 = "/btwmodtex/btwitems01.png";
-    		}
-    		pRender.loadTexture(s1);
-    		for (int j = 0; j <= renderPasses; j++) {
-    			int k = itemstack.getItem().getColorFromItemStack(itemstack, j);
-    			float f15 = (float)(k >> 16 & 0xff) / 255F;
-    			float f17 = (float)(k >> 8 & 0xff) / 255F;
-    			float f19 = (float)(k & 0xff) / 255F;
-    			GL11.glColor4f(f15, f17, f19, 1.0F);
-    			pRender.renderManager.itemRenderer.renderItem(pEntityLiving, itemstack, j);
+    		if (pRender.renderManager != null
+    				&& pRender.renderManager.itemRenderer != null) {
+    			// アイテムに色付け
+    			String s1 = "/gui/items.png";
+    			int renderPasses = itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0;
+    			if (mod_Modchu_ModchuLib.isForge) {
+    				if (renderPasses == 1) renderPasses =
+    						(Integer) Modchu_Reflect.invokeMethod(Item.class, "getRenderPasses", new Class[]{ int.class },
+    								itemstack.getItem(), new Object[]{ itemstack.getItemDamage() }) - 1;
+    				s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", itemstack.getItem());
+    				//Modchu_Debug.Debug("isForge pRender.loadTexture s1="+s1+" renderPasses="+renderPasses);
+    			} else if (mod_Modchu_ModchuLib.isBTW
+    					&& isBTWItem(itemstack.getItem())) {
+    				s1 = "/btwmodtex/btwitems01.png";
+    			}
+    			pRender.loadTexture(s1);
+    			for (int j = 0; j <= renderPasses; j++) {
+    				if (!mod_Modchu_ModchuLib.isSSP
+    						| renderPasses > 0) {
+    					int k = itemstack.getItem().getColorFromItemStack(itemstack, j);
+    					float f15 = (float)(k >> 16 & 0xff) / 255F;
+    					float f17 = (float)(k >> 8 & 0xff) / 255F;
+    					float f19 = (float)(k & 0xff) / 255F;
+    					GL11.glColor4f(f15, f17, f19, 1.0F);
+    				}
+    				pRender.renderManager.itemRenderer.renderItem(pEntityLiving, itemstack, j);
+    			}
     		}
     	}
 
@@ -1249,27 +1255,28 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
     public void fadeIntermediate(float var1)
     {
-    	float totalTime = (Float)Modchu_Reflect.getFieldObject(RendererData, "totalTime", previous);
-    	float previousOffsetX = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetX", previous);
-    	float previousOffsetY = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetY", previous);
-    	float previousOffsetZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetZ", previous);
-    	float previousRotateAngleX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleX", previous);
-    	float previousRotateAngleY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleY", previous);
-    	float previousRotateAngleZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleZ", previous);
-    	float previousRotationPointX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointX", previous);
-    	float previousRotationPointY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointY", previous);
-    	float previousRotationPointZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointZ", previous);
-    	if (previous != null && var1 - totalTime <= 2.0F)
-    	{
-    		offsetX = GetIntermediatePosition(previousOffsetX, offsetX, fadeOffsetX, totalTime, var1);
-    		offsetY = GetIntermediatePosition(previousOffsetY, offsetY, fadeOffsetY, totalTime, var1);
-    		offsetZ = GetIntermediatePosition(previousOffsetZ, offsetZ, fadeOffsetZ, totalTime, var1);
-    		rotateAngleX = GetIntermediateAngle(previousRotateAngleX, rotateAngleX, fadeRotateAngleX, totalTime, var1);
-    		rotateAngleY = GetIntermediateAngle(previousRotateAngleY, rotateAngleY, fadeRotateAngleY, totalTime, var1);
-    		rotateAngleZ = GetIntermediateAngle(previousRotateAngleZ, rotateAngleZ, fadeRotateAngleZ, totalTime, var1);
-    		rotationPointX = GetIntermediatePosition(previousRotationPointX, rotationPointX, fadeRotationPointX, totalTime, var1);
-    		rotationPointY = GetIntermediatePosition(previousRotationPointY, rotationPointY, fadeRotationPointY, totalTime, var1);
-    		rotationPointZ = GetIntermediatePosition(previousRotationPointZ, rotationPointZ, fadeRotationPointZ, totalTime, var1);
+    	if (previous != null) {
+    		float totalTime = (Float)Modchu_Reflect.getFieldObject(RendererData, "totalTime", previous);
+    		if (var1 - totalTime <= 2.0F) {
+    			float previousOffsetX = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetX", previous);
+    			float previousOffsetY = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetY", previous);
+    			float previousOffsetZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetZ", previous);
+    			float previousRotateAngleX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleX", previous);
+    			float previousRotateAngleY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleY", previous);
+    			float previousRotateAngleZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleZ", previous);
+    			float previousRotationPointX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointX", previous);
+    			float previousRotationPointY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointY", previous);
+    			float previousRotationPointZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointZ", previous);
+    			offsetX = GetIntermediatePosition(previousOffsetX, offsetX, fadeOffsetX, totalTime, var1);
+    			offsetY = GetIntermediatePosition(previousOffsetY, offsetY, fadeOffsetY, totalTime, var1);
+    			offsetZ = GetIntermediatePosition(previousOffsetZ, offsetZ, fadeOffsetZ, totalTime, var1);
+    			rotateAngleX = GetIntermediateAngle(previousRotateAngleX, rotateAngleX, fadeRotateAngleX, totalTime, var1);
+    			rotateAngleY = GetIntermediateAngle(previousRotateAngleY, rotateAngleY, fadeRotateAngleY, totalTime, var1);
+    			rotateAngleZ = GetIntermediateAngle(previousRotateAngleZ, rotateAngleZ, fadeRotateAngleZ, totalTime, var1);
+    			rotationPointX = GetIntermediatePosition(previousRotationPointX, rotationPointX, fadeRotationPointX, totalTime, var1);
+    			rotationPointY = GetIntermediatePosition(previousRotationPointY, rotationPointY, fadeRotationPointY, totalTime, var1);
+    			rotationPointZ = GetIntermediatePosition(previousRotationPointZ, rotationPointZ, fadeRotationPointZ, totalTime, var1);
+    		}
     	}
     }
 
