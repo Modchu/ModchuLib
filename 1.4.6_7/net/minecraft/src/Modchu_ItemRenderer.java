@@ -123,7 +123,6 @@ public class Modchu_ItemRenderer extends MMM_ItemRenderer {
                 GL11.glScalef(1.0F, 1.0F, 1.0F);
                 GL11.glTranslatef(-4.8F, -2.9F, 0.5F);
                 var17 = RenderManager.instance.getEntityRenderObject(this.mc.thePlayer);
-                var18 = (RenderPlayer)var17;
             	var16 = 1.0F;
             	GL11.glScalef(var16, var16, var16);
             } else {

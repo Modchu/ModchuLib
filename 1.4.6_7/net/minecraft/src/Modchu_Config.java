@@ -154,6 +154,7 @@ public class Modchu_Config
 				s2 = (String) list.get(i);
 				if (s2.startsWith(s)) {
 					int i1 = s2.indexOf('=');
+					//if (s.equalsIgnoreCase("shortcutKeysTextureName[6]")) Modchu_Debug.mDebug("Modchu_Config loadConfig2 s2 = "+s2+" s="+s+" s.length()="+s.length()+" i1="+i1);
 					if (i1 > -1
 							&& s.length() == i1) {
 						o = s2.substring(i1 + 1);

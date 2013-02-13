@@ -123,7 +123,6 @@ public class Modchu_ItemRendererHD extends MMM_ItemRendererHD {
                 GL11.glScalef(1.0F, 1.0F, 1.0F);
                 GL11.glTranslatef(-4.8F, -2.9F, 0.5F);
                 var17 = RenderManager.instance.getEntityRenderObject(this.mc.thePlayer);
-                var18 = (RenderPlayer)var17;
             	var16 = 1.0F;
             	GL11.glScalef(var16, var16, var16);
             } else {
@@ -179,7 +178,7 @@ public class Modchu_ItemRendererHD extends MMM_ItemRendererHD {
     		((RenderPlayer)r).func_82441_a(mc.thePlayer);
     		return;
     	}
-    	Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.PFLM_RenderPlayer2, "a", "func_82441_a", new Class[]{ EntityPlayer.class, int.class }, r, new Object[]{ mc.thePlayer, h });
+    	Modchu_Reflect.invokeMethod(RenderPlayer.class, "a", "func_82441_a", new Class[]{ EntityPlayer.class, int.class }, r, new Object[]{ mc.thePlayer, h });
     	return;
     }
 }
