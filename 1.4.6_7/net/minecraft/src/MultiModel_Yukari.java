@@ -642,6 +642,10 @@ public class MultiModel_Yukari extends MultiModel_Aug
     	actionPartsInit(f, f1);
     }
 
+    @Override
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
     	float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
@@ -685,6 +689,10 @@ public class MultiModel_Yukari extends MultiModel_Aug
     }
 
     @Override
+    public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    }
+
+    @Override
     public void defaultPartsSettingBefore() {
     	super.defaultPartsSettingBefore();
     	String[] s1 = {
@@ -714,6 +722,14 @@ public class MultiModel_Yukari extends MultiModel_Aug
     public void defaultPartsSettingAfter() {
     	//Cheek Default off
     	setGuiParts("Cheek", false);
+    }
+
+    @Override
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	if (getSkirtFloats()) {
+    		setVisible(Skirt, getGuiParts().get("Skirt"));
+    	}
     }
 
     @Override

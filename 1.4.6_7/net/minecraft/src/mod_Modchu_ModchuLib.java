@@ -32,12 +32,11 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static Class MMM_FileManager;
 	public static Class MMM_TextureBox;
 	public static Class MMM_StabilizerManager;
-	public static Class MMM_Helper;
-    public static Class mod_PFLM_PlayerFormLittleMaid;
-    public static Class PFLM_Gui;
-    public static Class PFLM_EntityPlayerDummy;
-    public static Class mod_LMM_littleMaidMob;
-    public static Class LMM_EntityLittleMaid;
+	public static Class mod_PFLM_PlayerFormLittleMaid;
+	public static Class PFLM_Gui;
+	public static Class PFLM_EntityPlayerDummy;
+	public static Class mod_LMM_littleMaidMob;
+	public static Class LMM_EntityLittleMaid;
 	public static Class decoBlock;
 	public static Class decoBlockBase;
 	public static Class favBlock;
@@ -49,6 +48,8 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static int modchuLibVersion;
 	private static final File cfgdir = new File(Minecraft.getMinecraftDir(), "/config/");
 	private static File mainCfgfile = new File(cfgdir, ("Modchu_ModchuLib.cfg"));
+	public static boolean isClient = true;
+	public static Minecraft mc = Minecraft.getMinecraft();
 
 	public mod_Modchu_ModchuLib()
 	{
@@ -154,7 +155,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.4.6~7-1d";
+		return "1.4.6~7-1f";
 	}
 
 	@Override
@@ -163,33 +164,33 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		if (Modchu_Debug.debugMessage
 				&& !mod_modchu_modchulib.isRelease()) Modchu_Debug.debugString = new String[10];
 		ModLoader.setInGameHook(this, true, true);
-		Modchu_Reflect.setDebugMessage(false);
 		//minecraft旧バージョン用
-		isModchu = Modchu_Reflect.loadClass(getClassName("Modchu_TextureManager")) != null;
+		isModchu = Modchu_Reflect.loadClass(getClassName("Modchu_TextureManager"), false) != null;
 		if (isModchu) {
 			MMM_TextureManager = Modchu_Reflect.loadClass(getClassName("Modchu_TextureManager"));
 			MMM_FileManager = Modchu_Reflect.loadClass(getClassName("Modchu_FileManager"));
-			MMM_StabilizerManager = Modchu_Reflect.loadClass(getClassName("Modchu_StabilizerManager"));
-			MMM_Helper = Modchu_Reflect.loadClass(getClassName("Modchu_Helper"));
 			Modchu_Reflect.invokeMethod(MMM_FileManager, "init");
 			Modchu_Reflect.invokeMethod(MMM_TextureManager, "init");
+//-@-125
+			MMM_StabilizerManager = Modchu_Reflect.loadClass(getClassName("Modchu_StabilizerManager"));
 			Modchu_Reflect.invokeMethod(MMM_StabilizerManager, "init");
+//@-@125
 		}
 
-		mod_LMM_littleMaidMob = Modchu_Reflect.loadClass(getClassName("mod_LMM_littleMaidMob"));
+		mod_LMM_littleMaidMob = Modchu_Reflect.loadClass(getClassName("mod_LMM_littleMaidMob"), false);
 		if (mod_LMM_littleMaidMob != null) {
 			isLMM = true;
 			LMM_EntityLittleMaid = (Class) Modchu_Reflect.loadClass(getClassName("LMM_EntityLittleMaid"));
 		}
 
-		mod_PFLM_PlayerFormLittleMaid = Modchu_Reflect.loadClass(getClassName("mod_PFLM_PlayerFormLittleMaid"));
+		mod_PFLM_PlayerFormLittleMaid = Modchu_Reflect.loadClass(getClassName("mod_PFLM_PlayerFormLittleMaid"), false);
 		if (mod_PFLM_PlayerFormLittleMaid != null) {
 			isPFLM = true;
 			PFLM_Gui = Modchu_Reflect.loadClass(getClassName("PFLM_Gui"));
 			PFLM_EntityPlayerDummy = Modchu_Reflect.loadClass(getClassName("PFLM_EntityPlayerDummy"));
 		}
 
-		RendererData = Modchu_Reflect.loadClass("net.smart.render.RendererData");
+		RendererData = Modchu_Reflect.loadClass("net.smart.render.RendererData", false);
 		loadcfg();
 		if (versionCheck) startVersionCheckThread();
 		Modchu_Debug.Debug("load() end");
@@ -199,17 +200,20 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public void modsLoaded() {
 		if (isModchu) {
 			// ロード
-			if ((Boolean) Modchu_Reflect.getFieldObject(MMM_Helper, "isClient")) {
+			if (isClient) {
 				// テクスチャパックの構築
 				Modchu_Reflect.invokeMethod(MMM_TextureManager, "loadTextures");
+//-@-125
 				Modchu_Reflect.invokeMethod(MMM_StabilizerManager, "loadStabilizer");
+//@-@125
 			} else {
 				Modchu_Reflect.invokeMethod(MMM_TextureManager, "loadTextureIndex");
 			}
-
+//-@-125
 			// テクスチャインデックスの構築
 			Modchu_Debug.Debug("Localmode: InitTextureList.");
 			Modchu_Reflect.invokeMethod(MMM_TextureManager, "initTextureList", new Class[]{ boolean.class}, null, new Object[]{ true });
+//@-@125
 		}
 
 		//対応MOD導入チェック ModLoader対応MOD
@@ -234,6 +238,11 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_FCBetterThanWolves Check ok.");
 				Modchu_Debug.Debug("mod_FCBetterThanWolves Check ok.");
 			}
+			else if (name.equals("mod_MinecraftForge")) {
+				isForge = true;
+				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_MinecraftForge Check ok.");
+				Modchu_Debug.Debug("mod_MinecraftForge Check ok.");
+			}
 		}
 
 		//対応MOD導入チェック class直チェック
@@ -250,7 +259,16 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				if(n == 0) isForge = true;
 				if(n == 1) isDecoBlock = true;
 				if(n == 2) isFavBlock = true;
-				if(n == 3) isSSP = true;
+				if(n == 3) {
+					try {
+						String s = getClassName("EntityPlayerSP2");
+						if (s != null) {
+							Object o = Modchu_Reflect.getFieldObject(s, "armor", false);
+							if (o != null) isSSP = true;
+						}
+					} catch(Exception e) {
+					}
+				}
 			} catch (ClassNotFoundException e) {
 			}
 		}

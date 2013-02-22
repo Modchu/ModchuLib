@@ -77,8 +77,10 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public static Class PFLM_EntityPlayerDummy;
     public static Class mod_LMM_littleMaidMob;
     public static Class LMM_EntityLittleMaid;
+/*//125delete
+    public Entity entity;
+*///125delete
 /*//b181delete
-    //public Entity entity;
     public int textureWidth = Modchu_ModelRenderer.textureWidthPFLM;
     public int textureHeight = Modchu_ModelRenderer.textureHeightPFLM;
     public boolean field_40333_u;
@@ -113,7 +115,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	textureHeight = par4;
     	//b173deleteboxList = new ArrayList();
 
-    	Modchu_Reflect.setDebugMessage(false);
     	mod_LMM_littleMaidMob = mod_Modchu_ModchuLib.mod_LMM_littleMaidMob;
     	if (mod_LMM_littleMaidMob != null) {
     		isLMM = true;
@@ -194,7 +195,9 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	if (entity instanceof EntityLiving) {
     		setRotationAngles(f, f1, ticksExisted, pheadYaw, pheadPitch, f5, entity);
     		if (mainFrame instanceof Modchu_ModelRenderer) ((Modchu_ModelRenderer) mainFrame).render(f5, (EntityLiving)entity);
+//-@-145
     		else if (mainFrame instanceof MMM_ModelRenderer) ((MMM_ModelRenderer) mainFrame).render(f5, (EntityLiving)entity);
+//@-@145
     		else mainFrame.render(f5);
     		if (modelCaps != null) {
     			renderStabilizer(entity, (Map) modelCaps.getCapsValue(caps_stabiliser), f, f1, ticksExisted, pheadYaw, pheadPitch, f5);
@@ -204,6 +207,9 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 
     @Override
     public void setLivingAnimations(EntityLiving entityliving, float f, float f1, float f2) {
+/*//125delete
+    	entity = entityliving;
+*///125delete
     	setMotionY(entityliving.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entityliving.motionY + 0.0784000015258789D)) * mod_Modchu_ModchuLib.skirtFloatsVolume);
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entityliving)) {
@@ -221,6 +227,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    	if (entity != null) ;else return;
     	setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entity)) {
@@ -297,13 +304,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     		if (litemstack != null) {
     			Object Arms = getArms(i);
     			if (Arms != null) {
-    				if (Arms instanceof MMM_ModelRenderer) {
-    					((MMM_ModelRenderer) Arms).loadMatrix();
-    					((MMM_ModelRenderer) Arms).renderItems(pEntity, pRender, false, laction, litemstack);
-    				} else if (Arms instanceof Modchu_ModelRenderer) {
-    					((Modchu_ModelRenderer) Arms).loadMatrix();
-    					((Modchu_ModelRenderer) Arms).renderItems(pEntity, pRender, false, laction, litemstack);
-    				}
+    				Modchu_Reflect.invokeMethod(Arms.getClass(), "loadMatrix", Arms);
+    				Modchu_Reflect.invokeMethod(Arms.getClass(), "renderItems", new Class[]{ EntityLiving.class, Render.class, boolean.class, EnumAction.class, ItemStack.class }, Arms, new Object[]{ pEntity, pRender, false, laction, litemstack });
     			}
     		}
     	}
@@ -323,11 +325,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			if (litemstack1 != null) {
     				ItemStack litemstack2 = litemstack1[litemstack1.length - 2];
     				Object HeadMount = getHeadMount();
-    				if (HeadMount instanceof MMM_ModelRenderer) {
-    					((MMM_ModelRenderer) HeadMount).loadMatrix();
-    				} else if (HeadMount instanceof Modchu_ModelRenderer) {
-    					((Modchu_ModelRenderer) HeadMount).loadMatrix();
-    				}
+    				Modchu_Reflect.invokeMethod(HeadMount.getClass(), "loadMatrix", HeadMount);
     				if (isPlanter
     						|| (addSupport > -1 && addSupport < 3)) {
     					//if (((LMM_EntityLittleMaid) pEntity).isPlanter()) {
@@ -340,11 +338,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     						scale = 1.0F + (0.2F * litemstack2.getItemDamage());
     					}
     				}
-    				if (HeadMount instanceof MMM_ModelRenderer) {
-    					((MMM_ModelRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack);
-    				} else if (HeadMount instanceof Modchu_ModelRenderer) {
-    					((Modchu_ModelRenderer) HeadMount).renderItems(pEntity, pRender, true, null, litemstack, scale, addSupport);
-    				}
+    				Modchu_Reflect.invokeMethod(HeadMount.getClass(), "renderItems", new Class[]{ EntityLiving.class, Render.class, boolean.class, EnumAction.class, ItemStack.class, float.class, int.class }, HeadMount, new Object[]{ pEntity, pRender, true, null, litemstack, scale, addSupport });
     				//HeadMount.renderItems(pEntity, pRender, true, null, ((LMM_EntityLittleMaid) pEntity).maidInventory.getHeadMount());
     			}
     		}
@@ -366,13 +360,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	if (litemstack != null) {
     		Object Arms = getArms(getHandedness());
     		if (Arms != null) {
-    			if (Arms instanceof MMM_ModelRenderer) {
-    				((MMM_ModelRenderer) Arms).loadMatrix();
-    				((MMM_ModelRenderer) Arms).renderItems(entityplayer, pRender, false, laction, litemstack);
-    			} else if (Arms instanceof Modchu_ModelRenderer) {
-    				((Modchu_ModelRenderer) Arms).loadMatrix();
-    				((Modchu_ModelRenderer) Arms).renderItems(entityplayer, pRender, false, laction, litemstack);
-    			}
+    			Modchu_Reflect.invokeMethod(Arms.getClass(), "loadMatrix", Arms);
+    			Modchu_Reflect.invokeMethod(Arms.getClass(), "renderItems", new Class[]{ EntityLiving.class, Render.class, boolean.class, EnumAction.class, ItemStack.class }, Arms, new Object[]{ entityplayer, pRender, false, laction, litemstack });
     		}
     	}
 
@@ -414,11 +403,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     		ItemStack litemstack2 = entityplayer.inventory.getStackInSlot(10);
     		Object HeadMount = getHeadMount();
     		if (HeadMount != null) ;else return;
-    		if (HeadMount instanceof MMM_ModelRenderer) {
-    			((MMM_ModelRenderer) HeadMount).loadMatrix();
-    		} else {
-    			((Modchu_ModelRenderer) HeadMount).loadMatrix();
-    		}
+    		Modchu_Reflect.invokeMethod(HeadMount.getClass(), "loadMatrix", HeadMount);
     		if (isPlanter
     				|| (addSupport > -1 && addSupport < 3)) {
     			equippedItemPositionFlower();
@@ -430,11 +415,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     				scale = 1.0F + (0.2F * litemstack2.getItemDamage());
     			}
     		}
-    		if (HeadMount instanceof MMM_ModelRenderer) {
-    			((MMM_ModelRenderer) HeadMount).renderItems(entityplayer, pRender, true, null, litemstack);
-    		} else {
-    			((Modchu_ModelRenderer) HeadMount).renderItems(entityplayer, pRender, true, null, litemstack, scale, addSupport);
-    		}
+    		Modchu_Reflect.invokeMethod(HeadMount.getClass(), "renderItems", new Class[]{ EntityLiving.class, Render.class, boolean.class, EnumAction.class, ItemStack.class, float.class, int.class }, HeadMount, new Object[]{ entityplayer, pRender, true, null, litemstack, scale, addSupport });
     	}
     }
 
@@ -459,7 +440,9 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     		}
     	} catch(Exception e) {
     	}
+//-@-132
     	if (item.itemID == Item.skull.itemID) return 3;
+//@-@132
     	if (item instanceof ItemBlock
     			&& block instanceof BlockPumpkin) return 4;
     	return flag;
@@ -499,6 +482,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      */
     public void PFLMLivingAnimationsSpecialOperationsAfter(Entity entity, float f, float f1, float f2) {
     	isRiding = !getIsRiding() ? getIsSitting() : getIsRiding();
+    	if (entity != null) ;else return;
     	if (entity instanceof EntityPlayer) settingShowParts();
     }
 
@@ -507,6 +491,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      * setRotationAngles ŒÄ‚Ño‚µŒã‚ÉŒÄ‚Î‚ê‚éB
      */
     public void PFLMRotationAnglesSpecialOperations(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    	if (entity != null) ;else return;
     	if (getFirstPerson()) setRotationAnglesfirstPerson(f, f1, f2, f3, f4, f5, entity);
     	if (getShortcutKeysAction()) {
     		action(entity, getRunActionNumber());
@@ -1531,6 +1516,11 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public ModelRenderer getBipedRightArm() {
     	if (getHandedness() == 0) return bipedRightArm;
     	return bipedLeftArm;
+    }
+
+    public ModelRenderer getNotDominantArm() {
+    	if (getHandedness() == 0) return bipedLeftArm;
+    	return bipedRightArm;
     }
 
     public int getHandedness() {

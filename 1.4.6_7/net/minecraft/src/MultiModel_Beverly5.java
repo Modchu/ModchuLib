@@ -227,6 +227,10 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
     	sleepingBan = false;
     }
 
+    @Override
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
 	@Override
 	public float getHeight()
 	{
@@ -891,5 +895,13 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
     	hemSkirtL1.isHidden = !b;
     	hemSkirtR2.isHidden = !b;
     	hemSkirtL2.isHidden = !b;
+    }
+
+    @Override
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	if (getSkirtFloats()) {
+    		setVisible(Skirt, getGuiParts().get("Skirt"));
+    	}
     }
 }

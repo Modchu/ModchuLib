@@ -38,6 +38,10 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public static final int RotYZX = 3;
 	public static final int RotZXY = 4;
 	public static final int RotZYX = 5;
+	public static final int ModeEquip = 0x000;
+	public static final int ModeInventory = 0x001;
+	public static final int ModeItemStack = 0x002;
+	public static final int ModeParts = 0x010;
 	private int textureOffsetX;
 	private int textureOffsetY;
 	private boolean compiled = false;
@@ -48,6 +52,10 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public boolean adjust;
 	public FloatBuffer matrix;
 	public boolean isInvertX;
+	public float scaleX;
+	public float scaleY;
+	public float scaleZ;
+	public ModelRenderer pearent;
 
 	//SmartMoving‹¤’Ê
 	protected ModelRenderer base;
@@ -57,9 +65,6 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public static final int YZX = RotXZY;
 	public static final int ZXY = RotYXZ;
 	public static final int ZYX = RotXYZ;
-	public float scaleX;
-	public float scaleY;
-	public float scaleZ;
 	public boolean ignoreRender;
 	public boolean forceRender;
 	public boolean ignoreBase;
@@ -76,12 +81,10 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public boolean fadeRotationPointZ;
 	public Class RendererData;
 	public Object previous;
-
-//-@-132
 	public float offsetX = 0.0F;
 	public float offsetY = 0.0F;
 	public float offsetZ = 0.0F;
-//@-@132
+
 /*//b181delete
     public List cubeList;
     public List childModels;
@@ -141,6 +144,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	matrix = BufferUtils.createFloatBuffer(16);
     	isInvertX = false;
     	baseModel = modelbase;
+    	pearent = null;
     	RendererData = mod_Modchu_ModchuLib.RendererData;
 /*//b181delete
         cubeList = new ArrayList();
@@ -265,13 +269,16 @@ public class Modchu_ModelRenderer extends ModelRenderer
     			float sy = scale;
     			float sz = scale;
     			float var6;
+//-@-132
     			if (pRealBlock && item.itemID == Item.skull.itemID) {
     				scale = 1.0625F * scale;
     				sx = scale;
     				sy = -scale;
     				sz = -scale;
     			}
-    			else if (itemstack.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType())) {
+    			else
+//@-@132
+    				if (itemstack.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType())) {
     				var6 = 0.5F;
 //    				GL11.glTranslatef(0.0F, 0.1875F, -0.3125F);
     				GL11.glTranslatef(0.0F, 0.1875F, -0.2125F);
@@ -319,7 +326,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     			GL11.glScalef(sx, sy, sz);
     		}
     	}
-
+//-@-132
     	if (pRealBlock && item.itemID == Item.skull.itemID)
     	{
     		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -329,8 +336,15 @@ public class Modchu_ModelRenderer extends ModelRenderer
     			var6 = itemstack.getTagCompound().getString("SkullOwner");
     		}
     		TileEntitySkullRenderer.skullRenderer.func_82393_a(-0.5F, 0.0F, -0.5F, 1, 180.0F, itemstack.getItemDamage(), var6);
-    	} else if (pRealBlock && itemstack.getItem() instanceof ItemBlock) {
-    		pRender.loadTexture("/terrain.png");
+    	} else
+//@-@132
+    	if (pRealBlock && itemstack.getItem() instanceof ItemBlock) {
+    		String s1 = "/terrain.png";
+    		if (mod_Modchu_ModchuLib.isForge) {
+    			s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", Item.itemsList[itemstack.itemID]);
+    			//Modchu_Debug.Debug("isForge pRender.loadTexture s1="+s1);
+    		}
+    		pRender.loadTexture(s1);
     		GL11.glEnable(GL11.GL_CULL_FACE);
     		pRender.renderBlocks.renderBlockAsItem(Block.blocksList[itemstack.itemID], itemstack.getItemDamage(), 1.0F);
     		GL11.glDisable(GL11.GL_CULL_FACE);
@@ -379,7 +393,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	int particleFrequency = 98;
     	String particleString = null;
     	float translatefX = 0.0F;
-    	float translatefY = mod_Modchu_ModchuLib.isForge ? 0.5F : 0.0F;
+    	float translatefY = 0.5F;
     	float translatefZ = 0.0F;
     	//addSupport = 0 DecoBlock
     	//addSupport = 1 DecoBlockBase
@@ -399,13 +413,13 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		flag = rotate = true;
     		translatef = true;
     		translatefX = 0.0F;
-    		translatefY = mod_Modchu_ModchuLib.isForge ? 0.4F : -0.1F;
+    		translatefY = 0.4F;
     		translatefZ = 0.0F;
     		particle = true;
     		particleString = "instantSpell";
     		particleFrequency = 80;
     	}
-		if (mod_Modchu_ModchuLib.isForge) GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
+    	GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
 
     	if (flag) {
     		pRender.loadTexture("/terrain.png");
@@ -629,6 +643,10 @@ public class Modchu_ModelRenderer extends ModelRenderer
     			&& !compiled)
     	{
     		compileDisplayList(par1);
+    	}
+
+    	if (pearent != null) {
+    		pearent.postRender(par1);
     	}
 
     	if (rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F) {

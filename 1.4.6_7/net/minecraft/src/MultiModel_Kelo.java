@@ -325,6 +325,10 @@ public class MultiModel_Kelo extends MultiModel
 	}
 
     @Override
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
+    @Override
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
     {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
@@ -396,6 +400,10 @@ public class MultiModel_Kelo extends MultiModel
     		}
     	}
         headwear.rotateAngleX = -0.087F;
+    }
+
+    @Override
+    public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     }
 
     @Override
