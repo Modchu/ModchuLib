@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class MultiModel_Shion extends MultiModel
-{
+public class MultiModel_Shion extends MultiModel {
 
     public Modchu_ModelRenderer longtail;
     public Modchu_ModelRenderer Headwear;
@@ -278,6 +277,6 @@ public class MultiModel_Shion extends MultiModel
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	setVisible(Skirt, false);
+		setVisible(Skirt, getGuiParts().get("Skirt"));
     }
 }

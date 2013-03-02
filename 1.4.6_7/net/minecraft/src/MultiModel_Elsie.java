@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class MultiModel_Elsie extends MultiModel
-{
+public class MultiModel_Elsie extends MultiModel {
 
     public Modchu_ModelRenderer RightSkirt;
     public Modchu_ModelRenderer LeftSkirt;
@@ -266,7 +265,7 @@ public class MultiModel_Elsie extends MultiModel
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
     	if (getSkirtFloats()) {
-    		setVisible(Skirt, true);
+    		setVisible(Skirt, getGuiParts().get("Skirt"));
     	}
     }
 

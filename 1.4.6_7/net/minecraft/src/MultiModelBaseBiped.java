@@ -3,6 +3,7 @@ package net.minecraft.src;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,44 @@ import org.lwjgl.opengl.GL11;
  */
 public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 
+    public static final int caps_getOnGround = 0x0204;
+    public static final int caps_setOnGround = 0x0205;
+    public static final int caps_getIsSneak = 0x0206;
+    public static final int caps_getaimedBow = 0x0207;
+    public static final int caps_getIsWait = 0x0208;
+    public static final int caps_getIsSitting = 0x0209;
+    public static final int caps_getFirstPerson = 0x0210;
+    public static final int caps_getOldwalking = 0x0211;
+    public static final int caps_setOldwalking = 0x0212;
+    public static final int caps_getMotionY = 0x0213;
+    public static final int caps_setMotionY = 0x0214;
+    public static final int caps_getPartsSetFlag = 0x0215;
+    public static final int caps_getShowModelFlag = 0x0216;
+    public static final int caps_setShowModelFlag = 0x0217;
+    public static final int caps_setPartsSetFlag = 0x0218;
+    public static final int caps_getShortcutKeysAction = 0x0219;
+    public static final int caps_setShortcutKeysAction = 0x0220;
+    public static final int caps_getRunActionNumber = 0x0221;
+    public static final int caps_setRunActionNumber = 0x0222;
+    public static final int caps_setIsWait = 0x0223;
+    public static final int caps_getSkirtFloats = 0x0224;
+    public static final int caps_renderFirstPersonHand = 0x0225;
+    public static final int caps_getBipedHead = 0x0226;
+    public static final int caps_getBipedRightArm = 0x0227;
+    public static final int caps_getNotDominantArm = 0x0228;
+    public static final int caps_getHandedness = 0x0229;
+    public static final int caps_setVisible = 0x0230;
+    public static final int caps_Physical_Hammer = 0x0231;
+    public static final int caps_getIsLookSuger = 0x0232;
+    public static final int caps_getEntityIdFactor = 0x0233;
+    public static final int caps_getIsInventory = 0x0234;
+    public static final int caps_convertDegtoRad = 0x0235;
+    public static final int caps_shiftArray = 0x0236;
+    public static final int caps_getClassName = 0x0237;
+    public static final int caps_getTextureNameList = 0x0238;
+    public static final int caps_getTextureList = 0x0239;
+    public static final int caps_getMaidColor = 0x0240;
+    public static final int caps_getTexture = 0x0241;
     public ModelRenderer rightArm;
     public ModelRenderer rightArm2;
     public ModelRenderer rightArmPlus;
@@ -72,9 +111,12 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public List<String> showPartsList = new ArrayList<String>();
     public List<String> showPartsHideList = new ArrayList<String>();
     public HashMap<String, Field> modelRendererMap = new HashMap();
+    public LinkedList<String> textureNameList = new LinkedList<String>();
+    public LinkedList<String> textureList = new LinkedList<String>();
     public static Class mod_PFLM_PlayerFormLittleMaid;
     public static Class PFLM_Gui;
     public static Class PFLM_EntityPlayerDummy;
+    public static Class PFLM_RenderPlayer;
     public static Class mod_LMM_littleMaidMob;
     public static Class LMM_EntityLittleMaid;
 /*//125delete
@@ -125,6 +167,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     		isPFLM = true;
     		PFLM_Gui = mod_Modchu_ModchuLib.PFLM_Gui;
     		PFLM_EntityPlayerDummy = mod_Modchu_ModchuLib.PFLM_EntityPlayerDummy;
+    		PFLM_RenderPlayer = mod_Modchu_ModchuLib.PFLM_RenderPlayer;
     		modchuRemodelingModel = mod_Modchu_ModchuLib.modchuRemodelingModel;
     		skirtFloats = mod_Modchu_ModchuLib.skirtFloats;
     		if ((Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "isOlddays")) {
@@ -194,11 +237,11 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public void render(Entity entity, float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5) {
     	if (entity instanceof EntityLiving) {
     		setRotationAngles(f, f1, ticksExisted, pheadYaw, pheadPitch, f5, entity);
-    		if (mainFrame instanceof Modchu_ModelRenderer) ((Modchu_ModelRenderer) mainFrame).render(f5, (EntityLiving)entity);
-//-@-145
-    		else if (mainFrame instanceof MMM_ModelRenderer) ((MMM_ModelRenderer) mainFrame).render(f5, (EntityLiving)entity);
-//@-@145
-    		else mainFrame.render(f5);
+    		try {
+    			Modchu_Reflect.invokeMethod(mainFrame.getClass(), "render", new Class[]{ float.class, EntityLiving.class }, mainFrame, new Object[]{ f5, (EntityLiving)entity });
+    		} catch(Exception e) {
+    			mainFrame.render(f5);
+    		}
     		if (modelCaps != null) {
     			renderStabilizer(entity, (Map) modelCaps.getCapsValue(caps_stabiliser), f, f1, ticksExisted, pheadYaw, pheadPitch, f5);
     		}
@@ -522,8 +565,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	for (int i = 0; i < fields.length; i++) {
     		//Modchu_Debug.mDebug("fields["+i+"].getType() = "+fields[i].getType());
     		Class c = fields[i].getType();
-    		if (c == ModelRenderer.class
-    				| c == Modchu_ModelRenderer.class) {
+    		if (ModelRenderer.class.isInstance(c)) {
     			try {
     				s1 = fields[i].getName();
     				getShowPartsList().add(s1);
@@ -643,6 +685,14 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 
     public HashMap<String, Field> getModelRendererMap() {
     	return modelRendererMap;
+    }
+
+    public LinkedList<String> getTextureNameList() {
+    	return textureNameList;
+    }
+
+    public LinkedList<String> getTextureList() {
+    	return textureList;
     }
 
     public void setParts(int i) {
@@ -1388,7 +1438,142 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	return onGround;
     }
 
-    public float getOnGround(Object o, Entity entity)
+	@Override
+	public Object getCapsValue(int pIndex, Object ...pArg) {
+		Object o = super.getCapsValue(pIndex, pArg);
+		if (o != null) return o;
+		switch (pIndex) {
+		case caps_getOnGround:
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) return getOnGround(getSwingStatus((Entity) pArg[1], (Integer) pArg[0]), (Entity) pArg[1]);
+			return getOnGround();
+		case caps_getIsSneak:
+			return getIsSneak();
+		case caps_getaimedBow:
+			return getaimedBow();
+		case caps_getIsWait:
+			return getIsWait();
+		case caps_getIsSitting:
+			return getIsSitting();
+		case caps_getFirstPerson:
+			return getFirstPerson();
+		case caps_getOldwalking:
+			return getOldwalking();
+		case caps_getMotionY:
+			return getMotionY();
+		case caps_getPartsSetFlag:
+			return getPartsSetFlag();
+		case caps_getShowModelFlag:
+			return getShowModelFlag();
+		case caps_getShortcutKeysAction:
+			return getShortcutKeysAction();
+		case caps_getRunActionNumber:
+			return getRunActionNumber();
+		case caps_getSkirtFloats:
+			return getSkirtFloats();
+		case caps_getBipedHead:
+			return getBipedHead();
+		case caps_getBipedRightArm:
+			return getBipedRightArm();
+		case caps_getNotDominantArm:
+			return getNotDominantArm();
+		case caps_getHandedness:
+			return getHandedness();
+		case caps_Physical_Hammer:
+			return Physical_Hammer();
+		case caps_getIsLookSuger:
+			if (pArg != null
+			&& pArg[0] != null) return getIsLookSuger((Entity) pArg[0]);
+		case caps_getEntityIdFactor:
+			if (pArg != null
+			&& pArg[0] != null) return getEntityIdFactor((Entity) pArg[0]);
+		case caps_getIsInventory:
+			if (pArg != null
+			&& pArg[0] != null) return getIsInventory((Entity) pArg[0]);
+		case caps_convertDegtoRad:
+			if (pArg != null
+			&& pArg[0] != null) return convertDegtoRad((Float) pArg[0]);
+		case caps_getClassName:
+			if (pArg != null
+			&& pArg[0] != null) return getClassName((String) pArg[0]);
+		case caps_getTextureNameList:
+			return getTextureNameList();
+		case caps_getTextureList:
+			return getTextureList();
+		case caps_getMaidColor:
+			if (pArg != null
+			&& pArg[0] != null) return getMaidColor((Entity) pArg[0]);
+		case caps_getTexture:
+			if (pArg != null
+			&& pArg.length > 2
+			&& pArg[0] != null
+			&& pArg[1] != null
+			&& pArg[2] != null) return getTexture((Entity) pArg[1], (String) pArg[0], (Integer) pArg[1]);
+		}
+		return null;
+	}
+
+	@Override
+	public boolean setCapsValue(int pIndex, Object ...pArg) {
+		boolean b = super.setCapsValue(pIndex, pArg);
+		if (b) return b;
+		switch (pIndex) {
+		case caps_setOnGround:
+			if (pArg != null
+			&& pArg[0] != null) setOnGround((Float) pArg[0]);
+			return true;
+		case caps_setOldwalking:
+			if (pArg != null
+			&& pArg[0] != null) setOldwalking((Boolean) pArg[0]);
+			return true;
+		case caps_setMotionY:
+			if (pArg != null
+			&& pArg[0] != null) setMotionY((Float) pArg[0]);
+			return true;
+		case caps_setShowModelFlag:
+			if (pArg != null
+			&& pArg[0] != null) setShowModelFlag((Integer) pArg[0]);
+			return true;
+		case caps_setPartsSetFlag:
+			if (pArg != null
+			&& pArg[0] != null) setPartsSetFlag((Integer) pArg[0]);
+			return true;
+		case caps_setShortcutKeysAction:
+			if (pArg != null
+			&& pArg[0] != null) setShortcutKeysAction((Boolean) pArg[0]);
+			return true;
+		case caps_setRunActionNumber:
+			if (pArg != null
+			&& pArg[0] != null) setRunActionNumber((Integer) pArg[0]);
+			return true;
+		case caps_setIsWait:
+			if (pArg != null
+			&& pArg[0] != null) setIsWait((Boolean) pArg[0]);
+			return true;
+		case caps_renderFirstPersonHand:
+			if (pArg != null
+			&& pArg[0] != null) renderFirstPersonHand((Float) pArg[0]);
+			return true;
+		case caps_setVisible:
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) setVisible((ModelRenderer) pArg[0], (Boolean) pArg[1]);
+			return true;
+		case caps_shiftArray:
+			if (pArg != null
+			&& pArg.length > 2
+			&& pArg[0] != null
+			&& pArg[1] != null
+			&& pArg[2] != null) shiftArray((Float) pArg[0], (Float) pArg[1], (Float) pArg[2]);
+			return true;
+		}
+		return b;
+	}
+
+	public float getOnGround(Object o, Entity entity)
     {
     	if (o != null) {
     		Class c = o.getClass();
@@ -1401,7 +1586,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			Object o1 = getFieldObject(c, "onGround", o);
     			if (o1 != null) return (Float) o1;
     		}
-    		//return getOnGround();
     	}
     	return 0.0F;
     }
@@ -1471,16 +1655,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public void setPartsSetFlag(int i) {
     	partsSetFlag = i;
     }
-/*
-    public int getPartsNumber()
-    {
-    	return partsNumber;
-    }
 
-    public void setPartsNumber(int i) {
-    	partsNumber = i;
-    }
-*/
     public boolean getShortcutKeysAction() {
     	return shortcutKeysAction;
     }
@@ -1592,6 +1767,30 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	pastZ[0] = z;
     }
 
+    public String getTexture(Entity entity, String s, int i) {
+    	if (mod_PFLM_PlayerFormLittleMaid != null
+    			&& entity instanceof EntityPlayer) {
+    		return (String) getObjectInvokeMethod(mod_PFLM_PlayerFormLittleMaid, "textureManagerGetTextureName", new Class[]{ String.class, int.class }, new Object[]{ s, i });
+    	} else
+    	if (LMM_EntityLittleMaid != null
+    			&& LMM_EntityLittleMaid.isInstance(entity)) {
+    		return MMM_TextureManager.getTextureName(s, i);
+    	}
+    	return null;
+    }
+
+    public int getMaidColor(Entity entity) {
+    	if (entity instanceof EntityPlayer) {
+    		Object modelData = Modchu_Reflect.invokeMethod(PFLM_RenderPlayer, "getPlayerData", new Class[]{ EntityPlayer.class }, new Object[]{ entity });
+    		if (modelData != null) return (Integer) Modchu_Reflect.getFieldObject(modelData.getClass(), "maidColor", modelData);
+    	} else
+    	if (LMM_EntityLittleMaid != null
+    			&& LMM_EntityLittleMaid.isInstance(entity)) {
+    		return (Integer) Modchu_Reflect.invokeMethod(LMM_EntityLittleMaid, "maidColor", entity);
+    	}
+    	return 0;
+    }
+
     public String getClassName(String s) {
     	if (s == null) return null;
     	Package pac = getClass().getPackage();
@@ -1659,6 +1858,10 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	return Modchu_Reflect.invokeMethod(o.getClass(), s, s1, o1);
     }
 
+    public Object getObjectInvokeMethod(Class c, String s, Class[] c1, Object[] o1) {
+    	return Modchu_Reflect.invokeMethod(c, s, c1, o1);
+    }
+
     public Object getObjectInvokeMethod(Class c, String s, Class[] c1, Object o1) {
     	return Modchu_Reflect.invokeMethod(c, s, c1, o1);
     }
@@ -1668,6 +1871,10 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     }
 
     public Object getObjectInvokeMethod(Class c, String s, Class[] c1, Object o1, Object ... o2) {
+    	return Modchu_Reflect.invokeMethod(c, s, c1, o1, o2);
+    }
+
+    public Object getObjectInvokeMethod(Class c, String s, Class[] c1, Object[] o1, Object ... o2) {
     	return Modchu_Reflect.invokeMethod(c, s, c1, o1, o2);
     }
 

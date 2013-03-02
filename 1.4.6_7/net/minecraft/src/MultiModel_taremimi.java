@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class MultiModel_taremimi extends MultiModel
-{
+public class MultiModel_taremimi extends MultiModel {
 
     public Modchu_ModelRenderer ChignonR;
     public Modchu_ModelRenderer ChignonL;

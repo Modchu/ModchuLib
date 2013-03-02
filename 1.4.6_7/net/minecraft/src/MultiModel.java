@@ -424,8 +424,8 @@ public class MultiModel extends MultiModelBaseBiped {
     }
 
     public void armSwing(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
-    	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
+    	float onGroundR = (Float) getCapsValue(caps_getOnGround, 0, entity);
+    	float onGroundL = (Float) getCapsValue(caps_getOnGround, 1, entity);
     	if ((onGroundR > -9990F || onGroundL > -9990F) && !getaimedBow() && !getOldwalking()) {
     		// ˜rU‚è
     		float f6, f7, f8;

@@ -1,12 +1,10 @@
 package net.minecraft.src;
 
-import org.lwjgl.opengl.GL11;
-
 /**
  * 多関節モデル
  * 身長2.25ブロック級
  */
-public class MultiModel_Beverly5 extends MultiModel_SR2 {
+public class MultiModel_Beverly6 extends MultiModel_SR2 {
 
 	//added fields
 	public Modchu_ModelRenderer Ponytail;
@@ -29,34 +27,34 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
 	/**
 	 * コンストラクタは全て継承させること
 	 */
-	public MultiModel_Beverly5()
+	public MultiModel_Beverly6()
 	{
 		super();
 	}
 	/**
 	 * コンストラクタは全て継承させること
 	 */
-	public MultiModel_Beverly5(float f)
+	public MultiModel_Beverly6(float f)
 	{
 		super(f);
 	}
 	/**
 	 * コンストラクタは全て継承させること
 	 */
-	public MultiModel_Beverly5(float f, float f1)
+	public MultiModel_Beverly6(float f, float f1)
 	{
     	this(f, f1 , 64, 64);
     }
 
-    public MultiModel_Beverly5(float f, float f1, int i, int j) {
+    public MultiModel_Beverly6(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
     	if (getMethod(EntityVillager.class, "isMating") != null) isMatingFlag = true;
     }
 
     @Override
     public void initModel(float f, float f1) {
+    	textureWidth = 128;
     	textureHeight = 64;
-    	textureWidth = 64;
 
     	offsetY = (byte)(f1 + 5); //Global to Local
 
@@ -71,23 +69,23 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
     	eyeL = new Modchu_ModelRenderer(this, 21, 0);
     	eyeL.addPlate(1.0F, -4F, -4.01F, 2, 3, 0, f);
 
-    	Ponytail = new Modchu_ModelRenderer(this, 32, 13);
+    	Ponytail = new Modchu_ModelRenderer(this, 76, 6);
     	Ponytail.addBox(-1.5F, -1.5F, -1F, 3, 9, 3, f);
 
-    	BunchR = new Modchu_ModelRenderer(this, 20, 16);
+    	BunchR = new Modchu_ModelRenderer(this, 64, 6);
     	BunchR.addBox(-1F, -1.3F, -0.8F, 1, 9, 2, f);
 
-    	BunchL = new Modchu_ModelRenderer(this, 26, 16);
+    	BunchL = new Modchu_ModelRenderer(this, 70, 6);
     	BunchL.mirror = true;
     	BunchL.addBox(0F, -1.3F, -0.8F, 1, 9, 2, f);
 
     	bipedHead = new Modchu_ModelRenderer(this, 0, 0);
     	bipedHead.setTextureOffset(0, 0).addBox(-4F, -8F, -4F, 8, 8, 8, f);			// Head
-    	bipedHead.setTextureOffset(32, 0).addBox(-4F, -0.7F, -4F, 8, 5, 8, f+0.3F);		// Hire
-    	bipedHead.setTextureOffset(31, 25).addBox(-2F, -7.2F, 4F, 4, 4, 2, f);		// ChignonB
-    	bipedHead.setTextureOffset(28, 39).addBox(-5F, -7F, 0.2F, 1, 3, 3, f);		// ChignonR
+    	bipedHead.setTextureOffset(32, 0).addBox(-4F, -8F, -4F, 8, 12, 8, f+0.3F);		// Hire
+    	bipedHead.setTextureOffset(72, 0).addBox(-2F, -7.2F, 4F, 4, 4, 2, f);		// ChignonB
+    	bipedHead.setTextureOffset(56, 0).addBox(-5F, -7F, 0.2F, 1, 3, 3, f);		// ChignonR
     	((Modchu_ModelRenderer) bipedHead).setMirror(true);
-    	bipedHead.setTextureOffset(28, 45).addBox(4F, -7F, 0.2F, 1, 3, 3, f);		// ChignonL
+    	bipedHead.setTextureOffset(64, 0).addBox(4F, -7F, 0.2F, 1, 3, 3, f);		// ChignonL
     	bipedHead.addChild(HeadMount);
     	bipedHead.addChild(eyeR);
     	bipedHead.addChild(eyeL);
@@ -112,57 +110,58 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
     	leftArm.addChild(leftArm2);
 
     	/* LEGS */
-    	rightLeg2 = new Modchu_ModelRenderer(this, 0, 50); //Below Knee
+    	rightLeg2 = new Modchu_ModelRenderer(this, 0, 47); //Below Knee
     	rightLeg2.addBox(-1.6F, -1F, -2F, 3, 10, 4, f);
 
-    	leftLeg2 = new Modchu_ModelRenderer(this, 14, 50);
+    	leftLeg2 = new Modchu_ModelRenderer(this, 0, 47);
     	leftLeg2.mirror = true;
     	leftLeg2.addBox(-1.4F, -1F, -2F, 3, 10, 4, f);
 
-    	rightLeg = new Modchu_ModelRenderer(this, 0, 39); //Above Knee
+    	rightLeg = new Modchu_ModelRenderer(this, 0, 36); //Above Knee
     	rightLeg.addBox(-1.5F, -1F, -1.7F, 3, 7, 4, f+0.2F);
     	rightLeg.addChild(rightLeg2);
 
-    	leftLeg = new Modchu_ModelRenderer(this, 14, 39);
+    	leftLeg = new Modchu_ModelRenderer(this, 0, 36);
     	leftLeg.mirror = true;
     	leftLeg.addBox(-1.5F, -1F, -1.7F, 3, 7, 4, f+0.2F);
     	leftLeg.addChild(leftLeg2);
 
     	/* SKIRT */
-    	hemSkirtR2 = new Modchu_ModelRenderer(this, 36, 50);
-    	hemSkirtR2.addBox(-3.5F, -2F, -4F, 7, 7, 7, f+0.2F);
+    	hemSkirtR2 = new Modchu_ModelRenderer(this, 68, 48);
+		hemSkirtR2.addBox(-3.5F, -2F, -4.5F, 7, 8, 8, f+0.2F);
 
-    	hemSkirtL2 = new Modchu_ModelRenderer(this, 36, 50);
+    	hemSkirtL2 = new Modchu_ModelRenderer(this, 98, 48);
     	hemSkirtL2.mirror = true;
-    	hemSkirtL2.addBox(-3.5F, -2F, -4F, 7, 7, 7, f+0.2F);
+		hemSkirtL2.addBox(-3.5F, -2F, -4.5F, 7, 8, 8, f+0.2F);
 
-    	hemSkirtR1 = new Modchu_ModelRenderer(this, 36, 36);
+    	hemSkirtR1 = new Modchu_ModelRenderer(this, 69, 34);
     	hemSkirtR1.addBox(-3F, -1F, -5F, 6, 7, 7, f);
     	rightLeg2.addChild(hemSkirtR2);
 
-    	hemSkirtL1 = new Modchu_ModelRenderer(this, 36, 36);
+    	hemSkirtL1 = new Modchu_ModelRenderer(this, 99, 34);
     	hemSkirtL1.mirror = true;
     	hemSkirtL1.addBox(-3F, -1F, -5F, 6, 7, 7, f);
     	leftLeg2.addChild(hemSkirtL2);
 
-    	Skirt = new Modchu_ModelRenderer(this, 15, 31);
-    	Skirt.addBox(-4F, 0F, -2F, 8, 3, 5, f+0.7F);
+    	Skirt = new Modchu_ModelRenderer(this, 18, 48);
+		Skirt.addBox(-4F, 0F, -2F, 8, 3, 5, f+0.6F);
     	rightLeg.addChild(hemSkirtR1);
     	leftLeg.addChild(hemSkirtL1);
 
     	/* BODY */
-    	breastR = new Modchu_ModelRenderer(this, 28, 2);
+		breastR = new Modchu_ModelRenderer(this, 20, 20);
     	breastR.addBox(-3F, 0F, -3F, 3, 3, 3, f+0.1F);
 
-    	breastL = new Modchu_ModelRenderer(this, 28, 51);
+    	breastL = new Modchu_ModelRenderer(this, 32, 20);
     	breastL.mirror = true;
     	breastL.addBox(0F, 0F, -3F, 3, 3, 3, f+0.1F);
 
-    	hipBody = new Modchu_ModelRenderer(this, 38, 26);
-    	hipBody.addBox(-4F, 0F, -2.2F, 8, 4, 5, f-0.2F);
+    	hipBody = new Modchu_ModelRenderer(this, 18, 39);
+		hipBody.addBox(-4F, 0F, -2.4F, 8, 4, 5, f-0.2F);
 
-    	bipedBody = new Modchu_ModelRenderer(this, 44, 13);
-    	bipedBody.addBox(-3F, -8.5F, -2.1F, 6, 9, 4, f);
+		bipedBody = new Modchu_ModelRenderer(this, 0, 0);
+		bipedBody.setTextureOffset(20, 26).addBox(-3F, -8.5F, -2.1F, 6, 9, 4, f); //body
+		bipedBody.setTextureOffset(24, 16).addBox(-1F, -9.8F, -1F, 2, 2, 2, f+0.5F); //neck
     	bipedBody.addChild(rightArm);
     	bipedBody.addChild(leftArm);
     	bipedBody.addChild(breastR);
@@ -401,8 +400,8 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
 					leftLeg.rotationPointY -= 1.0F;
 					bipedBody.rotateAngleX += 0.5F;
 					hipBody.rotateAngleX -= 0.1F + MathHelper.sin(f2 * 0.057F) * 0.03F;
-					rightArm.rotateAngleX += getIsWait() ? -0.3F : 0.1F;
-					leftArm.rotateAngleX += getIsWait() ? -0.3F : 0.1F;
+					rightArm.rotateAngleX += 0.1F;
+					leftArm.rotateAngleX += 0.1F;
 					rightLeg.rotateAngleY -= 0.07F;
 					leftLeg.rotateAngleY += 0.07F;
 					rightLeg.rotateAngleX -= 0.7F;
@@ -462,13 +461,11 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
 		// アイテム持ってるときの腕振りを抑える+表示角オフセット
 		if (heldItemLeft != 0)
 		{
-			leftArm.rotateAngleX
-				= leftArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemLeft;
+			leftArm.rotateAngleX = leftArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemLeft;
 		}
 		if (heldItemRight != 0)
 		{
-			rightArm.rotateAngleX
-				= rightArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemRight;
+			rightArm.rotateAngleX = rightArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemRight;
 		}
 		armSwing(f, f1, f2, f3, f4, f5, entity);
 
@@ -879,22 +876,28 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
     @Override
     public void setArmorBipedRightLegShowModel(boolean b) {
     	super.setArmorBipedRightLegShowModel(b);
+    	setVisible(hemSkirtR1, b);
+    	setVisible(hemSkirtR2, b);
     	rightLeg.isHidden = !b;
+    	hemSkirtR1.isHidden = !b;
+    	hemSkirtR2.isHidden = !b;
     }
 
     @Override
     public void setArmorBipedLeftLegShowModel(boolean b) {
     	super.setArmorBipedLeftLegShowModel(b);
+    	setVisible(hemSkirtL1, b);
+    	setVisible(hemSkirtL2, b);
     	leftLeg.isHidden = !b;
+    	hemSkirtL1.isHidden = !b;
+    	hemSkirtL2.isHidden = !b;
     }
 
     @Override
     public void setArmorSkirtShowModel(boolean b) {
-    	super.setArmorSkirtShowModel(b);
-    	hemSkirtR1.isHidden = !b;
-    	hemSkirtL1.isHidden = !b;
-    	hemSkirtR2.isHidden = !b;
-    	hemSkirtL2.isHidden = !b;
+    	setVisible(Skirt, b);
+    	Skirt.isHidden = !b;
+    	//Modchu_Debug.mDebug("setArmorSkirtShowModel b="+b);
     }
 
     @Override
@@ -911,6 +914,7 @@ public class MultiModel_Beverly5 extends MultiModel_SR2 {
     	super.showModelSettingReflects();
     	if (getSkirtFloats()) {
     		setVisible(Skirt, getGuiParts().get("Skirt"));
+    		if (getGuiParts().get("Skirt") != null) indexOfAllSetVisible("Skirt");
     	}
     }
 }

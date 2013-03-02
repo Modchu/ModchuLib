@@ -33,15 +33,16 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static Class MMM_TextureBox;
 	public static Class MMM_StabilizerManager;
 	public static Class mod_PFLM_PlayerFormLittleMaid;
+	public static Class mod_LMM_littleMaidMob;
 	public static Class PFLM_Gui;
 	public static Class PFLM_EntityPlayerDummy;
-	public static Class mod_LMM_littleMaidMob;
+	public static Class PFLM_RenderPlayer;
+	public static Class PFLM_RenderPlayer2;
 	public static Class LMM_EntityLittleMaid;
 	public static Class decoBlock;
 	public static Class decoBlockBase;
 	public static Class favBlock;
 	public static Class RendererData;
-	public static Class PFLM_RenderPlayer2;
 	private boolean isModchu;
 	public final String minecraftVersion;
 	public static String newVersion = "";
@@ -155,7 +156,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.4.6~7-1f";
+		return "1.4.6~7-1h";
 	}
 
 	@Override
@@ -188,6 +189,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 			isPFLM = true;
 			PFLM_Gui = Modchu_Reflect.loadClass(getClassName("PFLM_Gui"));
 			PFLM_EntityPlayerDummy = Modchu_Reflect.loadClass(getClassName("PFLM_EntityPlayerDummy"));
+			PFLM_RenderPlayer = Modchu_Reflect.loadClass(getClassName("PFLM_RenderPlayer"));
 		}
 
 		RendererData = Modchu_Reflect.loadClass("net.smart.render.RendererData", false);

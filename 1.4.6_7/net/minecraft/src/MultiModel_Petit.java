@@ -2,8 +2,8 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class MultiModel_Petit extends MultiModel
-{
+public class MultiModel_Petit extends MultiModel {
+
     public Modchu_ModelRenderer Prim;
     public Modchu_ModelRenderer eyeR;
     public Modchu_ModelRenderer eyeL;

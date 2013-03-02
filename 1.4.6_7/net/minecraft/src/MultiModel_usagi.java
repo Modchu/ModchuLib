@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class MultiModel_usagi extends MultiModel
-{
+public class MultiModel_usagi extends MultiModel {
 
     public Modchu_ModelRenderer WTail;
     public Modchu_ModelRenderer CatEL;

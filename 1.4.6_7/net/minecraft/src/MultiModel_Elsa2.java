@@ -143,7 +143,7 @@ public class MultiModel_Elsa2 extends MultiModel_SR2 {
     	leftArmPlus = new Modchu_ModelRenderer(this);
 
     	leftArm2 = new Modchu_ModelRenderer(this, 50, 22);
-    	leftArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 2, 2, f);
+    	leftArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 3, 2, f);
     	leftArm2.setRotationPoint(0.0F, 2.0F, 0.0F);
     	leftArm.addChild(leftArm2);
 

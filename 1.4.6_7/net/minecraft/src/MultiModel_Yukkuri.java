@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class MultiModel_Yukkuri extends MultiModel
-{
+public class MultiModel_Yukkuri extends MultiModel {
 
     public Modchu_ModelRenderer eyeL;
     public Modchu_ModelRenderer eyeR;

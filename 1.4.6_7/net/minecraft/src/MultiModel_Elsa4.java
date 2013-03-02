@@ -6,91 +6,110 @@ import org.lwjgl.opengl.GL11;
  * 標準意匠
  * 身長1.75ブロック級
  */
-public class MultiModel_Elsa3 extends MultiModel_SR2 {
+public class MultiModel_Elsa4 extends MultiModel_SR2 {
 
     public Modchu_ModelRenderer Ponytail;
     public Modchu_ModelRenderer BunchR;
     public Modchu_ModelRenderer BunchL;
+	public Modchu_ModelRenderer hemSkirt;
     protected byte offsetY;
     protected byte headPosY;
     protected byte bodyPosY;
     protected byte legPosY;
 
-    public MultiModel_Elsa3()
+    public MultiModel_Elsa4()
     {
     	this(0.0F);
     }
 
-    public MultiModel_Elsa3(float f)
+    public MultiModel_Elsa4(float f)
     {
     	this(f, 0.0F);
     }
 
-    public MultiModel_Elsa3(float f, float f1)
+    public MultiModel_Elsa4(float f, float f1)
     {
-    	this(f, f1 , 64, 32);
+    	this(f, f1 , 64, 64);
     }
 
-    public MultiModel_Elsa3(float f, float f1, int i, int j) {
+    public MultiModel_Elsa4(float f, float f1, int i, int j) {
     	super(f, f1, i, j);
     }
 
     @Override
     public void initModel(float f, float f1) {
+    	textureWidth = 64;
+    	textureHeight = 64;
     	offsetY = (byte)(f1 + 10); //Global to Local
 
-    	bodyPosY = -6; //Local waist height = always 0 (ORIGIN)
+    	bodyPosY = 0; //Local waist height = always 0 (ORIGIN)
     	headPosY = -6; //Local neck height = 0 - upper bodyLength
-    	legPosY = 9; //Lcal hip joint height = 0 + lower bodyLength
+    	legPosY = 3; //Lcal hip joint height = 0 + lower bodyLength
 
     	bipedHead = new Modchu_ModelRenderer(this, 0, 0);
     	bipedHead.addBox(-4F, -8F, -4F, 8, 8, 8, f);
 
-    	bipedHeadwear = new Modchu_ModelRenderer(this, 34, -3);
+    	bipedHeadwear = new Modchu_ModelRenderer(this, 32, 0);
     	bipedHeadwear.addBox(-4F, -0.01F, 1F, 8, 4, 3, f);
     	bipedHead.addChild(bipedHeadwear);
 
-    	bipedBody = new Modchu_ModelRenderer(this, 32, 4);
-    	bipedBody.addBox(-3F, 0F, -2F, 6, 9, 4, f);
+    	bipedBody = new Modchu_ModelRenderer(this, 0, 0);
+    	bipedBody.setTextureOffset(0, 16).addBox(-3F, -6F, -2F, 6, 9, 4, f); //body
+    	bipedBody.setTextureOffset(20, 20).addBox(-3F, -4.5F, -2.2F, 6, 2, 2, f+0.2F); //breast
 
-    	bipedRightArm = new Modchu_ModelRenderer(this, 42, 17);
+    	bipedRightArm = new Modchu_ModelRenderer(this, 20, 24);
     	bipedRightArm.addBox(-2F, -1F, -1F, 2, 10, 2, f);
     	bipedBody.addChild(bipedRightArm);
 
-    	bipedLeftArm = new Modchu_ModelRenderer(this, 50, 17);
+    	bipedLeftArm = new Modchu_ModelRenderer(this, 28, 24);
     	bipedLeftArm.mirror = true;
     	bipedLeftArm.addBox(0F, -1F, -1F, 2, 10, 2, f);
     	bipedBody.addChild(bipedLeftArm);
 
-    	bipedRightLeg = new Modchu_ModelRenderer(this, 28, 17);
+    	bipedRightLeg = new Modchu_ModelRenderer(this, 0, 29);
     	bipedRightLeg.addBox(-2F, 0F, -2F, 3, 11, 4, f);
     	bipedBody.addChild(bipedRightLeg);
 
-    	bipedLeftLeg = new Modchu_ModelRenderer(this, 28, 17);
+    	bipedLeftLeg = new Modchu_ModelRenderer(this, 0, 29);
     	bipedLeftLeg.mirror = true;
     	bipedLeftLeg.addBox(-1F, 0F, -2F, 3, 11, 4, f);
     	bipedBody.addChild(bipedLeftLeg);
 
-    	Skirt = new Modchu_ModelRenderer(this, 0, 16);
-    	Skirt.addBox(-4F, -3F, -3F, 8, 10, 6, f);
+    	hemSkirt = new Modchu_ModelRenderer(this, 34, 50);
+    	hemSkirt.addBox(-4F, -1F, -3.5F, 8, 7, 7, f+0.3F);
+
+    	Skirt = new Modchu_ModelRenderer(this, 36, 40);
+    	Skirt.addBox(-4F, -2F, -3F, 8, 4, 6, f);
     	Skirt.setRotationPoint(0F, 13F, 0F);
+    	Skirt.addChild(hemSkirt);
     	bipedBody.addChild(Skirt);
 
-    	ChignonR = new Modchu_ModelRenderer(this, 0, 2);
+    	ChignonR = new Modchu_ModelRenderer(this, 36, 20);
     	ChignonR.addBox(-5F, -7F, 0.2F, 1, 3, 3, f);
     	ChignonR.setRotationPoint(0F, 0F, 0F);
     	bipedHead.addChild(ChignonR);
 
-    	ChignonL = new Modchu_ModelRenderer(this, 0, 2);
+    	ChignonL = new Modchu_ModelRenderer(this, 44, 20);
     	ChignonL.mirror = true;
     	ChignonL.addBox(4F, -7F, 0.2F, 1, 3, 3, f);
     	ChignonL.setRotationPoint(0F, 0F, 0F);
     	bipedHead.addChild(ChignonL);
 
-    	ChignonB = new Modchu_ModelRenderer(this, 24, 2);
+    	ChignonB = new Modchu_ModelRenderer(this, 52, 20);
     	ChignonB.addBox(-2F, -7.2F, 4F, 4, 4, 2, f);
     	ChignonB.setRotationPoint(0F, 0F, 0F);
     	bipedHead.addChild(ChignonB);
+
+    	SideTailR = new Modchu_ModelRenderer(this, 36, 20);
+    	SideTailR.addBox(-5F, -7F, 0.2F, 1, 3, 3, f);
+    	SideTailR.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	bipedHead.addChild(SideTailR);
+
+    	SideTailL = new Modchu_ModelRenderer(this, 44, 20);
+    	SideTailL.mirror = true;
+    	SideTailL.addBox(4F, -7F, 0.2F, 1, 3, 3, f);
+    	SideTailL.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	bipedHead.addChild(SideTailL);
 
     	eyeR = new Modchu_ModelRenderer(this, 17, 0);
     	eyeR.addPlate(-3.0F, -4F, -4.01F, 2, 3, 0, f);
@@ -102,15 +121,15 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     	eyeL.setRotationPointLM(0F, 0F, 0F);
     	bipedHead.addChild(eyeL);
 
-    	Ponytail = new Modchu_ModelRenderer(this, 52, 5);
+    	Ponytail = new Modchu_ModelRenderer(this, 52, 26);
     	Ponytail.addBox(-1.5F, -1.5F, -1F, 3, 9, 3, f);
     	Ponytail.setRotationPoint(0F, -5.2F, 5F);
 
-    	BunchR = new Modchu_ModelRenderer(this, 58, 18);
+    	BunchR = new Modchu_ModelRenderer(this, 40, 26);
     	BunchR.addBox(-1F, -1.3F, -0.8F, 1, 9, 2, f);
     	BunchR.setRotationPoint(-4.5F, -5.5F, 1.7F);
 
-    	BunchL = new Modchu_ModelRenderer(this, 58, 18);
+    	BunchL = new Modchu_ModelRenderer(this, 46, 26);
     	BunchL.mirror = true;
     	BunchL.addBox(0F, -1.3F, -0.8F, 1, 9, 2, f);
     	BunchL.setRotationPoint(4.5F, -5.5F, 1.7F);
@@ -124,59 +143,59 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
 
     @Override
     public void actionPartsInit(float f, float f1) {
-    	rightArm = new Modchu_ModelRenderer(this, 42, 17);
+    	rightArm = new Modchu_ModelRenderer(this, 20, 24);
     	rightArm.addBox(-1.0F, 0.0F, -1.0F, 2, 5, 2, f);
     	rightArm.setRotationPoint(-3.0F, 9.5F, 0.0F);
     	bipedBody.addChild(rightArm);
 
     	rightArmPlus = new Modchu_ModelRenderer(this);
 
-    	rightArm2 = new Modchu_ModelRenderer(this, 42, 22);
+    	rightArm2 = new Modchu_ModelRenderer(this, 20, 28);
     	rightArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 3, 2, f);
     	rightArm2.setRotationPoint(0.0F, 5.0F, 0.0F);
     	rightArm.addChild(rightArm2);
 
     	rightArmPlus2 = new Modchu_ModelRenderer(this);
 
-    	rightHand = new Modchu_ModelRenderer(this, 42, 25);
+    	rightHand = new Modchu_ModelRenderer(this, 20, 32);
     	rightHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
     	rightHand.setRotationPoint(0.0F, 3.0F, 0.0F);
     	rightArm2.addChild(rightHand);
 
-    	leftArm = new Modchu_ModelRenderer(this, 50, 17);
+    	leftArm = new Modchu_ModelRenderer(this, 28, 24);
     	leftArm.addBox(-1.0F, 0.0F, -1.0F, 2, 5, 2, f);
     	leftArm.setRotationPoint(3.0F, 9.5F, 0.0F);
     	bipedBody.addChild(leftArm);
 
     	leftArmPlus = new Modchu_ModelRenderer(this);
 
-    	leftArm2 = new Modchu_ModelRenderer(this, 50, 22);
+    	leftArm2 = new Modchu_ModelRenderer(this, 28, 28);
     	leftArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 3, 2, f);
     	leftArm2.setRotationPoint(0.0F, 2.0F, 0.0F);
     	leftArm.addChild(leftArm2);
 
     	leftArmPlus2 = new Modchu_ModelRenderer(this);
 
-    	leftHand = new Modchu_ModelRenderer(this, 50, 25);
+    	leftHand = new Modchu_ModelRenderer(this, 28, 32);
     	leftHand.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
     	leftHand.setRotationPoint(0.0F, 3.0F, 0.0F);
     	leftArm2.addChild(leftHand);
 
-    	rightLeg = new Modchu_ModelRenderer(this, 28, 17);
+    	rightLeg = new Modchu_ModelRenderer(this, 0, 29);
     	rightLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
     	rightLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
     	bipedBody.addChild(rightLeg);
 
     	rightLegPlus = new Modchu_ModelRenderer(this);
 
-    	rightLeg2 = new Modchu_ModelRenderer(this, 28, 22);
+    	rightLeg2 = new Modchu_ModelRenderer(this, 0, 34);
     	rightLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
     	rightLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
     	rightLeg.addChild(rightLeg2);
 
     	rightLegPlus2 = new Modchu_ModelRenderer(this);
 
-    	leftLeg = new Modchu_ModelRenderer(this, 28, 17);
+    	leftLeg = new Modchu_ModelRenderer(this, 0, 29);
     	leftLeg.mirror = true;
     	leftLeg.addBox(-1.5F, 0.0F, -2.0F, 3, 5, 4, f);
     	leftLeg.setRotationPoint(0.0F, 8.0F, 0.0F);
@@ -188,7 +207,7 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     	leftLegPlus.rotateAngleX = 1.570796313F;
     	leftLeg.addChild(leftLegPlus);
 
-    	leftLeg2 = new Modchu_ModelRenderer(this, 28, 22);
+    	leftLeg2 = new Modchu_ModelRenderer(this, 0, 34);
     	leftLeg2.mirror = true;
     	leftLeg2.addBox(-1.5F, 0.0F, -2.0F, 3, 6, 4, f);
     	leftLeg2.setRotationPoint(0.0F, 8.0F, 0.0F);
@@ -226,15 +245,16 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     	BunchR.setRotationPoint (-4.5F, -5.5F, 1.7F);
     	BunchL.setRotationPoint ( 4.5F, -5.5F, 1.7F);
 
-    	bipedRightArm.setRotationPoint(-2.0F, 1F, 0F);
-    	bipedLeftArm.setRotationPoint ( 2.0F, 1F, 0F);
+    	bipedRightArm.setRotationPoint(-3.0F, -5F, 0F);
+    	bipedLeftArm.setRotationPoint ( 3.0F, -5F, 0F);
 
     	bipedRightLeg.setRotationPoint(-1.2F, legPosY, 0F);
     	Arms[0].setRotationPoint(-0.7F, 8.5F, 0F);
     	bipedLeftLeg.setRotationPoint ( 1.2F, legPosY, 0F);
     	Arms[1].setRotationPoint(0.7F, 8.5F, 0F);
 
-    	Skirt.setRotationPoint (0F, legPosY, 0F);
+    	Skirt.setRotationPoint (0F, legPosY - 1, 0F);
+    	hemSkirt.setRotationPoint (0F, 2F, 0F);
 
     	bipedBody.setRotationPoint (0F, bodyPosY, 0F);
 
@@ -275,6 +295,9 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
 		Skirt.rotateAngleX = 0F;
 		Skirt.rotateAngleY = 0F;
 		Skirt.rotateAngleZ = 0F;
+		 hemSkirt.rotateAngleX = 0.03F;
+		 hemSkirt.rotateAngleY = 0F;
+		 hemSkirt.rotateAngleZ = 0F;
 
 		bipedBody.rotateAngleX =-0.05F;
 		bipedBody.rotateAngleY = 0F;
@@ -297,37 +320,6 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
 
     @Override
     public void skirtFloatsInit(float f, float f1) {
-    	if(!getSkirtFloats()) return;
-    	//上
-    	SkirtTop = new Modchu_ModelRenderer(this, 6, 16);
-    	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 8, 6, 0);
-    	SkirtTop.setRotationPoint(0.0F, 8.0F, 0.0F);
-    	Skirt.addChild(SkirtTop);
-
-    	//前
-    	SkirtFront = new Modchu_ModelRenderer(this, 6, 22);
-    	((Modchu_ModelRenderer) SkirtFront).addPlate(0.0F, 0.0F, 0.0F, 8, 10, 0);
-    	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
-    	Skirt.addChild(SkirtFront);
-
-    	//右
-    	SkirtRight = new Modchu_ModelRenderer(this, 0, 22);
-    	((Modchu_ModelRenderer) SkirtRight).addPlate(-4.0F, 0.0F, -6.0F, 6, 10, 1);
-    	SkirtRight.setRotationPoint(0.0F, 8.0F, 0.0F);
-    	Skirt.addChild(SkirtRight);
-
-    	//左
-    	SkirtLeft = new Modchu_ModelRenderer(this, 14, 22);
-    	((Modchu_ModelRenderer) SkirtLeft).addPlate(4.0F, 0.0F, -6.0F, 6, 10, 1);
-    	SkirtLeft.setRotationPoint(0.0F, 8.0F, 0.0F);
-    	Skirt.addChild(SkirtLeft);
-
-    	//後ろ
-    	SkirtBack = new Modchu_ModelRenderer(this, 20, 22);
-    	((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 8, 10, 0);
-    	SkirtBack.setRotationPoint(0.0F, 8.0F, 0.0F);
-    	Skirt.addChild(SkirtBack);
-    	setVisible(Skirt, false);
     }
 
     /**
@@ -357,6 +349,8 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     	bipedLeftArm.rotateAngleX = MathHelper.cos(f * 0.5656F) * 0.8F * f1;
     	bipedRightLeg.rotateAngleX += MathHelper.cos(f * 0.5656F) * 1.2F * f1;
     	bipedLeftLeg.rotateAngleX -= MathHelper.cos(f * 0.5656F) * 1.2F * f1;
+    	Skirt.rotateAngleY += MathHelper.cos(f * 0.5656F) * 0.15F * f1;
+    	hemSkirt.rotateAngleY += MathHelper.cos(f * 0.5656F) * 0.25F * f1;
 
     	if (getIsRiding())
     	{
@@ -367,20 +361,19 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     		bipedLeftLeg.rotateAngleX -= 1.2F;
     		bipedRightLeg.rotateAngleY += 0.2F;
     		bipedLeftLeg.rotateAngleY -= 0.2F;
-    		Skirt.rotateAngleX -= 1.0F;
+    		Skirt.rotateAngleX -= 0.3F;
+    		hemSkirt.rotateAngleX -= 0.9F;
     		mainFrame.rotationPointZ += 1.5F;
     	}
 
     	// アイテム持ってるときの腕振りを抑える+表示角オフセット
     	if (heldItemLeft != 0)
     	{
-    		bipedLeftArm.rotateAngleX
-    			= bipedLeftArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemLeft;
+    		bipedLeftArm.rotateAngleX = bipedLeftArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemLeft;
     	}
     	if (heldItemRight != 0)
     	{
-    		bipedRightArm.rotateAngleX
-    			= bipedRightArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemRight;
+    		bipedRightArm.rotateAngleX = bipedRightArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemRight;
     	}
     	armSwing(f, f1, f2, f3, f4, f5, entity);
     	if (getIsSneak())
@@ -391,10 +384,12 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     		bipedLeftArm.rotateAngleX += 0.2F;
     		bipedHead.rotationPointY += 1.0F; //upper bodyLength * (1 - cos(0.52rad))
 
+    		bipedBody.rotationPointZ += 3.0F;
     		bipedRightLeg.rotationPointZ += 0.25F; //lower bodyLength * sin(0.52rad)
     		bipedLeftLeg.rotationPointZ += 0.25F; //lower bodyLength * sin(0.52rad)
     		Skirt.rotationPointZ = 0.0F; //lower bodyLength * sin(0.52rad)
     		Skirt.rotateAngleX = -0.5F;
+    		hemSkirt.rotateAngleX += 0.1F;
     		bipedRightLeg.rotateAngleX -= 0.5F;
     		bipedLeftLeg.rotateAngleX -= 0.5F;
     	}
@@ -457,33 +452,6 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
 
     @Override
     public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	if (!getSkirtFloats()) return;
-    	Skirt.rotationPointY = 9.0F;
-    	SkirtBack.rotateAngleX = SkirtRight.rotateAngleX = SkirtLeft.rotateAngleX = SkirtFront.rotateAngleX = 0.0F;
-    	SkirtBack.rotateAngleY = SkirtRight.rotateAngleY = SkirtLeft.rotateAngleY = SkirtFront.rotateAngleY = 0.0F;
-    	SkirtBack.rotateAngleZ = SkirtRight.rotateAngleZ = SkirtLeft.rotateAngleZ = SkirtFront.rotateAngleZ = 0.0F;
-
-    	SkirtTop.setRotationPoint(-4.0F, -3.0F, 3.0F);
-    	SkirtFront.setRotationPoint(-4.0F, -3.0F, -2.5F);
-    	SkirtRight.setRotationPoint(-8.0F, -3.0F, -2.5F);
-    	SkirtLeft.setRotationPoint(0.0F, -3.0F, 3.0F);
-    	SkirtBack.setRotationPoint(-4.0F, -3.0F, 3.0F);
-    	SkirtFront.rotationPointX += motionY * 4.0F;
-    	SkirtBack.rotationPointX += motionY * 4.0F;
-    	SkirtRight.rotationPointY += motionY * 2.0F;
-    	SkirtRight.rotationPointZ += motionY * 4.0F;
-    	SkirtLeft.rotationPointY -= motionY * 2.0F;
-    	SkirtLeft.rotationPointZ -= motionY * 4.0F;
-
-    	SkirtRight.rotateAngleY = 3.141592653F;
-    	SkirtTop.rotateAngleX = -1.570796313F;
-    	SkirtFront.rotateAngleX += motionY;
-    	SkirtRight.rotateAngleZ += -motionY / 2.0F;
-    	SkirtLeft.rotateAngleZ += motionY / 2.0F;
-    	SkirtBack.rotateAngleX += -motionY;
-
-    	((Modchu_ModelRenderer) SkirtFront).scaleX = ((Modchu_ModelRenderer) SkirtBack).scaleX = 1.0F - (getMotionY() * 1.0F);
-    	((Modchu_ModelRenderer) SkirtRight).scaleZ = ((Modchu_ModelRenderer) SkirtLeft).scaleZ = 1.0F - (getMotionY() * 1.0F);
     }
 
     @Override
@@ -491,17 +459,17 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     	super.action1(entity);
     	float f1 = bipedBody.rotateAngleZ;
     	if (f1 > 0.0F) {
-    		bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F + (f1 * 1.30889264F);
+    		bipedHead.rotationPointY = bipedBody.rotationPointY - 6.0F;
     	} else {
-    		bipedHead.rotationPointY = bipedBody.rotationPointY + 0.5F - (f1 * 1.30889264F);
+    		bipedHead.rotationPointY = bipedBody.rotationPointY - 6.0F;
     	}
+    	bipedHead.rotationPointX = f1 * 4.30447914F;
     	rightArm2.rotationPointY += 1.0F;
     	leftArm2.rotationPointY += 1.0F;
-    	bipedHead.rotationPointX = 0.0F;
     	rightLeg.rotationPointX -= 0.5F;
     	leftLeg.rotationPointX += 0.5F;
-    	rightLeg2.rotationPointY -= 4.5F;
-    	leftLeg2.rotationPointY -= 4.5F;
+    	rightLeg2.rotationPointY += 1.0F;
+    	leftLeg2.rotationPointY += 1.0F;
     	Arms[0].setRotationPoint(0.0F, 0.0F, 0.0F);
     	Arms[1].setRotationPoint(0.0F, 0.0F, 0.0F);
     }
@@ -525,5 +493,30 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     @Override
     public double getMountedYOffset() {
     	return 0.85D;
+    }
+
+    @Override
+    public void setArmorSkirtShowModel(boolean b) {
+    	setVisible(Skirt, b);
+    	setVisible(hemSkirt, b);
+    	Skirt.isHidden = !b;
+    	hemSkirt.isHidden = !b;
+    }
+
+    @Override
+    public void defaultPartsSettingBefore() {
+    	super.defaultPartsSettingBefore();
+    	String[] s = {
+    			"hemSkirt"
+    	};
+    	showPartsHideListadd(s);
+    }
+
+    @Override
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	if (getSkirtFloats()) {
+    		setVisible(Skirt, getGuiParts().get("Skirt"));
+    	}
     }
 }

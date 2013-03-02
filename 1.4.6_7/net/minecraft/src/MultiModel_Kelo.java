@@ -2,8 +2,8 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class MultiModel_Kelo extends MultiModel
-{
+public class MultiModel_Kelo extends MultiModel {
+
 	public Modchu_ModelRenderer tailL1;
 	public Modchu_ModelRenderer tailL2;
 	public Modchu_ModelRenderer tailR1;

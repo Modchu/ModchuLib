@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class MultiModel_naz extends MultiModel
-{
+public class MultiModel_naz extends MultiModel {
 
     public Modchu_ModelRenderer CatEL;
     public Modchu_ModelRenderer CatER;

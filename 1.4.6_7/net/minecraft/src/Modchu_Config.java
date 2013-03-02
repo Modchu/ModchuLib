@@ -5,16 +5,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.Reader;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import net.minecraft.client.Minecraft;
 
 public class Modchu_Config
 {
@@ -99,6 +94,8 @@ public class Modchu_Config
 			String s2;
 			for (int i = 0; i < list.size() ; i++) {
 				s2 = (String) list.get(i);
+				if (s2.startsWith("#")
+						| s2.startsWith("/")) continue;
 				if (s2.startsWith(s)) {
 					int i1 = s2.indexOf('=');
 					if (i1 > -1
@@ -112,7 +109,6 @@ public class Modchu_Config
 		}
 		return o;
 	}
-
 
 	public static Object loadConfig(File file, String s, Object o) {
 		// cfgê›íËçÄñ⁄ì«Ç›çûÇ› showModelì«Ç›çûÇ›ñ≥Çµ
@@ -152,6 +148,8 @@ public class Modchu_Config
 			String s2;
 			for (int i = 0; i < list.size() ; i++) {
 				s2 = (String) list.get(i);
+				if (s2.startsWith("#")
+						| s2.startsWith("/")) continue;
 				if (s2.startsWith(s)) {
 					int i1 = s2.indexOf('=');
 					//if (s.equalsIgnoreCase("shortcutKeysTextureName[6]")) Modchu_Debug.mDebug("Modchu_Config loadConfig2 s2 = "+s2+" s="+s+" s.length()="+s.length()+" i1="+i1);
@@ -223,6 +221,7 @@ public class Modchu_Config
 						}
 					}
 				}
+				breader.close();
 			} catch (Exception er) {
 				Modchu_Debug.Debug("saveParamater file error.");
 				er.printStackTrace();
@@ -288,6 +287,7 @@ public class Modchu_Config
 						}
 					}
 				}
+				breader.close();
 				breader = new BufferedReader(new FileReader(file));
 				//showModel[]êÍóp
 				while ((rl = breader.readLine()) != null) {
@@ -516,9 +516,16 @@ public class Modchu_Config
 					if (rl.startsWith("autoUpdates")) {
 						int k = rl.indexOf("=");
 						if (k > -1) {
-							if (Boolean.valueOf(rl.substring(k + 1))) return false;
-						} else return false;
+							if (Boolean.valueOf(rl.substring(k + 1))) {
+								breader.close();
+								return false;
+							}
+						} else {
+							breader.close();
+							return false;
+						}
 					} else {
+						breader.close();
 						return false;
 					}
 				} else {
@@ -582,6 +589,7 @@ public class Modchu_Config
 						}
 					}
 				}
+				breader.close();
 				breader = new BufferedReader(new FileReader(file));
 				//OthersPlayer[]êÍóp
 				while ((rl = breader.readLine()) != null) {
@@ -790,6 +798,7 @@ public class Modchu_Config
 					lines.add(m);
 					continue;
 				}
+				breader.close();
 			} catch (Exception er) {
 				Modchu_Debug.Debug("removeOthersPlayerParamater error.");
 				er.printStackTrace();
