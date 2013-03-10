@@ -19,41 +19,82 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public static final int caps_getOnGround = 0x0204;
     public static final int caps_setOnGround = 0x0205;
     public static final int caps_getIsSneak = 0x0206;
-    public static final int caps_getaimedBow = 0x0207;
-    public static final int caps_getIsWait = 0x0208;
-    public static final int caps_getIsSitting = 0x0209;
-    public static final int caps_getFirstPerson = 0x0210;
-    public static final int caps_getOldwalking = 0x0211;
-    public static final int caps_setOldwalking = 0x0212;
-    public static final int caps_getMotionY = 0x0213;
-    public static final int caps_setMotionY = 0x0214;
-    public static final int caps_getPartsSetFlag = 0x0215;
-    public static final int caps_getShowModelFlag = 0x0216;
-    public static final int caps_setShowModelFlag = 0x0217;
-    public static final int caps_setPartsSetFlag = 0x0218;
-    public static final int caps_getShortcutKeysAction = 0x0219;
-    public static final int caps_setShortcutKeysAction = 0x0220;
-    public static final int caps_getRunActionNumber = 0x0221;
-    public static final int caps_setRunActionNumber = 0x0222;
-    public static final int caps_setIsWait = 0x0223;
-    public static final int caps_getSkirtFloats = 0x0224;
-    public static final int caps_renderFirstPersonHand = 0x0225;
-    public static final int caps_getBipedHead = 0x0226;
-    public static final int caps_getBipedRightArm = 0x0227;
-    public static final int caps_getNotDominantArm = 0x0228;
-    public static final int caps_getHandedness = 0x0229;
-    public static final int caps_setVisible = 0x0230;
-    public static final int caps_Physical_Hammer = 0x0231;
-    public static final int caps_getIsLookSuger = 0x0232;
-    public static final int caps_getEntityIdFactor = 0x0233;
-    public static final int caps_getIsInventory = 0x0234;
-    public static final int caps_convertDegtoRad = 0x0235;
-    public static final int caps_shiftArray = 0x0236;
-    public static final int caps_getClassName = 0x0237;
-    public static final int caps_getTextureNameList = 0x0238;
-    public static final int caps_getTextureList = 0x0239;
-    public static final int caps_getMaidColor = 0x0240;
-    public static final int caps_getTexture = 0x0241;
+    public static final int caps_getIsRiding = 0x0207;
+    public static final int caps_getaimedBow = 0x0208;
+    public static final int caps_getIsWait = 0x0209;
+    public static final int caps_getIsSitting = 0x0210;
+    public static final int caps_getIsSleeping = 0x0211;
+    public static final int caps_getFirstPerson = 0x0212;
+    public static final int caps_getOldwalking = 0x0213;
+    public static final int caps_setOldwalking = 0x0214;
+    public static final int caps_getIsPlayer = 0x0215;
+    public static final int caps_setIsPlayer = 0x0216;
+    public static final int caps_getMotionY = 0x0217;
+    public static final int caps_setMotionY = 0x0218;
+    public static final int caps_getPartsSetFlag = 0x0219;
+    public static final int caps_getShowModelFlag = 0x0220;
+    public static final int caps_setShowModelFlag = 0x0221;
+    public static final int caps_setPartsSetFlag = 0x0222;
+    public static final int caps_getShortcutKeysAction = 0x0223;
+    public static final int caps_setShortcutKeysAction = 0x0224;
+    public static final int caps_getRunActionNumber = 0x0225;
+    public static final int caps_setRunActionNumber = 0x0226;
+    public static final int caps_setIsWait = 0x0227;
+    public static final int caps_getSkirtFloats = 0x0228;
+    public static final int caps_renderFirstPersonHand = 0x0229;
+    public static final int caps_getBipedHead = 0x0230;
+    public static final int caps_getBipedRightArm = 0x0231;
+    public static final int caps_getNotDominantArm = 0x0232;
+    public static final int caps_getHandedness = 0x0233;
+    public static final int caps_setVisible = 0x0234;
+    public static final int caps_Physical_Hammer = 0x0235;
+    public static final int caps_getIsLookSuger = 0x0236;
+    public static final int caps_getEntityIdFactor = 0x0237;
+    public static final int caps_getIsInventory = 0x0238;
+    public static final int caps_convertDegtoRad = 0x0239;
+    public static final int caps_shiftArray = 0x0240;
+    public static final int caps_getClassName = 0x0241;
+    public static final int caps_getTextureNameList = 0x0242;
+    public static final int caps_getTextureList = 0x0243;
+    public static final int caps_getMaidColor = 0x0244;
+    public static final int caps_getTexture = 0x0245;
+    public static final int caps_getPastX = 0x0246;
+    public static final int caps_getPastY = 0x0247;
+    public static final int caps_getPastZ = 0x0248;
+    public static final int caps_setPastX = 0x0249;
+    public static final int caps_setPastY = 0x0250;
+    public static final int caps_setPastZ = 0x0251;
+    public static final int caps_getSneakBan = 0x0252;
+    public static final int caps_getAimedBowBan = 0x0253;
+    public static final int caps_getWaitBan = 0x0254;
+    public static final int caps_getSittingBan = 0x0255;
+    public static final int caps_getSleepingBan = 0x0256;
+    public static final int caps_getRidingBan = 0x0257;
+    public static final int caps_setSneakBan = 0x0258;
+    public static final int caps_setAimedBowBan = 0x0259;
+    public static final int caps_setWaitBan = 0x0260;
+    public static final int caps_setSittingBan = 0x0261;
+    public static final int caps_setSleepingBan = 0x0262;
+    public static final int caps_setRidingBan = 0x0263;
+    public static final int caps_indexOfAllSetVisible = 0x0264;
+    public static final int caps_getModchuRemodelingModel = 0x0265;
+    public static final int caps_setModchuRemodelingModel = 0x0266;
+    public static final int caps_getActionSpeed = 0x0267;
+    public static final int caps_getActionReverse = 0x0268;
+    public static final int caps_setActionSpeed = 0x0269;
+    public static final int caps_setActionReverse = 0x0270;
+    public static final int caps_setHandedness = 0x0271;
+    public static final int caps_setIsInventory = 0x0272;
+    public static final int caps_getActionFlag = 0x0273;
+    public static final int caps_setActionFlag = 0x0274;
+    public static final int caps_getActionCount = 0x0275;
+    public static final int caps_setActionCount = 0x0276;
+    public static final int caps_setFirstPerson = 0x0277;
+    public static final int caps_getArmorType = 0x0278;
+    public static final int caps_setArmorType = 0x0279;
+    public static final int caps_setIsSleeping = 0x0280;
+    public static final int caps_setIsRiding = 0x0281;
+    public static final int caps_setIsSitting = 0x0282;
     public ModelRenderer rightArm;
     public ModelRenderer rightArm2;
     public ModelRenderer rightArmPlus;
@@ -88,9 +129,9 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public float[] pastX = new float[10];
     public float[] pastY = new float[10];
     public float[] pastZ = new float[10];
-    public static boolean isSitting = false;
-    public static boolean isSleeping = false;
-    public static boolean oldwalking = false;
+    public boolean isSitting = false;
+    public boolean isSleeping = false;
+    public boolean oldwalking = false;
     public boolean isInventory = false;
     public boolean firstPerson = false;
     public boolean isPlayer = false;
@@ -108,6 +149,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public static boolean isPFLM = false;
     public static boolean skirtFloats = false;
     private boolean partsSetInit = false;
+    public boolean oldRenderItems = false;
     public List<String> showPartsList = new ArrayList<String>();
     public List<String> showPartsHideList = new ArrayList<String>();
     public HashMap<String, Field> modelRendererMap = new HashMap();
@@ -115,10 +157,14 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public LinkedList<String> textureList = new LinkedList<String>();
     public static Class mod_PFLM_PlayerFormLittleMaid;
     public static Class PFLM_Gui;
+    public static Class PFLM_GuiModelSelect;
+    public static Class PFLM_GuiOthersPlayer;
+    public static Class PFLM_GuiOthersPlayerIndividualCustomize;
     public static Class PFLM_EntityPlayerDummy;
     public static Class PFLM_RenderPlayer;
     public static Class mod_LMM_littleMaidMob;
     public static Class LMM_EntityLittleMaid;
+    public static Class MMM_TextureManager;
 /*//125delete
     public Entity entity;
 *///125delete
@@ -161,20 +207,39 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	if (mod_LMM_littleMaidMob != null) {
     		isLMM = true;
     		LMM_EntityLittleMaid = mod_Modchu_ModchuLib.LMM_EntityLittleMaid;
+    		List list = ModLoader.getLoadedMods();
+    		Object instance = null;
+    		BaseMod mod;
+    		for(int i = 0; i < list.size(); i++) {
+    			mod = (BaseMod)list.get(i);
+    			if (mod.getClass() == mod_LMM_littleMaidMob) instance = mod;
+    		}
+    		if (instance != null) {
+    			boolean b = false;
+    			String s1 = (String) Modchu_Reflect.invokeMethod(mod_LMM_littleMaidMob, "getVersion", instance);
+    			if (s1.startsWith("1.4.6")) ;else {
+    				s1 = s1.substring(s1.length() - 1);
+    				if (Integer.valueOf(s1) < 5) oldRenderItems = b;
+    			}
+    		}
     	}
     	mod_PFLM_PlayerFormLittleMaid = mod_Modchu_ModchuLib.mod_PFLM_PlayerFormLittleMaid;
     	if (mod_PFLM_PlayerFormLittleMaid != null) {
     		isPFLM = true;
     		PFLM_Gui = mod_Modchu_ModchuLib.PFLM_Gui;
+    		PFLM_GuiModelSelect = mod_Modchu_ModchuLib.PFLM_GuiModelSelect;
+    		PFLM_GuiOthersPlayer = mod_Modchu_ModchuLib.PFLM_GuiOthersPlayer;
+    		PFLM_GuiOthersPlayerIndividualCustomize = mod_Modchu_ModchuLib.PFLM_GuiOthersPlayerIndividualCustomize;
     		PFLM_EntityPlayerDummy = mod_Modchu_ModchuLib.PFLM_EntityPlayerDummy;
     		PFLM_RenderPlayer = mod_Modchu_ModchuLib.PFLM_RenderPlayer;
-    		modchuRemodelingModel = mod_Modchu_ModchuLib.modchuRemodelingModel;
-    		skirtFloats = mod_Modchu_ModchuLib.skirtFloats;
     		if ((Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "isOlddays")) {
     			setOldwalking((Boolean) getFieldObject(ModelBiped.class, "oldwalking"));
     		}
     		setFieldObject(PFLM_Gui, "partsSetFlag", 1);
     	}
+    	skirtFloats = mod_Modchu_ModchuLib.skirtFloats;
+    	modchuRemodelingModel = mod_Modchu_ModchuLib.modchuRemodelingModel;
+    	MMM_TextureManager = mod_Modchu_ModchuLib.MMM_TextureManager;
     	armsinit(psize, pyoffset);
     	skirtFloatsInit(psize, pyoffset);
     }
@@ -287,12 +352,13 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     public void renderItems(EntityLiving pEntity, Render pRender) {
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(pEntity)) {
-    		renderItemsLM(pEntity, pRender);
+    		if (oldRenderItems) OldRenderItemsLM(pEntity, pRender);
+    		else renderItemsLM(pEntity, pRender);
     	} else {
     		renderItemsPFLM(pEntity, pRender);
     	}
     }
-/*
+
 	public void renderItemsLM(EntityLiving pEntity, Render pRender) {
 		// 手持ちの表示
 		GL11.glPushMatrix();
@@ -301,30 +367,54 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 			ItemStack[] litemstacks = (ItemStack[])modelCaps.getCapsValue(caps_Items);
 			EnumAction[] lactions = (EnumAction[])modelCaps.getCapsValue(caps_Actions);
 			if (litemstacks != null) {
-				// R
-				Arms[0].loadMatrix().renderItems(pEntity, pRender, false, lactions[0] ,litemstacks[0]);
-				// L
-				Arms[1].loadMatrix().renderItems(pEntity, pRender, false, lactions[1], litemstacks[1]);
+				Object Arms;
+				for (int i = 0; i < 2; i++) {
+					Arms = getArms(i);
+					if (Arms != null) {
+						Modchu_Reflect.invokeMethod(Arms.getClass(), "loadMatrix", Arms);
+						Modchu_Reflect.invokeMethod(Arms.getClass(), "renderItems", new Class[]{ EntityLiving.class, Render.class, boolean.class, EnumAction.class, ItemStack.class }, Arms, new Object[]{ pEntity, pRender, false, lactions[i] ,litemstacks[i] });
+					}
+				}
 				lflag = false;
 			}
 			// 頭部装飾品
 			boolean lplanter = modelCaps.getCapsValueBoolean(caps_isPlanter);
-			if (modelCaps.getCapsValueBoolean(caps_isCamouflage) || lplanter) {
-				HeadMount.loadMatrix();
-				if (lplanter) {
-					GL11.glTranslatef(0F, -0.56F, 0F);
+			ItemStack litemstack = (ItemStack)modelCaps.getCapsValue(caps_HeadMount);
+			int addSupport = addSupportChecks(pEntity, litemstack);
+			if (modelCaps.getCapsValueBoolean(caps_isCamouflage) || lplanter
+					|| addSupport > -1) {
+				Object HeadMount = getHeadMount();
+				Modchu_Reflect.invokeMethod(HeadMount.getClass(), "loadMatrix", HeadMount);
+				if (lplanter
+						|| (addSupport > -1 && addSupport < 3)) {
+					equippedItemPositionFlower();
 				}
-				HeadMount.renderItems(pEntity, pRender, true, null, (ItemStack)modelCaps.getCapsValue(caps_HeadMount));
+				float scale = 1.0F;
+				Object inventory = modelCaps.getCapsValue(caps_Inventory);
+				if (inventory != null) {
+					ItemStack litemstack1 = (ItemStack) Modchu_Reflect.invokeMethod(InventoryPlayer.class, "getStackInSlot", new Class[]{ int.class }, inventory, new Object[]{ 16 });
+					if (litemstack1 != null) {
+						Item item2 = litemstack1.getItem();
+						if (item2 == item2.dyePowder) {
+							scale = 1.0F + (0.2F * litemstack1.getItemDamage());
+						}
+					}
+					Modchu_Reflect.invokeMethod(HeadMount.getClass(), "renderItems", new Class[]{ EntityLiving.class, Render.class, boolean.class, EnumAction.class, ItemStack.class, float.class, int.class }, HeadMount, new Object[]{ pEntity, pRender, true, null, litemstack, scale, addSupport });
+					//HeadMount.renderItems(pEntity, pRender, true, null, (ItemStack)modelCaps.getCapsValue(caps_HeadMount));
+				}
 			}
 		}
 		if (lflag) {
-			Arms[0].loadMatrix().renderItems(pEntity, pRender, false, null, pEntity.getHeldItem());
+			Object Arms = getArms(0);
+			if (Arms != null) {
+				Modchu_Reflect.invokeMethod(Arms.getClass(), "loadMatrix", Arms);
+				Modchu_Reflect.invokeMethod(Arms.getClass(), "renderItems", new Class[]{ EntityLiving.class, Render.class, boolean.class, EnumAction.class, ItemStack.class }, Arms, new Object[]{ pEntity, pRender, false, null, pEntity.getHeldItem() });
+			}
 		}
 		GL11.glPopMatrix();
 	}
-*/
 
-    public void renderItemsLM(EntityLiving pEntity, Render pRender) {
+    public void OldRenderItemsLM(EntityLiving pEntity, Render pRender) {
     	// 手持ちの表示
     	GL11.glPushMatrix();
 
@@ -401,7 +491,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	laction = litemstack != null && entityplayer.getItemInUseCount() > 0 ? litemstack.getItemUseAction() : null;
 
     	if (litemstack != null) {
-    		Object Arms = getArms(getHandedness());
+    		Object Arms = getArms((Integer) getCapsValue(caps_getHandedness));
     		if (Arms != null) {
     			Modchu_Reflect.invokeMethod(Arms.getClass(), "loadMatrix", Arms);
     			Modchu_Reflect.invokeMethod(Arms.getClass(), "renderItems", new Class[]{ EntityLiving.class, Render.class, boolean.class, EnumAction.class, ItemStack.class }, Arms, new Object[]{ entityplayer, pRender, false, laction, litemstack });
@@ -468,6 +558,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      * BlockPumpkin = 4
      */
     public int addSupportChecks(EntityLiving pEntity, ItemStack litemstack) {
+    	if (litemstack != null) ;else return -1;
     	int flag = -1;
     	Item item = litemstack.getItem();
     	Block block = null;
@@ -504,7 +595,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     			&& LMM_EntityLittleMaid.isInstance(entity)) {
     		return getObjectInvokeMethod(entity, "getSwingStatus", new Class[]{ int.class }, i);
     	}
-    	if (getHandedness() == i) {
+    	if ((Integer) getCapsValue(caps_getHandedness) == i) {
         	//Modchu_Debug.mDebug("getOnGround()="+getOnGround() +" i="+i);
     		return getOnGround();
     	}
@@ -516,7 +607,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      * setLivingAnimations 呼び出し前に呼ばれる。
      */
     public void PFLMLivingAnimationsSpecialOperationsBefore(Entity entity, float f, float f1, float f2) {
-    	entityIdFactor = getEntityIdFactor(entity);
+    	entityIdFactor = (Float) getCapsValue(caps_getEntityIdFactor, entity);
     }
 
     /**
@@ -524,7 +615,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      * setLivingAnimations 呼び出し後に呼ばれる。
      */
     public void PFLMLivingAnimationsSpecialOperationsAfter(Entity entity, float f, float f1, float f2) {
-    	isRiding = !getIsRiding() ? getIsSitting() : getIsRiding();
+    	boolean isRiding = (Boolean) getCapsValue(caps_getIsRiding);
+    	setCapsValue(caps_setIsRiding, !isRiding ? (Boolean) getCapsValue(caps_getIsSitting) : isRiding);
     	if (entity != null) ;else return;
     	if (entity instanceof EntityPlayer) settingShowParts();
     }
@@ -535,12 +627,12 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      */
     public void PFLMRotationAnglesSpecialOperations(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	if (entity != null) ;else return;
-    	if (getFirstPerson()) setRotationAnglesfirstPerson(f, f1, f2, f3, f4, f5, entity);
-    	if (getShortcutKeysAction()) {
-    		action(entity, getRunActionNumber());
-    		if (actionFlag) {
-    	    	actionSpeed = 0.0F;
-    			actionFlag = false;
+    	if ((Boolean) getCapsValue(caps_getFirstPerson)) setRotationAnglesfirstPerson(f, f1, f2, f3, f4, f5, entity);
+    	if ((Boolean) getCapsValue(caps_getShortcutKeysAction)) {
+    		action(entity, (Integer) getCapsValue(caps_getRunActionNumber));
+    		if ((Boolean) getCapsValue(caps_getActionFlag)) {
+    			setCapsValue(caps_setActionSpeed, 0.0F);
+    			setCapsValue(caps_setActionFlag, false);
     		}
     	}
     }
@@ -563,20 +655,25 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	Field[] fields = this.getClass().getFields();
     	String s1;
     	for (int i = 0; i < fields.length; i++) {
-    		//Modchu_Debug.mDebug("fields["+i+"].getType() = "+fields[i].getType());
-    		Class c = fields[i].getType();
-    		if (ModelRenderer.class.isInstance(c)) {
-    			try {
-    				s1 = fields[i].getName();
-    				getShowPartsList().add(s1);
-    				if (fields[i].get(this) != null) {
-    					getModelRendererMap().put(s1, fields[i]);
-    					//Modchu_Debug.mDebug("ok. fields["+i+"].getName() = "+s1);
+    		Modchu_Debug.mDebug("fields["+i+"].getType() = "+fields[i].getType());
+    		Object o;
+    		try {
+    			o = fields[i].get(this);
+    			if (ModelRenderer.class.isInstance(o)) {
+    				try {
+    					s1 = fields[i].getName();
+    					getShowPartsList().add(s1);
+    					if (fields[i].get(this) != null) {
+    						getModelRendererMap().put(s1, fields[i]);
+    						Modchu_Debug.mDebug("ok. fields["+i+"].getName() = "+s1);
+    					}
+    				} catch (Exception e) {
+    					//e.printStackTrace();
     				}
-    			} catch (Exception e) {
-    				//e.printStackTrace();
+    				k++;
     			}
-    			k++;
+    		} catch (Exception e1) {
+    			e1.printStackTrace();
     		}
     	}
     }
@@ -733,7 +830,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     		if (f != null) {
     			try {
     				model = (ModelRenderer) f.get(this);
-    				if (model != null) setVisible(model, parts.get(s2));
+    				if (model != null) setCapsValue(caps_setVisible, model, parts.get(s2));
     			} catch (Exception e) {
     				e.printStackTrace();
     			}
@@ -753,7 +850,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     		if (s0 != null
     				&& s0.indexOf(s) > -1) {
     			try {
-    				setVisible((ModelRenderer) getModelRendererMap().get(s0).get(this), b);
+    				setCapsValue(caps_setVisible, (ModelRenderer) getModelRendererMap().get(s0).get(this), b);
     			} catch (Exception e) {
     				//e.printStackTrace();
     			}
@@ -770,7 +867,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     		s0 = getShowPartsList().get(i1);
     		if (s0.indexOf(s) > -1) {
     			try {
-    				setVisible((ModelRenderer) getModelRendererMap().get(s0).get(this), b);
+    				setCapsValue(caps_setVisible, (ModelRenderer) getModelRendererMap().get(s0).get(this), b);
     			} catch (Exception e) {
     				e.printStackTrace();
     			}
@@ -786,7 +883,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      * ショートカットアクション時に呼ばれる
      */
     public void actionInit(int i) {
-    	setRunActionNumber(i);
+    	setCapsValue(caps_setRunActionNumber, i);
     	switch(i) {
     	case 1:
     		actionInit1();
@@ -822,31 +919,31 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     }
 
     public void actionInit1() {
-    	setShortcutKeysAction(true);
+    	setCapsValue(caps_setShortcutKeysAction, true);
     	boolean b = false;
-    	setVisible(bipedLeftArm, b);
-    	setVisible(bipedRightArm, b);
-    	setVisible(bipedLeftLeg, b);
-    	setVisible(bipedRightLeg, b);
+    	setCapsValue(caps_setVisible, bipedLeftArm, b);
+    	setCapsValue(caps_setVisible, bipedRightArm, b);
+    	setCapsValue(caps_setVisible, bipedLeftLeg, b);
+    	setCapsValue(caps_setVisible, bipedRightLeg, b);
     	b = true;
-    	if (rightArm != null) setVisible(rightArm, b);
-    	if (rightArm2 != null) setVisible(rightArm2, b);
-    	if (rightArmPlus != null) setVisible(rightArmPlus, b);
-    	if (rightArmPlus2 != null) setVisible(rightArmPlus2, b);
-    	if (rightHand != null) setVisible(rightHand, b);
-    	if (leftArm != null) setVisible(leftArm, b);
-    	if (leftArm2 != null) setVisible(leftArm2, b);
-    	if (leftArmPlus != null) setVisible(leftArmPlus, b);
-    	if (leftArmPlus2 != null) setVisible(leftArmPlus2, b);
-    	if (leftHand != null) setVisible(leftHand, b);
-    	if (rightLeg != null) setVisible(rightLeg, b);
-    	if (rightLeg2 != null) setVisible(rightLeg2, b);
-    	if (rightLegPlus != null) setVisible(rightLegPlus, b);
-    	if (rightLegPlus2 != null) setVisible(rightLegPlus2, b);
-    	if (leftLeg != null) setVisible(leftLeg, b);
-    	if (leftLeg2 != null) setVisible(leftLeg2, b);
-    	if (leftLegPlus != null) setVisible(leftLegPlus, b);
-    	if (leftLegPlus2 != null) setVisible(leftLegPlus2, b);
+    	if (rightArm != null) setCapsValue(caps_setVisible, rightArm, b);
+    	if (rightArm2 != null) setCapsValue(caps_setVisible, rightArm2, b);
+    	if (rightArmPlus != null) setCapsValue(caps_setVisible, rightArmPlus, b);
+    	if (rightArmPlus2 != null) setCapsValue(caps_setVisible, rightArmPlus2, b);
+    	if (rightHand != null) setCapsValue(caps_setVisible, rightHand, b);
+    	if (leftArm != null) setCapsValue(caps_setVisible, leftArm, b);
+    	if (leftArm2 != null) setCapsValue(caps_setVisible, leftArm2, b);
+    	if (leftArmPlus != null) setCapsValue(caps_setVisible, leftArmPlus, b);
+    	if (leftArmPlus2 != null) setCapsValue(caps_setVisible, leftArmPlus2, b);
+    	if (leftHand != null) setCapsValue(caps_setVisible, leftHand, b);
+    	if (rightLeg != null) setCapsValue(caps_setVisible, rightLeg, b);
+    	if (rightLeg2 != null) setCapsValue(caps_setVisible, rightLeg2, b);
+    	if (rightLegPlus != null) setCapsValue(caps_setVisible, rightLegPlus, b);
+    	if (rightLegPlus2 != null) setCapsValue(caps_setVisible, rightLegPlus2, b);
+    	if (leftLeg != null) setCapsValue(caps_setVisible, leftLeg, b);
+    	if (leftLeg2 != null) setCapsValue(caps_setVisible, leftLeg2, b);
+    	if (leftLegPlus != null) setCapsValue(caps_setVisible, leftLegPlus, b);
+    	if (leftLegPlus2 != null) setCapsValue(caps_setVisible, leftLegPlus2, b);
     	if (bipedRightArm != null
     			&& bipedRightArm instanceof Modchu_ModelRenderer) {
     		((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[0]);
@@ -867,56 +964,56 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	}
     	Arms[0].setRotationPoint(0.5F, 0.0F, 0.0F);
     	Arms[1].setRotationPoint(-0.5F, 0.0F, 0.0F);
-    	sneakBan = true;
-    	waitBan = true;
-    	sittingBan = true;
+    	setCapsValue(caps_setSneakBan, true);
+    	setCapsValue(caps_setWaitBan, true);
+    	setCapsValue(caps_setSittingBan, true);
     }
 
     public void actionInit2() {
-    	setShortcutKeysAction(true);
-    	actionCount = 0;
-    	waitBan = true;
+    	setCapsValue(caps_setShortcutKeysAction, true);
+    	setCapsValue(caps_setActionCount, 0);
+    	setCapsValue(caps_setWaitBan, false);
     }
 
     public void actionInit3() {
-    	setShortcutKeysAction(true);
-    	waitBan = true;
+    	setCapsValue(caps_setShortcutKeysAction, true);
+    	setCapsValue(caps_setWaitBan, false);
     }
 
     public void actionInit4() {
-    	setShortcutKeysAction(true);
-    	waitBan = true;
+    	setCapsValue(caps_setShortcutKeysAction, true);
+    	setCapsValue(caps_setWaitBan, false);
     }
 
     public void actionInit5() {
-    	setShortcutKeysAction(true);
+    	setCapsValue(caps_setShortcutKeysAction, true);
     }
 
     public void actionInit6() {
-    	setShortcutKeysAction(true);
+    	setCapsValue(caps_setShortcutKeysAction, true);
     }
 
     public void actionInit7() {
-    	setShortcutKeysAction(true);
+    	setCapsValue(caps_setShortcutKeysAction, true);
     }
 
     public void actionInit8() {
-    	setShortcutKeysAction(true);
+    	setCapsValue(caps_setShortcutKeysAction, true);
     }
 
     public void actionInit9() {
-    	setShortcutKeysAction(true);
+    	setCapsValue(caps_setShortcutKeysAction, true);
     }
 
     public void actionInit30() {
-    	setShortcutKeysAction(true);
+    	setCapsValue(caps_setShortcutKeysAction, true);
     }
 
     /**c
      * ショートカットアクション解除時に呼ばれる。
      */
     public void actionRelease(int i) {
-    	switch(getRunActionNumber()) {
+    	switch((Integer) getCapsValue(caps_getRunActionNumber)) {
     	case 1:
     		actionRelease1();
     		break;
@@ -951,35 +1048,35 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     }
 
     public void actionRelease1() {
-    	setShortcutKeysAction(false);
-    	sneakBan = false;
-    	waitBan = false;
-    	sittingBan = false;
+    	setCapsValue(caps_setShortcutKeysAction, false);
+    	setCapsValue(caps_setSneakBan, false);
+    	setCapsValue(caps_setWaitBan, false);
+    	setCapsValue(caps_setSittingBan, false);
 
     	boolean b = true;
-    	setVisible(bipedLeftArm, b);
-    	setVisible(bipedRightArm, b);
-    	setVisible(bipedLeftLeg, b);
-    	setVisible(bipedRightLeg, b);
+    	setCapsValue(caps_setVisible, bipedLeftArm, b);
+    	setCapsValue(caps_setVisible, bipedRightArm, b);
+    	setCapsValue(caps_setVisible, bipedLeftLeg, b);
+    	setCapsValue(caps_setVisible, bipedRightLeg, b);
     	b = false;
-    	if (rightArm != null) setVisible(rightArm, b);
-    	if (rightArm2 != null) setVisible(rightArm2, b);
-    	if (rightArmPlus != null) setVisible(rightArmPlus, b);
-    	if (rightArmPlus2 != null) setVisible(rightArmPlus2, b);
-    	if (rightHand != null) setVisible(rightHand, b);
-    	if (leftArm != null) setVisible(leftArm, b);
-    	if (leftArm2 != null) setVisible(leftArm2, b);
-    	if (leftArmPlus != null) setVisible(leftArmPlus, b);
-    	if (leftArmPlus2 != null) setVisible(leftArmPlus2, b);
-    	if (leftHand != null) setVisible(leftHand, b);
-    	if (rightLeg != null) setVisible(rightLeg, b);
-    	if (rightLeg2 != null) setVisible(rightLeg2, b);
-    	if (rightLegPlus != null) setVisible(rightLegPlus, b);
-    	if (rightLegPlus2 != null) setVisible(rightLegPlus2, b);
-    	if (leftLeg != null) setVisible(leftLeg, b);
-    	if (leftLeg2 != null) setVisible(leftLeg2, b);
-    	if (leftLegPlus != null) setVisible(leftLegPlus, b);
-    	if (leftLegPlus2 != null) setVisible(leftLegPlus2, b);
+    	if (rightArm != null) setCapsValue(caps_setVisible, rightArm, b);
+    	if (rightArm2 != null) setCapsValue(caps_setVisible, rightArm2, b);
+    	if (rightArmPlus != null) setCapsValue(caps_setVisible, rightArmPlus, b);
+    	if (rightArmPlus2 != null) setCapsValue(caps_setVisible, rightArmPlus2, b);
+    	if (rightHand != null) setCapsValue(caps_setVisible, rightHand, b);
+    	if (leftArm != null) setCapsValue(caps_setVisible, leftArm, b);
+    	if (leftArm2 != null) setCapsValue(caps_setVisible, leftArm2, b);
+    	if (leftArmPlus != null) setCapsValue(caps_setVisible, leftArmPlus, b);
+    	if (leftArmPlus2 != null) setCapsValue(caps_setVisible, leftArmPlus2, b);
+    	if (leftHand != null) setCapsValue(caps_setVisible, leftHand, b);
+    	if (rightLeg != null) setCapsValue(caps_setVisible, rightLeg, b);
+    	if (rightLeg2 != null) setCapsValue(caps_setVisible, rightLeg2, b);
+    	if (rightLegPlus != null) setCapsValue(caps_setVisible, rightLegPlus, b);
+    	if (rightLegPlus2 != null) setCapsValue(caps_setVisible, rightLegPlus2, b);
+    	if (leftLeg != null) setCapsValue(caps_setVisible, leftLeg, b);
+    	if (leftLeg2 != null) setCapsValue(caps_setVisible, leftLeg2, b);
+    	if (leftLegPlus != null) setCapsValue(caps_setVisible, leftLegPlus, b);
+    	if (leftLegPlus2 != null) setCapsValue(caps_setVisible, leftLegPlus2, b);
 
     	if (Arms != null) {
     		if (Arms[0] != null) bipedRightArm.addChild(Arms[0]);
@@ -1009,42 +1106,42 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     }
 
     public void actionRelease2() {
-    	setShortcutKeysAction(false);
-    	waitBan = false;
+    	setCapsValue(caps_setShortcutKeysAction, false);
+    	setCapsValue(caps_setWaitBan, false);
     }
 
     public void actionRelease3() {
-    	setShortcutKeysAction(false);
-    	waitBan = false;
+    	setCapsValue(caps_setShortcutKeysAction, false);
+    	setCapsValue(caps_setWaitBan, false);
     }
 
     public void actionRelease4() {
-    	setShortcutKeysAction(false);
-    	waitBan = false;
+    	setCapsValue(caps_setShortcutKeysAction, false);
+    	setCapsValue(caps_setWaitBan, false);
     }
 
     public void actionRelease5() {
-    	setShortcutKeysAction(false);
+    	setCapsValue(caps_setShortcutKeysAction, false);
     }
 
     public void actionRelease6() {
-    	setShortcutKeysAction(false);
+    	setCapsValue(caps_setShortcutKeysAction, false);
     }
 
     public void actionRelease7() {
-    	setShortcutKeysAction(false);
+    	setCapsValue(caps_setShortcutKeysAction, false);
     }
 
     public void actionRelease8() {
-    	setShortcutKeysAction(false);
+    	setCapsValue(caps_setShortcutKeysAction, false);
     }
 
     public void actionRelease9() {
-    	setShortcutKeysAction(false);
+    	setCapsValue(caps_setShortcutKeysAction, false);
     }
 
     public void actionRelease30() {
-    	setShortcutKeysAction(false);
+    	setCapsValue(caps_setShortcutKeysAction, false);
     }
 
     public void action(Entity entity, int i) {
@@ -1081,7 +1178,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 
     public void action1(Entity entity) {
     	// ｳｯｰｳｯｰｳﾏｳﾏ(ﾟ∀ﾟ)
-    	float speed = actionSpeed / 10;
+    	float speed = (Float) getCapsValue(caps_getActionSpeed) / 10;
+    	//Modchu_Debug.mDebug("action1 "+((Float) getCapsValue(caps_getActionSpeed))+" speed="+speed);
     	if (speed < 0.0F) return;
 
     	rightArm.rotationPointX = bipedRightArm.rotationPointX;
@@ -1130,14 +1228,14 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	rightArm.rotateAngleY = f1 * 0.09328361F;
     	rightHand.rotateAngleX = -f1 * 1.86567233F;
     	rightHand.rotateAngleZ = 0.0F;
-    	if (!actionReverse) {
+    	if (!(Boolean) getCapsValue(caps_getActionReverse)) {
     		if (f1 < 0.5F) {
     			f1 += speed;
-    		} else actionReverse = true;
+    		} else setCapsValue(caps_setActionReverse, true);
     	} else {
     		if (f1 > -0.3F) {
     			f1 -= speed;
-    		} else actionReverse = false;
+    		} else setCapsValue(caps_setActionReverse, false);
     	}
     	if (f1 > 0.5449998F) f1 = 0.5449998F;
     	if (f1 < -0.3880023F) f1 = -0.3880023F;
@@ -1206,36 +1304,40 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 
     public void action2(Entity entity) {
     	// 手を上げるモーション
-    	getBipedRightArm().rotateAngleX -= 0.2F;
-    	getBipedRightArm().rotateAngleY -= 1.0F;
-    	getBipedRightArm().rotateAngleZ += getHandedness() == 0 ? 2.1F : -2.1F;
+    	((ModelRenderer) getCapsValue(caps_getBipedRightArm)).rotateAngleX -= 0.2F;
+    	((ModelRenderer) getCapsValue(caps_getBipedRightArm)).rotateAngleY -= 1.0F;
+    	((ModelRenderer) getCapsValue(caps_getBipedRightArm)).rotateAngleZ += (Integer) getCapsValue(caps_getHandedness) == 0 ? 2.1F : -2.1F;
     }
 
     public void action3(Entity entity) {
     	// 手を上げて振るモーション
     	//Modchu_Debug.mDebug("armorType="+armorType+" actionSpeed="+actionSpeed);
+    	float actionSpeed = (Float) getCapsValue(caps_getActionSpeed);
     	if (actionSpeed < 0.0F) return;
     	int i = (int) (actionSpeed * 2);
     	if (i < 0) i = 0;
+    	boolean actionReverse = (Boolean) getCapsValue(caps_getActionReverse);
+    	int actionCount = (Integer) getCapsValue(caps_getActionCount);
     	actionCount = (int) (actionReverse ? actionCount - i : actionCount + i);
+    	setCapsValue(caps_setActionCount, actionCount);
     	//Modchu_Debug.mDebug("actionReverse="+actionReverse+" actionCount="+actionCount+" "+((float) (actionCount - 15)) / 30.0F);
-    	getBipedRightArm().rotateAngleZ = 2.0F - ((float) (actionCount - 15)) / 20.0F;
-    	if (getHandedness() == 1) getBipedRightArm().rotateAngleZ = -getBipedRightArm().rotateAngleZ;
+    	((ModelRenderer) getCapsValue(caps_getBipedRightArm)).rotateAngleZ = 2.0F - ((float) (actionCount - 15)) / 20.0F;
+    	if ((Integer) getCapsValue(caps_getHandedness) == 1) ((ModelRenderer) getCapsValue(caps_getBipedRightArm)).rotateAngleZ = -((ModelRenderer) getCapsValue(caps_getBipedRightArm)).rotateAngleZ;
     	if (actionCount > 30) {
-    		actionReverse = true;
-    		actionCount = 30;
+    		setCapsValue(caps_setActionReverse, true);
+    		setCapsValue(caps_setActionCount, 30);
     	}
     	if (actionCount < 0) {
-    		actionReverse = false;
-    		actionCount = 0;
+    		setCapsValue(caps_setActionReverse, false);
+    		setCapsValue(caps_setActionCount, 0);
     	}
     }
 
     public void action4(Entity entity) {
     	// 両手を前に出すモーション
-    	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
-    	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
-    	if (getOnGround(getSwingStatus(entity, getHandedness()), entity) > 0.0F) {
+    	float onGroundR = (Float) getCapsValue(caps_getOnGround, 0, entity);
+    	float onGroundL = (Float) getCapsValue(caps_getOnGround, 1, entity);
+    	if (getOnGround(getSwingStatus(entity, (Integer) getCapsValue(caps_getHandedness)), entity) > 0.0F) {
     		bipedRightArm.rotateAngleX += bipedLeftArm.rotateAngleX += -1.57F;
     		bipedRightArm.rotateAngleY = bipedLeftArm.rotateAngleY = 0.0F;
     		bipedRightArm.rotateAngleZ = bipedLeftArm.rotateAngleZ = 0.0F;
@@ -1266,24 +1368,24 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	//デバック用
     	if (getClass().getPackage() == null) return;
     	boolean b = true;
-    	if (rightArm != null) setVisible(rightArm, b);
-    	if (rightArm2 != null) setVisible(rightArm2, b);
-    	if (rightArmPlus != null) setVisible(rightArmPlus, b);
-    	if (rightArmPlus2 != null) setVisible(rightArmPlus2, b);
-    	if (rightHand != null) setVisible(rightHand, b);
-    	if (leftArm != null) setVisible(leftArm, b);
-    	if (leftArm2 != null) setVisible(leftArm2, b);
-    	if (leftArmPlus != null) setVisible(leftArmPlus, b);
-    	if (leftArmPlus2 != null) setVisible(leftArmPlus2, b);
-    	if (leftHand != null) setVisible(leftHand, b);
-    	if (rightLeg != null) setVisible(rightLeg, b);
-    	if (rightLeg2 != null) setVisible(rightLeg2, b);
-    	if (rightLegPlus != null) setVisible(rightLegPlus, b);
-    	if (rightLegPlus2 != null) setVisible(rightLegPlus2, b);
-    	if (leftLeg != null) setVisible(leftLeg, b);
-    	if (leftLeg2 != null) setVisible(leftLeg2, b);
-    	if (leftLegPlus != null) setVisible(leftLegPlus, b);
-    	if (leftLegPlus2 != null) setVisible(leftLegPlus2, b);
+    	if (rightArm != null) setCapsValue(caps_setVisible, rightArm, b);
+    	if (rightArm2 != null) setCapsValue(caps_setVisible, rightArm2, b);
+    	if (rightArmPlus != null) setCapsValue(caps_setVisible, rightArmPlus, b);
+    	if (rightArmPlus2 != null) setCapsValue(caps_setVisible, rightArmPlus2, b);
+    	if (rightHand != null) setCapsValue(caps_setVisible, rightHand, b);
+    	if (leftArm != null) setCapsValue(caps_setVisible, leftArm, b);
+    	if (leftArm2 != null) setCapsValue(caps_setVisible, leftArm2, b);
+    	if (leftArmPlus != null) setCapsValue(caps_setVisible, leftArmPlus, b);
+    	if (leftArmPlus2 != null) setCapsValue(caps_setVisible, leftArmPlus2, b);
+    	if (leftHand != null) setCapsValue(caps_setVisible, leftHand, b);
+    	if (rightLeg != null) setCapsValue(caps_setVisible, rightLeg, b);
+    	if (rightLeg2 != null) setCapsValue(caps_setVisible, rightLeg2, b);
+    	if (rightLegPlus != null) setCapsValue(caps_setVisible, rightLegPlus, b);
+    	if (rightLegPlus2 != null) setCapsValue(caps_setVisible, rightLegPlus2, b);
+    	if (leftLeg != null) setCapsValue(caps_setVisible, leftLeg, b);
+    	if (leftLeg2 != null) setCapsValue(caps_setVisible, leftLeg2, b);
+    	if (leftLegPlus != null) setCapsValue(caps_setVisible, leftLegPlus, b);
+    	if (leftLegPlus2 != null) setCapsValue(caps_setVisible, leftLegPlus2, b);
     }
 
     /**
@@ -1291,8 +1393,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      * アーマーモデルに対して、メインモデルのデータが渡されてくるのでそれに合わせるパーツを同期させる
      */
     public void syncModel(MultiModelBaseBiped model) {
-    	if (getRunActionNumber() == 1
-    			| getRunActionNumber() == 2) bipedBody.rotateAngleZ = model.bipedBody.rotateAngleZ;
+    	if ((Integer) getCapsValue(caps_getRunActionNumber) == 1
+    			| (Integer) getCapsValue(caps_getRunActionNumber) == 2) bipedBody.rotateAngleZ = model.bipedBody.rotateAngleZ;
     }
 
     /**
@@ -1300,6 +1402,12 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
      * 各パーツの初期化など。
      */
     public abstract void reset(float f, float f1, float f2, float f3, float f4, float f5, Entity entity);
+
+    /**
+     * カラー切替時に実行されるコード
+     */
+    public void changeColor(EntityLiving pentity) {
+    }
 
     public float getyOffset() {
     	return 1.62F;
@@ -1367,75 +1475,60 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     }
 
     public void setArmorBipedHeadShowModel(boolean b) {
-    	setVisible(bipedHead, b);
+    	setCapsValue(caps_setVisible, bipedHead, b);
     }
 
     public void setArmorBipedBodyShowModel(boolean b) {
-    	setVisible(bipedBody, b);
+    	setCapsValue(caps_setVisible, bipedBody, b);
     }
 
     public void setArmorBipedRightArmShowModel(boolean b) {
-    	if (getShortcutKeysAction()
-    			&& getRunActionNumber() == 0
-    			| getRunActionNumber() == 1) {
-    		setVisible(bipedRightArm, false);
-    		if (rightArm != null) setVisible(rightArm, b);
-    		if (rightArm2 != null) setVisible(rightArm2, b);
-    		if (rightHand != null) setVisible(rightHand, b);
+    	if ((Boolean) getCapsValue(caps_getShortcutKeysAction)
+    			&& (Integer) getCapsValue(caps_getRunActionNumber) == 0
+    			| (Integer) getCapsValue(caps_getRunActionNumber) == 1) {
+    		setCapsValue(caps_setVisible, bipedRightArm, false);
+    		if (rightArm != null) setCapsValue(caps_setVisible, rightArm, b);
+    		if (rightArm2 != null) setCapsValue(caps_setVisible, rightArm2, b);
+    		if (rightHand != null) setCapsValue(caps_setVisible, rightHand, b);
     	}
-    	else setVisible(bipedRightArm, b);
+    	else setCapsValue(caps_setVisible, bipedRightArm, b);
     }
 
     public void setArmorBipedLeftArmShowModel(boolean b) {
-    	if (getShortcutKeysAction()
-    			&& getRunActionNumber() == 0
-    			| getRunActionNumber() == 1) {
-    		setVisible(bipedLeftArm, false);
-    		if (leftArm != null) setVisible(leftArm, b);
-    		if (leftArm2 != null) setVisible(leftArm2, b);
-    		if (leftHand != null) setVisible(leftHand, b);
+    	if ((Boolean) getCapsValue(caps_getShortcutKeysAction)
+    			&& (Integer) getCapsValue(caps_getRunActionNumber) == 0
+    			| (Integer) getCapsValue(caps_getRunActionNumber) == 1) {
+    		setCapsValue(caps_setVisible, bipedLeftArm, false);
+    		if (leftArm != null) setCapsValue(caps_setVisible, leftArm, b);
+    		if (leftArm2 != null) setCapsValue(caps_setVisible, leftArm2, b);
+    		if (leftHand != null) setCapsValue(caps_setVisible, leftHand, b);
     	}
-    	else setVisible(bipedLeftArm, b);
+    	else setCapsValue(caps_setVisible, bipedLeftArm, b);
     }
 
     public void setArmorBipedRightLegShowModel(boolean b) {
-    	if (getShortcutKeysAction()
-    			&& getRunActionNumber() == 0
-    			| getRunActionNumber() == 1) {
-    		setVisible(bipedRightLeg, false);
-    		if (rightLeg != null) setVisible(rightLeg, b);
-    		if (rightLeg2 != null) setVisible(rightLeg2, b);
+    	if ((Boolean) getCapsValue(caps_getShortcutKeysAction)
+    			&& (Integer) getCapsValue(caps_getRunActionNumber) == 0
+    			| (Integer) getCapsValue(caps_getRunActionNumber) == 1) {
+    		setCapsValue(caps_setVisible, bipedRightLeg, false);
+    		if (rightLeg != null) setCapsValue(caps_setVisible, rightLeg, b);
+    		if (rightLeg2 != null) setCapsValue(caps_setVisible, rightLeg2, b);
     	}
-    	else setVisible(bipedRightLeg, b);
+    	else setCapsValue(caps_setVisible, bipedRightLeg, b);
     }
 
     public void setArmorBipedLeftLegShowModel(boolean b) {
-    	if (getShortcutKeysAction()
-    			&& getRunActionNumber() == 0
-    			| getRunActionNumber() == 1) {
-    		setVisible(bipedLeftLeg, false);
-    		if (leftLeg != null) setVisible(leftLeg, b);
-    		if (leftLeg2 != null) setVisible(leftLeg2, b);
+    	if ((Boolean) getCapsValue(caps_getShortcutKeysAction)
+    			&& (Integer) getCapsValue(caps_getRunActionNumber) == 0
+    			| (Integer) getCapsValue(caps_getRunActionNumber) == 1) {
+    		setCapsValue(caps_setVisible, bipedLeftLeg, false);
+    		if (leftLeg != null) setCapsValue(caps_setVisible, leftLeg, b);
+    		if (leftLeg2 != null) setCapsValue(caps_setVisible, leftLeg2, b);
     	}
-    	else setVisible(bipedLeftLeg, b);
+    	else setCapsValue(caps_setVisible, bipedLeftLeg, b);
     }
 
     public void setArmorSkirtShowModel(boolean b) {
-    }
-
-    public boolean getIsRiding()
-    {
-    	return isRiding && !ridingBan;
-    }
-
-    public boolean getIsSleeping()
-    {
-    	return isSleeping && !sleepingBan;
-    }
-
-    public float getOnGround()
-    {
-    	return onGround;
     }
 
 	@Override
@@ -1451,16 +1544,28 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 			return getOnGround();
 		case caps_getIsSneak:
 			return getIsSneak();
+		case caps_getIsRiding:
+			return getIsRiding();
 		case caps_getaimedBow:
 			return getaimedBow();
 		case caps_getIsWait:
 			return getIsWait();
 		case caps_getIsSitting:
 			return getIsSitting();
+		case caps_getIsSleeping:
+			return getIsSleeping();
 		case caps_getFirstPerson:
 			return getFirstPerson();
+		case caps_getArmorType:
+			return getArmorType();
 		case caps_getOldwalking:
 			return getOldwalking();
+		case caps_getIsPlayer:
+			return getIsPlayer();
+		case caps_getActionFlag:
+			return getActionFlag();
+		case caps_getActionCount:
+			return getActionCount();
 		case caps_getMotionY:
 			return getMotionY();
 		case caps_getPartsSetFlag:
@@ -1510,7 +1615,31 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 			&& pArg.length > 2
 			&& pArg[0] != null
 			&& pArg[1] != null
-			&& pArg[2] != null) return getTexture((Entity) pArg[1], (String) pArg[0], (Integer) pArg[1]);
+			&& pArg[2] != null) return getTexture((Entity) pArg[0], (String) pArg[1], (Integer) pArg[2]);
+		case caps_getPastX:
+			return getPastX();
+		case caps_getPastY:
+			return getPastY();
+		case caps_getPastZ:
+			return getPastZ();
+		case caps_getSneakBan:
+			return getSneakBan();
+		case caps_getAimedBowBan:
+			return getAimedBowBan();
+		case caps_getWaitBan:
+			return getWaitBan();
+		case caps_getSittingBan:
+			return getSittingBan();
+		case caps_getSleepingBan:
+			return getSleepingBan();
+		case caps_getRidingBan:
+			return getRidingBan();
+		case caps_getModchuRemodelingModel:
+			return getModchuRemodelingModel();
+		case caps_getActionSpeed:
+			return getActionSpeed();
+		case caps_getActionReverse:
+			return getActionReverse();
 		}
 		return null;
 	}
@@ -1520,6 +1649,14 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 		boolean b = super.setCapsValue(pIndex, pArg);
 		if (b) return b;
 		switch (pIndex) {
+		case caps_setIsRiding:
+			if (pArg != null
+			&& pArg[0] != null) setIsRiding((Boolean) pArg[0]);
+			return true;
+		case caps_setIsSitting:
+			if (pArg != null
+			&& pArg[0] != null) setIsSitting((Boolean) pArg[0]);
+			return true;
 		case caps_setOnGround:
 			if (pArg != null
 			&& pArg[0] != null) setOnGround((Float) pArg[0]);
@@ -1528,6 +1665,34 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 			if (pArg != null
 			&& pArg[0] != null) setOldwalking((Boolean) pArg[0]);
 			return true;
+		case caps_setIsPlayer:
+			if (pArg != null
+			&& pArg[0] != null) setIsPlayer((Boolean) pArg[0]);
+			return true;
+		case caps_setFirstPerson:
+			if (pArg != null
+			&& pArg[0] != null) setFirstPerson((Boolean) pArg[0]);
+			return true;
+		case caps_setActionCount:
+			if (pArg != null
+			&& pArg[0] != null) setActionCount((Integer) pArg[0]);
+			return true;
+		case caps_setArmorType:
+			if (pArg != null
+			&& pArg[0] != null) setArmorType((Integer) pArg[0]);
+			return true;
+		case caps_setIsInventory:
+			if (pArg != null
+			&& pArg[0] != null) setIsInventory((Boolean) pArg[0]);
+			return true;
+		case caps_setActionFlag:
+			if (pArg != null
+			&& pArg[0] != null) setActionFlag((Boolean) pArg[0]);
+			return true;
+		case caps_setIsSleeping:
+			if (pArg != null
+			&& pArg[0] != null) setIsSleeping((Boolean) pArg[0]);
+			return true;
 		case caps_setMotionY:
 			if (pArg != null
 			&& pArg[0] != null) setMotionY((Float) pArg[0]);
@@ -1535,6 +1700,10 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 		case caps_setShowModelFlag:
 			if (pArg != null
 			&& pArg[0] != null) setShowModelFlag((Integer) pArg[0]);
+			return true;
+		case caps_setHandedness:
+			if (pArg != null
+			&& pArg[0] != null) setHandedness((Integer) pArg[0]);
 			return true;
 		case caps_setPartsSetFlag:
 			if (pArg != null
@@ -1569,11 +1738,106 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 			&& pArg[1] != null
 			&& pArg[2] != null) shiftArray((Float) pArg[0], (Float) pArg[1], (Float) pArg[2]);
 			return true;
+		case caps_setPastX:
+			if (pArg != null
+			&& pArg[0] != null) {
+				if (pArg[0].getClass().isInstance(float[].class)) setPastX((float[]) pArg[0]);
+				else {
+					if (pArg[1] != null) setPastX((Integer) pArg[0], (Float) pArg[1]);
+				}
+			}
+			return true;
+		case caps_setPastY:
+			if (pArg != null
+			&& pArg[0] != null) {
+				if (pArg[0].getClass().isInstance(float[].class)) setPastY((float[]) pArg[0]);
+				else {
+					if (pArg[1] != null) setPastY((Integer) pArg[0], (Float) pArg[1]);
+				}
+			}
+			return true;
+		case caps_setPastZ:
+			if (pArg != null
+			&& pArg[0] != null) {
+				if (pArg[0].getClass().isInstance(float[].class)) setPastZ((float[]) pArg[0]);
+				else {
+					if (pArg[1] != null) setPastZ((Integer) pArg[0], (Float) pArg[1]);
+				}
+			}
+			return true;
+		case caps_setSneakBan:
+			if (pArg != null
+			&& pArg[0] != null) setSneakBan((Boolean) pArg[0]);
+			return true;
+		case caps_setAimedBowBan:
+			if (pArg != null
+			&& pArg[0] != null) setAimedBowBan((Boolean) pArg[0]);
+			return true;
+		case caps_setWaitBan:
+			if (pArg != null
+			&& pArg[0] != null) setWaitBan((Boolean) pArg[0]);
+			return true;
+		case caps_setSittingBan:
+			if (pArg != null
+			&& pArg[0] != null) setSittingBan((Boolean) pArg[0]);
+			return true;
+		case caps_setSleepingBan:
+			if (pArg != null
+			&& pArg[0] != null) setSleepingBan((Boolean) pArg[0]);
+			return true;
+		case caps_setRidingBan:
+			if (pArg != null
+			&& pArg[0] != null) setRidingBan((Boolean) pArg[0]);
+			return true;
+		case caps_indexOfAllSetVisible:
+			if (pArg != null
+			&& pArg[0] != null) {
+				if (pArg[1] != null) indexOfAllSetVisible((String) pArg[0], (Boolean) pArg[1]);
+				else indexOfAllSetVisible((String) pArg[0]);
+			}
+			return true;
+		case caps_setModchuRemodelingModel:
+			if (pArg != null
+			&& pArg[0] != null) setModchuRemodelingModel((Boolean) pArg[0]);
+			return true;
+		case caps_setActionSpeed:
+			if (pArg != null
+			&& pArg[0] != null) setActionSpeed((Float) pArg[0]);
+			return true;
+		case caps_setActionReverse:
+			if (pArg != null
+			&& pArg[0] != null) setActionReverse((Boolean) pArg[0]);
+			return true;
 		}
 		return b;
 	}
 
-	public float getOnGround(Object o, Entity entity)
+    public boolean getIsRiding()
+    {
+    	return isRiding && !ridingBan;
+    }
+
+    public void setIsRiding(boolean b)
+    {
+    	isRiding = b;
+    }
+
+    public boolean getIsSleeping()
+    {
+    	return isSleeping && !sleepingBan;
+    }
+
+    public void setIsSleeping(boolean b)
+    {
+    	isSleeping = b;
+    }
+
+    public float getOnGround()
+    {
+    	return onGround;
+    }
+
+    public float getOnGround(Object o, Entity entity)
     {
     	if (o != null) {
     		Class c = o.getClass();
@@ -1615,9 +1879,19 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	return isSitting && !sittingBan;
     }
 
+    public void setIsSitting(boolean b)
+    {
+    	isSitting = b;
+    }
+
     public boolean getFirstPerson()
     {
     	return firstPerson;
+    }
+
+    public void setFirstPerson(boolean b)
+    {
+    	firstPerson = b;
     }
 
     public boolean getOldwalking()
@@ -1629,6 +1903,46 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	oldwalking = b;
     }
 
+    public boolean getIsPlayer()
+    {
+    	return isPlayer;
+    }
+
+    public void setIsPlayer(boolean b)
+    {
+    	isPlayer = b;
+    }
+
+    public boolean getActionFlag()
+    {
+    	return actionFlag;
+    }
+
+    public void setActionFlag(boolean b)
+    {
+    	actionFlag = b;
+    }
+
+    public int getActionCount()
+    {
+    	return actionCount;
+    }
+
+    public void setActionCount(int i)
+    {
+    	actionCount = i;
+    }
+
+    public int getArmorType()
+    {
+    	return armorType;
+    }
+
+    public void setArmorType(int i)
+    {
+    	armorType = i;
+    }
+
     public float getMotionY()
     {
     	return motionY;
@@ -1636,6 +1950,66 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
 
     public void setMotionY(float f) {
     	motionY = f;
+    }
+
+    public boolean getSneakBan()
+    {
+    	return sneakBan;
+    }
+
+    public boolean getAimedBowBan()
+    {
+    	return aimedBowBan;
+    }
+
+    public boolean getWaitBan()
+    {
+    	return waitBan;
+    }
+
+    public boolean getSittingBan()
+    {
+    	return sittingBan;
+    }
+
+    public boolean getSleepingBan()
+    {
+    	return sleepingBan;
+    }
+
+    public boolean getRidingBan()
+    {
+    	return ridingBan;
+    }
+
+    public void setAimedBowBan(boolean b)
+    {
+    	aimedBowBan = b;
+    }
+
+    public void setSneakBan(boolean b)
+    {
+    	sneakBan = b;
+    }
+
+    public void setWaitBan(boolean b)
+    {
+    	waitBan = b;
+    }
+
+    public void setSittingBan(boolean b)
+    {
+    	sittingBan = b;
+    }
+
+    public void setSleepingBan(boolean b)
+    {
+    	sleepingBan = b;
+    }
+
+    public void setRidingBan(boolean b)
+    {
+    	ridingBan = b;
     }
 
     public int getPartsSetFlag()
@@ -1680,27 +2054,13 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	return skirtFloats;
     }
 
-    public void renderFirstPersonHand(float f) {
-    	getBipedRightArm().render(f);
-    }
-
-    public ModelRenderer getBipedHead() {
-    	return bipedHead;
-    }
-
-    public ModelRenderer getBipedRightArm() {
-    	if (getHandedness() == 0) return bipedRightArm;
-    	return bipedLeftArm;
-    }
-
-    public ModelRenderer getNotDominantArm() {
-    	if (getHandedness() == 0) return bipedLeftArm;
-    	return bipedRightArm;
-    }
-
     public int getHandedness() {
     	if (handedness > -1) return handedness;
     	return 0;
+    }
+
+    public void setHandedness(int i) {
+    	handedness = i;
     }
 
     public void setVisible(ModelRenderer modelRenderer, boolean b) {
@@ -1710,10 +2070,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	} else {
     		modelRenderer.showModel = b;
     	}
-    }
-
-    public float Physical_Hammer() {
-    	return (Float) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "Physical_Hammer");
     }
 
     public boolean getIsLookSuger(Entity entity) {
@@ -1749,6 +2105,10 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	return false;
     }
 
+    public void setIsInventory(boolean b) {
+    	isInventory = b;
+    }
+
     public float convertDegtoRad(float deg) {
     	return deg / 180F * (float)Math.PI;
     }
@@ -1767,28 +2127,128 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped {
     	pastZ[0] = z;
     }
 
+    public float[] getPastX() {
+    	return pastX;
+    }
+
+    public float[] getPastY() {
+    	return pastY;
+    }
+
+    public float[] getPastZ() {
+    	return pastZ;
+    }
+
+    public void setPastX(float[] f) {
+    	pastX = f;
+    }
+
+    public void setPastY(float[] f) {
+    	pastY = f;
+    }
+
+    public void setPastZ(float[] f) {
+    	pastZ = f;
+    }
+
+    public void setPastX(int i, float f) {
+    	pastX[i] = f;
+    }
+
+    public void setPastY(int i, float f) {
+    	pastY[i] = f;
+    }
+
+    public void setPastZ(int i, float f) {
+    	pastZ[i] = f;
+    }
+
+    public boolean getModchuRemodelingModel() {
+    	return modchuRemodelingModel;
+    }
+
+    public void setModchuRemodelingModel(boolean b) {
+    	modchuRemodelingModel = b;
+    }
+
+    public float getActionSpeed() {
+    	return actionSpeed;
+    }
+
+    public void setActionSpeed(float f) {
+    	actionSpeed = f;
+    }
+
+    public boolean getActionReverse() {
+    	return actionReverse;
+    }
+
+    public void setActionReverse(boolean b) {
+    	actionReverse = b;
+    }
+
     public String getTexture(Entity entity, String s, int i) {
     	if (mod_PFLM_PlayerFormLittleMaid != null
-    			&& entity instanceof EntityPlayer) {
-    		return (String) getObjectInvokeMethod(mod_PFLM_PlayerFormLittleMaid, "textureManagerGetTextureName", new Class[]{ String.class, int.class }, new Object[]{ s, i });
+    			&& entity instanceof EntityPlayer
+    			| (PFLM_EntityPlayerDummy != null
+    			&& PFLM_EntityPlayerDummy.isInstance(entity))) {
+    		return (String) getObjectInvokeMethod(mod_PFLM_PlayerFormLittleMaid, "textureManagerGetTextureName", new Class[]{ String.class, int.class }, null, new Object[]{ s, i });
     	} else
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entity)) {
-    		return MMM_TextureManager.getTextureName(s, i);
+    		return (String) Modchu_Reflect.invokeMethod(MMM_TextureManager, "getTextureName", new Class[]{ String.class, int.class }, null, new Object[]{ s, i });
     	}
     	return null;
     }
 
     public int getMaidColor(Entity entity) {
-    	if (entity instanceof EntityPlayer) {
-    		Object modelData = Modchu_Reflect.invokeMethod(PFLM_RenderPlayer, "getPlayerData", new Class[]{ EntityPlayer.class }, new Object[]{ entity });
-    		if (modelData != null) return (Integer) Modchu_Reflect.getFieldObject(modelData.getClass(), "maidColor", modelData);
+    	if (mod_PFLM_PlayerFormLittleMaid != null
+    			&& entity instanceof EntityPlayer
+    			| (PFLM_EntityPlayerDummy != null
+    			&& PFLM_EntityPlayerDummy.isInstance(entity))) {
+    		if (entity instanceof EntityPlayer) {
+    			if (mc.currentScreen != null
+    					&& PFLM_Gui.isInstance(mc.currentScreen)) {
+    				Modchu_Debug.mDebug("getMaidColor "+Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "maidColor"));
+    				return (Integer) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "maidColor");
+    			}
+    			Object modelData = Modchu_Reflect.invokeMethod(PFLM_RenderPlayer, "getPlayerData", new Class[]{ EntityPlayer.class }, null, new Object[]{ entity });
+    			if (modelData != null) return (Integer) Modchu_Reflect.getFieldObject(modelData.getClass(), "maidColor", modelData);
+    		} else {
+    			if (mc.currentScreen != null) ;else return 0;
+    			if (PFLM_Gui.isInstance(mc.currentScreen)) return (Integer) Modchu_Reflect.getFieldObject(PFLM_Gui, "setColor");
+    			if (PFLM_GuiModelSelect.isInstance(mc.currentScreen)) return (Integer) Modchu_Reflect.getFieldObject(PFLM_GuiModelSelect, "modelColor", mc.currentScreen);
+    			if (PFLM_GuiOthersPlayerIndividualCustomize.isInstance(mc.currentScreen)) return (Integer) Modchu_Reflect.getFieldObject(PFLM_GuiOthersPlayerIndividualCustomize, "othersMaidColor");
+    			if (PFLM_GuiOthersPlayer.isInstance(mc.currentScreen)) return (Integer) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "othersMaidColor");
+    		}
     	} else
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entity)) {
-    		return (Integer) Modchu_Reflect.invokeMethod(LMM_EntityLittleMaid, "maidColor", entity);
+    		return (Integer) Modchu_Reflect.getFieldObject(LMM_EntityLittleMaid, "maidColor", entity);
     	}
     	return 0;
+    }
+
+    public float Physical_Hammer() {
+    	return (Float) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "Physical_Hammer");
+    }
+
+    public ModelRenderer getBipedHead() {
+    	return bipedHead;
+    }
+
+    public ModelRenderer getBipedRightArm() {
+    	if ((Integer) getCapsValue(caps_getHandedness) == 0) return bipedRightArm;
+    	return bipedLeftArm;
+    }
+
+    public ModelRenderer getNotDominantArm() {
+    	if ((Integer) getCapsValue(caps_getHandedness) == 0) return bipedLeftArm;
+    	return bipedRightArm;
+    }
+
+	public void renderFirstPersonHand(float f) {
+    	((ModelRenderer) getCapsValue(caps_getBipedRightArm)).render(f);
     }
 
     public String getClassName(String s) {

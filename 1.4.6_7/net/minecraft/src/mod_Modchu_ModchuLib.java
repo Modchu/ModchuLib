@@ -35,6 +35,9 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static Class mod_PFLM_PlayerFormLittleMaid;
 	public static Class mod_LMM_littleMaidMob;
 	public static Class PFLM_Gui;
+	public static Class PFLM_GuiModelSelect;
+	public static Class PFLM_GuiOthersPlayer;
+	public static Class PFLM_GuiOthersPlayerIndividualCustomize;
 	public static Class PFLM_EntityPlayerDummy;
 	public static Class PFLM_RenderPlayer;
 	public static Class PFLM_RenderPlayer2;
@@ -156,7 +159,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.4.6~7-1h";
+		return "1.4.6~7-1i";
 	}
 
 	@Override
@@ -176,18 +179,25 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 			MMM_StabilizerManager = Modchu_Reflect.loadClass(getClassName("Modchu_StabilizerManager"));
 			Modchu_Reflect.invokeMethod(MMM_StabilizerManager, "init");
 //@-@125
+		} else {
+			MMM_TextureManager = Modchu_Reflect.loadClass(getClassName("MMM_TextureManager"));
+			MMM_FileManager = Modchu_Reflect.loadClass(getClassName("MMM_FileManager"));
+			MMM_StabilizerManager = Modchu_Reflect.loadClass(getClassName("MMM_StabilizerManager"));
 		}
 
 		mod_LMM_littleMaidMob = Modchu_Reflect.loadClass(getClassName("mod_LMM_littleMaidMob"), false);
 		if (mod_LMM_littleMaidMob != null) {
 			isLMM = true;
-			LMM_EntityLittleMaid = (Class) Modchu_Reflect.loadClass(getClassName("LMM_EntityLittleMaid"));
+			LMM_EntityLittleMaid = Modchu_Reflect.loadClass(getClassName("LMM_EntityLittleMaid"));
 		}
 
 		mod_PFLM_PlayerFormLittleMaid = Modchu_Reflect.loadClass(getClassName("mod_PFLM_PlayerFormLittleMaid"), false);
 		if (mod_PFLM_PlayerFormLittleMaid != null) {
 			isPFLM = true;
 			PFLM_Gui = Modchu_Reflect.loadClass(getClassName("PFLM_Gui"));
+			PFLM_GuiModelSelect = Modchu_Reflect.loadClass(getClassName("PFLM_GuiModelSelect"));
+			PFLM_GuiOthersPlayer = Modchu_Reflect.loadClass(getClassName("PFLM_GuiOthersPlayer"));
+			PFLM_GuiOthersPlayerIndividualCustomize = Modchu_Reflect.loadClass(getClassName("PFLM_GuiOthersPlayerIndividualCustomize"));
 			PFLM_EntityPlayerDummy = Modchu_Reflect.loadClass(getClassName("PFLM_EntityPlayerDummy"));
 			PFLM_RenderPlayer = Modchu_Reflect.loadClass(getClassName("PFLM_RenderPlayer"));
 		}
