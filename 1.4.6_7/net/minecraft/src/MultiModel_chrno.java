@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class MultiModel_chrno extends MultiModel
-{
+public class MultiModel_chrno extends MultiModel {
 
     public Modchu_ModelRenderer RibonL;
     public Modchu_ModelRenderer RibonR;

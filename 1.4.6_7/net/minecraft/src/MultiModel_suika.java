@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class MultiModel_suika extends MultiModel
-{
+public class MultiModel_suika extends MultiModel {
 
     public Modchu_ModelRenderer RibonL;
     public Modchu_ModelRenderer RibonR;

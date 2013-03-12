@@ -143,7 +143,7 @@ public class MultiModel_Elsa2 extends MultiModel_SR2 {
     	leftArmPlus = new Modchu_ModelRenderer(this);
 
     	leftArm2 = new Modchu_ModelRenderer(this, 50, 22);
-    	leftArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 2, 2, f);
+    	leftArm2.addBox(-1.0F, 0.0F, -1.0F, 2, 3, 2, f);
     	leftArm2.setRotationPoint(0.0F, 2.0F, 0.0F);
     	leftArm.addChild(leftArm2);
 
@@ -338,33 +338,37 @@ public class MultiModel_Elsa2 extends MultiModel_SR2 {
     			bipedLeftArm.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.05F;
     		}
     	}
-    	if (getSkirtFloats()) {
-    		SkirtBack.rotateAngleX = SkirtRight.rotateAngleX = SkirtLeft.rotateAngleX = SkirtFront.rotateAngleX = 0.0F;
-    		SkirtBack.rotateAngleY = SkirtRight.rotateAngleY = SkirtLeft.rotateAngleY = SkirtFront.rotateAngleY = 0.0F;
-    		SkirtBack.rotateAngleZ = SkirtRight.rotateAngleZ = SkirtLeft.rotateAngleZ = SkirtFront.rotateAngleZ = 0.0F;
+    	skirtFloats(f, f1, f2, f3, f4, f5, entity);
+    }
 
-    		SkirtTop.setRotationPoint(-4.0F, -3.0F, 3.0F);
-    		SkirtFront.setRotationPoint(-4.0F, -3.0F, -2.5F);
-    		SkirtRight.setRotationPoint(-8.0F, -3.0F, -2.5F);
-    		SkirtLeft.setRotationPoint(0.0F, -3.0F, 3.0F);
-    		SkirtBack.setRotationPoint(-4.0F, -3.0F, 3.0F);
-    		SkirtFront.rotationPointX += motionY * 4.0F;
-    		SkirtBack.rotationPointX += motionY * 4.0F;
-    		SkirtRight.rotationPointY += motionY * 2.0F;
-    		SkirtRight.rotationPointZ += motionY * 4.0F;
-    		SkirtLeft.rotationPointY -= motionY * 2.0F;
-    		SkirtLeft.rotationPointZ -= motionY * 4.0F;
+    @Override
+    public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    	if (!getSkirtFloats()) return;
+    	SkirtBack.rotateAngleX = SkirtRight.rotateAngleX = SkirtLeft.rotateAngleX = SkirtFront.rotateAngleX = 0.0F;
+    	SkirtBack.rotateAngleY = SkirtRight.rotateAngleY = SkirtLeft.rotateAngleY = SkirtFront.rotateAngleY = 0.0F;
+    	SkirtBack.rotateAngleZ = SkirtRight.rotateAngleZ = SkirtLeft.rotateAngleZ = SkirtFront.rotateAngleZ = 0.0F;
 
-    		SkirtRight.rotateAngleY = 3.141592653F;
-    		SkirtTop.rotateAngleX = -1.570796313F;
-    		SkirtFront.rotateAngleX += motionY;
-    		SkirtRight.rotateAngleZ += -motionY / 2.0F;
-    		SkirtLeft.rotateAngleZ += motionY / 2.0F;
-    		SkirtBack.rotateAngleX += -motionY;
+    	SkirtTop.setRotationPoint(-4.0F, -3.0F, 3.0F);
+    	SkirtFront.setRotationPoint(-4.0F, -3.0F, -2.5F);
+    	SkirtRight.setRotationPoint(-8.0F, -3.0F, -2.5F);
+    	SkirtLeft.setRotationPoint(0.0F, -3.0F, 3.0F);
+    	SkirtBack.setRotationPoint(-4.0F, -3.0F, 3.0F);
+    	SkirtFront.rotationPointX += motionY * 4.0F;
+    	SkirtBack.rotationPointX += motionY * 4.0F;
+    	SkirtRight.rotationPointY += motionY * 2.0F;
+    	SkirtRight.rotationPointZ += motionY * 4.0F;
+    	SkirtLeft.rotationPointY -= motionY * 2.0F;
+    	SkirtLeft.rotationPointZ -= motionY * 4.0F;
 
-    		((Modchu_ModelRenderer) SkirtFront).scaleX = ((Modchu_ModelRenderer) SkirtBack).scaleX = 1.0F - (getMotionY() * 1.0F);
-    		((Modchu_ModelRenderer) SkirtRight).scaleZ = ((Modchu_ModelRenderer) SkirtLeft).scaleZ = 1.0F - (getMotionY() * 1.0F);
-    	}
+    	SkirtRight.rotateAngleY = 3.141592653F;
+    	SkirtTop.rotateAngleX = -1.570796313F;
+    	SkirtFront.rotateAngleX += motionY;
+    	SkirtRight.rotateAngleZ += -motionY / 2.0F;
+    	SkirtLeft.rotateAngleZ += motionY / 2.0F;
+    	SkirtBack.rotateAngleX += -motionY;
+
+    	((Modchu_ModelRenderer) SkirtFront).scaleX = ((Modchu_ModelRenderer) SkirtBack).scaleX = 1.0F - (getMotionY() * 1.0F);
+    	((Modchu_ModelRenderer) SkirtRight).scaleZ = ((Modchu_ModelRenderer) SkirtLeft).scaleZ = 1.0F - (getMotionY() * 1.0F);
     }
 
     @Override

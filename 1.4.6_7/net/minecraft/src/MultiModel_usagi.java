@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class MultiModel_usagi extends MultiModel
-{
+public class MultiModel_usagi extends MultiModel {
 
     public Modchu_ModelRenderer WTail;
     public Modchu_ModelRenderer CatEL;
@@ -30,10 +29,9 @@ public class MultiModel_usagi extends MultiModel
     	this(f, f1 , 64, 32);
     }
 
-	public MultiModel_usagi(float f, float f1, int i, int j) {
-		super(f, f1, i, j);
-//@-@132
-	}
+    public MultiModel_usagi(float f, float f1, int i, int j) {
+    	super(f, f1, i, j);
+    }
 
 	@Override
 	public void initModel(float f, float f1) {

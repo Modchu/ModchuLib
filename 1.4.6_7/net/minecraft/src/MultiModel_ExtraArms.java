@@ -3,8 +3,7 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class MultiModel_ExtraArms extends MultiModel
-{
+public class MultiModel_ExtraArms extends MultiModel {
 
     public Modchu_ModelRenderer Backpack;
     public Modchu_ModelRenderer Antena;

@@ -48,12 +48,38 @@ public class Modchu_Reflect
     	}
     }
 
+    public static void setFieldObject(Class var0, String var1, String var2, Object var3)
+    {
+    	try {
+    		getField(var0, var1).set(null, var3);
+    	} catch (Exception e) {
+    		try {
+    			getField(var0, var2).set(null, var3);
+    		} catch (Exception e1) {
+    			if (debugReflectMessage) e1.printStackTrace();
+    		}
+    	}
+    }
+
     public static void setFieldObject(Class var0, String var1, Object var2, Object var4)
     {
     	try {
     		getField(var0, var1).set(var2, var4);
     	} catch (Exception e) {
     		if (debugReflectMessage) e.printStackTrace();
+    	}
+    }
+
+    public static void setFieldObject(Class var0, String var1, String var2, Object var3, Object var4)
+    {
+    	try {
+    		getField(var0, var1).set(var3, var4);
+    	} catch (Exception e) {
+    		try {
+    			getField(var0, var2).set(var3, var4);
+    		} catch (Exception e1) {
+    			if (debugReflectMessage) e1.printStackTrace();
+    		}
     	}
     }
 
@@ -77,10 +103,25 @@ public class Modchu_Reflect
     	return null;
     }
 
-    public static Object getFieldObject(Class var0, String var2)
+    public static Object getFieldObject(Class var0, String var1)
+    {
+    	return getFieldObject(var0, var1, debugReflectMessage);
+    }
+
+    public static Object getFieldObject(Class var0, String var1, boolean var2)
     {
     	try {
-    		return getField(var0, var2).get(null);
+    		return getField(var0, var1).get(null);
+    	} catch (Exception e) {
+    		if (var2) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    public static Object getFieldObject(Class var0, String var1, String var2)
+    {
+    	try {
+    		return getField(var0, var1, var2).get(null);
     	} catch (Exception e) {
     		if (debugReflectMessage) e.printStackTrace();
     	}
@@ -107,6 +148,51 @@ public class Modchu_Reflect
     	return null;
     }
 
+    public static Object getFieldObject(String var0, String var1, String var2)
+    {
+    	try {
+    		return getField(loadClass(var0), var1, var2).get(null);
+    	} catch (Exception e) {
+    		if (debugReflectMessage) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    public static Object getFieldObject(String var0, String var1, Object var2)
+    {
+    	try {
+    		return getField(loadClass(var0), var1).get(var2);
+    	} catch (Exception e) {
+    		if (debugReflectMessage) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    public static Object getFieldObject(String var0, String var1)
+    {
+    	return getFieldObject(var0, var1, debugReflectMessage);
+    }
+
+    public static Object getFieldObject(String var0, String var1, boolean var2)
+    {
+    	try {
+    		return getField(loadClass(var0), var1).get(null);
+    	} catch (Exception e) {
+    		if (var2) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    public static Object getFieldObject(String var0, String var1, String var2, Object var3)
+    {
+    	try {
+    		return getField(loadClass(var0), var1, var2).get(var3);
+    	} catch (Exception e) {
+    		if (debugReflectMessage) e.printStackTrace();
+    	}
+    	return null;
+    }
+
     public static Field getField(Class var0, String var1, String var2) {
     	Field field = getField(var0, var2);
     	if (field != null) return field;
@@ -118,6 +204,24 @@ public class Modchu_Reflect
     	Field var4 = null;
     	try {
     		var4 = getRawField(var0, var1);
+    		var4.setAccessible(true);
+    	} catch (Exception e) {
+    		if (debugReflectMessageDetail) e.printStackTrace();
+    	}
+    	return var4;
+    }
+
+    public static Field getField(String var0, String var1, String var2) {
+    	Field field = getField(loadClass(var0), var2);
+    	if (field != null) return field;
+    	return getField(var0, var1);
+    }
+
+    public static Field getField(String var0, String var1)
+    {
+    	Field var4 = null;
+    	try {
+    		var4 = getRawField(loadClass(var0), var1);
     		var4.setAccessible(true);
     	} catch (Exception e) {
     		if (debugReflectMessageDetail) e.printStackTrace();
@@ -159,12 +263,17 @@ public class Modchu_Reflect
 
     public static Method getMethod(Class var0, String var1)
     {
+    	return getMethod(var0, var1, debugReflectMessage);
+    }
+
+    public static Method getMethod(Class var0, String var1, boolean b)
+    {
     	Method var5 = null;
     	try {
     		var5 = getRawMethod(var0, var1, null);
     		var5.setAccessible(true);
     	} catch (Exception e) {
-    		if (debugReflectMessage) e.printStackTrace();
+    		if (b) e.printStackTrace();
     	}
     	return var5;
     }
@@ -459,7 +568,9 @@ public class Modchu_Reflect
     	Class c = null;
     	try {
     		c = Class.forName(var0);
-    	} catch (ClassNotFoundException e) {
+    	} catch (NoClassDefFoundError e) {
+    		if (b) e.printStackTrace();
+    	} catch (Exception e) {
     		if (b) e.printStackTrace();
     	}
     	return c;
@@ -481,6 +592,9 @@ public class Modchu_Reflect
     		return var1.getConstructor(var2).newInstance(var3);
     	} catch (Exception e) {
     		if (debugReflectMessage) e.printStackTrace();
+    		else {
+    			e.printStackTrace();
+    		}
     	}
     	return null;
     }

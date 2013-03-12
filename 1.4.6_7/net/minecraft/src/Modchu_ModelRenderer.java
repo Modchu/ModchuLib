@@ -38,6 +38,10 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public static final int RotYZX = 3;
 	public static final int RotZXY = 4;
 	public static final int RotZYX = 5;
+	public static final int ModeEquip = 0x000;
+	public static final int ModeInventory = 0x001;
+	public static final int ModeItemStack = 0x002;
+	public static final int ModeParts = 0x010;
 	private int textureOffsetX;
 	private int textureOffsetY;
 	private boolean compiled = false;
@@ -48,6 +52,10 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public boolean adjust;
 	public FloatBuffer matrix;
 	public boolean isInvertX;
+	public float scaleX;
+	public float scaleY;
+	public float scaleZ;
+	public ModelRenderer pearent;
 
 	//SmartMoving共通
 	protected ModelRenderer base;
@@ -57,9 +65,6 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public static final int YZX = RotXZY;
 	public static final int ZXY = RotYXZ;
 	public static final int ZYX = RotXYZ;
-	public float scaleX;
-	public float scaleY;
-	public float scaleZ;
 	public boolean ignoreRender;
 	public boolean forceRender;
 	public boolean ignoreBase;
@@ -76,12 +81,10 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public boolean fadeRotationPointZ;
 	public Class RendererData;
 	public Object previous;
-
-//-@-132
 	public float offsetX = 0.0F;
 	public float offsetY = 0.0F;
 	public float offsetZ = 0.0F;
-//@-@132
+
 /*//b181delete
     public List cubeList;
     public List childModels;
@@ -141,6 +144,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	matrix = BufferUtils.createFloatBuffer(16);
     	isInvertX = false;
     	baseModel = modelbase;
+    	pearent = null;
     	RendererData = mod_Modchu_ModchuLib.RendererData;
 /*//b181delete
         cubeList = new ArrayList();
@@ -265,13 +269,16 @@ public class Modchu_ModelRenderer extends ModelRenderer
     			float sy = scale;
     			float sz = scale;
     			float var6;
+//-@-132
     			if (pRealBlock && item.itemID == Item.skull.itemID) {
     				scale = 1.0625F * scale;
     				sx = scale;
     				sy = -scale;
     				sz = -scale;
     			}
-    			else if (itemstack.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType())) {
+    			else
+//@-@132
+    				if (itemstack.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType())) {
     				var6 = 0.5F;
 //    				GL11.glTranslatef(0.0F, 0.1875F, -0.3125F);
     				GL11.glTranslatef(0.0F, 0.1875F, -0.2125F);
@@ -319,7 +326,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     			GL11.glScalef(sx, sy, sz);
     		}
     	}
-
+//-@-132
     	if (pRealBlock && item.itemID == Item.skull.itemID)
     	{
     		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -329,33 +336,50 @@ public class Modchu_ModelRenderer extends ModelRenderer
     			var6 = itemstack.getTagCompound().getString("SkullOwner");
     		}
     		TileEntitySkullRenderer.skullRenderer.func_82393_a(-0.5F, 0.0F, -0.5F, 1, 180.0F, itemstack.getItemDamage(), var6);
-    	} else if (pRealBlock && itemstack.getItem() instanceof ItemBlock) {
-    		pRender.loadTexture("/terrain.png");
+    	} else
+//@-@132
+    	if (pRealBlock && itemstack.getItem() instanceof ItemBlock) {
+
+    		String s1 = "/terrain.png";
+    		if (mod_Modchu_ModchuLib.isForge) {
+    			s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", Item.itemsList[itemstack.itemID]);
+    			//Modchu_Debug.Debug("isForge pRender.loadTexture s1="+s1);
+    		}
+    		pRender.loadTexture(s1);
+
     		GL11.glEnable(GL11.GL_CULL_FACE);
     		pRender.renderBlocks.renderBlockAsItem(Block.blocksList[itemstack.itemID], itemstack.getItemDamage(), 1.0F);
     		GL11.glDisable(GL11.GL_CULL_FACE);
     	} else {
-    		// アイテムに色付け
-    		String s1 = "/gui/items.png";
-    		int renderPasses = itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0;
-    		if (mod_Modchu_ModchuLib.isForge) {
-    			if (renderPasses == 1) renderPasses =
-    					(Integer) Modchu_Reflect.invokeMethod(Item.class, "getRenderPasses", new Class[]{ int.class },
-    							itemstack.getItem(), new Object[]{ itemstack.getItemDamage() }) - 1;
-    			s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", itemstack.getItem());
-    			//Modchu_Debug.Debug("isForge pRender.loadTexture s1="+s1+" renderPasses="+renderPasses);
-    		} else if (mod_Modchu_ModchuLib.isBTW
-    				&& isBTWItem(itemstack.getItem())) {
-    			s1 = "/btwmodtex/btwitems01.png";
-    		}
-    		pRender.loadTexture(s1);
-    		for (int j = 0; j <= renderPasses; j++) {
-    			int k = itemstack.getItem().getColorFromItemStack(itemstack, j);
-    			float f15 = (float)(k >> 16 & 0xff) / 255F;
-    			float f17 = (float)(k >> 8 & 0xff) / 255F;
-    			float f19 = (float)(k & 0xff) / 255F;
-    			GL11.glColor4f(f15, f17, f19, 1.0F);
-    			pRender.renderManager.itemRenderer.renderItem(pEntityLiving, itemstack, j);
+    		if (pRender.renderManager != null
+    				&& pRender.renderManager.itemRenderer != null) {
+    			// アイテムに色付け
+    			int renderPasses = itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0;
+
+    			String s1 = "/gui/items.png";
+    			if (mod_Modchu_ModchuLib.isForge) {
+    				if (renderPasses == 1) renderPasses =
+    						(Integer) Modchu_Reflect.invokeMethod(Item.class, "getRenderPasses", new Class[]{ int.class },
+    								itemstack.getItem(), new Object[]{ itemstack.getItemDamage() }) - 1;
+    				s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", itemstack.getItem());
+    				//Modchu_Debug.Debug("isForge pRender.loadTexture s1="+s1+" renderPasses="+renderPasses);
+    			} else if (mod_Modchu_ModchuLib.isBTW
+    					&& isBTWItem(itemstack.getItem())) {
+    				s1 = "/btwmodtex/btwitems01.png";
+    			}
+    			pRender.loadTexture(s1);
+
+    			for (int j = 0; j <= renderPasses; j++) {
+    				if (!mod_Modchu_ModchuLib.isSSP
+    						| renderPasses > 0) {
+    					int k = itemstack.getItem().getColorFromItemStack(itemstack, j);
+    					float f15 = (float)(k >> 16 & 0xff) / 255F;
+    					float f17 = (float)(k >> 8 & 0xff) / 255F;
+    					float f19 = (float)(k & 0xff) / 255F;
+    					GL11.glColor4f(f15, f17, f19, 1.0F);
+    				}
+    				pRender.renderManager.itemRenderer.renderItem(pEntityLiving, itemstack, j);
+    			}
     		}
     	}
 
@@ -373,7 +397,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	int particleFrequency = 98;
     	String particleString = null;
     	float translatefX = 0.0F;
-    	float translatefY = mod_Modchu_ModchuLib.isForge ? 0.5F : 0.0F;
+    	float translatefY = 0.5F;
     	float translatefZ = 0.0F;
     	//addSupport = 0 DecoBlock
     	//addSupport = 1 DecoBlockBase
@@ -393,13 +417,13 @@ public class Modchu_ModelRenderer extends ModelRenderer
     		flag = rotate = true;
     		translatef = true;
     		translatefX = 0.0F;
-    		translatefY = mod_Modchu_ModchuLib.isForge ? 0.4F : -0.1F;
+    		translatefY = 0.4F;
     		translatefZ = 0.0F;
     		particle = true;
     		particleString = "instantSpell";
     		particleFrequency = 80;
     	}
-		if (mod_Modchu_ModchuLib.isForge) GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
+    	GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
 
     	if (flag) {
     		pRender.loadTexture("/terrain.png");
@@ -623,6 +647,10 @@ public class Modchu_ModelRenderer extends ModelRenderer
     			&& !compiled)
     	{
     		compileDisplayList(par1);
+    	}
+
+    	if (pearent != null) {
+    		pearent.postRender(par1);
     	}
 
     	if (rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F) {
@@ -1249,27 +1277,28 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
     public void fadeIntermediate(float var1)
     {
-    	float totalTime = (Float)Modchu_Reflect.getFieldObject(RendererData, "totalTime", previous);
-    	float previousOffsetX = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetX", previous);
-    	float previousOffsetY = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetY", previous);
-    	float previousOffsetZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetZ", previous);
-    	float previousRotateAngleX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleX", previous);
-    	float previousRotateAngleY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleY", previous);
-    	float previousRotateAngleZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleZ", previous);
-    	float previousRotationPointX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointX", previous);
-    	float previousRotationPointY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointY", previous);
-    	float previousRotationPointZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointZ", previous);
-    	if (previous != null && var1 - totalTime <= 2.0F)
-    	{
-    		offsetX = GetIntermediatePosition(previousOffsetX, offsetX, fadeOffsetX, totalTime, var1);
-    		offsetY = GetIntermediatePosition(previousOffsetY, offsetY, fadeOffsetY, totalTime, var1);
-    		offsetZ = GetIntermediatePosition(previousOffsetZ, offsetZ, fadeOffsetZ, totalTime, var1);
-    		rotateAngleX = GetIntermediateAngle(previousRotateAngleX, rotateAngleX, fadeRotateAngleX, totalTime, var1);
-    		rotateAngleY = GetIntermediateAngle(previousRotateAngleY, rotateAngleY, fadeRotateAngleY, totalTime, var1);
-    		rotateAngleZ = GetIntermediateAngle(previousRotateAngleZ, rotateAngleZ, fadeRotateAngleZ, totalTime, var1);
-    		rotationPointX = GetIntermediatePosition(previousRotationPointX, rotationPointX, fadeRotationPointX, totalTime, var1);
-    		rotationPointY = GetIntermediatePosition(previousRotationPointY, rotationPointY, fadeRotationPointY, totalTime, var1);
-    		rotationPointZ = GetIntermediatePosition(previousRotationPointZ, rotationPointZ, fadeRotationPointZ, totalTime, var1);
+    	if (previous != null) {
+    		float totalTime = (Float)Modchu_Reflect.getFieldObject(RendererData, "totalTime", previous);
+    		if (var1 - totalTime <= 2.0F) {
+    			float previousOffsetX = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetX", previous);
+    			float previousOffsetY = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetY", previous);
+    			float previousOffsetZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "offsetZ", previous);
+    			float previousRotateAngleX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleX", previous);
+    			float previousRotateAngleY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleY", previous);
+    			float previousRotateAngleZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotateAngleZ", previous);
+    			float previousRotationPointX = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointX", previous);
+    			float previousRotationPointY = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointY", previous);
+    			float previousRotationPointZ = (Float)Modchu_Reflect.getFieldObject(RendererData, "rotationPointZ", previous);
+    			offsetX = GetIntermediatePosition(previousOffsetX, offsetX, fadeOffsetX, totalTime, var1);
+    			offsetY = GetIntermediatePosition(previousOffsetY, offsetY, fadeOffsetY, totalTime, var1);
+    			offsetZ = GetIntermediatePosition(previousOffsetZ, offsetZ, fadeOffsetZ, totalTime, var1);
+    			rotateAngleX = GetIntermediateAngle(previousRotateAngleX, rotateAngleX, fadeRotateAngleX, totalTime, var1);
+    			rotateAngleY = GetIntermediateAngle(previousRotateAngleY, rotateAngleY, fadeRotateAngleY, totalTime, var1);
+    			rotateAngleZ = GetIntermediateAngle(previousRotateAngleZ, rotateAngleZ, fadeRotateAngleZ, totalTime, var1);
+    			rotationPointX = GetIntermediatePosition(previousRotationPointX, rotationPointX, fadeRotationPointX, totalTime, var1);
+    			rotationPointY = GetIntermediatePosition(previousRotationPointY, rotationPointY, fadeRotationPointY, totalTime, var1);
+    			rotationPointZ = GetIntermediatePosition(previousRotationPointZ, rotationPointZ, fadeRotationPointZ, totalTime, var1);
+    		}
     	}
     }
 

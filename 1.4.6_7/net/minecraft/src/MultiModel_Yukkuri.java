@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class MultiModel_Yukkuri extends MultiModel
-{
+public class MultiModel_Yukkuri extends MultiModel {
 
     public Modchu_ModelRenderer eyeL;
     public Modchu_ModelRenderer eyeR;
@@ -359,6 +358,10 @@ public class MultiModel_Yukkuri extends MultiModel
     }
 
     @Override
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
+    @Override
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
     	SideTailL.rotateAngleX = SideTailR.rotateAngleX = -0.262F;
@@ -648,6 +651,10 @@ public class MultiModel_Yukkuri extends MultiModel
     }
 
     @Override
+    public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    }
+
+    @Override
     public void defaultPartsSettingBefore() {
     	super.defaultPartsSettingBefore();
     	String[] s1 = {
@@ -663,6 +670,14 @@ public class MultiModel_Yukkuri extends MultiModel
     			"B_hair5"
     	};
     	addShowPartsReneme(s1, s2);
+    }
+
+    @Override
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	if (getSkirtFloats()) {
+    		setVisible(Skirt, getGuiParts().get("Skirt"));
+    	}
     }
 
     @Override

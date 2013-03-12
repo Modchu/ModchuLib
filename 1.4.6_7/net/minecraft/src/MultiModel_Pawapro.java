@@ -2,8 +2,8 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class MultiModel_Pawapro extends MultiModel
-{
+public class MultiModel_Pawapro extends MultiModel {
+
     public Modchu_ModelRenderer tuba1;
     public Modchu_ModelRenderer tuba2;
     public Modchu_ModelRenderer HandR;

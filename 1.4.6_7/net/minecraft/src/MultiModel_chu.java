@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-public class MultiModel_chu extends MultiModel
-{
+public class MultiModel_chu extends MultiModel {
+
     public Modchu_ModelRenderer CatEL;
     public Modchu_ModelRenderer CatER;
     public Modchu_ModelRenderer CatTail;

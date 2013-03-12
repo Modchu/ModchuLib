@@ -634,7 +634,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
     	if (getSkirtFloats()) {
-    		setVisible(Skirt, false);
+    		setVisible(Skirt, getGuiParts().get("Skirt"));
     	}
     }
 

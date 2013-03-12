@@ -642,6 +642,10 @@ public class MultiModel_Yukari extends MultiModel_Aug
     	actionPartsInit(f, f1);
     }
 
+    @Override
+    public void skirtFloatsInit(float f, float f1) {
+    }
+
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
     	float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
@@ -685,6 +689,10 @@ public class MultiModel_Yukari extends MultiModel_Aug
     }
 
     @Override
+    public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+    }
+
+    @Override
     public void defaultPartsSettingBefore() {
     	super.defaultPartsSettingBefore();
     	String[] s1 = {
@@ -693,9 +701,9 @@ public class MultiModel_Yukari extends MultiModel_Aug
     			"RabbitEar_L3", "RabbitEar_L4", "HairOrnament_R", "HairOrnament_L", "Accessory_S1",
     			"Accessory_S2", "Accessory_B1", "Accessory_B2", "Accessory_H", "Accessory_HRF1",
     			"Accessory_HRF2", "Accessory_HRF3", "Accessory_HR1", "Accessory_HR2", "Accessory_HLF1",
-    			"Accessory_HLF2", "Accessory_HL1", "Accessory_HL2", "Accessory_HB1", "Accessory_HB2",
-    			"ArmAccessory_RF", "ArmAccessory_RB", "ArmAccessory_RR", "ArmAccessory_RL", "ArmAccessory_R",
-    			"BeltAccessory_L"
+    			"Accessory_HLF2", "Accessory_HLF3", "Accessory_HL1", "Accessory_HL2", "Accessory_HB1",
+    			"Accessory_HB2", "ArmAccessory_RF", "ArmAccessory_RB", "ArmAccessory_RR", "ArmAccessory_RL",
+    			"ArmAccessory_R", "BeltAccessory_L"
     	};
     	String[] s2 = {
     			"RabbitE_RB1", "RabbitE_RB2", "RabbitE_R1", "RabbitE_R2", "RabbitE_R3",
@@ -703,9 +711,9 @@ public class MultiModel_Yukari extends MultiModel_Aug
     			"RabbitE_L3", "RabbitE_L4", "HairO_R", "HairO_L", "Ac_S1",
     			"Ac_S2", "Ac_B1", "Ac_B2", "Ac_H", "Ac_HRF1",
     			"Ac_HRF2", "Ac_HRF3", "Ac_HR1", "Ac_HR2", "Ac_HLF1",
-    			"Ac_HLF2", "Ac_HL1", "Ac_HL2", "Ac_HB1", "Ac_HB2",
-    			"ArmAc_RF", "ArmAc_RB", "ArmAc_RR", "ArmAc_RL", "ArmAc_R",
-    			"BeltAc_L"
+    			"Ac_HLF2", "Ac_HLF3", "Ac_HL1", "Ac_HL2", "Ac_HB1",
+    			"Ac_HB2", "ArmAc_RF", "ArmAc_RB", "ArmAc_RR", "ArmAc_RL",
+    			"ArmAc_R", "BeltAc_L"
     	};
     	addShowPartsReneme(s1, s2);
     }
@@ -714,6 +722,14 @@ public class MultiModel_Yukari extends MultiModel_Aug
     public void defaultPartsSettingAfter() {
     	//Cheek Default off
     	setGuiParts("Cheek", false);
+    }
+
+    @Override
+    public void showModelSettingReflects() {
+    	super.showModelSettingReflects();
+    	if (getSkirtFloats()) {
+    		setVisible(Skirt, getGuiParts().get("Skirt"));
+    	}
     }
 
     @Override
@@ -817,6 +833,7 @@ public class MultiModel_Yukari extends MultiModel_Aug
     @Override
     public void setArmorBipedBodyShowModel(boolean b) {
     	super.setArmorBipedBodyShowModel(b);
+    	Breast_C.rotationPointZ = -2.35F;
     }
 
     @Override

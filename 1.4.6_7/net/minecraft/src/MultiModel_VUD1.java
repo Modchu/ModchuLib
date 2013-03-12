@@ -570,6 +570,41 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     	actionPartsInit(f, f1);
     }
 
+    public void skirtFloatsInit(float f, float f1) {
+    	if(!getSkirtFloats()) return;
+    	//ふんわりスカート上
+    	SkirtTop = new Modchu_ModelRenderer(this, 8, 18);
+    	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0);
+    	SkirtTop.setRotationPoint(-4.0F, -4.0F, 4.0F);
+    	if (Skirt != null) Skirt.addChild(SkirtTop);
+
+    	//ふんわりスカート前
+    	SkirtFront = new Modchu_ModelRenderer(this, 8, 24);
+    	((Modchu_ModelRenderer) SkirtFront).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0);
+    	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
+    	SkirtTop.addChild(SkirtFront);
+
+    	//ふんわりスカート右
+    	SkirtRight = new Modchu_ModelRenderer(this, 2, 24);
+    	((Modchu_ModelRenderer) SkirtRight).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1);
+    	SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	SkirtTop.addChild(SkirtRight);
+
+    	//ふんわりスカート左
+    	SkirtLeft = new Modchu_ModelRenderer(this, 16, 24);
+    	((Modchu_ModelRenderer) SkirtLeft).setMirror(true);
+    	((Modchu_ModelRenderer) SkirtLeft).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 1);
+    	SkirtLeft.setRotationPoint(8.0F, 8.0F, 0.0F);
+    	SkirtTop.addChild(SkirtLeft);
+
+    	//ふんわりスカート後ろ
+    	SkirtBack = new Modchu_ModelRenderer(this, 22, 24);
+    	((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0);
+    	SkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
+    	SkirtTop.addChild(SkirtBack);
+    	if (Skirt != null) ((Modchu_ModelRenderer) Skirt).setVisible(false);
+    }
+
     @Override
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
@@ -590,7 +625,7 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     	SideTailR_L.setRotateAngleX(-((Modchu_ModelRenderer) bipedHead).getRotateAngleX());
     	DropTail.setRotateAngleX(0.1745292F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX());
     	sensor1.rotationPointY = -8.0F;
-    	Skirt.rotationPointY -= 2.0F;
+    	if (!getSkirtFloats()) Skirt.rotationPointY -= 2.0F;
     	Skirt.rotationPointZ = 0.0F;
     	if (getIsSneak()) {
     		Skirt.rotateAngleX += 0.3F;

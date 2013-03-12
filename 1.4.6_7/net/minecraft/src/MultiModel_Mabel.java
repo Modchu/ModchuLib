@@ -2,8 +2,8 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class MultiModel_Mabel extends MultiModel
-{
+public class MultiModel_Mabel extends MultiModel {
+
 
     public Modchu_ModelRenderer aboveHeadwear;
     public Modchu_ModelRenderer innerBody;
