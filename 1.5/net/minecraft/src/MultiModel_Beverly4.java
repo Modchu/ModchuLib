@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 public class MultiModel_Beverly4 extends MultiModel_SR2
 {
@@ -158,17 +159,17 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	leftLegPlus = new Modchu_ModelRenderer(this);
     	leftLegPlus2 = new Modchu_ModelRenderer(this);
 
-    	setCapsValue(caps_setVisible, rightHand, false);
-    	setCapsValue(caps_setVisible, leftHand, false);
-    	setCapsValue(caps_setAimedBowBan, false);
-    	setCapsValue(caps_setSneakBan, false);
-    	setCapsValue(caps_setWaitBan, false);
-    	setCapsValue(caps_setSittingBan, false);
-    	setCapsValue(caps_setSleepingBan, false);
+    	setCapsValue(caps_visible, rightHand, false);
+    	setCapsValue(caps_visible, leftHand, false);
+    	setCapsValue(caps_aimedBowBan, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
+    	setCapsValue(caps_sleepingBan, false);
     }
 
     public void skirtFloatsInit(float f, float f1) {
-    	if(!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
+    	if(!getCapsValueBoolean(caps_skirtFloats)) return;
     	//SkirtR ã
     	SkirtTop = new Modchu_ModelRenderer(this, 47, 20);
     	((Modchu_ModelRenderer) SkirtTop).addPlate(-2.5F, 0.0F, -3.5F, 5, 7, 0);
@@ -220,8 +221,8 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	SkirtLeft = new Modchu_ModelRenderer(this);
     	((Modchu_ModelRenderer) rightLeg).removeChild(SkirtR);
     	((Modchu_ModelRenderer) leftLeg).removeChild(SkirtL);
-    	setCapsValue(caps_setVisible, SkirtR, false);
-    	setCapsValue(caps_setVisible, SkirtL, false);
+    	setCapsValue(caps_visible, SkirtR, false);
+    	setCapsValue(caps_visible, SkirtL, false);
     }
 
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
@@ -259,7 +260,7 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	float f6 = (float)Math.cos(f2 * 0.09F) * 0.05F;
     	rightArm.rotateAngleZ = 0.2F + f6;
     	leftArm.rotateAngleZ = -0.2F - f6;
-    	if ((Boolean) getCapsValue(caps_getIsRiding))
+    	if (getCapsValueBoolean(caps_getIsRiding))
     	{
     		bipedHead.rotationPointY = 1.0F;
     		bipedBody.rotationPointY = 1.0F;
@@ -269,7 +270,7 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     		SkirtR.rotationPointY = SkirtL.rotationPointY;
     		SkirtL.rotateAngleZ = 0.0F;
     		SkirtR.rotateAngleZ = -SkirtL.rotateAngleZ;
-    		if ((Boolean) getCapsValue(caps_getIsWait))
+    		if (getCapsValueBoolean(caps_getIsWait))
     		{
     			rightArm2.rotateAngleZ = 0.0F;
     			leftArm2.rotateAngleZ = 0.0F;
@@ -288,7 +289,7 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     			leftLeg2.rotateAngleX = 1.5F;
     		}
     	}
-    	else if ((Boolean) getCapsValue(caps_getIsSneak))
+    	else if (getCapsValueBoolean(caps_getIsSneak))
     	{
     		bipedBody.rotateAngleX = 0.35F;
     		rightArm.rotateAngleX = 0.3F;
@@ -325,9 +326,9 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	}
 
     	//‹|\‚¦ ˜r
-    	if((Boolean) getCapsValue(caps_getaimedBow)){
-    		float f15 = (float)Math.sin((Float) getCapsValue(caps_getOnGround) * 3.141593F);
-    		float f16 = (float)Math.sin((1.0F - (1.0F - (Float) getCapsValue(caps_getOnGround)) * (1.0F - (Float) getCapsValue(caps_getOnGround))) * 3.141593F);
+    	if(getCapsValueBoolean(caps_aimedBow)){
+    		float f15 = (float)Math.sin(getCapsValueFloat(caps_onGround) * 3.141593F);
+    		float f16 = (float)Math.sin((1.0F - (1.0F - getCapsValueFloat(caps_onGround)) * (1.0F - getCapsValueFloat(caps_onGround))) * 3.141593F);
     		rightArm2.rotateAngleZ = 0.0F;
     		leftArm2.rotateAngleZ = 0.0F;
     		rightArm2.rotateAngleY = -(0.1F - f15 * 0.6F);
@@ -344,9 +345,20 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     		leftArm2.rotateAngleX -= bipedHead.rotateAngleX;
     	}
 
-    	float onGroundR = (Float) getCapsValue(caps_getOnGround, 0, entity);
-    	float onGroundL = (Float) getCapsValue(caps_getOnGround, 1, entity);
-    	if ((onGroundR > -9990F || onGroundL > -9990F) && !(Boolean) getCapsValue(caps_getaimedBow) && !(Boolean) getCapsValue(caps_getOldwalking)) {
+    	float[] lgrounds = null;
+    	float onGroundR = 0;
+    	float onGroundL = 0;
+    	if (modelCaps != null) {
+    		lgrounds = (float[])getCapsValue(caps_Grounds);
+    		if (lgrounds != null) {
+    			onGroundR = lgrounds[0];
+    			onGroundL = lgrounds[1];
+    		}
+    	}
+    	if (lgrounds == null) {
+    		onGroundR = onGround;
+    	}
+    	if ((onGroundR > -9990F || onGroundL > -9990F) && !getCapsValueBoolean(caps_aimedBow) && !getCapsValueBoolean(caps_oldwalking)) {
     		// ˜rU‚è
     		float f15;
     		float f16, f17;
@@ -363,10 +375,10 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     			f15 *= f15;
     			f15 = 1.0F - f15;
     			float f18 = (float)Math.sin(f15 * 3.141593F) * 1.2F;
-    			float f8 = (float)Math.sin((Float) getCapsValue(caps_getOnGround) * 3.141593F) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
+    			float f8 = (float)Math.sin(getCapsValueFloat(caps_onGround) * 3.141593F) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
     			rightArm.rotateAngleX -= (double)f18 + (double)f8;
     			rightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-    			rightArm.rotateAngleZ = (float)Math.sin((Float) getCapsValue(caps_getOnGround) * 3.141593F) * -0.4F;
+    			rightArm.rotateAngleZ = (float)Math.sin(getCapsValueFloat(caps_onGround) * 3.141593F) * -0.4F;
     		}
 
     		// L
@@ -376,10 +388,10 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     			f15 *= f15;
     			f15 = 1.0F - f15;
     			float f18 = (float)Math.sin(f15 * 3.141593F) * 1.2F;
-    			float f8 = (float)Math.sin((Float) getCapsValue(caps_getOnGround) * 3.141593F) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
+    			float f8 = (float)Math.sin(getCapsValueFloat(caps_onGround) * 3.141593F) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
     			leftArm.rotateAngleX -= (double)f18 + (double)f8;
     			leftArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-    			leftArm.rotateAngleZ = (float)Math.sin((Float) getCapsValue(caps_getOnGround) * 3.141593F) * -0.4F;
+    			leftArm.rotateAngleZ = (float)Math.sin(getCapsValueFloat(caps_onGround) * 3.141593F) * -0.4F;
     		}
     	}
 
@@ -388,7 +400,7 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	rightArm.rotateAngleZ = 0.2F + fb;
     	leftArm.rotateAngleZ = -rightArm.rotateAngleZ;
 
-    	if ((Boolean) getCapsValue(caps_getIsWait) && !(Boolean) getCapsValue(caps_getaimedBow))
+    	if (getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow))
     	{
 			rightArm.rotateAngleX = (float)Math.sin(f2 * 0.067F) * 0.05F - 0.45F;
     		rightArm.rotateAngleY = 0.0F;
@@ -400,7 +412,7 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     		leftArm2.rotateAngleZ = 0.0F;
     		rightArm2.rotateAngleX = 0.0F;
     		leftArm2.rotateAngleX = 0.0F;
-    		if ((Boolean) getCapsValue(caps_getIsRiding)) {
+    		if (getCapsValueBoolean(caps_getIsRiding)) {
     			Arms[0].rotationPointX -= 1.0F;
     			Arms[0].rotationPointY -= 2.0F;
     			Arms[0].rotateAngleZ -= 2.0F;
@@ -453,8 +465,8 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
 
     @Override
     public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	if (!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
-    	float motionY = (Float) getCapsValue(caps_getMotionY);
+    	if (!getCapsValueBoolean(caps_skirtFloats)) return;
+    	float motionY = getCapsValueFloat(caps_motionY);
     	SkirtTop.rotateAngleX =
     			SkirtTopL.rotateAngleX =
     			SkirtRight.rotateAngleX = -1.570796313F;
@@ -509,7 +521,7 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     	leftLeg2.setRotationPoint(0.5F, 7.0F, 0.0F);
     	SkirtR.setRotationPoint(-0.5F, 1.5F, 0.0F);
     	SkirtL.setRotationPoint(0.0F, 1.5F, 0.0F);
-    	if ((Boolean) getCapsValue(caps_getSkirtFloats)) {
+    	if (getCapsValueBoolean(caps_skirtFloats)) {
     		SkirtTop.setRotationPoint(-1.0F, 0.5F, 3.5F);
     		SkirtTopL.setRotationPoint(1.0F, 0.5F, 3.5F);
     		SkirtFront.setRotationPoint(-2.5F, 7.0F, -3.5F);
@@ -557,58 +569,58 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	setCapsValue(caps_indexOfAllSetVisible, "ightArm", bipedRightArm.showModel);
-    	setCapsValue(caps_indexOfAllSetVisible, "eftArm", bipedLeftArm.showModel);
-    	setCapsValue(caps_indexOfAllSetVisible, "ightLeg", bipedRightLeg.showModel);
-    	setCapsValue(caps_indexOfAllSetVisible, "eftLeg", bipedLeftLeg.showModel);
-    	if ((Boolean) getCapsValue(caps_getSkirtFloats)) {
-    		setCapsValue(caps_setVisible, SkirtR, false);
-    		setCapsValue(caps_setVisible, SkirtL, false);
+    	setCapsValue(caps_indexOfAllVisible, "ightArm", bipedRightArm.showModel);
+    	setCapsValue(caps_indexOfAllVisible, "eftArm", bipedLeftArm.showModel);
+    	setCapsValue(caps_indexOfAllVisible, "ightLeg", bipedRightLeg.showModel);
+    	setCapsValue(caps_indexOfAllVisible, "eftLeg", bipedLeftLeg.showModel);
+    	if (getCapsValueBoolean(caps_skirtFloats)) {
+    		setCapsValue(caps_visible, SkirtR, false);
+    		setCapsValue(caps_visible, SkirtL, false);
     	}
     }
 
     @Override
     public void actionInit1() {
-    	setCapsValue(caps_setShortcutKeysAction, true);
+    	setCapsValue(caps_shortcutKeysAction, true);
     	boolean b = true;
-    	setCapsValue(caps_setVisible, rightArm, b);
-    	setCapsValue(caps_setVisible, rightArm2, b);
-    	setCapsValue(caps_setVisible, rightArmPlus, b);
-    	setCapsValue(caps_setVisible, rightArmPlus2, b);
-    	setCapsValue(caps_setVisible, rightHand, b);
-    	setCapsValue(caps_setVisible, leftArm, b);
-    	setCapsValue(caps_setVisible, leftArm2, b);
-    	setCapsValue(caps_setVisible, leftArmPlus, b);
-    	setCapsValue(caps_setVisible, leftArmPlus2, b);
-    	setCapsValue(caps_setVisible, leftHand, b);
-    	setCapsValue(caps_setVisible, rightLeg, b);
-    	setCapsValue(caps_setVisible, rightLeg2, b);
-    	setCapsValue(caps_setVisible, rightLegPlus, b);
-    	setCapsValue(caps_setVisible, rightLegPlus2, b);
-    	setCapsValue(caps_setVisible, leftLeg, b);
-    	setCapsValue(caps_setVisible, leftLeg2, b);
-    	setCapsValue(caps_setVisible, leftLegPlus, b);
-    	setCapsValue(caps_setVisible, leftLegPlus2, b);
-    	setCapsValue(caps_setSneakBan, true);
-    	setCapsValue(caps_setWaitBan, true);
-    	setCapsValue(caps_setSittingBan, true);
+    	setCapsValue(caps_visible, rightArm, b);
+    	setCapsValue(caps_visible, rightArm2, b);
+    	setCapsValue(caps_visible, rightArmPlus, b);
+    	setCapsValue(caps_visible, rightArmPlus2, b);
+    	setCapsValue(caps_visible, rightHand, b);
+    	setCapsValue(caps_visible, leftArm, b);
+    	setCapsValue(caps_visible, leftArm2, b);
+    	setCapsValue(caps_visible, leftArmPlus, b);
+    	setCapsValue(caps_visible, leftArmPlus2, b);
+    	setCapsValue(caps_visible, leftHand, b);
+    	setCapsValue(caps_visible, rightLeg, b);
+    	setCapsValue(caps_visible, rightLeg2, b);
+    	setCapsValue(caps_visible, rightLegPlus, b);
+    	setCapsValue(caps_visible, rightLegPlus2, b);
+    	setCapsValue(caps_visible, leftLeg, b);
+    	setCapsValue(caps_visible, leftLeg2, b);
+    	setCapsValue(caps_visible, leftLegPlus, b);
+    	setCapsValue(caps_visible, leftLegPlus2, b);
+    	setCapsValue(caps_sneakBan, true);
+    	setCapsValue(caps_waitBan, true);
+    	setCapsValue(caps_sittingBan, true);
     }
 
 	@Override
 	public void actionRelease1() {
-		setCapsValue(caps_setShortcutKeysAction, false);
+		setCapsValue(caps_shortcutKeysAction, false);
 		boolean b = true;
-		setCapsValue(caps_setVisible, rightArm, b);
-		setCapsValue(caps_setVisible, rightArm2, b);
-		setCapsValue(caps_setVisible, leftArm, b);
-  	 	setCapsValue(caps_setVisible, leftArm2, b);
+		setCapsValue(caps_visible, rightArm, b);
+		setCapsValue(caps_visible, rightArm2, b);
+		setCapsValue(caps_visible, leftArm, b);
+  	 	setCapsValue(caps_visible, leftArm2, b);
 		b = false;
-		setCapsValue(caps_setVisible, rightArmPlus, b);
-		setCapsValue(caps_setVisible, rightArmPlus2, b);
-		setCapsValue(caps_setVisible, rightHand, b);
-		setCapsValue(caps_setVisible, leftArmPlus, b);
-		setCapsValue(caps_setVisible, leftArmPlus2, b);
-		setCapsValue(caps_setVisible, leftHand, b);
+		setCapsValue(caps_visible, rightArmPlus, b);
+		setCapsValue(caps_visible, rightArmPlus2, b);
+		setCapsValue(caps_visible, rightHand, b);
+		setCapsValue(caps_visible, leftArmPlus, b);
+		setCapsValue(caps_visible, leftArmPlus2, b);
+		setCapsValue(caps_visible, leftHand, b);
 
 		bipedHead.rotateAngleX = 0.0F;
 		bipedHead.rotateAngleY = 0.0F;
@@ -623,9 +635,9 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
 		leftHand.rotateAngleY = 0.0F;
 		leftHand.rotateAngleZ = 0.0F;
 
-		setCapsValue(caps_setSneakBan, false);
-		setCapsValue(caps_setWaitBan, false);
-		setCapsValue(caps_setSittingBan, false);
+		setCapsValue(caps_sneakBan, false);
+		setCapsValue(caps_waitBan, false);
+		setCapsValue(caps_sittingBan, false);
 	}
 
 	@Override
@@ -666,7 +678,7 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
     @Override
     public void action4(Entity entity) {
     	// —¼Žè‚ð‘O‚Éo‚·ƒ‚[ƒVƒ‡ƒ“
-    	if ((Float) getCapsValue(caps_getOnGround, (Integer) getCapsValue(caps_getHandedness), entity) > 0.0F) {
+    	if (getCapsValueFloat(caps_onGround, getCapsValueInt(caps_dominantArm), entity) > 0.0F) {
     		rightArm.rotateAngleX += leftArm.rotateAngleX += -1.57F;
     		rightArm.rotateAngleY = leftArm.rotateAngleY = 0.0F;
     		rightArm.rotateAngleZ = leftArm.rotateAngleZ = 0.0F;
@@ -716,7 +728,7 @@ public class MultiModel_Beverly4 extends MultiModel_SR2
 
     @Override
     public ModelRenderer getBipedRightArm() {
-    	if ((Integer) getCapsValue(caps_getHandedness) == 0) return rightArm;
+    	if (getCapsValueInt(caps_dominantArm) == 0) return rightArm;
     	return leftArm;
     }
 

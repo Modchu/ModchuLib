@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-
 public class MultiModel_SA extends MultiModel_Aug {
 	public Modchu_ModelRenderer ChignonAug_R;
 	public Modchu_ModelRenderer ChignonAug_L;
@@ -300,7 +299,7 @@ public class MultiModel_SA extends MultiModel_Aug {
 	public void setLivingAnimationsLM(EntityLiving entityliving, float f,
 			float f1, float f2) {
 		super.setLivingAnimationsLM(entityliving, f, f1, f2);
-		if ((Boolean) getCapsValue(caps_getIsLookSuger, entityliving)) {
+		if (getCapsValueBoolean(caps_isLookSuger, entityliving)) {
 			Cheek_R.setVisible(true);
 			Cheek_L.setVisible(true);
 		} else {
@@ -308,9 +307,9 @@ public class MultiModel_SA extends MultiModel_Aug {
 			Cheek_L.setVisible(false);
 		}
 		float f3 = (float) entityliving.ticksExisted + f2
-				+ (Float) getCapsValue(caps_getEntityIdFactor, entityliving);
+				+ getCapsValueFloat(caps_entityIdFactor, entityliving);
 		float f4 = 0.0F;
-		if ((Boolean) getCapsValue(caps_getIsLookSuger, entityliving)) {
+		if (getCapsValueBoolean(caps_isLookSuger, entityliving)) {
 			f3 *= 8.0F;
 			f4 = -0.2F;
 		} else {

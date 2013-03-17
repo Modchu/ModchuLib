@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 public class MultiModel_DogAngel extends MultiModel_SR2 {
 
@@ -421,13 +422,13 @@ public class MultiModel_DogAngel extends MultiModel_SR2 {
 		Ahoge.rotateAngleY=MathHelper.cos(f2 * 0.2F + MathHelper.cos(f2*0.05F) * 1.0F) * 0.2F;
 		Ahoge.rotateAngleX=2.9F;
 
-		if ((Boolean) getCapsValue(caps_getaimedBow)) {
+		if (getCapsValueBoolean(caps_aimedBow)) {
 			WingLroot.rotateAngleX+= 0.5F;
 			WingRroot.rotateAngleX+= 0.5F;
 			WingLroot.rotateAngleY= -0.3F;
 			WingRroot.rotateAngleY= 0.3F;
 		}
-		if((Boolean) getCapsValue(caps_getIsSneak)){
+		if(getCapsValueBoolean(caps_getIsSneak)){
 			Skirt.rotationPointZ = -0.5F;
 		} else {
 			Skirt.rotationPointZ = 0.0F;
@@ -439,8 +440,8 @@ public class MultiModel_DogAngel extends MultiModel_SR2 {
 
 	@Override
 	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		if (!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
-    	float motionY = (Float) getCapsValue(caps_getMotionY);
+		if (!getCapsValueBoolean(caps_skirtFloats)) return;
+    	float motionY = getCapsValueFloat(caps_motionY);
 		Skirt1.setRotateAngle(-0.7853982F, 0.2268928F, 0.8203047F);
 		Skirt2.setRotateAngle(-0.7853982F, 0.9075712F, 0.8203047F);
 		Skirt3.setRotateAngle(-0.7853982F, 1.308997F, 0.715585F);

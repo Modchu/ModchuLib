@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 /**
  * 標準意匠
@@ -223,11 +224,11 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     							rightArm2.showModel = leftArm2.showModel =
     								rightLeg.showModel = rightLeg2.showModel =
     									leftLeg.showModel = leftLeg2.showModel = false;
-    	setCapsValue(caps_setAimedBowBan, false);
-    	setCapsValue(caps_setSneakBan, false);
-    	setCapsValue(caps_setWaitBan, false);
-    	setCapsValue(caps_setSittingBan, false);
-    	setCapsValue(caps_setSleepingBan, false);
+    	setCapsValue(caps_aimedBowBan, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
+    	setCapsValue(caps_sleepingBan, false);
     }
 
     @Override
@@ -351,7 +352,7 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     	Skirt.rotateAngleY += MathHelper.cos(f * 0.5656F) * 0.15F * f1;
     	hemSkirt.rotateAngleY += MathHelper.cos(f * 0.5656F) * 0.25F * f1;
 
-    	if ((Boolean) getCapsValue(caps_getIsRiding))
+    	if (getCapsValueBoolean(caps_getIsRiding))
     	{
     		// 乗り物に乗っている
     		bipedRightArm.rotateAngleX -= 0.3F;
@@ -375,7 +376,7 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     		bipedRightArm.rotateAngleX = bipedRightArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemRight;
     	}
     	armSwing(f, f1, f2, f3, f4, f5, entity);
-    	if ((Boolean) getCapsValue(caps_getIsSneak))
+    	if (getCapsValueBoolean(caps_getIsSneak))
     	{
     		// しゃがみ
     		bipedBody.rotateAngleX += 0.5F;
@@ -396,7 +397,7 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     	{
     		// 通常立ち
     	}
-    	if ((Boolean) getCapsValue(caps_getIsWait))
+    	if (getCapsValueBoolean(caps_getIsWait))
     	{
     		//待機状態の特別表示
     		bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.062F) * 0.05F -0.6F;
@@ -414,7 +415,7 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     	}
     	else
     	{
-    		if ((Boolean) getCapsValue(caps_getaimedBow))
+    		if (getCapsValueBoolean(caps_aimedBow))
     		{
     			// 弓構え
     			float f6 = MathHelper.sin(onGround * 3.141593F);
@@ -496,8 +497,8 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
 
     @Override
     public void setArmorSkirtShowModel(boolean b) {
-    	setCapsValue(caps_setVisible, Skirt, b);
-    	setCapsValue(caps_setVisible, hemSkirt, b);
+    	setCapsValue(caps_visible, Skirt, b);
+    	setCapsValue(caps_visible, hemSkirt, b);
     	Skirt.isHidden = !b;
     	hemSkirt.isHidden = !b;
     }
@@ -514,8 +515,8 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	if ((Boolean) getCapsValue(caps_getSkirtFloats)) {
-    		setCapsValue(caps_setVisible, Skirt, getGuiParts().get("Skirt"));
+    	if (getCapsValueBoolean(caps_skirtFloats)) {
+    		setCapsValue(caps_visible, Skirt, getGuiParts().get("Skirt"));
     	}
     }
 }

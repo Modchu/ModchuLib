@@ -59,27 +59,27 @@ public class MultiModel_QB extends MultiModel {
     	rightLeg.setRotationPoint(0.0F, 0.0F, 0.0F);
     	bipedBody.addChild(rightLeg);
     	leftLeg = new Modchu_ModelRenderer(this, 8, 17);
+    	leftLeg.mirror = true;
     	leftLeg.addBox(-0.999F, -1.5F, -1.501F, 2, 3, 3, f);
     	leftLeg.setRotationPoint(0.0F, 0.0F, 0.0F);
-    	leftLeg.mirror = true;
     	bipedBody.addChild(leftLeg);
     	rightLegbottom = new Modchu_ModelRenderer(this, 0, 23);
     	rightLegbottom.addBox(-1.001F, -0.5F, -2.001F, 2, 1, 4, f);
     	rightLegbottom.setRotationPoint(0.0F, 0.0F, 0.0F);
     	rightLeg.addChild(rightLegbottom);
     	leftLegbottom = new Modchu_ModelRenderer(this, 0, 23);
+    	leftLegbottom.mirror = true;
     	leftLegbottom.addBox(-0.999F, -0.5F, -2.001F, 2, 1, 4, f);
     	leftLegbottom.setRotationPoint(0.0F, 0.0F, 0.0F);
-    	leftLegbottom.mirror = true;
     	leftLeg.addChild(leftLegbottom);
     	rightearhair = new Modchu_ModelRenderer(this, 12, 23);
     	rightearhair.addBox(-0.5F, 0.0F, -0.5F, 1, 7, 1, f);
     	rightearhair.setRotationPoint(-1.0F, 1.0F, 1.0F);
     	bipedHead.addChild(rightearhair);
     	leftearhair = new Modchu_ModelRenderer(this, 12, 23);
+    	leftearhair.mirror = true;
     	leftearhair.addBox(-0.5F, 0.0F, -0.5F, 1, 7, 1, f);
     	leftearhair.setRotationPoint(4.0F, 1.0F, 1.0F);
-    	leftearhair.mirror = true;
     	bipedHead.addChild(leftearhair);
     	rightear = new Modchu_ModelRenderer(this, 16, 0);
     	rightear.addBox(-1.0F, -1.0F, -1.0F, 2, 2, 2, f);
@@ -162,10 +162,10 @@ public class MultiModel_QB extends MultiModel {
     	bipedRightArm.rotateAngleY = bipedLeftArm.rotateAngleY = 0.0F;
     	bipedRightArm.rotateAngleZ = bipedLeftArm.rotateAngleZ = 0.0F;
     	tail1.rotateAngleX = -0.2F;
-    	if ((Boolean) getCapsValue(caps_getIsRiding)) {
+    	if (getCapsValueBoolean(caps_getIsRiding)) {
     		// èÊÇËï®Ç…èÊÇ¡ÇƒÇ¢ÇÈ
     		float f15 = 1.5F;
-    		if ((Boolean) getCapsValue(caps_getIsSitting)) f15 = 1.0F;
+    		if (getCapsValueBoolean(caps_isSitting)) f15 = 1.0F;
     		float f9 = MathHelper.cos(f * 0.3F);
     		if (f9 < 0) {
     			f9 = -f9 * 2;
@@ -208,22 +208,22 @@ public class MultiModel_QB extends MultiModel {
     	} else {
     		bipedHead.rotationPointZ = bipedBody.rotationPointZ - 2.0F;
     	}
-    	if ((Boolean) getCapsValue(caps_getIsSneak)) {
+    	if (getCapsValueBoolean(caps_getIsSneak)) {
     		// ÇµÇ·Ç™Ç›
-    		float f12 = (Boolean) getCapsValue(caps_getIsRiding) ? -5F : 0F;
+    		float f12 = getCapsValueBoolean(caps_getIsRiding) ? -5F : 0F;
     		bipedHead.rotationPointY = 6.0F + f12;
     		bipedBody.rotationPointY = 10.0F + f12;
     		bipedBody.rotateAngleX = 0.1F;
     		rightLeg.rotationPointY = 1.0F;
     		leftLeg.rotationPointY = 1.0F;
-    		if ((Boolean) getCapsValue(caps_getIsRiding)) {
+    		if (getCapsValueBoolean(caps_getIsRiding)) {
     			bipedBody.rotationPointY += 1.8F;
     			bipedHead.rotationPointY += 2.8F;
     			rightLeg.rotationPointX += 1.0F;
     			leftLeg.rotationPointX -= 1.0F;
     		}
     	}
-    	if (!(Boolean) getCapsValue(caps_getIsRiding)) {
+    	if (!getCapsValueBoolean(caps_getIsRiding)) {
     		bipedHead.rotationPointY = 9F;
     		bipedBody.rotationPointY = 12F;
     		bipedRightArm.rotateAngleX = bipedLeftArm.rotateAngleX = MathHelper
@@ -233,7 +233,7 @@ public class MultiModel_QB extends MultiModel {
     	bipedHead.rotationPointX = 0F;
     	bipedRightArm.rotationPointX = -1.5F;
     	bipedLeftArm.rotationPointX = 1.5F;
-    	if ((Boolean) getCapsValue(caps_getIsWait) && !(Boolean) getCapsValue(caps_getaimedBow))
+    	if (getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow))
     	{
     		bipedRightArm.rotationPointY = bipedLeftArm.rotationPointY = 0.5F;
     		bipedRightArm.rotationPointZ = bipedLeftArm.rotationPointZ = -2.5F;
@@ -241,16 +241,16 @@ public class MultiModel_QB extends MultiModel {
     		bipedRightArm.rotateAngleZ = -0.4F;
     		bipedLeftArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F - 0.7F;
     		bipedLeftArm.rotateAngleZ = 0.4F;
-    		if ((Boolean) getCapsValue(caps_getIsRiding)) {
+    		if (getCapsValueBoolean(caps_getIsRiding)) {
     			bipedRightArm.rotateAngleX += 1.5F;
     			bipedLeftArm.rotateAngleX += 1.5F;
     		}
     	}
-    	if ((Boolean) getCapsValue(caps_getaimedBow)) {
+    	if (getCapsValueBoolean(caps_aimedBow)) {
     		// ã|ç\Ç¶
-    		float f13 = MathHelper.sin((Float) getCapsValue(caps_getOnGround) * 3.141593F);
-    		float f14 = MathHelper.sin((1.0F - (1.0F - (Float) getCapsValue(caps_getOnGround))
-    				* (1.0F - (Float) getCapsValue(caps_getOnGround))) * 3.141593F);
+    		float f13 = MathHelper.sin(getCapsValueFloat(caps_onGround) * 3.141593F);
+    		float f14 = MathHelper.sin((1.0F - (1.0F - getCapsValueFloat(caps_onGround))
+    				* (1.0F - getCapsValueFloat(caps_onGround))) * 3.141593F);
     		bipedRightArm.rotateAngleZ = 0.0F;
     		bipedLeftArm.rotateAngleZ = 0.0F;
     		bipedRightArm.rotateAngleY = -(0.1F - f13 * 0.6F)
@@ -271,7 +271,7 @@ public class MultiModel_QB extends MultiModel {
     		bipedLeftArm.rotationPointX = 2.0F;
     		bipedRightArm.rotationPointZ += 1.5F;
     		bipedLeftArm.rotationPointZ += 1.5F;
-    		if ((Boolean) getCapsValue(caps_getIsRiding)) {
+    		if (getCapsValueBoolean(caps_getIsRiding)) {
     			bipedRightArm.rotationPointZ = bipedLeftArm.rotationPointZ -= 4.0F;
     		}
     	}
@@ -298,7 +298,7 @@ public class MultiModel_QB extends MultiModel {
     	ringR.rotationPointY = -ff1 + 1.0F;
     	ringL.rotationPointY = -ff1 + 1.0F;
 
-    	if ((Boolean) getCapsValue(caps_getIsSleeping)) {
+    	if (getCapsValueBoolean(caps_isSleeping)) {
     		sleepingInit = true;
     		bipedHead.rotationPointX = -4F;
     		bipedHead.rotationPointY = 2F;
@@ -343,9 +343,20 @@ public class MultiModel_QB extends MultiModel {
     }
 
     public void armSwing(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	float onGroundR = (Float) getCapsValue(caps_getOnGround, 0, entity);
-    	float onGroundL = (Float) getCapsValue(caps_getOnGround, 1, entity);
-    	if ((onGroundR > -9990F || onGroundL > -9990F) && !(Boolean) getCapsValue(caps_getaimedBow) && !(Boolean) getCapsValue(caps_getOldwalking)) {
+    	float[] lgrounds = null;
+    	float onGroundR = 0;
+    	float onGroundL = 0;
+    	if (modelCaps != null) {
+    		lgrounds = (float[])getCapsValue(caps_Grounds);
+    		if (lgrounds != null) {
+    			onGroundR = lgrounds[0];
+    			onGroundL = lgrounds[1];
+    		}
+    	}
+    	if (lgrounds == null) {
+    		onGroundR = onGround;
+    	}
+    	if ((onGroundR > -9990F || onGroundL > -9990F) && !getCapsValueBoolean(caps_aimedBow) && !getCapsValueBoolean(caps_oldwalking)) {
     		// òrêUÇË
     		float f6, f7, f8;
     		f6 = MathHelper.sin(MathHelper.sqrt_float(onGroundR) * (float)Math.PI * 2.0F);
@@ -426,18 +437,18 @@ public class MultiModel_QB extends MultiModel {
 
     @Override
     public void actionInit1() {
-    	setCapsValue(caps_setShortcutKeysAction, true);
-    	setCapsValue(caps_setSneakBan, true);
-    	setCapsValue(caps_setWaitBan, true);
-    	setCapsValue(caps_setSittingBan, true);
+    	setCapsValue(caps_shortcutKeysAction, true);
+    	setCapsValue(caps_sneakBan, true);
+    	setCapsValue(caps_waitBan, true);
+    	setCapsValue(caps_sittingBan, true);
     }
 
     @Override
     public void actionRelease1() {
-    	setCapsValue(caps_setShortcutKeysAction, false);
-    	setCapsValue(caps_setSneakBan, false);
-    	setCapsValue(caps_setWaitBan, false);
-    	setCapsValue(caps_setSittingBan, false);
+    	setCapsValue(caps_shortcutKeysAction, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
 
     	bipedBody.rotateAngleX = 0.0F;
     	bipedBody.rotateAngleY = 0.0F;
@@ -451,7 +462,7 @@ public class MultiModel_QB extends MultiModel {
 
     @Override
     public void action1(Entity entity) {
-    	float speed = (Float) getCapsValue(caps_getActionSpeed) / 10;
+    	float speed = getCapsValueFloat(caps_actionSpeed) / 10;
     	if (speed < 0.0F) return;
 
     	float f1 = bipedBody.rotateAngleZ;
@@ -459,14 +470,14 @@ public class MultiModel_QB extends MultiModel {
     	bipedRightArm.rotateAngleX = -f1 * 1.86567233F;
     	bipedRightArm.rotateAngleY = 0.0F;
     	bipedRightArm.rotateAngleZ = 0.0F;
-    	if (!(Boolean) getCapsValue(caps_getActionReverse)) {
+    	if (!getCapsValueBoolean(caps_actionReverse)) {
     		if (f1 < 0.5F) {
     			f1 += speed;
-    		} else setCapsValue(caps_setActionReverse, true);
+    		} else setCapsValue(caps_actionReverse, true);
     	} else {
     		if (f1 > -0.3F) {
     			f1 -= speed;
-    		} else setCapsValue(caps_setActionReverse, false);
+    		} else setCapsValue(caps_actionReverse, false);
     	}
     	if (f1 > 0.5449998F) f1 = 0.5449998F;
     	if (f1 < -0.3880023F) f1 = -0.3880023F;
@@ -519,6 +530,6 @@ public class MultiModel_QB extends MultiModel {
 
     @Override
     public float Physical_Hammer() {
-    	return (Float) getCapsValue(caps_Physical_Hammer) == 1.0F ? 1.2F : (Float) getCapsValue(caps_Physical_Hammer);
+    	return getCapsValueFloat(caps_Physical_Hammer) == 1.0F ? 1.2F : getCapsValueFloat(caps_Physical_Hammer);
     }
 }

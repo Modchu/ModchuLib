@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 public class MultiModel_Yukkuri extends MultiModel {
 
@@ -559,20 +560,20 @@ public class MultiModel_Yukkuri extends MultiModel {
     	HaneR2.rotateAngleX = 0.349F;
     	HaneR2.rotateAngleY = h2 - 0.262F;
 
-    	if((Boolean) getCapsValue(caps_getIsRiding)) {
+    	if(getCapsValueBoolean(caps_getIsRiding)) {
     		bipedHead.rotationPointY = 15F;
     	}
     	armSwing(f, f1, f2, f3, f4, f5, entity);
-    	if((Boolean) getCapsValue(caps_getIsSneak)) {
+    	if(getCapsValueBoolean(caps_getIsSneak)) {
     		bipedHead.rotationPointY = bipedRightLeg.rotateAngleX < 0.0F ? 20F : 20F - bipedRightLeg.rotateAngleX * 8F;
     	}
-    	if((Boolean) getCapsValue(caps_getIsWait) && !(Boolean) getCapsValue(caps_getaimedBow)) {
+    	if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
     		bipedHead.rotationPointY = bipedRightLeg.rotateAngleX < 0.0F ? 20F : 20F - bipedRightLeg.rotateAngleX * 8F;
     	}
-    	if((Boolean) getCapsValue(caps_getaimedBow)) {
-    		float f6 = MathHelper.sin((Float) getCapsValue(caps_getOnGround) * 3.141593F);
-    		float f7 = MathHelper.sin((1.0F - (1.0F - (Float) getCapsValue(caps_getOnGround))
-    				* (1.0F - (Float) getCapsValue(caps_getOnGround))) * 3.141593F);
+    	if(getCapsValueBoolean(caps_aimedBow)) {
+    		float f6 = MathHelper.sin(getCapsValueFloat(caps_onGround) * 3.141593F);
+    		float f7 = MathHelper.sin((1.0F - (1.0F - getCapsValueFloat(caps_onGround))
+    				* (1.0F - getCapsValueFloat(caps_onGround))) * 3.141593F);
     		bipedRightArm.rotateAngleZ = 0.0F;
     		bipedLeftArm.rotateAngleZ = 0.0F;
     		bipedRightArm.rotateAngleY = -(0.1F - f6 * 0.6F)
@@ -594,25 +595,36 @@ public class MultiModel_Yukkuri extends MultiModel {
     		bipedRightArm.rotationPointZ = -2F;
     		bipedLeftArm.rotationPointZ = -2F;
     		//ï–ñ⁄Ç¬Ç‘ÇË
-    		setCapsValue(caps_setVisible, eyeR, false);
-    		setCapsValue(caps_setVisible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, false);
+    		setCapsValue(caps_visible, eyeL, true);
     	} else {
 
     		if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
-    			setCapsValue(caps_setVisible, eyeL, false);
-    			setCapsValue(caps_setVisible, eyeR, false);
+    			setCapsValue(caps_visible, eyeL, false);
+    			setCapsValue(caps_visible, eyeR, false);
     		} else {
-    			setCapsValue(caps_setVisible, eyeL, true);
-    			setCapsValue(caps_setVisible, eyeR, true);
+    			setCapsValue(caps_visible, eyeL, true);
+    			setCapsValue(caps_visible, eyeR, true);
     		}
     	}
     }
 
     @Override
     public void armSwing(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	float onGroundR = (Float) getCapsValue(caps_getOnGround, 0, entity);
-    	float onGroundL = (Float) getCapsValue(caps_getOnGround, 1, entity);
-    	if ((onGroundR > -9990F || onGroundL > -9990F) && !(Boolean) getCapsValue(caps_getaimedBow) && !(Boolean) getCapsValue(caps_getOldwalking)) {
+    	float[] lgrounds = null;
+    	float onGroundR = 0;
+    	float onGroundL = 0;
+    	if (modelCaps != null) {
+    		lgrounds = (float[])getCapsValue(caps_Grounds);
+    		if (lgrounds != null) {
+    			onGroundR = lgrounds[0];
+    			onGroundL = lgrounds[1];
+    		}
+    	}
+    	if (lgrounds == null) {
+    		onGroundR = onGround;
+    	}
+    	if ((onGroundR > -9990F || onGroundL > -9990F) && !getCapsValueBoolean(caps_aimedBow) && !getCapsValueBoolean(caps_oldwalking)) {
     		// òrêUÇË
     		float f6, f7, f8;
     		f6 = MathHelper.sin(MathHelper.sqrt_float(onGroundR) * (float)Math.PI * 2.0F);
@@ -674,25 +686,25 @@ public class MultiModel_Yukkuri extends MultiModel {
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	if ((Boolean) getCapsValue(caps_getSkirtFloats)) {
-    		setCapsValue(caps_setVisible, Skirt, getGuiParts().get("Skirt"));
+    	if (getCapsValueBoolean(caps_skirtFloats)) {
+    		setCapsValue(caps_visible, Skirt, getGuiParts().get("Skirt"));
     	}
     }
 
     @Override
     public void actionInit1() {
-    	setCapsValue(caps_setShortcutKeysAction, true);
-    	setCapsValue(caps_setSneakBan, true);
-    	setCapsValue(caps_setWaitBan, true);
-    	setCapsValue(caps_setSittingBan, true);
+    	setCapsValue(caps_shortcutKeysAction, true);
+    	setCapsValue(caps_sneakBan, true);
+    	setCapsValue(caps_waitBan, true);
+    	setCapsValue(caps_sittingBan, true);
     }
 
     @Override
     public void actionRelease1() {
-    	setCapsValue(caps_setShortcutKeysAction, false);
-    	setCapsValue(caps_setSneakBan, false);
-    	setCapsValue(caps_setWaitBan, false);
-    	setCapsValue(caps_setSittingBan, false);
+    	setCapsValue(caps_shortcutKeysAction, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
 
     	bipedBody.rotateAngleX = 0.0F;
     	bipedBody.rotateAngleY = 0.0F;
@@ -706,7 +718,7 @@ public class MultiModel_Yukkuri extends MultiModel {
 
     @Override
     public void action1(Entity entity) {
-    	float speed = (Float) getCapsValue(caps_getActionSpeed) / 10;
+    	float speed = getCapsValueFloat(caps_actionSpeed) / 10;
     	if (speed < 0.0F) return;
 
     	float f1 = bipedBody.rotateAngleZ;
@@ -714,14 +726,14 @@ public class MultiModel_Yukkuri extends MultiModel {
     	bipedRightArm.rotateAngleX = -f1 * 1.86567233F;
     	bipedRightArm.rotateAngleY = 0.0F;
     	bipedRightArm.rotateAngleZ = 0.0F;
-    	if (!(Boolean) getCapsValue(caps_getActionReverse)) {
+    	if (!getCapsValueBoolean(caps_actionReverse)) {
     		if (f1 < 0.5F) {
     			f1 += speed;
-    		} else setCapsValue(caps_setActionReverse, true);
+    		} else setCapsValue(caps_actionReverse, true);
     	} else {
     		if (f1 > -0.3F) {
     			f1 -= speed;
-    		} else setCapsValue(caps_setActionReverse, false);
+    		} else setCapsValue(caps_actionReverse, false);
     	}
     	if (f1 > 0.5449998F) f1 = 0.5449998F;
     	if (f1 < -0.3880023F) f1 = -0.3880023F;
@@ -760,7 +772,7 @@ public class MultiModel_Yukkuri extends MultiModel {
     @Override
     public double getMountedYOffset() {
     	double d = 1.4D;
-    	if((Boolean) getCapsValue(caps_getIsRiding)) {
+    	if(getCapsValueBoolean(caps_getIsRiding)) {
     		d -= 0.1D;
     	};
     	return d;

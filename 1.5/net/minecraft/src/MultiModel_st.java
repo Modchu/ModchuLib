@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-
 public class MultiModel_st extends MultiModel_SR2
 {
     public Modchu_ModelRenderer ArmR1;
@@ -355,7 +354,7 @@ public class MultiModel_st extends MultiModel_SR2
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
         super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	if ((Boolean) getCapsValue(caps_getIsLookSuger, entityliving)) {
+    	if (getCapsValueBoolean(caps_isLookSuger, entityliving)) {
     		Cheek_R.setVisible(true);
     		Cheek_L.setVisible(true);
     	} else {
@@ -371,7 +370,7 @@ public class MultiModel_st extends MultiModel_SR2
 		Skirt.rotationPointY -= 1.0F;
 		Skirt.rotateAngleX = 0.0F;
 		Skirt.rotationPointZ = 0.0F;
-		if((Boolean) getCapsValue(caps_getIsSneak)){
+		if(getCapsValueBoolean(caps_getIsSneak)){
 			Skirt.rotationPointY -= 1.5F;
 			Skirt.rotationPointZ = 0.0F;
 			Skirt.rotateAngleX = -0.4F;

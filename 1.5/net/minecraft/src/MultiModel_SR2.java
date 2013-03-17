@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-
 public class MultiModel_SR2 extends MultiModel {
 
 	public Modchu_ModelRenderer eyeR;
@@ -44,23 +43,23 @@ public class MultiModel_SR2 extends MultiModel {
 	public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float renderPartialTicks) {
 		super.setLivingAnimationsLM(entityliving, f, f1, renderPartialTicks);
 
-		float f3 = (float)entityliving.ticksExisted + renderPartialTicks + (Float) getCapsValue(caps_getEntityIdFactor, entityliving);
+		float f3 = (float)entityliving.ticksExisted + renderPartialTicks + getCapsValueFloat(caps_entityIdFactor, entityliving);
 		// –Úƒpƒ`
 		if( 0 > MathHelper.sin(f3 * 0.05F) + MathHelper.sin(f3 * 0.13F) + MathHelper.sin(f3 * 0.7F) + 2.55F) {
-			setCapsValue(caps_setVisible, eyeR, true);
-			setCapsValue(caps_setVisible, eyeL, true);
+			setCapsValue(caps_visible, eyeR, true);
+			setCapsValue(caps_visible, eyeL, true);
 		} else {
-			setCapsValue(caps_setVisible, eyeR, false);
-			setCapsValue(caps_setVisible, eyeL, false);
+			setCapsValue(caps_visible, eyeR, false);
+			setCapsValue(caps_visible, eyeL, false);
 		}
 	}
 
 	@Override
 	public void setRotationAnglesLM(float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5, Entity entity) {
 		super.setRotationAnglesLM(f, f1, ticksExisted, pheadYaw, pheadPitch, f5, entity);
-		if ((Boolean) getCapsValue(caps_getaimedBow)) {
-			setCapsValue(caps_setVisible, eyeL, true);
-			setCapsValue(caps_setVisible, eyeR, false);
+		if (getCapsValueBoolean(caps_aimedBow)) {
+			setCapsValue(caps_visible, eyeL, true);
+			setCapsValue(caps_visible, eyeR, false);
 		}
 	}
 }

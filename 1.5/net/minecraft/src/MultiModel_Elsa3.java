@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 /**
  * 標準意匠
@@ -204,11 +205,11 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     							rightArm2.showModel = leftArm2.showModel =
     								rightLeg.showModel = rightLeg2.showModel =
     									leftLeg.showModel = leftLeg2.showModel = false;
-    	setCapsValue(caps_setAimedBowBan, false);
-    	setCapsValue(caps_setSneakBan, false);
-    	setCapsValue(caps_setWaitBan, false);
-    	setCapsValue(caps_setSittingBan, false);
-    	setCapsValue(caps_setSleepingBan, false);
+    	setCapsValue(caps_aimedBowBan, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
+    	setCapsValue(caps_sleepingBan, false);
     }
 
     @Override
@@ -296,7 +297,7 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
 
     @Override
     public void skirtFloatsInit(float f, float f1) {
-    	if(!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
+    	if(!getCapsValueBoolean(caps_skirtFloats)) return;
     	//上
     	SkirtTop = new Modchu_ModelRenderer(this, 6, 16);
     	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 8, 6, 0);
@@ -326,7 +327,7 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     	((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 8, 10, 0);
     	SkirtBack.setRotationPoint(0.0F, 8.0F, 0.0F);
     	Skirt.addChild(SkirtBack);
-    	setCapsValue(caps_setVisible, Skirt, false);
+    	setCapsValue(caps_visible, Skirt, false);
     }
 
     /**
@@ -357,7 +358,7 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     	bipedRightLeg.rotateAngleX += MathHelper.cos(f * 0.5656F) * 1.2F * f1;
     	bipedLeftLeg.rotateAngleX -= MathHelper.cos(f * 0.5656F) * 1.2F * f1;
 
-    	if ((Boolean) getCapsValue(caps_getIsRiding))
+    	if (getCapsValueBoolean(caps_getIsRiding))
     	{
     		// 乗り物に乗っている
     		bipedRightArm.rotateAngleX -= 0.3F;
@@ -382,7 +383,7 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     			= bipedRightArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemRight;
     	}
     	armSwing(f, f1, f2, f3, f4, f5, entity);
-    	if ((Boolean) getCapsValue(caps_getIsSneak))
+    	if (getCapsValueBoolean(caps_getIsSneak))
     	{
     		// しゃがみ
     		bipedBody.rotateAngleX += 0.5F;
@@ -401,7 +402,7 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     	{
     		// 通常立ち
     	}
-    	if ((Boolean) getCapsValue(caps_getIsWait))
+    	if (getCapsValueBoolean(caps_getIsWait))
     	{
     		//待機状態の特別表示
     		bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.062F) * 0.05F -0.6F;
@@ -419,7 +420,7 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
     	}
     	else
     	{
-    		if ((Boolean) getCapsValue(caps_getaimedBow))
+    		if (getCapsValueBoolean(caps_aimedBow))
     		{
     			// 弓構え
     			float f6 = MathHelper.sin(onGround * 3.141593F);
@@ -456,8 +457,8 @@ public class MultiModel_Elsa3 extends MultiModel_SR2 {
 
     @Override
     public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	if (!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
-    	float motionY = (Float) getCapsValue(caps_getMotionY);
+    	if (!getCapsValueBoolean(caps_skirtFloats)) return;
+    	float motionY = getCapsValueFloat(caps_motionY);
     	Skirt.rotationPointY = 9.0F;
     	SkirtBack.rotateAngleX = SkirtRight.rotateAngleX = SkirtLeft.rotateAngleX = SkirtFront.rotateAngleX = 0.0F;
     	SkirtBack.rotateAngleY = SkirtRight.rotateAngleY = SkirtLeft.rotateAngleY = SkirtFront.rotateAngleY = 0.0F;

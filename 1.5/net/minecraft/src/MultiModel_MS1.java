@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-
 public class MultiModel_MS1 extends MultiModel_SR2
 {
     public Modchu_ModelRenderer Goggles1;
@@ -110,26 +109,26 @@ public class MultiModel_MS1 extends MultiModel_SR2
 		bipedHead.addChild(GogglesL);
 		bipedHead.addChild(Cheek_R);
 		bipedHead.addChild(Cheek_L);
-		setCapsValue(caps_setVisible, Tail, false);
-		setCapsValue(caps_setVisible, SideTailR, false);
-		setCapsValue(caps_setVisible, SideTailL, false);
-		setCapsValue(caps_setVisible, ChignonR, false);
-		setCapsValue(caps_setVisible, ChignonL, false);
-		setCapsValue(caps_setVisible, ChignonB, false);
-		setCapsValue(caps_setVisible, Goggles1, true);
-		setCapsValue(caps_setVisible, Goggles2, true);
-		setCapsValue(caps_setVisible, Goggles3, true);
-		setCapsValue(caps_setVisible, GogglesR, true);
-		setCapsValue(caps_setVisible, GogglesL, true);
-		setCapsValue(caps_setVisible, Goggles1A, false);
-		setCapsValue(caps_setVisible, Goggles2A, false);
-		setCapsValue(caps_setVisible, Goggles3A, false);
-		setCapsValue(caps_setVisible, GogglesRA, false);
-		setCapsValue(caps_setVisible, GogglesLA, false);
+		setCapsValue(caps_visible, Tail, false);
+		setCapsValue(caps_visible, SideTailR, false);
+		setCapsValue(caps_visible, SideTailL, false);
+		setCapsValue(caps_visible, ChignonR, false);
+		setCapsValue(caps_visible, ChignonL, false);
+		setCapsValue(caps_visible, ChignonB, false);
+		setCapsValue(caps_visible, Goggles1, true);
+		setCapsValue(caps_visible, Goggles2, true);
+		setCapsValue(caps_visible, Goggles3, true);
+		setCapsValue(caps_visible, GogglesR, true);
+		setCapsValue(caps_visible, GogglesL, true);
+		setCapsValue(caps_visible, Goggles1A, false);
+		setCapsValue(caps_visible, Goggles2A, false);
+		setCapsValue(caps_visible, Goggles3A, false);
+		setCapsValue(caps_visible, GogglesRA, false);
+		setCapsValue(caps_visible, GogglesLA, false);
 	}
 
 	public void skirtFloatsInit(float f, float f1) {
-    	if(!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
+    	if(!getCapsValueBoolean(caps_skirtFloats)) return;
     	//ふんわりスカート上
     	SkirtTop = new Modchu_ModelRenderer(this, 6, 16);
     	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 7, 6, 0);
@@ -160,18 +159,18 @@ public class MultiModel_MS1 extends MultiModel_SR2
     	((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 7, 7, 0);
     	SkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
     	SkirtTop.addChild(SkirtBack);
-    	setCapsValue(caps_setVisible, Skirt, false);
+    	setCapsValue(caps_visible, Skirt, false);
     }
 
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
         super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	if ((Boolean) getCapsValue(caps_getIsLookSuger, entityliving)) {
-    		setCapsValue(caps_setVisible, Cheek_R, true);
-    		setCapsValue(caps_setVisible, Cheek_L, true);
+    	if (getCapsValueBoolean(caps_isLookSuger, entityliving)) {
+    		setCapsValue(caps_visible, Cheek_R, true);
+    		setCapsValue(caps_visible, Cheek_L, true);
     	} else {
-    		setCapsValue(caps_setVisible, Cheek_R, false);
-    		setCapsValue(caps_setVisible, Cheek_L, false);
+    		setCapsValue(caps_visible, Cheek_R, false);
+    		setCapsValue(caps_visible, Cheek_L, false);
     	}
     }
 
@@ -179,13 +178,13 @@ public class MultiModel_MS1 extends MultiModel_SR2
     public void setRotationAnglesLM(float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5, Entity entity)
     {
     	super.setRotationAnglesLM(f, f1, ticksExisted, pheadYaw, pheadPitch, f5, entity);
-    	if ((Boolean) getCapsValue(caps_getaimedBow)) {
-    		setCapsValue(caps_setVisible, eyeR, false);
-    		setCapsValue(caps_setVisible, eyeL, true);
+    	if (getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeR, false);
+    		setCapsValue(caps_visible, eyeL, true);
     	}
     	Skirt.rotationPointY -= 2.0F;
     	Skirt.rotationPointZ = 0.0F;
-    	if ((Boolean) getCapsValue(caps_getIsSneak)) {
+    	if (getCapsValueBoolean(caps_getIsSneak)) {
     		Skirt.rotateAngleX += 0.3F;
     	}
     }
@@ -193,8 +192,8 @@ public class MultiModel_MS1 extends MultiModel_SR2
     @Override
     public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.skirtFloats(f, f1, f2, f3, f4, f5, entity);
-    	if (!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
-    	float motionY = (Float) getCapsValue(caps_getMotionY);
+    	if (!getCapsValueBoolean(caps_skirtFloats)) return;
+    	float motionY = getCapsValueFloat(caps_motionY);
     	SkirtTop.setRotationPoint(-3.5F, -2.5F, 3.0F);
     	SkirtFront.setRotationPoint(0.0F, 6.0F, 0.0F);
     	SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -217,21 +216,21 @@ public class MultiModel_MS1 extends MultiModel_SR2
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	setCapsValue(caps_setVisible, Tail, false);
-    	setCapsValue(caps_setVisible, SideTailR, false);
-    	setCapsValue(caps_setVisible, SideTailL, false);
-    	setCapsValue(caps_setVisible, ChignonR, false);
-    	setCapsValue(caps_setVisible, ChignonL, false);
-    	setCapsValue(caps_setVisible, ChignonB, false);
-    	setCapsValue(caps_setVisible, Goggles1, true);
-    	setCapsValue(caps_setVisible, Goggles2, true);
-    	setCapsValue(caps_setVisible, Goggles3, true);
-    	setCapsValue(caps_setVisible, GogglesR, true);
-    	setCapsValue(caps_setVisible, GogglesL, true);
-    	setCapsValue(caps_setVisible, Goggles1A, false);
-    	setCapsValue(caps_setVisible, Goggles2A, false);
-    	setCapsValue(caps_setVisible, Goggles3A, false);
-    	setCapsValue(caps_setVisible, GogglesRA, false);
-    	setCapsValue(caps_setVisible, GogglesLA, false);
+    	setCapsValue(caps_visible, Tail, false);
+    	setCapsValue(caps_visible, SideTailR, false);
+    	setCapsValue(caps_visible, SideTailL, false);
+    	setCapsValue(caps_visible, ChignonR, false);
+    	setCapsValue(caps_visible, ChignonL, false);
+    	setCapsValue(caps_visible, ChignonB, false);
+    	setCapsValue(caps_visible, Goggles1, true);
+    	setCapsValue(caps_visible, Goggles2, true);
+    	setCapsValue(caps_visible, Goggles3, true);
+    	setCapsValue(caps_visible, GogglesR, true);
+    	setCapsValue(caps_visible, GogglesL, true);
+    	setCapsValue(caps_visible, Goggles1A, false);
+    	setCapsValue(caps_visible, Goggles2A, false);
+    	setCapsValue(caps_visible, Goggles3A, false);
+    	setCapsValue(caps_visible, GogglesRA, false);
+    	setCapsValue(caps_visible, GogglesLA, false);
     }
 }

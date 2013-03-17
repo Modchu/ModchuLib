@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 public class MultiModel_NM1 extends MultiModel_SR2
 {
@@ -274,36 +275,36 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	bipedLeftLeg.addChild(bootL1);
     	bipedLeftLeg.addChild(bootL2);
 
-    	setCapsValue(caps_setVisible, HornR1, false);
-    	setCapsValue(caps_setVisible, HornR2, false);
-    	setCapsValue(caps_setVisible, HornR3, false);
-    	setCapsValue(caps_setVisible, HornR4, false);
-    	setCapsValue(caps_setVisible, HornL1, false);
-    	setCapsValue(caps_setVisible, HornL2, false);
-    	setCapsValue(caps_setVisible, HornL3, false);
-    	setCapsValue(caps_setVisible, HornL4, false);
-    	setCapsValue(caps_setVisible, ArmR1, false);
-    	setCapsValue(caps_setVisible, HandR1, false);
-    	setCapsValue(caps_setVisible, HandR2, false);
-    	setCapsValue(caps_setVisible, ArmL1, false);
-    	setCapsValue(caps_setVisible, HandL1, false);
-    	setCapsValue(caps_setVisible, HandL2, false);
-    	setCapsValue(caps_setVisible, LegR1, false);
-    	setCapsValue(caps_setVisible, LegR2, false);
-    	setCapsValue(caps_setVisible, LegR3, false);
-    	setCapsValue(caps_setVisible, LegR4, false);
-    	setCapsValue(caps_setVisible, LegR5, false);
-    	setCapsValue(caps_setVisible, LegL1, false);
-    	setCapsValue(caps_setVisible, LegL2, false);
-    	setCapsValue(caps_setVisible, LegL3, false);
-    	setCapsValue(caps_setVisible, LegL4, false);
-    	setCapsValue(caps_setVisible, LegL5, false);
-    	setCapsValue(caps_setVisible, bipedLeftLeg, false);
-    	setCapsValue(caps_setVisible, bipedRightLeg, false);
-    	setCapsValue(caps_setVisible, bootR1, false);
-    	setCapsValue(caps_setVisible, bootR2, false);
-    	setCapsValue(caps_setVisible, bootL1, false);
-    	setCapsValue(caps_setVisible, bootL2, false);
+    	setCapsValue(caps_visible, HornR1, false);
+    	setCapsValue(caps_visible, HornR2, false);
+    	setCapsValue(caps_visible, HornR3, false);
+    	setCapsValue(caps_visible, HornR4, false);
+    	setCapsValue(caps_visible, HornL1, false);
+    	setCapsValue(caps_visible, HornL2, false);
+    	setCapsValue(caps_visible, HornL3, false);
+    	setCapsValue(caps_visible, HornL4, false);
+    	setCapsValue(caps_visible, ArmR1, false);
+    	setCapsValue(caps_visible, HandR1, false);
+    	setCapsValue(caps_visible, HandR2, false);
+    	setCapsValue(caps_visible, ArmL1, false);
+    	setCapsValue(caps_visible, HandL1, false);
+    	setCapsValue(caps_visible, HandL2, false);
+    	setCapsValue(caps_visible, LegR1, false);
+    	setCapsValue(caps_visible, LegR2, false);
+    	setCapsValue(caps_visible, LegR3, false);
+    	setCapsValue(caps_visible, LegR4, false);
+    	setCapsValue(caps_visible, LegR5, false);
+    	setCapsValue(caps_visible, LegL1, false);
+    	setCapsValue(caps_visible, LegL2, false);
+    	setCapsValue(caps_visible, LegL3, false);
+    	setCapsValue(caps_visible, LegL4, false);
+    	setCapsValue(caps_visible, LegL5, false);
+    	setCapsValue(caps_visible, bipedLeftLeg, false);
+    	setCapsValue(caps_visible, bipedRightLeg, false);
+    	setCapsValue(caps_visible, bootR1, false);
+    	setCapsValue(caps_visible, bootR2, false);
+    	setCapsValue(caps_visible, bootL1, false);
+    	setCapsValue(caps_visible, bootL2, false);
 
     	actionPartsInit(f, f1);
     }
@@ -417,11 +418,11 @@ public class MultiModel_NM1 extends MultiModel_SR2
 														rightArm2.showModel = leftArm2.showModel =
 																rightLeg.showModel = rightLeg2.showModel =
 																		leftLeg.showModel = leftLeg2.showModel = false;
-		setCapsValue(caps_setAimedBowBan, false);
-		setCapsValue(caps_setSneakBan, false);
-		setCapsValue(caps_setWaitBan, false);
-		setCapsValue(caps_setSittingBan, false);
-		setCapsValue(caps_setSleepingBan, false);
+		setCapsValue(caps_aimedBowBan, false);
+		setCapsValue(caps_sneakBan, false);
+		setCapsValue(caps_waitBan, false);
+		setCapsValue(caps_sittingBan, false);
+		setCapsValue(caps_sleepingBan, false);
 	}
 
     @Override
@@ -444,7 +445,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	Arms[1].rotateAngleX = 0F;
     	Arms[1].rotateAngleY = 0F;
     	Arms[1].rotateAngleZ = 0F;
-    	float f3 = (float)entityliving.ticksExisted + f2 + (Float) getCapsValue(caps_getEntityIdFactor, entityliving);
+    	float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor, entityliving);
 
     	eyeR.showModel = eyeL.showModel = false;
     	eyeR1.showModel = eyeL1.showModel = false;
@@ -467,7 +468,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	bootL1.showModel = bootL2.showModel = false;
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entityliving)
-    			&& !(Boolean) getCapsValue(caps_getaimedBow)) {
+    			&& !getCapsValueBoolean(caps_aimedBow)) {
     		boolean isWorkingDelay = (Boolean)getObjectInvokeMethod(LMM_EntityLittleMaid, "isWorkingDelay", entityliving);
     		if (isWorkingDelay) {
 //-@-125
@@ -522,7 +523,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	bipedRightArm.rotationPointY = bipedLeftArm.rotationPointY = -3.5F;
     	Breast.rotationPointY = -2.5F;
 
-    	if ((Boolean) getCapsValue(caps_getIsRiding))
+    	if (getCapsValueBoolean(caps_getIsRiding))
     	{
     		bipedRightArm.rotateAngleX += -((float)Math.PI / 5F);
     		bipedLeftArm.rotateAngleX += -((float)Math.PI / 5F);
@@ -546,7 +547,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	bipedLeftArm.rotateAngleY = 0.0F;
     	armSwing(f, f1, f2, f3, f4, f5, entity);
 
-    	if ((Boolean) getCapsValue(caps_getIsSneak))
+    	if (getCapsValueBoolean(caps_getIsSneak))
     	{
     		bipedBody.rotateAngleX = 0.5F;
     		bipedHead.rotationPointY = -3F;
@@ -578,7 +579,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
     		Skirt.rotateAngleX = 0.0F;
     	}
 
-    	if ((Boolean) getCapsValue(caps_getIsWait) && !(Boolean) getCapsValue(caps_getaimedBow))
+    	if (getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow))
     	{
     		bipedRightArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F - 0.7F;
     		bipedRightArm.rotateAngleY = 0.0F;
@@ -595,10 +596,10 @@ public class MultiModel_NM1 extends MultiModel_SR2
     		Arms[1].rotateAngleX -= 0.5F;
     		Arms[1].rotateAngleY -= 1.5F;
     	}
-    	if ((Boolean) getCapsValue(caps_getaimedBow))
+    	if (getCapsValueBoolean(caps_aimedBow))
     	{
-    		float f7 = MathHelper.sin((Float) getCapsValue(caps_getOnGround) * (float)Math.PI);
-    		float f9 = MathHelper.sin((1.0F - (1.0F - (Float) getCapsValue(caps_getOnGround)) * (1.0F - (Float) getCapsValue(caps_getOnGround))) * (float)Math.PI);
+    		float f7 = MathHelper.sin(getCapsValueFloat(caps_onGround) * (float)Math.PI);
+    		float f9 = MathHelper.sin((1.0F - (1.0F - getCapsValueFloat(caps_onGround)) * (1.0F - getCapsValueFloat(caps_onGround))) * (float)Math.PI);
     		bipedRightArm.rotateAngleZ = 0.0F;
     		bipedLeftArm.rotateAngleZ = 0.0F;
     		bipedRightArm.rotateAngleY = -(0.1F - f7 * 0.6F);
@@ -618,7 +619,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	}
     	else
     	{
-    		if (!(Boolean) getCapsValue(caps_getIsWait)) {
+    		if (!getCapsValueBoolean(caps_getIsWait)) {
     			bipedRightArm.rotateAngleZ += 0.3F;
     			bipedLeftArm.rotateAngleZ -= 0.3F;
     			bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
@@ -632,8 +633,8 @@ public class MultiModel_NM1 extends MultiModel_SR2
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	if ((Boolean) getCapsValue(caps_getSkirtFloats)) {
-    		setCapsValue(caps_setVisible, Skirt, getGuiParts().get("Skirt"));
+    	if (getCapsValueBoolean(caps_skirtFloats)) {
+    		setCapsValue(caps_visible, Skirt, getGuiParts().get("Skirt"));
     	}
     }
 
@@ -670,14 +671,14 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	boolean b = bipedRightLeg.showModel;
     	boolean b1 = bipedLeftLeg.showModel;
     	super.actionInit1();
-    	setCapsValue(caps_setVisible, rightLeg, b);
-    	setCapsValue(caps_setVisible, rightLeg2, b);
-    	setCapsValue(caps_setVisible, rightLegPlus, b);
-    	setCapsValue(caps_setVisible, rightLegPlus2, b);
-    	setCapsValue(caps_setVisible, leftLeg, b);
-    	setCapsValue(caps_setVisible, leftLeg2, b);
-    	setCapsValue(caps_setVisible, leftLegPlus, b);
-    	setCapsValue(caps_setVisible, leftLegPlus2, b);
+    	setCapsValue(caps_visible, rightLeg, b);
+    	setCapsValue(caps_visible, rightLeg2, b);
+    	setCapsValue(caps_visible, rightLegPlus, b);
+    	setCapsValue(caps_visible, rightLegPlus2, b);
+    	setCapsValue(caps_visible, leftLeg, b);
+    	setCapsValue(caps_visible, leftLeg2, b);
+    	setCapsValue(caps_visible, leftLegPlus, b);
+    	setCapsValue(caps_visible, leftLegPlus2, b);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(ArmR1);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(HandR1);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(HandR2);

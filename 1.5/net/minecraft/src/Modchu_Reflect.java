@@ -465,6 +465,16 @@ public class Modchu_Reflect
     	return null;
     }
 
+    public static Object invokeMethod(Class var0, String var1, Class[] var2, Object var3, Object[] var4, boolean var5)
+    {
+    	try {
+    		return getMethod(var0, var1, var2).invoke(var3, var4);
+    	} catch (Exception e) {
+    		if (var5) e.printStackTrace();
+    	}
+    	return null;
+    }
+
     public static Object invokeMethod(Class var0, String var1, Class[] var2, Object var3, Object var4)
     {
     	try {

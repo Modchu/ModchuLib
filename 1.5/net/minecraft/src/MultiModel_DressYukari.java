@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 public class MultiModel_DressYukari extends MultiModel_SR2 {
 
@@ -91,7 +92,7 @@ public class MultiModel_DressYukari extends MultiModel_SR2 {
 	public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
 		super.setLivingAnimationsLM(entityliving, f, f1, f2);
 		IdOffset=entityliving.entityId;
-		if ((Boolean) getCapsValue(caps_getIsLookSuger, entityliving))
+		if (getCapsValueBoolean(caps_isLookSuger, entityliving))
 			pink.setVisible(true);
 		else
 			pink.setVisible(false);
@@ -118,7 +119,7 @@ public class MultiModel_DressYukari extends MultiModel_SR2 {
 		if(isRiding) {
 			Skirt.rotationPointY-=0.2f;
 			Skirt.rotationPointZ+=1.0f;
-			Skirt.rotateAngleX = (Float) getCapsValue(caps_convertDegtoRad, -25F);
+			Skirt.rotateAngleX = getCapsValueFloat(caps_convertDegtoRad, -25F);
 		}
 	}
 

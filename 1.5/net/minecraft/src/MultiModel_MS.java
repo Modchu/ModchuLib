@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-
 public class MultiModel_MS extends MultiModel_MS1
 {
 
@@ -32,9 +31,9 @@ public class MultiModel_MS extends MultiModel_MS1
     	Goggles3A.setVisible(false);
     	GogglesRA.setVisible(false);
     	GogglesLA.setVisible(false);
-    	if ((Boolean) getCapsValue(caps_getaimedBow)) {
-    		setCapsValue(caps_setVisible, eyeR, false);
-    		setCapsValue(caps_setVisible, eyeL, true);
+    	if (getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeR, false);
+    		setCapsValue(caps_visible, eyeL, true);
     		Goggles1.setVisible(false);
     		Goggles2.setVisible(false);
     		Goggles3.setVisible(false);

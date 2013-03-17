@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-
 public class MultiModel_dm extends MultiModel_SR2
 {
     public Modchu_ModelRenderer HornR1;
@@ -299,7 +298,7 @@ public class MultiModel_dm extends MultiModel_SR2
     public void setLivingAnimations(EntityLiving entityliving, float f, float f1, float f2)
     {
     	super.setLivingAnimations(entityliving, f, f1, f2);
-    	if ((Boolean) getCapsValue(caps_getIsLookSuger, entityliving)) {
+    	if (getCapsValueBoolean(caps_isLookSuger, entityliving)) {
     		Cheek_R.setVisible(true);
     		Cheek_L.setVisible(true);
     	} else {

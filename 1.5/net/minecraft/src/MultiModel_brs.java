@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-
 public class MultiModel_brs extends MultiModel_SR2
 {
     public Modchu_ModelRenderer TailR1;
@@ -145,7 +144,7 @@ public class MultiModel_brs extends MultiModel_SR2
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	if ((Boolean) getCapsValue(caps_getIsLookSuger, entityliving)) {
+    	if (getCapsValueBoolean(caps_isLookSuger, entityliving)) {
     		Cheek_R.setVisible(true);
     		Cheek_L.setVisible(true);
     	} else {

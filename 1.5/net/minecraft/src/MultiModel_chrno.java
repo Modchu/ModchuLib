@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 public class MultiModel_chrno extends MultiModel {
 
@@ -154,21 +155,21 @@ public class MultiModel_chrno extends MultiModel {
     	}
     	Icewing1.setRotateAngleX(Icewing2.setRotateAngleX(Icewing3.setRotateAngleX(mh_sin(f * f * 0.6662F) * 0.15F)));
     	Icewing4.setRotateAngleX(Icewing5.setRotateAngleX(Icewing6.setRotateAngleX(mh_sin(f * f * 0.6662F) * 0.15F)));
-    	if((Float) getCapsValue(caps_getOnGround) > -9990F && !(Boolean) getCapsValue(caps_getaimedBow)) {
+    	if(getCapsValueFloat(caps_onGround) > -9990F && !getCapsValueBoolean(caps_aimedBow)) {
     		Icewing1.setRotateAngleY(Icewing2.setRotateAngleY(Icewing3.setRotateAngleY(((Modchu_ModelRenderer) bipedBody).getRotateAngleY())));
     		Icewing4.setRotateAngleY(Icewing5.setRotateAngleY(Icewing6.setRotateAngleY(((Modchu_ModelRenderer) bipedBody).getRotateAngleY())));
     	}
-    	if((Boolean) getCapsValue(caps_getIsWait) && !(Boolean) getCapsValue(caps_getaimedBow)) {
+    	if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
     		if (!initWait) {
     			initWait = true;
     			Rightarm1.isHidden = false;
     			Rightarm2.isHidden = false;
     			Leftarm1.isHidden = false;
     			Leftarm2.isHidden = false;
-    			setCapsValue(caps_setVisible, Leftarm1, true);
-    			setCapsValue(caps_setVisible, Leftarm2, true);
-    			setCapsValue(caps_setVisible, Rightarm1, true);
-    			setCapsValue(caps_setVisible, Rightarm2, true);
+    			setCapsValue(caps_visible, Leftarm1, true);
+    			setCapsValue(caps_visible, Leftarm2, true);
+    			setCapsValue(caps_visible, Rightarm1, true);
+    			setCapsValue(caps_visible, Rightarm2, true);
     			((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[0]);
     			((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[2]);
     			((Modchu_ModelRenderer) bipedLeftArm).removeChild(Arms[1]);
@@ -179,8 +180,8 @@ public class MultiModel_chrno extends MultiModel {
     			Leftarm2.addChild(Arms[3]);
     			Arms[0].setRotationPoint(-5.0F, 0.0F, 0F);
     		}
-    		setCapsValue(caps_setVisible, bipedRightArm, false);
-    		setCapsValue(caps_setVisible, bipedLeftArm, false);
+    		setCapsValue(caps_visible, bipedRightArm, false);
+    		setCapsValue(caps_visible, bipedLeftArm, false);
     		Icewing3.setRotateAngleX(Icewing6.setRotateAngleX(mh_sin(f2 * f2 * 0.6662F) * 0.2F));
     		((Modchu_ModelRenderer) bipedRightArm).setRotateAngleX(0.0F);
     		((Modchu_ModelRenderer) bipedRightArm).setRotateAngleY(0.0F);
@@ -194,12 +195,12 @@ public class MultiModel_chrno extends MultiModel {
     			Rightarm2.isHidden = true;
     			Leftarm1.isHidden = true;
     			Leftarm2.isHidden = true;
-    			setCapsValue(caps_setVisible, Leftarm1, false);
-    			setCapsValue(caps_setVisible, Leftarm2, false);
-    			setCapsValue(caps_setVisible, Rightarm1, false);
-    			setCapsValue(caps_setVisible, Rightarm2, false);
-    			setCapsValue(caps_setVisible, bipedRightArm, true);
-    			setCapsValue(caps_setVisible, bipedLeftArm, true);
+    			setCapsValue(caps_visible, Leftarm1, false);
+    			setCapsValue(caps_visible, Leftarm2, false);
+    			setCapsValue(caps_visible, Rightarm1, false);
+    			setCapsValue(caps_visible, Rightarm2, false);
+    			setCapsValue(caps_visible, bipedRightArm, true);
+    			setCapsValue(caps_visible, bipedLeftArm, true);
     			Rightarm2.removeChild(Arms[0]);
     			Rightarm2.removeChild(Arms[2]);
     			Leftarm2.removeChild(Arms[1]);
@@ -211,16 +212,16 @@ public class MultiModel_chrno extends MultiModel {
     			Arms[0].setRotationPoint(0.5F, 6.5F, 0F);
     		}
     	}
-    	if((Boolean) getCapsValue(caps_getaimedBow)) {
-    		setCapsValue(caps_setVisible, eyeL, true);
-    		setCapsValue(caps_setVisible, eyeR, false);
+    	if(getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, false);
     	} else {
     		if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
-    			setCapsValue(caps_setVisible, eyeL, false);
-    			setCapsValue(caps_setVisible, eyeR, false);
+    			setCapsValue(caps_visible, eyeL, false);
+    			setCapsValue(caps_visible, eyeR, false);
     		} else {
-    			setCapsValue(caps_setVisible, eyeL, true);
-    			setCapsValue(caps_setVisible, eyeR, true);
+    			setCapsValue(caps_visible, eyeL, true);
+    			setCapsValue(caps_visible, eyeR, true);
     		}
     	}
     }
@@ -236,12 +237,12 @@ public class MultiModel_chrno extends MultiModel {
 		Rightarm2.isHidden = true;
 		Leftarm1.isHidden = true;
 		Leftarm2.isHidden = true;
-		setCapsValue(caps_setVisible, Leftarm1, true);
-		setCapsValue(caps_setVisible, Leftarm2, true);
-		setCapsValue(caps_setVisible, Rightarm1, true);
-		setCapsValue(caps_setVisible, Rightarm2, true);
-		setCapsValue(caps_setVisible, bipedRightArm, false);
-		setCapsValue(caps_setVisible, bipedLeftArm, false);
+		setCapsValue(caps_visible, Leftarm1, true);
+		setCapsValue(caps_visible, Leftarm2, true);
+		setCapsValue(caps_visible, Rightarm1, true);
+		setCapsValue(caps_visible, Rightarm2, true);
+		setCapsValue(caps_visible, bipedRightArm, false);
+		setCapsValue(caps_visible, bipedLeftArm, false);
 		((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[0]);
 		((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[2]);
 		((Modchu_ModelRenderer) bipedLeftArm).removeChild(Arms[1]);
@@ -265,12 +266,12 @@ public class MultiModel_chrno extends MultiModel {
 		Rightarm2.isHidden = false;
 		Leftarm1.isHidden = false;
 		Leftarm2.isHidden = false;
-		setCapsValue(caps_setVisible, Leftarm1, false);
-		setCapsValue(caps_setVisible, Leftarm2, false);
-		setCapsValue(caps_setVisible, Rightarm1, false);
-		setCapsValue(caps_setVisible, Rightarm2, false);
-		setCapsValue(caps_setVisible, bipedRightArm, true);
-		setCapsValue(caps_setVisible, bipedLeftArm, true);
+		setCapsValue(caps_visible, Leftarm1, false);
+		setCapsValue(caps_visible, Leftarm2, false);
+		setCapsValue(caps_visible, Rightarm1, false);
+		setCapsValue(caps_visible, Rightarm2, false);
+		setCapsValue(caps_visible, bipedRightArm, true);
+		setCapsValue(caps_visible, bipedLeftArm, true);
 	}
 
     public float getWidth()
@@ -279,19 +280,19 @@ public class MultiModel_chrno extends MultiModel {
     }
 
     public ModelRenderer getBipedRightArm() {
-    	if ((Boolean) getCapsValue(caps_getShortcutKeysAction)
-    			&& (Integer) getCapsValue(caps_getRunActionNumber) == 0
-    			| (Integer) getCapsValue(caps_getRunActionNumber) == 1) {
-    		if ((Integer) getCapsValue(caps_getHandedness) == 0) return rightArm;
+    	if (getCapsValueBoolean(caps_shortcutKeysAction)
+    			&& getCapsValueInt(caps_runActionNumber) == 0
+    			| getCapsValueInt(caps_runActionNumber) == 1) {
+    		if (getCapsValueInt(caps_dominantArm) == 0) return rightArm;
     		return leftArm;
     	}
     	else {
-    		if((Boolean) getCapsValue(caps_getIsWait) && !(Boolean) getCapsValue(caps_getaimedBow))
+    		if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow))
     		{
-    			if ((Integer) getCapsValue(caps_getHandedness) == 0) return Rightarm1;
+    			if (getCapsValueInt(caps_dominantArm) == 0) return Rightarm1;
     			return Leftarm1;
     		} else {
-    			if ((Integer) getCapsValue(caps_getHandedness) == 0) return bipedRightArm;
+    			if (getCapsValueInt(caps_dominantArm) == 0) return bipedRightArm;
     			return bipedLeftArm;
     		}
     	}
@@ -300,7 +301,7 @@ public class MultiModel_chrno extends MultiModel {
     @Override
     public void setArmorBipedRightArmShowModel(boolean b) {
     	super.setArmorBipedRightArmShowModel(b);
-    	if((Boolean) getCapsValue(caps_getIsWait) && !(Boolean) getCapsValue(caps_getaimedBow)) {
+    	if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
     		Rightarm1.isHidden = b;
     		Rightarm2.isHidden = b;
     	} else {
@@ -312,7 +313,7 @@ public class MultiModel_chrno extends MultiModel {
     @Override
     public void setArmorBipedLeftArmShowModel(boolean b) {
     	super.setArmorBipedLeftArmShowModel(b);
-    	if((Boolean) getCapsValue(caps_getIsWait) && !(Boolean) getCapsValue(caps_getaimedBow)) {
+    	if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
     		Leftarm1.isHidden = b;
     		Leftarm2.isHidden = b;
     	} else {

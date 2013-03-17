@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 public class MultiModel_Tenshi extends MultiModel_SR2 {
 
@@ -859,7 +860,7 @@ public class MultiModel_Tenshi extends MultiModel_SR2 {
 
 	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
-		if((Boolean) getCapsValue(caps_getIsSneak)){
+		if(getCapsValueBoolean(caps_getIsSneak)){
 			Skirt.rotationPointZ = -0.5F;
 		} else {
 			Skirt.rotationPointZ = 0.0F;
@@ -871,8 +872,8 @@ public class MultiModel_Tenshi extends MultiModel_SR2 {
 
 	@Override
 	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		if (!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
-		float motionY = (Float) getCapsValue(caps_getMotionY);
+		if (!getCapsValueBoolean(caps_skirtFloats)) return;
+		float motionY = getCapsValueFloat(caps_motionY);
 		Skirt1.setRotateAngleDeg(-118F, 113F, 47F);
 		Skirt2.setRotateAngleDeg(-65F, 113F, 47F);
 		Skirt3.setRotateAngleDeg(-122F, 158F, 47F);

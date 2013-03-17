@@ -57,10 +57,10 @@ public class MultiModel_twinD extends MultiModel_SR2
 		longhearL.rotateAngleY=kamidomeL.rotateAngleY=-0.296706F;
 		longhearR.rotateAngleZ=-0.1745329F;
 		longhearL.rotateAngleZ=0.1745329F;
-		setCapsValue(caps_setVisible, Tail, false);
-		setCapsValue(caps_setVisible, SideTailL, false);
-		setCapsValue(caps_setVisible, SideTailR, false);
-		setCapsValue(caps_setVisible, ChignonB, false);
+		setCapsValue(caps_visible, Tail, false);
+		setCapsValue(caps_visible, SideTailL, false);
+		setCapsValue(caps_visible, SideTailR, false);
+		setCapsValue(caps_visible, ChignonB, false);
     }
 
     @Override
@@ -75,9 +75,9 @@ public class MultiModel_twinD extends MultiModel_SR2
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	setCapsValue(caps_setVisible, Tail, false);
-    	setCapsValue(caps_setVisible, SideTailL, false);
-    	setCapsValue(caps_setVisible, SideTailR, false);
-    	setCapsValue(caps_setVisible, ChignonB, false);
+    	setCapsValue(caps_visible, Tail, false);
+    	setCapsValue(caps_visible, SideTailL, false);
+    	setCapsValue(caps_visible, SideTailR, false);
+    	setCapsValue(caps_visible, ChignonB, false);
     }
 }

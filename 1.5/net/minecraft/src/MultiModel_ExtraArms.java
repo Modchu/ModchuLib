@@ -1,6 +1,7 @@
 
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 public class MultiModel_ExtraArms extends MultiModel {
 
@@ -113,14 +114,14 @@ public class MultiModel_ExtraArms extends MultiModel {
     @Override
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	float f3 = (float)entityliving.ticksExisted + f2 + (Float) getCapsValue(caps_getEntityIdFactor, entityliving);
+    	float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor, entityliving);
     	// –Úƒpƒ`
     	if( 0 > MathHelper.sin(f3 * 0.05F) + MathHelper.sin(f3 * 0.13F) + MathHelper.sin(f3 * 0.7F) + 2.55F) {
-    		setCapsValue(caps_setVisible, eyeR, false);
-    		setCapsValue(caps_setVisible, eyeL, false);
+    		setCapsValue(caps_visible, eyeR, false);
+    		setCapsValue(caps_visible, eyeL, false);
     	} else {
-    		setCapsValue(caps_setVisible, eyeR, true);
-    		setCapsValue(caps_setVisible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, true);
+    		setCapsValue(caps_visible, eyeL, true);
     	}
     }
 
@@ -129,15 +130,15 @@ public class MultiModel_ExtraArms extends MultiModel {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
     	Cwave.setVisible(false);
 
-    	if((Float) getCapsValue(caps_getOnGround) > -9990F && !(Boolean) getCapsValue(caps_getaimedBow))
+    	if(getCapsValueFloat(caps_onGround) > -9990F && !getCapsValueBoolean(caps_aimedBow))
     	{
     		Antena.rotationPointY = 4F;
     	}
     	Skirt.rotationPointZ = 0.0F;
-    	if ((Boolean) getCapsValue(caps_getIsSneak)) {
+    	if (getCapsValueBoolean(caps_getIsSneak)) {
     		Skirt.rotateAngleX += 0.3F;
     	}
-    	if ((Boolean) getCapsValue(caps_getIsWait))
+    	if (getCapsValueBoolean(caps_getIsWait))
     	{
     		Antena.rotationPointY = 0.0F;
     		if (0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.15000000596046448D + 0.10000000149011612D)
@@ -149,14 +150,14 @@ public class MultiModel_ExtraArms extends MultiModel {
     			Cwave.setVisible(false);
     		}
     	}
-    	if((Boolean) getCapsValue(caps_getaimedBow) || (Boolean) getCapsValue(caps_getIsWait))
+    	if(getCapsValueBoolean(caps_aimedBow) || getCapsValueBoolean(caps_getIsWait))
     	{
     		if (!aimedBowBinoculars)
     		{
     			aimedBowBinoculars = true;
     			((Modchu_ModelRenderer) bipedLeftArm).removeChild(Binoculars);
     			bipedLeftLeg.addChild(Binoculars);
-    			if((Boolean) getCapsValue(caps_getaimedBow))
+    			if(getCapsValueBoolean(caps_aimedBow))
     			{
     				Binoculars.setRotationPoint(0.0F, -10.0F, 0.0F);
     			} else {
@@ -178,10 +179,10 @@ public class MultiModel_ExtraArms extends MultiModel {
     			Binoculars.setRotateAngleZ(0.0F);
     		}
     	}
-    	if((Boolean) getCapsValue(caps_getaimedBow))
+    	if(getCapsValueBoolean(caps_aimedBow))
     	{
-    		setCapsValue(caps_setVisible, eyeL, true);
-    		setCapsValue(caps_setVisible, eyeR, false);
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, false);
     		BinocularsL1.setRotateAngleX(BinocularsL2.setRotateAngleX(0.0F));
     		BinocularsR1.setRotateAngleX(BinocularsR2.setRotateAngleX(0.0F));
     		BinocularsL1.setRotateAngleY(BinocularsL2.setRotateAngleY(0.0F));

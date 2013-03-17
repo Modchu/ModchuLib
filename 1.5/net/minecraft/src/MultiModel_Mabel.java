@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 public class MultiModel_Mabel extends MultiModel {
 
@@ -84,7 +85,7 @@ public class MultiModel_Mabel extends MultiModel {
     	innerLeftLeg.setRotationPoint(0.0F, 0.0F, -0.2F);
     	bipedLeftLeg.addChild(innerLeftLeg);
     	Skirt = new Modchu_ModelRenderer(this, 0, 24);
-    	if (!(Boolean) getCapsValue(caps_getSkirtFloats)) Skirt.addBox(-2F, 0.0F, -2F, 4, 4, 4, f + 2.0F);
+    	if (!getCapsValueBoolean(caps_skirtFloats)) Skirt.addBox(-2F, 0.0F, -2F, 4, 4, 4, f + 2.0F);
     	Skirt.setRotationPoint(0.0F, 7F, 0.0F);
     	bipedBody.addChild(Skirt);
     	innerSkirt = new Modchu_ModelRenderer(this, 16, 26);
@@ -232,16 +233,16 @@ public class MultiModel_Mabel extends MultiModel {
     							rightArm2.showModel = leftArm2.showModel =
     								rightLeg.showModel = rightLeg2.showModel =
     									leftLeg.showModel = leftLeg2.showModel = false;
-    	setCapsValue(caps_setAimedBowBan, false);
-    	setCapsValue(caps_setSneakBan, false);
-    	setCapsValue(caps_setWaitBan, false);
-    	setCapsValue(caps_setSittingBan, false);
-    	setCapsValue(caps_setSleepingBan, false);
+    	setCapsValue(caps_aimedBowBan, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
+    	setCapsValue(caps_sleepingBan, false);
     }
 
     @Override
     public void skirtFloatsInit(float f, float f1) {
-    	if(!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
+    	if(!getCapsValueBoolean(caps_skirtFloats)) return;
     	//スカート上
     	SkirtTop = new Modchu_ModelRenderer(this, 4, 24);
     	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 4, 4, 0, f + 2.0F);
@@ -301,8 +302,8 @@ public class MultiModel_Mabel extends MultiModel {
     	innerSkirtBack.addPlate(0.0F, 0.0F, 0.0F, 3, 3, 0, f + 1.6F);
     	innerSkirtBack.setRotationPoint(0.0F, 0.0F, 0.0F);
     	innerSkirtTop.addChild(innerSkirtBack);
-    	setCapsValue(caps_setVisible, Skirt, false);
-    	setCapsValue(caps_setVisible, innerSkirt, false);
+    	setCapsValue(caps_visible, Skirt, false);
+    	setCapsValue(caps_visible, innerSkirt, false);
     }
 
     @Override
@@ -330,7 +331,7 @@ public class MultiModel_Mabel extends MultiModel {
     	SideTailL.rotateAngleZ = -f6;
     	Tail.rotateAngleX = f6;
     	SideTailL.rotateAngleX = SideTailR.rotateAngleX = -bipedHead.rotateAngleX / 2.0F;
-    	if((Boolean) getCapsValue(caps_getIsSneak))
+    	if(getCapsValueBoolean(caps_getIsSneak))
     	{
     		// しゃがみ
     		Skirt.rotateAngleX += 0.4F;
@@ -342,8 +343,8 @@ public class MultiModel_Mabel extends MultiModel {
     @Override
     public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	super.skirtFloats(f, f1, f2, f3, f4, f5, entity);
-    	if (!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
-    	float motionY = (Float) getCapsValue(caps_getMotionY);
+    	if (!getCapsValueBoolean(caps_skirtFloats)) return;
+    	float motionY = getCapsValueFloat(caps_motionY);
     	SkirtBack.rotateAngleX = SkirtRight.rotateAngleX = SkirtLeft.rotateAngleX = SkirtFront.rotateAngleX = 0.0F;
     	SkirtBack.rotateAngleY = SkirtRight.rotateAngleY = SkirtLeft.rotateAngleY = SkirtFront.rotateAngleY = 0.0F;
     	SkirtBack.rotateAngleZ = SkirtRight.rotateAngleZ = SkirtLeft.rotateAngleZ = SkirtFront.rotateAngleZ = 0.0F;
@@ -431,8 +432,8 @@ public class MultiModel_Mabel extends MultiModel {
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	if ((Boolean) getCapsValue(caps_getSkirtFloats)) {
-    		setCapsValue(caps_setVisible, innerSkirt, false);
+    	if (getCapsValueBoolean(caps_skirtFloats)) {
+    		setCapsValue(caps_visible, innerSkirt, false);
     	}
     }
 

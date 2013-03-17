@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-
 public class MultiModel_NM extends MultiModel_SR2
 {
     public Modchu_ModelRenderer hairR;
@@ -255,10 +254,10 @@ public class MultiModel_NM extends MultiModel_SR2
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
         super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	float f3 = (float)entityliving.ticksExisted + f2 + (Float) getCapsValue(caps_getEntityIdFactor, entityliving);
+    	float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor, entityliving);
     	if (LMM_EntityLittleMaid != null
     			&& LMM_EntityLittleMaid.isInstance(entityliving)
-    			&& !(Boolean) getCapsValue(caps_getaimedBow)) {
+    			&& !getCapsValueBoolean(caps_aimedBow)) {
     		boolean isWorkingDelay = (Boolean)getObjectInvokeMethod(LMM_EntityLittleMaid, "isWorkingDelay", entityliving);
     		if (isWorkingDelay) {
 //-@-125
@@ -327,7 +326,7 @@ public class MultiModel_NM extends MultiModel_SR2
     		}
     	}
     	float f7 = 0.0F;
-    	if ((Boolean) getCapsValue(caps_getIsLookSuger, entityliving)) {
+    	if (getCapsValueBoolean(caps_isLookSuger, entityliving)) {
     		f3 *= 8F;
     		f7 = -0.2F;
     		Cheek_R.setVisible(true);

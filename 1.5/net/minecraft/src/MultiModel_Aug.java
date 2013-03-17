@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-
 public class MultiModel_Aug extends MultiModel_SR2 {
 
 	public Modchu_ModelRenderer sidetailUpperR;
@@ -91,9 +90,9 @@ public class MultiModel_Aug extends MultiModel_SR2 {
 		bipedHead.addChild(sidetailUpperL);
 
 		// 未使用パーツ
-		setCapsValue(caps_setVisible, bipedHeadwear, false);
-		setCapsValue(caps_setVisible, Tail, false);
-		setCapsValue(caps_setVisible, ChignonB, false);
+		setCapsValue(caps_visible, bipedHeadwear, false);
+		setCapsValue(caps_visible, Tail, false);
+		setCapsValue(caps_visible, ChignonB, false);
 	}
 
 	@Override
@@ -101,9 +100,9 @@ public class MultiModel_Aug extends MultiModel_SR2 {
 	{
 		super.setLivingAnimationsLM(entityliving, f, f1, renderPartialTicks);
 
-		float f3 = (float)entityliving.ticksExisted + renderPartialTicks + (Float) getCapsValue(caps_getEntityIdFactor, entityliving);
+		float f3 = (float)entityliving.ticksExisted + renderPartialTicks + getCapsValueFloat(caps_entityIdFactor, entityliving);
 		float f4 = 0.0F;
-		if ((Boolean) getCapsValue(caps_getIsLookSuger, entityliving)) {
+		if (getCapsValueBoolean(caps_isLookSuger, entityliving)) {
 			f3 *= 8.0F;
 			f4 = -0.2F;
 		} else {

@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
 
 public class MultiModel_Kelo extends MultiModel {
 
@@ -189,9 +190,9 @@ public class MultiModel_Kelo extends MultiModel {
 		mainFrame.addChild(bipedHead);
 		mainFrame.addChild(bipedBody);
 		mainFrame.setRotationPoint(0.0F, 0.0F, 0.0F);
-		setCapsValue(caps_setVisible, bipedHeadwear, false);
-		setCapsValue(caps_setVisible, ChignonB, false);
-		setCapsValue(caps_setVisible, Tail, false);
+		setCapsValue(caps_visible, bipedHeadwear, false);
+		setCapsValue(caps_visible, ChignonB, false);
+		setCapsValue(caps_visible, Tail, false);
 		actionPartsInit(f, f1);
     }
 
@@ -316,11 +317,11 @@ public class MultiModel_Kelo extends MultiModel {
 																rightLeg.showModel = rightLeg2.showModel =
 																		leftLeg.showModel = leftLeg2.showModel =
 																				rightHandPlus.showModel = leftHandPlus.showModel = false;
-		setCapsValue(caps_setAimedBowBan, false);
-		setCapsValue(caps_setSneakBan, false);
-		setCapsValue(caps_setWaitBan, false);
-		setCapsValue(caps_setSittingBan, false);
-		setCapsValue(caps_setSleepingBan, false);
+		setCapsValue(caps_aimedBowBan, false);
+		setCapsValue(caps_sneakBan, false);
+		setCapsValue(caps_waitBan, false);
+		setCapsValue(caps_sittingBan, false);
+		setCapsValue(caps_sleepingBan, false);
 	}
 
     @Override
@@ -334,19 +335,19 @@ public class MultiModel_Kelo extends MultiModel {
 
     	bipedRightLeg.rotateAngleX = (MathHelper.cos(f * 0.6662F) * 1.4F * f1) / 1.5F;
     	bipedLeftLeg.rotateAngleX = (MathHelper.cos(f * 0.6662F + 3.141593F) * 1.4F * f1) / 1.5F;
-    	setCapsValue(caps_setVisible, KeloeyeL1, true);
-    	setCapsValue(caps_setVisible, KeloeyeR1, true);
-    	setCapsValue(caps_setVisible, KeloeyeL2, false);
-    	setCapsValue(caps_setVisible, KeloeyeR2, false);
+    	setCapsValue(caps_visible, KeloeyeL1, true);
+    	setCapsValue(caps_visible, KeloeyeR1, true);
+    	setCapsValue(caps_visible, KeloeyeL2, false);
+    	setCapsValue(caps_visible, KeloeyeR2, false);
 
-    	if((Boolean) getCapsValue(caps_getIsRiding))
+    	if(getCapsValueBoolean(caps_getIsRiding))
     	{
     		bipedRightLeg.rotateAngleX = -1.256637F;
     		bipedLeftLeg.rotateAngleX = -1.256637F;
     		bipedRightLeg.rotateAngleY = 0.3141593F;
     		bipedLeftLeg.rotateAngleY = -0.3141593F;
     	}
-    	if((Float) getCapsValue(caps_getOnGround) > -9990F && !(Boolean) getCapsValue(caps_getaimedBow))
+    	if(getCapsValueFloat(caps_onGround) > -9990F && !getCapsValueBoolean(caps_aimedBow))
     	{
     		bipedRightArm.rotationPointZ = MathHelper.sin(bipedBody.rotateAngleY) * 4F;
     		bipedRightArm.rotationPointX = -MathHelper.cos(bipedBody.rotateAngleY) * 3.5F + 1.0F;
@@ -355,7 +356,7 @@ public class MultiModel_Kelo extends MultiModel {
     	}
     	Skirt.rotationPointY = 10.0F;
     	Skirt.rotationPointZ = 0.0F;
-    	if((Boolean) getCapsValue(caps_getIsSneak))
+    	if(getCapsValueBoolean(caps_getIsSneak))
     	{
     		bipedHead.rotationPointY = 5.5F;
     		bipedBody.rotationPointY = 5.0F;
@@ -377,25 +378,25 @@ public class MultiModel_Kelo extends MultiModel {
     		bipedLeftLeg.rotationPointY = 9F;
     	}
 
-    	if((Boolean) getCapsValue(caps_getIsWait) && !(Boolean) getCapsValue(caps_getaimedBow))
+    	if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow))
     	{
-    		setCapsValue(caps_setVisible, KeloeyeL1, false);
-    		setCapsValue(caps_setVisible, KeloeyeR1, false);
-    		setCapsValue(caps_setVisible, KeloeyeL2, true);
-    		setCapsValue(caps_setVisible, KeloeyeR2, true);
+    		setCapsValue(caps_visible, KeloeyeL1, false);
+    		setCapsValue(caps_visible, KeloeyeR1, false);
+    		setCapsValue(caps_visible, KeloeyeL2, true);
+    		setCapsValue(caps_visible, KeloeyeR2, true);
     	}
-    	if ((Boolean) getCapsValue(caps_getaimedBow)) {
-    		setCapsValue(caps_setVisible, eyeL, true);
-    		setCapsValue(caps_setVisible, eyeR, false);
+    	if (getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, false);
     	} else {
     		if (0.0D > (double) (mh_sin(f2 * 0.1F) * 0.3F)
     			+ Math.random() * 0.10000000149011612D
     			+ 0.18000000715255737D) {
-    			setCapsValue(caps_setVisible, eyeL, true);
-    			setCapsValue(caps_setVisible, eyeR, true);
+    			setCapsValue(caps_visible, eyeL, true);
+    			setCapsValue(caps_visible, eyeR, true);
     		} else {
-    			setCapsValue(caps_setVisible, eyeL, false);
-    			setCapsValue(caps_setVisible, eyeR, false);
+    			setCapsValue(caps_visible, eyeL, false);
+    			setCapsValue(caps_visible, eyeR, false);
     		}
     	}
         headwear.rotateAngleX = -0.087F;
@@ -424,16 +425,16 @@ public class MultiModel_Kelo extends MultiModel {
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	setCapsValue(caps_setVisible, bipedHeadwear, false);
-    	setCapsValue(caps_setVisible, ChignonB, false);
-    	setCapsValue(caps_setVisible, Tail, false);
+    	setCapsValue(caps_visible, bipedHeadwear, false);
+    	setCapsValue(caps_visible, ChignonB, false);
+    	setCapsValue(caps_visible, Tail, false);
     }
 
     @Override
     public void actionInit1() {
     	super.actionInit1();
-    	setCapsValue(caps_setVisible, rightHandPlus, true);
-    	setCapsValue(caps_setVisible, leftHandPlus, true);
+    	setCapsValue(caps_visible, rightHandPlus, true);
+    	setCapsValue(caps_visible, leftHandPlus, true);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(SleeveR);
     	((Modchu_ModelRenderer) bipedLeftArm).removeChild(SleeveL);
     	((Modchu_ModelRenderer) bipedRightLeg).removeChild(ShoesR);

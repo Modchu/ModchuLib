@@ -187,16 +187,16 @@ public class MultiModel_Petit extends MultiModel {
     			rightLeg.showModel = rightLeg2.showModel =
     			leftLeg.showModel = leftLeg2.showModel =
     			rightHandPlus.showModel = leftHandPlus.showModel = false;
-    	setCapsValue(caps_setAimedBowBan, false);
-    	setCapsValue(caps_setSneakBan, false);
-    	setCapsValue(caps_setWaitBan, false);
-    	setCapsValue(caps_setSittingBan, false);
-    	setCapsValue(caps_setSleepingBan, false);
+    	setCapsValue(caps_aimedBowBan, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
+    	setCapsValue(caps_sleepingBan, false);
     }
 
     @Override
     public void skirtFloatsInit(float f, float f1) {
-    	if(!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
+    	if(!getCapsValueBoolean(caps_skirtFloats)) return;
     	//ã
     	SkirtTop = new Modchu_ModelRenderer(this, 8, 16);
     	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
@@ -226,7 +226,7 @@ public class MultiModel_Petit extends MultiModel {
     	((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
     	SkirtBack.setRotationPoint(-4.0F, 0.0F, 4.0F);
     	SkirtTop.addChild(SkirtBack);
-    	setCapsValue(caps_setVisible, Skirt, false);
+    	setCapsValue(caps_visible, Skirt, false);
     }
 
     @Override
@@ -264,39 +264,39 @@ public class MultiModel_Petit extends MultiModel {
     	bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 5.0F;
     	Skirt.rotationPointY = 4.0F;
     	bipedHead.rotationPointZ = 0.0F;
-    	if((Boolean) getCapsValue(caps_getIsRiding)) {
+    	if(getCapsValueBoolean(caps_getIsRiding)) {
     		bipedHead.rotationPointY -= 4.5F;
     		bipedBody.rotationPointY -= 4.5F;
     	}
 
-    	if((Boolean) getCapsValue(caps_getIsSneak)) {
+    	if(getCapsValueBoolean(caps_getIsSneak)) {
     		bipedHead.rotationPointY += 0.5F;
     		bipedHead.rotationPointZ = 2.0F;
     		Skirt.rotationPointZ = 0.0F;
     	}
 
-    	if((Boolean) getCapsValue(caps_getaimedBow)) {
-    		setCapsValue(caps_setVisible, eyeR, false);
-    		setCapsValue(caps_setVisible, FaceR, false);
+    	if(getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeR, false);
+    		setCapsValue(caps_visible, FaceR, false);
     	}
 
     	if( 0 > mh_sin(f2 * 0.1F) * 0.3F + (Math.random() * 0.1F) + 0.18F) {
-    		setCapsValue(caps_setVisible, eyeL, true);
-    		setCapsValue(caps_setVisible, eyeR, false);
-    		setCapsValue(caps_setVisible, FaceL, false);
-    		setCapsValue(caps_setVisible, FaceR, false);
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, false);
+    		setCapsValue(caps_visible, FaceL, false);
+    		setCapsValue(caps_visible, FaceR, false);
     	} else {
-    		setCapsValue(caps_setVisible, eyeL, true);
-    		setCapsValue(caps_setVisible, eyeR, true);
-    		setCapsValue(caps_setVisible, FaceL, true);
-    		setCapsValue(caps_setVisible, FaceR, true);
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, true);
+    		setCapsValue(caps_visible, FaceL, true);
+    		setCapsValue(caps_visible, FaceR, true);
     	}
     }
 
     @Override
     public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	if (!(Boolean) getCapsValue(caps_getSkirtFloats)) return;
-    	float motionY = (Float) getCapsValue(caps_getMotionY);
+    	if (!getCapsValueBoolean(caps_skirtFloats)) return;
+    	float motionY = getCapsValueFloat(caps_motionY);
     	SkirtTop.setRotationPoint(-4.0F, -2.0F, 4.0F);
     	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
     	SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -409,6 +409,6 @@ public class MultiModel_Petit extends MultiModel {
 
     @Override
     public float Physical_Hammer() {
-    	return (Float) getCapsValue(caps_Physical_Hammer) == 1.0F ? 1.3F : (Float) getCapsValue(caps_Physical_Hammer);
+    	return getCapsValueFloat(caps_Physical_Hammer) == 1.0F ? 1.3F : getCapsValueFloat(caps_Physical_Hammer);
     }
 }

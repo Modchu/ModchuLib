@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-
 public class MultiModel_tareusa extends MultiModel {
 
 	public Modchu_ModelRenderer ChignonR;
@@ -74,7 +73,7 @@ public class MultiModel_tareusa extends MultiModel {
 		bipedHead.addChild(eyeR);
 
 		Usasippo.setRotationPointZ(2.0F);
-		setCapsValue(caps_setVisible, bipedHeadwear, false);
+		setCapsValue(caps_visible, bipedHeadwear, false);
 	}
 
 	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -82,33 +81,33 @@ public class MultiModel_tareusa extends MultiModel {
 
 		Usasippo.setRotateAngleY(mh_sin(f * 0.6662F) * 0.3F);
 		UsaER.rotateAngleX = UsaEL.rotateAngleX = mh_sin(f2 * 0.2F) * 0.1F + 0.2F;
-		if ((Boolean) getCapsValue(caps_getIsRiding)) {
+		if (getCapsValueBoolean(caps_getIsRiding)) {
 			Usasippo.setRotateAngleY(mh_sin(f * 0.6662F) * 0.5F);
 		}
-		if ((Float) getCapsValue(caps_getOnGround) > -9990F && !(Boolean) getCapsValue(caps_getaimedBow)) {
+		if (getCapsValueFloat(caps_onGround) > -9990F && !getCapsValueBoolean(caps_aimedBow)) {
 			Usasippo.rotateAngleY = mh_sin(f2 * 0.2F) * 0.2F;
 			Usasippo.setRotateAngleX(0.0F);
 		}
-		if ((Boolean) getCapsValue(caps_getIsSneak)) {
+		if (getCapsValueBoolean(caps_getIsSneak)) {
 			Usasippo.setRotateAngleY(0.0F);
 		}
-		if((Boolean) getCapsValue(caps_getIsWait) && !(Boolean) getCapsValue(caps_getaimedBow)) {
+		if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
 			Usasippo.setRotateAngleY(0.0F);
 			Usasippo.setRotateAngleX(mh_sin(f2 * 0.3F) * 0.1F);
 			UsaER.rotateAngleX = UsaEL.rotateAngleX = mh_sin(f2 * 0.1F) * 0.06F + 0.2F;
 		}
-		if ((Boolean) getCapsValue(caps_getaimedBow)) {
-			setCapsValue(caps_setVisible, eyeL, true);
-			setCapsValue(caps_setVisible, eyeR, false);
+		if (getCapsValueBoolean(caps_aimedBow)) {
+			setCapsValue(caps_visible, eyeL, true);
+			setCapsValue(caps_visible, eyeR, false);
 			Usasippo.setRotateAngleY(0.0F);
 		} else {
 			if (0.0D > (double) (mh_sin(f2 * 0.1F) * 0.3F) + Math.random()
 					* 0.10000000149011612D + 0.18000000715255737D) {
-				setCapsValue(caps_setVisible, eyeL, false);
-				setCapsValue(caps_setVisible, eyeR, false);
+				setCapsValue(caps_visible, eyeL, false);
+				setCapsValue(caps_visible, eyeR, false);
 			} else {
-				setCapsValue(caps_setVisible, eyeL, true);
-				setCapsValue(caps_setVisible, eyeR, true);
+				setCapsValue(caps_visible, eyeL, true);
+				setCapsValue(caps_visible, eyeR, true);
 			}
 		}
 
@@ -138,6 +137,6 @@ public class MultiModel_tareusa extends MultiModel {
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	setCapsValue(caps_setVisible, bipedHeadwear, false);
+    	setCapsValue(caps_visible, bipedHeadwear, false);
     }
 }
