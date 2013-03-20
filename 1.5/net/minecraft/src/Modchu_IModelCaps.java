@@ -13,7 +13,7 @@ public interface Modchu_IModelCaps {
 	public static final int caps_firstPerson						= 0x0209;
 	public static final int caps_oldwalking							= 0x0210;
 	public static final int caps_motionY								= 0x0211;
-	public static final int caps_partsSetFlag						= 0x0212;
+	//public static final int caps_partsSetFlag						= 0x0212;
 	public static final int caps_showModelFlag					= 0x0213;
 	public static final int caps_shortcutKeysAction			= 0x0214;
 	public static final int caps_runActionNumber				= 0x0215;
@@ -54,11 +54,11 @@ public interface Modchu_IModelCaps {
 	public static final int caps_actionInit							= 0x0250;
 	public static final int caps_actionRelease					= 0x0251;
 	public static final int caps_syncModel							= 0x0252;
-	public static final int caps_settingShowParts				= 0x0253;
+	//public static final int caps_settingShowParts				= 0x0253;
 	public static final int caps_maidColor							= 0x0254;
-	public static final int caps_guiShowModelFlag				= 0x0255;
-	public static final int caps_showModelList					= 0x0256;
-	public static final int caps_loadShowModelList				= 0x0257;
+	//public static final int caps_guiShowModelFlag				= 0x0255;
+	//public static final int caps_showModelList					= 0x0256;
+	//public static final int caps_loadShowModelList				= 0x0257;
 	public static final int caps_getIsSleeping						= 0x0258;
 	// public static final int caps_TextureNameList
 

@@ -1,8 +1,8 @@
 package net.minecraft.src;
 
-import net.minecraft.client.Minecraft;
-
 import org.lwjgl.input.Mouse;
+
+import net.minecraft.client.Minecraft;
 
 public class Modchu_GuiSmallButton extends GuiSmallButton {
 
@@ -17,7 +17,7 @@ public class Modchu_GuiSmallButton extends GuiSmallButton {
     {
     	if (buttonClick) {
     		buttonClick = false;
-    		return this.enabled && this.drawButton && par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
+    		return enabled && drawButton && par2 >= xPosition && par3 >= yPosition && par2 < xPosition + width && par3 < yPosition + height;
     	}
     	return false;
     }

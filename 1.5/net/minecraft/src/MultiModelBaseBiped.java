@@ -37,8 +37,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     public ModelRenderer Arms[];
     public ModelRenderer HeadMount;
     public ModelRenderer mainFrame;
-    private boolean partsSetInit = false;
-    //private static int partsSetFlag = 1;
     private static int showModelFlag = 0;
     private static int overridePartsNumber = 0;
     private int actionCount = 0;
@@ -542,32 +540,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     }
 
     /**
-     * GUI パーツ表示・非表示実行
-     */
-    public void settingShowParts() {
-    	//GUI パーツ表示・非表示初期設定
-    	if(getCapsValueInt(caps_partsSetFlag) == 1) {
-    		if (getShowPartsList().isEmpty()) showPartsInit();
-    		defaultPartsSettingBefore();
-    		setParts(0);
-    		defaultPartsSettingAfter();
-    		setCapsValue(caps_partsSetFlag, 2);
-    		if(!partsSetInit) {
-    			partsSetInit = true;
-    			setCapsValue(caps_guiShowModelFlag, true);
-    			List<String> list = (List<String>) getCapsValue(caps_showModelList);
-    			if (list != null) setCapsValue(caps_loadShowModelList, list);
-    		}
-    	}
-
-    	//GUI パーツ表示・非表示反映
-    	if(getCapsValueBoolean(caps_guiShowModelFlag)) {
-    		settingReflects();
-    		setCapsValue(caps_guiShowModelFlag, false);
-    	}
-    }
-
-    /**
      * GUI パーツ表示・非表示用リスト追加
      */
     public void addShowParts(String[] s) {
@@ -656,10 +628,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     	return textureList;
     }
 
-    public void setParts(int i) {
-    	getObjectInvokeMethod(mod_Modchu_ModchuLib.PFLM_Gui, "setParts", new Class[]{ List.class, List.class }, null, new Object[]{ getShowPartsList(), getShowPartsHideList() });
-    }
-
     public HashMap<String, Boolean> getGuiParts() {
     	return (HashMap<String, Boolean>) getFieldObject(mod_Modchu_ModchuLib.PFLM_Gui, "parts");
     }
@@ -670,13 +638,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 
     public HashMap<String, String> getShowPartsReneme() {
     	return (HashMap<String, String>) getFieldObject(mod_Modchu_ModchuLib.PFLM_Gui, "showPartsReneme");
-    }
-
-    /**
-     * GUI パーツ表示・非表示反映呼び出し
-     */
-    public void settingReflects() {
-    	showModelSettingReflects();
     }
 
     /**
@@ -1690,9 +1651,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 			if (pArg != null
 			&& pArg.length > 0
 			&& pArg[0] != null) syncModel((MultiModelBaseBiped) pArg[0]);
-			return true;
-		case caps_settingShowParts:
-			settingShowParts();
 			return true;
 		}
 		return super.setCapsValue(pIndex, pArg);
