@@ -426,8 +426,8 @@ public class MultiModel extends MultiModelBaseBiped {
 
     public void armSwing(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	float[] lgrounds = null;
-    	float onGroundR = 0;
-    	float onGroundL = 0;
+    	float onGroundR = 0F;
+    	float onGroundL = 0F;
     	if (modelCaps != null) {
     		lgrounds = (float[])getCapsValue(caps_Grounds);
     		if (lgrounds != null) {
@@ -436,7 +436,7 @@ public class MultiModel extends MultiModelBaseBiped {
     		}
     	}
     	if (lgrounds == null) {
-    		onGroundR = onGround;
+    		onGroundR = getCapsValueFloat(caps_onGround);
     	}
     	if ((onGroundR > -9990F || onGroundL > -9990F) && !getCapsValueBoolean(caps_aimedBow) && !getCapsValueBoolean(caps_oldwalking)) {
     		// ˜rU‚è
@@ -473,7 +473,7 @@ public class MultiModel extends MultiModelBaseBiped {
 
     @Override
     public void setRotationAnglesfirstPerson(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	if (((EntityPlayer) entity).inventory.getCurrentItem() != null) {
+    	if (((InventoryPlayer) getCapsValue(caps_Inventory)).getCurrentItem() != null) {
     		//’n}‚ğ‚Á‚Ä‚¢‚é
     		bipedRightArm.rotationPointX = -3.0F;
     		bipedRightArm.rotationPointY = 1.5F;

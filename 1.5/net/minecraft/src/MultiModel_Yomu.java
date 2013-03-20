@@ -704,7 +704,7 @@ public class MultiModel_Yomu extends MultiModel_SR2 {
 			f4 = f2;
 		}
 
-		float f3 = (float)entityliving.ticksExisted + f4 + getCapsValueFloat(caps_entityIdFactor, entityliving);
+		float f3 = (float)entityliving.ticksExisted + f4 + getCapsValueFloat(caps_entityIdFactor);
 		int IdIndex;
 		if(getCapsValueBoolean(caps_isOpenInv, entityliving)) {
 			try

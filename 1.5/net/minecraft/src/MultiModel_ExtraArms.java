@@ -114,7 +114,7 @@ public class MultiModel_ExtraArms extends MultiModel {
     @Override
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor, entityliving);
+    	float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor);
     	// –Úƒpƒ`
     	if( 0 > MathHelper.sin(f3 * 0.05F) + MathHelper.sin(f3 * 0.13F) + MathHelper.sin(f3 * 0.7F) + 2.55F) {
     		setCapsValue(caps_visible, eyeR, false);

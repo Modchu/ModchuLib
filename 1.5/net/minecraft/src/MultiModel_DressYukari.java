@@ -92,7 +92,7 @@ public class MultiModel_DressYukari extends MultiModel_SR2 {
 	public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
 		super.setLivingAnimationsLM(entityliving, f, f1, f2);
 		IdOffset=entityliving.entityId;
-		if (getCapsValueBoolean(caps_isLookSuger, entityliving))
+		if (getCapsValueBoolean(caps_isLookSuger))
 			pink.setVisible(true);
 		else
 			pink.setVisible(false);

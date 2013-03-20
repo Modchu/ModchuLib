@@ -43,7 +43,7 @@ public class MultiModel_SR2 extends MultiModel {
 	public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float renderPartialTicks) {
 		super.setLivingAnimationsLM(entityliving, f, f1, renderPartialTicks);
 
-		float f3 = (float)entityliving.ticksExisted + renderPartialTicks + getCapsValueFloat(caps_entityIdFactor, entityliving);
+		float f3 = (float)entityliving.ticksExisted + renderPartialTicks + getCapsValueFloat(caps_entityIdFactor);
 		// –Úƒpƒ`
 		if( 0 > MathHelper.sin(f3 * 0.05F) + MathHelper.sin(f3 * 0.13F) + MathHelper.sin(f3 * 0.7F) + 2.55F) {
 			setCapsValue(caps_visible, eyeR, true);

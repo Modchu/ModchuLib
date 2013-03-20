@@ -56,7 +56,11 @@ public interface Modchu_IModelCaps {
 	public static final int caps_syncModel							= 0x0252;
 	public static final int caps_settingShowParts				= 0x0253;
 	public static final int caps_maidColor							= 0x0254;
-	// public static final int caps_TextureNameList			= 0x0255;
+	public static final int caps_guiShowModelFlag				= 0x0255;
+	public static final int caps_showModelList					= 0x0256;
+	public static final int caps_loadShowModelList				= 0x0257;
+	public static final int caps_getIsSleeping						= 0x0258;
+	// public static final int caps_TextureNameList
 
 
 

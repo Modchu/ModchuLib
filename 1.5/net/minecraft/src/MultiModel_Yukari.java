@@ -648,8 +648,8 @@ public class MultiModel_Yukari extends MultiModel_Aug
 
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor, entityliving);
-    	if (getCapsValueBoolean(caps_isLookSuger, entityliving)) {
+    	float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor);
+    	if (getCapsValueBoolean(caps_isLookSuger)) {
     		setCapsValue(caps_visible, Cheek_R, true);
     		setCapsValue(caps_visible, Cheek_L, true);
     		RabbitEar_R3.rotateAngleZ = mh_sin(f3 * 0.09F) * 0.09F + 0.87F;

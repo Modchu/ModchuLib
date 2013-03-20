@@ -445,7 +445,7 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	Arms[1].rotateAngleX = 0F;
     	Arms[1].rotateAngleY = 0F;
     	Arms[1].rotateAngleZ = 0F;
-    	float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor, entityliving);
+    	float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor);
 
     	eyeR.showModel = eyeL.showModel = false;
     	eyeR1.showModel = eyeL1.showModel = false;
@@ -466,13 +466,13 @@ public class MultiModel_NM1 extends MultiModel_SR2
     	bipedLeftLeg.showModel = bipedRightLeg.showModel = false;
     	bootR1.showModel = bootR2.showModel = false;
     	bootL1.showModel = bootL2.showModel = false;
-    	if (LMM_EntityLittleMaid != null
-    			&& LMM_EntityLittleMaid.isInstance(entityliving)
+    	if (mod_Modchu_ModchuLib.LMM_EntityLittleMaid != null
+    			&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entityliving)
     			&& !getCapsValueBoolean(caps_aimedBow)) {
-    		boolean isWorkingDelay = (Boolean)getObjectInvokeMethod(LMM_EntityLittleMaid, "isWorkingDelay", entityliving);
+    		boolean isWorkingDelay = getCapsValueBoolean(caps_isWorkingDelay);
     		if (isWorkingDelay) {
 //-@-125
-    			int maidMode = (Integer)getObjectInvokeMethod(LMM_EntityLittleMaid, "getMaidModeInt", entityliving);
+    			int maidMode = (Integer)getObjectInvokeMethod(mod_Modchu_ModchuLib.LMM_EntityLittleMaid, "getMaidModeInt", entityliving);
     			int i = 0x00C0;
     			int i1 = 0x0021;
 //@-@125

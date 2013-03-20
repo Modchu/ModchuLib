@@ -608,7 +608,7 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     @Override
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	if (getCapsValueBoolean(caps_isLookSuger, entityliving)) {
+    	if (getCapsValueBoolean(caps_isLookSuger)) {
     		Cheek_R.setVisible(true);
     		Cheek_L.setVisible(true);
     	} else {
@@ -660,8 +660,8 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     		Tail_U.setRotateAngleX(0.0F);
     		Tail_B.setRotateAngleX(-((Modchu_ModelRenderer) bipedHead).getRotateAngleX() + ((Modchu_ModelRenderer) Skirt).getRotateAngleX());
     	}
-    	if (LMM_EntityLittleMaid != null
-    			&& LMM_EntityLittleMaid.isInstance(entity)) {
+    	if (mod_Modchu_ModchuLib.LMM_EntityLittleMaid != null
+    			&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entity)) {
     		if (getCapsValueBoolean(caps_getIsSneak)) {
     			Negi1.setVisible(true);
     			Negi2.setVisible(true);

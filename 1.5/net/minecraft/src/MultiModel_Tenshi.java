@@ -829,12 +829,12 @@ public class MultiModel_Tenshi extends MultiModel_SR2 {
 				Item item = is.getItem();
 				if(item instanceof ItemArmor) isHelmet = true;
 			}
-		} else if (LMM_EntityLittleMaid != null
-					&& LMM_EntityLittleMaid.isInstance(entityliving)) {
+		} else if (mod_Modchu_ModchuLib.LMM_EntityLittleMaid != null
+					&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entityliving)) {
 			//isHelmet = ((LMM_EntityLittleMaid) entityliving).maidInventory.armorInventory[3] != null;
 			Class c = loadClass(getClassName("LMM_InventoryLittleMaid"));
 			if (c != null) {
-				Object[] o = (Object[]) getFieldObject(c, "armorInventory", getFieldObject(LMM_EntityLittleMaid, "maidInventory", entityliving));
+				Object[] o = (Object[]) getFieldObject(c, "armorInventory", getFieldObject(mod_Modchu_ModchuLib.LMM_EntityLittleMaid, "maidInventory", entityliving));
 				if (o != null
 						&& o[3] != null) isHelmet = true;
 			}

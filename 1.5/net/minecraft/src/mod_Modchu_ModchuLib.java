@@ -27,6 +27,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static boolean isBTW = false;
 	public static boolean isSSP = false;
 	public static boolean newRelease = false;
+	public static boolean oldRenderItems = false;
 	public static mod_Modchu_ModchuLib mod_modchu_modchulib;
 	public static Class MMM_TextureManager;
 	public static Class MMM_FileManager;
@@ -261,6 +262,14 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_MinecraftForge Check ok.");
 				Modchu_Debug.Debug("mod_MinecraftForge Check ok.");
 			}
+			else if (name.equals("mod_LMM_littleMaidMob")) {
+				boolean b = false;
+				String s1 = (String) Modchu_Reflect.invokeMethod(mod_LMM_littleMaidMob, "getVersion", mod);
+				if (s1.startsWith("1.4.6")) ;else {
+					s1 = s1.substring(s1.length() - 1);
+					if (Integer.valueOf(s1) < 5) oldRenderItems = b;
+				}
+			}
 		}
 
 		//対応MOD導入チェック class直チェック
@@ -379,7 +388,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	}
 
 	public boolean isRelease() {
-		return getPackage() == null;
+		return getClass().getPackage() == null;
 	}
 
 	public String getClassName(String s) {

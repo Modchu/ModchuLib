@@ -100,9 +100,9 @@ public class MultiModel_Aug extends MultiModel_SR2 {
 	{
 		super.setLivingAnimationsLM(entityliving, f, f1, renderPartialTicks);
 
-		float f3 = (float)entityliving.ticksExisted + renderPartialTicks + getCapsValueFloat(caps_entityIdFactor, entityliving);
+		float f3 = (float)entityliving.ticksExisted + renderPartialTicks + getCapsValueFloat(caps_entityIdFactor);
 		float f4 = 0.0F;
-		if (getCapsValueBoolean(caps_isLookSuger, entityliving)) {
+		if (getCapsValueBoolean(caps_isLookSuger)) {
 			f3 *= 8.0F;
 			f4 = -0.2F;
 		} else {

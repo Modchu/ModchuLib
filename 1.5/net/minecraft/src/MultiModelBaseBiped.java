@@ -37,11 +37,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     public ModelRenderer Arms[];
     public ModelRenderer HeadMount;
     public ModelRenderer mainFrame;
-    private static boolean skirtFloats = false;
-    private boolean modchuRemodelingModel = false;
-    private boolean oldRenderItems = false;
     private boolean partsSetInit = false;
-    private static int partsSetFlag = 1;
+    //private static int partsSetFlag = 1;
     private static int showModelFlag = 0;
     private static int overridePartsNumber = 0;
     private int actionCount = 0;
@@ -68,18 +65,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     private HashMap<String, Field> modelRendererMap = new HashMap();
     //private LinkedList<String> textureNameList = new LinkedList<String>();
     private LinkedList<String> textureList = new LinkedList<String>();
-    private static boolean isLMM = false;
-    private static boolean isPFLM = false;
-    public static Class mod_PFLM_PlayerFormLittleMaid;
-    public static Class PFLM_Gui;
-    public static Class PFLM_GuiModelSelect;
-    public static Class PFLM_GuiOthersPlayer;
-    public static Class PFLM_GuiOthersPlayerIndividualCustomize;
-    public static Class PFLM_EntityPlayerDummy;
-    public static Class PFLM_RenderPlayer;
-    public static Class mod_LMM_littleMaidMob;
-    public static Class LMM_EntityLittleMaid;
-    public static Class MMM_TextureManager;
 /*//125delete
     public Entity entity;
 *///125delete
@@ -117,46 +102,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     	textureWidth = par3;
     	textureHeight = par4;
     	//b173deleteboxList = new ArrayList();
-
-    	mod_LMM_littleMaidMob = mod_Modchu_ModchuLib.mod_LMM_littleMaidMob;
-    	if (mod_LMM_littleMaidMob != null) {
-    		isLMM = true;
-    		LMM_EntityLittleMaid = mod_Modchu_ModchuLib.LMM_EntityLittleMaid;
-
-    		List list = ModLoader.getLoadedMods();
-    		Object instance = null;
-    		BaseMod mod;
-    		for(int i = 0; i < list.size(); i++) {
-    			mod = (BaseMod)list.get(i);
-    			if (mod.getClass() == mod_LMM_littleMaidMob) instance = mod;
-    		}
-    		if (instance != null) {
-    			boolean b = false;
-    			String s1 = (String) Modchu_Reflect.invokeMethod(mod_LMM_littleMaidMob, "getVersion", instance);
-    			if (s1.startsWith("1.4.6")) ;else {
-    				s1 = s1.substring(s1.length() - 1);
-    				if (Integer.valueOf(s1) < 5) oldRenderItems = b;
-    			}
-    		}
-
-    	}
-    	mod_PFLM_PlayerFormLittleMaid = mod_Modchu_ModchuLib.mod_PFLM_PlayerFormLittleMaid;
-    	if (mod_PFLM_PlayerFormLittleMaid != null) {
-    		isPFLM = true;
-    		PFLM_Gui = mod_Modchu_ModchuLib.PFLM_Gui;
-    		PFLM_GuiModelSelect = mod_Modchu_ModchuLib.PFLM_GuiModelSelect;
-    		PFLM_GuiOthersPlayer = mod_Modchu_ModchuLib.PFLM_GuiOthersPlayer;
-    		PFLM_GuiOthersPlayerIndividualCustomize = mod_Modchu_ModchuLib.PFLM_GuiOthersPlayerIndividualCustomize;
-    		PFLM_EntityPlayerDummy = mod_Modchu_ModchuLib.PFLM_EntityPlayerDummy;
-    		PFLM_RenderPlayer = mod_Modchu_ModchuLib.PFLM_RenderPlayer;
-    		if ((Boolean) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "isOlddays")) {
-    			setOldwalking((Boolean) getFieldObject(ModelBiped.class, "oldwalking"));
-    		}
-    		setFieldObject(PFLM_Gui, "partsSetFlag", 1);
-    	}
-    	skirtFloats = mod_Modchu_ModchuLib.skirtFloats;
-    	modchuRemodelingModel = mod_Modchu_ModchuLib.modchuRemodelingModel;
-    	MMM_TextureManager = mod_Modchu_ModchuLib.MMM_TextureManager;
     	armsinit(psize, pyoffset);
     	skirtFloatsInit(psize, pyoffset);
     }
@@ -235,23 +180,34 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 /*//125delete
     	entity = entityliving;
 *///125delete
-    	setMotionY(entityliving.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entityliving.motionY + 0.0784000015258789D)) * mod_Modchu_ModchuLib.skirtFloatsVolume);
+    	if (mod_Modchu_ModchuLib.skirtFloats) setMotionY(entityliving.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entityliving.motionY + 0.0784000015258789D)) * mod_Modchu_ModchuLib.skirtFloatsVolume);
+
     	if (modelCaps != null) {
-    		Modchu_Reflect.invokeMethod(modelCaps.getClass(), "setLivingAnimationsBefore", new Class[]{ MMM_ModelBiped.class, EntityLiving.class, float.class, float.class, float.class }, modelCaps, new Object[]{ this, entityliving, f, f1, f2 }, false);
     		// ↓メソッド作成希望
     		//modelCaps.setLivingAnimationsBefore(this, entityliving, f, f1, f2);
+    		// ↓LMM用 代用
+    		if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
+    				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entityliving)) {
+    			setLivingAnimationsAfter(entityliving, f, f1, f2);
+    		} else {
+    			((PFLM_ModelData) modelCaps).setLivingAnimationsBefore(this, entityliving, f, f1, f2);
+    		}
     	}
+
     	setLivingAnimationsLM(entityliving, f, f1, f2);
+
     	if (modelCaps != null) {
-    		Modchu_Reflect.invokeMethod(modelCaps.getClass(), "setLivingAnimationsAfter", new Class[]{ MMM_ModelBiped.class, EntityLiving.class, float.class, float.class, float.class }, modelCaps, new Object[]{ this, entityliving, f, f1, f2 }, false);
     		// ↓メソッド作成希望
     		//modelCaps.setLivingAnimationsAfter(this, entityliving, f, f1, f2);
     		// ↓LMM用 代用
-    		if (mod_LMM_littleMaidMob != null
-    				&& mod_LMM_littleMaidMob.isInstance(entityliving)) {
+    		if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
+    				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entityliving)) {
     			setLivingAnimationsAfter(entityliving, f, f1, f2);
+    		} else {
+    			((PFLM_ModelData) modelCaps).setLivingAnimationsAfter(this, entityliving, f, f1, f2);
     		}
     	}
+
     }
 
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
@@ -260,17 +216,29 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
     	if (entity != null) ;else return;
+
     	if (modelCaps != null) {
-    		Modchu_Reflect.invokeMethod(modelCaps.getClass(), "setRotationAnglesBefore", new Class[]{ MMM_ModelBiped.class, float.class, float.class, float.class, float.class, float.class, float.class, Entity.class }, modelCaps, new Object[]{ this, f, f1, f2, f3, f4, f5, entity }, false);
     		// ↓メソッド作成希望
-    		//modelCaps.setLivingAnimationsBefore(this, f, f1, f2, f3, f4, f5, entity);
+    		//modelCaps.setRotationAnglesBefore(this, f, f1, f2, f3, f4, f5, entity);
+    		if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
+    				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entity)) {
+    		} else {
+    			((PFLM_ModelData) modelCaps).setRotationAnglesBefore(this, f, f1, f2, f3, f4, f5, entity);
+    		}
     	}
+
     	setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
+
     	if (modelCaps != null) {
-    		Modchu_Reflect.invokeMethod(modelCaps.getClass(), "setRotationAnglesAfter", new Class[]{ MMM_ModelBiped.class, float.class, float.class, float.class, float.class, float.class, float.class, Entity.class }, modelCaps, new Object[]{ this, f, f1, f2, f3, f4, f5, entity }, false);
     		// ↓メソッド作成希望
-    		//modelCaps.setLivingAnimationsAfter(this, f, f1, f2, f3, f4, f5, entity);
+    		//modelCaps.setRotationAnglesAfter(this, f, f1, f2, f3, f4, f5, entity);
+    		if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
+    				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entity)) {
+    		} else {
+    			((PFLM_ModelData) modelCaps).setRotationAnglesAfter(this, f, f1, f2, f3, f4, f5, entity);
+    		}
     	}
+
     }
 
     public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
@@ -279,9 +247,9 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     @Override
     public void renderItems(EntityLiving pEntity, Render pRender) {
     	if (modelCaps != null) {
-    		if (oldRenderItems
-    				&& mod_LMM_littleMaidMob != null
-    				&& mod_LMM_littleMaidMob.isInstance(pEntity)) {
+    		if (mod_Modchu_ModchuLib.oldRenderItems
+    				&& mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
+    				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(pEntity)) {
     			OldRenderItemsLM(pEntity, pRender);
     		} else renderItemsLM(pEntity, pRender);
     	}
@@ -578,23 +546,24 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
      */
     public void settingShowParts() {
     	//GUI パーツ表示・非表示初期設定
-    	if((Integer) getFieldObject(PFLM_Gui, "partsSetFlag") == 1) {
+    	if(getCapsValueInt(caps_partsSetFlag) == 1) {
     		if (getShowPartsList().isEmpty()) showPartsInit();
     		defaultPartsSettingBefore();
     		setParts(0);
     		defaultPartsSettingAfter();
-    		setFieldObject(PFLM_Gui, "partsSetFlag", 2);
+    		setCapsValue(caps_partsSetFlag, 2);
     		if(!partsSetInit) {
     			partsSetInit = true;
-    			setFieldObject(PFLM_Gui, "showModelFlag", true);
-    			Modchu_Config.loadShowModelList((List<String>) getFieldObject(mod_PFLM_PlayerFormLittleMaid, "showModelList"));
+    			setCapsValue(caps_guiShowModelFlag, true);
+    			List<String> list = (List<String>) getCapsValue(caps_showModelList);
+    			if (list != null) setCapsValue(caps_loadShowModelList, list);
     		}
     	}
 
     	//GUI パーツ表示・非表示反映
-    	if((Boolean) getFieldObject(PFLM_Gui, "showModelFlag")) {
+    	if(getCapsValueBoolean(caps_guiShowModelFlag)) {
     		settingReflects();
-    		setFieldObject(PFLM_Gui, "showModelFlag", false);
+    		setCapsValue(caps_guiShowModelFlag, false);
     	}
     }
 
@@ -688,19 +657,19 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     }
 
     public void setParts(int i) {
-    	getObjectInvokeMethod(PFLM_Gui, "setParts", new Class[]{ List.class, List.class }, null, new Object[]{ getShowPartsList(), getShowPartsHideList() });
+    	getObjectInvokeMethod(mod_Modchu_ModchuLib.PFLM_Gui, "setParts", new Class[]{ List.class, List.class }, null, new Object[]{ getShowPartsList(), getShowPartsHideList() });
     }
 
     public HashMap<String, Boolean> getGuiParts() {
-    	return (HashMap<String, Boolean>) getFieldObject(PFLM_Gui, "parts");
+    	return (HashMap<String, Boolean>) getFieldObject(mod_Modchu_ModchuLib.PFLM_Gui, "parts");
     }
 
     public HashMap<Integer, String> getShowPartsNemeList() {
-    	return (HashMap<Integer, String>) getFieldObject(PFLM_Gui, "showPartsNemeList");
+    	return (HashMap<Integer, String>) getFieldObject(mod_Modchu_ModchuLib.PFLM_Gui, "showPartsNemeList");
     }
 
     public HashMap<String, String> getShowPartsReneme() {
-    	return (HashMap<String, String>) getFieldObject(PFLM_Gui, "showPartsReneme");
+    	return (HashMap<String, String>) getFieldObject(mod_Modchu_ModchuLib.PFLM_Gui, "showPartsReneme");
     }
 
     /**
@@ -1430,13 +1399,15 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 			return getIsSneak();
 		case caps_getIsRiding:
 			return getIsRiding();
+		case caps_isRiding:
+			return isRiding;
 		case caps_aimedBow:
 			return getaimedBow();
 		case caps_getIsWait:
 			return getIsWait();
 		case caps_isSitting:
 			return getIsSitting();
-		case caps_isSleeping:
+		case caps_getIsSleeping:
 			return getIsSleeping();
 		case caps_firstPerson:
 			return getFirstPerson();
@@ -1452,8 +1423,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 			return getActionCount();
 		case caps_motionY:
 			return getMotionY();
-		case caps_partsSetFlag:
-			return getPartsSetFlag();
 		case caps_showModelFlag:
 			return getShowModelFlag();
 		case caps_shortcutKeysAction:
@@ -1535,6 +1504,11 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 			&& pArg.length > 0
 			&& pArg[0] != null) setIsRiding((Boolean) pArg[0]);
 			return true;
+		case caps_isSneak:
+			if (pArg != null
+			&& pArg.length > 0
+			&& pArg[0] != null) setIsSneak((Boolean) pArg[0]);
+			return true;
 		case caps_onGround:
 			if (pArg != null
 			&& pArg.length > 0
@@ -1578,11 +1552,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 			if (pArg != null
 			&& pArg.length > 0
 			&& pArg[0] != null) setShowModelFlag((Integer) pArg[0]);
-			return true;
-		case caps_partsSetFlag:
-			if (pArg != null
-			&& pArg.length > 0
-			&& pArg[0] != null) setPartsSetFlag((Integer) pArg[0]);
 			return true;
 		case caps_shortcutKeysAction:
 			if (pArg != null
@@ -1733,9 +1702,9 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 		Object o = null;
 		if (modelCaps != null) o = modelCaps.getCapsValue(caps_maidColor);
 		if (o != null) return (Integer) o;
-		if (mod_LMM_littleMaidMob != null
-				&& mod_LMM_littleMaidMob.isInstance(entity)) {
-			o = (Integer) Modchu_Reflect.invokeMethod(LMM_EntityLittleMaid, "maidColor", entity);
+		if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
+				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entity)) {
+			o = (Integer) Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.LMM_EntityLittleMaid, "maidColor", entity);
 		}
 		if (o != null) return (Integer) o;
 		return 0;
@@ -1746,7 +1715,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 		if (modelCaps != null) {
 			o = modelCaps.getCapsValue(caps_texture, s, i);
 			if (o != null) return o;
-			return (String) Modchu_Reflect.invokeMethod(MMM_TextureManager, "getTextureName", new Class[]{ String.class, int.class }, null, new Object[]{ s, i });
+			return (String) Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.MMM_TextureManager, "getTextureName", new Class[]{ String.class, int.class }, null, new Object[]{ s, i });
 		}
 		return o;
 	}
@@ -1759,7 +1728,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     private float getOnGround(int i) {
     	if (getCapsValueInt(caps_dominantArm) == i) {
     		//Modchu_Debug.mDebug("getOnGround()="+getOnGround() +" i="+i);
-    		return getOnGround();
+    		return getGrounds()[i];
     	}
     	return 0.0F;
     }
@@ -1797,14 +1766,19 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     	isRiding = b;
     }
 
-    private boolean getIsSleeping()
-    {
-    	return getCapsValueBoolean(caps_isSleeping) && !sleepingBan;
-    }
-
     private boolean getIsSneak()
     {
     	return isSneak && !sneakBan;
+    }
+
+    private void setIsSneak(boolean b)
+    {
+    	isSneak = b;
+    }
+
+    private boolean getIsSleeping()
+    {
+    	return getCapsValueBoolean(caps_isSleeping) && !sleepingBan;
     }
 
     private boolean getaimedBow()
@@ -1819,7 +1793,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 
     private boolean getIsSitting()
     {
-    	return getCapsValueBoolean(caps_isSitting) && !sittingBan;
+    	if (modelCaps != null) return modelCaps.getCapsValueBoolean(caps_isSitting) && !sittingBan;
+    	return false;
     }
 
     private boolean getFirstPerson()
@@ -1950,11 +1925,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     	ridingBan = b;
     }
 
-    private int getPartsSetFlag()
-    {
-    	return partsSetFlag;
-    }
-
     private int getShowModelFlag()
     {
     	return showModelFlag;
@@ -1962,10 +1932,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 
     private void setShowModelFlag(int i) {
     	showModelFlag = i;
-    }
-
-    private void setPartsSetFlag(int i) {
-    	partsSetFlag = i;
     }
 
     private boolean getShortcutKeysAction() {
@@ -1985,7 +1951,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     }
 
     private boolean getSkirtFloats() {
-    	return skirtFloats;
+    	return mod_Modchu_ModchuLib.skirtFloats;
     }
 
     private void setVisible(ModelRenderer modelRenderer, boolean b) {
@@ -2067,11 +2033,11 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     }
 
     private boolean getModchuRemodelingModel() {
-    	return modchuRemodelingModel;
+    	return mod_Modchu_ModchuLib.modchuRemodelingModel;
     }
 
     private void setModchuRemodelingModel(boolean b) {
-    	modchuRemodelingModel = b;
+    	mod_Modchu_ModchuLib.modchuRemodelingModel = b;
     }
 
     private float getActionSpeed() {
@@ -2091,7 +2057,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     }
 
     public float Physical_Hammer() {
-    	return (Float) Modchu_Reflect.getFieldObject(mod_PFLM_PlayerFormLittleMaid, "Physical_Hammer");
+    	return (Float) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.mod_PFLM_PlayerFormLittleMaid, "Physical_Hammer");
     }
 
     public ModelRenderer getBipedHead() {
