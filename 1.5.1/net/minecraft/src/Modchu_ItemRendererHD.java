@@ -1,11 +1,11 @@
 package net.minecraft.src;
 
-import net.minecraft.client.Minecraft;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class Modchu_ItemRenderer extends MMM_ItemRenderer {
+import net.minecraft.client.Minecraft;
+
+public class Modchu_ItemRendererHD extends MMM_ItemRendererHD {
 
 	public static boolean flipHorizontal = false;
 	public static boolean leftHandedness = false;
@@ -16,7 +16,7 @@ public class Modchu_ItemRenderer extends MMM_ItemRenderer {
 	public float equippedProgress;
 	public float prevEquippedProgress;
 *///145delete
-    public Modchu_ItemRenderer(Minecraft minecraft) {
+    public Modchu_ItemRendererHD(Minecraft minecraft) {
     	super(minecraft);
     	try {
     		Object o = Modchu_Reflect.getFieldObject(ItemRenderer.class, "olddays", false);
@@ -164,8 +164,8 @@ public class Modchu_ItemRenderer extends MMM_ItemRenderer {
             	var16 = 1.0F;
             	GL11.glScalef(var16, var16, var16);
             }
-            if (var17 instanceof RenderPlayer) ((RenderPlayer) var17).renderFirstPersonArm(mc.thePlayer);
-            else Modchu_Reflect.invokeMethod(var17.getClass(), "renderFirstPersonArm", var17, new Object[]{ mc.thePlayer });
+            if (var17 instanceof RenderPlayer) ((RenderPlayer) var17).func_82441_a(mc.thePlayer);
+            else Modchu_Reflect.invokeMethod(var17.getClass(), "func_82441_a", var17, new Object[]{ mc.thePlayer });
             GL11.glPopMatrix();
 //-@-132
         }
@@ -190,10 +190,10 @@ public class Modchu_ItemRenderer extends MMM_ItemRenderer {
     	if (isOlddays) b = (Boolean) Modchu_Reflect.getFieldObject(ItemRenderer.class, "olddays");
     	if (!b) {
         	//Modchu_Debug.Debug("drawFirstPersonHand b!");
-    		((RenderPlayer)r).renderFirstPersonArm(mc.thePlayer);
+    		((RenderPlayer)r).func_82441_a(mc.thePlayer);
     		return;
     	}
-    	Modchu_Reflect.invokeMethod(RenderPlayer.class, "a", "renderFirstPersonArm", new Class[]{ EntityPlayer.class, int.class }, r, new Object[]{ mc.thePlayer, h });
+    	Modchu_Reflect.invokeMethod(RenderPlayer.class, "a", "func_82441_a", new Class[]{ EntityPlayer.class, int.class }, r, new Object[]{ mc.thePlayer, h });
     	return;
     }
 }

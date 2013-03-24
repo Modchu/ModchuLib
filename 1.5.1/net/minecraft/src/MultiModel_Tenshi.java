@@ -823,6 +823,7 @@ public class MultiModel_Tenshi extends MultiModel_SR2 {
 
 		ItemStack is;
 		boolean isHelmet = false;
+/*
 		if (entityliving instanceof EntityPlayer) {
 			is = ((EntityPlayer) entityliving).inventory.armorItemInSlot(3);
 			if (is != null && is.stackSize > 0) {
@@ -831,14 +832,15 @@ public class MultiModel_Tenshi extends MultiModel_SR2 {
 			}
 		} else if (mod_Modchu_ModchuLib.LMM_EntityLittleMaid != null
 					&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entityliving)) {
+*/
 			//isHelmet = ((LMM_EntityLittleMaid) entityliving).maidInventory.armorInventory[3] != null;
-			Class c = loadClass(getClassName("LMM_InventoryLittleMaid"));
-			if (c != null) {
-				Object[] o = (Object[]) getFieldObject(c, "armorInventory", getFieldObject(mod_Modchu_ModchuLib.LMM_EntityLittleMaid, "maidInventory", entityliving));
+			Object inventory = getCapsValue(caps_Inventory);
+			if (inventory != null) {
+				Object[] o = (Object[]) getFieldObject(InventoryPlayer.class, "b", "armorInventory", inventory);
 				if (o != null
 						&& o[3] != null) isHelmet = true;
 			}
-		}
+		//}
 		if(isHelmet){
 			Hat1.isHidden = Hat2.isHidden = Hat3.isHidden =
 					Hat4.isHidden = Hat5.isHidden = Hat6.isHidden =

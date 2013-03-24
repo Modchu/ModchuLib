@@ -339,14 +339,14 @@ public class Modchu_ModelRenderer extends ModelRenderer
     	} else
 //@-@132
     	if (pRealBlock && itemstack.getItem() instanceof ItemBlock) {
-/*//147delete
+
     		String s1 = "/terrain.png";
     		if (mod_Modchu_ModchuLib.isForge) {
     			s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", Item.itemsList[itemstack.itemID]);
     			//Modchu_Debug.Debug("isForge pRender.loadTexture s1="+s1);
     		}
     		pRender.loadTexture(s1);
-*///147delete
+
     		GL11.glEnable(GL11.GL_CULL_FACE);
     		pRender.renderBlocks.renderBlockAsItem(Block.blocksList[itemstack.itemID], itemstack.getItemDamage(), 1.0F);
     		GL11.glDisable(GL11.GL_CULL_FACE);
@@ -355,7 +355,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     				&& pRender.renderManager.itemRenderer != null) {
     			// アイテムに色付け
     			int renderPasses = itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0;
-/*//147delete
+
     			String s1 = "/gui/items.png";
     			if (mod_Modchu_ModchuLib.isForge) {
     				if (renderPasses == 1) renderPasses =
@@ -368,7 +368,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     				s1 = "/btwmodtex/btwitems01.png";
     			}
     			pRender.loadTexture(s1);
-*///147delete
+
     			for (int j = 0; j <= renderPasses; j++) {
     				if (!mod_Modchu_ModchuLib.isSSP
     						| renderPasses > 0) {

@@ -60,9 +60,9 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public mod_Modchu_ModchuLib()
 	{
 		// b181deleteload();
-		if (getVersion().startsWith("1.5")) {
-			minecraftVersion = "1.5";
-			modchuLibVersion = 150;
+		if (getVersion().startsWith("1.5.1")) {
+			minecraftVersion = "1.5.1";
+			modchuLibVersion = 151;
 			return;
 		}
 		if (getVersion().startsWith("1.4.6~7")) {
@@ -166,7 +166,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5-1i";
+		return "1.5.1-1i";
 	}
 
 	@Override

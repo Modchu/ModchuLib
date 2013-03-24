@@ -4,7 +4,7 @@ public class mod_PFLM_ModelForLittleMaidMob extends BaseMod
 {
 	public String getVersion()
 	{
-		return "1.5-1b";
+		return "1.5.1-1b";
 	}
 
 	public void load()

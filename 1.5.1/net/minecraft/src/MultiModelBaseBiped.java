@@ -288,7 +288,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 				Object inventory = modelCaps.getCapsValue(caps_Inventory);
 				if (inventory != null) {
 					int slot = pEntity instanceof EntityPlayer ? 10 : 16;
-					ItemStack litemstack1 = (ItemStack) Modchu_Reflect.invokeMethod(InventoryPlayer.class, "getStackInSlot", new Class[]{ int.class }, inventory, new Object[]{ slot });
+					ItemStack litemstack1 = (ItemStack) Modchu_Reflect.invokeMethod(InventoryPlayer.class, "a", "getStackInSlot", new Class[]{ int.class }, inventory, new Object[]{ slot });
 					if (litemstack1 != null) {
 						Item item2 = litemstack1.getItem();
 						if (item2 == item2.dyePowder) {
@@ -300,15 +300,11 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 				}
 			}
 
-			if (pEntity instanceof EntityPlayer) {
-				// アーマー頭部装飾品 特殊対応
-				EntityPlayer entityplayer = ((EntityPlayer) pEntity);
-				litemstack = entityplayer.inventory.armorItemInSlot(3);
-				if (litemstack != null) {
-					addSupport = addSupportChecks(entityplayer, litemstack);
-					if (addSupport == 3
-							| addSupport == 4) headMountRenderItems(entityplayer, pRender, litemstack, addSupport);
-				}
+			// アーマー頭部装飾品 対応
+			litemstack = (ItemStack) getCapsValue(caps_armorItemInSlot, 3);
+			if (litemstack != null) {
+				addSupport = addSupportChecks(pEntity, litemstack);
+				headMountRenderItems(pEntity, pRender, litemstack, addSupport);
 			}
 		}
 		if (lflag) {
@@ -386,45 +382,8 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 
     	GL11.glPopMatrix();
     }
-/*
-    public void renderItemsPFLM(EntityLiving pEntity, Render pRender) {
-    	// 手持ちの表示 PFLM
-    	EntityPlayer entityplayer = ((EntityPlayer) pEntity);
-    	GL11.glPushMatrix();
 
-    	ItemStack litemstack = null;
-    	EnumAction laction;
-    	litemstack = entityplayer.inventory.getCurrentItem();
-    	laction = litemstack != null && entityplayer.getItemInUseCount() > 0 ? litemstack.getItemUseAction() : null;
-
-    	if (litemstack != null) {
-    		Object Arms = getArms(getCapsValueInt(caps_dominantArm));
-    		if (Arms != null) {
-    			Modchu_Reflect.invokeMethod(Arms.getClass(), "loadMatrix", Arms);
-    			Modchu_Reflect.invokeMethod(Arms.getClass(), "renderItems", new Class[]{ EntityLiving.class, Render.class, boolean.class, EnumAction.class, ItemStack.class }, Arms, new Object[]{ entityplayer, pRender, false, laction, litemstack });
-    		}
-    	}
-
-    	// 頭部装飾品
-    	litemstack = entityplayer.inventory.getStackInSlot(9);
-    	if (litemstack != null) {
-    		int addSupport = addSupportChecks(entityplayer, litemstack);
-    		if (addSupport == 3) addSupport = -1;
-    		headMountRenderItems(entityplayer, pRender, litemstack, addSupport);
-    	}
-
-    	// アーマー頭部装飾品 特殊対応
-    	litemstack = entityplayer.inventory.armorItemInSlot(3);
-    	if (litemstack != null) {
-    		int addSupport = addSupportChecks(entityplayer, litemstack);
-    		if (addSupport == 3
-    				| addSupport == 4) headMountRenderItems(entityplayer, pRender, litemstack, addSupport);
-    	}
-
-    	GL11.glPopMatrix();
-    }
-*/
-    public void headMountRenderItems(EntityPlayer entityplayer, Render pRender, ItemStack litemstack, int addSupport) {
+    public void headMountRenderItems(EntityLiving pEntity, Render pRender, ItemStack litemstack, int addSupport) {
     	Item item = litemstack.getItem();
     	Block block = null;
     	boolean isCamouflage = false;
@@ -440,22 +399,26 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     	if (isCamouflage
     			|| isPlanter
     			|| addSupport > -1) {
-    		ItemStack litemstack2 = entityplayer.inventory.getStackInSlot(10);
-    		Object HeadMount = getHeadMount();
-    		if (HeadMount != null) ;else return;
-    		Modchu_Reflect.invokeMethod(HeadMount.getClass(), "loadMatrix", HeadMount);
-    		if (isPlanter
-    				|| (addSupport > -1 && addSupport < 3)) {
-    			equippedItemPositionFlower();
-    		}
+    		Object inventory = modelCaps.getCapsValue(caps_Inventory);
     		float scale = 1.0F;
-    		if (litemstack2 != null) {
-    			Item item2 = litemstack2.getItem();
-    			if (item2 == item2.dyePowder) {
-    				scale = 1.0F + (0.2F * litemstack2.getItemDamage());
+    		if (inventory != null) {
+    			int slot = pEntity instanceof EntityPlayer ? 10 : 16;
+    			ItemStack litemstack2 = (ItemStack) Modchu_Reflect.invokeMethod(InventoryPlayer.class, "a", "getStackInSlot", new Class[]{ int.class }, inventory, new Object[]{ slot });
+    			Object HeadMount = getHeadMount();
+    			if (HeadMount != null) ;else return;
+    			Modchu_Reflect.invokeMethod(HeadMount.getClass(), "loadMatrix", HeadMount);
+    			if (isPlanter
+    					|| (addSupport > -1 && addSupport < 3)) {
+    				equippedItemPositionFlower();
+    			}
+    			if (litemstack2 != null) {
+    				Item item2 = litemstack2.getItem();
+    				if (item2 == item2.dyePowder) {
+    					scale = 1.0F + (0.2F * litemstack2.getItemDamage());
+    				}
     			}
     		}
-    		Modchu_Reflect.invokeMethod(HeadMount.getClass(), "renderItems", new Class[]{ EntityLiving.class, Render.class, boolean.class, EnumAction.class, ItemStack.class, float.class, int.class }, HeadMount, new Object[]{ entityplayer, pRender, true, null, litemstack, scale, addSupport });
+    		Modchu_Reflect.invokeMethod(HeadMount.getClass(), "renderItems", new Class[]{ EntityLiving.class, Render.class, boolean.class, EnumAction.class, ItemStack.class, float.class, int.class }, HeadMount, new Object[]{ pEntity, pRender, true, null, litemstack, scale, addSupport });
     	}
     }
 
@@ -1004,7 +967,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     public void action1(Entity entity) {
     	// ｳｯｰｳｯｰｳﾏｳﾏ(ﾟ∀ﾟ)
     	float speed = getCapsValueFloat(caps_actionSpeed) / 10;
-    	//Modchu_Debug.mDebug("action1 "+(getCapsValueFloat(caps_actionSpeed))+" speed="+speed);
+    	//Modchu_Debug.mDebug("action1 "+(getCapsValueFloat(caps_actionSpeed))+" speed="+speed+" Type="+getCapsValue(caps_armorType));
     	if (speed < 0.0F) return;
 
     	rightArm.rotationPointX = bipedRightArm.rotationPointX;
@@ -1217,7 +1180,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
      */
     public void syncModel(MultiModelBaseBiped model) {
     	if (getCapsValueInt(caps_runActionNumber) == 1
-    			| getCapsValueInt(caps_runActionNumber) == 2) bipedBody.rotateAngleZ = model.bipedBody.rotateAngleZ;
+    			| getCapsValueInt(caps_runActionNumber) == 3) bipedBody.rotateAngleZ = model.bipedBody.rotateAngleZ;
     }
 
     /**
@@ -1674,7 +1637,10 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 			o = modelCaps.getCapsValue(caps_texture, s, i);
 			if (o != null) return o;
 			return (String) Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.MMM_TextureManager, "getTextureName", new Class[]{ String.class, int.class }, null, new Object[]{ s, i });
+		} else {
+			Modchu_Debug.mDebug("getTexture modelCaps == null");
 		}
+		//Modchu_Debug.mDebug("getTexture o ="+o);
 		return o;
 	}
 

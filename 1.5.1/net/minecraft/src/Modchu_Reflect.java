@@ -238,7 +238,16 @@ public class Modchu_Reflect
     			try {
     				return var0.getField(var1);
     			} catch (Exception e) {
-    				if (debugReflectMessageDetail) e.printStackTrace();
+    				Field f;
+    				for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
+    					try {
+    						f = c.getDeclaredField(var1);
+    						f.setAccessible(true);
+    						return f;
+    					} catch (Exception e2) {
+    						if (debugReflectMessageDetail) e2.printStackTrace();
+    					}
+    				}
     			}
     		}
     	}
@@ -680,57 +689,87 @@ public class Modchu_Reflect
     	return null;
     }
 
-	public static Object getPrivateValue(Class var0, Object var1, int var2)
-	{
-		try
-		{
-			Field var3 = var0.getDeclaredFields()[var2];
-			var3.setAccessible(true);
-			return var3.get(var1);
-		}
-		catch (Exception var4)
-		{
-			return null;
-		}
-	}
+    public static Object getPrivateValue(Class var0, Object var1, int var2)
+    {
+    	try
+    	{
+    		Field var3 = var0.getDeclaredFields()[var2];
+    		var3.setAccessible(true);
+    		return var3.get(var1);
+    	}
+    	catch (Exception var4)
+    	{
+    		return null;
+    	}
+    }
 
-	public static Object getPrivateValue(Class var0, Object var1, String var2) throws IllegalArgumentException, SecurityException, NoSuchFieldException
-	{
-		try
-		{
-			Field var3 = var0.getDeclaredField(var2);
-			var3.setAccessible(true);
-			return var3.get(var1);
-		}
-		catch (Exception var4)
-		{
-			return null;
-		}
-	}
+    public static Object getPrivateValue(Class var0, Object var1, String var2)
+    {
+    	Field var3;
+    	try
+    	{
+    		var3 = var0.getDeclaredField(var2);
+    		var3.setAccessible(true);
+    		return var3.get(var1);
+    	}
+    	catch (Exception var4)
+    	{
+    		for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
+    			try {
+    				var3 = c.getDeclaredField(var2);
+    				var3.setAccessible(true);
+    				return var3.get(var1);
+    			} catch (Exception e2) {
+    				if (debugReflectMessageDetail) e2.printStackTrace();
+    			}
+    		}
+    	}
+    	return null;
+    }
 
     public static void setPrivateValue(Class var0, Object var1, int var2, Object var3)
     {
-        try
-        {
-            Field var4 = var0.getDeclaredFields()[var2];
-            var4.setAccessible(true);
-            var4.set(var1, var3);
-        }
-        catch (Exception var6)
-        {
-        }
+    	Field var4;
+    	try
+    	{
+    		var4 = var0.getDeclaredFields()[var2];
+    		var4.setAccessible(true);
+    		var4.set(var1, var3);
+    	}
+    	catch (Exception var6)
+    	{
+    		for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
+    			try {
+    				var4 = c.getDeclaredFields()[var2];
+    				var4.setAccessible(true);
+    				var4.set(var1, var3);
+    			} catch (Exception e2) {
+    				if (debugReflectMessageDetail) e2.printStackTrace();
+    			}
+    		}
+    	}
     }
 
     public static void setPrivateValue(Class var0, Object var1, String var2, Object var3)
     {
-        try
-        {
-            Field var4 = var0.getDeclaredField(var2);
-            var4.setAccessible(true);
-            var4.set(var1, var3);
-        }
-        catch (Exception var6)
-        {
-        }
+    	Field var4;
+    	try
+    	{
+    		var4 = var0.getDeclaredField(var2);
+    		var4.setAccessible(true);
+    		var4.set(var1, var3);
+    	}
+    	catch (Exception var6)
+    	{
+    		for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
+    			try {
+    				var4 = c.getDeclaredField(var2);
+    				var4.setAccessible(true);
+    				var4.set(var1, var3);
+    			} catch (Exception e2) {
+    				if (debugReflectMessageDetail) e2.printStackTrace();
+    			}
+    		}
+    	}
     }
 }
