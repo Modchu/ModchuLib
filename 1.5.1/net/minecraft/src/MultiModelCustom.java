@@ -198,163 +198,18 @@ public abstract class MultiModelCustom extends MultiModelBaseBiped {
     }
 
     @Override
-    public void actionInit2() {
-    	customModel.actionInit2();
-    }
-
-    @Override
-    public void actionInit3() {
-    	customModel.actionInit3();
-    }
-
-    @Override
-    public void actionInit4() {
-    	customModel.actionInit4();
-    }
-
-    @Override
-    public void actionInit5() {
-    	customModel.actionInit5();
-    }
-
-    @Override
-    public void actionInit6() {
-    	customModel.actionInit6();
-    }
-
-    @Override
-    public void actionInit7() {
-    	customModel.actionInit7();
-    }
-
-    @Override
-    public void actionInit8() {
-    	customModel.actionInit8();
-    }
-
-    @Override
-    public void actionInit9() {
-    	customModel.actionInit9();
-    }
-
-    @Override
-    public void actionInit30() {
-    	customModel.actionInit30();
-    }
-
-    @Override
     public void actionRelease(int i) {
     	customModel.actionRelease(i);
     }
 
     @Override
-    public void actionRelease1() {
-    	customModel.actionRelease1();
-    }
-
-    @Override
-    public void actionRelease2() {
-    	customModel.actionRelease2();
-    }
-
-    @Override
-    public void actionRelease3() {
-    	customModel.actionRelease3();
-    }
-
-    @Override
-    public void actionRelease4() {
-    	customModel.actionRelease4();
-    }
-
-    @Override
-    public void actionRelease5() {
-    	customModel.actionRelease5();
-    }
-
-    @Override
-    public void actionRelease6() {
-    	customModel.actionRelease6();
-    }
-
-    @Override
-    public void actionRelease7() {
-    	customModel.actionRelease7();
-    }
-
-    @Override
-    public void actionRelease8() {
-    	customModel.actionRelease8();
-    }
-
-    @Override
-    public void actionRelease9() {
-    	customModel.actionRelease9();
-    }
-
-    @Override
-    public void actionRelease30() {
-    	customModel.actionRelease30();
-    }
-
-    @Override
     public void action(Entity entity, int i) {
+    	Modchu_Debug.mDebug("custom action");
     	customModel.action(entity, i);
     }
 
     @Override
-    public void action1(Entity entity) {
-    	customModel.action1(entity);
-    }
-
-    @Override
-    public void action2(Entity entity) {
-    	customModel.action2(entity);
-    }
-
-    @Override
-    public void action3(Entity entity) {
-    	customModel.action3(entity);
-    }
-
-    @Override
-    public void action4(Entity entity) {
-    	customModel.action4(entity);
-    }
-
-    @Override
-    public void action5(Entity entity) {
-    	customModel.action5(entity);
-    }
-
-    @Override
-    public void action6(Entity entity) {
-    	customModel.action6(entity);
-    }
-
-    @Override
-    public void action7(Entity entity) {
-    	customModel.action7(entity);
-    }
-
-    @Override
-    public void action8(Entity entity) {
-    	customModel.action8(entity);
-    }
-
-    @Override
-    public void action9(Entity entity) {
-    	customModel.action9(entity);
-    }
-
-    @Override
-    public void action30(Entity entity) {
-    	customModel.action30(entity);
-    }
-
-    @Override
     public void syncModel(MultiModelBaseBiped model) {
-    	Modchu_Debug.mDebug("syncModel bipedBody.rotateAngleZ="+bipedBody.rotateAngleZ);
     	customModel.syncModel(model);
     }
 

@@ -217,10 +217,6 @@ public class Modchu_CustomModel extends ModelBase {
 				baseModel.modelCaps = mainModel.modelCaps;
 			}
 		}
-		if (baseModel.getCapsValueBoolean(baseModel.caps_shortcutKeysAction)) {
-			if (baseModel.getCapsValueInt(baseModel.caps_armorType) != 0) mainModel.setCapsValue(mainModel.caps_syncModel, armorSyncBaseModel);
-			else armorSyncBaseModel = mainModel;
-		}
 
 		///fieldAllSync(false, entityliving, f, f1, renderPartialTicks);
 		if (mainModel != null) mainModel.setLivingAnimations(entityliving, f, f1, renderPartialTicks);
@@ -283,12 +279,11 @@ public class Modchu_CustomModel extends ModelBase {
 		if (mainModel != null) mainModel.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		///fieldSync(true, (EntityLiving) entity, f, f1, f2);
 		setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
-/*///
-		if (baseModel.getCapsValueBoolean(baseModel.caps_shortcutKeysAction)) {
+		if (mainModel.getCapsValueBoolean(mainModel.caps_shortcutKeysAction)) {
 			if (baseModel.getCapsValueInt(baseModel.caps_armorType) != 0) mainModel.setCapsValue(mainModel.caps_syncModel, armorSyncBaseModel);
 			else armorSyncBaseModel = mainModel;
+			actionSync();
 		}
-*////
 	}
 
 	public void setRotationAnglesLM(float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5, Entity entity) {
@@ -421,138 +416,16 @@ public class Modchu_CustomModel extends ModelBase {
 		if (mainModel != null) mainModel.actionInit(i);
 	}
 
-	public void actionInit1() {
-		if (mainModel != null) mainModel.actionInit1();
-	}
-
-	public void actionInit2() {
-		if (mainModel != null) mainModel.actionInit2();
-	}
-
-	public void actionInit3() {
-		if (mainModel != null) mainModel.actionInit3();
-	}
-
-	public void actionInit4() {
-		if (mainModel != null) mainModel.actionInit4();
-	}
-
-	public void actionInit5() {
-		if (mainModel != null) mainModel.actionInit5();
-	}
-
-	public void actionInit6() {
-		if (mainModel != null) mainModel.actionInit6();
-	}
-
-	public void actionInit7() {
-		if (mainModel != null) mainModel.actionInit7();
-	}
-
-	public void actionInit8() {
-		if (mainModel != null) mainModel.actionInit8();
-	}
-
-	public void actionInit9() {
-		if (mainModel != null) mainModel.actionInit9();
-	}
-
-	public void actionInit30() {
-		if (mainModel != null) mainModel.actionInit30();
-	}
-
 	public void actionRelease(int i) {
 		if (mainModel != null) mainModel.actionRelease(i);
-	}
-
-	public void actionRelease1() {
-		if (mainModel != null) mainModel.actionRelease1();
-	}
-
-	public void actionRelease2() {
-		if (mainModel != null) mainModel.actionRelease2();
-	}
-
-	public void actionRelease3() {
-		if (mainModel != null) mainModel.actionRelease3();
-	}
-
-	public void actionRelease4() {
-		if (mainModel != null) mainModel.actionRelease4();
-	}
-
-	public void actionRelease5() {
-		if (mainModel != null) mainModel.actionRelease5();
-	}
-
-	public void actionRelease6() {
-		if (mainModel != null) mainModel.actionRelease6();
-	}
-
-	public void actionRelease7() {
-		if (mainModel != null) mainModel.actionRelease7();
-	}
-
-	public void actionRelease8() {
-		if (mainModel != null) mainModel.actionRelease8();
-	}
-
-	public void actionRelease9() {
-		if (mainModel != null) mainModel.actionRelease9();
-	}
-
-	public void actionRelease30() {
-		if (mainModel != null) mainModel.actionRelease30();
 	}
 
 	public void action(Entity entity, int i) {
 		if (mainModel != null) mainModel.action(entity, i);
 	}
 
-	public void action1(Entity entity) {
-		if (mainModel != null) mainModel.action1(entity);
-	}
-
-	public void action2(Entity entity) {
-		if (mainModel != null) mainModel.action1(entity);
-	}
-
-	public void action3(Entity entity) {
-		if (mainModel != null) mainModel.action1(entity);
-	}
-
-	public void action4(Entity entity) {
-		if (mainModel != null) mainModel.action1(entity);
-	}
-
-	public void action5(Entity entity) {
-		if (mainModel != null) mainModel.action1(entity);
-	}
-
-	public void action6(Entity entity) {
-		if (mainModel != null) mainModel.action1(entity);
-	}
-
-	public void action7(Entity entity) {
-		if (mainModel != null) mainModel.action1(entity);
-	}
-
-	public void action8(Entity entity) {
-		if (mainModel != null) mainModel.action1(entity);
-	}
-
-	public void action9(Entity entity) {
-		if (mainModel != null) mainModel.action1(entity);
-	}
-
-	public void action30(Entity entity) {
-		if (mainModel != null) mainModel.action1(entity);
-	}
-
 	public void syncModel(MultiModelBaseBiped model) {
 		if (mainModel != null) mainModel.syncModel(model);
-		Modchu_Debug.mDebug("mainModel.bipedBody.rotateAngleZ="+mainModel.bipedBody.rotateAngleZ);
-		Modchu_Debug.mDebug("baseModel.bipedBody.rotateAngleZ="+baseModel.bipedBody.rotateAngleZ);
 	}
 
 	public float getHeight() {
@@ -1272,6 +1145,18 @@ public class Modchu_CustomModel extends ModelBase {
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
+		}
+	}
+
+	private void actionSync() {
+		if (mainModel != null) {
+			baseModel.bipedBody.rotateAngleZ = mainModel.bipedBody.rotateAngleZ;
+			baseModel.bipedRightArm.rotateAngleX = mainModel.bipedRightArm.rotateAngleX;
+			baseModel.bipedRightArm.rotateAngleY = mainModel.bipedRightArm.rotateAngleY;
+			baseModel.bipedRightArm.rotateAngleZ = mainModel.bipedRightArm.rotateAngleZ;
+			baseModel.bipedLeftArm.rotateAngleX = mainModel.bipedLeftArm.rotateAngleX;
+			baseModel.bipedLeftArm.rotateAngleY = mainModel.bipedLeftArm.rotateAngleY;
+			baseModel.bipedLeftArm.rotateAngleZ = mainModel.bipedLeftArm.rotateAngleZ;
 		}
 	}
 
