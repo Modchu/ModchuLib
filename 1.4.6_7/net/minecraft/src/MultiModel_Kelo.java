@@ -190,9 +190,9 @@ public class MultiModel_Kelo extends MultiModel {
 		mainFrame.addChild(bipedHead);
 		mainFrame.addChild(bipedBody);
 		mainFrame.setRotationPoint(0.0F, 0.0F, 0.0F);
-		setVisible(bipedHeadwear, false);
-		setVisible(ChignonB, false);
-		setVisible(Tail, false);
+		setCapsValue(caps_visible, bipedHeadwear, false);
+		setCapsValue(caps_visible, ChignonB, false);
+		setCapsValue(caps_visible, Tail, false);
 		actionPartsInit(f, f1);
     }
 
@@ -317,11 +317,11 @@ public class MultiModel_Kelo extends MultiModel {
 																rightLeg.showModel = rightLeg2.showModel =
 																		leftLeg.showModel = leftLeg2.showModel =
 																				rightHandPlus.showModel = leftHandPlus.showModel = false;
-		aimedBowBan = false;
-		sneakBan = false;
-		waitBan = false;
-		sittingBan = false;
-		sleepingBan = false;
+		setCapsValue(caps_aimedBowBan, false);
+		setCapsValue(caps_sneakBan, false);
+		setCapsValue(caps_waitBan, false);
+		setCapsValue(caps_sittingBan, false);
+		setCapsValue(caps_sleepingBan, false);
 	}
 
     @Override
@@ -335,19 +335,19 @@ public class MultiModel_Kelo extends MultiModel {
 
     	bipedRightLeg.rotateAngleX = (MathHelper.cos(f * 0.6662F) * 1.4F * f1) / 1.5F;
     	bipedLeftLeg.rotateAngleX = (MathHelper.cos(f * 0.6662F + 3.141593F) * 1.4F * f1) / 1.5F;
-    	KeloeyeL1.setVisible(true);
-    	KeloeyeR1.setVisible(true);
-    	KeloeyeL2.setVisible(false);
-    	KeloeyeR2.setVisible(false);
+    	setCapsValue(caps_visible, KeloeyeL1, true);
+    	setCapsValue(caps_visible, KeloeyeR1, true);
+    	setCapsValue(caps_visible, KeloeyeL2, false);
+    	setCapsValue(caps_visible, KeloeyeR2, false);
 
-    	if(getIsRiding())
+    	if(getCapsValueBoolean(caps_getIsRiding))
     	{
     		bipedRightLeg.rotateAngleX = -1.256637F;
     		bipedLeftLeg.rotateAngleX = -1.256637F;
     		bipedRightLeg.rotateAngleY = 0.3141593F;
     		bipedLeftLeg.rotateAngleY = -0.3141593F;
     	}
-    	if(getOnGround() > -9990F && !getaimedBow())
+    	if(getCapsValueFloat(caps_onGround) > -9990F && !getCapsValueBoolean(caps_aimedBow))
     	{
     		bipedRightArm.rotationPointZ = MathHelper.sin(bipedBody.rotateAngleY) * 4F;
     		bipedRightArm.rotationPointX = -MathHelper.cos(bipedBody.rotateAngleY) * 3.5F + 1.0F;
@@ -356,7 +356,7 @@ public class MultiModel_Kelo extends MultiModel {
     	}
     	Skirt.rotationPointY = 10.0F;
     	Skirt.rotationPointZ = 0.0F;
-    	if(getIsSneak())
+    	if(getCapsValueBoolean(caps_getIsSneak))
     	{
     		bipedHead.rotationPointY = 5.5F;
     		bipedBody.rotationPointY = 5.0F;
@@ -378,25 +378,25 @@ public class MultiModel_Kelo extends MultiModel {
     		bipedLeftLeg.rotationPointY = 9F;
     	}
 
-    	if(getIsWait() && !getaimedBow())
+    	if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow))
     	{
-    		KeloeyeL1.setVisible(false);
-    		KeloeyeR1.setVisible(false);
-    		KeloeyeL2.setVisible(true);
-    		KeloeyeR2.setVisible(true);
+    		setCapsValue(caps_visible, KeloeyeL1, false);
+    		setCapsValue(caps_visible, KeloeyeR1, false);
+    		setCapsValue(caps_visible, KeloeyeL2, true);
+    		setCapsValue(caps_visible, KeloeyeR2, true);
     	}
-    	if (getaimedBow()) {
-    		eyeL.setVisible(true);
-    		eyeR.setVisible(false);
+    	if (getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, false);
     	} else {
     		if (0.0D > (double) (mh_sin(f2 * 0.1F) * 0.3F)
     			+ Math.random() * 0.10000000149011612D
     			+ 0.18000000715255737D) {
-    			eyeL.setVisible(true);
-    			eyeR.setVisible(true);
+    			setCapsValue(caps_visible, eyeL, true);
+    			setCapsValue(caps_visible, eyeR, true);
     		} else {
-    			eyeL.setVisible(false);
-    			eyeR.setVisible(false);
+    			setCapsValue(caps_visible, eyeL, false);
+    			setCapsValue(caps_visible, eyeR, false);
     		}
     	}
         headwear.rotateAngleX = -0.087F;
@@ -425,16 +425,16 @@ public class MultiModel_Kelo extends MultiModel {
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	setVisible(bipedHeadwear, false);
-    	setVisible(ChignonB, false);
-    	setVisible(Tail, false);
+    	setCapsValue(caps_visible, bipedHeadwear, false);
+    	setCapsValue(caps_visible, ChignonB, false);
+    	setCapsValue(caps_visible, Tail, false);
     }
 
     @Override
     public void actionInit1() {
     	super.actionInit1();
-    	rightHandPlus.setVisible(true);
-    	leftHandPlus.setVisible(true);
+    	setCapsValue(caps_visible, rightHandPlus, true);
+    	setCapsValue(caps_visible, leftHandPlus, true);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(SleeveR);
     	((Modchu_ModelRenderer) bipedLeftArm).removeChild(SleeveL);
     	((Modchu_ModelRenderer) bipedRightLeg).removeChild(ShoesR);

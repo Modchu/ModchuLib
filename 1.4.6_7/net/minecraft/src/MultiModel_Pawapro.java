@@ -226,11 +226,11 @@ public class MultiModel_Pawapro extends MultiModel {
     							rightArm2.showModel = leftArm2.showModel = false;
     	rightLeg.isHidden = rightLeg2.isHidden =
     			leftLeg.isHidden = leftLeg2.isHidden = true;
-    	aimedBowBan = false;
-    	sneakBan = false;
-    	waitBan = false;
-    	sittingBan = false;
-    	sleepingBan = false;
+    	setCapsValue(caps_aimedBowBan, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
+    	setCapsValue(caps_sleepingBan, false);
     }
 
     @Override
@@ -243,18 +243,20 @@ public class MultiModel_Pawapro extends MultiModel {
     	Skirt.rotationPointY -= 5.5F;
     	bipedRightLeg.rotationPointY += 3.0F;
     	bipedLeftLeg.rotationPointY += 3.0F;
-    	eyeLniko.setVisible(false);	eyeRniko.setVisible(false);
-    	eyeLFire.setVisible(false);	eyeRFire.setVisible(false);
+    	setCapsValue(caps_visible, eyeLniko, false);
+    	setCapsValue(caps_visible, eyeRniko, false);
+    	setCapsValue(caps_visible, eyeLFire, false);
+    	setCapsValue(caps_visible, eyeRFire, false);
 
-    	if (getIsWait() && !getaimedBow()) {
-    		eyeL.setVisible(false);	eyeR.setVisible(false);
-    		eyeLniko.setVisible(true);	eyeRniko.setVisible(true);
+    	if (getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeLniko, true);
+    		setCapsValue(caps_visible, eyeRniko, true);
     	}
-    	if (getaimedBow()){
-    		eyeL.showModel = false; eyeR.showModel = false;
-    		eyeLFire.setVisible(true);	eyeRFire.setVisible(true);
+    	if (getCapsValueBoolean(caps_aimedBow)){
+    		setCapsValue(caps_visible, eyeLFire, true);
+    		setCapsValue(caps_visible, eyeRFire, true);
     	}
-    	if (getIsSneak()){
+    	if (getCapsValueBoolean(caps_getIsSneak)){
     		Skirt.rotationPointY = 0.0F;
     		Skirt.rotationPointZ = 0.0F;
     		Skirt.rotateAngleX = 0.0F;
@@ -263,9 +265,11 @@ public class MultiModel_Pawapro extends MultiModel {
     	double Eye =(double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D;
 
     	if(0.0D > Eye) {
-    		eyeL.setVisible(false);eyeR.setVisible(false);
+    		setCapsValue(caps_visible, eyeL, false);
+    		setCapsValue(caps_visible, eyeR, false);
     	} else {
-    		eyeL.setVisible(true);eyeR.setVisible(true);
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, true);
     	}
     	bipedRightLeg.rotateAngleY = 0.5235988F;
     	bipedLeftLeg.rotateAngleY = -0.5235988F;
@@ -273,29 +277,29 @@ public class MultiModel_Pawapro extends MultiModel {
 
     @Override
     public void actionInit1() {
-    	setShortcutKeysAction(true);
+    	setCapsValue(caps_shortcutKeysAction, true);
     	boolean b = false;
-    	setVisible(bipedLeftArm, b);
-    	setVisible(bipedRightArm, b);
+    	setCapsValue(caps_visible, bipedLeftArm, b);
+    	setCapsValue(caps_visible, bipedRightArm, b);
     	b = true;
-    	setVisible(rightArm, b);
-    	setVisible(rightArm2, b);
-    	setVisible(rightArmPlus, b);
-    	setVisible(rightArmPlus2, b);
-    	setVisible(rightHand, b);
-    	setVisible(leftArm, b);
-    	setVisible(leftArm2, b);
-    	setVisible(leftArmPlus, b);
-    	setVisible(leftArmPlus2, b);
-    	setVisible(leftHand, b);
+    	setCapsValue(caps_visible, rightArm, b);
+    	setCapsValue(caps_visible, rightArm2, b);
+    	setCapsValue(caps_visible, rightArmPlus, b);
+    	setCapsValue(caps_visible, rightArmPlus2, b);
+    	setCapsValue(caps_visible, rightHand, b);
+    	setCapsValue(caps_visible, leftArm, b);
+    	setCapsValue(caps_visible, leftArm2, b);
+    	setCapsValue(caps_visible, leftArmPlus, b);
+    	setCapsValue(caps_visible, leftArmPlus2, b);
+    	setCapsValue(caps_visible, leftHand, b);
     	rightLeg.isHidden = !b;
     	rightLeg2.isHidden = !b;
-    	setVisible(rightLegPlus, b);
-    	setVisible(rightLegPlus2, b);
+    	setCapsValue(caps_visible, rightLegPlus, b);
+    	setCapsValue(caps_visible, rightLegPlus2, b);
     	leftLeg.isHidden = !b;
     	leftLeg2.isHidden = !b;
-    	setVisible(leftLegPlus, b);
-    	setVisible(leftLegPlus2, b);
+    	setCapsValue(caps_visible, leftLegPlus, b);
+    	setCapsValue(caps_visible, leftLegPlus2, b);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[0]);
     	((Modchu_ModelRenderer) bipedRightArm).removeChild(Arms[2]);
     	((Modchu_ModelRenderer) bipedLeftArm).removeChild(Arms[1]);
@@ -314,40 +318,40 @@ public class MultiModel_Pawapro extends MultiModel {
     	leftLeg2.addChild(bipedLeftLeg);
     	Arms[0].setRotationPoint(0.0F, 3.0F, 0.0F);
     	Arms[1].setRotationPoint(0.0F, 3.0F, 0.0F);
-    	sneakBan = true;
-    	waitBan = true;
-    	sittingBan = true;
+    	setCapsValue(caps_sneakBan, true);
+    	setCapsValue(caps_waitBan, true);
+    	setCapsValue(caps_sittingBan, true);
     }
 
     @Override
     public void actionRelease1() {
-    	setShortcutKeysAction(false);
-    	sneakBan = false;
-    	waitBan = false;
-    	sittingBan = false;
+    	setCapsValue(caps_shortcutKeysAction, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
 
     	boolean b = true;
-    	((Modchu_ModelRenderer) bipedLeftArm).setVisible(b);
-    	((Modchu_ModelRenderer) bipedRightArm).setVisible(b);
+    	setCapsValue(caps_visible, bipedLeftArm, b);
+    	setCapsValue(caps_visible, bipedRightArm, b);
     	b = false;
-    	setVisible(rightArm, b);
-    	setVisible(rightArm2, b);
-    	setVisible(rightArmPlus, b);
-    	setVisible(rightArmPlus2, b);
-    	setVisible(rightHand, b);
-    	setVisible(leftArm, b);
-    	setVisible(leftArm2, b);
-    	setVisible(leftArmPlus, b);
-    	setVisible(leftArmPlus2, b);
-    	setVisible(leftHand, b);
+    	setCapsValue(caps_visible, rightArm, b);
+    	setCapsValue(caps_visible, rightArm2, b);
+    	setCapsValue(caps_visible, rightArmPlus, b);
+    	setCapsValue(caps_visible, rightArmPlus2, b);
+    	setCapsValue(caps_visible, rightHand, b);
+    	setCapsValue(caps_visible, leftArm, b);
+    	setCapsValue(caps_visible, leftArm2, b);
+    	setCapsValue(caps_visible, leftArmPlus, b);
+    	setCapsValue(caps_visible, leftArmPlus2, b);
+    	setCapsValue(caps_visible, leftHand, b);
     	rightLeg.isHidden = !b;
     	rightLeg2.isHidden = !b;
-    	setVisible(rightLegPlus, b);
-    	setVisible(rightLegPlus2, b);
+    	setCapsValue(caps_visible, rightLegPlus, b);
+    	setCapsValue(caps_visible, rightLegPlus2, b);
     	leftLeg.isHidden = !b;
     	leftLeg2.isHidden = !b;
-    	setVisible(leftLegPlus, b);
-    	setVisible(leftLegPlus2, b);
+    	setCapsValue(caps_visible, leftLegPlus, b);
+    	setCapsValue(caps_visible, leftLegPlus2, b);
 
     	bipedRightArm.addChild(Arms[0]);
     	bipedRightArm.addChild(Arms[2]);
@@ -404,6 +408,6 @@ public class MultiModel_Pawapro extends MultiModel {
     @Override
     public void setArmorBipedBodyShowModel(boolean b) {
     	super.setArmorBipedBodyShowModel(b);
-    	Logo2.setVisible(b);
+    	setCapsValue(caps_visible, Logo2, b);
     }
 }

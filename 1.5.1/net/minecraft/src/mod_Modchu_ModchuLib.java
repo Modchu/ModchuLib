@@ -166,7 +166,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.1-1i";
+		return "1.5.1-1j";
 	}
 
 	@Override
@@ -347,7 +347,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				String s[] = {
 						"skirtFloats=false", "skirtFloatsVolume=1.0F", "debugMessage=true", "debugMessagetexture=true", "debugReflectMessage=true",
 						"debugReflectMessageDetail=false", "modchuRemodelingModel=true", "useInvisibilityBody=true", "useInvisibilityArmor=false", "useInvisibilityItem=false",
-						"versionCheck=true"
+						"versionCheck=true",  "debugCustomModelMessage=false"
 				};
 				Modchu_Config.writerConfig(mainCfgfile, s);
 			} else {
@@ -363,15 +363,16 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				useInvisibilityArmor = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityArmor", useInvisibilityArmor)).toString());
 				useInvisibilityItem = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityItem", useInvisibilityItem)).toString());
 				versionCheck = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "versionCheck", versionCheck)).toString());
+				Modchu_Debug.debugCustomModelMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugCustomModelMessage", Modchu_Debug.debugCustomModelMessage)).toString());
 				String k[] = {
 						"skirtFloats", "skirtFloatsVolume", "debugMessage", "debugMessagetexture", "debugReflectMessage",
 						"debugReflectMessageDetail", "modchuRemodelingModel", "useInvisibilityBody", "useInvisibilityArmor", "useInvisibilityItem",
-						"versionCheck"
+						"versionCheck", "debugCustomModelMessage"
 				};
 				String k1[] = {
 						""+skirtFloats, ""+skirtFloatsVolume, ""+Modchu_Debug.debugMessage, ""+Modchu_Debug.debugMessagetexture, ""+Modchu_Reflect.debugReflectMessage,
 						""+Modchu_Reflect.debugReflectMessageDetail, ""+modchuRemodelingModel, ""+useInvisibilityBody, ""+useInvisibilityArmor, ""+useInvisibilityItem,
-						""+versionCheck
+						""+versionCheck, ""+Modchu_Debug.debugCustomModelMessage
 				};
 				if (skirtFloatsVolume < 0.0F) skirtFloatsVolume = 0.0F;
 				if (skirtFloatsVolume > 2.0F) skirtFloatsVolume = 2.0F;

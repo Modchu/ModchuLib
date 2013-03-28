@@ -41,10 +41,10 @@ public class MultiModel_long extends MultiModel_SR2
 
 		kamidome.rotateAngleX=0.2974289F;
 		longhear.rotateAngleX=0.2974289F;
-		setVisible(Tail, false);
-		setVisible(SideTailL, false);
-		setVisible(SideTailR, false);
-		setVisible(ChignonB, false);
+		setCapsValue(caps_visible, Tail, false);
+		setCapsValue(caps_visible, SideTailL, false);
+		setCapsValue(caps_visible, SideTailR, false);
+		setCapsValue(caps_visible, ChignonB, false);
     }
 
     @Override
@@ -59,9 +59,9 @@ public class MultiModel_long extends MultiModel_SR2
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	setVisible(Tail, false);
-    	setVisible(SideTailL, false);
-    	setVisible(SideTailR, false);
-    	setVisible(ChignonB, false);
+    	setCapsValue(caps_visible, Tail, false);
+    	setCapsValue(caps_visible, SideTailL, false);
+    	setCapsValue(caps_visible, SideTailR, false);
+    	setCapsValue(caps_visible, ChignonB, false);
     }
 }

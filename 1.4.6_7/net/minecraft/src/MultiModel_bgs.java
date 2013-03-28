@@ -339,11 +339,11 @@ public class MultiModel_bgs extends MultiModel_SR2
     								rightArm2.showModel = leftArm2.showModel =
     									rightLeg.showModel = rightLeg2.showModel =
     										leftLeg.showModel = leftLeg2.showModel = false;
-    	aimedBowBan = false;
-    	sneakBan = false;
-    	waitBan = false;
-    	sittingBan = false;
-    	sleepingBan = false;
+    	setCapsValue(caps_aimedBowBan, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
+    	setCapsValue(caps_sleepingBan, false);
     	actionRelease1();
     }
 

@@ -120,7 +120,7 @@ public class MultiModel_Shion extends MultiModel {
 		((Modchu_ModelRenderer) bipedHead).removeChild(Tail);
 		((Modchu_ModelRenderer) bipedHead).removeChild(ChignonR);
 		((Modchu_ModelRenderer) bipedHead).removeChild(ChignonL);
-		setVisible(Skirt, false);
+		setCapsValue(caps_visible, Skirt, false);
    }
 
     @Override
@@ -137,15 +137,16 @@ public class MultiModel_Shion extends MultiModel {
 
     	bipedRightLeg.rotateAngleX = (MathHelper.cos(f * 0.6662F) * 1.4F * f1) / 1.5F;
     	bipedLeftLeg.rotateAngleX = (MathHelper.cos(f * 0.6662F + 3.141593F) * 1.4F * f1) / 1.5F;
-    	sodeL.setVisible(true);
-    	sodeR.setVisible(true);
-    	WsodeL.setVisible(false);
-    	WsodeR.setVisible(false);
-    	if(getIsRiding()) {
+    	setCapsValue(caps_visible, sodeL, true);
+    	setCapsValue(caps_visible, sodeR, true);
+    	setCapsValue(caps_visible, WsodeL, false);
+    	setCapsValue(caps_visible, WsodeR, false);
+    	if(getCapsValueBoolean(caps_getIsRiding)) {
     		bipedRightLeg.rotateAngleY = 0.0F;
     		bipedLeftLeg.rotateAngleY = 0.0F;
     	}
-    	if(getIsSneak()) {
+    	boolean modchuRemodelingModel = getCapsValueBoolean(caps_modchuRemodelingModel);
+    	if(getCapsValueBoolean(caps_getIsSneak)) {
     		if (!modchuRemodelingModel) {
     			bipedRightLeg.rotateAngleX -= 0.5F;
     			bipedLeftLeg.rotateAngleX -= 0.5F;
@@ -172,15 +173,15 @@ public class MultiModel_Shion extends MultiModel {
     			SkirtL.setRotationPoint(-0.5F, 0.0F, 0.0F);
     		}
     	}
-    	if(getIsWait() && !getaimedBow()) {
-    		sodeL.setVisible(false);
-    		sodeR.setVisible(false);
-    		WsodeL.setVisible(true);
-    		WsodeR.setVisible(true);
+    	if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, sodeL, false);
+    		setCapsValue(caps_visible, sodeR, false);
+    		setCapsValue(caps_visible, WsodeL, true);
+    		setCapsValue(caps_visible, WsodeR, true);
     	}
-    	if(getaimedBow()) {
-    		eyeR.setVisible(false);
-    		eyeL.setVisible(true);
+    	if(getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeR, false);
+    		setCapsValue(caps_visible, eyeL, true);
     	}
     	ChignonB.rotateAngleX = 0.0873F;
     	Headwear.rotationPointY = -1F;
@@ -195,14 +196,14 @@ public class MultiModel_Shion extends MultiModel {
     	kanzasi.rotateAngleY = -0.175F;
     	kanzasi.rotateAngleZ = 1.396F;
     	obi.rotateAngleX = 0.0873F;
-    	if (modchuRemodelingModel) {
-    		if (getIsSneak()) {
+    	if (getCapsValueBoolean(caps_modchuRemodelingModel)) {
+    		if (getCapsValueBoolean(caps_getIsSneak)) {
     			bipedBody.rotateAngleX = 0.0F;
     			bipedHead.rotationPointZ = 0.0F;
     			bipedBody.rotationPointZ = 0.0F;
     			bipedRightLeg.rotationPointZ = 0.0F;
     			bipedLeftLeg.rotationPointZ = 0.0F;
-    			if (!getaimedBow()) {
+    			if (!getCapsValueBoolean(caps_aimedBow)) {
     				bipedRightArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F - 0.7F;
     				bipedRightArm.rotateAngleY = 0.0F;
     				bipedRightArm.rotateAngleZ = -0.4F;
@@ -211,10 +212,10 @@ public class MultiModel_Shion extends MultiModel {
     				bipedLeftArm.rotateAngleZ = 0.4F;
     				bipedRightArm.rotationPointZ = 0.0F;
     				bipedLeftArm.rotationPointZ = 0.0F;
-    				sodeL.setVisible(false);
-    				sodeR.setVisible(false);
-    				WsodeL.setVisible(true);
-    				WsodeR.setVisible(true);
+    				setCapsValue(caps_visible, sodeL, false);
+    				setCapsValue(caps_visible, sodeR, false);
+    				setCapsValue(caps_visible, WsodeL, true);
+    				setCapsValue(caps_visible, WsodeR, true);
     			}
     		} else {
     			bipedHead.rotationPointZ = 0.0F;
@@ -222,7 +223,7 @@ public class MultiModel_Shion extends MultiModel {
     			bipedRightArm.rotationPointZ = 0.0F;
     			bipedLeftArm.rotationPointZ = 0.0F;
     		}
-    		if (getIsRiding()) {
+    		if (getCapsValueBoolean(caps_getIsRiding)) {
     			if (entity.ridingEntity != null) {
     				bipedRightArm.rotateAngleX += -0.6283185F;
     				bipedLeftArm.rotateAngleX += -0.6283185F;
@@ -240,11 +241,11 @@ public class MultiModel_Shion extends MultiModel {
     	if (0.0D > (double) (mh_sin(f2 * 0.1F) * 0.3F)
     			+ Math.random() * 0.10000000149011612D
     			+ 0.18000000715255737D) {
-    		eyeL.setVisible(false);
-    		eyeR.setVisible(false);
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, false);
     	} else {
-    		eyeL.setVisible(true);
-    		eyeR.setVisible(true);
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, true);
     	}
     }
 
@@ -277,6 +278,6 @@ public class MultiModel_Shion extends MultiModel {
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-		setVisible(Skirt, getGuiParts().get("Skirt"));
+		setCapsValue(caps_visible, Skirt, getGuiParts().get("Skirt"));
     }
 }

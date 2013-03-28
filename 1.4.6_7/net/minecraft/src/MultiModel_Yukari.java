@@ -648,15 +648,15 @@ public class MultiModel_Yukari extends MultiModel_Aug
 
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
-    	if (getIsLookSuger(entityliving)) {
-    		Cheek_R.setVisible(true);
-    		Cheek_L.setVisible(true);
+    	float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor);
+    	if (getCapsValueBoolean(caps_isLookSuger)) {
+    		setCapsValue(caps_visible, Cheek_R, true);
+    		setCapsValue(caps_visible, Cheek_L, true);
     		RabbitEar_R3.rotateAngleZ = mh_sin(f3 * 0.09F) * 0.09F + 0.87F;
     		RabbitEar_L3.rotateAngleZ = -(mh_sin(f3 * 0.09F) * 0.09F + 0.87F);
     	} else {
-    		Cheek_R.setVisible(false);
-    		Cheek_L.setVisible(false);
+    		setCapsValue(caps_visible, Cheek_R, false);
+    		setCapsValue(caps_visible, Cheek_L, false);
     		RabbitEar_R3.rotateAngleZ = ((float)Math.PI / 4F);
     		RabbitEar_L3.rotateAngleZ = -((float)Math.PI / 4F);
     	}
@@ -667,12 +667,12 @@ public class MultiModel_Yukari extends MultiModel_Aug
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
     	Skirt.rotationPointY -= 2.0F;
     	Skirt.rotationPointZ = 0.0F;
-    	if (getIsSneak()) {
+    	if (getCapsValueBoolean(caps_getIsSneak)) {
     		Skirt.rotationPointZ = -0.3F;
     		Skirt.rotateAngleX += 0.3F;
     	}
 
-    	if (getIsRiding())
+    	if (getCapsValueBoolean(caps_getIsRiding))
     	{
     		RabbitEar_RB1.setRotateAngleX(0.08726461F);
     		RabbitEar_LB1.setRotateAngleX(0.08726461F);
@@ -727,8 +727,8 @@ public class MultiModel_Yukari extends MultiModel_Aug
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	if (getSkirtFloats()) {
-    		setVisible(Skirt, getGuiParts().get("Skirt"));
+    	if (getCapsValueBoolean(caps_skirtFloats)) {
+    		setCapsValue(caps_visible, Skirt, getGuiParts().get("Skirt"));
     	}
     }
 

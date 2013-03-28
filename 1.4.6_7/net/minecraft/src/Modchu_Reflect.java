@@ -130,10 +130,15 @@ public class Modchu_Reflect
 
     public static Object getFieldObject(Class var0, String var1, Object var2)
     {
+    	return getFieldObject(var0, var1, var2, debugReflectMessage);
+    }
+
+    public static Object getFieldObject(Class var0, String var1, Object var2, boolean var3)
+    {
     	try {
     		return getField(var0, var1).get(var2);
     	} catch (Exception e) {
-    		if (debugReflectMessage) e.printStackTrace();
+    		if (var3) e.printStackTrace();
     	}
     	return null;
     }
@@ -238,7 +243,16 @@ public class Modchu_Reflect
     			try {
     				return var0.getField(var1);
     			} catch (Exception e) {
-    				if (debugReflectMessageDetail) e.printStackTrace();
+    				Field f;
+    				for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
+    					try {
+    						f = c.getDeclaredField(var1);
+    						f.setAccessible(true);
+    						return f;
+    					} catch (Exception e2) {
+    						if (debugReflectMessageDetail) e2.printStackTrace();
+    					}
+    				}
     			}
     		}
     	}
@@ -298,6 +312,67 @@ public class Modchu_Reflect
     		} catch (Exception e1) {
     			try {
     				return var0.getMethod(var1, var2);
+    			} catch (Exception e) {
+    				if (debugReflectMessageDetail) e.printStackTrace();
+    	   		}
+    		}
+    	}
+    	return null;
+    }
+
+    public static Method getMethod(String var0, String var1, String var2)
+    {
+    	Method method = null;
+    	method = getMethod(var0, var2, (Class[]) null);
+    	if (method != null) return method;
+    	return getMethod(var0, var1, (Class[]) null);
+    }
+
+    public static Method getMethod(String var0, String var1, String var2, Class[] var3)
+    {
+    	Method method = null;
+    	method = getMethod(var0, var2, var3);
+    	if (method != null) return method;
+    	return getMethod(var0, var1, var3);
+    }
+
+    public static Method getMethod(String var0, String var1)
+    {
+    	return getMethod(var0, var1, debugReflectMessage);
+    }
+
+    public static Method getMethod(String var0, String var1, boolean b)
+    {
+    	Method var5 = null;
+    	try {
+    		var5 = getRawMethod(var0, var1, null);
+    		var5.setAccessible(true);
+    	} catch (Exception e) {
+    		if (b) e.printStackTrace();
+    	}
+    	return var5;
+    }
+
+    public static Method getMethod(String var0, String var1, Class[] var2)
+    {
+    	Method var5 = null;
+    	try {
+    		var5 = getRawMethod(var0, var1, var2);
+    		var5.setAccessible(true);
+    	} catch (Exception e) {
+    		if (debugReflectMessageDetail) e.printStackTrace();
+    	}
+    	return var5;
+    }
+
+    private static Method getRawMethod(String var0, String var1, Class[] var2)
+    {
+    	if (var1 != null) {
+    		try {
+    			return loadClass(var0).getDeclaredMethod(var1, var2);
+    		} catch (Exception e1) {
+    			try {
+    				return loadClass(var0).getMethod(var1, var2);
     			} catch (Exception e) {
     				if (debugReflectMessageDetail) e.printStackTrace();
     	   		}
@@ -400,6 +475,16 @@ public class Modchu_Reflect
     		return getMethod(var0, var1, (Class[]) null).invoke(var3, var4);
     	} catch (Exception e) {
     		if (debugReflectMessage) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    public static Object invokeMethod(Class var0, String var1, Class[] var2, Object var3, Object[] var4, boolean var5)
+    {
+    	try {
+    		return getMethod(var0, var1, var2).invoke(var3, var4);
+    	} catch (Exception e) {
+    		if (var5) e.printStackTrace();
     	}
     	return null;
     }
@@ -570,6 +655,16 @@ public class Modchu_Reflect
     		c = Class.forName(var0);
     	} catch (NoClassDefFoundError e) {
     		if (b) e.printStackTrace();
+    	} catch (ClassNotFoundException e) {
+    		try {
+    			c = Class.forName("net.minecraft.src."+var0);
+    		} catch (NoClassDefFoundError e1) {
+    			if (b) e1.printStackTrace();
+    		} catch (ClassNotFoundException e1) {
+    			if (b) e1.printStackTrace();
+    		} catch (Exception e1) {
+    			if (b) e1.printStackTrace();
+    		}
     	} catch (Exception e) {
     		if (b) e.printStackTrace();
     	}
@@ -597,5 +692,89 @@ public class Modchu_Reflect
     		}
     	}
     	return null;
+    }
+
+    public static Object getPrivateValue(Class var0, Object var1, int var2)
+    {
+    	try
+    	{
+    		Field var3 = var0.getDeclaredFields()[var2];
+    		var3.setAccessible(true);
+    		return var3.get(var1);
+    	}
+    	catch (Exception var4)
+    	{
+    		return null;
+    	}
+    }
+
+    public static Object getPrivateValue(Class var0, Object var1, String var2)
+    {
+    	Field var3;
+    	try
+    	{
+    		var3 = var0.getDeclaredField(var2);
+    		var3.setAccessible(true);
+    		return var3.get(var1);
+    	}
+    	catch (Exception var4)
+    	{
+    		for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
+    			try {
+    				var3 = c.getDeclaredField(var2);
+    				var3.setAccessible(true);
+    				return var3.get(var1);
+    			} catch (Exception e2) {
+    				if (debugReflectMessageDetail) e2.printStackTrace();
+    			}
+    		}
+    	}
+    	return null;
+    }
+
+    public static void setPrivateValue(Class var0, Object var1, int var2, Object var3)
+    {
+    	Field var4;
+    	try
+    	{
+    		var4 = var0.getDeclaredFields()[var2];
+    		var4.setAccessible(true);
+    		var4.set(var1, var3);
+    	}
+    	catch (Exception var6)
+    	{
+    		for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
+    			try {
+    				var4 = c.getDeclaredFields()[var2];
+    				var4.setAccessible(true);
+    				var4.set(var1, var3);
+    			} catch (Exception e2) {
+    				if (debugReflectMessageDetail) e2.printStackTrace();
+    			}
+    		}
+    	}
+    }
+
+    public static void setPrivateValue(Class var0, Object var1, String var2, Object var3)
+    {
+    	Field var4;
+    	try
+    	{
+    		var4 = var0.getDeclaredField(var2);
+    		var4.setAccessible(true);
+    		var4.set(var1, var3);
+    	}
+    	catch (Exception var6)
+    	{
+    		for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
+    			try {
+    				var4 = c.getDeclaredField(var2);
+    				var4.setAccessible(true);
+    				var4.set(var1, var3);
+    			} catch (Exception e2) {
+    				if (debugReflectMessageDetail) e2.printStackTrace();
+    			}
+    		}
+    	}
     }
 }

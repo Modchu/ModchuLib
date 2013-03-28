@@ -571,7 +571,7 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     }
 
     public void skirtFloatsInit(float f, float f1) {
-    	if(!getSkirtFloats()) return;
+    	if(!getCapsValueBoolean(caps_skirtFloats)) return;
     	//ふんわりスカート上
     	SkirtTop = new Modchu_ModelRenderer(this, 8, 18);
     	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0);
@@ -608,7 +608,7 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     @Override
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2) {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	if (getIsLookSuger(entityliving)) {
+    	if (getCapsValueBoolean(caps_isLookSuger)) {
     		Cheek_R.setVisible(true);
     		Cheek_L.setVisible(true);
     	} else {
@@ -625,9 +625,9 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     	SideTailR_L.setRotateAngleX(-((Modchu_ModelRenderer) bipedHead).getRotateAngleX());
     	DropTail.setRotateAngleX(0.1745292F - ((Modchu_ModelRenderer) bipedHead).getRotateAngleX());
     	sensor1.rotationPointY = -8.0F;
-    	if (!getSkirtFloats()) Skirt.rotationPointY -= 2.0F;
+    	if (!getCapsValueBoolean(caps_skirtFloats)) Skirt.rotationPointY -= 2.0F;
     	Skirt.rotationPointZ = 0.0F;
-    	if (getIsSneak()) {
+    	if (getCapsValueBoolean(caps_getIsSneak)) {
     		Skirt.rotateAngleX += 0.3F;
     	}
     	if (((Modchu_ModelRenderer) bipedHead).getRotateAngleX() < 0.0F)
@@ -660,9 +660,9 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     		Tail_U.setRotateAngleX(0.0F);
     		Tail_B.setRotateAngleX(-((Modchu_ModelRenderer) bipedHead).getRotateAngleX() + ((Modchu_ModelRenderer) Skirt).getRotateAngleX());
     	}
-    	if (LMM_EntityLittleMaid != null
-    			&& LMM_EntityLittleMaid.isInstance(entity)) {
-    		if (getIsSneak()) {
+    	if (mod_Modchu_ModchuLib.LMM_EntityLittleMaid != null
+    			&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entity)) {
+    		if (getCapsValueBoolean(caps_getIsSneak)) {
     			Negi1.setVisible(true);
     			Negi2.setVisible(true);
     			Negi3.setVisible(true);

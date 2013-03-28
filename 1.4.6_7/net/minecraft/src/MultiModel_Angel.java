@@ -658,14 +658,14 @@ public class MultiModel_Angel extends MultiModel_SR2 {
 		Tail5.rotateAngleX=-bipedHead.rotateAngleX;
 		Tail6.rotateAngleX=-bipedHead.rotateAngleX;
 
-		if (getaimedBow()) {
+		if (getCapsValueBoolean(caps_aimedBow)) {
 			WingLroot.rotateAngleX+= 0.5F;
 			WingRroot.rotateAngleX+= 0.5F;
 			WingLroot.rotateAngleY= -0.3F;
 			WingRroot.rotateAngleY= 0.3F;
 		}
 
-		if(getIsSneak()){
+		if(getCapsValueBoolean(caps_getIsSneak)){
 			Skirt.rotationPointZ = -0.5F;
 		} else {
 			Skirt.rotationPointZ = 0.0F;
@@ -677,7 +677,8 @@ public class MultiModel_Angel extends MultiModel_SR2 {
 
 	@Override
 	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		if (!getSkirtFloats()) return;
+		if (!getCapsValueBoolean(caps_skirtFloats)) return;
+    	float motionY = getCapsValueFloat(caps_motionY);
 		Skirt1.setRotateAngleDeg(-118F, 113F, 47F);
 		Skirt2.setRotateAngleDeg(-65F, 113F, 47F);
 		Skirt3.setRotateAngleDeg(-122F, 158F, 47F);

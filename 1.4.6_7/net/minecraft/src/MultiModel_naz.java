@@ -62,20 +62,20 @@ public class MultiModel_naz extends MultiModel {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
     	CatTail.setRotateAngleX(mh_sin(f * 0.6662F) * 0.5F - 4.363323F);
 
-    	if(getIsWait() && !getaimedBow()) {
+    	if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
     		CatTail.setRotateAngleX(mh_sin(f2 * 0.6662F) * 0.1F - 4.363323F);
     	}
-    	if(getaimedBow()) {
-    		eyeL.setVisible(true);
-    		eyeR.setVisible(false);
+    	if(getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, false);
     	} else {
     		if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D)
     		{
-    			eyeL.setVisible(false);
-    			eyeR.setVisible(false);
+    			setCapsValue(caps_visible, eyeL, false);
+    			setCapsValue(caps_visible, eyeR, false);
     		} else {
-    			eyeL.setVisible(true);
-    			eyeR.setVisible(true);
+    			setCapsValue(caps_visible, eyeL, true);
+    			setCapsValue(caps_visible, eyeR, true);
     		}
     	}
     }

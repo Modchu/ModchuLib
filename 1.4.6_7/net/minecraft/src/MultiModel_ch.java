@@ -445,7 +445,7 @@ public class MultiModel_ch extends MultiModel_SR2
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
     	super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	if (getIsLookSuger(entityliving)) {
+    	if (getCapsValueBoolean(caps_isLookSuger)) {
     		Cheek_R.setVisible(true);
     		Cheek_L.setVisible(true);
     	} else {

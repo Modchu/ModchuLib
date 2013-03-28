@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class Modchu_Config
 {
-    private static Map cfgData = new HashMap();
+	public static Map cfgData = new HashMap();
 	private static Class mod_PFLM_PlayerFormLittleMaid;
 	private static Class PFLM_Gui;
 	private static Class PFLM_GuiOthersPlayer;

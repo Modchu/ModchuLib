@@ -92,23 +92,23 @@ public class MultiModel_taremimi extends MultiModel {
     	Wansippo1.setRotateAngleX(Wansippo2.setRotateAngleX(Wansippo3.setRotateAngleX(Wansippo4.setRotateAngleX(-0.275F))));
     	Wansippo1.setRotateAngleY(Wansippo2.setRotateAngleY(Wansippo3.setRotateAngleY(Wansippo4.setRotateAngleY(mh_cos(f2 * 0.2F) * 0.05F))));
     	Wansippo1.setRotateAngleZ(Wansippo2.setRotateAngleZ(Wansippo3.setRotateAngleZ(Wansippo4.setRotateAngleZ(mh_sin(f2 * 0.2F) * 0.5F))));
-    	if(getIsRiding()) {
+    	if(getCapsValueBoolean(caps_getIsRiding)) {
     		Wansippo1.setRotateAngleX(Wansippo2.setRotateAngleX(Wansippo3.setRotateAngleX(Wansippo4.setRotateAngleX(-0.1F))));
     	}
-    	if(getIsWait() && !getaimedBow()) {
+    	if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
     		Wansippo1.setRotateAngleZ(Wansippo2.setRotateAngleZ(Wansippo3.setRotateAngleZ(Wansippo4.setRotateAngleZ(mh_sin(f2 * 0.5F) * 1.0F))));
     		Wansippo1.setRotateAngleY(Wansippo2.setRotateAngleY(Wansippo3.setRotateAngleY(Wansippo4.setRotateAngleY(mh_cos(f2 * 0.5F) * 1.0F))));
     	}
-    	if (getaimedBow()) {
-    		eyeL.setVisible(true);
-    		eyeR.setVisible(false);
+    	if (getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, false);
     	} else {
     		if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
-    			eyeL.setVisible(false);
-    			eyeR.setVisible(false);
+    			setCapsValue(caps_visible, eyeL, false);
+    			setCapsValue(caps_visible, eyeR, false);
     		} else {
-    			eyeL.setVisible(true);
-    			eyeR.setVisible(true);
+    			setCapsValue(caps_visible, eyeL, true);
+    			setCapsValue(caps_visible, eyeR, true);
     		}
     	}
     	DogER.rotateAngleX = DogEL.rotateAngleX = mh_sin(f2 * 0.05F) * 0.06F + 0.2F;

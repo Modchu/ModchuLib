@@ -378,6 +378,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
     					float f19 = (float)(k & 0xff) / 255F;
     					GL11.glColor4f(f15, f17, f19, 1.0F);
     				}
+    				Modchu_Debug.mDebug("itemRenderer.renderItem");
     				pRender.renderManager.itemRenderer.renderItem(pEntityLiving, itemstack, j);
     			}
     		}

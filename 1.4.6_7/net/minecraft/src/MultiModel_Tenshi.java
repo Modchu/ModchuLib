@@ -823,22 +823,24 @@ public class MultiModel_Tenshi extends MultiModel_SR2 {
 
 		ItemStack is;
 		boolean isHelmet = false;
+/*
 		if (entityliving instanceof EntityPlayer) {
 			is = ((EntityPlayer) entityliving).inventory.armorItemInSlot(3);
 			if (is != null && is.stackSize > 0) {
 				Item item = is.getItem();
 				if(item instanceof ItemArmor) isHelmet = true;
 			}
-		} else if (LMM_EntityLittleMaid != null
-					&& LMM_EntityLittleMaid.isInstance(entityliving)) {
+		} else if (mod_Modchu_ModchuLib.LMM_EntityLittleMaid != null
+					&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entityliving)) {
+*/
 			//isHelmet = ((LMM_EntityLittleMaid) entityliving).maidInventory.armorInventory[3] != null;
-			Class c = loadClass(getClassName("LMM_InventoryLittleMaid"));
-			if (c != null) {
-				Object[] o = (Object[]) getFieldObject(c, "armorInventory", getFieldObject(LMM_EntityLittleMaid, "maidInventory", entityliving));
+			Object inventory = getCapsValue(caps_Inventory);
+			if (inventory != null) {
+				Object[] o = (Object[]) getFieldObject(InventoryPlayer.class, "b", "armorInventory", inventory);
 				if (o != null
 						&& o[3] != null) isHelmet = true;
 			}
-		}
+		//}
 		if(isHelmet){
 			Hat1.isHidden = Hat2.isHidden = Hat3.isHidden =
 					Hat4.isHidden = Hat5.isHidden = Hat6.isHidden =
@@ -860,7 +862,7 @@ public class MultiModel_Tenshi extends MultiModel_SR2 {
 
 	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
-		if(getIsSneak()){
+		if(getCapsValueBoolean(caps_getIsSneak)){
 			Skirt.rotationPointZ = -0.5F;
 		} else {
 			Skirt.rotationPointZ = 0.0F;
@@ -872,7 +874,8 @@ public class MultiModel_Tenshi extends MultiModel_SR2 {
 
 	@Override
 	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		if (!getSkirtFloats()) return;
+		if (!getCapsValueBoolean(caps_skirtFloats)) return;
+		float motionY = getCapsValueFloat(caps_motionY);
 		Skirt1.setRotateAngleDeg(-118F, 113F, 47F);
 		Skirt2.setRotateAngleDeg(-65F, 113F, 47F);
 		Skirt3.setRotateAngleDeg(-122F, 158F, 47F);

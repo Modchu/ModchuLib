@@ -299,7 +299,7 @@ public class MultiModel_SA extends MultiModel_Aug {
 	public void setLivingAnimationsLM(EntityLiving entityliving, float f,
 			float f1, float f2) {
 		super.setLivingAnimationsLM(entityliving, f, f1, f2);
-		if (getIsLookSuger(entityliving)) {
+		if (getCapsValueBoolean(caps_isLookSuger)) {
 			Cheek_R.setVisible(true);
 			Cheek_L.setVisible(true);
 		} else {
@@ -307,9 +307,9 @@ public class MultiModel_SA extends MultiModel_Aug {
 			Cheek_L.setVisible(false);
 		}
 		float f3 = (float) entityliving.ticksExisted + f2
-				+ getEntityIdFactor(entityliving);
+				+ getCapsValueFloat(caps_entityIdFactor);
 		float f4 = 0.0F;
-		if (getIsLookSuger(entityliving)) {
+		if (getCapsValueBoolean(caps_isLookSuger)) {
 			f3 *= 8.0F;
 			f4 = -0.2F;
 		} else {

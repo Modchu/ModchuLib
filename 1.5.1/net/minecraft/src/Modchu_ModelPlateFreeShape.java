@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+
 public class Modchu_ModelPlateFreeShape extends ModelBox
 {
     private PositionTextureVertex[] vertexPositions;

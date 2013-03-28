@@ -1625,7 +1625,7 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 		if (o != null) return (Integer) o;
 		if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
 				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entity)) {
-			o = (Integer) Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.LMM_EntityLittleMaid, "maidColor", entity);
+			o = (Integer) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.LMM_EntityLittleMaid, "maidColor", entity);
 		}
 		if (o != null) return (Integer) o;
 		return 0;

@@ -139,9 +139,9 @@ public class MultiModel_suika extends MultiModel {
     	super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
     	Hyoutan1.rotateAngleX = Hyoutan2.rotateAngleX = Hyoutan1.rotateAngleY = Hyoutan2.rotateAngleY = -0.7853982F;
 
-    	if(getaimedBow()) {
-    		eyeL.setVisible(true);
-    		eyeR.setVisible(false);
+    	if(getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, false);
     		if (!initAimedBow) {
     			((Modchu_ModelRenderer) bipedLeftArm).removeChild(Hyoutan1);
     			((Modchu_ModelRenderer) bipedLeftArm).removeChild(Hyoutan2);
@@ -162,11 +162,11 @@ public class MultiModel_suika extends MultiModel {
     			Hyoutan2.setRotationPoint(-1.0F, 1.0F, 0.0F);
     		}
     		if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.10000000149011612D) {
-    			eyeL.setVisible(false);
-    			eyeR.setVisible(false);
+    			setCapsValue(caps_visible, eyeL, false);
+    			setCapsValue(caps_visible, eyeR, false);
     		} else {
-    			eyeL.setVisible(true);
-    			eyeR.setVisible(true);
+    			setCapsValue(caps_visible, eyeL, true);
+    			setCapsValue(caps_visible, eyeR, true);
     		}
     	}
     	Prim.setRotateAngleX(((Modchu_ModelRenderer) bipedHead).getRotateAngleX());

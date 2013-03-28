@@ -473,7 +473,9 @@ public class MultiModel extends MultiModelBaseBiped {
 
     @Override
     public void setRotationAnglesfirstPerson(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	if (((InventoryPlayer) getCapsValue(caps_Inventory)).getCurrentItem() != null) {
+    	InventoryPlayer inventoryPlayer = (InventoryPlayer) getCapsValue(caps_Inventory);
+    	if (inventoryPlayer != null
+    			&& inventoryPlayer.getCurrentItem() != null) {
     		//’n}‚ğ‚Á‚Ä‚¢‚é
     		bipedRightArm.rotationPointX = -3.0F;
     		bipedRightArm.rotationPointY = 1.5F;

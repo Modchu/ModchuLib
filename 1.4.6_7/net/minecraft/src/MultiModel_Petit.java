@@ -187,16 +187,16 @@ public class MultiModel_Petit extends MultiModel {
     			rightLeg.showModel = rightLeg2.showModel =
     			leftLeg.showModel = leftLeg2.showModel =
     			rightHandPlus.showModel = leftHandPlus.showModel = false;
-    	aimedBowBan = false;
-    	sneakBan = false;
-    	waitBan = false;
-    	sittingBan = false;
-    	sleepingBan = false;
+    	setCapsValue(caps_aimedBowBan, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
+    	setCapsValue(caps_sleepingBan, false);
     }
 
     @Override
     public void skirtFloatsInit(float f, float f1) {
-    	if(!getSkirtFloats()) return;
+    	if(!getCapsValueBoolean(caps_skirtFloats)) return;
     	//ã
     	SkirtTop = new Modchu_ModelRenderer(this, 8, 16);
     	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
@@ -226,7 +226,7 @@ public class MultiModel_Petit extends MultiModel {
     	((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 8, 8, 0, f - 1.9F);
     	SkirtBack.setRotationPoint(-4.0F, 0.0F, 4.0F);
     	SkirtTop.addChild(SkirtBack);
-    	setVisible(Skirt, false);
+    	setCapsValue(caps_visible, Skirt, false);
     }
 
     @Override
@@ -264,56 +264,57 @@ public class MultiModel_Petit extends MultiModel {
     	bipedRightLeg.rotationPointY = bipedLeftLeg.rotationPointY = 5.0F;
     	Skirt.rotationPointY = 4.0F;
     	bipedHead.rotationPointZ = 0.0F;
-    	if(getIsRiding()) {
+    	if(getCapsValueBoolean(caps_getIsRiding)) {
     		bipedHead.rotationPointY -= 4.5F;
     		bipedBody.rotationPointY -= 4.5F;
     	}
 
-    	if(getIsSneak()) {
+    	if(getCapsValueBoolean(caps_getIsSneak)) {
     		bipedHead.rotationPointY += 0.5F;
     		bipedHead.rotationPointZ = 2.0F;
     		Skirt.rotationPointZ = 0.0F;
     	}
 
-    	if(getaimedBow()) {
-    		eyeR.setVisible(false);
-    		FaceR.setVisible(false);
+    	if(getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeR, false);
+    		setCapsValue(caps_visible, FaceR, false);
     	}
 
     	if( 0 > mh_sin(f2 * 0.1F) * 0.3F + (Math.random() * 0.1F) + 0.18F) {
-    		eyeL.setVisible(false);
-    		eyeR.setVisible(false);
-    		FaceL.setVisible(false);
-    		FaceR.setVisible(false);
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, false);
+    		setCapsValue(caps_visible, FaceL, false);
+    		setCapsValue(caps_visible, FaceR, false);
     	} else {
-    		eyeL.setVisible(true);
-    		eyeR.setVisible(true);
-    		FaceL.setVisible(true);
-    		FaceR.setVisible(true);
+    		setCapsValue(caps_visible, eyeL, true);
+    		setCapsValue(caps_visible, eyeR, true);
+    		setCapsValue(caps_visible, FaceL, true);
+    		setCapsValue(caps_visible, FaceR, true);
     	}
     }
 
     @Override
     public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	if (!getSkirtFloats()) return;
+    	if (!getCapsValueBoolean(caps_skirtFloats)) return;
+    	float motionY = getCapsValueFloat(caps_motionY);
     	SkirtTop.setRotationPoint(-4.0F, -2.0F, 4.0F);
     	SkirtFront.setRotationPoint(0.0F, 8.0F, 0.0F);
     	SkirtRight.setRotationPoint(0.0F, 0.0F, 0.0F);
     	SkirtLeft.setRotationPoint(8.0F, 8.0F, 0.0F);
     	SkirtBack.setRotationPoint(0.0F, 3.8F, 0.0F);
 
-    	SkirtFront.rotationPointX += getMotionY() * 4.0F;
-    	SkirtFront.rotationPointY += getMotionY() * 2.0F;
-    	SkirtFront.rotationPointZ += getMotionY() * 2.0F;
-    	SkirtBack.rotationPointX += getMotionY() * 4.0F;
-    	SkirtBack.rotationPointY -= getMotionY() * 2.0F;
-    	SkirtBack.rotationPointZ -= getMotionY() * 2.0F;
-    	SkirtRight.rotationPointX -= getMotionY() * 2.0F;
-    	SkirtRight.rotationPointY += getMotionY() * 5.0F;
-    	SkirtRight.rotationPointZ += getMotionY() * 3.0F;
-    	SkirtLeft.rotationPointX += getMotionY() * 3.0F;
-    	SkirtLeft.rotationPointY -= getMotionY() * 2.0F;
-    	SkirtLeft.rotationPointZ += getMotionY() * 2.0F;
+    	SkirtFront.rotationPointX += motionY * 4.0F;
+    	SkirtFront.rotationPointY += motionY * 2.0F;
+    	SkirtFront.rotationPointZ += motionY * 2.0F;
+    	SkirtBack.rotationPointX += motionY * 4.0F;
+    	SkirtBack.rotationPointY -= motionY * 2.0F;
+    	SkirtBack.rotationPointZ -= motionY * 2.0F;
+    	SkirtRight.rotationPointX -= motionY * 2.0F;
+    	SkirtRight.rotationPointY += motionY * 5.0F;
+    	SkirtRight.rotationPointZ += motionY * 3.0F;
+    	SkirtLeft.rotationPointX += motionY * 3.0F;
+    	SkirtLeft.rotationPointY -= motionY * 2.0F;
+    	SkirtLeft.rotationPointZ += motionY * 2.0F;
 
     	SkirtTop.rotateAngleX = -1.570796313F;
     	SkirtBack.rotateAngleX = 1.570796313F;
@@ -321,15 +322,15 @@ public class MultiModel_Petit extends MultiModel {
     	SkirtRight.rotateAngleX = -1.570796313F;
     	SkirtRight.rotateAngleY = 3.141592653F;
     	SkirtLeft.rotateAngleX = 1.570796313F;
-    	SkirtFront.rotateAngleX += getMotionY();
-    	SkirtRight.rotateAngleX += getMotionY() / 8.0F;
-    	SkirtRight.rotateAngleZ = getMotionY() / 8.0F;
-    	SkirtRight.rotateAngleY += getMotionY();
-    	SkirtLeft.rotateAngleY = -getMotionY();
-    	SkirtBack.rotateAngleX -= getMotionY();
+    	SkirtFront.rotateAngleX += motionY;
+    	SkirtRight.rotateAngleX += motionY / 8.0F;
+    	SkirtRight.rotateAngleZ = motionY / 8.0F;
+    	SkirtRight.rotateAngleY += motionY;
+    	SkirtLeft.rotateAngleY = -motionY;
+    	SkirtBack.rotateAngleX -= motionY;
 
-    	((Modchu_ModelRenderer) SkirtFront).scaleX = ((Modchu_ModelRenderer) SkirtBack).scaleX = 1.0F - (getMotionY() * 1.0F);
-    	((Modchu_ModelRenderer) SkirtRight).scaleZ = ((Modchu_ModelRenderer) SkirtLeft).scaleZ = 1.0F - (getMotionY() * 1.0F);
+    	((Modchu_ModelRenderer) SkirtFront).scaleX = ((Modchu_ModelRenderer) SkirtBack).scaleX = 1.0F - (motionY * 1.0F);
+    	((Modchu_ModelRenderer) SkirtRight).scaleZ = ((Modchu_ModelRenderer) SkirtLeft).scaleZ = 1.0F - (motionY * 1.0F);
     }
 
     @Override
@@ -408,6 +409,6 @@ public class MultiModel_Petit extends MultiModel {
 
     @Override
     public float Physical_Hammer() {
-    	return super.Physical_Hammer() == 1.0F ? 1.3F : super.Physical_Hammer();
+    	return getCapsValueFloat(caps_Physical_Hammer) == 1.0F ? 1.3F : getCapsValueFloat(caps_Physical_Hammer);
     }
 }

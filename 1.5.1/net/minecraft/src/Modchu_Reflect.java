@@ -130,10 +130,15 @@ public class Modchu_Reflect
 
     public static Object getFieldObject(Class var0, String var1, Object var2)
     {
+    	return getFieldObject(var0, var1, var2, debugReflectMessage);
+    }
+
+    public static Object getFieldObject(Class var0, String var1, Object var2, boolean var3)
+    {
     	try {
     		return getField(var0, var1).get(var2);
     	} catch (Exception e) {
-    		if (debugReflectMessage) e.printStackTrace();
+    		if (var3) e.printStackTrace();
     	}
     	return null;
     }

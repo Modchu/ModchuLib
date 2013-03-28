@@ -193,11 +193,11 @@ public class MultiModel_Elsie extends MultiModel {
     							rightArm2.showModel = leftArm2.showModel =
     								rightLeg.showModel = rightLeg2.showModel =
     									leftLeg.showModel = leftLeg2.showModel = false;
-    	aimedBowBan = false;
-    	sneakBan = false;
-    	waitBan = false;
-    	sittingBan = false;
-    	sleepingBan = false;
+    	setCapsValue(caps_aimedBowBan, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
+    	setCapsValue(caps_sleepingBan, false);
     }
 
     @Override
@@ -221,7 +221,7 @@ public class MultiModel_Elsie extends MultiModel {
     	bipedRightArm.rotationPointY += 3.0F;
     	bipedLeftArm.rotationPointY += 3.0F;
     	bipedBody.rotationPointZ = 0.0F;
-    	if(getIsSneak()) {
+    	if(getCapsValueBoolean(caps_getIsSneak)) {
     		bipedHead.rotationPointY += 1.0F;
     		bipedBody.rotationPointY += 1.0F;
     		bipedBody.rotationPointZ -= 0.1F;
@@ -231,7 +231,7 @@ public class MultiModel_Elsie extends MultiModel {
     		bipedLeftLeg.rotationPointY -= 1.0F;
         	Skirt.rotationPointZ = 2.0F;
     	}
-    	if(getIsWait() && !getaimedBow()) {
+    	if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
     		bipedRightArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F - 0.7F;
     		bipedRightArm.rotateAngleY = 0.0F;
     		bipedRightArm.rotateAngleZ = -0.4F;
@@ -264,8 +264,8 @@ public class MultiModel_Elsie extends MultiModel {
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	if (getSkirtFloats()) {
-    		setVisible(Skirt, getGuiParts().get("Skirt"));
+    	if (getCapsValueBoolean(caps_skirtFloats)) {
+    		setCapsValue(caps_visible, Skirt, getGuiParts().get("Skirt"));
     	}
     }
 

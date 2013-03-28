@@ -197,16 +197,16 @@ public class MultiModel_Elsa2 extends MultiModel_SR2 {
     							rightArm2.showModel = leftArm2.showModel =
     								rightLeg.showModel = rightLeg2.showModel =
     									leftLeg.showModel = leftLeg2.showModel = false;
-    	aimedBowBan = false;
-    	sneakBan = false;
-    	waitBan = false;
-    	sittingBan = false;
-    	sleepingBan = false;
+    	setCapsValue(caps_aimedBowBan, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
+    	setCapsValue(caps_sleepingBan, false);
     }
 
     @Override
     public void skirtFloatsInit(float f, float f1) {
-    	if(!getSkirtFloats()) return;
+    	if(!getCapsValueBoolean(caps_skirtFloats)) return;
     	//è„
     	SkirtTop = new Modchu_ModelRenderer(this, 6, 16);
     	((Modchu_ModelRenderer) SkirtTop).addPlate(0.0F, 0.0F, 0.0F, 8, 6, 0);
@@ -236,7 +236,7 @@ public class MultiModel_Elsa2 extends MultiModel_SR2 {
     	((Modchu_ModelRenderer) SkirtBack).addPlate(0.0F, 0.0F, 0.0F, 8, 10, 0);
     	SkirtBack.setRotationPoint(0.0F, 8.0F, 0.0F);
     	Skirt.addChild(SkirtBack);
-    	setVisible(Skirt, false);
+    	setCapsValue(caps_visible, Skirt, false);
     }
 
     @Override
@@ -260,7 +260,7 @@ public class MultiModel_Elsa2 extends MultiModel_SR2 {
     	bipedRightLeg.rotateAngleX = MathHelper.cos(f * 0.5656F) * 1.0F * f1;
     	bipedLeftLeg.rotateAngleX = MathHelper.cos(f * 0.5656F + 3.141593F) * 1.0F * f1;
 
-    	if(getIsRiding())
+    	if(getCapsValueBoolean(caps_getIsRiding))
     	{
     		// èÊÇËï®Ç…èÊÇ¡ÇƒÇ¢ÇÈ
     		bipedRightArm.rotateAngleX += -0.6283185F;
@@ -276,9 +276,9 @@ public class MultiModel_Elsa2 extends MultiModel_SR2 {
     		bipedRightArm.rotateAngleX = bipedRightArm.rotateAngleX * 0.5F - 0.3141593F * (float)heldItemRight;
     	}
 
-    	float onGroundR = getOnGround(getSwingStatus(entity, 0), entity);
-    	float onGroundL = getOnGround(getSwingStatus(entity, 1), entity);
-    	if ((onGroundR > -9990F || onGroundL > -9990F) && !getaimedBow() && !getOldwalking()) {
+    	float onGroundR = getCapsValueFloat(caps_onGround, 0, entity);
+    	float onGroundL = getCapsValueFloat(caps_onGround, 1, entity);
+    	if ((onGroundR > -9990F || onGroundL > -9990F) && !getCapsValueBoolean(caps_aimedBow) && !getCapsValueBoolean(caps_oldwalking)) {
     		// òrêUÇË
     		float f6, f7, f8;
     		f6 = MathHelper.sin(MathHelper.sqrt_float(onGroundR) * (float)Math.PI * 2.0F);
@@ -308,7 +308,7 @@ public class MultiModel_Elsa2 extends MultiModel_SR2 {
     			bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
     		}
     	}
-    	if(getIsSneak())
+    	if(getCapsValueBoolean(caps_getIsSneak))
     	{
     		// ÇµÇ·Ç™Ç›
     		bipedRightLeg.rotateAngleX -= 0.5F;
@@ -316,23 +316,23 @@ public class MultiModel_Elsa2 extends MultiModel_SR2 {
         	bipedHead.rotationPointY += 1.0F;
         	bipedBody.rotationPointY += 1.0F;
     	}
-    	if (getIsWait() && !getaimedBow()) {
+    	if (getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
     		//ë“ã@èÛë‘ÇÃì¡ï ï\é¶
     		bipedRightArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F -0.7F;
     		bipedLeftArm.rotateAngleX = MathHelper.sin(f2 * 0.067F) * 0.05F -0.7F;
     	}
-    	if (getaimedBow())
+    	if (getCapsValueBoolean(caps_aimedBow))
     	{
     		// ã|ç\Ç¶
-    		float f6 = MathHelper.sin(getOnGround() * 3.141593F);
-    		float f7 = MathHelper.sin((1.0F - (1.0F - getOnGround()) * (1.0F - getOnGround())) * 3.141593F);
+    		float f6 = MathHelper.sin(getCapsValueFloat(caps_onGround) * 3.141593F);
+    		float f7 = MathHelper.sin((1.0F - (1.0F - getCapsValueFloat(caps_onGround)) * (1.0F - getCapsValueFloat(caps_onGround))) * 3.141593F);
     		bipedRightArm.rotateAngleX = -1.470796F;
     		bipedRightArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
     		bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
     		bipedRightArm.rotateAngleX += bipedHead.rotateAngleX;
     		bipedLeftArm.rotateAngleX = bipedRightArm.rotateAngleX + 0.4F;
     	} else {
-    		if (!getIsWait()) {
+    		if (!getCapsValueBoolean(caps_getIsWait)) {
     			// åƒãz òrìô
     			bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
     			bipedLeftArm.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.05F;
@@ -343,7 +343,8 @@ public class MultiModel_Elsa2 extends MultiModel_SR2 {
 
     @Override
     public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-    	if (!getSkirtFloats()) return;
+    	if (!getCapsValueBoolean(caps_skirtFloats)) return;
+    	float motionY = getCapsValueFloat(caps_motionY);
     	SkirtBack.rotateAngleX = SkirtRight.rotateAngleX = SkirtLeft.rotateAngleX = SkirtFront.rotateAngleX = 0.0F;
     	SkirtBack.rotateAngleY = SkirtRight.rotateAngleY = SkirtLeft.rotateAngleY = SkirtFront.rotateAngleY = 0.0F;
     	SkirtBack.rotateAngleZ = SkirtRight.rotateAngleZ = SkirtLeft.rotateAngleZ = SkirtFront.rotateAngleZ = 0.0F;
@@ -367,8 +368,8 @@ public class MultiModel_Elsa2 extends MultiModel_SR2 {
     	SkirtLeft.rotateAngleZ += motionY / 2.0F;
     	SkirtBack.rotateAngleX += -motionY;
 
-    	((Modchu_ModelRenderer) SkirtFront).scaleX = ((Modchu_ModelRenderer) SkirtBack).scaleX = 1.0F - (getMotionY() * 1.0F);
-    	((Modchu_ModelRenderer) SkirtRight).scaleZ = ((Modchu_ModelRenderer) SkirtLeft).scaleZ = 1.0F - (getMotionY() * 1.0F);
+    	((Modchu_ModelRenderer) SkirtFront).scaleX = ((Modchu_ModelRenderer) SkirtBack).scaleX = 1.0F - (motionY * 1.0F);
+    	((Modchu_ModelRenderer) SkirtRight).scaleZ = ((Modchu_ModelRenderer) SkirtLeft).scaleZ = 1.0F - (motionY * 1.0F);
     }
 
     @Override

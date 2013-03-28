@@ -125,7 +125,7 @@ public class MultiModel_mahoro extends MultiModel {
     	SensorL.rotateAngleZ = -SensorR.rotateAngleZ;
     	//DropTail.rotateAngleX = 10F / 180F * 3.141526F - bipedHead.rotateAngleX;
 
-		if (getaimedBow()) {
+		if (getCapsValueBoolean(caps_aimedBow)) {
 			eyeL.showModel = true;
 			eyeR.showModel = false;
 		} else {

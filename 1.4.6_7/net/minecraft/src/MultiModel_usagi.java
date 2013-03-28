@@ -113,7 +113,7 @@ public class MultiModel_usagi extends MultiModel {
     	UsaEL.rotationPointZ = UsaER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F - 0.2F;
     	CatEL.rotationPointZ = CatER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F;
     	Usasippo.setRotateAngleY(mh_sin(f * 0.6662F) * 0.3F);
-    	if(getIsRiding()) {
+    	if(getCapsValueBoolean(caps_getIsRiding)) {
     		UsaER.rotateAngleX = UsaEL.rotateAngleX = 2.094F;
     		UsaEL.rotationPointX = -2F;
     		UsaER.rotationPointX = 2.0F;
@@ -121,11 +121,11 @@ public class MultiModel_usagi extends MultiModel {
     		UsaEL.rotationPointZ = UsaER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F + 8F;
     		Usasippo.setRotateAngleY(mh_sin(f * 0.6662F) * 0.5F);
     	}
-    	if(getOnGround() > -9990F && !getaimedBow()) Usasippo.rotateAngleY = mh_sin(f * 0.2F) * 0.5F;
+    	if(getCapsValueFloat(caps_onGround) > -9990F && !getCapsValueBoolean(caps_aimedBow)) Usasippo.rotateAngleY = mh_sin(f * 0.2F) * 0.5F;
 
-    	if(getIsSneak()) Usasippo.setRotateAngleY(0.0F);
+    	if(getCapsValueBoolean(caps_getIsSneak)) Usasippo.setRotateAngleY(0.0F);
 
-    	if(getIsWait() && !getaimedBow()) {
+    	if(getCapsValueBoolean(caps_getIsWait) && !getCapsValueBoolean(caps_aimedBow)) {
     		Usasippo.setRotateAngleY(mh_cos(f2 * 0.2F) * 0.5F);
     		UsaER.rotateAngleX = UsaEL.rotateAngleX = 2.268928F;
     		UsaEL.rotationPointX = -2F;
@@ -133,29 +133,29 @@ public class MultiModel_usagi extends MultiModel {
     		UsaEL.rotationPointY = UsaER.rotationPointY = -13.3F;
     		UsaEL.rotationPointZ = UsaER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F + 7.8F;
     	}
-    	if(getaimedBow()) {
-    		eyeR.setVisible(false);
-    		eyeL.setVisible(true);
+    	if(getCapsValueBoolean(caps_aimedBow)) {
+    		setCapsValue(caps_visible, eyeR, false);
+    		setCapsValue(caps_visible, eyeL, true);
     		Usasippo.setRotateAngleY(0.0F);
     	} else {
     		if(0.0D > (double)(mh_sin(f2 * 0.1F) * 0.3F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
-    			eyeL.setVisible(false);
-    			eyeR.setVisible(false);
+    			setCapsValue(caps_visible, eyeL, false);
+    			setCapsValue(caps_visible, eyeR, false);
     		} else {
-    			eyeL.setVisible(true);
-    			eyeR.setVisible(true);
+    			setCapsValue(caps_visible, eyeL, true);
+    			setCapsValue(caps_visible, eyeR, true);
     		}
     	}
 
-    	if (modchuRemodelingModel) {
-    		if (getIsSneak()) {
+    	if (getCapsValueBoolean(caps_modchuRemodelingModel)) {
+    		if (getCapsValueBoolean(caps_getIsSneak)) {
     			UsaER.rotateAngleX = UsaEL.rotateAngleX = 2.268928F;
     			UsaEL.rotationPointX = -2F;
     			UsaER.rotationPointX = 2.0F;
     			UsaEL.rotationPointY = UsaER.rotationPointY = -13.3F;
     			UsaEL.rotationPointZ = UsaER.rotationPointZ = mh_cos(f2 * 0.05F) * 0.5F + 7.8F;
     		}
-    		if (getIsWait()) {
+    		if (getCapsValueBoolean(caps_getIsWait)) {
     			if(!isTaremimi
     					&& 0.0D > (double)(mh_sin(f2 * 0.1F) * 0.2F) + Math.random() * 0.10000000149011612D + 0.18000000715255737D) {
     				isTaremimi = true;

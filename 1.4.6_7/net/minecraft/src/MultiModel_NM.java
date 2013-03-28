@@ -254,14 +254,14 @@ public class MultiModel_NM extends MultiModel_SR2
     public void setLivingAnimationsLM(EntityLiving entityliving, float f, float f1, float f2)
     {
         super.setLivingAnimationsLM(entityliving, f, f1, f2);
-    	float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
-    	if (LMM_EntityLittleMaid != null
-    			&& LMM_EntityLittleMaid.isInstance(entityliving)
-    			&& !getaimedBow()) {
-    		boolean isWorkingDelay = (Boolean)getObjectInvokeMethod(LMM_EntityLittleMaid, "isWorkingDelay", entityliving);
+    	float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor);
+    	if (mod_Modchu_ModchuLib.LMM_EntityLittleMaid != null
+    			&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entityliving)
+    			&& !getCapsValueBoolean(caps_aimedBow)) {
+    		boolean isWorkingDelay = getCapsValueBoolean(caps_isWorkingDelay);
     		if (isWorkingDelay) {
 //-@-125
-    			int maidMode = (Integer)getObjectInvokeMethod(LMM_EntityLittleMaid, "getMaidModeInt", entityliving);
+    			int maidMode = (Integer)getObjectInvokeMethod(mod_Modchu_ModchuLib.LMM_EntityLittleMaid, "getMaidModeInt", entityliving);
     			int i = 0x0080;
     			int i1 = 0x0021;
     			int i2 = 0x0083;
@@ -326,7 +326,7 @@ public class MultiModel_NM extends MultiModel_SR2
     		}
     	}
     	float f7 = 0.0F;
-    	if (getIsLookSuger(entityliving)) {
+    	if (getCapsValueBoolean(caps_isLookSuger)) {
     		f3 *= 8F;
     		f7 = -0.2F;
     		Cheek_R.setVisible(true);

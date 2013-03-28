@@ -704,9 +704,9 @@ public class MultiModel_Yomu extends MultiModel_SR2 {
 			f4 = f2;
 		}
 
-		float f3 = (float)entityliving.ticksExisted + f4 + getEntityIdFactor(entityliving);
+		float f3 = (float)entityliving.ticksExisted + f4 + getCapsValueFloat(caps_entityIdFactor);
 		int IdIndex;
-		if(getIsInventory(entityliving)) {
+		if(getCapsValueBoolean(caps_isOpenInv, entityliving)) {
 			try
 			{
 				IdIndex = IdList.indexOf(Integer.valueOf(entityliving.entityId));
@@ -769,7 +769,10 @@ public class MultiModel_Yomu extends MultiModel_SR2 {
 	{
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
         bipedHeadwear.rotateAngleX = bipedHeadwear.rotateAngleY = bipedHeadwear.rotateAngleZ = 0.0F;
-        shiftArray(HanreiC.rotationPointX, HanreiC.rotationPointY, HanreiC.rotationPointZ);
+        getCapsValue(caps_shiftArray, HanreiC.rotationPointX, HanreiC.rotationPointY, HanreiC.rotationPointZ);
+        float[] pastX = (float[]) getCapsValue(caps_pastX);
+        float[] pastY = (float[]) getCapsValue(caps_pastY);
+        float[] pastZ = (float[]) getCapsValue(caps_pastZ);
         Hanrei4.rotationPointX = pastX[4] - HanreiC.rotationPointX;
         Hanrei4.rotationPointY = pastY[4] - HanreiC.rotationPointY + 1.0F;
         Hanrei4.rotationPointZ = pastZ[4] - HanreiC.rotationPointZ + 2.5F;
@@ -787,10 +790,10 @@ public class MultiModel_Yomu extends MultiModel_SR2 {
         if (isRiding)
         {
             Skirt.rotationPointZ -= 0.8F;
-            Skirt.rotateAngleX = convertDegtoRad(-25.0F);
+            Skirt.rotateAngleX = getCapsValueFloat(caps_convertDegtoRad, -25.0F);
         }
 
-        if(getIsSneak()){
+        if(getCapsValueBoolean(caps_getIsSneak)){
 			Skirt.rotationPointZ = -0.5F;
 		} else {
 			Skirt.rotationPointZ = 0.0F;
@@ -802,7 +805,8 @@ public class MultiModel_Yomu extends MultiModel_SR2 {
 
 	@Override
 	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		if (!getSkirtFloats()) return;
+		if (!getCapsValueBoolean(caps_skirtFloats)) return;
+    	float motionY = getCapsValueFloat(caps_motionY);
 		Skirt1.setRotateAngleDeg(-118F, 113F, 42F);
 		Skirt2.setRotateAngleDeg(-65F, 113F, 42F);
 		Skirt3.setRotateAngleDeg(-122F, 158F, 42F);

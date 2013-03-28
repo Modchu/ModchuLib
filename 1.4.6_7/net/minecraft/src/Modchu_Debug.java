@@ -6,6 +6,7 @@ public class Modchu_Debug {
 
 	public static boolean debugMessage = true;
 	public static boolean debugMessagetexture = true;
+	public static boolean debugCustomModelMessage = false;
 	public static boolean isRelease;
 	public static String[] debugString;
 	//private static Class mod_PFLM_PlayerFormLittleMaid;
@@ -34,6 +35,10 @@ public class Modchu_Debug {
 
 	public static void tDebug(String s) {
 		if (debugMessagetexture) System.out.println((new StringBuilder()).append("Modchu_tDebug_").append(s).toString());
+	}
+
+	public static void cDebug(String s) {
+		if (debugCustomModelMessage) System.out.println((new StringBuilder()).append("Modchu_cDebug_").append(s).toString());
 	}
 
 	public static void dDebug(String s) {

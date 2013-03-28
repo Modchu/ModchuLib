@@ -224,11 +224,11 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     							rightArm2.showModel = leftArm2.showModel =
     								rightLeg.showModel = rightLeg2.showModel =
     									leftLeg.showModel = leftLeg2.showModel = false;
-    	aimedBowBan = false;
-    	sneakBan = false;
-    	waitBan = false;
-    	sittingBan = false;
-    	sleepingBan = false;
+    	setCapsValue(caps_aimedBowBan, false);
+    	setCapsValue(caps_sneakBan, false);
+    	setCapsValue(caps_waitBan, false);
+    	setCapsValue(caps_sittingBan, false);
+    	setCapsValue(caps_sleepingBan, false);
     }
 
     @Override
@@ -352,7 +352,7 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     	Skirt.rotateAngleY += MathHelper.cos(f * 0.5656F) * 0.15F * f1;
     	hemSkirt.rotateAngleY += MathHelper.cos(f * 0.5656F) * 0.25F * f1;
 
-    	if (getIsRiding())
+    	if (getCapsValueBoolean(caps_getIsRiding))
     	{
     		// èÊÇËï®Ç…èÊÇ¡ÇƒÇ¢ÇÈ
     		bipedRightArm.rotateAngleX -= 0.3F;
@@ -376,7 +376,7 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     		bipedRightArm.rotateAngleX = bipedRightArm.rotateAngleX * 0.5F - (float)Math.PI * 0.1F * heldItemRight;
     	}
     	armSwing(f, f1, f2, f3, f4, f5, entity);
-    	if (getIsSneak())
+    	if (getCapsValueBoolean(caps_getIsSneak))
     	{
     		// ÇµÇ·Ç™Ç›
     		bipedBody.rotateAngleX += 0.5F;
@@ -397,7 +397,7 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     	{
     		// í èÌóßÇø
     	}
-    	if (getIsWait())
+    	if (getCapsValueBoolean(caps_getIsWait))
     	{
     		//ë“ã@èÛë‘ÇÃì¡ï ï\é¶
     		bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.062F) * 0.05F -0.6F;
@@ -415,7 +415,7 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     	}
     	else
     	{
-    		if (getaimedBow())
+    		if (getCapsValueBoolean(caps_aimedBow))
     		{
     			// ã|ç\Ç¶
     			float f6 = MathHelper.sin(onGround * 3.141593F);
@@ -497,8 +497,8 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
 
     @Override
     public void setArmorSkirtShowModel(boolean b) {
-    	setVisible(Skirt, b);
-    	setVisible(hemSkirt, b);
+    	setCapsValue(caps_visible, Skirt, b);
+    	setCapsValue(caps_visible, hemSkirt, b);
     	Skirt.isHidden = !b;
     	hemSkirt.isHidden = !b;
     }
@@ -515,8 +515,8 @@ public class MultiModel_Elsa4 extends MultiModel_SR2 {
     @Override
     public void showModelSettingReflects() {
     	super.showModelSettingReflects();
-    	if (getSkirtFloats()) {
-    		setVisible(Skirt, getGuiParts().get("Skirt"));
+    	if (getCapsValueBoolean(caps_skirtFloats)) {
+    		setCapsValue(caps_visible, Skirt, getGuiParts().get("Skirt"));
     	}
     }
 }

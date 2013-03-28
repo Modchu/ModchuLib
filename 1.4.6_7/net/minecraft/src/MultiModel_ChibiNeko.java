@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import java.util.Map;
+
 import org.lwjgl.opengl.GL11;
 
 public class MultiModel_ChibiNeko extends MultiModel_SR2 {
@@ -47,10 +49,10 @@ public class MultiModel_ChibiNeko extends MultiModel_SR2 {
 	public Modchu_ModelRenderer DrowaL1;
 	public Modchu_ModelRenderer DrowaR2;
 	public Modchu_ModelRenderer DrowaL2;
+	public Modchu_ModelRenderer pink;
+	private Map sizeMap;
 
 	private static final float Scale=0.4F;
-
-	private int IdOffset;
 
 	public MultiModel_ChibiNeko()
 	{
@@ -87,6 +89,11 @@ public class MultiModel_ChibiNeko extends MultiModel_SR2 {
 		bipedLeftLeg.mirror = true;
 		bipedLeftLeg.addBox(-1F, 0.0F, -2F, 3, 9, 4, f-Scale);
 		bipedBody.addChild(bipedLeftLeg);
+
+		pink = new Modchu_ModelRenderer(this, 0, 8);
+		pink.addPlate(-4f, -2.7f, -3.653f, 2, 1, 0);
+		pink.addPlate(2f, -2.7f, -3.653f, 2, 1, 0);
+		bipedHead.addChild(pink);
 
 		DrowaR1 = new Modchu_ModelRenderer(this, 46, 25);
 		DrowaR1.addBox(-2F, -0.0F, -2F, 3, 2, 4, f-0.1F);
@@ -248,7 +255,7 @@ public class MultiModel_ChibiNeko extends MultiModel_SR2 {
 
 		Band1 = new Modchu_ModelRenderer(this, 0, 56, Skirt);
 		Band1.addBoxLM(-3F, 0F, -2F, 6, 4, 4,f);
-		Band1.setRotationPointLM(0F,-3.3F,0F);
+		Band1.setRotationPointLM(0F,-3.5F,0F);
 
 		EarL1 = new Modchu_ModelRenderer(this, 0, 16);
 		EarL1.addPlate(0F, 0F, 0F, 16, 16, 0,f);
@@ -304,7 +311,7 @@ public class MultiModel_ChibiNeko extends MultiModel_SR2 {
 
 		Shippo1 = new Modchu_ModelRenderer(this, 60, 16);
 		Shippo1.addBoxLM(-0.5F, 0F, -0.5F, 1, 2, 1);
-		Shippo1.setRotationPointLM(0F, 2.2F+Scale, 2F-Scale);
+		Shippo1.setRotationPointLM(0F, 3.6F+Scale, 2F-Scale);
 		Shippo1.setRotateAngleDeg(125F, 0F, 0F);
 		bipedBody.addChild(Shippo1);
 
@@ -418,6 +425,7 @@ public class MultiModel_ChibiNeko extends MultiModel_SR2 {
 		Skirt214.setScale(0.22F, 0.22F, 1.0F);
 		Skirt215.setScale(0.22F, 0.22F, 1.0F);
 		Skirt216.setScale(0.22F, 0.22F, 1.0F);
+		pink.setScale(0.75F, 0.75F, 1F);
 
 		actionPartsInit(f, f1);
 	}
@@ -522,7 +530,8 @@ public class MultiModel_ChibiNeko extends MultiModel_SR2 {
 	{
 		super.setLivingAnimationsLM(entityliving, f, f1, f2);
 
-		float f3 = (float)entityliving.ticksExisted + f2 + getEntityIdFactor(entityliving);
+		setCapsValue(caps_visible, pink, (getCapsValueBoolean(caps_isLookSuger)));
+		float f3 = (float)entityliving.ticksExisted + f2 + getCapsValueFloat(caps_entityIdFactor);
 		if (0.0F > mh_sin(f3 * 0.17F) + mh_sin(f3 * 0.17F + 0.02F) + mh_sin(f3 * 0.11F) + mh_sin(f3 * 0.7F) + 3.1F) {
 			EarL1.rotateAngleZ = EarR1.rotateAngleZ = EarLi1.rotateAngleZ = EarRi1.rotateAngleZ = -0.5235988F;
 			EarL2.rotateAngleZ = EarR2.rotateAngleZ = EarLi2.rotateAngleZ = EarRi2.rotateAngleZ = 0.5235988F;
@@ -538,16 +547,18 @@ public class MultiModel_ChibiNeko extends MultiModel_SR2 {
 			EarR1.rotateAngleY = EarRi1.rotateAngleY = 1.745329F;
 			EarR2.rotateAngleY = EarRi2.rotateAngleY = -1.396263F;
 		}
-
-		IdOffset = entityliving.entityId;
 	}
 
 	@Override
 	public void setRotationAnglesLM(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
 
-		Ahoge.rotateAngleY = MathHelper.cos(f2 * 0.2F + MathHelper.cos(f2 * 0.05F + (float)IdOffset) * 1.0F) * 0.2F;
-		Ahoge.rotateAngleX = 2.9F;
+		float t = f2;
+		float idFactor = getCapsValueFloat(caps_entityIdFactor);
+		if(getCapsValueBoolean(caps_isLookSuger)) t *= 2F;
+		Ahoge.rotateAngleY = MathHelper.cos(t * 0.2F + MathHelper.cos(t * 0.05F + idFactor) * 1.0F) * 0.2F;
+		Ahoge.rotateAngleX = MathHelper.cos(t * 0.02F + MathHelper.cos(t*0.05F + idFactor) * 1.0F) * 0.0015F;
+		Ahoge.rotateAngleZ = 0.02F;
 		bipedHead.rotationPointZ = 0.0F;
 		bipedRightArm.rotationPointY = -4.5F + 4*Scale;
 		bipedLeftArm.rotationPointY = -4.5F + 4*Scale;
@@ -556,24 +567,24 @@ public class MultiModel_ChibiNeko extends MultiModel_SR2 {
 		DrowaL2.rotationPointY = -2.0F;
 		DrowaL2.rotationPointZ = 0.0F;
 
-		if(bipedHead.rotateAngleX>convertDegtoRad(10F))
-			Tail2.rotateAngleX=Tail3.rotateAngleX=Tail4.rotateAngleX=Tail5.rotateAngleX=Tail6.rotateAngleX=-convertDegtoRad(10F);
+		if(bipedHead.rotateAngleX>getCapsValueFloat(caps_convertDegtoRad, 10F))
+			Tail2.rotateAngleX = Tail3.rotateAngleX = Tail4.rotateAngleX = Tail5.rotateAngleX = Tail6.rotateAngleX = -getCapsValueFloat(caps_convertDegtoRad, 10F);
 		else
-			Tail2.rotateAngleX=Tail3.rotateAngleX=Tail4.rotateAngleX=Tail5.rotateAngleX=Tail6.rotateAngleX=-bipedHead.rotateAngleX;//+bipedBody.rotateAngleX);
-		Shippo1.rotateAngleX = 2.181662F + 0.025F * MathHelper.sin(-f2 * 0.6F + (float)IdOffset);
-		Shippo2.rotateAngleX=20F/180F*(float)Math.PI;
-		Shippo3.rotateAngleX=10F/180F*(float)Math.PI;
-		Shippo4.rotateAngleX=5F/180F*(float)Math.PI;
-		Shippo5.rotateAngleX=-5F/180F*(float)Math.PI;
-		Shippo6.rotateAngleX=-15F/180F*(float)Math.PI;
-		Shippo1.rotateAngleY = 0.2F * MathHelper.sin(f2 * 0.3F + (float)IdOffset);
-		Shippo2.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.3F + 1E-005F + (float)IdOffset);
-		Shippo3.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.3F + 2E-005F + (float)IdOffset);
-		Shippo4.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.3F + 3E-005F + (float)IdOffset);
-		Shippo5.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.3F + 4E-005F + (float)IdOffset);
-		Shippo6.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.3F + 5E-005F + (float)IdOffset);
+			Tail2.rotateAngleX = Tail3.rotateAngleX = Tail4.rotateAngleX = Tail5.rotateAngleX = Tail6.rotateAngleX = -bipedHead.rotateAngleX;//+bipedBody.rotateAngleX);
+		Shippo1.rotateAngleX = 125F / 180F * (float)Math.PI + 0.025F * MathHelper.sin(-t * 0.6F + idFactor);
+		Shippo2.rotateAngleX = 20F / 180F*(float)Math.PI;
+		Shippo3.rotateAngleX = 10F / 180F*(float)Math.PI;
+		Shippo4.rotateAngleX = 5F / 180F*(float)Math.PI;
+		Shippo5.rotateAngleX = -5F / 180F*(float)Math.PI;
+		Shippo6.rotateAngleX = -15F / 180F*(float)Math.PI;
+		Shippo1.rotateAngleY = 0.2F * MathHelper.sin(t*0.3F+idFactor);
+		Shippo2.rotateAngleZ = 0.2F * MathHelper.sin(-t*0.3F+0.000005F+idFactor);
+		Shippo3.rotateAngleZ = 0.2F * MathHelper.sin(-t*0.3F+0.00001F+idFactor);
+		Shippo4.rotateAngleZ = 0.2F * MathHelper.sin(-t*0.3F+0.000015F+idFactor);
+		Shippo5.rotateAngleZ = 0.2F * MathHelper.sin(-t*0.3F+0.00002F+idFactor);
+		Shippo6.rotateAngleZ = 0.2F * MathHelper.sin(-t*0.3F+0.000025F+idFactor);
 
-		if (getOnGround() > -9990F && !getaimedBow())
+		if (getCapsValueFloat(caps_onGround) > -9990F && !getCapsValueBoolean(caps_aimedBow))
 		{
 			bipedRightArm.rotationPointZ = MathHelper.sin(bipedBody.rotateAngleY) * 4F;
 			bipedRightArm.rotationPointX = -MathHelper.cos(bipedBody.rotateAngleY) * 4F + 1.0F+2.0F*Scale;
@@ -581,20 +592,20 @@ public class MultiModel_ChibiNeko extends MultiModel_SR2 {
 			bipedLeftArm.rotationPointX = MathHelper.cos(bipedBody.rotateAngleY) * 4F - 1.0F-2.0F*Scale;
 		}
 
-		if(getIsRiding())
+		if(getCapsValueBoolean(caps_getIsRiding))
 		{
-			Shippo1.rotateAngleX = 2.181662F + 0.025F * MathHelper.sin(-f2 * 0.4F + (float)IdOffset);
-			Shippo1.rotateAngleY = 0.2F * MathHelper.sin(f2 * 0.2F + (float)IdOffset);
-			Shippo2.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.2F + 0.0002F + (float)IdOffset);
-			Shippo3.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.2F + 0.0004F + (float)IdOffset);
-			Shippo4.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.2F + 0.0006F + (float)IdOffset);
-			Shippo5.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.2F + 0.0008F + (float)IdOffset);
-			Shippo6.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.2F + 0.001F + (float)IdOffset);
+			Shippo1.rotateAngleX = 125F / 180F * (float)Math.PI + 0.025F * MathHelper.sin(-t * 0.4F + idFactor);
+			Shippo1.rotateAngleY = 0.2F * MathHelper.sin(t * 0.2F + idFactor);
+			Shippo2.rotateAngleZ = 0.2F * MathHelper.sin(-t * 0.2F + 0.0002F + idFactor);
+			Shippo3.rotateAngleZ = 0.2F * MathHelper.sin(-t * 0.2F + 0.0004F + idFactor);
+			Shippo4.rotateAngleZ = 0.2F * MathHelper.sin(-t * 0.2F + 0.0006F + idFactor);
+			Shippo5.rotateAngleZ = 0.2F * MathHelper.sin(-t * 0.2F + 0.0008F + idFactor);
+			Shippo6.rotateAngleZ = 0.2F * MathHelper.sin(-t * 0.2F + 0.001F + idFactor);
 		}
-		if (getaimedBow()) {
-			Shippo1.rotateAngleX=145F/180F*(float)Math.PI;
-			Shippo2.rotateAngleX=Shippo3.rotateAngleX=Shippo4.rotateAngleX=Shippo5.rotateAngleX=Shippo6.rotateAngleX=0;
-			Shippo1.rotateAngleY=Shippo2.rotateAngleZ=Shippo3.rotateAngleZ=Shippo4.rotateAngleZ=Shippo5.rotateAngleZ=Shippo6.rotateAngleZ=0;
+		if (getCapsValueBoolean(caps_aimedBow)) {
+			Shippo1.rotateAngleX = 145F / 180F * (float)Math.PI;
+			Shippo2.rotateAngleX = Shippo3.rotateAngleX = Shippo4.rotateAngleX = Shippo5.rotateAngleX = Shippo6.rotateAngleX = 0F;
+			Shippo1.rotateAngleY = Shippo2.rotateAngleZ = Shippo3.rotateAngleZ = Shippo4.rotateAngleZ = Shippo5.rotateAngleZ = Shippo6.rotateAngleZ = 0F;
 		}
 		bipedHead.rotationPointY = 8.0F + 5.0F * Scale;
 		bipedBody.rotationPointY = 12.0F + Scale;
@@ -602,37 +613,38 @@ public class MultiModel_ChibiNeko extends MultiModel_SR2 {
 		bipedLeftLeg.rotationPointY = 3.0F + Scale;
 		Skirt.rotationPointY = 3.0F + 2.0F * Scale;
 		Skirt.rotationPointZ = 0.0F;
-		if(getIsSneak()){
-			Shippo1.rotateAngleX = 2.181662F + 0.025F * MathHelper.sin(-f2 * 0.4F + (float)IdOffset);
-			Shippo1.rotateAngleY = 0.2F * MathHelper.sin(f2 * 0.2F + (float)IdOffset);
-			Shippo2.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.2F + 0.0002F + (float)IdOffset);
-			Shippo3.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.2F + 0.0004F + (float)IdOffset);
-			Shippo4.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.2F + 0.0006F + (float)IdOffset);
-			Shippo5.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.2F + 0.0008F + (float)IdOffset);
-			Shippo6.rotateAngleZ = 0.2F * MathHelper.sin(-f2 * 0.2F + 0.001F + (float)IdOffset);
+		if(getCapsValueBoolean(caps_getIsSneak)){
+			Shippo1.rotateAngleX = 125F / 180F * (float)Math.PI + 0.025F * MathHelper.sin(-t * 0.4F + idFactor);
+			Shippo1.rotateAngleY = 0.2F * MathHelper.sin(t * 0.2F + idFactor);
+			Shippo2.rotateAngleZ = 0.2F * MathHelper.sin(-t * 0.2F + 0.0002F + idFactor);
+			Shippo3.rotateAngleZ = 0.2F * MathHelper.sin(-t * 0.2F + 0.0004F + idFactor);
+			Shippo4.rotateAngleZ = 0.2F * MathHelper.sin(-t * 0.2F + 0.0006F + idFactor);
+			Shippo5.rotateAngleZ = 0.2F * MathHelper.sin(-t * 0.2F + 0.0008F + idFactor);
+			Shippo6.rotateAngleZ = 0.2F * MathHelper.sin(-t * 0.2F + 0.001F + idFactor);
 			bipedHead.rotationPointY = 8.5F + 5.0F * Scale;
 		}
-		if( 0.0F > mh_sin(f2 * 0.17F) + mh_sin(f2 * 0.17F + 0.02F) + mh_sin(f2 * 0.11F) + mh_sin(f2 * 0.7F) + 3.10F) {
-			EarL1.rotateAngleZ=EarR1.rotateAngleZ=EarLi1.rotateAngleZ=EarRi1.rotateAngleZ=-30F/180F*(float)Math.PI;
-			EarL2.rotateAngleZ=EarR2.rotateAngleZ=EarLi2.rotateAngleZ=EarRi2.rotateAngleZ=30F/180F*(float)Math.PI;
-			EarL1.rotateAngleY=EarLi1.rotateAngleY=90F/180F*(float)Math.PI;
-			EarL2.rotateAngleY=EarLi2.rotateAngleY=-90F/180F*(float)Math.PI;
-			EarR1.rotateAngleY=EarRi1.rotateAngleY=90F/180F*(float)Math.PI;
-			EarR2.rotateAngleY=EarRi2.rotateAngleY=-90F/180F*(float)Math.PI;
+		if( 0.0F > mh_sin(t * 0.17F) + mh_sin(t * 0.17F + 0.02F) + mh_sin(t * 0.11F) + mh_sin(t * 0.7F) + 3.10F) {
+			EarL1.rotateAngleZ = EarR1.rotateAngleZ = EarLi1.rotateAngleZ = EarRi1.rotateAngleZ = -30F / 180F * (float)Math.PI;
+			EarL2.rotateAngleZ = EarR2.rotateAngleZ = EarLi2.rotateAngleZ = EarRi2.rotateAngleZ = 30F / 180F * (float)Math.PI;
+			EarL1.rotateAngleY = EarLi1.rotateAngleY = 90F / 180F * (float)Math.PI;
+			EarL2.rotateAngleY = EarLi2.rotateAngleY = -90F / 180F * (float)Math.PI;
+			EarR1.rotateAngleY = EarRi1.rotateAngleY = 90F / 180F * (float)Math.PI;
+			EarR2.rotateAngleY = EarRi2.rotateAngleY = -90F / 180F * (float)Math.PI;
 		} else {
-			EarL1.rotateAngleZ=EarR1.rotateAngleZ=EarLi1.rotateAngleZ=EarRi1.rotateAngleZ=-40F/180F*(float)Math.PI;
-			EarL2.rotateAngleZ=EarR2.rotateAngleZ=EarLi2.rotateAngleZ=EarRi2.rotateAngleZ=40F/180F*(float)Math.PI;
-			EarL1.rotateAngleY=EarLi1.rotateAngleY=80F/180F*(float)Math.PI;
-			EarL2.rotateAngleY=EarLi2.rotateAngleY=-100F/180F*(float)Math.PI;
-			EarR1.rotateAngleY=EarRi1.rotateAngleY=100F/180F*(float)Math.PI;
-			EarR2.rotateAngleY=EarRi2.rotateAngleY=-80F/180F*(float)Math.PI;
+			EarL1.rotateAngleZ = EarR1.rotateAngleZ = EarLi1.rotateAngleZ = EarRi1.rotateAngleZ = -40F / 180F * (float)Math.PI;
+			EarL2.rotateAngleZ = EarR2.rotateAngleZ = EarLi2.rotateAngleZ = EarRi2.rotateAngleZ = 40F / 180F * (float)Math.PI;
+			EarL1.rotateAngleY = EarLi1.rotateAngleY = 80F / 180F * (float)Math.PI;
+			EarL2.rotateAngleY = EarLi2.rotateAngleY = -100F / 180F * (float)Math.PI;
+			EarR1.rotateAngleY = EarRi1.rotateAngleY = 100F / 180F * (float)Math.PI;
+			EarR2.rotateAngleY = EarRi2.rotateAngleY = -80F / 180F * (float)Math.PI;
 		}
-		skirtFloats(f, f1, f2, f3, f4, f5, entity);
+		skirtFloats(f, f1, t, f3, f4, f5, entity);
 	}
 
 	@Override
 	public void skirtFloats(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		if (!getSkirtFloats()) return;
+		if (!getCapsValueBoolean(caps_skirtFloats)) return;
+    	float motionY = getCapsValueFloat(caps_motionY);
 		Skirt21.setRotateAngleDeg(-118F, 113F, 47F);
 		Skirt22.setRotateAngleDeg(-65F, 113F, 47F);
 		Skirt23.setRotateAngleDeg(-122F, 158F, 47F);
