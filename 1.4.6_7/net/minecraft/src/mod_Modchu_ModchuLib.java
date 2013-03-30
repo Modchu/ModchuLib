@@ -27,6 +27,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static boolean isBTW = false;
 	public static boolean isSSP = false;
 	public static boolean newRelease = false;
+	public static boolean oldRenderItems = false;
 	public static mod_Modchu_ModchuLib mod_modchu_modchulib;
 	public static Class MMM_TextureManager;
 	public static Class MMM_FileManager;
@@ -49,6 +50,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	private boolean isModchu;
 	public final String minecraftVersion;
 	public static String newVersion = "";
+	public static String packageName;
 	public static int modchuLibVersion;
 	private static final File cfgdir = new File(Minecraft.getMinecraftDir(), "/config/");
 	private static File mainCfgfile = new File(cfgdir, ("Modchu_ModchuLib.cfg"));
@@ -58,6 +60,11 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public mod_Modchu_ModchuLib()
 	{
 		// b181deleteload();
+		if (getVersion().startsWith("1.5.1")) {
+			minecraftVersion = "1.5.1";
+			modchuLibVersion = 151;
+			return;
+		}
 		if (getVersion().startsWith("1.4.6~7")) {
 			minecraftVersion = "1.4.7";
 			modchuLibVersion = 147;
@@ -159,7 +166,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.4.6~7-1i";
+		return "1.4.6~7-1j";
 	}
 
 	@Override
@@ -255,6 +262,14 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_MinecraftForge Check ok.");
 				Modchu_Debug.Debug("mod_MinecraftForge Check ok.");
 			}
+			else if (name.equals("mod_LMM_littleMaidMob")) {
+				boolean b = false;
+				String s1 = (String) Modchu_Reflect.invokeMethod(mod_LMM_littleMaidMob, "getVersion", mod);
+				if (s1.startsWith("1.4.6")) ;else {
+					s1 = s1.substring(s1.length() - 1);
+					if (Integer.valueOf(s1) < 5) oldRenderItems = b;
+				}
+			}
 		}
 
 		//対応MOD導入チェック class直チェック
@@ -332,7 +347,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				String s[] = {
 						"skirtFloats=false", "skirtFloatsVolume=1.0F", "debugMessage=true", "debugMessagetexture=true", "debugReflectMessage=true",
 						"debugReflectMessageDetail=false", "modchuRemodelingModel=true", "useInvisibilityBody=true", "useInvisibilityArmor=false", "useInvisibilityItem=false",
-						"versionCheck=true"
+						"versionCheck=true",  "debugCustomModelMessage=false"
 				};
 				Modchu_Config.writerConfig(mainCfgfile, s);
 			} else {
@@ -348,15 +363,16 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				useInvisibilityArmor = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityArmor", useInvisibilityArmor)).toString());
 				useInvisibilityItem = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityItem", useInvisibilityItem)).toString());
 				versionCheck = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "versionCheck", versionCheck)).toString());
+				Modchu_Debug.debugCustomModelMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugCustomModelMessage", Modchu_Debug.debugCustomModelMessage)).toString());
 				String k[] = {
 						"skirtFloats", "skirtFloatsVolume", "debugMessage", "debugMessagetexture", "debugReflectMessage",
 						"debugReflectMessageDetail", "modchuRemodelingModel", "useInvisibilityBody", "useInvisibilityArmor", "useInvisibilityItem",
-						"versionCheck"
+						"versionCheck", "debugCustomModelMessage"
 				};
 				String k1[] = {
 						""+skirtFloats, ""+skirtFloatsVolume, ""+Modchu_Debug.debugMessage, ""+Modchu_Debug.debugMessagetexture, ""+Modchu_Reflect.debugReflectMessage,
 						""+Modchu_Reflect.debugReflectMessageDetail, ""+modchuRemodelingModel, ""+useInvisibilityBody, ""+useInvisibilityArmor, ""+useInvisibilityItem,
-						""+versionCheck
+						""+versionCheck, ""+Modchu_Debug.debugCustomModelMessage
 				};
 				if (skirtFloatsVolume < 0.0F) skirtFloatsVolume = 0.0F;
 				if (skirtFloatsVolume > 2.0F) skirtFloatsVolume = 2.0F;
@@ -385,9 +401,20 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	}
 
 	public String getPackage() {
+		if (packageName != null) return packageName;
+		if (isForge) {
+			Class c = Modchu_Reflect.loadClass("net.minecraft.src.mod_PFLM_PlayerFormLittleMaid");
+			if (c != null) {
+				return packageName = "net.minecraft.src";
+			}
+			return packageName;
+		}
 		Package pac = getClass().getPackage();
-		if (pac != null) return pac.getName();
-		return null;
+		if (pac != null) {
+			packageName = pac.getName();
+			return packageName;
+		}
+		return packageName;
 	}
 
     public static String getHashMapKey(HashMap hashMap, int i) {
