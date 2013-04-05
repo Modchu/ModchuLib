@@ -181,22 +181,18 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     	if (mod_Modchu_ModchuLib.skirtFloats) setMotionY(entityliving.motionY + 0.0784000015258789D > 0 ? 0 : (float) ((entityliving.motionY + 0.0784000015258789D)) * mod_Modchu_ModchuLib.skirtFloatsVolume);
 
     	if (modelCaps != null) {
-    		// ↓メソッド作成希望
-    		//modelCaps.setLivingAnimationsBefore(this, entityliving, f, f1, f2);
     		// ↓LMM用 代用
     		if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
     				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entityliving)) {
     			setLivingAnimationsAfter(entityliving, f, f1, f2);
     		} else {
-    			((PFLM_ModelData) modelCaps).setLivingAnimationsBefore(this, entityliving, f, f1, f2);
+    			if (modelCaps instanceof PFLM_ModelData) ((PFLM_ModelData) modelCaps).setLivingAnimationsBefore(this, entityliving, f, f1, f2);
     		}
     	}
 
     	setLivingAnimationsLM(entityliving, f, f1, f2);
 
     	if (modelCaps != null) {
-    		// ↓メソッド作成希望
-    		//modelCaps.setLivingAnimationsAfter(this, entityliving, f, f1, f2);
     		// ↓LMM用 代用
     		if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
     				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entityliving)) {
@@ -216,8 +212,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     	if (entity != null) ;else return;
 
     	if (modelCaps != null) {
-    		// ↓メソッド作成希望
-    		//modelCaps.setRotationAnglesBefore(this, f, f1, f2, f3, f4, f5, entity);
     		if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
     				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entity)) {
     		} else {
@@ -228,8 +222,6 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
     	setRotationAnglesLM(f, f1, f2, f3, f4, f5, entity);
 
     	if (modelCaps != null) {
-    		// ↓メソッド作成希望
-    		//modelCaps.setRotationAnglesAfter(this, f, f1, f2, f3, f4, f5, entity);
     		if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
     				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entity)) {
     		} else {
@@ -1631,17 +1623,15 @@ public abstract class MultiModelBaseBiped extends MMM_ModelBiped implements Modc
 		return 0;
 	}
 
-	private Object getTexture(String s, int i) {
+	private String getTexture(String s, int i) {
 		Object o = null;
 		if (modelCaps != null) {
 			o = modelCaps.getCapsValue(caps_texture, s, i);
-			if (o != null) return o;
-			return (String) Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.MMM_TextureManager, "getTextureName", new Class[]{ String.class, int.class }, null, new Object[]{ s, i });
-		} else {
-			Modchu_Debug.mDebug("getTexture modelCaps == null");
+			if (o != null) return  (String) o;
 		}
 		//Modchu_Debug.mDebug("getTexture o ="+o);
-		return o;
+		o = (String) Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.MMM_TextureManager, "getTextureName", new Class[]{ String.class, int.class }, null, new Object[]{ s, i });
+		return (String) o;
 	}
 
     private float getOnGround()

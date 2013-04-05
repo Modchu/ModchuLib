@@ -614,11 +614,11 @@ public class MultiModel extends MultiModelBaseBiped {
     	if (getCapsValueBoolean(caps_shortcutKeysAction)
     			&& getCapsValueInt(caps_runActionNumber) == 0
     			| getCapsValueInt(caps_runActionNumber) == 1) {
-    		if (modelCaps.getCapsValueInt(caps_dominantArm) == 0) return rightArm;
+    		if (getCapsValueInt(caps_dominantArm) == 0) return rightArm;
     		return leftArm;
     	}
     	else {
-    		if (modelCaps.getCapsValueInt(caps_dominantArm) == 0) return bipedRightArm;
+    		if (getCapsValueInt(caps_dominantArm) == 0) return bipedRightArm;
     		return bipedLeftArm;
     	}
     }

@@ -166,7 +166,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.1-1j";
+		return "1.5.1-2";
 	}
 
 	@Override

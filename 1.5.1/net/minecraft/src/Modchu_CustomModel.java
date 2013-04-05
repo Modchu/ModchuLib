@@ -272,7 +272,8 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
-		if (mainModel != null) mainModel.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		if (mainModel != null) ;else return;
+		mainModel.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		///fieldSync(true, (EntityLiving) entity, f, f1, f2);
 		if (mainModel.getCapsValueBoolean(mainModel.caps_shortcutKeysAction)) {
 			if (baseModel.getCapsValueInt(baseModel.caps_armorType) != 0) mainModel.setCapsValue(mainModel.caps_syncModel, armorSyncBaseModel);
@@ -314,11 +315,12 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	public Object getCapsValue(int pIndex, Object[] pArg) {
-		return baseModel.superGetCapsValue(pIndex, pArg);
+		if (baseModel != null) return baseModel.superGetCapsValue(pIndex, pArg);
+		return null;
 	}
 
 	public boolean setCapsValue(int pIndex, Object[] pArg) {
-		mainModel.setCapsValue(pIndex, pArg);
+		if (mainModel != null) mainModel.setCapsValue(pIndex, pArg);
 		return baseModel.superSetCapsValue(pIndex, pArg);
 	}
 
@@ -577,6 +579,7 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	public void changeModel(EntityLiving entity) {
+		if (mainModel != null) ;else return;
 		changeModelInit = true;
 		colorSetting(entity);
 		Field[] fields = mainModel.getClass().getFields();
@@ -970,18 +973,26 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	private void colorSetting(EntityLiving entity) {
-		if (baseModel.modelCaps != mainModel.modelCaps) {
-			if (baseModel.modelCaps != null) {
-				mainModel.modelCaps = baseModel.modelCaps;
-			} else if (mainModel.modelCaps != null) {
-				baseModel.modelCaps = mainModel.modelCaps;
+		if ((baseModel != null
+				&& baseModel.modelCaps != null)
+				| (mainModel != null
+				&& mainModel.modelCaps != null)) {
+			if (baseModel.modelCaps.equals(mainModel.modelCaps)) {
+				if (baseModel.modelCaps != null) {
+					mainModel.modelCaps = baseModel.modelCaps;
+				} else if (mainModel.modelCaps != null) {
+					baseModel.modelCaps = mainModel.modelCaps;
+				}
 			}
 		}
 		String s1 = null;
-		MultiModelBaseBiped model = mainModel.modelCaps != null ? mainModel : baseModel;
-		if (model.modelCaps != null) ;else {
-			Modchu_Debug.mDebug("Modchu_CustomModel colorSetting model.modelCaps == null !!");
-			return;
+		MultiModelBaseBiped model = mainModel != null && mainModel.modelCaps != null ? mainModel : baseModel;
+		if (model != null
+				&& model.modelCaps != null) ;else {
+			//Modchu_Debug.mDebug("Modchu_CustomModel colorSetting model.modelCaps == null !!");
+			Class c = Modchu_Reflect.loadClass(mod_Modchu_ModchuLib.mod_modchu_modchulib.getClassName("PFLM_GuiModelSelect"));
+			if (c != null
+					&& c.isInstance(Minecraft.getMinecraft().currentScreen)) ;else return;
 		}
 		int color = model.getCapsValueInt(mainModel.caps_maidColor, entity);
 		LinkedList<String> textureList = (LinkedList<String>) model.getCapsValue(model.caps_textureList);
