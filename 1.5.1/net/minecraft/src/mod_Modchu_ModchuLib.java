@@ -166,7 +166,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.1-2";
+		return "1.5.1-2b";
 	}
 
 	@Override
@@ -389,7 +389,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	}
 
 	public boolean isRelease() {
-		return getClass().getPackage() == null;
+		return getPackage() == null;
 	}
 
 	public String getClassName(String s) {
@@ -403,7 +403,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public String getPackage() {
 		if (packageName != null) return packageName;
 		if (isForge) {
-			Class c = Modchu_Reflect.loadClass("net.minecraft.src.mod_PFLM_PlayerFormLittleMaid");
+			Class c = Modchu_Reflect.loadClass("net.minecraft.src.mod_PFLM_PlayerFormLittleMaid", false);
 			if (c != null) {
 				return packageName = "net.minecraft.src";
 			}

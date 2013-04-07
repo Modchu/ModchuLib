@@ -1,9 +1,9 @@
 package net.minecraft.src;
 
+import net.minecraft.client.Minecraft;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
-import net.minecraft.client.Minecraft;
 
 public class Modchu_ItemRendererHD extends MMM_ItemRendererHD {
 
@@ -193,7 +193,7 @@ public class Modchu_ItemRendererHD extends MMM_ItemRendererHD {
     		((RenderPlayer)r).renderFirstPersonArm(mc.thePlayer);
     		return;
     	}
-    	Modchu_Reflect.invokeMethod(RenderPlayer.class, "a", "renderFirstPersonArm", new Class[]{ EntityPlayer.class, int.class }, r, new Object[]{ mc.thePlayer, h });
+    	Modchu_Reflect.invokeMethod(RenderPlayer.class, "func_82441_a", "renderFirstPersonArm", new Class[]{ EntityPlayer.class, int.class }, r, new Object[]{ mc.thePlayer, h });
     	return;
     }
 }
