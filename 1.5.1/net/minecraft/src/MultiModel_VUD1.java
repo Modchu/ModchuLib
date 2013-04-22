@@ -464,7 +464,7 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     	Belt_L.setRotateAngleZ(-((float)Math.PI / 10F));
     	Number = new Modchu_ModelRenderer(this, 16, 32);
     	Number.addPlate(0.0F, -4F, -4F, 8, 8, 1, f - 3.3F);
-    	Number.setRotationPointLM(5.301F, 0.0F, 0.0F);
+    	Number.setRotationPointLM(4.301F, 1.0F, 0.0F);
     	Negi1 = new Modchu_ModelRenderer(this, 60, 23);
     	Negi1.addBoxLM(-0.5F, -4F, -0.5F, 1, 8, 1, f);
     	Negi1.setRotationPointLM(0.0F, 7.0F, 0.0F);
@@ -706,6 +706,8 @@ public class MultiModel_VUD1 extends MultiModel_Aug
     	//Cheek Default off
     	setGuiParts("Cheek", false);
     	//Negi Default off
-    	setGuiParts("Negi", false);
+    	setGuiParts("Negi1", false);
+    	setGuiParts("Negi2", false);
+    	setGuiParts("Negi3", false);
     }
 }

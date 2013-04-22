@@ -73,14 +73,17 @@ public class MultiModel_Yukari extends MultiModel_Aug
     public Modchu_ModelRenderer Incom_1;
     public Modchu_ModelRenderer Incom_2;
     public Modchu_ModelRenderer Incom_3;
+    public Modchu_ModelRenderer Shaggy_B1;
     public Modchu_ModelRenderer Shaggy_B2;
     public Modchu_ModelRenderer Shaggy_B3;
     public Modchu_ModelRenderer Shaggy_B4;
     public Modchu_ModelRenderer Shaggy_B5;
+    public Modchu_ModelRenderer Shaggy_R1;
     public Modchu_ModelRenderer Shaggy_R2;
     public Modchu_ModelRenderer Shaggy_R3;
     public Modchu_ModelRenderer Shaggy_R4;
     public Modchu_ModelRenderer Shaggy_R5;
+    public Modchu_ModelRenderer Shaggy_L1;
     public Modchu_ModelRenderer Shaggy_L2;
     public Modchu_ModelRenderer Shaggy_L3;
     public Modchu_ModelRenderer Shaggy_L4;
@@ -400,10 +403,18 @@ public class MultiModel_Yukari extends MultiModel_Aug
     	Incom_3 = new Modchu_ModelRenderer(this, 30, 53);
     	Incom_3.addBox(-1.205F, -0.5F, -0.5F, 1, 1, 1, f - 0.295F);
     	Incom_3.setRotationPoint(0.0F, 0.0F, 0.0F);
+
+    	//不要パーツ（削除するとエラー）
     	shaggyB = new Modchu_ModelRenderer(this, 32, 0);
     	shaggyB.addPlate(-3.5F, 0.0F, 0.0F, 7, 2, 4, f);
     	shaggyB.setRotationPoint(0.0F, -8.0F, 4F);
     	shaggyB.setRotateAngleX(0.1745292F);
+    	//ここまで
+
+		Shaggy_B1 = new Modchu_ModelRenderer(this, 32, 0);
+		Shaggy_B1.addPlate(-3.5F, 0.0F, 0.0F, 7, 2, 4, f);
+		Shaggy_B1.setRotationPoint(0.0F, -8.0F, 4.0F);
+		Shaggy_B1.setRotateAngleX(10F / 180F * 3.141526F);
     	Shaggy_B2 = new Modchu_ModelRenderer(this, 32, 2);
     	Shaggy_B2.addPlate(-3.5F, 0.0F, 0.0F, 7, 2, 4, f);
     	Shaggy_B2.setRotationPoint(0.0F, -6.0F, 4F);
@@ -418,12 +429,20 @@ public class MultiModel_Yukari extends MultiModel_Aug
     	Shaggy_B4.setRotateAngleX(0.2617939F);
     	Shaggy_B5 = new Modchu_ModelRenderer(this, 32, 7);
     	Shaggy_B5.addPlate(-4F, 0.0F, 0.0F, 8, 1, 4, f);
-    	Shaggy_B5.setRotationPoint(0.0F, -8.0F, 4F);
+    	Shaggy_B5.setRotationPoint(0.0F, -1.0F, 4F);
     	Shaggy_B5.setRotateAngleX(0.2617939F);
+
+    	//不要パーツ（削除するとエラー）
     	shaggyR = new Modchu_ModelRenderer(this, 40, 0);
     	shaggyR.addPlate(0.0F, 0.0F, -4F, 8, 2, 5, f);
     	shaggyR.setRotationPoint(-4F, -8.0F, 0.0F);
     	shaggyR.setRotateAngleZ(0.1745292F);
+    	//ここまで
+
+		Shaggy_R1 = new Modchu_ModelRenderer(this, 40, 0);
+		Shaggy_R1.addPlate(0.0F, 0.0F, -4.0F, 8, 2, 5, f);
+		Shaggy_R1.setRotationPoint(-4.0F, -8.0F, 0.0F);
+		Shaggy_R1.setRotateAngleZ(10F / 180F * 3.141526F);
     	Shaggy_R2 = new Modchu_ModelRenderer(this, 40, 2);
     	Shaggy_R2.addPlate(0.0F, 0.0F, -4F, 8, 2, 5, f);
     	Shaggy_R2.setRotationPoint(-4F, -6.0F, 0.0F);
@@ -438,12 +457,20 @@ public class MultiModel_Yukari extends MultiModel_Aug
     	Shaggy_R4.setRotateAngleZ(0.2617939F);
     	Shaggy_R5 = new Modchu_ModelRenderer(this, 40, 7);
     	Shaggy_R5.addPlate(0.0F, 0.0F, -4F, 8, 1, 5, f);
-    	Shaggy_R5.setRotationPoint(-4F, -8.0F, 0.0F);
+    	Shaggy_R5.setRotationPoint(-4F, -1.0F, 0.0F);
     	Shaggy_R5.setRotateAngleZ(0.2617939F);
+
+    	//不要パーツ（削除するとエラー）
     	shaggyL = new Modchu_ModelRenderer(this, 24, 0);
     	shaggyL.addPlate(0.0F, 0.0F, -4F, 8, 2, 1, f);
     	shaggyL.setRotationPoint(4F, -8.0F, 0.0F);
     	shaggyL.setRotateAngleZ(-0.1745292F);
+    	//ここまで
+
+		Shaggy_L1 = new Modchu_ModelRenderer(this, 24, 0);
+		Shaggy_L1.addPlate(0.0F, 0.0F, -4.0F, 8, 2, 1, f);
+		Shaggy_L1.setRotationPoint(4.0F, -8.0F, 0.0F);
+		Shaggy_L1.setRotateAngleZ(-10F / 180F * 3.141526F);
     	Shaggy_L2 = new Modchu_ModelRenderer(this, 24, 2);
     	Shaggy_L2.addPlate(0.0F, 0.0F, -4F, 8, 2, 1, f);
     	Shaggy_L2.setRotationPoint(4F, -6.0F, 0.0F);
@@ -458,7 +485,7 @@ public class MultiModel_Yukari extends MultiModel_Aug
     	Shaggy_L4.setRotateAngleZ(-0.2617939F);
     	Shaggy_L5 = new Modchu_ModelRenderer(this, 24, 7);
     	Shaggy_L5.addPlate(0.0F, 0.0F, -4F, 8, 1, 1, f);
-    	Shaggy_L5.setRotationPoint(4F, -8.0F, 0.0F);
+    	Shaggy_L5.setRotationPoint(4F, -1.0F, 0.0F);
     	Shaggy_L5.setRotateAngleZ(-0.2617939F);
     	sensor1 = new Modchu_ModelRenderer(this, 0, 0);
     	sensor1.addPlate(-8F, -4F, 0.0F, 8, 4, 0, f);
@@ -489,7 +516,7 @@ public class MultiModel_Yukari extends MultiModel_Aug
     	Head_F.setRotationPoint(3.25F, -5.25F, -4.002F);
     	Body_B = new Modchu_ModelRenderer(this, 24, 16);
     	Body_B.addPlate(-4F, -4F, 3F, 8, 8, 4, f - 3F);
-    	Body_B.setRotationPoint(0.0F, 3.0F, 2.001F);
+    	Body_B.setRotationPoint(0.0F, 0.0F, 2.001F);
     	Breast = new Modchu_ModelRenderer(this, 56, 16);
     	Breast.addBox(0.0F, -2.5F, 0.0F, 2, 5, 2, f);
     	Breast.setRotationPoint(0.0F, -3.0F, -2F);
@@ -604,17 +631,20 @@ public class MultiModel_Yukari extends MultiModel_Aug
     	bipedHead.addChild(Incom_1);
     	bipedHead.addChild(Incom_2);
     	Incom_2.addChild(Incom_3);
-    	bipedHead.addChild(shaggyB);
+    	//bipedHead.addChild(shaggyB);
+    	bipedHead.addChild(Shaggy_B1);
     	bipedHead.addChild(Shaggy_B2);
     	bipedHead.addChild(Shaggy_B3);
     	bipedHead.addChild(Shaggy_B4);
     	bipedHead.addChild(Shaggy_B5);
-    	bipedHead.addChild(shaggyR);
+    	//bipedHead.addChild(shaggyR);
+    	bipedHead.addChild(Shaggy_R1);
     	bipedHead.addChild(Shaggy_R2);
     	bipedHead.addChild(Shaggy_R3);
     	bipedHead.addChild(Shaggy_R4);
     	bipedHead.addChild(Shaggy_R5);
-    	bipedHead.addChild(shaggyL);
+    	//bipedHead.addChild(shaggyL);
+    	bipedHead.addChild(Shaggy_L1);
     	bipedHead.addChild(Shaggy_L2);
     	bipedHead.addChild(Shaggy_L3);
     	bipedHead.addChild(Shaggy_L4);
@@ -828,11 +858,106 @@ public class MultiModel_Yukari extends MultiModel_Aug
     public void setArmorBipedHeadShowModel(boolean b) {
     	bipedHead.isHidden = !b;
     	super.setArmorBipedHeadShowModel(b);
+    	((Modchu_ModelRenderer) RabbitEar_R1).setVisible(b);
+    	((Modchu_ModelRenderer) RabbitEar_R2).setVisible(b);
+    	((Modchu_ModelRenderer) RabbitEar_R3).setVisible(b);
+    	((Modchu_ModelRenderer) RabbitEar_R4).setVisible(b);
+    	((Modchu_ModelRenderer) RabbitEar_L1).setVisible(b);
+    	((Modchu_ModelRenderer) RabbitEar_L2).setVisible(b);
+    	((Modchu_ModelRenderer) RabbitEar_L3).setVisible(b);
+    	((Modchu_ModelRenderer) RabbitEar_L4).setVisible(b);
+    	((Modchu_ModelRenderer) HairOrnament_R).setVisible(b);
+    	((Modchu_ModelRenderer) HairOrnament_L).setVisible(b);
+    	((Modchu_ModelRenderer) PigTail_R1).setVisible(b);
+    	((Modchu_ModelRenderer) PigTail_R2).setVisible(b);
+    	((Modchu_ModelRenderer) PigTail_L1).setVisible(b);
+    	((Modchu_ModelRenderer) PigTail_L2).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_S1).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_S2).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_B1).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_B2).setVisible(b);
+    	((Modchu_ModelRenderer) Incom_1).setVisible(b);
+    	((Modchu_ModelRenderer) Incom_2).setVisible(b);
+    	((Modchu_ModelRenderer) Incom_3).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_B1).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_B2).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_B3).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_B4).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_B5).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_R1).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_R2).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_R3).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_R4).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_R5).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_L1).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_L2).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_L3).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_L4).setVisible(b);
+    	((Modchu_ModelRenderer) Shaggy_L5).setVisible(b);
+    	((Modchu_ModelRenderer) sensor1).setVisible(b);
+    	((Modchu_ModelRenderer) sensor2).setVisible(b);
+    	((Modchu_ModelRenderer) sensor3).setVisible(b);
+    	((Modchu_ModelRenderer) sensor4).setVisible(b);
+    	((Modchu_ModelRenderer) eyeR).setVisible(b);
+    	((Modchu_ModelRenderer) eyeL).setVisible(b);
+    	((Modchu_ModelRenderer) Cheek_R).setVisible(b);
+    	((Modchu_ModelRenderer) Cheek_L).setVisible(b);
+    	((Modchu_ModelRenderer) Head_F).setVisible(b);
     }
 
     @Override
     public void setArmorBipedBodyShowModel(boolean b) {
     	super.setArmorBipedBodyShowModel(b);
+    	((Modchu_ModelRenderer) Arm_RF).setVisible(b);
+    	((Modchu_ModelRenderer) Arm_RB).setVisible(b);
+    	((Modchu_ModelRenderer) Arm_RR).setVisible(b);
+    	((Modchu_ModelRenderer) Arm_RL).setVisible(b);
+    	((Modchu_ModelRenderer) Arm_LF).setVisible(b);
+    	((Modchu_ModelRenderer) Arm_LB).setVisible(b);
+    	((Modchu_ModelRenderer) Arm_LR).setVisible(b);
+    	((Modchu_ModelRenderer) Arm_LL).setVisible(b);
+    	((Modchu_ModelRenderer) Parka_1).setVisible(b);
+    	((Modchu_ModelRenderer) Parka_2).setVisible(b);
+    	((Modchu_ModelRenderer) Parka_F).setVisible(b);
+    	((Modchu_ModelRenderer) Parka_B).setVisible(b);
+    	((Modchu_ModelRenderer) Parka_R).setVisible(b);
+    	((Modchu_ModelRenderer) Parka_L).setVisible(b);
+    	((Modchu_ModelRenderer) RabbitEar_RB1).setVisible(b);
+    	((Modchu_ModelRenderer) RabbitEar_RB2).setVisible(b);
+    	((Modchu_ModelRenderer) RabbitEar_LB1).setVisible(b);
+    	((Modchu_ModelRenderer) RabbitEar_LB2).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_H).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HRF1).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HRF2).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HRF3).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HR1).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HR2).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HLF1).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HLF2).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HLF3).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HL1).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HL2).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HB1).setVisible(b);
+    	((Modchu_ModelRenderer) Accessory_HB2).setVisible(b);
+    	((Modchu_ModelRenderer) ArmAccessory_RF).setVisible(b);
+    	((Modchu_ModelRenderer) ArmAccessory_RB).setVisible(b);
+    	((Modchu_ModelRenderer) ArmAccessory_RR).setVisible(b);
+    	((Modchu_ModelRenderer) ArmAccessory_RL).setVisible(b);
+    	((Modchu_ModelRenderer) ArmAccessory_R).setVisible(b);
+    	((Modchu_ModelRenderer) Belt_R).setVisible(b);
+    	((Modchu_ModelRenderer) Belt_L).setVisible(b);
+    	((Modchu_ModelRenderer) BeltAccessory_L).setVisible(b);
+    	((Modchu_ModelRenderer) Body_B).setVisible(b);
+    	((Modchu_ModelRenderer) Breast).setVisible(b);
+    	((Modchu_ModelRenderer) Breast_C).setVisible(b);
+    	((Modchu_ModelRenderer) Breast_U).setVisible(b);
+    	((Modchu_ModelRenderer) Breast_B).setVisible(b);
+    	((Modchu_ModelRenderer) Breast_R).setVisible(b);
+    	((Modchu_ModelRenderer) Breast_L).setVisible(b);
+    	((Modchu_ModelRenderer) Breast_RU).setVisible(b);
+    	((Modchu_ModelRenderer) Breast_LU).setVisible(b);
+    	((Modchu_ModelRenderer) Breast_RB).setVisible(b);
+    	((Modchu_ModelRenderer) Breast_LB).setVisible(b);
     	Breast_C.rotationPointZ = -2.35F;
     }
 
@@ -846,6 +971,16 @@ public class MultiModel_Yukari extends MultiModel_Aug
     public void setArmorSkirtShowModel(boolean b) {
     	super.setArmorSkirtShowModel(b);
     	Skirt.isHidden = !b;
+    	((Modchu_ModelRenderer) Skirt_R).setVisible(b);
+    	((Modchu_ModelRenderer) Skirt_L).setVisible(b);
+    	((Modchu_ModelRenderer) Skirt_RF).setVisible(b);
+    	((Modchu_ModelRenderer) Skirt_RB).setVisible(b);
+    	((Modchu_ModelRenderer) Skirt_RR).setVisible(b);
+    	((Modchu_ModelRenderer) Skirt_RL).setVisible(b);
+    	((Modchu_ModelRenderer) Skirt_LF).setVisible(b);
+    	((Modchu_ModelRenderer) Skirt_LB).setVisible(b);
+    	((Modchu_ModelRenderer) Skirt_LR).setVisible(b);
+    	((Modchu_ModelRenderer) Skirt_LL).setVisible(b);
     }
 
     @Override
