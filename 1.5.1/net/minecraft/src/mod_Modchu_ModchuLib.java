@@ -55,6 +55,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	private static final File cfgdir = new File(Minecraft.getMinecraftDir(), "/config/");
 	private static File mainCfgfile = new File(cfgdir, ("Modchu_ModchuLib.cfg"));
 	public static boolean isClient = true;
+	private static boolean packageNameNull = false;
 	public static Minecraft mc = Minecraft.getMinecraft();
 
 	public mod_Modchu_ModchuLib()
@@ -166,12 +167,44 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.1-2b";
+		return "1.5.1-2c";
 	}
 
 	@Override
 	public void load() {
 		mod_modchu_modchulib = this;
+		//対応MOD導入チェック class直チェック
+		String className1[] = {
+				"FMLRenderAccessLibrary", "net.minecraft.src.FMLRenderAccessLibrary", "net.minecraft.decoblock.DecoBlock", "net.minecraft.favstar.BlockFav", "EntityPlayerSP2",
+				"net.minecraft.src.EntityPlayerSP2"
+		};
+		String test2 = null;
+		for(int n = 0 ; n < className1.length ; n++){
+			try {
+				test2 = className1[n];
+				test2 = ""+Class.forName(test2);
+				ModLoader.getLogger().fine((new StringBuilder("Modchu_ModchuLib-"+ test2 + " Check ok.")).toString());
+				Modchu_Debug.Debug(test2 + " Check ok.");
+				if(n == 0
+						| n == 1) isForge = true;
+				if(n == 2) isDecoBlock = true;
+				if(n == 3) isFavBlock = true;
+				if(n == 4
+						| n == 5) {
+					try {
+						String s = className1[n];
+						if (s != null) {
+							Object o = Modchu_Reflect.getFieldObject(s, "armor", false);
+							if (o != null) isSSP = true;
+						}
+					} catch(Exception e) {
+					}
+				}
+			} catch (ClassNotFoundException e) {
+			}
+		}
+		getPackageInit();
+		String s;
 		if (Modchu_Debug.debugMessage
 				&& !mod_modchu_modchulib.isRelease()) Modchu_Debug.debugString = new String[10];
 		ModLoader.setInGameHook(this, true, true);
@@ -201,12 +234,6 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		mod_PFLM_PlayerFormLittleMaid = Modchu_Reflect.loadClass(getClassName("mod_PFLM_PlayerFormLittleMaid"), false);
 		if (mod_PFLM_PlayerFormLittleMaid != null) {
 			isPFLM = true;
-			PFLM_Gui = Modchu_Reflect.loadClass(getClassName("PFLM_Gui"));
-			PFLM_GuiModelSelect = Modchu_Reflect.loadClass(getClassName("PFLM_GuiModelSelect"));
-			PFLM_GuiOthersPlayer = Modchu_Reflect.loadClass(getClassName("PFLM_GuiOthersPlayer"));
-			PFLM_GuiOthersPlayerIndividualCustomize = Modchu_Reflect.loadClass(getClassName("PFLM_GuiOthersPlayerIndividualCustomize"));
-			PFLM_EntityPlayerDummy = Modchu_Reflect.loadClass(getClassName("PFLM_EntityPlayerDummy"));
-			PFLM_RenderPlayer = Modchu_Reflect.loadClass(getClassName("PFLM_RenderPlayer"));
 		}
 
 		RendererData = Modchu_Reflect.loadClass("net.smart.render.RendererData", false);
@@ -242,7 +269,17 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		{
 			BaseMod mod = (BaseMod)list.get(i);
 			String name = mod.getClass().getSimpleName();
-			if (name.equals("mod_DecoBlock")) {
+			if (name.equals("mod_PFLM_PlayerFormLittleMaid")) {
+				Modchu_Reflect.invokeMethod(mod.getClass(), "loadInit", mod);
+				Modchu_Reflect.invokeMethod(mod.getClass(), "modsLoadedInit", mod);
+				PFLM_Gui = Modchu_Reflect.loadClass(getClassName("PFLM_Gui"));
+				PFLM_GuiModelSelect = Modchu_Reflect.loadClass(getClassName("PFLM_GuiModelSelect"));
+				PFLM_GuiOthersPlayer = Modchu_Reflect.loadClass(getClassName("PFLM_GuiOthersPlayer"));
+				PFLM_GuiOthersPlayerIndividualCustomize = Modchu_Reflect.loadClass(getClassName("PFLM_GuiOthersPlayerIndividualCustomize"));
+				PFLM_EntityPlayerDummy = Modchu_Reflect.loadClass(getClassName("PFLM_EntityPlayerDummy"));
+				PFLM_RenderPlayer = Modchu_Reflect.loadClass(getClassName("PFLM_RenderPlayer"));
+			}
+			else if (name.equals("mod_DecoBlock")) {
 				isDecoBlock = true;
 				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_DecoBlock Check ok.");
 				Modchu_Debug.Debug("DecoBlock Check ok.");
@@ -271,36 +308,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				}
 			}
 		}
-
-		//対応MOD導入チェック class直チェック
-		String className1[] = {
-				"FMLRenderAccessLibrary", "net.minecraft.decoblock.DecoBlock", "net.minecraft.favstar.BlockFav", "EntityPlayerSP2"
-		};
-		String test2 = null;
-		for(int n = 0 ; n < className1.length ; n++){
-			try {
-				test2 = getClassName(className1[n]);
-				test2 = ""+Class.forName(test2);
-				ModLoader.getLogger().fine((new StringBuilder("Modchu_ModchuLib-"+ test2 + " Check ok.")).toString());
-				Modchu_Debug.Debug(test2 + " Check ok.");
-				if(n == 0) isForge = true;
-				if(n == 1) isDecoBlock = true;
-				if(n == 2) isFavBlock = true;
-				if(n == 3) {
-					try {
-						String s = getClassName("EntityPlayerSP2");
-						if (s != null) {
-							Object o = Modchu_Reflect.getFieldObject(s, "armor", false);
-							if (o != null) isSSP = true;
-						}
-					} catch(Exception e) {
-					}
-				}
-			} catch (ClassNotFoundException e) {
-			}
-		}
-
-		String s = null;
+		String s;
 		if (isDecoBlock) {
 			try {
 				s = "net.minecraft.decoblock.DecoBlock";
@@ -400,20 +408,22 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		return s;
 	}
 
-	public String getPackage() {
-		if (packageName != null) return packageName;
+	public void getPackageInit() {
+		packageName = null;
 		if (isForge) {
 			Class c = Modchu_Reflect.loadClass("net.minecraft.src.mod_PFLM_PlayerFormLittleMaid", false);
 			if (c != null) {
-				return packageName = "net.minecraft.src";
+				packageName = "net.minecraft.src";
 			}
-			return packageName;
+		} else {
+			Package pac = getClass().getPackage();
+			if (pac != null) {
+				packageName = pac.getName();
+			}
 		}
-		Package pac = getClass().getPackage();
-		if (pac != null) {
-			packageName = pac.getName();
-			return packageName;
-		}
+	}
+
+	public String getPackage() {
 		return packageName;
 	}
 
@@ -486,7 +496,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		try {
 			Integer.valueOf(s);
 			return true;
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			return false;
 		}
 	}
