@@ -102,7 +102,7 @@ public class Modchu_ItemRendererHD extends MMM_ItemRendererHD {
         float var16;
         RenderPlayer var18;
 //-@-132
-        if (!var3.getHasActivePotion())
+        if (!var3.isInvisible())
         {
 //@-@132
             GL11.glPushMatrix();
