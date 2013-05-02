@@ -17,7 +17,7 @@ public class Modchu_Debug {
 		else s = "mod_PFLM_PlayerFormLittleMaid";
 		mod_PFLM_PlayerFormLittleMaid = Modchu_Reflect.loadClass(s);
 */
-		isRelease = mod_Modchu_ModchuLib.mod_modchu_modchulib.isRelease();
+		isRelease = mod_Modchu_ModchuLib.isRelease;
 	}
 
 	public static void Debug(String s) {

@@ -56,6 +56,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	private static File mainCfgfile = new File(cfgdir, ("Modchu_ModchuLib.cfg"));
 	public static boolean isClient = true;
 	private static boolean packageNameNull = false;
+	public static boolean isRelease = true;
 	public static Minecraft mc = Minecraft.getMinecraft();
 
 	public mod_Modchu_ModchuLib()
@@ -167,7 +168,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.1-2c";
+		return "1.5.1-2d";
 	}
 
 	@Override
@@ -397,7 +398,15 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	}
 
 	public boolean isRelease() {
-		return getPackage() == null;
+		return isRelease;
+	}
+
+	static{
+		String s = System.getenv("modchu");
+		if (s != null
+				&& s.equals("on")) {
+			isRelease = false;
+		}
 	}
 
 	public String getClassName(String s) {
@@ -409,18 +418,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	}
 
 	public void getPackageInit() {
-		packageName = null;
-		if (isForge) {
-			Class c = Modchu_Reflect.loadClass("net.minecraft.src.mod_PFLM_PlayerFormLittleMaid", false);
-			if (c != null) {
-				packageName = "net.minecraft.src";
-			}
-		} else {
-			Package pac = getClass().getPackage();
-			if (pac != null) {
-				packageName = pac.getName();
-			}
-		}
+		packageName = !isRelease ? "net.minecraft.src" : null;
 	}
 
 	public String getPackage() {
