@@ -16,14 +16,14 @@ public class Modchu_ModelPlateFreeShape extends MMM_ModelBoxBase
 	public final float posZ3;
 	public final float[][] vn;
 
-//-@-151
-	public Modchu_ModelPlateFreeShape(ModelRenderer pMRenderer, Object... pArg) {
+
+	public Modchu_ModelPlateFreeShape(MMM_ModelRenderer pMRenderer, Object... pArg) {
 		this(pMRenderer, (Integer)pArg[0], (Integer)pArg[1],
 				(float[][])pArg[2], (float[][])pArg[3], (float[][])pArg[4],
 				(float[])pArg[5], (Float)pArg[6]);
 	}
-//@-@151
-	private Modchu_ModelPlateFreeShape(ModelRenderer var1, int var2, int var3,
+
+	private Modchu_ModelPlateFreeShape(MMM_ModelRenderer var1, int var2, int var3,
 			float[][] var4, float[][] var5, float[][] var6,
 			float[] var7, float var8)
 	{

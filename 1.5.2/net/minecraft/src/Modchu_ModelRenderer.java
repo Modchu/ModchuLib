@@ -1,4 +1,3 @@
-
 package net.minecraft.src;
 
 //b181deleteimport java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.Random;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
-public class Modchu_ModelRenderer extends ModelRenderer
+public class Modchu_ModelRenderer extends MMM_ModelRenderer
 {
 	public float preRotationPointX;
 	public float preRotationPointY;
@@ -20,46 +19,20 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public float preRotateAngleY;
 	public float preRotateAngleZ;
 	public boolean angleFirst;
-	public ModelRenderer parentModel;
+	public MMM_ModelRenderer parentModel;
 	public String boxName;
 	private static Random rnd = new Random();
 
 	//littleMaidMob共通
-	/**
-	 * (180F / (float)Math.PI)
-	 */
-	public static final float radFactor = 57.295779513082320876798154814105F;
-	/**
-	 * PI / 180
-	 */
-	public static final float degFactor = 0.01745329251994329576923690768489F;
-	public static final int RotXYZ = 0;
-	public static final int RotXZY = 1;
-	public static final int RotYXZ = 2;
-	public static final int RotYZX = 3;
-	public static final int RotZXY = 4;
-	public static final int RotZYX = 5;
-	public static final int ModeEquip = 0x000;
-	public static final int ModeInventory = 0x001;
-	public static final int ModeItemStack = 0x002;
-	public static final int ModeParts = 0x010;
 	private int textureOffsetX;
 	private int textureOffsetY;
 	private boolean compiled = false;
 	private int displayList;
-	private ModelBase baseModel;
-	public int rotatePriority;
-	public ItemStack itemstack;
-	public boolean adjust;
-	public FloatBuffer matrix;
-	public boolean isInvertX;
-	public float scaleX;
-	public float scaleY;
-	public float scaleZ;
-	public ModelRenderer pearent;
+	private MMM_ModelBase baseModel;
+	public Modchu_ModelRenderer pearent;
 
 	//SmartMoving共通
-	protected ModelRenderer base;
+	protected MMM_ModelRenderer base;
 	public static final int XYZ = RotZYX;
 	public static final int XZY = RotYZX;
 	public static final int YXZ = RotZXY;
@@ -95,20 +68,20 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	public static float textureWidth;
 	public static float textureHeight;
 *///b173delete
-	public Modchu_ModelRenderer(ModelBase modelbase, int i, int j)
+	public Modchu_ModelRenderer(MMM_ModelBase modelBase, int i, int j)
 	{
-		super(modelbase, i, j);
-		init(modelbase, i, j, null);
+		super(modelBase, i, j);
+		init(modelBase, i, j, null);
 	}
 //-@-b181
-	public Modchu_ModelRenderer(ModelBase modelbase, int i, int j, String s)
+	public Modchu_ModelRenderer(MMM_ModelBase modelBase, int i, int j, String s)
 	{
-		super(modelbase, s);
-		init(modelbase, i, j, s);
+		super(modelBase, s);
+		init(modelBase, i, j, s);
 	}
 
-	public Modchu_ModelRenderer(ModelBase modelbase, int i, int j, ModelRenderer modelRenderer) {
-		this(modelbase, i, j);
+	public Modchu_ModelRenderer(MMM_ModelBase modelBase, int i, int j, MMM_ModelRenderer modelRenderer) {
+		this(modelBase, i, j);
 		base = modelRenderer;
 		if (base != null)
 		{
@@ -116,15 +89,15 @@ public class Modchu_ModelRenderer extends ModelRenderer
 		}
 	}
 
-	public Modchu_ModelRenderer(ModelBase modelbase) {
-		this(modelbase, 0, 0);
+	public Modchu_ModelRenderer(MMM_ModelBase modelBase) {
+		this(modelBase, 0, 0);
 	}
 
-	public Modchu_ModelRenderer(ModelBase modelbase, String s) {
-		this(modelbase, 64, 32, s);
+	public Modchu_ModelRenderer(MMM_ModelBase modelBase, String s) {
+		this(modelBase, 64, 32, s);
 	}
 
-	public void init(ModelBase modelbase, int i, int j, String s) {
+	public void init(MMM_ModelBase modelBase, int i, int j, String s) {
 		preRotationPointX = 0.0F;
 		preRotationPointY = 0.0F;
 		preRotationPointZ = 0.0F;
@@ -144,7 +117,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 		adjust = true;
 		matrix = BufferUtils.createFloatBuffer(16);
 		isInvertX = false;
-		baseModel = modelbase;
+		baseModel = modelBase;
 		pearent = null;
 		RendererData = mod_Modchu_ModchuLib.RendererData;
 /*//b181delete
@@ -160,31 +133,6 @@ public class Modchu_ModelRenderer extends ModelRenderer
 		textureOffsetX = i;
 		textureOffsetY = j;
 		return this;
-	}
-
-	public Modchu_ModelRenderer setTextureSizeMM(int pWidth, int pHeight) {
-		setTextureSize(pWidth, pHeight);
-		return this;
-	}
-
-	public Modchu_ModelRenderer setRotationPointMM(float f, float f1, float f2) {
-		setRotationPoint(f, f1, f2);
-		return this;
-	}
-
-	protected MMM_ModelBoxBase getModelBoxBase(Class pModelBoxBase, Object ... pArg) {
-		return getModelBoxBase(pModelBoxBase, ModelRenderer.class, (Object[]) pArg);
-	}
-
-	protected MMM_ModelBoxBase getModelBoxBase(Class pModelBoxBase, Class constructorClass, Object ... pArg) {
-		try {
-			Constructor<MMM_ModelBoxBase> lconstructor =
-					pModelBoxBase.getConstructor(constructorClass, Object[].class);
-			return lconstructor.newInstance(this, (Object[]) pArg);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	/**
@@ -213,7 +161,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 //-@-151
 	public Modchu_ModelRenderer addPartsTexture(Class pModelBoxBase, String pName, Object ... pArg) {
 		pName = (new StringBuilder()).append(boxName).append(".").append(pName).toString();
-		addCubeList(getModelBoxBase(pModelBoxBase, (Object[]) pArg).setBoxNameMM(pName));
+		addCubeList(getModelBoxBase(pModelBoxBase, (Object[]) pArg).setBoxName(pName));
 		return this;
 	}
 //@-@151
@@ -237,25 +185,12 @@ public class Modchu_ModelRenderer extends ModelRenderer
 		return lobject;
 	}
 
-	public Modchu_ModelRenderer addPlate(String s, float f, float f1, float f2, int i, int j, int k) {
-		s = (new StringBuilder()).append(boxName).append(".").append(s).toString();
-		TextureOffset textureoffset = baseModel.getTextureOffset(s);
-		setTextureOffset(textureoffset.textureOffsetX, textureoffset.textureOffsetY);
-/*//151delete
-		cubeList.add((new MMM_ModelPlate(this, textureOffsetX, textureOffsetY, f, f1, f2, i, j, k, 0.0F)).func_78244_a(s));
-*///151delete
-//-@-151
-		addParts(Modchu_ModelPlate.class, f, f1, f2, i, j, k, 0.0F);
-//@-@151
-		return this;
-	}
-
 	public Modchu_ModelRenderer addPlate(float f, float f1, float f2, int i, int j, int k) {
 /*//151delete
 		cubeList.add(new MMM_ModelPlate(this, textureOffsetX, textureOffsetY, f, f1, f2, i, j, k, 0.0F));
 *///151delete
 //-@-151
-		addParts(Modchu_ModelPlate.class, f, f1, f2, i, j, k, 0.0F);
+		addParts(MMM_ModelPlate.class, f, f1, f2, i, j, k, 0.0F);
 //@-@151
 		return this;
 	}
@@ -265,7 +200,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 		cubeList.add(new MMM_ModelPlate(this, textureOffsetX, textureOffsetY, f, f1, f2, i, j, k, f3));
 *///151delete
 //-@-151
-		addParts(Modchu_ModelPlate.class, f, f1, f2, i, j, k, f3);
+		addParts(MMM_ModelPlate.class, f, f1, f2, i, j, k, f3);
 //@-@151
 		return this;
 	}
@@ -313,14 +248,9 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	 * 描画用のボックス、子供をクリアする
 	 */
 	public void clearCubeList() {
-		cubeList.clear();
+		if (cubeList != null) cubeList.clear();
 		compiled = false;
-		childModels.clear();
-	}
-
-	public Modchu_ModelRenderer setItemStack(ItemStack pItemStack) {
-		itemstack = pItemStack;
-		return this;
+		if (childModels != null) childModels.clear();
 	}
 
 	public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack, float scale, int addSupport) {
@@ -666,25 +596,18 @@ public class Modchu_ModelRenderer extends ModelRenderer
 		}
 	}
 
-	public void renderObject(float par1, EntityLiving pEntityLiving) {
+	public void renderObject(float par1, boolean b) {
 		// レンダリング、あと子供も
-		if (showModel) {
+		if (b) {
 			GL11.glScalef(scaleX, scaleY, scaleZ);
 			GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, matrix);
-			if (!(baseModel instanceof MMM_ModelMultiBase) || ((MMM_ModelMultiBase)baseModel).isRendering) {
-				GL11.glCallList(displayList);
-			}
+			GL11.glCallList(displayList);
 		}
 		if (childModels != null) {
+			MMM_ModelRenderer modelRenderer;
 			for (int i = 0; i < childModels.size(); i++) {
-				ModelRenderer modelRenderer = (ModelRenderer) childModels.get(i);
-				if (modelRenderer != null) {
-					if (modelRenderer instanceof Modchu_ModelRenderer) {
-						((Modchu_ModelRenderer) modelRenderer).render(par1, pEntityLiving);
-					} else{
-						modelRenderer.render(par1);
-					}
-				}
+				modelRenderer = childModels.get(i);
+				if (modelRenderer != null) modelRenderer.render(par1, b);
 			}
 		}
 	}
@@ -692,44 +615,29 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	@Override
 	public void render(float par1)
 	{
-		render(par1, null);
+		render(par1, showModel);
 	}
 
-	public void render(float par1, EntityLiving pEntityLiving)
+	public void render(float par1, boolean b)
 	{
-		if (isHidden) {
-			return;
-		}
+		if (isHidden) return;
 
 		if (showModel
 				&& !compiled) {
 			compileDisplayList(par1);
 		}
 
-			GL11.glPushMatrix();
-			if (offsetX != 0.0F | offsetY != 0.0F | offsetZ != 0.0F)
-				GL11.glTranslatef(offsetX, offsetY, offsetZ);
+		GL11.glPushMatrix();
+		GL11.glTranslatef(field_82906_o, field_82908_p, field_82907_q);
 
-			if (rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F) {
-				GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
-
-				setRotation();
-				renderObject(par1, pEntityLiving);
-
-			}
-			else if (rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F)
-			{
-				GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
-				renderObject(par1, pEntityLiving);
-				GL11.glTranslatef(-rotationPointX * par1, -rotationPointY * par1, -rotationPointZ * par1);
-			}
-			else
-			{
-				renderObject(par1, pEntityLiving);
-			}
-			if (offsetX != 0.0F | offsetY != 0.0F | offsetZ != 0.0F)
-				GL11.glTranslatef(-offsetX, -offsetY, -offsetZ);
-			GL11.glPopMatrix();
+		if (rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F) {
+			GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
+		}
+		if (rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F) {
+			setRotation();
+		}
+		renderObject(par1, showModel);
+		GL11.glPopMatrix();
 	}
 
 	@Override
@@ -774,12 +682,12 @@ public class Modchu_ModelRenderer extends ModelRenderer
 		}
 	}
 
-	public void postRenderAll(float par1, EntityLiving pEntityLiving) {
+	public void postRenderAll(float par1, boolean b) {
 		if (isHidden) {
 			return;
 		}
 
-		if (showModel
+		if (b
 				&& !compiled) {
 			compileDisplayList(par1);
 		}
@@ -796,7 +704,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
 		if (childModels != null) {
 			for (int i = 0; i < childModels.size(); i++) {
-				((Modchu_ModelRenderer) childModels.get(i)).postRenderAll(par1, pEntityLiving);
+				((Modchu_ModelRenderer) childModels.get(i)).postRenderAll(par1, b);
 			}
 		}
 	}
@@ -804,190 +712,18 @@ public class Modchu_ModelRenderer extends ModelRenderer
 	/**
 	* Compiles a GL display list for this model
 	*/
-	private void compileDisplayList(float par1)
+	public void compileDisplayList(float par1)
 	{
 		displayList = GLAllocation.generateDisplayLists(1);
 		GL11.glNewList(displayList, GL11.GL_COMPILE);
 		Tessellator tessellator = Tessellator.instance;
 		for (int i = 0; i < cubeList.size(); i++)
 		{
-			((ModelBox)cubeList.get(i)).render(tessellator, par1);
+			cubeList.get(i).render(tessellator, par1);
 		}
 
 		GL11.glEndList();
 		compiled = true;
-	}
-
-	/**
-	* パーツ描画時点のマトリクスを設定する。
-	* これ以前に設定されたマトリクスは破棄される。
-	*/
-	public Modchu_ModelRenderer loadMatrix() {
-		GL11.glLoadMatrix(matrix);
-		if (isInvertX) {
-			GL11.glScalef(-1F, 1F, 1F);
-		}
-		return this;
-	}
-
-	public Modchu_ModelRenderer addBoxMM(float pX, float pY, float pZ,
-			int pWidth, int pHeight, int pDepth) {
-		addParts(Modchu_ModelBox.class, ModelRenderer.class, pX, pY, pZ, pWidth, pHeight, pDepth, 0.0F);
-		return this;
-	}
-
-	public Modchu_ModelRenderer addBoxMM(float pX, float pY, float pZ,
-			int pWidth, int pHeight, int pDepth, float f) {
-		addParts(Modchu_ModelBox.class, ModelRenderer.class, pX, pY, pZ, pWidth, pHeight, pDepth, f);
-		return this;
-	}
-
-	@Override
-	public Modchu_ModelRenderer addBox(String s, float par2, float par3, float par4, int par5, int par6, int par7) {
-		s = (new StringBuilder()).append(boxName).append(".").append(s).toString();
-		TextureOffset textureoffset = baseModel.getTextureOffset(s);
-		setTextureOffset(textureoffset.textureOffsetX, textureoffset.textureOffsetY);
-/*//151delete
-		super.addBox(par1Str, par2, par3, par4, par5, par6, par7);
-*///151delete
-//-@-151
-		addBoxMM(par2, par3, par4, par5, par6, par7, 0.0F);
-//@-@151
-		return this;
-	}
-
-	@Override
-	public Modchu_ModelRenderer addBox(float par1, float par2, float par3, int par4, int par5, int par6) {
-/*//151delete
-		super.addBox(par1, par2, par3, par4, par5, par6);
-*///151delete
-//-@-151
-		addBoxMM(par1, par2, par3, par4, par5, par6, 0.0F);
-//@-@151
-		return this;
-	}
-
-	@Override
-	public void addBox(float par1, float par2, float par3, int par4, int par5, int par6, float par7) {
-/*//151delete
-		super.addBox(par1, par2, par3, par4, par5, par6, par7);
-*///151delete
-//-@-151
-		addBoxMM(par1, par2, par3, par4, par5, par6, par7);
-//@-@151
-	}
-
-	public Modchu_ModelRenderer setRotationPointLM(float f, float f1, float f2) {
-		setRotationPoint(f, f1, f2);
-		return this;
-	}
-	public boolean getMirror() {
-		return mirror;
-	}
-
-	public void setMirror(boolean flag) {
-		mirror = flag;
-	}
-
-	public boolean getVisible() {
-		return showModel;
-	}
-
-	public boolean setVisible(boolean flag) {
-		if (showModel != flag) {
-			showModel = flag;
-		}
-		return flag;
-	}
-
-	// Deg付きは角度指定が度数法
-	public float getRotateAngleX() {
-		return rotateAngleX;
-	}
-
-	public float getRotateAngleDegX() {
-		return rotateAngleX * 57.295779513082320876798154814105F;
-	}
-
-	public float setRotateAngleX(float value) {
-		return rotateAngleX = value;
-	}
-
-	public float setRotateAngleDegX(float value) {
-		return rotateAngleX = value * 0.01745329251994329576923690768489F;
-	}
-
-	public float getRotateAngleY() {
-		return rotateAngleY;
-	}
-
-	public float getRotateAngleDegY() {
-		return rotateAngleY * 57.295779513082320876798154814105F;
-	}
-
-	public float setRotateAngleY(float value) {
-		return rotateAngleY = value;
-	}
-
-	public float setRotateAngleDegY(float value) {
-		return rotateAngleY = value * 0.01745329251994329576923690768489F;
-	}
-
-	public float getRotateAngleZ() {
-		return rotateAngleZ;
-	}
-
-	public float getRotateAngleDegZ() {
-		return rotateAngleZ * 57.295779513082320876798154814105F;
-	}
-
-	public float setRotateAngleZ(float value) {
-		return rotateAngleZ = value;
-	}
-
-	public float setRotateAngleDegZ(float value) {
-		return rotateAngleZ = value * 0.01745329251994329576923690768489F;
-	}
-
-	public Modchu_ModelRenderer setRotateAngle(float x, float y, float z) {
-		rotateAngleX = x;
-		rotateAngleY = y;
-		rotateAngleZ = z;
-		return this;
-	}
-
-	public Modchu_ModelRenderer setRotateAngleDeg(float x, float y, float z) {
-		rotateAngleX = x * 0.01745329251994329576923690768489F;
-		rotateAngleY = y * 0.01745329251994329576923690768489F;
-		rotateAngleZ = z * 0.01745329251994329576923690768489F;
-		return this;
-	}
-
-	public float getRotationPointX() {
-		return rotationPointX;
-	}
-
-	public float setRotationPointX(float value) {
-		rotationPointX = value;
-		return rotationPointX;
-	}
-
-	public float getRotationPointY() {
-		return rotationPointY;
-	}
-
-	public float setRotationPointY(float value) {
-		rotationPointY = value;
-		return rotationPointY;
-	}
-
-	public float getRotationPointZ() {
-		return rotationPointZ;
-	}
-
-	public float setRotationPointZ(float value) {
-		rotationPointZ = value;
-		return rotationPointZ;
 	}
 
 	public void preRotateRender(float f) {
@@ -1114,35 +850,6 @@ public class Modchu_ModelRenderer extends ModelRenderer
 		preRotationPointZ = f2;
 	}
 
-	// バージョン変更に依存させないための関数群
-	public void addChildMM(ModelRenderer pModelRenderer) {
-		addChild(pModelRenderer);
-	}
-
-	public Modchu_ModelRenderer setTextureOffsetMM(int pOffsetX, int pOffsetY) {
-		return setTextureOffset(pOffsetX, pOffsetY);
-	}
-
-	public void addBoxLM(float f, float f1, float f2, int i, int j, int k) {
-		addBox(f, f1, f2, i, j, k);
-	}
-
-	public void addBoxLM(float f, float f1, float f2, int i, int j, int k, float f3) {
-		addBox(f, f1, f2, i, j, k, f3);
-	}
-
-	public void renderLM(float f) {
-		render(f);
-	}
-
-	public void renderWithRotationLM(float f) {
-		renderWithRotation(f);
-	}
-
-	public void postRenderLM(float f) {
-		postRender(f);
-	}
-
 	public void individuallyHidePreRotateRender(float par1) {
 		if (!isHidden)
 		{
@@ -1155,7 +862,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 			}
 
 			Iterator var2;
-			ModelRenderer var3;
+			MMM_ModelRenderer var3;
 
 			if (preRotateAngleX == 0.0F && preRotateAngleY == 0.0F && preRotateAngleZ == 0.0F)
 			{
@@ -1169,7 +876,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
 						while (var2.hasNext())
 						{
-							var3 = (ModelRenderer)var2.next();
+							var3 = (MMM_ModelRenderer)var2.next();
 							if (var3.showModel) var3.render(par1);
 						}
 					}
@@ -1186,7 +893,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
 						while (var2.hasNext())
 						{
-							var3 = (ModelRenderer)var2.next();
+							var3 = (MMM_ModelRenderer)var2.next();
 							if (var3.showModel) var3.render(par1);
 						}
 					}
@@ -1222,7 +929,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
 					while (var2.hasNext())
 					{
-						var3 = (ModelRenderer)var2.next();
+						var3 = (MMM_ModelRenderer)var2.next();
 						if (var3.showModel) var3.render(par1);
 					}
 				}
@@ -1233,7 +940,7 @@ public class Modchu_ModelRenderer extends ModelRenderer
 		}
 	}
 
-	public void removeChild(ModelRenderer par1ModelRenderer)
+	public void removeChild(MMM_ModelRenderer par1ModelRenderer)
 	{
 		if (childModels == null)
 		{
@@ -1246,12 +953,6 @@ public class Modchu_ModelRenderer extends ModelRenderer
 
 	public void clearChildModels() {
 		childModels.clear();
-	}
-
-	public void setScale(float f, float f1, float f2) {
-		scaleX = f;
-		scaleY = f1;
-		scaleZ = f2;
 	}
 
 	private Modchu_ModelRenderer makeBall(float var1, float var2, float var3,

@@ -13,7 +13,16 @@ public class Modchu_ModelCapsHelper {
 		return pOwner == null ? null : pOwner.getCapsValue(pOwner.getModelCaps().get(pCapsName), pArg);
 	}
 
-	public static int getCapsValueInt(MultiModelBaseBiped model, int pIndex, Object ...pArg) {
+	public static int getCapsValueInt(MultiModelBaseBiped model, MMM_IModelCaps pOwner, int pIndex, Object ...pArg) {
+		Object o = model.getCapsValue(pOwner, pIndex, pArg);
+		if (o instanceof Boolean) {
+			boolean b = (Boolean) o;
+			return b ? 2 : 1;
+		}
+		return o != null ? (Integer) o : 0;
+	}
+
+	public static int getCapsValueInt(MMM_ModelMultiBase model, int pIndex, Object ...pArg) {
 		Object o = model.getCapsValue(pIndex, pArg);
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
@@ -31,7 +40,12 @@ public class Modchu_ModelCapsHelper {
 		return o != null ? (Integer) o : 0;
 	}
 
-	public static float getCapsValueFloat(MultiModelBaseBiped model, int pIndex, Object ...pArg) {
+	public static float getCapsValueFloat(MultiModelBaseBiped model, MMM_IModelCaps pOwner, int pIndex, Object ...pArg) {
+		Object o = model.getCapsValue(pOwner, pIndex, pArg);
+		return o != null ? (Float) o : 0.0F;
+	}
+
+	public static float getCapsValueFloat(MMM_ModelMultiBase model, int pIndex, Object ...pArg) {
 		Object o = model.getCapsValue(pIndex, pArg);
 		return o != null ? (Float) o : 0.0F;
 	}
@@ -41,7 +55,12 @@ public class Modchu_ModelCapsHelper {
 		return o != null ? (Float) o : 0.0F;
 	}
 
-	public static double getCapsValueDouble(MultiModelBaseBiped model, int pIndex, Object ...pArg) {
+	public static double getCapsValueDouble(MultiModelBaseBiped model, MMM_IModelCaps pOwner, int pIndex, Object ...pArg) {
+		Object o = model.getCapsValue(pOwner, pIndex, pArg);
+		return o != null ? (Double) o : 0.0D;
+	}
+
+	public static double getCapsValueDouble(MMM_ModelMultiBase model, int pIndex, Object ...pArg) {
 		Object o = model.getCapsValue(pIndex, pArg);
 		return o != null ? (Double) o : 0.0D;
 	}
@@ -51,7 +70,12 @@ public class Modchu_ModelCapsHelper {
 		return o != null ? (Double) o : 0.0D;
 	}
 
-	public static boolean getCapsValueBoolean(MultiModelBaseBiped model, int pIndex, Object ...pArg) {
+	public static boolean getCapsValueBoolean(MultiModelBaseBiped model, MMM_IModelCaps pOwner, int pIndex, Object ...pArg) {
+		Object o = model.getCapsValue(pOwner, pIndex, pArg);
+		return o != null ? (Boolean) o : false;
+	}
+
+	public static boolean getCapsValueBoolean(MMM_ModelMultiBase model, int pIndex, Object ...pArg) {
 		Object o = model.getCapsValue(pIndex, pArg);
 		return o != null ? (Boolean) o : false;
 	}
@@ -61,8 +85,8 @@ public class Modchu_ModelCapsHelper {
 		return o != null ? (Boolean) o : false;
 	}
 
-	public static boolean setCapsValue(MultiModelBaseBiped model, String pCapsName, Object... pArg) {
-		return model == null ? false : model.setCapsValue(model.getModelCaps().get(pCapsName), pArg);
+	public static boolean setCapsValue(MultiModelBaseBiped model, MMM_IModelCaps pOwner, String pCapsName, Object... pArg) {
+		return model == null ? false : model.setCapsValue(pOwner, model.getModelCaps().get(pCapsName), pArg);
 	}
 
 	public static boolean setCapsValue(MMM_IModelCaps pOwner, String pCapsName, Object... pArg) {

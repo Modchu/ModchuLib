@@ -92,7 +92,11 @@ public interface Modchu_IModelCaps {
 	public static final int caps_changeColor							= 0x08084;
 	public static final int caps_showPartsSetting					= 0x08085;
 
+	public Object getCapsValue(MultiModelBaseBiped model, MMM_IModelCaps entityCaps, int pIndex, Object ...pArg);
 	public Object getCapsValue(MultiModelBaseBiped model, int pIndex, Object ...pArg);
+	public Object getCapsValue(MMM_IModelCaps entityCaps, int pIndex, Object ...pArg);
 
+	public boolean setCapsValue(MultiModelBaseBiped model, MMM_IModelCaps entityCaps, int pIndex, Object... pArg);
 	public boolean setCapsValue(MultiModelBaseBiped model, int pIndex, Object... pArg);
+	public boolean setCapsValue(MMM_IModelCaps entityCaps, int pIndex, Object... pArg);
 }
