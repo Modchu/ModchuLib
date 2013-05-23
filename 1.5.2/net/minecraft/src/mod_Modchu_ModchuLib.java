@@ -588,7 +588,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	}
 
 	public static Object getTextureBox(String s) {
-		if (s.equals("default")) s = "default_Orign";
+		if (s.indexOf("_") < 0) s = s+"_Orign";
 		return Modchu_Reflect.invokeMethod(MMM_TextureManager, "getTextureBox", new Class[]{ String.class }, null, new Object[]{ s });
 	}
 

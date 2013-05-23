@@ -29,9 +29,9 @@ public class Modchu_CustomModel extends ModelBase {
 	public String[] partAddChildName;
 	public int[] partsTextureWidth;
 	public int[] partsTextureHeight;
-	public int[] partsTextureOffsetX;
-	public int[] partsTextureOffsetY;
 	public int[] partsBoxNumber;
+	public int[][] partsTextureOffsetX;
+	public int[][] partsTextureOffsetY;
 	public int[][] partsBoxX;
 	public int[][] partsBoxY;
 	public int[][] partsBoxZ;
@@ -59,6 +59,7 @@ public class Modchu_CustomModel extends ModelBase {
 	public static final byte ear = 3;
 	public static final byte tail = 4;
 	public static final int maxTypeMode = 5;
+	public static final int maxboxType = 3;
 	public HashMap<Integer, String> partsTextureNameMap = new HashMap();
 	public LinkedList<String> textureList = new LinkedList<String>();
 
@@ -170,8 +171,6 @@ public class Modchu_CustomModel extends ModelBase {
 			partAddChildName[j] = (String) temp[2][i1];
 			partsTextureWidth[j] = (Integer) temp[3][i1];
 			partsTextureHeight[j] = (Integer) temp[4][i1];
-			partsTextureOffsetX[j] = (Integer) temp[5][i1];
-			partsTextureOffsetY[j] = (Integer) temp[6][i1];
 			partsBoxNumber[j] = (Integer) temp[7][i1];
 			partsRotationPointX[j] = (Float) temp[8][i1];
 			partsRotationPointY[j] = (Float) temp[9][i1];
@@ -186,14 +185,16 @@ public class Modchu_CustomModel extends ModelBase {
 			if (partsBoxNumberMax > 0) {
 				for(int i2 = 0; i2 < partsBoxNumberMax; i2++) {
 					boxType[j][i2] = (Byte) tempBox[0][i1][i2];
-					partsBoxInitPointX[j][i2] = (Float) tempBox[1][i1][i2];
-					partsBoxInitPointY[j][i2] = (Float) tempBox[2][i1][i2];
-					partsBoxInitPointZ[j][i2] = (Float) tempBox[3][i1][i2];
-					partsBoxX[j][i2] = (Integer) tempBox[4][i1][i2];
-					partsBoxY[j][i2] = (Integer) tempBox[5][i1][i2];
-					partsBoxZ[j][i2] = (Integer) tempBox[6][i1][i2];
-					partsScaleFactor[j][i2] = (Float) tempBox[7][i1][i2];
-					partsScaleCorrection[j][i2] = (Float) tempBox[8][i1][i2];
+					partsTextureOffsetX[j][i2] = (Integer) tempBox[1][i1][i2];
+					partsTextureOffsetY[j][i2] = (Integer) tempBox[2][i1][i2];
+					partsBoxInitPointX[j][i2] = (Float) tempBox[3][i1][i2];
+					partsBoxInitPointY[j][i2] = (Float) tempBox[4][i1][i2];
+					partsBoxInitPointZ[j][i2] = (Float) tempBox[5][i1][i2];
+					partsBoxX[j][i2] = (Integer) tempBox[6][i1][i2];
+					partsBoxY[j][i2] = (Integer) tempBox[7][i1][i2];
+					partsBoxZ[j][i2] = (Integer) tempBox[8][i1][i2];
+					partsScaleFactor[j][i2] = (Float) tempBox[9][i1][i2];
+					partsScaleCorrection[j][i2] = (Float) tempBox[10][i1][i2];
 				}
 			}
 			j++;
@@ -242,32 +243,32 @@ public class Modchu_CustomModel extends ModelBase {
 			partAddChildName[i1] = (String) temp[2][i1];
 			partsTextureWidth[i1] = (Integer) temp[3][i1];
 			partsTextureHeight[i1] = (Integer) temp[4][i1];
-			partsTextureOffsetX[i1] = (Integer) temp[5][i1];
-			partsTextureOffsetY[i1] = (Integer) temp[6][i1];
-			if (i != i1) partsBoxNumber[i1] = (Integer) temp[7][i1];
-			partsRotationPointX[i1] = (Float) temp[8][i1];
-			partsRotationPointY[i1] = (Float) temp[9][i1];
-			partsRotationPointZ[i1] = (Float) temp[10][i1];
-			partsRotateAngleX[i1] = (Float) temp[11][i1];
-			partsRotateAngleY[i1] = (Float) temp[12][i1];
-			partsRotateAngleZ[i1] = (Float) temp[13][i1];
-			partsType[i1] = (Byte) temp[14][i1];
-			partsTextureColor[i1] = (Byte) temp[15][i1];
-			partsTypeFactor[i1] = (Float) temp[16][i1];
-			partsTypeCorrection[i1] = (Float) temp[17][i1];
+			if (i != i1) partsBoxNumber[i1] = (Integer) temp[5][i1];
+			partsRotationPointX[i1] = (Float) temp[6][i1];
+			partsRotationPointY[i1] = (Float) temp[7][i1];
+			partsRotationPointZ[i1] = (Float) temp[8][i1];
+			partsRotateAngleX[i1] = (Float) temp[9][i1];
+			partsRotateAngleY[i1] = (Float) temp[10][i1];
+			partsRotateAngleZ[i1] = (Float) temp[11][i1];
+			partsType[i1] = (Byte) temp[12][i1];
+			partsTextureColor[i1] = (Byte) temp[13][i1];
+			partsTypeFactor[i1] = (Float) temp[14][i1];
+			partsTypeCorrection[i1] = (Float) temp[15][i1];
 			j = 0;
 			for(int i3 = 0; i3 < partsBoxNumber[i1]; i3++) {
 				if (i1 == i
 						&& i3 == i2) continue;
 				boxType[i1][j] = (Byte) tempBox[0][i1][i3];
-				partsBoxInitPointX[i1][j] = (Float) tempBox[1][i1][i3];
-				partsBoxInitPointY[i1][j] = (Float) tempBox[2][i1][i3];
-				partsBoxInitPointZ[i1][j] = (Float) tempBox[3][i1][i3];
-				partsBoxX[i1][j] = (Integer) tempBox[4][i1][i3];
-				partsBoxY[i1][j] = (Integer) tempBox[5][i1][i3];
-				partsBoxZ[i1][j] = (Integer) tempBox[6][i1][i3];
-				partsScaleFactor[i1][j] = (Float) tempBox[7][i1][i3];
-				partsScaleCorrection[i1][j] = (Float) tempBox[8][i1][i3];
+				partsTextureOffsetX[i1][j] = (Integer) tempBox[1][i1][i3];
+				partsTextureOffsetY[i1][j] = (Integer) tempBox[2][i1][i3];
+				partsBoxInitPointX[i1][j] = (Float) tempBox[3][i1][i3];
+				partsBoxInitPointY[i1][j] = (Float) tempBox[4][i1][i3];
+				partsBoxInitPointZ[i1][j] = (Float) tempBox[5][i1][i3];
+				partsBoxX[i1][j] = (Integer) tempBox[6][i1][i3];
+				partsBoxY[i1][j] = (Integer) tempBox[7][i1][i3];
+				partsBoxZ[i1][j] = (Integer) tempBox[8][i1][i3];
+				partsScaleFactor[i1][j] = (Float) tempBox[9][i1][i3];
+				partsScaleCorrection[i1][j] = (Float) tempBox[10][i1][i3];
 				j++;
 			}
 		}
@@ -296,19 +297,17 @@ public class Modchu_CustomModel extends ModelBase {
 			partAddChildName[i1] = (String) temp[2][i1];
 			partsTextureWidth[i1] = (Integer) temp[3][i1];
 			partsTextureHeight[i1] = (Integer) temp[4][i1];
-			partsTextureOffsetX[i1] = (Integer) temp[5][i1];
-			partsTextureOffsetY[i1] = (Integer) temp[6][i1];
-			if (i != i1) partsBoxNumber[i1] = (Integer) temp[7][i1];
-			partsRotationPointX[i1] = (Float) temp[8][i1];
-			partsRotationPointY[i1] = (Float) temp[9][i1];
-			partsRotationPointZ[i1] = (Float) temp[10][i1];
-			partsRotateAngleX[i1] = (Float) temp[11][i1];
-			partsRotateAngleY[i1] = (Float) temp[12][i1];
-			partsRotateAngleZ[i1] = (Float) temp[13][i1];
-			partsType[i1] = (Byte) temp[14][i1];
-			partsTextureColor[i1] = (Byte) temp[15][i1];
-			partsTypeFactor[i1] = (Float) temp[16][i1];
-			partsTypeCorrection[i1] = (Float) temp[17][i1];
+			if (i != i1) partsBoxNumber[i1] = (Integer) temp[5][i1];
+			partsRotationPointX[i1] = (Float) temp[6][i1];
+			partsRotationPointY[i1] = (Float) temp[7][i1];
+			partsRotationPointZ[i1] = (Float) temp[8][i1];
+			partsRotateAngleX[i1] = (Float) temp[9][i1];
+			partsRotateAngleY[i1] = (Float) temp[10][i1];
+			partsRotateAngleZ[i1] = (Float) temp[11][i1];
+			partsType[i1] = (Byte) temp[12][i1];
+			partsTextureColor[i1] = (Byte) temp[13][i1];
+			partsTypeFactor[i1] = (Float) temp[14][i1];
+			partsTypeCorrection[i1] = (Float) temp[15][i1];
 			j = 0;
 			//Modchu_Debug.mDebug("addBox partsBoxNumber["+i1+"]="+partsBoxNumber[i1]);
 			for(int i3 = 0; i3 < partsBoxNumber[i1]; i3++) {
@@ -317,6 +316,8 @@ public class Modchu_CustomModel extends ModelBase {
 						&& i3 == i2) {
 					//Modchu_Debug.mDebug("addBox newadd i="+i+" i2="+i2);
 					boxType[i1][i3] = 0;
+					partsTextureOffsetX[i1][i3] = 0;
+					partsTextureOffsetY[i1][i3] = 0;
 					partsBoxInitPointX[i1][i3] = 0.0F;
 					partsBoxInitPointY[i1][i3] = 0.0F;
 					partsBoxInitPointZ[i1][i3] = 0.0F;
@@ -329,14 +330,16 @@ public class Modchu_CustomModel extends ModelBase {
 				}
 				//Modchu_Debug.mDebug("addBox add else i1="+i1+" i3="+i3);
 				boxType[i1][i3] = (Byte) tempBox[0][i1][j];
-				partsBoxInitPointX[i1][i3] = (Float) tempBox[1][i1][j];
-				partsBoxInitPointY[i1][i3] = (Float) tempBox[2][i1][j];
-				partsBoxInitPointZ[i1][i3] = (Float) tempBox[3][i1][j];
-				partsBoxX[i1][i3] = (Integer) tempBox[4][i1][j];
-				partsBoxY[i1][i3] = (Integer) tempBox[5][i1][j];
-				partsBoxZ[i1][i3] = (Integer) tempBox[6][i1][j];
-				partsScaleFactor[i1][i3] = (Float) tempBox[7][i1][j];
-				partsScaleCorrection[i1][i3] = (Float) tempBox[8][i1][j];
+				partsTextureOffsetX[i1][i3] = (Integer) tempBox[1][i1][j];
+				partsTextureOffsetY[i1][i3] = (Integer) tempBox[2][i1][j];
+				partsBoxInitPointX[i1][i3] = (Float) tempBox[3][i1][j];
+				partsBoxInitPointY[i1][i3] = (Float) tempBox[4][i1][j];
+				partsBoxInitPointZ[i1][i3] = (Float) tempBox[5][i1][j];
+				partsBoxX[i1][i3] = (Integer) tempBox[6][i1][j];
+				partsBoxY[i1][i3] = (Integer) tempBox[7][i1][j];
+				partsBoxZ[i1][i3] = (Integer) tempBox[8][i1][j];
+				partsScaleFactor[i1][i3] = (Float) tempBox[9][i1][j];
+				partsScaleCorrection[i1][i3] = (Float) tempBox[10][i1][j];
 				j++;
 			}
 		}
@@ -357,29 +360,29 @@ public class Modchu_CustomModel extends ModelBase {
 			partAddChildName[i] = (String) temp[2][i];
 			partsTextureWidth[i] = (Integer) temp[3][i];
 			partsTextureHeight[i] = (Integer) temp[4][i];
-			partsTextureOffsetX[i] = (Integer) temp[5][i];
-			partsTextureOffsetY[i] = (Integer) temp[6][i];
-			partsBoxNumber[i] = (Integer) temp[7][i];
-			partsRotationPointX[i] = (Float) temp[8][i];
-			partsRotationPointY[i] = (Float) temp[9][i];
-			partsRotationPointZ[i] = (Float) temp[10][i];
-			partsRotateAngleX[i] = (Float) temp[11][i];
-			partsRotateAngleY[i] = (Float) temp[12][i];
-			partsRotateAngleZ[i] = (Float) temp[13][i];
-			partsType[i] = (Byte) temp[14][i];
-			partsTextureColor[i] = (Byte) temp[15][i];
-			partsTypeFactor[i] = (Float) temp[16][i];
-			partsTypeCorrection[i] = (Float) temp[17][i];
+			partsBoxNumber[i] = (Integer) temp[5][i];
+			partsRotationPointX[i] = (Float) temp[6][i];
+			partsRotationPointY[i] = (Float) temp[7][i];
+			partsRotationPointZ[i] = (Float) temp[8][i];
+			partsRotateAngleX[i] = (Float) temp[9][i];
+			partsRotateAngleY[i] = (Float) temp[10][i];
+			partsRotateAngleZ[i] = (Float) temp[11][i];
+			partsType[i] = (Byte) temp[12][i];
+			partsTextureColor[i] = (Byte) temp[13][i];
+			partsTypeFactor[i] = (Float) temp[14][i];
+			partsTypeCorrection[i] = (Float) temp[15][i];
 			for(int i3 = 0; i3 < partsBoxNumber[i]; i3++) {
 				boxType[i][i3] = (Byte) tempBox[0][i][i3];
-				partsBoxInitPointX[i][i3] = (Float) tempBox[1][i][i3];
-				partsBoxInitPointY[i][i3] = (Float) tempBox[2][i][i3];
-				partsBoxInitPointZ[i][i3] = (Float) tempBox[3][i][i3];
-				partsBoxX[i][i3] = (Integer) tempBox[4][i][i3];
-				partsBoxY[i][i3] = (Integer) tempBox[5][i][i3];
-				partsBoxZ[i][i3] = (Integer) tempBox[6][i][i3];
-				partsScaleFactor[i][i3] = (Float) tempBox[7][i][i3];
-				partsScaleCorrection[i][i3] = (Float) tempBox[8][i][i3];
+				partsTextureOffsetX[i][i3] = (Integer) tempBox[1][i][i3];
+				partsTextureOffsetY[i][i3] = (Integer) tempBox[2][i][i3];
+				partsBoxInitPointX[i][i3] = (Float) tempBox[3][i][i3];
+				partsBoxInitPointY[i][i3] = (Float) tempBox[4][i][i3];
+				partsBoxInitPointZ[i][i3] = (Float) tempBox[5][i][i3];
+				partsBoxX[i][i3] = (Integer) tempBox[6][i][i3];
+				partsBoxY[i][i3] = (Integer) tempBox[7][i][i3];
+				partsBoxZ[i][i3] = (Integer) tempBox[8][i][i3];
+				partsScaleFactor[i][i3] = (Float) tempBox[9][i][i3];
+				partsScaleCorrection[i][i3] = (Float) tempBox[10][i][i3];
 			}
 		}
 		int i = partsNumberMax - 1;
@@ -394,26 +397,24 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	private Object[][] tempParts() {
-		Object[][] temp = new Object[18][partsNumberMax];
+		Object[][] temp = new Object[16][partsNumberMax];
 		for(int i = 0; i < partsNumberMax; i++) {
 			temp[0][i] = parts[i] != null ? parts[i] : new Modchu_ModelRenderer(mainModel);
 			temp[1][i] = partsName[i] != null ? partsName[i] : null;
 			temp[2][i] = partAddChildName[i] != null ? partAddChildName[i] : null;
 			temp[3][i] = partsTextureWidth[i] == 0 ? partsTextureWidth[i] : 64;
 			temp[4][i] = partsTextureHeight[i] == 0 ? partsTextureHeight[i] : 32;
-			temp[5][i] = partsTextureOffsetX[i];
-			temp[6][i] = partsTextureOffsetY[i];
-			temp[7][i] = partsBoxNumber[i];
-			temp[8][i] = partsRotationPointX[i];
-			temp[9][i] = partsRotationPointY[i];
-			temp[10][i] = partsRotationPointZ[i];
-			temp[11][i] = partsRotateAngleX[i];
-			temp[12][i] = partsRotateAngleY[i];
-			temp[13][i] = partsRotateAngleZ[i];
-			temp[14][i] = partsType[i];
-			temp[15][i] = partsTextureColor[i];
-			temp[16][i] = partsTypeFactor[i];
-			temp[17][i] = partsTypeCorrection[i];
+			temp[5][i] = partsBoxNumber[i];
+			temp[6][i] = partsRotationPointX[i];
+			temp[7][i] = partsRotationPointY[i];
+			temp[8][i] = partsRotationPointZ[i];
+			temp[9][i] = partsRotateAngleX[i];
+			temp[10][i] = partsRotateAngleY[i];
+			temp[11][i] = partsRotateAngleZ[i];
+			temp[12][i] = partsType[i];
+			temp[13][i] = partsTextureColor[i];
+			temp[14][i] = partsTypeFactor[i];
+			temp[15][i] = partsTypeCorrection[i];
 		}
 		return temp;
 	}
@@ -421,19 +422,21 @@ public class Modchu_CustomModel extends ModelBase {
 	private Object[][][] tempPartsBox() {
 		partsNumberMaxCheck();
 		boxNumberCount = null;
-		Object[][][] temp = new Object[9][partsNumberMax][partsBoxNumberMax];
+		Object[][][] temp = new Object[11][partsNumberMax][partsBoxNumberMax];
 		if (partsBoxNumberMax > 0) {
 			for(int i = 0; i < partsNumberMax; i++) {
 				for(int i1 = 0; i1 < partsBoxNumberMax; i1++) {
 					temp[0][i][i1] = boxType[i][i1];
-					temp[1][i][i1] = partsBoxInitPointX[i][i1];
-					temp[2][i][i1] = partsBoxInitPointY[i][i1];
-					temp[3][i][i1] = partsBoxInitPointZ[i][i1];
-					temp[4][i][i1] = partsBoxX[i][i1];
-					temp[5][i][i1] = partsBoxY[i][i1];
-					temp[6][i][i1] = partsBoxZ[i][i1];
-					temp[7][i][i1] = partsScaleFactor[i][i1];
-					temp[8][i][i1] = partsScaleCorrection[i][i1];
+					temp[1][i][i1] = partsTextureOffsetX[i][i1];
+					temp[2][i][i1] = partsTextureOffsetY[i][i1];
+					temp[3][i][i1] = partsBoxInitPointX[i][i1];
+					temp[4][i][i1] = partsBoxInitPointY[i][i1];
+					temp[5][i][i1] = partsBoxInitPointZ[i][i1];
+					temp[6][i][i1] = partsBoxX[i][i1];
+					temp[7][i][i1] = partsBoxY[i][i1];
+					temp[8][i][i1] = partsBoxZ[i][i1];
+					temp[9][i][i1] = partsScaleFactor[i][i1];
+					temp[10][i][i1] = partsScaleCorrection[i][i1];
 				}
 			}
 		}
@@ -446,8 +449,6 @@ public class Modchu_CustomModel extends ModelBase {
 		partAddChildName = new String[partsNumberMax];
 		partsTextureWidth = new int[partsNumberMax];
 		partsTextureHeight = new int[partsNumberMax];
-		partsTextureOffsetX = new int[partsNumberMax];
-		partsTextureOffsetY = new int[partsNumberMax];
 		partsBoxNumber = new int[partsNumberMax];
 		partsRotationPointX = new float[partsNumberMax];
 		partsRotationPointY = new float[partsNumberMax];
@@ -467,6 +468,8 @@ public class Modchu_CustomModel extends ModelBase {
 
 		boxNumberCount = null;
 		boxType = new byte[partsNumberMax][partsBoxNumberMax];
+		partsTextureOffsetX = new int[partsNumberMax][partsBoxNumberMax];
+		partsTextureOffsetY = new int[partsNumberMax][partsBoxNumberMax];
 		partsBoxInitPointX = new float[partsNumberMax][partsBoxNumberMax];
 		partsBoxInitPointY = new float[partsNumberMax][partsBoxNumberMax];
 		partsBoxInitPointZ = new float[partsNumberMax][partsBoxNumberMax];
@@ -486,12 +489,12 @@ public class Modchu_CustomModel extends ModelBase {
 			return;
 		}
 		parts[i].clearCubeList();
-		parts[i].setTextureOffset(partsTextureOffsetX[i], partsTextureOffsetY[i]);
 		parts[i].textureWidth = partsTextureWidth[i];
 		parts[i].textureHeight = partsTextureHeight[i];
 		for (int i1 = 0;i1 < partsBoxNumber[i]; i1++) {
 			//Modchu_Debug.mDebug("add i="+i+" i1="+i1);
 			Modchu_Debug.cDebug("Modchu_CustomModel partsName["+i+"]="+partsName[i]);
+			parts[i].setTextureOffset(partsTextureOffsetX[i][i1], partsTextureOffsetY[i][i1]);
 			switch (boxType[i][i1]) {
 			case 0:
 				Modchu_Debug.cDebug(new StringBuilder().append("Modchu_CustomModel i=").append(i).append(" i1=").append(i1)
@@ -515,7 +518,7 @@ public class Modchu_CustomModel extends ModelBase {
 						.append(partsBoxInitPointX[i][i1]).append("F,").append(partsBoxInitPointY[i][i1]).append("F,").append(partsBoxInitPointZ[i][i1]).append("F,")
 						.append(partsBoxX[i][i1]).append(",").append(partsBoxY[i][i1]).append(",").append(partsBoxZ[i][i1])
 						.append(")").toString());
-				parts[i].addBall(partsBoxInitPointX[i][i1], partsBoxInitPointY[i][i1], partsBoxInitPointZ[i][i1], partsBoxX[i][i1], partsBoxY[i][i1], partsBoxZ[i][i1]);
+				parts[i].addBall(partsBoxInitPointX[i][i1], partsBoxInitPointY[i][i1], partsBoxInitPointZ[i][i1], (float) partsBoxX[i][i1], (float) partsBoxY[i][i1], (float) partsBoxZ[i][i1]);
 				break;
 			}
 		}
@@ -557,11 +560,14 @@ public class Modchu_CustomModel extends ModelBase {
 			}
 			if (mainModeltexture != null) ;else Modchu_Debug.cDebug("Modchu_CustomModel render mainModeltexture == null !! mainModeltextureName="+mainModeltextureName);
 			if (mainModel.render != null) ;else mainModel.render = baseModel.render;
-			if (mainModel.render != null) mainModel.render.loadTexture(mainModeltexture);
+			if (mainModel.render != null
+					&& mainModeltexture != null) {
+				mainModel.render.loadTexture(mainModeltexture);
+				//Modchu_Debug.mDebug("Modchu_CustomModel render mainModeltexture="+mainModeltexture);
+				//Modchu_Debug.mDebug("Modchu_CustomModel render mainModel.getClass()="+(mainModel.getClass()));
+				mainModel.render(entityCaps, f, f1, ticksExisted, pheadYaw, pheadPitch, f5, true);
+			}
 			else Modchu_Debug.cDebug("Modchu_CustomModel render render == null !!");
-			//Modchu_Debug.mDebug("Modchu_CustomModel render mainModeltexture="+mainModeltexture);
-			//Modchu_Debug.mDebug("Modchu_CustomModel render mainModel.getClass()="+(mainModel.getClass()));
-			mainModel.render(entityCaps, f, f1, ticksExisted, pheadYaw, pheadPitch, f5, true);
 		} else {
 			//Modchu_Debug.mDebug("Modchu_CustomModel render armor baseModel.getCapsValueInt(baseModel.caps_armorType)="+baseModel.getCapsValueInt(baseModel.caps_armorType));
 			int color = getMaidColor(entityCaps);
@@ -627,7 +633,7 @@ public class Modchu_CustomModel extends ModelBase {
 			break;
 		}
 */
-		if (setArmorModel((MMM_ModelMultiBase) model, is, entity, i, f) > -1) {
+		if (setArmorModel(entityCaps, (MMM_ModelMultiBase) model, is, entity, i, f) > -1) {
 			if (s != null) {
 				if (mainModel.render != null) ;else mainModel.render = baseModel.render;
 				if (mainModel.render != null) mainModel.render.loadTexture(s);
@@ -636,11 +642,18 @@ public class Modchu_CustomModel extends ModelBase {
 		}
 	}
 
-	private int setArmorModel(MMM_ModelMultiBase model, ItemStack is, Entity entity, int i, float f) {
+	private int setArmorModel(MMM_IModelCaps entityCaps, MMM_ModelMultiBase model, ItemStack is, Entity entity, int i, float f) {
 		byte byte0 = -1;
 		if (model != null) ;else return byte0;
+		int armorType = Modchu_ModelCapsHelper.getCapsValueInt(baseModel, baseModel.caps_armorType);
+		if (armorType > 1) ;else return byte0;
+		int i2 = armorType == 2 ? 0 : 1;
 		if (is != null && is.stackSize > 0) {
-			model.showArmorParts(i);
+			if (model instanceof MultiModelBaseBiped) {
+				((MultiModelBaseBiped) model).showArmorParts(entityCaps, i, i2);
+			} else {
+				model.showArmorParts(i, i2);
+			}
 //-@-b181
 			byte0 = (byte) (is.isItemEnchanted() ? 15 : 1);
 //@-@b181
@@ -741,19 +754,19 @@ public class Modchu_CustomModel extends ModelBase {
 		if (mainModel != null) mainModel.renderItems(entityCaps);
 	}
 
-	public void defaultPartsSettingBefore() {
+	public void defaultPartsSettingBefore(MMM_IModelCaps entityCaps) {
 		if (mainModel instanceof MultiModelBaseBiped
-				&& mainModel != null) ((MultiModelBaseBiped) mainModel).defaultPartsSettingBefore();
+				&& mainModel != null) ((MultiModelBaseBiped) mainModel).defaultPartsSettingBefore(entityCaps);
 	}
 
-	public void defaultPartsSettingAfter() {
+	public void defaultPartsSettingAfter(MMM_IModelCaps entityCaps) {
 		if (mainModel instanceof MultiModelBaseBiped
-				&& mainModel != null) ((MultiModelBaseBiped) mainModel).defaultPartsSettingAfter();
+				&& mainModel != null) ((MultiModelBaseBiped) mainModel).defaultPartsSettingAfter(entityCaps);
 	}
 
-	public void showModelSettingReflects() {
+	public void showModelSettingReflects(MMM_IModelCaps entityCaps) {
 		if (mainModel instanceof MultiModelBaseBiped
-				&& mainModel != null) ((MultiModelBaseBiped) mainModel).showModelSettingReflects();
+				&& mainModel != null) ((MultiModelBaseBiped) mainModel).showModelSettingReflects(entityCaps);
 	}
 
 	public void actionInit(MMM_IModelCaps entityCaps, int i) {
@@ -1113,10 +1126,10 @@ public class Modchu_CustomModel extends ModelBase {
 			sb = sb.append("textureHeight").append("=").append(partsTextureHeight[i]);
 			lines.add(sb.toString());
 			sb.delete(0, sb.length());
-			sb = sb.append("textureOffset").append("=").append(partsTextureOffsetX[i]).append(",").append(partsTextureOffsetY[i]);
-			lines.add(sb.toString());
-			sb.delete(0, sb.length());
 			for (int i1 = 0; i1 < partsBoxNumber[i]; i1++) {
+				sb = sb.append("textureOffset").append("=").append(partsTextureOffsetX[i][i1]).append(",").append(partsTextureOffsetY[i][i1]);
+				lines.add(sb.toString());
+				sb.delete(0, sb.length());
 				switch(boxType[i][i1]) {
 				case 0:
 					sb = sb.append("addBox");
@@ -1201,6 +1214,10 @@ public class Modchu_CustomModel extends ModelBase {
 				partsTypeFactor[partsCount] = partsCount > 0 ? partsTypeFactor[partsCount - 1] : 0.0F;
 				partsTextureWidth[partsCount] = partsCount > 0 ? partsTextureWidth[partsCount - 1] : 64;
 				partsTextureHeight[partsCount] = partsCount > 0 ? partsTextureHeight[partsCount - 1] : 32;
+				partsTextureOffsetX[partsCount][boxCount] = partsCount > 0
+						&& boxCount > 0 ? partsTextureOffsetX[partsCount][boxCount - 1] : 0;
+				partsTextureOffsetY[partsCount][boxCount] = partsCount > 0
+						&& boxCount > 0 ? partsTextureOffsetY[partsCount][boxCount - 1] : 0;
 				return;
 			}
 		}
@@ -1241,8 +1258,8 @@ public class Modchu_CustomModel extends ModelBase {
 				s = s.substring(i1 + 1);
 				i1 = s.indexOf(',');
 				if (i1 > -1) {
-					partsTextureOffsetX[partsCount] = Integer.valueOf(s.substring(0, i1));
-					partsTextureOffsetY[partsCount] = Integer.valueOf(s.substring(i1 + 1));
+					partsTextureOffsetX[partsCount][boxCount] = Integer.valueOf(s.substring(0, i1));
+					partsTextureOffsetY[partsCount][boxCount] = Integer.valueOf(s.substring(i1 + 1));
 					//Modchu_Debug.mDebug("Modchu_CustomModel partsTextureOffsetX["+partsCount+"]="+partsTextureOffsetX[partsCount]);
 					//Modchu_Debug.mDebug("Modchu_CustomModel partsTextureOffsetY["+partsCount+"]="+partsTextureOffsetY[partsCount]);
 					return;
@@ -1740,8 +1757,8 @@ public class Modchu_CustomModel extends ModelBase {
 		return s;
 	}
 
-	public int showArmorParts(MMM_IModelCaps entityCaps, int i) {
-		return mainModel != null ? mainModel.showArmorParts(i) : -1;
+	public int showArmorParts(MMM_IModelCaps entityCaps, int i, int i2) {
+		return mainModel != null ? mainModel.showArmorParts(i, i2) : -1;
 	}
 
 	public String getUsingTexture() {
