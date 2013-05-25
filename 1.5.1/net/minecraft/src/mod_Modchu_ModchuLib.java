@@ -183,7 +183,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.1-3";
+		return "1.5.1-3a";
 	}
 
 	@Override
@@ -857,14 +857,20 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	public static String textureManagerGetNextArmorPackege(String s) {
 		Object ltb = getTextureBox(s);
-		if (ltb != null) return (String) Modchu_Reflect.invokeMethod(MMM_TextureManager, "getNextArmorPackege", new Class[]{MMM_TextureBox}, null, new Object[]{ltb});
+		if (ltb != null) {
+			ltb = Modchu_Reflect.invokeMethod(MMM_TextureManager, "getNextArmorPackege", new Class[]{MMM_TextureBox}, null, new Object[]{ltb});
+			return (String) Modchu_Reflect.getFieldObject(ltb.getClass(), "fileName", ltb);
+		}
 		Modchu_Debug.mDebug("textureManagerGetNextArmorPackege return null !! s="+s);
 		return null;
 	}
 
 	public static String textureManagerGetPrevArmorPackege(String s) {
 		Object ltb = getTextureBox(s);
-		if (ltb != null) return (String) Modchu_Reflect.invokeMethod(MMM_TextureManager, "getPrevArmorPackege", new Class[]{MMM_TextureBox}, null, new Object[]{ltb});
+		if (ltb != null) {
+			ltb = Modchu_Reflect.invokeMethod(MMM_TextureManager, "getPrevArmorPackege", new Class[]{MMM_TextureBox}, null, new Object[]{ltb});
+			return (String) Modchu_Reflect.getFieldObject(ltb.getClass(), "fileName", ltb);
+		}
 		Modchu_Debug.mDebug("textureManagerGetPrevArmorPackege return null !! s="+s);
 		return null;
 	}
