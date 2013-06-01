@@ -395,8 +395,10 @@ public class Modchu_Reflect
     		for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
     			try {
     				if (c != null) f = c.getDeclaredField(var1);
-    				if (f != null) f.setAccessible(true);
-    				return f;
+    				if (f != null) {
+    					f.setAccessible(true);
+    					return f;
+    				}
     			} catch (Exception e4) {
     				if (debugReflectMessageDetail) {
     					Modchu_Debug.Debug("getRawField Exception Class="+c+" String="+var1);
@@ -489,6 +491,13 @@ public class Modchu_Reflect
     		} catch (Exception e1) {
     			if (debugDisplayDetail(i)) e1.printStackTrace();
     		}
+    		try {
+    			if (var0 != null) method = var0.getMethod(var1, var2);
+    			return method;
+    		} catch (Exception e) {
+    			if (debugDisplay(i)) e.printStackTrace();
+    		}
+    		var1 = getFieldName(var1);
     		try {
     			if (var0 != null) method = var0.getMethod(var1, var2);
     			return method;

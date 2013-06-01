@@ -1,6 +1,9 @@
 package net.minecraft.src;
 
 //b181deleteimport java.util.ArrayList;
+import static net.minecraft.src.MMM_IModelCaps.caps_Entity;
+import static net.minecraft.src.MMM_IModelCaps.caps_HeadMount;
+
 import java.lang.reflect.Constructor;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -251,6 +254,19 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		if (cubeList != null) cubeList.clear();
 		compiled = false;
 		if (childModels != null) childModels.clear();
+	}
+
+	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, float scale, int addSupport) {
+		ItemStack lis = (ItemStack)pEntityCaps.getCapsValue(caps_HeadMount);
+		EntityLiving lentity = (EntityLiving)pEntityCaps.getCapsValue(caps_Entity);
+
+		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
+	}
+
+	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, ItemStack lis, float scale, int addSupport) {
+		EntityLiving lentity = (EntityLiving)pEntityCaps.getCapsValue(caps_Entity);
+
+		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
 	}
 
 	public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack, float scale, int addSupport) {
@@ -628,7 +644,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		}
 
 		GL11.glPushMatrix();
-		GL11.glTranslatef(field_82906_o, field_82908_p, field_82907_q);
+		GL11.glTranslatef(offsetX, offsetY, offsetZ);
 
 		if (rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F) {
 			GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);

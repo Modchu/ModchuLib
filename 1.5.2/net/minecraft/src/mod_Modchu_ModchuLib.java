@@ -183,7 +183,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.2-3a";
+		return "1.5.2-3b";
 	}
 
 	@Override
@@ -749,7 +749,8 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		Object[] models = new Object[3];
 		String s1 = s != null ? lastIndexProcessing(s, "_") : s;
 		String s2 = s1 != null
-				&& !s1.equalsIgnoreCase("default") ?
+				&& !s1.equalsIgnoreCase("default")
+				&& s.indexOf("_") > -1 ?
 				new StringBuilder().append(modelClassName).append("_").append(s1).toString()
 				: modelClassName;
 		Class c = Modchu_Reflect.loadClass(mod_Modchu_ModchuLib.mod_modchu_modchulib.getClassName(s2), -1);

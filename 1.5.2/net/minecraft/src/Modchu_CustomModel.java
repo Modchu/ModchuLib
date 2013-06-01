@@ -526,11 +526,12 @@ public class Modchu_CustomModel extends ModelBase {
 		parts[i].setRotateAngle(partsRotateAngleX[i], partsRotateAngleY[i], partsRotateAngleZ[i]);
 		if (partAddChildName[i] != null) {
 			String addChildName = obfuscationNameCheck(partAddChildName[i]);
-			Modchu_ModelRenderer modchu_ModelRenderer = (Modchu_ModelRenderer) Modchu_Reflect.getFieldObject(mainModel.getClass(), addChildName, mainModel, -1);
-			if (modchu_ModelRenderer != null) {
-				modchu_ModelRenderer.addChild(parts[i]);
+			MMM_ModelRenderer modelRenderer = (MMM_ModelRenderer) Modchu_Reflect.getFieldObject(mainModel.getClass(), addChildName, mainModel, -1);
+			if (modelRenderer != null) {
+				modelRenderer.addChild(parts[i]);
 				Modchu_Debug.cDebug("Modchu_CustomModel addChild "+addChildName+" i="+i);
 			} else {
+				Modchu_Debug.cDebug("Modchu_CustomModel addChild else "+addChildName+" i="+i);
 				for (int i1 = 0;i1 < partsNumberMax && parts[i1] != null; i1++) {
 					if (partAddChildName[i].equalsIgnoreCase(partsName[i1])) {
 						parts[i1].addChild(parts[i]);
@@ -554,7 +555,9 @@ public class Modchu_CustomModel extends ModelBase {
 		boolean flag1 = armorType < 2;
 		if (flag1) {
 			if (mainModeltexture != null
-					&& !(mod_Modchu_ModchuLib.LMM_GuiTextureSelect.isInstance(Minecraft.getMinecraft().currentScreen))) {
+					&& ((mod_Modchu_ModchuLib.LMM_GuiTextureSelect != null
+					&& !(mod_Modchu_ModchuLib.LMM_GuiTextureSelect.isInstance(Minecraft.getMinecraft().currentScreen)))
+					| mod_Modchu_ModchuLib.LMM_GuiTextureSelect == null)) {
 			} else {
 				colorSetting(entityCaps);
 			}
@@ -600,15 +603,23 @@ public class Modchu_CustomModel extends ModelBase {
 						&& !prevTexture.equalsIgnoreCase(texture)) flag = true;
 				if (flag) {
 					//Modchu_Debug.mDebug("MultiModelCustom s1="+s1+" loadTexture texture="+texture+" prevTexture="+prevTexture);
-					//Modchu_Debug.mDebug("MultiModelCustom s1="+s1+" loadTexture texture="+texture);
+					//Modchu_Debug.cDebug("MultiModelCustom s1="+s1+" loadTexture texture="+texture);
 					if (texture != null) {
 						if (baseModel.render != null) {
 							baseModel.render.loadTexture(texture);
+						} else {
+							Render render = RenderManager.instance.getEntityRenderObject(entity);
+							baseModel.render = render;
+							mainModel.render = render;
+							if (baseModel.render != null) {
+								baseModel.render.loadTexture(texture);
+							} else {
+								Modchu_Debug.cDebug("MultiModelCustom baseModel.render == null !!");
+							}
 						}
 					}
 					customModelShowModelSetting(s1, true);
 					mainModel.render(entityCaps, f, f1, ticksExisted, pheadYaw, pheadPitch, f5, true);
-					//((MultiModelCustom) baseModel).superrender(f, f1, ticksExisted, pheadYaw, pheadPitch, f5);
 					customModelShowModelSetting(null, false);
 				}
 				prevTexture = texture;
@@ -708,17 +719,18 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	public void setRotationAnglesLM(float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5, MMM_IModelCaps entityCaps) {
-		if (parts != null) {
+		if (parts != null
+				&& mainModel != null) {
 			for(int i = 0; i < parts.length ;i++) {
 				if (partsType[i] == eyeR) {
-					if ((Boolean) mainModel.getCapsValue(mainModel.caps_aimedBow)) {
+					if (Modchu_ModelCapsHelper.getCapsValueBoolean(mainModel, mainModel.caps_aimedBow)) {
 						mainModel.setCapsValue(((MultiModelBaseBiped) mainModel).caps_visible, parts[i], false);
 						//Modchu_Debug.mDebug("caps_aimedBow eyeR parts[i].showModel="+parts[i].showModel);
 						customModelshowModelMemoryList.put(parts[i], parts[i].showModel);
 					}
 				}
 				if (partsType[i] == eyeL) {
-					if ((Boolean) mainModel.getCapsValue(mainModel.caps_aimedBow)) {
+					if (Modchu_ModelCapsHelper.getCapsValueBoolean(mainModel, mainModel.caps_aimedBow)) {
 						mainModel.setCapsValue(((MultiModelBaseBiped) mainModel).caps_visible, parts[i], true);
 						//Modchu_Debug.mDebug("caps_aimedBow eyeL parts[i].showModel="+parts[i].showModel);
 						customModelshowModelMemoryList.put(parts[i], parts[i].showModel);
@@ -780,7 +792,6 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	public void action(float f, float f1, float f2, float f3, float f4, float f5, int i, MMM_IModelCaps entityCaps) {
-		Modchu_Debug.mDebug("action");
 		if (mainModel instanceof MultiModelAction
 				&& mainModel != null) ((MultiModelAction) mainModel).action(f, f1, f2, f3, f4, f5, i, entityCaps);
 	}
@@ -851,11 +862,6 @@ public class Modchu_CustomModel extends ModelBase {
 		if (mainModel instanceof MultiModelBaseBiped
 				&& mainModel != null) return ((MultiModelBaseBiped) mainModel).getModelScale();
 		return 0.9375F;
-	}
-
-	public void equippedItemPositionFlower() {
-		if (mainModel instanceof MultiModelBaseBiped
-				&& mainModel != null) ((MultiModelBaseBiped) mainModel).equippedItemPositionFlower();
 	}
 
 	public void setArmorBipedHeadShowModel(MMM_IModelCaps entityCaps, boolean b) {
@@ -978,7 +984,7 @@ public class Modchu_CustomModel extends ModelBase {
 	public void reset(float f, float f1, float f2, float f3, float f4,
 			float f5, MMM_IModelCaps entityCaps) {
 		if (mainModel instanceof MultiModelBaseBiped
-				&& mainModel != null) ((MultiModelBaseBiped) mainModel).reset(f, f1, f2, f3, f4, f5, entityCaps);
+				&& mainModel != null) ((MultiModelBaseBiped) mainModel).setDefaultPause(f, f1, f2, f3, f4, f5, entityCaps);
 	}
 
 	public float[] getArmorModelsSize() {
@@ -1556,7 +1562,7 @@ public class Modchu_CustomModel extends ModelBase {
 						if (partsTextureNameMap.get(i).equalsIgnoreCase(s)) b1 = b;
 					}
 				}
-				//Modchu_Debug.mDebug("customModelShowModelSetting "+partsTextureNameMap.get(i)+" customModelshowModelMemoryList.get(parts["+i+"])="+(customModelshowModelMemoryList.get(parts[i]))+" s="+s+" b="+b+" b1="+b1);
+				//Modchu_Debug.cDebug("customModelShowModelSetting "+partsTextureNameMap.get(i)+" customModelshowModelMemoryList.get(parts["+i+"])="+(customModelshowModelMemoryList.get(parts[i]))+" s="+s+" b="+b+" b1="+b1);
 				parts[i].showModel = b1;
 			}
 		}
@@ -1718,7 +1724,9 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	private String obfuscationNameCheck(String s) {
-		if (!mod_Modchu_ModchuLib.mod_modchu_modchulib.isRelease()) return s;
+/*
+		if (!mod_Modchu_ModchuLib.mod_modchu_modchulib.isRelease()
+				| mod_Modchu_ModchuLib.isForge) return s;
 		String[] s1 = {
 				"bipedHead", "bipedHeadwear", "bipedBody",
 				"bipedRightArm", "bipedLeftArm", "bipedRightLeg", "bipedLeftLeg", "bipedCloak",
@@ -1732,6 +1740,7 @@ public class Modchu_CustomModel extends ModelBase {
 		for(int i = 0; i < s1.length; i++) {
 			if (s.equalsIgnoreCase(s1[i])) return s2[i];
 		}
+*/
 		return s;
 	}
 
