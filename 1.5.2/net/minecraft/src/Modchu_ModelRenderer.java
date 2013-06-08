@@ -138,9 +138,6 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		return this;
 	}
 
-	/**
-	 * ModelBox継承の独自オブジェクト追加用
-	 */
 //-@-151
 	public Modchu_ModelRenderer addCubeList(MMM_ModelBoxBase pModelBoxBase) {
 		cubeList.add(pModelBoxBase);
@@ -157,10 +154,6 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		return this;
 	}
 //@-@151
-	/**
-	 * 自分でテクスチャの座標を指定する時に使います。
-	 * コンストラクタへそのまま値を渡します。
-	 */
 //-@-151
 	public Modchu_ModelRenderer addPartsTexture(Class pModelBoxBase, String pName, Object ... pArg) {
 		pName = (new StringBuilder()).append(boxName).append(".").append(pName).toString();
@@ -168,25 +161,12 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		return this;
 	}
 //@-@151
-	/**
-	 * 自分でテクスチャの座標を指定する時に使います。
-	 * コンストラクタへそのまま値を渡します。
-	 */
 //-@-151
 	public Modchu_ModelRenderer addPartsTexture(Class pModelBoxBase, Object ... pArg) {
 		addCubeList(getModelBoxBase(pModelBoxBase, (Object[]) pArg));
 		return this;
 	}
 //@-@151
-	protected Object[] getArg(Object ... pArg) {
-		Object lobject[] = new Object[pArg.length + 2];
-		lobject[0] = textureOffsetX;
-		lobject[1] = textureOffsetY;
-		for (int li = 0; li < pArg.length; li++) {
-			lobject[2 + li] = pArg[li];
-		}
-		return lobject;
-	}
 
 	public Modchu_ModelRenderer addPlate(float f, float f1, float f2, int i, int j, int k) {
 /*//151delete

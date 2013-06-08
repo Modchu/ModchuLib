@@ -42,7 +42,6 @@ public interface Modchu_IModelCaps {
 	public static final int caps_isItemHolder							= 0x08034;
 	public static final int caps_isPlayer									= 0x08035;
 	public static final int caps_sittingyOffset							= 0x08036;
-	public static final int caps_sleepingyOffset						= 0x08037;
 	public static final int caps_model									= 0x08038;
 	public static final int caps_changeModel							= 0x08039;
 	public static final int caps_actionInit								= 0x08040;
@@ -50,7 +49,6 @@ public interface Modchu_IModelCaps {
 	public static final int caps_syncModel								= 0x08042;
 	public static final int caps_maidColor								= 0x08043;
 	public static final int caps_getIsSleeping							= 0x08044;
-	public static final int caps_armorItemInSlot						= 0x08045;
 	public static final int caps_showModelSettingReflects		= 0x08046;
 	public static final int caps_showPartsHideList					= 0x08047;
 	public static final int caps_showPartsRenemeMap				= 0x08048;
@@ -92,6 +90,7 @@ public interface Modchu_IModelCaps {
 	public static final int caps_changeColor							= 0x08084;
 	public static final int caps_showPartsSetting					= 0x08085;
 	public static final int caps_actionReleaseNumber				= 0x08086;
+	public static final int caps_rotate									= 0x08087;
 
 	public Object getCapsValue(MultiModelBaseBiped model, MMM_IModelCaps entityCaps, int pIndex, Object ...pArg);
 	public Object getCapsValue(MultiModelBaseBiped model, int pIndex, Object ...pArg);

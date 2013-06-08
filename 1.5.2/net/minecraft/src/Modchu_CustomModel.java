@@ -672,17 +672,12 @@ public class Modchu_CustomModel extends ModelBase {
 		return byte0;
 	}
 
-	public void setLivingAnimations(MMM_IModelCaps entityCaps, float f, float f1, float renderPartialTicks) {
-/*
-		if ((mainModel.entityCaps != null
-				&& entityCaps != mainModel.entityCaps)
-				| mainModel.entityCaps == null) mainModel.entityCaps = entityCaps;
-*/
+	public void setLivingAnimationsLM(MMM_IModelCaps entityCaps, float f, float f1, float renderPartialTicks) {
 		//Modchu_Debug.mDebug("Modchu_CustomModel setLivingAnimationsLM");
 		EntityLiving entityliving = (EntityLiving) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
 		if (entityliving != null) ;else return;
-		//fieldSync(true, entityliving, f, f1, renderPartialTicks);
-
+		if (mainModel != null
+				&& mainModel instanceof MultiModelBaseBiped) ((MultiModelBaseBiped) mainModel).setLivingAnimationsLM(entityCaps, f, f1, renderPartialTicks);
 		if (parts != null) {
 			for(int i = 0; i < parts.length ;i++) {
 				if (partsType[i] == eyeR
@@ -744,6 +739,11 @@ public class Modchu_CustomModel extends ModelBase {
 				}
 			}
 		}
+	}
+
+	public void skirtFloatsInit(float f, float f1) {
+		if (mainModel instanceof MultiModelSkirtFloats
+				&& mainModel != null) ((MultiModelSkirtFloats) mainModel).skirtFloatsInit(f, f1);
 	}
 
 	public void setRotationAnglesfirstPerson(float f, float f1, float f2, float f3, float f4, float f5, MMM_IModelCaps entityCaps) {
@@ -844,12 +844,6 @@ public class Modchu_CustomModel extends ModelBase {
 		if (mainModel instanceof MultiModelBaseBiped
 				&& mainModel != null) return ((MultiModelBaseBiped) mainModel).getSittingyOffset();
 		return -0.35D;
-	}
-
-	public double getSleepingyOffset() {
-		if (mainModel instanceof MultiModelBaseBiped
-				&& mainModel != null) return ((MultiModelBaseBiped) mainModel).getSleepingyOffset();
-		return -0.9D;
 	}
 
 	public float ridingViewCorrection() {
