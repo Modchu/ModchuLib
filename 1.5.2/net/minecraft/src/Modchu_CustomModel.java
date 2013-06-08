@@ -995,7 +995,7 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	private void loadInit(File file, List list, boolean b) {
-		List list2 = list != null ? list : !b ? (ArrayList) PFLM_Config.cfgData.get(file) : null;
+		List list2 = list != null ? list : !b ? (ArrayList) Modchu_Config.cfgData.get(file) : null;
 		partsNumberMax = 0;
 		if (list2 == null) {
 			list2 = new ArrayList();
@@ -1013,7 +1013,7 @@ public class Modchu_CustomModel extends ModelBase {
 				}
 				partsNumberMax = partsCount + 1;
 				//Modchu_Debug.mDebug("Modchu_CustomModel loadInit partsNumberMax="+partsNumberMax);
-				PFLM_Config.cfgData.put(file, list2);
+				Modchu_Config.cfgData.put(file, list2);
 				breader.close();
 			} catch (Exception e) {
 				//Modchu_Debug.cDebug("Modchu_CustomModel loadInit load "+ file.toString() +" load fail.");
@@ -1162,7 +1162,7 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	private void load(File file, List list, boolean b) {
-		List list2 = list != null ? list : !b ? (ArrayList) PFLM_Config.cfgData.get(file) : null;
+		List list2 = list != null ? list : !b ? (ArrayList) Modchu_Config.cfgData.get(file) : null;
 		partsCount = -1;
 		if (list2 == null) {
 			list2 = new ArrayList();
@@ -1177,10 +1177,10 @@ public class Modchu_CustomModel extends ModelBase {
 							| rl.startsWith("/")) continue;
 					settingData(rl.toString());
 				}
-				PFLM_Config.cfgData.put(file, list2);
+				Modchu_Config.cfgData.put(file, list2);
 				breader.close();
 			} catch (Exception e) {
-				//Modchu_Debug.cDebug("PFLM_Config load "+ file.toString() +" load fail.");
+				//Modchu_Debug.cDebug("Modchu_Config load "+ file.toString() +" load fail.");
 				e.printStackTrace();
 			}
 		} else {

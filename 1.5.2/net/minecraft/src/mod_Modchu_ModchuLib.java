@@ -183,7 +183,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.2-3d";
+		return "1.5.2-3e";
 	}
 
 	@Override
@@ -382,21 +382,21 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 						"debugReflectMessageDetail=false", "modchuRemodelingModel=true", "useInvisibilityBody=true", "useInvisibilityArmor=false", "useInvisibilityItem=false",
 						"versionCheck=true",  "debugCustomModelMessage=false"
 				};
-				PFLM_Config.writerConfig(mainCfgfile, s);
+				Modchu_Config.writerConfig(mainCfgfile, s);
 			} else {
 				// cfgƒtƒ@ƒCƒ‹‚ª‚ ‚é
-				skirtFloats = Boolean.valueOf((PFLM_Config.loadConfig(mainCfgfile, "skirtFloats", skirtFloats)).toString());
-				skirtFloatsVolume = Float.valueOf((PFLM_Config.loadConfig(mainCfgfile, "skirtFloatsVolume", skirtFloatsVolume)).toString());
-				Modchu_Debug.debugMessage = Boolean.valueOf((PFLM_Config.loadConfig(mainCfgfile, "debugMessage", Modchu_Debug.debugMessage)).toString());
-				Modchu_Debug.debugMessagetexture = Boolean.valueOf((PFLM_Config.loadConfig(mainCfgfile, "debugMessagetexture", Modchu_Debug.debugMessagetexture)).toString());
-				Modchu_Reflect.debugReflectMessage = Boolean.valueOf((PFLM_Config.loadConfig(mainCfgfile, "debugReflectMessage", Modchu_Reflect.debugReflectMessage)).toString());
-				Modchu_Reflect.debugReflectMessageDetail = Boolean.valueOf((PFLM_Config.loadConfig(mainCfgfile, "debugReflectMessageDetail", Modchu_Reflect.debugReflectMessageDetail)).toString());
-				modchuRemodelingModel = Boolean.valueOf((PFLM_Config.loadConfig(mainCfgfile, "modchuRemodelingModel", modchuRemodelingModel)).toString());
-				useInvisibilityBody = Boolean.valueOf((PFLM_Config.loadConfig(mainCfgfile, "useInvisibilityBody", useInvisibilityBody)).toString());
-				useInvisibilityArmor = Boolean.valueOf((PFLM_Config.loadConfig(mainCfgfile, "useInvisibilityArmor", useInvisibilityArmor)).toString());
-				useInvisibilityItem = Boolean.valueOf((PFLM_Config.loadConfig(mainCfgfile, "useInvisibilityItem", useInvisibilityItem)).toString());
-				versionCheck = Boolean.valueOf((PFLM_Config.loadConfig(mainCfgfile, "versionCheck", versionCheck)).toString());
-				Modchu_Debug.debugCustomModelMessage = Boolean.valueOf((PFLM_Config.loadConfig(mainCfgfile, "debugCustomModelMessage", Modchu_Debug.debugCustomModelMessage)).toString());
+				skirtFloats = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "skirtFloats", skirtFloats)).toString());
+				skirtFloatsVolume = Float.valueOf((Modchu_Config.loadConfig(mainCfgfile, "skirtFloatsVolume", skirtFloatsVolume)).toString());
+				Modchu_Debug.debugMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugMessage", Modchu_Debug.debugMessage)).toString());
+				Modchu_Debug.debugMessagetexture = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugMessagetexture", Modchu_Debug.debugMessagetexture)).toString());
+				Modchu_Reflect.debugReflectMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugReflectMessage", Modchu_Reflect.debugReflectMessage)).toString());
+				Modchu_Reflect.debugReflectMessageDetail = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugReflectMessageDetail", Modchu_Reflect.debugReflectMessageDetail)).toString());
+				modchuRemodelingModel = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "modchuRemodelingModel", modchuRemodelingModel)).toString());
+				useInvisibilityBody = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityBody", useInvisibilityBody)).toString());
+				useInvisibilityArmor = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityArmor", useInvisibilityArmor)).toString());
+				useInvisibilityItem = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityItem", useInvisibilityItem)).toString());
+				versionCheck = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "versionCheck", versionCheck)).toString());
+				Modchu_Debug.debugCustomModelMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugCustomModelMessage", Modchu_Debug.debugCustomModelMessage)).toString());
 				String k[] = {
 						"skirtFloats", "skirtFloatsVolume", "debugMessage", "debugMessagetexture", "debugReflectMessage",
 						"debugReflectMessageDetail", "modchuRemodelingModel", "useInvisibilityBody", "useInvisibilityArmor", "useInvisibilityItem",
@@ -409,7 +409,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 				};
 				if (skirtFloatsVolume < 0.0F) skirtFloatsVolume = 0.0F;
 				if (skirtFloatsVolume > 2.0F) skirtFloatsVolume = 2.0F;
-				PFLM_Config.writerSupplementConfig(mainCfgfile, k, k1);
+				Modchu_Config.writerSupplementConfig(mainCfgfile, k, k1);
 			}
 		}
 	}
