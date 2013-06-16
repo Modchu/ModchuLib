@@ -568,7 +568,8 @@ public class Modchu_CustomModel extends ModelBase {
 				mainModel.render.loadTexture(mainModeltexture);
 				//Modchu_Debug.mDebug("Modchu_CustomModel render mainModeltexture="+mainModeltexture);
 				//Modchu_Debug.mDebug("Modchu_CustomModel render mainModel.getClass()="+(mainModel.getClass()));
-				mainModel.render(entityCaps, f, f1, ticksExisted, pheadYaw, pheadPitch, f5, true);
+				Modchu_Debug.mDebug("Modchu_CustomModel render Modchu_ModelCapsHelper.getCapsValueBoolean(entityCaps, entityCaps.caps_isRendering)="+(Modchu_ModelCapsHelper.getCapsValueBoolean(entityCaps, entityCaps.caps_isRendering)));
+				mainModel.render(entityCaps, f, f1, ticksExisted, pheadYaw, pheadPitch, f5, Modchu_ModelCapsHelper.getCapsValueBoolean(entityCaps, entityCaps.caps_isRendering));
 			}
 			else Modchu_Debug.cDebug("Modchu_CustomModel render render == null !!");
 		} else {
@@ -619,7 +620,7 @@ public class Modchu_CustomModel extends ModelBase {
 						}
 					}
 					customModelShowModelSetting(s1, true);
-					mainModel.render(entityCaps, f, f1, ticksExisted, pheadYaw, pheadPitch, f5, true);
+					mainModel.render(entityCaps, f, f1, ticksExisted, pheadYaw, pheadPitch, f5, Modchu_ModelCapsHelper.getCapsValueBoolean(entityCaps, entityCaps.caps_isRendering));
 					customModelShowModelSetting(null, false);
 				}
 				prevTexture = texture;
@@ -649,7 +650,7 @@ public class Modchu_CustomModel extends ModelBase {
 				if (mainModel.render != null) ;else mainModel.render = baseModel.render;
 				if (mainModel.render != null) mainModel.render.loadTexture(s);
 			}
-			model.render(entityCaps, f, f1, ticksExisted, pheadYaw, pheadPitch, f5, true);
+			model.render(entityCaps, f, f1, ticksExisted, pheadYaw, pheadPitch, f5, Modchu_ModelCapsHelper.getCapsValueBoolean(entityCaps, entityCaps.caps_isRendering));
 		}
 	}
 

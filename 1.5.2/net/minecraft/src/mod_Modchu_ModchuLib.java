@@ -183,7 +183,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.2-3e";
+		return "1.5.2-3g";
 	}
 
 	@Override

@@ -594,10 +594,10 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 
 	public void renderObject(float par1, boolean b) {
 		// レンダリング、あと子供も
-		if (b) {
+		if (showModel) {
 			GL11.glScalef(scaleX, scaleY, scaleZ);
 			GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, matrix);
-			GL11.glCallList(displayList);
+			if (b) GL11.glCallList(displayList);
 		}
 		if (childModels != null) {
 			MMM_ModelRenderer modelRenderer;
@@ -632,7 +632,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		if (rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F) {
 			setRotation();
 		}
-		renderObject(par1, showModel);
+		renderObject(par1, b);
 		GL11.glPopMatrix();
 	}
 
@@ -665,10 +665,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 			compileDisplayList(par1);
 		}
 
-		if (pearent != null) {
-			pearent.postRender(par1);
-		}
-
+		GL11.glPushMatrix();
 		if (rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F) {
 			GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
 
@@ -676,6 +673,11 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		} else if (rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F) {
 			GL11.glTranslatef(rotationPointX * par1, rotationPointY * par1, rotationPointZ * par1);
 		}
+
+		if (pearent != null) {
+			pearent.postRender(par1);
+		}
+		GL11.glPopMatrix();
 	}
 
 	public void postRenderAll(float par1, boolean b) {

@@ -1339,7 +1339,7 @@ public class Modchu_Reflect
 
 	private static String getFieldName(String var0) {
     	if (mod_Modchu_ModchuLib.isForge
-    			&& mod_PFLM_PlayerFormLittleMaid.mod_pflm_playerformlittlemaid.playerFormLittleMaidVersion >= 151) return var0;
+    			&& mod_Modchu_ModchuLib.mod_modchu_modchulib.modchuLibVersion >= 151) return var0;
     	String[] s1 = {
     			"field_77110_j",
     			"func_82441_a",
