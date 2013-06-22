@@ -24,6 +24,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static boolean isForge = false;
 	public static boolean isLMM = false;
 	public static boolean isPFLM = false;
+	public static boolean isPFLMF = false;
 	public static boolean isFavBlock = false;
 	public static boolean isDecoBlock = false;
 	public static boolean isBTW = false;
@@ -35,8 +36,11 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static Class MMM_FileManager;
 	public static Class MMM_TextureBox;
 	public static Class MMM_StabilizerManager;
+	public static Class MMM_GuiTextureSelect;
+	public static Class MMM_EntitySelect;
 	public static Class mod_PFLM_PlayerFormLittleMaid;
 	public static Class mod_LMM_littleMaidMob;
+	public static Class mod_PFLMF;
 	public static Class PFLM_Gui;
 	public static Class PFLM_GuiModelSelect;
 	public static Class PFLM_GuiOthersPlayer;
@@ -45,7 +49,6 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static Class PFLM_RenderPlayer;
 	public static Class PFLM_RenderPlayer2;
 	public static Class LMM_EntityLittleMaid;
-	public static Class LMM_GuiTextureSelect;
 	public static Class decoBlock;
 	public static Class decoBlockBase;
 	public static Class favBlock;
@@ -60,6 +63,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	private static File mainCfgfile = new File(cfgdir, ("Modchu_ModchuLib.cfg"));
 	public static HashMap<String, Object[]> checkModelsBox = new HashMap();
 	public static HashMap<Entity, Map> entityModelMapData = new HashMap();
+	public static Map<String, Object[]> dummyModelMapData = new HashMap();
 	public static List<String> ngPlayerModelList = new ArrayList<String>();
 	public static boolean isClient = true;
 	private static boolean packageNameNull = false;
@@ -183,7 +187,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.5.2-3g";
+		return "1.5.2-4";
 	}
 
 	@Override
@@ -253,7 +257,8 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		if (mod_LMM_littleMaidMob != null) {
 			isLMM = true;
 			LMM_EntityLittleMaid = Modchu_Reflect.loadClass(getClassName("LMM_EntityLittleMaid"));
-			LMM_GuiTextureSelect = Modchu_Reflect.loadClass(getClassName("LMM_GuiTextureSelect"));
+			MMM_GuiTextureSelect = Modchu_Reflect.loadClass(getClassName("MMM_GuiTextureSelect"));
+			MMM_EntitySelect = Modchu_Reflect.loadClass(getClassName("MMM_EntitySelect"));
 		}
 
 		mod_PFLM_PlayerFormLittleMaid = Modchu_Reflect.loadClass(getClassName("mod_PFLM_PlayerFormLittleMaid"), -1);
@@ -331,6 +336,12 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 					s1 = s1.substring(s1.length() - 1);
 					if (Integer.valueOf(s1) < 5) oldRenderItems = b;
 				}
+			}
+			else if (name.equals("mod_PFLMF")) {
+				isPFLMF = true;
+				mod_PFLMF = Modchu_Reflect.loadClass(getClassName("mod_PFLMF"), -1);
+				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_PFLMF Check ok.");
+				Modchu_Debug.Debug("mod_PFLMF Check ok.");
 			}
 		}
 		String s;
@@ -595,21 +606,23 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	}
 
 	public static Object getTextureBox(String s) {
-		if (s.indexOf("_") < 0) s = s+"_Orign";
+		if (s != null) {
+			if (s.indexOf("_") < 0) s = s+"_Orign";
+		} else s = "default_Orign";
 		Object o = Modchu_Reflect.getFieldObject(MMM_TextureManager, "instance");
 		if (o != null) return Modchu_Reflect.invokeMethod(MMM_TextureManager, "getTextureBox", new Class[]{ String.class }, o, new Object[]{ s });
 		return null;
 	}
 
-	public static Object[] getTextureModels(String s) {
-		return getTextureModels(s, false);
+	public static Object[] getTextureModels(Entity entity, String s) {
+		return getTextureModels(entity, s, false);
 	}
 
-	public static Object[] getTextureModels(String s, boolean b) {
+	public static Object[] getTextureModels(Entity entity, String s, boolean b) {
 		Object o = Modchu_Reflect.getFieldObject(MMM_TextureManager, "instance");
 		if (o != null) {
 			Object ltb = Modchu_Reflect.invokeMethod(MMM_TextureManager, "getTextureBox", new Class[]{ String.class }, o, new Object[]{ s });
-			return textureBoxModelsCheck(ltb, s, b, true);
+			return modelNewInstance(entity, s, b, true);
 		}
 		return null;
 	}
@@ -618,104 +631,19 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		return getTextureManagerTextures(i);
 	}
 
-	public static Object[] getTextureModels(int i) {
-		return getTextureModels(i, false);
+	public static Object[] getTextureModels(Entity entity, int i) {
+		return getTextureModels(entity, i, false);
 	}
 
-	public static Object[] getTextureModels(int i, boolean b) {
+	public static Object[] getTextureModels(Entity entity, int i, boolean b) {
 		Object ltb = getTextureManagerTextures(i);
-		return textureBoxModelsCheck(ltb, getTextureBoxFileName(ltb), b, true);
+		return modelNewInstance(entity, getTextureBoxFileName(ltb), b, true);
 	}
 
-	public static Object[] textureBoxModelsCheck(Object ltb, String s) {
-		return textureBoxModelsCheck(ltb, s, false, true);
-	}
-
-	public static Object[] textureBoxModelsCheck(Object ltb, String s, boolean b, boolean useCustom) {
-		String s1 = lastIndexProcessing(s, "_");
-		Object[] newModels;
-		if (checkModelsBox.containsKey(s)) {
-			if (!b) {
-				newModels = (Object[]) checkModelsBox.get(s);
-				if (newModels != null) {
-					//Modchu_Debug.mDebug("textureBoxModelsCheck return newModels s="+s);
-					return newModels;
-				}
-			}
-		}
-		if (ltb != null) ;else ltb = getTextureBox(s);
-		boolean flag = false;
-		Object[] models = null;
-		if (ltb != null) {
-			models = getTextureBoxModels(ltb);
-			flag = ltb != null
-					&& models != null
-					&& !MultiModelBaseBiped.class.isInstance(models[0]) ? true : false;
-			flag = models != null ? flag : true;
-		}
-		if (flag
-				| b) {
-			//Modchu_Debug.mDebug("textureBoxCheck !MultiModelBaseBiped s1="+s1);
-			newModels = new Object[3];
-			String s2 = s1.equals("default") | modelClassName == null ? modelClassName : new StringBuilder().append(modelClassName).append("_").append(s1).toString();
-			Class c = Modchu_Reflect.loadClass(mod_Modchu_ModchuLib.mod_modchu_modchulib.getClassName(s2), -1);
-			if (c != null) {
-				Modchu_Debug.mDebug("textureBoxCheck newInstance s="+s);
-				newModels[0] = (MultiModelBaseBiped) Modchu_Reflect.newInstance(c, new Class[]{ float.class }, new Object[]{ 0.0F });
-				float[] f1 = getArmorModelsSize(newModels[0]);
-				newModels[1] = (MultiModelBaseBiped) Modchu_Reflect.newInstance(c, new Class[]{ float.class }, new Object[]{ f1[0] });
-				newModels[2] = (MultiModelBaseBiped) Modchu_Reflect.newInstance(c, new Class[]{ float.class }, new Object[]{ f1[1] });
-			} else {
-				//Modchu_Debug.mDebug("textureBoxCheck !c == null s="+s);
-				if (useCustom) newModels = newModelCustom(ltb, s);
-				//Modchu_Reflect.setFieldObject(ltb.getClass(), "models", ltb, newModels);
-			}
-			checkModelsBox.put(s, newModels);
-			return newModels;
-		}
-		//Modchu_Debug.mDebug("textureBoxCheck !flag s="+s);
-		return models;
-	}
-
-	public static Object[] newModelCustom(Object ltb, String s) {
-		if (ltb != null) ;else ltb = getTextureBox(s);
-		Object[] models = getTextureBoxModels(ltb);
-		Class c = Modchu_Reflect.loadClass(mod_Modchu_ModchuLib.mod_modchu_modchulib.getClassName("MultiModel_Custom"), -1);
-		Modchu_Debug.mDebug("newModelCustom s="+s);
-		if (models != null) ;else {
-			models = new MultiModel[3];
-			models[0] = new MultiModel(0.0F);
-			float[] f = ((MultiModel) models[0]).getArmorModelsSize();
-			models[1] = new MultiModel(f[0]);
-			models[2] = new MultiModel(f[1]);
-		}
-		if (s.indexOf("_") < 0) return models;
-		if (c != null
-				&& models != null) {
-			if (models[0] != null) ;else Modchu_Debug.mDebug("models[0] == null !!");
-			if (models[0] != null) {
-				Object[] newModels = new Object[3];
-				newModels[0] = (MultiModel_Custom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ 0.0F, models[0], s});
-				float[] f1 = getArmorModelsSize(models[0]);
-				if (models[1] != null) ;else Modchu_Debug.mDebug("models[1] == null !!");
-				if (models[2] != null) ;else Modchu_Debug.mDebug("models[2] == null !!");
-				if (models[1] != null) {
-					if (LMMarmorSupport) newModels[1] = (MultiModelCustom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ f1[0], models[1], s });
-					else newModels[1] = models[1];
-				}
-				if (models[2] != null) {
-					if (LMMarmorSupport) newModels[2] = (MultiModelCustom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ f1[1], models[2], s });
-					else newModels[2] = models[2];
-				}
-				return newModels;
-			}
-		}
-		Modchu_Debug.mDebug("newModelCustom return null !! s="+s);
-		return null;
-	}
-
-	public static Object[] modelNewInstance(Entity entity, String s, boolean b) {
-		Map<String, Object[]> map = entityModelMapData.get(entity);
+	public static Object[] modelNewInstance(Entity entity, String s, boolean b, boolean useCustom) {
+		Map<String, Object[]> map = null;
+		if (entity != null) map = entityModelMapData.get(entity);
+		else map = dummyModelMapData;
 		Object[] models = null;
 		String s1 = lastIndexProcessing(s, "_");
 		if (map != null) {
@@ -736,29 +664,29 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 			map = new HashMap<String, Object[]>();
 			//Modchu_Debug.mDebug("modelNewInstance map = new HashMap");
 		}
-		models = modelNewInstance(s);
+		models = modelNewInstance(s, useCustom);
 		if (models != null
 				&& models[0] != null
 				&& models[1] != null
 				&& models[2] != null) {
 			map.put(s, models);
-			entityModelMapData.put(entity, map);
+			if (entity != null) entityModelMapData.put(entity, map);
 			return models;
 		}
 		boolean isBiped = s1.equalsIgnoreCase("Biped");
 		String t = isBiped ? "Biped_Biped" : s;
-		models = modelNewInstance(t);
+		models = modelNewInstance(t, useCustom);
 		if (models != null
 				&& models[0] != null
 				&& models[1] != null
 				&& models[2] != null) {
 			map.put(t, models);
-			entityModelMapData.put(entity, map);
+			if (entity != null) entityModelMapData.put(entity, map);
 		}
 		return models;
 	}
 
-	public static Object[] modelNewInstance(String s) {
+	public static Object[] modelNewInstance(String s, boolean useCustom) {
 		Object[] models = new Object[3];
 		String s1 = s != null ? lastIndexProcessing(s, "_") : s;
 		String s2 = s1 != null
@@ -795,9 +723,47 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 *///125delete
 				return models;
 			}
+		} else {
+			Object ltb = getTextureBox(s);
+			if (ltb != null) models = getTextureBoxModels(ltb);
 		}
 		Modchu_Debug.mDebug("modelNewInstance c == null s="+s);
-		return newModelCustom(null, s);
+		return useCustom ? newModelCustom(models, s) : models;
+	}
+
+	public static Object[] newModelCustom(Object[] models, String s) {
+		Class c = Modchu_Reflect.loadClass(mod_Modchu_ModchuLib.mod_modchu_modchulib.getClassName("MultiModel_Custom"), -1);
+		Modchu_Debug.mDebug("newModelCustom s="+s);
+		if (models != null) ;else {
+			models = new MultiModel[3];
+			models[0] = new MultiModel(0.0F);
+			float[] f = ((MultiModel) models[0]).getArmorModelsSize();
+			models[1] = new MultiModel(f[0]);
+			models[2] = new MultiModel(f[1]);
+		}
+		if (s.indexOf("_") < 0) return models;
+		if (c != null
+				&& models != null) {
+			if (models[0] != null) ;else Modchu_Debug.mDebug("models[0] == null !!");
+			if (models[0] != null) {
+				Object[] newModels = new Object[3];
+				newModels[0] = (MultiModel_Custom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ 0.0F, models[0], s});
+				float[] f1 = getArmorModelsSize(models[0]);
+				if (models[1] != null) ;else Modchu_Debug.mDebug("models[1] == null !!");
+				if (models[2] != null) ;else Modchu_Debug.mDebug("models[2] == null !!");
+				if (models[1] != null) {
+					if (LMMarmorSupport) newModels[1] = (MultiModelCustom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ f1[0], models[1], s });
+					else newModels[1] = models[1];
+				}
+				if (models[2] != null) {
+					if (LMMarmorSupport) newModels[2] = (MultiModelCustom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ f1[1], models[2], s });
+					else newModels[2] = models[2];
+				}
+				return newModels;
+			}
+		}
+		Modchu_Debug.mDebug("newModelCustom return null !! s="+s);
+		return null;
 	}
 
 	public static Object checkTexturePackege(String s, int i) {
