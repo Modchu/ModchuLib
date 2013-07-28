@@ -12,7 +12,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	//cfg書き込み項目
 	public static boolean skirtFloats = false;
-	public static float skirtFloatsVolume = 1.0F;
+	public static double skirtFloatsVolume = 1.0D;
 	public static boolean modchuRemodelingModel = true;
 	public static boolean useInvisibilityBody = true;
 	public static boolean useInvisibilityArmor = false;
@@ -190,7 +190,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.6.2-4a";
+		return "1.6.2-4b";
 	}
 
 	@Override
@@ -392,7 +392,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 			if (!mainCfgfile.exists()) {
 				// cfgファイルが無い = 新規作成
 				String s[] = {
-						"skirtFloats=false", "skirtFloatsVolume=1.0F", "debugMessage=true", "debugMessagetexture=true", "debugReflectMessage=true",
+						"skirtFloats=false", "skirtFloatsVolume=1.0D", "debugMessage=true", "debugMessagetexture=true", "debugReflectMessage=true",
 						"debugReflectMessageDetail=false", "modchuRemodelingModel=true", "useInvisibilityBody=true", "useInvisibilityArmor=false", "useInvisibilityItem=false",
 						"versionCheck=true",  "debugCustomModelMessage=false"
 				};
@@ -400,7 +400,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 			} else {
 				// cfgファイルがある
 				skirtFloats = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "skirtFloats", skirtFloats)).toString());
-				skirtFloatsVolume = Float.valueOf((Modchu_Config.loadConfig(mainCfgfile, "skirtFloatsVolume", skirtFloatsVolume)).toString());
+				skirtFloatsVolume = Double.valueOf((Modchu_Config.loadConfig(mainCfgfile, "skirtFloatsVolume", skirtFloatsVolume)).toString());
 				Modchu_Debug.debugMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugMessage", Modchu_Debug.debugMessage)).toString());
 				Modchu_Debug.debugMessagetexture = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugMessagetexture", Modchu_Debug.debugMessagetexture)).toString());
 				Modchu_Reflect.debugReflectMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugReflectMessage", Modchu_Reflect.debugReflectMessage)).toString());
@@ -421,8 +421,8 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 						""+Modchu_Reflect.debugReflectMessageDetail, ""+modchuRemodelingModel, ""+useInvisibilityBody, ""+useInvisibilityArmor, ""+useInvisibilityItem,
 						""+versionCheck, ""+Modchu_Debug.debugCustomModelMessage
 				};
-				if (skirtFloatsVolume < 0.0F) skirtFloatsVolume = 0.0F;
-				if (skirtFloatsVolume > 2.0F) skirtFloatsVolume = 2.0F;
+				if (skirtFloatsVolume < 0.0D) skirtFloatsVolume = 0.0D;
+				if (skirtFloatsVolume > 2.0D) skirtFloatsVolume = 2.0D;
 				Modchu_Config.writerSupplementConfig(mainCfgfile, k, k1);
 			}
 		}

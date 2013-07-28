@@ -1344,7 +1344,8 @@ public class Modchu_Reflect
     			"field_77110_j",
     			"func_82441_a",
     			"func_71061_d_", "func_70105_a", "field_75623_d",
-    			"func_70301_a", "field_70462_a", "func_70301_a", "func_71052_bv", "field_70460_b"
+    			"func_70301_a", "field_70462_a", "func_70301_a", "func_71052_bv", "field_70460_b",
+    			"field_82424_k"
     	};
     	String[] s2 = {
     			"h",
@@ -1355,7 +1356,8 @@ public class Modchu_Reflect
     			"a",
 *///151delete
     			"aa", "a", "d",
-    			"a", "a", "a", "bL", "b"
+    			"a", "a", "a", "bL", "b",
+    			"l"
     	};
     	for(int i = 0; i < s1.length; i++) {
     		if (s1[i].equals(var0)) return s2[i];

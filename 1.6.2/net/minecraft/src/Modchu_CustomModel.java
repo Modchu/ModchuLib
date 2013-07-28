@@ -172,17 +172,17 @@ public class Modchu_CustomModel extends ModelBase {
 			partAddChildName[j] = (String) temp[2][i1];
 			partsTextureWidth[j] = (Integer) temp[3][i1];
 			partsTextureHeight[j] = (Integer) temp[4][i1];
-			partsBoxNumber[j] = (Integer) temp[7][i1];
-			partsRotationPointX[j] = (Float) temp[8][i1];
-			partsRotationPointY[j] = (Float) temp[9][i1];
-			partsRotationPointZ[j] = (Float) temp[10][i1];
-			partsRotateAngleX[j] = (Float) temp[11][i1];
-			partsRotateAngleY[j] = (Float) temp[12][i1];
-			partsRotateAngleZ[j] = (Float) temp[13][i1];
-			partsType[j] = (Byte) temp[14][i1];
-			partsTextureColor[j] = (Byte) temp[15][i1];
-			partsTypeFactor[j] = (Float) temp[16][i1];
-			partsTypeCorrection[j] = (Float) temp[17][i1];
+			partsBoxNumber[j] = (Integer) temp[5][i1];
+			partsRotationPointX[j] = (Float) temp[6][i1];
+			partsRotationPointY[j] = (Float) temp[7][i1];
+			partsRotationPointZ[j] = (Float) temp[8][i1];
+			partsRotateAngleX[j] = (Float) temp[9][i1];
+			partsRotateAngleY[j] = (Float) temp[10][i1];
+			partsRotateAngleZ[j] = (Float) temp[11][i1];
+			partsType[j] = (Byte) temp[12][i1];
+			partsTextureColor[j] = (Byte) temp[13][i1];
+			partsTypeFactor[j] = (Float) temp[14][i1];
+			partsTypeCorrection[j] = (Float) temp[15][i1];
 			if (partsBoxNumberMax > 0) {
 				for(int i2 = 0; i2 < partsBoxNumberMax; i2++) {
 					boxType[j][i2] = (Byte) tempBox[0][i1][i2];
@@ -394,6 +394,8 @@ public class Modchu_CustomModel extends ModelBase {
 		if (i > 0) {
 			partAddChildName[i] = partAddChildName[i - 1];
 			partsTextureNameMap.put(i, partsTextureNameMap.get(i - 1));
+		} else {
+			partsTextureNameMap.put(i, "default");
 		}
 	}
 
