@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import net.minecraft.client.Minecraft;
 
 public class Modchu_Debug {
 
@@ -39,6 +38,13 @@ public class Modchu_Debug {
 
 	public static void cDebug(String s) {
 		if (debugCustomModelMessage) System.out.println((new StringBuilder()).append("Modchu_cDebug_").append(s).toString());
+	}
+
+	public static void mlDebug(String s) {
+		if (debugMessage) {
+			ModLoader.getLogger().fine("playerFormLittleMaid-"+s);
+			Debug(s);
+		}
 	}
 
 	public static void dDebug(String s) {

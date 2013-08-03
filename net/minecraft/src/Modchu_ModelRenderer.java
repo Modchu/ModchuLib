@@ -238,18 +238,18 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 
 	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, float scale, int addSupport) {
 		ItemStack lis = (ItemStack)pEntityCaps.getCapsValue(caps_HeadMount);
-		EntityLiving lentity = (EntityLiving)pEntityCaps.getCapsValue(caps_Entity);
+		EntityLivingBase lentity = (EntityLivingBase)pEntityCaps.getCapsValue(caps_Entity);
 
 		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
 	}
 
 	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, ItemStack lis, float scale, int addSupport) {
-		EntityLiving lentity = (EntityLiving)pEntityCaps.getCapsValue(caps_Entity);
+		EntityLivingBase lentity = (EntityLivingBase)pEntityCaps.getCapsValue(caps_Entity);
 
 		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
 	}
 
-	public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack, float scale, int addSupport) {
+	public void renderItems(EntityLivingBase pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack, float scale, int addSupport) {
 		if (pEntityLiving != null) ;else return;
 		itemstack = pItemStack;
 		switch(addSupport) {
@@ -262,19 +262,19 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		renderItems(pEntityLiving, pRender, pRealBlock, pAction, scale);
 	}
 
-	public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack) {
+	public void renderItems(EntityLivingBase pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack) {
 		if (pEntityLiving != null) ;else return;
 		itemstack = pItemStack;
 		renderItems(pEntityLiving, pRender, pRealBlock, pAction, 1.0F);
 	}
 
-	public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction) {
+	public void renderItems(EntityLivingBase pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction) {
 		if (itemstack != null
 				&& pEntityLiving != null) ;else return;
 		renderItems(pEntityLiving, pRender, pRealBlock, pAction, 1.0F);
 	}
 
-	public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale) {
+	public void renderItems(EntityLivingBase pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale) {
 		if (itemstack != null
 				&& pEntityLiving != null) ;else return;
 
@@ -382,6 +382,8 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 			}
 *///147delete
 			// 152deletepRender.func_110776_a(s1);
+			TextureManager var4 = Minecraft.getMinecraft().func_110434_K();
+			var4.func_110577_a(var4.func_130087_a(0));
 			GL11.glEnable(GL11.GL_CULL_FACE);
 			pRender.renderBlocks.renderBlockAsItem(Block.blocksList[itemstack.itemID], itemstack.getItemDamage(), 1.0F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
@@ -391,8 +393,8 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 				// アイテムに色付け
 				int renderPasses = itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0;
 
-				String s1 = "/gui/items.png";
 /*//147delete
+				String s1 = "/gui/items.png";
 				if (mod_Modchu_ModchuLib.isForge) {
 					if (renderPasses == 1) renderPasses =
 							(Integer) Modchu_Reflect.invokeMethod(Item.class, "getRenderPasses", new Class[]{ int.class },
@@ -405,7 +407,6 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 				}
 *///147delete
 				// 152deletepRender.func_110776_a(s1);
-
 				for (int j = 0; j <= renderPasses; j++) {
 					if (!mod_Modchu_ModchuLib.isSSP
 							| renderPasses > 0) {
@@ -424,7 +425,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		GL11.glPopMatrix();
 	}
 
-	public boolean renderDecoBlock(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale, int addSupport) {
+	public boolean renderDecoBlock(EntityLivingBase pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale, int addSupport) {
 		//DecoBlock, FavBlock用描画
 		Item item = itemstack.getItem();
 		Block block = Block.blocksList[item.itemID];
