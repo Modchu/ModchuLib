@@ -190,7 +190,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.6.2-4c";
+		return "1.6.2-4d";
 	}
 
 	@Override
@@ -774,7 +774,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static Object checkTexturePackege(String s, int i) {
 		Object ltb = getTextureBox(s);
 		if (ltb != null) {
-			ResourceLocation s1 = textureManagerGetTexture(s, i);
+			Object s1 = textureManagerGetTexture(s, i);
 			if (s1 != null) {
 				//Modchu_Debug.mDebug("checkTexturePackege ok s1="+s1);
 				return ltb;
@@ -787,7 +787,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		Object ltb = getTextureBox(s);
 		if (ltb != null
 				&& getTextureBoxHasArmor(ltb)) {
-			ResourceLocation s1 = textureManagerGetArmorTexture(s, 64, new ItemStack(Item.helmetDiamond));
+			Object s1 = textureManagerGetArmorTexture(s, 64, new ItemStack(Item.helmetDiamond));
 			if (s1 != null) {
 				//Modchu_Debug.mDebug("checkTextureArmorPackege ok s1="+s1);
 				return ltb;
@@ -796,7 +796,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		return null;
 	}
 
-	public static ResourceLocation textureManagerGetTexture(String s, int i) {
+	public static Object textureManagerGetTexture(String s, int i) {
 		s = textureNameCheck(s);
 		Object ltb = getTextureBox(s);
 		if (ltb != null) return getTextureBoxTextureName(ltb, i);
@@ -824,11 +824,11 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		return s;
 	}
 
-	public static ResourceLocation textureManagerGetArmorTexture(String s, int i, ItemStack is) {
+	public static Object textureManagerGetArmorTexture(String s, int i, ItemStack is) {
 		//Modchu_Debug.mDebug("textureManagerGetArmorTextureName s="+s+" i="+i);
 		s = textureNameCheck(s);
 		Object ltb = getTextureBox(s);
-		if (ltb != null) return (ResourceLocation) Modchu_Reflect.invokeMethod(MMM_TextureBox, "getArmorTextureName", new Class[]{int.class, ItemStack.class}, ltb, new Object[]{i, is});
+		if (ltb != null) return Modchu_Reflect.invokeMethod(MMM_TextureBox, "getArmorTextureName", new Class[]{int.class, ItemStack.class}, ltb, new Object[]{i, is});
 		//Modchu_Debug.mDebug("textureManagerGetArmorTextureName return null !! s="+s+" i="+i);
 		return null;
 	}
@@ -901,8 +901,8 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		return ltb != null ? (Boolean) Modchu_Reflect.invokeMethod(MMM_TextureBox, "hasColor", new Class[]{ int.class }, ltb, new Object[]{ i }) : false;
 	}
 
-	public static ResourceLocation getTextureBoxTextureName(Object ltb, int i) {
-		return ltb != null ? (ResourceLocation) Modchu_Reflect.invokeMethod(MMM_TextureBox, "getTextureName", new Class[]{ int.class }, ltb, new Object[]{ i }) : null;
+	public static Object getTextureBoxTextureName(Object ltb, int i) {
+		return ltb != null ? Modchu_Reflect.invokeMethod(MMM_TextureBox, "getTextureName", new Class[]{ int.class }, ltb, new Object[]{ i }) : null;
 	}
 
 	public static String getTextureBoxFileName(Object ltb) {

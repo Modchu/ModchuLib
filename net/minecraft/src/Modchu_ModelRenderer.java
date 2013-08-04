@@ -382,8 +382,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 			}
 *///147delete
 			// 152deletepRender.func_110776_a(s1);
-			TextureManager var4 = Minecraft.getMinecraft().func_110434_K();
-			var4.func_110577_a(var4.func_130087_a(0));
+			loadBlockTexture();
 			GL11.glEnable(GL11.GL_CULL_FACE);
 			pRender.renderBlocks.renderBlockAsItem(Block.blocksList[itemstack.itemID], itemstack.getItemDamage(), 1.0F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
@@ -479,8 +478,9 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 */
 //@-@b173
 			if (scale > 1.0F) GL11.glScalef(scale, scale, scale);
-			// b166deleteGL11.glColor4f(f20, f20, f20, 1.0F);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			if (translatef) GL11.glTranslatef(translatefX, translatefY, translatefZ);
+			loadBlockTexture();
 			pRender.renderBlocks.renderBlockAsItem(block, itemstack.getItemDamage(), 1.0F);
 			particleFrequency -= (int)((scale - 1.0F) * 10F);
 			//Modchu_Debug.mDebug("particleFrequency ="+particleFrequency+" (int)(scale - 1.0F * 10F)="+((int)((scale - 1.0F) * 10F))+" scale="+scale);
@@ -497,23 +497,29 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		return flag;
 	}
 
+	private void loadBlockTexture() {
+		if (mod_PFLM_PlayerFormLittleMaid.getPFLMVersion() < 160) return;
+		TextureManager var4 = Minecraft.getMinecraft().func_110434_K();
+		var4.func_110577_a(var4.func_130087_a(0));
+	}
+
 	private boolean isBTWItem(Item var1) {
-        Class c = Modchu_Reflect.loadClass("net.minecraft.src.forge.ITextureProvider");
-        if (c != null) ;else Modchu_Reflect.loadClass("forge.ITextureProvider");
-        if (c != null) {
-            Class[] var3 = var1.getClass().getInterfaces();
-            for (int var4 = 0; var4 < var3.length; ++var4) {
-                if (var3[var4] == c) return true;
-        	}
-    	} else {
-    		c = Modchu_Reflect.loadClass("net.minecraft.src.FCItemMattock");
-    		if (c!= null
-    				&& c.isInstance(var1)) return true;
-    		c = Modchu_Reflect.loadClass("FCItemMattock");
-    		if (c!= null
-    				&& c.isInstance(var1)) return true;
-    	}
-        return false;
+		Class c = Modchu_Reflect.loadClass("net.minecraft.src.forge.ITextureProvider");
+		if (c != null) ;else Modchu_Reflect.loadClass("forge.ITextureProvider");
+		if (c != null) {
+			Class[] var3 = var1.getClass().getInterfaces();
+			for (int var4 = 0; var4 < var3.length; ++var4) {
+				if (var3[var4] == c) return true;
+			}
+		} else {
+			c = Modchu_Reflect.loadClass("net.minecraft.src.FCItemMattock");
+			if (c!= null
+					&& c.isInstance(var1)) return true;
+			c = Modchu_Reflect.loadClass("FCItemMattock");
+			if (c!= null
+					&& c.isInstance(var1)) return true;
+		}
+		return false;
 	}
 
 	public void setRotatePriority(int pValue) {

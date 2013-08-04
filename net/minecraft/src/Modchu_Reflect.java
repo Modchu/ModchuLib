@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -1128,6 +1129,16 @@ public class Modchu_Reflect
     	return null;
     }
 
+    public static Object invokeMethod(String var0, String var1, Class[] var2, Object ... var3)
+    {
+    	return invokeMethod(var0, var1, var2, null, var3, 1);
+    }
+
+    public static Object invokeMethod(String var0, String var1, Class[] var2, Object[] var3, int i)
+    {
+    	return invokeMethod(var0, var1, var2, null, var3, i);
+    }
+
     public static Object invokeMethod(String var0, String var1, Class[] var2, Object var3, Object ... var4)
     {
     	return invokeMethod(var0, var1, var2, var3, var4, 1);
@@ -1280,6 +1291,39 @@ public class Modchu_Reflect
     		if (constructor != null) return constructor.newInstance(var3);
     	} catch (Exception e) {
     		if (debugDisplay(i)) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    public static Object[] newInstanceArray(String var1, int i)
+    {
+    	return newInstanceArray(var1, i, 1);
+    }
+
+    public static Object[] newInstanceArray(String var1, int i, int i2)
+    {
+    	Class c = null;
+    	try {
+    		c = loadClass(var1);
+    		if (c != null) return (Object[]) Array.newInstance(c, i);
+    	} catch (Exception e) {
+    		if (debugDisplay(i2)) e.printStackTrace();
+    	}
+    	return null;
+    }
+
+    static Object[] newInstanceArray(Class var1, int i)
+    {
+    	return newInstanceArray(var1, i, 1);
+    }
+
+    public static Object[] newInstanceArray(Class var1, int i, int i2)
+    {
+    	Constructor constructor = null;
+    	try {
+    		if (var1 != null) return (Object[]) Array.newInstance(var1, i);
+    	} catch (Exception e) {
+    		if (debugDisplay(i2)) e.printStackTrace();
     	}
     	return null;
     }
