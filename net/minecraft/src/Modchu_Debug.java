@@ -16,7 +16,7 @@ public class Modchu_Debug {
 		else s = "mod_PFLM_PlayerFormLittleMaid";
 		mod_PFLM_PlayerFormLittleMaid = Modchu_Reflect.loadClass(s);
 */
-		isRelease = mod_Modchu_ModchuLib.isRelease;
+		isRelease = mod_Modchu_ModchuLib.modchu_Main.isRelease;
 	}
 
 	public static void Debug(String s) {
@@ -58,7 +58,10 @@ public class Modchu_Debug {
 
 	public static void dDebugDrow() {
 		for(int i = 0 ;i < debugString.length ;i++){
-			if (debugString != null) Minecraft.getMinecraft().ingameGUI.drawString(Minecraft.getMinecraft().fontRenderer, debugString[i], 1, 1 + (10 * i), 0xffffff);
+			if (debugString != null) {
+				GuiIngame ingameGUI = (GuiIngame) Modchu_Reflect.getFieldObject("Minecraft", "ingameGUI", mod_Modchu_ModchuLib.modchu_Main.getMinecraft());
+				ingameGUI.drawString((FontRenderer) Modchu_Reflect.getFieldObject("Minecraft", "fontRenderer", mod_Modchu_ModchuLib.modchu_Main.getMinecraft()), debugString[i], 1, 1 + (10 * i), 0xffffff);
+			}
 		}
 	}
 

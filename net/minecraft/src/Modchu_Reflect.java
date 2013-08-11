@@ -13,6 +13,8 @@ public class Modchu_Reflect
     public static boolean debugReflectMessageDetail = false;
     private static HashMap<String, Class> classMap = new HashMap();
     private static HashMap<String, Method> methodMap = new HashMap();
+    private static HashMap<String, String> classNameMap = new HashMap();
+    private static HashMap<String, String> methodNameMap = new HashMap();
 
     public static void setDebugMessage(boolean b) {
     	debugReflectMessage = b;
@@ -22,8 +24,9 @@ public class Modchu_Reflect
     	debugReflectMessageDetail = b;
     }
 
-    public static void copyFields(Class var0, Object var1, Object var2)
+    public static boolean copyFields(Class var0, Object var1, Object var2)
     {
+    	boolean b = false;
     	Field[] ff = var0.getDeclaredFields();
     	for (int var4 = 0; var4 < ff.length; ++var4) {
     		Field f = ff[var4];
@@ -31,146 +34,182 @@ public class Modchu_Reflect
     		if (!Modifier.isStatic(var6) && !Modifier.isFinal(var6)) {
     			f.setAccessible(true);
     			setFieldObject(f, var2, getFieldObject(f, var1));
+    			b = true;
     		}
     	}
+    	return b;
     }
 
-    public static void setFieldObject(Field var0, Object var1, Object var2)
+    public static boolean setFieldObject(Field var0, Object var1, Object var2)
     {
-    	setFieldObject(var0, var1, var2, 1);
+    	return setFieldObject(var0, var1, var2, 1);
     }
 
-    public static void setFieldObject(Field var0, Object var1, Object var2, int i)
+    public static boolean setFieldObject(Field var0, Object var1, Object var2, int i)
     {
     	try {
-    		if (var0 != null) var0.set(var1, var2);
+    		if (var0 != null) {
+    			var0.set(var1, var2);
+    			return true;
+    		}
     	} catch (Exception e) {
     		if (debugDisplay(i)) e.printStackTrace();
     	}
+    	return false;
     }
 
-    public static void setFieldObject(String var0, String var1, Object var2)
+    public static boolean setFieldObject(String var0, String var1, Object var2)
     {
     	Class c = loadClass(var0);
-    	if (c != null) setFieldObject(c, var1, var2);
+    	if (c != null) return setFieldObject(c, var1, var2);
+    	return false;
     }
 
-    public static void setFieldObject(String var0, String var1, Object var2, int i)
+    public static boolean setFieldObject(String var0, String var1, Object var2, int i)
     {
     	Class c = loadClass(var0);
-    	if (c != null) setFieldObject(c, var1, var2, i);
+    	if (c != null) return setFieldObject(c, var1, var2, i);
+    	return false;
     }
 
-    public static void setFieldObject(Class var0, String var1, Object var2)
+    public static boolean setFieldObject(Class var0, String var1, Object var2)
     {
-    	setFieldObject(var0, var1, var2, 1);
+    	return setFieldObject(var0, var1, var2, 1);
     }
 
-    public static void setFieldObject(Class var0, String var1, Object var2, int i)
+    public static boolean setFieldObject(Class var0, String var1, Object var2, int i)
     {
     	Field f = null;
     	try {
     		f = getField(var0, var1, i);
-    		if (f != null) f.set(null, var2);
+    		if (f != null) {
+    			f.set(null, var2);
+    			return true;
+    		}
     	} catch (Exception e) {
     		if (debugDisplay(i)) e.printStackTrace();
     	}
+    	return false;
     }
 
-    public static void setFieldObject(String var0, String var1, String var2, Object var3)
+    public static boolean setFieldObject(String var0, String var1, String var2, Object var3)
     {
     	Class c = loadClass(var0);
-    	if (c != null) setFieldObject(c, var1, var2, var3, 1);
+    	if (c != null) return setFieldObject(c, var1, var2, var3, 1);
+    	return false;
     }
 
-    public static void setFieldObject(String var0, String var1, String var2, Object var3, int i)
+    public static boolean setFieldObject(String var0, String var1, String var2, Object var3, int i)
     {
     	Class c = loadClass(var0);
-    	if (c != null) setFieldObject(c, var1, var2, var3, i);
+    	if (c != null) return setFieldObject(c, var1, var2, var3, i);
+    	return false;
     }
 
-    public static void setFieldObject(Class var0, String var1, String var2, Object var3)
+    public static boolean setFieldObject(Class var0, String var1, String var2, Object var3)
     {
-    	setFieldObject(var0, var1, var2, var3, 1);
+    	return setFieldObject(var0, var1, var2, var3, 1);
     }
 
-    public static void setFieldObject(Class var0, String var1, String var2, Object var3, int i)
+    public static boolean setFieldObject(Class var0, String var1, String var2, Object var3, int i)
     {
     	Field f = null;
     	try {
     		f = getField(var0, var1, i == 1 ? 2 : i);
-    		if (f != null) f.set(null, var3);
+    		if (f != null) {
+    			f.set(null, var3);
+    			return true;
+    		}
     	} catch (Exception e) {
     		if (debugDisplayDetail(i)) e.printStackTrace();
-    		try {
-    			f = getField(var0, var2, i);
-    			if (f != null) f.set(null, var3);
-    		} catch (Exception e1) {
-    			if (debugDisplay(i)) e1.printStackTrace();
-    		}
     	}
+    	try {
+    		f = getField(var0, var2, i);
+    		if (f != null) {
+    			f.set(null, var3);
+    			return true;
+    		}
+    	} catch (Exception e1) {
+    		if (debugDisplay(i)) e1.printStackTrace();
+    	}
+    	return false;
     }
 
-    public static void setFieldObject(String var0, String var1, Object var2, Object var4)
+    public static boolean setFieldObject(String var0, String var1, Object var2, Object var4)
     {
     	Class c = loadClass(var0);
-    	if (c != null) setFieldObject(c, var1, var2, var4, 1);
+    	if (c != null) return setFieldObject(c, var1, var2, var4, 1);
+    	return false;
     }
 
-    public static void setFieldObject(String var0, String var1, Object var2, Object var4, int i)
+    public static boolean setFieldObject(String var0, String var1, Object var2, Object var4, int i)
     {
     	Class c = loadClass(var0);
-    	if (c != null) setFieldObject(c, var1, var2, var4, i);
+    	if (c != null) return setFieldObject(c, var1, var2, var4, i);
+    	return false;
     }
 
-    public static void setFieldObject(Class var0, String var1, Object var2, Object var4)
+    public static boolean setFieldObject(Class var0, String var1, Object var2, Object var4)
     {
-    	setFieldObject(var0, var1, var2, var4, 1);
+    	return setFieldObject(var0, var1, var2, var4, 1);
     }
 
-    public static void setFieldObject(Class var0, String var1, Object var2, Object var4, int i)
+    public static boolean setFieldObject(Class var0, String var1, Object var2, Object var4, int i)
     {
     	Field f = null;
     	try {
     		f = getField(var0, var1, i);
-    		if (f != null) f.set(var2, var4);
+    		if (f != null) {
+    			f.set(var2, var4);
+    			return true;
+    		}
     	} catch (Exception e) {
     		if (debugDisplay(i)) e.printStackTrace();
     	}
+    	return false;
     }
 
-    public static void setFieldObject(String var0, String var1, String var2, Object var3, Object var4)
+    public static boolean setFieldObject(String var0, String var1, String var2, Object var3, Object var4)
     {
     	Class c = loadClass(var0);
-    	if (c != null) setFieldObject(c, var1, var2, var3, var4, 1);
+    	if (c != null) return setFieldObject(c, var1, var2, var3, var4, 1);
+    	return false;
     }
 
-    public static void setFieldObject(String var0, String var1, String var2, Object var3, Object var4, int i)
+    public static boolean setFieldObject(String var0, String var1, String var2, Object var3, Object var4, int i)
     {
     	Class c = loadClass(var0);
-    	if (c != null) setFieldObject(c, var1, var2, var3, var4, i);
+    	if (c != null) return setFieldObject(c, var1, var2, var3, var4, i);
+    	return false;
     }
 
-    public static void setFieldObject(Class var0, String var1, String var2, Object var3, Object var4)
+    public static boolean setFieldObject(Class var0, String var1, String var2, Object var3, Object var4)
     {
-    	setFieldObject(var0, var1, var2, var3, var4, 1);
+    	return setFieldObject(var0, var1, var2, var3, var4, 1);
     }
 
-    public static void setFieldObject(Class var0, String var1, String var2, Object var3, Object var4, int i)
+    public static boolean setFieldObject(Class var0, String var1, String var2, Object var3, Object var4, int i)
     {
     	Field f = null;
     	try {
     		f = getField(var0, var1, i == 1 ? 2 : i);
-    		if (f != null) f.set(var3, var4);
+    		if (f != null) {
+    			f.set(var3, var4);
+    			return true;
+    		}
     	} catch (Exception e) {
     		if (debugDisplayDetail(i)) e.printStackTrace();
-    		try {
-    			f = getField(var0, var2, i);
-    			if (f != null) f.set(var3, var4);
-    		} catch (Exception e1) {
-    			if (debugDisplay(i)) e1.printStackTrace();
-    		}
     	}
+    	try {
+    		f = getField(var0, var2, i);
+    		if (f != null) {
+    			f.set(var3, var4);
+    			return true;
+    		}
+    	} catch (Exception e1) {
+    		if (debugDisplay(i)) e1.printStackTrace();
+    	}
+    	return false;
     }
 
     public static Object getFieldObject(Field var0, Object var1)
@@ -541,32 +580,49 @@ public class Modchu_Reflect
     	Method method = null;
     	if (var1 != null) {
     		String var3 = getFieldName(var1);
+/*
     		try {
     			if (var0 != null) method = var0.getMethod(var3, var2);
     			if (method != null) {
+    				method.setAccessible(true);
     				methodMap.put(s, method);
     				return method;
     			}
     		} catch (Exception e) {
     			if (debugDisplayDetail(i)) e.printStackTrace();
     		}
+*/
     		try {
     			if (var0 != null) method = var0.getDeclaredMethod(var3, var2);
     			if (method != null) {
+    				method.setAccessible(true);
     				methodMap.put(s, method);
     				return method;
     			}
     		} catch (Exception e1) {
     			if (debugDisplayDetail(i)) e1.printStackTrace();
     		}
+/*
     		try {
     			if (var0 != null) method = var0.getMethod(var1, var2);
     			if (method != null) {
+    				method.setAccessible(true);
     				methodMap.put(s, method);
     				return method;
     			}
     		} catch (Exception e) {
     			if (debugDisplay(i)) e.printStackTrace();
+    		}
+*/
+    		try {
+    			if (var0 != null) method = var0.getDeclaredMethod(var1, var2);
+    			if (method != null) {
+    				method.setAccessible(true);
+    				methodMap.put(s, method);
+    				return method;
+    			}
+    		} catch (Exception e1) {
+    			if (debugDisplay(i)) e1.printStackTrace();
     		}
     	}
     	return method;
@@ -1212,7 +1268,7 @@ public class Modchu_Reflect
     		if (debugDisplay(i)) e.printStackTrace();
     	} catch (ClassNotFoundException e) {
 /*
-    		if (	mod_Modchu_ModchuLib.isForge) {
+    		if (	mod_Modchu_ModchuLib.modchu_Main.isForge) {
     			try {
     				if (debugDisplay(i)) Modchu_Debug.Debug("loadClass classString="+var0);
     				Object o = getPrivateValue(Class.forName("cpw.mods.fml.relauncher.FMLRelauncher"), null, "INSTANCE");
@@ -1256,6 +1312,11 @@ public class Modchu_Reflect
     		if (debugDisplayDetail(i)) e1.printStackTrace();
     	}
     	return c;
+    }
+
+	public static Object newInstance(String var1)
+    {
+    	return newInstance(var1, null, null, 1);
     }
 
 	public static Object newInstance(String var1, Class[] var2, Object[] var3)
@@ -1469,10 +1530,81 @@ public class Modchu_Reflect
     	return false;
     }
 
-    private static String getFieldName(String var0) {
-    	if (mod_Modchu_ModchuLib.isForge
-    			&& mod_Modchu_ModchuLib.mod_modchu_modchulib.modchuLibVersion >= 151) return var0;
+    public static String getFieldName(String s) {
+    	if (mod_Modchu_ModchuLib.modchu_Main.isForge
+    			&& mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 150) return s;
+    	if (methodNameMap != null
+    			&& methodNameMap.containsKey(s)) {
+    		return methodNameMap.get(s);
+    	}
+    	if (!mod_Modchu_ModchuLib.modchu_Main.isRelease
+    			&& (s.startsWith("field")
+    					| (s.startsWith("func")))) Modchu_Debug.mlDebug("getFieldName check out var0="+s);
+    	return s;
+    }
+
+    public static String getClassName(String s) {
+    	int i1 = s.indexOf("net.minecraft.src.");
+    	boolean b = false;
+    	if (i1 > -1) {
+    		s = s.substring(i1 + 18);
+    		b = true;
+    	}
+    	if (classNameMap != null
+    			&& classNameMap.containsKey(s)) {
+    		return b ? "net.minecraft.src." + classNameMap.get(s) : classNameMap.get(s);
+    	}
+    	return s;
+    }
+
+    public static void initNameMap() {
     	String[] s1 = {
+    			"Minecraft", "AbstractClientPlayer", "EntityLivingBase", "RendererLivingEntity", "ResourceLocation",
+    			"RenderEngine", "MapItemRenderer", "TextureUtil", "Resource", "ResourceManager",
+    			"PFLM_RenderPlayer", "PFLM_GuiSmallButton", "PFLM_RenderPlayerDummy", "PFLM_ItemRenderer", "PFLM_ItemRendererHD"
+    	};
+    	String[] s2 = null;
+    	if (mod_Modchu_ModchuLib.modchu_Main.isForge
+    			&& mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 150) {
+    		s2 = new String []{
+    				"net.minecraft.client.Minecraft", "net.minecraft.client.entity.AbstractClientPlayer", "net.minecraft.entity.EntityLivingBase", "net.minecraft.client.renderer.entity.RendererLivingEntity", "net.minecraft.util.ResourceLocation",
+    				"net.minecraft.client.renderer.RenderEngine","net.minecraft.client.gui.MapItemRenderer", "net.minecraft.client.renderer.texture.TextureUtil", "net.minecraft.client.resources.Resource", "net.minecraft.client.resources.ResourceManager",
+    				"PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160", "PFLM_ItemRendererHDV160"
+    		};
+    	} else if (mod_Modchu_ModchuLib.modchu_Main.isRelease) {
+    		switch(mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion()) {
+    		case 162:
+    			s2 = new String []{
+    					"ats", "ber", "oe", "bgy", "bjl",
+    					"bge", "avs", "bim", "bjk", "bjm",
+    					"PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160", "PFLM_ItemRendererHDV160"
+    			};
+    			break;
+    		}
+    	} else {
+    		if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159) {
+    			s2 = new String []{
+    					"Minecraft", "AbstractClientPlayer", "EntityLivingBase", "RendererLivingEntity", "ResourceLocation",
+    					"RenderEngine", "MapItemRenderer", "TextureUtil", "Resource", "ResourceManager",
+    					"PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160", "PFLM_ItemRendererHDV160"
+    			};
+    		}
+    		else if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() < 160) {
+    			s2 = new String []{
+    					"net.minecraft.client.Minecraft",  "EntityPlayer", "EntityLiving", "RendererLiving", "",
+    					"RenderEngine", "MapItemRenderer", "TextureUtil", "Resource", "ResourceManager",
+    					"PFLM_RenderPlayerV1", "PFLM_GuiSmallButtonV1", "PFLM_RenderPlayerDummyV1", "PFLM_ItemRendererV1", "PFLM_ItemRendererHDV1"
+    			};
+    		}
+    	}
+    	if (s1 != null
+    			&& s2 != null) {
+    		for(int i = 0; i < s1.length; i++) {
+    			classNameMap.put(s1[i], s2[i]);
+    		}
+    	}
+
+    	s1 = new String []{
     			"field_77110_j",
     			"func_82441_a",
     			"func_71061_d_", "func_70105_a", "field_75623_d",
@@ -1484,9 +1616,15 @@ public class Modchu_Reflect
     			"func_82241_s", "func_77105_b", "func_77102_a", "field_71442_b", "field_71460_t",
     			"field_71439_g", "field_71441_e", "field_71415_G", "field_71474_y", "field_1064_b",
     			"field_4209_q", "field_6313_p", "field_6323_f", "func_71410_x", "func_110300_d",
-    			"func_110304_a", "func_110306_p", "func_110309_l", "func_110557_a", "func_76976_a"
+    			"func_110304_a", "func_110306_p", "func_110309_l", "func_110557_a", "func_76976_a",
+    			"func_71391_r", "func_71356_B", "func_110138_aP", "func_110536_a", "func_110442_L",
+    			"func_110776_a", "func_110623_a", "func_130087_a", "func_110577_a", "func_110432_I",
+    			"func_70073_O", "field_70120_cr", "func_78350_a", "func_110434_K", "field_71412_D",
+    			"func_71373_a", "field_74320_O", "func_110987_a", "field_72770_i", "func_78351_a",
+    			"func_77220_a", "func_130000_a", "field_70260_b", "func_71386_F", "func_110527_b",
+    			"func_110857_a"
     	};
-    	String[] s2 = {
+    	s2 = new String []{
     			"h",
 //-@-151
     			"b",
@@ -1503,47 +1641,19 @@ public class Modchu_Reflect
     			"r", "a", "a", "c", "p",
     			"h", "f", "A", "u", "b",
     			"t", "n", "g", "w", "d",
-    			"a", "r", "p", "a", "a"
+    			"a", "r", "p", "a", "a",
+    			"q", "B", "aS", "a", "K",
+    			"a", "a", "a", "a", "H",
+    			"N", "cv", "a", "J", "x",
+    			"a", "aa", "a", "p", "a",
+    			"a", "a", "aU", "F", "b",
+    			"a"
     	};
-    	for(int i = 0; i < s1.length; i++) {
-    		if (s1[i].equals(var0)) return s2[i];
-    	}
-    	return var0;
-    }
-
-    private static String getClassName(String s) {
-    	String[] s1 = {
-    			"Minecraft", "AbstractClientPlayer", "EntityLivingBase", "RendererLivingEntity", "ResourceLocation"
-    	};
-    	String[] s2 = null;
-		if (mod_Modchu_ModchuLib.isForge
-    			&& mod_Modchu_ModchuLib.mod_modchu_modchulib.modchuLibVersion >= 151) {
-			s2 = new String []{
-					"net.minecraft.client.Minecraft", "net.minecraft.client.entity.AbstractClientPlayer", "net.minecraft.entity.EntityLivingBase", "net.minecraft.client.renderer.entity.RendererLivingEntity", "net.minecraft.util.ResourceLocation"
-			};
-		} else if (mod_Modchu_ModchuLib.isRelease) {
-			switch(mod_Modchu_ModchuLib.getModchuLibVersion()) {
-    		case 162:
-    			s2 = new String []{
-    					"ats", "ber", "oe", "bgy", "bjl"
-    			};
-    			break;
-    		}
-    	} else {
-    		if (mod_Modchu_ModchuLib.getModchuLibVersion() < 160) {
-    			s2 = new String []{
-    					"net.minecraft.client.Minecraft",  "EntityPlayer", "EntityLiving", "RendererLiving", ""
-    			};
-    		}
-    	}
     	if (s1 != null
     			&& s2 != null) {
     		for(int i = 0; i < s1.length; i++) {
-    			if (s1[i].equals(s)) {
-    				return s2[i];
-    			}
+    			methodNameMap.put(s1[i], s2[i]);
     		}
     	}
-    	return s;
     }
 }

@@ -18,7 +18,7 @@ public class Modchu_CustomModel extends ModelBase {
 	public MultiModelBaseBiped baseModel;
 	public Modchu_ModelRenderer[] parts;
 	public String mainModeltextureName;
-	public ResourceLocation mainModeltexture;
+	public Object mainModeltexture;
 	public String[] partsName;
 	public String[] partAddChildName;
 	public int[] partsTextureWidth;
@@ -55,9 +55,9 @@ public class Modchu_CustomModel extends ModelBase {
 	public static final int maxTypeMode = 5;
 	public static final int maxboxType = 3;
 	public HashMap<Integer, String> partsTextureNameMap = new HashMap();
-	public LinkedList<ResourceLocation> textureList = new LinkedList<ResourceLocation>();
+	public LinkedList<Object> textureList = new LinkedList<Object>();
 //-@-152
-	public ResourceLocation[] partsResourceLocations;
+	public Object[] partsTextures;
 //@-@152
 	private MultiModelBaseBiped armorSyncBaseModel;
 	private boolean changeModelInit;
@@ -65,7 +65,7 @@ public class Modchu_CustomModel extends ModelBase {
 	private HashMap<MMM_ModelRenderer, Boolean> showModelMemoryList = new HashMap();
 	private HashMap<MMM_ModelRenderer, Boolean> customModelshowModelMemoryList = new HashMap();
 	private HashMap<Integer, Field> modelRendererFieldsMap = new HashMap();
-	private final File cfgdir = new File(Minecraft.getMinecraft().mcDataDir, "/config/CustomModel/");
+	private File cfgdir;
 	private int partsCount;
 	private int boxCount;
 	private int[] boxNumberCount;
@@ -81,7 +81,7 @@ public class Modchu_CustomModel extends ModelBase {
 	private String cfgName;
 	private MMM_IModelCaps debaEntityCaps;
 //-@-152
-	private ResourceLocation[] resourceLocationsMain = new ResourceLocation[3];
+	private Object[] resourceLocationsMain = new Object[3];
 //@-@152
 	//private Class PFLM_ModelData;
 	//private Method setArmorModelMethod;
@@ -113,6 +113,7 @@ public class Modchu_CustomModel extends ModelBase {
 		boxCount = 0;
 		boxNumberCount = new int[256];
 
+		cfgdir = new File(mod_Modchu_ModchuLib.modchu_Main.getMinecraftDir(), "/config/CustomModel/");
 		String s1 = new StringBuilder().append("CustomModel_").append(s).append(".cfg").toString();
 		Modchu_Debug.cDebug("Modchu_CustomModel cfg["+s1+"] loadInit");
 		loadInit(new File(cfgdir, s1), reLoadList, cfgReLoad);
@@ -142,7 +143,7 @@ public class Modchu_CustomModel extends ModelBase {
 			partsInitSetting(i, f);
 		}
 		//syncNameListSetting();
-		//PFLM_ModelData = Modchu_Reflect.loadClass(mod_Modchu_ModchuLib.mod_modchu_modchulib.getClassName("PFLM_ModelData"));
+		//PFLM_ModelData = Modchu_Reflect.loadClass(mod_Modchu_ModchuLib.modchu_Main.mod_modchu_modchulib.getClassName("PFLM_ModelData"));
 	}
 
 	public void newInitSetting() {
@@ -463,7 +464,7 @@ public class Modchu_CustomModel extends ModelBase {
 		partsTextureColor = new byte[partsNumberMax];
 		partsTypeFactor = new float[partsNumberMax];
 		partsTypeCorrection = new float[partsNumberMax];
-		partsResourceLocations = new ResourceLocation[partsNumberMax];
+		partsTextures = new Object[partsNumberMax];
 	}
 
 	private void newPartsBoxInit() {
@@ -550,7 +551,7 @@ public class Modchu_CustomModel extends ModelBase {
 	public void render(MMM_IModelCaps entityCaps, float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5, boolean pIsRender) {
 		if (mainModel != null) ;else return;
 //-@-151
-		EntityLivingBase entity = (EntityLivingBase) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
+		Entity entity = (Entity) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
 //@-@151
 		allShowModelMemory();
 		customModelShowModelMemory();
@@ -558,12 +559,13 @@ public class Modchu_CustomModel extends ModelBase {
 		int armorType = Modchu_ModelCapsHelper.getCapsValueInt(baseModel, baseModel.caps_armorType);
 		boolean flag1 = armorType < 1;
 		if (flag1) {
+			Object currentScreen = Modchu_Reflect.getFieldObject("Minecraft", "field_6313_p", "currentScreen", mod_Modchu_ModchuLib.modchu_Main.getMinecraft());
 			if (mainModeltexture != null
-					&& ((mod_Modchu_ModchuLib.MMM_GuiTextureSelect != null
-					&& !(mod_Modchu_ModchuLib.MMM_GuiTextureSelect.isInstance(Minecraft.getMinecraft().currentScreen)))
-					| mod_Modchu_ModchuLib.MMM_GuiTextureSelect == null)) {
-				if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
-						&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entity)) {
+					&& ((mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect != null
+					&& !(mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect.isInstance(currentScreen)))
+					| mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect == null)) {
+				if (mod_Modchu_ModchuLib.modchu_Main.mod_LMM_littleMaidMob != null
+						&& mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid.isInstance(entity)) {
 					colorSetting(entityCaps);
 				}
 			} else {
@@ -573,7 +575,7 @@ public class Modchu_CustomModel extends ModelBase {
 			if (mainModel.render != null) ;else mainModel.render = baseModel.render;
 			if (mainModel.render != null
 					&& mainModeltexture != null) {
-				mainModel.render.func_110776_a(resourceLocationsMain[0]);
+				loadTexture(mainModel.render, resourceLocationsMain[0]);
 				//Modchu_Debug.mDebug("Modchu_CustomModel render mainModeltexture="+mainModeltexture);
 				//Modchu_Debug.mDebug("Modchu_CustomModel render mainModel.getClass()="+(mainModel.getClass()));
 				//Modchu_Debug.mDebug("Modchu_CustomModel render entityCaps.getClass()="+(entityCaps.getClass()));
@@ -593,7 +595,7 @@ public class Modchu_CustomModel extends ModelBase {
 				for(int i = 0; i < 4; i++) {
 					is = inventory.armorItemInSlot(i);
 					s = (String) baseModel.getCapsValue(baseModel.caps_armorTexture, armorName, armorType, is);
-					resourceLocationsMain[armorType] = new ResourceLocation(s);
+					resourceLocationsMain[armorType] = Modchu_Reflect.newInstance("ResourceLocation", new Class[]{ String.class }, new Object[]{ s });
 					armorRender(entityCaps, resourceLocationsMain[armorType], armorType, is, mainModel, i, entity, f, f1, ticksExisted, pheadYaw, pheadPitch, f5);
 				}
 			}
@@ -603,28 +605,34 @@ public class Modchu_CustomModel extends ModelBase {
 		if (partsTextureNameMap.size() > 0
 				&& textureList != null
 				&& textureList.size() > 0) {
-			ResourceLocation texture;
-			ResourceLocation prevTexture = null;
+			Object texture;
+			Object prevTexture = null;
+			String s2 = null;
+			String s3 = null;
 			for(int i = 0; i < partsTextureNameMap.size() ;i++) {
 				s1 = partsTextureNameMap.get(i);
 				texture = textureList.get(i);
 				boolean flag = false;
 				if (prevTexture == null) flag = true;
+				if (prevTexture != null) s2 = (String) (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.invokeMethod("ResourceLocation", "func_110623_a", prevTexture) :
+					prevTexture);
+				if (texture != null) s3 = (String) (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.invokeMethod("ResourceLocation", "func_110623_a", texture) :
+					texture);
 				if (texture != null
 						&& prevTexture != null
-						&& !prevTexture.func_110623_a().equalsIgnoreCase(texture.func_110623_a())) flag = true;
+						&& !s2.equalsIgnoreCase(s3)) flag = true;
 				if (flag) {
 					//Modchu_Debug.mDebug("MultiModelCustom s1="+s1+" func_110776_a texture="+texture+" prevTexture="+prevTexture);
 					//Modchu_Debug.cDebug("MultiModelCustom s1="+s1+" func_110776_a texture="+texture);
 					if (texture != null) {
 						if (baseModel.render != null) {
-							baseModel.render.func_110776_a(partsResourceLocations[i]);
+							loadTexture(baseModel.render, partsTextures[i]);
 						} else {
 							Render render = RenderManager.instance.getEntityRenderObject(entity);
 							baseModel.render = render;
 							mainModel.render = render;
 							if (baseModel.render != null) {
-								baseModel.render.func_110776_a(partsResourceLocations[i]);
+								loadTexture(baseModel.render, partsTextures[i]);
 							} else {
 								Modchu_Debug.cDebug("MultiModelCustom baseModel.render == null !!");
 							}
@@ -642,7 +650,12 @@ public class Modchu_CustomModel extends ModelBase {
 		if (!changeModelInit) changeModel(entityCaps);
 	}
 
-	private void armorRender(MMM_IModelCaps entityCaps, ResourceLocation resourceLocation, int armorType, ItemStack is, MMM_ModelMultiBase model, int i, Entity entity, float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5) {
+	private void loadTexture(Render r, Object o) {
+		if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159) Modchu_Reflect.invokeMethod(Render.class, "func_110776_a", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, r, new Object[]{ o });
+		else Modchu_Reflect.invokeMethod(Render.class, "loadTexture", new Class[]{ String.class }, r, new Object[]{ o });
+	}
+
+	private void armorRender(MMM_IModelCaps entityCaps, Object resourceLocation, int armorType, ItemStack is, MMM_ModelMultiBase model, int i, Entity entity, float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5) {
 		if (resourceLocation != null) ;else return;
 /*
 		if (setArmorModelMethodType == 0) return;
@@ -659,7 +672,7 @@ public class Modchu_CustomModel extends ModelBase {
 		if (setArmorModel(entityCaps, (MMM_ModelMultiBase) model, is, entity, i, f) > -1) {
 			if (resourceLocation != null) {
 				if (mainModel.render != null) ;else mainModel.render = baseModel.render;
-				if (mainModel.render != null) mainModel.render.func_110776_a(resourceLocation);
+				if (mainModel.render != null) loadTexture(mainModel.render, resourceLocation);
 			}
 			model.render(entityCaps, f, f1, ticksExisted, pheadYaw, pheadPitch, f5, Modchu_ModelCapsHelper.getCapsValueBoolean(entityCaps, entityCaps.caps_isRendering));
 		}
@@ -690,7 +703,7 @@ public class Modchu_CustomModel extends ModelBase {
 
 	public void setLivingAnimationsLM(MMM_IModelCaps entityCaps, float f, float f1, float renderPartialTicks) {
 		//Modchu_Debug.mDebug("Modchu_CustomModel setLivingAnimationsLM");
-		EntityLivingBase entityliving = (EntityLivingBase) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
+		Entity entityliving = (Entity) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
 		if (entityliving != null) ;else return;
 		if (parts != null) {
 			for(int i = 0; i < parts.length ;i++) {
@@ -960,7 +973,7 @@ public class Modchu_CustomModel extends ModelBase {
 	public void changeModel(MMM_IModelCaps entityCaps) {
 		if (mainModel != null) ;else return;
 //-@-151
-		EntityLivingBase entity = (EntityLivingBase) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
+		Entity entity = (Entity) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
 //@-@151
 		changeModelInit = true;
 		colorSetting(entityCaps);
@@ -1004,8 +1017,8 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	public void renderFirstPersonHand(MMM_IModelCaps entityCaps, float f) {
-		Render render = RenderManager.instance.getEntityRenderObject(Minecraft.getMinecraft().thePlayer);
-		if (mainModeltexture != null) render.func_110776_a(resourceLocationsMain[0]);
+		Render render = RenderManager.instance.getEntityRenderObject(mod_Modchu_ModchuLib.modchu_Main.getThePlayer());
+		if (mainModeltexture != null) loadTexture(render, resourceLocationsMain[0]);
 		if (mainModel instanceof MultiModelBaseBiped
 				&& mainModel != null) ((MultiModelBaseBiped) mainModel).renderFirstPersonHand(entityCaps, f);
 	}
@@ -1169,7 +1182,7 @@ public class Modchu_CustomModel extends ModelBase {
 			sb = sb.append(partAddChildName[i]).append(".addChild");
 			lines.add(sb.toString());
 			sb.delete(0, sb.length());
-			sb = sb.append("type").append("=").append(partsType[i]).append(";").append(partsTypeFactor[i]).append("F;").append(partsTypeCorrection[i]).append("F");
+			sb = sb.append("type").append("=").append(getPartsTypeString(partsType[i])).append(";").append(partsTypeFactor[i]).append("F;").append(partsTypeCorrection[i]).append("F");
 			lines.add(sb.toString());
 			sb.delete(0, sb.length());
 			lines.add("");
@@ -1455,15 +1468,16 @@ public class Modchu_CustomModel extends ModelBase {
 	public void newMainModelInit() {
 		String name = mainModeltextureName;
 		Modchu_Debug.cDebug("customInitModel mainModeltextureName="+mainModeltextureName);
-		Object[] o = mod_Modchu_ModchuLib.modelNewInstance(null, mainModeltextureName, true, false);
+		Object[] o = mod_Modchu_ModchuLib.modchu_Main.modelNewInstance(null, mainModeltextureName, true, false);
 		if (o != null
 				&& o[0] != null) mainModel = (MMM_ModelMultiBase) o[0];
 		//Modchu_Debug.mDebug("customInitModel mainModel != null ?"+(mainModel != null));
 	}
 
 	private void colorSetting(MMM_IModelCaps entityCaps) {
+		//Modchu_Debug.mDebug("Modchu_CustomModel colorSetting");
 //-@-151
-		EntityLivingBase entity = (EntityLivingBase) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
+		Entity entity = (Entity) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
 //@-@151
 		MMM_ModelMultiBase model = mainModel != null ? mainModel : baseModel;
 		if (model != null
@@ -1481,24 +1495,24 @@ public class Modchu_CustomModel extends ModelBase {
 			if (textureList != null) {
 				for(int i1 = 0; i1 < partsTextureNameMap.size() ;i1++) {
 					String s1 = partsTextureNameMap.get(i1);
-					ResourceLocation s2 =  (ResourceLocation) multiModelBaseBiped.getCapsValue(entityCaps, multiModelBaseBiped.caps_texture, s1, partsTextureColor[i1] == -1 ? color : (int) partsTextureColor[i1]);
+					Object s2 =  (Object) multiModelBaseBiped.getCapsValue(entityCaps, multiModelBaseBiped.caps_texture, s1, partsTextureColor[i1] == -1 ? color : (int) partsTextureColor[i1]);
 					Modchu_Debug.cDebug("Modchu_CustomModel colorSetting add "+s1+" color="+(partsTextureColor[i1] == -1 ? color : (int) partsTextureColor[i1])+" texture="+s2);
 					textureList.add(i1, s2);
 				}
 			}
 		}
 		Modchu_Debug.cDebug("Modchu_CustomModel colorSetting mainModeltextureName="+mainModeltextureName+" color="+color+" mainModeltexture="+mainModeltexture);
-		ResourceLocation texture;
+		Object texture;
 		for(int i = 0; i < partsTextureNameMap.size() ;i++) {
 			texture = textureList.get(i);
-			partsResourceLocations[i] = texture;
+			partsTextures[i] = texture;
 		}
 /*
 		setArmorModelMethod = Modchu_Reflect.getMethod(render.getClass(), "setArmorModel", new Class[]{ MultiModelBaseBiped.class, EntityPlayer.class, int.class, float.class });
 		if (setArmorModelMethod != null) {
 			setArmorModelMethodType = 1;
 		} else {
-			setArmorModelMethod = Modchu_Reflect.getMethod(render.getClass(), "setArmorModelEx", new Class[]{ mod_Modchu_ModchuLib.LMM_EntityLittleMaid, int.class, float.class });
+			setArmorModelMethod = Modchu_Reflect.getMethod(render.getClass(), "setArmorModelEx", new Class[]{ mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid, int.class, float.class });
 			if (setArmorModelMethod != null) {
 				setArmorModelMethodType = 2;
 			} else {
@@ -1511,40 +1525,40 @@ public class Modchu_CustomModel extends ModelBase {
 */
 	}
 
-	private ResourceLocation getTexture(MMM_IModelCaps entityCaps, MMM_ModelMultiBase model, EntityLivingBase entity, String s, int i) {
+	private Object getTexture(MMM_IModelCaps entityCaps, MMM_ModelMultiBase model, Entity entity, String s, int i) {
 		int armorType;
-		ResourceLocation s1 = null;
+		Object s1 = null;
 		if (entityCaps != null
 				&& model instanceof MultiModelBaseBiped) {
 			MultiModelBaseBiped multiModelBaseBiped = (MultiModelBaseBiped) model;
 			armorType = Modchu_ModelCapsHelper.getCapsValueInt(multiModelBaseBiped, multiModelBaseBiped.caps_armorType);
 			s1 = armorType < 1 ?
-					(ResourceLocation) multiModelBaseBiped.getCapsValue(entityCaps, multiModelBaseBiped.caps_texture, s, i) :
-						(ResourceLocation) multiModelBaseBiped.getCapsValue(entityCaps, multiModelBaseBiped.caps_armorTexture, s, armorType == 1 ? 64 : 80);
+					(Object) multiModelBaseBiped.getCapsValue(entityCaps, multiModelBaseBiped.caps_texture, s, i) :
+						(Object) multiModelBaseBiped.getCapsValue(entityCaps, multiModelBaseBiped.caps_armorTexture, s, armorType == 1 ? 64 : 80);
 			//Modchu_Debug.mDebug("getTexture s="+s+" i="+i+" armorType="+armorType+" s1="+s1);
 			return s1;
 		}
 		armorType = Modchu_ModelCapsHelper.getCapsValueInt(baseModel, baseModel.caps_armorType);
 		//Modchu_Debug.mDebug("Modchu_CustomModel getTexture armorType="+armorType);
 		s1 = armorType < 1 ?
-				(ResourceLocation) baseModel.getCapsValue(entityCaps, baseModel.caps_texture, s, i) :
-					(ResourceLocation) baseModel.getCapsValue(entityCaps, baseModel.caps_armorTexture, s, armorType);
-				Modchu_Debug.mDebug("getTexture s="+s+" i="+i+" armorType="+armorType+" s1="+s1);
+				baseModel.getCapsValue(entityCaps, baseModel.caps_texture, s, i) :
+					baseModel.getCapsValue(entityCaps, baseModel.caps_armorTexture, s, armorType);
+		Modchu_Debug.mDebug("getTexture s="+s+" i="+i+" armorType="+armorType+" s1="+s1);
 		return s1;
 	}
 
 	private int getMaidColor(MMM_IModelCaps entityCaps) {
 //-@-151
-		EntityLivingBase entity = (EntityLivingBase) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
+		Entity entity = (Entity) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
 //@-@151
 		Object o = null;
-		if (mod_Modchu_ModchuLib.mod_LMM_littleMaidMob != null
-				&& mod_Modchu_ModchuLib.LMM_EntityLittleMaid.isInstance(entity)) {
-			o = (Integer) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.LMM_EntityLittleMaid, "maidColor", entity);
+		if (mod_Modchu_ModchuLib.modchu_Main.mod_LMM_littleMaidMob != null
+				&& mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid.isInstance(entity)) {
+			o = (Integer) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid, "maidColor", entity);
 			allRendering = true;
-		} else if (mod_Modchu_ModchuLib.MMM_EntitySelect != null
-				&& mod_Modchu_ModchuLib.MMM_EntitySelect.isInstance(entity)) {
-			o = (Integer) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.MMM_EntitySelect, "color", entity);
+		} else if (mod_Modchu_ModchuLib.modchu_Main.MMM_EntitySelect != null
+				&& mod_Modchu_ModchuLib.modchu_Main.MMM_EntitySelect.isInstance(entity)) {
+			o = (Integer) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_EntitySelect, "color", entity);
 			allRendering = true;
 		} else {
 			//Modchu_Debug.mDebug("getMaidColor !LMM ?"+(entity.getClass()));
@@ -1747,8 +1761,8 @@ public class Modchu_CustomModel extends ModelBase {
 
 	private String obfuscationNameCheck(String s) {
 /*
-		if (!mod_Modchu_ModchuLib.mod_modchu_modchulib.isRelease()
-				| mod_Modchu_ModchuLib.isForge) return s;
+		if (!mod_Modchu_ModchuLib.modchu_Main.mod_modchu_modchulib.isRelease()
+				| mod_Modchu_ModchuLib.modchu_Main.isForge) return s;
 		String[] s1 = {
 				"bipedHead", "bipedHeadwear", "bipedBody",
 				"bipedRightArm", "bipedLeftArm", "bipedRightLeg", "bipedLeftLeg", "bipedCloak",

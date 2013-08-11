@@ -122,7 +122,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		isInvertX = false;
 		baseModel = modelBase;
 		pearent = null;
-		RendererData = mod_Modchu_ModchuLib.RendererData;
+		RendererData = mod_Modchu_ModchuLib.modchu_Main.RendererData;
 /*//b181delete
 		cubeList = new ArrayList();
 		setTextureSize((int)((MultiModel) modelbase).textureWidth, (int)((MultiModel) modelbase).textureHeight);
@@ -238,18 +238,18 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 
 	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, float scale, int addSupport) {
 		ItemStack lis = (ItemStack)pEntityCaps.getCapsValue(caps_HeadMount);
-		EntityLivingBase lentity = (EntityLivingBase)pEntityCaps.getCapsValue(caps_Entity);
+		Entity lentity = (Entity)pEntityCaps.getCapsValue(caps_Entity);
 
 		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
 	}
 
 	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, ItemStack lis, float scale, int addSupport) {
-		EntityLivingBase lentity = (EntityLivingBase)pEntityCaps.getCapsValue(caps_Entity);
+		Entity lentity = (Entity)pEntityCaps.getCapsValue(caps_Entity);
 
 		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
 	}
 
-	public void renderItems(EntityLivingBase pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack, float scale, int addSupport) {
+	public void renderItems(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack, float scale, int addSupport) {
 		if (pEntityLiving != null) ;else return;
 		itemstack = pItemStack;
 		switch(addSupport) {
@@ -262,19 +262,19 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		renderItems(pEntityLiving, pRender, pRealBlock, pAction, scale);
 	}
 
-	public void renderItems(EntityLivingBase pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack) {
+	public void renderItems(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack) {
 		if (pEntityLiving != null) ;else return;
 		itemstack = pItemStack;
 		renderItems(pEntityLiving, pRender, pRealBlock, pAction, 1.0F);
 	}
 
-	public void renderItems(EntityLivingBase pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction) {
+	public void renderItems(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction) {
 		if (itemstack != null
 				&& pEntityLiving != null) ;else return;
 		renderItems(pEntityLiving, pRender, pRealBlock, pAction, 1.0F);
 	}
 
-	public void renderItems(EntityLivingBase pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale) {
+	public void renderItems(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale) {
 		if (itemstack != null
 				&& pEntityLiving != null) ;else return;
 
@@ -376,7 +376,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		if (pRealBlock && itemstack.getItem() instanceof ItemBlock) {
 			// 152deleteString s1 = "/terrain.png";
 /*//147delete
-			if (mod_Modchu_ModchuLib.isForge) {
+			if (mod_Modchu_ModchuLib.modchu_Main.isForge) {
 				s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", Item.itemsList[itemstack.itemID]);
 				//Modchu_Debug.Debug("isForge pRender.func_110776_a s1="+s1);
 			}
@@ -394,20 +394,20 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 
 /*//147delete
 				String s1 = "/gui/items.png";
-				if (mod_Modchu_ModchuLib.isForge) {
+				if (mod_Modchu_ModchuLib.modchu_Main.isForge) {
 					if (renderPasses == 1) renderPasses =
 							(Integer) Modchu_Reflect.invokeMethod(Item.class, "getRenderPasses", new Class[]{ int.class },
 									itemstack.getItem(), new Object[]{ itemstack.getItemDamage() }) - 1;
 					s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", itemstack.getItem());
 					//Modchu_Debug.Debug("isForge pRender.func_110776_a s1="+s1+" renderPasses="+renderPasses);
-				} else if (mod_Modchu_ModchuLib.isBTW
+				} else if (mod_Modchu_ModchuLib.modchu_Main.isBTW
 						&& isBTWItem(itemstack.getItem())) {
 					s1 = "/btwmodtex/btwitems01.png";
 				}
 *///147delete
 				// 152deletepRender.func_110776_a(s1);
 				for (int j = 0; j <= renderPasses; j++) {
-					if (!mod_Modchu_ModchuLib.isSSP
+					if (!mod_Modchu_ModchuLib.modchu_Main.isSSP
 							| renderPasses > 0) {
 						int k = itemstack.getItem().getColorFromItemStack(itemstack, j);
 						float f15 = (float)(k >> 16 & 0xff) / 255F;
@@ -416,7 +416,8 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 						GL11.glColor4f(f15, f17, f19, 1.0F);
 					}
 					//Modchu_Debug.mDebug("itemRenderer.renderItem");
-					pRender.renderManager.itemRenderer.renderItem(pEntityLiving, itemstack, j);
+					Modchu_Reflect.invokeMethod(ItemRenderer.class, "renderItem", new Class[]{ Modchu_Reflect.loadClass("EntityLivingBase"), ItemStack.class, int.class }, pRender.renderManager.itemRenderer, new Object[]{ pEntityLiving, itemstack, j });
+					//pRender.renderManager.itemRenderer.renderItem(pEntityLiving, itemstack, j);
 				}
 			}
 		}
@@ -424,7 +425,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		GL11.glPopMatrix();
 	}
 
-	public boolean renderDecoBlock(EntityLivingBase pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale, int addSupport) {
+	public boolean renderDecoBlock(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale, int addSupport) {
 		//DecoBlock, FavBlock—p•`‰æ
 		Item item = itemstack.getItem();
 		Block block = Block.blocksList[item.itemID];
@@ -498,9 +499,11 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 	}
 
 	private void loadBlockTexture() {
-		if (mod_PFLM_PlayerFormLittleMaid.getPFLMVersion() < 160) return;
-		TextureManager var4 = Minecraft.getMinecraft().func_110434_K();
-		var4.func_110577_a(var4.func_130087_a(0));
+		if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() < 160) return;
+		Object var4 = Modchu_Reflect.invokeMethod("Minecraft", "func_110434_K", mod_Modchu_ModchuLib.modchu_Main.getMinecraft());
+		Modchu_Reflect.invokeMethod("TextureManager", "func_110577_a", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, var4, new Object[]{ Modchu_Reflect.invokeMethod("TextureManager", "func_130087_a", new Class[]{ int.class }, var4, new Object[]{ 0 }) });
+		//TextureManager var4 = Minecraft.getMinecraft().func_110434_K();
+		//var4.func_110577_a(var4.func_130087_a(0));
 	}
 
 	private boolean isBTWItem(Item var1) {
