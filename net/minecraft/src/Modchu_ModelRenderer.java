@@ -138,7 +138,6 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		return this;
 	}
 
-//-@-151
 	public Modchu_ModelRenderer addCubeList(MMM_ModelBoxBase pModelBoxBase) {
 		cubeList.add(pModelBoxBase);
 		return this;
@@ -153,72 +152,44 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		addCubeList(getModelBoxBase(pModelBoxBase, constructorClass, getArg((Object[]) pArg)));
 		return this;
 	}
-//@-@151
-//-@-151
+
 	public Modchu_ModelRenderer addPartsTexture(Class pModelBoxBase, String pName, Object ... pArg) {
 		pName = (new StringBuilder()).append(boxName).append(".").append(pName).toString();
 		addCubeList(getModelBoxBase(pModelBoxBase, (Object[]) pArg).setBoxName(pName));
 		return this;
 	}
-//@-@151
-//-@-151
+
 	public Modchu_ModelRenderer addPartsTexture(Class pModelBoxBase, Object ... pArg) {
 		addCubeList(getModelBoxBase(pModelBoxBase, (Object[]) pArg));
 		return this;
 	}
-//@-@151
 
 	public Modchu_ModelRenderer addPlate(float f, float f1, float f2, int i, int j, int k) {
-/*//151delete
-		cubeList.add(new MMM_ModelPlate(this, textureOffsetX, textureOffsetY, f, f1, f2, i, j, k, 0.0F));
-*///151delete
-//-@-151
-		addParts(MMM_ModelPlate.class, f, f1, f2, i, j, k, 0.0F);
-//@-@151
+		addParts(mod_Modchu_ModchuLib.modchu_Main.MMM_ModelPlate, f, f1, f2, i, j, k, 0.0F);
 		return this;
 	}
 
 	public Modchu_ModelRenderer addPlate(float f, float f1, float f2, int i, int j, int k, float f3) {
-/*//151delete
-		cubeList.add(new MMM_ModelPlate(this, textureOffsetX, textureOffsetY, f, f1, f2, i, j, k, f3));
-*///151delete
-//-@-151
-		addParts(MMM_ModelPlate.class, f, f1, f2, i, j, k, f3);
-//@-@151
+		addParts(mod_Modchu_ModchuLib.modchu_Main.MMM_ModelPlate, f, f1, f2, i, j, k, f3);
 		return this;
 	}
 
 	public Modchu_ModelRenderer addPlateFreeShape(float[][] vertex, float[][] vertexN, int px, int py)
 	{
 		float[][] vt = { { textureOffsetX / textureWidth, (textureOffsetY + 1) / textureHeight }, { (textureOffsetX + 1) / textureWidth, (textureOffsetY + 1) / textureHeight }, { (textureOffsetX + 1) / textureWidth, textureOffsetY / textureHeight }, { textureOffsetX / textureWidth, textureOffsetY / textureHeight } };
-/*//151delete
-		cubeList.add(new Modchu_ModelPlateFreeShape(this, textureOffsetX, textureOffsetY, vertex, vt, vertexN, null, 0.0F));
-*///151delete
-//-@-151
 		addParts(Modchu_ModelPlateFreeShape.class, vertex, vt, vertexN, null, 0.0F);
-//@-@151
 		return this;
 	}
 
 	public Modchu_ModelRenderer addPlateFreeShape(float[][] vertex, float[][] texUV, float[][] vertexN)
 	{
-/*//151delete
-		cubeList.add(new Modchu_ModelPlateFreeShape(this, textureOffsetX, textureOffsetY, vertex, texUV, vertexN, null, 0.0F));
-*///151delete
-//-@-151
 		addParts(Modchu_ModelPlateFreeShape.class, vertex, texUV, vertexN, null, 0.0F);
-//@-@151
 		return this;
 	}
 
 	public Modchu_ModelRenderer addPlateFreeShape(float[][] var1, float[][] var2, float[][] var3, float[] var4)
 	{
-/*//151delete
-		cubeList.add(new Modchu_ModelPlateFreeShape(this, textureOffsetX, textureOffsetY, var1, var2, var3, var4, 0.0F));
-*///151delete
-//-@-151
 		addParts(Modchu_ModelPlateFreeShape.class, var1, var2, var3, var4, 0.0F);
-//@-@151
 		return this;
 	}
 

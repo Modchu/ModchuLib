@@ -33,9 +33,11 @@ public class Modchu_Main extends BaseMod {
 	public static Class MMM_TextureManager;
 	public static Class MMM_FileManager;
 	public static Class MMM_TextureBox;
+	public static Class MMM_ModelPlate;
 	public static Class MMM_StabilizerManager;
 	public static Class MMM_GuiTextureSelect;
 	public static Class MMM_EntitySelect;
+	public static Class MMM_TextureData;
 	public static Class mod_PFLM_PlayerFormLittleMaid;
 	public static Class mod_LMM_littleMaidMob;
 	public static Class mod_PFLMF;
@@ -191,7 +193,7 @@ public class Modchu_Main extends BaseMod {
 
 	@Override
 	public String getVersion() {
-		return "1.6.2-5a";
+		return "1.6.2-5b";
 	}
 
 	@Override
@@ -234,7 +236,6 @@ public class Modchu_Main extends BaseMod {
 		String s;
 		if (Modchu_Debug.debugMessage
 				&& !mod_Modchu_ModchuLib.modchu_Main.isRelease()) Modchu_Debug.debugString = new String[10];
-		ModLoader.setInGameHook(this, true, true);
 		//minecraft旧バージョン用
 		isModchu = Modchu_Reflect.loadClass(getClassName("Modchu_TextureManager"), -1) != null;
 		if (isModchu) {
@@ -259,12 +260,16 @@ public class Modchu_Main extends BaseMod {
 			MMM_TextureBox = Modchu_Reflect.loadClass(getClassName("MMM_TextureBox"));
 			MMM_StabilizerManager = Modchu_Reflect.loadClass(getClassName("MMM_StabilizerManager"));
 		}
+		MMM_ModelPlate = Modchu_Reflect.loadClass(getClassName("Modchu_ModelPlate"));
+		if (MMM_ModelPlate != null) ;else MMM_ModelPlate = Modchu_Reflect.loadClass(getClassName("MMM_ModelPlate"));
+
 		mod_LMM_littleMaidMob = Modchu_Reflect.loadClass(getClassName("mod_LMM_littleMaidMob"), -1);
 		if (mod_LMM_littleMaidMob != null) {
 			isLMM = true;
 			LMM_EntityLittleMaid = Modchu_Reflect.loadClass(getClassName("LMM_EntityLittleMaid"));
 			MMM_GuiTextureSelect = Modchu_Reflect.loadClass(getClassName("MMM_GuiTextureSelect"));
 			MMM_EntitySelect = Modchu_Reflect.loadClass(getClassName("MMM_EntitySelect"));
+			if (getMinecraftVersion() > 159) MMM_TextureData = Modchu_Reflect.loadClass(getClassName("MMM_TextureData"));
 		}
 
 		mod_PFLM_PlayerFormLittleMaid = Modchu_Reflect.loadClass(getClassName("mod_PFLM_PlayerFormLittleMaid"), -1);
@@ -437,8 +442,12 @@ public class Modchu_Main extends BaseMod {
 	public boolean onTickInGame(float f, Object minecraft)
 	{
 		if (Modchu_Debug.debugMessage
-				&& !mod_Modchu_ModchuLib.modchu_Main.isRelease()) Modchu_Debug.dDebugDrow();
-		return true;
+				&& !mod_Modchu_ModchuLib.modchu_Main.isRelease()) {
+			Modchu_Debug.dDebugDrow();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean isRelease() {
@@ -833,7 +842,13 @@ public class Modchu_Main extends BaseMod {
 		//Modchu_Debug.mDebug("textureManagerGetArmorTextureName s="+s+" i="+i);
 		s = textureNameCheck(s);
 		Object ltb = getTextureBox(s);
-		if (ltb != null) return Modchu_Reflect.invokeMethod(MMM_TextureBox, "getArmorTextureName", new Class[]{int.class, ItemStack.class}, ltb, new Object[]{i, is});
+		if (ltb != null) {
+			if (getMinecraftVersion() > 159) return Modchu_Reflect.invokeMethod(MMM_TextureBox, "getArmorTextureName", new Class[]{int.class, ItemStack.class}, ltb, new Object[]{i, is});
+			else {
+				boolean b = i == 1 | i == 64;
+				return Modchu_Reflect.invokeMethod(MMM_TextureBox, "getArmorTextureName", new Class[]{boolean.class, ItemStack.class}, ltb, new Object[]{b, is});
+			}
+		}
 		//Modchu_Debug.mDebug("textureManagerGetArmorTextureName return null !! s="+s+" i="+i);
 		return null;
 	}

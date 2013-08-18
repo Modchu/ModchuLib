@@ -35,6 +35,6 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	public boolean onTickInGame(float f, Minecraft minecraft)
 	{
-		return modchu_Main.onTickInGame(f, minecraft);
+		return modchu_Main.onTickInGame(f, (Object) minecraft);
 	}
 }

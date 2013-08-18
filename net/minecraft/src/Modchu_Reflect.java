@@ -1561,7 +1561,7 @@ public class Modchu_Reflect
     	String[] s1 = {
     			"Minecraft", "AbstractClientPlayer", "EntityLivingBase", "RendererLivingEntity", "ResourceLocation",
     			"RenderEngine", "MapItemRenderer", "TextureUtil", "Resource", "ResourceManager",
-    			"PFLM_RenderPlayer", "PFLM_GuiSmallButton", "PFLM_RenderPlayerDummy", "PFLM_ItemRenderer", "PFLM_ItemRendererHD"
+    			"PFLM_RenderPlayer", "PFLM_GuiSmallButton", "PFLM_RenderPlayerDummy", "PFLM_ItemRenderer", "PFLM_ItemRendererHD", "PFLM_GuiOthersPlayerSlot"
     	};
     	String[] s2 = null;
     	if (mod_Modchu_ModchuLib.modchu_Main.isForge
@@ -1569,7 +1569,7 @@ public class Modchu_Reflect
     		s2 = new String []{
     				"net.minecraft.client.Minecraft", "net.minecraft.client.entity.AbstractClientPlayer", "net.minecraft.entity.EntityLivingBase", "net.minecraft.client.renderer.entity.RendererLivingEntity", "net.minecraft.util.ResourceLocation",
     				"net.minecraft.client.renderer.RenderEngine","net.minecraft.client.gui.MapItemRenderer", "net.minecraft.client.renderer.texture.TextureUtil", "net.minecraft.client.resources.Resource", "net.minecraft.client.resources.ResourceManager",
-    				"PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160", "PFLM_ItemRendererHDV160"
+    				"PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160", "PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160"
     		};
     	} else if (mod_Modchu_ModchuLib.modchu_Main.isRelease) {
     		switch(mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion()) {
@@ -1577,7 +1577,7 @@ public class Modchu_Reflect
     			s2 = new String []{
     					"ats", "ber", "oe", "bgy", "bjl",
     					"bge", "avs", "bim", "bjk", "bjm",
-    					"PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160", "PFLM_ItemRendererHDV160"
+    					"PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160", "PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160"
     			};
     			break;
     		}
@@ -1586,14 +1586,14 @@ public class Modchu_Reflect
     			s2 = new String []{
     					"Minecraft", "AbstractClientPlayer", "EntityLivingBase", "RendererLivingEntity", "ResourceLocation",
     					"RenderEngine", "MapItemRenderer", "TextureUtil", "Resource", "ResourceManager",
-    					"PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160", "PFLM_ItemRendererHDV160"
+    					"PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160", "PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160"
     			};
     		}
     		else if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() < 160) {
     			s2 = new String []{
-    					"net.minecraft.client.Minecraft",  "EntityPlayer", "EntityLiving", "RendererLiving", "",
+    					"net.minecraft.client.Minecraft",  "EntityPlayer", "EntityLiving", "RenderLiving", "java.lang.String",
     					"RenderEngine", "MapItemRenderer", "TextureUtil", "Resource", "ResourceManager",
-    					"PFLM_RenderPlayerV1", "PFLM_GuiSmallButtonV1", "PFLM_RenderPlayerDummyV1", "PFLM_ItemRendererV1", "PFLM_ItemRendererHDV1"
+    					"PFLM_RenderPlayerV1", "PFLM_GuiSmallButtonV1", "PFLM_RenderPlayerDummyV1", "PFLM_ItemRendererV1", "PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1"
     			};
     		}
     	}
@@ -1622,7 +1622,7 @@ public class Modchu_Reflect
     			"func_70073_O", "field_70120_cr", "func_78350_a", "func_110434_K", "field_71412_D",
     			"func_71373_a", "field_74320_O", "func_110987_a", "field_72770_i", "func_78351_a",
     			"func_77220_a", "func_130000_a", "field_70260_b", "func_71386_F", "func_110527_b",
-    			"func_110857_a"
+    			"func_110857_a", "func_77031_a", "field_70475_c"
     	};
     	s2 = new String []{
     			"h",
@@ -1647,7 +1647,7 @@ public class Modchu_Reflect
     			"N", "cv", "a", "J", "x",
     			"a", "aa", "a", "p", "a",
     			"a", "a", "aU", "F", "b",
-    			"a"
+    			"a", "a", "h"
     	};
     	if (s1 != null
     			&& s2 != null) {

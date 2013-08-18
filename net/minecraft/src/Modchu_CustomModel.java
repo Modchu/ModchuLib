@@ -550,9 +550,7 @@ public class Modchu_CustomModel extends ModelBase {
 
 	public void render(MMM_IModelCaps entityCaps, float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5, boolean pIsRender) {
 		if (mainModel != null) ;else return;
-//-@-151
 		Entity entity = (Entity) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
-//@-@151
 		allShowModelMemory();
 		customModelShowModelMemory();
 		customModelShowModelSetting(null, false);
@@ -560,17 +558,14 @@ public class Modchu_CustomModel extends ModelBase {
 		boolean flag1 = armorType < 1;
 		if (flag1) {
 			Object currentScreen = Modchu_Reflect.getFieldObject("Minecraft", "field_6313_p", "currentScreen", mod_Modchu_ModchuLib.modchu_Main.getMinecraft());
-			if (mainModeltexture != null
-					&& ((mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect != null
-					&& !(mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect.isInstance(currentScreen)))
-					| mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect == null)) {
-				if (mod_Modchu_ModchuLib.modchu_Main.mod_LMM_littleMaidMob != null
-						&& mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid.isInstance(entity)) {
-					colorSetting(entityCaps);
-				}
-			} else {
-				colorSetting(entityCaps);
+			boolean colorSettingFlag = mainModeltexture == null;
+			if (mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect != null
+					&& mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect.isInstance(currentScreen)
+					| (mod_Modchu_ModchuLib.modchu_Main.mod_LMM_littleMaidMob != null
+							&& mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid.isInstance(entity))) {
+				colorSettingFlag = true;
 			}
+			if (colorSettingFlag) colorSetting(entityCaps);
 			if (mainModeltexture != null) ;else Modchu_Debug.cDebug("Modchu_CustomModel render mainModeltexture == null !! mainModeltextureName="+mainModeltextureName);
 			if (mainModel.render != null) ;else mainModel.render = baseModel.render;
 			if (mainModel.render != null
@@ -585,7 +580,7 @@ public class Modchu_CustomModel extends ModelBase {
 			}
 			else Modchu_Debug.cDebug("Modchu_CustomModel render render == null !!");
 		} else {
-			//Modchu_Debug.mDebug("Modchu_CustomModel render armor baseModel.getCapsValueInt(baseModel.caps_armorType)="+baseModel.getCapsValueInt(baseModel.caps_armorType));
+			//Modchu_Debug.mDebug("Modchu_CustomModel render armor baseModel.getCapsValue(baseModel.caps_armorType)="+baseModel.getCapsValue(baseModel.caps_armorType));
 			int color = getMaidColor(entityCaps);
 			String s;
 			String armorName = (String) baseModel.getCapsValue(baseModel.caps_textureArmorName);
@@ -624,7 +619,8 @@ public class Modchu_CustomModel extends ModelBase {
 				if (flag) {
 					//Modchu_Debug.mDebug("MultiModelCustom s1="+s1+" func_110776_a texture="+texture+" prevTexture="+prevTexture);
 					//Modchu_Debug.cDebug("MultiModelCustom s1="+s1+" func_110776_a texture="+texture);
-					if (texture != null) {
+					if (texture != null
+							&& partsTextures[i] != null) {
 						if (baseModel.render != null) {
 							loadTexture(baseModel.render, partsTextures[i]);
 						} else {
@@ -972,9 +968,7 @@ public class Modchu_CustomModel extends ModelBase {
 
 	public void changeModel(MMM_IModelCaps entityCaps) {
 		if (mainModel != null) ;else return;
-//-@-151
 		Entity entity = (Entity) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
-//@-@151
 		changeModelInit = true;
 		colorSetting(entityCaps);
 		Field[] fields = mainModel.getClass().getFields();
@@ -1019,8 +1013,10 @@ public class Modchu_CustomModel extends ModelBase {
 	public void renderFirstPersonHand(MMM_IModelCaps entityCaps, float f) {
 		Render render = RenderManager.instance.getEntityRenderObject(mod_Modchu_ModchuLib.modchu_Main.getThePlayer());
 		if (mainModeltexture != null) loadTexture(render, resourceLocationsMain[0]);
-		if (mainModel instanceof MultiModelBaseBiped
-				&& mainModel != null) ((MultiModelBaseBiped) mainModel).renderFirstPersonHand(entityCaps, f);
+		if (mainModel != null) {
+			if (mainModel instanceof MultiModelBaseBiped) ((MultiModelBaseBiped) mainModel).renderFirstPersonHand(entityCaps, f);
+			else mainModel.renderFirstPersonHand(entityCaps);
+		}
 	}
 
 	private void loadInit(File file, List list, boolean b) {
@@ -1476,9 +1472,7 @@ public class Modchu_CustomModel extends ModelBase {
 
 	private void colorSetting(MMM_IModelCaps entityCaps) {
 		//Modchu_Debug.mDebug("Modchu_CustomModel colorSetting");
-//-@-151
 		Entity entity = (Entity) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
-//@-@151
 		MMM_ModelMultiBase model = mainModel != null ? mainModel : baseModel;
 		if (model != null
 			&& entityCaps != null) ;else {
@@ -1548,13 +1542,16 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	private int getMaidColor(MMM_IModelCaps entityCaps) {
-//-@-151
 		Entity entity = (Entity) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
-//@-@151
 		Object o = null;
 		if (mod_Modchu_ModchuLib.modchu_Main.mod_LMM_littleMaidMob != null
 				&& mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid.isInstance(entity)) {
-			o = (Integer) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid, "maidColor", entity);
+			if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159) {
+				o = Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid, "textureData", entity);
+				if (o != null) o = (Integer) Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.modchu_Main.MMM_TextureData, "getColor", o);
+			} else{
+				o = (Integer) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid, "maidColor", entity);
+			}
 			allRendering = true;
 		} else if (mod_Modchu_ModchuLib.modchu_Main.MMM_EntitySelect != null
 				&& mod_Modchu_ModchuLib.modchu_Main.MMM_EntitySelect.isInstance(entity)) {
@@ -1562,9 +1559,13 @@ public class Modchu_CustomModel extends ModelBase {
 			allRendering = true;
 		} else {
 			//Modchu_Debug.mDebug("getMaidColor !LMM ?"+(entity.getClass()));
+			//Modchu_Debug.mDebug("getMaidColor o="+Modchu_ModelCapsHelper.getCapsValueInt(baseModel, entityCaps, baseModel.caps_maidColor, entity));
 			return Modchu_ModelCapsHelper.getCapsValueInt(baseModel, entityCaps, baseModel.caps_maidColor, entity);
 		}
-		if (o != null) return (Integer) o;
+		if (o != null) {
+			//Modchu_Debug.mDebug("getMaidColor o="+o);
+			return (Integer) o;
+		}
 		return 0;
 	}
 
