@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class Modchu_Main extends BaseMod {
+public class Modchu_Main {
+
+	public static final String version = "5c";
 
 	//cfg書き込み項目
 	public static boolean skirtFloats = false;
@@ -36,6 +38,7 @@ public class Modchu_Main extends BaseMod {
 	public static Class MMM_ModelPlate;
 	public static Class MMM_StabilizerManager;
 	public static Class MMM_GuiTextureSelect;
+	public static Class MMM_GuiTextureSlot;
 	public static Class MMM_EntitySelect;
 	public static Class MMM_TextureData;
 	public static Class mod_PFLM_PlayerFormLittleMaid;
@@ -55,7 +58,6 @@ public class Modchu_Main extends BaseMod {
 	public static Class favBlock;
 	public static Class RendererData;
 	private boolean isModchu;
-	public final String minecraftVersion;
 	public static String newVersion = "";
 	public static String packageName;
 	public static String modelClassName = "MultiModel";
@@ -78,125 +80,104 @@ public class Modchu_Main extends BaseMod {
 	{
 		// b181deleteload();
 		if (getVersion().startsWith("1.6.2")) {
-			minecraftVersion = "1.6.2";
 			modchuLibVersion = 162;
 			return;
 		}
 		if (getVersion().startsWith("1.5.2")) {
-			minecraftVersion = "1.5.2";
 			modchuLibVersion = 152;
 			return;
 		}
 		if (getVersion().startsWith("1.5.1")) {
-			minecraftVersion = "1.5.1";
 			modchuLibVersion = 151;
 			return;
 		}
-		if (getVersion().startsWith("1.4.6~7")) {
-			minecraftVersion = "1.4.7";
+		if (getVersion().startsWith("1.4.7")) {
 			modchuLibVersion = 147;
 			return;
 		}
 		if (getVersion().startsWith("1.4.6")) {
 			modchuLibVersion = 146;
-			minecraftVersion = "1.4.6";
 			return;
 		}
-		if (getVersion().startsWith("1.4.4~5")) {
+		if (getVersion().startsWith("1.4.5")) {
 			modchuLibVersion = 145;
-			minecraftVersion = "1.4.5";
 			return;
 		}
 		if (getVersion().startsWith("1.4.4")) {
 			modchuLibVersion = 144;
-			minecraftVersion = "1.4.4";
 			return;
 		}
 		if (getVersion().startsWith("1.4.2")) {
 			modchuLibVersion = 142;
-			minecraftVersion = "1.4.2";
 			return;
 		}
 		if (getVersion().startsWith("1.4.1")) {
 			modchuLibVersion = 141;
-			minecraftVersion = "1.4.1";
 			return;
 		}
 		if (getVersion().startsWith("1.4")) {
 			modchuLibVersion = 140;
-			minecraftVersion = "1.4";
 			return;
 		}
 		if (getVersion().startsWith("1.3.2")) {
 			modchuLibVersion = 132;
-			minecraftVersion = "1.3.2";
 			return;
 		}
 		if (getVersion().startsWith("1.3.1")) {
 			modchuLibVersion = 131;
-			minecraftVersion = "1.3.1";
 			return;
 		}
-		if (getVersion().startsWith("1-2-4")) {
+		if (getVersion().startsWith("1.2.5")) {
+			modchuLibVersion = 125;
+			return;
+		}
+		if (getVersion().startsWith("1.2.4")) {
 			modchuLibVersion = 124;
-			minecraftVersion = "1.2.4";
 			return;
 		}
-		if (getVersion().startsWith("1-2-3")) {
+		if (getVersion().startsWith("1.2.3")) {
 			modchuLibVersion = 123;
-			minecraftVersion = "1.2.3";
 			return;
 		}
-		if (getVersion().startsWith("1-1")) {
+		if (getVersion().startsWith("1.1")) {
 			modchuLibVersion = 110;
-			minecraftVersion = "1.1.0";
 			return;
 		}
-		if (getVersion().startsWith("1-0-0")) {
+		if (getVersion().startsWith("1.0.0")) {
 			modchuLibVersion = 100;
-			minecraftVersion = "1.0.0";
 			return;
 		}
-		if (getVersion().startsWith("1-9pre")) {
+		if (getVersion().startsWith("Beta 1.9")) {
 			modchuLibVersion = 90;
-			minecraftVersion = "1.9pre";
 			return;
 		}
-		if (getVersion().startsWith("1-8-1")) {
+		if (getVersion().startsWith("Beta 1.8.1")) {
 			modchuLibVersion = 81;
-			minecraftVersion = "beta1.8.1";
 			return;
 		}
-		if (getVersion().startsWith("1-7-3")) {
+		if (getVersion().startsWith("Beta 1.7.3")) {
 			modchuLibVersion = 73;
-			minecraftVersion = "beta1.7.3";
 			return;
 		}
-		if (getVersion().startsWith("1-6-6")) {
+		if (getVersion().startsWith("Beta 1.6.6")) {
 			modchuLibVersion = 66;
-			minecraftVersion = "beta1.6.6";
 			return;
 		}
-		if (getVersion().startsWith("1-5-1")) {
+		if (getVersion().startsWith("Beta 1.5_01")) {
 			modchuLibVersion = 51;
-			minecraftVersion = "beta1.5.1";
 			return;
 		}
 		modchuLibVersion = 0;
-		minecraftVersion = "";
 	}
 
-	@Override
 	public String getName() {
 		return "ModchuLib";
 	}
 
-	@Override
 	public String getVersion() {
-		return "1.6.2-5b";
+		return Modchu_Version.getMinecraftVersion() + "-" + version;
 	}
 
-	@Override
 	public void load() {
 		//対応MOD導入チェック class直チェック
 		String className1[] = {
@@ -208,8 +189,7 @@ public class Modchu_Main extends BaseMod {
 			try {
 				test2 = className1[n];
 				test2 = ""+Class.forName(test2);
-				ModLoader.getLogger().fine((new StringBuilder("Modchu_ModchuLib-"+ test2 + " Check ok.")).toString());
-				Modchu_Debug.Debug(test2 + " Check ok.");
+				Modchu_Debug.lDebug(test2 + " Check ok.");
 				if(n == 0
 						| n == 1) isForge = true;
 				if(n == 2) isDecoBlock = true;
@@ -268,6 +248,7 @@ public class Modchu_Main extends BaseMod {
 			isLMM = true;
 			LMM_EntityLittleMaid = Modchu_Reflect.loadClass(getClassName("LMM_EntityLittleMaid"));
 			MMM_GuiTextureSelect = Modchu_Reflect.loadClass(getClassName("MMM_GuiTextureSelect"));
+			MMM_GuiTextureSlot = Modchu_Reflect.loadClass(getClassName("MMM_GuiTextureSlot"));
 			MMM_EntitySelect = Modchu_Reflect.loadClass(getClassName("MMM_EntitySelect"));
 			if (getMinecraftVersion() > 159) MMM_TextureData = Modchu_Reflect.loadClass(getClassName("MMM_TextureData"));
 		}
@@ -284,7 +265,6 @@ public class Modchu_Main extends BaseMod {
 		if (versionCheck) startVersionCheckThread();
 	}
 
-	@Override
 	public void modsLoaded() {
 		if (isModchu) {
 			// ロード
@@ -300,7 +280,7 @@ public class Modchu_Main extends BaseMod {
 			}
 //-@-125
 			// テクスチャインデックスの構築
-			Modchu_Debug.Debug("Localmode: InitTextureList.");
+			Modchu_Debug.lDebug("Localmode: InitTextureList.");
 			if (o != null) Modchu_Reflect.invokeMethod(MMM_TextureManager, "initTextureList", new Class[]{ boolean.class}, o, new Object[]{ true });
 //@-@125
 		}
@@ -325,23 +305,19 @@ public class Modchu_Main extends BaseMod {
 			}
 			else if (name.equals("mod_DecoBlock")) {
 				isDecoBlock = true;
-				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_DecoBlock Check ok.");
-				Modchu_Debug.Debug("DecoBlock Check ok.");
+				Modchu_Debug.lDebug("DecoBlock Check ok.");
 			}
 			else if (name.equals("mod_FavBlock")) {
 				isFavBlock = true;
-				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_FavBlock Check ok.");
-				Modchu_Debug.Debug("FavBlock Check ok.");
+				Modchu_Debug.lDebug("FavBlock Check ok.");
 			}
 			else if (name.equals("mod_FCBetterThanWolves")) {
 				isBTW = true;
-				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_FCBetterThanWolves Check ok.");
-				Modchu_Debug.Debug("mod_FCBetterThanWolves Check ok.");
+				Modchu_Debug.lDebug("mod_FCBetterThanWolves Check ok.");
 			}
 			else if (name.equals("mod_MinecraftForge")) {
 				isForge = true;
-				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_MinecraftForge Check ok.");
-				Modchu_Debug.Debug("mod_MinecraftForge Check ok.");
+				Modchu_Debug.lDebug("mod_MinecraftForge Check ok.");
 			}
 			else if (name.equals("mod_LMM_littleMaidMob")) {
 				boolean b = false;
@@ -354,8 +330,7 @@ public class Modchu_Main extends BaseMod {
 			else if (name.equals("mod_PFLMF")) {
 				isPFLMF = true;
 				mod_PFLMF = Modchu_Reflect.loadClass(getClassName("mod_PFLMF"), -1);
-				ModLoader.getLogger().fine("Modchu_ModchuLib-mod_PFLMF Check ok.");
-				Modchu_Debug.Debug("mod_PFLMF Check ok.");
+				Modchu_Debug.lDebug("mod_PFLMF Check ok.");
 			}
 		}
 		String s;
@@ -373,8 +348,7 @@ public class Modchu_Main extends BaseMod {
 				e.printStackTrace();
 			}
 		} else {
-			ModLoader.getLogger().fine("playerFormLittleMaid-isDecoBlock false.");
-			Modchu_Debug.Debug("isDecoBlock false.");
+			Modchu_Debug.lDebug("isDecoBlock false.");
 		}
 		if (isFavBlock) {
 			try {
@@ -389,8 +363,7 @@ public class Modchu_Main extends BaseMod {
 				}
 			}
 		} else  {
-			ModLoader.getLogger().fine("playerFormLittleMaid-isFavBlock false.");
-			Modchu_Debug.Debug("isFavBlock false.");
+			Modchu_Debug.lDebug("isFavBlock false.");
 		}
 		if (isSSP) {
 			PFLM_RenderPlayer2 = Modchu_Reflect.loadClass("PFLM_RenderPlayer2");
@@ -405,7 +378,7 @@ public class Modchu_Main extends BaseMod {
 				String s[] = {
 						"skirtFloats=false", "skirtFloatsVolume=1.0D", "debugMessage=true", "debugMessagetexture=true", "debugReflectMessage=true",
 						"debugReflectMessageDetail=false", "modchuRemodelingModel=true", "useInvisibilityBody=true", "useInvisibilityArmor=false", "useInvisibilityItem=false",
-						"versionCheck=true",  "debugCustomModelMessage=false"
+						"versionCheck=true",  "debugCustomModelMessage=false", "debugLogMessage=false", "careerSave=false"
 				};
 				Modchu_Config.writerConfig(mainCfgfile, s);
 			} else {
@@ -422,15 +395,17 @@ public class Modchu_Main extends BaseMod {
 				useInvisibilityItem = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "useInvisibilityItem", useInvisibilityItem)).toString());
 				versionCheck = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "versionCheck", versionCheck)).toString());
 				Modchu_Debug.debugCustomModelMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugCustomModelMessage", Modchu_Debug.debugCustomModelMessage)).toString());
+				Modchu_Debug.debugLogMessage = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "debugLogMessage", Modchu_Debug.debugLogMessage)).toString());
+				Modchu_Debug.careerSave = Boolean.valueOf((Modchu_Config.loadConfig(mainCfgfile, "careerSave", Modchu_Debug.careerSave)).toString());
 				String k[] = {
 						"skirtFloats", "skirtFloatsVolume", "debugMessage", "debugMessagetexture", "debugReflectMessage",
 						"debugReflectMessageDetail", "modchuRemodelingModel", "useInvisibilityBody", "useInvisibilityArmor", "useInvisibilityItem",
-						"versionCheck", "debugCustomModelMessage"
+						"versionCheck", "debugCustomModelMessage", "debugLogMessage", "careerSave"
 				};
 				String k1[] = {
 						""+skirtFloats, ""+skirtFloatsVolume, ""+Modchu_Debug.debugMessage, ""+Modchu_Debug.debugMessagetexture, ""+Modchu_Reflect.debugReflectMessage,
 						""+Modchu_Reflect.debugReflectMessageDetail, ""+modchuRemodelingModel, ""+useInvisibilityBody, ""+useInvisibilityArmor, ""+useInvisibilityItem,
-						""+versionCheck, ""+Modchu_Debug.debugCustomModelMessage
+						""+versionCheck, ""+Modchu_Debug.debugCustomModelMessage, ""+Modchu_Debug.debugLogMessage, ""+Modchu_Debug.careerSave
 				};
 				if (skirtFloatsVolume < 0.0D) skirtFloatsVolume = 0.0D;
 				if (skirtFloatsVolume > 2.0D) skirtFloatsVolume = 2.0D;
@@ -815,6 +790,9 @@ public class Modchu_Main extends BaseMod {
 		Object ltb = getTextureBox(s);
 		if (ltb != null) return getTextureBoxTextureName(ltb, i);
 		//Modchu_Debug.mDebug("textureManagerGetTextureName return null !! s="+s+" i="+i);
+		s = textureNameCheck(null);
+		ltb = getTextureBox(s);
+		if (ltb != null) return getTextureBoxTextureName(ltb, i);
 		return null;
 	}
 
@@ -828,12 +806,18 @@ public class Modchu_Main extends BaseMod {
 
 	public static String textureNameCheck(String s) {
 		String s1 = (String) Modchu_Reflect.getFieldObject(MMM_TextureManager, "defaultModelName");
-		if (s != null) {
+		if (s == null
+				| (s !=null
+				&& s.isEmpty())) {
+			if (s1 != null) {
+				s = "default_"+s1;
+				//Modchu_Debug.lDebug("Modchu_Main textureNameCheck default setting.");
+			}
+			else Modchu_Debug.lDebug("Modchu_Main textureNameCheck MMM_TextureManager defaultModelName == null !!");
+		} else {
 			if (s.indexOf("_") < 0) {
 				if (s1 != null) s = s+"_"+s1;
 			}
-		} else {
-			if (s1 != null) s = "default_"+s1;
 		}
 		return s;
 	}
@@ -985,7 +969,7 @@ public class Modchu_Main extends BaseMod {
 	public File getMinecraftDir() {
 		if (mc != null) ;else mc = getMinecraft();
 		return (File) (getMinecraftVersion() > 159 ? Modchu_Reflect.getFieldObject("Minecraft", "field_71412_D", "mcDataDir", mc) :
-			Modchu_Reflect.invokeMethod("Minecraft", "getMinecraftDir", getMinecraft()));
+			Modchu_Reflect.invokeMethod("Minecraft", "func_71380_b", "getMinecraftDir", mc));
 	}
 
 	public static int getMinecraftVersion() {

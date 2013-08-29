@@ -32,9 +32,9 @@ public class Modchu_Config
 			}
 			cfgData.put(file, list);
 			bwriter.close();
-			Modchu_Debug.mDebug("Modchu_Config "+ file.toString() +" new file create.");
+			Modchu_Debug.lDebug("Modchu_Config "+ file.toString() +" new file create.");
 		} catch (Exception e) {
-			Modchu_Debug.Debug("Modchu_Config "+ file.toString() +" file writer fail.");
+			Modchu_Debug.lDebug("Modchu_Config", "writerConfig file="+ file.toString() +" file writer fail.", 2, e);
 			e.printStackTrace();
 		}
 	}
@@ -66,7 +66,7 @@ public class Modchu_Config
 				breader.close();
 				//Modchu_Debug.mDebug("Modchu_Config loadConfig o = "+o.toString());
 			} catch (Exception e) {
-				Modchu_Debug.Debug("Modchu_Config loadConfig "+ file.toString() +" load fail.");
+				Modchu_Debug.lDebug("Modchu_Config", "loadConfig "+ file.toString() +" load fail.", 2, e);
 				e.printStackTrace();
 			}
 		} else {
@@ -117,7 +117,7 @@ public class Modchu_Config
 				breader.close();
 				//Modchu_Debug.mDebug("Modchu_Config loadConfig1 o = "+o.toString());
 			} catch (Exception e) {
-				Modchu_Debug.Debug("Modchu_Config loadConfig "+ file.toString() +" load fail.");
+				Modchu_Debug.lDebug("Modchu_Config", "loadConfig "+ file.toString() +" load fail.", 2, e);
 				e.printStackTrace();
 			}
 		} else {
@@ -199,7 +199,7 @@ public class Modchu_Config
 				}
 				breader.close();
 			} catch (Exception er) {
-				Modchu_Debug.Debug("saveParamater file error.");
+				Modchu_Debug.lDebug("Modchu_Config", "saveParamater", 2, er);
 				er.printStackTrace();
 			}
 			try {
@@ -218,7 +218,7 @@ public class Modchu_Config
 					bwriter.close();
 				}
 			} catch (Exception er) {
-				Modchu_Debug.Debug("saveParamater file save fail.");
+				Modchu_Debug.lDebug("Modchu_Config", "saveParamater file="+ file.toString(), 2, er);
 				er.printStackTrace();
 			}
 		}

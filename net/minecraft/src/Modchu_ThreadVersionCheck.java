@@ -16,7 +16,7 @@ public class Modchu_ThreadVersionCheck extends Thread
         HttpURLConnection var1 = null;
         try
         {
-        	String s = mod_Modchu_ModchuLib.modchu_Main.minecraftVersion;
+        	String s = Modchu_Version.getMinecraftVersion();
         	if (s != null) {
             	URL var2 = new URL((new StringBuilder()).append("https://dl.dropbox.com/u/105864172/ModchuLib").append(s).append(".txt").toString());
                 var1 = (HttpURLConnection)var2.openConnection();
@@ -30,7 +30,7 @@ public class Modchu_ThreadVersionCheck extends Thread
                     String[] var5 = tokenize(var4, "\n\r");
                     if (var5.length < 1) return;
                     String var6 = var5[0];
-                    Modchu_Debug.Debug("mod_Modchu_ModchuLib Version found: " + var6);
+                    Modchu_Debug.lDebug("mod_Modchu_ModchuLib Version found: " + var6);
                     if (mod_Modchu_ModchuLib.modchu_Main.checkRelease(var6)) {
                     	mod_Modchu_ModchuLib.modchu_Main.setNewRelease(var6);
                         return;
