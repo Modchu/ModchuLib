@@ -56,6 +56,11 @@ public class Modchu_Debug {
 		lDebug(s, null, 0, null);
 	}
 
+	public static void mmlDebug(String s) {
+		mDebug(s);
+		if (!isRelease) lDebug(s, null, 0, null);
+	}
+
 	public static void tDebug(String s) {
 		if (debugMessagetexture) System.out.println((new StringBuilder()).append("Modchu_tDebug_").append(s).toString());
 	}

@@ -11,7 +11,9 @@ import java.util.Map.Entry;
 
 public class Modchu_Main {
 
-	public static final String version = "5c";
+	public static final String version = "5d";
+	public static final String modName = "ModchuLib";
+	public static final String versionString = Modchu_Version.version + "-" + version;
 
 	//cfg‘‚«ž‚Ý€–Ú
 	public static boolean skirtFloats = false;
@@ -40,6 +42,7 @@ public class Modchu_Main {
 	public static Class MMM_GuiTextureSelect;
 	public static Class MMM_GuiTextureSlot;
 	public static Class MMM_EntitySelect;
+	public static Class MMM_ITextureEntity;
 	public static Class MMM_TextureData;
 	public static Class mod_PFLM_PlayerFormLittleMaid;
 	public static Class mod_LMM_littleMaidMob;
@@ -58,6 +61,7 @@ public class Modchu_Main {
 	public static Class favBlock;
 	public static Class RendererData;
 	private boolean isModchu;
+
 	public static String newVersion = "";
 	public static String packageName;
 	public static String modelClassName = "MultiModel";
@@ -171,11 +175,11 @@ public class Modchu_Main {
 	}
 
 	public String getName() {
-		return "ModchuLib";
+		return modName;
 	}
 
 	public String getVersion() {
-		return Modchu_Version.getMinecraftVersion() + "-" + version;
+		return versionString;
 	}
 
 	public void load() {
@@ -250,6 +254,7 @@ public class Modchu_Main {
 			MMM_GuiTextureSelect = Modchu_Reflect.loadClass(getClassName("MMM_GuiTextureSelect"));
 			MMM_GuiTextureSlot = Modchu_Reflect.loadClass(getClassName("MMM_GuiTextureSlot"));
 			MMM_EntitySelect = Modchu_Reflect.loadClass(getClassName("MMM_EntitySelect"));
+			MMM_ITextureEntity = Modchu_Reflect.loadClass(getClassName("MMM_ITextureEntity"));
 			if (getMinecraftVersion() > 159) MMM_TextureData = Modchu_Reflect.loadClass(getClassName("MMM_TextureData"));
 		}
 
@@ -959,6 +964,11 @@ public class Modchu_Main {
 		}
 */
 		return (EntityPlayer) Modchu_Reflect.getFieldObject("Minecraft", "field_71439_g", "thePlayer", mc);
+	}
+
+	public static void setThePlayer(EntityPlayer entityPlayer) {
+		if (mc != null) ;else mc = getMinecraft();
+		Modchu_Reflect.setFieldObject("Minecraft", "field_71439_g", "thePlayer", mc, entityPlayer);
 	}
 
 	public static World getTheWorld() {

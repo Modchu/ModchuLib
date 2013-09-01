@@ -1655,7 +1655,7 @@ public class Modchu_Reflect
     			"func_110776_a", "func_110623_a", "func_130087_a", "func_110577_a", "func_110432_I",
     			"func_70073_O", "field_70120_cr", "func_78350_a", "func_110434_K", "field_71412_D",
     			"func_71373_a", "field_74320_O", "func_110987_a", "field_71446_o", "func_78351_a",
-    			"func_77220_a", "func_130000_a", "field_70260_b", "func_71386_F", "func_110527_b",
+    			"func_77220_a", "func_130000_a", "field_70734_aK", "func_71386_F", "func_110527_b",
     			"func_110857_a", "func_77031_a", "field_70475_c", "func_71380_b", "func_76985_a",
     			"field_71462_r"
     	};

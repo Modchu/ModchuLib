@@ -86,7 +86,7 @@ public class Modchu_CustomModel extends ModelBase {
 	private boolean guiTextureSelectFlag;
 	private boolean colorSettingForcingFlag;
 	private Object tempSelectPanel;
-	private Object tempGuiTextureSlotEntity;
+	private Object tempGuiEntitySelectEntity;
 	//private Class PFLM_ModelData;
 	//private Method setArmorModelMethod;
 	//private int setArmorModelMethodType;
@@ -564,21 +564,30 @@ public class Modchu_CustomModel extends ModelBase {
 			if (tempSelectPanel != null) tempSelectPanel = null;
 		}
 		boolean colorSettingFlag = mainModeltexture == null;
+		//Modchu_Debug.lDebug("render currentScreen="+currentScreen);
+		//Modchu_Debug.lDebug("render mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect="+mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect);
+		//Modchu_Debug.lDebug("render mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect.isInstance(currentScreen)="+mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect.isInstance(currentScreen));
 		if (mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect != null
 				&& mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect.isInstance(currentScreen)) {
 			colorSettingFlag = true;
 			guiTextureSelectFlag = true;
+			if (tempSelectPanel != null) ;else {
+				tempSelectPanel = Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect, "selectPanel", currentScreen);
+				tempGuiEntitySelectEntity = null;
+			}
 		} else {
 			if (guiTextureSelectFlag) {
 				colorSettingForcingFlag = true;
 				guiTextureSelectFlag = false;
 			}
+			if (tempSelectPanel != null) tempSelectPanel = null;
 		}
 		if (mod_Modchu_ModchuLib.modchu_Main.mod_LMM_littleMaidMob != null
 				&& mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid.isInstance(entity)) {
 			colorSettingFlag = true;
 		}
 		if (mainModeltexture != null) ;else colorSettingForcingFlag = true;
+		//Modchu_Debug.lDebug("render colorSettingFlag="+colorSettingFlag);
 		if (colorSettingFlag) changeColor(entityCaps);
 		//Modchu_Debug.mDebug("Modchu_CustomModel mainModeltexture="+mainModeltexture);
 		boolean flag1 = armorType < 1;
@@ -691,7 +700,7 @@ public class Modchu_CustomModel extends ModelBase {
 
 	private void loadTexture(Render r, Object o) {
 		if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159) Modchu_Reflect.invokeMethod(Render.class, "func_110776_a", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, r, new Object[]{ o });
-		else Modchu_Reflect.invokeMethod(Render.class, "loadTexture", new Class[]{ String.class }, r, new Object[]{ o });
+		else Modchu_Reflect.invokeMethod(Render.class, "func_76985_a", "loadTexture", new Class[]{ String.class }, r, new Object[]{ o });
 	}
 
 	private void armorRender(MMM_IModelCaps entityCaps, Object resourceLocation, int armorType, ItemStack is, MMM_ModelMultiBase model, int i, Entity entity, float f, float f1, float ticksExisted, float pheadYaw, float pheadPitch, float f5) {
@@ -1585,19 +1594,24 @@ public class Modchu_CustomModel extends ModelBase {
 		Object o = null;
 		Object currentScreen = Modchu_Reflect.getFieldObject("Minecraft", "field_71462_r", "currentScreen", mod_Modchu_ModchuLib.modchu_Main.getMinecraft());
 		if (guiTextureSelectFlag) {
-			if (tempSelectPanel != null) ;else {
-				tempSelectPanel = Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect, "selectPanel", currentScreen);
-				tempGuiTextureSlotEntity = null;
-			}
-			//Modchu_Debug.Debug("getMaidColor tempSelectPanel="+tempSelectPanel);
+
 			if (tempSelectPanel != null) {
-				if (tempGuiTextureSlotEntity != null) ;else tempGuiTextureSlotEntity = Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSlot, "entity", tempSelectPanel);
-				if (tempGuiTextureSlotEntity != null) {
-					o = (Integer) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_EntitySelect, "color", tempGuiTextureSlotEntity);
+				if (tempGuiEntitySelectEntity != null) ;else tempGuiEntitySelectEntity = Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSlot, "entity", tempSelectPanel);
+				if (tempGuiEntitySelectEntity != null) {
+					o = (Integer) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_EntitySelect, "color", tempGuiEntitySelectEntity);
 					allRendering = true;
-					//Modchu_Debug.Debug("getMaidColor MMM_GuiTextureSelect o="+o);
+					Modchu_Debug.Debug("getMaidColor MMM_GuiTextureSelect o="+o);
 				}
 			}
+
+/*
+			if (tempGuiEntitySelectEntity != null) ;else tempGuiEntitySelectEntity = Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect, "target", currentScreen);
+			if (tempGuiEntitySelectEntity != null) {
+				o = (Integer) Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.modchu_Main.MMM_ITextureEntity, "getColor", tempGuiEntitySelectEntity);
+				allRendering = true;
+				Modchu_Debug.Debug("getMaidColor MMM_GuiTextureSelect o="+o);
+			}
+*/
 		} else if (mod_Modchu_ModchuLib.modchu_Main.mod_LMM_littleMaidMob != null
 				&& mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid.isInstance(entity)) {
 			if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159) {
@@ -1609,12 +1623,11 @@ public class Modchu_CustomModel extends ModelBase {
 			//allRendering = true;
 			//Modchu_Debug.Debug("getMaidColor mod_LMM_littleMaidMob");
 		} else {
-			//Modchu_Debug.mDebug("getMaidColor !LMM ?"+(entity.getClass()));
-			//Modchu_Debug.mDebug("getMaidColor o="+Modchu_ModelCapsHelper.getCapsValueInt(baseModel, entityCaps, baseModel.caps_maidColor, entity));
-			return Modchu_ModelCapsHelper.getCapsValueInt(baseModel, entityCaps, baseModel.caps_maidColor, entity);
+			//Modchu_Debug.Debug("getMaidColor !LMM ?"+(entity.getClass()));
+			o = Modchu_ModelCapsHelper.getCapsValueInt(baseModel, entityCaps, baseModel.caps_maidColor, entity);
 		}
 		if (o != null) {
-			//Modchu_Debug.mDebug("getMaidColor o="+o);
+			Modchu_Debug.Debug("getMaidColor o="+o);
 			return (Integer) o;
 		}
 		return 0;
