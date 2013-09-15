@@ -113,24 +113,16 @@ public class Modchu_Reflect
 
     public static boolean setFieldObject(Class var0, String var1, String var2, Object var3, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Field f = null;
     	try {
-    		f = getField(var0, var1, i == 1 ? 2 : i);
+    		f = getField(var0, var1, i);
     		if (f != null) {
     			f.set(null, var3);
     			return true;
     		}
     	} catch (Exception e) {
-    		if (debugDisplayDetail(i)) printStackTrace(e);
-    	}
-    	try {
-    		f = getField(var0, var2, i);
-    		if (f != null) {
-    			f.set(null, var3);
-    			return true;
-    		}
-    	} catch (Exception e1) {
-    		if (debugDisplay(i)) printStackTrace(e1);
+    		if (debugDisplay(i)) printStackTrace(e);
     	}
     	return false;
     }
@@ -190,24 +182,16 @@ public class Modchu_Reflect
 
     public static boolean setFieldObject(Class var0, String var1, String var2, Object var3, Object var4, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Field f = null;
     	try {
-    		f = getField(var0, var1, i == 1 ? 2 : i);
+    		f = getField(var0, var1, i);
     		if (f != null) {
     			f.set(var3, var4);
     			return true;
     		}
     	} catch (Exception e) {
-    		if (debugDisplayDetail(i)) printStackTrace(e);
-    	}
-    	try {
-    		f = getField(var0, var2, i);
-    		if (f != null) {
-    			f.set(var3, var4);
-    			return true;
-    		}
-    	} catch (Exception e1) {
-    		if (debugDisplay(i)) printStackTrace(e1);
+    		if (debugDisplay(i)) printStackTrace(e);
     	}
     	return false;
     }
@@ -465,7 +449,7 @@ public class Modchu_Reflect
     			return f;
     		} catch (Exception e2) {
     		}
-    		if (debugReflectMessageDetail) Modchu_Debug.lDebug("getRawField Exception getDeclaredField Class="+var0+" String="+var1);
+    		if (debugReflectMessageDetail) Modchu_Debug.Debug("getRawField Exception getDeclaredField Class="+var0+" String="+var1);
     		try {
     			f = var0.getField(var2);
     			return f;
@@ -476,13 +460,13 @@ public class Modchu_Reflect
     			return f;
     		} catch (Exception e1) {
     		}
-    		if (debugReflectMessageDetail) Modchu_Debug.lDebug("getRawField Exception getDeclaredField Class="+var0+" String="+var1);
+    		if (debugReflectMessageDetail) Modchu_Debug.Debug("getRawField Exception getDeclaredField Class="+var0+" String="+var1);
     		try {
     			f = var0.getField(var1);
     			return f;
     		} catch (Exception e) {
     		}
-    		if (debugReflectMessageDetail) Modchu_Debug.lDebug("getRawField Exception getField Class="+var0+" String="+var1);
+    		if (debugReflectMessageDetail) Modchu_Debug.Debug("getRawField Exception getField Class="+var0+" String="+var1);
     		for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
     			try {
     				if (c != null) f = c.getDeclaredField(var1);
@@ -492,7 +476,7 @@ public class Modchu_Reflect
     				}
     			} catch (Exception e4) {
     				if (debugReflectMessageDetail) {
-    					Modchu_Debug.lDebug("getRawField Exception Class="+c+" String="+var1);
+    					Modchu_Debug.Debug("getRawField Exception Class="+c+" String="+var1);
     					printStackTrace(e4);
     				}
     			}
@@ -635,10 +619,8 @@ public class Modchu_Reflect
 
     public static Method getMethod(String var0, String var1, String var2, int i)
     {
-    	Method method = null;
-    	method = getMethod(var0, var2, (Class[]) null, i == 1 ? 2 : i);
-    	if (method != null) return method;
-    	method = getMethod(var0, var1, (Class[]) null, i);
+    	var1 = reflectStringSetting(var1, var2);
+    	Method method = getMethod(var0, var1, (Class[]) null, i);
     	return method;
     }
 
@@ -649,10 +631,8 @@ public class Modchu_Reflect
 
     public static Method getMethod(String var0, String var1, String var2, Class[] var3, int i)
     {
-    	Method method = null;
-    	method = getMethod(var0, var2, var3, i == 1 ? 2 : i);
-    	if (method != null) return method;
-    	method = getMethod(var0, var1, var3, i);
+    	var1 = reflectStringSetting(var1, var2);
+    	Method method = getMethod(var0, var1, var3, i);
     	return method;
     }
 
@@ -812,17 +792,10 @@ public class Modchu_Reflect
 
     public static Object invokeMethod(Class var0, String var1, String var2, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Method method = null;
     	try {
-    		method = getMethod(var0, var1, (Class[]) null, i == 1 ? 2 : i);
-    		if (method != null) {
-    			Object o = method.invoke(null);
-    			return o;
-    		}
-    	} catch (Exception ee) {
-    	}
-    	try {
-    		method = getMethod(var0, var2, (Class[]) null, i);
+    		method = getMethod(var0, var1, (Class[]) null, i);
     		if (method != null) {
     			Object o = method.invoke(null);
     			return o;
@@ -860,17 +833,10 @@ public class Modchu_Reflect
 
     public static Object invokeMethod(Class var0, String var1, String var2, Object var3, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Method method = null;
     	try {
-    		method = getMethod(var0, var1, (Class[]) null, i == 1 ? 2 : i);
-    		if (method != null) {
-    			Object o = method.invoke(var3);
-    			return o;
-    		}
-    	} catch (Exception ee) {
-    	}
-    	try {
-    		method = getMethod(var0, var2, (Class[]) null, i);
+    		method = getMethod(var0, var1, (Class[]) null, i);
     		if (method != null) {
     			Object o = method.invoke(var3);
     			return o;
@@ -958,17 +924,10 @@ public class Modchu_Reflect
 
     public static Object invokeMethod(Class var0, String var1, String var2, Class[] var3, Object var4, Object var5, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Method method = null;
     	try {
-    		method = getMethod(var0, var1, var3, i == 1 ? 2 : i);
-    		if (method != null) {
-    			Object o = method.invoke(var4, var5);
-    			return o;
-    		}
-    	} catch (Exception ee) {
-    	}
-    	try {
-    		method = getMethod(var0, var2, var3, i);
+    		method = getMethod(var0, var1, var3, i);
     		if (method != null) {
     			Object o = method.invoke(var4, var5);
     			return o;
@@ -986,17 +945,10 @@ public class Modchu_Reflect
 
     public static Object invokeMethod(Class var0, String var1, String var2, Class[] var3, Object var4, Object[] var5, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Method method = null;
     	try {
-    		method = getMethod(var0, var1, var3, i == 1 ? 2 : i);
-    		if (method != null) {
-    			Object o = method.invoke(var4, var5);
-    			return o;
-    		}
-    	} catch (Exception ee) {
-    	}
-    	try {
-    		method = getMethod(var0, var2, var3, i);
+    		method = getMethod(var0, var1, var3, i);
     		if (method != null) {
     			Object o = method.invoke(var4, var5);
     			return o;
@@ -1036,19 +988,12 @@ public class Modchu_Reflect
 
     public static Object invokeMethod(String var0, String var1, String var2, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Method method = null;
     	Class c = null;
     	try {
     		c = loadClass(var0);
-    		if (c != null) method = getMethod(c, var1, (Class[]) null, i == 1 ? 2 : i);
-    		if (method != null) {
-    			Object o = method.invoke(null);
-    			return o;
-    		}
-    	} catch (Exception ee) {
-    	}
-    	try {
-    		if (c != null) method = getMethod(c, var2, (Class[]) null, i);
+    		if (c != null) method = getMethod(c, var1, (Class[]) null, i);
     		if (method != null) {
     			Object o = method.invoke(null);
     			return o;
@@ -1088,19 +1033,12 @@ public class Modchu_Reflect
 
     public static Object invokeMethod(String var0, String var1, String var2, Object var3, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Method method = null;
     	Class c = null;
     	try {
     		c = loadClass(var0);
-    		if (c != null) method = getMethod(c, var1, (Class[]) null, i == 1 ? 2 : i);
-    		if (method != null) {
-    			Object o = method.invoke(var3);
-    			return o;
-    		}
-    	} catch (Exception ee) {
-    	}
-    	try {
-    		if (c != null) method = getMethod(c, var2, (Class[]) null, i);
+    		if (c != null) method = getMethod(c, var1, (Class[]) null, i);
     		if (method != null) {
     			Object o = method.invoke(var3);
     			return o;
@@ -1162,19 +1100,12 @@ public class Modchu_Reflect
 
     public static Object invokeMethod(String var0, String var1, String var2, Class[] var3, Object var4, Object var5, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Method method = null;
     	Class c = null;
     	try {
     		c = loadClass(var0);
-    		if (c != null) method = getMethod(c, var1, var3, i == 1 ? 2 : i);
-    		if (method != null) {
-    			Object o = method.invoke(var4, var5);
-    			return o;
-    		}
-    	} catch (Exception ee) {
-    	}
-    	try {
-    		if (c != null) method = getMethod(c, var2, var3, i);
+    		if (c != null) method = getMethod(c, var1, var3, i);
     		if (method != null) {
     			Object o = method.invoke(var4, var5);
     			return o;
@@ -1224,20 +1155,12 @@ public class Modchu_Reflect
 
     public static Object invokeMethod(String var0, String var1, String var2, Class[] var3, Object var4, Object[] var5, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Method method = null;
     	Class c = null;
     	try {
     		c = loadClass(var0);
-    		if (c != null) method = getMethod(c, var1, var3, i == 1 ? 2 : i);
-    		if (method != null) {
-    			Object o = method.invoke(var4, var5);
-    			return o;
-    		}
-    	} catch (Exception ee) {
-    		if (debugDisplayDetail(i)) printStackTrace(ee);
-    	}
-    	try {
-    		if (c != null) method = getMethod(c, var2, var3, i);
+    		if (c != null) method = getMethod(c, var1, var3, i);
     		if (method != null) {
     			Object o = method.invoke(var4, var5);
     			return o;
@@ -1270,11 +1193,11 @@ public class Modchu_Reflect
 /*
     		if (	mod_Modchu_ModchuLib.modchu_Main.isForge) {
     			try {
-    				if (debugDisplay(i)) Modchu_Debug.lDebug("loadClass classString="+var0);
+    				if (debugDisplay(i)) Modchu_Debug.Debug("loadClass classString="+var0);
     				Object o = getPrivateValue(Class.forName("cpw.mods.fml.relauncher.FMLRelauncher"), null, "INSTANCE");
-    				if (debugDisplay(i)) Modchu_Debug.lDebug("loadClass FMLRelauncher o="+(o != null));
+    				if (debugDisplay(i)) Modchu_Debug.Debug("loadClass FMLRelauncher o="+(o != null));
     				if (o != null) o = getPrivateValue(o.getClass(), o, "classLoader");
-    				if (debugDisplay(i)) Modchu_Debug.lDebug("loadClass classLoader o="+(o != null));
+    				if (debugDisplay(i)) Modchu_Debug.Debug("loadClass classLoader o="+(o != null));
     				if (o != null) {
     					try {
     						c = (Class) invokeMethod(o.getClass(), "findClass", new Class[]{ String.class }, o, new Object[]{ var0 });
@@ -1283,14 +1206,14 @@ public class Modchu_Reflect
     							c = (Class) invokeMethod(o.getClass(), "findClass", new Class[]{ String.class }, o, new Object[]{ "net.minecraft.src."+var0 });
     						} catch (Exception e4) {
     							if (debugDisplay(i)) {
-    								Modchu_Debug.lDebug("loadClass Exception classString=net.minecraft.src."+var0);
+    								Modchu_Debug.Debug("loadClass Exception classString=net.minecraft.src."+var0);
     								printStackTrace(e4);
     							}
     						}
     					}
     				}
     			} catch (NoClassDefFoundError e1) {
-    				if (debugDisplay(i)) printStackTrace(e);
+    				if (debugDisplay(i)) printStackTraceError(e);
     			} catch (ClassNotFoundException e2) {
     				if (debugDisplay(i)) printStackTrace(e2);
     			} catch (Exception e3) {
@@ -1414,7 +1337,7 @@ public class Modchu_Reflect
     			return f.get(var1);
     		}
     	} catch (Exception var4) {
-    		if (debugDisplay(i)) printStackTrace(var4);
+    		if (debugDisplay(i)) var4.printStackTrace();
     	}
     	return null;
     }
@@ -1530,6 +1453,10 @@ public class Modchu_Reflect
     	return false;
     }
 
+    private static String reflectStringSetting(String var1, String var2) {
+    	return mod_Modchu_ModchuLib.modchu_Main.isRelease() ? var1 : var2;
+    }
+
     public static String getFieldName(String s) {
     	if (mod_Modchu_ModchuLib.modchu_Main.isForge
     			&& mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 150) return s;
@@ -1571,6 +1498,7 @@ public class Modchu_Reflect
     	String[] s1 = {
     			"Minecraft", "AbstractClientPlayer", "EntityLivingBase", "RendererLivingEntity", "ResourceLocation",
     			"RenderEngine", "MapItemRenderer", "TextureUtil", "Resource", "ResourceManager",
+    			"TextureManager",
     			"PFLM_RenderPlayer2", "PFLM_RenderPlayer", "PFLM_GuiSmallButton", "PFLM_RenderPlayerDummy", "PFLM_ItemRenderer",
     			"PFLM_ItemRendererHD", "PFLM_GuiOthersPlayerSlot", "PFLM_RenderPlayerAether"
     	};
@@ -1581,14 +1509,16 @@ public class Modchu_Reflect
     			s2 = new String []{
     					"net.minecraft.client.Minecraft", "net.minecraft.client.entity.EntityPlayer", "net.minecraft.entity.EntityLiving", "net.minecraft.client.renderer.entity.RenderLiving", "java.lang.String",
     					"net.minecraft.client.renderer.RenderEngine","net.minecraft.client.gui.MapItemRenderer", "", "", "",
+    					"net.minecraft.client.renderer.texture.TextureManager",
     					"PFLM_RenderPlayer2V1", "PFLM_RenderPlayerV1", "PFLM_GuiSmallButtonV1", "PFLM_RenderPlayerDummyV1", "PFLM_ItemRendererV1",
-    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", "PFLM_RenderPlayerAetherV1"
+    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", ""
     			};
     			break;
     		case 162:
     			s2 = new String []{
     					"net.minecraft.client.Minecraft", "net.minecraft.client.entity.AbstractClientPlayer", "net.minecraft.entity.EntityLivingBase", "net.minecraft.client.renderer.entity.RendererLivingEntity", "net.minecraft.util.ResourceLocation",
     					"net.minecraft.client.renderer.RenderEngine","net.minecraft.client.gui.MapItemRenderer", "net.minecraft.client.renderer.texture.TextureUtil", "net.minecraft.client.resources.Resource", "net.minecraft.client.resources.ResourceManager",
+    					"net.minecraft.client.renderer.texture.TextureManager",
     					"PFLM_RenderPlayer2V160", "PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160",
     					"PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160", "PFLM_RenderPlayerAetherV160"
     			};
@@ -1600,14 +1530,16 @@ public class Modchu_Reflect
     			s2 = new String []{
     					"net.minecraft.client.Minecraft", "sq", "ng", "bho", "java.lang.String",
     					"bge", "axi", "", "", "",
+    					"biq",
     					"PFLM_RenderPlayer2V1", "PFLM_RenderPlayerV1", "PFLM_GuiSmallButtonV1", "PFLM_RenderPlayerDummyV1", "PFLM_ItemRendererV1",
-    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", "PFLM_RenderPlayerAetherV1"
+    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", ""
     			};
     			break;
     		case 162:
     			s2 = new String []{
     					"ats", "ber", "oe", "bgy", "bjl",
     					"bge", "avs", "bim", "bjk", "bjm",
+    					"bij",
     					"PFLM_RenderPlayer2V160", "PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160",
     					"PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160", "PFLM_RenderPlayerAetherV160"
     			};
@@ -1618,6 +1550,7 @@ public class Modchu_Reflect
     			s2 = new String []{
     					"Minecraft", "AbstractClientPlayer", "EntityLivingBase", "RendererLivingEntity", "ResourceLocation",
     					"RenderEngine", "MapItemRenderer", "TextureUtil", "Resource", "ResourceManager",
+    					"TextureManager",
     					"PFLM_RenderPlayer2V160", "PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160",
     					"PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160", "PFLM_RenderPlayerAetherV160"
     			};
@@ -1626,8 +1559,9 @@ public class Modchu_Reflect
     			s2 = new String []{
     					"net.minecraft.client.Minecraft",  "EntityPlayer", "EntityLiving", "RenderLiving", "java.lang.String",
     					"RenderEngine", "MapItemRenderer", "", "", "",
+    					"TextureManager",
     					"PFLM_RenderPlayer2V1", "PFLM_RenderPlayerV1", "PFLM_GuiSmallButtonV1", "PFLM_RenderPlayerDummyV1", "PFLM_ItemRendererV1",
-    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", "PFLM_RenderPlayerAetherV1"
+    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", ""
     			};
     		}
     	}
@@ -1657,30 +1591,59 @@ public class Modchu_Reflect
     			"func_71373_a", "field_74320_O", "func_110987_a", "field_71446_o", "func_78351_a",
     			"func_77220_a", "func_130000_a", "field_70734_aK", "func_71386_F", "func_110527_b",
     			"func_110857_a", "func_77031_a", "field_70475_c", "func_71380_b", "func_76985_a",
-    			"field_71462_r"
+    			"field_71462_r", "field_71456_v", "field_73886_k", "func_71354_a", "field_71451_h",
+    			"func_78745_b", "func_78064_b", "func_607_d", "field_71466_p", "field_71456_v"
     	};
-    	s2 = new String []{
-    			"h",
-    			"b",
-    			"aa", "a", "d",
-    			"a", "a", "a", "bL", "b",
-    			"l", "aM", "aO", "aN", "aQ",
-    			"aP", "aF", "aG", "aH", "g_",
-    			"a", "a", "ay", "aB", "b",
-    			"p", "bA", "bB", "a", "ai",
-    			"r", "a", "a", "c", "p",
-    			"h", "f", "A", "u", "b",
-    			"t", "n", "g", "w", "d",
-    			"a", "r", "p", "a", "a",
-    			"q", "B", "aS", "a", "K",
-    			"a", "a", "a", "a", "H",
-    			"N", "cv", "a", "J", "x",
-    			"a", "aa", "a", "p", "a",
-    			"a", "a", "aU", "F", "b",
-    			"a", "a", "h", "b", "a",
-    			"n"
-    	};
-    	if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() < 160) s2[1] = "a";
+    	switch(mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion()) {
+    	case 152:
+    		s2 = new String []{
+    				"h",
+    				"a",
+    				"aa", "a", "d",
+    				"a", "a", "a", "bL", "b",
+    				"l", "aM", "az", "ay", "aB",
+    				"aA", "bh", "bi", "bj", "g_",
+    				"a", "a", "aW", "aZ", "b",
+    				"p", "bA", "bB", "a", "ai",
+    				"r", "a", "a", "b", "u",
+    				"g", "e", "H", "z", "b",
+    				"t", "n", "fg", "x", "d",
+    				"a", "r", "p", "a", "a",
+    				"r", "C", "aS", "a", "K",
+    				"a", "a", "a", "a", "H",
+    				"N", "cv", "a", "J", "x",
+    				"a", "aa", "a", "p", "a",
+    				"a", "a", "aU", "G", "b",
+    				"a", "a", "h", "b", "a",
+    				"s", "w", "q", "a", "h",
+    				"b", "b", "d", "q", "w"
+    		};
+    		break;
+    	case 162:
+    		s2 = new String []{
+    				"h",
+    				"b",
+    				"aa", "a", "d",
+    				"a", "a", "a", "bL", "b",
+    				"l", "aM", "aO", "aN", "aQ",
+    				"aP", "aF", "aG", "aH", "g_",
+    				"a", "a", "ay", "aB", "b",
+    				"p", "bA", "bB", "a", "ai",
+    				"r", "a", "a", "c", "p",
+    				"h", "f", "A", "u", "b",
+    				"t", "n", "g", "w", "d",
+    				"a", "r", "p", "a", "a",
+    				"q", "B", "aS", "a", "K",
+    				"a", "a", "a", "a", "H",
+    				"N", "cv", "a", "J", "x",
+    				"a", "aa", "a", "p", "a",
+    				"a", "a", "aU", "F", "b",
+    				"a", "a", "h", "b", "a",
+    				"n", "r", "l", "a", "h",
+    				"b", "b", "d", "l", "r"
+    		};
+    		break;
+    	}
 
     	if (s1 != null
     			&& s2 != null) {

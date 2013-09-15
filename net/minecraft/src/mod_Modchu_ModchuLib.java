@@ -9,19 +9,7 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 	public static boolean isServer = false;
 
 	static {
-		//boolean b = cpw.mods.fml.common.FMLCommonHandler.instance().getSide().isServer();
-		//Modchu_Debug.Debug("static b="+b);
-		Object o = Modchu_Reflect.invokeMethod("cpw.mods.fml.common.FMLCommonHandler", "instance");
-		if (o != null) {
-			o = Modchu_Reflect.invokeMethod(o.getClass(), "getSide", o);
-			if (o != null) {
-				if ((Boolean) Modchu_Reflect.invokeMethod(o.getClass(), "isServer", o)) isServer = true;
-			} else {
-				//Modchu_Debug.Debug("static 2 o == null !!");
-			}
-		} else {
-			//Modchu_Debug.Debug("static o == null !!");
-		}
+		isServer = ModLoader.getMinecraftInstance() == null;
 		//Modchu_Debug.Debug("static isServer="+isServer);
 	}
 
@@ -31,20 +19,25 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 		modchu_Main = new Modchu_Main();
 	}
 
+	@Override
 	public String getName() {
 		return Modchu_Main.modName;
 	}
 
+	@Override
 	public String getVersion() {
 		return Modchu_Main.versionString;
 	}
 
+	@Override
 	public void load() {
 		if (isServer) return;
 		mod_modchu_modchulib = this;
 		modchu_Main.load();
+		ModLoader.setInGameHook(this, true, true);
 	}
 
+	@Override
 	public void modsLoaded() {
 		if (isServer) return;
 		modchu_Main.modsLoaded();

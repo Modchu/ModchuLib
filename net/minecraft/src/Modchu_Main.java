@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,9 +10,9 @@ import java.util.Map.Entry;
 
 public class Modchu_Main {
 
-	public static final String version = "5d";
+	public static final String version = "5e";
 	public static final String modName = "ModchuLib";
-	public static final String versionString = Modchu_Version.version + "-" + version;
+	public static final String versionString = ""+ Modchu_Version.version + "-" + version;
 
 	//cfg書き込み項目
 	public static boolean skirtFloats = false;
@@ -46,7 +45,7 @@ public class Modchu_Main {
 	public static Class MMM_TextureData;
 	public static Class mod_PFLM_PlayerFormLittleMaid;
 	public static Class mod_LMM_littleMaidMob;
-	public static Class mod_PFLMF;
+	public static Class PFLMF;
 	public static Class PFLM_Gui;
 	public static Class PFLM_GuiModelSelect;
 	public static Class PFLM_GuiOthersPlayer;
@@ -65,7 +64,8 @@ public class Modchu_Main {
 	public static String newVersion = "";
 	public static String packageName;
 	public static String modelClassName = "MultiModel";
-	public static int modchuLibVersion;
+	public static final int modchuLibVersion = Modchu_Version.version;
+	public static int mmmLibVersion;
 	private static File cfgdir;
 	private static File mainCfgfile;
 	public static HashMap<String, Object[]> checkModelsBox = new HashMap();
@@ -75,7 +75,7 @@ public class Modchu_Main {
 	public static boolean isClient = true;
 	private static boolean packageNameNull = false;
 	public static boolean isRelease = true;
-	public static Object mc = getMinecraft();
+	public static Object mc;
 
 	//不具合有り機能封印
 	private static boolean LMMarmorSupport = false;
@@ -83,95 +83,16 @@ public class Modchu_Main {
 	public Modchu_Main()
 	{
 		// b181deleteload();
-		if (getVersion().startsWith("1.6.2")) {
-			modchuLibVersion = 162;
-			return;
+		String s = mod_MMM_MMMLib.Revision;
+		int i = 0;
+		if (s.length() > 1) {
+			String s1 = s.substring(s.length() - 1);
+			s = s.substring(0, s.length() - 1);
+			i = Integer.parseInt(s) * 100 + Integer.parseInt(s1, 16);
+		} else {
+			i = Integer.parseInt(s) * 100;
 		}
-		if (getVersion().startsWith("1.5.2")) {
-			modchuLibVersion = 152;
-			return;
-		}
-		if (getVersion().startsWith("1.5.1")) {
-			modchuLibVersion = 151;
-			return;
-		}
-		if (getVersion().startsWith("1.4.7")) {
-			modchuLibVersion = 147;
-			return;
-		}
-		if (getVersion().startsWith("1.4.6")) {
-			modchuLibVersion = 146;
-			return;
-		}
-		if (getVersion().startsWith("1.4.5")) {
-			modchuLibVersion = 145;
-			return;
-		}
-		if (getVersion().startsWith("1.4.4")) {
-			modchuLibVersion = 144;
-			return;
-		}
-		if (getVersion().startsWith("1.4.2")) {
-			modchuLibVersion = 142;
-			return;
-		}
-		if (getVersion().startsWith("1.4.1")) {
-			modchuLibVersion = 141;
-			return;
-		}
-		if (getVersion().startsWith("1.4")) {
-			modchuLibVersion = 140;
-			return;
-		}
-		if (getVersion().startsWith("1.3.2")) {
-			modchuLibVersion = 132;
-			return;
-		}
-		if (getVersion().startsWith("1.3.1")) {
-			modchuLibVersion = 131;
-			return;
-		}
-		if (getVersion().startsWith("1.2.5")) {
-			modchuLibVersion = 125;
-			return;
-		}
-		if (getVersion().startsWith("1.2.4")) {
-			modchuLibVersion = 124;
-			return;
-		}
-		if (getVersion().startsWith("1.2.3")) {
-			modchuLibVersion = 123;
-			return;
-		}
-		if (getVersion().startsWith("1.1")) {
-			modchuLibVersion = 110;
-			return;
-		}
-		if (getVersion().startsWith("1.0.0")) {
-			modchuLibVersion = 100;
-			return;
-		}
-		if (getVersion().startsWith("Beta 1.9")) {
-			modchuLibVersion = 90;
-			return;
-		}
-		if (getVersion().startsWith("Beta 1.8.1")) {
-			modchuLibVersion = 81;
-			return;
-		}
-		if (getVersion().startsWith("Beta 1.7.3")) {
-			modchuLibVersion = 73;
-			return;
-		}
-		if (getVersion().startsWith("Beta 1.6.6")) {
-			modchuLibVersion = 66;
-			return;
-		}
-		if (getVersion().startsWith("Beta 1.5_01")) {
-			modchuLibVersion = 51;
-			return;
-		}
-		modchuLibVersion = 0;
+		mmmLibVersion = i;
 	}
 
 	public String getName() {
@@ -332,10 +253,24 @@ public class Modchu_Main {
 					if (Integer.valueOf(s1) < 5) oldRenderItems = b;
 				}
 			}
-			else if (name.equals("mod_PFLMF")) {
-				isPFLMF = true;
-				mod_PFLMF = Modchu_Reflect.loadClass(getClassName("mod_PFLMF"), -1);
-				Modchu_Debug.lDebug("mod_PFLMF Check ok.");
+		}
+		Object o = Modchu_Reflect.invokeMethod("cpw.mods.fml.common.Loader", "instance");
+		if (o != null) {
+			list = (List) Modchu_Reflect.invokeMethod("cpw.mods.fml.common.Loader", "getActiveModList", o);
+			if (list != null) {
+				size = list.size();
+				String name = null;
+				for (int i = 0; i < size; i++)
+				{
+					o = list.get(i);
+					name = (String) Modchu_Reflect.invokeMethod("cpw.mods.fml.common.ModContainer", "getName", o);
+					if (name.startsWith("PFLMF")) {
+						isPFLMF = true;
+						PFLMF = Modchu_Reflect.loadClass(getClassName("PFLMF"), -1);
+						Modchu_Debug.lDebug("PFLMF Check ok.");
+						break;
+					}
+				}
 			}
 		}
 		String s;
@@ -493,11 +428,11 @@ public class Modchu_Main {
 			if (s.length() > 1) {
 				String ck = s.substring(s.length() - 1, s.length());
 				String mck = mod_Modchu_ModchuLib.modchu_Main.getVersion();
-				String k = mck;
-				if (k.lastIndexOf("-") > -1) k = k.substring(k.lastIndexOf("-") + 1);
+				String k = version;
 				mck = k.substring(k.length() - 1);
 				if (integerCheck(mck)) mck = "";
 				boolean check = integerCheck(k);
+				//Modchu_Debug.mDebug("Modchulib checkRelease k="+k+" mck="+mck+" check="+check);
 				while(!check
 						&& k.length() > 1){
 					//Modchu_Debug.mDebug("Modchulib checkRelease k="+k);
@@ -950,8 +885,15 @@ public class Modchu_Main {
 	public static Object getMinecraft() {
 		Object o = Modchu_Reflect.invokeMethod("Minecraft", "func_71410_x", "getMinecraft");
 		if (o != null) return o;
-		return getMinecraftVersion() > 129 ? Modchu_Reflect.getPrivateValue("Minecraft", null, 8)
+		o = getMinecraftVersion() > 129 ? Modchu_Reflect.getPrivateValue("Minecraft", null, 8)
 				: Modchu_Reflect.getPrivateValue("Minecraft", null, 1);
+		if (o == null) {
+			Modchu_Debug.mDebug("getMinecraft o == null !! Modchu_Reflect.loadClass(Minecraft)="+Modchu_Reflect.loadClass("Minecraft"));
+			Modchu_Debug.mDebug("getMinecraft mod_Modchu_ModchuLib.modchu_Main.isForge="+mod_Modchu_ModchuLib.modchu_Main.isForge);
+			Modchu_Debug.mDebug("getMinecraft mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion()="+mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion());
+			throw new RuntimeException("Modchu_Main-getMinecraft o == null !!");
+		}
+		return o;
 	}
 
 	public static EntityPlayer getThePlayer() {

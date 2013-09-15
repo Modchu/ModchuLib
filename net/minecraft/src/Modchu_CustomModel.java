@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.zip.ZipFile;
 
 public class Modchu_CustomModel extends ModelBase {
 
@@ -120,7 +121,25 @@ public class Modchu_CustomModel extends ModelBase {
 		cfgdir = new File(mod_Modchu_ModchuLib.modchu_Main.getMinecraftDir(), "/config/CustomModel/");
 		String s1 = new StringBuilder().append("CustomModel_").append(s).append(".cfg").toString();
 		Modchu_Debug.cDebug("Modchu_CustomModel cfg["+s1+"] loadInit");
-		loadInit(new File(cfgdir, s1), reLoadList, cfgReLoad);
+		File file = new File(cfgdir, s1);
+		if (!file.exists()) {
+			Modchu_Debug.lDebug("----------------------------------------------------");
+			Modchu_Debug.lDebug("Modchu_CustomModel !file.exists()");
+			ZipFile zipFile = Modchu_Config.getZipFile(baseModel.getClass());
+			Modchu_Debug.lDebug("Modchu_CustomModel zipFile="+zipFile);
+			String name = "CustomModelCfg_Sample.zip";
+			Class c = baseModel.getClass();
+			File copyDir = mod_Modchu_ModchuLib.modchu_Main.isRelease() ?
+					new File(mod_Modchu_ModchuLib.modchu_Main.getMinecraftDir(), "/config/") :
+					new File(""+mod_Modchu_ModchuLib.modchu_Main.getMinecraftDir().toString().replace("\\.", "")+"/config/");
+			Modchu_Debug.lDebug("Modchu_Config cfgdir="+copyDir);
+			Modchu_Config.copyZipResource(c, zipFile, name, copyDir);
+			file = new File(copyDir, s1);
+			Modchu_Debug.lDebug("Modchu_CustomModel last file="+file);
+		} else {
+			Modchu_Debug.lDebug("Modchu_CustomModel file.exists() ok.");
+		}
+		loadInit(file, reLoadList, cfgReLoad);
 		if (partsNumberMax < 1) {
 			Modchu_Debug.cDebug("Modchu_CustomModel init partsNumberMax="+partsNumberMax+" end");
 			return;
@@ -128,13 +147,6 @@ public class Modchu_CustomModel extends ModelBase {
 		Modchu_Debug.cDebug("Modchu_CustomModel customInitModel partsNumberMax="+partsNumberMax);
 		newInitSetting();
 
-		File file = null;
-		try {
-			file = new File(cfgdir, (new StringBuilder()).append("CustomModel_").append(s).append(".cfg").toString());
-		} catch(Exception e) {
-			throw new RuntimeException("Modchu_CustomModel file="+file.toString()+"\n\n"+e);
-		}
-		if (!file.exists()) throw new RuntimeException("Modchu_CustomModel FileNotFound!! file="+file.toString());
 		for (int i = 0;i < partsNumberMax; i++) {
 			parts[i] = new Modchu_ModelRenderer(mainModel);
 		}
@@ -576,11 +588,11 @@ public class Modchu_CustomModel extends ModelBase {
 				tempGuiEntitySelectEntity = null;
 			}
 		} else {
+			if (tempSelectPanel != null) tempSelectPanel = null;
 			if (guiTextureSelectFlag) {
 				colorSettingForcingFlag = true;
 				guiTextureSelectFlag = false;
 			}
-			if (tempSelectPanel != null) tempSelectPanel = null;
 		}
 		if (mod_Modchu_ModchuLib.modchu_Main.mod_LMM_littleMaidMob != null
 				&& mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid.isInstance(entity)) {
@@ -1058,6 +1070,7 @@ public class Modchu_CustomModel extends ModelBase {
 		if (tempColor != color
 				| guiTextureSelectFlag
 				| colorSettingForcingFlag) ;else return;
+		//Modchu_Debug.mDebug("tempColor="+tempColor+" color="+color+" colorSettingForcingFlag="+colorSettingForcingFlag);
 		colorSettingForcingFlag = false;
 		colorSetting(entityCaps, color);
 	}
@@ -1090,9 +1103,9 @@ public class Modchu_CustomModel extends ModelBase {
 		partsNumberMax = 0;
 		if (list2 == null) {
 			list2 = new ArrayList();
+			BufferedReader breader = null;
 			try {
-				BufferedReader breader = new BufferedReader(new FileReader(
-						file));
+				breader = new BufferedReader(new FileReader(file));
 				String rl;
 				partsCount = -1;
 				for (int i = 0; (rl = breader.readLine()) != null ; i++) {
@@ -1105,11 +1118,15 @@ public class Modchu_CustomModel extends ModelBase {
 				partsNumberMax = partsCount + 1;
 				//Modchu_Debug.mDebug("Modchu_CustomModel loadInit partsNumberMax="+partsNumberMax);
 				Modchu_Config.cfgData.put(file, list2);
-				breader.close();
 			} catch (Exception e) {
 				//Modchu_Debug.cDebug("Modchu_CustomModel loadInit load "+ file.toString() +" load fail.");
 				e.printStackTrace();
-			}
+			 } finally {
+				 try {
+					 if (breader != null) breader.close();
+				 } catch (Exception e) {
+				 }
+			 }
 		} else {
 			String s2;
 			partsCount = -1;
@@ -1257,9 +1274,9 @@ public class Modchu_CustomModel extends ModelBase {
 		partsCount = -1;
 		if (list2 == null) {
 			list2 = new ArrayList();
+			BufferedReader breader = null;
 			try {
-				BufferedReader breader = new BufferedReader(new FileReader(
-						file));
+				breader = new BufferedReader(new FileReader(file));
 				String rl;
 				for (int i = 0; (rl = breader.readLine()) != null ; i++) {
 					int i1;
@@ -1273,7 +1290,12 @@ public class Modchu_CustomModel extends ModelBase {
 			} catch (Exception e) {
 				//Modchu_Debug.cDebug("Modchu_Config load "+ file.toString() +" load fail.");
 				e.printStackTrace();
-			}
+			 } finally {
+				 try {
+					 if (breader != null) breader.close();
+				 } catch (Exception e) {
+				 }
+			 }
 		} else {
 			String s2;
 			//Modchu_Debug.mDebug("1 file="+file.toString()+" list.size()="+list.size());
@@ -1537,7 +1559,7 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	private void colorSetting(MMM_IModelCaps entityCaps, int color) {
-		Modchu_Debug.mDebug("Modchu_CustomModel colorSetting");
+		//Modchu_Debug.mDebug("Modchu_CustomModel colorSetting");
 		Entity entity = (Entity) baseModel.getCapsValue(entityCaps, entityCaps.caps_Entity);
 		//MMM_ModelMultiBase model = baseModel;
 		tempColor = color;
@@ -1594,24 +1616,14 @@ public class Modchu_CustomModel extends ModelBase {
 		Object o = null;
 		Object currentScreen = Modchu_Reflect.getFieldObject("Minecraft", "field_71462_r", "currentScreen", mod_Modchu_ModchuLib.modchu_Main.getMinecraft());
 		if (guiTextureSelectFlag) {
-
 			if (tempSelectPanel != null) {
 				if (tempGuiEntitySelectEntity != null) ;else tempGuiEntitySelectEntity = Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSlot, "entity", tempSelectPanel);
 				if (tempGuiEntitySelectEntity != null) {
-					o = (Integer) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_EntitySelect, "color", tempGuiEntitySelectEntity);
 					allRendering = true;
-					Modchu_Debug.Debug("getMaidColor MMM_GuiTextureSelect o="+o);
+					o = (Integer) Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.modchu_Main.MMM_EntitySelect, "getColor", tempGuiEntitySelectEntity);
+					//Modchu_Debug.Debug("getMaidColor MMM_GuiTextureSelect o="+o);
 				}
 			}
-
-/*
-			if (tempGuiEntitySelectEntity != null) ;else tempGuiEntitySelectEntity = Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_GuiTextureSelect, "target", currentScreen);
-			if (tempGuiEntitySelectEntity != null) {
-				o = (Integer) Modchu_Reflect.invokeMethod(mod_Modchu_ModchuLib.modchu_Main.MMM_ITextureEntity, "getColor", tempGuiEntitySelectEntity);
-				allRendering = true;
-				Modchu_Debug.Debug("getMaidColor MMM_GuiTextureSelect o="+o);
-			}
-*/
 		} else if (mod_Modchu_ModchuLib.modchu_Main.mod_LMM_littleMaidMob != null
 				&& mod_Modchu_ModchuLib.modchu_Main.LMM_EntityLittleMaid.isInstance(entity)) {
 			if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159) {
@@ -1627,7 +1639,7 @@ public class Modchu_CustomModel extends ModelBase {
 			o = Modchu_ModelCapsHelper.getCapsValueInt(baseModel, entityCaps, baseModel.caps_maidColor, entity);
 		}
 		if (o != null) {
-			Modchu_Debug.Debug("getMaidColor o="+o);
+			//Modchu_Debug.Debug("getMaidColor o="+o);
 			return (Integer) o;
 		}
 		return 0;

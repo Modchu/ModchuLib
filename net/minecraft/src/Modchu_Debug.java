@@ -2,10 +2,6 @@ package net.minecraft.src;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -122,10 +118,11 @@ public class Modchu_Debug {
 	}
 
 	public static void dDebugDrow() {
+		if (debugString != null) ;else debugString = new String[10];
 		for(int i = 0 ;i < debugString.length ;i++){
 			if (debugString != null) {
-				GuiIngame ingameGUI = (GuiIngame) Modchu_Reflect.getFieldObject("Minecraft", "ingameGUI", mod_Modchu_ModchuLib.modchu_Main.getMinecraft());
-				ingameGUI.drawString((FontRenderer) Modchu_Reflect.getFieldObject("Minecraft", "fontRenderer", mod_Modchu_ModchuLib.modchu_Main.getMinecraft()), debugString[i], 1, 1 + (10 * i), 0xffffff);
+				GuiIngame ingameGUI = (GuiIngame) Modchu_Reflect.getFieldObject("Minecraft", "field_71456_v", "ingameGUI", mod_Modchu_ModchuLib.modchu_Main.getMinecraft());
+				ingameGUI.drawString((FontRenderer) Modchu_Reflect.getFieldObject("Minecraft", "field_71466_p", "fontRenderer", mod_Modchu_ModchuLib.modchu_Main.getMinecraft()), debugString[i], 1, 1 + (10 * i), 0xffffff);
 			}
 		}
 		if (!Keyboard.getEventKeyState()

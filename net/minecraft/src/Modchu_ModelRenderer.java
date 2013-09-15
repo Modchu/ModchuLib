@@ -1,11 +1,6 @@
 package net.minecraft.src;
 
 //b181deleteimport java.util.ArrayList;
-import static net.minecraft.src.MMM_IModelCaps.caps_Entity;
-import static net.minecraft.src.MMM_IModelCaps.caps_HeadMount;
-
-import java.lang.reflect.Constructor;
-import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -208,14 +203,14 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 	}
 
 	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, float scale, int addSupport) {
-		ItemStack lis = (ItemStack)pEntityCaps.getCapsValue(caps_HeadMount);
-		Entity lentity = (Entity)pEntityCaps.getCapsValue(caps_Entity);
+		ItemStack lis = (ItemStack)pEntityCaps.getCapsValue(pEntityCaps.caps_HeadMount);
+		Entity lentity = (Entity)pEntityCaps.getCapsValue(pEntityCaps.caps_Entity);
 
 		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
 	}
 
 	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, ItemStack lis, float scale, int addSupport) {
-		Entity lentity = (Entity)pEntityCaps.getCapsValue(caps_Entity);
+		Entity lentity = (Entity)pEntityCaps.getCapsValue(pEntityCaps.caps_Entity);
 
 		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
 	}
@@ -583,7 +578,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		if (childModels != null) {
 			MMM_ModelRenderer modelRenderer;
 			for (int i = 0; i < childModels.size(); i++) {
-				modelRenderer = childModels.get(i);
+				modelRenderer = (MMM_ModelRenderer) childModels.get(i);
 				if (modelRenderer != null) modelRenderer.render(par1, b);
 			}
 		}
