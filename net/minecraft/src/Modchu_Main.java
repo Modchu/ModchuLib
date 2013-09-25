@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 
 public class Modchu_Main {
 
-	public static final String version = "5e";
+	public static final String version = "5f";
 	public static final String modName = "ModchuLib";
 	public static final String versionString = ""+ Modchu_Version.version + "-" + version;
 
@@ -43,6 +43,7 @@ public class Modchu_Main {
 	public static Class MMM_EntitySelect;
 	public static Class MMM_ITextureEntity;
 	public static Class MMM_TextureData;
+	public static Class MMM_ModelBaseNihil;
 	public static Class mod_PFLM_PlayerFormLittleMaid;
 	public static Class mod_LMM_littleMaidMob;
 	public static Class PFLMF;
@@ -164,6 +165,7 @@ public class Modchu_Main {
 			MMM_FileManager = Modchu_Reflect.loadClass(getClassName("MMM_FileManager"));
 			MMM_TextureBox = Modchu_Reflect.loadClass(getClassName("MMM_TextureBox"));
 			MMM_StabilizerManager = Modchu_Reflect.loadClass(getClassName("MMM_StabilizerManager"));
+			MMM_ModelBaseNihil = Modchu_Reflect.loadClass(getClassName("MMM_ModelBaseNihil"));
 		}
 		MMM_ModelPlate = Modchu_Reflect.loadClass(getClassName("Modchu_ModelPlate"));
 		if (MMM_ModelPlate != null) ;else MMM_ModelPlate = Modchu_Reflect.loadClass(getClassName("MMM_ModelPlate"));
@@ -359,6 +361,7 @@ public class Modchu_Main {
 		if (Modchu_Debug.debugMessage
 				&& !mod_Modchu_ModchuLib.modchu_Main.isRelease()) {
 			Modchu_Debug.dDebugDrow();
+			//return false;
 			return true;
 		} else {
 			return false;
@@ -655,6 +658,7 @@ public class Modchu_Main {
 /*//125delete
 				}
 *///125delete
+				models = entityTypeSetting(models);
 				return models;
 			}
 		} else {
@@ -662,7 +666,16 @@ public class Modchu_Main {
 			if (ltb != null) models = getTextureBoxModels(ltb);
 		}
 		Modchu_Debug.mDebug("modelNewInstance c == null s="+s);
-		return useCustom ? newModelCustom(models, s) : models;
+		if (useCustom) models = newModelCustom(models, s);
+		models = entityTypeSetting(models);
+		return models;
+	}
+
+	private static Object[] entityTypeSetting(Object[] models) {
+		if (models[0] instanceof MultiModelCustom) ((MultiModelCustom) models[0]).customModel.entityType = ((MultiModelCustom) models[0]).customModel.PFLM;
+		if (models[1] instanceof MultiModelCustom) ((MultiModelCustom) models[1]).customModel.entityType = ((MultiModelCustom) models[1]).customModel.PFLM;
+		if (models[2] instanceof MultiModelCustom) ((MultiModelCustom) models[2]).customModel.entityType = ((MultiModelCustom) models[2]).customModel.PFLM;
+		return models;
 	}
 
 	public static Object[] newModelCustom(Object[] models, String s) {
@@ -681,7 +694,11 @@ public class Modchu_Main {
 			if (models[0] != null) ;else Modchu_Debug.mDebug("models[0] == null !!");
 			if (models[0] != null) {
 				Object[] newModels = new Object[3];
-				newModels[0] = (MultiModel_Custom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ 0.0F, models[0], s});
+				newModels[0] = Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ 0.0F, models[0], s});
+				if (newModels[0] != null) ;else {
+					Modchu_Debug.lDebug("newModelCustom newModels[0] == null !!");
+					return null;
+				}
 				float[] f1 = getArmorModelsSize(models[0]);
 				if (models[1] != null) ;else Modchu_Debug.mDebug("models[1] == null !!");
 				if (models[2] != null) ;else Modchu_Debug.mDebug("models[2] == null !!");
@@ -693,10 +710,11 @@ public class Modchu_Main {
 					if (LMMarmorSupport) newModels[2] = (MultiModelCustom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ f1[1], models[2], s });
 					else newModels[2] = models[2];
 				}
+				newModels = entityTypeSetting(newModels);
 				return newModels;
 			}
 		}
-		Modchu_Debug.mDebug("newModelCustom return null !! s="+s);
+		Modchu_Debug.lDebug("newModelCustom return null !! s="+s);
 		return null;
 	}
 
@@ -778,55 +796,86 @@ public class Modchu_Main {
 	}
 
 	public static String textureManagerGetNextPackege(String s, int i) {
-		Object ltb = getTextureBox(s);
-		if (ltb != null) {
-			Object o = Modchu_Reflect.getFieldObject(MMM_TextureManager, "instance");
-			if (o != null) {
-				ltb = Modchu_Reflect.invokeMethod(MMM_TextureManager, "getNextPackege", new Class[]{MMM_TextureBox, int.class}, o, new Object[]{ltb, i});
-				return getTextureBoxFileName(ltb);
-			}
-		}
-		Modchu_Debug.mDebug("textureManagerGetNextPackege return null !! s="+s+" i="+i);
-		return null;
+		return textureManagerGetPackege(s, i, 0);
 	}
 
 	public static String textureManagerGetPrevPackege(String s, int i) {
+		return textureManagerGetPackege(s, i, 1);
+	}
+
+	public static String textureManagerGetPackege(String s, int i, int i1) {
 		Object ltb = getTextureBox(s);
 		if (ltb != null) {
 			Object o = Modchu_Reflect.getFieldObject(MMM_TextureManager, "instance");
 			if (o != null) {
-				ltb = Modchu_Reflect.invokeMethod(MMM_TextureManager, "getPrevPackege", new Class[]{MMM_TextureBox, int.class}, o, new Object[]{ltb, i});
+				ltb = i1 == 0 ? Modchu_Reflect.invokeMethod(MMM_TextureManager, "getNextPackege", new Class[]{MMM_TextureBox, int.class}, o, new Object[]{ltb, i}) :
+					Modchu_Reflect.invokeMethod(MMM_TextureManager, "getPrevPackege", new Class[]{MMM_TextureBox, int.class}, o, new Object[]{ltb, i});
 				return getTextureBoxFileName(ltb);
 			}
 		}
-		Modchu_Debug.mDebug("textureManagerGetPrevPackege return null !! s="+s+" i="+i);
+		Modchu_Debug.mDebug("textureManagerGetPackege return null !! s="+s+" i="+i);
 		return null;
 	}
 
 	public static String textureManagerGetNextArmorPackege(String s) {
-		Object ltb = getTextureBox(s);
-		if (ltb != null) {
-			Object o = Modchu_Reflect.getFieldObject(MMM_TextureManager, "instance");
-			if (o != null) {
-				ltb = Modchu_Reflect.invokeMethod(MMM_TextureManager, "getNextArmorPackege", new Class[]{MMM_TextureBox}, o, new Object[]{ltb});
-				return (String) Modchu_Reflect.getFieldObject(ltb.getClass(), "fileName", ltb);
-			}
-		}
-		Modchu_Debug.mDebug("textureManagerGetNextArmorPackege return null !! s="+s);
-		return null;
+		return textureManagerGetArmorPackege(s, 0);
 	}
 
 	public static String textureManagerGetPrevArmorPackege(String s) {
+		return textureManagerGetArmorPackege(s, 1);
+	}
+
+	public static String textureManagerGetArmorPackege(String s, int i) {
+		Modchu_Debug.mDebug("textureManagerGetArmorPackege s="+s+" i="+i);
+		String s1 = (String) Modchu_Reflect.getFieldObject(MMM_TextureManager, "defaultModelName");
+		Object textureManagerInstance = Modchu_Reflect.getFieldObject(MMM_TextureManager, "instance");
+		if (textureManagerInstance != null) ;else {
+			throw new RuntimeException("Modchu_Main-textureManagerGetArmorPackege MMM_TextureManager instance == null !!");
+		}
+		List textures = (List)Modchu_Reflect.getFieldObject(textureManagerInstance.getClass(), "textures", textureManagerInstance);
 		Object ltb = getTextureBox(s);
-		if (ltb != null) {
-			Object o = Modchu_Reflect.getFieldObject(MMM_TextureManager, "instance");
-			if (o != null) {
-				ltb = Modchu_Reflect.invokeMethod(MMM_TextureManager, "getPrevArmorPackege", new Class[]{MMM_TextureBox}, o, new Object[]{ltb});
-				return (String) Modchu_Reflect.getFieldObject(ltb.getClass(), "fileName", ltb);
+		int index = -1;
+		String s2 = s;
+		int i2 = s != null && !s.isEmpty() ? s.lastIndexOf(s1) : -1;
+		if (i2 > -1) {
+			s2 = s.substring(0, i2);
+		}
+		for(int i1 = 0; i1 < textures.size(); i1++) {
+			ltb = textures.get(i1);
+			if(((String) Modchu_Reflect.getFieldObject(ltb.getClass(), "fileName", ltb)).equals(s)) {
+				index = i1;
+				break;
 			}
 		}
-		Modchu_Debug.mDebug("textureManagerGetPrevArmorPackege return null !! s="+s);
-		return null;
+		if (index == -1) {
+			Modchu_Debug.mDebug("textureManagerGetArmorPackege return index == -1 !!");
+			return null;
+		}
+		boolean flag = false;
+		for(int i1 = 0; i1 < textures.size(); i1++) {
+			index = i == 0 ? index + 1 : index - 1;
+			if (index >= textures.size()) index = 0;
+			if (index < 0) index = textures.size() - 1;
+			ltb = textures.get(index);
+			//ltb = i == 0 ? Modchu_Reflect.invokeMethod(MMM_TextureManager, "getNextArmorPackege", new Class[]{MMM_TextureBox}, textureManagerInstance, new Object[]{ltb}) :
+			//Modchu_Reflect.invokeMethod(MMM_TextureManager, "getPrevArmorPackege", new Class[]{MMM_TextureBox}, textureManagerInstance, new Object[]{ltb});
+			Modchu_Debug.mDebug("textureManagerGetArmorPackege index for insex="+index+" s="+(String) Modchu_Reflect.getFieldObject(ltb.getClass(), "fileName", ltb));
+			if (getTextureBoxHasArmor(ltb)) {
+				s = (String) Modchu_Reflect.getFieldObject(ltb.getClass(), "fileName", ltb);
+				if (!s.isEmpty()
+						&& !s.equals(s2)) {
+					Modchu_Debug.mDebug("textureManagerGetArmorPackege flag ok.textures.size()="+textures.size());
+					Modchu_Debug.mDebug("textureManagerGetArmorPackege flag ok.s="+s);
+					flag = true;
+					break;
+				}
+			}
+		}
+		if (!flag) Modchu_Debug.mDebug("textureManagerGetArmorPackege !flag !!");
+		i2 = s.lastIndexOf(s1);
+		if (i2 > -1) s = s.substring(0, i2);
+		Modchu_Debug.mDebug("textureManagerGetArmorPackege return s="+s);
+		return s;
 	}
 
 	public static Object[] getTextureBoxModels(Object ltb) {

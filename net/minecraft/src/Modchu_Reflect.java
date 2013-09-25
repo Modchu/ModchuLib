@@ -6,15 +6,16 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Modchu_Reflect
 {
     public static boolean debugReflectMessage = true;
     public static boolean debugReflectMessageDetail = false;
-    private static HashMap<String, Class> classMap = new HashMap();
-    private static HashMap<String, Method> methodMap = new HashMap();
-    private static HashMap<String, String> classNameMap = new HashMap();
-    private static HashMap<String, String> methodNameMap = new HashMap();
+    private static ConcurrentHashMap<String, Class> classMap = new ConcurrentHashMap();
+    private static ConcurrentHashMap methodMap = new ConcurrentHashMap();
+    private static ConcurrentHashMap<String, String> classNameMap = new ConcurrentHashMap();
+    private static ConcurrentHashMap<String, String> methodNameMap = new ConcurrentHashMap();
 
     public static void setDebugMessage(boolean b) {
     	debugReflectMessage = b;
@@ -560,7 +561,7 @@ public class Modchu_Reflect
     {
     	String s = var0.getName() + var1;
     	if (var2 != null) s = s + var2.toString();
-    	if (methodMap.containsKey(s)) return methodMap.get(s);
+    	if (methodMap.containsKey(s)) return (Method) methodMap.get(s);
     	Method method = null;
     	if (var1 != null) {
     		String var3 = getFieldName(var1);

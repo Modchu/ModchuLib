@@ -46,7 +46,6 @@ public interface Modchu_IModelCaps {
 	public static final int caps_tempLimbSwing						= 0x080039;
 	public static final int caps_actionInit								= 0x080040;
 	public static final int caps_actionRelease						= 0x080041;
-	public static final int caps_syncModel								= 0x080042;
 	public static final int caps_maidColor								= 0x080043;
 	public static final int caps_getIsSleeping							= 0x080044;
 	public static final int caps_showModelSettingReflects		= 0x080046;
