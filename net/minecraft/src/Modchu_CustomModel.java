@@ -658,9 +658,9 @@ public class Modchu_CustomModel extends ModelBase {
 				s1 = partsTextureNameMap.get(i);
 				texture = textureList.get(i);
 				if (prevTexture == null) flag = true;
-				if (prevTexture != null) s2 = (String) (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.invokeMethod("ResourceLocation", "func_110623_a", prevTexture) :
+				if (prevTexture != null) s2 = (String) (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.invokeMethod("ResourceLocation", "func_110623_a", "getResourcePath", prevTexture) :
 					prevTexture);
-				if (texture != null) s3 = (String) (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.invokeMethod("ResourceLocation", "func_110623_a", texture) :
+				if (texture != null) s3 = (String) (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.invokeMethod("ResourceLocation", "func_110623_a", "getResourcePath", texture) :
 					texture);
 				if (texture != null
 						&& prevTexture != null
@@ -718,7 +718,7 @@ public class Modchu_CustomModel extends ModelBase {
 	}
 
 	private void loadTexture(Render r, Object o) {
-		if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159) Modchu_Reflect.invokeMethod(Render.class, "func_110776_a", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, r, new Object[]{ o });
+		if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() > 159) Modchu_Reflect.invokeMethod(Render.class, "func_110776_a", "bindTexture", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, r, new Object[]{ o });
 		else Modchu_Reflect.invokeMethod(Render.class, "func_76985_a", "loadTexture", new Class[]{ String.class }, r, new Object[]{ o });
 	}
 

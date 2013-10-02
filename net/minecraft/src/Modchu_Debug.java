@@ -29,6 +29,7 @@ public class Modchu_Debug {
 	private static BufferedWriter debugLogBwriter;
     private static Logger logger;
 	private static String tempDebugLog = "";
+	public static String debugPlayerName;
 
 	public static void init(String s) {
 		isRelease = mod_Modchu_ModchuLib.modchu_Main.isRelease;

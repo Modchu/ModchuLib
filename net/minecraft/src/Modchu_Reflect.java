@@ -1149,6 +1149,11 @@ public class Modchu_Reflect
     	return null;
     }
 
+    public static Object invokeMethod(String var0, String var1, String var2, Class[] var3, Object... var4)
+    {
+    	return invokeMethod(var0, var1, var2, var3, null, (Object[])var4, 1);
+    }
+
     public static Object invokeMethod(String var0, String var1, String var2, Class[] var3, Object var4, Object ... var5)
     {
     	return invokeMethod(var0, var1, var2, var3, var4, var5, 1);
@@ -1593,7 +1598,8 @@ public class Modchu_Reflect
     			"func_77220_a", "func_130000_a", "field_70734_aK", "func_71386_F", "func_110527_b",
     			"func_110857_a", "func_77031_a", "field_70475_c", "func_71380_b", "func_76985_a",
     			"field_71462_r", "field_71456_v", "field_73886_k", "func_71354_a", "field_71451_h",
-    			"func_78745_b", "func_78064_b", "func_607_d", "field_71466_p", "field_71456_v"
+    			"func_78745_b", "func_78064_b", "func_607_d", "field_71466_p", "field_71456_v",
+    			"func_94277_a", "func_110311_f", "field_110316_a"
     	};
     	switch(mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion()) {
     	case 152:
@@ -1617,7 +1623,8 @@ public class Modchu_Reflect
     				"a", "a", "aU", "G", "b",
     				"a", "a", "h", "b", "a",
     				"s", "w", "q", "a", "h",
-    				"b", "b", "d", "q", "w"
+    				"b", "b", "d", "q", "w",
+    				"b", "", ""
     		};
     		break;
     	case 162:
@@ -1641,7 +1648,8 @@ public class Modchu_Reflect
     				"a", "a", "aU", "F", "b",
     				"a", "a", "h", "b", "a",
     				"n", "r", "l", "a", "h",
-    				"b", "b", "d", "l", "r"
+    				"b", "b", "d", "l", "r",
+    				"b", "f", "a"
     		};
     		break;
     	}

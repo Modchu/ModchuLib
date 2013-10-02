@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 
 public class Modchu_Main {
 
-	public static final String version = "5f";
+	public static final String version = "5g";
 	public static final String modName = "ModchuLib";
 	public static final String versionString = ""+ Modchu_Version.version + "-" + version;
 
@@ -61,6 +61,8 @@ public class Modchu_Main {
 	public static Class favBlock;
 	public static Class RendererData;
 	private boolean isModchu;
+	private boolean runtimeExceptionFlag;
+	private String runtimeExceptionString;
 
 	public static String newVersion = "";
 	public static String packageName;
@@ -85,14 +87,7 @@ public class Modchu_Main {
 	{
 		// b181deleteload();
 		String s = mod_MMM_MMMLib.Revision;
-		int i = 0;
-		if (s.length() > 1) {
-			String s1 = s.substring(s.length() - 1);
-			s = s.substring(0, s.length() - 1);
-			i = Integer.parseInt(s) * 100 + Integer.parseInt(s1, 16);
-		} else {
-			i = Integer.parseInt(s) * 100;
-		}
+		int i = getVersionStringConversionInt(s);
 		mmmLibVersion = i;
 	}
 
@@ -125,7 +120,7 @@ public class Modchu_Main {
 					try {
 						String s = className1[n];
 						if (s != null) {
-							Object o = Modchu_Reflect.getFieldObject(s, "armor", false);
+							Object o = Modchu_Reflect.getFieldObject(s, "armor", -1);
 							if (o != null) isSSP = true;
 						}
 					} catch(Exception e) {
@@ -267,9 +262,20 @@ public class Modchu_Main {
 					o = list.get(i);
 					name = (String) Modchu_Reflect.invokeMethod("cpw.mods.fml.common.ModContainer", "getName", o);
 					if (name.startsWith("PFLMF")) {
-						isPFLMF = true;
-						PFLMF = Modchu_Reflect.loadClass(getClassName("PFLMF"), -1);
-						Modchu_Debug.lDebug("PFLMF Check ok.");
+						String s = (String) Modchu_Reflect.invokeMethod("cpw.mods.fml.common.ModContainer", "getVersion", o);
+						if (s != null) {
+							s = lastIndexProcessing(s, "_");
+							int i1 = getVersionStringConversionInt(s);
+							if (i1 < 401) {
+								Modchu_Debug.lDebug("PFLMF Version is old !! VersionInt="+i1);
+								runtimeExceptionFlag = true;
+								runtimeExceptionString = "PFLMF Version is old !!";
+							} else {
+								isPFLMF = true;
+								PFLMF = Modchu_Reflect.loadClass(getClassName("PFLMF"), -1);
+								Modchu_Debug.lDebug("PFLMF Check ok.");
+							}
+						}
 						break;
 					}
 				}
@@ -358,14 +364,12 @@ public class Modchu_Main {
 
 	public boolean onTickInGame(float f, Object minecraft)
 	{
+		if (runtimeExceptionFlag) throw new RuntimeException(runtimeExceptionString);
 		if (Modchu_Debug.debugMessage
 				&& !mod_Modchu_ModchuLib.modchu_Main.isRelease()) {
 			Modchu_Debug.dDebugDrow();
-			//return false;
-			return true;
-		} else {
-			return false;
 		}
+		return true;
 	}
 
 	public boolean isRelease() {
@@ -506,6 +510,18 @@ public class Modchu_Main {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public static int getVersionStringConversionInt(String s) {
+		int i = 0;
+		if (s.length() > 1) {
+			String s1 = s.substring(s.length() - 1);
+			s = s.substring(0, s.length() - 1);
+			i = Integer.parseInt(s) * 100 + s1.compareTo("a") + 1;
+		} else {
+			i = Integer.parseInt(s) * 100;
+		}
+		return i;
 	}
 
 	public static void setNewRelease(String s) {
@@ -859,7 +875,7 @@ public class Modchu_Main {
 			ltb = textures.get(index);
 			//ltb = i == 0 ? Modchu_Reflect.invokeMethod(MMM_TextureManager, "getNextArmorPackege", new Class[]{MMM_TextureBox}, textureManagerInstance, new Object[]{ltb}) :
 			//Modchu_Reflect.invokeMethod(MMM_TextureManager, "getPrevArmorPackege", new Class[]{MMM_TextureBox}, textureManagerInstance, new Object[]{ltb});
-			Modchu_Debug.mDebug("textureManagerGetArmorPackege index for insex="+index+" s="+(String) Modchu_Reflect.getFieldObject(ltb.getClass(), "fileName", ltb));
+			Modchu_Debug.mDebug("textureManagerGetArmorPackege index for index="+index+" s="+(String) Modchu_Reflect.getFieldObject(ltb.getClass(), "fileName", ltb));
 			if (getTextureBoxHasArmor(ltb)) {
 				s = (String) Modchu_Reflect.getFieldObject(ltb.getClass(), "fileName", ltb);
 				if (!s.isEmpty()
