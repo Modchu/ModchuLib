@@ -1,11 +1,6 @@
 package net.minecraft.src;
 
 //b181deleteimport java.util.ArrayList;
-import static net.minecraft.src.MMM_IModelCaps.caps_Entity;
-import static net.minecraft.src.MMM_IModelCaps.caps_HeadMount;
-
-import java.lang.reflect.Constructor;
-import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -122,7 +117,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		isInvertX = false;
 		baseModel = modelBase;
 		pearent = null;
-		RendererData = mod_Modchu_ModchuLib.RendererData;
+		RendererData = mod_Modchu_ModchuLib.modchu_Main.RendererData;
 /*//b181delete
 		cubeList = new ArrayList();
 		setTextureSize((int)((MultiModel) modelbase).textureWidth, (int)((MultiModel) modelbase).textureHeight);
@@ -138,7 +133,6 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		return this;
 	}
 
-//-@-151
 	public Modchu_ModelRenderer addCubeList(MMM_ModelBoxBase pModelBoxBase) {
 		cubeList.add(pModelBoxBase);
 		return this;
@@ -153,72 +147,44 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		addCubeList(getModelBoxBase(pModelBoxBase, constructorClass, getArg((Object[]) pArg)));
 		return this;
 	}
-//@-@151
-//-@-151
+
 	public Modchu_ModelRenderer addPartsTexture(Class pModelBoxBase, String pName, Object ... pArg) {
 		pName = (new StringBuilder()).append(boxName).append(".").append(pName).toString();
 		addCubeList(getModelBoxBase(pModelBoxBase, (Object[]) pArg).setBoxName(pName));
 		return this;
 	}
-//@-@151
-//-@-151
+
 	public Modchu_ModelRenderer addPartsTexture(Class pModelBoxBase, Object ... pArg) {
 		addCubeList(getModelBoxBase(pModelBoxBase, (Object[]) pArg));
 		return this;
 	}
-//@-@151
 
 	public Modchu_ModelRenderer addPlate(float f, float f1, float f2, int i, int j, int k) {
-/*//151delete
-		cubeList.add(new MMM_ModelPlate(this, textureOffsetX, textureOffsetY, f, f1, f2, i, j, k, 0.0F));
-*///151delete
-//-@-151
-		addParts(MMM_ModelPlate.class, f, f1, f2, i, j, k, 0.0F);
-//@-@151
+		addParts(mod_Modchu_ModchuLib.modchu_Main.MMM_ModelPlate, f, f1, f2, i, j, k, 0.0F);
 		return this;
 	}
 
 	public Modchu_ModelRenderer addPlate(float f, float f1, float f2, int i, int j, int k, float f3) {
-/*//151delete
-		cubeList.add(new MMM_ModelPlate(this, textureOffsetX, textureOffsetY, f, f1, f2, i, j, k, f3));
-*///151delete
-//-@-151
-		addParts(MMM_ModelPlate.class, f, f1, f2, i, j, k, f3);
-//@-@151
+		addParts(mod_Modchu_ModchuLib.modchu_Main.MMM_ModelPlate, f, f1, f2, i, j, k, f3);
 		return this;
 	}
 
 	public Modchu_ModelRenderer addPlateFreeShape(float[][] vertex, float[][] vertexN, int px, int py)
 	{
 		float[][] vt = { { textureOffsetX / textureWidth, (textureOffsetY + 1) / textureHeight }, { (textureOffsetX + 1) / textureWidth, (textureOffsetY + 1) / textureHeight }, { (textureOffsetX + 1) / textureWidth, textureOffsetY / textureHeight }, { textureOffsetX / textureWidth, textureOffsetY / textureHeight } };
-/*//151delete
-		cubeList.add(new Modchu_ModelPlateFreeShape(this, textureOffsetX, textureOffsetY, vertex, vt, vertexN, null, 0.0F));
-*///151delete
-//-@-151
 		addParts(Modchu_ModelPlateFreeShape.class, vertex, vt, vertexN, null, 0.0F);
-//@-@151
 		return this;
 	}
 
 	public Modchu_ModelRenderer addPlateFreeShape(float[][] vertex, float[][] texUV, float[][] vertexN)
 	{
-/*//151delete
-		cubeList.add(new Modchu_ModelPlateFreeShape(this, textureOffsetX, textureOffsetY, vertex, texUV, vertexN, null, 0.0F));
-*///151delete
-//-@-151
 		addParts(Modchu_ModelPlateFreeShape.class, vertex, texUV, vertexN, null, 0.0F);
-//@-@151
 		return this;
 	}
 
 	public Modchu_ModelRenderer addPlateFreeShape(float[][] var1, float[][] var2, float[][] var3, float[] var4)
 	{
-/*//151delete
-		cubeList.add(new Modchu_ModelPlateFreeShape(this, textureOffsetX, textureOffsetY, var1, var2, var3, var4, 0.0F));
-*///151delete
-//-@-151
 		addParts(Modchu_ModelPlateFreeShape.class, var1, var2, var3, var4, 0.0F);
-//@-@151
 		return this;
 	}
 
@@ -237,19 +203,19 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 	}
 
 	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, float scale, int addSupport) {
-		ItemStack lis = (ItemStack)pEntityCaps.getCapsValue(caps_HeadMount);
-		EntityLiving lentity = (EntityLiving)pEntityCaps.getCapsValue(caps_Entity);
+		ItemStack lis = (ItemStack)pEntityCaps.getCapsValue(pEntityCaps.caps_HeadMount);
+		Entity lentity = (Entity)pEntityCaps.getCapsValue(pEntityCaps.caps_Entity);
 
 		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
 	}
 
 	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, ItemStack lis, float scale, int addSupport) {
-		EntityLiving lentity = (EntityLiving)pEntityCaps.getCapsValue(caps_Entity);
+		Entity lentity = (Entity)pEntityCaps.getCapsValue(pEntityCaps.caps_Entity);
 
 		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
 	}
 
-	public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack, float scale, int addSupport) {
+	public void renderItems(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack, float scale, int addSupport) {
 		if (pEntityLiving != null) ;else return;
 		itemstack = pItemStack;
 		switch(addSupport) {
@@ -262,19 +228,19 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		renderItems(pEntityLiving, pRender, pRealBlock, pAction, scale);
 	}
 
-	public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack) {
+	public void renderItems(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack) {
 		if (pEntityLiving != null) ;else return;
 		itemstack = pItemStack;
 		renderItems(pEntityLiving, pRender, pRealBlock, pAction, 1.0F);
 	}
 
-	public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction) {
+	public void renderItems(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction) {
 		if (itemstack != null
 				&& pEntityLiving != null) ;else return;
 		renderItems(pEntityLiving, pRender, pRealBlock, pAction, 1.0F);
 	}
 
-	public void renderItems(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale) {
+	public void renderItems(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale) {
 		if (itemstack != null
 				&& pEntityLiving != null) ;else return;
 
@@ -374,14 +340,15 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		} else
 //@-@132
 		if (pRealBlock && itemstack.getItem() instanceof ItemBlock) {
-			String s1 = "/terrain.png";
+			// 152deleteString s1 = "/terrain.png";
 /*//147delete
-			if (mod_Modchu_ModchuLib.isForge) {
+			if (mod_Modchu_ModchuLib.modchu_Main.isForge) {
 				s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", Item.itemsList[itemstack.itemID]);
-				//Modchu_Debug.Debug("isForge pRender.loadTexture s1="+s1);
+				//Modchu_Debug.Debug("isForge pRender.func_110776_a s1="+s1);
 			}
 *///147delete
-			pRender.loadTexture(s1);
+			// 152deletepRender.func_110776_a(s1);
+			loadBlockTexture();
 			GL11.glEnable(GL11.GL_CULL_FACE);
 			pRender.renderBlocks.renderBlockAsItem(Block.blocksList[itemstack.itemID], itemstack.getItemDamage(), 1.0F);
 			GL11.glDisable(GL11.GL_CULL_FACE);
@@ -391,23 +358,22 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 				// アイテムに色付け
 				int renderPasses = itemstack.getItem().requiresMultipleRenderPasses() ? 1 : 0;
 
-				String s1 = "/gui/items.png";
 /*//147delete
-				if (mod_Modchu_ModchuLib.isForge) {
+				String s1 = "/gui/items.png";
+				if (mod_Modchu_ModchuLib.modchu_Main.isForge) {
 					if (renderPasses == 1) renderPasses =
 							(Integer) Modchu_Reflect.invokeMethod(Item.class, "getRenderPasses", new Class[]{ int.class },
 									itemstack.getItem(), new Object[]{ itemstack.getItemDamage() }) - 1;
 					s1 = (String) Modchu_Reflect.invokeMethod(Item.class, "getTextureFile", itemstack.getItem());
-					//Modchu_Debug.Debug("isForge pRender.loadTexture s1="+s1+" renderPasses="+renderPasses);
-				} else if (mod_Modchu_ModchuLib.isBTW
+					//Modchu_Debug.Debug("isForge pRender.func_110776_a s1="+s1+" renderPasses="+renderPasses);
+				} else if (mod_Modchu_ModchuLib.modchu_Main.isBTW
 						&& isBTWItem(itemstack.getItem())) {
 					s1 = "/btwmodtex/btwitems01.png";
 				}
 *///147delete
-				pRender.loadTexture(s1);
-
+				// 152deletepRender.func_110776_a(s1);
 				for (int j = 0; j <= renderPasses; j++) {
-					if (!mod_Modchu_ModchuLib.isSSP
+					if (!mod_Modchu_ModchuLib.modchu_Main.isSSP
 							| renderPasses > 0) {
 						int k = itemstack.getItem().getColorFromItemStack(itemstack, j);
 						float f15 = (float)(k >> 16 & 0xff) / 255F;
@@ -416,7 +382,8 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 						GL11.glColor4f(f15, f17, f19, 1.0F);
 					}
 					//Modchu_Debug.mDebug("itemRenderer.renderItem");
-					pRender.renderManager.itemRenderer.renderItem(pEntityLiving, itemstack, j);
+					Modchu_Reflect.invokeMethod(ItemRenderer.class, "renderItem", new Class[]{ Modchu_Reflect.loadClass("EntityLivingBase"), ItemStack.class, int.class }, pRender.renderManager.itemRenderer, new Object[]{ pEntityLiving, itemstack, j });
+					//pRender.renderManager.itemRenderer.renderItem(pEntityLiving, itemstack, j);
 				}
 			}
 		}
@@ -424,7 +391,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		GL11.glPopMatrix();
 	}
 
-	public boolean renderDecoBlock(EntityLiving pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale, int addSupport) {
+	public boolean renderDecoBlock(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale, int addSupport) {
 		//DecoBlock, FavBlock用描画
 		Item item = itemstack.getItem();
 		Block block = Block.blocksList[item.itemID];
@@ -464,7 +431,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
 
 		if (flag) {
-			pRender.loadTexture("/terrain.png");
+			// 152deletepRender.func_110776_a("/terrain.png");
 			GL11.glEnable(GL11.GL_CULL_FACE);
 			if (rotate) GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 			else GL11.glRotatef(12F, 0.0F, 1.0F, 0.0F);
@@ -478,8 +445,9 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 */
 //@-@b173
 			if (scale > 1.0F) GL11.glScalef(scale, scale, scale);
-			// b166deleteGL11.glColor4f(f20, f20, f20, 1.0F);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			if (translatef) GL11.glTranslatef(translatefX, translatefY, translatefZ);
+			loadBlockTexture();
 			pRender.renderBlocks.renderBlockAsItem(block, itemstack.getItemDamage(), 1.0F);
 			particleFrequency -= (int)((scale - 1.0F) * 10F);
 			//Modchu_Debug.mDebug("particleFrequency ="+particleFrequency+" (int)(scale - 1.0F * 10F)="+((int)((scale - 1.0F) * 10F))+" scale="+scale);
@@ -496,23 +464,31 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		return flag;
 	}
 
+	private void loadBlockTexture() {
+		if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() < 160) return;
+		Object var4 = Modchu_Reflect.invokeMethod("Minecraft", "func_110434_K", mod_Modchu_ModchuLib.modchu_Main.getMinecraft());
+		Modchu_Reflect.invokeMethod("TextureManager", "func_110577_a", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, var4, new Object[]{ Modchu_Reflect.invokeMethod("TextureManager", "func_130087_a", new Class[]{ int.class }, var4, new Object[]{ 0 }) });
+		//TextureManager var4 = Minecraft.getMinecraft().func_110434_K();
+		//var4.func_110577_a(var4.func_130087_a(0));
+	}
+
 	private boolean isBTWItem(Item var1) {
-        Class c = Modchu_Reflect.loadClass("net.minecraft.src.forge.ITextureProvider");
-        if (c != null) ;else Modchu_Reflect.loadClass("forge.ITextureProvider");
-        if (c != null) {
-            Class[] var3 = var1.getClass().getInterfaces();
-            for (int var4 = 0; var4 < var3.length; ++var4) {
-                if (var3[var4] == c) return true;
-        	}
-    	} else {
-    		c = Modchu_Reflect.loadClass("net.minecraft.src.FCItemMattock");
-    		if (c!= null
-    				&& c.isInstance(var1)) return true;
-    		c = Modchu_Reflect.loadClass("FCItemMattock");
-    		if (c!= null
-    				&& c.isInstance(var1)) return true;
-    	}
-        return false;
+		Class c = Modchu_Reflect.loadClass("net.minecraft.src.forge.ITextureProvider");
+		if (c != null) ;else Modchu_Reflect.loadClass("forge.ITextureProvider");
+		if (c != null) {
+			Class[] var3 = var1.getClass().getInterfaces();
+			for (int var4 = 0; var4 < var3.length; ++var4) {
+				if (var3[var4] == c) return true;
+			}
+		} else {
+			c = Modchu_Reflect.loadClass("net.minecraft.src.FCItemMattock");
+			if (c!= null
+					&& c.isInstance(var1)) return true;
+			c = Modchu_Reflect.loadClass("FCItemMattock");
+			if (c!= null
+					&& c.isInstance(var1)) return true;
+		}
+		return false;
 	}
 
 	public void setRotatePriority(int pValue) {
@@ -602,7 +578,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		if (childModels != null) {
 			MMM_ModelRenderer modelRenderer;
 			for (int i = 0; i < childModels.size(); i++) {
-				modelRenderer = childModels.get(i);
+				modelRenderer = (MMM_ModelRenderer) childModels.get(i);
 				if (modelRenderer != null) modelRenderer.render(par1, b);
 			}
 		}
