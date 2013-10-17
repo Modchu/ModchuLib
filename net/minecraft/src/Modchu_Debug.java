@@ -32,7 +32,7 @@ public class Modchu_Debug {
 	public static String debugPlayerName;
 
 	public static void init(String s) {
-		isRelease = mod_Modchu_ModchuLib.modchu_Main.isRelease;
+		isRelease = mod_Modchu_ModchuLib.modchu_Main != null ? mod_Modchu_ModchuLib.modchu_Main.isRelease : true;
 	}
 
 	public static void Debug(String s) {
@@ -134,74 +134,74 @@ public class Modchu_Debug {
 				//key != 200 &&
 				Keyboard.isKeyDown(200)) {
 			key = 200;
-			debaf1 += Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf1 += mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 		if (
 				//key != 208 &&
 				Keyboard.isKeyDown(208)) {
 			key = 208;
-			debaf1 -= Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf1 -= mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 		if (
 				//key != 205 &&
 				Keyboard.isKeyDown(205)) {
 			key = 205;
-			debaf2 += Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf2 += mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 		if (
 				//key != 203 &&
 				Keyboard.isKeyDown(203)) {
 			key = 203;
-			debaf2 -= Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf2 -= mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 		if (
 				//key != 77 &&
 				Keyboard.isKeyDown(77)) {
 			key = 77;
-			debaf3 += Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf3 += mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 		if (
 				//key != 75 &&
 				Keyboard.isKeyDown(75)) {
 			key = 75;
-			debaf3 -= Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf3 -= mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 		//Modchu_Debug.mDebug(""+Keyboard.getEventKey());
 		if (
 				//key != 79 &&
 				Keyboard.isKeyDown(79)) {
 			key = 79;
-			debaf4 += Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf4 += mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 		if (
 				//key != 71 &&
 				Keyboard.isKeyDown(71)) {
 			key = 71;
-			debaf4 -= Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf4 -= mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 		if (
 				//key != 80 &&
 				Keyboard.isKeyDown(80)) {
 			key = 80;
-			debaf5 += Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf5 += mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 		if (
 				//key != 72 &&
 				Keyboard.isKeyDown(72)) {
 			key = 72;
-			debaf5 -= Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf5 -= mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 		if (
 				//key != 81 &&
 				Keyboard.isKeyDown(81)) {
 			key = 81;
-			debaf6 += Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf6 += mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 		if (
 				//key != 73 &&
 				Keyboard.isKeyDown(73)) {
 			key = 73;
-			debaf6 -= Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) ? 1.0F : 0.1F;
+			debaf6 -= mod_Modchu_ModchuLib.modchu_Main.isCtrlKeyDown() ? 1.0F : 0.1F;
 		}
 	}
 

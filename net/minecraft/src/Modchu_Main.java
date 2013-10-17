@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.lwjgl.input.Keyboard;
+
 public class Modchu_Main {
 
-	public static final String version = "5g";
+	public static final String version = "6";
 	public static final String modName = "ModchuLib";
 	public static final String versionString = ""+ Modchu_Version.version + "-" + version;
 
@@ -41,9 +43,15 @@ public class Modchu_Main {
 	public static Class MMM_GuiTextureSelect;
 	public static Class MMM_GuiTextureSlot;
 	public static Class MMM_EntitySelect;
+	public static Class MMM_EntityCaps;
 	public static Class MMM_ITextureEntity;
+	public static Class MMM_IModelCaps;
 	public static Class MMM_TextureData;
 	public static Class MMM_ModelBaseNihil;
+	public static Class MMM_ModelBase;
+	public static Class MMM_ModelMultiBase;
+	public static Class MMM_ModelBaseSolo;
+	public static Class MMM_ModelBaseDuo;
 	public static Class mod_PFLM_PlayerFormLittleMaid;
 	public static Class mod_LMM_littleMaidMob;
 	public static Class PFLMF;
@@ -86,9 +94,14 @@ public class Modchu_Main {
 	public Modchu_Main()
 	{
 		// b181deleteload();
-		String s = mod_MMM_MMMLib.Revision;
-		int i = getVersionStringConversionInt(s);
-		mmmLibVersion = i;
+		Class mod_MMM_MMMLib = Modchu_Reflect.loadClass("mod_MMM_MMMLib");
+		if (mod_MMM_MMMLib != null) {
+			String s = (String) Modchu_Reflect.getFieldObject(mod_MMM_MMMLib, "Revision");
+			int i = getVersionStringConversionInt(s);
+			mmmLibVersion = i;
+		} else {
+			mmmLibVersion = -1;
+		}
 	}
 
 	public String getName() {
@@ -129,11 +142,15 @@ public class Modchu_Main {
 			} catch (ClassNotFoundException e) {
 			}
 		}
+		//Modchu_Debug.lDebug("Modchu_Main load() getPackageInit");
 		getPackageInit();
 		Modchu_Reflect.initNameMap();
+		Modchu_Debug.lDebug("Modchu_Main load() getMinecraftDir().getAbsolutePath()="+getMinecraftDir().getAbsolutePath());
 		if (getMinecraftDir().getAbsolutePath().indexOf("jars") != -1) {
 			isRelease = false;
 		}
+		Modchu_Debug.init(null);
+		Modchu_Debug.lDebug("Modchu_Main load() isRelease = "+isRelease);
 		String s;
 		if (Modchu_Debug.debugMessage
 				&& !mod_Modchu_ModchuLib.modchu_Main.isRelease()) Modchu_Debug.debugString = new String[10];
@@ -155,12 +172,24 @@ public class Modchu_Main {
 			MMM_StabilizerManager = Modchu_Reflect.loadClass(getClassName("Modchu_StabilizerManager"));
 			Modchu_Reflect.invokeMethod(MMM_StabilizerManager, "init");
 //@-@125
+			MMM_EntityCaps = Modchu_Reflect.loadClass(getClassName("Modchu_EntityCaps"));
+			MMM_ModelBase = Modchu_Reflect.loadClass(getClassName("Modchu_ModelBase"));
+			MMM_ModelMultiBase = Modchu_Reflect.loadClass(getClassName("Modchu_ModelMultiBase"));
+			MMM_ModelBaseSolo = Modchu_Reflect.loadClass(getClassName("Modchu_ModelBaseSolo"));
+			MMM_ModelBaseDuo = Modchu_Reflect.loadClass(getClassName("Modchu_ModelBaseDuo"));
+			MMM_IModelCaps = Modchu_Reflect.loadClass(getClassName("Modchu_IModelCaps"));
 		} else {
 			MMM_TextureManager = Modchu_Reflect.loadClass(getClassName("MMM_TextureManager"));
 			MMM_FileManager = Modchu_Reflect.loadClass(getClassName("MMM_FileManager"));
 			MMM_TextureBox = Modchu_Reflect.loadClass(getClassName("MMM_TextureBox"));
 			MMM_StabilizerManager = Modchu_Reflect.loadClass(getClassName("MMM_StabilizerManager"));
 			MMM_ModelBaseNihil = Modchu_Reflect.loadClass(getClassName("MMM_ModelBaseNihil"));
+			MMM_ModelBase = Modchu_Reflect.loadClass(getClassName("MMM_ModelBase"));
+			MMM_ModelMultiBase = Modchu_Reflect.loadClass(getClassName("MMM_ModelMultiBase"));
+			MMM_ModelBaseSolo = Modchu_Reflect.loadClass(getClassName("MMM_ModelBaseSolo"));
+			MMM_ModelBaseDuo = Modchu_Reflect.loadClass(getClassName("MMM_ModelBaseDuo"));
+			MMM_EntityCaps = Modchu_Reflect.loadClass(getClassName("MMM_EntityCaps"));
+			MMM_IModelCaps = Modchu_Reflect.loadClass(getClassName("MMM_IModelCaps"));
 		}
 		MMM_ModelPlate = Modchu_Reflect.loadClass(getClassName("Modchu_ModelPlate"));
 		if (MMM_ModelPlate != null) ;else MMM_ModelPlate = Modchu_Reflect.loadClass(getClassName("MMM_ModelPlate"));
@@ -669,6 +698,7 @@ public class Modchu_Main {
 				} else {
 *///125delete
 					float[] f1 = getArmorModelsSize(models[0]);
+					//Modchu_Debug.mDebug("modelNewInstance getArmorModelsSize f1[0]="+f1[0]+" f1[1]="+f1[1]);
 					models[1] = Modchu_Reflect.newInstance(c, new Class[]{ float.class }, new Object[]{ f1[0] });
 					models[2] = Modchu_Reflect.newInstance(c, new Class[]{ float.class }, new Object[]{ f1[1] });
 /*//125delete
@@ -688,9 +718,16 @@ public class Modchu_Main {
 	}
 
 	private static Object[] entityTypeSetting(Object[] models) {
-		if (models[0] instanceof MultiModelCustom) ((MultiModelCustom) models[0]).customModel.entityType = ((MultiModelCustom) models[0]).customModel.PFLM;
-		if (models[1] instanceof MultiModelCustom) ((MultiModelCustom) models[1]).customModel.entityType = ((MultiModelCustom) models[1]).customModel.PFLM;
-		if (models[2] instanceof MultiModelCustom) ((MultiModelCustom) models[2]).customModel.entityType = ((MultiModelCustom) models[2]).customModel.PFLM;
+		if (models != null) {
+			if (models[0] != null
+					&& models[0] instanceof MultiModelCustom) ((MultiModelCustom) models[0]).customModel.entityType = ((MultiModelCustom) models[0]).customModel.PFLM;
+			if (models[1] != null
+					&& models[1] instanceof MultiModelCustom) ((MultiModelCustom) models[1]).customModel.entityType = ((MultiModelCustom) models[1]).customModel.PFLM;
+			if (models[2] != null
+					&& models[2] instanceof MultiModelCustom) ((MultiModelCustom) models[2]).customModel.entityType = ((MultiModelCustom) models[2]).customModel.PFLM;
+		} else {
+			Modchu_Debug.lDebug("entityTypeSetting models == null");
+		}
 		return models;
 	}
 
@@ -710,7 +747,7 @@ public class Modchu_Main {
 			if (models[0] != null) ;else Modchu_Debug.mDebug("models[0] == null !!");
 			if (models[0] != null) {
 				Object[] newModels = new Object[3];
-				newModels[0] = Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ 0.0F, models[0], s});
+				newModels[0] = Modchu_Reflect.newInstance(c, new Class[]{ float.class, Object.class, String.class }, new Object[]{ 0.0F, models[0], s});
 				if (newModels[0] != null) ;else {
 					Modchu_Debug.lDebug("newModelCustom newModels[0] == null !!");
 					return null;
@@ -719,11 +756,11 @@ public class Modchu_Main {
 				if (models[1] != null) ;else Modchu_Debug.mDebug("models[1] == null !!");
 				if (models[2] != null) ;else Modchu_Debug.mDebug("models[2] == null !!");
 				if (models[1] != null) {
-					if (LMMarmorSupport) newModels[1] = (MultiModelCustom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ f1[0], models[1], s });
+					if (LMMarmorSupport) newModels[1] = (MultiModelCustom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, Object.class, String.class }, new Object[]{ f1[0], models[1], s });
 					else newModels[1] = models[1];
 				}
 				if (models[2] != null) {
-					if (LMMarmorSupport) newModels[2] = (MultiModelCustom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, MMM_ModelMultiBase.class, String.class }, new Object[]{ f1[1], models[2], s });
+					if (LMMarmorSupport) newModels[2] = (MultiModelCustom) Modchu_Reflect.newInstance(c, new Class[]{ float.class, Object.class, String.class }, new Object[]{ f1[1], models[2], s });
 					else newModels[2] = models[2];
 				}
 				newModels = entityTypeSetting(newModels);
@@ -944,7 +981,15 @@ public class Modchu_Main {
 	}
 
 	public static float[] getArmorModelsSize(Object o) {
-		return o != null ? (float[]) Modchu_Reflect.invokeMethod(MMM_ModelMultiBase.class, "getArmorModelsSize", o) : null;
+		return o != null ? (float[]) Modchu_Reflect.invokeMethod(MMM_ModelMultiBase, "getArmorModelsSize", o) : null;
+	}
+
+	public int getCapsInt(String s) {
+		int i = 0;
+		i = (Integer) Modchu_Reflect.getFieldObject(mod_Modchu_ModchuLib.modchu_Main.MMM_IModelCaps, s);
+		if (i > 0) return i;
+		i = (Integer) Modchu_Reflect.getFieldObject(Modchu_IModelCaps.class, s);
+		return i;
 	}
 
 	public static Object getMinecraft() {
@@ -988,6 +1033,32 @@ public class Modchu_Main {
 		return (File) (getMinecraftVersion() > 159 ? Modchu_Reflect.getFieldObject("Minecraft", "field_71412_D", "mcDataDir", mc) :
 			Modchu_Reflect.invokeMethod("Minecraft", "func_71380_b", "getMinecraftDir", mc));
 	}
+
+	public void printChatMessage(String s) {
+		Object ingameGUI = Modchu_Reflect.getFieldObject("Minecraft", "field_71456_v", "ingameGUI", mod_Modchu_ModchuLib.modchu_Main.getMinecraft());
+		if (ingameGUI != null) ;else {
+			Modchu_Debug.lDebug("printChatMessage ingameGUI == null !!");
+			return;
+		}
+		Object chatGUI = Modchu_Reflect.invokeMethod(ingameGUI.getClass(), "func_73827_b", "getChatGUI", ingameGUI);
+		if (chatGUI != null) ;else {
+			Modchu_Debug.lDebug("printChatMessage chatGUI == null !!");
+			return;
+		}
+		Modchu_Reflect.invokeMethod(chatGUI.getClass(), "func_73765_a", "printChatMessage", new Class[]{ String.class }, chatGUI, new Object[]{ s });
+	}
+
+    public static boolean isCtrlKeyDown()
+    {
+    	boolean b = getMinecraftVersion() > 159 ? (Boolean)Modchu_Reflect.getFieldObject("Minecraft", "field_142025_a", "isRunningOnMac", getMinecraft()) :
+    		Modchu_Reflect.invokeMethod("Minecraft", "func_71376_c", "getOs", getMinecraft()) == EnumOS.MACOS;
+    	return b ? Keyboard.isKeyDown(219) || Keyboard.isKeyDown(220) : Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157);
+    }
+
+    public static boolean isShiftKeyDown()
+    {
+        return Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54);
+    }
 
 	public static int getMinecraftVersion() {
 		return mod_Modchu_ModchuLib.modchu_Main.modchuLibVersion;

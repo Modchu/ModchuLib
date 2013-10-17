@@ -17,7 +17,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 	public float preRotateAngleY;
 	public float preRotateAngleZ;
 	public boolean angleFirst;
-	public MMM_ModelRenderer parentModel;
+	public Modchu_ModelRenderer parentModel;
 	public String boxName;
 	private static Random rnd = new Random();
 
@@ -30,7 +30,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 	public Modchu_ModelRenderer pearent;
 
 	//SmartMoving‹¤’Ê
-	protected MMM_ModelRenderer base;
+	protected Modchu_ModelRenderer base;
 	public static final int XYZ = RotZYX;
 	public static final int XZY = RotYZX;
 	public static final int YXZ = RotZXY;
@@ -78,7 +78,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		init(modelBase, i, j, s);
 	}
 
-	public Modchu_ModelRenderer(MMM_ModelBase modelBase, int i, int j, MMM_ModelRenderer modelRenderer) {
+	public Modchu_ModelRenderer(MMM_ModelBase modelBase, int i, int j, Modchu_ModelRenderer modelRenderer) {
 		this(modelBase, i, j);
 		base = modelRenderer;
 		if (base != null)
@@ -133,7 +133,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		return this;
 	}
 
-	public Modchu_ModelRenderer addCubeList(MMM_ModelBoxBase pModelBoxBase) {
+	public Modchu_ModelRenderer addCubeList(Modchu_ModelBoxBase pModelBoxBase) {
 		cubeList.add(pModelBoxBase);
 		return this;
 	}
@@ -202,14 +202,14 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		if (childModels != null) childModels.clear();
 	}
 
-	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, float scale, int addSupport) {
+	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, Modchu_IModelCaps pEntityCaps, float scale, int addSupport) {
 		ItemStack lis = (ItemStack)pEntityCaps.getCapsValue(pEntityCaps.caps_HeadMount);
 		Entity lentity = (Entity)pEntityCaps.getCapsValue(pEntityCaps.caps_Entity);
 
 		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
 	}
 
-	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, MMM_IModelCaps pEntityCaps, ItemStack lis, float scale, int addSupport) {
+	public void renderItemsHead(MMM_ModelMultiBase pModelMulti, Modchu_IModelCaps pEntityCaps, ItemStack lis, float scale, int addSupport) {
 		Entity lentity = (Entity)pEntityCaps.getCapsValue(pEntityCaps.caps_Entity);
 
 		renderItems(lentity, pModelMulti.render, true, null, lis, scale, addSupport);
@@ -576,9 +576,9 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 			if (b) GL11.glCallList(displayList);
 		}
 		if (childModels != null) {
-			MMM_ModelRenderer modelRenderer;
+			Modchu_ModelRenderer modelRenderer;
 			for (int i = 0; i < childModels.size(); i++) {
-				modelRenderer = (MMM_ModelRenderer) childModels.get(i);
+				modelRenderer = (Modchu_ModelRenderer) childModels.get(i);
 				if (modelRenderer != null) modelRenderer.render(par1, b);
 			}
 		}
@@ -836,7 +836,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 			}
 
 			Iterator var2;
-			MMM_ModelRenderer var3;
+			Modchu_ModelRenderer var3;
 
 			if (preRotateAngleX == 0.0F && preRotateAngleY == 0.0F && preRotateAngleZ == 0.0F)
 			{
@@ -850,7 +850,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 
 						while (var2.hasNext())
 						{
-							var3 = (MMM_ModelRenderer)var2.next();
+							var3 = (Modchu_ModelRenderer)var2.next();
 							if (var3.showModel) var3.render(par1);
 						}
 					}
@@ -867,7 +867,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 
 						while (var2.hasNext())
 						{
-							var3 = (MMM_ModelRenderer)var2.next();
+							var3 = (Modchu_ModelRenderer)var2.next();
 							if (var3.showModel) var3.render(par1);
 						}
 					}
@@ -903,7 +903,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 
 					while (var2.hasNext())
 					{
-						var3 = (MMM_ModelRenderer)var2.next();
+						var3 = (Modchu_ModelRenderer)var2.next();
 						if (var3.showModel) var3.render(par1);
 					}
 				}
@@ -914,7 +914,7 @@ public class Modchu_ModelRenderer extends MMM_ModelRenderer
 		}
 	}
 
-	public void removeChild(MMM_ModelRenderer par1ModelRenderer)
+	public void removeChild(Modchu_ModelRenderer par1ModelRenderer)
 	{
 		if (childModels == null)
 		{

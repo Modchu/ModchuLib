@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
 
-public class Modchu_ModelPlateFreeShape extends MMM_ModelBoxBase
+public class Modchu_ModelPlateFreeShape extends Modchu_ModelBoxBase
 {
 	private PositionTextureVertex[] vertexPositions;
 	private Modchu_TexturedTriangle[] triList;
@@ -17,13 +17,17 @@ public class Modchu_ModelPlateFreeShape extends MMM_ModelBoxBase
 	public final float[][] vn;
 
 
-	public Modchu_ModelPlateFreeShape(MMM_ModelRenderer pMRenderer, Object... pArg) {
+	public Modchu_ModelPlateFreeShape(MMM_ModelRenderer pMRenderer, Object[] pArg) {
+		this((Modchu_ModelRenderer)pMRenderer, pArg);
+	}
+
+	public Modchu_ModelPlateFreeShape(Modchu_ModelRenderer pMRenderer, Object... pArg) {
 		this(pMRenderer, (Integer)pArg[0], (Integer)pArg[1],
 				(float[][])pArg[2], (float[][])pArg[3], (float[][])pArg[4],
 				(float[])pArg[5], (Float)pArg[6]);
 	}
 
-	private Modchu_ModelPlateFreeShape(MMM_ModelRenderer var1, int var2, int var3,
+	private Modchu_ModelPlateFreeShape(Modchu_ModelRenderer var1, int var2, int var3,
 			float[][] var4, float[][] var5, float[][] var6,
 			float[] var7, float var8)
 	{

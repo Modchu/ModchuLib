@@ -5,7 +5,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Modchu_Reflect
@@ -13,9 +14,12 @@ public class Modchu_Reflect
     public static boolean debugReflectMessage = true;
     public static boolean debugReflectMessageDetail = false;
     private static ConcurrentHashMap<String, Class> classMap = new ConcurrentHashMap();
-    private static ConcurrentHashMap methodMap = new ConcurrentHashMap();
+    private static ConcurrentHashMap<String, Method> methodMap = new ConcurrentHashMap();
+    private static ConcurrentHashMap<String, Field> fieldMap = new ConcurrentHashMap();
     private static ConcurrentHashMap<String, String> classNameMap = new ConcurrentHashMap();
     private static ConcurrentHashMap<String, String> methodNameMap = new ConcurrentHashMap();
+    private static List<String> ngMethodList = new ArrayList();
+    private static List<String> ngFieldList = new ArrayList();
 
     public static void setDebugMessage(boolean b) {
     	debugReflectMessage = b;
@@ -376,9 +380,8 @@ public class Modchu_Reflect
     }
 
     public static Field getField(Class var0, String var1, String var2, int i) {
+    	var1 = reflectStringSetting(var1, var2);
     	Field f = getField(var0, var1, i);
-    	if (f != null) return f;
-    	f = getField(var0, var2, i);
     	return f;
     }
 
@@ -409,11 +412,10 @@ public class Modchu_Reflect
     }
 
     public static Field getField(String var0, String var1, String var2, int i) {
+    	var1 = reflectStringSetting(var1, var2);
     	Field f = null;
     	Class c = loadClass(var0);
-    	if (c != null) f = getField(c, var1, i == 1 ? 2 : i);
-    	if (f != null) return f;
-    	f = getField(var0, var2, i);
+    	if (c != null) f = getField(c, var1, i);
     	return f;
     }
 
@@ -441,31 +443,47 @@ public class Modchu_Reflect
 
     private static Field getRawField(Class var0, String var1, int i)
     {
+    	String s = var0.getName() +","+ var1;
+    	if (fieldMap.containsKey(s)) return fieldMap.get(s);
+    	if (ngFieldList.contains(s)) {
+    		Modchu_Debug.mDebug("getRawField ngFieldList.contains s="+s);
+    		return null;
+    	}
     	Field f = null;
+    	Exception[] e = new Exception[10];
+    	int eCount = 0;
     	if (var1 != null
     			&& var0 != null) {
     		String var2 = getFieldName(var1);
     		try {
     			f = var0.getDeclaredField(var2);
+    			fieldMap.put(s, f);
     			return f;
     		} catch (Exception e2) {
+    			e[eCount] = e2;
+    			eCount++;
     		}
     		if (debugReflectMessageDetail) Modchu_Debug.Debug("getRawField Exception getDeclaredField Class="+var0+" String="+var1);
     		try {
     			f = var0.getField(var2);
+    			fieldMap.put(s, f);
     			return f;
     		} catch (Exception e3) {
     		}
     		try {
     			f = var0.getDeclaredField(var1);
+    			fieldMap.put(s, f);
     			return f;
     		} catch (Exception e1) {
+    			e[eCount] = e1;
+    			eCount++;
     		}
     		if (debugReflectMessageDetail) Modchu_Debug.Debug("getRawField Exception getDeclaredField Class="+var0+" String="+var1);
     		try {
     			f = var0.getField(var1);
+    			fieldMap.put(s, f);
     			return f;
-    		} catch (Exception e) {
+    		} catch (Exception e3) {
     		}
     		if (debugReflectMessageDetail) Modchu_Debug.Debug("getRawField Exception getField Class="+var0+" String="+var1);
     		for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
@@ -473,16 +491,21 @@ public class Modchu_Reflect
     				if (c != null) f = c.getDeclaredField(var1);
     				if (f != null) {
     					f.setAccessible(true);
+    					fieldMap.put(s, f);
     					return f;
     				}
     			} catch (Exception e4) {
-    				if (debugReflectMessageDetail) {
-    					Modchu_Debug.Debug("getRawField Exception Class="+c+" String="+var1);
-    					printStackTrace(e4);
-    				}
+    				e[eCount] = e4;
+    				eCount++;
     			}
     		}
     	}
+    	if (i > -1) {
+    		for(int i2 = 0; i2 < 10; i2++) {
+    			printStackTrace(e[i2]);
+    		}
+    	}
+    	ngFieldList.add(s);
     	return f;
     }
 
@@ -493,28 +516,25 @@ public class Modchu_Reflect
 
     public static Method getMethod(Class var0, String var1, String var2, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Method method = null;
-    	method = getMethod(var0, var1, (Class[]) null, i == 1 ? 2 : i);
-    	if (method != null) return method;
-    	method = getMethod(var0, var2, (Class[]) null, i);
+    	method = getMethod(var0, var1, (Class[]) null, i);
     	return method;
     }
 
     public static Method getMethod(Class var0, String var1, String var2, Class[] var3)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Method method = null;
     	method = getMethod(var0, var1, var3, 1);
-    	if (method != null) return method;
-    	method = getMethod(var0, var2, var3, 1);
     	return method;
     }
 
     public static Method getMethod(Class var0, String var1, String var2, Class[] var3, int i)
     {
+    	var1 = reflectStringSetting(var1, var2);
     	Method method = null;
-    	method = getMethod(var0, var1, var3, i == 1 ? 2 : i);
-    	if (method != null) return method;
-    	method = getMethod(var0, var2, var3, i);
+    	method = getMethod(var0, var1, var3, i);
     	return method;
     }
 
@@ -559,24 +579,24 @@ public class Modchu_Reflect
 
     private static Method getRawMethod(Class var0, String var1, Class[] var2, int i)
     {
-    	String s = var0.getName() + var1;
-    	if (var2 != null) s = s + var2.toString();
+    	String s = var0.getName() +","+ var1;
+    	if (var2 != null) {
+    		for(int i1 = 0; i1 < var2.length; i1++) {
+    			s = s +","+ var2[i1].getName();
+    		}
+    	}
+    	//Modchu_Debug.mDebug("getRawMethod s="+s);
     	if (methodMap.containsKey(s)) return (Method) methodMap.get(s);
+    	if (ngMethodList.contains(s)) {
+    		Modchu_Debug.mDebug("getRawMethod ngMethodList.contains s="+s);
+    		return null;
+    	}
+    	//Modchu_Debug.mDebug("getRawMethod s="+s);
     	Method method = null;
+    	Exception[] e = new Exception[10];
+    	int eCount = 0;
     	if (var1 != null) {
     		String var3 = getFieldName(var1);
-/*
-    		try {
-    			if (var0 != null) method = var0.getMethod(var3, var2);
-    			if (method != null) {
-    				method.setAccessible(true);
-    				methodMap.put(s, method);
-    				return method;
-    			}
-    		} catch (Exception e) {
-    			if (debugDisplayDetail(i)) printStackTrace(e);
-    		}
-*/
     		try {
     			if (var0 != null) method = var0.getDeclaredMethod(var3, var2);
     			if (method != null) {
@@ -585,20 +605,9 @@ public class Modchu_Reflect
     				return method;
     			}
     		} catch (Exception e1) {
-    			if (debugDisplayDetail(i)) printStackTrace(e1);
+    			e[eCount] = e1;
+    			eCount++;
     		}
-/*
-    		try {
-    			if (var0 != null) method = var0.getMethod(var1, var2);
-    			if (method != null) {
-    				method.setAccessible(true);
-    				methodMap.put(s, method);
-    				return method;
-    			}
-    		} catch (Exception e) {
-    			if (debugDisplay(i)) printStackTrace(e);
-    		}
-*/
     		try {
     			if (var0 != null) method = var0.getDeclaredMethod(var1, var2);
     			if (method != null) {
@@ -607,9 +616,39 @@ public class Modchu_Reflect
     				return method;
     			}
     		} catch (Exception e1) {
-    			if (debugDisplay(i)) printStackTrace(e1);
+    			e[eCount] = e1;
+    			eCount++;
+    		}
+    		for (Class c = var0; c != Object.class; c = c.getSuperclass()) {
+    			try {
+    				method = c.getDeclaredMethod(var3, var2);
+    				if (method != null) {
+    					method.setAccessible(true);
+    					methodMap.put(s, method);
+    					return method;
+    				}
+    			} catch (Exception e2) {
+    			}
+    			try {
+    				method = c.getDeclaredMethod(var1, var2);
+    				if (method != null) {
+    					method.setAccessible(true);
+    					methodMap.put(s, method);
+    					return method;
+    				}
+    			} catch (Exception e2) {
+    				e[eCount] = e2;
+    				eCount++;
+    				if (eCount > 9) eCount = 9;
+    			}
     		}
     	}
+    	if (i > -1) {
+    		for(int i2 = 0; i2 < 10; i2++) {
+    			printStackTrace(e[i2]);
+    		}
+    	}
+    	ngMethodList.add(s);
     	return method;
     }
 
@@ -1496,8 +1535,10 @@ public class Modchu_Reflect
 	}
 
 	private static void printStackTrace(Exception e) {
-		e.printStackTrace();
-		Modchu_Debug.lDebug("", null, 2, e);
+		if (e != null) {
+			e.printStackTrace();
+			Modchu_Debug.lDebug("", null, 2, e);
+		}
 	}
 
     public static void initNameMap() {
@@ -1506,7 +1547,7 @@ public class Modchu_Reflect
     			"RenderEngine", "MapItemRenderer", "TextureUtil", "Resource", "ResourceManager",
     			"TextureManager",
     			"PFLM_RenderPlayer2", "PFLM_RenderPlayer", "PFLM_GuiSmallButton", "PFLM_RenderPlayerDummy", "PFLM_ItemRenderer",
-    			"PFLM_ItemRendererHD", "PFLM_GuiOthersPlayerSlot", "PFLM_RenderPlayerAether"
+    			"PFLM_ItemRendererHD", "PFLM_GuiOthersPlayerSlot", "PFLM_RenderPlayerAether", "PFLM_EntityPlayerDummy", "Modchu_ModelMultiBase"
     	};
     	String[] s2 = null;
     	if (mod_Modchu_ModchuLib.modchu_Main.isForge) {
@@ -1517,7 +1558,7 @@ public class Modchu_Reflect
     					"net.minecraft.client.renderer.RenderEngine","net.minecraft.client.gui.MapItemRenderer", "", "", "",
     					"net.minecraft.client.renderer.texture.TextureManager",
     					"PFLM_RenderPlayer2V1", "PFLM_RenderPlayerV1", "PFLM_GuiSmallButtonV1", "PFLM_RenderPlayerDummyV1", "PFLM_ItemRendererV1",
-    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", ""
+    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", "", "PFLM_EntityPlayerDummyV1", "Modchu_ModelMultiBaseV1"
     			};
     			break;
     		case 162:
@@ -1526,7 +1567,7 @@ public class Modchu_Reflect
     					"net.minecraft.client.renderer.RenderEngine","net.minecraft.client.gui.MapItemRenderer", "net.minecraft.client.renderer.texture.TextureUtil", "net.minecraft.client.resources.Resource", "net.minecraft.client.resources.ResourceManager",
     					"net.minecraft.client.renderer.texture.TextureManager",
     					"PFLM_RenderPlayer2V160", "PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160",
-    					"PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160", "PFLM_RenderPlayerAetherV160"
+    					"PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160", "PFLM_RenderPlayerAetherV160", "PFLM_EntityPlayerDummyV160", "Modchu_ModelMultiBaseV160"
     			};
     			break;
     		}
@@ -1538,7 +1579,7 @@ public class Modchu_Reflect
     					"bge", "axi", "", "", "",
     					"biq",
     					"PFLM_RenderPlayer2V1", "PFLM_RenderPlayerV1", "PFLM_GuiSmallButtonV1", "PFLM_RenderPlayerDummyV1", "PFLM_ItemRendererV1",
-    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", ""
+    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", "", "PFLM_EntityPlayerDummyV1", "Modchu_ModelMultiBaseV1"
     			};
     			break;
     		case 162:
@@ -1547,7 +1588,7 @@ public class Modchu_Reflect
     					"bge", "avs", "bim", "bjk", "bjm",
     					"bij",
     					"PFLM_RenderPlayer2V160", "PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160",
-    					"PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160", "PFLM_RenderPlayerAetherV160"
+    					"PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160", "PFLM_RenderPlayerAetherV160", "PFLM_EntityPlayerDummyV160", "Modchu_ModelMultiBaseV160"
     			};
     			break;
     		}
@@ -1558,7 +1599,7 @@ public class Modchu_Reflect
     					"RenderEngine", "MapItemRenderer", "TextureUtil", "Resource", "ResourceManager",
     					"TextureManager",
     					"PFLM_RenderPlayer2V160", "PFLM_RenderPlayerV160", "PFLM_GuiSmallButtonV160", "PFLM_RenderPlayerDummyV160", "PFLM_ItemRendererV160",
-    					"PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160", "PFLM_RenderPlayerAetherV160"
+    					"PFLM_ItemRendererHDV160", "PFLM_GuiOthersPlayerSlotV160", "PFLM_RenderPlayerAetherV160", "PFLM_EntityPlayerDummyV160", "Modchu_ModelMultiBaseV160"
     			};
     		}
     		else if (mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion() < 160) {
@@ -1567,7 +1608,7 @@ public class Modchu_Reflect
     					"RenderEngine", "MapItemRenderer", "", "", "",
     					"TextureManager",
     					"PFLM_RenderPlayer2V1", "PFLM_RenderPlayerV1", "PFLM_GuiSmallButtonV1", "PFLM_RenderPlayerDummyV1", "PFLM_ItemRendererV1",
-    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", ""
+    					"PFLM_ItemRendererHDV1", "PFLM_GuiOthersPlayerSlotV1", "", "PFLM_EntityPlayerDummyV1", "Modchu_ModelMultiBaseV1"
     			};
     		}
     	}
@@ -1599,7 +1640,8 @@ public class Modchu_Reflect
     			"func_110857_a", "func_77031_a", "field_70475_c", "func_71380_b", "func_76985_a",
     			"field_71462_r", "field_71456_v", "field_73886_k", "func_71354_a", "field_71451_h",
     			"func_78745_b", "func_78064_b", "func_607_d", "field_71466_p", "field_71456_v",
-    			"func_94277_a", "func_110311_f", "field_110316_a"
+    			"func_94277_a", "func_110311_f", "field_110316_a", "field_78729_o", "func_73827_b",
+    			"func_73765_a", "field_142025_a", "func_71376_c"
     	};
     	switch(mod_Modchu_ModchuLib.modchu_Main.getMinecraftVersion()) {
     	case 152:
@@ -1624,7 +1666,8 @@ public class Modchu_Reflect
     				"a", "a", "h", "b", "a",
     				"s", "w", "q", "a", "h",
     				"b", "b", "d", "q", "w",
-    				"b", "", ""
+    				"b", "", "", "q", "c",
+    				"a", "a", "c"
     		};
     		break;
     	case 162:
@@ -1649,7 +1692,8 @@ public class Modchu_Reflect
     				"a", "a", "h", "b", "a",
     				"n", "r", "l", "a", "h",
     				"b", "b", "d", "l", "r",
-    				"b", "f", "a"
+    				"b", "f", "a", "q", "c",
+    				"a", "a", ""
     		};
     		break;
     	}

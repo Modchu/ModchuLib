@@ -31,8 +31,13 @@ public class mod_Modchu_ModchuLib extends BaseMod {
 
 	@Override
 	public void load() {
-		if (isServer) return;
+		Modchu_Debug.init(null);
+		if (isServer) {
+			Modchu_Debug.lDebug("mod_Modchu_ModchuLib isServer return.");
+			return;
+		}
 		mod_modchu_modchulib = this;
+		Modchu_Debug.lDebug("mod_Modchu_ModchuLib modchu_Main.load");
 		modchu_Main.load();
 		ModLoader.setInGameHook(this, true, true);
 	}
