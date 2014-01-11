@@ -10,4 +10,10 @@ public interface Modchu_IPacketConstant {
 	public final byte packet_IDAction = 3;
 	public final byte packet_IDRunActionNumber = 4;
 	public final byte packet_IDAll = 5;
+	public final byte packet_IDLANRemove = 100;
+	public final byte packet_IDLANSitting = 101;
+	public final byte packet_IDLANSleeping = 102;
+	public final byte packet_IDLANAction = 103;
+	public final byte packet_IDLANRunActionNumber = 104;
+	public final byte packet_IDLANAll = 105;
 }

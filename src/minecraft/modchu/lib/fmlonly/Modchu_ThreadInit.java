@@ -44,7 +44,7 @@ public class Modchu_ThreadInit extends Thread {
 				}
 			}
 		}
-		Modchu_Debug.lDebug("Modchu_ThreadInit run() loadList.isEmpty()="+(loadList.isEmpty()));
+		//Modchu_Debug.lDebug("Modchu_ThreadInit run() loadList.isEmpty()="+(loadList.isEmpty()));
 		if (loadList.isEmpty()) state = 3;
 		while (state < 3) {
 			waitCount++;
@@ -53,35 +53,36 @@ public class Modchu_ThreadInit extends Thread {
 				if (!loadList.isEmpty()) load();
 			}
 			Modchu_Debug.dDebug("Modchu_ThreadInit run() (2 / 2) ModsLoaded waitting. ("+Modchu_Main.initModsLoadedCount+" / 100)", 1);
-			if (Modchu_Main.initModsLoadedCount > 97) {
+			if (Modchu_Main.initModsLoadedCount > 97
+					| !Modchu_Main.isPFLM) {
 				state = 3;
-				Modchu_Debug.lDebug("Modchu_ThreadInit run() state = 3");
+				//Modchu_Debug.lDebug("Modchu_ThreadInit run() state = 3");
 			}
 		}
 		if (!loadList.isEmpty()) load();
 		Modchu_Debug.dDebug(null, 0);
 		Modchu_Debug.dDebug(null, 1);
-		Modchu_Debug.lDebug("Modchu_ThreadInit run() end.");
+		//Modchu_Debug.lDebug("Modchu_ThreadInit run() end.");
 	}
 
 	public static void load() {
-		Modchu_Debug.lDebug("Modchu_ThreadInit load()");
+		//Modchu_Debug.lDebug("Modchu_ThreadInit load()");
 		for (int i = 0; i < loadList.size(); i++) {
 			Method method = loadList.get(i);
-			Modchu_Debug.lDebug("Modchu_ThreadInit load() method="+method);
+			//Modchu_Debug.lDebug("Modchu_ThreadInit load() method="+method);
 			if (method != null) Modchu_Reflect.invoke(method);
 		}
 		loadList.clear();
-		Modchu_Debug.lDebug("Modchu_ThreadInit load() end.");
+		//Modchu_Debug.lDebug("Modchu_ThreadInit load() end.");
 	}
 
 	public static void register(Method method) {
-		Modchu_Debug.lDebug("Modchu_ThreadInit register method="+method);
+		//Modchu_Debug.lDebug("Modchu_ThreadInit register method="+method);
 		if (!loadList.contains(method)) {
 			loadList.add(method);
-			Modchu_Debug.lDebug("Modchu_ThreadInit register loadList.add");
+			//Modchu_Debug.lDebug("Modchu_ThreadInit register loadList.add");
 			if (state > 2) {
-				Modchu_Debug.lDebug("Modchu_ThreadInit register state > 2 load");
+				//Modchu_Debug.lDebug("Modchu_ThreadInit register state > 2 load");
 				load();
 			}
 		}
