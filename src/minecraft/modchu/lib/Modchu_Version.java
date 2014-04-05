@@ -1,1 +1,0 @@
-package modchu.lib;public class Modchu_Version {	public static final int version = 164;	public static final String versionString = "1.6.4";	public static final int getMinecraftVersion()	{		return version;	}	public static final String getMinecraftVersionString()	{		return versionString;	}}
