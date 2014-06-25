@@ -1,11 +1,10 @@
-package modchu.lib.fmlonly;
+package modchu.lib.fmlonly.characteristic;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 import modchu.lib.Modchu_Debug;
-import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.LoaderState.ModState;
@@ -45,6 +44,7 @@ public class Modchu_ThreadInit extends Thread {
 			}
 		}
 		//Modchu_Debug.lDebug("Modchu_ThreadInit run() loadList.isEmpty()="+(loadList.isEmpty()));
+/*
 		if (loadList.isEmpty()) state = 3;
 		while (state < 3) {
 			waitCount++;
@@ -59,9 +59,9 @@ public class Modchu_ThreadInit extends Thread {
 				//Modchu_Debug.lDebug("Modchu_ThreadInit run() state = 3");
 			}
 		}
+*/
 		if (!loadList.isEmpty()) load();
-		Modchu_Debug.dDebug(null, 0);
-		Modchu_Debug.dDebug(null, 1);
+		Modchu_Debug.dDebug(null);
 		//Modchu_Debug.lDebug("Modchu_ThreadInit run() end.");
 	}
 
