@@ -1,0 +1,1 @@
+package modchu.lib.replacepoint;import modchu.lib.replace.Modchu_ItemRendererBase;import net.minecraft.client.Minecraft;public abstract class Modchu_ItemRendererReplacePoint extends Modchu_ItemRendererBase {	public Modchu_ItemRendererReplacePoint(Minecraft minecraft) {		super(minecraft);	}}

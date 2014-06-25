@@ -1,0 +1,1 @@
+package modchu.lib.characteristic;public class Modchu_Version {	public static final int version = 172;	public static final String versionString = "1.7.2";	public static final int getMinecraftVersion()	{		return version;	}	public static final String getMinecraftVersionString()	{		return versionString;	}}
