@@ -1,6 +1,6 @@
 package modchu.lib;
 
-import modchu.lib.characteristic.Modchu_GuiBase;
+import modchu.lib.characteristic.recompileonly.Modchu_GuiBase;
 
 
 public interface Modchu_IGuiBaseMaster {

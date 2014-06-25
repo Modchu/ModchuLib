@@ -1,4 +1,4 @@
-package modchu.lib.characteristic;
+package modchu.lib.characteristic.recompileonly;
 
 import modchu.lib.Modchu_ITexturedQuad;
 import modchu.lib.Modchu_Reflect;

@@ -1,4 +1,4 @@
-package modchu.lib.characteristic;
+package modchu.lib.characteristic.recompileonly;
 
 import modchu.lib.replacepoint.Modchu_IModelCapsReplacePoint;
 import modchu.model.ModchuModel_IModelCaps;

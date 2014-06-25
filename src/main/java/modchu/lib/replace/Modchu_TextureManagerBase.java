@@ -23,7 +23,7 @@ import java.util.zip.ZipInputStream;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_FileManager;
 import modchu.lib.Modchu_Reflect;
-import modchu.model.multimodel.MultiModelBaseBiped;
+import modchu.model.multimodel.base.MultiModelBaseBiped;
 import modchu.model.replacepoint.ModchuModel_FileManagerReplacePoint;
 import modchu.model.replacepoint.ModchuModel_HelperReplacePoint;
 import modchu.model.replacepoint.ModchuModel_ITextureEntityReplacePoint;
@@ -144,8 +144,10 @@ public class Modchu_TextureManagerBase {
 	 * テクスチャ名称の一致する物を返す。
 	 */
 	public ModchuModel_TextureBoxReplacePoint getTextureBox(String pName) {
+		//Modchu_Debug.mDebug("Modchu_TextureManagerBase getTextureBox pName="+pName);
 		for (ModchuModel_TextureBoxReplacePoint ltb : textures) {
 			if (ltb.textureName.equals(pName)) {
+				//Modchu_Debug.mDebug("Modchu_TextureManagerBase getTextureBox ltb ok.");
 				return ltb;
 			}
 		}
@@ -234,7 +236,14 @@ public class Modchu_TextureManagerBase {
 
 		// TODO:実験コード
 		buildCrafterTexture();
+		setModels();
 
+		setDefaultTexture(EntityLivingBase.class, getTextureBox("default_" + defaultModelName));
+
+		return false;
+	}
+
+	public void setModels() {
 		// テクスチャパッケージにモデルクラスを紐付け
 		MultiModelBaseBiped[] ldm = modelMap.get(defaultModelName);
 		if (ldm == null && !modelMap.isEmpty()) {
@@ -272,20 +281,17 @@ public class Modchu_TextureManagerBase {
 		for (ModchuModel_TextureBoxReplacePoint lbox : textures) {
 			Modchu_Debug.tDebug("texture: %s(%s) - hasModel:%b", lbox.textureName, lbox.fileName, lbox.models != null);
 		}
+/*
 		for (int li = textures.size() - 1; li >= 0; li--) {
 			if (textures.get(li).models == null) {
 				textures.remove(li);
 			}
 		}
+*/
 		Modchu_Debug.tDebug("Rebuild Texture Lists.(%d)", textures.size());
 		for (ModchuModel_TextureBoxReplacePoint lbox : textures) {
 			Modchu_Debug.tDebug("texture: %s(%s) - hasModel:%b", lbox.textureName, lbox.fileName, lbox.models != null);
 		}
-
-
-		setDefaultTexture(EntityLivingBase.class, getTextureBox("default_" + defaultModelName));
-
-		return false;
 	}
 
 	public void buildCrafterTexture() {
@@ -617,6 +623,11 @@ public class Modchu_TextureManagerBase {
 		// 次のテクスチャパッケージの名前を返す
 		boolean f = false;
 		ModchuModel_TextureBoxReplacePoint lreturn = null;
+/*
+		for (ModchuModel_TextureBoxReplacePoint ltb : textures) {
+			Modchu_Debug.mDebug("Modchu_TextureManagerBase getNextPackege ltb.textureName="+ltb.textureName+" ltb.hasColor(pColor)="+ltb.hasColor(pColor));
+		}
+*/
 		for (ModchuModel_TextureBoxReplacePoint ltb : textures) {
 			if (ltb.hasColor(pColor)) {
 				if (f) {

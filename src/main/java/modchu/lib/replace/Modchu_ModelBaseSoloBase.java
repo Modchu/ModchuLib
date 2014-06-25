@@ -2,7 +2,7 @@ package modchu.lib.replace;
 
 import java.util.Map;
 
-import modchu.lib.characteristic.Modchu_IModelBaseModchuModel;
+import modchu.lib.characteristic.recompileonly.Modchu_IModelBaseModchuModel;
 import modchu.lib.replacepoint.Modchu_ModelBaseNihilReplacePoint;
 import modchu.lib.replacepoint.Modchu_ModelMultiReplacePoint;
 import modchu.model.ModchuModel_Client;

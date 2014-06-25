@@ -1,6 +1,6 @@
 package modchu.lib.replace;
 
-import modchu.lib.characteristic.Modchu_IModelBaseModchuModel;
+import modchu.lib.characteristic.recompileonly.Modchu_IModelBaseModchuModel;
 import modchu.model.ModchuModel_IModelCaps;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;

@@ -1,6 +1,6 @@
 package modchu.lib;
 
-import modchu.model.multimodel.MultiModelBaseBiped;
+import modchu.model.multimodel.base.MultiModelBaseBiped;
 
 public interface Modchu_IRenderPlayerMaster {
 

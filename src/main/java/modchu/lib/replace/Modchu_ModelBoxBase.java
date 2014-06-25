@@ -1,6 +1,6 @@
 package modchu.lib.replace;
 
-import modchu.lib.characteristic.Modchu_TexturedQuad;
+import modchu.lib.characteristic.recompileonly.Modchu_TexturedQuad;
 import modchu.lib.replacepoint.Modchu_ModelBoxReplacePoint;
 import modchu.lib.replacepoint.Modchu_ModelRendererReplacePoint;
 import net.minecraft.client.model.PositionTextureVertex;

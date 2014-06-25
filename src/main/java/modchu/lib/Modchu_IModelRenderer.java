@@ -3,23 +3,17 @@ package modchu.lib;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import modchu.lib.characteristic.Modchu_ModelRenderer;
+import modchu.lib.characteristic.recompileonly.Modchu_ModelRenderer;
 import modchu.lib.replace.Modchu_ModelRendererBase;
 import modchu.lib.replacepoint.Modchu_ModelMultiReplacePoint;
 import modchu.model.ModchuModel_IModelCaps;
-import net.minecraft.client.model.TextureOffset;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.ItemStack;
 
 public interface Modchu_IModelRenderer {
 
 	public Modchu_ModelRenderer setTextureOffset(int i, int j);
 	public int getTextureOffsetX();
 	public int getTextureOffsetY();
-	public ConcurrentHashMap<String, TextureOffset> getTextureOffsetMap();
+	public ConcurrentHashMap<String, Object> getTextureOffsetMap();
 	public void setTextureOffset(String s, int par2, int par3);
 	public Object getTextureOffset(String s);
 	public Modchu_ModelRenderer addCubeList(Object object);
@@ -41,13 +35,13 @@ public interface Modchu_IModelRenderer {
 	public Modchu_ModelRenderer addBall(float var1, float var2, float var3, float var4, float var5, float var6);
 	public void clearCubeList();
 	public void renderItemsHead(Modchu_ModelMultiReplacePoint pModelMulti, ModchuModel_IModelCaps pEntityCaps, float scale, int addSupport);
-	public void renderItemsHead(Modchu_ModelMultiReplacePoint pModelMulti, ModchuModel_IModelCaps pEntityCaps, ItemStack lis, float scale, int addSupport);
+	public void renderItemsHead(Modchu_ModelMultiReplacePoint pModelMulti, ModchuModel_IModelCaps pEntityCaps, Object itemStack, float scale, int addSupport);
 	public boolean renderItems(Modchu_ModelMultiReplacePoint pModelMulti, ModchuModel_IModelCaps pEntityCaps, boolean pRealBlock, int pIndex);
-	public void renderItems(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack, float scale, int addSupport);
-	public void renderItems(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack pItemStack);
-	public void renderItems(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, ItemStack itemstack, float scale);
-	public boolean renderBlockDoublePlant(RenderBlocks renderBlocks, Object blockDoublePlant, int i, double d, int x, int y, int z);
-	public boolean renderDecoBlock(Entity pEntityLiving, Render pRender, boolean pRealBlock, EnumAction pAction, float scale, int addSupport);
+	public void renderItems(Object entityLiving, Object render, boolean pRealBlock, Object enumAction, Object itemStack, float scale, int addSupport);
+	public void renderItems(Object entityLiving, Object render, boolean pRealBlock, Object enumAction, Object itemStack);
+	public void renderItems(Object entityLiving, Object render, boolean pRealBlock, Object enumAction, Object itemStack, float scale);
+	public boolean renderBlockDoublePlant(Object renderBlocks, Object blockDoublePlant, int i, double d, int x, int y, int z);
+	public boolean renderDecoBlock(Object entityLiving, Object render, boolean pRealBlock, Object enumAction, float scale, int addSupport);
 	public void setRotatePriority(int pValue);
 	public void setRotation();
 	public void renderObject(float par1, boolean b);

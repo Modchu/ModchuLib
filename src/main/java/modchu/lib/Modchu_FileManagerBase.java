@@ -14,10 +14,6 @@ import java.util.jar.JarFile;
 
 import modchu.lib.characteristic.Modchu_AS;
 import modchu.model.ModchuModel_Client;
-import modchu.model.replacepoint.ModchuModel_HelperReplacePoint;
-import net.minecraft.client.Minecraft;
-import net.minecraft.server.MinecraftServer;
-import cpw.mods.fml.common.FMLModContainer;
 
 public class Modchu_FileManagerBase {
 
@@ -30,16 +26,13 @@ public class Modchu_FileManagerBase {
 
 	public static void init() {
 		// 初期化
-		if (ModchuModel_HelperReplacePoint.isClient) {
-			minecraftDir = Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir);
-		} else {
-			minecraftDir = MinecraftServer.getServer().getFile("");
-		}
+		minecraftDir = Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir);
 
 		// mincraft.jarを取得
 		// 開発中用のJar内に含まれていることの対策
+		Class c = Modchu_Main.isForge ? Modchu_Reflect.loadClass("cpw.mods.fml.common.FMLModContainer") : Modchu_Reflect.loadClass("BaseMod");
 		try {
-			ProtectionDomain ls1 = FMLModContainer.class.getProtectionDomain();
+			ProtectionDomain ls1 = c.getProtectionDomain();
 			CodeSource ls2 = ls1.getCodeSource();
 			URL ls3 = ls2.getLocation();
 			URI ls4 = ls3.toURI();
@@ -52,8 +45,8 @@ public class Modchu_FileManagerBase {
 		}
 		if (minecraftJar == null) {
 			try {
-				ClassLoader lcl1 = FMLModContainer.class.getClassLoader();
-				String lcls1 = FMLModContainer.class.getName().concat(".class");
+				ClassLoader lcl1 = c.getClassLoader();
+				String lcls1 = c.getName().concat(".class");
 				URL lclu1 = lcl1.getResource(lcls1);
 				JarURLConnection lclc1 = (JarURLConnection)lclu1.openConnection();
 				JarFile lclj1 = lclc1.getJarFile();
@@ -72,7 +65,8 @@ public class Modchu_FileManagerBase {
 			minecraftJar = new File(ls);
 			Modchu_Debug.Debug("getMinecraftFile-file:%s", ls);
 		}
-		if (!Modchu_Main.isForge && ModchuModel_HelperReplacePoint.isClient) {
+		if (!Modchu_Main.isForge
+				&& !Modchu_Main.isServer) {
 			File lversions = new File(minecraftDir, "versions");
 			versionDir = new File(lversions, ModchuModel_Client.getVersionString());
 			if (lversions.exists() && lversions.isDirectory() && versionDir.exists() && versionDir.isDirectory()) {
@@ -85,13 +79,8 @@ public class Modchu_FileManagerBase {
 		}
 		Modchu_Debug.Debug("getMods-Directory:%s", modDir.getAbsolutePath());
 
-		if (ModchuModel_HelperReplacePoint.isClient) {
-			try {
-				assetsDir = (File)Modchu_Reflect.getPrivateValue(Minecraft.class, Minecraft.getMinecraft(), 41);
-			} catch (Exception e) {
-				e.printStackTrace();
-				assetsDir = new File(minecraftDir, "assets");
-			}
+		if (!Modchu_Main.isServer) {
+			assetsDir = new File(minecraftDir, "assets");
 			Modchu_Debug.Debug("getAssets-Directory:%s", assetsDir.getAbsolutePath());
 		} else {
 			// サーバー側では使われないはず。

@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import modchu.lib.Modchu_Debug;
 import modchu.lib.replacepoint.Modchu_ModelMultiReplacePoint;
 import modchu.model.ModchuModel_IModelCaps;
 import modchu.model.ModchuModel_ModelCapsHelper;
+import modchu.model.replacepoint.ModchuModel_TextureBoxReplacePoint;
 import modchu.model.replacepoint.ModchuModel_TextureManagerReplacePoint;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -70,9 +72,12 @@ public class Modchu_TextureBoxBase extends Modchu_TextureBoxBaseBase {
 
 	public void setModels(String pModelName, Modchu_ModelMultiReplacePoint[] pModels, Modchu_ModelMultiReplacePoint[] pDefModels) {
 		modelName = pModelName;
-		models = pModels == null ? pDefModels : pModels;
+		models = pModels != null ? pModels : pDefModels;
 		textureName = (new StringBuilder()).append(packegeName).append("_").append(modelName).toString();
-		isUpdateSize = (models != null && models[0] != null) ? ModchuModel_ModelCapsHelper.getCapsValueBoolean(models[0], ModchuModel_IModelCaps.caps_isUpdateSize) : false;
+		isUpdateSize = (models != null
+				&& models.length > 0
+				&& models[0] != null) ? ModchuModel_ModelCapsHelper.getCapsValueBoolean(models[0], ModchuModel_IModelCaps.caps_isUpdateSize) : false;
+		//Modchu_Debug.mDebug("setModels models[0].getClass()="+models[0].getClass());
 	}
 
 	/**
@@ -188,8 +193,8 @@ public class Modchu_TextureBoxBase extends Modchu_TextureBoxBaseBase {
 		return models != null ? models[0].getMountedYOffset(pEntityCaps) : modelMountedYOffset;
 	}
 
-	public Modchu_TextureBoxBase duplicate() {
-		Modchu_TextureBoxBase lbox = new Modchu_TextureBoxBase();
+	public ModchuModel_TextureBoxReplacePoint duplicate() {
+		ModchuModel_TextureBoxReplacePoint lbox = new ModchuModel_TextureBoxReplacePoint();
 		lbox.textureName = textureName;
 		lbox.packegeName = packegeName;
 		lbox.fileName = fileName;
@@ -198,7 +203,7 @@ public class Modchu_TextureBoxBase extends Modchu_TextureBoxBaseBase {
 		lbox.textures = textures;
 		lbox.armors = armors;
 		lbox.models = models;
-		lbox.isUpdateSize = lbox.isUpdateSize;
+		lbox.isUpdateSize = isUpdateSize;
 
 		return lbox;
 	}

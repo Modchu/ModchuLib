@@ -1,4 +1,4 @@
-package modchu.lib.characteristic;
+package modchu.lib.characteristic.recompileonly;
 
 import modchu.lib.Modchu_CastHelperBase;
 import net.minecraft.block.Block;

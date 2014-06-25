@@ -3,7 +3,7 @@ package modchu.lib.replace;
 import java.util.HashMap;
 import java.util.Map;
 
-import modchu.lib.characteristic.Modchu_ModelRenderer;
+import modchu.lib.characteristic.recompileonly.Modchu_ModelRenderer;
 import modchu.lib.replacepoint.Modchu_IModelCapsReplacePoint;
 import modchu.lib.replacepoint.Modchu_ModelMultiReplacePoint;
 import modchu.model.ModchuModel_IModelCaps;

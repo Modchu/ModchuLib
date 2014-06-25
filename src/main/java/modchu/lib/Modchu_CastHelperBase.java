@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Modchu_CastHelperBase {
@@ -22,16 +23,29 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static int Int(Object o, int i) {
+		if (o != null) ;else return i;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
 			return b ? 2 : 1;
 		}
-		if (o != null) ;else return i;
-		if (o instanceof Integer) {
-			return (Integer) o;
-		}
+		if (o instanceof Integer) return (Integer) o;
 		if (Modchu_Main.integerCheck(""+o)) return Integer.valueOf(""+o);
 		return i;
+	}
+
+	public static short Short(Object o) {
+		return Short(o, (short) 0);
+	}
+
+	public static short Short(Object o, short sh) {
+		if (o != null) ;else return sh;
+		if (o instanceof Boolean) {
+			boolean b = (Boolean) o;
+			return (short) (b ? 2 : 1);
+		}
+		if (o instanceof Short) return (Short) o;
+		if (Modchu_Main.shortCheck(""+o)) return Short.valueOf(""+o);
+		return sh;
 	}
 
 	public static long Long(Object o) {
@@ -82,14 +96,12 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static byte Byte(Object o, byte by) {
+		if (o != null) ;else return by;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
 			return (byte) (b ? 2 : 1);
 		}
-		if (o != null) ;else return by;
-		if (o instanceof Byte) {
-			return (Byte) o;
-		}
+		if (o instanceof Byte) return (Byte) o;
 		if (Modchu_Main.byteCheck(""+o)) return Byte.valueOf(""+o);
 		return by;
 	}
@@ -99,14 +111,12 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static float Float(Object o, float f) {
+		if (o != null) ;else return f;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
 			return b ? 2 : 1;
 		}
-		if (o != null) ;else return f;
-		if (o instanceof Float) {
-			return (Float) o;
-		}
+		if (o instanceof Float) return (Float) o;
 		if (Modchu_Main.floatCheck(""+o)) return Float.valueOf(""+o);
 		return f;
 	}
@@ -116,22 +126,22 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static double Double(Object o, double d) {
+		if (o != null) ;else return d;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
 			return b ? 2 : 1;
 		}
-		if (o != null) ;else return d;
-		if (o instanceof Double) {
-			return (Double) o;
-		}
+		if (o instanceof Double) return (Double) o;
 		return Double.valueOf(""+o);
 	}
 
 	public static boolean Boolean(Object o) {
-		if (o instanceof Boolean
-				| boolean.class.isInstance(o)) {
-			return (Boolean) o;
+		if (o != null) ;else return false;
+		if (boolean.class.isInstance(o)
+				| o instanceof String) {
+			return Boolean.valueOf(""+o);
 		}
+		if (o instanceof Boolean) return (Boolean) o;
 		return false;
 	}
 
@@ -183,5 +193,10 @@ public class Modchu_CastHelperBase {
 	public static InputStream InputStream(Object o) {
 		return o != null 
 				&& o instanceof InputStream ? (InputStream) o : null;
+	}
+
+	public static UUID UUID(Object o) {
+		return o != null 
+				&& o instanceof UUID ? (UUID) o : null;
 	}
 }
