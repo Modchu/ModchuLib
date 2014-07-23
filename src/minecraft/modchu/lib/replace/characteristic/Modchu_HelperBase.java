@@ -1,4 +1,4 @@
-package modchu.lib.replace;
+package modchu.lib.replace.characteristic;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

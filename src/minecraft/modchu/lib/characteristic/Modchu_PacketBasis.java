@@ -16,6 +16,10 @@ public class Modchu_PacketBasis {
 				&& entityPlayerMP != null) Modchu_Packet.sendTo(data, entityPlayerMP, channelName);
 	}
 
+	public static void sendToAll(Object[] data, String channelName) {
+		if (data != null) Modchu_Packet.sendToAll(data, channelName);
+	}
+
 	public static void sendToAll(Object[] data, String channelName, Object world) {
 		if (data != null) Modchu_Packet.sendToAll(data, channelName, world);
 	}

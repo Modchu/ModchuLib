@@ -7,8 +7,7 @@ import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.Modchu_Debug;
@@ -41,7 +40,7 @@ public class Modchu_Packet implements Modchu_IPacketConstant {
 			if (channelName != null
 					&& !channelName.isEmpty()) {
 				Object modInstance = packetModInstanceMap.get(channelName);
-				if (modInstance != null) Modchu_Reflect.invokeMethod(modInstance.getClass(), "onPacketData", new Class[]{ Object.class, Object.class, String.class }, modInstance, new Object[]{ datainputstream, player, channelName });
+				if (modInstance != null) Modchu_Reflect.invokeMethod(modInstance.getClass(), "onPacketData", new Class[]{ LinkedList.class, Object.class, String.class }, modInstance, new Object[]{ receivePacketData(datainputstream), player, channelName });
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -54,24 +53,34 @@ public class Modchu_Packet implements Modchu_IPacketConstant {
 		}
 	}
 
-	public static void sendToAll(Object o, String channelName) {
+	public static void sendToAll(Object[] o, String channelName) {
 		sendToAll(o, channelName, Modchu_AS.get(Modchu_AS.minecraftTheWorld));
 	}
 
-	public static void sendToAll(Object o, String channelName, Object world) {
+	public static void sendToAll(Object[] o, String channelName, Object world) {
+		Modchu_Debug.mDebug("Modchu_Packet sendToAll channelName="+channelName);
 		if (o != null
 				&& channelName != null
-				&& world != null) ;else {
+				//&& world != null
+				) ;else {
 			if (o != null) ;else Modchu_Debug.mDebug("Modchu_Packet sendToAll o == null !!");
 			if (channelName != null) ;else Modchu_Debug.mDebug("Modchu_Packet sendToAll channelName == null !!");
-			if (world != null) ;else Modchu_Debug.mDebug("Modchu_Packet sendToAll world == null !!");
+			//if (world != null) ;else Modchu_Debug.mDebug("Modchu_Packet sendToAll world == null !!");
 			return;
 		}
-		List playerEntities = Modchu_AS.getList(Modchu_AS.playerEntities, world);
-		Iterator iterator = playerEntities.iterator();
-		while (iterator.hasNext()) {
-			Object entityplayer = iterator.next();
-			sendTo(o, entityplayer, channelName);
+		//sendToAll(newPacket(o, channelName), channelName);
+		if (world.getClass().isArray()) {
+			for (Object world1 : Modchu_CastHelper.ObjectArray(world)) {
+				sendToWorld(o, channelName, world1);
+			}
+		} else {
+			sendToWorld(o, channelName, world);
+		}
+	}
+
+	private static void sendToWorld(Object[] o, String channelName, Object world) {
+		for (Object entityplayer : Modchu_AS.getList(Modchu_AS.playerEntities, world)) {
+			sendTo(newPacket(o, channelName), (EntityPlayerMP) entityplayer, channelName);
 		}
 	}
 
@@ -170,6 +179,57 @@ public class Modchu_Packet implements Modchu_IPacketConstant {
 		return null;
 	}
 
+	public static LinkedList receivePacketData(InputStream input) {
+		LinkedList list = new LinkedList();
+		int i = 0;
+		boolean returnFlag = true;
+		try {
+			do {
+				byte by = Modchu_PacketBasis.readByte(input);
+				Object o = null;
+				switch(by) {
+				case packet_Byte:
+					o = Modchu_PacketBasis.readByte(input);
+					break;
+				case packet_Integer:
+					o = Modchu_PacketBasis.readInt(input);
+					break;
+				case packet_Float:
+					o = Modchu_PacketBasis.readFloat(input);
+					break;
+				case packet_Double:
+					o = Modchu_PacketBasis.readDouble(input);
+					break;
+				case packet_Long:
+					o = Modchu_PacketBasis.readLong(input);
+					break;
+				case packet_String:
+					o = Modchu_PacketBasis.readString(input);
+					break;
+				case packet_end:
+					returnFlag = false;
+					break;
+				default:
+					break;
+				}
+				if (o != null) {
+					Modchu_Debug.mDebug("Modchu_Packet receivePacketData i="+i+" o="+o);
+					list.add(o);
+				}
+				i++;
+			} while(returnFlag);
+		} catch (EOFException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (input != null) input.close();
+			} catch (Exception e) {
+			}
+		}
+		return list;
+	}
+/*
 	public static ConcurrentHashMap<Integer, Object> receivePacketData(InputStream input) {
 		ConcurrentHashMap<Integer, Object> map = new ConcurrentHashMap();
 		int i = 0;
@@ -216,4 +276,5 @@ public class Modchu_Packet implements Modchu_IPacketConstant {
 		}
 		return map;
 	}
+*/
 }

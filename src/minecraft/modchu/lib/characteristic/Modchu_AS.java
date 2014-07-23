@@ -45,6 +45,7 @@ import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
@@ -74,6 +75,7 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionHelper;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -320,7 +322,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object[] blockBlockList() {
-		return null;
+		return Block.blocksList;
 	}
 
 	@Override
@@ -2110,7 +2112,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object[] itemItemsList() {
-		return null;
+		return Item.itemsList;
 	}
 
 	@Override
@@ -2287,13 +2289,13 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object minecraftGetMinecraft() {
-		if (Modchu_Main.isServer) return null;
+		if (Modchu_Main.isServer) return MinecraftServer.getServer();
 		return Minecraft.getMinecraft();
 	}
 
 	@Override
 	protected long minecraftGetSystemTime() {
-		if (Modchu_Main.isServer) return -1;
+		if (Modchu_Main.isServer) return MinecraftServer.getServer().getSystemTimeMillis();
 		return Minecraft.getMinecraft().getSystemTime();
 	}
 
@@ -2347,7 +2349,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object minecraftTheWorld() {
-		if (Modchu_Main.isServer) return FMLCommonHandler.instance().getMinecraftServerInstance();
+		if (Modchu_Main.isServer) return MinecraftServer.getServer().worldServers[0];
 		return Minecraft.getMinecraft().theWorld;
 	}
 
@@ -3305,7 +3307,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object iIconRegisterRegisterIcon(Object iIconRegister, String s) {
-		return null;
+		return ((IconRegister) iIconRegister).registerIcon(s);
 	}
 
 	@Override
@@ -3399,7 +3401,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected boolean blockDoublePlantFunc_149887_c(Object blockDoublePlant, int i) {
+	protected boolean blockDoublePlantFunc_149887_c(int i) {
 		return false;
 	}
 
@@ -3414,7 +3416,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object blockDoublePlantSunflowerIcons(Object blockDoublePlant) {
+	protected Object[] blockDoublePlantSunflowerIcons(Object blockDoublePlant) {
 		return null;
 	}
 
@@ -3576,6 +3578,31 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected void setEntityLivingBaseLimbSwingAmount(Object entity, float f) {
 		((EntityLivingBase) entity).limbSwingAmount = f;
+	}
+
+	@Override
+	protected void itemOnItemRightClick(Object item, Object itemStack, Object world, Object entityplayer) {
+		((Item) item).onItemRightClick((ItemStack) itemStack, (World) world, (EntityPlayer) entityplayer);
+	}
+
+	@Override
+	protected void setItemStackStackSize(Object itemstack, int i) {
+		((ItemStack) itemstack).stackSize = i;
+	}
+
+	@Override
+	protected Object minecraftServerGetServer() {
+		return MinecraftServer.getServer();
+	}
+
+	@Override
+	protected Object[] minecraftServerGetServerWorldServers() {
+		return MinecraftServer.getServer().worldServers;
+	}
+
+	@Override
+	protected void entityPlayerDestroyCurrentEquippedItem(Object entityplayer) {
+		((EntityPlayer) entityplayer).destroyCurrentEquippedItem();
 	}
 
 }
