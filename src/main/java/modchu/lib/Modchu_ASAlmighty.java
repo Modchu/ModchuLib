@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.characteristic.recompileonly.Modchu_CastHelper;
 import modchu.pflm.PFLM_ItemRendererMaster;
+import net.minecraft.client.renderer.ThreadDownloadImageData;
 
 import org.lwjgl.input.Keyboard;
 
@@ -116,11 +117,16 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == renderRenderManagerRenderEngine) return pArg != null && pArg.length > 0 ? renderRenderManagerRenderEngine(pArg[0]) : null;
 		if (pIndex == renderManagerGetEntityRenderObject) return pArg != null && pArg.length > 0 ? renderManagerGetEntityRenderObject(pArg[0]) : null;
 		if (pIndex == renderMainModel) return pArg != null && pArg.length > 0 ? renderMainModel(pArg[0]) : null;
+		if (pIndex == nbtUtilFunc_152459_a) return pArg != null && pArg.length > 0 ? nbtUtilFunc_152459_a(pArg[0]) : null;
 		if (pIndex == nbtTagCompoundHasKey) {
 			if (pArg != null
 			&& pArg.length > 1
 			&& pArg[0] != null
 			&& pArg[1] != null) {
+				if (pArg.length > 2
+						&& pArg[2] != null) {
+					return nbtTagCompoundHasKey(pArg[0], (String) pArg[1], (Integer) pArg[2]);
+				}
 				return nbtTagCompoundHasKey(pArg[0], (String) pArg[1]);
 			}
 			return null;
@@ -131,6 +137,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[0] != null
 			&& pArg[1] != null) {
 				return nbtTagCompoundGetString(pArg[0], (String) pArg[1]);
+			}
+			return null;
+		}
+		if (pIndex == nbtTagCompoundGetCompoundTag) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				return nbtTagCompoundGetCompoundTag(pArg[0], (String) pArg[1]);
 			}
 			return null;
 		}
@@ -166,6 +181,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == entityLivingBaseMaxHurtTime) return pArg != null && pArg.length > 0 ? entityLivingBaseMaxHurtTime(pArg[0]) : entityLivingBaseMaxHurtTime();
 		if (pIndex == gLAllocationCreateDirectIntBuffer) return pArg != null && pArg.length > 0 ? gLAllocationCreateDirectIntBuffer((Integer) pArg[0]) : null;
 		if (pIndex == gLAllocationGenerateDisplayLists) return pArg != null && pArg.length > 0 ? gLAllocationGenerateDisplayLists((Integer) pArg[0]) : null;
+		if (pIndex == stringUtilsIsNullOrEmpty) return pArg != null && pArg.length > 0 ? stringUtilsIsNullOrEmpty((String) pArg[0]) : null;
 		if (pIndex == inventoryPlayerGetStackInSlot) {
 			if (pArg != null
 			&& pArg.length > 1
@@ -195,10 +211,9 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		}
 		if (pIndex == blockDoublePlantFunc_149887_c) {
 			if (pArg != null
-			&& pArg.length > 1
-			&& pArg[0] != null
-			&& pArg[1] != null) {
-				return blockDoublePlantFunc_149887_c(pArg[0], (Integer) pArg[1]);
+			&& pArg.length > 0
+			&& pArg[0] != null) {
+				return blockDoublePlantFunc_149887_c((Integer) pArg[0]);
 			}
 			return null;
 		}
@@ -216,7 +231,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == iIconGetMinV) return pArg != null && pArg.length > 0 ? iIconGetMinV(pArg[0]) : null;
 		if (pIndex == iIconGetMaxU) return pArg != null && pArg.length > 0 ? iIconGetMaxU(pArg[0]) : null;
 		if (pIndex == iIconGetMaxV) return pArg != null && pArg.length > 0 ? iIconGetMaxV(pArg[0]) : null;
-		if (pIndex == blockDoublePlantSunflowerIcons) return pArg != null && pArg.length > 0 ? blockDoublePlantSunflowerIcons((Integer) pArg[0]) : null;
+		if (pIndex == blockDoublePlantSunflowerIcons) return pArg != null && pArg.length > 0 ? blockDoublePlantSunflowerIcons(pArg[0]) : null;
 		if (pIndex == blockDoublePlantFunc_149890_d) return pArg != null && pArg.length > 0 ? blockDoublePlantFunc_149890_d((Integer) pArg[0]) : null;
 		if (pIndex == itemStackGetItemDamage) return pArg != null && pArg.length > 0 ? itemStackGetItemDamage(pArg[0]) : null;
 		if (pIndex == renderManagerInstance) return renderManagerInstance();
@@ -839,6 +854,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == rendererLivingEntityRES_ITEM_GLINT) return pArg != null && pArg.length > 0 ? rendererLivingEntityRES_ITEM_GLINT(pArg[0]) : null;
 		if (pIndex == openGlHelperDefaultTexUnit) return openGlHelperDefaultTexUnit();
 		if (pIndex == openGlHelperLightmapTexUnit) return openGlHelperLightmapTexUnit();
+		if (pIndex == minecraftServerGetServer) return minecraftServerGetServer();
+		if (pIndex == minecraftServerGetServerWorldServers) return minecraftServerGetServerWorldServers();
 		if (pIndex == guiScreenButtonList) return pArg != null && pArg.length > 0 ? guiScreenButtonList(pArg[0]) : null;
 		if (pIndex == guiScreenWidth) return pArg != null && pArg.length > 0 ? guiScreenWidth(pArg[0]) : null;
 		if (pIndex == guiScreenHeight) return pArg != null && pArg.length > 0 ? guiScreenHeight(pArg[0]) : null;
@@ -1151,6 +1168,13 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	@Override
 	public boolean setB(Modchu_ASBase accessSupport, int pIndex, Object... pArg) {
+		if (pIndex == entityPlayerDestroyCurrentEquippedItem) {
+			if (pArg != null
+					&& pArg.length > 0) {
+				entityPlayerDestroyCurrentEquippedItem(pArg[0]);
+			}
+			entityPlayerDestroyCurrentEquippedItem();
+		}
 		if (pIndex == setRender) {
 			if (pArg != null
 			&& pArg.length > 1
@@ -1462,6 +1486,21 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return false;
 		}
+		if (pIndex == entityTameableSetOwner) {
+			if (pArg != null
+			&& pArg.length > 0
+			&& pArg[0] != null) {
+				if (pArg != null
+						&& pArg.length > 1
+						&& pArg[1] != null) {
+					entityTameableSetOwner(pArg[0], (String) pArg[1]);
+				} else {
+					entityTameableSetOwner(pArg[0]);
+				}
+				return true;
+			}
+			return false;
+		}
 		if (pIndex == entityLivingBaseSwingItem) {
 			if (pArg != null
 			&& pArg.length > 0
@@ -1523,6 +1562,16 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 				} else {
 					setEntityHurtResistantTime((Integer) pArg[0]);
 				}
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == itemStackStackSize) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				setItemStackStackSize(pArg[0], (Integer) pArg[1]);
 				return true;
 			}
 			return false;
@@ -1674,6 +1723,18 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return false;
 		}
+		if (pIndex == itemOnItemRightClick) {
+			if (pArg != null
+			&& pArg.length > 3
+			&& pArg[0] != null
+			&& pArg[1] != null
+			&& pArg[2] != null
+			&& pArg[3] != null) {
+				itemOnItemRightClick(pArg[0], pArg[1], pArg[2], pArg[3]);
+				return true;
+			}
+			return false;
+		}
 		if (pIndex == renderBlocksRenderBlockAllFaces) {
 			if (pArg != null
 			&& pArg.length > 4
@@ -1683,6 +1744,20 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[3] != null
 			&& pArg[4] != null) {
 				renderBlocksRenderBlockAllFaces(pArg[0], pArg[1], (Integer) pArg[2], (Integer) pArg[3], (Integer) pArg[4]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == renderBlocksDrawCrossedSquares) {
+			if (pArg != null
+			&& pArg.length > 5
+			&& pArg[0] != null
+			&& pArg[1] != null
+			&& pArg[2] != null
+			&& pArg[3] != null
+			&& pArg[4] != null
+			&& pArg[5] != null) {
+				renderBlocksDrawCrossedSquares(pArg[0], pArg[1], (Double) pArg[2], (Double) pArg[3], (Double) pArg[4], (Float) pArg[5]);
 				return true;
 			}
 			return false;
@@ -3115,13 +3190,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[2] != null
 			&& pArg[3] != null
 			&& pArg[4] != null
-			&& pArg[5] != null
-			&& pArg[6] != null) {
+			&& pArg[5] != null) {
 				if (pArg.length > 7
-						&& pArg[7] != null) {
-					tileEntitySkullRendererSkullRendererRender(pArg[0], (Float) pArg[1], (Float) pArg[2], (Float) pArg[3], (Integer) pArg[4], (Float) pArg[5], (Integer) pArg[6], (String) pArg[7]);
+						&& pArg[6] != null) {
+					tileEntitySkullRendererSkullRendererRender(pArg[0], (Float) pArg[1], (Float) pArg[2], (Float) pArg[3], (Integer) pArg[4], (Float) pArg[5], (Integer) pArg[6], pArg[7]);
 				} else {
-					tileEntitySkullRendererSkullRendererRender((Float) pArg[0], (Float) pArg[1], (Float) pArg[2], (Integer) pArg[3], (Float) pArg[4], (Integer) pArg[5], (String) pArg[6]);
+					tileEntitySkullRendererSkullRendererRender((Float) pArg[0], (Float) pArg[1], (Float) pArg[2], (Integer) pArg[3], (Float) pArg[4], (Integer) pArg[5], pArg[6]);
 				}
 				return true;
 			}
@@ -4559,6 +4633,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.String(Modchu_Reflect.invokeMethod("EntityTameable", "func_70905_p", "getOwnerName", entityTameable));
 	}
 
+	protected void entityTameableSetOwner(Object entityTameable) {
+		entityTameableSetOwner(entityTameable, getUserName(minecraftThePlayer()));
+	}
+
+	protected void entityTameableSetOwner(Object entityTameable, String s) {
+		boolean b = Modchu_Main.getMinecraftVersion() > 172;
+		Modchu_Reflect.invokeMethod("EntityTameable", b ? "func_152115_b" : "func_70910_a", b ? "func_152115_b" : "setOwner", new Class[]{ String.class }, entityTameable, new Object[]{ s });
+	}
+
 	protected void entityLivingSetHealth(int i) {
 		entityLivingSetHealth(minecraftThePlayer(), i);
 	}
@@ -4829,6 +4912,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected void entityPlayerSetItemInUse(Object entityplayer, Object itemstack, int i) {
 		Modchu_Reflect.invokeMethod("EntityPlayer", "func_71008_a", "setItemInUse", new Class[]{ Modchu_Reflect.loadClass("ItemStack"), int.class }, entityplayer, new Object[]{ itemstack, i });
+	}
+
+	protected void entityPlayerDestroyCurrentEquippedItem() {
+		entityPlayerDestroyCurrentEquippedItem(minecraftThePlayer());
+	}
+
+	protected void entityPlayerDestroyCurrentEquippedItem(Object entityplayer) {
+		Modchu_Reflect.invokeMethod("EntityPlayer", "func_71028_bD", "destroyCurrentEquippedItem", entityplayer);
 	}
 
 	protected double entityPosX() {
@@ -5928,8 +6019,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		Modchu_Reflect.setFieldObject("Item", "field_77791_bV", "itemIcon", item, icon);
 	}
 
+	protected void itemOnItemRightClick(Object item, Object itemStack, Object world, Object entityplayer) {
+		Modchu_Reflect.invokeMethod("Item", "func_77659_a", "onItemRightClick", new Class[]{ Modchu_Reflect.loadClass("ItemStack"), Modchu_Reflect.loadClass("World"), Modchu_Reflect.loadClass("EntityPlayer") }, item, new Object[]{ itemStack, world, entityplayer });
+	}
+
 	protected Object iIconRegisterRegisterIcon(Object iIconRegister, String s) {
-		return Modchu_Reflect.invokeMethod("net.minecraft.client.renderer.texture.iIconRegister", "func_94245_a", "registerIcon", new Class[]{ String.class }, iIconRegister, new Object[]{ s });
+		return Modchu_Reflect.invokeMethod(Modchu_Main.getMinecraftVersion() > 169 ? "net.minecraft.client.renderer.texture.iIconRegister" : "net.minecraft.client.renderer.texture.IconRegister", "func_94245_a", "registerIcon", new Class[]{ String.class }, iIconRegister, new Object[]{ s });
 	}
 
 	protected Object itemStackCopyItemStack(Object o) {
@@ -5968,8 +6063,20 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("NBTTagCompound", "func_74764_b", "hasKey", new Class[]{ String.class }, itemStackGetTagCompound(nBTTagCompoundOrItemStack), new Object[]{ s }));
 	}
 
+	protected boolean nbtTagCompoundHasKey(Object nBTTagCompoundOrItemStack, String s, int i) {
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("NBTTagCompound", "func_74764_b", "hasKey", new Class[]{ String.class, int.class }, itemStackGetTagCompound(nBTTagCompoundOrItemStack), new Object[]{ s, i }));
+	}
+
 	protected String nbtTagCompoundGetString(Object nBTTagCompoundOrItemStack, String s) {
 		return Modchu_CastHelper.String(Modchu_Reflect.invokeMethod("NBTTagCompound", "func_74779_i", "getString", new Class[]{ String.class }, itemStackGetTagCompound(nBTTagCompoundOrItemStack), new Object[]{ s }));
+	}
+
+	protected Object nbtTagCompoundGetCompoundTag(Object nBTTagCompoundOrItemStack, String s) {
+		return Modchu_Reflect.invokeMethod("NBTTagCompound", "func_74775_l", "getCompoundTag", new Class[]{ String.class }, itemStackGetTagCompound(nBTTagCompoundOrItemStack), new Object[]{ s });
+	}
+
+	protected Object nbtUtilFunc_152459_a(Object nBTTagCompound) {
+		return Modchu_Reflect.invokeMethod("net.minecraft.nbt.NBTUtil", "func_152459_a", new Class[]{ Modchu_Reflect.loadClass("NBTTagCompound") }, new Object[]{ nBTTagCompound });
 	}
 
 	protected Object tileEntitySkullRendererSkullRenderer() {
@@ -5977,12 +6084,16 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			Modchu_Reflect.getFieldObject("TileEntitySkullRenderer", "field_82397_a", "skullRenderer");
 	}
 
-	protected void tileEntitySkullRendererSkullRendererRender(float f, float f1, float f2, int i, float f3, int i2, String s) {
-		tileEntitySkullRendererSkullRendererRender(tileEntitySkullRendererSkullRenderer(), f, f1, f2, i, f3, i2, s);
+	protected void tileEntitySkullRendererSkullRendererRender(float f, float f1, float f2, int i, float f3, int i2, Object o) {
+		tileEntitySkullRendererSkullRendererRender(tileEntitySkullRendererSkullRenderer(), f, f1, f2, i, f3, i2, o);
 	}
 
-	protected void tileEntitySkullRendererSkullRendererRender(Object skullRenderer, float f, float f1, float f2, int i, float f3, int i2, String s) {
-		Modchu_Reflect.invokeMethod(skullRenderer.getClass(), Modchu_Main.getMinecraftVersion() > 169 ? "func_147530_a" : "func_82393_a", new Class[]{ float.class, float.class, float.class, int.class, float.class, int.class, String.class }, skullRenderer, new Object[]{ f, f1, f2, i, f3, i2, s });
+	protected void tileEntitySkullRendererSkullRendererRender(Object skullRenderer, float f, float f1, float f2, int i, float f3, int i2, Object o) {
+		if (Modchu_Main.getMinecraftVersion() > 172) {
+			Modchu_Reflect.invokeMethod("net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer", "func_152674_a", new Class[]{ float.class, float.class, float.class, int.class, float.class, int.class, Modchu_Reflect.loadClass("com.mojang.authlib.GameProfile") }, skullRenderer, new Object[]{ f, f1, f2, i, f3, i2, o });
+		} else {
+			Modchu_Reflect.invokeMethod(skullRenderer.getClass(), Modchu_Main.getMinecraftVersion() > 169 ? "func_147530_a" : "func_82393_a", new Class[]{ float.class, float.class, float.class, int.class, float.class, int.class, String.class }, skullRenderer, new Object[]{ f, f1, f2, i, f3, i2, o });
+		}
 	}
 
 	protected int itemStackItemID(Object itemstack) {
@@ -5991,6 +6102,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected int itemStackStackSize(Object itemstack) {
 		return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject("ItemStack", "field_77994_a", "stackSize", itemstack));
+	}
+
+	protected void setItemStackStackSize(Object itemstack, int i) {
+		Modchu_Reflect.setFieldObject("ItemStack", "field_77994_a", "stackSize", itemstack, i);
 	}
 
 	protected void itemStackDamageItem(Object itemstack, int i, Object entityLivingBase) {
@@ -6018,7 +6133,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int blockDoublePlantColorMultiplier(Object blockDoublePlant, Object world, int x, int y, int z) {
-		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod(blockDoublePlant.getClass(), "func_71920_b", "colorMultiplier", new Class[]{ Modchu_Reflect.loadClass("World"), int.class, int.class, int.class }, blockDoublePlant, new Object[]{ world, x, y, z }));
+		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod(blockDoublePlant.getClass(), "func_149720_d", "colorMultiplier", new Class[]{ Modchu_Reflect.loadClass("net.minecraft.world.IBlockAccess"), int.class, int.class, int.class }, blockDoublePlant, new Object[]{ world, x, y, z }));
 	}
 
 	protected int biomeGenBaseGetBiomeGrassColor(Object biomeGenBase) {
@@ -6030,8 +6145,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod(biomeGenBase.getClass(), "func_76737_k", "getBiomeGrassColor", biomeGenBase));
 	}
 
-	protected boolean blockDoublePlantFunc_149887_c(Object blockDoublePlant, int i) {
-		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod(blockDoublePlant.getClass(), "func_149887_c", new Class[]{ int.class }, blockDoublePlant, new Object[]{ i }));
+	protected boolean blockDoublePlantFunc_149887_c(int i) {
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("BlockDoublePlant", "func_149887_c", new Class[]{ int.class }, new Object[]{ i }));
 	}
 
 	protected int blockDoublePlantFunc_149890_d(int i) {
@@ -6042,8 +6157,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_Reflect.invokeMethod(blockDoublePlant.getClass(), "func_149888_a", new Class[]{ boolean.class, int.class }, blockDoublePlant, new Object[]{ b, i });
 	}
 
-	protected Object blockDoublePlantSunflowerIcons(Object blockDoublePlant) {
-		return Modchu_Reflect.invokeMethod(blockDoublePlant.getClass(), "field_149891_b", "sunflowerIcons", blockDoublePlant);
+	protected Object[] blockDoublePlantSunflowerIcons(Object blockDoublePlant) {
+		return Modchu_CastHelper.ObjectArray(Modchu_Reflect.invokeMethod(blockDoublePlant.getClass(), "field_149891_b", "sunflowerIcons", blockDoublePlant));
 	}
 
 	protected double iIconGetMinU(Object iIcon) {
@@ -6207,7 +6322,9 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		o = Modchu_Main.getMinecraftVersion() > 129 ? Modchu_Reflect.getPrivateValue("Minecraft", null, 8)
 				: Modchu_Reflect.getPrivateValue("Minecraft", null, 1);
 		if (o == null) {
-			throw new RuntimeException("Modchu_Main-getMinecraft o == null !! loadClass(Minecraft)="+Modchu_Reflect.loadClass("Minecraft")+" isForge="+Modchu_Main.isForge+" getMinecraftVersion()="+Modchu_Main.getMinecraftVersion());
+			String s = "Modchu_Main-getMinecraft o == null !! loadClass(Minecraft)="+Modchu_Reflect.loadClass("Minecraft")+" isForge="+Modchu_Main.isForge+" getMinecraftVersion()="+Modchu_Main.getMinecraftVersion();
+			Modchu_Debug.lDebug(s);
+			throw new RuntimeException(s);
 		}
 		getMinecraftMode = 3;
 		return o;
@@ -6289,6 +6406,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	protected Object minecraftTheWorld() {
 		if (Modchu_Main.isServer) return null;
 		return Modchu_Reflect.getFieldObject("Minecraft", "field_71441_e", "theWorld", minecraftGetMinecraft());
+	}
+
+	protected Object minecraftServerGetServer() {
+		return Modchu_Reflect.invokeMethod("net.minecraft.server.MinecraftServer", "func_71276_C", "getServer");
+	}
+
+	protected Object[] minecraftServerGetServerWorldServers() {
+		return Modchu_CastHelper.ObjectArray(Modchu_Reflect.getFieldObject("net.minecraft.server.MinecraftServer", "field_71305_c", "worldServers", minecraftServerGetServer()));
 	}
 
 	protected Object modelBaseRender(Object model, Object entity, float f, float f2, float f3, float f4, float f5, float f6) {
@@ -6700,8 +6825,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		Modchu_Reflect.invokeMethod(renderBlocks.getClass(), "func_147769_a", "renderBlockAllFaces", new Class[]{ Modchu_Reflect.loadClass("Block"), int.class, int.class, int.class }, renderBlocks, new Object[]{ block, i, i2, i3 });
 	}
 
-	protected void renderBlocksDrawCrossedSquares(Object renderBlocks, Object block, int i, double d, double d2, double d3, float f) {
-		Modchu_Reflect.invokeMethod("RenderBlocks", "func_78599_a", "drawCrossedSquares", new Class[]{ Modchu_Reflect.loadClass("Block"), int.class, double.class, double.class, double.class, float.class }, renderBlocks, new Object[]{ block, i, d, d2, d3, f });
+	protected void renderBlocksDrawCrossedSquares(Object renderBlocks, Object iIcon, double d, double d2, double d3, float f) {
+		//Modchu_Debug.mDebug("renderBlocksDrawCrossedSquares iIcon="+iIcon);
+		//Modchu_Debug.mDebug("renderBlocksDrawCrossedSquares d="+d+" d2="+d2+" d3="+d3+" f="+f);
+		Modchu_Reflect.invokeMethod("RenderBlocks", "func_147765_a", "drawCrossedSquares", new Class[]{ Modchu_Reflect.loadClass("net.minecraft.util.IIcon"), double.class, double.class, double.class, float.class }, renderBlocks, new Object[]{ iIcon, d, d2, d3, f });
 	}
 
 	protected void renderBlocksRenderBlockAsItem(Object renderBlocks, Object block, int i, float f) {
@@ -7096,6 +7223,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		Modchu_Reflect.setFieldObject("RenderManager", "field_78721_f", "itemRenderer", renderManagerInstance(), itemRenderer);
 	}
 
+	protected boolean stringUtilsIsNullOrEmpty(String s) {
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("net.minecraft.util.StringUtils", "func_151246_b", "isNullOrEmpty", new Class[]{ String.class }, new Object[]{ s }));
+	}
+
 	protected void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5) {
 		Modchu_Reflect.invokeMethod("Tessellator", "func_78374_a", "addVertexWithUV", new Class[]{ double.class, double.class, double.class, double.class, double.class }, tessellator, new Object[]{ d, d2, d3, d4, d5 });
 	}
@@ -7198,6 +7329,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean threadDownloadImageDataIsTextureUploaded(Object threadDownloadImageData) {
+		if (Modchu_Main.getMinecraftVersion() > 172) {
+			int i = ((ThreadDownloadImageData) threadDownloadImageData).getGlTextureId();
+			return Modchu_CastHelper.Boolean(Modchu_Reflect.getFieldObject("ThreadDownloadImageData", "field_110559_g", "textureUploaded", threadDownloadImageData));
+		}
 		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("ThreadDownloadImageData", "func_110557_a", "isTextureUploaded", threadDownloadImageData));
 	}
 
@@ -7319,7 +7454,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			minecraftServerInstance = getIntegratedServer();
 		}
 		if (minecraftServerInstance != null) {
-			Object configurationManager = Modchu_Reflect.invokeMethod(minecraftServerInstance.getClass(), "getConfigurationManager", minecraftServerInstance);
+			Object configurationManager = Modchu_Reflect.invokeMethod(minecraftServerInstance.getClass(), "func_71203_ab", "getConfigurationManager", minecraftServerInstance);
 			return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject(configurationManager.getClass(), "field_72404_b", "playerEntityList", configurationManager));
 		}
 		Modchu_Debug.Debug1("Modchu_ASAlmighty playerEntities return null !!");

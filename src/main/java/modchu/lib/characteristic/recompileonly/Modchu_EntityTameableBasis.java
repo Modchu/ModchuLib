@@ -3,6 +3,7 @@ package modchu.lib.characteristic.recompileonly;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntityTameable;
 import modchu.lib.characteristic.Modchu_EntityTameable;
 

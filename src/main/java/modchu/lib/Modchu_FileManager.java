@@ -255,7 +255,9 @@ public class Modchu_FileManager {
 		FileOutputStream fos = null;
 		InputStream is = null;
 		if (zipFile != null) {
+			Modchu_Debug.lDebug("Modchu_FileManager s="+s);
 			ZipEntry ze = zipFile.getEntry(s);
+			Modchu_Debug.lDebug("Modchu_FileManager 1 ze="+ze);
 			if (ze != null) ;else {
 				for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements();) {
 					ze = e.nextElement();
@@ -263,7 +265,12 @@ public class Modchu_FileManager {
 					if (ze.getName().equals(s)) break;
 				}
 			}
-			Modchu_Debug.lDebug("Modchu_FileManager ze="+ze);
+			if (ze != null 
+					&& !ze.getName().equals(s)) {
+				Modchu_Debug.lDebug("Modchu_FileManager !ze.getName().equals(s) ze="+ze);
+				return;
+			}
+			Modchu_Debug.lDebug("Modchu_FileManager 2 ze="+ze);
 			if (ze != null) {
 				file = new File(copydir, ze.getName());
 				//Modchu_Debug.lDebug("Modchu_FileManager file="+file);
@@ -294,7 +301,8 @@ public class Modchu_FileManager {
 					}
 				}
 			} else {
-				throw new RuntimeException("Modchu_FileManager name="+s+" not found !");
+				Modchu_Debug.lDebug("Modchu_FileManager name="+s+" not found !");
+				return;
 			}
 		}
 		Modchu_Debug.lDebug("flag="+flag);
@@ -328,6 +336,7 @@ public class Modchu_FileManager {
 		} else {
 			//Modchu_FileManager.copyZipResource(zipFile, copydir, s);
 		}
+		file1 = null;
 		file = new File(copydir, s);
 		Modchu_Debug.lDebug("Modchu_FileManager copy zip file="+file);
 		try {
@@ -335,7 +344,9 @@ public class Modchu_FileManager {
 			Modchu_Debug.lDebug("Modchu_FileManager last zipFile2.getName()="+zipFile2.getName());
 			Modchu_FileManager.copyZipResourceAll(zipFile2, copydir);
 			zipFile2.close();
+			zipFile2 = null;
 			zipFile.close();
+			zipFile = null;
 			if (file.exists()
 					&& file.canRead()) {
 				boolean b = false;

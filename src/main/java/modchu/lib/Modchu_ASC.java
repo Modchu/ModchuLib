@@ -549,5 +549,13 @@ public interface Modchu_ASC {
 	public static final int itemArmorGetColor_int = 16248;
 	public static final int convertGlColor_int = 16249;
 	public static final int rendererLivingEntityPassSpecialRender_int = 16250;
+	public static final int itemOnItemRightClick_int = 16251;
+	public static final int entityTameableSetOwner_int = 16252;
+	public static final int nbtTagCompoundGetCompoundTag_int = 16253;
+	public static final int nbtUtilFunc_152459_a_int = 16254;
+	public static final int stringUtilsIsNullOrEmpty_int = 16255;
+	public static final int minecraftServerGetServer_int = 16256;
+	public static final int minecraftServerGetServerWorldServers_int = 16257;
+	public static final int entityPlayerDestroyCurrentEquippedItem_int = 16258;
 
 }

@@ -244,53 +244,74 @@ public class Modchu_TextureManagerBase {
 	}
 
 	public void setModels() {
+		Modchu_Debug.tDebug("Modchu_TextureManagerBase setModels");
 		// テクスチャパッケージにモデルクラスを紐付け
 		MultiModelBaseBiped[] ldm = modelMap.get(defaultModelName);
 		if (ldm == null && !modelMap.isEmpty()) {
 			ldm = (MultiModelBaseBiped[])modelMap.values().toArray()[0];
 		}
-		for (ModchuModel_TextureBoxReplacePoint ltb : textures) {
-			if (ltb.modelName.isEmpty()) {
-				ltb.setModels(defaultModelName, null, ldm);
-			} else {
-				if (modelMap.containsKey(ltb.modelName)) {
-					ltb.setModels(ltb.modelName, modelMap.get(ltb.modelName), ldm);
+		if (textures != null
+				&& !textures.isEmpty()) {
+			for (ModchuModel_TextureBoxReplacePoint ltb : textures) {
+				if (ltb.modelName.isEmpty()) {
+					ltb.setModels(defaultModelName, null, ldm);
+				} else {
+					if (modelMap.containsKey(ltb.modelName)) {
+						ltb.setModels(ltb.modelName, modelMap.get(ltb.modelName), ldm);
+					}
 				}
 			}
 		}
-		for (Entry<String, MultiModelBaseBiped[]> le : modelMap.entrySet()) {
-			String ls = le.getValue()[0].getUsingTexture();
-			if (ls != null) {
-				if (getTextureBox(ls + "_" + le.getKey()) == null) {
-					ModchuModel_TextureBoxReplacePoint lbox = null;
-					for (ModchuModel_TextureBoxReplacePoint ltb : textures) {
-						if (ltb.packegeName.equals(ls)) {
-							lbox = ltb;
-							break;
+		Modchu_Debug.tDebug("Modchu_TextureManagerBase setModels 1 modelMap.size()="+(modelMap != null ? modelMap.size() : null));
+		if (modelMap != null
+				&& !modelMap.isEmpty()) {
+			for (Entry<String, MultiModelBaseBiped[]> le : modelMap.entrySet()) {
+				String key = le.getKey();
+				MultiModelBaseBiped[] value = le.getValue();
+				String ls = value != null
+						&& value.length > 0 ? value[0].getUsingTexture() : null;
+				Modchu_Debug.tDebug("Modchu_TextureManagerBase setModels ls="+ls);
+				if (ls != null) {
+					if (getTextureBox(ls + "_" + key) == null) {
+						ModchuModel_TextureBoxReplacePoint lbox = null;
+						if (textures != null
+								&& !textures.isEmpty()) {
+							for (ModchuModel_TextureBoxReplacePoint ltb : textures) {
+								String packegeName = ltb.packegeName;
+								if (packegeName != null
+										&& ls != null
+										&& packegeName.equals(ls)) {
+									lbox = ltb;
+									break;
+								}
+							}
 						}
-					}
-					if (lbox != null) {
-						lbox = (ModchuModel_TextureBoxReplacePoint) lbox.duplicate();
-						lbox.setModels(le.getKey(), null, le.getValue());
-						textures.add(lbox);
+						if (lbox != null) {
+							lbox = (ModchuModel_TextureBoxReplacePoint) lbox.duplicate();
+							lbox.setModels(key, null, value);
+							textures.add(lbox);
+						}
 					}
 				}
 			}
 		}
 		Modchu_Debug.tDebug("Loaded Texture Lists.(%d)", textures.size());
-		for (ModchuModel_TextureBoxReplacePoint lbox : textures) {
-			Modchu_Debug.tDebug("texture: %s(%s) - hasModel:%b", lbox.textureName, lbox.fileName, lbox.models != null);
-		}
-/*
-		for (int li = textures.size() - 1; li >= 0; li--) {
-			if (textures.get(li).models == null) {
-				textures.remove(li);
+		if (textures != null
+				&& !textures.isEmpty()) {
+			for (ModchuModel_TextureBoxReplacePoint lbox : textures) {
+				Modchu_Debug.tDebug("texture: %s(%s) - hasModel:%b", lbox.textureName, lbox.fileName, lbox.models != null);
 			}
-		}
+/*
+			for (int li = textures.size() - 1; li >= 0; li--) {
+				if (textures.get(li).models == null) {
+					textures.remove(li);
+				}
+			}
 */
-		Modchu_Debug.tDebug("Rebuild Texture Lists.(%d)", textures.size());
-		for (ModchuModel_TextureBoxReplacePoint lbox : textures) {
-			Modchu_Debug.tDebug("texture: %s(%s) - hasModel:%b", lbox.textureName, lbox.fileName, lbox.models != null);
+			Modchu_Debug.tDebug("Rebuild Texture Lists.(%d)", textures.size());
+			for (ModchuModel_TextureBoxReplacePoint lbox : textures) {
+				Modchu_Debug.tDebug("texture: %s(%s) - hasModel:%b", lbox.textureName, lbox.fileName, lbox.models != null);
+			}
 		}
 	}
 

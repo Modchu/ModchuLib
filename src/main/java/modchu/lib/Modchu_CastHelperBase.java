@@ -88,7 +88,7 @@ public class Modchu_CastHelperBase {
 
 	public static Object[] ObjectArray(Object o) {
 		return o != null 
-				&& o instanceof Object[] ? (Object[]) o : null;
+				&& o.getClass().isArray() ? (Object[]) o : null;
 	}
 
 	public static byte Byte(Object o) {

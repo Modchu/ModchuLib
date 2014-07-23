@@ -609,5 +609,13 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int itemArmorGetColor = itemArmorGetColor_int;
 	public static int convertGlColor = convertGlColor_int;
 	public static int rendererLivingEntityPassSpecialRender = rendererLivingEntityPassSpecialRender_int;
+	public static int itemOnItemRightClick = itemOnItemRightClick_int;
+	public static int entityTameableSetOwner = entityTameableSetOwner_int;
+	public static int nbtTagCompoundGetCompoundTag = nbtTagCompoundGetCompoundTag_int;
+	public static int nbtUtilFunc_152459_a = nbtUtilFunc_152459_a_int;
+	public static int stringUtilsIsNullOrEmpty = stringUtilsIsNullOrEmpty_int;
+	public static int minecraftServerGetServer = minecraftServerGetServer_int;
+	public static int minecraftServerGetServerWorldServers = minecraftServerGetServerWorldServers_int;
+	public static int entityPlayerDestroyCurrentEquippedItem = entityPlayerDestroyCurrentEquippedItem_int;
 
 }

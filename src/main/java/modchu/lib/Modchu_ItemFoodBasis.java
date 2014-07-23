@@ -159,12 +159,10 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 	@Override
 	public void onUpdate(Object itemStack, Object world, Object entity, int par4, boolean par5) {
 		base.superOnUpdate(itemStack, world, entity, par4, par5);
-		base.superOnUpdate(itemStack, world, entity, par4, par5);
 	}
 
 	@Override
 	public void onCreated(Object itemStack, Object world, Object entityPlayer) {
-		base.superOnCreated(itemStack, world, entityPlayer);
 		base.superOnCreated(itemStack, world, entityPlayer);
 	}
 
@@ -186,7 +184,6 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 	@Override
 	public void onPlayerStoppedUsing(Object itemStack, Object world, Object entityPlayer, int par4) {
 		base.superOnPlayerStoppedUsing(itemStack, world, entityPlayer, par4);
-		base.superOnPlayerStoppedUsing(itemStack, world, entityPlayer, par4);
 	}
 
 	@Override
@@ -206,7 +203,6 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 
 	@Override
 	public void addInformation(Object itemStack, Object entityPlayer, List par3List, boolean par4) {
-		base.superAddInformation(itemStack, entityPlayer, par3List, par4);
 		base.superAddInformation(itemStack, entityPlayer, par3List, par4);
 	}
 
@@ -272,7 +268,6 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 
 	@Override
 	public void registerIcons(Object iIconRegister) {
-		base.superRegisterIcons(iIconRegister);
 		base.superRegisterIcons(iIconRegister);
 	}
 
@@ -404,7 +399,6 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 	@Override
 	public void renderHelmetOverlay(Object itemStack, Object entityPlayer, Object scaledResolution, float partialTicks, boolean hasScreen, int mouseX, int mouseY) {
 		base.superRenderHelmetOverlay(itemStack, entityPlayer, scaledResolution, partialTicks, hasScreen, mouseX, mouseY);
-		base.superRenderHelmetOverlay(itemStack, entityPlayer, scaledResolution, partialTicks, hasScreen, mouseX, mouseY);
 	}
 
 	@Override
@@ -429,7 +423,6 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 
 	@Override
 	public void setDamage(Object itemStack, int damage) {
-		base.superSetDamage(itemStack, damage);
 		base.superSetDamage(itemStack, damage);
 	}
 
