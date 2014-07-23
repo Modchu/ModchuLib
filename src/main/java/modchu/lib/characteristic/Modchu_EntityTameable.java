@@ -3,7 +3,9 @@ package modchu.lib.characteristic;
 import java.util.Collection;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
+import scala.collection.mutable.StringBuilder;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
@@ -57,6 +59,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	public Modchu_EntityTameableBase masterEntity;
 	public String entityName;
+	public static ConcurrentHashMap<String, UUID> entityUniqueIDMap = new ConcurrentHashMap();
 /*
 	private HashMap<String, Field> allsyncMap = new HashMap();
 	private HashMap<String, Field> masterEntityAllSyncMap = new HashMap();
@@ -113,8 +116,18 @@ public class Modchu_EntityTameable extends EntityTameable {
 			}
 			entityName = c != null ? c.getName() : null;
 		}
-		Modchu_Debug.mDebug("initNBTAfter masterEntity="+masterEntity);
 		Modchu_Debug.mDebug("initNBTAfter entityName="+(entityName != null ? entityName : "null !!"));
+		String s0 = new StringBuilder(Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this) ? "1" : "0").append(entityUniqueID).toString();
+		if (entityUniqueIDMap.containsKey(s0)) {
+			Modchu_Debug.mDebug("initNBTAfter entityUniqueIDMap.containsKey isDead entityUniqueID="+entityUniqueID);
+			Modchu_AS.set(Modchu_AS.entityLivingBaseSetHealth, this, 0.0F);
+			deathTime = 20;
+			setDead();
+			return;
+		}
+		entityUniqueIDMap.put(s0, entityUniqueID);
+		Modchu_Debug.mDebug("initNBTAfter entityUniqueID="+entityUniqueID);
+		Modchu_Debug.mDebug("initNBTAfter masterEntity="+masterEntity);
 	}
 /*
 	private void allFieldSync(boolean reverse) {
