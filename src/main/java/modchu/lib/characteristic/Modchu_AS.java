@@ -11,6 +11,7 @@ import modchu.lib.Modchu_ASAlmighty;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
+import modchu.lib.characteristic.recompileonly.Modchu_CastHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
@@ -40,7 +41,6 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -70,6 +70,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.potion.Potion;
@@ -83,6 +84,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovementInput;
 import net.minecraft.util.MovementInputFromOptions;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StringUtils;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -105,12 +107,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object abstractClientPlayerGetTextureCape(Object entity) {
-		return ((AbstractClientPlayer) entity).getTextureCape();
+		return ((AbstractClientPlayer) entity).getLocationCape();
 	}
 
 	@Override
 	protected Object abstractClientPlayerGetTextureSkin(Object entity) {
-		return ((AbstractClientPlayer) entity).getTextureSkin();
+		return ((AbstractClientPlayer) entity).getLocationSkin();
 	}
 
 	@Override
@@ -1051,7 +1053,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected String entityTameableGetOwnerName(Object entityTameable) {
-		return ((EntityTameable) entityTameable).getOwnerName();
+		return ((EntityTameable) entityTameable).func_152113_b();
 	}
 
 	@Override
@@ -1573,13 +1575,13 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object minecraftGetMinecraft() {
-		if (Modchu_Main.isServer) return MinecraftServer.getServer();
+		if (Modchu_Main.isServer) return null;
 		return Minecraft.getMinecraft();
 	}
 
 	@Override
 	protected long minecraftGetSystemTime() {
-		if (Modchu_Main.isServer) return MinecraftServer.getServer().getSystemTimeMillis();
+		if (Modchu_Main.isServer) return -1;
 		return Minecraft.getMinecraft().getSystemTime();
 	}
 
@@ -2432,11 +2434,6 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected boolean threadDownloadImageDataIsTextureUploaded(Object threadDownloadImageData) {
-		return ((ThreadDownloadImageData) threadDownloadImageData).isTextureUploaded();
-	}
-
-	@Override
 	protected Object vec3CrossProduct(Object vec3, Object vec3_2) {
 		return ((Vec3) vec3).crossProduct((Vec3) vec3_2);
 	}
@@ -2856,6 +2853,26 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected void itemOnItemRightClick(Object item, Object itemStack, Object world, Object entityplayer) {
 		((Item) item).onItemRightClick((ItemStack) itemStack, (World) world, (EntityPlayer) entityplayer);
+	}
+
+	@Override
+	protected boolean nbtTagCompoundHasKey(Object nBTTagCompoundOrItemStack, String s, int i) {
+		return ((NBTTagCompound) nBTTagCompoundOrItemStack).hasKey(s, i);
+	}
+
+	@Override
+	protected Object nbtTagCompoundGetCompoundTag(Object nBTTagCompoundOrItemStack, String s) {
+		return ((NBTTagCompound) nBTTagCompoundOrItemStack).getCompoundTag(s);
+	}
+
+	@Override
+	protected Object nbtUtilFunc_152459_a(Object nBTTagCompound) {
+		return NBTUtil.func_152459_a((NBTTagCompound) nBTTagCompound);
+	}
+
+	@Override
+	protected boolean stringUtilsIsNullOrEmpty(String s) {
+		return StringUtils.isNullOrEmpty(s);
 	}
 
 	@Override

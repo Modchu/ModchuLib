@@ -202,23 +202,23 @@ public class Modchu_EntityTameableBase extends EntityTameable {
 	}
 
 	@Override
-	public String getOwnerName() {
-		return master != null ? master.getOwnerName() : super.getOwnerName();
+	public String func_152113_b() {
+		return master != null ? master.getOwnerName() : super.func_152113_b();
 	}
 
 	public String superGetOwnerName() {
-		return base != null ? base.superGetOwnerName() : super.getOwnerName();
+		return base != null ? base.superGetOwnerName() : super.func_152113_b();
 	}
 
 	@Override
-	public void setOwner(String par1Str) {
+	public void func_152115_b(String par1Str) {
 		if (master != null) master.setOwner(par1Str);
-		else super.setOwner(par1Str);
+		else super.func_152115_b(par1Str);
 	}
 
 	public void superSetOwner(String par1Str) {
 		if (base != null) base.superSetOwner(par1Str);
-		else super.setOwner(par1Str);
+		else super.func_152115_b(par1Str);
 	}
 
 	@Override

@@ -536,7 +536,7 @@ public class Modchu_HelperBase {
 	 * @return
 	 */
 	public static Entity getRayTraceEntity(EntityLivingBase pEntity, double pRange, float pDelta, float pExpand) {
-		Vec3 lvpos = pEntity.worldObj.getWorldVec3Pool().getVecFromPool(
+		Vec3 lvpos = Vec3.createVectorHelper(
 				pEntity.posX, pEntity.posY + pEntity.getEyeHeight(), pEntity.posZ);
 //		Vec3 lvpos = pEntity.getPosition(pDelta).addVector(0D, pEntity.getEyeHeight(), 0D);
 		Vec3 lvlook = pEntity.getLook(pDelta);
