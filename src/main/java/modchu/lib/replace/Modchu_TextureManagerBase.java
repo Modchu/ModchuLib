@@ -270,7 +270,7 @@ public class Modchu_TextureManagerBase {
 				MultiModelBaseBiped[] value = le.getValue();
 				String ls = value != null
 						&& value.length > 0 ? value[0].getUsingTexture() : null;
-				Modchu_Debug.tDebug("Modchu_TextureManagerBase setModels ls="+ls);
+				//Modchu_Debug.tDebug("Modchu_TextureManagerBase setModels ls="+ls);
 				if (ls != null) {
 					if (getTextureBox(ls + "_" + key) == null) {
 						ModchuModel_TextureBoxReplacePoint lbox = null;

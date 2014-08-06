@@ -557,5 +557,9 @@ public interface Modchu_ASC {
 	public static final int minecraftServerGetServer_int = 16256;
 	public static final int minecraftServerGetServerWorldServers_int = 16257;
 	public static final int entityPlayerDestroyCurrentEquippedItem_int = 16258;
+	public static final int entityPlayerCapabilitiesIsCreativeMode_int = 16259;
+	public static final int modelBaseIsChild_int = 16260;
+	public static final int entityBatSetIsBatHanging_int = 16261;
+	public static final int entitySetEating_int = 16262;
 
 }

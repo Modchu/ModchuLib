@@ -617,5 +617,9 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int minecraftServerGetServer = minecraftServerGetServer_int;
 	public static int minecraftServerGetServerWorldServers = minecraftServerGetServerWorldServers_int;
 	public static int entityPlayerDestroyCurrentEquippedItem = entityPlayerDestroyCurrentEquippedItem_int;
+	public static int entityPlayerCapabilitiesIsCreativeMode = entityPlayerCapabilitiesIsCreativeMode_int;
+	public static int modelBaseIsChild = modelBaseIsChild_int;
+	public static int entityBatSetIsBatHanging = entityBatSetIsBatHanging_int;
+	public static int entitySetEating = entitySetEating_int;
 
 }

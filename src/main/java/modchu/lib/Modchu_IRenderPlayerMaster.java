@@ -22,5 +22,6 @@ public interface Modchu_IRenderPlayerMaster {
 	public void renderGuiIngame(Object var0);
 	public void preRenderCallback(Object entity, float f);
 	public void allModelInit(Object entity, boolean debug);
+	public void modelArmorInit(Object entity, boolean debug);
 
 }
