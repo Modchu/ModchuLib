@@ -60,6 +60,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -2893,6 +2894,31 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected void entityPlayerDestroyCurrentEquippedItem(Object entityplayer) {
 		((EntityPlayer) entityplayer).destroyCurrentEquippedItem();
+	}
+
+	@Override
+	protected boolean entityPlayerCapabilitiesIsCreativeMode(Object entityplayer) {
+		return ((EntityPlayer) entityplayer).capabilities.isCreativeMode;
+	}
+
+	@Override
+	protected boolean modelBaseIsChild(Object modelBase) {
+		return ((ModelBase) modelBase).isChild;
+	}
+
+	@Override
+	protected void setModelBaseIsChild(Object modelBase, boolean b) {
+		((ModelBase) modelBase).isChild = b;
+	}
+
+	@Override
+	protected void entityBatSetIsBatHanging(Object entityBat, boolean b) {
+		((EntityBat) entityBat).setIsBatHanging(b);
+	}
+
+	@Override
+	protected void entitySetEating(Object entity, boolean b) {
+		((Entity) entity).setEating(b);
 	}
 
 }
