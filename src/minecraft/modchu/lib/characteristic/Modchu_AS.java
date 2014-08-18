@@ -3631,4 +3631,14 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 		((Entity) entity).setEating(b);
 	}
 
+	@Override
+	protected void entityLivingBaseSetPositionAndUpdate(Object entity, double x, double y, double z) {
+		((EntityLivingBase) entity).setPositionAndUpdate(x, y, z);
+	}
+
+	@Override
+	protected void entitySetPositionAndRotation(Object entity, double x, double y, double z, float f, float f1) {
+		((Entity) entity).setPositionAndRotation(x, y, z, f, f1);
+	}
+
 }
