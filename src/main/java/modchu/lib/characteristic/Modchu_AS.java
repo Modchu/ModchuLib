@@ -11,6 +11,7 @@ import modchu.lib.Modchu_ASAlmighty;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
+import modchu.lib.characteristic.recompileonly.Modchu_CastHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
@@ -33,6 +34,7 @@ import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.model.TextureOffset;
 import net.minecraft.client.model.TexturedQuad;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -60,6 +62,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -2876,6 +2879,46 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected void entityPlayerDestroyCurrentEquippedItem(Object entityplayer) {
 		((EntityPlayer) entityplayer).destroyCurrentEquippedItem();
+	}
+
+	@Override
+	protected boolean entityPlayerCapabilitiesIsCreativeMode(Object entityplayer) {
+		return ((EntityPlayer) entityplayer).capabilities.isCreativeMode;
+	}
+
+	@Override
+	protected boolean modelBaseIsChild(Object modelBase) {
+		return ((ModelBase) modelBase).isChild;
+	}
+
+	@Override
+	protected void setModelBaseIsChild(Object modelBase, boolean b) {
+		((ModelBase) modelBase).isChild = b;
+	}
+
+	@Override
+	protected void entityBatSetIsBatHanging(Object entityBat, boolean b) {
+		((EntityBat) entityBat).setIsBatHanging(b);
+	}
+
+	@Override
+	protected void entitySetEating(Object entity, boolean b) {
+		((Entity) entity).setEating(b);
+	}
+
+	@Override
+	protected void entityLivingBaseSetPositionAndUpdate(Object entity, double x, double y, double z) {
+		((EntityLivingBase) entity).setPositionAndUpdate(x, y, z);
+	}
+
+	@Override
+	protected void entitySetPositionAndRotation(Object entity, double x, double y, double z, float f, float f1) {
+		((Entity) entity).setPositionAndRotation(x, y, z, f, f1);
+	}
+
+	@Override
+	protected void worldClientAddEntityToWorld(Object world, int i, Object entity) {
+		((WorldClient) world).addEntityToWorld(i, (Entity) entity);
 	}
 
 }
