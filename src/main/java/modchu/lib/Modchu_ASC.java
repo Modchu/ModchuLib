@@ -561,5 +561,10 @@ public interface Modchu_ASC {
 	public static final int modelBaseIsChild_int = 16260;
 	public static final int entityBatSetIsBatHanging_int = 16261;
 	public static final int entitySetEating_int = 16262;
+	public static final int entityLivingBaseSetPositionAndUpdate_int = 16263;
+	public static final int entitySetPositionAndRotation_int = 16264;
+	public static final int abstractClientPlayerLocationSkin_int = 16265;
+	public static final int abstractClientPlayerLocationCape_int = 16266;
+	public static final int worldAddEntityToWorld_int = 16267;
 
 }

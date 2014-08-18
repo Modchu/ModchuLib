@@ -621,5 +621,10 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int modelBaseIsChild = modelBaseIsChild_int;
 	public static int entityBatSetIsBatHanging = entityBatSetIsBatHanging_int;
 	public static int entitySetEating = entitySetEating_int;
+	public static int entityLivingBaseSetPositionAndUpdate = entityLivingBaseSetPositionAndUpdate_int;
+	public static int entitySetPositionAndRotation = entitySetPositionAndRotation_int;
+	public static int abstractClientPlayerLocationSkin = abstractClientPlayerLocationSkin_int;
+	public static int abstractClientPlayerLocationCape = abstractClientPlayerLocationCape_int;
+	public static int worldAddEntityToWorld = worldAddEntityToWorld_int;
 
 }
