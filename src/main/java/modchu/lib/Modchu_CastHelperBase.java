@@ -1,5 +1,6 @@
 package modchu.lib;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Array;
@@ -11,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+
+import com.google.common.collect.Multimap;
 
 public class Modchu_CastHelperBase {
 
@@ -24,10 +27,14 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static int Int(Object o, int i) {
+		return Int(o, i, 2, 1);
+	}
+
+	public static int Int(Object o, int i, int i1, int i2) {
 		if (o != null) ;else return i;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
-			return b ? 2 : 1;
+			return b ? i1 : i2;
 		}
 		if (o instanceof Integer) return (Integer) o;
 		if (Modchu_Main.integerCheck(""+o)) return Integer.valueOf(""+o);
@@ -142,6 +149,11 @@ public class Modchu_CastHelperBase {
 				&& o instanceof Map[] ? (Map[]) o : null;
 	}
 
+	public static Multimap[] MultimapArray(Object o) {
+		return o != null 
+				&& o instanceof Multimap[] ? (Multimap[]) o : null;
+	}
+
 	public static IntBuffer[] IntBufferArray(Object o) {
 		return o != null 
 				&& o instanceof IntBuffer[] ? (IntBuffer[]) o : null;
@@ -155,6 +167,11 @@ public class Modchu_CastHelperBase {
 	public static UUID[] UUIDArray(Object o) {
 		return o != null 
 				&& o instanceof UUID[] ? (UUID[]) o : null;
+	}
+
+	public static BufferedImage[] BufferedImageArray(Object o) {
+		return o != null 
+				&& o instanceof BufferedImage[] ? (BufferedImage[]) o : null;
 	}
 
 	public static Object[] ObjectArray(Object o) {
@@ -215,9 +232,11 @@ public class Modchu_CastHelperBase {
 		if (c1 == ConcurrentHashMap.class) return ConcurrentHashMap(o);
 		if (c1 == HashMap.class) return HashMap(o);
 		if (c1 == Map.class) return Map(o);
+		if (c1 == Multimap.class) return Multimap(o);
 		if (c1 == IntBuffer.class) return IntBuffer(o);
 		if (c1 == InputStream.class) return InputStream(o);
 		if (c1 == UUID.class) return UUID(o);
+		if (c1 == BufferedImage.class) return BufferedImage(o);
 		if (c1 == Object[].class) return ObjectArray(o);
 		if (c1 == int[].class) return IntArray(o);
 		if (c1 == float[].class) return FloatArray(o);
@@ -236,9 +255,11 @@ public class Modchu_CastHelperBase {
 		if (c1 == ConcurrentHashMap[].class) return ConcurrentHashMapArray(o);
 		if (c1 == HashMap[].class) return HashMapArray(o);
 		if (c1 == Map[].class) return MapArray(o);
+		if (c1 == Multimap[].class) return MultimapArray(o);
 		if (c1 == IntBuffer[].class) return IntBufferArray(o);
 		if (c1 == InputStream[].class) return InputStreamArray(o);
 		if (c1 == UUID[].class) return UUIDArray(o);
+		if (c1 == BufferedImage[].class) return BufferedImageArray(o);
 		return null;
 	}
 
@@ -247,10 +268,14 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static byte Byte(Object o, byte by) {
+		return Byte(o, by, (byte) 2, (byte) 1);
+	}
+
+	public static byte Byte(Object o, byte by, byte by1, byte by2) {
 		if (o != null) ;else return by;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
-			return (byte) (b ? 2 : 1);
+			return (byte) (b ? by1 : by2);
 		}
 		if (o instanceof Byte) return (Byte) o;
 		if (Modchu_Main.byteCheck(""+o)) return Byte.valueOf(""+o);
@@ -336,6 +361,11 @@ public class Modchu_CastHelperBase {
 				&& o instanceof Map ? (Map) o : null;
 	}
 
+	public static Multimap Multimap(Object o) {
+		return o != null 
+				&& o instanceof Multimap ? (Multimap) o : null;
+	}
+
 	public static IntBuffer IntBuffer(Object o) {
 		return o != null 
 				&& o instanceof IntBuffer ? (IntBuffer) o : null;
@@ -349,6 +379,11 @@ public class Modchu_CastHelperBase {
 	public static UUID UUID(Object o) {
 		return o != null 
 				&& o instanceof UUID ? (UUID) o : null;
+	}
+
+	public static BufferedImage BufferedImage(Object o) {
+		return o != null 
+				&& o instanceof BufferedImage ? (BufferedImage) o : null;
 	}
 
 	public static Class Class(Object o) {

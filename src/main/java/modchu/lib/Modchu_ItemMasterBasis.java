@@ -2,13 +2,13 @@ package modchu.lib;
 
 import java.util.List;
 
-import modchu.lib.characteristic.Modchu_ItemFood;
+import modchu.lib.characteristic.Modchu_Item;
 
-public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
-	public Modchu_ItemFood base;
+public class Modchu_ItemMasterBasis implements Modchu_IItemMaster {
+	public Modchu_Item base;
 
-	public Modchu_ItemFoodBasis(Modchu_ItemFood modchu_ItemFood, Object... o) {
-		base = modchu_ItemFood;
+	public Modchu_ItemMasterBasis(Modchu_Item modchu_Item, Object... o) {
+		base = modchu_Item;
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 
 	@Override
 	public Object onItemUseFinish(Object itemStack, Object world, Object entityPlayer) {
-		return base.superOnItemUseFinish(itemStack, world, entityPlayer);
+		return base.superOnEaten(itemStack, world, entityPlayer);
 	}
 
 	@Override
@@ -159,10 +159,12 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 	@Override
 	public void onUpdate(Object itemStack, Object world, Object entity, int par4, boolean par5) {
 		base.superOnUpdate(itemStack, world, entity, par4, par5);
+		base.superOnUpdate(itemStack, world, entity, par4, par5);
 	}
 
 	@Override
 	public void onCreated(Object itemStack, Object world, Object entityPlayer) {
+		base.superOnCreated(itemStack, world, entityPlayer);
 		base.superOnCreated(itemStack, world, entityPlayer);
 	}
 
@@ -184,6 +186,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 	@Override
 	public void onPlayerStoppedUsing(Object itemStack, Object world, Object entityPlayer, int par4) {
 		base.superOnPlayerStoppedUsing(itemStack, world, entityPlayer, par4);
+		base.superOnPlayerStoppedUsing(itemStack, world, entityPlayer, par4);
 	}
 
 	@Override
@@ -203,6 +206,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 
 	@Override
 	public void addInformation(Object itemStack, Object entityPlayer, List par3List, boolean par4) {
+		base.superAddInformation(itemStack, entityPlayer, par3List, par4);
 		base.superAddInformation(itemStack, entityPlayer, par3List, par4);
 	}
 
@@ -268,6 +272,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 
 	@Override
 	public void registerIcons(Object iIconRegister) {
+		base.superRegisterIcons(iIconRegister);
 		base.superRegisterIcons(iIconRegister);
 	}
 
@@ -399,6 +404,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 	@Override
 	public void renderHelmetOverlay(Object itemStack, Object entityPlayer, Object scaledResolution, float partialTicks, boolean hasScreen, int mouseX, int mouseY) {
 		base.superRenderHelmetOverlay(itemStack, entityPlayer, scaledResolution, partialTicks, hasScreen, mouseX, mouseY);
+		base.superRenderHelmetOverlay(itemStack, entityPlayer, scaledResolution, partialTicks, hasScreen, mouseX, mouseY);
 	}
 
 	@Override
@@ -424,6 +430,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 	@Override
 	public void setDamage(Object itemStack, int damage) {
 		base.superSetDamage(itemStack, damage);
+		base.superSetDamage(itemStack, damage);
 	}
 
 	@Override
@@ -442,7 +449,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 	}
 
 	@Override
-	public float func_150893_a(Object itemStack, Object block) {
+	public float getStrVsBlock(Object itemStack, Object block) {
 		return base.superGetStrVsBlock(itemStack, block);
 	}
 
@@ -452,7 +459,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 	}
 
 	@Override
-	public boolean func_150897_b(Object block) {
+	public boolean canHarvestBlock(Object block) {
 		return base.superCanHarvestBlock(block);
 	}
 
@@ -527,18 +534,8 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 
 	//164
 	@Override
-	public float getStrVsBlock(Object itemStack, Object block) {
-		return base.superGetStrVsBlock(itemStack, block);
-	}
-
-	@Override
 	public boolean onBlockDestroyed(Object itemStack, Object world, int par3, int par4, int par5, int par6, Object entityLivingBase) {
 		return base.superOnBlockDestroyed(itemStack, world, par3, par4, par5, par6, entityLivingBase);
-	}
-
-	@Override
-	public boolean canHarvestBlock(Object block) {
-		return base.superCanHarvestBlock(block);
 	}
 
 	@Override
@@ -604,43 +601,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 		return base.superGetArmorTexture(itemStack, entity, slot, layer);
 	}
 
-	// ItemFood
-	@Override
-	public void onFoodEaten(Object itemStack, Object world, Object entityPlayer) {
-		base.superOnFoodEaten(itemStack, world, entityPlayer);
-	}
-
-	public int func_150905_g(Object itemStack) {
-		return base.superGetHealAmount(itemStack);
-	}
-
-	public int getHealAmount(Object itemStack) {
-		return base.superGetHealAmount(itemStack);
-	}
-
-	public float func_150906_h(Object itemStack) {
-		return base.superGetSaturationModifier(itemStack);
-	}
-
-	public float getSaturationModifier(Object itemStack) {
-		return base.superGetSaturationModifier(itemStack);
-	}
-
-	@Override
-	public boolean isWolfsFavoriteMeat() {
-		return base.superIsWolfsFavoriteMeat();
-	}
-
-	@Override
-	public Object setPotionEffect(int par1, int par2, int par3, float par4) {
-		return base.superSetPotionEffect(par1, par2, par3, par4);
-	}
-
-	@Override
-	public Object setAlwaysEdible() {
-		return base.superSetAlwaysEdible();
-	}
-
+	// 180~
 	@Override
 	public boolean onItemUseFirst(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ) {
 		return base.superOnItemUseFirst(itemStack, entityPlayer, world, blockPos, enumFacing, hitX, hitY, hitZ);
@@ -681,25 +642,13 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
 		return base.superOnItemUse(itemStack, entityPlayer, world, blockPos, enumFacing, f, f1, f2);
 	}
 
-	// 180~
 	@Override
-	public boolean updateItemStackNBT(Object nBTTagCompound) {
-		return base.superUpdateItemStackNBT(nBTTagCompound);
+	public float func_150893_a(Object itemStack, Object block) {
+		return base.superGetStrVsBlock(itemStack, block);
 	}
 
 	@Override
-	public Object getModel(Object itemStack, Object entityPlayer, int useRemaining) {
-		return base.superGetModel(itemStack, entityPlayer, useRemaining);
+	public boolean func_150897_b(Object block) {
+		return base.superCanHarvestBlock(block);
 	}
-
-	@Override
-	public int getItemEnchantability(Object itemStack) {
-		return base.superGetItemEnchantability(itemStack);
-	}
-
-	@Override
-	public boolean isBeaconPayment(Object itemStack) {
-		return base.superIsBeaconPayment(itemStack);
-	}
-
 }

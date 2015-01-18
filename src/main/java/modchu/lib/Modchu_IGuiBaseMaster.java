@@ -1,12 +1,11 @@
 package modchu.lib;
 
-import modchu.lib.characteristic.recompileonly.Modchu_GuiBase;
-
+import modchu.lib.characteristic.Modchu_GuiBase;
 
 public interface Modchu_IGuiBaseMaster {
 
 	public void initGui();
-	public void init(Modchu_GuiBase guiBase, Object par1GuiScreen, Object world, Object... o);
+	public void init(Object guiBase, Object guiScreen, Object world, Object... o);
 	public void reInit();
 	public Object getFontRenderer();
 	public void setFontRenderer(Object fontRenderer);
@@ -20,6 +19,7 @@ public interface Modchu_IGuiBaseMaster {
 	public boolean handleMouseInput();
 	public boolean keyTyped(char c, int i);
 	public void mouseClickMove(int mouseX, int mouseY, int clickButton, long time);
+	public void mouseReleased(int mouseX, int mouseY, int clickButton);
 	public void mouseMovedOrUp(int mouseX, int mouseY, int clickButton);
 
 }

@@ -8,13 +8,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Modifier;
+import java.net.JarURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.security.CodeSource;
+import java.security.ProtectionDomain;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.jar.JarFile;
 import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -26,10 +33,110 @@ import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ResourceInfo;
 
 public class Modchu_FileManager {
+
+	public static File minecraftJar;
+	public static Map<String, List<File>> fileList = new TreeMap<String, List<File>>();
+	public static File minecraftDir;
+	public static File assetsDir;
 	protected static ArrayList<String> failureShowModelList = new ArrayList<String>();
 	public static final int TYPE_FILE_OR_DIR = 1;
 	public static final int TYPE_FILE = 2;
 	public static final int TYPE_DIR = 3;
+
+	public static void init() {
+		// 初期化
+		minecraftDir = Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir);
+
+		// mincraft.jarを取得
+		// 開発中用のJar内に含まれていることの対策
+		Class c = Modchu_Main.isForge ? Modchu_Reflect.loadClass(Modchu_Main.getMinecraftVersion() > 179 ? "net.minecraftforge.fml.common.FMLModContainer" : "cpw.mods.fml.common.FMLModContainer") : Modchu_Reflect.loadClass("BaseMod");
+		int i = 0;
+		try {
+			ProtectionDomain ls1 = c.getProtectionDomain();
+			CodeSource ls2 = ls1.getCodeSource();
+			URL ls3 = ls2.getLocation();
+			URI ls4 = ls3.toURI();
+			minecraftJar = new File(ls4);
+//			minecraftJar = new File(BaseMod.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+//			Modchu_Debug.tDebug(String.format("getMincraftFile-file:%s", minecraftJar.getName()));
+			i = 1;
+		} catch (Exception exception) {
+			Modchu_Debug.tDebug("getMinecraftFile-Exception.");
+		}
+		if (minecraftJar == null) {
+			try {
+				ClassLoader lcl1 = c.getClassLoader();
+				String lcls1 = c.getName().concat(".class");
+				URL lclu1 = lcl1.getResource(lcls1);
+				JarURLConnection lclc1 = (JarURLConnection)lclu1.openConnection();
+				JarFile lclj1 = lclc1.getJarFile();
+				minecraftJar = new File(lclj1.getName());
+				i = 2;
+			} catch (Exception exception) {
+				Modchu_Debug.tDebug("getMinecraftFile-Exception.");
+			}
+		}
+		if (minecraftJar == null) {
+			String ls = System.getProperty("java.class.path");
+			int li = ls.indexOf(';');
+			if (li > -1) {
+				ls = ls.substring(0, li);
+			}
+			minecraftJar = new File(ls);
+			i = 3;
+		}
+		Modchu_Debug.systemLogDebug("Modchu_FileManager minecraftJar="+minecraftJar.getAbsolutePath()+" i="+i);
+		if (!Modchu_Main.isServer) {
+			assetsDir = new File(minecraftDir, "assets");
+			Modchu_Debug.systemLogDebug("Modchu_FileManager assetsDir="+assetsDir.getAbsolutePath());
+		} else {
+			// サーバー側では使われないはず。
+		}
+
+	}
+
+	public static List<File> getModFile(String pname, String pprefix) {
+		// 検索済みかどうかの判定
+		List<File> llist;
+		if (fileList.containsKey(pname)) {
+			llist = fileList.get(pname);
+		} else {
+			llist = new ArrayList<File>();
+			fileList.put(pname, llist);
+		}
+
+		Modchu_Debug.tDebug("getModFile:[%s]:%s", pname, Modchu_Main.modsDir.getAbsolutePath());
+		// ファイル・ディレクトリを検索
+		try {
+			if (Modchu_Main.modsDir.isDirectory()) {
+				Modchu_Debug.tDebug("getModFile-get:%d.", Modchu_Main.modsDir.list().length);
+				for (File t : Modchu_Main.modsDir.listFiles()) {
+					if (t.getName().indexOf(pprefix) != -1) {
+						if (t.getName().endsWith(".zip")) {
+							llist.add(t);
+							Modchu_Debug.tDebug("getModFile-file:%s", t.getName());
+						} else if (t.isDirectory()) {
+							llist.add(t);
+							Modchu_Debug.tDebug("getModFile-file:%s", t.getName());
+						}
+					}
+				}
+				Modchu_Debug.tDebug("getModFile-files:%d", llist.size());
+			} else {
+				// まずありえない
+				Modchu_Debug.tDebug("getModFile-fail.");
+			}
+			return llist;
+		}
+		catch (Exception exception) {
+			Modchu_Debug.tDebug("getModFile-Exception.");
+			return null;
+		}
+	}
+
+	public static List<File> getFileList(String pname) {
+		return fileList.get(pname);
+	}
 
 	public static List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search) {
 		if (list != null) ;else list = new ArrayList();
@@ -186,7 +293,7 @@ public class Modchu_FileManager {
 		String mcDataDirAbsolutePath = Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir).getAbsolutePath();
 		int i1 = mcDataDirAbsolutePath.lastIndexOf("\\.");
 		if (i1 > -1) mcDataDirAbsolutePath = mcDataDirAbsolutePath.substring(0, i1 + 1);
-		String minecraftJarPath = Modchu_FileManagerBase.minecraftJar.getAbsolutePath();
+		String minecraftJarPath = minecraftJar.getAbsolutePath();
 		//Modchu_Debug.Debug("classNameProcessing-mcDataDirAbsolutePath="+mcDataDirAbsolutePath);
 		//Modchu_Debug.Debug("classNameProcessing-minecraftJarPath="+minecraftJarPath);
 		String cn = fname.replace(".class", "");
@@ -467,8 +574,18 @@ public class Modchu_FileManager {
 
 	public static File getFile(String directoryPath, String matchingFileName, String indexofFileName) {
 		ArrayList<File> list = listFiles(directoryPath, null, matchingFileName, indexofFileName);
-		return list != null
-				&& !list.isEmpty() ? list.get(0) : null;
+		if (list != null
+				&& !list.isEmpty()) {
+			for (File file : list) {
+				//Modchu_Debug.mDebug("Modchu_FileManager getFile file="+file);
+				if (file != null) {
+					//Modchu_Debug.mDebug("Modchu_FileManager getFile return file="+file);
+					return file;
+				}
+			}
+		}
+		//Modchu_Debug.mDebug("Modchu_FileManager getFile return return null");
+		return null;
 	}
 
 	public static ArrayList<File> listFiles(String directoryPath, String fileName) {
@@ -480,19 +597,23 @@ public class Modchu_FileManager {
 			fileName = fileName.replace(".", "\\.");
 			fileName = fileName.replace("*", ".*");
 		}
-		return listFiles(directoryPath, fileName, matchingFileName, indexofFileName, TYPE_FILE, true, 0);
+		ArrayList<File> list = new ArrayList<File>();
+		return listFiles(directoryPath, fileName, matchingFileName, indexofFileName, list, TYPE_FILE, true, 0);
 	}
 
-	public static ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName, int type, boolean isRecursive, int period) {
+	public static ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName, ArrayList list, int type, boolean isRecursive, int period) {
 		File dir = new File(directoryPath);
-		if (!dir.isDirectory()) throw new IllegalArgumentException ("Modchu_FileManager listFiles Exception [" + dir.getAbsolutePath() + "] is not a directory.");
+		if (!dir.isDirectory()) {
+			String s = "Modchu_FileManager listFiles Exception [" + dir.getAbsolutePath() + "] is not a directory.";
+			Modchu_Main.setRuntimeException(s);
+			throw new IllegalArgumentException (s);
+		}
 		File[] files = dir.listFiles();
-		ArrayList<File> list = new ArrayList<File>();
 		for (int i = 0; i < files.length; i++) {
 			File file = files[i];
 			list = addFile(type, fileName, matchingFileName, indexofFileName, list, file, period);
 			if (isRecursive && file.isDirectory()) {
-				list = listFiles(file.getAbsolutePath(), fileName, matchingFileName, indexofFileName, type, isRecursive, period);
+				list = listFiles(file.getAbsolutePath(), fileName, matchingFileName, indexofFileName, list, type, isRecursive, period);
 			}
 		}
 		return list;
@@ -508,7 +629,10 @@ public class Modchu_FileManager {
 			break;
 		}
 		Modchu_Debug.mDebug("Modchu_FileManager addFile file.getName()="+file.getName());
-		if (fileName != null && !file.getName().matches(fileName)) return list;
+		if (fileName != null && !file.getName().matches(fileName)) {
+			list.add(file);
+			return list;
+		}
 		if (period != 0) {
 			Date lastModifiedDate = new Date(file.lastModified());
 			String lastModifiedDateStr = new SimpleDateFormat("yyyyMMdd").format(lastModifiedDate);
@@ -532,5 +656,15 @@ public class Modchu_FileManager {
 			Modchu_Debug.mDebug("Modchu_FileManager addFile list.add file.getName()="+file.getName());
 		}
 		return list;
+	}
+
+	public static void createDir(String s) {
+		String s1 = "";
+		String as[] = s.split("/");
+		for (int i = 0; i < as.length - 1; i++) {
+			s1 = (new StringBuilder()).append(s1).append(as[i]).toString();
+			boolean flag = (new File((new StringBuilder()).append(Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir)).append(s1).toString())).mkdir();
+			s1 = (new StringBuilder()).append(s1).append("/").toString();
+		}
 	}
 }
