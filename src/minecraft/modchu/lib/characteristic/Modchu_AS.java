@@ -12,7 +12,6 @@ import modchu.lib.Modchu_ASAlmighty;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
-import modchu.lib.characteristic.recompileonly.Modchu_CastHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLeaves;
@@ -28,11 +27,28 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSlot;
+import net.minecraft.client.gui.LoadingScreenRenderer;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBat;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelBlaze;
+import net.minecraft.client.model.ModelChicken;
+import net.minecraft.client.model.ModelCreeper;
+import net.minecraft.client.model.ModelGhast;
+import net.minecraft.client.model.ModelHorse;
+import net.minecraft.client.model.ModelIronGolem;
+import net.minecraft.client.model.ModelOcelot;
+import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.ModelSnowMan;
+import net.minecraft.client.model.ModelSpider;
+import net.minecraft.client.model.ModelSquid;
+import net.minecraft.client.model.ModelWolf;
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.model.TextureOffset;
 import net.minecraft.client.model.TexturedQuad;
+import net.minecraft.client.multiplayer.NetClientHandler;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GLAllocation;
@@ -47,8 +63,10 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureObject;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
+import net.minecraft.client.resources.Resource;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
@@ -61,32 +79,51 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityFishHook;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetServerHandler;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Facing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovementInput;
 import net.minecraft.util.MovementInputFromOptions;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumGameType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+
+import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Multimap;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Modchu_AS extends Modchu_ASAlmighty {
@@ -654,8 +691,8 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void entityLivingBaseGetAITarget(Object entityLivingBase) {
-		((EntityLivingBase) entityLivingBase).getAITarget();
+	protected Object entityLivingBaseGetAITarget(Object entityLivingBase) {
+		return ((EntityLivingBase) entityLivingBase).getAITarget();
 	}
 
 	@Override
@@ -1545,8 +1582,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 			initOldVersionItemMap = true;
 		}
 		if (!oldVersionItemMap.containsKey(s)) {
-			Modchu_Main.runtimeExceptionFlag = true;
-			Modchu_Main.runtimeExceptionString = "oldVersionItemMap s="+s+" is null !!";
+			Modchu_Main.setRuntimeException("oldVersionItemMap s="+s+" is null !!");
 			return null;
 		}
 		return oldVersionItemMap.get(s);
@@ -1911,8 +1947,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 			initOldVersionBlockMap = true;
 		}
 		if (!oldVersionBlockMap.containsKey(s)) {
-			Modchu_Main.runtimeExceptionFlag = true;
-			Modchu_Main.runtimeExceptionString = "oldVersionBlockMap s="+s+" is null !!";
+			Modchu_Main.setRuntimeException("oldVersionBlockMap s="+s+" is null !!");
 			return null;
 		}
 		return oldVersionBlockMap.get(s);
@@ -2051,6 +2086,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected boolean isLANWorld() {
+		if (Modchu_Main.isServer) return false;
 		if (!isMuiti()) {
 			Object theIntegratedServer = Modchu_Reflect.getFieldObject("Minecraft", "field_71437_Z", "theIntegratedServer", minecraftGetMinecraft());
 			if (theIntegratedServer != null
@@ -2068,6 +2104,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected boolean isMuiti() {
+		if (Modchu_Main.isServer) return true;
 		return !Modchu_Main.isServer ? Minecraft.getMinecraft().getNetHandler() != null
 				&& !Minecraft.getMinecraft().isSingleplayer() : true;
 	}
@@ -2721,11 +2758,6 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void renderEngineBindTexture(String s) {
-		return;
-	}
-
-	@Override
 	protected void renderEngineSetupTexture(Object bufferedimage, int i) {
 	}
 
@@ -2775,8 +2807,8 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void renderManagerItemRendererRenderItem(Object itemRenderer, Object entity, Object itemstack, int i) {
-		RenderManager.instance.itemRenderer.renderItem((EntityLivingBase) entity, (ItemStack) itemstack, i);
+	protected void renderManagerItemRendererRenderItem(Object itemRenderer, Object entity, Object itemstack, Object o) {
+		RenderManager.instance.itemRenderer.renderItem((EntityLivingBase) entity, (ItemStack) itemstack, (Integer) o);
 	}
 
 	@Override
@@ -2792,7 +2824,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected InputStream resourceGetInputStream(Object resource) {
-		return null;
+		return ((Resource) resource).getInputStream();
 	}
 
 	@Override
@@ -3116,7 +3148,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected void textureManagerBindTexture(Object textureManager, Object o) {
-		Modchu_Reflect.invokeMethod("TextureManager", "func_110577_a", "bindTexture", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, textureManager, new Object[]{ o });
+		if (o != null) ((TextureManager) textureManager).bindTexture((ResourceLocation) o);
 	}
 
 	@Override
@@ -3287,9 +3319,9 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void worldSpawnParticle(Object worldOrEntity, String s, double d, double d1, double d2, double d3, double d4, double d5) {
+	protected void worldSpawnParticle(Object worldOrEntity, Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
 		World world = ((World) entityWorldObj(worldOrEntity));
-		if (world != null) world.spawnParticle(s, d, d1, d2, d3, d4, d5);
+		if (world != null) world.spawnParticle((String)stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5);
 	}
 
 	@Override
@@ -3639,6 +3671,787 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected void entitySetPositionAndRotation(Object entity, double x, double y, double z, float f, float f1) {
 		((Entity) entity).setPositionAndRotation(x, y, z, f, f1);
+	}
+
+	@Override
+	protected int itemStackGetMaxDamage(Object itemstack) {
+		return ((ItemStack) itemstack).getMaxDamage();
+	}
+
+	@Override
+	protected float mathHelperFloor_float(float f) {
+		return MathHelper.floor_float(f);
+	}
+
+	@Override
+	protected long mathHelperFloor_double_long(double d) {
+		return MathHelper.floor_double_long(d);
+	}
+
+	@Override
+	protected float mathHelperAbs(float f) {
+		return MathHelper.abs(f);
+	}
+
+	@Override
+	protected double mathHelperAbs_max(double d, double d1) {
+		return MathHelper.abs_max(d, d1);
+	}
+
+	@Override
+	protected int mathHelperBucketInt(int i, int j) {
+		return MathHelper.bucketInt(i, j);
+	}
+
+	@Override
+	protected boolean mathHelperStringNullOrLengthZero(String s) {
+		return MathHelper.stringNullOrLengthZero(s);
+	}
+
+	@Override
+	protected int threadDownloadImageDataGetGlTextureId(Object threadDownloadImageData) {
+		return ((ThreadDownloadImageData) threadDownloadImageData).getGlTextureId();
+	}
+
+	@Override
+	protected Object netClientHandlerGetNetManager(Object netClientHandler) {
+		return ((NetClientHandler) netClientHandler).getNetManager();
+	}
+
+	@Override
+	protected List modelBaseBoxList(Object modelBase) {
+		if (!(modelBase instanceof ModelBase)) {
+			return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject(modelBase.getClass(), "boxList", modelBase));
+		}
+		return ((ModelBase) modelBase).boxList;
+	}
+
+	@Override
+	protected void setModelBaseBoxList(Object modelBase, List list) {
+		if (!(modelBase instanceof ModelBase)) {
+			Modchu_Reflect.setFieldObject(modelBase.getClass(), "boxList", modelBase, list);
+			return;
+		}
+		((ModelBase) modelBase).boxList = list;
+	}
+
+	@Override
+	protected int modelBaseTextureWidth(Object modelBase) {
+		if (!(modelBase instanceof ModelBase)) {
+			return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject(modelBase.getClass(), "textureWidth", modelBase));
+		}
+		return ((ModelBase) modelBase).textureWidth;
+	}
+
+	@Override
+	protected void setModelBaseTextureWidth(Object modelBase, int i) {
+		if (!(modelBase instanceof ModelBase)) {
+			Modchu_Reflect.setFieldObject(modelBase.getClass(), "textureWidth", modelBase, i);
+			return;
+		}
+		((ModelBase) modelBase).textureWidth = i;
+	}
+
+	@Override
+	protected int modelBaseTextureHeight(Object modelBase) {
+		if (!(modelBase instanceof ModelBase)) {
+			return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject(modelBase.getClass(), "textureHeight", modelBase));
+		}
+		return ((ModelBase) modelBase).textureHeight;
+	}
+
+	@Override
+	protected void setModelBaseTextureHeight(Object modelBase, int i) {
+		if (!(modelBase instanceof ModelBase)) {
+			Modchu_Reflect.setFieldObject(modelBase.getClass(), "textureHeight", modelBase, i);
+			return;
+		}
+		((ModelBase) modelBase).textureHeight = i;
+	}
+
+	@Override
+	protected Object modelRightArm(Object model) {
+		if (model instanceof ModelBase) {
+			if (model instanceof ModelBiped) return modelBipedBipedRightArm(model);
+			if (model instanceof ModelQuadruped) return modelQuadrupedLeg1(model);
+			if (model instanceof ModelBat) return modelBatBatRightWing(model);
+			if (model instanceof ModelChicken) return modelChickenRightWing(model);
+			if (model instanceof ModelCreeper) return modelCreeperLeg1(model);
+			if (model instanceof ModelHorse) return modelHorseFrontRightLeg(model);
+			if (model instanceof ModelIronGolem) return modelIronGolemIronGolemRightArm(model);
+			if (model instanceof ModelOcelot) return modelOcelotOcelotFrontRightLeg(model);
+			if (model instanceof ModelSnowMan) return modelSnowManRightHand(model);
+			if (model instanceof ModelSpider) return modelSpiderSpiderLeg1(model);
+			if (model instanceof ModelWolf) return modelWolfWolfLeg1(model);
+			if (model instanceof ModelSquid) {
+				Object[] o = modelSquidSquidTentacles(model);
+				return o != null
+						&& o.length > 0 ? o[0] : null;
+			}
+			if (model instanceof ModelBlaze) {
+				Object[] o = modelBlazeBlazeSticks(model);
+				return o != null
+						&& o.length > 0 ? o[0] : null;
+			}
+			if (model instanceof ModelGhast) {
+				Object[] o = modelGhastTentacles(model);
+				return o != null
+						&& o.length > 0 ? o[0] : null;
+			}
+		}
+		return Modchu_Reflect.getFieldObject(model.getClass(), "bipedRightArm", model);
+	}
+
+	@Override
+	protected Object modelBipedBipedRightArm(Object modelBiped) {
+		return ((ModelBiped) modelBiped).bipedRightArm;
+	}
+
+	@Override
+	protected void setModelBipedBipedRightArm(Object modelBiped, Object modelRenderer) {
+		((ModelBiped) modelBiped).bipedRightArm = (ModelRenderer) modelRenderer;
+	}
+
+	@Override
+	protected Object modelWolfWolfLeg1(Object modelWolf) {
+		return ((ModelWolf) modelWolf).wolfLeg1;
+	}
+
+	@Override
+	protected void setModelWolfWolfLeg1(Object modelWolf, Object modelRenderer) {
+		((ModelWolf) modelWolf).wolfLeg1 = (ModelRenderer) modelRenderer;
+	}
+
+	@Override
+	protected Object modelSnowManRightHand(Object modelSnowMan) {
+		return ((ModelSnowMan) modelSnowMan).rightHand;
+	}
+
+	@Override
+	protected void setModelSnowManRightHand(Object modelSnowMan, Object modelRenderer) {
+		((ModelSnowMan) modelSnowMan).rightHand = (ModelRenderer) modelRenderer;
+	}
+
+	@Override
+	protected Object modelSpiderSpiderLeg1(Object modelSpider) {
+		return ((ModelSpider) modelSpider).spiderLeg1;
+	}
+
+	@Override
+	protected void setModelSpiderSpiderLeg1(Object modelSpider, Object modelRenderer) {
+		((ModelSpider) modelSpider).spiderLeg1 = (ModelRenderer) modelRenderer;
+	}
+
+	@Override
+	protected Object modelIronGolemIronGolemRightArm(Object modelIronGolem) {
+		return ((ModelIronGolem) modelIronGolem).ironGolemRightArm;
+	}
+
+	@Override
+	protected void setModelIronGolemIronGolemRightArm(Object modelIronGolem, Object modelRenderer) {
+		((ModelIronGolem) modelIronGolem).ironGolemRightArm = (ModelRenderer) modelRenderer;
+	}
+
+	@Override
+	protected Object modelQuadrupedLeg1(Object modelQuadruped) {
+		return ((ModelQuadruped) modelQuadruped).leg1;
+	}
+
+	@Override
+	protected void setModelQuadrupedLeg1(Object modelQuadruped, Object modelRenderer) {
+		((ModelQuadruped) modelQuadruped).leg1 = (ModelRenderer) modelRenderer;
+	}
+
+	@Override
+	protected Object modelCreeperLeg1(Object modelCreeper) {
+		return ((ModelCreeper) modelCreeper).leg1;
+	}
+
+	@Override
+	protected void setModelCreeperLeg1(Object modelCreeper, Object modelRenderer) {
+		((ModelCreeper) modelCreeper).leg1 = (ModelRenderer) modelRenderer;
+	}
+
+	@Override
+	protected Object modelChickenRightWing(Object modelChicken) {
+		return ((ModelChicken) modelChicken).rightWing;
+	}
+
+	@Override
+	protected void setModelChickenRightWing(Object modelChicken, Object modelRenderer) {
+		((ModelChicken) modelChicken).rightWing = (ModelRenderer) modelRenderer;
+	}
+
+	@Override
+	protected void renderEngineDeleteTexture(Object renderEngine, Object resourceLocation) {
+		TextureObject textureObject = ((TextureManager) renderEngine).getTexture((ResourceLocation) resourceLocation);
+		if (textureObject != null) GL11.glDeleteTextures(textureObject.getGlTextureId());
+	}
+
+	@Override
+	protected String resourceLocationGetResourceDomain(Object resourceLocation) {
+		return ((ResourceLocation) resourceLocation).getResourceDomain();
+	}
+
+	@Override
+	protected String resourceLocationGetResourcePath(Object resourceLocation) {
+		return ((ResourceLocation) resourceLocation).getResourcePath();
+	}
+
+	@Override
+	protected int scaledresolutionGetScaleFactor(Object scaledresolution) {
+		return ((ScaledResolution) scaledresolution).getScaleFactor();
+	}
+
+	@Override
+	protected int scaledresolutionGetScaledWidth(Object scaledresolution) {
+		return ((ScaledResolution) scaledresolution).getScaledWidth();
+	}
+
+	@Override
+	protected int scaledresolutionGetScaledHeight(Object scaledresolution) {
+		return ((ScaledResolution) scaledresolution).getScaledHeight();
+	}
+
+	@Override
+	protected void framebufferBindFramebuffer(Object framebuffer, boolean b) {
+	}
+
+	@Override
+	protected void framebufferUnbindFramebuffer(Object framebuffer) {
+	}
+
+	@Override
+	protected void framebufferFramebufferRender(Object framebuffer, int i, int i1) {
+	}
+
+	@Override
+	protected boolean gameSettingsAnaglyph(Object gameSettings) {
+		return ((GameSettings) gameSettings).anaglyph;
+	}
+
+	@Override
+	protected void tessellatorAddVertex(Object tessellator, double d, double d2, double d3) {
+		((Tessellator) tessellator).addVertex(d, d2, d3);
+	}
+
+	@Override
+	protected double mathHelperSqrt_double(double d) {
+		return MathHelper.sqrt_double(d);
+	}
+
+	@Override
+	protected Object getBipedArmor(Object entityPlayer, Object itemStack, int i, int i2, String s) {
+		if (Modchu_Main.isServer) return null;
+		Item item = (Item) itemStackGetItem(itemStack);
+		if (item instanceof ItemArmor) {
+			int renderIndex = itemArmorRenderIndex(item);
+			String[] armorFilename = renderBipedBipedArmorFilenamePrefix();
+			String a1 = renderIndex < armorFilename.length ? armorFilename[renderIndex] : armorFilename[armorFilename.length - 1];
+			return RenderBiped.getArmorResource((Entity)entityPlayer, (ItemStack)itemStack, i, s);
+		}
+		return null;
+	}
+
+	@Override
+	protected int[] facingOffsetsXForSide() {
+		return Facing.offsetsXForSide;
+	}
+
+	@Override
+	protected int[] facingOffsetsYForSide() {
+		return Facing.offsetsYForSide;
+	}
+
+	@Override
+	protected int[] facingOffsetsZForSide() {
+		return Facing.offsetsZForSide;
+	}
+
+	@Override
+	protected boolean itemStackHasDisplayName(Object itemstack) {
+		return ((ItemStack) itemstack).hasDisplayName();
+	}
+
+	@Override
+	protected void entitySetCustomNameTag(Object entity, String s) {
+		((EntityLiving) entity).setCustomNameTag(s);
+	}
+
+	@Override
+	protected String itemStackGetDisplayName(Object itemstack) {
+		return ((ItemStack) itemstack).getDisplayName();
+	}
+
+	@Override
+	protected Enum movingObjectPositionTypeOfHit(Object movingObjectPosition) {
+		return ((MovingObjectPosition) movingObjectPosition).typeOfHit;
+	}
+
+	@Override
+	protected Enum movingObjectPositionMovingObjectTypeMISS(Object movingObjectPosition) {
+		return null;
+	}
+
+	@Override
+	protected Enum movingObjectPositionMovingObjectTypeBLOCK(Object movingObjectPosition) {
+		return null;
+	}
+
+	@Override
+	protected Enum movingObjectPositionMovingObjectTypeENTITY(Object movingObjectPosition) {
+		return ((MovingObjectPosition) movingObjectPosition).typeOfHit.ENTITY;
+	}
+
+	@Override
+	protected boolean worldIsBlockModifiable(Object worldOrEntity, Object entityPlayer, int x, int y, int z) {
+		return ((World) worldOrEntity).canMineBlock((EntityPlayer)entityPlayer, x, y, z);
+	}
+
+	@Override
+	protected int movingObjectPositionSideHit(Object movingObjectPosition) {
+		return ((MovingObjectPosition) movingObjectPosition).sideHit;
+	}
+
+	@Override
+	protected boolean entityPlayerCanPlayerEdit(Object entityplayer, int x, int y, int z, int i, Object itemStack) {
+		return ((EntityPlayer) entityplayer).canPlayerEdit(x, y, z, i, (ItemStack) itemStack);
+	}
+
+	@Override
+	protected Object entityPlayerMPPlayerNetServerHandler(Object entityplayerMP) {
+		return ((EntityPlayerMP) entityplayerMP).playerNetServerHandler;
+	}
+
+	@Override
+	protected void setEntityPlayerMPPlayerNetServerHandler(Object entityplayerMP, Object netHandlerPlayServer) {
+		((EntityPlayerMP) entityplayerMP).playerNetServerHandler = (NetServerHandler) netHandlerPlayServer;
+	}
+
+	@Override
+	protected void entitySetLocationAndAngles(Object entity, double x, double y, double z, float f, float f1) {
+		((Entity) entity).setLocationAndAngles(x, y, z, f, f1);
+	}
+
+	@Override
+	protected float mathHelperWrapAngleTo180_float(float f) {
+		return MathHelper.wrapAngleTo180_float(f);
+	}
+
+	@Override
+	protected float blockPosGetX(Object blockPos) {
+		return 0.0F;
+	}
+
+	@Override
+	protected float blockPosGetY(Object blockPos) {
+		return 0.0F;
+	}
+
+	@Override
+	protected float blockPosGetZ(Object blockPos) {
+		return 0.0F;
+	}
+
+	@Override
+	protected Object iBlockStateGetBlock(Object iBlockState) {
+		return iBlockState;
+	}
+
+	@Override
+	protected int worldGetBlockStateGetBlockMetadata(Object worldOrEntity, int x, int y, int z) {
+		return ((World) entityWorldObj(worldOrEntity)).getBlockMetadata(x, y, z);
+	}
+
+	@Override
+	protected int tileEntityXCoord(Object tileEntity) {
+		return ((TileEntity) tileEntity).xCoord;
+	}
+
+	@Override
+	protected int tileEntityYCoord(Object tileEntity) {
+		return ((TileEntity) tileEntity).yCoord;
+	}
+
+	@Override
+	protected int tileEntityZCoord(Object tileEntity) {
+		return ((TileEntity) tileEntity).zCoord;
+	}
+
+	@Override
+	protected Object newBlockPos(Object x, Object y, Object z) {
+		return null;
+	}
+
+	@Override
+	protected Object worldGetBlockState(Object worldOrEntity, Object blockPos) {
+		return null;
+	}
+
+	@Override
+	protected Object containerInventorySlots(Object container) {
+		return ((Container) container).inventorySlots;
+	}
+
+	@Override
+	protected int worldGetStrongPower(Object worldOrEntity, int x, int y, int z) {
+		return ((World) entityWorldObj(worldOrEntity)).getBlockPowerInput(x, y, z);
+	}
+
+	@Override
+	protected Object containerGetSlot(Object container, int i) {
+		return ((Container) container).getSlot(i);
+	}
+
+	@Override
+	protected Object slotGetStack(Object slot) {
+		return ((Slot) slot).getStack();
+	}
+
+	@Override
+	protected Object containerInventoryItemStacks(Object container) {
+		return ((Container) container).inventoryItemStacks;
+	}
+
+	@Override
+	protected Object pathNavigateTryMoveToXYZ(Object pathNavigate, int x, int y, int z, float f) {
+		return ((PathNavigate) pathNavigate).tryMoveToXYZ(x, y, z, f);
+	}
+
+	@Override
+	protected Object worldGetEntityByID(Object worldOrEntity, int i) {
+		return ((World) entityWorldObj(worldOrEntity)).getEntityByID(i);
+	}
+
+	@Override
+	protected Map entityListStringToClassMapping() {
+		return EntityList.stringToClassMapping;
+	}
+
+	@Override
+	protected Map entityListClassToStringMapping() {
+		return EntityList.classToStringMapping;
+	}
+
+	@Override
+	protected Map entityListIDtoClassMapping() {
+		return EntityList.IDtoClassMapping;
+	}
+
+	@Override
+	protected Object entityLivingBaseGetLook(Object entityLivingBase, float f) {
+		return ((EntityLivingBase) entityLivingBase).getLook(f);
+	}
+
+	@Override
+	protected Object vec3AddVector(Object vec3, double d, double d2, double d3) {
+		return ((Vec3) vec3).addVector(d, d2, d3);
+	}
+
+	@Override
+	protected List worldGetEntitiesWithinAABBExcludingEntity(Object worldOrEntity, Object entity, Object axisAlignedBB) {
+		return ((World) entityWorldObj(worldOrEntity)).getEntitiesWithinAABBExcludingEntity((Entity) entity, (AxisAlignedBB) axisAlignedBB);
+	}
+
+	@Override
+	protected Object entityGetBoundingBox(Object entity) {
+		return ((Entity) entity).getBoundingBox();
+	}
+
+	@Override
+	protected boolean entityCanBeCollidedWith(Object entity) {
+		return ((Entity) entity).canBeCollidedWith();
+	}
+
+	@Override
+	protected float entityGetCollisionBorderSize(Object entity) {
+		return ((Entity) entity).getCollisionBorderSize();
+	}
+
+	@Override
+	protected Object axisAlignedBBCalculateIntercept(Object axisAlignedBB, Object vec3, Object vec3_2) {
+		return ((AxisAlignedBB) axisAlignedBB).calculateIntercept((Vec3) vec3, (Vec3) vec3_2);
+	}
+
+	@Override
+	protected boolean axisAlignedBBIsVecInside(Object axisAlignedBB, Object vec3) {
+		return ((AxisAlignedBB) axisAlignedBB).isVecInside((Vec3) vec3);
+	}
+
+	@Override
+	protected Object movingObjectPositionHitVec(Object movingObjectPosition) {
+		return ((MovingObjectPosition) movingObjectPosition).hitVec;
+	}
+
+	@Override
+	protected double vec3SquareDistanceTo(Object vec3, Object vec3_2) {
+		return ((Vec3) vec3).squareDistanceTo((Vec3) vec3_2);
+	}
+
+	@Override
+	protected List itemPotionGetEffects(Object itemPotion, Object itemStack) {
+		return ((ItemPotion) itemPotion).getEffects((ItemStack) itemStack);
+	}
+
+	@Override
+	protected Multimap itemStackGetAttributeModifiers(Object itemStack) {
+		return ((ItemStack) itemStack).getAttributeModifiers();
+	}
+
+	@Override
+	protected Object sharedMonsterAttributesAttackDamage() {
+		return SharedMonsterAttributes.attackDamage;
+	}
+
+	@Override
+	protected String iAttributeGetAttributeUnlocalizedName(Object iAttribute) {
+		return null;
+	}
+
+	@Override
+	protected double attributeModifierGetAmount(Object attributeModifier) {
+		return ((AttributeModifier) attributeModifier).getAmount();
+	}
+
+	@Override
+	protected Object itemArmorGetArmorMaterial(Object itemArmor) {
+		return ((ItemArmor) itemArmor).getArmorMaterial();
+	}
+
+	@Override
+	protected String itemArmorArmorMaterialGetName(Object armorMaterial) {
+		return null;
+	}
+
+	@Override
+	protected void loadingScreenDisplayLoadingString(Object loadingScreenRenderer, String s) {
+		((LoadingScreenRenderer) loadingScreenRenderer).resetProgresAndWorkingMessage(s);
+	}
+
+	@Override
+	protected void loadingScreenResetProgressAndMessage(Object loadingScreenRenderer, String s) {
+		((LoadingScreenRenderer) loadingScreenRenderer).resetProgressAndMessage(s);
+	}
+
+	@Override
+	protected void loadingScreenSetLoadingProgress(Object loadingScreenRenderer, int i) {
+		((LoadingScreenRenderer) loadingScreenRenderer).setLoadingProgress(i);
+	}
+
+	@Override
+	protected void openGlHelperGlBlendFunc(int i, int i1, int i2, int i3) {
+	}
+
+	@Override
+	protected Object vec3CreateVectorHelper(double d, double d2, double d3) {
+		return Vec3.createVectorHelper(d, d2, d3);
+	}
+
+	@Override
+	protected void guiScreenFunc_175273_b(Object guiScreen, Object minecraft, int i, int i2) {
+	}
+
+	@Override
+	protected Enum itemCameraTransformsTransformTypeNONE() {
+		return null;
+	}
+
+	@Override
+	protected Enum itemCameraTransformsTransformTypeTHIRD_PERSON() {
+		return null;
+	}
+
+	@Override
+	protected Enum itemCameraTransformsTransformTypeFIRST_PERSON() {
+		return null;
+	}
+
+	@Override
+	protected Enum itemCameraTransformsTransformTypeHEAD() {
+		return null;
+	}
+
+	@Override
+	protected Enum itemCameraTransformsTransformTypeGUI() {
+		return null;
+	}
+
+	@Override
+	protected Object entityPlayerFishEntity(Object entityplayer) {
+		return ((EntityPlayer) entityplayer).fishEntity;
+	}
+
+	@Override
+	protected void setEntityPlayerFishEntity(Object entityplayer, Object entityFishHook) {
+		((EntityPlayer) entityplayer).fishEntity = (EntityFishHook) entityFishHook;
+	}
+
+	@Override
+	protected boolean entityZombieIsVillager(Object entityZombie) {
+		return ((EntityZombie) entityZombie).isVillager();
+	}
+
+	@Override
+	protected void entityZombieSetVillager(Object entityZombie, boolean b) {
+		((EntityZombie) entityZombie).setVillager(b);
+	}
+
+	@Override
+	protected Object tileEntitySkullUpdateGameprofile(Object gameprofile) {
+		return null;
+	}
+
+	@Override
+	protected Object nBTUtilWriteGameProfile(Object nBTTagCompound, Object gameprofile) {
+		return nBTTagCompound;
+	}
+
+	@Override
+	protected void nbtTagCompoundSetTag(Object nBTTagCompound, String s, Object nbtBase) {
+		((NBTTagCompound) nBTTagCompound).setTag(s, (NBTBase) nbtBase);
+	}
+
+	@Override
+	protected Enum enumFacingUP() {
+		return EnumFacing.UP;
+	}
+
+	@Override
+	protected Enum enumFacingDOWN() {
+		return EnumFacing.DOWN;
+	}
+
+	@Override
+	protected Enum enumFacingEAST() {
+		return EnumFacing.EAST;
+	}
+
+	@Override
+	protected Enum enumFacingNORTH() {
+		return EnumFacing.NORTH;
+	}
+
+	@Override
+	protected Enum enumFacingSOUTH() {
+		return EnumFacing.SOUTH;
+	}
+
+	@Override
+	protected Enum enumFacingWEST() {
+		return EnumFacing.WEST;
+	}
+
+	@Override
+	protected int itemStackGetMetadata(Object itemstack) {
+		return -1;
+	}
+
+	@Override
+	protected Object minecraftGetBlockRendererDispatcher() {
+		return null;
+	}
+
+	@Override
+	protected Object textureMapLocationBlocksTexture() {
+		return null;
+	}
+
+	@Override
+	protected Object blockGetDefaultState(Object blockOrIBlockState) {
+		return null;
+	}
+
+	@Override
+	protected void blockRendererDispatcherRenderBlockBrightness(Object blockRendererDispatcher, Object iBlockState, float f) {
+	}
+
+	@Override
+	protected Object iBlockStateWithProperty(Object blockOrIBlockState, Object iProperty, Comparable comparable) {
+		return null;
+	}
+
+	@Override
+	protected Object blockDoublePlantVARIANT() {
+		return null;
+	}
+
+	@Override
+	protected Object blockDoublePlantHALF() {
+		return null;
+	}
+
+	@Override
+	protected int blockGetMetaFromState(Object block, Object iBlockState) {
+		return -1;
+	}
+
+	@Override
+	protected Object abstractClientPlayerLocationSkin(Object entity) {
+		return ((AbstractClientPlayer) entity).getLocationSkin();
+	}
+
+	@Override
+	protected int itemGetMetadata(Object item, int i) {
+		return ((Item) item).getMetadata(i);
+	}
+
+	@Override
+	protected int blockColorMultiplier(Object block, Object iBlockAccess, Object blockPos, int i) {
+		return -1;
+	}
+
+	@Override
+	protected int textureUtilAnaglyphColor(int i) {
+		return -1;
+	}
+
+	@Override
+	protected Object blockGetStateFromMeta(Object block, int i) {
+		return null;
+	}
+
+	@Override
+	protected Object blockRendererDispatcherGetBlockModelRenderer(Object blockRendererDispatcher) {
+		return null;
+	}
+
+	@Override
+	protected void blockModelRendererRenderModelBrightness(Object blockModelRenderer, Object iBakedModel, Object iBlockState, float f, boolean b) {
+	}
+
+	@Override
+	protected String abstractClientPlayerGetSkinType(Object abstractClientPlayer) {
+		return null;
+	}
+
+	@Override
+	protected void setEntityTicksExisted(Object entity, int i) {
+		((Entity) entity).ticksExisted = i;
+	}
+
+	@Override
+	protected Object worldGetBiomeGenForCoords(Object worldOrEntity, int i, int i1) {
+		return ((World) entityWorldObj(worldOrEntity)).getBiomeGenForCoords(i, i1);
+	}
+
+	@Override
+	protected List worldGetEntitiesWithinAABB(Object worldOrEntity, Class c, Object axisAlignedBB) {
+		return ((World) entityWorldObj(worldOrEntity)).getEntitiesWithinAABB(c, (AxisAlignedBB) axisAlignedBB);
+	}
+
+	@Override
+	protected void entityTameableSetOwner(Object entityTameable, String s) {
+		((EntityTameable) entityTameable).setOwner(s);
+	}
+
+	@Override
+	protected boolean worldSpawnEntityInWorld(Object worldOrEntity, Object entity) {
+		return ((World) entityWorldObj(worldOrEntity)).spawnEntityInWorld((Entity) entity);
+	}
+
+	@Override
+	protected Object worldGetClosestPlayerToEntity(Object worldOrEntity, Object entity, double d) {
+		return ((World) entityWorldObj(worldOrEntity)).getClosestPlayerToEntity((Entity) entity, d);
 	}
 
 }

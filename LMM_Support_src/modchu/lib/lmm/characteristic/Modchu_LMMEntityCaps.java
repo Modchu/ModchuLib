@@ -21,7 +21,7 @@ public class Modchu_LMMEntityCaps extends MMM_EntityCaps {
 
 	@Override
 	public Map<String, Integer> getModelCaps() {
-		return base.getModelCaps();
+		return super.getModelCaps();
 	}
 
 	public Map<String, Integer> superGetModelCaps() {

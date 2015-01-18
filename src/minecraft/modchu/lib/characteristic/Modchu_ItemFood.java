@@ -55,15 +55,6 @@ public class Modchu_ItemFood extends ItemFood {
 	}
 
 	@Override
-	public int getSpriteNumber() {
-		return master != null ? master.getSpriteNumber() : super.getSpriteNumber();
-	}
-
-	public int superGetSpriteNumber() {
-		return super.getSpriteNumber();
-	}
-
-	@Override
 	public Icon getIconFromDamage(int par1) {
 		return (Icon) (master != null ? master.getIconFromDamage(par1) : super.getIconFromDamage(par1));
 	}
@@ -101,7 +92,7 @@ public class Modchu_ItemFood extends ItemFood {
 
 	@Override
 	public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
-		return (ItemStack) (master != null ? master.onEaten(itemStack, world, entityPlayer) : super.onEaten(itemStack, world, entityPlayer));
+		return (ItemStack) (master != null ? master.onItemUseFinish(itemStack, world, entityPlayer) : super.onEaten(itemStack, world, entityPlayer));
 	}
 
 	public ItemStack superOnEaten(Object itemStack, Object world, Object entityPlayer) {
@@ -195,7 +186,7 @@ public class Modchu_ItemFood extends ItemFood {
 	}
 
 	public Item superSetFull3D() {
-		return (Item) (super.setFull3D());
+		return (super.setFull3D());
 	}
 
 	@Override
@@ -286,7 +277,7 @@ public class Modchu_ItemFood extends ItemFood {
 	}
 
 	public Item superGetContainerItem() {
-		return (Item) (super.getContainerItem());
+		return (super.getContainerItem());
 	}
 
 	@Override
@@ -488,7 +479,7 @@ public class Modchu_ItemFood extends ItemFood {
 	}
 
 	public CreativeTabs superGetCreativeTab() {
-		return (CreativeTabs) (super.getCreativeTab());
+		return (super.getCreativeTab());
 	}
 
 	@Override
@@ -525,7 +516,7 @@ public class Modchu_ItemFood extends ItemFood {
 	}
 
 	public Multimap superGetItemAttributeModifiers() {
-		return (Multimap) (super.getItemAttributeModifiers());
+		return (super.getItemAttributeModifiers());
 	}
 
 	@Override
@@ -545,7 +536,142 @@ public class Modchu_ItemFood extends ItemFood {
 	public String superGetIconString() {
 		return super.getIconString();
 	}
+	// ~164
+	@Override
+	public String getPotionEffect() {
+		return master != null ? master.getPotionEffect() : super.getPotionEffect();
+	}
 
+	public String superGetPotionEffect() {
+		return super.getPotionEffect();
+	}
+
+	@Override
+	public boolean isPotionIngredient() {
+		return master != null ? master.isPotionIngredient() : super.isPotionIngredient();
+	}
+
+	public boolean superIsPotionIngredient() {
+		return super.isPotionIngredient();
+	}
+
+	@Override
+	public float getStrVsBlock(ItemStack itemStack, Block block) {
+		return master != null ? master.getStrVsBlock(itemStack, block) : super.getStrVsBlock(itemStack, block);
+	}
+
+	public float superGetStrVsBlock(Object itemStack, Object block) {
+		return super.getStrVsBlock((ItemStack) itemStack, (Block) block);
+	}
+
+	@Override
+	public boolean onBlockDestroyed(ItemStack itemStack, World world, int par3, int par4, int par5, int par6, EntityLivingBase entityLivingBase) {
+		return master != null ? master.onBlockDestroyed(itemStack, world, par3, par4, par5, par6, entityLivingBase) : super.onBlockDestroyed(itemStack, world, par3, par4, par5, par6, entityLivingBase);
+	}
+
+	public boolean superOnBlockDestroyed(Object itemStack, Object world, int par3, int par4, int par5, int par6, Object entityLivingBase) {
+		return super.onBlockDestroyed((ItemStack) itemStack, (World) world, par3, par4, par5, par6, (EntityLivingBase) entityLivingBase);
+	}
+
+	@Override
+	public boolean canHarvestBlock(Block block) {
+		return master != null ? master.canHarvestBlock(block) : super.canHarvestBlock(block);
+	}
+
+	public boolean superCanHarvestBlock(Object block) {
+		return super.canHarvestBlock((Block) block);
+	}
+
+	@Override
+	public String getStatName() {
+		return master != null ? master.getStatName() : super.getStatName();
+	}
+
+	public String superGetStatName() {
+		return super.getStatName();
+	}
+
+	@Override
+	public String getItemDisplayName(ItemStack itemStack) {
+		return master != null ? master.getItemDisplayName(itemStack) : super.getItemDisplayName(itemStack);
+	}
+
+	public String superGetItemDisplayName(Object itemStack) {
+		return super.getItemDisplayName((ItemStack) itemStack);
+	}
+
+	@Override
+	public void getSubItems(int par1, CreativeTabs creativeTabs, List par3List) {
+	}
+
+	public void superGetSubItems(int par1, Object creativeTabs, List par3List) {
+		super.getSubItems(par1, (CreativeTabs) creativeTabs, par3List);
+	}
+
+	public void registerIcons(Object iconRegister) {
+	}
+
+	@Override
+	public float getStrVsBlock(ItemStack itemStack, Block block, int metadata) {
+		return master != null ? master.getStrVsBlock(itemStack, block, metadata) : super.getStrVsBlock(itemStack, block, metadata);
+	}
+
+	public float superGetStrVsBlock(Object itemStack, Object block, int metadata) {
+		return super.getStrVsBlock((ItemStack) itemStack, (Block) block, metadata);
+	}
+
+	@Override
+	public void onUsingItemTick(ItemStack itemStack, EntityPlayer entityPlayer, int count) {
+	}
+
+	public void superOnUsingItemTick(Object itemStack, Object entityPlayer, int count) {
+		super.onUsingItemTick((ItemStack) itemStack, (EntityPlayer) entityPlayer, count);
+	}
+
+	@Override
+	public ItemStack getContainerItemStack(ItemStack itemStack) {
+		return (ItemStack) (master != null ? master.getContainerItemStack(itemStack) : super.getContainerItemStack(itemStack));
+	}
+
+	public ItemStack superGetContainerItemStack(Object itemStack) {
+		return super.getContainerItemStack((ItemStack) itemStack);
+	}
+
+	@Override
+	public boolean shouldPassSneakingClickToBlock(World world, int par4, int par5, int par6) {
+		return master != null ? master.shouldPassSneakingClickToBlock(world, par4, par5, par6) : super.shouldPassSneakingClickToBlock(world, par4, par5, par6);
+	}
+
+	public boolean superShouldPassSneakingClickToBlock(Object world, int par4, int par5, int par6) {
+		return super.shouldPassSneakingClickToBlock((World) world, par4, par5, par6);
+	}
+
+	@Override
+	public void onArmorTickUpdate(World world, EntityPlayer entityPlayer, ItemStack itemStack) {
+	}
+
+	public void superOnArmorTickUpdate(Object world, Object entityPlayer, Object itemStack) {
+		super.onArmorTickUpdate((World) world, (EntityPlayer) entityPlayer, (ItemStack) itemStack);
+	}
+
+	@Override
+	public float getDamageVsEntity(Entity entity, ItemStack itemStack) {
+		return master != null ? master.getDamageVsEntity(entity, itemStack) : super.getDamageVsEntity(entity, itemStack);
+	}
+
+	public float superGetDamageVsEntity(Object entity, Object itemStack) {
+		return super.getDamageVsEntity((Entity) entity, (ItemStack) itemStack);
+	}
+
+	@Override
+	public String getArmorTexture(ItemStack itemStack, Entity entity, int slot, int layer) {
+		return master != null ? master.getArmorTexture(itemStack, entity, slot, layer) : super.getArmorTexture(itemStack, entity, slot, layer);
+	}
+
+	public String superGetArmorTexture(Object itemStack, Object entity, int slot, int layer) {
+		return super.getArmorTexture((ItemStack) itemStack, (Entity) entity, slot, layer);
+	}
+	// 172~
 	@Override
 	public boolean onDroppedByPlayer(ItemStack itemStack, EntityPlayer entityPlayer) {
 		return master != null ? master.onDroppedByPlayer(itemStack, entityPlayer) : super.onDroppedByPlayer(itemStack, entityPlayer);
@@ -579,7 +705,7 @@ public class Modchu_ItemFood extends ItemFood {
 	}
 
 	public Item superSetNoRepair() {
-		return (Item) (super.setNoRepair());
+		return (super.setNoRepair());
 	}
 
 	@Override
@@ -660,7 +786,7 @@ public class Modchu_ItemFood extends ItemFood {
 	}
 
 	public CreativeTabs[] superGetCreativeTabs() {
-		return (CreativeTabs[]) (super.getCreativeTabs());
+		return (super.getCreativeTabs());
 	}
 
 	@Override
@@ -827,153 +953,6 @@ public class Modchu_ItemFood extends ItemFood {
 		return super.getItemStackLimit((ItemStack) itemStack);
 	}
 
-	//164
-	public float getStrVsBlock(ItemStack itemStack, Block block) {
-		return 0.0F;
-	}
-
-	public float superGetStrVsBlock(Object itemStack, Object block) {
-		return 0.0F;
-	}
-
-	public boolean onBlockDestroyed(ItemStack itemStack, World world, int par3, int par4, int par5, int par6, EntityLivingBase entityLivingBase) {
-		return false;
-	}
-
-	public boolean superOnBlockDestroyed(Object itemStack, Object world, int par3, int par4, int par5, int par6, Object entityLivingBase) {
-		return false;
-	}
-
-	public boolean canHarvestBlock(Block block) {
-		return false;
-	}
-
-	public boolean superCanHarvestBlock(Object block) {
-		return false;
-	}
-
-	public String getStatName() {
-		return null;
-	}
-
-	public String superGetStatName() {
-		return null;
-	}
-
-	public String getPotionEffect() {
-		return null;
-	}
-
-	public String superGetPotionEffect() {
-		return null;
-	}
-
-	public boolean isPotionIngredient() {
-		return false;
-	}
-
-	public boolean superIsPotionIngredient() {
-		return false;
-	}
-
-	public String getItemDisplayName(ItemStack itemStack) {
-		return null;
-	}
-
-	public String superGetItemDisplayName(Object itemStack) {
-		return null;
-	}
-/*
-	public Icon getIconFromDamageForRenderPass(int par1, int par2) {
-		return null;
-	}
-
-	public Icon superGetIconFromDamageForRenderPass(int par1, int par2) {
-		return null;
-	}
-*/
-	public void getSubItems(int par1, CreativeTabs creativeTabs, List par3List) {
-	}
-
-	public void superGetSubItems(int par1, Object creativeTabs, List par3List) {
-	}
-
-	//	public void registerIcons(IconRegister iconRegister) {
-	public void registerIcons(Object iconRegister) {
-	}
-/*
-	public void superRegisterIcons(Object iconRegister) {
-	}
-*/
-	public float getStrVsBlock(ItemStack itemStack, Block block, int metadata) {
-		return 0.0F;
-	}
-
-	public float superGetStrVsBlock(Object itemStack, Object block, int metadata) {
-		return 0.0F;
-	}
-
-	public void onUsingItemTick(ItemStack itemStack, EntityPlayer entityPlayer, int count) {
-	}
-
-	public void superOnUsingItemTick(Object itemStack, Object entityPlayer, int count) {
-	}
-/*
-	public Icon getIcon(ItemStack itemStack, int renderPass, EntityPlayer entityPlayer, ItemStack itemStack1, int useRemaining) {
-		return null;
-	}
-
-	public Icon superGetIcon(Object itemStack, int renderPass, Object entityPlayer, Object itemStack1, int useRemaining) {
-		return null;
-	}
-*/
-	public ItemStack getContainerItemStack(ItemStack itemStack) {
-		return null;
-	}
-
-	public ItemStack superGetContainerItemStack(Object itemStack) {
-		return null;
-	}
-/*
-	public Icon getIcon(ItemStack itemStack, int pass) {
-		return null;
-	}
-
-	public Icon superGetIcon(Object itemStack, int pass) {
-		return null;
-	}
-*/
-	public boolean shouldPassSneakingClickToBlock(World world, int par4, int par5, int par6) {
-		return false;
-	}
-
-	public boolean superShouldPassSneakingClickToBlock(Object world, int par4, int par5, int par6) {
-		return false;
-	}
-
-	public void onArmorTickUpdate(World world, EntityPlayer entityPlayer, ItemStack itemStack) {
-	}
-
-	public void superOnArmorTickUpdate(Object world, Object entityPlayer, Object itemStack) {
-	}
-
-	public float getDamageVsEntity(Entity entity, ItemStack itemStack) {
-		return 0.0F;
-	}
-
-	public float superGetDamageVsEntity(Object entity, Object itemStack) {
-		return 0.0F;
-	}
-
-	public String getArmorTexture(ItemStack itemStack, Entity entity, int slot, int layer) {
-		return null;
-	}
-
-	public String superGetArmorTexture(Object itemStack, Object entity, int slot, int layer) {
-		return null;
-	}
-
-	// 172~
 	public float func_150893_a(ItemStack itemStack, Block block) {
 		return 0.0F;
 	}
@@ -1147,6 +1126,76 @@ public class Modchu_ItemFood extends ItemFood {
 
 	public float superFunc_150906_h(Object itemStack) {
 		return 0.0F;
+	}
+
+	// ~179
+	@Override
+	public int getSpriteNumber() {
+		return master != null ? master.getSpriteNumber() : super.getSpriteNumber();
+	}
+
+	public int superGetSpriteNumber() {
+		return super.getSpriteNumber();
+	}
+
+	// 180~
+	public int superGetHealAmount(Object itemStack) {
+		return superFunc_150905_g(itemStack);
+	}
+
+	public float superGetSaturationModifier(Object itemStack) {
+		return superFunc_150906_h(itemStack);
+	}
+
+	public boolean superOnItemUseFirst(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ) {
+		return false;
+	}
+
+	public boolean superOnBlockStartBreak(Object itemStack, Object blockPos, Object entityPlayer) {
+		return false;
+	}
+
+	public void superRenderHelmetOverlay(Object itemStack, Object entityPlayer, Object scaledResolution, float partialTicks) {
+	}
+
+	public int superGetMetadata(Object itemStack) {
+		return 0;
+	}
+
+	public boolean superOnBlockDestroyed(Object itemStack, Object world, Object block, Object blockPos, Object entityLivingBase) {
+		return false;
+	}
+
+	public float superGetDigSpeed(Object itemStack, Object iBlockState) {
+		return 0;
+	}
+
+	public boolean superDoesSneakBypassUse(Object world, Object blockPos, Object entityPlayer) {
+		return false;
+	}
+
+	public boolean superOnItemUse(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumFacing, float f, float f1, float f2) {
+		return false;
+	}
+
+	public boolean superUpdateItemStackNBT(Object nBTTagCompound) {
+		return false;
+	}
+
+	public Object superGetModel(Object itemStack, Object entityPlayer, int useRemaining) {
+		return null;
+	}
+
+	public int superGetItemEnchantability(Object itemStack) {
+		return 0;
+	}
+
+	public boolean superIsBeaconPayment(Object itemStack) {
+		return false;
+	}
+
+	public Object superOnItemUseFinish(Object itemStack, Object world, Object entityPlayer) {
+		return null;
 	}
 
 }

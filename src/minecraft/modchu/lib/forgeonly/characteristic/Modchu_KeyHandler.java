@@ -1,4 +1,4 @@
-package modchu.lib.fmlonly;
+package modchu.lib.forgeonly.characteristic;
 
 import java.util.EnumSet;
 

@@ -1,4 +1,4 @@
-package modchu.lib.characteristic;
+package modchu.lib.forgeonly.characteristic;
 
 import modchu.lib.Modchu_Main;
 import net.minecraftforge.event.Event;

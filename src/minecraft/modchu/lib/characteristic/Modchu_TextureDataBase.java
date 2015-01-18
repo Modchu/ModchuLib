@@ -1,24 +1,16 @@
-package modchu.lib.replace.characteristic;
+package modchu.lib.characteristic;
 
 import java.util.Random;
 
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Reflect;
-import modchu.lib.replace.Modchu_ModelMultiBase;
-import modchu.lib.replace.Modchu_TextureBoxBase;
-import modchu.lib.replace.Modchu_TextureBoxServer;
-import modchu.model.ModchuModel_IModelCaps;
-import modchu.model.replacepoint.ModchuModel_HelperReplacePoint;
-import modchu.model.replacepoint.ModchuModel_ITextureEntityReplacePoint;
-import modchu.model.replacepoint.ModchuModel_TextureBoxReplacePoint;
-import modchu.model.replacepoint.ModchuModel_TextureManagerReplacePoint;
+import modchu.model.ModchuModel_IEntityCaps;
+import modchu.model.multimodel.base.MultiModelBaseBiped;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
-
 
 /**
  * テクスチャ管理用の変数群をまとめたもの。
@@ -26,7 +18,7 @@ import net.minecraft.util.ResourceLocation;
 public class Modchu_TextureDataBase  {
 
 	public EntityLivingBase owner;
-	public ModchuModel_IModelCaps entityCaps;
+	public ModchuModel_IEntityCaps entityCaps;
 
 	/**
 	 * 使用されるテクスチャリソースのコンテナ
@@ -43,7 +35,7 @@ public class Modchu_TextureDataBase  {
 
 	public Modchu_TextureBoxBase textureBox[];
 	public int textureIndex[];
-	public Modchu_ModelMultiBase textureModel[];
+	public MultiModelBaseBiped textureModel[];
 
 	/**
 	 * 表示制御に使うフラグ群<br>
@@ -58,7 +50,7 @@ public class Modchu_TextureDataBase  {
 	private Random rand = new Random();
 
 
-	public Modchu_TextureDataBase(EntityLivingBase pEntity, ModchuModel_IModelCaps pCaps) {
+	public Modchu_TextureDataBase(EntityLivingBase pEntity, ModchuModel_IEntityCaps pCaps) {
 		owner = pEntity;
 		entityCaps = pCaps;
 		textures = new ResourceLocation[][] {
@@ -86,9 +78,9 @@ public class Modchu_TextureDataBase  {
 		color = 12;
 		contract = false;
 		textureBox = new Modchu_TextureBoxBase[2];
-		textureBox[0] = textureBox[1] = ModchuModel_TextureManagerReplacePoint.instance.getDefaultTexture(owner.getClass());
+		textureBox[0] = textureBox[1] = Modchu_TextureManagerBase.instance.getDefaultTexture(owner.getClass());
 		textureIndex = new int[] { 0, 0 };
-		textureModel = new Modchu_ModelMultiBase[3];
+		textureModel = new MultiModelBaseBiped[3];
 	}
 
 	/**
@@ -112,34 +104,34 @@ public class Modchu_TextureDataBase  {
 	protected boolean setTextureNamesClient() {
 		// Client
 		boolean lf = false;
-		ModchuModel_TextureBoxReplacePoint lbox;
+		Modchu_TextureBoxBase lbox;
 
-		if (textureBox[0] instanceof ModchuModel_TextureBoxReplacePoint) {
-			int lc = (color & 0x00ff) + (contract ? 0 : ModchuModel_TextureManagerReplacePoint.tx_wild);
-			lbox = (ModchuModel_TextureBoxReplacePoint)textureBox[0];
+		if (textureBox[0] instanceof Modchu_TextureBoxBase) {
+			int lc = (color & 0x00ff) + (contract ? 0 : Modchu_TextureManagerBase.tx_wild);
+			lbox = (Modchu_TextureBoxBase)textureBox[0];
 			if (lbox.hasColor(lc)) {
-				textures[0][0] = lbox.getTextureName(lc);
-				lc = (color & 0x00ff) + (contract ? ModchuModel_TextureManagerReplacePoint.tx_eyecontract : ModchuModel_TextureManagerReplacePoint.tx_eyewild);
-				textures[0][1] = lbox.getTextureName(lc);
+				textures[0][0] = (ResourceLocation) lbox.getTextureName(lc);
+				lc = (color & 0x00ff) + (contract ? Modchu_TextureManagerBase.tx_eyecontract : Modchu_TextureManagerBase.tx_eyewild);
+				textures[0][1] = (ResourceLocation) lbox.getTextureName(lc);
 				lf = true;
 				textureModel[0] = lbox.models[0];
 			}
 		} else {
-			textureBox[0] = ModchuModel_TextureManagerReplacePoint.instance.getTextureBoxServerIndex(textureIndex[0]);
+			textureBox[0] = Modchu_TextureManagerBase.instance.getTextureBoxServerIndex(textureIndex[0]);
 		}
-		if (textureBox[1] instanceof ModchuModel_TextureBoxReplacePoint && owner != null) {
-			lbox = (ModchuModel_TextureBoxReplacePoint)textureBox[1];
+		if (textureBox[1] instanceof Modchu_TextureBoxBase && owner != null) {
+			lbox = (Modchu_TextureBoxBase)textureBox[1];
 			for (int i = 0; i < 4; i++) {
 				ItemStack is = owner.getCurrentItemOrArmor(i + 1);
-				textures[1][i] = lbox.getArmorTextureName(ModchuModel_TextureManagerReplacePoint.tx_armor1, is);
-				textures[2][i] = lbox.getArmorTextureName(ModchuModel_TextureManagerReplacePoint.tx_armor2, is);
-				textures[3][i] = lbox.getArmorTextureName(ModchuModel_TextureManagerReplacePoint.tx_armor1light, is);
-				textures[4][i] = lbox.getArmorTextureName(ModchuModel_TextureManagerReplacePoint.tx_armor2light, is);
+				textures[1][i] = (ResourceLocation) lbox.getArmorTextureName(Modchu_TextureManagerBase.tx_armor1, is);
+				textures[2][i] = (ResourceLocation) lbox.getArmorTextureName(Modchu_TextureManagerBase.tx_armor2, is);
+				textures[3][i] = (ResourceLocation) lbox.getArmorTextureName(Modchu_TextureManagerBase.tx_armor1light, is);
+				textures[4][i] = (ResourceLocation) lbox.getArmorTextureName(Modchu_TextureManagerBase.tx_armor2light, is);
 			}
 			textureModel[1] = lbox.models[1];
 			textureModel[2] = lbox.models[2];
 		} else {
-			textureBox[0] = ModchuModel_TextureManagerReplacePoint.instance.getTextureBoxServerIndex(textureIndex[0]);
+			textureBox[0] = Modchu_TextureManagerBase.instance.getTextureBoxServerIndex(textureIndex[0]);
 		}
 		return lf;
 	}
@@ -151,12 +143,12 @@ public class Modchu_TextureDataBase  {
 		if (textureBox[0] instanceof Modchu_TextureBoxServer) {
 			lbox = (Modchu_TextureBoxServer)textureBox[0];
 			if (lbox.localBox != null) {
-				int lc = (color & 0x00ff) + (contract ? 0 : ModchuModel_TextureManagerReplacePoint.tx_wild);
+				int lc = (color & 0x00ff) + (contract ? 0 : Modchu_TextureManagerBase.tx_wild);
 				if (lbox.localBox.hasColor(lc)) {
-					if (ModchuModel_HelperReplacePoint.isClient) {
-						textures[0][0] = lbox.localBox.getTextureName(lc);
-						lc = (color & 0x00ff) + (contract ? ModchuModel_TextureManagerReplacePoint.tx_eyecontract : ModchuModel_TextureManagerReplacePoint.tx_eyewild);
-						textures[0][1] = lbox.localBox.getTextureName(lc);
+					if (Modchu_HelperBase.isClient) {
+						textures[0][0] = (ResourceLocation) lbox.localBox.getTextureName(lc);
+						lc = (color & 0x00ff) + (contract ? Modchu_TextureManagerBase.tx_eyecontract : Modchu_TextureManagerBase.tx_eyewild);
+						textures[0][1] = (ResourceLocation) lbox.localBox.getTextureName(lc);
 					}
 					lf = true;
 					textureModel[0] = lbox.localBox.models[0];
@@ -166,13 +158,13 @@ public class Modchu_TextureDataBase  {
 		if (textureBox[1] instanceof Modchu_TextureBoxServer && owner != null) {
 			lbox = (Modchu_TextureBoxServer)textureBox[1];
 			if (lbox.localBox != null) {
-				if (ModchuModel_HelperReplacePoint.isClient) {
+				if (Modchu_HelperBase.isClient) {
 					for (int i = 0; i < 4; i++) {
 						ItemStack is = owner.getCurrentItemOrArmor(i + 1);
-						textures[1][i] = lbox.localBox.getArmorTextureName(ModchuModel_TextureManagerReplacePoint.tx_armor1, is);
-						textures[2][i] = lbox.localBox.getArmorTextureName(ModchuModel_TextureManagerReplacePoint.tx_armor2, is);
-						textures[3][i] = lbox.localBox.getArmorTextureName(ModchuModel_TextureManagerReplacePoint.tx_armor1light, is);
-						textures[4][i] = lbox.localBox.getArmorTextureName(ModchuModel_TextureManagerReplacePoint.tx_armor2light, is);
+						textures[1][i] = (ResourceLocation) lbox.localBox.getArmorTextureName(Modchu_TextureManagerBase.tx_armor1, is);
+						textures[2][i] = (ResourceLocation) lbox.localBox.getArmorTextureName(Modchu_TextureManagerBase.tx_armor2, is);
+						textures[3][i] = (ResourceLocation) lbox.localBox.getArmorTextureName(Modchu_TextureManagerBase.tx_armor1light, is);
+						textures[4][i] = (ResourceLocation) lbox.localBox.getArmorTextureName(Modchu_TextureManagerBase.tx_armor2light, is);
 					}
 				}
 				textureModel[1] = lbox.localBox.models[1];
@@ -184,35 +176,35 @@ public class Modchu_TextureDataBase  {
 
 	public void setNextTexturePackege(int pTargetTexture) {
 		if (pTargetTexture == 0) {
-			int lc = getColor() + (isContract() ? 0 : ModchuModel_TextureManagerReplacePoint.tx_wild);
-			textureBox[0] = ModchuModel_TextureManagerReplacePoint.instance.getNextPackege((ModchuModel_TextureBoxReplacePoint)textureBox[0], lc);
+			int lc = getColor() + (isContract() ? 0 : Modchu_TextureManagerBase.tx_wild);
+			textureBox[0] = Modchu_TextureManagerBase.instance.getNextPackege((Modchu_TextureBoxBase)textureBox[0], lc);
 			if (textureBox[0] == null) {
 				// 指定色が無い場合は標準モデルに
-				textureBox[0] = textureBox[1] = ModchuModel_TextureManagerReplacePoint.instance.getDefaultTexture((ModchuModel_ITextureEntityReplacePoint)owner);
+				textureBox[0] = textureBox[1] = Modchu_TextureManagerBase.instance.getDefaultTexture((Modchu_ITextureEntityBase)owner);
 				setColor(12);
 			} else {
 				textureBox[1] = textureBox[0];
 			}
-			if (!((ModchuModel_TextureBoxReplacePoint)textureBox[1]).hasArmor()) {
+			if (!((Modchu_TextureBoxBase)textureBox[1]).hasArmor()) {
 				pTargetTexture = 1;
 			}
 		}
 		if (pTargetTexture == 1) {
-			textureBox[1] = ModchuModel_TextureManagerReplacePoint.instance.getNextArmorPackege((ModchuModel_TextureBoxReplacePoint)textureBox[1]);
+			textureBox[1] = Modchu_TextureManagerBase.instance.getNextArmorPackege((Modchu_TextureBoxBase)textureBox[1]);
 		}
 	}
 
 	public void setPrevTexturePackege(int pTargetTexture) {
 		if (pTargetTexture == 0) {
-			int lc = getColor() + (isContract() ? 0 : ModchuModel_TextureManagerReplacePoint.tx_wild);
-			textureBox[0] = ModchuModel_TextureManagerReplacePoint.instance.getPrevPackege((ModchuModel_TextureBoxReplacePoint)textureBox[0], lc);
+			int lc = getColor() + (isContract() ? 0 : Modchu_TextureManagerBase.tx_wild);
+			textureBox[0] = Modchu_TextureManagerBase.instance.getPrevPackege((Modchu_TextureBoxBase)textureBox[0], lc);
 			textureBox[1] = textureBox[0];
-			if (!((ModchuModel_TextureBoxReplacePoint)textureBox[1]).hasArmor()) {
+			if (!((Modchu_TextureBoxBase)textureBox[1]).hasArmor()) {
 				pTargetTexture = 1;
 			}
 		}
 		if (pTargetTexture == 1) {
-			textureBox[1] = ModchuModel_TextureManagerReplacePoint.instance.getPrevArmorPackege((ModchuModel_TextureBoxReplacePoint)textureBox[1]);
+			textureBox[1] = Modchu_TextureManagerBase.instance.getPrevArmorPackege((Modchu_TextureBoxBase)textureBox[1]);
 		}
 	}
 
@@ -242,14 +234,14 @@ public class Modchu_TextureDataBase  {
 		// Server
 		for (int li = 0; li < pIndex.length; li++) {
 			textureIndex[li] = pIndex[li];
-			textureBox[li] = ModchuModel_TextureManagerReplacePoint.instance.getTextureBoxServer(textureIndex[li]);
+			textureBox[li] = Modchu_TextureManagerBase.instance.getTextureBoxServer(textureIndex[li]);
 		}
 		color = pColor;
 		setSize();
 	}
 
 //	@Override
-	public void setTexturePackName(ModchuModel_TextureBoxReplacePoint[] pTextureBox) {
+	public void setTexturePackName(Modchu_TextureBoxBase[] pTextureBox) {
 		// Client
 		for (int li = 0; li < pTextureBox.length; li++) {
 			textureBox[li] = pTextureBox[li];
@@ -324,15 +316,15 @@ public class Modchu_TextureDataBase  {
 	public void setTextureInitServer(String pName) {
 		Modchu_Debug.Debug("request Init Texture: %s", pName);
 		textureIndex[0] = textureIndex[1] =
-				ModchuModel_TextureManagerReplacePoint.instance.getIndexTextureBoxServer((ModchuModel_ITextureEntityReplacePoint)owner, pName);
-		textureBox[0] = textureBox[1] = ModchuModel_TextureManagerReplacePoint.instance.getTextureBoxServer(textureIndex[0]);
+				Modchu_TextureManagerBase.instance.getIndexTextureBoxServer((Modchu_ITextureEntityBase)owner, pName);
+		textureBox[0] = textureBox[1] = Modchu_TextureManagerBase.instance.getTextureBoxServer(textureIndex[0]);
 		color = textureBox[0].getRandomWildColor(rand);
 	}
 	public void setTextureInitClient() {
-		ModchuModel_TextureBoxReplacePoint lbox = ModchuModel_TextureManagerReplacePoint.instance.getDefaultTexture(owner.getClass());
+		Modchu_TextureBoxBase lbox = Modchu_TextureManagerBase.instance.getDefaultTexture(owner.getClass());
 		for (int li = 0; li < textureBox.length; li++) {
 			textureBox[li] = lbox;
-			textureIndex[li] = ModchuModel_TextureManagerReplacePoint.instance.getIndexTextureBoxServerIndex(lbox);
+			textureIndex[li] = Modchu_TextureManagerBase.instance.getIndexTextureBoxServerIndex(lbox);
 		}
 		color = textureBox[0].getRandomWildColor(rand);
 	}
@@ -342,7 +334,7 @@ public class Modchu_TextureDataBase  {
 	}
 
 	public ResourceLocation getGUITexture() {
-		return ((ModchuModel_TextureBoxReplacePoint)textureBox[0]).getTextureName(ModchuModel_TextureManagerReplacePoint.tx_gui);
+		return (ResourceLocation) ((Modchu_TextureBoxBase)textureBox[0]).getTextureName(Modchu_TextureManagerBase.tx_gui);
 	}
 
 	/**
@@ -396,7 +388,7 @@ public class Modchu_TextureDataBase  {
 			contract = lnbt.getBoolean("Contract");
 			selectValue = lnbt.getInteger("SelectValue");
 
-			ModchuModel_TextureBoxReplacePoint lbox = ModchuModel_TextureManagerReplacePoint.instance.getDefaultTexture((ModchuModel_ITextureEntityReplacePoint)owner);
+			Modchu_TextureBoxBase lbox = Modchu_TextureManagerBase.instance.getDefaultTexture((ModchuModel_ITextureEntity)owner);
 			NBTTagList lnbtlist = lnbt.getTagList("Textures");
 			if (lnbtlist.tagCount() > 0) {
 				textureIndex = new int[lnbtlist.tagCount()];
@@ -406,7 +398,7 @@ public class Modchu_TextureDataBase  {
 				setTexturePackIndex(color, textureIndex);
 			} else {
 				// ローカルに在るデフォルトのテクスチャを設定
-				int li = ModchuModel_TextureManagerReplacePoint.instance.getIndexTextureBoxServerIndex(lbox);
+				int li = Modchu_TextureManagerBase.instance.getIndexTextureBoxServerIndex(lbox);
 				setTexturePackIndex(color, new int[] {li, li});
 			}
 		}
@@ -449,15 +441,6 @@ public class Modchu_TextureDataBase  {
 	}
 
 	public void onUpdateTex() {
-		// TODO:onUpdateと統合すること
-		if (owner.worldObj.isRemote) {
-			// Client
-
-		} else {
-
-		}
-
-
 	}
 
 	protected void setWatchedColor(int pColor) {
