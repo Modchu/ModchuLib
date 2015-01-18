@@ -1,4 +1,4 @@
-package modchu.lib.characteristic;
+package modchu.lib.forgeonly.characteristic;
 
 import modchu.lib.Modchu_Main;
 import cpw.mods.fml.common.eventhandler.Event;
@@ -8,6 +8,6 @@ public class Modchu_ForgeEVENTHandler {
 
 	@SubscribeEvent
 	public void event(Event event) {
-		Modchu_Main.event(event);
+		Object o = Modchu_Main.event(event);
 	}
 }

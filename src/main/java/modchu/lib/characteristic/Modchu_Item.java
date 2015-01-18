@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Set;
 
 import modchu.lib.Modchu_Debug;
-import modchu.lib.Modchu_IItem;
+import modchu.lib.Modchu_IItemMaster;
 import modchu.lib.Modchu_Reflect;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
@@ -30,7 +30,7 @@ import net.minecraftforge.common.ChestGenHooks;
 import com.google.common.collect.Multimap;
 
 public class Modchu_Item extends Item {
-	public Modchu_IItem master;
+	public Modchu_IItemMaster master;
 
 	public Modchu_Item(Class masterClass, int i) {
 		this(masterClass);
@@ -40,7 +40,7 @@ public class Modchu_Item extends Item {
 		super();
 		Object instance = Modchu_Reflect.newInstance(masterClass, new Class[]{ Modchu_Item.class, Object[].class }, new Object[]{ this, null });
 		Modchu_Debug.mDebug("Modchu_Item init instance="+instance);
-		master = instance instanceof Modchu_IItem ? (Modchu_IItem) instance : null;
+		master = instance instanceof Modchu_IItemMaster ? (Modchu_IItemMaster) instance : null;
 		Modchu_Debug.mDebug("Modchu_Item init master="+master);
 	}
 
@@ -51,33 +51,6 @@ public class Modchu_Item extends Item {
 
 	public Item superSetMaxStackSize(int par1) {
 		return super.setMaxStackSize(par1);
-	}
-
-	@Override
-	public int getSpriteNumber() {
-		return master != null ? master.getSpriteNumber() : super.getSpriteNumber();
-	}
-
-	public int superGetSpriteNumber() {
-		return super.getSpriteNumber();
-	}
-
-	@Override
-	public IIcon getIconFromDamage(int par1) {
-		return (IIcon) (master != null ? master.getIconFromDamage(par1) : super.getIconFromDamage(par1));
-	}
-
-	public IIcon superGetIconFromDamage(int par1) {
-		return super.getIconFromDamage(par1);
-	}
-
-	@Override
-	public IIcon getIconIndex(ItemStack itemStack) {
-		return (IIcon) (master != null ? master.getIconIndex(itemStack) : super.getIconIndex(itemStack));
-	}
-
-	public IIcon superGetIconIndex(Object itemStack) {
-		return super.getIconIndex((ItemStack) itemStack);
 	}
 
 	@Override
@@ -100,7 +73,7 @@ public class Modchu_Item extends Item {
 
 	@Override
 	public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
-		return (ItemStack) (master != null ? master.onEaten(itemStack, world, entityPlayer) : super.onEaten(itemStack, world, entityPlayer));
+		return (ItemStack) (master != null ? master.onItemUseFinish(itemStack, world, entityPlayer) : super.onEaten(itemStack, world, entityPlayer));
 	}
 
 	public ItemStack superOnEaten(Object itemStack, Object world, Object entityPlayer) {
@@ -374,24 +347,6 @@ public class Modchu_Item extends Item {
 	}
 
 	@Override
-	public String getPotionEffect(ItemStack itemStack) {
-		return master != null ? master.getPotionEffect(itemStack) : super.getPotionEffect(itemStack);
-	}
-
-	public String superGetPotionEffect(Object itemStack) {
-		return super.getPotionEffect((ItemStack) itemStack);
-	}
-
-	@Override
-	public boolean isPotionIngredient(ItemStack itemStack) {
-		return master != null ? master.isPotionIngredient(itemStack) : super.isPotionIngredient(itemStack);
-	}
-
-	public boolean superIsPotionIngredient(Object itemStack) {
-		return super.isPotionIngredient((ItemStack) itemStack);
-	}
-
-	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List par3List, boolean par4) {
 		if (master != null) master.addInformation(itemStack, entityPlayer, par3List, par4);
 		else super.addInformation(itemStack, entityPlayer, par3List, par4);
@@ -456,24 +411,6 @@ public class Modchu_Item extends Item {
 	}
 
 	@Override
-	public boolean requiresMultipleRenderPasses() {
-		return master != null ? master.requiresMultipleRenderPasses() : super.requiresMultipleRenderPasses();
-	}
-
-	public boolean superRequiresMultipleRenderPasses() {
-		return super.requiresMultipleRenderPasses();
-	}
-
-	@Override
-	public IIcon getIconFromDamageForRenderPass(int par1, int par2) {
-		return (IIcon) (master != null ? master.getIconFromDamageForRenderPass(par1, par2) : super.getIconFromDamageForRenderPass(par1, par2));
-	}
-
-	public IIcon superGetIconFromDamageForRenderPass(int par1, int par2) {
-		return super.getIconFromDamageForRenderPass(par1, par2);
-	}
-
-	@Override
 	public Item setCreativeTab(CreativeTabs creativeTabs) {
 		return (Item) (master != null ? master.setCreativeTab(creativeTabs) : super.setCreativeTab(creativeTabs));
 	}
@@ -510,16 +447,6 @@ public class Modchu_Item extends Item {
 	}
 
 	@Override
-	public void registerIcons(IIconRegister iIconRegister) {
-		if (master != null) master.registerIcons(iIconRegister);
-		else super.registerIcons(iIconRegister);
-	}
-
-	public void superRegisterIcons(Object iIconRegister) {
-		super.registerIcons((IIconRegister) iIconRegister);
-	}
-
-	@Override
 	public Multimap getItemAttributeModifiers() {
 		return (Multimap) (master != null ? master.getItemAttributeModifiers() : super.getItemAttributeModifiers());
 	}
@@ -527,23 +454,149 @@ public class Modchu_Item extends Item {
 	public Multimap superGetItemAttributeModifiers() {
 		return (Multimap) (super.getItemAttributeModifiers());
 	}
+	// ~164
+	public float getStrVsBlock(ItemStack itemStack, Block block) {
+		return 0.0F;
+	}
+
+	public float superGetStrVsBlock(Object itemStack, Object block) {
+		return 0.0F;
+	}
+
+	public boolean onBlockDestroyed(ItemStack itemStack, World world, int par3, int par4, int par5, int par6, EntityLivingBase entityLivingBase) {
+		return false;
+	}
+
+	public boolean superOnBlockDestroyed(Object itemStack, Object world, int par3, int par4, int par5, int par6, Object entityLivingBase) {
+		return false;
+	}
+
+	public boolean canHarvestBlock(Block block) {
+		return false;
+	}
+
+	public boolean superCanHarvestBlock(Object block) {
+		return false;
+	}
+
+	public String getStatName() {
+		return null;
+	}
+
+	public String superGetStatName() {
+		return null;
+	}
+
+	public String getPotionEffect() {
+		return null;
+	}
+
+	public String superGetPotionEffect() {
+		return null;
+	}
+
+	public boolean isPotionIngredient() {
+		return false;
+	}
+
+	public boolean superIsPotionIngredient() {
+		return false;
+	}
+
+	public String getItemDisplayName(ItemStack itemStack) {
+		return null;
+	}
+
+	public String superGetItemDisplayName(Object itemStack) {
+		return null;
+	}
+
+	public void getSubItems(int par1, CreativeTabs creativeTabs, List par3List) {
+	}
+
+	public void superGetSubItems(int par1, Object creativeTabs, List par3List) {
+	}
+
+	public void registerIcons(Object iconRegister) {
+	}
+	// 164~
+	public float getStrVsBlock(ItemStack itemStack, Block block, int metadata) {
+		return 0.0F;
+	}
+
+	public float superGetStrVsBlock(Object itemStack, Object block, int metadata) {
+		return 0.0F;
+	}
+
+	public void onUsingItemTick(ItemStack itemStack, EntityPlayer entityPlayer, int count) {
+	}
+
+	public void superOnUsingItemTick(Object itemStack, Object entityPlayer, int count) {
+	}
+
+	public ItemStack getContainerItemStack(ItemStack itemStack) {
+		return null;
+	}
+
+	public ItemStack superGetContainerItemStack(Object itemStack) {
+		return null;
+	}
+
+	public boolean shouldPassSneakingClickToBlock(World world, int par4, int par5, int par6) {
+		return false;
+	}
+
+	public boolean superShouldPassSneakingClickToBlock(Object world, int par4, int par5, int par6) {
+		return false;
+	}
+
+	public void onArmorTickUpdate(World world, EntityPlayer entityPlayer, ItemStack itemStack) {
+	}
+
+	public void superOnArmorTickUpdate(Object world, Object entityPlayer, Object itemStack) {
+	}
+
+	public float getDamageVsEntity(Entity entity, ItemStack itemStack) {
+		return 0.0F;
+	}
+
+	public float superGetDamageVsEntity(Object entity, Object itemStack) {
+		return 0.0F;
+	}
+
+	public String getArmorTexture(ItemStack itemStack, Entity entity, int slot, int layer) {
+		return null;
+	}
+
+	public String superGetArmorTexture(Object itemStack, Object entity, int slot, int layer) {
+		return null;
+	}
+	// 164~
+	@Override
+	public IIcon getIconIndex(ItemStack itemStack) {
+		return (IIcon) (master != null ? master.getIconIndex(itemStack) : super.getIconIndex(itemStack));
+	}
+
+	public IIcon superGetIconIndex(Object itemStack) {
+		return super.getIconIndex((ItemStack) itemStack);
+	}
 
 	@Override
-	public Item setTextureName(String par1Str) {
-		return (Item) (master != null ? master.setTextureName(par1Str) : super.setTextureName(par1Str));
+	public String getPotionEffect(ItemStack itemStack) {
+		return master != null ? master.getPotionEffect(itemStack) : super.getPotionEffect(itemStack);
 	}
 
-	public Item superSetTextureName(String par1Str) {
-		return super.setTextureName(par1Str);
+	public String superGetPotionEffect(Object itemStack) {
+		return super.getPotionEffect((ItemStack) itemStack);
 	}
 
 	@Override
-	protected String getIconString() {
-		return master != null ? master.getIconString() : super.getIconString();
+	public boolean isPotionIngredient(ItemStack itemStack) {
+		return master != null ? master.isPotionIngredient(itemStack) : super.isPotionIngredient(itemStack);
 	}
 
-	public String superGetIconString() {
-		return super.getIconString();
+	public boolean superIsPotionIngredient(Object itemStack) {
+		return super.isPotionIngredient((ItemStack) itemStack);
 	}
 
 	@Override
@@ -598,24 +651,6 @@ public class Modchu_Item extends Item {
 
 	public boolean superOnLeftClickEntity(Object itemStack, Object entityPlayer, Object entity) {
 		return super.onLeftClickEntity((ItemStack) itemStack, (EntityPlayer) entityPlayer, (Entity) entity);
-	}
-
-	@Override
-	public IIcon getIcon(ItemStack itemStack, int renderPass, EntityPlayer entityPlayer, ItemStack itemStack1, int useRemaining) {
-		return (IIcon) (master != null ? master.getIcon(itemStack, renderPass, entityPlayer, itemStack1, useRemaining) : super.getIcon(itemStack, renderPass, entityPlayer, itemStack1, useRemaining));
-	}
-
-	public IIcon superGetIcon(Object itemStack, int renderPass, Object entityPlayer, Object itemStack1, int useRemaining) {
-		return super.getIcon((ItemStack) itemStack, renderPass, (EntityPlayer) entityPlayer, (ItemStack) itemStack1, useRemaining);
-	}
-
-	@Override
-	public int getRenderPasses(int metadata) {
-		return master != null ? master.getRenderPasses(metadata) : super.getRenderPasses(metadata);
-	}
-
-	public int superGetRenderPasses(int metadata) {
-		return super.getRenderPasses(metadata);
 	}
 
 	@Override
@@ -826,153 +861,6 @@ public class Modchu_Item extends Item {
 	public int superGetItemStackLimit(Object itemStack) {
 		return super.getItemStackLimit((ItemStack) itemStack);
 	}
-
-	//164
-	public float getStrVsBlock(ItemStack itemStack, Block block) {
-		return 0.0F;
-	}
-
-	public float superGetStrVsBlock(Object itemStack, Object block) {
-		return 0.0F;
-	}
-
-	public boolean onBlockDestroyed(ItemStack itemStack, World world, int par3, int par4, int par5, int par6, EntityLivingBase entityLivingBase) {
-		return false;
-	}
-
-	public boolean superOnBlockDestroyed(Object itemStack, Object world, int par3, int par4, int par5, int par6, Object entityLivingBase) {
-		return false;
-	}
-
-	public boolean canHarvestBlock(Block block) {
-		return false;
-	}
-
-	public boolean superCanHarvestBlock(Object block) {
-		return false;
-	}
-
-	public String getStatName() {
-		return null;
-	}
-
-	public String superGetStatName() {
-		return null;
-	}
-
-	public String getPotionEffect() {
-		return null;
-	}
-
-	public String superGetPotionEffect() {
-		return null;
-	}
-
-	public boolean isPotionIngredient() {
-		return false;
-	}
-
-	public boolean superIsPotionIngredient() {
-		return false;
-	}
-
-	public String getItemDisplayName(ItemStack itemStack) {
-		return null;
-	}
-
-	public String superGetItemDisplayName(Object itemStack) {
-		return null;
-	}
-/*
-	public Icon getIconFromDamageForRenderPass(int par1, int par2) {
-		return null;
-	}
-
-	public Icon superGetIconFromDamageForRenderPass(int par1, int par2) {
-		return null;
-	}
-*/
-	public void getSubItems(int par1, CreativeTabs creativeTabs, List par3List) {
-	}
-
-	public void superGetSubItems(int par1, Object creativeTabs, List par3List) {
-	}
-
-	//	public void registerIcons(IconRegister iconRegister) {
-	public void registerIcons(Object iconRegister) {
-	}
-/*
-	public void superRegisterIcons(Object iconRegister) {
-	}
-*/
-	public float getStrVsBlock(ItemStack itemStack, Block block, int metadata) {
-		return 0.0F;
-	}
-
-	public float superGetStrVsBlock(Object itemStack, Object block, int metadata) {
-		return 0.0F;
-	}
-
-	public void onUsingItemTick(ItemStack itemStack, EntityPlayer entityPlayer, int count) {
-	}
-
-	public void superOnUsingItemTick(Object itemStack, Object entityPlayer, int count) {
-	}
-/*
-	public Icon getIcon(ItemStack itemStack, int renderPass, EntityPlayer entityPlayer, ItemStack itemStack1, int useRemaining) {
-		return null;
-	}
-
-	public Icon superGetIcon(Object itemStack, int renderPass, Object entityPlayer, Object itemStack1, int useRemaining) {
-		return null;
-	}
-*/
-	public ItemStack getContainerItemStack(ItemStack itemStack) {
-		return null;
-	}
-
-	public ItemStack superGetContainerItemStack(Object itemStack) {
-		return null;
-	}
-/*
-	public Icon getIcon(ItemStack itemStack, int pass) {
-		return null;
-	}
-
-	public Icon superGetIcon(Object itemStack, int pass) {
-		return null;
-	}
-*/
-	public boolean shouldPassSneakingClickToBlock(World world, int par4, int par5, int par6) {
-		return false;
-	}
-
-	public boolean superShouldPassSneakingClickToBlock(Object world, int par4, int par5, int par6) {
-		return false;
-	}
-
-	public void onArmorTickUpdate(World world, EntityPlayer entityPlayer, ItemStack itemStack) {
-	}
-
-	public void superOnArmorTickUpdate(Object world, Object entityPlayer, Object itemStack) {
-	}
-
-	public float getDamageVsEntity(Entity entity, ItemStack itemStack) {
-		return 0.0F;
-	}
-
-	public float superGetDamageVsEntity(Object entity, Object itemStack) {
-		return 0.0F;
-	}
-
-	public String getArmorTexture(ItemStack itemStack, Entity entity, int slot, int layer) {
-		return null;
-	}
-
-	public String superGetArmorTexture(Object itemStack, Object entity, int slot, int layer) {
-		return null;
-	}
-
 	// 172~
 	@Override
 	public float func_150893_a(ItemStack itemStack, Block block) {
@@ -1120,6 +1008,121 @@ public class Modchu_Item extends Item {
 
 	public int superGetHarvestLevel(Object itemStack, String toolClass) {
 		return super.getHarvestLevel((ItemStack) itemStack, toolClass);
+	}
+
+	// ~179
+	@Override
+	public int getSpriteNumber() {
+		return master != null ? master.getSpriteNumber() : super.getSpriteNumber();
+	}
+
+	public int superGetSpriteNumber() {
+		return super.getSpriteNumber();
+	}
+
+	@Override
+	public IIcon getIconFromDamage(int par1) {
+		return (IIcon) (master != null ? master.getIconFromDamage(par1) : super.getIconFromDamage(par1));
+	}
+
+	public IIcon superGetIconFromDamage(int par1) {
+		return super.getIconFromDamage(par1);
+	}
+
+	@Override
+	public boolean requiresMultipleRenderPasses() {
+		return master != null ? master.requiresMultipleRenderPasses() : super.requiresMultipleRenderPasses();
+	}
+
+	public boolean superRequiresMultipleRenderPasses() {
+		return super.requiresMultipleRenderPasses();
+	}
+
+	@Override
+	public IIcon getIconFromDamageForRenderPass(int par1, int par2) {
+		return (IIcon) (master != null ? master.getIconFromDamageForRenderPass(par1, par2) : super.getIconFromDamageForRenderPass(par1, par2));
+	}
+
+	public IIcon superGetIconFromDamageForRenderPass(int par1, int par2) {
+		return super.getIconFromDamageForRenderPass(par1, par2);
+	}
+
+	@Override
+	public void registerIcons(IIconRegister iIconRegister) {
+		if (master != null) master.registerIcons(iIconRegister);
+		else super.registerIcons(iIconRegister);
+	}
+
+	public void superRegisterIcons(Object iIconRegister) {
+		super.registerIcons((IIconRegister) iIconRegister);
+	}
+
+	@Override
+	public Item setTextureName(String par1Str) {
+		return (Item) (master != null ? master.setTextureName(par1Str) : super.setTextureName(par1Str));
+	}
+
+	public Item superSetTextureName(String par1Str) {
+		return super.setTextureName(par1Str);
+	}
+
+	@Override
+	protected String getIconString() {
+		return master != null ? master.getIconString() : super.getIconString();
+	}
+
+	public String superGetIconString() {
+		return super.getIconString();
+	}
+
+	@Override
+	public IIcon getIcon(ItemStack itemStack, int renderPass, EntityPlayer entityPlayer, ItemStack itemStack1, int useRemaining) {
+		return (IIcon) (master != null ? master.getIcon(itemStack, renderPass, entityPlayer, itemStack1, useRemaining) : super.getIcon(itemStack, renderPass, entityPlayer, itemStack1, useRemaining));
+	}
+
+	public IIcon superGetIcon(Object itemStack, int renderPass, Object entityPlayer, Object itemStack1, int useRemaining) {
+		return super.getIcon((ItemStack) itemStack, renderPass, (EntityPlayer) entityPlayer, (ItemStack) itemStack1, useRemaining);
+	}
+
+	@Override
+	public int getRenderPasses(int metadata) {
+		return master != null ? master.getRenderPasses(metadata) : super.getRenderPasses(metadata);
+	}
+
+	public int superGetRenderPasses(int metadata) {
+		return super.getRenderPasses(metadata);
+	}
+
+	// 180~
+	public boolean superOnItemUseFirst(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ) {
+		return false;
+	}
+
+	public boolean superOnBlockStartBreak(Object itemStack, Object blockPos, Object entityPlayer) {
+		return false;
+	}
+
+	public void superRenderHelmetOverlay(Object itemStack, Object entityPlayer, Object scaledResolution, float partialTicks) {
+	}
+
+	public int superGetMetadata(Object itemStack) {
+		return 0;
+	}
+
+	public boolean superOnBlockDestroyed(Object itemStack, Object world, Object block, Object blockPos, Object entityLivingBase) {
+		return false;
+	}
+
+	public float superGetDigSpeed(Object itemStack, Object iBlockState) {
+		return 0;
+	}
+
+	public boolean superDoesSneakBypassUse(Object world, Object blockPos, Object entityPlayer) {
+		return false;
+	}
+
+	public boolean superOnItemUse(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumFacing, float f, float f1, float f2) {
+		return false;
 	}
 
 }

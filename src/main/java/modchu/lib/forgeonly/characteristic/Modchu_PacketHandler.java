@@ -1,7 +1,6 @@
-package modchu.lib.characteristic;
+package modchu.lib.forgeonly.characteristic;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
@@ -9,6 +8,10 @@ import io.netty.handler.codec.MessageToMessageCodec;
 import java.util.List;
 
 import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_Packet;
+import modchu.lib.characteristic.Modchu_AS;
+import modchu.lib.characteristic.Modchu_AbstractPacket;
+import modchu.lib.characteristic.Modchu_Message;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
@@ -30,7 +33,7 @@ public class Modchu_PacketHandler extends MessageToMessageCodec<FMLProxyPacket, 
 	@Override
 	protected void encode(ChannelHandlerContext ctx, Modchu_AbstractPacket msg, List<Object> out) throws Exception {
 		Modchu_Debug.mDebug("Modchu_PacketHandler encode channelName="+channelName);
-		FMLProxyPacket proxyPacket = new FMLProxyPacket(((Modchu_Message) msg).byteBuf, (String)ctx.channel().attr(NetworkRegistry.FML_CHANNEL).get());
+		FMLProxyPacket proxyPacket = new FMLProxyPacket((ByteBuf) ((Modchu_Message) msg).byteBuf, (String)ctx.channel().attr(NetworkRegistry.FML_CHANNEL).get());
 		out.add(proxyPacket);
 	}
 

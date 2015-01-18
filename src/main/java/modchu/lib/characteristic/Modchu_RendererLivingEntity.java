@@ -3,35 +3,30 @@ package modchu.lib.characteristic;
 import java.util.List;
 
 import modchu.lib.Modchu_IRenderLiving;
-import modchu.lib.Modchu_IRenderLivingMaster;
+import modchu.lib.Modchu_IRendererLivingEntityMaster;
+import modchu.lib.Modchu_IRendererLivingEntity;
 import modchu.lib.Modchu_Reflect;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.culling.ICamera;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderLiving {
-	public Modchu_IRenderLivingMaster master;
+public class Modchu_RendererLivingEntity extends RendererLivingEntity implements Modchu_IRendererLivingEntity {
+	public Modchu_IRendererLivingEntityMaster master;
 
-	public Modchu_RenderLiving(Class masterClass, Modchu_ModelBase model, float f) {
+	public Modchu_RendererLivingEntity(Class masterClass, Modchu_ModelBase model, float f) {
 		super(model, f);
-		Object instance = masterClass != null ? Modchu_Reflect.newInstance(masterClass, new Class[]{ Modchu_IRenderLiving.class, Object[].class }, new Object[]{ this, new Object[]{ model, f } }) : null;
-		//Modchu_Debug.mDebug("Modchu_RenderLiving init instance="+instance);
+		Object instance = masterClass != null ? Modchu_Reflect.newInstance(masterClass, new Class[]{ Modchu_IRendererLivingEntity.class, Object[].class }, new Object[]{ this, new Object[]{ model, f } }) : null;
+		//Modchu_Debug.mDebug("Modchu_RendererLivingEntity init instance="+instance);
 		master = instance != null
-				&& instance instanceof Modchu_IRenderLivingMaster ? (Modchu_IRenderLivingMaster) instance : null;
+				&& instance instanceof Modchu_IRendererLivingEntityMaster ? (Modchu_IRendererLivingEntityMaster) instance : null;
 		setRenderManager((RenderManager) Modchu_AS.get(Modchu_AS.renderManagerInstance));
-	}
-
-	@Override
-	public void doRender(EntityLiving entity, double d, double d1, double d2, float d3, float d4) {
-		doRender((Entity) entity, d, d1, d2, d3, d4);
 	}
 
 	@Override
@@ -46,7 +41,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public void doRender(Entity entity, double d, double d1, double d2, float d3, float d4) {
-		//Modchu_Debug.mDebug("Modchu_RenderLiving doRender");
+		//Modchu_Debug.mDebug("Modchu_RenderLivingBase doRender");
 		if (master != null) master.doRender(entity, d, d1, d2, d3, d4);
 	}
 
@@ -61,7 +56,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		//if (master != null) Modchu_Debug.mdDebug("Modchu_RenderLiving getEntityTexture "+((ResourceLocation) master.getEntityTexture(entity)));
+		//if (master != null) Modchu_Debug.mdDebug("Modchu_RenderLivingBase getEntityTexture "+((ResourceLocation) master.getEntityTexture(entity)));
 		return master != null ? (ResourceLocation) master.getEntityTexture(entity) : null;
 	}
 
@@ -85,10 +80,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	// 180~
 	public boolean shouldRenderLiving(EntityLiving entityLiving, ICamera iCamera, double p_177104_3_, double p_177104_5_, double p_177104_7_) {
 		return false;
-	}
-
-	@Override
-	public void superFunc_177105_a(Object entityLiving, float p_177105_2_) {
 	}
 
 	public void func_177105_a(EntityLiving entityLiving, float p_177105_2_) {
@@ -250,7 +241,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return null;
 	}
 
-	public RenderManager superFunc_177068_d() {
+	public Object superFunc_177068_d() {
 		return null;
 	}
 
@@ -261,6 +252,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public void setRenderPassModel(Object model, Object model2) {
+		setRenderPassModel((ModelBase) model);
 	}
 
 	@Override
@@ -405,12 +397,13 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public FontRenderer superGetFontRendererFromRenderManager() {
+	public Object superGetFontRendererFromRenderManager() {
 		return super.getFontRendererFromRenderManager();
 	}
 
 	@Override
 	public void superPreRenderCallback(Object entityLivingBase, float par2) {
+		super.preRenderCallback((EntityLivingBase) entityLivingBase, par2);
 	}
 
 	@Override
@@ -435,16 +428,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public void superRenderEquippedItems(Object entityliving, float f) {
-	}
-
-	@Override
-	public int superShouldRenderPass(Object entityliving, int i, float f) {
-		return -1;
-	}
-
-	@Override
-	public int superInheritRenderPass(Object entity, int par2, float par3) {
-		return -1;
+		super.renderEquippedItems((EntityLivingBase) entityliving, f);
 	}
 
 	@Override
@@ -454,71 +438,128 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public Object getRenderPassModel() {
-		return null;
+		return renderPassModel;
 	}
 
 	@Override
-	public boolean superUsePassSpecialRender(Object entityLivingBase) {
-		return false;
+	public void setRenderPassModel(ModelBase modelBase) {
+		if (master != null) master.setRenderPassModel(modelBase);
+		else super.setRenderPassModel(modelBase);
 	}
 
-	@Override
-	public void renderLeashedToEntityRope(Object entityLiving, double d, double d1, double d2, float d3, float d4) {
-	}
-
-	@Override
 	public void superSetRenderPassModel(Object modelBase) {
 		super.setRenderPassModel((ModelBase) modelBase);
 	}
 
 	@Override
+	protected float renderSwingProgress(EntityLivingBase entityLivingBase, float par2) {
+		return master != null ? master.renderSwingProgress(entityLivingBase, par2) : super.renderSwingProgress(entityLivingBase, par2);
+	}
+
 	public float superRenderSwingProgress(Object entityLivingBase, float par2) {
 		return super.renderSwingProgress((EntityLivingBase) entityLivingBase, par2);
 	}
 
 	@Override
+	protected void renderArrowsStuckInEntity(EntityLivingBase entityLivingBase, float par2) {
+		if (master != null) master.renderArrowsStuckInEntity(entityLivingBase, par2);
+		else super.renderArrowsStuckInEntity(entityLivingBase, par2);
+	}
+
 	public void superRenderArrowsStuckInEntity(Object entityLivingBase, float par2) {
 		super.renderArrowsStuckInEntity((EntityLivingBase) entityLivingBase, par2);
 	}
 
 	@Override
-	public void superFunc_82408_c(Object entityLivingBase, int par2, float par3) {
-		super.func_82408_c((AbstractClientPlayer) entityLivingBase, par2, par3);
+	protected int inheritRenderPass(EntityLivingBase entityLivingBase, int par2, float par3) {
+		return master != null ? master.inheritRenderPass(entityLivingBase, par2, par3) : super.inheritRenderPass(entityLivingBase, par2, par3);
+	}
+
+	public int superInheritRenderPass(Object entityLivingBase, int par2, float par3) {
+		return super.inheritRenderPass((EntityLivingBase) entityLivingBase, par2, par3);
 	}
 
 	@Override
+	protected int shouldRenderPass(EntityLivingBase entityLivingBase, int par2, float par3) {
+		return master != null ? master.shouldRenderPass(entityLivingBase, par2, par3) : super.shouldRenderPass(entityLivingBase, par2, par3);
+	}
+
+	public int superShouldRenderPass(Object entityLivingBase, int par2, float par3) {
+		return super.shouldRenderPass((EntityLivingBase) entityLivingBase, par2, par3);
+	}
+
+	@Override
+	protected void func_82408_c(EntityLivingBase entityLivingBase, int par2, float par3) {
+		if (master != null) master.func_82408_c(entityLivingBase, par2, par3);
+		else super.func_82408_c(entityLivingBase, par2, par3);
+	}
+
+	public void superFunc_82408_c(Object entityLivingBase, int par2, float par3) {
+		super.func_82408_c((EntityLivingBase) entityLivingBase, par2, par3);
+	}
+
+	@Override
+	protected boolean func_110813_b(EntityLivingBase entityLivingBase) {
+		return master != null ? master.func_110813_b(entityLivingBase) : super.func_110813_b(entityLivingBase);
+	}
+
 	public boolean superFunc_110813_b(Object entityLivingBase) {
 		return super.func_110813_b((EntityLivingBase) entityLivingBase);
 	}
 
 	@Override
+	protected void func_96449_a(EntityLivingBase entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10) {
+		if (master != null) master.func_96449_a(entityLivingBase, par2, par4, par6, par8Str, par9, par10);
+		else super.func_96449_a(entityLivingBase, par2, par4, par6, par8Str, par9, par10);
+	}
+
 	public void superFunc_96449_a(Object entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10) {
-		super.func_96449_a((AbstractClientPlayer) entityLivingBase, par2, par4, par6, par8Str, par9, par10);
+		super.func_96449_a((EntityLivingBase) entityLivingBase, par2, par4, par6, par8Str, par9, par10);
 	}
 
 	@Override
+	public boolean isStaticEntity() {
+		return master != null ? master.isStaticEntity() : super.isStaticEntity();
+	}
+
 	public boolean superIsStaticEntity() {
 		return super.isStaticEntity();
 	}
 
 	@Override
+	protected void bindEntityTexture(Entity entity) {
+		if (master != null) master.bindEntityTexture(entity);
+		else super.bindEntityTexture(entity);
+	}
+
+	@Override
+	public void setRenderManager(RenderManager renderManager) {
+		if (master != null) master.setRenderManager(renderManager);
+		else super.setRenderManager(renderManager);
+	}
+
 	public void superSetRenderManager(Object renderManager) {
 		super.setRenderManager((RenderManager) renderManager);
 	}
 
 	@Override
+	public void updateIcons(IIconRegister iIconRegister) {
+		if (master != null) master.updateIcons(iIconRegister);
+		else super.updateIcons(iIconRegister);
+	}
+
 	public void superUpdateIcons(Object iIconRegister) {
 		super.updateIcons((IIconRegister) iIconRegister);
 	}
 
 	@Override
-	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
-		super.func_147906_a((Entity) entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
+	protected void func_147906_a(Entity entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
+		if (master != null) master.func_147906_a(entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
+		else super.func_147906_a(entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
 	}
 
-	@Override
-	public boolean superFunc_130007_b(Object entityLiving) {
-		return false;
+	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
+		super.func_147906_a((Entity) entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
 	}
 
 }
