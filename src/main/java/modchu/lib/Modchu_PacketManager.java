@@ -3,19 +3,20 @@ package modchu.lib;
 import java.io.IOException;
 import java.io.InputStream;
 
-import modchu.lib.Modchu_IPacketManager;
-import modchu.lib.Modchu_Reflect;
-
 public class Modchu_PacketManager {
 	public static Modchu_IPacketManager master;
 
 	public static void init() {
+		boolean debug = false;
+		if (debug) Modchu_Debug.lDebug("Modchu_PacketManager init");
 		if (master != null) ;else {
+			if (debug) Modchu_Debug.lDebug("Modchu_PacketManager init 1");
 			Object o = Modchu_Reflect.newInstance("modchu.lib.forgeonly.characteristic.Modchu_PacketManagerMaster");
-			if (o != null); else Modchu_Debug.lDebug("Modchu_PacketManager init o == null !!");
+			if (debug) Modchu_Debug.lDebug("Modchu_PacketManager init o="+o);
 			master = o instanceof Modchu_IPacketManager ? (Modchu_IPacketManager) o : null;
-			if (master != null); else Modchu_Debug.lDebug("Modchu_PacketManager init master == null !!");
+			if (debug) Modchu_Debug.lDebug("Modchu_PacketManager init master="+master);
 		}
+		if (debug) Modchu_Debug.lDebug("Modchu_PacketManager init end.");
 	}
 
 	public static void sendToServer(Object[] data, String packetChannelName) {

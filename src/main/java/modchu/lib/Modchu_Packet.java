@@ -11,22 +11,21 @@ public class Modchu_Packet implements Modchu_IPacketConstant {
 	}
 
 	public static void registerPacket(Object instance, String channelName) {
-		Modchu_Debug.lDebug("Modchu_Packet registerPacket");
-		if (Modchu_Main.getMinecraftVersion() < 164
-				&& !Modchu_Main.isForge) return;
+		boolean debug = false;
+		if (debug) Modchu_Debug.lDebug("Modchu_Packet registerPacket");
 		if (master != null) ;else {
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master null init");
 			Class c = Modchu_Reflect.loadClass("modchu.lib.forgeonly.characteristic.Modchu_PacketMaster");
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master null init c="+c);
+			if (debug) Modchu_Debug.lDebug("Modchu_Packet registerPacket c="+c);
 			if (c != null) ;else return;
 			Object o = Modchu_Reflect.newInstance(c);
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master null init o="+o);
+			if (debug) Modchu_Debug.lDebug("Modchu_Packet registerPacket o="+o);
 			master = o != null
 					&& o instanceof Modchu_IPacket ? (Modchu_IPacket) o : null;
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master null init master="+master);
+			if (debug) Modchu_Debug.lDebug("Modchu_Packet registerPacket master="+master);
 			Modchu_PacketManager.init();
 		}
 		if (master != null) master.registerPacket(instance, channelName);
+		if (debug) Modchu_Debug.lDebug("Modchu_Packet registerPacket end.");
 	}
 
 	public static void onPacketData(Object... o) {
