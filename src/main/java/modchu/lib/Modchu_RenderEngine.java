@@ -46,7 +46,10 @@ public class Modchu_RenderEngine {
 
 	public void bindBufferedImage(String s, BufferedImage image) {
 		if (s != null
-				&& image != null) ;else return;
+				&& image != null) ;else {
+			Modchu_Debug.lDebug("Modchu_RenderEngine bindBufferedImage s == null !!");
+			return;
+		}
 		int generateDisplayList = Modchu_AS.getInt(Modchu_AS.gLAllocationGenerateDisplayLists, displayListsNumber);
 		bindTexture(generateDisplayList);
 		setupTextureExt(image, generateDisplayList, false, false);

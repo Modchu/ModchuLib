@@ -629,10 +629,6 @@ public class Modchu_FileManager {
 			break;
 		}
 		Modchu_Debug.mDebug("Modchu_FileManager addFile file.getName()="+file.getName());
-		if (fileName != null && !file.getName().matches(fileName)) {
-			list.add(file);
-			return list;
-		}
 		if (period != 0) {
 			Date lastModifiedDate = new Date(file.lastModified());
 			String lastModifiedDateStr = new SimpleDateFormat("yyyyMMdd").format(lastModifiedDate);
@@ -646,12 +642,14 @@ public class Modchu_FileManager {
 				if (lastModifiedDateStr.compareTo(designatedDateStr) > 0) return list;
 			}
 		}
-		if ((indexofFileName == null
+		if (fileName != null
+				&& !file.getName().matches(fileName)
+				&& ((indexofFileName == null
 				&& matchingFileName == null)
 				| (indexofFileName != null
 				&& file.getName().indexOf(indexofFileName) > -1)
 				| (matchingFileName != null
-				&& file.getName().equals(matchingFileName))) {
+				&& file.getName().equals(matchingFileName)))) {
 			list.add(file);
 			Modchu_Debug.mDebug("Modchu_FileManager addFile list.add file.getName()="+file.getName());
 		}
