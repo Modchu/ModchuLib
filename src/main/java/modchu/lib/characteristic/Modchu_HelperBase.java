@@ -3,6 +3,7 @@ package modchu.lib.characteristic;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,39 +12,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPotion;
-import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
+
+import com.google.common.collect.Multimap;
 
 public class Modchu_HelperBase {
 
-	public static final boolean isClient;
 	public static final Package fpackage;
 	public static final String packegeBase;
-	public static final boolean isForge = Loader.isModLoaded("Forge");
-	public static final Minecraft mc;
 	public static Method methGetSmeltingResultForge = null;
 	public static Class entityRegistry = null;
 	public static Method registerModEntity = null;
@@ -54,16 +32,6 @@ public class Modchu_HelperBase {
 		fpackage = null;
 		packegeBase = fpackage == null ? "" : fpackage.getName().concat(".");
 
-		Minecraft lm = null;
-		try {
-			lm = FMLClientHandler.instance().getClient();
-		} catch (Exception e) {
-//			e.printStackTrace();
-		} catch (Error e) {
-//			e.printStackTrace();
-		}
-		mc = lm;
-		isClient = FMLCommonHandler.instance().getSide().isClient();
 /*
 		if (isForge) {
 			try {
@@ -72,7 +40,7 @@ public class Modchu_HelperBase {
 				e.printStackTrace();
 			}
 			try {
-				entityRegistry = getNameOfClass("cpw.mods.fml.common.registry.EntityRegistry");
+				entityRegistry = getNameOfClass("EntityRegistry");
 				registerModEntity = entityRegistry.getMethod("registerModEntity",
 						Class.class, String.class, int.class, Object.class, int.class, int.class, boolean.class);
 			} catch (Exception e) {
@@ -86,7 +54,8 @@ public class Modchu_HelperBase {
 	 * 現在の実行環境がローカルかどうかを判定する。
 	 */
 	public static boolean isLocalPlay() {
-		return isClient && mc.isIntegratedServerRunning();
+		return !Modchu_Main.isServer
+				&& Modchu_AS.getBoolean(Modchu_AS.isIntegratedServerRunning);
 	}
 
 	/**
@@ -95,15 +64,17 @@ public class Modchu_HelperBase {
 	 * その際、UsingItemの更新処理が行われないため違うアイテムに持替えられたと判定される。
 	 * ここでは比較用に使われるスタックリストを強制的に書換える事により対応した。
 	 */
-	public static void updateCheckinghSlot(Entity pEntity, ItemStack pItemStack) {
-		if (pEntity instanceof EntityPlayerMP) {
-			// サーバー側でのみ処理
-			EntityPlayerMP lep = (EntityPlayerMP)pEntity;
-			Container lctr = lep.openContainer;
-			for (int li = 0; li < lctr.inventorySlots.size(); li++) {
-				ItemStack lis = ((Slot)lctr.getSlot(li)).getStack();
-				if (lis == pItemStack) {
-					lctr.inventoryItemStacks.set(li, pItemStack.copy());
+	public static void updateCheckinghSlot(Object entity, Object itemStack) {
+		// サーバー側でのみ処理
+		if (!Modchu_Main.isServer) return;
+		if (Modchu_Reflect.loadClass("EntityPlayerMP").isInstance(entity)) {
+			Object container = Modchu_AS.get(Modchu_AS.entityPlayerMPOpenContainer, entity);
+			List inventorySlots = Modchu_AS.getList(Modchu_AS.containerInventorySlots, container);
+			for (int li = 0; li < inventorySlots.size(); li++) {
+				Object itemStack2 = Modchu_AS.get(Modchu_AS.slotGetStack, Modchu_AS.get(Modchu_AS.containerGetSlot, container, li));
+				if (itemStack2 == itemStack) {
+					List inventoryItemStacks = Modchu_AS.getList(Modchu_AS.containerInventoryItemStacks, container);
+					inventoryItemStacks.set(li, Modchu_AS.get(Modchu_AS.itemStackCopyItemStack, itemStack));
 					break;
 				}
 			}
@@ -114,7 +85,7 @@ public class Modchu_HelperBase {
 	 * Forge用クラス獲得。
 	 */
 	public static Class getForgeClass(Object pMod, String pName) {
-		if (isForge) {
+		if (Modchu_Main.isForge) {
 			pName = pName.concat("_Forge");
 		}
 		return getNameOfClass(pName);
@@ -192,12 +163,12 @@ public class Modchu_HelperBase {
 
 	// 状況判断要関数群
 /*
-	protected static boolean canBlockBeSeen(Entity pEntity, int x, int y, int z, boolean toTop, boolean do1, boolean do2) {
+	protected static boolean canBlockBeSeen(Entity entity, int x, int y, int z, boolean toTop, boolean do1, boolean do2) {
 		// ブロックの可視判定
-		Vec3 vec3d = Vec3.createVectorHelper(pEntity.posX, pEntity.posY + pEntity.getEyeHeight(), pEntity.posZ);
+		Vec3 vec3d = Vec3.createVectorHelper(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ);
 		Vec3 vec3d1 = Vec3.createVectorHelper((double)x + 0.5D, (double)y + (toTop ? 0.9D : 0.5D), (double)z + 0.5D);
 
-		MovingObjectPosition movingobjectposition = pEntity.worldObj.rayTraceBlocks_do_do(vec3d, vec3d1, do1, do2);
+		MovingObjectPosition movingobjectposition = entity.worldObj.rayTraceBlocks_do_do(vec3d, vec3d1, do1, do2);
 		if (movingobjectposition == null) {
 			return false;
 		}
@@ -211,23 +182,27 @@ public class Modchu_HelperBase {
 		return false;
 	}
 */
-	public static boolean setPathToTile(EntityLiving pEntity, TileEntity pTarget, boolean flag) {
+	public static boolean setPathToTile(Object entityLiving, Object tileEntity, boolean flag) {
 		// Tileまでのパスを作る
-		PathNavigate lpn = pEntity.getNavigator();
+		Object pathNavigate = Modchu_AS.get(Modchu_AS.entityLivingGetNavigator, entityLiving);
 		float lspeed = 1.0F;
 		// 向きに合わせて距離を調整
-		int i = (pTarget.yCoord == MathHelper.floor_double(pEntity.posY) && flag) ? 2 : 1;
-		switch (pEntity.worldObj.getBlockMetadata(pTarget.xCoord, pTarget.yCoord, pTarget.zCoord)) {
+		int x = Modchu_AS.getInt(Modchu_AS.tileEntityXCoord, tileEntity);
+		int y = Modchu_AS.getInt(Modchu_AS.tileEntityYCoord, tileEntity);
+		int z = Modchu_AS.getInt(Modchu_AS.tileEntityZCoord, tileEntity);
+		int i = (y == Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosY, entityLiving))
+				&& flag) ? 2 : 1;
+		switch (Modchu_AS.getInt(Modchu_AS.worldGetBlockStateGetBlockMetadata, entityLiving, x, y, z)) {
 		case 3:
-			return lpn.tryMoveToXYZ(pTarget.xCoord, pTarget.yCoord, pTarget.zCoord + i, lspeed);
+			return Modchu_AS.getBoolean(Modchu_AS.pathNavigateTryMoveToXYZ, pathNavigate, x, y, z + i, lspeed);
 		case 2:
-			return lpn.tryMoveToXYZ(pTarget.xCoord, pTarget.yCoord, pTarget.zCoord - i, lspeed);
+			return Modchu_AS.getBoolean(Modchu_AS.pathNavigateTryMoveToXYZ, pathNavigate, x, y, z - i, lspeed);
 		case 5:
-			return lpn.tryMoveToXYZ(pTarget.xCoord + 1, pTarget.yCoord, pTarget.zCoord, lspeed);
+			return Modchu_AS.getBoolean(Modchu_AS.pathNavigateTryMoveToXYZ, pathNavigate, x + 1, y, z, lspeed);
 		case 4:
-			return lpn.tryMoveToXYZ(pTarget.xCoord - i, pTarget.yCoord, pTarget.zCoord, lspeed);
+			return Modchu_AS.getBoolean(Modchu_AS.pathNavigateTryMoveToXYZ, pathNavigate, x - i, y, z, lspeed);
 		default:
-			return lpn.tryMoveToXYZ(pTarget.xCoord, pTarget.yCoord, pTarget.zCoord, lspeed);
+			return Modchu_AS.getBoolean(Modchu_AS.pathNavigateTryMoveToXYZ, pathNavigate, x, y, z, lspeed);
 		}
 	}
 
@@ -331,8 +306,8 @@ public class Modchu_HelperBase {
 	/**
 	 * Entityを返す。
 	 */
-	public static Entity getEntity(byte[] pData, int pIndex, World pWorld) {
-		return pWorld.getEntityByID(Modchu_HelperBase.getInt(pData, pIndex));
+	public static Object getEntity(byte[] pData, int pIndex, Object world) {
+		return Modchu_AS.get(Modchu_AS.worldGetEntityByID, world, Modchu_HelperBase.getInt(pData, pIndex));
 	}
 
 	/**
@@ -340,13 +315,13 @@ public class Modchu_HelperBase {
 	 * avatarが存在しない場合は元の値を返す。
 	 * avatarはEntityLiving互換。
 	 */
-	public static Entity getAvatarEntity(Entity pEntity){
+	public static Object getAvatarEntity(Object entity){
 		// littleMaid用コードここから
-		if (pEntity == null) return null;
+		if (entity == null) return null;
 		try {
 			// 射手の情報をEntityLittleMaidAvatarからEntityLittleMaidへ置き換える
-			Field field = pEntity.getClass().getField("avatar");
-			pEntity = (EntityLivingBase)field.get(pEntity);
+			Field field = entity.getClass().getField("avatar");
+			entity = field.get(entity);
 		} catch (NoSuchFieldException e) {
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -354,7 +329,7 @@ public class Modchu_HelperBase {
 			e.printStackTrace();
 		}
 		// ここまで
-		return pEntity;
+		return entity;
 	}
 
 	/**
@@ -362,11 +337,11 @@ public class Modchu_HelperBase {
 	 * maidAvatarが存在しない場合は元の値を返す。
 	 * maidAvatarはEntityPlayer互換。
 	 */
-	public static Entity getAvatarPlayer(Entity entity) {
+	public static Object getAvatarPlayer(Object entity) {
 		// メイドさんチェック
 		try {
 			Field field = entity.getClass().getField("maidAvatar");
-			entity = (Entity)field.get(entity);
+			entity = field.get(entity);
 		}
 		catch (NoSuchFieldException e) {
 		}
@@ -426,23 +401,7 @@ public class Modchu_HelperBase {
 		}
 		return lf;
 	}
-/*
-	protected static float convRevision() {
-		return convRevision(mod_MMM_MMMLib.Revision);
-	}
-*/
-	/**
-	 * 指定されたリビジョンよりも古ければ例外を投げてストップ
-	 */
-/*
-	public static void checkRevision(String pRev) {
-		if (convRevision() < convRevision(pRev)) {
-			// 適合バージョンではないのでストップ
-			ModLoader.getLogger().warning("you must check MMMLib revision.");
-			throw new RuntimeException("The revision of MMMLib is old.");
-		}
-	}
-*/
+
 	/**
 	 * EntityListに登録されていいるEntityを置き換える。
 	 */
@@ -454,28 +413,28 @@ public class Modchu_HelperBase {
 			Map lmap;
 			int lint = 0;
 			String ls = "";
-			lmap = (Map)Modchu_Reflect.getPrivateValue(EntityList.class, null, 0);
+			lmap = Modchu_AS.getMap(Modchu_AS.entityListStringToClassMapping);
 			for (Entry<String, Class> le : ((Map<String, Class>)lmap).entrySet()) {
 				if (le.getValue() == pSrcClass) {
 					le.setValue(pDestClass);
 				}
 			}
 			// classToStringMapping
-			lmap = (Map)Modchu_Reflect.getPrivateValue(EntityList.class, null, 1);
+			lmap = Modchu_AS.getMap(Modchu_AS.entityListClassToStringMapping);
 			if (lmap.containsKey(pSrcClass)) {
 				ls = (String)lmap.get(pSrcClass);
 //				lmap.remove(pSrcClass);
 				lmap.put(pDestClass, ls);
 			}
 			// IDtoClassMapping
-			lmap = (Map)Modchu_Reflect.getPrivateValue(EntityList.class, null, 2);
+			lmap = Modchu_AS.getMap(Modchu_AS.entityListIDtoClassMapping);
 			for (Entry<Integer, Class> le : ((Map<Integer, Class>)lmap).entrySet()) {
 				if (le.getValue() == pSrcClass) {
 					le.setValue(pDestClass);
 				}
 			}
 			// classToIDMapping
-			lmap = (Map)Modchu_Reflect.getPrivateValue(EntityList.class, null, 3);
+			lmap = Modchu_AS.getMap(Modchu_AS.entityListClassToIDMapping);
 			if (lmap.containsKey(pSrcClass)) {
 				lint = (Integer)lmap.get(pSrcClass);
 //				lmap.remove(pSrcClass);
@@ -525,50 +484,51 @@ public class Modchu_HelperBase {
 */
 	/**
 	 * 視線の先にいる最初のEntityを返す
-	 * @param pEntity
+	 * @param entityLivingBase
 	 * 視点
-	 * @param pRange
+	 * @param range
 	 * 視線の有効距離
-	 * @param pDelta
+	 * @param delta
 	 * 時刻補正
-	 * @param pExpand
+	 * @param expand
 	 * 検知領域の拡大範囲
 	 * @return
 	 */
-	public static Entity getRayTraceEntity(EntityLivingBase pEntity, double pRange, float pDelta, float pExpand) {
-		Vec3 lvpos = Vec3.createVectorHelper(
-				pEntity.posX, pEntity.posY + pEntity.getEyeHeight(), pEntity.posZ);
-//		Vec3 lvpos = pEntity.getPosition(pDelta).addVector(0D, pEntity.getEyeHeight(), 0D);
-		Vec3 lvlook = pEntity.getLook(pDelta);
-		Vec3 lvview = lvpos.addVector(lvlook.xCoord * pRange, lvlook.yCoord * pRange, lvlook.zCoord * pRange);
-		Entity ltarget = null;
-		List llist = pEntity.worldObj.getEntitiesWithinAABBExcludingEntity(pEntity, pEntity.boundingBox.addCoord(lvlook.xCoord * pRange, lvlook.yCoord * pRange, lvlook.zCoord * pRange).expand((double)pExpand, (double)pExpand, (double)pExpand));
-		double ltdistance = pRange * pRange;
+	public static Object getRayTraceEntity(Object entityLivingBase, double range, float delta, float expand) {
+		Object vec3 = Modchu_Reflect.newInstance("Vec3", new Class[]{ double.class, double.class, double.class }, new Object[]{ Modchu_AS.getDouble(Modchu_AS.entityPosX, entityLivingBase), Modchu_AS.getDouble(Modchu_AS.entityPosY, entityLivingBase) + Modchu_AS.getFloat(Modchu_AS.entityGetEyeHeight, entityLivingBase), Modchu_AS.getDouble(Modchu_AS.entityPosZ, entityLivingBase) });
+		Object vec3Look =  Modchu_AS.get(Modchu_AS.entityLivingBaseGetLook, entityLivingBase, delta);
+		int xCoord = Modchu_AS.getInt(Modchu_AS.vec3XCoord, vec3Look);
+		int yCoord = Modchu_AS.getInt(Modchu_AS.vec3YCoord, vec3Look);
+		int zCoord = Modchu_AS.getInt(Modchu_AS.vec3ZCoord, vec3Look);
+		Object vec3View = Modchu_AS.get(Modchu_AS.vec3AddVector, vec3, xCoord * range, yCoord * range, zCoord * range);
+		Object targetEntity = null;
+		List list = Modchu_AS.getList(Modchu_AS.worldGetEntitiesWithinAABBExcludingEntity, entityLivingBase, entityLivingBase, Modchu_AS.get(Modchu_AS.axisAlignedBBExpand, Modchu_AS.get(Modchu_AS.axisAlignedBBExpand, Modchu_AS.get(Modchu_AS.entityGetBoundingBox, entityLivingBase), xCoord * range, yCoord * range, zCoord * range), (double)expand, (double)expand, (double)expand));
+		double ltdistance = range * range;
 
-		for (int var13 = 0; var13 < llist.size(); ++var13) {
-			Entity lentity = (Entity)llist.get(var13);
+		for (int var13 = 0; var13 < list.size(); ++var13) {
+			Object entity = list.get(var13);
 
-			if (lentity.canBeCollidedWith()) {
-				float lexpand = lentity.getCollisionBorderSize() + 0.3F;
-				AxisAlignedBB laabb = lentity.boundingBox.expand((double)lexpand, (double)lexpand, (double)lexpand);
-				MovingObjectPosition lmop = laabb.calculateIntercept(lvpos, lvview);
+			if (Modchu_AS.getBoolean(Modchu_AS.entityCanBeCollidedWith, entity)) {
+				float lexpand = Modchu_AS.getFloat(Modchu_AS.entityGetCollisionBorderSize, entity) + 0.3F;
+				Object axisAlignedBB = Modchu_AS.get(Modchu_AS.axisAlignedBBExpand, Modchu_AS.get(Modchu_AS.entityGetBoundingBox, entity), (double)lexpand, (double)lexpand, (double)lexpand);
+				Object movingObjectPosition = Modchu_AS.get(Modchu_AS.axisAlignedBBCalculateIntercept, axisAlignedBB, vec3, vec3View);
 
-				if (laabb.isVecInside(lvpos)) {
+				if (Modchu_AS.getBoolean(Modchu_AS.axisAlignedBBIsVecInside, axisAlignedBB, vec3)) {
 					if (0.0D < ltdistance || ltdistance == 0.0D) {
-						ltarget = lentity;
+						targetEntity = entity;
 						ltdistance = 0.0D;
 					}
-				} else if (lmop != null) {
-					double ldis = lvpos.squareDistanceTo(lmop.hitVec);
+				} else if (movingObjectPosition != null) {
+					double ldis = Modchu_AS.getDouble(Modchu_AS.vec3SquareDistanceTo, vec3, Modchu_AS.get(Modchu_AS.movingObjectPositionHitVec, movingObjectPosition));
 
 					if (ldis < ltdistance || ltdistance == 0.0D) {
-						ltarget = lentity;
+						targetEntity = entity;
 						ltdistance = ldis;
 					}
 				}
 			}
 		}
-		return ltarget;
+		return targetEntity;
 	}
 
 
@@ -591,16 +551,16 @@ public class Modchu_HelperBase {
 	/**
 	 * アイテムに追加効果が在るかを判定する。
 	 * Forge対策。
-	 * @param pItemStack
+	 * @param itemStack
 	 * @return
 	 */
-	public static boolean hasEffect(ItemStack pItemStack) {
-		// マジClientSIDEとか辞めてほしい。
-		if (pItemStack != null) {
-			Item litem = pItemStack.getItem();
-			if (litem instanceof ItemPotion) {
-				List llist = ((ItemPotion)litem).getEffects(pItemStack);
-				return llist != null && !llist.isEmpty();
+	public static boolean hasEffect(Object itemStack) {
+		if (itemStack != null) {
+			Object item = Modchu_AS.get(Modchu_AS.itemStackGetItem, itemStack);
+			if (Modchu_Reflect.loadClass("ItemPotion").isInstance(item)) {
+				List list = Modchu_AS.getList(Modchu_AS.itemPotionGetEffects, item, itemStack);
+				return list != null
+						&& !list.isEmpty();
 			}
 		}
 		return false;
@@ -609,17 +569,18 @@ public class Modchu_HelperBase {
 	/**
 	 * Blockのインスタンスを置き換える。
 	 * static finalの変数に対して行うのでForgeでは無効。
-	 * @param pOriginal
-	 * @param pReplace
+	 * @param block
+	 * @param block2
 	 * @return
 	 */
-	public static boolean replaceBlock(Block pOriginal, Block pReplace) {
-		if (isForge) {
+	public static boolean replaceBlock(Object block, Object block2) {
+		if (Modchu_Main.isForge) {
 			return false;
 		}
 		try {
 			// Blockのstatic final分の置換え
-			Field[] lfield = Block.class.getDeclaredFields();
+			Class Block = Modchu_Reflect.loadClass("Block");
+			Field[] lfield = Block.getDeclaredFields();
 			for (int li = 0; li < lfield.length; li++) {
 				if (!Modifier.isStatic(lfield[li].getModifiers())) {
 					// static以外は対象外
@@ -627,8 +588,8 @@ public class Modchu_HelperBase {
 				}
 
 				Object lobject = lfield[li].get(null);
-				if (lobject == pOriginal) {
-					Modchu_Reflect.setPrivateValue(Block.class, null, li, pReplace);
+				if (lobject == block) {
+					Modchu_Reflect.setPrivateValue(Block, null, li, block2);
 					return true;
 				}
 			}
@@ -654,12 +615,12 @@ public class Modchu_HelperBase {
 
 	/**
 	 *  アイテムに設定された攻撃力を見る
-	 * @param pItemStack
+	 * @param itemStack
 	 * @return
 	 */
-	public static double getAttackVSEntity(ItemStack pItemStack) {
-		AttributeModifier lam = (AttributeModifier)pItemStack.getAttributeModifiers().get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
-		return lam == null ? 0 : lam.getAmount();
+	public static double getAttackVSEntity(Object itemStack) {
+		Collection attributeModifier = Modchu_AS.getMultimap(Modchu_AS.itemStackGetAttributeModifiers, itemStack).get(Modchu_AS.getString(Modchu_AS.iAttributeGetAttributeUnlocalizedName, Modchu_AS.get(Modchu_AS.sharedMonsterAttributesAttackDamage)));
+		return attributeModifier == null ? 0 : Modchu_AS.getDouble(Modchu_AS.attributeModifierGetAmount, attributeModifier);
 	}
 
 }

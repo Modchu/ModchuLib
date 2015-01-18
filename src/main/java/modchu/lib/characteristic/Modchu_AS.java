@@ -18,10 +18,11 @@ import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockMushroom;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.BlockTallGrass;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.LoadingScreenRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -49,21 +50,26 @@ import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.model.TextureOffset;
 import net.minecraft.client.model.TexturedQuad;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
+import net.minecraft.client.renderer.BlockModelRenderer;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GLAllocation;
-import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.entity.layers.LayerArmorBase;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
 import net.minecraft.client.resources.IResource;
+import net.minecraft.client.resources.model.IBakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.shader.Framebuffer;
@@ -71,7 +77,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -100,23 +105,23 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Facing;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovementInput;
 import net.minecraft.util.MovementInputFromOptions;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.RegistryNamespaced;
+import net.minecraft.util.RegistryNamespacedDefaultedByKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.Vec3;
@@ -125,11 +130,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.WorldSettings.GameType;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import com.google.common.collect.Multimap;
 import com.mojang.authlib.GameProfile;
-
-import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Modchu_AS extends Modchu_ASAlmighty {
 
@@ -160,7 +164,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object axisAlignedBBGetBoundingBox(double d, double d1, double d2, double d3, double d4, double d5) {
-		return AxisAlignedBB.getBoundingBox(d, d1, d2, d3, d4, d5);
+		return new AxisAlignedBB(d, d1, d2, d3, d4, d5);
 	}
 
 	@Override
@@ -568,40 +572,43 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object entityBoundingBox(Object entity) {
-		return ((Entity) entity).boundingBox;
+		return ((Entity) entity).getBoundingBox();
 	}
 
 	@Override
 	protected double entityBoundingBoxMaxX(Object entityOrBoundingBox) {
-		AxisAlignedBB boundingBox = entityOrBoundingBox instanceof Entity ? ((Entity) entityOrBoundingBox).boundingBox : (AxisAlignedBB) entityOrBoundingBox;
-		return boundingBox.maxX;
+		AxisAlignedBB boundingBox = entityOrBoundingBox instanceof Entity ? ((Entity) entityOrBoundingBox).getBoundingBox() : (AxisAlignedBB) entityOrBoundingBox;
+		return boundingBox != null ? boundingBox.maxX : 0.0D;
 	}
 
 	@Override
 	protected double entityBoundingBoxMaxY(Object entityOrBoundingBox) {
-		AxisAlignedBB boundingBox = entityOrBoundingBox instanceof Entity ? ((Entity) entityOrBoundingBox).boundingBox : (AxisAlignedBB) entityOrBoundingBox;
-		return boundingBox.maxY;
+		AxisAlignedBB boundingBox = entityOrBoundingBox instanceof Entity ? ((Entity) entityOrBoundingBox).getBoundingBox() : (AxisAlignedBB) entityOrBoundingBox;
+		return boundingBox != null ? boundingBox.maxY : 0.0D;
 	}
 
 	@Override
 	protected double entityBoundingBoxMaxZ(Object entityOrBoundingBox) {
-		AxisAlignedBB boundingBox = entityOrBoundingBox instanceof Entity ? ((Entity) entityOrBoundingBox).boundingBox : (AxisAlignedBB) entityOrBoundingBox;
-		return boundingBox.maxZ;
+		AxisAlignedBB boundingBox = entityOrBoundingBox instanceof Entity ? ((Entity) entityOrBoundingBox).getBoundingBox() : (AxisAlignedBB) entityOrBoundingBox;
+		return boundingBox != null ? boundingBox.maxZ : 0.0D;
 	}
 
 	@Override
 	protected double entityBoundingBoxMinX(Object entity) {
-		return ((Entity) entity).boundingBox.minX;
+		AxisAlignedBB boundingBox = ((Entity) entity).getBoundingBox();
+		return boundingBox != null ? boundingBox.minX : 0.0D;
 	}
 
 	@Override
 	protected double entityBoundingBoxMinY(Object entity) {
-		return ((Entity) entity).boundingBox.minY;
+		AxisAlignedBB boundingBox = ((Entity) entity).getBoundingBox();
+		return boundingBox != null ? boundingBox.minY : 0.0D;
 	}
 
 	@Override
 	protected double entityBoundingBoxMinZ(Object entity) {
-		return ((Entity) entity).boundingBox.minZ;
+		AxisAlignedBB boundingBox = ((Entity) entity).getBoundingBox();
+		return boundingBox != null ? boundingBox.minZ : 0.0D;
 	}
 
 	@Override
@@ -611,12 +618,11 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object entityCreatureGetEntityToAttack(Object entityCreature) {
-		return ((EntityCreature) entityCreature).getEntityToAttack();
+		return ((EntityLiving) entityCreature).getAttackTarget();
 	}
 
 	@Override
 	protected void entityCreatureSetPathToEntity(Object entityCreature, Object entityPath) {
-		((EntityCreature) entityCreature).setPathToEntity((PathEntity) entityPath);
 	}
 
 	@Override
@@ -782,7 +788,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected float entityLivingBasePrevHealth(Object entityLivingBase) {
-		return ((EntityLivingBase) entityLivingBase).prevHealth;
+		return ((EntityLivingBase) entityLivingBase).getHealth();
 	}
 
 	@Override
@@ -926,7 +932,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected boolean entityPlayerGetHideCape(Object entityplayer) {
-		return ((EntityPlayer) entityplayer).getHideCape();
+		return false;
 	}
 
 	@Override
@@ -1091,7 +1097,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected String entityTameableGetOwnerName(Object entityTameable) {
-		return ((EntityTameable) entityTameable).func_152113_b();
+		return ((EntityTameable) entityTameable).getOwnerId();
 	}
 
 	@Override
@@ -1111,32 +1117,32 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected float entityYOffset(Object entity) {
-		return ((Entity) entity).yOffset;
+		return 0.0F;
 	}
 
 	@Override
 	protected Enum enumActionBlock() {
-		return EnumAction.block;
+		return EnumAction.BLOCK;
 	}
 
 	@Override
 	protected Enum enumActionBow() {
-		return EnumAction.bow;
+		return EnumAction.BOW;
 	}
 
 	@Override
 	protected Enum enumActionDrink() {
-		return EnumAction.drink;
+		return EnumAction.DRINK;
 	}
 
 	@Override
 	protected Enum enumActionEat() {
-		return EnumAction.eat;
+		return EnumAction.EAT;
 	}
 
 	@Override
 	protected Enum enumActionNone() {
-		return EnumAction.none;
+		return EnumAction.NONE;
 	}
 
 	@Override
@@ -1156,22 +1162,22 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Enum enumCreatureTypeAmbient() {
-		return EnumCreatureType.ambient;
+		return EnumCreatureType.AMBIENT;
 	}
 
 	@Override
 	protected Enum enumCreatureTypeCreature() {
-		return EnumCreatureType.creature;
+		return EnumCreatureType.CREATURE;
 	}
 
 	@Override
 	protected Enum enumCreatureTypeMonster() {
-		return EnumCreatureType.monster;
+		return EnumCreatureType.MONSTER;
 	}
 
 	@Override
 	protected Enum enumCreatureTypeWaterCreature() {
-		return EnumCreatureType.waterCreature;
+		return EnumCreatureType.WATER_CREATURE;
 	}
 
 	@Override
@@ -1242,12 +1248,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected String getUserName(Object entityplayer) {
-		return entityplayer instanceof EntityPlayer ? ((EntityPlayer) entityplayer).getCommandSenderName() : null;
+		return entityplayer instanceof EntityPlayer ? ((EntityPlayer) entityplayer).getName() : null;
 	}
 
 	@Override
 	protected int getVacancyGlobalEntityID() {
-		Map map = EntityList.IDtoClassMapping;
+		Map map = EntityList.idToClassMapping;
 		int ID = -1;
 		if (map != null) {
 			for(int i = 64; i < 3000; i++) {
@@ -1308,7 +1314,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	protected void guiIngameDrawString(String s, int i, int j, int k) {
 		if (Modchu_Main.isServer) return;
 		Minecraft mc = Minecraft.getMinecraft();
-		mc.ingameGUI.drawString(mc.fontRenderer, s, i, j, k);
+		mc.ingameGUI.drawString(mc.fontRendererObj, s, i, j, k);
 	}
 
 	@Override
@@ -1448,7 +1454,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object itemSetTextureName(Object item, String s) {
-		return ((Item) item).setTextureName(s);
+		return item;
 	}
 
 	@Override
@@ -1498,7 +1504,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected boolean keyBindingGetIsKeyPressed(Object keyBinding) {
-		return keyBinding != null ? ((KeyBinding) keyBinding).getIsKeyPressed() : null;
+		return keyBinding != null ? ((KeyBinding) keyBinding).isKeyDown() : null;
 	}
 
 	@Override
@@ -1574,13 +1580,13 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected Object minecraftFontRenderer() {
 		if (Modchu_Main.isServer) return null;
-		return Minecraft.getMinecraft().fontRenderer;
+		return Minecraft.getMinecraft().fontRendererObj;
 	}
 
 	@Override
 	protected void minecraftFontRenderer(Object fontRenderer) {
 		if (Modchu_Main.isServer) return;
-		Minecraft.getMinecraft().fontRenderer = (FontRenderer) fontRenderer;
+		Minecraft.getMinecraft().fontRendererObj = (FontRenderer) fontRenderer;
 	}
 
 	@Override
@@ -1895,7 +1901,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object potionAbsorption() {
-		return Potion.field_76444_x;
+		return Potion.absorption;
 	}
 
 	@Override
@@ -1940,7 +1946,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object potionHealthBoost() {
-		return Potion.field_76434_w;
+		return Potion.healthBoost;
 	}
 
 	@Override
@@ -1990,7 +1996,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object potionSaturation() {
-		return Potion.field_76443_y;
+		return Potion.saturation;
 	}
 
 	@Override
@@ -2021,22 +2027,20 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected String[] renderBipedBipedArmorFilenamePrefix() {
-		return RenderBiped.bipedArmorFilenamePrefix;
+		return null;
 	}
 
 	@Override
 	protected void renderBlocksRenderBlockAllFaces(Object renderBlocks, Object block, int i, int i2, int i3) {
-		((RenderBlocks) renderBlocks).renderBlockAllFaces((Block) block, i, i2, i3);
 	}
 
 	@Override
 	protected void renderBlocksRenderBlockAsItem(Object renderBlocks, Object block, int i, float f) {
-		((RenderBlocks) renderBlocks).renderBlockAsItem((Block) block, i, f);
 	}
 
 	@Override
 	protected boolean renderBlocksRenderItemIn3d(Object renderBlocks, int i) {
-		return ((RenderBlocks) renderBlocks).renderItemIn3d(i);
+		return false;
 	}
 
 	@Override
@@ -2051,7 +2055,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected void renderFirstPersonArm(Object renderplayer, Object entityplayer) {
-		((RenderPlayer) renderplayer).renderFirstPersonArm((EntityPlayer) entityplayer);
+		((RenderPlayer) renderplayer).func_177138_b((AbstractClientPlayer) entityplayer);
 	}
 
 	@Override
@@ -2071,42 +2075,44 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Map renderManagerEntityRenderMap() {
-		return RenderManager.instance.entityRenderMap;
+		return ((RenderManager) renderManagerInstance()).entityRenderMap;
 	}
 
 	@Override
 	protected Object renderManagerGetEntityClassRenderObject(Class c) {
-		return RenderManager.instance.getEntityClassRenderObject(c);
+		return ((RenderManager) renderManagerInstance()).getEntityClassRenderObject(c);
 	}
 
 	@Override
 	protected Object renderManagerGetEntityRenderObject(Object entity) {
-		return RenderManager.instance.getEntityRenderObject((Entity) entity);
+		return ((RenderManager) renderManagerInstance()).getEntityRenderObject((Entity) entity);
 	}
 
 	@Override
 	protected Object renderManagerInstance() {
-		return RenderManager.instance;
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().getRenderManager();
 	}
 
 	@Override
 	protected Object renderManagerItemRenderer() {
-		return RenderManager.instance.itemRenderer;
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().getItemRenderer();
 	}
-
+/*
 	@Override
 	protected void renderManagerItemRendererRenderItem(Object itemRenderer, Object entity, Object itemstack, Object o) {
-		RenderManager.instance.itemRenderer.renderItem((EntityLivingBase) entity, (ItemStack) itemstack, (Integer) o);
+		((ItemRenderer) renderManagerItemRenderer()).renderItem((EntityLivingBase) entity, (ItemStack) itemstack, (net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType) o);
 	}
-
+*/
 	@Override
 	protected boolean renderManagerRenderEntityWithPosYaw(Object entity, double d, double d2, double d3, float f, float f2) {
-		return RenderManager.instance.renderEntityWithPosYaw((Entity) entity, d, d2, d3, f, f2);
+		return ((RenderManager) renderManagerInstance()).renderEntityWithPosYaw((Entity) entity, d, d2, d3, f, f2);
 	}
 
 	@Override
 	protected Object renderRenderBlocks(Object pRender) {
-		return Modchu_Reflect.getFieldObject("Render", "field_147909_c", pRender);
+		return null;
 	}
 
 	@Override
@@ -2171,7 +2177,6 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected void setEntityLivingBasePrevHealth(Object entityLivingBase, float f) {
-		((EntityLivingBase) entityLivingBase).prevHealth = f;
 	}
 
 	@Override
@@ -2264,7 +2269,6 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected void setEntityYOffset(Object entity, float f) {
-		((Entity) entity).yOffset = f;
 	}
 
 	@Override
@@ -2344,13 +2348,13 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected void setMinecraftRenderViewEntity(Object entity) {
 		if (Modchu_Main.isServer) return;
-		Minecraft.getMinecraft().renderViewEntity = (EntityLivingBase) entity;
+		Minecraft.getMinecraft().setRenderViewEntity((Entity) entity);
 	}
 
 	@Override
 	protected void setMinecraftThePlayer(Object entityPlayer) {
 		if (Modchu_Main.isServer) return;
-		Minecraft.getMinecraft().thePlayer = (EntityClientPlayerMP) entityPlayer;
+		Minecraft.getMinecraft().thePlayer = (EntityPlayerSP) entityPlayer;
 	}
 
 	@Override
@@ -2389,13 +2393,8 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void setRenderManagerItemRenderer(Object itemRenderer) {
-		RenderManager.instance.itemRenderer = (ItemRenderer) itemRenderer;
-	}
-
-	@Override
 	protected void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5) {
-		((Tessellator) tessellator).addVertexWithUV(d, d2, d3, d4, d5);
+		((Tessellator) tessellator).getWorldRenderer().addVertexWithUV(d, d2, d3, d4, d5);
 	}
 
 	@Override
@@ -2405,37 +2404,37 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object tessellatorInstance() {
-		return Tessellator.instance;
+		return Tessellator.getInstance();
 	}
 
 	@Override
 	protected void tessellatorSetColorOpaque_I(Object tessellator, int i) {
-		((Tessellator) tessellator).setColorOpaque_I(i);
+		((Tessellator) tessellator).getWorldRenderer().setColorOpaque_I(i);
 	}
 
 	@Override
 	protected void tessellatorSetColorRGBA_I(Object tessellator, int i, int i2) {
-		((Tessellator) tessellator).setColorRGBA_I(i, i2);
+		((Tessellator) tessellator).getWorldRenderer().setColorRGBA_I(i, i2);
 	}
 
 	@Override
 	protected void tessellatorSetNormal(Object tessellator, float f, float f2, float f3) {
-		((Tessellator) tessellator).setNormal(f, f2, f3);
+		((Tessellator) tessellator).getWorldRenderer().setNormal(f, f2, f3);
 	}
 
 	@Override
 	protected void tessellatorStartDrawing(Object tessellator, byte by) {
-		((Tessellator) tessellator).startDrawing(by);
+		((Tessellator) tessellator).getWorldRenderer().startDrawing(by);
 	}
 
 	@Override
 	protected void tessellatorStartDrawingQuads(Object tessellator) {
-		((Tessellator) tessellator).startDrawingQuads();
+		((Tessellator) tessellator).getWorldRenderer().startDrawingQuads();
 	}
 
 	@Override
 	protected void texturedQuadDraw(Object texturedQuad, Object tessellator, float f) {
-		((TexturedQuad) texturedQuad).draw((Tessellator) tessellator, f);
+		((TexturedQuad) texturedQuad).draw(((Tessellator) tessellator).getWorldRenderer(), f);
 	}
 
 	@Override
@@ -2450,7 +2449,8 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object textureManagerGetResourceLocation(Object textureManager, int i) {
-		return ((TextureManager) textureManager).getResourceLocation(i);
+		// TODO
+		return null;
 	}
 
 	@Override
@@ -2480,7 +2480,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object vec3Subtract(Object vec3, Object vec3_2) {
-		return ((Vec3) vec3).subtract((Vec3) vec3_2);
+		return ((Vec3) vec3).subtractReverse((Vec3) vec3_2);
 	}
 
 	@Override
@@ -2500,17 +2500,18 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected boolean worldCanBlockSeeTheSky(Object worldOrEntity, double d, double d2, double d3) {
-		return ((World) entityWorldObj(worldOrEntity)).canBlockSeeTheSky((int) d, (int) d2, (int) d3);
+		return ((World) entityWorldObj(worldOrEntity)).canSeeSky(new BlockPos(d, d2, d3));
 	}
 
 	@Override
 	protected boolean worldCanBlockSeeTheSky(Object worldOrEntity, int i, int i2, int i3) {
-		return ((World) entityWorldObj(worldOrEntity)).canBlockSeeTheSky(i, i2, i3);
+		return ((World) entityWorldObj(worldOrEntity)).canSeeSky(new BlockPos(i, i2, i3));
 	}
 
 	@Override
 	protected Object worldGetPathEntityToEntity(Object worldOrEntity, Object entity, Object entity2, float f, boolean b, boolean b1, boolean b2, boolean b3) {
-		return ((World) entityWorldObj(worldOrEntity)).getPathEntityToEntity((Entity) entity, (Entity) entity2, f, b, b1, b2, b3);
+		// TODO
+		return null;
 	}
 
 	@Override
@@ -2532,12 +2533,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected boolean worldIsAirBlock(Object worldOrEntity, int i, int j, int k) {
-		return ((World) entityWorldObj(worldOrEntity)).isAirBlock(i, j, k);
+		return ((World) entityWorldObj(worldOrEntity)).isAirBlock(new BlockPos(i, j, k));
 	}
 
 	@Override
 	protected boolean worldIsBlockNormalCubeDefault(Object worldOrEntity, int i, int j, int k, boolean b) {
-		return ((World) entityWorldObj(worldOrEntity)).isBlockNormalCubeDefault(i, j, k, b);
+		return ((World) entityWorldObj(worldOrEntity)).isBlockNormalCube(new BlockPos(i, j, k), b);
 	}
 
 	@Override
@@ -2608,7 +2609,63 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected void worldSpawnParticle(Object worldOrEntity, Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
 		World world = ((World) entityWorldObj(worldOrEntity));
-		if (world != null) world.spawnParticle((String)stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5);
+		if (world != null) {
+			Object type = getEnumParticleTypes(stingOrEnumParticleTypes);
+			if (type != null) world.spawnParticle((EnumParticleTypes) type, d, d1, d2, d3, d4, d5);
+		}
+	}
+
+	private Object getEnumParticleTypes(Object stingOrEnumParticleTypes) {
+		if (stingOrEnumParticleTypes instanceof EnumParticleTypes) return stingOrEnumParticleTypes;
+		if (stingOrEnumParticleTypes.equals("explode")) return EnumParticleTypes.EXPLOSION_NORMAL;
+		if (stingOrEnumParticleTypes.equals("largeexplode")) return EnumParticleTypes.EXPLOSION_LARGE;
+		if (stingOrEnumParticleTypes.equals("hugeexplosion")) return EnumParticleTypes.EXPLOSION_HUGE;
+		if (stingOrEnumParticleTypes.equals("fireworksSpark")) return EnumParticleTypes.FIREWORKS_SPARK;
+		if (stingOrEnumParticleTypes.equals("bubble")) return EnumParticleTypes.WATER_BUBBLE;
+		if (stingOrEnumParticleTypes.equals("splash")) return EnumParticleTypes.WATER_SPLASH;
+		if (stingOrEnumParticleTypes.equals("wake")) return EnumParticleTypes.WATER_WAKE;
+		if (stingOrEnumParticleTypes.equals("suspended")) return EnumParticleTypes.SUSPENDED;
+		if (stingOrEnumParticleTypes.equals("depthsuspend")) return EnumParticleTypes.SUSPENDED_DEPTH;
+		if (stingOrEnumParticleTypes.equals("crit")) return EnumParticleTypes.CRIT;
+		if (stingOrEnumParticleTypes.equals("magicCrit")) return EnumParticleTypes.CRIT_MAGIC;
+		if (stingOrEnumParticleTypes.equals("smoke")) return EnumParticleTypes.SMOKE_NORMAL;
+		if (stingOrEnumParticleTypes.equals("largesmoke")) return EnumParticleTypes.SMOKE_LARGE;
+		if (stingOrEnumParticleTypes.equals("spell")) return EnumParticleTypes.SPELL;
+		if (stingOrEnumParticleTypes.equals("instantSpell")) return EnumParticleTypes.SPELL_INSTANT;
+		if (stingOrEnumParticleTypes.equals("mobSpell")) return EnumParticleTypes.SPELL_MOB;
+		if (stingOrEnumParticleTypes.equals("mobSpellAmbient")) return EnumParticleTypes.SPELL_MOB_AMBIENT;
+		if (stingOrEnumParticleTypes.equals("witchMagic")) return EnumParticleTypes.SPELL_WITCH;
+		if (stingOrEnumParticleTypes.equals("dripWater")) return EnumParticleTypes.DRIP_WATER;
+		if (stingOrEnumParticleTypes.equals("dripLava")) return EnumParticleTypes.DRIP_LAVA;
+		if (stingOrEnumParticleTypes.equals("angryVillager")) return EnumParticleTypes.VILLAGER_ANGRY;
+		if (stingOrEnumParticleTypes.equals("happyVillager")) return EnumParticleTypes.VILLAGER_HAPPY;
+		if (stingOrEnumParticleTypes.equals("townaura")) return EnumParticleTypes.TOWN_AURA;
+		if (stingOrEnumParticleTypes.equals("note")) return EnumParticleTypes.NOTE;
+		if (stingOrEnumParticleTypes.equals("portal")) return EnumParticleTypes.PORTAL;
+		if (stingOrEnumParticleTypes.equals("enchantmenttable")) return EnumParticleTypes.ENCHANTMENT_TABLE;
+		if (stingOrEnumParticleTypes.equals("flame")) return EnumParticleTypes.FLAME;
+		if (stingOrEnumParticleTypes.equals("lava")) return EnumParticleTypes.LAVA;
+		if (stingOrEnumParticleTypes.equals("footstep")) return EnumParticleTypes.FOOTSTEP;
+		if (stingOrEnumParticleTypes.equals("cloud")) return EnumParticleTypes.CLOUD;
+		if (stingOrEnumParticleTypes.equals("reddust")) return EnumParticleTypes.REDSTONE;
+		if (stingOrEnumParticleTypes.equals("snowballpoof")) return EnumParticleTypes.SNOWBALL;
+		if (stingOrEnumParticleTypes.equals("snowshovel")) return EnumParticleTypes.SNOW_SHOVEL;
+		if (stingOrEnumParticleTypes.equals("slime")) return EnumParticleTypes.SLIME;
+		if (stingOrEnumParticleTypes.equals("heart")) return EnumParticleTypes.HEART;
+		if (stingOrEnumParticleTypes.equals("barrier")) return EnumParticleTypes.BARRIER;
+		if (stingOrEnumParticleTypes.equals("iconcrack_")) return EnumParticleTypes.ITEM_CRACK;
+		if (stingOrEnumParticleTypes.equals("blockcrack_")) return EnumParticleTypes.BLOCK_CRACK;
+		if (stingOrEnumParticleTypes.equals("blockdust_")) return EnumParticleTypes.BLOCK_DUST;
+		if (stingOrEnumParticleTypes.equals("droplet")) return EnumParticleTypes.WATER_DROP;
+		if (stingOrEnumParticleTypes.equals("take")) return EnumParticleTypes.ITEM_TAKE;
+		if (stingOrEnumParticleTypes.equals("mobappearance")) return EnumParticleTypes.MOB_APPEARANCE;
+		try {
+			EnumParticleTypes type = stingOrEnumParticleTypes instanceof String ? EnumParticleTypes.valueOf((String) stingOrEnumParticleTypes) : null;
+			return type;
+		} catch (Exception e) {
+		}
+		Modchu_Debug.mlDebug("Modchu_AS getEnumParticleTypes type null !! stingOrEnumParticleTypes="+stingOrEnumParticleTypes);
+		return null;
 	}
 
 	@Override
@@ -2627,7 +2684,8 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object iIconRegisterRegisterIcon(Object iIconRegister, String s) {
-		return ((IIconRegister) iIconRegister).registerIcon(s);
+		// TODO
+		return null;
 	}
 
 	@Override
@@ -2677,7 +2735,8 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected boolean itemRequiresMultipleRenderPasses(Object item) {
-		return ((Item) item).requiresMultipleRenderPasses();
+		// TODO
+		return false;
 	}
 
 	@Override
@@ -2687,17 +2746,19 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected int blockDoublePlantGetMixedBrightnessForBlock(Object blockDoublePlant, int x, int y, int z) {
-		return ((BlockDoublePlant) blockDoublePlant).getMixedBrightnessForBlock((IBlockAccess) minecraftTheWorld(), x, y, z);
+		// TODO
+		return -1;
 	}
 
 	@Override
 	protected int blockDoublePlantGetMixedBrightnessForBlock(Object blockDoublePlant, Object iBlockAccess, int x, int y, int z) {
-		return ((BlockDoublePlant) blockDoublePlant).getMixedBrightnessForBlock((IBlockAccess) iBlockAccess, x, y, z);
+		// TODO
+		return -1;
 	}
 
 	@Override
 	protected int biomeGenBaseGetBiomeGrassColor(Object biomeGenBase, int x, int y, int z) {
-		return ((BiomeGenBase) biomeGenBase).getBiomeGrassColor(x, y, z);
+		return ((BiomeGenBase) biomeGenBase).getGrassColorAtPos(new BlockPos(x, y, z));
 	}
 
 	@Override
@@ -2707,47 +2768,55 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected void tessellatorSetColorOpaque_F(Object tessellator, float f, float f1, float f2) {
-		((Tessellator) tessellator).setColorOpaque_F(f, f1, f2);
+		((Tessellator) tessellator).getWorldRenderer().setColorOpaque_F(f, f1, f2);
 	}
 
 	@Override
 	protected boolean blockDoublePlantFunc_149887_c(int i) {
-		return BlockDoublePlant.func_149887_c(i);
+		// TODO
+		return false;
 	}
 
 	@Override
 	protected int blockDoublePlantFunc_149890_d(int i) {
-		return BlockDoublePlant.func_149890_d(i);
+		// TODO
+		return -1;
 	}
 
 	@Override
 	protected Object blockDoublePlantFunc_149888_a(Object blockDoublePlant, boolean b, int i) {
-		return ((BlockDoublePlant) blockDoublePlant).func_149888_a(b, i);
+		// TODO
+		return null;
 	}
 
 	@Override
 	protected Object[] blockDoublePlantSunflowerIcons(Object blockDoublePlant) {
-		return ((BlockDoublePlant) blockDoublePlant).sunflowerIcons;
+		// TODO
+		return null;
 	}
 
 	@Override
 	protected double iIconGetMinU(Object iIcon) {
-		return ((IIcon) iIcon).getMinU();
+		// TODO
+		return 0.0D;
 	}
 
 	@Override
 	protected double iIconGetMinV(Object iIcon) {
-		return ((IIcon) iIcon).getMinV();
+		// TODO
+		return 0.0D;
 	}
 
 	@Override
 	protected double iIconGetMaxU(Object iIcon) {
-		return ((IIcon) iIcon).getMaxU();
+		// TODO
+		return 0.0D;
 	}
 
 	@Override
 	protected double iIconGetMaxV(Object iIcon) {
-		return ((IIcon) iIcon).getMaxV();
+		// TODO
+		return 0.0D;
 	}
 
 	@Override
@@ -2902,7 +2971,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object nbtUtilReadGameProfileFromNBT(Object nBTTagCompound) {
-		return NBTUtil.func_152459_a((NBTTagCompound) nBTTagCompound);
+		return NBTUtil.readGameProfileFromNBT((NBTTagCompound) nBTTagCompound);
 	}
 
 	@Override
@@ -2997,7 +3066,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected boolean mathHelperStringNullOrLengthZero(String s) {
-		return MathHelper.stringNullOrLengthZero(s);
+		return s == null | s.length() == 0;
 	}
 
 	@Override
@@ -3226,7 +3295,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected void tessellatorAddVertex(Object tessellator, double d, double d2, double d3) {
-		((Tessellator) tessellator).addVertex(d, d2, d3);
+		((Tessellator) tessellator).getWorldRenderer().addVertex(d, d2, d3);
 	}
 
 	@Override
@@ -3236,50 +3305,58 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected int movingObjectPositionBlockPosGetX(Object movingObjectPosition) {
-		return ((MovingObjectPosition) movingObjectPosition).blockX;
+		return ((MovingObjectPosition) movingObjectPosition).getBlockPos().getX();
 	}
 
 	@Override
 	protected int movingObjectPositionBlockPosGetY(Object movingObjectPosition) {
-		return ((MovingObjectPosition) movingObjectPosition).blockY;
+		return ((MovingObjectPosition) movingObjectPosition).getBlockPos().getY();
 	}
 
 	@Override
 	protected int movingObjectPositionBlockPosGetZ(Object movingObjectPosition) {
-		return ((MovingObjectPosition) movingObjectPosition).blockZ;
+		return ((MovingObjectPosition) movingObjectPosition).getBlockPos().getZ();
 	}
 
 	@Override
 	protected Object getBipedArmor(Object entityPlayer, Object itemStack, int i, int i2, String s) {
-		if (Modchu_Main.isServer) return null;
-		Item item = (Item) itemStackGetItem(itemStack);
-		if (item instanceof ItemArmor) {
-			//int renderIndex = itemArmorRenderIndex(item);
-			//String[] armorFilename = renderBipedBipedArmorFilenamePrefix();
-			//String a1 = renderIndex < armorFilename.length ? armorFilename[renderIndex] : armorFilename[armorFilename.length - 1];
-			return RenderBiped.getArmorResource((Entity)entityPlayer, (ItemStack)itemStack, i, s);
+		if (Modchu_Main.isServer
+				| itemStack == null) return null;
+		Object render = renderManagerGetEntityRenderObject(entityPlayer);
+		if (render != null) ;else return null;
+		List<Object> list = Modchu_CastHelper.List(Modchu_Reflect.getFieldObject(render.getClass(), "field_177097_h", "layerRenderers", render));
+		if (list != null
+				&& !list.isEmpty()) ;else return null;
+		LayerArmorBase layerArmorBase = null;
+		for (Object o : list) {
+			if (o instanceof LayerArmorBase) {
+				layerArmorBase = (LayerArmorBase) o;
+				break;
+			}
 		}
-		return null;
+		Item item = ((ItemStack)itemStack).getItem();
+		if (!(item instanceof ItemArmor)) return null;
+		return layerArmorBase != null ? layerArmorBase.getArmorResource((Entity)entityPlayer, (ItemStack)itemStack, i, s) : null;
 	}
 
 	@Override
 	protected Object worldGetBlock(Object world, int i, int i2, int i3) {
-		return ((World) world).getBlock(i, i2, i3);
+		return ((World) world).getBlockState(new BlockPos(i, i2, i3)).getBlock();
 	}
 
 	@Override
 	protected int[] facingOffsetsXForSide() {
-		return Facing.offsetsXForSide;
+		return null;
 	}
 
 	@Override
 	protected int[] facingOffsetsYForSide() {
-		return Facing.offsetsYForSide;
+		return null;
 	}
 
 	@Override
 	protected int[] facingOffsetsZForSide() {
-		return Facing.offsetsZForSide;
+		return null;
 	}
 
 	@Override
@@ -3289,7 +3366,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected void entitySetCustomNameTag(Object entity, String s) {
-		((EntityLiving) entity).setCustomNameTag(s);
+		((Entity) entity).setCustomNameTag(s);
 	}
 
 	@Override
@@ -3319,17 +3396,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected boolean worldIsBlockModifiable(Object worldOrEntity, Object entityPlayer, int x, int y, int z) {
-		return ((World) worldOrEntity).canMineBlock((EntityPlayer)entityPlayer, x, y, z);
-	}
-
-	@Override
-	protected int movingObjectPositionSideHit(Object movingObjectPosition) {
-		return ((MovingObjectPosition) movingObjectPosition).sideHit;
+		return ((World) worldOrEntity).isBlockModifiable((EntityPlayer)entityPlayer, new BlockPos(x, y, z));
 	}
 
 	@Override
 	protected boolean entityPlayerCanPlayerEdit(Object entityplayer, int x, int y, int z, int i, Object itemStack) {
-		return ((EntityPlayer) entityplayer).canPlayerEdit(x, y, z, i, (ItemStack) itemStack);
+		return ((EntityPlayer) entityplayer).isAllowEdit();
 	}
 
 	@Override
@@ -3343,68 +3415,69 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void entitySetLocationAndAngles(Object entity, double x, double y, double z, float f, float f1) {
-		((Entity) entity).setLocationAndAngles(x, y, z, f, f1);
-	}
-
-	@Override
 	protected float mathHelperWrapAngleTo180_float(float f) {
 		return MathHelper.wrapAngleTo180_float(f);
 	}
 
 	@Override
 	protected float blockPosGetX(Object blockPos) {
-		return 0.0F;
+		return ((BlockPos) blockPos).getX();
 	}
 
 	@Override
 	protected float blockPosGetY(Object blockPos) {
-		return 0.0F;
+		return ((BlockPos) blockPos).getY();
 	}
 
 	@Override
 	protected float blockPosGetZ(Object blockPos) {
-		return 0.0F;
+		return ((BlockPos) blockPos).getZ();
 	}
 
 	@Override
 	protected Object iBlockStateGetBlock(Object iBlockState) {
-		return iBlockState;
+		return ((IBlockState) iBlockState).getBlock();
 	}
 
 	@Override
 	protected int worldGetBlockStateGetBlockMetadata(Object worldOrEntity, int x, int y, int z) {
-		return ((World) entityWorldObj(worldOrEntity)).getBlockMetadata(x, y, z);
+		IBlockState iBlockState = (IBlockState) worldGetBlockState(worldOrEntity, newBlockPos(x, y, z));
+		Block block = (Block) (iBlockState != null ? iBlockStateGetBlock(iBlockState) : null);
+		if (block != null) ;else return 0;
+		return ((Block) block).getMetaFromState(iBlockState);
 	}
 
 	@Override
 	protected int tileEntityXCoord(Object tileEntity) {
-		return ((TileEntity) tileEntity).xCoord;
+		return ((TileEntity) tileEntity).getPos().getX();
 	}
 
 	@Override
 	protected int tileEntityYCoord(Object tileEntity) {
-		return ((TileEntity) tileEntity).yCoord;
+		return ((TileEntity) tileEntity).getPos().getY();
 	}
 
 	@Override
 	protected int tileEntityZCoord(Object tileEntity) {
-		return ((TileEntity) tileEntity).zCoord;
+		return ((TileEntity) tileEntity).getPos().getZ();
 	}
 
 	@Override
 	protected Object newBlockPos(Object x, Object y, Object z) {
-		return null;
+		return x instanceof Integer ? new BlockPos((Integer) x, (Integer) y, (Integer) z) : new BlockPos((Double) x, (Double) y, (Double) z);
 	}
 
 	@Override
 	protected Object worldGetBlockState(Object worldOrEntity, Object blockPos) {
-		return null;
+		return ((World) entityWorldObj(worldOrEntity)).getBlockState((BlockPos) blockPos);
 	}
 
 	@Override
 	protected int worldGetBlockLightValue(Object worldOrEntity, int x, int y, int z) {
-		return ((World) entityWorldObj(worldOrEntity)).getBlockLightValue(x, y, z);
+		IBlockState iBlockState = (IBlockState) worldGetBlockState(worldOrEntity, newBlockPos(x, y, z));
+		Block block = (Block) (iBlockState != null ? iBlockStateGetBlock(iBlockState) : null);
+		if (block != null) ;else return 0;
+		return ((Block) block).getLightValue();
 	}
 
 	@Override
@@ -3414,7 +3487,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected int worldGetStrongPower(Object worldOrEntity, int x, int y, int z) {
-		return ((World) entityWorldObj(worldOrEntity)).getBlockPowerInput(x, y, z);
+		return ((World) entityWorldObj(worldOrEntity)).getStrongPower(new BlockPos(x, y, z));
 	}
 
 	@Override
@@ -3454,7 +3527,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Map entityListIDtoClassMapping() {
-		return EntityList.IDtoClassMapping;
+		return EntityList.idToClassMapping;
 	}
 
 	@Override
@@ -3535,10 +3608,10 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected Object getBlock(String s) {
 		if (s != null) ;else return null;
-		RegistryNamespaced blockRegistry = Block.blockRegistry;
+		RegistryNamespacedDefaultedByKey blockRegistry = Block.blockRegistry;
 		if (blockRegistry != null) ;else return null;
 		Object block = blockRegistry.getObject(s);
-		//Modchu_Debug.mDebug("getBlock s="+s+" block="+block);
+		Modchu_Debug.mDebug("getBlock s="+s+" block="+block);
 		return block != null ? block : null;
 	}
 
@@ -3549,7 +3622,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected String itemArmorArmorMaterialGetName(Object armorMaterial) {
-		return null;
+		return ((ItemArmor.ArmorMaterial) armorMaterial).getName();
 	}
 
 	@Override
@@ -3566,7 +3639,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected void loadingScreenDisplayLoadingString(Object loadingScreenRenderer, String s) {
-		((LoadingScreenRenderer) loadingScreenRenderer).resetProgresAndWorkingMessage(s);
+		((LoadingScreenRenderer) loadingScreenRenderer).displayLoadingString(s);
 	}
 
 	@Override
@@ -3586,38 +3659,39 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object vec3CreateVectorHelper(double d, double d2, double d3) {
-		return Vec3.createVectorHelper(d, d2, d3);
+		return new Vec3(d, d2, d3);
 	}
 
 	@Override
 	protected void guiScreenFunc_175273_b(Object guiScreen, Object minecraft, int i, int i2) {
+		((GuiScreen) guiScreen).func_175273_b((Minecraft) minecraft, i, i2);
 	}
-
+/*
 	@Override
 	protected Enum itemCameraTransformsTransformTypeNONE() {
-		return null;
+		return ItemCameraTransforms.TransformType.NONE;
 	}
 
 	@Override
 	protected Enum itemCameraTransformsTransformTypeTHIRD_PERSON() {
-		return null;
+		return ItemCameraTransforms.TransformType.THIRD_PERSON;
 	}
 
 	@Override
 	protected Enum itemCameraTransformsTransformTypeFIRST_PERSON() {
-		return null;
+		return ItemCameraTransforms.TransformType.FIRST_PERSON;
 	}
 
 	@Override
 	protected Enum itemCameraTransformsTransformTypeHEAD() {
-		return null;
+		return ItemCameraTransforms.TransformType.HEAD;
 	}
 
 	@Override
 	protected Enum itemCameraTransformsTransformTypeGUI() {
-		return null;
+		return ItemCameraTransforms.TransformType.GUI;
 	}
-
+*/
 	@Override
 	protected Object entityPlayerFishEntity(Object entityplayer) {
 		return ((EntityPlayer) entityplayer).fishEntity;
@@ -3640,18 +3714,22 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object tileEntitySkullUpdateGameprofile(Object gameprofile) {
-		return null;
+		return TileEntitySkull.updateGameprofile((GameProfile) gameprofile);
 	}
 
 	@Override
 	protected Object nBTUtilWriteGameProfile(Object nBTTagCompound, Object gameprofile) {
-		NBTUtil.func_152460_a((NBTTagCompound) nBTTagCompound, (GameProfile) gameprofile);
-		return nBTTagCompound;
+		return NBTUtil.writeGameProfile((NBTTagCompound) nBTTagCompound, (GameProfile) gameprofile);
 	}
 
 	@Override
 	protected void nbtTagCompoundSetTag(Object nBTTagCompound, String s, Object nbtBase) {
 		((NBTTagCompound) nBTTagCompound).setTag(s, (NBTBase) nbtBase);
+	}
+
+	@Override
+	protected void tileEntitySkullRendererRenderSkull(Object skullRenderer, float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2) {
+		TileEntitySkullRenderer.instance.renderSkull(f, f1, f2, (EnumFacing) en, f3, i, (GameProfile) gameProfile, i2);
 	}
 
 	@Override
@@ -3686,46 +3764,48 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected int itemStackGetMetadata(Object itemstack) {
-		return -1;
+		return ((ItemStack) itemstack).getMetadata();
 	}
 
 	@Override
 	protected Object minecraftGetBlockRendererDispatcher() {
-		return null;
+		return Minecraft.getMinecraft().getBlockRendererDispatcher();
 	}
 
 	@Override
 	protected Object textureMapLocationBlocksTexture() {
-		return null;
+		return TextureMap.locationBlocksTexture;
 	}
 
 	@Override
 	protected Object blockGetDefaultState(Object blockOrIBlockState) {
-		return null;
+		return blockOrIBlockState instanceof Block ? ((Block) blockOrIBlockState).getDefaultState() : blockOrIBlockState instanceof IBlockState ? blockOrIBlockState : null;
 	}
 
 	@Override
 	protected void blockRendererDispatcherRenderBlockBrightness(Object blockRendererDispatcher, Object iBlockState, float f) {
+		((BlockRendererDispatcher) blockRendererDispatcher).renderBlockBrightness((IBlockState) iBlockState, f);
 	}
 
 	@Override
 	protected Object iBlockStateWithProperty(Object blockOrIBlockState, Object iProperty, Comparable comparable) {
-		return null;
+		Object iBlockState = blockGetDefaultState(blockOrIBlockState);
+		return iBlockState != null ? ((IBlockState) iBlockState).withProperty((IProperty) iProperty, comparable) : null;
 	}
 
 	@Override
 	protected Object blockDoublePlantVARIANT() {
-		return null;
+		return BlockDoublePlant.VARIANT;
 	}
 
 	@Override
 	protected Object blockDoublePlantHALF() {
-		return null;
+		return BlockDoublePlant.HALF;
 	}
 
 	@Override
 	protected int blockGetMetaFromState(Object block, Object iBlockState) {
-		return -1;
+		return ((Block) block).getMetaFromState((IBlockState) iBlockState);
 	}
 
 	@Override
@@ -3740,31 +3820,32 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected int blockColorMultiplier(Object block, Object iBlockAccess, Object blockPos, int i) {
-		return -1;
+		return ((Block) block).colorMultiplier((IBlockAccess) iBlockAccess, (BlockPos) blockPos, i);
 	}
 
 	@Override
 	protected int textureUtilAnaglyphColor(int i) {
-		return -1;
+		return TextureUtil.anaglyphColor(i);
 	}
 
 	@Override
 	protected Object blockGetStateFromMeta(Object block, int i) {
-		return null;
+		return ((Block) block).getStateFromMeta(i);
 	}
 
 	@Override
 	protected Object blockRendererDispatcherGetBlockModelRenderer(Object blockRendererDispatcher) {
-		return null;
+		return ((BlockRendererDispatcher) blockRendererDispatcher).getBlockModelRenderer();
 	}
 
 	@Override
 	protected void blockModelRendererRenderModelBrightness(Object blockModelRenderer, Object iBakedModel, Object iBlockState, float f, boolean b) {
+		((BlockModelRenderer) blockModelRenderer).renderModelBrightness((IBakedModel) iBakedModel, (IBlockState) iBlockState, f, b);
 	}
 
 	@Override
 	protected String abstractClientPlayerGetSkinType(Object abstractClientPlayer) {
-		return null;
+		return ((AbstractClientPlayer) abstractClientPlayer).getSkinType();
 	}
 
 	@Override
@@ -3773,8 +3854,8 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object worldGetBiomeGenForCoords(Object worldOrEntity, int i, int i1) {
-		return ((World) entityWorldObj(worldOrEntity)).getBiomeGenForCoords(i, i1);
+	protected Object worldGetBiomeGenForCoords(Object worldOrInt, Object blockPosOrInt) {
+		return ((World) entityWorldObj(worldOrInt)).getBiomeGenForCoords((BlockPos) blockPosOrInt);
 	}
 
 	@Override
@@ -3784,7 +3865,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected void entityTameableSetOwner(Object entityTameable, String s) {
-		((EntityTameable) entityTameable).func_152115_b(s);
+		((EntityTameable) entityTameable).setOwnerId(s);
 	}
 
 	@Override
@@ -3795,6 +3876,28 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected Object worldGetClosestPlayerToEntity(Object worldOrEntity, Object entity, double d) {
 		return ((World) entityWorldObj(worldOrEntity)).getClosestPlayerToEntity((Entity) entity, d);
+	}
+
+	@Override
+	protected Object minecraftGetRenderItem() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().getRenderItem();
+	}
+
+	@Override
+	protected Object renderItemGetItemModelMesher(Object renderItem) {
+		return ((RenderItem) renderItem).getItemModelMesher();
+	}
+
+	@Override
+	protected Object newModelResourceLocation(String s, String s1) {
+		return new ModelResourceLocation(s, s1);
+	}
+
+	@Override
+	protected void itemModelMesherRegister(Object itemModelMesher, Object item, int i, Object modelResourceLocation) {
+		Modchu_Debug.mDebug("Modchu_AS itemModelMesherRegister");
+		((ItemModelMesher) itemModelMesher).register((Item) item, i, (ModelResourceLocation) modelResourceLocation);
 	}
 
 }
