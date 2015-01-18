@@ -5,8 +5,8 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import scala.collection.mutable.StringBuilder;
 import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_IEntityTameableMaster;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
 import net.minecraft.block.Block;
@@ -15,6 +15,7 @@ import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
@@ -54,20 +55,21 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import scala.collection.mutable.StringBuilder;
 
 public class Modchu_EntityTameable extends EntityTameable {
 
-	public Modchu_EntityTameableBase masterEntity;
+	public Modchu_IEntityTameableMaster master;
 	public String entityName;
 	public static ConcurrentHashMap<String, UUID> entityUniqueIDMap = new ConcurrentHashMap();
-/*
-	private HashMap<String, Field> allsyncMap = new HashMap();
-	private HashMap<String, Field> masterEntityAllSyncMap = new HashMap();
-	private HashMap<Integer, String> allSyncNameMap = new HashMap();
-	private HashMap<Integer, String> masterEntityAllSyncNameMap = new HashMap();
-*/
+
 	public Modchu_EntityTameable(World world) {
 		super(world);
+		Modchu_Debug.mDebug("Modchu_EntityTameable init");
+	}
+
+	public Modchu_EntityTameable(Object world) {
+		super((World) world);
 		Modchu_Debug.mDebug("Modchu_EntityTameable init");
 	}
 
@@ -90,32 +92,30 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	public Object getMaster() {
 		//Modchu_Debug.mDebug("getmasterEntity masterEntity="+masterEntity);
-		if (masterEntity != null) ;else {
+		if (master != null) ;else {
 			init(entityName);
 		}
-		return masterEntity;
+		return master;
 	}
 
 	public Object getFreeVariable(String s) {
-		return masterEntity.getFreeVariable(s);
+		return master.getFreeVariable(s);
 	}
 
 	public void setFreeVariable(String s, Object o) {
-		masterEntity.setFreeVariable(s, o);
+		master.setFreeVariable(s, o);
 	}
 
 	private void init(String s) {
 		if (s != null
-				&& !s.isEmpty()) {
-			masterEntity = (Modchu_EntityTameableBase) Modchu_Reflect.newInstance(s, new Class[]{ Modchu_EntityTameable.class, Object.class }, new Object[]{ this, worldObj });
-			entityName = s;
-		} else {
+				&& !s.isEmpty()); else {
 			Class c = Modchu_Main.getSpownEntityClass(worldObj, posX, posY, posZ);
 			if (c != null) {
-				masterEntity = (Modchu_EntityTameableBase) Modchu_Reflect.newInstance(c, new Class[]{ Modchu_EntityTameable.class, Object.class }, new Object[]{ this, worldObj });
+				s = c.getName();
 			}
-			entityName = c != null ? c.getName() : null;
 		}
+		master = (modchu.lib.Modchu_IEntityTameableMaster) Modchu_Reflect.newInstance(s, new Class[]{ Modchu_EntityTameable.class, Object[].class }, new Object[]{ this, new Object[]{ worldObj } });
+		entityName = s;
 		Modchu_Debug.mDebug("initNBTAfter entityName="+(entityName != null ? entityName : "null !!"));
 		String s0 = new StringBuilder(Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this) ? "1" : "0").append(entityUniqueID).toString();
 		if (entityUniqueIDMap.containsKey(s0)) {
@@ -127,131 +127,40 @@ public class Modchu_EntityTameable extends EntityTameable {
 		}
 		entityUniqueIDMap.put(s0, entityUniqueID);
 		Modchu_Debug.mDebug("initNBTAfter entityUniqueID="+entityUniqueID);
-		Modchu_Debug.mDebug("initNBTAfter masterEntity="+masterEntity);
-	}
-/*
-	private void allFieldSync(boolean reverse) {
-		if (allsyncMap.isEmpty()) fieldAllSyncInit(false);
-		if (masterEntityAllSyncNameMap.isEmpty()) fieldAllSyncInit(true);
-		HashMap<String, Field> map = reverse ? masterEntityAllSyncMap : allsyncMap;
-		HashMap<String, Field> map2 = reverse ? allsyncMap : masterEntityAllSyncMap;
-		HashMap<Integer, String> nameMap = reverse ? masterEntityAllSyncNameMap : allSyncNameMap;
-		HashMap<Integer, String> nameMap2 = reverse ? allSyncNameMap : masterEntityAllSyncNameMap;
-		fieldSync(reverse, map, map2, nameMap, nameMap2);
+		Modchu_Debug.mDebug("initNBTAfter masterEntity="+master);
 	}
 
-	private void fieldAllSyncInit(boolean reverse) {
-		Field[] fields = reverse ? masterEntity.getClass().getFields() : getClass().getFields();
-		Field[] mainFields = reverse ? getClass().getFields() : masterEntity.getClass().getFields() ;
-		String fieldsName;
-		String mainFieldsName;
-		int mod;
-		int mapCount = 0;
-		Object o;
-		for (int i = 0; i < fields.length; i++) {
-			//Modchu_Debug.mDebug("fields["+i+"].getName()="+fields[i].getName()+" fields["+i+"].getType() = "+fields[i].getType());
-			try {
-				mod = fields[i].getModifiers();
-				if (!Modifier.isFinal(mod)
-						&& Modifier.isPrivate(mod)) {
-					o = Modchu_Reflect.getPrivateValue(reverse ? masterEntity.getClass() : getClass(), reverse ? masterEntity : this, fields[i].getName());
-				} else {
-					o = fields[i].get(reverse ? masterEntity : this);
-				}
-				fieldsName = fields[i].getName();
-				if (o != null) {
-					for (int i1 = 0; i1 < mainFields.length; i1++) {
-						mainFieldsName = mainFields[i1].getName();
-						//if (fieldsName.equalsIgnoreCase("posX")) Modchu_Debug.mDebug("fieldsName = "+fieldsName+" mainFieldsName="+mainFieldsName);
-						if (mainFieldsName.equalsIgnoreCase(fieldsName)) {
-							//if (fieldsName.equalsIgnoreCase("posX")) Modchu_Debug.mDebug("isAccessible() = "+mainFields[i1].isAccessible());
-							mod = mainFields[i1].getModifiers();
-							if (!Modifier.isFinal(mod)) {
-								Modchu_Debug.mDebug("put fieldsName="+fieldsName);
-								if (reverse) {
-									allSyncNameMap.put(mapCount, fieldsName);
-									allsyncMap.put(fieldsName, fields[i]);
-								} else {
-									masterEntityAllSyncNameMap.put(mapCount, fieldsName);
-									masterEntityAllSyncMap.put(fieldsName, fields[i]);
-								}
-								mapCount++;
-								break;
-							} else {
-								//Modchu_Debug.mDebug("No put fieldsName="+fieldsName);
-							}
-						}
-					}
-				}
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		}
+	public static void worldEventLoad(Object event) {
+		entityUniqueIDMap.clear();
 	}
 
-	private void fieldSync(boolean reverse, HashMap<String, Field> map, HashMap<String, Field> map2, HashMap<Integer, String> nameMap, HashMap<Integer, String> nameMap2) {
-		String s;
-		String s2;
-		Field field;
-		Field field2;
-		Object o;
-		int mod;
-		for (int i = 0; i < nameMap.size(); i++) {
-			s = nameMap.get(i);
-			field = map.get(s);
-			if (field != null) ;else {
-				Modchu_Debug.mDebug("fieldSync 1 s="+s+" null!!");
-				continue;
-			}
-			field2 = map2.get(s);
-			if (field2 != null) ;else {
-				Modchu_Debug.mDebug("fieldSync 2 s="+s+" null!!");
-				continue;
-			}
-			mod = field.getModifiers();
-			try {
-				if (Modifier.isPrivate(mod)) {
-					o = Modchu_Reflect.getPrivateValue(reverse ? masterEntity.getClass() : getClass(), reverse ? masterEntity : this, field.getName());
-					Modchu_Reflect.setPrivateValue(reverse ? getClass() : masterEntity.getClass(), reverse ? this : masterEntity, field2.getName(), o);
-				} else {
-					o = field.get(reverse ? masterEntity : this);
-					field2.set(reverse ? this : masterEntity, o);
-				}
-				//Modchu_Debug.mDebug("fieldSync s="+s);
-				//if (s.equalsIgnoreCase("posX")) Modchu_Debug.mDebug("o = "+o);
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		}
-	}
-*/
 	public boolean isAngry() {
-		return masterEntity != null ? masterEntity.isAngry() : false;
+		return master != null ? master.isAngry() : false;
 	}
 
 	public void setAngry(boolean flag) {
-		if (masterEntity != null) masterEntity.setAngry(flag);
+		if (master != null) master.setAngry(flag);
 	}
 
 	public int getTextureColor() {
-		return masterEntity != null ? masterEntity.getTextureColor() : 0;
+		return master != null ? master.getTextureColor() : 0;
 	}
 
 	public void setTextureColor(int i) {
-		if (masterEntity != null) masterEntity.setTextureColor(i);
+		if (master != null) master.setTextureColor(i);
 	}
 
 	public ResourceLocation getResourceLocation() {
-		return masterEntity != null ? (ResourceLocation) masterEntity.getResourceLocation() : null;
+		return master != null ? (ResourceLocation) master.getResourceLocation() : null;
 	}
 
 	public void setResourceLocation(ResourceLocation resourceLocation) {
-		if (masterEntity != null) masterEntity.setResourceLocation(resourceLocation);
+		if (master != null) master.setResourceLocation(resourceLocation);
 	}
 
 	@Override
 	protected void entityInit() {
-		if (masterEntity != null) masterEntity.entityInit();
+		if (master != null) master.entityInit();
 		else super.entityInit();
 	}
 
@@ -264,7 +173,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 		if (entityName != null
 				&& !entityName.isEmpty()) {
 			nBTTagCompound.setString("entityName", entityName);
-			if (masterEntity != null) masterEntity.writeEntityToNBT(nBTTagCompound);
+			if (master != null) master.writeEntityToNBT(nBTTagCompound);
 			else super.writeEntityToNBT(nBTTagCompound);
 		}
 		//Modchu_Debug.mDebug("writeEntityToNBT entityName="+entityName);
@@ -280,7 +189,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 		String s = nBTTagCompound.getString("entityName");
 		//Modchu_Debug.mDebug("readEntityFromNBT s="+s);
 		init(s);
-		if (masterEntity != null) masterEntity.readEntityFromNBT(nBTTagCompound);
+		if (master != null) master.readEntityFromNBT(nBTTagCompound);
 		else super.readEntityFromNBT(nBTTagCompound);
 	}
 
@@ -290,7 +199,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void playTameEffect(boolean par1) {
-		if (masterEntity != null) masterEntity.playTameEffect(par1);
+		if (master != null) master.playTameEffect(par1);
 		else super.playTameEffect(par1);
 	}
 
@@ -300,7 +209,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void handleHealthUpdate(byte par1) {
-		if (masterEntity != null) masterEntity.handleHealthUpdate(par1);
+		if (master != null) master.handleHealthUpdate(par1);
 		else super.handleHealthUpdate(par1);
 	}
 
@@ -310,7 +219,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isTamed() {
-		return masterEntity != null ? masterEntity.isTamed() : super.isTamed();
+		return master != null ? master.isTamed() : super.isTamed();
 	}
 
 	public boolean superIsTamed() {
@@ -319,7 +228,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setTamed(boolean par1) {
-		if (masterEntity != null) masterEntity.setTamed(par1);
+		if (master != null) master.setTamed(par1);
 		else super.setTamed(par1);
 	}
 
@@ -329,7 +238,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isSitting() {
-		return masterEntity != null ? masterEntity.isSitting() : super.isSitting();
+		return master != null ? master.isSitting() : super.isSitting();
 	}
 
 	public boolean superIsSitting() {
@@ -338,7 +247,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setSitting(boolean par1) {
-		if (masterEntity != null) masterEntity.setSitting(par1);
+		if (master != null) master.setSitting(par1);
 		else super.setSitting(par1);
 	}
 
@@ -348,7 +257,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public String getOwnerName() {
-		return masterEntity != null ? masterEntity.getOwnerName() : super.getOwnerName();
+		return master != null ? master.getOwnerName() : super.getOwnerName();
 	}
 
 	public String superGetOwnerName() {
@@ -357,7 +266,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setOwner(String par1Str) {
-		if (masterEntity != null) masterEntity.setOwner(par1Str);
+		if (master != null) master.setOwner(par1Str);
 		else super.setOwner(par1Str);
 	}
 
@@ -367,7 +276,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityAISit func_70907_r() {
-		return (EntityAISit) (masterEntity != null ? masterEntity.func_70907_r() : super.func_70907_r());
+		return (EntityAISit) (master != null ? master.getAISit() : super.func_70907_r());
 	}
 
 	public EntityAISit superFunc_70907_r() {
@@ -376,7 +285,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean func_142018_a(EntityLivingBase entityLivingBase, EntityLivingBase entityLivingBase1) {
-		return masterEntity != null ? masterEntity.func_142018_a(entityLivingBase, entityLivingBase1) : super.func_142018_a(entityLivingBase, entityLivingBase1);
+		return master != null ? master.func_142018_a(entityLivingBase, entityLivingBase1) : super.func_142018_a(entityLivingBase, entityLivingBase1);
 	}
 
 	public boolean superFunc_142018_a(Object entityLivingBase, Object entityLivingBase1) {
@@ -385,7 +294,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public Team getTeam() {
-		return (Team) (masterEntity != null ? masterEntity.getTeam() : super.getTeam());
+		return (Team) (master != null ? master.getTeam() : super.getTeam());
 	}
 
 	public Team superGetTeam() {
@@ -394,7 +303,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isOnSameTeam(EntityLivingBase entityLivingBase) {
-		return masterEntity != null ? masterEntity.isOnSameTeam(entityLivingBase) : super.isOnSameTeam(entityLivingBase);
+		return master != null ? master.isOnSameTeam(entityLivingBase) : super.isOnSameTeam(entityLivingBase);
 	}
 
 	public boolean superIsOnSameTeam(Object entityLivingBase) {
@@ -403,7 +312,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void updateAITick() {
-		if (masterEntity != null) masterEntity.updateAITick();
+		if (master != null) master.updateAITick();
 		else super.updateAITick();
 	}
 
@@ -416,14 +325,14 @@ public class Modchu_EntityTameable extends EntityTameable {
 		//Modchu_Debug.mDebug("onLivingUpdate masterEntity="+masterEntity);
 		//Modchu_Debug.mDebug("onLivingUpdate entityName="+entityName);
 		//Modchu_Debug.mDebug("onLivingUpdate posX="+posX+" posY="+posY+" posZ="+posZ);
-		if (masterEntity != null
+		if (master != null
 				&& entityName != null) ;else {
 			init(null);
-			if (masterEntity != null) ;else {
+			if (master != null) ;else {
 				setDead();
 			}
 		}
-		if (masterEntity != null) masterEntity.onLivingUpdate();
+		if (master != null) master.onLivingUpdate();
 		else super.onLivingUpdate();
 	}
 
@@ -432,18 +341,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	protected void attackEntity(Entity entity, float par2) {
-		if (masterEntity != null) masterEntity.attackEntity(entity, par2);
-		else super.attackEntity(entity, par2);
-	}
-
-	public void superAttackEntity(Object entity, float par2) {
-		super.attackEntity((Entity) entity, par2);
-	}
-
-	@Override
 	public boolean attackEntityFrom(DamageSource damageSource, float par2) {
-		return masterEntity != null ? masterEntity.attackEntityFrom(damageSource, par2) : super.attackEntityFrom(damageSource, par2);
+		return master != null ? master.attackEntityFrom(damageSource, par2) : super.attackEntityFrom(damageSource, par2);
 	}
 
 	public boolean superAttackEntityFrom(Object damageSource, float par2) {
@@ -451,26 +350,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public float getBlockPathWeight(int par1, int par2, int par3) {
-		return masterEntity != null ? masterEntity.getBlockPathWeight(par1, par2, par3) : super.getBlockPathWeight(par1, par2, par3);
-	}
-
-	public float superGetBlockPathWeight(int par1, int par2, int par3) {
-		return super.getBlockPathWeight(par1, par2, par3);
-	}
-
-	@Override
-	protected Entity findPlayerToAttack() {
-		return (Entity) (masterEntity != null ? masterEntity.findPlayerToAttack() : super.findPlayerToAttack());
-	}
-
-	public Entity superFindPlayerToAttack() {
-		return super.findPlayerToAttack();
-	}
-
-	@Override
 	public boolean getCanSpawnHere() {
-		return masterEntity != null ? masterEntity.getCanSpawnHere() : super.getCanSpawnHere();
+		return master != null ? master.getCanSpawnHere() : super.getCanSpawnHere();
 	}
 
 	public boolean superGetCanSpawnHere() {
@@ -479,7 +360,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int getTalkInterval() {
-		return masterEntity != null ? masterEntity.getTalkInterval() : super.getTalkInterval();
+		return master != null ? master.getTalkInterval() : super.getTalkInterval();
 	}
 
 	public int superGetTalkInterval() {
@@ -488,7 +369,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected boolean canDespawn() {
-		return masterEntity != null ? masterEntity.canDespawn() : super.canDespawn();
+		return master != null ? master.canDespawn() : super.canDespawn();
 	}
 
 	public boolean superCanDespawn() {
@@ -497,7 +378,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected int getExperiencePoints(EntityPlayer entityPlayer) {
-		return masterEntity != null ? masterEntity.getExperiencePoints(entityPlayer) : super.getExperiencePoints(entityPlayer);
+		return master != null ? master.getExperiencePoints(entityPlayer) : super.getExperiencePoints(entityPlayer);
 	}
 
 	public int superGetExperiencePoints(Object entityPlayer) {
@@ -506,7 +387,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isBreedingItem(ItemStack itemStack) {
-		return masterEntity != null ? masterEntity.isBreedingItem(itemStack) : super.isBreedingItem(itemStack);
+		return master != null ? master.isBreedingItem(itemStack) : super.isBreedingItem(itemStack);
 	}
 
 	public boolean superIsBreedingItem(Object itemStack) {
@@ -515,7 +396,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean interact(EntityPlayer entityPlayer) {
-		return masterEntity != null ? masterEntity.interact(entityPlayer) : super.interact(entityPlayer);
+		return master != null ? master.interact(entityPlayer) : super.interact(entityPlayer);
 	}
 
 	public boolean superInteract(Object entityPlayer) {
@@ -524,7 +405,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isInLove() {
-		return masterEntity != null ? masterEntity.isInLove() : super.isInLove();
+		return master != null ? master.isInLove() : super.isInLove();
 	}
 
 	public boolean superIsInLove() {
@@ -533,7 +414,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void resetInLove() {
-		if (masterEntity != null) masterEntity.resetInLove();
+		if (master != null) master.resetInLove();
 		else super.resetInLove();
 	}
 
@@ -543,7 +424,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean canMateWith(EntityAnimal entityAnimal) {
-		return masterEntity != null ? masterEntity.canMateWith(entityAnimal) : super.canMateWith(entityAnimal);
+		return master != null ? master.canMateWith(entityAnimal) : super.canMateWith(entityAnimal);
 	}
 
 	public boolean superCanMateWith(Object entityAnimal) {
@@ -552,12 +433,12 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityAgeable createChild(EntityAgeable entityAgeable) {
-		return (EntityAgeable) (masterEntity != null ? masterEntity.createChild(entityAgeable) : null);
+		return (EntityAgeable) (master != null ? master.createChild(entityAgeable) : null);
 	}
 
 	@Override
 	public int getGrowingAge() {
-		return masterEntity != null ? masterEntity.getGrowingAge() : super.getGrowingAge();
+		return master != null ? master.getGrowingAge() : super.getGrowingAge();
 	}
 
 	public int superGetGrowingAge() {
@@ -566,7 +447,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void addGrowth(int par1) {
-		if (masterEntity != null) masterEntity.addGrowth(par1);
+		if (master != null) master.addGrowth(par1);
 		else super.addGrowth(par1);
 	}
 
@@ -576,7 +457,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setGrowingAge(int par1) {
-		if (masterEntity != null) masterEntity.setGrowingAge(par1);
+		if (master != null) master.setGrowingAge(par1);
 		else super.setGrowingAge(par1);
 	}
 
@@ -586,7 +467,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isChild() {
-		return masterEntity != null ? masterEntity.isChild() : super.isChild();
+		return master != null ? master.isChild() : super.isChild();
 	}
 
 	public boolean superIsChild() {
@@ -595,7 +476,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setScaleForAge(boolean par1) {
-		if (masterEntity != null) masterEntity.setScaleForAge(par1);
+		if (master != null) master.setScaleForAge(par1);
 		else super.setScaleForAge(par1);
 	}
 
@@ -604,37 +485,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	protected boolean isMovementCeased() {
-		return masterEntity != null ? masterEntity.isMovementCeased() : super.isMovementCeased();
-	}
-
-	public boolean superIsMovementCeased() {
-		return super.isMovementCeased();
-	}
-
-	@Override
-	protected void updateEntityActionState() {
-		if (masterEntity != null) masterEntity.updateEntityActionState();
-		else super.updateEntityActionState();
-	}
-
-	public void superUpdateEntityActionState() {
-		super.updateEntityActionState();
-	}
-
-	@Override
-	protected void updateWanderPath() {
-		if (masterEntity != null) masterEntity.updateWanderPath();
-		else super.updateWanderPath();
-	}
-
-	public void superUpdateWanderPath() {
-		super.updateWanderPath();
-	}
-
-	@Override
 	public boolean hasPath() {
-		return masterEntity != null ? masterEntity.hasPath() : super.hasPath();
+		return master != null ? master.hasPath() : super.hasPath();
 	}
 
 	public boolean superHasPath() {
@@ -643,7 +495,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setPathToEntity(PathEntity pathEntity) {
-		if (masterEntity != null) masterEntity.setPathToEntity(pathEntity);
+		if (master != null) master.setPathToEntity(pathEntity);
 		else super.setPathToEntity(pathEntity);
 	}
 
@@ -652,55 +504,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public Entity getEntityToAttack() {
-		return (Entity) (masterEntity != null ? masterEntity.getEntityToAttack() : super.getEntityToAttack());
-	}
-
-	public Entity superGetEntityToAttack() {
-		return super.getEntityToAttack();
-	}
-
-	@Override
-	public void setTarget(Entity entity) {
-		if (masterEntity != null) masterEntity.setTarget(entity);
-		else super.setTarget(entity);
-	}
-
-	public void superSetTarget(Object entity) {
-		super.setTarget((Entity) entity);
-	}
-
-	@Override
-	public void setHomeArea(int par1, int par2, int par3, int par4) {
-		if (masterEntity != null) masterEntity.setHomeArea(par1, par2, par3, par4);
-		else super.setHomeArea(par1, par2, par3, par4);
-	}
-
-	public void superSetHomeArea(int par1, int par2, int par3, int par4) {
-		super.setHomeArea(par1, par2, par3, par4);
-	}
-
-	@Override
-	public ChunkCoordinates getHomePosition() {
-		return (ChunkCoordinates) (masterEntity != null ? masterEntity.getHomePosition() : super.getHomePosition());
-	}
-
-	public ChunkCoordinates superGetHomePosition() {
-		return super.getHomePosition();
-	}
-
-	@Override
-	public float func_110174_bM() {
-		return masterEntity != null ? masterEntity.func_110174_bM() : super.func_110174_bM();
-	}
-
-	public float superFunc_110174_bM() {
-		return super.func_110174_bM();
-	}
-
-	@Override
 	public void detachHome() {
-		if (masterEntity != null) masterEntity.detachHome();
+		if (master != null) master.detachHome();
 		else super.detachHome();
 	}
 
@@ -710,7 +515,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean hasHome() {
-		return masterEntity != null ? masterEntity.hasHome() : super.hasHome();
+		return master != null ? master.hasHome() : super.hasHome();
 	}
 
 	public boolean superHasHome() {
@@ -719,7 +524,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void func_142017_o(float par1) {
-		if (masterEntity != null) masterEntity.func_142017_o(par1);
+		if (master != null) master.func_142017_o(par1);
 		else super.func_142017_o(par1);
 	}
 
@@ -729,7 +534,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void applyEntityAttributes() {
-		if (masterEntity != null) masterEntity.applyEntityAttributes();
+		if (master != null) master.applyEntityAttributes();
 		else super.applyEntityAttributes();
 	}
 
@@ -739,7 +544,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityLookHelper getLookHelper() {
-		return (EntityLookHelper) (masterEntity != null ? masterEntity.getLookHelper() : super.getLookHelper());
+		return (EntityLookHelper) (master != null ? master.getLookHelper() : super.getLookHelper());
 	}
 
 	public EntityLookHelper superGetLookHelper() {
@@ -748,7 +553,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityMoveHelper getMoveHelper() {
-		return (EntityMoveHelper) (masterEntity != null ? masterEntity.getMoveHelper() : super.getMoveHelper());
+		return (EntityMoveHelper) (master != null ? master.getMoveHelper() : super.getMoveHelper());
 	}
 
 	public EntityMoveHelper superGetMoveHelper() {
@@ -757,7 +562,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityJumpHelper getJumpHelper() {
-		return (EntityJumpHelper) (masterEntity != null ? masterEntity.getJumpHelper() : super.getJumpHelper());
+		return (EntityJumpHelper) (master != null ? master.getJumpHelper() : super.getJumpHelper());
 	}
 
 	public EntityJumpHelper superGetJumpHelper() {
@@ -766,7 +571,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public PathNavigate getNavigator() {
-		return (PathNavigate) (masterEntity != null ? masterEntity.getNavigator() : super.getNavigator());
+		return (PathNavigate) (master != null ? master.getNavigator() : super.getNavigator());
 	}
 
 	public PathNavigate superGetNavigator() {
@@ -775,7 +580,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntitySenses getEntitySenses() {
-		return (EntitySenses) (masterEntity != null ? masterEntity.getEntitySenses() : super.getEntitySenses());
+		return (EntitySenses) (master != null ? master.getEntitySenses() : super.getEntitySenses());
 	}
 
 	public EntitySenses superGetEntitySenses() {
@@ -784,7 +589,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityLivingBase getAttackTarget() {
-		return (EntityLivingBase) (masterEntity != null ? masterEntity.getAttackTarget() : super.getAttackTarget());
+		return (EntityLivingBase) (master != null ? master.getAttackTarget() : super.getAttackTarget());
 	}
 
 	public EntityLivingBase superGetAttackTarget() {
@@ -793,7 +598,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setAttackTarget(EntityLivingBase entityLivingBase) {
-		if (masterEntity != null) masterEntity.setAttackTarget(entityLivingBase);
+		if (master != null) master.setAttackTarget(entityLivingBase);
 		else super.setAttackTarget(entityLivingBase);
 	}
 
@@ -803,7 +608,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean canAttackClass(Class c) {
-		return masterEntity != null ? masterEntity.canAttackClass(c) : super.canAttackClass(c);
+		return master != null ? master.canAttackClass(c) : super.canAttackClass(c);
 	}
 
 	public boolean superCanAttackClass(Object c) {
@@ -812,7 +617,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void eatGrassBonus() {
-		if (masterEntity != null) masterEntity.eatGrassBonus();
+		if (master != null) master.eatGrassBonus();
 		else super.eatGrassBonus();
 	}
 
@@ -822,7 +627,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void playLivingSound() {
-		if (masterEntity != null) masterEntity.playLivingSound();
+		if (master != null) master.playLivingSound();
 		else super.playLivingSound();
 	}
 
@@ -832,7 +637,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void onEntityUpdate() {
-		if (masterEntity != null) masterEntity.onEntityUpdate();
+		if (master != null) master.onEntityUpdate();
 		else super.onEntityUpdate();
 	}
 
@@ -842,7 +647,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void spawnExplosionParticle() {
-		if (masterEntity != null) masterEntity.spawnExplosionParticle();
+		if (master != null) master.spawnExplosionParticle();
 		else super.spawnExplosionParticle();
 	}
 
@@ -852,7 +657,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void onUpdate() {
-		if (masterEntity != null) masterEntity.onUpdate();
+		if (master != null) master.onUpdate();
 		else super.onUpdate();
 	}
 
@@ -862,7 +667,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected float func_110146_f(float par1, float par2) {
-		return masterEntity != null ? masterEntity.func_110146_f(par1, par2) : super.func_110146_f(par1, par2);
+		return master != null ? master.func_110146_f(par1, par2) : super.func_110146_f(par1, par2);
 	}
 
 	public float superFunc_110146_f(float par1, float par2) {
@@ -871,7 +676,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected String getLivingSound() {
-		return masterEntity != null ? masterEntity.getLivingSound() : super.getLivingSound();
+		return master != null ? master.getLivingSound() : super.getLivingSound();
 	}
 
 	public String superGetLivingSound() {
@@ -880,7 +685,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {
-		if (masterEntity != null) masterEntity.dropFewItems(par1, par2);
+		if (master != null) master.dropFewItems(par1, par2);
 		else super.dropFewItems(par1, par2);
 	}
 
@@ -890,7 +695,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setMoveForward(float par1) {
-		if (masterEntity != null) masterEntity.setMoveForward(par1);
+		if (master != null) master.setMoveForward(par1);
 		else super.setMoveForward(par1);
 	}
 
@@ -900,7 +705,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setAIMoveSpeed(float par1) {
-		if (masterEntity != null) masterEntity.setAIMoveSpeed(par1);
+		if (master != null) master.setAIMoveSpeed(par1);
 		else super.setAIMoveSpeed(par1);
 	}
 
@@ -909,17 +714,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	protected boolean isAIEnabled() {
-		return masterEntity != null ? masterEntity.isAIEnabled() : super.isAIEnabled();
-	}
-
-	public boolean superIsAIEnabled() {
-		return super.isAIEnabled();
-	}
-
-	@Override
 	protected void despawnEntity() {
-		if (masterEntity != null) masterEntity.despawnEntity();
+		if (master != null) master.despawnEntity();
 		else super.despawnEntity();
 	}
 
@@ -929,7 +725,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void updateAITasks() {
-		if (masterEntity != null) masterEntity.updateAITasks();
+		if (master != null) master.updateAITasks();
 		else super.updateAITasks();
 	}
 
@@ -939,7 +735,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int getVerticalFaceSpeed() {
-		return masterEntity != null ? masterEntity.getVerticalFaceSpeed() : super.getVerticalFaceSpeed();
+		return master != null ? master.getVerticalFaceSpeed() : super.getVerticalFaceSpeed();
 	}
 
 	public int superGetVerticalFaceSpeed() {
@@ -948,7 +744,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void faceEntity(Entity entity, float par2, float par3) {
-		if (masterEntity != null) masterEntity.faceEntity(entity, par2, par3);
+		if (master != null) master.faceEntity(entity, par2, par3);
 		else super.faceEntity(entity, par2, par3);
 	}
 
@@ -958,7 +754,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public float getRenderSizeModifier() {
-		return masterEntity != null ? masterEntity.getRenderSizeModifier() : super.getRenderSizeModifier();
+		return master != null ? master.getRenderSizeModifier() : super.getRenderSizeModifier();
 	}
 
 	public float superGetRenderSizeModifier() {
@@ -967,7 +763,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int getMaxSpawnedInChunk() {
-		return masterEntity != null ? masterEntity.getMaxSpawnedInChunk() : super.getMaxSpawnedInChunk();
+		return master != null ? master.getMaxSpawnedInChunk() : super.getMaxSpawnedInChunk();
 	}
 
 	public int superGetMaxSpawnedInChunk() {
@@ -975,17 +771,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public int getMaxSafePointTries() {
-		return masterEntity != null ? masterEntity.getMaxSafePointTries() : super.getMaxSafePointTries();
-	}
-
-	public int superGetMaxSafePointTries() {
-		return super.getMaxSafePointTries();
-	}
-
-	@Override
 	public ItemStack getHeldItem() {
-		return (ItemStack) (masterEntity != null ? masterEntity.getHeldItem() : super.getHeldItem());
+		return (ItemStack) (master != null ? master.getHeldItem() : super.getHeldItem());
 	}
 
 	public ItemStack superGetHeldItem() {
@@ -993,17 +780,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public ItemStack func_130225_q(int par1) {
-		return (ItemStack) (masterEntity != null ? masterEntity.func_130225_q(par1) : super.func_130225_q(par1));
-	}
-
-	public ItemStack superFunc_130225_q(int par1) {
-		return super.func_130225_q(par1);
-	}
-
-	@Override
 	public void setCurrentItemOrArmor(int par1, ItemStack itemStack) {
-		if (masterEntity != null) masterEntity.setCurrentItemOrArmor(par1, itemStack);
+		if (master != null) master.setCurrentItemOrArmor(par1, itemStack);
 		else super.setCurrentItemOrArmor(par1, itemStack);
 	}
 
@@ -1012,17 +790,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public ItemStack[] getLastActiveItems() {
-		return (ItemStack[]) (masterEntity != null ? masterEntity.getLastActiveItems() : super.getLastActiveItems());
-	}
-
-	public ItemStack[] superGetLastActiveItems() {
-		return super.getLastActiveItems();
-	}
-
-	@Override
 	protected void dropEquipment(boolean par1, int par2) {
-		if (masterEntity != null) masterEntity.dropEquipment(par1, par2);
+		if (master != null) master.dropEquipment(par1, par2);
 		else super.dropEquipment(par1, par2);
 	}
 
@@ -1032,7 +801,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void addRandomArmor() {
-		if (masterEntity != null) masterEntity.addRandomArmor();
+		if (master != null) master.addRandomArmor();
 		else super.addRandomArmor();
 	}
 
@@ -1041,18 +810,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	protected void enchantEquipment() {
-		if (masterEntity != null) masterEntity.enchantEquipment();
-		else super.enchantEquipment();
-	}
-
-	public void superEnchantEquipment() {
-		super.enchantEquipment();
-	}
-
-	@Override
 	public boolean canBeSteered() {
-		return masterEntity != null ? masterEntity.canBeSteered() : super.canBeSteered();
+		return master != null ? master.canBeSteered() : super.canBeSteered();
 	}
 
 	public boolean superCanBeSteered() {
@@ -1060,18 +819,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public void func_110163_bv() {
-		if (masterEntity != null) masterEntity.func_110163_bv();
-		else super.func_110163_bv();
-	}
-
-	public void superFunc_110163_bv() {
-		super.func_110163_bv();
-	}
-
-	@Override
 	public void setCustomNameTag(String par1Str) {
-		if (masterEntity != null) masterEntity.setCustomNameTag(par1Str);
+		if (master != null) master.setCustomNameTag(par1Str);
 		else super.setCustomNameTag(par1Str);
 	}
 
@@ -1081,7 +830,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public String getCustomNameTag() {
-		return masterEntity != null ? masterEntity.getCustomNameTag() : super.getCustomNameTag();
+		return master != null ? master.getCustomNameTag() : super.getCustomNameTag();
 	}
 
 	public String superGetCustomNameTag() {
@@ -1090,7 +839,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean hasCustomNameTag() {
-		return masterEntity != null ? masterEntity.hasCustomNameTag() : super.hasCustomNameTag();
+		return master != null ? master.hasCustomNameTag() : super.hasCustomNameTag();
 	}
 
 	public boolean superHasCustomNameTag() {
@@ -1099,7 +848,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setAlwaysRenderNameTag(boolean par1) {
-		if (masterEntity != null) masterEntity.setAlwaysRenderNameTag(par1);
+		if (master != null) master.setAlwaysRenderNameTag(par1);
 		else super.setAlwaysRenderNameTag(par1);
 	}
 
@@ -1109,7 +858,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean getAlwaysRenderNameTag() {
-		return masterEntity != null ? masterEntity.getAlwaysRenderNameTag() : super.getAlwaysRenderNameTag();
+		return master != null ? master.getAlwaysRenderNameTag() : super.getAlwaysRenderNameTag();
 	}
 
 	public boolean superGetAlwaysRenderNameTag() {
@@ -1118,7 +867,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean getAlwaysRenderNameTagForRender() {
-		return masterEntity != null ? masterEntity.getAlwaysRenderNameTagForRender() : super.getAlwaysRenderNameTagForRender();
+		return master != null ? master.getAlwaysRenderNameTagForRender() : super.getAlwaysRenderNameTagForRender();
 	}
 
 	public boolean superGetAlwaysRenderNameTagForRender() {
@@ -1127,7 +876,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setEquipmentDropChance(int par1, float par2) {
-		if (masterEntity != null) masterEntity.setEquipmentDropChance(par1, par2);
+		if (master != null) master.setEquipmentDropChance(par1, par2);
 		else super.setEquipmentDropChance(par1, par2);
 	}
 
@@ -1137,7 +886,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean canPickUpLoot() {
-		return masterEntity != null ? masterEntity.canPickUpLoot() : super.canPickUpLoot();
+		return master != null ? master.canPickUpLoot() : super.canPickUpLoot();
 	}
 
 	public boolean superCanPickUpLoot() {
@@ -1146,7 +895,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setCanPickUpLoot(boolean par1) {
-		if (masterEntity != null) masterEntity.setCanPickUpLoot(par1);
+		if (master != null) master.setCanPickUpLoot(par1);
 		else super.setCanPickUpLoot(par1);
 	}
 
@@ -1156,7 +905,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isNoDespawnRequired() {
-		return masterEntity != null ? masterEntity.isNoDespawnRequired() : super.isNoDespawnRequired();
+		return master != null ? master.isNoDespawnRequired() : super.isNoDespawnRequired();
 	}
 
 	public boolean superIsNoDespawnRequired() {
@@ -1165,7 +914,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void clearLeashed(boolean par1, boolean par2) {
-		if (masterEntity != null) masterEntity.clearLeashed(par1, par2);
+		if (master != null) master.clearLeashed(par1, par2);
 		else super.clearLeashed(par1, par2);
 	}
 
@@ -1175,7 +924,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean allowLeashing() {
-		return masterEntity != null ? masterEntity.allowLeashing() : super.allowLeashing();
+		return master != null ? master.allowLeashing() : super.allowLeashing();
 	}
 
 	public boolean superAllowLeashing() {
@@ -1184,7 +933,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean getLeashed() {
-		return masterEntity != null ? masterEntity.getLeashed() : super.getLeashed();
+		return master != null ? master.getLeashed() : super.getLeashed();
 	}
 
 	public boolean superGetLeashed() {
@@ -1193,7 +942,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public Entity getLeashedToEntity() {
-		return (Entity) (masterEntity != null ? masterEntity.getLeashedToEntity() : super.getLeashedToEntity());
+		return (Entity) (master != null ? master.getLeashedToEntity() : super.getLeashedToEntity());
 	}
 
 	public Entity superGetLeashedToEntity() {
@@ -1202,7 +951,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setLeashedToEntity(Entity entity, boolean par2) {
-		if (masterEntity != null) masterEntity.setLeashedToEntity(entity, par2);
+		if (master != null) master.setLeashedToEntity(entity, par2);
 		else super.setLeashedToEntity(entity, par2);
 	}
 
@@ -1211,18 +960,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	protected void updateFallState(double par1, boolean par3) {
-		if (masterEntity != null) masterEntity.updateFallState(par1, par3);
-		else super.updateFallState(par1, par3);
-	}
-
-	public void superUpdateFallState(double par1, boolean par3) {
-		super.updateFallState(par1, par3);
-	}
-
-	@Override
 	public boolean canBreatheUnderwater() {
-		return masterEntity != null ? masterEntity.canBreatheUnderwater() : super.canBreatheUnderwater();
+		return master != null ? master.canBreatheUnderwater() : super.canBreatheUnderwater();
 	}
 
 	public boolean superCanBreatheUnderwater() {
@@ -1231,7 +970,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void onDeathUpdate() {
-		if (masterEntity != null) masterEntity.onDeathUpdate();
+		if (master != null) master.onDeathUpdate();
 		else super.onDeathUpdate();
 	}
 
@@ -1241,7 +980,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected int decreaseAirSupply(int par1) {
-		return masterEntity != null ? masterEntity.decreaseAirSupply(par1) : super.decreaseAirSupply(par1);
+		return master != null ? master.decreaseAirSupply(par1) : super.decreaseAirSupply(par1);
 	}
 
 	public int superDecreaseAirSupply(int par1) {
@@ -1250,7 +989,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected boolean isPlayer() {
-		return masterEntity != null ? masterEntity.isPlayer() : super.isPlayer();
+		return master != null ? master.isPlayer() : super.isPlayer();
 	}
 
 	public boolean superIsPlayer() {
@@ -1259,7 +998,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public Random getRNG() {
-		return (Random) (masterEntity != null ? masterEntity.getRNG() : super.getRNG());
+		return (Random) (master != null ? master.getRNG() : super.getRNG());
 	}
 
 	public Random superGetRNG() {
@@ -1268,7 +1007,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityLivingBase getAITarget() {
-		return (EntityLivingBase) (masterEntity != null ? masterEntity.getAITarget() : super.getAITarget());
+		return (EntityLivingBase) (master != null ? master.getAITarget() : super.getAITarget());
 	}
 
 	public EntityLivingBase superGetAITarget() {
@@ -1276,17 +1015,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public int func_142015_aE() {
-		return masterEntity != null ? masterEntity.func_142015_aE() : super.func_142015_aE();
-	}
-
-	public int superFunc_142015_aE() {
-		return super.func_142015_aE();
-	}
-
-	@Override
 	public void setRevengeTarget(EntityLivingBase entityLivingBase) {
-		if (masterEntity != null) masterEntity.setRevengeTarget(entityLivingBase);
+		if (master != null) master.setRevengeTarget(entityLivingBase);
 		else super.setRevengeTarget(entityLivingBase);
 	}
 
@@ -1296,7 +1026,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityLivingBase getLastAttacker() {
-		return (EntityLivingBase) (masterEntity != null ? masterEntity.getLastAttacker() : super.getLastAttacker());
+		return (EntityLivingBase) (master != null ? master.getLastAttacker() : super.getLastAttacker());
 	}
 
 	public EntityLivingBase superGetLastAttacker() {
@@ -1305,7 +1035,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int getLastAttackerTime() {
-		return masterEntity != null ? masterEntity.getLastAttackerTime() : super.getLastAttackerTime();
+		return master != null ? master.getLastAttackerTime() : super.getLastAttackerTime();
 	}
 
 	public int superGetLastAttackerTime() {
@@ -1314,7 +1044,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setLastAttacker(Entity entity) {
-		if (masterEntity != null) masterEntity.setLastAttacker(entity);
+		if (master != null) master.setLastAttacker(entity);
 		else super.setLastAttacker(entity);
 	}
 
@@ -1324,7 +1054,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int getAge() {
-		return masterEntity != null ? masterEntity.getAge() : super.getAge();
+		return master != null ? master.getAge() : super.getAge();
 	}
 
 	public int superGetAge() {
@@ -1333,7 +1063,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void updatePotionEffects() {
-		if (masterEntity != null) masterEntity.updatePotionEffects();
+		if (master != null) master.updatePotionEffects();
 		else super.updatePotionEffects();
 	}
 
@@ -1343,7 +1073,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void clearActivePotions() {
-		if (masterEntity != null) masterEntity.clearActivePotions();
+		if (master != null) master.clearActivePotions();
 		else super.clearActivePotions();
 	}
 
@@ -1353,7 +1083,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public Collection getActivePotionEffects() {
-		return (Collection) (masterEntity != null ? masterEntity.getActivePotionEffects() : super.getActivePotionEffects());
+		return (Collection) (master != null ? master.getActivePotionEffects() : super.getActivePotionEffects());
 	}
 
 	public Collection superGetActivePotionEffects() {
@@ -1362,7 +1092,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isPotionActive(int par1) {
-		return masterEntity != null ? masterEntity.isPotionActive(par1) : super.isPotionActive(par1);
+		return master != null ? master.isPotionActive(par1) : super.isPotionActive(par1);
 	}
 
 	public boolean superIsPotionActive(int par1) {
@@ -1371,7 +1101,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isPotionActive(Potion potion) {
-		return masterEntity != null ? masterEntity.isPotionActive(potion) : super.isPotionActive(potion);
+		return master != null ? master.isPotionActive(potion) : super.isPotionActive(potion);
 	}
 
 	public boolean superIsPotionActive(Object potion) {
@@ -1380,7 +1110,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public PotionEffect getActivePotionEffect(Potion potion) {
-		return (PotionEffect) (masterEntity != null ? masterEntity.getActivePotionEffect(potion) : super.getActivePotionEffect(potion));
+		return (PotionEffect) (master != null ? master.getActivePotionEffect(potion) : super.getActivePotionEffect(potion));
 	}
 
 	public PotionEffect superGetActivePotionEffect(Object potion) {
@@ -1389,7 +1119,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void addPotionEffect(PotionEffect potionEffect) {
-		if (masterEntity != null) masterEntity.addPotionEffect(potionEffect);
+		if (master != null) master.addPotionEffect(potionEffect);
 		else super.addPotionEffect(potionEffect);
 	}
 
@@ -1399,7 +1129,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isPotionApplicable(PotionEffect potionEffect) {
-		return masterEntity != null ? masterEntity.isPotionApplicable(potionEffect) : super.isPotionApplicable(potionEffect);
+		return master != null ? master.isPotionApplicable(potionEffect) : super.isPotionApplicable(potionEffect);
 	}
 
 	public boolean superIsPotionApplicable(Object potionEffect) {
@@ -1408,7 +1138,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isEntityUndead() {
-		return masterEntity != null ? masterEntity.isEntityUndead() : super.isEntityUndead();
+		return master != null ? master.isEntityUndead() : super.isEntityUndead();
 	}
 
 	public boolean superIsEntityUndead() {
@@ -1417,7 +1147,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void removePotionEffectClient(int par1) {
-		if (masterEntity != null) masterEntity.removePotionEffectClient(par1);
+		if (master != null) master.removePotionEffectClient(par1);
 		else super.removePotionEffectClient(par1);
 	}
 
@@ -1427,7 +1157,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void removePotionEffect(int par1) {
-		if (masterEntity != null) masterEntity.removePotionEffect(par1);
+		if (master != null) master.removePotionEffect(par1);
 		else super.removePotionEffect(par1);
 	}
 
@@ -1437,7 +1167,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void onNewPotionEffect(PotionEffect potionEffect) {
-		if (masterEntity != null) masterEntity.onNewPotionEffect(potionEffect);
+		if (master != null) master.onNewPotionEffect(potionEffect);
 		else super.onNewPotionEffect(potionEffect);
 	}
 
@@ -1447,7 +1177,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void onChangedPotionEffect(PotionEffect potionEffect, boolean par2) {
-		if (masterEntity != null) masterEntity.onChangedPotionEffect(potionEffect, par2);
+		if (master != null) master.onChangedPotionEffect(potionEffect, par2);
 		else super.onChangedPotionEffect(potionEffect, par2);
 	}
 
@@ -1457,7 +1187,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void onFinishedPotionEffect(PotionEffect potionEffect) {
-		if (masterEntity != null) masterEntity.onFinishedPotionEffect(potionEffect);
+		if (master != null) master.onFinishedPotionEffect(potionEffect);
 		else super.onFinishedPotionEffect(potionEffect);
 	}
 
@@ -1467,7 +1197,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void heal(float par1) {
-		if (masterEntity != null) masterEntity.heal(par1);
+		if (master != null) master.heal(par1);
 		else super.heal(par1);
 	}
 
@@ -1477,7 +1207,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setHealth(float par1) {
-		if (masterEntity != null) masterEntity.setHealth(par1);
+		if (master != null) master.setHealth(par1);
 		else super.setHealth(par1);
 	}
 
@@ -1487,7 +1217,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void renderBrokenItemStack(ItemStack itemStack) {
-		if (masterEntity != null) masterEntity.renderBrokenItemStack(itemStack);
+		if (master != null) master.renderBrokenItemStack(itemStack);
 		else super.renderBrokenItemStack(itemStack);
 	}
 
@@ -1497,7 +1227,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void onDeath(DamageSource damageSource) {
-		if (masterEntity != null) masterEntity.onDeath(damageSource);
+		if (master != null) master.onDeath(damageSource);
 		else super.onDeath(damageSource);
 	}
 
@@ -1507,7 +1237,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void knockBack(Entity entity, float par2, double par3, double par5) {
-		if (masterEntity != null) masterEntity.knockBack(entity, par2, par3, par5);
+		if (master != null) master.knockBack(entity, par2, par3, par5);
 		else super.knockBack(entity, par2, par3, par5);
 	}
 
@@ -1517,7 +1247,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected String getHurtSound() {
-		return masterEntity != null ? masterEntity.getHurtSound() : super.getHurtSound();
+		return master != null ? master.getHurtSound() : super.getHurtSound();
 	}
 
 	public String superGetHurtSound() {
@@ -1526,7 +1256,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected String getDeathSound() {
-		return masterEntity != null ? masterEntity.getDeathSound() : super.getDeathSound();
+		return master != null ? master.getDeathSound() : super.getDeathSound();
 	}
 
 	public String superGetDeathSound() {
@@ -1534,18 +1264,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	protected void dropRareDrop(int par1) {
-		if (masterEntity != null) masterEntity.dropRareDrop(par1);
-		else super.dropRareDrop(par1);
-	}
-
-	public void superDropRareDrop(int par1) {
-		super.dropRareDrop(par1);
-	}
-
-	@Override
 	public boolean isOnLadder() {
-		return masterEntity != null ? masterEntity.isOnLadder() : super.isOnLadder();
+		return master != null ? master.isOnLadder() : super.isOnLadder();
 	}
 
 	public boolean superIsOnLadder() {
@@ -1554,7 +1274,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isEntityAlive() {
-		return masterEntity != null ? masterEntity.isEntityAlive() : super.isEntityAlive();
+		return master != null ? master.isEntityAlive() : super.isEntityAlive();
 	}
 
 	public boolean superIsEntityAlive() {
@@ -1562,18 +1282,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	protected void fall(float par1) {
-		if (masterEntity != null) masterEntity.fall(par1);
-		else super.fall(par1);
-	}
-
-	public void superFall(float par1) {
-		super.fall(par1);
-	}
-
-	@Override
 	public void performHurtAnimation() {
-		if (masterEntity != null) masterEntity.performHurtAnimation();
+		if (master != null) master.performHurtAnimation();
 		else super.performHurtAnimation();
 	}
 
@@ -1583,7 +1293,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int getTotalArmorValue() {
-		return masterEntity != null ? masterEntity.getTotalArmorValue() : super.getTotalArmorValue();
+		return master != null ? master.getTotalArmorValue() : super.getTotalArmorValue();
 	}
 
 	public int superGetTotalArmorValue() {
@@ -1592,7 +1302,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void damageArmor(float par1) {
-		if (masterEntity != null) masterEntity.damageArmor(par1);
+		if (master != null) master.damageArmor(par1);
 		else super.damageArmor(par1);
 	}
 
@@ -1602,7 +1312,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected float applyArmorCalculations(DamageSource damageSource, float par2) {
-		return masterEntity != null ? masterEntity.applyArmorCalculations(damageSource, par2) : super.applyArmorCalculations(damageSource, par2);
+		return master != null ? master.applyArmorCalculations(damageSource, par2) : super.applyArmorCalculations(damageSource, par2);
 	}
 
 	public float superApplyArmorCalculations(Object damageSource, float par2) {
@@ -1611,7 +1321,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected float applyPotionDamageCalculations(DamageSource damageSource, float par2) {
-		return masterEntity != null ? masterEntity.applyPotionDamageCalculations(damageSource, par2) : super.applyPotionDamageCalculations(damageSource, par2);
+		return master != null ? master.applyPotionDamageCalculations(damageSource, par2) : super.applyPotionDamageCalculations(damageSource, par2);
 	}
 
 	public float superApplyPotionDamageCalculations(Object damageSource, float par2) {
@@ -1620,7 +1330,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void damageEntity(DamageSource damageSource, float par2) {
-		if (masterEntity != null) masterEntity.damageEntity(damageSource, par2);
+		if (master != null) master.damageEntity(damageSource, par2);
 		else super.damageEntity(damageSource, par2);
 	}
 
@@ -1629,17 +1339,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public CombatTracker func_110142_aN() {
-		return (CombatTracker) (masterEntity != null ? masterEntity.func_110142_aN() : super.func_110142_aN());
-	}
-
-	public CombatTracker superFunc_110142_aN() {
-		return super.func_110142_aN();
-	}
-
-	@Override
 	public EntityLivingBase func_94060_bK() {
-		return (EntityLivingBase) (masterEntity != null ? masterEntity.func_94060_bK() : super.func_94060_bK());
+		return (EntityLivingBase) (master != null ? master.func_94060_bK() : super.func_94060_bK());
 	}
 
 	public EntityLivingBase superFunc_94060_bK() {
@@ -1648,7 +1349,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void swingItem() {
-		if (masterEntity != null) masterEntity.swingItem();
+		if (master != null) master.swingItem();
 		else super.swingItem();
 	}
 
@@ -1658,7 +1359,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void kill() {
-		if (masterEntity != null) masterEntity.kill();
+		if (master != null) master.kill();
 		else super.kill();
 	}
 
@@ -1668,7 +1369,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void updateArmSwingProgress() {
-		if (masterEntity != null) masterEntity.updateArmSwingProgress();
+		if (master != null) master.updateArmSwingProgress();
 		else super.updateArmSwingProgress();
 	}
 
@@ -1678,7 +1379,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public BaseAttributeMap getAttributeMap() {
-		return (BaseAttributeMap) (masterEntity != null ? masterEntity.getAttributeMap() : super.getAttributeMap());
+		return (BaseAttributeMap) (master != null ? master.getAttributeMap() : super.getAttributeMap());
 	}
 
 	public BaseAttributeMap superGetAttributeMap() {
@@ -1687,7 +1388,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
-		return (EnumCreatureAttribute) (masterEntity != null ? masterEntity.getCreatureAttribute() : super.getCreatureAttribute());
+		return (EnumCreatureAttribute) (master != null ? master.getCreatureAttribute() : super.getCreatureAttribute());
 	}
 
 	public EnumCreatureAttribute superGetCreatureAttribute() {
@@ -1696,7 +1397,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setSprinting(boolean par1) {
-		if (masterEntity != null) masterEntity.setSprinting(par1);
+		if (master != null) master.setSprinting(par1);
 		else super.setSprinting(par1);
 	}
 
@@ -1706,7 +1407,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected float getSoundVolume() {
-		return masterEntity != null ? masterEntity.getSoundVolume() : super.getSoundVolume();
+		return master != null ? master.getSoundVolume() : super.getSoundVolume();
 	}
 
 	public float superGetSoundVolume() {
@@ -1715,7 +1416,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected float getSoundPitch() {
-		return masterEntity != null ? masterEntity.getSoundPitch() : super.getSoundPitch();
+		return master != null ? master.getSoundPitch() : super.getSoundPitch();
 	}
 
 	public float superGetSoundPitch() {
@@ -1724,7 +1425,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected boolean isMovementBlocked() {
-		return masterEntity != null ? masterEntity.isMovementBlocked() : super.isMovementBlocked();
+		return master != null ? master.isMovementBlocked() : super.isMovementBlocked();
 	}
 
 	public boolean superIsMovementBlocked() {
@@ -1733,7 +1434,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setPositionAndUpdate(double par1, double par3, double par5) {
-		if (masterEntity != null) masterEntity.setPositionAndUpdate(par1, par3, par5);
+		if (master != null) master.setPositionAndUpdate(par1, par3, par5);
 		else super.setPositionAndUpdate(par1, par3, par5);
 	}
 
@@ -1743,7 +1444,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void dismountEntity(Entity entity) {
-		if (masterEntity != null) masterEntity.dismountEntity(entity);
+		if (master != null) master.dismountEntity(entity);
 		else super.dismountEntity(entity);
 	}
 
@@ -1753,7 +1454,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void jump() {
-		if (masterEntity != null) masterEntity.jump();
+		if (master != null) master.jump();
 		else super.jump();
 	}
 
@@ -1763,7 +1464,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void moveEntityWithHeading(float par1, float par2) {
-		if (masterEntity != null) masterEntity.moveEntityWithHeading(par1, par2);
+		if (master != null) master.moveEntityWithHeading(par1, par2);
 		else super.moveEntityWithHeading(par1, par2);
 	}
 
@@ -1773,7 +1474,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public float getAIMoveSpeed() {
-		return masterEntity != null ? masterEntity.getAIMoveSpeed() : super.getAIMoveSpeed();
+		return master != null ? master.getAIMoveSpeed() : super.getAIMoveSpeed();
 	}
 
 	public float superGetAIMoveSpeed() {
@@ -1782,7 +1483,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {
-		return masterEntity != null ? masterEntity.attackEntityAsMob(entity) : super.attackEntityAsMob(entity);
+		return master != null ? master.attackEntityAsMob(entity) : super.attackEntityAsMob(entity);
 	}
 
 	public boolean superAttackEntityAsMob(Object entity) {
@@ -1791,7 +1492,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isPlayerSleeping() {
-		return masterEntity != null ? masterEntity.isPlayerSleeping() : super.isPlayerSleeping();
+		return master != null ? master.isPlayerSleeping() : super.isPlayerSleeping();
 	}
 
 	public boolean superIsPlayerSleeping() {
@@ -1800,7 +1501,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void collideWithNearbyEntities() {
-		if (masterEntity != null) masterEntity.collideWithNearbyEntities();
+		if (master != null) master.collideWithNearbyEntities();
 		else super.collideWithNearbyEntities();
 	}
 
@@ -1810,7 +1511,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void collideWithEntity(Entity entity) {
-		if (masterEntity != null) masterEntity.collideWithEntity(entity);
+		if (master != null) master.collideWithEntity(entity);
 		else super.collideWithEntity(entity);
 	}
 
@@ -1820,7 +1521,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void updateRidden() {
-		if (masterEntity != null) masterEntity.updateRidden();
+		if (master != null) master.updateRidden();
 		else super.updateRidden();
 	}
 
@@ -1829,18 +1530,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
-		if (masterEntity != null) masterEntity.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
-		else super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
-	}
-
-	public void superSetPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
-		super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
-	}
-
-	@Override
 	public void setJumping(boolean par1) {
-		if (masterEntity != null) masterEntity.setJumping(par1);
+		if (master != null) master.setJumping(par1);
 		else super.setJumping(par1);
 	}
 
@@ -1850,7 +1541,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void onItemPickup(Entity entity, int par2) {
-		if (masterEntity != null) masterEntity.onItemPickup(entity, par2);
+		if (master != null) master.onItemPickup(entity, par2);
 		else super.onItemPickup(entity, par2);
 	}
 
@@ -1860,7 +1551,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean canEntityBeSeen(Entity entity) {
-		return masterEntity != null ? masterEntity.canEntityBeSeen(entity) : super.canEntityBeSeen(entity);
+		return master != null ? master.canEntityBeSeen(entity) : super.canEntityBeSeen(entity);
 	}
 
 	public boolean superCanEntityBeSeen(Object entity) {
@@ -1869,7 +1560,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public Vec3 getLookVec() {
-		return (Vec3) (masterEntity != null ? masterEntity.getLookVec() : super.getLookVec());
+		return (Vec3) (master != null ? master.getLookVec() : super.getLookVec());
 	}
 
 	public Vec3 superGetLookVec() {
@@ -1878,7 +1569,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public Vec3 getLook(float par1) {
-		return (Vec3) (masterEntity != null ? masterEntity.getLook(par1) : super.getLook(par1));
+		return (Vec3) (master != null ? master.getLook(par1) : super.getLook(par1));
 	}
 
 	public Vec3 superGetLook(float par1) {
@@ -1887,7 +1578,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public float getSwingProgress(float par1) {
-		return masterEntity != null ? masterEntity.getSwingProgress(par1) : super.getSwingProgress(par1);
+		return master != null ? master.getSwingProgress(par1) : super.getSwingProgress(par1);
 	}
 
 	public float superGetSwingProgress(float par1) {
@@ -1895,35 +1586,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public Vec3 getPosition(float par1) {
-		return (Vec3) (masterEntity != null ? masterEntity.getPosition(par1) : super.getPosition(par1));
-	}
-
-	public Vec3 superGetPosition(float par1) {
-		return super.getPosition(par1);
-	}
-
-	@Override
-	public MovingObjectPosition rayTrace(double par1, float par3) {
-		return (MovingObjectPosition) (masterEntity != null ? masterEntity.rayTrace(par1, par3) : super.rayTrace(par1, par3));
-	}
-
-	public MovingObjectPosition superRayTrace(double par1, float par3) {
-		return super.rayTrace(par1, par3);
-	}
-
-	@Override
-	public boolean isClientWorld() {
-		return masterEntity != null ? masterEntity.isClientWorld() : super.isClientWorld();
-	}
-
-	public boolean superIsClientWorld() {
-		return super.isClientWorld();
-	}
-
-	@Override
 	public boolean canBeCollidedWith() {
-		return masterEntity != null ? masterEntity.canBeCollidedWith() : super.canBeCollidedWith();
+		return master != null ? master.canBeCollidedWith() : super.canBeCollidedWith();
 	}
 
 	public boolean superCanBeCollidedWith() {
@@ -1932,7 +1596,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean canBePushed() {
-		return masterEntity != null ? masterEntity.canBePushed() : super.canBePushed();
+		return master != null ? master.canBePushed() : super.canBePushed();
 	}
 
 	public boolean superCanBePushed() {
@@ -1941,7 +1605,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public float getEyeHeight() {
-		return masterEntity != null ? masterEntity.getEyeHeight() : super.getEyeHeight();
+		return master != null ? master.getEyeHeight() : super.getEyeHeight();
 	}
 
 	public float superGetEyeHeight() {
@@ -1950,7 +1614,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void setBeenAttacked() {
-		if (masterEntity != null) masterEntity.setBeenAttacked();
+		if (master != null) master.setBeenAttacked();
 		else super.setBeenAttacked();
 	}
 
@@ -1960,7 +1624,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public float getRotationYawHead() {
-		return masterEntity != null ? masterEntity.getRotationYawHead() : super.getRotationYawHead();
+		return master != null ? master.getRotationYawHead() : super.getRotationYawHead();
 	}
 
 	public float superGetRotationYawHead() {
@@ -1969,7 +1633,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setRotationYawHead(float par1) {
-		if (masterEntity != null) masterEntity.setRotationYawHead(par1);
+		if (master != null) master.setRotationYawHead(par1);
 		else super.setRotationYawHead(par1);
 	}
 
@@ -1979,7 +1643,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public float getAbsorptionAmount() {
-		return masterEntity != null ? masterEntity.getAbsorptionAmount() : super.getAbsorptionAmount();
+		return master != null ? master.getAbsorptionAmount() : super.getAbsorptionAmount();
 	}
 
 	public float superGetAbsorptionAmount() {
@@ -1988,7 +1652,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setAbsorptionAmount(float par1) {
-		if (masterEntity != null) masterEntity.setAbsorptionAmount(par1);
+		if (master != null) master.setAbsorptionAmount(par1);
 		else super.setAbsorptionAmount(par1);
 	}
 
@@ -1998,7 +1662,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isOnTeam(Team team) {
-		return masterEntity != null ? masterEntity.isOnTeam(team) : super.isOnTeam(team);
+		return master != null ? master.isOnTeam(team) : super.isOnTeam(team);
 	}
 
 	public boolean superIsOnTeam(Object team) {
@@ -2006,27 +1670,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public void curePotionEffects(ItemStack itemStack) {
-		if (masterEntity != null) masterEntity.curePotionEffects(itemStack);
-		else super.curePotionEffects(itemStack);
-	}
-
-	public void superCurePotionEffects(Object itemStack) {
-		super.curePotionEffects((ItemStack) itemStack);
-	}
-
-	@Override
-	public boolean shouldRiderFaceForward(EntityPlayer entityPlayer) {
-		return masterEntity != null ? masterEntity.shouldRiderFaceForward(entityPlayer) : super.shouldRiderFaceForward(entityPlayer);
-	}
-
-	public boolean superShouldRiderFaceForward(Object entityPlayer) {
-		return super.shouldRiderFaceForward((EntityPlayer) entityPlayer);
-	}
-
-	@Override
 	public DataWatcher getDataWatcher() {
-		return (DataWatcher) (masterEntity != null ? masterEntity.getDataWatcher() : super.getDataWatcher());
+		return (DataWatcher) (master != null ? master.getDataWatcher() : super.getDataWatcher());
 	}
 
 	public DataWatcher superGetDataWatcher() {
@@ -2035,7 +1680,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean equals(Object par1Obj) {
-		return masterEntity != null ? masterEntity.equals(par1Obj) : super.equals(par1Obj);
+		return master != null ? master.equals(par1Obj) : super.equals(par1Obj);
 	}
 
 	public boolean superEquals(Object par1Obj) {
@@ -2044,7 +1689,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int hashCode() {
-		return masterEntity != null ? masterEntity.hashCode() : super.hashCode();
+		return master != null ? master.hashCode() : super.hashCode();
 	}
 
 	public int superHashCode() {
@@ -2053,7 +1698,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void preparePlayerToSpawn() {
-		if (masterEntity != null) masterEntity.preparePlayerToSpawn();
+		if (master != null) master.preparePlayerToSpawn();
 		else super.preparePlayerToSpawn();
 	}
 
@@ -2063,7 +1708,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setDead() {
-		if (masterEntity != null) masterEntity.setDead();
+		if (master != null) master.setDead();
 		else super.setDead();
 	}
 
@@ -2073,7 +1718,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void setRotation(float par1, float par2) {
-		if (masterEntity != null) masterEntity.setRotation(par1, par2);
+		if (master != null) master.setRotation(par1, par2);
 		else super.setRotation(par1, par2);
 	}
 
@@ -2083,7 +1728,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setPosition(double par1, double par3, double par5) {
-		if (masterEntity != null) masterEntity.setPosition(par1, par3, par5);
+		if (master != null) master.setPosition(par1, par3, par5);
 		else super.setPosition(par1, par3, par5);
 	}
 
@@ -2093,7 +1738,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setAngles(float par1, float par2) {
-		if (masterEntity != null) masterEntity.setAngles(par1, par2);
+		if (master != null) master.setAngles(par1, par2);
 		else super.setAngles(par1, par2);
 	}
 
@@ -2103,7 +1748,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int getMaxInPortalTime() {
-		return masterEntity != null ? masterEntity.getMaxInPortalTime() : super.getMaxInPortalTime();
+		return master != null ? master.getMaxInPortalTime() : super.getMaxInPortalTime();
 	}
 
 	public int superGetMaxInPortalTime() {
@@ -2112,7 +1757,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void setOnFireFromLava() {
-		if (masterEntity != null) masterEntity.setOnFireFromLava();
+		if (master != null) master.setOnFireFromLava();
 		else super.setOnFireFromLava();
 	}
 
@@ -2122,7 +1767,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setFire(int par1) {
-		if (masterEntity != null) masterEntity.setFire(par1);
+		if (master != null) master.setFire(par1);
 		else super.setFire(par1);
 	}
 
@@ -2132,7 +1777,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void extinguish() {
-		if (masterEntity != null) masterEntity.extinguish();
+		if (master != null) master.extinguish();
 		else super.extinguish();
 	}
 
@@ -2142,7 +1787,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isOffsetPositionInLiquid(double par1, double par3, double par5) {
-		return masterEntity != null ? masterEntity.isOffsetPositionInLiquid(par1, par3, par5) : super.isOffsetPositionInLiquid(par1, par3, par5);
+		return master != null ? master.isOffsetPositionInLiquid(par1, par3, par5) : super.isOffsetPositionInLiquid(par1, par3, par5);
 	}
 
 	public boolean superIsOffsetPositionInLiquid(double par1, double par3, double par5) {
@@ -2151,7 +1796,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void moveEntity(double par1, double par3, double par5) {
-		if (masterEntity != null) masterEntity.moveEntity(par1, par3, par5);
+		if (master != null) master.moveEntity(par1, par3, par5);
 		else super.moveEntity(par1, par3, par5);
 	}
 
@@ -2161,7 +1806,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void playSound(String par1Str, float par2, float par3) {
-		if (masterEntity != null) masterEntity.playSound(par1Str, par2, par3);
+		if (master != null) master.playSound(par1Str, par2, par3);
 		else super.playSound(par1Str, par2, par3);
 	}
 
@@ -2171,7 +1816,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected boolean canTriggerWalking() {
-		return masterEntity != null ? masterEntity.canTriggerWalking() : super.canTriggerWalking();
+		return master != null ? master.canTriggerWalking() : super.canTriggerWalking();
 	}
 
 	public boolean superCanTriggerWalking() {
@@ -2180,7 +1825,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public AxisAlignedBB getBoundingBox() {
-		return (AxisAlignedBB) (masterEntity != null ? masterEntity.getBoundingBox() : super.getBoundingBox());
+		return (AxisAlignedBB) (master != null ? master.getBoundingBox() : super.getBoundingBox());
 	}
 
 	public AxisAlignedBB superGetBoundingBox() {
@@ -2189,7 +1834,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void dealFireDamage(int par1) {
-		if (masterEntity != null) masterEntity.dealFireDamage(par1);
+		if (master != null) master.dealFireDamage(par1);
 		else super.dealFireDamage(par1);
 	}
 
@@ -2199,7 +1844,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isWet() {
-		return masterEntity != null ? masterEntity.isWet() : super.isWet();
+		return master != null ? master.isWet() : super.isWet();
 	}
 
 	public boolean superIsWet() {
@@ -2208,7 +1853,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isInWater() {
-		return masterEntity != null ? masterEntity.isInWater() : super.isInWater();
+		return master != null ? master.isInWater() : super.isInWater();
 	}
 
 	public boolean superIsInWater() {
@@ -2217,7 +1862,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean handleWaterMovement() {
-		return masterEntity != null ? masterEntity.handleWaterMovement() : super.handleWaterMovement();
+		return master != null ? master.handleWaterMovement() : super.handleWaterMovement();
 	}
 
 	public boolean superHandleWaterMovement() {
@@ -2226,7 +1871,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isInsideOfMaterial(Material material) {
-		return masterEntity != null ? masterEntity.isInsideOfMaterial(material) : super.isInsideOfMaterial(material);
+		return master != null ? master.isInsideOfMaterial(material) : super.isInsideOfMaterial(material);
 	}
 
 	public boolean superIsInsideOfMaterial(Object material) {
@@ -2235,7 +1880,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean handleLavaMovement() {
-		return masterEntity != null ? masterEntity.handleLavaMovement() : super.handleLavaMovement();
+		return master != null ? master.handleLavaMovement() : super.handleLavaMovement();
 	}
 
 	public boolean superHandleLavaMovement() {
@@ -2244,7 +1889,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void moveFlying(float par1, float par2, float par3) {
-		if (masterEntity != null) masterEntity.moveFlying(par1, par2, par3);
+		if (master != null) master.moveFlying(par1, par2, par3);
 		else super.moveFlying(par1, par2, par3);
 	}
 
@@ -2254,7 +1899,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int getBrightnessForRender(float par1) {
-		return masterEntity != null ? masterEntity.getBrightnessForRender(par1) : super.getBrightnessForRender(par1);
+		return master != null ? master.getBrightnessForRender(par1) : super.getBrightnessForRender(par1);
 	}
 
 	public int superGetBrightnessForRender(float par1) {
@@ -2263,7 +1908,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public float getBrightness(float par1) {
-		return masterEntity != null ? masterEntity.getBrightness(par1) : super.getBrightness(par1);
+		return master != null ? master.getBrightness(par1) : super.getBrightness(par1);
 	}
 
 	public float superGetBrightness(float par1) {
@@ -2272,7 +1917,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setWorld(World world) {
-		if (masterEntity != null) masterEntity.setWorld(world);
+		if (master != null) master.setWorld(world);
 		else super.setWorld(world);
 	}
 
@@ -2282,7 +1927,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setPositionAndRotation(double par1, double par3, double par5, float par7, float par8) {
-		if (masterEntity != null) masterEntity.setPositionAndRotation(par1, par3, par5, par7, par8);
+		if (master != null) master.setPositionAndRotation(par1, par3, par5, par7, par8);
 		else super.setPositionAndRotation(par1, par3, par5, par7, par8);
 	}
 
@@ -2292,7 +1937,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setLocationAndAngles(double par1, double par3, double par5, float par7, float par8) {
-		if (masterEntity != null) masterEntity.setLocationAndAngles(par1, par3, par5, par7, par8);
+		if (master != null) master.setLocationAndAngles(par1, par3, par5, par7, par8);
 		else super.setLocationAndAngles(par1, par3, par5, par7, par8);
 	}
 
@@ -2302,7 +1947,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public float getDistanceToEntity(Entity entity) {
-		return masterEntity != null ? masterEntity.getDistanceToEntity(entity) : super.getDistanceToEntity(entity);
+		return master != null ? master.getDistanceToEntity(entity) : super.getDistanceToEntity(entity);
 	}
 
 	public float superGetDistanceToEntity(Object entity) {
@@ -2311,7 +1956,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public double getDistanceSq(double par1, double par3, double par5) {
-		return masterEntity != null ? masterEntity.getDistanceSq(par1, par3, par5) : super.getDistanceSq(par1, par3, par5);
+		return master != null ? master.getDistanceSq(par1, par3, par5) : super.getDistanceSq(par1, par3, par5);
 	}
 
 	public double superGetDistanceSq(double par1, double par3, double par5) {
@@ -2320,7 +1965,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public double getDistance(double par1, double par3, double par5) {
-		return masterEntity != null ? masterEntity.getDistance(par1, par3, par5) : super.getDistance(par1, par3, par5);
+		return master != null ? master.getDistance(par1, par3, par5) : super.getDistance(par1, par3, par5);
 	}
 
 	public double superGetDistance(double par1, double par3, double par5) {
@@ -2329,7 +1974,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public double getDistanceSqToEntity(Entity entity) {
-		return masterEntity != null ? masterEntity.getDistanceSqToEntity(entity) : super.getDistanceSqToEntity(entity);
+		return master != null ? master.getDistanceSqToEntity(entity) : super.getDistanceSqToEntity(entity);
 	}
 
 	public double superGetDistanceSqToEntity(Object entity) {
@@ -2338,7 +1983,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer entityPlayer) {
-		if (masterEntity != null) masterEntity.onCollideWithPlayer(entityPlayer);
+		if (master != null) master.onCollideWithPlayer(entityPlayer);
 		else super.onCollideWithPlayer(entityPlayer);
 	}
 
@@ -2348,7 +1993,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void applyEntityCollision(Entity entity) {
-		if (masterEntity != null) masterEntity.applyEntityCollision(entity);
+		if (master != null) master.applyEntityCollision(entity);
 		else super.applyEntityCollision(entity);
 	}
 
@@ -2358,7 +2003,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void addVelocity(double par1, double par3, double par5) {
-		if (masterEntity != null) masterEntity.addVelocity(par1, par3, par5);
+		if (master != null) master.addVelocity(par1, par3, par5);
 		else super.addVelocity(par1, par3, par5);
 	}
 
@@ -2368,7 +2013,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void addToPlayerScore(Entity entity, int par2) {
-		if (masterEntity != null) masterEntity.addToPlayerScore(entity, par2);
+		if (master != null) master.addToPlayerScore(entity, par2);
 		else super.addToPlayerScore(entity, par2);
 	}
 
@@ -2378,7 +2023,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isInRangeToRenderDist(double par1) {
-		return masterEntity != null ? masterEntity.isInRangeToRenderDist(par1) : super.isInRangeToRenderDist(par1);
+		return master != null ? master.isInRangeToRenderDist(par1) : super.isInRangeToRenderDist(par1);
 	}
 
 	public boolean superIsInRangeToRenderDist(double par1) {
@@ -2387,7 +2032,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean writeMountToNBT(NBTTagCompound nBTTagCompound) {
-		return masterEntity != null ? masterEntity.writeMountToNBT(nBTTagCompound) : super.writeMountToNBT(nBTTagCompound);
+		return master != null ? master.writeMountToNBT(nBTTagCompound) : super.writeMountToNBT(nBTTagCompound);
 	}
 
 	public boolean superWriteMountToNBT(Object nBTTagCompound) {
@@ -2396,7 +2041,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean writeToNBTOptional(NBTTagCompound nBTTagCompound) {
-		return masterEntity != null ? masterEntity.writeToNBTOptional(nBTTagCompound) : super.writeToNBTOptional(nBTTagCompound);
+		return master != null ? master.writeToNBTOptional(nBTTagCompound) : super.writeToNBTOptional(nBTTagCompound);
 	}
 
 	public boolean superWriteToNBTOptional(Object nBTTagCompound) {
@@ -2405,7 +2050,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void writeToNBT(NBTTagCompound nBTTagCompound) {
-		if (masterEntity != null) masterEntity.writeToNBT(nBTTagCompound);
+		if (master != null) master.writeToNBT(nBTTagCompound);
 		else super.writeToNBT(nBTTagCompound);
 	}
 
@@ -2415,7 +2060,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void readFromNBT(NBTTagCompound nBTTagCompound) {
-		if (masterEntity != null) masterEntity.readFromNBT(nBTTagCompound);
+		if (master != null) master.readFromNBT(nBTTagCompound);
 		else super.readFromNBT(nBTTagCompound);
 	}
 
@@ -2425,7 +2070,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected boolean shouldSetPosAfterLoading() {
-		return masterEntity != null ? masterEntity.shouldSetPosAfterLoading() : super.shouldSetPosAfterLoading();
+		return master != null ? master.shouldSetPosAfterLoading() : super.shouldSetPosAfterLoading();
 	}
 
 	public boolean superShouldSetPosAfterLoading() {
@@ -2434,7 +2079,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void onChunkLoad() {
-		if (masterEntity != null) masterEntity.onChunkLoad();
+		if (master != null) master.onChunkLoad();
 		else super.onChunkLoad();
 	}
 
@@ -2444,7 +2089,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected NBTTagList newDoubleNBTList(double... par1ArrayOfDouble) {
-		return (NBTTagList) (masterEntity != null ? masterEntity.newDoubleNBTList(par1ArrayOfDouble) : super.newDoubleNBTList(par1ArrayOfDouble));
+		return (NBTTagList) (master != null ? master.newDoubleNBTList(par1ArrayOfDouble) : super.newDoubleNBTList(par1ArrayOfDouble));
 	}
 
 	public NBTTagList superNewDoubleNBTList(double... par1ArrayOfDouble) {
@@ -2453,7 +2098,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected NBTTagList newFloatNBTList(float... par1ArrayOfFloat) {
-		return (NBTTagList) (masterEntity != null ? masterEntity.newFloatNBTList(par1ArrayOfFloat) : super.newFloatNBTList(par1ArrayOfFloat));
+		return (NBTTagList) (master != null ? master.newFloatNBTList(par1ArrayOfFloat) : super.newFloatNBTList(par1ArrayOfFloat));
 	}
 
 	public NBTTagList superNewFloatNBTList(float... par1ArrayOfFloat) {
@@ -2462,7 +2107,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityItem entityDropItem(ItemStack itemStack, float par2) {
-		return (EntityItem) (masterEntity != null ? masterEntity.entityDropItem(itemStack, par2) : super.entityDropItem(itemStack, par2));
+		return (EntityItem) (master != null ? master.entityDropItem(itemStack, par2) : super.entityDropItem(itemStack, par2));
 	}
 
 	public EntityItem superEntityDropItem(Object itemStack, float par2) {
@@ -2470,17 +2115,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public float getShadowSize() {
-		return masterEntity != null ? masterEntity.getShadowSize() : super.getShadowSize();
-	}
-
-	public float superGetShadowSize() {
-		return super.getShadowSize();
-	}
-
-	@Override
 	public boolean isEntityInsideOpaqueBlock() {
-		return masterEntity != null ? masterEntity.isEntityInsideOpaqueBlock() : super.isEntityInsideOpaqueBlock();
+		return master != null ? master.isEntityInsideOpaqueBlock() : super.isEntityInsideOpaqueBlock();
 	}
 
 	public boolean superIsEntityInsideOpaqueBlock() {
@@ -2489,7 +2125,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public AxisAlignedBB getCollisionBox(Entity entity) {
-		return (AxisAlignedBB) (masterEntity != null ? masterEntity.getCollisionBox(entity) : super.getCollisionBox(entity));
+		return (AxisAlignedBB) (master != null ? master.getCollisionBox(entity) : super.getCollisionBox(entity));
 	}
 
 	public AxisAlignedBB superGetCollisionBox(Object entity) {
@@ -2498,7 +2134,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void updateRiderPosition() {
-		if (masterEntity != null) masterEntity.updateRiderPosition();
+		if (master != null) master.updateRiderPosition();
 		else super.updateRiderPosition();
 	}
 
@@ -2508,7 +2144,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public double getYOffset() {
-		return masterEntity != null ? masterEntity.getYOffset() : super.getYOffset();
+		return master != null ? master.getYOffset() : super.getYOffset();
 	}
 
 	public double superGetYOffset() {
@@ -2517,7 +2153,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public double getMountedYOffset() {
-		return masterEntity != null ? masterEntity.getMountedYOffset() : super.getMountedYOffset();
+		return master != null ? master.getMountedYOffset() : super.getMountedYOffset();
 	}
 
 	public double superGetMountedYOffset() {
@@ -2526,7 +2162,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void mountEntity(Entity entity) {
-		if (masterEntity != null) masterEntity.mountEntity(entity);
+		if (master != null) master.mountEntity(entity);
 		else super.mountEntity(entity);
 	}
 
@@ -2536,7 +2172,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public float getCollisionBorderSize() {
-		return masterEntity != null ? masterEntity.getCollisionBorderSize() : super.getCollisionBorderSize();
+		return master != null ? master.getCollisionBorderSize() : super.getCollisionBorderSize();
 	}
 
 	public float superGetCollisionBorderSize() {
@@ -2545,7 +2181,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setInPortal() {
-		if (masterEntity != null) masterEntity.setInPortal();
+		if (master != null) master.setInPortal();
 		else super.setInPortal();
 	}
 
@@ -2555,7 +2191,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int getPortalCooldown() {
-		return masterEntity != null ? masterEntity.getPortalCooldown() : super.getPortalCooldown();
+		return master != null ? master.getPortalCooldown() : super.getPortalCooldown();
 	}
 
 	public int superGetPortalCooldown() {
@@ -2564,7 +2200,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setVelocity(double par1, double par3, double par5) {
-		if (masterEntity != null) masterEntity.setVelocity(par1, par3, par5);
+		if (master != null) master.setVelocity(par1, par3, par5);
 		else super.setVelocity(par1, par3, par5);
 	}
 
@@ -2574,7 +2210,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isBurning() {
-		return masterEntity != null ? masterEntity.isBurning() : super.isBurning();
+		return master != null ? master.isBurning() : super.isBurning();
 	}
 
 	public boolean superIsBurning() {
@@ -2583,7 +2219,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isRiding() {
-		return masterEntity != null ? masterEntity.isRiding() : super.isRiding();
+		return master != null ? master.isRiding() : super.isRiding();
 	}
 
 	public boolean superIsRiding() {
@@ -2592,7 +2228,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isSneaking() {
-		return masterEntity != null ? masterEntity.isSneaking() : super.isSneaking();
+		return master != null ? master.isSneaking() : super.isSneaking();
 	}
 
 	public boolean superIsSneaking() {
@@ -2601,7 +2237,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setSneaking(boolean par1) {
-		if (masterEntity != null) masterEntity.setSneaking(par1);
+		if (master != null) master.setSneaking(par1);
 		else super.setSneaking(par1);
 	}
 
@@ -2611,7 +2247,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isSprinting() {
-		return masterEntity != null ? masterEntity.isSprinting() : super.isSprinting();
+		return master != null ? master.isSprinting() : super.isSprinting();
 	}
 
 	public boolean superIsSprinting() {
@@ -2620,7 +2256,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isInvisible() {
-		return masterEntity != null ? masterEntity.isInvisible() : super.isInvisible();
+		return master != null ? master.isInvisible() : super.isInvisible();
 	}
 
 	public boolean superIsInvisible() {
@@ -2629,7 +2265,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isInvisibleToPlayer(EntityPlayer entityPlayer) {
-		return masterEntity != null ? masterEntity.isInvisibleToPlayer(entityPlayer) : super.isInvisibleToPlayer(entityPlayer);
+		return master != null ? master.isInvisibleToPlayer(entityPlayer) : super.isInvisibleToPlayer(entityPlayer);
 	}
 
 	public boolean superIsInvisibleToPlayer(Object entityPlayer) {
@@ -2638,7 +2274,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setInvisible(boolean par1) {
-		if (masterEntity != null) masterEntity.setInvisible(par1);
+		if (master != null) master.setInvisible(par1);
 		else super.setInvisible(par1);
 	}
 
@@ -2648,7 +2284,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isEating() {
-		return masterEntity != null ? masterEntity.isEating() : super.isEating();
+		return master != null ? master.isEating() : super.isEating();
 	}
 
 	public boolean superIsEating() {
@@ -2657,7 +2293,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setEating(boolean par1) {
-		if (masterEntity != null) masterEntity.setEating(par1);
+		if (master != null) master.setEating(par1);
 		else super.setEating(par1);
 	}
 
@@ -2667,7 +2303,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected boolean getFlag(int par1) {
-		return masterEntity != null ? masterEntity.getFlag(par1) : super.getFlag(par1);
+		return master != null ? master.getFlag(par1) : super.getFlag(par1);
 	}
 
 	public boolean superGetFlag(int par1) {
@@ -2676,7 +2312,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void setFlag(int par1, boolean par2) {
-		if (masterEntity != null) masterEntity.setFlag(par1, par2);
+		if (master != null) master.setFlag(par1, par2);
 		else super.setFlag(par1, par2);
 	}
 
@@ -2686,7 +2322,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int getAir() {
-		return masterEntity != null ? masterEntity.getAir() : super.getAir();
+		return master != null ? master.getAir() : super.getAir();
 	}
 
 	public int superGetAir() {
@@ -2695,7 +2331,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setAir(int par1) {
-		if (masterEntity != null) masterEntity.setAir(par1);
+		if (master != null) master.setAir(par1);
 		else super.setAir(par1);
 	}
 
@@ -2705,7 +2341,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void onStruckByLightning(EntityLightningBolt entityLightningBolt) {
-		if (masterEntity != null) masterEntity.onStruckByLightning(entityLightningBolt);
+		if (master != null) master.onStruckByLightning(entityLightningBolt);
 		else super.onStruckByLightning(entityLightningBolt);
 	}
 
@@ -2715,7 +2351,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void onKillEntity(EntityLivingBase entityLivingBase) {
-		if (masterEntity != null) masterEntity.onKillEntity(entityLivingBase);
+		if (master != null) master.onKillEntity(entityLivingBase);
 		else super.onKillEntity(entityLivingBase);
 	}
 
@@ -2725,7 +2361,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setInWeb() {
-		if (masterEntity != null) masterEntity.setInWeb();
+		if (master != null) master.setInWeb();
 		else super.setInWeb();
 	}
 
@@ -2735,7 +2371,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public Entity[] getParts() {
-		return (Entity[]) (masterEntity != null ? masterEntity.getParts() : super.getParts());
+		return (Entity[]) (master != null ? master.getParts() : super.getParts());
 	}
 
 	public Entity[] superGetParts() {
@@ -2744,7 +2380,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isEntityEqual(Entity entity) {
-		return masterEntity != null ? masterEntity.isEntityEqual(entity) : super.isEntityEqual(entity);
+		return master != null ? master.isEntityEqual(entity) : super.isEntityEqual(entity);
 	}
 
 	public boolean superIsEntityEqual(Object entity) {
@@ -2753,7 +2389,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean canAttackWithItem() {
-		return masterEntity != null ? masterEntity.canAttackWithItem() : super.canAttackWithItem();
+		return master != null ? master.canAttackWithItem() : super.canAttackWithItem();
 	}
 
 	public boolean superCanAttackWithItem() {
@@ -2762,7 +2398,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean hitByEntity(Entity entity) {
-		return masterEntity != null ? masterEntity.hitByEntity(entity) : super.hitByEntity(entity);
+		return master != null ? master.hitByEntity(entity) : super.hitByEntity(entity);
 	}
 
 	public boolean superHitByEntity(Object entity) {
@@ -2771,7 +2407,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public String toString() {
-		return masterEntity != null ? masterEntity.toString() : super.toString();
+		return master != null ? master.toString() : super.toString();
 	}
 
 	public String superToString() {
@@ -2780,7 +2416,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isEntityInvulnerable() {
-		return masterEntity != null ? masterEntity.isEntityInvulnerable() : super.isEntityInvulnerable();
+		return master != null ? master.isEntityInvulnerable(null) : super.isEntityInvulnerable();
 	}
 
 	public boolean superIsEntityInvulnerable() {
@@ -2789,7 +2425,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void copyLocationAndAnglesFrom(Entity entity) {
-		if (masterEntity != null) masterEntity.copyLocationAndAnglesFrom(entity);
+		if (master != null) master.copyLocationAndAnglesFrom(entity);
 		else super.copyLocationAndAnglesFrom(entity);
 	}
 
@@ -2799,7 +2435,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void copyDataFrom(Entity entity, boolean par2) {
-		if (masterEntity != null) masterEntity.copyDataFrom(entity, par2);
+		if (master != null) master.copyDataFrom(entity, par2);
 		else super.copyDataFrom(entity, par2);
 	}
 
@@ -2809,7 +2445,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void travelToDimension(int par1) {
-		if (masterEntity != null) masterEntity.travelToDimension(par1);
+		if (master != null) master.travelToDimension(par1);
 		else super.travelToDimension(par1);
 	}
 
@@ -2819,7 +2455,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public int getTeleportDirection() {
-		return masterEntity != null ? masterEntity.getTeleportDirection() : super.getTeleportDirection();
+		return master != null ? master.getTeleportDirection() : super.getTeleportDirection();
 	}
 
 	public int superGetTeleportDirection() {
@@ -2828,7 +2464,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean doesEntityNotTriggerPressurePlate() {
-		return masterEntity != null ? masterEntity.doesEntityNotTriggerPressurePlate() : super.doesEntityNotTriggerPressurePlate();
+		return master != null ? master.doesEntityNotTriggerPressurePlate() : super.doesEntityNotTriggerPressurePlate();
 	}
 
 	public boolean superDoesEntityNotTriggerPressurePlate() {
@@ -2837,7 +2473,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void addEntityCrashInfo(CrashReportCategory crashReportCategory) {
-		if (masterEntity != null) masterEntity.addEntityCrashInfo(crashReportCategory);
+		if (master != null) master.addEntityCrashInfo(crashReportCategory);
 		else super.addEntityCrashInfo(crashReportCategory);
 	}
 
@@ -2847,7 +2483,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean canRenderOnFire() {
-		return masterEntity != null ? masterEntity.canRenderOnFire() : super.canRenderOnFire();
+		return master != null ? master.canRenderOnFire() : super.canRenderOnFire();
 	}
 
 	public boolean superCanRenderOnFire() {
@@ -2856,7 +2492,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public UUID getUniqueID() {
-		return masterEntity != null ? masterEntity.getUniqueID() : super.getUniqueID();
+		return master != null ? master.getUniqueID() : super.getUniqueID();
 	}
 
 	public UUID superGetUniqueID() {
@@ -2865,7 +2501,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isPushedByWater() {
-		return masterEntity != null ? masterEntity.isPushedByWater() : super.isPushedByWater();
+		return master != null ? master.isPushedByWater() : super.isPushedByWater();
 	}
 
 	public boolean superIsPushedByWater() {
@@ -2873,8 +2509,176 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
+	public IEntityLivingData onSpawnWithEgg(IEntityLivingData iEntityLivingData) {
+		return (IEntityLivingData) (master != null ? master.onSpawnWithEgg(iEntityLivingData) : super.onSpawnWithEgg(iEntityLivingData));
+	}
+
+	public IEntityLivingData superOnSpawnWithEgg(Object iEntityLivingData) {
+		return super.onSpawnWithEgg((IEntityLivingData) iEntityLivingData);
+	}
+	// ~162
+	public EntityLivingBase func_130012_q() {
+		return null;
+	}
+
+	public EntityLivingBase superFunc_130012_q() {
+		return null;
+	}
+
+	public void func_110196_bT() {
+	}
+
+	public void superFunc_110196_bT() {
+	}
+
+	public boolean func_110173_bK() {
+		return false;
+	}
+
+	public boolean superFunc_110173_bK() {
+		return false;
+	}
+
+	public boolean func_110176_b(int par1, int par2, int par3) {
+		return false;
+	}
+
+	public boolean superFunc_110176_b(int par1, int par2, int par3) {
+		return false;
+	}
+
+	protected void func_110159_bB() {
+	}
+
+	public void superFunc_110159_bB() {
+	}
+
+	public boolean whiteListCheck(EntityLiving entityLiving) {
+		return false;
+	}
+
+	public boolean superWhiteListCheck(Object entityLiving) {
+		return false;
+	}
+
+	public boolean ngListCheck(EntityLiving entityLiving) {
+		return false;
+	}
+
+	public boolean superNgListCheck(Object entityLiving) {
+		return false;
+	}
+
+	protected int getDropItemId() {
+		return -1;
+	}
+
+	public int superGetDropItemId() {
+		return -1;
+	}
+
+	public ItemStack getCurrentItemOrArmor(int par1) {
+		return null;
+	}
+
+	public ItemStack superGetCurrentItemOrArmor(int par1) {
+		return null;
+	}
+
+	public String getEntityName() {
+		return null;
+	}
+
+	public String superGetEntityName() {
+		return null;
+	}
+
+	protected void doBlockCollisions() {
+	}
+
+	public void superDoBlockCollisions() {
+	}
+
+	protected void playStepSound(int par1, int par2, int par3, int par4) {
+	}
+
+	public void superPlayStepSound(int par1, int par2, int par3, int par4) {
+	}
+
+	public boolean isInRangeToRenderVec3D(Vec3 vec3) {
+		return false;
+	}
+
+	public boolean superIsInRangeToRenderVec3D(Object vec3) {
+		return false;
+	}
+
+	public EntityItem dropItem(int par1, int par2) {
+		return null;
+	}
+
+	public EntityItem superDropItem(int par1, int par2) {
+		return null;
+	}
+
+	public EntityItem dropItemWithOffset(int par1, int par2, float par3) {
+		return null;
+	}
+
+	public EntityItem superDropItemWithOffset(int par1, int par2, float par3) {
+		return null;
+	}
+
+	protected boolean pushOutOfBlocks(double par1, double par3, double par5) {
+		return func_145771_j(par1, par3, par5);
+	}
+
+	public float getBlockExplosionResistance(Explosion explosion, World world, int par3, int par4, int par5, Block block) {
+		return 0.0F;
+	}
+
+	public float superGetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block) {
+		return 0.0F;
+	}
+
+	public boolean shouldExplodeBlock(Explosion explosion, World world, int par3, int par4, int par5, int par6, float par7) {
+		return false;
+	}
+
+	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
+		return false;
+	}
+
+	public String getTranslatedEntityName() {
+		return null;
+	}
+
+	public String superGetTranslatedEntityName() {
+		return null;
+	}
+	// 164~
+	@Override
+	public void curePotionEffects(ItemStack itemStack) {
+		if (master != null) master.curePotionEffects(itemStack);
+		else super.curePotionEffects(itemStack);
+	}
+
+	public void superCurePotionEffects(Object itemStack) {
+		super.curePotionEffects((ItemStack) itemStack);
+	}
+
+	@Override
+	public boolean shouldRiderFaceForward(EntityPlayer entityPlayer) {
+		return master != null ? master.shouldRiderFaceForward(entityPlayer) : super.shouldRiderFaceForward(entityPlayer);
+	}
+
+	public boolean superShouldRiderFaceForward(Object entityPlayer) {
+		return super.shouldRiderFaceForward((EntityPlayer) entityPlayer);
+	}
+
+	@Override
 	public NBTTagCompound getEntityData() {
-		return (NBTTagCompound) (masterEntity != null ? masterEntity.getEntityData() : super.getEntityData());
+		return (NBTTagCompound) (master != null ? master.getEntityData() : super.getEntityData());
 	}
 
 	public NBTTagCompound superGetEntityData() {
@@ -2883,7 +2687,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean shouldRiderSit() {
-		return masterEntity != null ? masterEntity.shouldRiderSit() : super.shouldRiderSit();
+		return master != null ? master.shouldRiderSit() : super.shouldRiderSit();
 	}
 
 	public boolean superShouldRiderSit() {
@@ -2892,7 +2696,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public ItemStack getPickedResult(MovingObjectPosition movingObjectPosition) {
-		return (ItemStack) (masterEntity != null ? masterEntity.getPickedResult(movingObjectPosition) : super.getPickedResult(movingObjectPosition));
+		return (ItemStack) (master != null ? master.getPickedResult(movingObjectPosition) : super.getPickedResult(movingObjectPosition));
 	}
 
 	public ItemStack superGetPickedResult(Object movingObjectPosition) {
@@ -2901,7 +2705,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public UUID getPersistentID() {
-		return (UUID) (masterEntity != null ? masterEntity.getPersistentID() : super.getPersistentID());
+		return (UUID) (master != null ? master.getPersistentID() : super.getPersistentID());
 	}
 
 	public UUID superGetPersistentID() {
@@ -2910,7 +2714,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean shouldRenderInPass(int pass) {
-		return masterEntity != null ? masterEntity.shouldRenderInPass(pass) : super.shouldRenderInPass(pass);
+		return master != null ? master.shouldRenderInPass(pass) : super.shouldRenderInPass(pass);
 	}
 
 	public boolean superShouldRenderInPass(int pass) {
@@ -2919,7 +2723,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isCreatureType(EnumCreatureType enumCreatureType, boolean forSpawnCount) {
-		return masterEntity != null ? masterEntity.isCreatureType(enumCreatureType, forSpawnCount) : super.isCreatureType(enumCreatureType, forSpawnCount);
+		return master != null ? master.isCreatureType(enumCreatureType, forSpawnCount) : super.isCreatureType(enumCreatureType, forSpawnCount);
 	}
 
 	public boolean superIsCreatureType(Object enumCreatureType, boolean forSpawnCount) {
@@ -2928,7 +2732,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public String registerExtendedProperties(String identifier, IExtendedEntityProperties iExtendedEntityProperties) {
-		return masterEntity != null ? masterEntity.registerExtendedProperties(identifier, iExtendedEntityProperties) : super.registerExtendedProperties(identifier, iExtendedEntityProperties);
+		return master != null ? master.registerExtendedProperties(identifier, iExtendedEntityProperties) : super.registerExtendedProperties(identifier, iExtendedEntityProperties);
 	}
 
 	public String superRegisterExtendedProperties(String identifier, Object iExtendedEntityProperties) {
@@ -2937,7 +2741,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public IExtendedEntityProperties getExtendedProperties(String identifier) {
-		return (IExtendedEntityProperties) (masterEntity != null ? masterEntity.getExtendedProperties(identifier) : super.getExtendedProperties(identifier));
+		return (IExtendedEntityProperties) (master != null ? master.getExtendedProperties(identifier) : super.getExtendedProperties(identifier));
 	}
 
 	public IExtendedEntityProperties superGetExtendedProperties(String identifier) {
@@ -2946,7 +2750,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean canRiderInteract() {
-		return masterEntity != null ? masterEntity.canRiderInteract() : super.canRiderInteract();
+		return master != null ? master.canRiderInteract() : super.canRiderInteract();
 	}
 
 	public boolean superCanRiderInteract() {
@@ -2955,7 +2759,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean shouldDismountInWater(Entity entity) {
-		return masterEntity != null ? masterEntity.shouldDismountInWater(entity) : super.shouldDismountInWater(entity);
+		return master != null ? master.shouldDismountInWater(entity) : super.shouldDismountInWater(entity);
 	}
 
 	public boolean superShouldDismountInWater(Object entity) {
@@ -2965,7 +2769,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 	// 172~
 	@Override
 	public EntityLivingBase getOwner() {
-		return (EntityLivingBase) (masterEntity != null ? masterEntity.getOwner() : super.getOwner());
+		return (EntityLivingBase) (master != null ? master.getOwner() : super.getOwner());
 	}
 
 	public EntityLivingBase superGetOwner() {
@@ -2974,7 +2778,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void func_146082_f(EntityPlayer entityPlayer) {
-		if (masterEntity != null) masterEntity.func_146082_f(entityPlayer);
+		if (master != null) master.func_146082_f(entityPlayer);
 		else super.func_146082_f(entityPlayer);
 	}
 
@@ -2984,7 +2788,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityPlayer func_146083_cb() {
-		return (EntityPlayer) (masterEntity != null ? masterEntity.func_146083_cb() : super.func_146083_cb());
+		return (EntityPlayer) (master != null ? master.func_146083_cb() : super.func_146083_cb());
 	}
 
 	public EntityPlayer superFunc_146083_cb() {
@@ -2993,7 +2797,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isWithinHomeDistanceCurrentPosition() {
-		return masterEntity != null ? masterEntity.isWithinHomeDistanceCurrentPosition() : super.isWithinHomeDistanceCurrentPosition();
+		return master != null ? master.isWithinHomeDistanceCurrentPosition() : super.isWithinHomeDistanceCurrentPosition();
 	}
 
 	public boolean superIsWithinHomeDistanceCurrentPosition() {
@@ -3002,7 +2806,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isWithinHomeDistance(int par1, int par2, int par3) {
-		return masterEntity != null ? masterEntity.isWithinHomeDistance(par1, par2, par3) : super.isWithinHomeDistance(par1, par2, par3);
+		return master != null ? master.isWithinHomeDistance(par1, par2, par3) : super.isWithinHomeDistance(par1, par2, par3);
 	}
 
 	public boolean superIsWithinHomeDistance(int par1, int par2, int par3) {
@@ -3011,7 +2815,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void updateLeashedState() {
-		if (masterEntity != null) masterEntity.updateLeashedState();
+		if (master != null) master.updateLeashedState();
 		else super.updateLeashedState();
 	}
 
@@ -3021,7 +2825,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected Item getDropItem() {
-		return (Item) (masterEntity != null ? masterEntity.getDropItem() : super.getDropItem());
+		return (Item) (master != null ? master.getDropItem() : super.getDropItem());
 	}
 
 	public Item superGetDropItem() {
@@ -3030,7 +2834,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public ItemStack getEquipmentInSlot(int par1) {
-		return (ItemStack) (masterEntity != null ? masterEntity.getEquipmentInSlot(par1) : super.getEquipmentInSlot(par1));
+		return (ItemStack) (master != null ? master.getEquipmentInSlot(par1) : super.getEquipmentInSlot(par1));
 	}
 
 	public ItemStack superGetEquipmentInSlot(int par1) {
@@ -3038,17 +2842,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public IEntityLivingData onSpawnWithEgg(IEntityLivingData iEntityLivingData) {
-		return (IEntityLivingData) (masterEntity != null ? masterEntity.onSpawnWithEgg(iEntityLivingData) : super.onSpawnWithEgg(iEntityLivingData));
-	}
-
-	public IEntityLivingData superOnSpawnWithEgg(Object iEntityLivingData) {
-		return super.onSpawnWithEgg((IEntityLivingData) iEntityLivingData);
-	}
-
-	@Override
 	public String getCommandSenderName() {
-		return masterEntity != null ? masterEntity.getCommandSenderName() : super.getCommandSenderName();
+		return master != null ? master.getCommandSenderName() : super.getCommandSenderName();
 	}
 
 	public String superGetCommandSenderName() {
@@ -3057,7 +2852,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected boolean func_146066_aG() {
-		return masterEntity != null ? masterEntity.func_146066_aG() : super.func_146066_aG();
+		return master != null ? master.func_146066_aG() : super.func_146066_aG();
 	}
 
 	public boolean superFunc_146066_aG() {
@@ -3066,16 +2861,16 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected String func_146067_o(int p_146067_1_) {
-		return masterEntity != null ? masterEntity.func_146067_o(p_146067_1_) : super.func_146067_o(p_146067_1_);
+		return master != null ? master.func_146067_o(p_146067_1_) : super.func_146067_o(p_146067_1_);
 	}
 
-	public String superFunc_146067_o(int p_146067_1_) {
+	public String superGetFallSoundString(int p_146067_1_) {
 		return super.func_146067_o(p_146067_1_);
 	}
 
 	@Override
 	public IAttributeInstance getEntityAttribute(IAttribute iAttribute) {
-		return (IAttributeInstance) (masterEntity != null ? masterEntity.getEntityAttribute(iAttribute) : super.getEntityAttribute(iAttribute));
+		return (IAttributeInstance) (master != null ? master.getEntityAttribute(iAttribute) : super.getEntityAttribute(iAttribute));
 	}
 
 	public IAttributeInstance superGetEntityAttribute(Object iAttribute) {
@@ -3083,17 +2878,8 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
-	public IIcon getItemIcon(ItemStack itemStack, int par2) {
-		return (IIcon) (masterEntity != null ? masterEntity.getItemIcon(itemStack, par2) : super.getItemIcon(itemStack, par2));
-	}
-
-	public IIcon superGetItemIcon(Object itemStack, int par2) {
-		return super.getItemIcon((ItemStack) itemStack, par2);
-	}
-
-	@Override
 	public int getEntityId() {
-		return masterEntity != null ? masterEntity.getEntityId() : super.getEntityId();
+		return master != null ? master.getEntityId() : super.getEntityId();
 	}
 
 	public int superGetEntityId() {
@@ -3102,7 +2888,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public void setEntityId(int p_145769_1_) {
-		if (masterEntity != null) masterEntity.setEntityId(p_145769_1_);
+		if (master != null) master.setEntityId(p_145769_1_);
 		else super.setEntityId(p_145769_1_);
 	}
 
@@ -3112,7 +2898,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected String getSwimSound() {
-		return masterEntity != null ? masterEntity.getSwimSound() : super.getSwimSound();
+		return master != null ? master.getSwimSound() : super.getSwimSound();
 	}
 
 	public String superGetSwimSound() {
@@ -3121,7 +2907,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void func_145775_I() {
-		if (masterEntity != null) masterEntity.func_145775_I();
+		if (master != null) master.func_145775_I();
 		else super.func_145775_I();
 	}
 
@@ -3131,7 +2917,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block block) {
-		if (masterEntity != null) masterEntity.func_145780_a(p_145780_1_, p_145780_2_, p_145780_3_, block);
+		if (master != null) master.func_145780_a(p_145780_1_, p_145780_2_, p_145780_3_, block);
 		else super.func_145780_a(p_145780_1_, p_145780_2_, p_145780_3_, block);
 	}
 
@@ -3141,7 +2927,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	protected String getSplashSound() {
-		return masterEntity != null ? masterEntity.getSplashSound() : super.getSplashSound();
+		return master != null ? master.getSplashSound() : super.getSplashSound();
 	}
 
 	public String superGetSplashSound() {
@@ -3150,7 +2936,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public boolean isInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_) {
-		return masterEntity != null ? masterEntity.isInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_) : super.isInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_);
+		return master != null ? master.isInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_) : super.isInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_);
 	}
 
 	public boolean superIsInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_) {
@@ -3159,7 +2945,7 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityItem dropItem(Item item, int p_145779_2_) {
-		return (EntityItem) (masterEntity != null ? masterEntity.dropItem(item, p_145779_2_) : super.dropItem(item, p_145779_2_));
+		return (EntityItem) (master != null ? master.dropItem(item, p_145779_2_) : super.dropItem(item, p_145779_2_));
 	}
 
 	public EntityItem superDropItem(Object item, int p_145779_2_) {
@@ -3168,25 +2954,25 @@ public class Modchu_EntityTameable extends EntityTameable {
 
 	@Override
 	public EntityItem func_145778_a(Item item, int p_145778_2_, float p_145778_3_) {
-		return (EntityItem) (masterEntity != null ? masterEntity.func_145778_a(item, p_145778_2_, p_145778_3_) : super.func_145778_a(item, p_145778_2_, p_145778_3_));
+		return (EntityItem) (master != null ? master.func_145778_a(item, p_145778_2_, p_145778_3_) : super.func_145778_a(item, p_145778_2_, p_145778_3_));
 	}
 
-	public EntityItem superFunc_145778_a(Object item, int p_145778_2_, float p_145778_3_) {
+	public EntityItem superDropItemWithOffset(Object item, int p_145778_2_, float p_145778_3_) {
 		return super.func_145778_a((Item) item, p_145778_2_, p_145778_3_);
 	}
 
 	@Override
 	protected boolean func_145771_j(double p_145771_1_, double p_145771_3_, double p_145771_5_) {
-		return masterEntity != null ? masterEntity.func_145771_j(p_145771_1_, p_145771_3_, p_145771_5_) : super.func_145771_j(p_145771_1_, p_145771_3_, p_145771_5_);
+		return master != null ? master.pushOutOfBlocks(p_145771_1_, p_145771_3_, p_145771_5_) : super.func_145771_j(p_145771_1_, p_145771_3_, p_145771_5_);
 	}
 
-	public boolean superFunc_145771_j(double p_145771_1_, double p_145771_3_, double p_145771_5_) {
+	public boolean superPushOutOfBlocks(double p_145771_1_, double p_145771_3_, double p_145771_5_) {
 		return super.func_145771_j(p_145771_1_, p_145771_3_, p_145771_5_);
 	}
 
 	@Override
 	public float func_145772_a(Explosion explosion, World world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Block block) {
-		return masterEntity != null ? masterEntity.func_145772_a(explosion, world, p_145772_3_, p_145772_4_, p_145772_5_, block) : super.func_145772_a(explosion, world, p_145772_3_, p_145772_4_, p_145772_5_, block);
+		return master != null ? master.func_145772_a(explosion, world, p_145772_3_, p_145772_4_, p_145772_5_, block) : super.func_145772_a(explosion, world, p_145772_3_, p_145772_4_, p_145772_5_, block);
 	}
 
 	public float superFunc_145772_a(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block) {
@@ -3194,31 +2980,347 @@ public class Modchu_EntityTameable extends EntityTameable {
 	}
 
 	@Override
+	public IChatComponent func_145748_c_() {
+		return (IChatComponent) (master != null ? master.getDisplayName() : super.func_145748_c_());
+	}
+
+	public IChatComponent superGetDisplayName() {
+		return super.func_145748_c_();
+	}
+
+	@Override
+	public void func_145781_i(int p_145781_1_) {
+		if (master != null) master.func_145781_i(p_145781_1_);
+		else super.func_145781_i(p_145781_1_);
+	}
+
+	public void superFunc_145781_i(int p_145781_1_) {
+		super.func_145781_i(p_145781_1_);
+	}
+
+	// ~179
+	@Override
+	protected void attackEntity(Entity entity, float par2) {
+		if (master != null) master.attackEntity(entity, par2);
+		else super.attackEntity(entity, par2);
+	}
+
+	public void superAttackEntity(Object entity, float par2) {
+		super.attackEntity((Entity) entity, par2);
+	}
+
+	@Override
+	public float getBlockPathWeight(int par1, int par2, int par3) {
+		return master != null ? master.getBlockPathWeight(par1, par2, par3) : super.getBlockPathWeight(par1, par2, par3);
+	}
+
+	public float superGetBlockPathWeight(int par1, int par2, int par3) {
+		return super.getBlockPathWeight(par1, par2, par3);
+	}
+
+	@Override
+	protected Entity findPlayerToAttack() {
+		return (Entity) (master != null ? master.findPlayerToAttack() : super.findPlayerToAttack());
+	}
+
+	public Entity superFindPlayerToAttack() {
+		return super.findPlayerToAttack();
+	}
+
+	@Override
+	protected boolean isMovementCeased() {
+		return master != null ? master.isMovementCeased() : super.isMovementCeased();
+	}
+
+	public boolean superIsMovementCeased() {
+		return super.isMovementCeased();
+	}
+
+	@Override
+	protected void updateEntityActionState() {
+		if (master != null) master.updateEntityActionState();
+		else super.updateEntityActionState();
+	}
+
+	public void superUpdateEntityActionState() {
+		super.updateEntityActionState();
+	}
+
+	@Override
+	protected void updateWanderPath() {
+		if (master != null) master.updateWanderPath();
+		else super.updateWanderPath();
+	}
+
+	public void superUpdateWanderPath() {
+		super.updateWanderPath();
+	}
+
+	@Override
+	public Entity getEntityToAttack() {
+		return (Entity) (master != null ? master.getEntityToAttack() : super.getEntityToAttack());
+	}
+
+	public Entity superGetEntityToAttack() {
+		return super.getEntityToAttack();
+	}
+
+	@Override
+	public void setTarget(Entity entity) {
+		if (master != null) master.setTarget(entity);
+		else super.setTarget(entity);
+	}
+
+	public void superSetTarget(Object entity) {
+		super.setTarget((Entity) entity);
+	}
+
+	@Override
+	public void setHomeArea(int par1, int par2, int par3, int par4) {
+		if (master != null) master.setHomeArea(par1, par2, par3, par4);
+		else super.setHomeArea(par1, par2, par3, par4);
+	}
+
+	public void superSetHomeArea(int par1, int par2, int par3, int par4) {
+		super.setHomeArea(par1, par2, par3, par4);
+	}
+
+	@Override
+	public ChunkCoordinates getHomePosition() {
+		return (ChunkCoordinates) (master != null ? master.getHomePosition() : super.getHomePosition());
+	}
+
+	public ChunkCoordinates superGetHomePosition() {
+		return super.getHomePosition();
+	}
+
+	@Override
+	public float func_110174_bM() {
+		return master != null ? master.func_110174_bM() : super.func_110174_bM();
+	}
+
+	public float superFunc_110174_bM() {
+		return super.func_110174_bM();
+	}
+
+	@Override
+	protected boolean isAIEnabled() {
+		return master != null ? master.isAIEnabled() : super.isAIEnabled();
+	}
+
+	public boolean superIsAIEnabled() {
+		return super.isAIEnabled();
+	}
+
+	@Override
+	public int getMaxSafePointTries() {
+		return master != null ? master.getMaxSafePointTries() : super.getMaxSafePointTries();
+	}
+
+	public int superGetMaxSafePointTries() {
+		return super.getMaxSafePointTries();
+	}
+
+	@Override
+	public ItemStack func_130225_q(int par1) {
+		return (ItemStack) (master != null ? master.func_130225_q(par1) : super.func_130225_q(par1));
+	}
+
+	public ItemStack superFunc_130225_q(int par1) {
+		return super.func_130225_q(par1);
+	}
+
+	@Override
+	public ItemStack[] getLastActiveItems() {
+		return (ItemStack[]) (master != null ? master.getLastActiveItems() : super.getLastActiveItems());
+	}
+
+	public ItemStack[] superGetLastActiveItems() {
+		return super.getLastActiveItems();
+	}
+
+	@Override
+	public void func_110163_bv() {
+		if (master != null) master.func_110163_bv();
+		else super.func_110163_bv();
+	}
+
+	public void superFunc_110163_bv() {
+		super.func_110163_bv();
+	}
+
+	@Override
+	protected void enchantEquipment() {
+		if (master != null) master.enchantEquipment();
+		else super.enchantEquipment();
+	}
+
+	public void superEnchantEquipment() {
+		super.enchantEquipment();
+	}
+
+	@Override
+	protected void updateFallState(double par1, boolean par3) {
+		if (master != null) master.updateFallState(par1, par3);
+		else super.updateFallState(par1, par3);
+	}
+
+	public void superUpdateFallState(double par1, boolean par3) {
+		super.updateFallState(par1, par3);
+	}
+
+	@Override
+	public int func_142015_aE() {
+		return master != null ? master.func_142015_aE() : super.func_142015_aE();
+	}
+
+	public int superFunc_142015_aE() {
+		return super.func_142015_aE();
+	}
+
+	@Override
+	protected void fall(float par1) {
+		if (master != null) master.fall(par1);
+		else super.fall(par1);
+	}
+
+	public void superFall(float par1) {
+		super.fall(par1);
+	}
+
+	@Override
+	protected void dropRareDrop(int par1) {
+		if (master != null) master.dropRareDrop(par1);
+		else super.dropRareDrop(par1);
+	}
+
+	public void superDropRareDrop(int par1) {
+		super.dropRareDrop(par1);
+	}
+
+	@Override
+	public CombatTracker func_110142_aN() {
+		return (CombatTracker) (master != null ? master.func_110142_aN() : super.func_110142_aN());
+	}
+
+	public CombatTracker superFunc_110142_aN() {
+		return super.func_110142_aN();
+	}
+
+	@Override
+	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
+		if (master != null) master.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
+		else super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
+	}
+
+	public void superSetPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
+		super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
+	}
+
+	@Override
+	public Vec3 getPosition(float par1) {
+		return (Vec3) (master != null ? master.getPosition(par1) : super.getPosition(par1));
+	}
+
+	public Vec3 superGetPosition(float par1) {
+		return super.getPosition(par1);
+	}
+
+	@Override
+	public MovingObjectPosition rayTrace(double par1, float par3) {
+		return (MovingObjectPosition) (master != null ? master.rayTrace(par1, par3) : super.rayTrace(par1, par3));
+	}
+
+	public MovingObjectPosition superRayTrace(double par1, float par3) {
+		return super.rayTrace(par1, par3);
+	}
+
+	@Override
+	public boolean isClientWorld() {
+		return master != null ? master.isClientWorld() : super.isClientWorld();
+	}
+
+	public boolean superIsClientWorld() {
+		return super.isClientWorld();
+	}
+
+	@Override
+	public float getShadowSize() {
+		return master != null ? master.getShadowSize() : super.getShadowSize();
+	}
+
+	public float superGetShadowSize() {
+		return super.getShadowSize();
+	}
+
+	@Override
+	public IIcon getItemIcon(ItemStack itemStack, int par2) {
+		return (IIcon) (master != null ? master.getItemIcon(itemStack, par2) : super.getItemIcon(itemStack, par2));
+	}
+
+	public IIcon superGetItemIcon(Object itemStack, int par2) {
+		return super.getItemIcon((ItemStack) itemStack, par2);
+	}
+
+	@Override
 	public boolean func_145774_a(Explosion explosion, World world, int p_145774_3_, int p_145774_4_, int p_145774_5_, Block block, float p_145774_7_) {
-		return masterEntity != null ? masterEntity.func_145774_a(explosion, world, p_145774_3_, p_145774_4_, p_145774_5_, block, p_145774_7_) : super.func_145774_a(explosion, world, p_145774_3_, p_145774_4_, p_145774_5_, block, p_145774_7_);
+		return master != null ? master.func_145774_a(explosion, world, p_145774_3_, p_145774_4_, p_145774_5_, block, p_145774_7_) : super.func_145774_a(explosion, world, p_145774_3_, p_145774_4_, p_145774_5_, block, p_145774_7_);
 	}
 
 	public boolean superFunc_145774_a(Object explosion, Object world, int p_145774_3_, int p_145774_4_, int p_145774_5_, Object block, float p_145774_7_) {
 		return super.func_145774_a((Explosion) explosion, (World) world, p_145774_3_, p_145774_4_, p_145774_5_, (Block) block, p_145774_7_);
 	}
 
-	@Override
-	public IChatComponent func_145748_c_() {
-		return (IChatComponent) (masterEntity != null ? masterEntity.func_145748_c_() : super.func_145748_c_());
+	// 180~
+	public boolean superFunc_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
+		return false;
 	}
 
-	public IChatComponent superFunc_145748_c_() {
-		return super.func_145748_c_();
+	public Object superGetAISit() {
+		return superFunc_70907_r();
 	}
 
-	@Override
-	public void func_145781_i(int p_145781_1_) {
-		if (masterEntity != null) masterEntity.func_145781_i(p_145781_1_);
-		else super.func_145781_i(p_145781_1_);
+	public float superGetBlockPathWeight(Object blockPos) {
+		return 0.0F;
 	}
 
-	public void superFunc_145781_i(int p_145781_1_) {
-		super.func_145781_i(p_145781_1_);
+	public float superGetExplosionResistance(Object explosion, Object world, Object blockPos, Object iBlockState) {
+		return 0.0F;
+	}
+
+	public boolean superIsWithinHomeDistance(Object blockPos) {
+		return false;
+	}
+
+	public Object superOnSpawnWithEgg(Object difficultyInstance, Object iEntityLivingData) {
+		return superOnSpawnWithEgg(iEntityLivingData);
+	}
+
+	public String superGetName() {
+		return superGetCommandSenderName();
+	}
+
+	public String superFunc_152113_b() {
+		return null;
+	}
+
+	public void superFunc_152115_b(String par1Str) {
+	}
+
+	public String superFunc_146067_o(int p_146067_1_) {
+		return super.func_146067_o(p_146067_1_);
+	}
+
+	public Object superFunc_145778_a(Object item, int p_145778_2_, float p_145778_3_) {
+		return super.func_145778_a((Item) item, p_145778_2_, p_145778_3_);
+	}
+
+	public float superFunc_180484_a(Object blockPos) {
+		return 0.0F;
+	}
+
+	public boolean superFunc_180485_d(Object blockPos) {
+		return false;
 	}
 
 }
