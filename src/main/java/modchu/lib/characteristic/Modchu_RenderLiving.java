@@ -2,6 +2,7 @@ package modchu.lib.characteristic;
 
 import java.util.List;
 
+import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IRenderLiving;
 import modchu.lib.Modchu_IRenderLivingMaster;
 import modchu.lib.Modchu_Reflect;
@@ -23,10 +24,13 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	public Modchu_RenderLiving(Class masterClass, Modchu_ModelBase model, float f) {
 		super(model, f);
 		Object instance = masterClass != null ? Modchu_Reflect.newInstance(masterClass, new Class[]{ Modchu_IRenderLiving.class, Object[].class }, new Object[]{ this, new Object[]{ model, f } }) : null;
-		//Modchu_Debug.mDebug("Modchu_RenderLiving init instance="+instance);
+		Modchu_Debug.mDebug("Modchu_RenderLiving init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IRenderLivingMaster ? (Modchu_IRenderLivingMaster) instance : null;
-		setRenderManager((RenderManager) Modchu_AS.get(Modchu_AS.renderManagerInstance));
+		Object renderManager = Modchu_AS.get(Modchu_AS.renderManagerInstance);
+		if (renderManager != null) setRenderManager((RenderManager) renderManager);
+		else Modchu_Debug.mDebug("Modchu_RenderLiving init renderManager == null !!");
+		Modchu_Debug.mDebug("Modchu_RenderLiving init end.");
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import modchu.lib.Modchu_Reflect;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,7 +18,10 @@ public class Modchu_AllRenderLiving extends RenderLiving {
 
 	public Modchu_AllRenderLiving(float f) {
 		super(null, f);
-		Modchu_Debug.mDebug("Modchu_RenderLiving init");
+		Object renderManager = Modchu_AS.get(Modchu_AS.renderManagerInstance);
+		if (renderManager != null) setRenderManager((RenderManager) renderManager);
+		else Modchu_Debug.mDebug("Modchu_AllRenderLiving init renderManager == null !!");
+		Modchu_Debug.mDebug("Modchu_AllRenderLiving init end.");
 	}
 
 	@Override
