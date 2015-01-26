@@ -80,6 +80,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityBat;
@@ -100,11 +102,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetServerHandler;
+import net.minecraft.network.packet.Packet205ClientCommand;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -2562,7 +2566,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void playerControllerCreativeSetPlayerCapabilities(Object playerController, Object entityplayer) {
+	protected void playerControllerMPSetPlayerCapabilities(Object playerController, Object entityplayer) {
 	}
 
 	@Override
@@ -4452,6 +4456,95 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected Object worldGetClosestPlayerToEntity(Object worldOrEntity, Object entity, double d) {
 		return ((World) entityWorldObj(worldOrEntity)).getClosestPlayerToEntity((Entity) entity, d);
+	}
+
+	@Override
+	protected Object minecraftGetRenderItem() {
+		return null;
+	}
+
+	@Override
+	protected Object renderItemGetItemModelMesher(Object renderItem) {
+		return null;
+	}
+
+	@Override
+	protected Object newModelResourceLocation(String s, String s1) {
+		return null;
+	}
+
+	@Override
+	protected void itemModelMesherRegister(Object itemModelMesher, Object item, int i, Object modelResourceLocation) {
+	}
+
+	@Override
+	protected void pathNavigateGroundFunc_179690_a(Object pathNavigateGround, boolean b) {
+	}
+
+	@Override
+	protected Object entityLivingTasks(Object entityLiving) {
+		return ((EntityLiving) entityLiving).tasks;
+	}
+
+	@Override
+	protected void entityAITasksAddTask(Object entityAITasks, int i, Object entityAIBase) {
+		((EntityAITasks) entityAITasks).addTask(i, (EntityAIBase) entityAIBase);
+	}
+
+	@Override
+	protected void entityOnUpdate(Object entity) {
+		((Entity) entity).onUpdate();
+	}
+
+	@Override
+	protected void entityPlayerPreparePlayerToSpawn(Object entityplayer) {
+		((EntityPlayer) entityplayer).preparePlayerToSpawn();
+	}
+
+	@Override
+	protected Object entityClientPlayerMPSendQueue(Object entityClientPlayerMP) {
+		return ((EntityClientPlayerMP) entityClientPlayerMP).sendQueue;
+	}
+
+	@Override
+	protected void netClientHandlerHandleClientCommand(Object netClientHandler, Object packet205ClientCommand) {
+		((NetClientHandler) netClientHandler).handleClientCommand((Packet205ClientCommand) packet205ClientCommand);
+	}
+
+	@Override
+	protected void worldRemoveEntity(Object world, Object entity) {
+		((World) world).removeEntity((Entity) entity);
+	}
+
+	@Override
+	protected String entityClientPlayerMPFunc_142021_k(Object entityClientPlayerMP) {
+		return ((EntityClientPlayerMP) entityClientPlayerMP).func_142021_k();
+	}
+
+	@Override
+	protected void entityClientPlayerMPFunc_142020_c(Object entityClientPlayerMP, String s) {
+		((EntityClientPlayerMP) entityClientPlayerMP).func_142020_c(s);
+	}
+
+	@Override
+	protected Object minecraftServerGetConfigurationManager(Object minecraftServer) {
+		return ((MinecraftServer) minecraftServer).getConfigurationManager();
+	}
+
+	@Override
+	protected Object serverConfigurationManagerRespawnPlayer(Object serverConfigurationManager, Object entityPlayerMP, int i, boolean b) {
+		return ((ServerConfigurationManager) serverConfigurationManager).respawnPlayer((EntityPlayerMP) entityPlayerMP, i, b);
+	}
+
+	@Override
+	protected void setEntityDimension(Object entity, int i) {
+		((Entity) entity).dimension = i;
+	}
+
+	@Override
+	protected Object minecraftGetIntegratedServer() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().getIntegratedServer();
 	}
 
 }
