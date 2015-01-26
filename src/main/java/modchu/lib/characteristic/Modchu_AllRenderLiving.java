@@ -7,6 +7,7 @@ import modchu.lib.Modchu_Reflect;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -17,8 +18,8 @@ public class Modchu_AllRenderLiving extends RenderLiving {
 	public static ConcurrentHashMap<Class, Modchu_RenderLiving> renderMap = new ConcurrentHashMap();
 
 	public Modchu_AllRenderLiving(float f) {
-		super(null, null, f);
-		Modchu_Debug.mDebug("Modchu_RenderLiving init");
+		super((RenderManager) Modchu_AS.get(Modchu_AS.renderManagerInstance), null, f);
+		Modchu_Debug.mDebug("Modchu_AllRenderLiving init");
 	}
 
 	@Override
@@ -66,12 +67,11 @@ public class Modchu_AllRenderLiving extends RenderLiving {
 
 	@Override
 	public void doRender(Entity entity, double d, double d1, double d2, float d3, float d4) {
-		//Modchu_Debug.mDebug("Modchu_RenderLiving doRender");
+		//Modchu_Debug.mDebug("Modchu_AllRenderLiving doRender");
 		Modchu_RenderLiving render = renderMapGet(entity);
 		if (render != null) render.doRender(entity, d, d1, d2, d3, d4);
 		else {
-			Modchu_Debug.mDebug("Modchu_RenderLiving doRender render == null !! entity="+entity);
-			Modchu_Debug.mDebug("Modchu_RenderLiving doRender render == null !! entity.getClass()="+entity.getClass());
+			Modchu_Debug.mDebug("Modchu_AllRenderLiving doRender render == null !! entity="+entity+" entity.getClass()="+(entity != null ? entity.getClass() : null));
 		}
 	}
 
@@ -212,6 +212,7 @@ public class Modchu_AllRenderLiving extends RenderLiving {
 
 	@Override
 	public boolean shouldRender(Entity entity, ICamera iCamera, double d, double d1, double d2) {
+		//Modchu_Debug.mDebug("Modchu_AllRenderLiving shouldRender");
 		Modchu_RenderLiving render = renderMapGet(entity);
 		if (render != null) render.shouldRender(entity, iCamera, d, d1, d2);
 		return super.shouldRender(entity, iCamera, d, d1, d2);
