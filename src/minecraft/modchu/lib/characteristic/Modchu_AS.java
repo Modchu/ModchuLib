@@ -2404,7 +2404,8 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void playerControllerCreativeSetPlayerCapabilities(Object playerController, Object entityplayer) {
+	protected void playerControllerMPSetPlayerCapabilities(Object playerController, Object entityplayer) {
+		((PlayerControllerMP) playerController).setPlayerCapabilities((EntityPlayer) entityplayer);
 	}
 
 	@Override
@@ -2413,7 +2414,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object playerControllerMPCreatePlayer(Object playerController) {
-		return null;
+		return ((PlayerControllerMP) playerController).func_78754_a((World) minecraftTheWorld());
 	}
 
 	@Override
@@ -3672,12 +3673,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected String resourceLocationGetResourceDomain(Object resourceLocation) {
-		return null;
+		return ((ResourceLocation) resourceLocation).getResourceDomain();
 	}
 
 	@Override
 	protected String resourceLocationGetResourcePath(Object resourceLocation) {
-		return Modchu_CastHelper.String(resourceLocation);
+		return ((ResourceLocation) resourceLocation).getResourcePath();
 	}
 
 	@Override
@@ -4249,6 +4250,91 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	@Override
 	protected Object worldGetClosestPlayerToEntity(Object worldOrEntity, Object entity, double d) {
 		return ((World) entityWorldObj(worldOrEntity)).getClosestPlayerToEntity((Entity) entity, d);
+	}
+
+	@Override
+	protected Object minecraftGetRenderItem() {
+		return null;
+	}
+
+	@Override
+	protected Object renderItemGetItemModelMesher(Object renderItem) {
+		return null;
+	}
+
+	@Override
+	protected Object newModelResourceLocation(String s, String s1) {
+		return null;
+	}
+
+	@Override
+	protected void itemModelMesherRegister(Object itemModelMesher, Object item, int i, Object modelResourceLocation) {
+	}
+
+	@Override
+	protected void pathNavigateGroundFunc_179690_a(Object pathNavigateGround, boolean b) {
+		((PathNavigate) pathNavigateGround).setAvoidsWater(b);
+	}
+
+	@Override
+	protected void entityAITasksAddTask(Object entityAITasks, int i, Object entityAIBase) {
+		((EntityAITasks) entityAITasks).addTask(i, (EntityAIBase) entityAIBase);
+	}
+
+	@Override
+	protected void entityOnUpdate(Object entity) {
+		((Entity) entity).onUpdate();
+	}
+
+	@Override
+	protected void entityPlayerPreparePlayerToSpawn(Object entityplayer) {
+		((EntityPlayer) entityplayer).preparePlayerToSpawn();
+	}
+
+	@Override
+	protected Object entityClientPlayerMPSendQueue(Object entityClientPlayerMP) {
+		return ((EntityClientPlayerMP) entityClientPlayerMP).sendQueue;
+	}
+
+	@Override
+	protected void netClientHandlerHandleClientCommand(Object netClientHandler, Object packet205ClientCommand) {
+		((NetClientHandler) netClientHandler).handleClientCommand((Packet205ClientCommand) packet205ClientCommand);
+	}
+
+	@Override
+	protected void worldRemoveEntity(Object world, Object entity) {
+		((World) world).removeEntity((Entity) entity);
+	}
+
+	@Override
+	protected String entityClientPlayerMPFunc_142021_k(Object entityClientPlayerMP) {
+		return ((EntityClientPlayerMP) entityClientPlayerMP).func_142021_k();
+	}
+
+	@Override
+	protected void entityClientPlayerMPFunc_142020_c(Object entityClientPlayerMP, String s) {
+		((EntityClientPlayerMP) entityClientPlayerMP).func_142020_c(s);
+	}
+
+	@Override
+	protected Object minecraftServerGetConfigurationManager(Object minecraftServer) {
+		return ((MinecraftServer) minecraftServer).getConfigurationManager();
+	}
+
+	@Override
+	protected Object serverConfigurationManagerRespawnPlayer(Object serverConfigurationManager, Object entityPlayerMP, int i, boolean b) {
+		return ((ServerConfigurationManager) serverConfigurationManager).respawnPlayer((EntityPlayerMP) entityPlayerMP, i, b);
+	}
+
+	@Override
+	protected void setEntityDimension(Object entity, int i) {
+		((Entity) entity).dimension = i;
+	}
+
+	@Override
+	protected Object minecraftGetIntegratedServer() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().getIntegratedServer();
 	}
 
 }
