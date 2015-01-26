@@ -1,5 +1,6 @@
 package modchu.lib;
 
+import java.util.Random;
 import java.util.UUID;
 
 public interface Modchu_IEntityTameableMaster {
@@ -140,7 +141,7 @@ public interface Modchu_IEntityTameableMaster {
 	public boolean func_146066_aG();
 	public int decreaseAirSupply(int par1);
 	public boolean isPlayer();
-	public Object getRNG();
+	public Random getRNG();
 	public Object getAITarget();
 	public int func_142015_aE();
 	public void setRevengeTarget(Object entityLivingBase);

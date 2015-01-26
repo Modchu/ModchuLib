@@ -177,7 +177,7 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int entityMotionZ = entityMotionZ_int;
 	public static int playerControllerSetGameType = playerControllerSetGameType_int;
 	public static int minecraftSetDimensionAndSpawnPlayer = minecraftSetDimensionAndSpawnPlayer_int;
-	public static int playerControllerCreativeSetPlayerCapabilities = playerControllerCreativeSetPlayerCapabilities_int;
+	public static int playerControllerMPSetPlayerCapabilities = playerControllerMPSetPlayerCapabilities_int;
 	public static int worldSetEntityDead = worldSetEntityDead_int;
 	public static int entitySetDead = entitySetDead_int;
 	public static int playerControllerMPCreatePlayer = playerControllerMPCreatePlayer_int;
@@ -775,5 +775,20 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int renderItemGetItemModelMesher = renderItemGetItemModelMesher_int;
 	public static int newModelResourceLocation = newModelResourceLocation_int;
 	public static int itemModelMesherRegister = itemModelMesherRegister_int;
+	public static int pathNavigateGroundFunc_179690_a = pathNavigateGroundFunc_179690_a_int;
+	public static int entityLivingTasks = entityLivingTasks_int;
+	public static int entityAITasksAddTask = entityAITasksAddTask_int;
+	public static int entityTameableAiSit = entityTameableAiSit_int;
+	public static int entityOnUpdate = entityOnUpdate_int;
+	public static int entityPlayerPreparePlayerToSpawn = entityPlayerPreparePlayerToSpawn_int;
+	public static int entityClientPlayerMPSendQueue = entityClientPlayerMPSendQueue_int;
+	public static int netClientHandlerHandleClientCommand = netClientHandlerHandleClientCommand_int;
+	public static int worldRemoveEntity = worldRemoveEntity_int;
+	public static int entityClientPlayerMPFunc_142021_k = entityClientPlayerMPFunc_142021_k_int;
+	public static int entityClientPlayerMPFunc_142020_c = entityClientPlayerMPFunc_142020_c_int;
+	public static int serverConfigurationManagerRespawnPlayer = serverConfigurationManagerRespawnPlayer_int;
+	public static int minecraftServerGetConfigurationManager = minecraftServerGetConfigurationManager_int;
+	public static int minecraftMyNetworkManager = minecraftMyNetworkManager_int;
+	public static int minecraftGetIntegratedServer = minecraftGetIntegratedServer_int;
 
 }

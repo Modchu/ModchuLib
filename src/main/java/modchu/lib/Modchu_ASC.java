@@ -118,7 +118,7 @@ public interface Modchu_ASC {
 	public static final int entityMotionZ_int = 89;
 	public static final int playerControllerSetGameType_int = 90;
 	public static final int minecraftSetDimensionAndSpawnPlayer_int = 91;
-	public static final int playerControllerCreativeSetPlayerCapabilities_int = 92;
+	public static final int playerControllerMPSetPlayerCapabilities_int = 92;
 	public static final int worldSetEntityDead_int = 93;
 	public static final int entitySetDead_int = 94;
 	public static final int playerControllerMPCreatePlayer_int = 95;
@@ -715,5 +715,20 @@ public interface Modchu_ASC {
 	public static final int renderItemGetItemModelMesher_int = 16415;
 	public static final int newModelResourceLocation_int = 16416;
 	public static final int itemModelMesherRegister_int = 16417;
+	public static final int pathNavigateGroundFunc_179690_a_int = 16418;
+	public static final int entityLivingTasks_int = 16419;
+	public static final int entityAITasksAddTask_int = 16420;
+	public static final int entityTameableAiSit_int = 16421;
+	public static final int entityOnUpdate_int = 16422;
+	public static final int entityPlayerPreparePlayerToSpawn_int = 16423;
+	public static final int entityClientPlayerMPSendQueue_int = 16424;
+	public static final int netClientHandlerHandleClientCommand_int = 16425;
+	public static final int worldRemoveEntity_int = 16426;
+	public static final int entityClientPlayerMPFunc_142021_k_int = 16427;
+	public static final int entityClientPlayerMPFunc_142020_c_int = 16428;
+	public static final int serverConfigurationManagerRespawnPlayer_int = 16429;
+	public static final int minecraftServerGetConfigurationManager_int = 16430;
+	public static final int minecraftMyNetworkManager_int = 16431;
+	public static final int minecraftGetIntegratedServer_int = 16432;
 
 }

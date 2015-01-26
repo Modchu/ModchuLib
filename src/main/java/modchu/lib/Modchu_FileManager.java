@@ -2,11 +2,15 @@ package modchu.lib;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Modifier;
 import java.net.JarURLConnection;
 import java.net.URI;
@@ -17,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -42,6 +48,7 @@ public class Modchu_FileManager {
 	public static final int TYPE_FILE_OR_DIR = 1;
 	public static final int TYPE_FILE = 2;
 	public static final int TYPE_DIR = 3;
+	public static HashMap<Object, List<String>> listData = new HashMap();
 
 	public static void init() {
 		// 初期化
@@ -643,7 +650,7 @@ public class Modchu_FileManager {
 			}
 		}
 		if (fileName != null
-				&& !file.getName().matches(fileName)
+				&& file.getName().matches(fileName)
 				&& ((indexofFileName == null
 				&& matchingFileName == null)
 				| (indexofFileName != null
@@ -664,5 +671,116 @@ public class Modchu_FileManager {
 			boolean flag = (new File((new StringBuilder()).append(Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir)).append(s1).toString())).mkdir();
 			s1 = (new StringBuilder()).append(s1).append("/").toString();
 		}
+	}
+
+	public static BufferedReader getResourceBufferedReader(String s) {
+		return getResourceBufferedReader(Modchu_FileManager.class, s);
+	}
+
+	public static BufferedReader getResourceBufferedReader(Class c, String s) {
+		if (Modchu_Main.isRelease()) {
+			try {
+				for (ResourceInfo resourceInfo : ClassPath.from(c.getClassLoader()).getResources()) {
+					String resourceName = resourceInfo.getResourceName();
+					//if (resourceName.indexOf("modchulib") > -1) Modchu_Debug.lDebug1("resourceName="+resourceName);
+					if (resourceName.lastIndexOf(s) > -1) {
+						Modchu_Debug.lDebug1("resourceName ok. s="+s);
+						//URL url = resourceInfo.url();
+						return getJarReader(s);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			//Modchu_Debug.lDebug1("getResourceFile s="+s);
+			if (!s.startsWith("/")) s = "/"+s;
+			//Modchu_Debug.lDebug1("getResourceFile 1 s="+s);
+			URL url = Modchu_Reflect.class.getResource(s);
+			//Modchu_Debug.lDebug1("getResourceFile 2 url="+url);
+			File file = null;
+			if (url != null) {
+				file = new File(url.getFile());
+				//Modchu_Debug.lDebug1("getResourceFile return file="+file);
+				try {
+					return new BufferedReader(new FileReader(file));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		Modchu_Debug.lDebug1("getResourceFile null !! s="+s);
+		return null;
+	}
+
+	public static BufferedReader getJarReader(String s) {
+		BufferedReader bufferedReader = null;
+		InputStream inputStream = Modchu_FileManager.class.getClassLoader().getResourceAsStream(s);
+		if (inputStream != null) {
+			bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+		} else {
+			Modchu_Debug.lDebug1("getJarReader inputStream == null !! s="+s);
+			File file = new File(s);
+			if (file.exists()) Modchu_Debug.lDebug1("getJarReader ok. file="+file);
+			else Modchu_Debug.lDebug1("getJarReader !file.exists() !! file="+file);
+		}
+		return bufferedReader;
+	}
+
+	public static ArrayList<String> loadFileToArrayList(File file) {
+		// File読み込みArrayListで返す
+		if (listData.containsKey(file)) return (ArrayList<String>) listData.get(file);
+		return (ArrayList<String>) loadFileToList(file, new ArrayList());
+	}
+
+	public static LinkedList<String> loadFileToLinkedList(File file) {
+		// File読み込みLinkedListで返す
+		if (listData.containsKey(file)) return (LinkedList<String>) listData.get(file);
+		return (LinkedList<String>) loadFileToList(file, new LinkedList());
+	}
+
+	public static List<String> loadFileToList(File file, List list) {
+		// File読み込みListで返す
+		if (listData.containsKey(file)) return listData.get(file);
+		try {
+			list = bufferedReaderToList(new BufferedReader(new FileReader(file)), list);
+			listData.put(file, list);
+			return list;
+		} catch (Exception e) {
+			Modchu_Debug.systemLogDebug("Modchu_Config loadFileToList "+ file.toString() +" load fail.", 2, e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static ArrayList<String> bufferedReaderToArrayList(BufferedReader breader) {
+		// BufferedReader読み込みArrayListで返す
+		return (ArrayList<String>) bufferedReaderToList(breader, new ArrayList());
+	}
+
+	public static LinkedList<String> bufferedReaderToLinkedList(BufferedReader breader) {
+		// BufferedReader読み込みLinkedListで返す
+		return (LinkedList<String>) bufferedReaderToList(breader, new LinkedList());
+	}
+
+	public static List<String> bufferedReaderToList(BufferedReader breader, List list) {
+		// BufferedReader読み込みListで返す
+		try {
+			String rl;
+			while ((rl = breader.readLine()) != null) {
+				//Modchu_Debug.lDebug("bufferedReaderToList list.add rl="+rl);
+				list.add(rl);
+			}
+		} catch (Exception e) {
+			Modchu_Debug.systemLogDebug("Modchu_FileManager bufferedReaderToList " + breader + " load fail.", 2, e);
+			e.printStackTrace();
+		} finally {
+			try {
+				if (breader != null) breader.close();
+			} catch (Exception e) {
+			}
+		}
+		Modchu_Debug.lDebug("bufferedReaderToList list.add list.size()="+list.size());
+		return list;
 	}
 }

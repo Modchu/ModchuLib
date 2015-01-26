@@ -1,5 +1,6 @@
 package modchu.lib;
 
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -690,7 +691,7 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public Object getRNG() {
+	public Random getRNG() {
 		return base.superGetRNG();
 	}
 
