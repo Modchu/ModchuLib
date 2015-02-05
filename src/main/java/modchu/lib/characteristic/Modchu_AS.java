@@ -61,6 +61,7 @@ import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
@@ -3831,6 +3832,16 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	protected Object minecraftGetIntegratedServer() {
 		if (Modchu_Main.isServer) return null;
 		return Minecraft.getMinecraft().getIntegratedServer();
+	}
+
+	@Override
+	protected Object entityLivingGetCurrentArmor(Object entityLiving, int i) {
+		return ((EntityLiving) entityLiving).func_130225_q(i);
+	}
+
+	@Override
+	protected void rendererLivingEntitySetRenderPassModel(Object rendererLivingEntity, Object modelBase) {
+		((RendererLivingEntity) rendererLivingEntity).setRenderPassModel((ModelBase) modelBase);
 	}
 
 }
