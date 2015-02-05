@@ -102,14 +102,15 @@ public class Modchu_EntityTameableB extends EntityTameable {
 		entityName = s;
 		Modchu_Debug.mDebug("initNBTAfter entityName="+(entityName != null ? entityName : "null !!"));
 		String s0 = new StringBuilder(Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this) ? "1" : "0").append(entityUniqueID).toString();
-		if (entityUniqueIDMap.containsKey(s0)) {
+		if (s0 != null
+				&& entityUniqueIDMap.containsKey(s0)) {
 			Modchu_Debug.mDebug("initNBTAfter entityUniqueIDMap.containsKey isDead entityUniqueID="+entityUniqueID);
 			Modchu_AS.set(Modchu_AS.entityLivingBaseSetHealth, this, 0.0F);
 			deathTime = 20;
 			setDead();
 			return;
 		}
-		entityUniqueIDMap.put(s0, entityUniqueID);
+		if (s0 != null) entityUniqueIDMap.put(s0, entityUniqueID);
 		Modchu_Debug.mDebug("initNBTAfter entityUniqueID="+entityUniqueID);
 		Modchu_Debug.mDebug("initNBTAfter masterEntity="+master);
 	}
