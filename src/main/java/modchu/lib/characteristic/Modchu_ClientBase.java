@@ -4,6 +4,7 @@ import java.util.Random;
 
 import modchu.lib.Modchu_ModelRendererBase;
 import modchu.lib.Modchu_Reflect;
+import modchu.lib.Modchu_TextureManagerBase;
 import modchu.model.ModchuModel_ModelBaseMaster;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;

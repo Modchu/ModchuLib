@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.minecraft.item.ItemArmor;
+import modchu.lib.Modchu_EntityCapsHelper;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
-import modchu.lib.Modchu_EntityCapsHelper;
+import modchu.lib.Modchu_TextureManagerBase;
 import modchu.model.multimodel.base.MultiModelBaseBiped;
 
 public class Modchu_TextureBoxBase extends Modchu_TextureBoxBaseBase {
@@ -224,7 +224,9 @@ public class Modchu_TextureBoxBase extends Modchu_TextureBoxBaseBase {
 		case Modchu_TextureManagerBase.tx_armor2light:
 		case Modchu_TextureManagerBase.tx_oldarmor1:
 		case Modchu_TextureManagerBase.tx_oldarmor2:
+			//Modchu_Debug.mDebug("Modchu_TextureBoxBase addTexture pLocation="+pLocation);
 			ls = pLocation.substring(pLocation.lastIndexOf("/") + 1, pLocation.lastIndexOf("_"));
+			//Modchu_Debug.mDebug("Modchu_TextureBoxBase addTexture ls="+ls);
 			Map<Integer, Object> lmap;
 			if (armors.containsKey(ls)) {
 				lmap = armors.get(ls);
