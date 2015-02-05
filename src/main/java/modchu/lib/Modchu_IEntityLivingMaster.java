@@ -25,5 +25,10 @@ public interface Modchu_IEntityLivingMaster {
 	public float setHealth(float f);
 	public double setMaxHealth(double d);
 	public float getShadowSize();
+	public Object getHeldItem();
+	public Object getEquipmentInSlot(int i);
+	public Object getCurrentArmor(int i);
+	public void setCurrentItemOrArmor(int i, Object itemStack);
+	public Object[] getInventory();
 
 }

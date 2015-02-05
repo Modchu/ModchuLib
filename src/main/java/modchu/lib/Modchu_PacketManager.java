@@ -10,7 +10,7 @@ public class Modchu_PacketManager {
 	public static Modchu_IPacketManager master;
 
 	public static void init() {
-		if (master != null) ;else {
+		if (master != null); else {
 			Object o = Modchu_Reflect.newInstance("modchu.lib.forgeonly.characteristic.Modchu_PacketManagerMaster");
 			if (o != null); else Modchu_Debug.lDebug("Modchu_PacketManager init o == null !!");
 			master = o instanceof Modchu_IPacketManager ? (Modchu_IPacketManager) o : null;

@@ -46,7 +46,7 @@ public class Modchu_RenderEngine {
 
 	public void bindBufferedImage(String s, BufferedImage image) {
 		if (s != null
-				&& image != null) ;else {
+				&& image != null); else {
 			Modchu_Debug.lDebug("Modchu_RenderEngine bindBufferedImage s == null !!");
 			return;
 		}
@@ -66,7 +66,7 @@ public class Modchu_RenderEngine {
 	public int getTexture(String s) {
 		//Modchu_Debug.mDebug("Modchu_RenderEngine getTexture s="+s);
 		if (s != null
-				&& !s.isEmpty()) ;else return -1;
+				&& !s.isEmpty()); else return -1;
 		//Modchu_Debug.mDebug("Modchu_RenderEngine getTexture 1");
 		int i = textureMap.containsKey(s) ? textureMap.get(s) : -1;
 

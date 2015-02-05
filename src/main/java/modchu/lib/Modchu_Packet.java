@@ -14,11 +14,11 @@ public class Modchu_Packet implements Modchu_IPacketConstant {
 		Modchu_Debug.lDebug("Modchu_Packet registerPacket");
 		if (Modchu_Main.getMinecraftVersion() < 164
 				&& !Modchu_Main.isForge) return;
-		if (master != null) ;else {
+		if (master != null); else {
 			Modchu_Debug.lDebug("Modchu_Packet registerPacket master null init");
 			Class c = Modchu_Reflect.loadClass("modchu.lib.forgeonly.characteristic.Modchu_PacketMaster");
 			Modchu_Debug.lDebug("Modchu_Packet registerPacket master null init c="+c);
-			if (c != null) ;else return;
+			if (c != null); else return;
 			Object o = Modchu_Reflect.newInstance(c);
 			Modchu_Debug.lDebug("Modchu_Packet registerPacket master null init o="+o);
 			master = o != null

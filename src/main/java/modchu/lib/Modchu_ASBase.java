@@ -790,5 +790,9 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int minecraftServerGetConfigurationManager = minecraftServerGetConfigurationManager_int;
 	public static int minecraftMyNetworkManager = minecraftMyNetworkManager_int;
 	public static int minecraftGetIntegratedServer = minecraftGetIntegratedServer_int;
+	public static int entityLivingGetCurrentArmor = entityLivingGetCurrentArmor_int;
+	public static int minecraftServerGetFile = minecraftServerGetFile_int;
+	public static int isPumpkin = isPumpkin_int;
+	public static int rendererLivingEntitySetRenderPassModel = rendererLivingEntitySetRenderPassModel_int;
 
 }

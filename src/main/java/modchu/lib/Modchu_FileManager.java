@@ -3,11 +3,13 @@ package modchu.lib;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,6 +21,7 @@ import java.security.CodeSource;
 import java.security.ProtectionDomain;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -26,6 +29,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.jar.JarFile;
 import java.util.zip.CRC32;
@@ -56,7 +60,7 @@ public class Modchu_FileManager {
 
 		// mincraft.jarを取得
 		// 開発中用のJar内に含まれていることの対策
-		Class c = Modchu_Main.isForge ? Modchu_Reflect.loadClass(Modchu_Main.getMinecraftVersion() > 179 ? "net.minecraftforge.fml.common.FMLModContainer" : "cpw.mods.fml.common.FMLModContainer") : Modchu_Reflect.loadClass("BaseMod");
+		Class c = Modchu_Main.isForge ? Modchu_Reflect.loadClass(Modchu_Main.getMinecraftVersion() > 179 ? "net.minecraftforge.fml.common.FMLModContainer" : "cpw.mods.fml.common.FMLModContainer") : Modchu_Reflect.loadClass("net.minecraft.src.BaseMod");
 		int i = 0;
 		try {
 			ProtectionDomain ls1 = c.getProtectionDomain();
@@ -146,7 +150,7 @@ public class Modchu_FileManager {
 	}
 
 	public static List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search) {
-		if (list != null) ;else list = new ArrayList();
+		if (list != null); else list = new ArrayList();
 		try {
 			if (dir.isDirectory()) {
 				Modchu_Debug.Debug("getModFile-get:"+dir.list().length);
@@ -177,7 +181,7 @@ public class Modchu_FileManager {
 
 	public static boolean addTexturesZip(File file, ConcurrentHashMap<String, Class> map, String search) {
 		if (file != null
-				&& file.isFile()) ;else return false;
+				&& file.isFile()); else return false;
 		FileInputStream fileinputstream = null;
 		ZipInputStream zipinputstream = null;
 		try {
@@ -206,7 +210,7 @@ public class Modchu_FileManager {
 	}
 
 	public static void addTexturesJar(File file, ConcurrentHashMap<String, Class> map, String search) {
-		if (file != null) ;else {
+		if (file != null); else {
 			Modchu_Debug.Debug("addTextureJar file == null !!");
 			return;
 		}
@@ -240,7 +244,7 @@ public class Modchu_FileManager {
 	}
 
 	public static boolean addTexturesDir(File file, ConcurrentHashMap<String, Class> map, String search) {
-		if (file != null) ;else return false;
+		if (file != null); else return false;
 		try {
 			for (File t : file.listFiles()) {
 				if (t.isDirectory()) {
@@ -255,7 +259,7 @@ public class Modchu_FileManager {
 	}
 
 	public static boolean addResourcesMod(Class c, ConcurrentHashMap<String, Class> map, String search) {
-		if (c != null) ;else return false;
+		if (c != null); else return false;
 		try {
 			for (ResourceInfo i : ClassPath.from(c.getClassLoader()).getResources()) {
 				String resourceName = i.getResourceName();
@@ -372,7 +376,7 @@ public class Modchu_FileManager {
 			Modchu_Debug.lDebug("Modchu_FileManager s="+s);
 			ZipEntry ze = zipFile.getEntry(s);
 			Modchu_Debug.lDebug("Modchu_FileManager 1 ze="+ze);
-			if (ze != null) ;else {
+			if (ze != null); else {
 				for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements();) {
 					ze = e.nextElement();
 					//Modchu_Debug.lDebug("Modchu_FileManager ze.getName()="+ze.getName());
@@ -521,37 +525,96 @@ public class Modchu_FileManager {
 	}
 
 	public static void copyResource(ZipFile zipFile, ZipEntry ze, File outFile) {
-		 if (ze.isDirectory()) {
-			 outFile.mkdirs();
-		 } else {
-			 BufferedInputStream bis = null;
-			 BufferedOutputStream bos = null;
-			 InputStream is = null;
-			 try {
-				 is = zipFile.getInputStream(ze);
-				 bis = new BufferedInputStream(is);
+		InputStream is = null;
+		try {
+			is = zipFile.getInputStream(ze);
+			copyResource(is, ze, outFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (is != null) is.close();
+			} catch (Exception e) {
+			}
+		}
+	}
 
-				 if (!outFile.getParentFile().exists()) {
-					 outFile.getParentFile().mkdirs();
-				 }
-				 bos = new BufferedOutputStream(new FileOutputStream(outFile));
-				 int i;
-				 while ((i = bis.available()) > 0) {
-					 byte[] bs = new byte[i];
-					 bis.read(bs);
-					 bos.write(bs);
-				 }
-			 } catch (Exception e) {
-				 e.printStackTrace();
-			 } finally {
-				 try {
-					 if (bis != null) bis.close();
-					 if (bos != null) bos.close();
-					 if (is != null) is.close();
-				 } catch (Exception e) {
-				 }
-			 }
-		 }
+	public static void copyResource(InputStream is, ZipEntry ze, File outFile) {
+		if (ze.isDirectory()) {
+			outFile.mkdirs();
+		} else {
+			BufferedInputStream bis = null;
+			BufferedOutputStream bos = null;
+			try {
+				bis = new BufferedInputStream(is);
+				if (!outFile.getParentFile().exists()) {
+					outFile.getParentFile().mkdirs();
+				}
+				bos = new BufferedOutputStream(new FileOutputStream(outFile));
+				int i;
+				while ((i = bis.available()) > 0) {
+					byte[] bs = new byte[i];
+					bis.read(bs);
+					bos.write(bs);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (bis != null) bis.close();
+				} catch (Exception e) {
+				}
+				try {
+					if (bos != null) bos.close();
+				} catch (Exception e) {
+				}
+				try {
+					if (is != null) is.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+	}
+
+	public static void copyResource(InputStream is, HashMap<ZipEntry, File> map) {
+		BufferedInputStream bis = null;
+		BufferedOutputStream bos = null;
+		try {
+			for (Entry<ZipEntry, File> en : map.entrySet()) {
+				ZipEntry ze = en.getKey();
+				File outFile = en.getValue();
+				if (ze.isDirectory()) {
+					outFile.mkdirs();
+				} else {
+					bis = new BufferedInputStream(is);
+					if (!outFile.getParentFile().exists()) {
+						outFile.getParentFile().mkdirs();
+					}
+					bos = new BufferedOutputStream(new FileOutputStream(outFile));
+					int i;
+					while ((i = bis.available()) > 0) {
+						byte[] bs = new byte[i];
+						bis.read(bs);
+						bos.write(bs);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (bis != null) bis.close();
+			} catch (Exception e) {
+			}
+			try {
+				if (bos != null) bos.close();
+			} catch (Exception e) {
+			}
+			try {
+				if (is != null) is.close();
+			} catch (Exception e) {
+			}
+		}
 	}
 
 	public static void copyResource(Class c, String s, File file) {
@@ -576,6 +639,15 @@ public class Modchu_FileManager {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	public static void copyResourceText(InputStream is, File outFile) {
+		ArrayList<String> list = new ArrayList();
+		try {
+			writerFile(outFile, inputStreamToList(is, null));
+		} catch (Exception e) {
+			Modchu_Debug.systemLogDebug("Modchu_FileManager copyResourceText load fail.", 2, e);
 		}
 	}
 
@@ -635,7 +707,7 @@ public class Modchu_FileManager {
 			if (!file.isDirectory()) return list;
 			break;
 		}
-		Modchu_Debug.mDebug("Modchu_FileManager addFile file.getName()="+file.getName());
+		//Modchu_Debug.mDebug("Modchu_FileManager addFile file.getName()="+file.getName());
 		if (period != 0) {
 			Date lastModifiedDate = new Date(file.lastModified());
 			String lastModifiedDateStr = new SimpleDateFormat("yyyyMMdd").format(lastModifiedDate);
@@ -658,7 +730,7 @@ public class Modchu_FileManager {
 				| (matchingFileName != null
 				&& file.getName().equals(matchingFileName)))) {
 			list.add(file);
-			Modchu_Debug.mDebug("Modchu_FileManager addFile list.add file.getName()="+file.getName());
+			//Modchu_Debug.mDebug("Modchu_FileManager addFile list.add file.getName()="+file.getName());
 		}
 		return list;
 	}
@@ -747,7 +819,7 @@ public class Modchu_FileManager {
 			listData.put(file, list);
 			return list;
 		} catch (Exception e) {
-			Modchu_Debug.systemLogDebug("Modchu_Config loadFileToList "+ file.toString() +" load fail.", 2, e);
+			Modchu_Debug.systemLogDebug("Modchu_FileManager loadFileToList "+ file.toString() +" load fail.", 2, e);
 			e.printStackTrace();
 		}
 		return null;
@@ -782,5 +854,133 @@ public class Modchu_FileManager {
 		}
 		Modchu_Debug.lDebug("bufferedReaderToList list.add list.size()="+list.size());
 		return list;
+	}
+
+	public static ArrayList<String> inputStreamToArrayList(InputStream is) {
+		// InputStream読み込みArrayListで返す
+		return (ArrayList<String>) inputStreamToList(is, new ArrayList());
+	}
+
+	public static LinkedList<String> inputStreamToLinkedList(InputStream is) {
+		// InputStream読み込みLinkedListで返す
+		return (LinkedList<String>) inputStreamToList(is, new LinkedList());
+	}
+
+	public static List<String> inputStreamToList(InputStream is, List list) {
+		if (list != null); else list = new LinkedList();
+		BufferedReader breader = null;
+		try {
+			breader = new BufferedReader(new InputStreamReader(is));
+			String rl;
+			while ((rl = breader.readLine()) != null) {
+				list.add(rl);
+			}
+			return list;
+		} catch (Exception e) {
+			Modchu_Debug.systemLogDebug("Modchu_FileManager inputStreamToList " + breader + " load fail.", 2, e);
+			//e.printStackTrace();
+		} finally {
+			try {
+				if (breader != null) breader.close();
+			} catch (Exception e) {
+			}
+		}
+		return null;
+	}
+
+	public static void writerFile(File file, String[] s) {
+		//ファイル書き込み
+		try {
+			BufferedWriter bwriter = new BufferedWriter(new FileWriter(file));
+			List list = new ArrayList();
+			for (String s0 : s) {
+				if (s0 != null); else continue;
+				list.add(s0);
+				bwriter.write(s0);
+				bwriter.newLine();
+			}
+			listData.put(file, list);
+			bwriter.close();
+			Modchu_Debug.lDebug("Modchu_FileManager String[] "+ file.toString() +" new file create.");
+		} catch (Exception e) {
+			Modchu_Debug.systemLogDebug("Modchu_FileManager writerFile String[] file="+ file.toString() +" file writer fail.", 2, e);
+			e.printStackTrace();
+		}
+	}
+
+	public static void writerFile(File file, List<String> list1) {
+		//ファイル書き込み
+		if (file != null
+				&& list1 != null
+				&& !list1.isEmpty()); else {
+			//if (file == null) Modchu_Debug.Debug("Modchu_FileManager List writerFile error ! file == null !!");
+			if (list1.isEmpty()) Modchu_Debug.lDebug("Modchu_FileManager List "+ file.toString() +" writerFile error ! list1.isEmpty()");
+			return;
+		}
+		BufferedWriter bwriter = null;
+		try {
+			if (!list1.isEmpty()
+					&& (file.exists()
+							| file.createNewFile())
+					&& file.canWrite()) {
+				bwriter = new BufferedWriter(new FileWriter(file));
+				List list = new ArrayList();
+				for (String s1 : list1) {
+					if (s1 != null); else continue;
+					list.add(s1);
+					bwriter.write(s1);
+					bwriter.newLine();
+				}
+				listData.put(file, list);
+				//Modchu_Debug.mDebug("Modchu_FileManager List "+ file.toString() +" writerFile.");
+			} else {
+				if (file.exists()
+						| file.createNewFile()); else Modchu_Debug.lDebug("Modchu_FileManager List "+ file.toString() +" writerFile error ! !(file.exists() | file.createNewFile())");
+				if (!file.canWrite()) Modchu_Debug.lDebug("Modchu_FileManager List "+ file.toString() +" writerFile error ! !file.canWrite()");
+			}
+		} catch (ConcurrentModificationException e) {
+		} catch (Exception e) {
+			Modchu_Debug.systemLogDebug("Modchu_FileManager writerFile List file="+ file.toString() +" file writer fail.", 2, e);
+			e.printStackTrace();
+		 } finally {
+			 try {
+				 if (bwriter != null) bwriter.close();
+			 } catch (Exception e) {
+			 }
+		 }
+	}
+
+	public static void writerFile(File file, Map map) {
+		//ファイル書き込み
+		BufferedWriter bwriter = null;
+		try {
+			if (!map.isEmpty()
+					&& (file.exists()
+							| file.createNewFile())
+					&& file.canWrite()) {
+				bwriter = new BufferedWriter(new FileWriter(file));
+				List list = new ArrayList();
+				for (Entry<Object, Object> en : ((Map<Object, Object>) map).entrySet()) {
+					Object key = en.getKey();
+					Object value = en.getValue();
+					String s1 = key.toString() + "=" + value.toString();
+					list.add(s1);
+					bwriter.write(s1);
+					bwriter.newLine();
+				}
+				listData.put(file, list);
+				Modchu_Debug.lDebug("Modchu_FileManager Map "+ file.toString() +" writerFile.");
+			} else {
+				Modchu_Debug.lDebug("Modchu_FileManager Map "+ file.toString() +" writerFile. error map="+map+" file="+file);
+			}
+		} catch (Exception e) {
+			Modchu_Debug.systemLogDebug("Modchu_FileManager writerFile Map file="+ file.toString() +" file writer fail.", 2, e);
+			e.printStackTrace();
+		 } finally {
+			 try {
+				 if (bwriter != null) bwriter.close();
+			 } catch (Exception e) {
+			 }
+		 }
 	}
 }

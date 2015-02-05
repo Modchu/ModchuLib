@@ -9,7 +9,7 @@ import modchu.lib.characteristic.Modchu_CastHelper;
 import org.lwjgl.opengl.GL11;
 
 public class Modchu_GlStateManagerBase {
-	private static ConcurrentHashMap<String, Object> freeVariableMap;
+	private static ConcurrentHashMap<String, Object> freeVariableMap = new ConcurrentHashMap();
 
 	public static void pushMatrix() {
 		GL11.glPushMatrix();
@@ -35,11 +35,11 @@ public class Modchu_GlStateManagerBase {
 		GL11.glPopMatrix();
 	}
 
-	public static void func_179146_y() {
+	public static void generateTexture() {
 		GL11.glGenTextures();
 	}
 
-	public static void func_179098_w() {
+	public static void enableTexture2D() {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 
@@ -270,7 +270,7 @@ public class Modchu_GlStateManagerBase {
 		GL11.glTexGen(8192, p_179105_1_, (FloatBuffer) floatBuffer);
 	}
 
-	public static void func_179090_x() {
+	public static void disableTexture2D() {
 		freeVariableMap.put("field_179174_pField_179060_a", false);
 	}
 
@@ -278,7 +278,7 @@ public class Modchu_GlStateManagerBase {
 		GL11.glDeleteTextures(p_179150_0_);
 	}
 
-	public static void func_179144_i(int p_179144_0_) {
+	public static void bindTexture(int p_179144_0_) {
 		if (p_179144_0_ != Modchu_CastHelper.Int(freeVariableMap.get("field_179174_pField_179059_b"))) {
 			freeVariableMap.put("field_179174_pField_179059_b", p_179144_0_);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, p_179144_0_);
@@ -352,7 +352,7 @@ public class Modchu_GlStateManagerBase {
 		color(p_179124_0_, p_179124_1_, p_179124_2_, 1.0F);
 	}
 
-	public static void func_179117_G() {
+	public static void resetColor() {
 		freeVariableMap.put("colorStateField_179195_a", -1.0F);
 		freeVariableMap.put("colorStateGreen", -1.0F);
 		freeVariableMap.put("colorStateBlue", -1.0F);

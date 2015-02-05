@@ -21,7 +21,7 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 
 	@Override
 	public void setFreeVariable(String s, Object o) {
-		if (freeVariableMap != null) ;else freeVariableMap = new ConcurrentHashMap();
+		if (freeVariableMap != null); else freeVariableMap = new ConcurrentHashMap();
 		freeVariableMap.put(s, o);
 	}
 

@@ -31,7 +31,7 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static int Int(Object o, int i, int i1, int i2) {
-		if (o != null) ;else return i;
+		if (o != null); else return i;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
 			return b ? i1 : i2;
@@ -46,7 +46,7 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static short Short(Object o, short sh) {
-		if (o != null) ;else return sh;
+		if (o != null); else return sh;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
 			return (short) (b ? 2 : 1);
@@ -61,7 +61,7 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static long Long(Object o, long l) {
-		if (o != null) ;else return l;
+		if (o != null); else return l;
 		try {
 			return Long.valueOf(""+o);
 		} catch (Exception e) {
@@ -272,7 +272,7 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static byte Byte(Object o, byte by, byte by1, byte by2) {
-		if (o != null) ;else return by;
+		if (o != null); else return by;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
 			return (byte) (b ? by1 : by2);
@@ -287,7 +287,7 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static float Float(Object o, float f) {
-		if (o != null) ;else return f;
+		if (o != null); else return f;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
 			return b ? 2 : 1;
@@ -302,7 +302,7 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static double Double(Object o, double d) {
-		if (o != null) ;else return d;
+		if (o != null); else return d;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
 			return b ? 2 : 1;
@@ -312,7 +312,7 @@ public class Modchu_CastHelperBase {
 	}
 
 	public static boolean Boolean(Object o) {
-		if (o != null) ;else return false;
+		if (o != null); else return false;
 		if (boolean.class.isInstance(o)
 				| o instanceof String) {
 			return Boolean.valueOf(""+o);

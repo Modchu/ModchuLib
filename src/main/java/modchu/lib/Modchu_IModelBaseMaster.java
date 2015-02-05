@@ -10,5 +10,6 @@ public interface Modchu_IModelBaseMaster {
 	public void setLivingAnimations(Object entityLivingBase, float par2, float par3, float par4);
 	public Object getRandomModelBox(Random random);
 	public Object getRightArm(Modchu_IEntityCapsBase entityCaps);
+	public void setModelAttributes(Object modelBase);
 
 }

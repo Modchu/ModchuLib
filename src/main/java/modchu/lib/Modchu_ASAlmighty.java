@@ -128,6 +128,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == userName) return pArg != null && pArg.length > 0 ? getUserName(pArg[0]) : getUserName();
 		if (pIndex == isPlanter) return pArg != null && pArg.length > 0 ? isPlanter(pArg[0]) : null;
 		if (pIndex == isCamouflage) return pArg != null && pArg.length > 0 ? isCamouflage(pArg[0]) : null;
+		if (pIndex == isPumpkin) return pArg != null && pArg.length > 0 ? isPumpkin(pArg[0]) : null;
 		if (pIndex == vacancyGlobalEntityID) return getVacancyGlobalEntityID();
 		if (pIndex == isLANWorld) return isLANWorld();
 		if (pIndex == isIntegratedServerRunning) return isIntegratedServerRunning();
@@ -576,6 +577,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 					return worldIsAirBlock(pArg[0], (Integer) pArg[1], (Integer) pArg[2], (Integer) pArg[3]);
 				}
 				return worldIsAirBlock((Integer) pArg[0], (Integer) pArg[1], (Integer) pArg[2]);
+			}
+			return null;
+		}
+		if (pIndex == entityLivingGetCurrentArmor) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				return entityLivingGetCurrentArmor(pArg[0], (Integer) pArg[1]);
 			}
 			return null;
 		}
@@ -1097,6 +1107,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == minecraftServerGetServer) return minecraftServerGetServer();
 		if (pIndex == minecraftServerGetServerWorldServers) return minecraftServerGetServerWorldServers();
 		if (pIndex == minecraftServerGetConfigurationManager) return pArg != null && pArg.length > 0 ? minecraftServerGetConfigurationManager(pArg[0]) : null;
+		if (pIndex == minecraftServerGetFile) return pArg != null && pArg.length > 0 ? minecraftServerGetFile((String) pArg[0]) : null;
 		if (pIndex == guiScreenButtonList) return pArg != null && pArg.length > 0 ? guiScreenButtonList(pArg[0]) : null;
 		if (pIndex == guiScreenWidth) return pArg != null && pArg.length > 0 ? guiScreenWidth(pArg[0]) : null;
 		if (pIndex == guiScreenHeight) return pArg != null && pArg.length > 0 ? guiScreenHeight(pArg[0]) : null;
@@ -1803,6 +1814,16 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[0] != null
 			&& pArg[1] != null) {
 				setArmorRendering(pArg[0], (Boolean) pArg[1]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == rendererLivingEntitySetRenderPassModel) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				rendererLivingEntitySetRenderPassModel(pArg[0], pArg[1]);
 				return true;
 			}
 			return false;
@@ -4677,7 +4698,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	public static void instanceCheck() {
-		if (instance != null) ;else instance = new Modchu_ASAlmighty();
+		if (instance != null); else instance = new Modchu_ASAlmighty();
 	}
 
 	protected float[] convertGlColor(int i) {
@@ -4750,13 +4771,13 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		int version = Modchu_Main.getMinecraftVersion();
 		if (version > 179) {
 			Object render = renderManagerGetEntityRenderObject(entityPlayer);
-			if (render != null) ;else return null;
+			if (render != null); else return null;
 			List<Object> list = Modchu_CastHelper.List(Modchu_Reflect.getFieldObject(render.getClass(), "field_177097_h", "layerRenderers", render));
 			if (list != null
-					&& !list.isEmpty()) ;else return null;
+					&& !list.isEmpty()); else return null;
 			Object layerArmorBase = null;
 			Class LayerArmorBase = Modchu_Reflect.loadClass("LayerArmorBase");
-			if (LayerArmorBase != null) ;else return null;
+			if (LayerArmorBase != null); else return null;
 			for (Object o : list) {
 				if (LayerArmorBase.isInstance(o)) {
 					layerArmorBase = o;
@@ -4798,7 +4819,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object blockGetBlockFromItem(Object item) {
-		if (item != null) ;else return null;
+		if (item != null); else return null;
 		return Modchu_Main.getMinecraftVersion() > 169 ? Modchu_Reflect.invokeMethod("Block", "func_149634_a", "getBlockFromItem", new Class[]{ Modchu_Reflect.loadClass("Item") }, null, new Object[]{ item }) : blockBlockList()[itemItemID(item)];
 	}
 
@@ -5928,7 +5949,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object[] entityPlayerArmorInventory(Object entityplayerORInventory) {
-		if (Modchu_Reflect.loadClass("InventoryPlayer").isInstance(entityplayerORInventory)) ;else {
+		if (Modchu_Reflect.loadClass("InventoryPlayer").isInstance(entityplayerORInventory)); else {
 			entityplayerORInventory = entityPlayerArmorInventory(entityplayerORInventory);
 		}
 		return (Object[]) Modchu_Reflect.getFieldObject("InventoryPlayer", "field_70460_b", "armorInventory", entityplayerORInventory);
@@ -6077,7 +6098,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerInventoryPlayerArmorItemInSlot(Object entityplayerORInventory, int i) {
-		if (Modchu_Reflect.loadClass("InventoryPlayer").isInstance(entityplayerORInventory)) ;else {
+		if (Modchu_Reflect.loadClass("InventoryPlayer").isInstance(entityplayerORInventory)); else {
 			entityplayerORInventory = entityPlayerInventory(entityplayerORInventory);
 		}
 		return Modchu_Reflect.invokeMethod("InventoryPlayer", "func_70440_f", "armorItemInSlot", new Class[]{ int.class }, entityplayerORInventory, new Object[]{ i });
@@ -6109,7 +6130,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object[] entityPlayerMainInventory(Object entityplayerORInventory) {
-		if (Modchu_Reflect.loadClass("InventoryPlayer").isInstance(entityplayerORInventory)) ;else {
+		if (Modchu_Reflect.loadClass("InventoryPlayer").isInstance(entityplayerORInventory)); else {
 			entityplayerORInventory = entityPlayerInventory(entityplayerORInventory);
 		}
 		return (Object[]) Modchu_Reflect.getFieldObject("InventoryPlayer", "field_70462_a", "mainInventory", entityplayerORInventory);
@@ -6520,6 +6541,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	protected void entityLivingNavigatorClearPathEntity(Object entityLivingOrPathNavigate) {
 		Object navigator = entityLivingGetNavigator(entityLivingOrPathNavigate);
 		if (navigator != null) Modchu_Reflect.invokeMethod(navigator.getClass(), "func_75499_g", "clearPathEntity", navigator);
+	}
+
+	protected Object entityLivingGetCurrentArmor(Object entityLiving, int i) {
+		return Modchu_Reflect.invokeMethod("EntityLiving", "func_130225_q", "getCurrentArmor", new Class[]{ int.class }, entityLiving, new Object[]{ i });
 	}
 
 	protected boolean entityLivingBaseIsPotionActive(Object potionOrPotionId) {
@@ -7046,15 +7071,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object getBlockItemStack(Object itemstack) {
-		if (itemstack != null) ;else return null;
+		if (itemstack != null); else return null;
 		return Modchu_Main.getMinecraftVersion() > 169 ? blockGetBlockFromItem(itemStackGetItem(itemstack)) : blockBlockList()[itemStackItemID(itemstack)];
 	}
 
 	protected Object getItem(String s) {
-		if (s != null) ;else return null;
+		if (s != null); else return null;
 		if (Modchu_Main.getMinecraftVersion() > 169) {
 			Object itemRegistry = Modchu_Reflect.getFieldObject("Item", "field_150901_e", "itemRegistry");
-			if (itemRegistry != null) ;else return null;
+			if (itemRegistry != null); else return null;
 			Object item = Modchu_Reflect.invokeMethod(itemRegistry.getClass(), "func_82594_a", "getObject", new Class[]{ String.class }, itemRegistry, new Object[]{ s });
 			//Modchu_Debug.mDebug("getItem s="+s+" item="+item);
 			return item != null ? item : null;
@@ -7063,10 +7088,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object getBlock(String s) {
-		if (s != null) ;else return null;
+		if (s != null); else return null;
 		if (Modchu_Main.getMinecraftVersion() > 169) {
 			Object blockRegistry = Modchu_Reflect.getFieldObject("Block", "field_149771_c", "blockRegistry");
-			if (blockRegistry != null) ;else return null;
+			if (blockRegistry != null); else return null;
 			Object block = Modchu_Reflect.invokeMethod(blockRegistry.getClass(), "func_82594_a", "getObject", new Class[]{ String.class }, blockRegistry, new Object[]{ s });
 			Modchu_Debug.mDebug("getBlock s="+s+" block="+block);
 			return block != null ? block : null;
@@ -7095,7 +7120,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("ModLoader", "getUniqueEntityId"));
 		}
 		Map map = (Map) Modchu_Reflect.getFieldObject("EntityList", "field_75623_d", -1);
-		if (map != null) ;else map = (Map) Modchu_Reflect.getFieldObject("EntityList", "IDtoClassMapping");
+		if (map != null); else map = (Map) Modchu_Reflect.getFieldObject("EntityList", "IDtoClassMapping");
 		int ID = -1;
 		if (map != null) {
 			for(int i = 64; i < 3000; i++) {
@@ -7155,7 +7180,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	protected void guiIngameDrawString(String s, int i, int j, int k) {
 		if (Modchu_Main.isServer) return;
 		Object mc = minecraftGetMinecraft();
-		if (mc != null) ;else return;
+		if (mc != null); else return;
 		Object ingameGUI = Modchu_Reflect.getFieldObject("Minecraft", "field_71456_v", "ingameGUI", minecraftGetMinecraft());
 		if (ingameGUI != null) Modchu_Reflect.invokeMethod("Gui", "func_73731_b", "drawString", new Class[]{ Modchu_Reflect.loadClass("FontRenderer"), String.class, int.class, int.class, int.class }, ingameGUI, new Object[]{ minecraftFontRenderer(), s, i, j, k });
 	}
@@ -7225,7 +7250,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean isCamouflage(Object itemStackOrItemOrBlock) {
-		if (itemStackOrItemOrBlock != null) ;else return false;
+		if (itemStackOrItemOrBlock != null); else return false;
 		Object block = getBlock(itemStackOrItemOrBlock);
 		return isCamouflageCheck(block);
 	}
@@ -7236,13 +7261,20 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 				| Modchu_Reflect.loadClass("BlockPumpkin").isInstance(block));
 	}
 
+	protected boolean isPumpkin(Object itemStackOrItemOrBlock) {
+		if (itemStackOrItemOrBlock != null); else return false;
+		Object block = getBlock(itemStackOrItemOrBlock);
+		return block != null
+				&& Modchu_Reflect.loadClass("BlockPumpkin").isInstance(block);
+	}
+
 	protected boolean isCtrlKeyDown() {
 		return isMac() ? Keyboard.isKeyDown(219) || Keyboard.isKeyDown(220) : Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157);
 	}
 
 	protected boolean isIntegratedServerRunning() {
 		Object mc = minecraftGetMinecraft();
-		if (mc != null) ;else return false;
+		if (mc != null); else return false;
 		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("Minecraft", "func_71387_A", "isIntegratedServerRunning", mc));
 	}
 
@@ -7268,13 +7300,13 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected boolean isMuiti() {
 		Object mc = minecraftGetMinecraft();
-		if (mc != null) ;else return false;
+		if (mc != null); else return false;
 		return Modchu_Reflect.invokeMethod("Minecraft", Modchu_Main.getMinecraftVersion() > 169 ? "func_147114_u" : "func_71391_r", "getNetHandler", mc) != null
 				&& !Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("Minecraft", "func_71356_B", "isSingleplayer", mc));
 	}
 
 	protected boolean isPlanter(Object itemStackOrItemOrBlock) {
-		if (itemStackOrItemOrBlock != null) ;else return false;
+		if (itemStackOrItemOrBlock != null); else return false;
 		Object block = itemStackOrItemOrBlock;
 		if (Modchu_Reflect.loadClass("ItemStack").isInstance(itemStackOrItemOrBlock)) {
 			block = getBlockItemStack(itemStackOrItemOrBlock);
@@ -8025,6 +8057,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.ObjectArray(Modchu_Reflect.getFieldObject("net.minecraft.server.MinecraftServer", "field_71305_c", "worldServers", minecraftServerGetServer()));
 	}
 
+	protected File minecraftServerGetFile(String s) {
+		return Modchu_CastHelper.File(Modchu_Reflect.invokeMethod("net.minecraft.server.MinecraftServer", "func_71209_f", "getFile", new Class[]{ String.class }, minecraftServerGetServer(), new Object[]{ s }));
+	}
+
 	protected Object minecraftServerGetConfigurationManager(Object minecraftServer) {
 		return Modchu_Reflect.invokeMethod("MinecraftServer", "func_71203_ab", "getConfigurationManager", minecraftServer);
 	}
@@ -8614,7 +8650,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected void playerControllerMPSetPlayerCapabilities(Object playerController, Object entityplayer) {
 		if (Modchu_Main.isServer) return;
-		if (Modchu_Reflect.loadClass("PlayerControllerCreative").isInstance(playerController)) ;else return;
+		if (Modchu_Reflect.loadClass("PlayerControllerCreative").isInstance(playerController)); else return;
 		Modchu_Reflect.invokeMethod("PlayerControllerCreative", "func_78748_a", "setPlayerCapabilities", new Class[]{Modchu_Reflect.loadClass("EntityPlayer")}, playerController, new Object[]{ entityplayer });
 	}
 
@@ -8682,12 +8718,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	protected void printChatMessage(String s) {
 		if (Modchu_Main.isServer) return;
 		Object ingameGUI = Modchu_Reflect.getFieldObject("Minecraft", "field_71456_v", "ingameGUI", minecraftGetMinecraft());
-		if (ingameGUI != null) ;else {
+		if (ingameGUI != null); else {
 			Modchu_Debug.lDebug("printChatMessage ingameGUI == null !!");
 			return;
 		}
 		Object chatGUI = Modchu_Reflect.invokeMethod(ingameGUI.getClass(), Modchu_Main.getMinecraftVersion() > 169 ? "func_146158_b" : "func_73827_b", "getChatGUI", ingameGUI);
-		if (chatGUI != null) ;else {
+		if (chatGUI != null); else {
 			Modchu_Debug.lDebug("printChatMessage chatGUI == null !!");
 			return;
 		}
@@ -8765,6 +8801,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected void rendererLivingEntityPassSpecialRender(Object rendererLivingEntity, Object entity, double d, double d1, double d2) {
 		Modchu_Reflect.invokeMethod("RendererLivingEntity", "func_77033_b", "passSpecialRender", new Class[]{ Modchu_Reflect.loadClass("EntityLivingBase"), double.class, double.class, double.class }, rendererLivingEntity, new Object[]{ entity, d, d1, d2 });
+	}
+
+	protected void rendererLivingEntitySetRenderPassModel(Object rendererLivingEntity, Object modelBase) {
+		Modchu_Reflect.invokeMethod("RendererLivingEntity", "func_77042_a", "setRenderPassModel", new Class[]{ Modchu_Reflect.loadClass("ModelBase") }, rendererLivingEntity, new Object[]{ modelBase });
 	}
 
 	protected void renderFirstPersonArm(Object render, Object entityplayer) {
@@ -8882,12 +8922,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected String resourceLocationGetResourceDomain(Object resourceLocation) {
-		if (Modchu_Main.getMinecraftVersion() > 159) ;else return null;
+		if (Modchu_Main.getMinecraftVersion() > 159); else return null;
 		return Modchu_CastHelper.String(Modchu_Reflect.invokeMethod(resourceLocation.getClass(), "func_110624_b", "getResourceDomain", resourceLocation));
 	}
 
 	protected String resourceLocationGetResourcePath(Object resourceLocation) {
-		if (Modchu_Main.getMinecraftVersion() > 159) ;else return Modchu_CastHelper.String(resourceLocation);
+		if (Modchu_Main.getMinecraftVersion() > 159); else return Modchu_CastHelper.String(resourceLocation);
 		return Modchu_CastHelper.String(Modchu_Reflect.invokeMethod(resourceLocation.getClass(), "func_110623_a", "getResourcePath", resourceLocation));
 	}
 
@@ -9628,7 +9668,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (Modchu_Main.getMinecraftVersion() > 179) {
 			Object iBlockState = worldGetBlockState(worldOrEntity, newBlockPos(x, y, z));
 			Object block = iBlockState != null ? iBlockStateGetBlock(iBlockState) : null;
-			if (block != null) ;else return 0;
+			if (block != null); else return 0;
 			return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("Block", "func_176201_c", "getMetaFromState", new Class[]{ iBlockState.getClass() }, block, new Object[]{ iBlockState }));
 		}
 		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_72805_g", "getBlockMetadata", new Class[]{ int.class, int.class, int.class }, entityWorldObj(worldOrEntity), new Object[]{ x, y, z }));
@@ -9642,7 +9682,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (Modchu_Main.getMinecraftVersion() > 179) {
 			Object iBlockState = worldGetBlockState(worldOrEntity, newBlockPos(x, y, z));
 			Object block = iBlockState != null ? iBlockStateGetBlock(iBlockState) : null;
-			if (block != null) ;else return 0;
+			if (block != null); else return 0;
 			return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("Block", "func_149750_m", "getLightValue", block));
 		}
 		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_72957_l", "getBlockLightValue", new Class[]{ int.class, int.class, int.class }, entityWorldObj(worldOrEntity), new Object[]{ x, y, z }));
