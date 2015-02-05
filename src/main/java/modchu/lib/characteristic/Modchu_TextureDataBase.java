@@ -5,6 +5,7 @@ import java.util.Random;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
+import modchu.lib.Modchu_TextureManagerBase;
 import modchu.model.multimodel.base.MultiModelBaseBiped;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.EntityAgeable;
