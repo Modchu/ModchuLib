@@ -3,7 +3,10 @@ package modchu.lib.characteristic;
 import java.util.Collection;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
+import modchu.lib.Modchu_ASAlmighty;
+import modchu.lib.Modchu_ASBase;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntityTameableMaster;
 import modchu.lib.Modchu_Main;
@@ -52,9 +55,12 @@ import net.minecraft.world.World;
 public class Modchu_EntityTameableB extends EntityTameable {
 	public Modchu_IEntityTameableMaster master;
 	public String entityName;
+	public static ConcurrentHashMap<String, UUID> entityUniqueIDMap = new ConcurrentHashMap();
+	protected UUID entityUniqueID;
 
 	public Modchu_EntityTameableB(World world) {
 		super(world);
+		entityUniqueID = UUID.randomUUID();
 		ignoreFrustumCheck = true;
 	}
 
@@ -99,9 +105,20 @@ public class Modchu_EntityTameableB extends EntityTameable {
 				s = c.getName();
 			}
 		}
-		master = (Modchu_IEntityTameableMaster) Modchu_Reflect.newInstance(s, new Class[]{ Modchu_EntityTameable.class, Object[].class }, new Object[]{ this, new Object[]{ worldObj } });
+		master = (modchu.lib.Modchu_IEntityTameableMaster) Modchu_Reflect.newInstance(s, new Class[]{ Modchu_EntityTameable.class, Object[].class }, new Object[]{ this, new Object[]{ worldObj } });
 		entityName = s;
 		Modchu_Debug.mDebug("initNBTAfter entityName="+(entityName != null ? entityName : "null !!"));
+		String s0 = new StringBuilder(Modchu_ASAlmighty.getBoolean(Modchu_ASBase.worldIsRemote, this) ? "1" : "0").append(entityUniqueID).toString();
+		if (s0 != null
+				&& entityUniqueIDMap.containsKey(s0)) {
+			Modchu_Debug.mDebug("initNBTAfter entityUniqueIDMap.containsKey isDead entityUniqueID="+entityUniqueID);
+			Modchu_AS.set(Modchu_AS.entityLivingBaseSetHealth, this, 0.0F);
+			deathTime = 20;
+			setDead();
+			return;
+		}
+		if (s0 != null) entityUniqueIDMap.put(s0, entityUniqueID);
+		Modchu_Debug.mDebug("initNBTAfter entityUniqueID="+entityUniqueID);
 		Modchu_Debug.mDebug("initNBTAfter masterEntity="+master);
 	}
 
@@ -146,9 +163,14 @@ public class Modchu_EntityTameableB extends EntityTameable {
 	public void writeEntityToNBT(NBTTagCompound nBTTagCompound) {
 		if (entityName != null
 				&& !entityName.isEmpty()) {
-			nBTTagCompound.setString("entityName", entityName);
-			if (master != null) master.writeEntityToNBT(nBTTagCompound);
-			else super.writeEntityToNBT(nBTTagCompound);
+			try {
+				nBTTagCompound.setString("entityName", entityName);
+				nBTTagCompound.setLong("UUIDMost", getUniqueID().getMostSignificantBits());
+				nBTTagCompound.setLong("UUIDLeast", getUniqueID().getLeastSignificantBits());
+				if (master != null) master.writeEntityToNBT(nBTTagCompound);
+				else super.writeEntityToNBT(nBTTagCompound);
+			} catch (Throwable throwable) {
+			}
 		}
 		//Modchu_Debug.mDebug("writeEntityToNBT entityName="+entityName);
 	}
@@ -162,6 +184,10 @@ public class Modchu_EntityTameableB extends EntityTameable {
 		//Modchu_Debug.mDebug("readEntityFromNBT entityName="+entityName);
 		String s = nBTTagCompound.getString("entityName");
 		//Modchu_Debug.mDebug("readEntityFromNBT s="+s);
+		if (nBTTagCompound.hasKey("UUIDMost")
+				&& nBTTagCompound.hasKey("UUIDLeast")) {
+			entityUniqueID = new UUID(nBTTagCompound.getLong("UUIDMost"), nBTTagCompound.getLong("UUIDLeast"));
+		}
 		init(s);
 		if (master != null) master.readEntityFromNBT(nBTTagCompound);
 		else super.readEntityFromNBT(nBTTagCompound);
