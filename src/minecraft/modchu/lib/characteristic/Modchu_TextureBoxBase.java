@@ -7,6 +7,7 @@ import java.util.TreeMap;
 import modchu.lib.Modchu_EntityCapsHelper;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
+import modchu.lib.Modchu_TextureManagerBase;
 import modchu.model.ModchuModel_IEntityCaps;
 import modchu.model.multimodel.base.MultiModelBaseBiped;
 

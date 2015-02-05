@@ -67,4 +67,7 @@ public class Modchu_ModelBase extends ModelBase {
 		return super.getRandomModelBox(random);
 	}
 
+	public void superSetModelAttributes(Object modelBase) {
+	}
+
 }

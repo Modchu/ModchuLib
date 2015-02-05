@@ -20,7 +20,8 @@ public class Modchu_LmmTextureBox extends MMM_TextureBox {
 		init(textureBox, (Object[]) null);
 		textureName = textureBox.textureName;
 		fileName = textureName;
-		int li = textureName.lastIndexOf("_");
+		int li = textureName != null
+				&& !textureName.isEmpty() ? textureName.lastIndexOf("_") : -1;
 		if (li > -1) {
 			packegeName = textureName.substring(0, li);
 			modelName = textureName.substring(li + 1);
