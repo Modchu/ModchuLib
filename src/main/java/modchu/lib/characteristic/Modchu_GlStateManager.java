@@ -30,12 +30,12 @@ public class Modchu_GlStateManager extends Modchu_GlStateManagerBase {
 		Modchu_GlStateManagerBase.popMatrix();
 	}
 
-	public static void func_179146_y() {
-		Modchu_GlStateManagerBase.func_179146_y();
+	public static void generateTexture() {
+		Modchu_GlStateManagerBase.generateTexture();
 	}
 
-	public static void func_179098_w() {
-		Modchu_GlStateManagerBase.func_179098_w();
+	public static void enableTexture2D() {
+		Modchu_GlStateManagerBase.enableTexture2D();
 	}
 
 	public static void enableBlend() {
@@ -214,16 +214,16 @@ public class Modchu_GlStateManager extends Modchu_GlStateManagerBase {
 		Modchu_GlStateManagerBase.func_179105_a(glStateManagerTexGen, p_179105_1_, (FloatBuffer) floatBuffer);
 	}
 
-	public static void func_179090_x() {
-		Modchu_GlStateManagerBase.func_179090_x();
+	public static void disableTexture2D() {
+		Modchu_GlStateManagerBase.disableTexture2D();
 	}
 
 	public static void func_179150_h(int p_179150_0_) {
 		Modchu_GlStateManagerBase.func_179150_h(p_179150_0_);
 	}
 
-	public static void func_179144_i(int p_179144_0_) {
-		Modchu_GlStateManagerBase.func_179144_i(p_179144_0_);
+	public static void bindTexture(int p_179144_0_) {
+		Modchu_GlStateManagerBase.bindTexture(p_179144_0_);
 	}
 
 	public static void enableNormalize() {
@@ -282,8 +282,8 @@ public class Modchu_GlStateManager extends Modchu_GlStateManagerBase {
 		Modchu_GlStateManagerBase.color(p_179124_0_, p_179124_1_, p_179124_2_);
 	}
 
-	public static void func_179117_G() {
-		Modchu_GlStateManagerBase.func_179117_G();
+	public static void resetColor() {
+		Modchu_GlStateManagerBase.resetColor();
 	}
 
 	public static void callList(int p_179148_0_) {
