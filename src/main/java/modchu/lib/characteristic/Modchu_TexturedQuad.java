@@ -30,12 +30,12 @@ public class Modchu_TexturedQuad extends TexturedQuad {
 	}
 
 	public void init(Class masterClass, PositionTextureVertex[] arrayOfPositionTextureVertex, Object... o) {
-		if (masterClass != null) ;else masterClass = Modchu_Reflect.loadClass("modchu.model.ModchuModel_TexturedQuadMaster");
-		if (masterClass != null) ;else throw new RuntimeException("Modchu_TexturedQuad init masterClass null !!");
+		if (masterClass != null); else masterClass = Modchu_Reflect.loadClass("modchu.model.ModchuModel_TexturedQuadMaster");
+		if (masterClass != null); else throw new RuntimeException("Modchu_TexturedQuad init masterClass null !!");
 		Object instance = Modchu_Reflect.newInstance(masterClass, new Class[]{ Modchu_TexturedQuad.class, Object[].class, Object[].class }, new Object[]{ this, arrayOfPositionTextureVertex, o });
 		//Modchu_Debug.mDebug("Modchu_TexturedQuad instance="+instance);
 		master = instance instanceof Modchu_ITexturedQuad ? (Modchu_ITexturedQuad) instance : null;
-		if (master != null) ;else throw new RuntimeException("Modchu_TexturedQuad init master null !! masterClass=" + masterClass);
+		if (master != null); else throw new RuntimeException("Modchu_TexturedQuad init master null !! masterClass=" + masterClass);
 	}
 
 	@Override

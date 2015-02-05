@@ -41,19 +41,19 @@ public class Modchu_PacketMaster implements Modchu_IPacket {
 	@Override
 	public void registerPacket(Object instance, String channelName) {
 		if (channelName != null
-				&& !channelName.isEmpty()) ;else {
+				&& !channelName.isEmpty()); else {
 			Modchu_Debug.mDebug("Modchu_PacketMaster registerPacket channelName == null !!");
 			return;
 		}
 		Object networkRegistryINSTANCE = Modchu_Reflect.getFieldObject("NetworkRegistry", "INSTANCE");
-		if (networkRegistryINSTANCE != null) ;else {
+		if (networkRegistryINSTANCE != null); else {
 			Modchu_Debug.mDebug("Modchu_PacketMaster registerPacket networkRegistryINSTANCE == null !!");
 			return;
 		}
 		Modchu_PacketHandler packetHandler = new Modchu_PacketHandler(channelName, instance);
 		Object o = Modchu_Reflect.invokeMethod(networkRegistryINSTANCE.getClass(), "newChannel", new Class[]{ String.class, ChannelHandler[].class }, networkRegistryINSTANCE, new Object[]{ channelName, new ChannelHandler[] { packetHandler } });
 		EnumMap<Side, FMLEmbeddedChannel> channels = o != null ? (EnumMap<Side, FMLEmbeddedChannel>) o : null;
-		if (channels != null) ;else {
+		if (channels != null); else {
 			Modchu_Debug.mDebug("Modchu_PacketMaster registerPacket channels == null !!");
 			return;
 		}
@@ -68,7 +68,7 @@ public class Modchu_PacketMaster implements Modchu_IPacket {
 		Object entityPlayer = o[2];
 		Modchu_Debug.mDebug("Modchu_PacketMaster onPacketData channelName="+channelName);
 		Modchu_PacketHandler packetHander = getPacketHander(channelName);
-		if (packetHander != null) ;else return;
+		if (packetHander != null); else return;
 		Modchu_Reflect.invokeMethod(packetHander.modInstance.getClass(), "onPacketData", new Class[]{ LinkedList.class, Object.class, String.class }, packetHander.modInstance, new Object[]{ Modchu_Packet.receivePacketData(Modchu_Packet.getPacketInputStream(packet)), entityPlayer, channelName });
 	}
 
@@ -84,10 +84,10 @@ public class Modchu_PacketMaster implements Modchu_IPacket {
 		if (o != null
 				&& channelName != null
 				//&& world != null
-				) ;else {
-			if (o != null) ;else Modchu_Debug.mDebug("Modchu_PacketMaster sendToAll o == null !!");
-			if (channelName != null) ;else Modchu_Debug.mDebug("Modchu_PacketMaster sendToAll channelName == null !!");
-			//if (world != null) ;else Modchu_Debug.mDebug("Modchu_PacketMaster sendToAll world == null !!");
+				); else {
+			if (o != null); else Modchu_Debug.mDebug("Modchu_PacketMaster sendToAll o == null !!");
+			if (channelName != null); else Modchu_Debug.mDebug("Modchu_PacketMaster sendToAll channelName == null !!");
+			//if (world != null); else Modchu_Debug.mDebug("Modchu_PacketMaster sendToAll world == null !!");
 			return;
 		}
 		sendToAll(newPacket(o, channelName), channelName);
@@ -203,7 +203,7 @@ public class Modchu_PacketMaster implements Modchu_IPacket {
 	@Override
 	public ByteBuf getBytes(Object[] o) {
 		if (o != null
-				&& o.length > 0) ;else return null;
+				&& o.length > 0); else return null;
 		o = Modchu_Packet.sendStateProcessing(o);
 		ByteBuf buf = newPacketBuffer(Unpooled.buffer());
 		ByteBufOutputStream byteBufOutputStream = new ByteBufOutputStream((ByteBuf) buf);
@@ -249,7 +249,7 @@ public class Modchu_PacketMaster implements Modchu_IPacket {
 	@Override
 	public Object[] sendStateProcessing(Object... o) {
 		if (o != null
-				&& o.length > 0) ;else return null;
+				&& o.length > 0); else return null;
 		Object[] o2 = new Object[o.length * 2 + 1];
 		for (int i = 0; i < o.length; i++) {
 			Modchu_Debug.mDebug("Modchu_PacketMaster sendStateProcessing o["+i+"]="+o[i]);

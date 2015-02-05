@@ -16,6 +16,7 @@ import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockMushroom;
+import net.minecraft.block.BlockPumpkin;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.properties.IProperty;
@@ -143,7 +144,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	public static void instanceCheck() {
 		if (instance != null
-				&& instance instanceof Modchu_AS) ;else instance = new Modchu_AS();
+				&& instance instanceof Modchu_AS); else instance = new Modchu_AS();
 	}
 
 	public Modchu_AS() {
@@ -378,7 +379,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object blockGetBlockFromItem(Object item) {
-		if (item != null) ;else return null;
+		if (item != null); else return null;
 		return Block.getBlockFromItem((Item) item);
 	}
 
@@ -868,7 +869,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object[] entityPlayerArmorInventory(Object entityplayerORInventory) {
-		if (entityplayerORInventory instanceof InventoryPlayer) ;else {
+		if (entityplayerORInventory instanceof InventoryPlayer); else {
 			entityplayerORInventory = entityPlayerArmorInventory(entityplayerORInventory);
 		}
 		return ((InventoryPlayer) entityplayerORInventory).armorInventory;
@@ -966,7 +967,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object entityPlayerInventoryPlayerArmorItemInSlot(Object entityplayerORInventory, int i) {
-		if (entityplayerORInventory instanceof InventoryPlayer) ;else {
+		if (entityplayerORInventory instanceof InventoryPlayer); else {
 			entityplayerORInventory = entityPlayerInventory(entityplayerORInventory);
 		}
 		return ((InventoryPlayer) entityplayerORInventory).armorItemInSlot(i);
@@ -984,7 +985,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object[] entityPlayerMainInventory(Object entityplayerORInventory) {
-		if (entityplayerORInventory instanceof InventoryPlayer) ;else {
+		if (entityplayerORInventory instanceof InventoryPlayer); else {
 			entityplayerORInventory = entityPlayerInventory(entityplayerORInventory);
 		}
 		return ((InventoryPlayer) entityplayerORInventory).mainInventory;
@@ -1235,13 +1236,13 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object getBlockItemStack(Object itemstack) {
-		if (itemstack != null) ;else return null;
+		if (itemstack != null); else return null;
 		return blockGetBlockFromItem(itemStackGetItem(itemstack));
 	}
 
 	@Override
 	protected Object getItem(String s) {
-		if (s != null) ;else return null;
+		if (s != null); else return null;
 		return Item.itemRegistry.getObject(s);
 	}
 
@@ -3327,10 +3328,10 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 		if (Modchu_Main.isServer
 				| itemStack == null) return null;
 		Object render = renderManagerGetEntityRenderObject(entityPlayer);
-		if (render != null) ;else return null;
+		if (render != null); else return null;
 		List<Object> list = Modchu_CastHelper.List(Modchu_Reflect.getFieldObject(render.getClass(), "field_177097_h", "layerRenderers", render));
 		if (list != null
-				&& !list.isEmpty()) ;else return null;
+				&& !list.isEmpty()); else return null;
 		LayerArmorBase layerArmorBase = null;
 		for (Object o : list) {
 			if (o instanceof LayerArmorBase) {
@@ -3447,7 +3448,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	protected int worldGetBlockStateGetBlockMetadata(Object worldOrEntity, int x, int y, int z) {
 		IBlockState iBlockState = (IBlockState) worldGetBlockState(worldOrEntity, newBlockPos(x, y, z));
 		Block block = (Block) (iBlockState != null ? iBlockStateGetBlock(iBlockState) : null);
-		if (block != null) ;else return 0;
+		if (block != null); else return 0;
 		return ((Block) block).getMetaFromState(iBlockState);
 	}
 
@@ -3480,7 +3481,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	protected int worldGetBlockLightValue(Object worldOrEntity, int x, int y, int z) {
 		IBlockState iBlockState = (IBlockState) worldGetBlockState(worldOrEntity, newBlockPos(x, y, z));
 		Block block = (Block) (iBlockState != null ? iBlockStateGetBlock(iBlockState) : null);
-		if (block != null) ;else return 0;
+		if (block != null); else return 0;
 		return ((Block) block).getLightValue();
 	}
 
@@ -3611,9 +3612,9 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object getBlock(String s) {
-		if (s != null) ;else return null;
+		if (s != null); else return null;
 		RegistryNamespacedDefaultedByKey blockRegistry = Block.blockRegistry;
-		if (blockRegistry != null) ;else return null;
+		if (blockRegistry != null); else return null;
 		Object block = blockRegistry.getObject(s);
 		Modchu_Debug.mDebug("getBlock s="+s+" block="+block);
 		return block != null ? block : null;
@@ -3970,6 +3971,26 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	protected Object minecraftGetIntegratedServer() {
 		if (Modchu_Main.isServer) return null;
 		return Minecraft.getMinecraft().getIntegratedServer();
+	}
+
+	@Override
+	protected Object entityLivingGetCurrentArmor(Object entityLiving, int i) {
+		return ((EntityLiving) entityLiving).getCurrentArmor(i);
+	}
+
+	@Override
+	protected File minecraftServerGetFile(String s) {
+		return MinecraftServer.getServer().getFile(s);
+	}
+
+	@Override
+	protected boolean isPumpkin(Object itemStackOrBlockOrItem) {
+		itemStackOrBlockOrItem = itemStackOrBlockOrItem instanceof ItemStack ? getBlock(itemStackOrBlockOrItem) : itemStackOrBlockOrItem;
+		return itemStackOrBlockOrItem instanceof BlockPumpkin;
+	}
+
+	@Override
+	protected void rendererLivingEntitySetRenderPassModel(Object rendererLivingEntity, Object modelBase) {
 	}
 
 }

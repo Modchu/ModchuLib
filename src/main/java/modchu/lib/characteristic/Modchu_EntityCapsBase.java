@@ -176,7 +176,7 @@ public class Modchu_EntityCapsBase implements Modchu_IEntityCapsBase {
 
 	@Override
 	public boolean setCapsValue(int pIndex, Object... pArg) {
-		if (owner != null) ;else return false;
+		if (owner != null); else return false;
 		switch (pIndex) {
 		case caps_health:
 			owner.setHealth((Integer)pArg[0]);

@@ -64,7 +64,7 @@ public class Modchu_EntityTameableB extends EntityTameable {
 
 	public Modchu_EntityTameableB(Class masterClass, Object world) {
 		this((World) world);
-		if (masterClass != null) ;else {
+		if (masterClass != null); else {
 			Modchu_Debug.Debug("Modchu_EntityTameable init masterClass == null !!");
 			return;
 		}
@@ -91,7 +91,7 @@ public class Modchu_EntityTameableB extends EntityTameable {
 
 	public Object getMaster() {
 		//Modchu_Debug.mDebug("getmasterEntity masterEntity="+masterEntity);
-		if (master != null) ;else {
+		if (master != null); else {
 			init(entityName);
 		}
 		return master;
@@ -117,14 +117,15 @@ public class Modchu_EntityTameableB extends EntityTameable {
 		entityName = s;
 		Modchu_Debug.mDebug("initNBTAfter entityName="+(entityName != null ? entityName : "null !!"));
 		String s0 = new StringBuilder(Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this) ? "1" : "0").append(entityUniqueID).toString();
-		if (entityUniqueIDMap.containsKey(s0)) {
+		if (s0 != null
+				&& entityUniqueIDMap.containsKey(s0)) {
 			Modchu_Debug.mDebug("initNBTAfter entityUniqueIDMap.containsKey isDead entityUniqueID="+entityUniqueID);
 			Modchu_AS.set(Modchu_AS.entityLivingBaseSetHealth, this, 0.0F);
 			deathTime = 20;
 			setDead();
 			return;
 		}
-		entityUniqueIDMap.put(s0, entityUniqueID);
+		if (s0 != null) entityUniqueIDMap.put(s0, entityUniqueID);
 		Modchu_Debug.mDebug("initNBTAfter entityUniqueID="+entityUniqueID);
 		Modchu_Debug.mDebug("initNBTAfter masterEntity="+master);
 	}
@@ -325,9 +326,9 @@ public class Modchu_EntityTameableB extends EntityTameable {
 		//Modchu_Debug.mDebug("onLivingUpdate entityName="+entityName);
 		//Modchu_Debug.mDebug("onLivingUpdate posX="+posX+" posY="+posY+" posZ="+posZ);
 		if (master != null
-				&& entityName != null) ;else {
+				&& entityName != null); else {
 			init(null);
-			if (master != null) ;else {
+			if (master != null); else {
 				setDead();
 			}
 		}
