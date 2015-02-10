@@ -734,5 +734,6 @@ public interface Modchu_ASC {
 	public static final int minecraftServerGetFile_int = 16434;
 	public static final int isPumpkin_int = 16435;
 	public static final int rendererLivingEntitySetRenderPassModel_int = 16436;
+	public static final int renderPlayerSmallArms_int = 16437;
 
 }

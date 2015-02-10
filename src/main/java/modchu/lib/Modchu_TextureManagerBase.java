@@ -697,7 +697,9 @@ public class Modchu_TextureManagerBase {
 		}
 */
 		for (Modchu_TextureBoxBase ltb : textures) {
-			if (ltb.hasColor(pColor)) {
+			if (ltb.hasColor(pColor)
+					&& ltb.textureName != null
+					&& !ltb.textureName.isEmpty()) {
 				if (f) {
 					return ltb;
 				}
@@ -709,23 +711,32 @@ public class Modchu_TextureManagerBase {
 				f = true;
 			}
 		}
-		return lreturn == null ? null : lreturn;
+		//if (lreturn != null) return lreturn;
+		return textures != null
+				&& !textures.isEmpty() ? textures.get(0) : null;
 	}
 
 	public Modchu_TextureBoxBase getPrevPackege(Modchu_TextureBoxBase pNowBox, int pColor) {
+		//Modchu_Debug.mDebug("getPrevPackege");
 		// 前のテクスチャパッケージの名前を返す
 		Modchu_TextureBoxBase lreturn = null;
 		for (Modchu_TextureBoxBase ltb : textures) {
 			if (ltb == pNowBox) {
 				if (lreturn != null) {
-					break;
+					//Modchu_Debug.mDebug("getPrevPackege return lreturn="+lreturn);
+					return lreturn;
 				}
 			}
-			if (ltb.hasColor(pColor)) {
+			if (ltb.hasColor(pColor)
+					&& ltb.textureName != null
+					&& !ltb.textureName.isEmpty()) {
+				//Modchu_Debug.mDebug("getPrevPackege hasColor lreturn="+ltb);
 				lreturn = ltb;
 			}
 		}
-		return lreturn == null ? null : lreturn;
+		//if (lreturn != null) return lreturn;
+		return textures != null
+				&& textures.size() > 0 ? textures.get(textures.size() - 1) : null;
 	}
 
 	/**

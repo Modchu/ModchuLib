@@ -139,6 +139,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == renderRenderManagerRenderEngine) return pArg != null && pArg.length > 0 ? renderRenderManagerRenderEngine(pArg[0]) : null;
 		if (pIndex == renderManagerGetEntityRenderObject) return pArg != null && pArg.length > 0 ? renderManagerGetEntityRenderObject(pArg[0]) : renderManagerGetEntityRenderObject();
 		if (pIndex == renderMainModel) return pArg != null && pArg.length > 0 ? renderMainModel(pArg[0]) : null;
+		if (pIndex == renderPlayerSmallArms) return pArg != null && pArg.length > 0 ? renderPlayerSmallArms(pArg[0]) : null;
 		if (pIndex == nbtUtilReadGameProfileFromNBT) return pArg != null && pArg.length > 0 ? nbtUtilReadGameProfileFromNBT(pArg[0]) : null;
 		if (pIndex == blockRendererDispatcherGetBlockModelRenderer) return pArg != null && pArg.length > 0 ? blockRendererDispatcherGetBlockModelRenderer(pArg[0]) : null;
 		if (pIndex == tileEntitySkullUpdateGameprofile) return pArg != null && pArg.length > 0 ? tileEntitySkullUpdateGameprofile(pArg[0]) : null;
@@ -8809,6 +8810,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected void renderFirstPersonArm(Object render, Object entityplayer) {
 		Modchu_Reflect.invokeMethod("RenderPlayer", "func_82441_a", "renderFirstPersonArm", new Class[]{ Modchu_Reflect.loadClass("EntityPlayer") }, render, new Object[]{ entityplayer });
+	}
+
+	protected boolean renderPlayerSmallArms(Object renderPlayer) {
+		return Modchu_Main.getMinecraftVersion() > 179 ? Modchu_CastHelper.Boolean(Modchu_Reflect.getFieldObject("RenderPlayer", "field_177140_a",  "smallArms", renderPlayer)) : false;
 	}
 
 	protected void renderHelperDisableStandardItemLighting() {

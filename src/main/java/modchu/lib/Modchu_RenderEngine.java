@@ -54,6 +54,8 @@ public class Modchu_RenderEngine {
 		bindTexture(generateDisplayList);
 		setupTextureExt(image, generateDisplayList, false, false);
 		textureMap.put(s, generateDisplayList);
+		//displayListsNumber++;
+		//if (displayListsNumber > Integer.MAX_VALUE - 1) displayListsNumber = 2;
 	}
 
 	private void bindTexture(int i) {
@@ -78,7 +80,7 @@ public class Modchu_RenderEngine {
 			//Modchu_Debug.mDebug("Modchu_RenderEngine getTexture 2");
 			String s0 = s;
 			//int generateDisplayList = Modchu_AS.getInt(Modchu_AS.gLAllocationGenerateDisplayLists, displayListsNumber);
-			int generateDisplayList = textureMap.size() + 100;
+			int generateDisplayList = textureMap.size();
 			//Modchu_Debug.mDebug("Modchu_RenderEngine getTexture generateDisplayList="+generateDisplayList);
 			try {
 				boolean var9 = s0.startsWith("%blur%");

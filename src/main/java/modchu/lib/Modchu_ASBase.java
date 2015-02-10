@@ -794,5 +794,6 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int minecraftServerGetFile = minecraftServerGetFile_int;
 	public static int isPumpkin = isPumpkin_int;
 	public static int rendererLivingEntitySetRenderPassModel = rendererLivingEntitySetRenderPassModel_int;
+	public static int renderPlayerSmallArms = renderPlayerSmallArms_int;
 
 }
