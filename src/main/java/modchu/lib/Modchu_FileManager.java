@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -28,8 +27,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.jar.JarFile;
 import java.util.zip.CRC32;
@@ -39,6 +38,7 @@ import java.util.zip.ZipInputStream;
 
 import modchu.lib.characteristic.Modchu_AS;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ResourceInfo;
 
@@ -752,36 +752,52 @@ public class Modchu_FileManager {
 	public static BufferedReader getResourceBufferedReader(Class c, String s) {
 		if (Modchu_Main.isRelease()) {
 			try {
-				for (ResourceInfo resourceInfo : ClassPath.from(c.getClassLoader()).getResources()) {
+				return getJarReader(s);
+/*
+				ClassLoader classLoader = c.getClassLoader();
+				if (classLoader != null); else {
+					Modchu_Debug.lDebug1("Modchu_FileManager getResourceBufferedReader classLoader == null !! c="+c);
+					return null;
+				}
+				ClassPath classPath = ClassPath.from(classLoader);
+				if (classPath != null); else {
+					Modchu_Debug.lDebug1("Modchu_FileManager getResourceBufferedReader classPath == null !! c="+c);
+					return null;
+				}
+				ImmutableSet<ResourceInfo> resources = classPath.getResources();
+				if (resources != null); else {
+					Modchu_Debug.lDebug1("Modchu_FileManager getResourceBufferedReader resources == null !! c="+c);
+					return null;
+				}
+				for (ResourceInfo resourceInfo : resources) {
 					String resourceName = resourceInfo.getResourceName();
 					//if (resourceName.indexOf("modchulib") > -1) Modchu_Debug.lDebug1("resourceName="+resourceName);
-					if (resourceName.lastIndexOf(s) > -1) {
-						Modchu_Debug.lDebug1("resourceName ok. s="+s);
-						//URL url = resourceInfo.url();
-						return getJarReader(s);
-					}
+					if (resourceName.lastIndexOf(s) < 0) continue;
+					Modchu_Debug.lDebug1("Modchu_FileManager getResourceBufferedReader ok. s="+s);
+					return getJarReader(s);
 				}
+*/
 			} catch (Exception e) {
-				e.printStackTrace();
+				Modchu_Debug.lDebug("Modchu_FileManager getResourceBufferedReader Exception !!", 2, e);
 			}
 		} else {
-			//Modchu_Debug.lDebug1("getResourceFile s="+s);
+			//Modchu_Debug.lDebug1("Modchu_FileManager getResourceFile s="+s);
 			if (!s.startsWith("/")) s = "/"+s;
-			//Modchu_Debug.lDebug1("getResourceFile 1 s="+s);
-			URL url = Modchu_Reflect.class.getResource(s);
-			//Modchu_Debug.lDebug1("getResourceFile 2 url="+url);
+			//Modchu_Debug.lDebug1("Modchu_FileManager getResourceFile 1 s="+s);
+			URL url = c.getResource(s);
+			//Modchu_Debug.lDebug1("Modchu_FileManager getResourceFile 2 url="+url);
 			File file = null;
 			if (url != null) {
 				file = new File(url.getFile());
-				//Modchu_Debug.lDebug1("getResourceFile return file="+file);
+				//Modchu_Debug.lDebug1("Modchu_FileManager getResourceFile return file="+file);
 				try {
 					return new BufferedReader(new FileReader(file));
 				} catch (Exception e) {
-					e.printStackTrace();
+					Modchu_Debug.lDebug("Modchu_FileManager getResourceBufferedReader Exception !!", 2, e);
 				}
 			}
 		}
-		Modchu_Debug.lDebug1("getResourceFile null !! s="+s);
+		Modchu_Debug.lDebug1("Modchu_FileManager getResourceBufferedReader null !! s="+s);
 		return null;
 	}
 
