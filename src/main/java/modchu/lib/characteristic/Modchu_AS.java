@@ -108,6 +108,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.potion.Potion;
@@ -3991,6 +3992,26 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected void rendererLivingEntitySetRenderPassModel(Object rendererLivingEntity, Object modelBase) {
+	}
+
+	@Override
+	protected Object pathNavigateGetPathToEntityLiving(Object pathNavigate, Object entity) {
+		return ((PathNavigate) pathNavigate).getPathToEntityLiving((Entity) entity);
+	}
+
+	@Override
+	protected Object pathNavigateSetPath(Object pathNavigate, Object pathEntity, double d) {
+		return ((PathNavigate) pathNavigate).setPath((PathEntity) pathEntity, d);
+	}
+
+	@Override
+	protected void pathNavigateClearPathEntity(Object pathNavigate) {
+		((PathNavigate) pathNavigate).clearPathEntity();
+	}
+
+	@Override
+	protected float entityGetDistanceToEntity(Object entity, Object entity2) {
+		return ((Entity) entity).getDistanceToEntity((Entity) entity2);
 	}
 
 }
