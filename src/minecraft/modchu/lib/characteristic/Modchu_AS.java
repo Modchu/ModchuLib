@@ -4358,4 +4358,24 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 		((RendererLivingEntity) rendererLivingEntity).setRenderPassModel((ModelBase) modelBase);
 	}
 
+	@Override
+	protected Object pathNavigateGetPathToEntityLiving(Object pathNavigate, Object entity) {
+		return ((PathNavigate) pathNavigate).getPathToEntityLiving((Entity) entity);
+	}
+
+	@Override
+	protected Object pathNavigateSetPath(Object pathNavigate, Object pathEntity, double d) {
+		return ((PathNavigate) pathNavigate).setPath((PathEntity) pathEntity, d);
+	}
+
+	@Override
+	protected void pathNavigateClearPathEntity(Object pathNavigate) {
+		((PathNavigate) pathNavigate).clearPathEntity();
+	}
+
+	@Override
+	protected float entityGetDistanceToEntity(Object entity, Object entity2) {
+		return ((Entity) entity).getDistanceToEntity((Entity) entity2);
+	}
+
 }
