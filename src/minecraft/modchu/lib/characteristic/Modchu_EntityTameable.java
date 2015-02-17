@@ -79,11 +79,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB {
 	}
 
 	public boolean shouldRenderInPass(int pass) {
-		return false;
+		return true;
 	}
 
 	public boolean superShouldRenderInPass(int pass) {
-		return false;
+		return true;
 	}
 
 	public boolean isCreatureType(EnumCreatureType enumCreatureType, boolean forSpawnCount) {
