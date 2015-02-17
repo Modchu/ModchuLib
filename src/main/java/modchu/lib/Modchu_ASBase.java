@@ -795,5 +795,8 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int isPumpkin = isPumpkin_int;
 	public static int rendererLivingEntitySetRenderPassModel = rendererLivingEntitySetRenderPassModel_int;
 	public static int renderPlayerSmallArms = renderPlayerSmallArms_int;
+	public static int pathNavigateGetPathToEntityLiving = pathNavigateGetPathToEntityLiving_int;
+	public static int pathNavigateSetPath = pathNavigateSetPath_int;
+	public static int pathNavigateClearPathEntity = pathNavigateClearPathEntity_int;
 
 }

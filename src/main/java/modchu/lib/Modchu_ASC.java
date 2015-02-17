@@ -735,5 +735,8 @@ public interface Modchu_ASC {
 	public static final int isPumpkin_int = 16435;
 	public static final int rendererLivingEntitySetRenderPassModel_int = 16436;
 	public static final int renderPlayerSmallArms_int = 16437;
+	public static final int pathNavigateGetPathToEntityLiving_int = 16438;
+	public static final int pathNavigateSetPath_int = 16439;
+	public static final int pathNavigateClearPathEntity_int = 16440;
 
 }

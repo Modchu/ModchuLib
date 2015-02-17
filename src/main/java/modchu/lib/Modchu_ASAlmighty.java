@@ -937,6 +937,18 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return null;
 		}
+		if (pIndex == entityGetDistanceToEntity) {
+			if (pArg != null
+			&& pArg.length > 0
+			&& pArg[0] != null) {
+				if (pArg.length > 1
+						&& pArg[1] != null) {
+					return entityGetDistanceToEntity(pArg[0], pArg[1]);
+				}
+				return entityGetDistanceToEntity(pArg[0]);
+			}
+			return null;
+		}
 		if (pIndex == itemSetUnlocalizedName) {
 			if (pArg != null
 			&& pArg.length > 1
@@ -1476,6 +1488,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 				return worldGetBlockState(pArg[0], pArg[1]);
 			}
 		}
+		if (pIndex == pathNavigateGetPathToEntityLiving) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				return pathNavigateGetPathToEntityLiving(pArg[0], pArg[1]);
+			}
+		}
 		if (pIndex == newBlockPos) {
 			if (pArg != null
 			&& pArg.length > 2
@@ -1483,6 +1503,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[1] != null
 			&& pArg[2] != null) {
 				return newBlockPos(pArg[0], pArg[1], pArg[2]);
+			}
+		}
+		if (pIndex == pathNavigateSetPath) {
+			if (pArg != null
+			&& pArg.length > 2
+			&& pArg[0] != null
+			&& pArg[1] != null
+			&& pArg[2] != null) {
+				return pathNavigateSetPath(pArg[0], pArg[1], (Double) pArg[2]);
 			}
 		}
 		if (pIndex == pathNavigateTryMoveToXYZ) {
@@ -2455,6 +2484,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			entityOnUpdate(pArg[0]);
 			return true;
 		}
+		if (pIndex == pathNavigateClearPathEntity) {
+			if (pArg != null
+					&& pArg.length > 0
+					&& pArg[0] != null) {
+				pathNavigateClearPathEntity(pArg[0]);
+				return true;
+			}
+			return false;
+		}
 		if (pIndex == renderFirstPersonArm) {
 			if (pArg != null
 			&& pArg.length > 1
@@ -3066,10 +3104,9 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		}
 		if (pIndex == entityCreatureSetPathToEntity) {
 			if (pArg != null
-			&& pArg.length > 0
-			&& pArg[0] != null) {
+			&& pArg.length > 0) {
 				if (pArg.length > 1
-						&& pArg[1] != null) {
+						&& pArg[0] != null) {
 					entityCreatureSetPathToEntity(pArg[0], pArg[1]);
 				} else {
 					entityCreatureSetPathToEntity(pArg[0]);
@@ -8634,8 +8671,20 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_Reflect.invokeMethod(pathNavigate.getClass(), "func_75492_a", "tryMoveToXYZ", new Class[]{ int.class, int.class, int.class, float.class }, pathNavigate, new Object[]{ x, y, z, f });
 	}
 
+	protected Object pathNavigateSetPath(Object pathNavigate, Object pathEntity, double d) {
+		return Modchu_Reflect.invokeMethod(pathNavigate.getClass(), "func_75484_a", "setPath", new Class[]{ Modchu_Reflect.loadClass("PathEntity"), double.class }, pathNavigate, new Object[]{ pathEntity, d });
+	}
+
+	protected void pathNavigateClearPathEntity(Object pathNavigate) {
+		Modchu_Reflect.invokeMethod(pathNavigate.getClass(), "func_75499_g", "clearPathEntity", pathNavigate);
+	}
+
 	protected void pathNavigateGroundFunc_179690_a(Object pathNavigateGround, boolean b) {
 		Modchu_Reflect.invokeMethod(pathNavigateGround.getClass(), "func_179690_a", new Class[]{ boolean.class }, pathNavigateGround, new Object[]{ b });
+	}
+
+	protected Object pathNavigateGetPathToEntityLiving(Object pathNavigate, Object entity) {
+		return Modchu_Reflect.invokeMethod(pathNavigate.getClass(), "func_75494_a", "getPathToEntityLiving", new Class[]{ Modchu_Reflect.loadClass("Entity") }, pathNavigate, new Object[]{ entity });
 	}
 
 	protected void playerControllerMPSetPlayerCapabilities() {

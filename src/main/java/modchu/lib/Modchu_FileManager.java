@@ -93,6 +93,10 @@ public class Modchu_FileManager {
 			if (li > -1) {
 				ls = ls.substring(0, li);
 			}
+			li = ls.indexOf(':');
+			if (li > -1) {
+				ls = ls.substring(0, li);
+			}
 			minecraftJar = new File(ls);
 			i = 3;
 		}

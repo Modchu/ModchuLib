@@ -3,7 +3,6 @@ package modchu.lib;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.IntBuffer;
@@ -13,6 +12,7 @@ import javax.imageio.ImageIO;
 
 import modchu.lib.characteristic.Modchu_AS;
 import modchu.lib.characteristic.Modchu_CastHelper;
+import modchu.lib.characteristic.Modchu_GlStateManager;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -60,7 +60,7 @@ public class Modchu_RenderEngine {
 
 	private void bindTexture(int i) {
 		//if (i != boundTexture) {
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, i);
+		Modchu_GlStateManager.bindTexture(i);
 			boundTexture = i;
 		//}
 	}
