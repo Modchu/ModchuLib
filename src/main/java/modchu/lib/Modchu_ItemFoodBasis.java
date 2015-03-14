@@ -1,14 +1,13 @@
 package modchu.lib;
 
+import java.util.HashMap;
 import java.util.List;
 
-import modchu.lib.characteristic.Modchu_ItemFood;
+public class Modchu_ItemFoodBasis implements Modchu_IItemFoodMaster {
+	public Modchu_IItemFood base;
 
-public class Modchu_ItemFoodBasis implements Modchu_IItemFood {
-	public Modchu_ItemFood base;
-
-	public Modchu_ItemFoodBasis(Modchu_ItemFood modchu_ItemFood, Object... o) {
-		base = modchu_ItemFood;
+	public Modchu_ItemFoodBasis(HashMap<String, Object> map) {
+		base = (Modchu_IItemFood) map.get("base");
 	}
 
 	@Override

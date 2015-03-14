@@ -738,5 +738,30 @@ public interface Modchu_ASC {
 	public static final int pathNavigateGetPathToEntityLiving_int = 16438;
 	public static final int pathNavigateSetPath_int = 16439;
 	public static final int pathNavigateClearPathEntity_int = 16440;
+	public static final int modelRendererCubeList_int = 16441;
+	public static final int modelRendererTextureOffsetX_int = 16442;
+	public static final int modelRendererTextureOffsetY_int = 16443;
+	public static final int modelRendererChildModels_int = 16444;
+	public static final int modelRendererBoxName_int = 16445;
+	public static final int modelRendererTextureHeight_int = 16446;
+	public static final int modelRendererTextureWidth_int = 16447;
+	public static final int modelRendererBaseModel_int = 16448;
+	public static final int modelRendererCompiled_int = 16449;
+	public static final int entityIsInWeb_int = 16450;
+	public static final int entityLivingBaseIsSwingInProgress_int = 16451;
+	public static final int entityIsBurning_int = 16452;
+	public static final int entityIsSprinting_int = 16453;
+	public static final int entityLivingGetLeashed_int = 16454;
+	public static final int entityListGetEntityString_int = 16455;
+	public static final int worldInfoGetWorldTotalTime_int = 16456;
+	public static final int worldInfoGetWorldTime_int = 16457;
+	public static final int worldGetMoonPhase_int = 16458;
+	public static final int entityLivingSetCurrentItemOrArmor_int = 16459;
+	public static final int entitySetVelocity_int = 16460;
+	public static final int entitySetSneaking_int = 16461;
+	public static final int openGlHelperSetLightmapTextureCoords_int = 16462;
+	public static final int entityTameableSetTamed_int = 16463;
+	public static final int entityAgeableSetGrowingAge_int = 16464;
+	public static final int chatAllowedCharactersFilterAllowedCharacters_int = 16465;
 
 }

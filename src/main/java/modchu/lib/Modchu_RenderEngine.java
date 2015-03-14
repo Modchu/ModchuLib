@@ -10,10 +10,6 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_CastHelper;
-import modchu.lib.characteristic.Modchu_GlStateManager;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -60,7 +56,7 @@ public class Modchu_RenderEngine {
 
 	private void bindTexture(int i) {
 		//if (i != boundTexture) {
-		Modchu_GlStateManager.bindTexture(i);
+			Modchu_GlStateManager.bindTexture(i);
 			boundTexture = i;
 		//}
 	}

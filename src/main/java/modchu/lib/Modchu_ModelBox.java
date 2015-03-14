@@ -1,17 +1,35 @@
 package modchu.lib;
 
-import modchu.lib.characteristic.Modchu_ModelBoxBase;
+import java.util.HashMap;
 
-public class Modchu_ModelBox extends Modchu_ModelBoxBase {
+public class Modchu_ModelBox implements Modchu_IModelBox {
+	public Modchu_IModelBoxMaster master;
 
-	public int boxSizeX;
-	public int boxSizeY;
-	public int boxSizeZ;
+	public Modchu_ModelBox(HashMap<String, Object> map) {
+		map.put("base", this);
+		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
+		//Modchu_Debug.lDebug("Modchu_ModelBox init instance="+instance);
+		master = instance != null
+				&& instance instanceof Modchu_IModelBoxMaster ? (Modchu_IModelBoxMaster) instance : null;
+	}
 
-	public Modchu_ModelBox(Modchu_ModelRendererBase pMRenderer, Object... pArg) {
-		super(pMRenderer, pArg);
-		boxSizeX = (Integer)pArg[5];
-		boxSizeY = (Integer)pArg[6];
-		boxSizeZ = (Integer)pArg[5];
+	public void render(float par2) {
+		if (master != null) master.render(par2);
+	}
+
+	public Modchu_ModelBox setBoxName(String pName) {
+		return (Modchu_ModelBox) (master != null ? master.setBoxName(pName) : null);
+	}
+
+	public int getBoxSizeX() {
+		return master != null ? master.getBoxSizeX() : 0;
+	}
+
+	public int getBoxSizeY() {
+		return master != null ? master.getBoxSizeY() : 0;
+	}
+
+	public int getBoxSizeZ() {
+		return master != null ? master.getBoxSizeZ() : 0;
 	}
 }

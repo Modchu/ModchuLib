@@ -1,22 +1,11 @@
 package modchu.lib;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_IEntityCapsBase;
-import modchu.lib.characteristic.Modchu_ModelBase;
-import modchu.lib.characteristic.Modchu_ModelRenderer;
-import modchu.lib.Modchu_EntityCapsHelper;
-import modchu.model.ModchuModel_ModelDataMaster;
-
-import org.lwjgl.opengl.GL11;
-
 public abstract class Modchu_ModelBaseMaster implements Modchu_IEntityCapsBase, Modchu_IModelBaseMaster {
-	public Modchu_ModelBase base;
+	public Modchu_IModelBase base;
 	public static final float PI = (float)Math.PI;
 	public int textureWidth = 64;
 	public int textureHeight = 32;
@@ -24,13 +13,12 @@ public abstract class Modchu_ModelBaseMaster implements Modchu_IEntityCapsBase, 
 	public int dominantArm = 0;
 	public boolean isRiding = false;
 	public boolean isChild = true;
-	public List<Modchu_ModelRenderer> boxList = new ArrayList();
+	public List boxList = new ArrayList();
 	//private Map<String, Object> modelTextureMap = new HashMap();
 
 	public boolean aimedBow;
 	public boolean isSneak;
 	public boolean isWait;
-	public Modchu_ModelRenderer mainFrame;
 	public float entityIdFactor;
 	public int entityTicksExisted;
 	public float scaleFactor = 0.9375F;
@@ -42,21 +30,23 @@ public abstract class Modchu_ModelBaseMaster implements Modchu_IEntityCapsBase, 
 	public void render(Object entity, float par2, float par3, float par4, float par5, float par6, float par7, boolean pIsRender) {
 	}
 
-	public Modchu_ModelRenderer getRandomModelBox(Random par1Random) {
+	public Object getRandomModelBox(Random par1Random) {
 		// 膝に矢を受けてしまってな・・・
-		int li = par1Random.nextInt(boxList.size());
-		Modchu_ModelRenderer lmr = boxList.get(li);
-		for (int lj = 0; lj < boxList.size(); lj++) {
-			if (!lmr.cubeList.isEmpty()) {
+		int j = par1Random.nextInt(boxList.size());
+		Object modelRenderer = boxList.get(j);
+		for (int i = 0; i < boxList.size(); i++) {
+			List cubeList = Modchu_CastHelper.List(Modchu_Reflect.getFieldObject(modelRenderer.getClass(), "cubeList", modelRenderer));
+			if (cubeList != null
+					&& !cubeList.isEmpty()) {
 				break;
 			}
 			// 箱がない
-			if (++li >= boxList.size()) {
-				li = 0;
+			if (++j >= boxList.size()) {
+				j = 0;
 			}
-			lmr = boxList.get(li);
+			modelRenderer = boxList.get(j);
 		}
-		return lmr;
+		return modelRenderer;
 	}
 /*
 	public void setTextureOffset(String par1Str, int par2, int par3) {
@@ -205,7 +195,7 @@ public abstract class Modchu_ModelBaseMaster implements Modchu_IEntityCapsBase, 
 	public abstract void renderFirstPersonHand(Modchu_IEntityCapsBase entityCaps, int i);
 
 	@Override
-	public Object getCapsValue(Modchu_IEntityCapsBase entityCaps, int pIndex, Object ...pArg) {
+	public Object getCapsValue(Modchu_IEntityCapsBase entityCaps, int pIndex, Object... pArg) {
 		switch (pIndex) {
 		case caps_onGround:
 			return onGrounds;

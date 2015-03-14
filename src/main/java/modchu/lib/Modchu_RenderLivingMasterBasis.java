@@ -1,15 +1,13 @@
 package modchu.lib;
 
+import java.util.HashMap;
+
 public class Modchu_RenderLivingMasterBasis extends Modchu_RendererLivingEntityMasterBasis implements Modchu_IRenderLivingMaster {
 	public Modchu_IRenderLiving base;
 
-	public Modchu_RenderLivingMasterBasis(Modchu_IRenderLiving modchu_IRenderLiving, Object[] o) {
-		this((Modchu_IRendererLivingEntity) modchu_IRenderLiving, o);
-		base = modchu_IRenderLiving;
-	}
-
-	public Modchu_RenderLivingMasterBasis(Modchu_IRendererLivingEntity modchu_IRenderLivingBase, Object[] o) {
-		super(modchu_IRenderLivingBase, o);
+	public Modchu_RenderLivingMasterBasis(HashMap<String, Object> map) {
+		super(map);
+		base = (Modchu_IRenderLiving) map.get("base");
 	}
 
 	@Override

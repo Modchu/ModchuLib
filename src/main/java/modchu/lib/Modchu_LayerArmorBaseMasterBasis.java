@@ -1,12 +1,12 @@
 package modchu.lib;
 
-import modchu.lib.characteristic.Modchu_LayerArmorBase;
+import java.util.HashMap;
 
 public class Modchu_LayerArmorBaseMasterBasis implements Modchu_ILayerArmorBaseMaster  {
-	public Modchu_LayerArmorBase base;
+	public Modchu_ILayerArmorBase base;
 
-	public Modchu_LayerArmorBaseMasterBasis(Object modchu_LayerArmorBase) {
-		base = (Modchu_LayerArmorBase) modchu_LayerArmorBase;
+	public Modchu_LayerArmorBaseMasterBasis(HashMap<String, Object> map) {
+		base = (Modchu_ILayerArmorBase) map.get("base");
 	}
 
 	@Override

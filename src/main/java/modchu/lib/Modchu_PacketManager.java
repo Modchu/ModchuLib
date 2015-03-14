@@ -3,15 +3,12 @@ package modchu.lib;
 import java.io.IOException;
 import java.io.InputStream;
 
-import modchu.lib.Modchu_IPacketManager;
-import modchu.lib.Modchu_Reflect;
-
 public class Modchu_PacketManager {
 	public static Modchu_IPacketManager master;
 
 	public static void init() {
 		if (master != null); else {
-			Object o = Modchu_Reflect.newInstance("modchu.lib.forgeonly.characteristic.Modchu_PacketManagerMaster");
+			Object o = Modchu_Reflect.newInstance(Modchu_Main.getModchuCharacteristicClass("Modchu_PacketManagerMaster"));
 			if (o != null); else Modchu_Debug.lDebug("Modchu_PacketManager init o == null !!");
 			master = o instanceof Modchu_IPacketManager ? (Modchu_IPacketManager) o : null;
 			if (master != null); else Modchu_Debug.lDebug("Modchu_PacketManager init master == null !!");

@@ -1,12 +1,12 @@
 package modchu.lib;
 
-import modchu.lib.characteristic.Modchu_PlayerController;
+import java.util.HashMap;
 
 public class Modchu_PlayerControllerMasterBasis implements Modchu_IPlayerControllerMaster {
-	public Modchu_PlayerController base;
+	public Modchu_IPlayerController base;
 
-	public Modchu_PlayerControllerMasterBasis(Modchu_PlayerController playerController, Object[] o) {
-		base = playerController;
+	public Modchu_PlayerControllerMasterBasis(HashMap<String, Object> map) {
+		base = (Modchu_IPlayerController) map.get("base");
 	}
 
 	@Override

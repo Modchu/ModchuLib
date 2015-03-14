@@ -1,10 +1,11 @@
 package modchu.lib;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Modchu_Packet implements Modchu_IPacketConstant {
-	public static Modchu_IPacket master;
+	public static Modchu_IPacketMaster master;
 
 	public static boolean isPacketEnable() {
 		return master != null;
@@ -15,15 +16,15 @@ public class Modchu_Packet implements Modchu_IPacketConstant {
 		if (Modchu_Main.getMinecraftVersion() < 164
 				&& !Modchu_Main.isForge) return;
 		if (master != null); else {
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master null init");
-			Class c = Modchu_Reflect.loadClass("modchu.lib.forgeonly.characteristic.Modchu_PacketMaster");
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master null init c="+c);
+			Modchu_Debug.lDebug("Modchu_Packet registerPacket master init");
+			Class c = Modchu_Main.getModchuCharacteristicClass("Modchu_PacketMaster");
+			Modchu_Debug.lDebug("Modchu_Packet registerPacket master init c="+c);
 			if (c != null); else return;
-			Object o = Modchu_Reflect.newInstance(c);
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master null init o="+o);
+			Object o = Modchu_Reflect.newInstance(c, new Class[]{ HashMap.class }, new Object[]{ null });
+			Modchu_Debug.lDebug("Modchu_Packet registerPacket master init o="+o);
 			master = o != null
-					&& o instanceof Modchu_IPacket ? (Modchu_IPacket) o : null;
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master null init master="+master);
+					&& o instanceof Modchu_IPacketMaster ? (Modchu_IPacketMaster) o : null;
+			Modchu_Debug.lDebug("Modchu_Packet registerPacket master init master="+master);
 			Modchu_PacketManager.init();
 		}
 		if (master != null) master.registerPacket(instance, channelName);

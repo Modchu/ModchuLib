@@ -1,10 +1,12 @@
 package modchu.lib;
 
+import java.util.HashMap;
+
 public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaster {
 	public Modchu_IRenderPlayer base;
 
-	public Modchu_RenderPlayerMasterBasis(Modchu_IRenderPlayer modchu_IRenderPlayer, Object[] o) {
-		base = modchu_IRenderPlayer;
+	public Modchu_RenderPlayerMasterBasis(HashMap<String, Object> map) {
+		base = (Modchu_IRenderPlayer) map.get("base");
 	}
 
 	@Override

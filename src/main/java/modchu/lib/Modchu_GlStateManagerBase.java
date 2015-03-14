@@ -3,9 +3,6 @@ package modchu.lib;
 import java.nio.FloatBuffer;
 import java.util.concurrent.ConcurrentHashMap;
 
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_CastHelper;
-
 import org.lwjgl.opengl.GL11;
 
 public class Modchu_GlStateManagerBase {
@@ -296,6 +293,18 @@ public class Modchu_GlStateManagerBase {
 
 	public static void callList(int p_179148_0_) {
 		GL11.glCallList(p_179148_0_);
+	}
+
+	public static void enableLight(int p_179085_0_) {
+		GL11.glEnable(p_179085_0_);
+	}
+
+	public static void disableLight(int p_179122_0_) {
+		GL11.glDisable(p_179122_0_);
+	}
+
+	public static void deleteTexture(int p_179150_0_) {
+		GL11.glDeleteTextures(p_179150_0_);
 	}
 
 }

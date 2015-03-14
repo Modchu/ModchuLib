@@ -1,17 +1,16 @@
 package modchu.lib;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import modchu.lib.characteristic.Modchu_EntityTameable;
-
 public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableMaster {
-	public Modchu_EntityTameable base;
+	public Modchu_IEntityTameable base;
 	public ConcurrentHashMap<String, Object> freeVariableMap;
 
-	public Modchu_EntityTameableMasterBasis(Modchu_EntityTameable modchu_EntityTameable, Object... o) {
-		base = modchu_EntityTameable;
+	public Modchu_EntityTameableMasterBasis(HashMap<String, Object> map) {
+		base = (Modchu_IEntityTameable) map.get("base");
 	}
 
 	@Override

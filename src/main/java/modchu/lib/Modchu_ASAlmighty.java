@@ -13,34 +13,53 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import modchu.lib.characteristic.Modchu_CastHelper;
-
 import org.lwjgl.input.Keyboard;
 
 import com.google.common.collect.Multimap;
 
 public class Modchu_ASAlmighty extends Modchu_ASBase {
 	public static Modchu_ASAlmighty instance;
-	protected static boolean initNewVersionItemNameMap = false;
-	protected static boolean initNewVersionBlockNameMap = false;
-	protected static boolean initOldVersionItemMap = false;
-	protected static boolean initOldVersionBlockMap = false;
-	protected static ConcurrentHashMap<String, String> newVersionItemNameMap;
-	protected static ConcurrentHashMap<String, String> newVersionBlockNameMap;
-	protected static ConcurrentHashMap<String, Object> oldVersionItemMap;
-	protected static ConcurrentHashMap<String, Object> oldVersionBlockMap;
+	public static boolean initNewVersionItemNameMap = false;
+	public static boolean initNewVersionBlockNameMap = false;
+	public static boolean initOldVersionItemMap = false;
+	public static boolean initOldVersionBlockMap = false;
+	public static ConcurrentHashMap<String, String> newVersionItemNameMap;
+	public static ConcurrentHashMap<String, String> newVersionBlockNameMap;
+	public static ConcurrentHashMap<String, Object> oldVersionItemMap;
+	public static ConcurrentHashMap<String, Object> oldVersionBlockMap;
 	private int getMinecraftMode = 0;
 
 	public Modchu_ASAlmighty() {
 		instance = this;
 	}
 
-	public static Object get(int pIndex, Object... pArg) {
-		return instance.getB(null, pIndex, (Object[])pArg);
+	public static Object get(String s, String s1, Object... pArg) {
+		return instance.getB(null, s, s1, null, null, (Object[])pArg);
 	}
 
-	public static Object get(Modchu_ASBase accessSupport, int pIndex, Object... pArg) {
-		return instance.getB(accessSupport, pIndex, (Object[])pArg);
+	public static Object get(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static Object get(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getB(null, s, s1, o, c, (Object[])pArg);
+	}
+
+	public static Object get(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return instance.getB(accessSupport, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static Object get(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return instance.getB(accessSupport, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static Object get(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getB(accessSupport, s, s1, o, c, (Object[])pArg);
+	}
+
+	@Override
+	public Object getB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return getB(null, s, s1, o, c, (Object[])pArg);
 	}
 
 	public static boolean set(int pIndex, Object... pArg) {
@@ -49,6 +68,67 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	public static boolean set(Modchu_ASBase accessSupport, int pIndex, Object... pArg) {
 		return instance.setB(accessSupport, pIndex, (Object[])pArg);
+	}
+
+	public static boolean set(String s, String s1, Object... pArg) {
+		return instance.setB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static boolean set(String s, String s1, Class[] c, Object... pArg) {
+		return instance.setB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static boolean set(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.setB(null, s, s1, o, c, (Object[])pArg);
+	}
+
+	public static boolean set(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return instance.setB(accessSupport, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static boolean set(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return instance.setB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg);
+	}
+
+	public static boolean set(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.setB(accessSupport, s, s1, o, null, c, (Object[])pArg);
+	}
+
+	@Override
+	public Object getB(String s, String s1, Object... pArg) {
+		return getB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	@Override
+	public Object getB(String s, String s1, Class[] c, Object... pArg) {
+		return getB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	@Override
+	public Object getB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return getB(accessSupport, s, s1, null, (Object[])pArg);
+	}
+
+	@Override
+	public Object getB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return getB(accessSupport, s, s1, null, c, (Object[])pArg);
+	}
+
+	@Override
+	public Object getB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		if (accessSupport != null) {
+			Object o1 = accessSupport.getB(s, s1, o, (Object[])pArg);
+			if (o1 != null) return o1;
+		}
+		return Modchu_Reflect.getUnownReflection(s, s1, o, c, pArg, -1);
+	}
+
+	public static Object get(int pIndex, Object... pArg) {
+		return instance.getB(null, pIndex, (Object[])pArg);
+	}
+
+	public static Object get(Modchu_ASBase accessSupport, int pIndex, Object... pArg) {
+		return instance.getB(accessSupport, pIndex, (Object[])pArg);
 	}
 
 	@Override
@@ -258,6 +338,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == mathHelperBucketInt) return pArg != null && pArg.length > 1 ? mathHelperBucketInt((Integer) pArg[0], (Integer) pArg[1]) : null;
 		if (pIndex == mathHelperStringNullOrLengthZero) return pArg != null && pArg.length > 0 ? mathHelperStringNullOrLengthZero((String) pArg[0]) : null;
 		if (pIndex == modelRendererGetTextureOffsetMap) return pArg != null && pArg.length > 0 ? modelRendererGetTextureOffsetMap(pArg[0]) : null;
+		if (pIndex == modelRendererCubeList) return pArg != null && pArg.length > 0 ? modelRendererCubeList(pArg[0]) : null;
+		if (pIndex == modelRendererChildModels) return pArg != null && pArg.length > 0 ? modelRendererChildModels(pArg[0]) : null;
+		if (pIndex == modelRendererBoxName) return pArg != null && pArg.length > 0 ? modelRendererBoxName(pArg[0]) : null;
+		if (pIndex == modelRendererTextureWidth) return pArg != null && pArg.length > 0 ? modelRendererTextureWidth(pArg[0]) : null;
+		if (pIndex == modelRendererTextureHeight) return pArg != null && pArg.length > 0 ? modelRendererTextureHeight(pArg[0]) : null;
+		if (pIndex == modelRendererBaseModel) return pArg != null && pArg.length > 0 ? modelRendererBaseModel(pArg[0]) : null;
+		if (pIndex == modelRendererCompiled) return pArg != null && pArg.length > 0 ? modelRendererCompiled(pArg[0]) : null;
+		if (pIndex == modelRendererTextureOffsetX) return pArg != null && pArg.length > 0 ? modelRendererTextureOffsetX(pArg[0]) : null;
+		if (pIndex == modelRendererTextureOffsetY) return pArg != null && pArg.length > 0 ? modelRendererTextureOffsetY(pArg[0]) : null;
 		if (pIndex == textureOffsetTextureOffsetX) return pArg != null && pArg.length > 0 ? textureOffsetTextureOffsetX(pArg[0]) : null;
 		if (pIndex == textureOffsetTextureOffsetY) return pArg != null && pArg.length > 0 ? textureOffsetTextureOffsetY(pArg[0]) : null;
 		if (pIndex == minecraftCurrentScreen) return minecraftCurrentScreen();
@@ -269,7 +358,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == entityLivingBaseAttackedAtYaw) return pArg != null && pArg.length > 0 ? entityLivingBaseAttackedAtYaw(pArg[0]) : entityLivingBaseAttackedAtYaw();
 		if (pIndex == entityLivingBasePrevHealth) return pArg != null && pArg.length > 0 ? entityLivingBasePrevHealth(pArg[0]) : entityLivingBasePrevHealth();
 		if (pIndex == entityLivingBaseIsChild) return pArg != null && pArg.length > 0 ? entityLivingBaseIsChild(pArg[0]) : entityLivingBaseIsChild();
-		if (pIndex == entityAgeableGetGrowingAge) return pArg != null && pArg.length > 0 ? entityAgeableGetGrowingAge(pArg[0]) : entityAgeableGetGrowingAge();
+		if (pIndex == entityAgeableGetGrowingAge) return pArg != null && pArg.length > 0 ? entityAgeableGetGrowingAge(pArg[0]) : null;
 		if (pIndex == entityLivingBaseHurtTime) return pArg != null && pArg.length > 0 ? entityLivingBaseHurtTime(pArg[0]) : entityLivingBaseHurtTime();
 		if (pIndex == entityLivingBaseMaxHurtTime) return pArg != null && pArg.length > 0 ? entityLivingBaseMaxHurtTime(pArg[0]) : entityLivingBaseMaxHurtTime();
 		if (pIndex == entityZombieIsVillager) return pArg != null && pArg.length > 0 ? entityZombieIsVillager(pArg[0]) : null;
@@ -466,12 +555,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == renderManagerItemRenderer) return renderManagerItemRenderer();
 		if (pIndex == minecraftPlayerController) return minecraftPlayerController();
 		if (pIndex == minecraftLoadingScreen) return minecraftLoadingScreen();
-		if (pIndex == worldGetWorldInfo) return worldGetWorldInfo();
 		if (pIndex == worldGetWorldInfoGetGameType) return worldGetWorldInfoGetGameType();
 		if (pIndex == worldSettingsGameTypeNOT_SET) return worldSettingsGameTypeNOT_SET();
 		if (pIndex == worldSettingsGameTypeSURVIVAL) return worldSettingsGameTypeSURVIVAL();
 		if (pIndex == worldSettingsGameTypeCREATIVE) return worldSettingsGameTypeCREATIVE();
 		if (pIndex == worldSettingsGameTypeADVENTURE) return worldSettingsGameTypeADVENTURE();
+		if (pIndex == worldGetWorldInfo) return pArg != null && pArg.length > 0 ? worldGetWorldInfo(pArg[0]) : worldGetWorldInfo();
 		if (pIndex == entityPosX) return pArg != null && pArg.length > 0 ? entityPosX(pArg[0]) : entityPosX();
 		if (pIndex == entityPosY) return pArg != null && pArg.length > 0 ? entityPosY(pArg[0]) : entityPosY();
 		if (pIndex == entityPosZ) return pArg != null && pArg.length > 0 ? entityPosZ(pArg[0]) : entityPosZ();
@@ -664,6 +753,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == entityHorseIsTame) return pArg != null && pArg.length > 0 ? entityHorseIsTame(pArg[0]) : null;
 		if (pIndex == isTamed) return pArg != null && pArg.length > 0 ? isTamed(pArg[0]) : null;
 		if (pIndex == entityLivingBaseDeathTime) return pArg != null && pArg.length > 0 ? entityLivingBaseDeathTime(pArg[0]) : entityLivingBaseDeathTime();
+		if (pIndex == entityLivingBaseIsSwingInProgress) return pArg != null && pArg.length > 0 ? entityLivingBaseIsSwingInProgress(pArg[0]) : entityLivingBaseIsSwingInProgress();
 		if (pIndex == entityLivingBaseRecentlyHit) return pArg != null && pArg.length > 0 ? entityLivingBaseRecentlyHit(pArg[0]) : entityLivingBaseRecentlyHit();
 		if (pIndex == entityLivingBaseAttackingPlayer) return pArg != null && pArg.length > 0 ? entityLivingBaseAttackingPlayer(pArg[0]) : entityLivingBaseAttackingPlayer();
 		if (pIndex == entityLivingBaseGetHeldItem) return pArg != null && pArg.length > 0 ? entityLivingBaseGetHeldItem(pArg[0]) : entityLivingBaseGetHeldItem();
@@ -671,6 +761,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == entityLivingBaseGetSoundPitch) return pArg != null && pArg.length > 0 ? entityLivingBaseGetSoundPitch(pArg[0]) : entityLivingBaseGetSoundPitch();
 		if (pIndex == entityLastDamage) return pArg != null && pArg.length > 0 ? entityLastDamage(pArg[0]) : entityLastDamage();
 		if (pIndex == entityYOffset) return pArg != null && pArg.length > 0 ? entityYOffset(pArg[0]) : entityYOffset();
+		if (pIndex == chatAllowedCharactersFilterAllowedCharacters) return pArg != null && pArg.length > 0 ? chatAllowedCharactersFilterAllowedCharacters((String) pArg[0]) : null;
 		if (pIndex == worldIsDaytime) return pArg != null && pArg.length > 0 ? worldIsDaytime(pArg[0]) : worldIsDaytime();
 		if (pIndex == entityGetBrightness) {
 			if (pArg != null
@@ -745,6 +836,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == entityIsEntityAlive) return pArg != null && pArg.length > 0 ? entityIsEntityAlive(pArg[0]) : entityIsEntityAlive();
 		if (pIndex == entityCreatureHasAttacked) return pArg != null && pArg.length > 0 ? entityCreatureHasAttacked(pArg[0]) : entityCreatureHasAttacked();
 		if (pIndex == entityIsWet) return pArg != null && pArg.length > 0 ? entityIsWet(pArg[0]) : entityIsWet();
+		if (pIndex == entityIsBurning) return pArg != null && pArg.length > 0 ? entityIsBurning(pArg[0]) : entityIsBurning();
+		if (pIndex == entityIsSprinting) return pArg != null && pArg.length > 0 ? entityIsSprinting(pArg[0]) : entityIsSprinting();
 		if (pIndex == entityIsInWater) return pArg != null && pArg.length > 0 ? entityIsInWater(pArg[0]) : entityIsInWater();
 		if (pIndex == entityCreatureEntityToAttack) return pArg != null && pArg.length > 0 ? entityCreatureEntityToAttack(pArg[0]) : entityCreatureEntityToAttack();
 		if (pIndex == entityLivingNumTicksToChaseTarget) return pArg != null && pArg.length > 0 ? entityLivingNumTicksToChaseTarget(pArg[0]) : entityLivingNumTicksToChaseTarget();
@@ -805,8 +898,13 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == entityLivingBaseGetMaxHealth) return pArg != null && pArg.length > 0 ? entityLivingBaseGetMaxHealth(pArg[0]) : entityLivingBaseGetMaxHealth();
 		if (pIndex == entityLivingBaseHealth) return pArg != null && pArg.length > 0 ? entityLivingBaseHealth(pArg[0]) : entityLivingBaseHealth();
 		if (pIndex == entityLivingBaseGetHealth) return pArg != null && pArg.length > 0 ? entityLivingBaseGetHealth(pArg[0]) : entityLivingBaseGetHealth();
+		if (pIndex == entityLivingGetLeashed) return pArg != null && pArg.length > 0 ? entityLivingGetLeashed(pArg[0]) : null;
 		if (pIndex == entityLivingTasks) return pArg != null && pArg.length > 0 ? entityLivingTasks(pArg[0]) : null;
 		if (pIndex == worldIsRemote) return pArg != null && pArg.length > 0 ? worldIsRemote(pArg[0]) : worldIsRemote();
+		if (pIndex == worldInfoGetWorldTotalTime) return pArg != null && pArg.length > 0 ? worldInfoGetWorldTotalTime(pArg[0]) : worldInfoGetWorldTotalTime();
+		if (pIndex == worldInfoGetWorldTime) return pArg != null && pArg.length > 0 ? worldInfoGetWorldTime(pArg[0]) : worldInfoGetWorldTime();
+		if (pIndex == worldGetMoonPhase) return pArg != null && pArg.length > 0 ? worldGetMoonPhase(pArg[0]) : worldGetMoonPhase();
+		if (pIndex == entityListGetEntityString) return pArg != null && pArg.length > 0 ? entityListGetEntityString(pArg[0]) : null;
 		if (pIndex == enumCreatureAttributeUNDEFINED) return enumCreatureAttributeUNDEFINED();
 		if (pIndex == enumCreatureAttributeUNDEAD) return enumCreatureAttributeUNDEAD();
 		if (pIndex == enumCreatureAttributeARTHROPOD) return enumCreatureAttributeARTHROPOD();
@@ -972,7 +1070,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == itemArmorGetArmorMaterial) return pArg != null && pArg.length > 0 ? itemArmorGetArmorMaterial(pArg[0]) : null;
 		if (pIndex == itemArmorArmorMaterialGetName) return pArg != null && pArg.length > 0 ? itemArmorArmorMaterialGetName(pArg[0]) : null;
 		if (pIndex == entityGetUniqueID) return pArg != null && pArg.length > 0 ? entityGetUniqueID(pArg[0]) : entityGetUniqueID();
-		if (pIndex == entityTameableGetOwnerName) return pArg != null && pArg.length > 0 ? entityTameableGetOwnerName(pArg[0]) : entityTameableGetOwnerName();
+		if (pIndex == entityTameableGetOwnerName) return pArg != null && pArg.length > 0 ? entityTameableGetOwnerName(pArg[0]) : null;
 		if (pIndex == entityTameableAiSit) return pArg != null && pArg.length > 0 ? entityTameableAiSit(pArg[0]) : null;
 		if (pIndex == entityAnimalBreeding) return pArg != null && pArg.length > 0 ? entityAnimalBreeding(pArg[0]) : entityAnimalBreeding();
 		if (pIndex == entityLivingBasePrevRenderYawOffset) return pArg != null && pArg.length > 0 ? entityLivingBasePrevRenderYawOffset(pArg[0]) : entityLivingBasePrevRenderYawOffset();
@@ -990,6 +1088,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == entityLivingBaseMoveStrafing) return pArg != null && pArg.length > 0 ? entityLivingBaseMoveStrafing(pArg[0]) : entityLivingBaseMoveStrafing();
 		if (pIndex == entityLivingBaseMoveForward) return pArg != null && pArg.length > 0 ? entityLivingBaseMoveForward(pArg[0]) : entityLivingBaseMoveForward();
 		if (pIndex == entityIsInvisible) return pArg != null && pArg.length > 0 ? entityIsInvisible(pArg[0]) : entityIsInvisible();
+		if (pIndex == entityIsInWeb) return pArg != null && pArg.length > 0 ? entityIsInWeb(pArg[0]) : entityIsInWeb();
 		if (pIndex == entityLivingBaseGetSwingProgress) {
 			if (pArg != null
 			&& pArg.length > 0
@@ -1625,6 +1724,30 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	@Override
+	public boolean setB(String s, String s1, Class[] c, Object... pArg) {
+		return setB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	@Override
+	public boolean setB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return setB(null, s, s1, o, c, (Object[])pArg);
+	}
+
+	@Override
+	public boolean setB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return setB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	@Override
+	public boolean setB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		if (accessSupport != null) {
+			boolean b = accessSupport.setB(s, s1, (Object[])pArg);
+			if (b) return b;
+		}
+		return Modchu_Reflect.setUnownReflection(s, s1, o, c, pArg, -1);
+	}
+
+	@Override
 	public boolean setB(int pIndex, Object... pArg) {
 		return setB(null, pIndex, (Object[])pArg);
 	}
@@ -1848,6 +1971,16 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return false;
 		}
+		if (pIndex == entityAgeableSetGrowingAge) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				entityAgeableSetGrowingAge(pArg[0], (Integer) pArg[1]);
+				return true;
+			}
+			return false;
+		}
 		if (pIndex == rendererLivingEntitySetRenderPassModel) {
 			if (pArg != null
 			&& pArg.length > 1
@@ -1983,6 +2116,26 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[1] != null
 			&& pArg[2] != null) {
 				nbttagcompoundSetIntArray(pArg[0], (String) pArg[1], (int[]) pArg[2]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == entityLivingSetCurrentItemOrArmor) {
+			if (pArg != null
+			&& pArg.length > 2
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				entityLivingSetCurrentItemOrArmor(pArg[0], (Integer) pArg[1], pArg[2]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == entityTameableSetTamed) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				entityTameableSetTamed(pArg[0], (Boolean) pArg[1]);
 				return true;
 			}
 			return false;
@@ -2296,6 +2449,20 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 					setEntityLivingBaseMaxHurtResistantTime(pArg[0], (Integer) pArg[1]);
 				} else {
 					setEntityLivingBaseMaxHurtResistantTime((Integer) pArg[0]);
+				}
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == entityLivingBaseIsSwingInProgress) {
+			if (pArg != null
+			&& pArg.length > 0
+			&& pArg[0] != null) {
+				if (pArg.length > 1
+						&& pArg[1] != null) {
+					setEntityLivingBaseIsSwingInProgress(pArg[0], (Boolean) pArg[1]);
+				} else {
+					setEntityLivingBaseIsSwingInProgress((Boolean) pArg[0]);
 				}
 				return true;
 			}
@@ -2656,6 +2823,20 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return false;
 		}
+		if (pIndex == entitySetSneaking) {
+			if (pArg != null
+			&& pArg.length > 0
+			&& pArg[0] != null) {
+				if (pArg.length > 1
+						&& pArg[1] != null) {
+					entitySetSneaking(pArg[0], (Boolean) pArg[1]);
+				} else {
+					entitySetSneaking((Boolean) pArg[0]);
+				}
+				return true;
+			}
+			return false;
+		}
 		if (pIndex == playerControllerSetGameType) {
 			playerControllerSetGameType(pArg[0]);
 			return true;
@@ -2912,6 +3093,22 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return false;
 		}
+		if (pIndex == entitySetVelocity) {
+			if (pArg != null
+			&& pArg.length > 2
+			&& pArg[0] != null
+			&& pArg[1] != null
+			&& pArg[2] != null) {
+				if (pArg.length > 3
+						&& pArg[3] != null) {
+					entitySetVelocity(pArg[0], (Double) pArg[1], (Double) pArg[2], (Double) pArg[3]);
+				} else {
+					entitySetVelocity((Double) pArg[0], (Double) pArg[1], (Double) pArg[2]);
+				}
+				return true;
+			}
+			return false;
+		}
 		if (pIndex == entityLivingBaseSetPositionAndUpdate) {
 			if (pArg != null
 			&& pArg.length > 2
@@ -2938,9 +3135,9 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[4] != null) {
 				if (pArg.length > 5
 						&& pArg[5] != null) {
-					entitySetLocationAndAngles(pArg[0], (Integer) pArg[1], (Integer) pArg[2], (Integer) pArg[3], (Float) pArg[4], (Float) pArg[5]);
+					entitySetLocationAndAngles(pArg[0], (Double) pArg[1], (Double) pArg[2], (Double) pArg[3], (Float) pArg[4], (Float) pArg[5]);
 				} else {
-					entitySetLocationAndAngles((Integer) pArg[0], (Integer) pArg[1], (Integer) pArg[2], (Float) pArg[3], (Float) pArg[4]);
+					entitySetLocationAndAngles((Double) pArg[0], (Double) pArg[1], (Double) pArg[2], (Float) pArg[3], (Float) pArg[4]);
 				}
 				return true;
 			}
@@ -3930,6 +4127,96 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return false;
 		}
+		if (pIndex == modelRendererCubeList) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				setModelRendererCubeList(pArg[0], (List) pArg[1]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == modelRendererChildModels) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				setModelRendererChildModels(pArg[0], (List) pArg[1]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == modelRendererBoxName) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				setModelRendererBoxName(pArg[0], (String) pArg[1]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == modelRendererTextureHeight) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				setModelRendererTextureHeight(pArg[0], (Float) pArg[1]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == modelRendererBaseModel) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				setModelRendererBaseModel(pArg[0], (Float) pArg[1]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == modelRendererCompiled) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				setModelRendererCompiled(pArg[0], (Boolean) pArg[1]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == modelRendererTextureWidth) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				setModelRendererTextureWidth(pArg[0], (Float) pArg[1]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == modelRendererTextureOffsetX) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				setModelRendererTextureOffsetX(pArg[0], (Integer) pArg[1]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == modelRendererTextureOffsetY) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				setModelRendererTextureOffsetY(pArg[0], (Integer) pArg[1]);
+				return true;
+			}
+			return false;
+		}
 		if (pIndex == modelRendererRotateAngleX) {
 			if (pArg != null
 			&& pArg.length > 1
@@ -4280,7 +4567,18 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[1] != null
 			&& pArg[2] != null
 			&& pArg[3] != null) {
-				openGlHelperGlBlendFunc((Integer) pArg[0],(Integer) pArg[1], (Integer) pArg[2], (Integer) pArg[3]);
+				openGlHelperGlBlendFunc((Integer) pArg[0], (Integer) pArg[1], (Integer) pArg[2], (Integer) pArg[3]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == openGlHelperSetLightmapTextureCoords) {
+			if (pArg != null
+			&& pArg.length > 2
+			&& pArg[0] != null
+			&& pArg[1] != null
+			&& pArg[2] != null) {
+				openGlHelperSetLightmapTextureCoords((Integer) pArg[0], (Float) pArg[1], (Float) pArg[2]);
 				return true;
 			}
 			return false;
@@ -4333,6 +4631,876 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		}
 		Modchu_Debug.mDebug1("Modchu_ASAlmighty setB other return null !! pIndex="+pIndex);
 		return false;
+	}
+
+	@Override
+	public boolean setB(String s, String s1, Object... pArg) {
+		return setB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	@Override
+	public boolean setB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return setB(accessSupport, s, s1, null, null, (Object[])pArg);
+	}
+
+	@Override
+	public boolean getBooleanB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Boolean(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public boolean getBooleanB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Boolean(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public float getFloatB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Float(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public float getFloatB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Float(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public double getDoubleB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Double(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public double getDoubleB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Double(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public int getIntB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Int(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public int getIntB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Int(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public long getLongB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Long(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public long getLongB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Long(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public byte getByteB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Byte(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public byte getByteB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Byte(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public String getStringB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.String(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public String getStringB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.String(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public List getListB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.List(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public List getListB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.List(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public ArrayList getArrayListB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ArrayList(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public ArrayList getArrayListB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ArrayList(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public LinkedList getLinkedListB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.LinkedList(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public LinkedList getLinkedListB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.LinkedList(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Enum getEnumB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Enum(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Enum getEnumB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Enum(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public ConcurrentHashMap getConcurrentHashMapB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public ConcurrentHashMap getConcurrentHashMapB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public HashMap getHashMapB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.HashMap(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public HashMap getHashMapB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.HashMap(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Map getMapB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Map(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Map getMapB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Map(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public File getFileB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.File(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public File getFileB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.File(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public IntBuffer getIntBufferB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.IntBuffer(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public IntBuffer getIntBufferB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.IntBuffer(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public InputStream getInputStreamB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.InputStream(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public InputStream getInputStreamB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.InputStream(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public int[] getIntArrayB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.IntArray(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public int[] getIntArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.IntArray(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public float[] getFloatArrayB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.FloatArray(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public float[] getFloatArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.FloatArray(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public double[] getDoubleArrayB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.DoubleArray(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public double[] getDoubleArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.DoubleArray(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public byte[] getByteArrayB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ByteArray(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public byte[] getByteArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ByteArray(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public String[] getStringArrayB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.StringArray(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public String[] getStringArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.StringArray(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Object[] getObjectArrayB(String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ObjectArray(getB(null, s, s1, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Object[] getObjectArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ObjectArray(getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	public static boolean getBoolean(String s, String s1, Object... pArg) {
+		return instance.getBooleanB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static boolean getBoolean(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Boolean(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public boolean getBooleanB(String s, String s1, Object... pArg) {
+		return getBooleanB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public boolean getBooleanB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Boolean(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static int getInt(String s, String s1, Object... pArg) {
+		return instance.getIntB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static int getInt(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Int(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public int getIntB(String s, String s1, Object... pArg) {
+		return getIntB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public int getIntB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Int(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static long getLong(String s, String s1, Object... pArg) {
+		return instance.getLongB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static long getLong(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Long(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public long getLongB(String s, String s1, Object... pArg) {
+		return getLongB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public long getLongB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Long(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static byte getByte(String s, String s1, Object... pArg) {
+		return instance.getByteB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static byte getByte(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Byte(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public byte getByteB(String s, String s1, Object... pArg) {
+		return getByteB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public byte getByteB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Byte(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static float getFloat(String s, String s1, Object... pArg) {
+		return instance.getFloatB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static float getFloat(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Float(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public float getFloatB(String s, String s1, Object... pArg) {
+		return getFloatB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public float getFloatB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Float(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static double getDouble(String s, String s1, Object... pArg) {
+		return instance.getDoubleB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static double getDouble(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Float(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public double getDoubleB(String s, String s1, Object... pArg) {
+		return getFloatB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public double getDoubleB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Double(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static String getString(String s, String s1, Object... pArg) {
+		return instance.getStringB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static String getString(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.String(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public String getStringB(String s, String s1, Object... pArg) {
+		return getStringB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public String getStringB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.String(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static List getList(String s, String s1, Object... pArg) {
+		return instance.getListB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static List getList(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.List(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public List getListB(String s, String s1, Object... pArg) {
+		return getListB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public List getListB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.List(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static ArrayList getArrayList(String s, String s1, Object... pArg) {
+		return instance.getArrayListB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static ArrayList getArrayList(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.ArrayList(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public ArrayList getArrayListB(String s, String s1, Object... pArg) {
+		return getArrayListB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public ArrayList getArrayListB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.ArrayList(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static LinkedList getLinkedList(String s, String s1, Object... pArg) {
+		return instance.getLinkedListB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static LinkedList getLinkedList(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.LinkedList(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public LinkedList getLinkedListB(String s, String s1, Object... pArg) {
+		return getLinkedListB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public LinkedList getLinkedListB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.LinkedList(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static ConcurrentHashMap getConcurrentHashMap(String s, String s1, Object... pArg) {
+		return instance.getConcurrentHashMapB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static ConcurrentHashMap getConcurrentHashMap(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public ConcurrentHashMap getConcurrentHashMapB(String s, String s1, Object... pArg) {
+		return getConcurrentHashMapB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public ConcurrentHashMap getConcurrentHashMapB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static HashMap getHashMap(String s, String s1, Object... pArg) {
+		return instance.getHashMapB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static HashMap getHashMap(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.HashMap(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public HashMap getHashMapB(String s, String s1, Object... pArg) {
+		return getHashMapB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public HashMap getHashMapB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.HashMap(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static Map getMap(String s, String s1, Object... pArg) {
+		return instance.getMapB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static Map getMap(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Map(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public Map getMapB(String s, String s1, Object... pArg) {
+		return getMapB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public Map getMapB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Map(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static Multimap getMultimap(String s, String s1, Object... pArg) {
+		return instance.getMultimapB((Modchu_ASBase)null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static Multimap getMultimap(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Multimap(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public Multimap getMultimapB(String s, String s1, Object... pArg) {
+		return getMultimapB((Modchu_ASBase)null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public Multimap getMultimapB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Multimap(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static Enum getEnum(String s, String s1, Object... pArg) {
+		return instance.getEnumB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static Enum getEnum(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Enum(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public Enum getEnumB(String s, String s1, Object... pArg) {
+		return getEnumB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public Enum getEnumB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Enum(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static File getFile(String s, String s1, Object... pArg) {
+		return instance.getFileB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static File getFile(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.File(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public File getFileB(String s, String s1, Object... pArg) {
+		return getFileB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public File getFileB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.File(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static IntBuffer getIntBuffer(String s, String s1, Object... pArg) {
+		return instance.getIntBufferB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static IntBuffer getIntBuffer(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.IntBuffer(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public IntBuffer getIntBufferB(String s, String s1, Object... pArg) {
+		return getIntBufferB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public IntBuffer getIntBufferB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.IntBuffer(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static UUID getUUID(String s, String s1, Object... pArg) {
+		return instance.getUUIDB((Modchu_ASBase)null, s, s1, (Object)null, (Class[])null, (Object[])pArg);
+	}
+
+	public static UUID getUUID(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.UUID(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public UUID getUUIDB(String s, String s1, Object... pArg) {
+		return getUUIDB((Modchu_ASBase)null, s, s1, (Object)null, (Class[])null, (Object[])pArg);
+	}
+
+	public UUID getUUIDB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.UUID(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static int[] getIntArray(String s, String s1, Object... pArg) {
+		return instance.getIntArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static int[] getIntArray(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.IntArray(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public int[] getIntArrayB(String s, String s1, Object... pArg) {
+		return getIntArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public int[] getIntArrayB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.IntArray(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static InputStream getInputStream(String s, String s1, Object... pArg) {
+		return instance.getInputStreamB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static InputStream getInputStream(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.InputStream(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public InputStream getInputStreamB(String s, String s1, Object... pArg) {
+		return getInputStreamB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public InputStream getInputStreamB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.InputStream(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static float[] getFloatArray(String s, String s1, Object... pArg) {
+		return instance.getFloatArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static float[] getFloatArray(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.FloatArray(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public float[] getFloatArrayB(String s, String s1, Object... pArg) {
+		return getFloatArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public float[] getFloatArrayB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.FloatArray(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static double[] getDoubleArray(String s, String s1, Object... pArg) {
+		return instance.getDoubleArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static double[] getDoubleArray(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.DoubleArray(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public double[] getDoubleArrayB(String s, String s1, Object... pArg) {
+		return getDoubleArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public double[] getDoubleArrayB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.DoubleArray(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static byte[] getByteArray(String s, String s1, Object... pArg) {
+		return instance.getByteArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static byte[] getByteArray(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.ByteArray(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public byte[] getByteArrayB(String s, String s1, Object... pArg) {
+		return getByteArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public byte[] getByteArrayB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.ByteArray(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static String[] getStringArray(String s, String s1, Object... pArg) {
+		return instance.getStringArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static String[] getStringArray(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.StringArray(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public String[] getStringArrayB(String s, String s1, Object... pArg) {
+		return getStringArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public String[] getStringArrayB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.StringArray(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static Object[] getObjectArray(String s, String s1, Object... pArg) {
+		return instance.getObjectArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static Object[] getObjectArray(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.ObjectArray(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public Object[] getObjectArrayB(String s, String s1, Object... pArg) {
+		return getObjectArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public Object[] getObjectArrayB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.ObjectArray(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	@Override
+	public boolean getBooleanB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Boolean(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public boolean getBooleanB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Boolean(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public float getFloatB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Float(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public float getFloatB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Float(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public double getDoubleB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Double(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public double getDoubleB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Double(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public int getIntB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Int(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public int getIntB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Int(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public long getLongB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Long(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public long getLongB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Long(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public byte getByteB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Byte(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public byte getByteB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Byte(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public String getStringB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.String(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public String getStringB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.String(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public List getListB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.List(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public List getListB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.List(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public ArrayList getArrayListB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ArrayList(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public ArrayList getArrayListB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ArrayList(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public LinkedList getLinkedListB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.LinkedList(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public LinkedList getLinkedListB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.LinkedList(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Enum getEnumB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Enum(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Enum getEnumB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Enum(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public ConcurrentHashMap getConcurrentHashMapB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public ConcurrentHashMap getConcurrentHashMapB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public HashMap getHashMapB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.HashMap(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public HashMap getHashMapB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.HashMap(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Map getMapB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Map(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Map getMapB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Map(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public File getFileB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.File(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public File getFileB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.File(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public IntBuffer getIntBufferB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.IntBuffer(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public IntBuffer getIntBufferB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.IntBuffer(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public InputStream getInputStreamB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.InputStream(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public InputStream getInputStreamB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.InputStream(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public int[] getIntArrayB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.IntArray(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public int[] getIntArrayB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.IntArray(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public float[] getFloatArrayB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.FloatArray(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public float[] getFloatArrayB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.FloatArray(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public double[] getDoubleArrayB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.DoubleArray(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public double[] getDoubleArrayB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.DoubleArray(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public byte[] getByteArrayB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ByteArray(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public byte[] getByteArrayB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ByteArray(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public String[] getStringArrayB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.StringArray(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public String[] getStringArrayB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.StringArray(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Object[] getObjectArrayB(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ObjectArray(getB((Modchu_ASBase)null, s, s1, (Object)null, null, c, (Object[])pArg));
+	}
+
+	@Override
+	public Object[] getObjectArrayB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.ObjectArray(getB(accessSupport, s, s1, (Object)null, null, c, (Object[])pArg));
 	}
 
 	public static boolean getBoolean(int pIndex, Object... pArg) {
@@ -4937,6 +6105,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("AxisAlignedBB", "func_72318_a", "isVecInside", new Class[]{ Modchu_Reflect.loadClass("Vec3") }, axisAlignedBB, new Object[]{ vec3 }));
 	}
 
+	protected String chatAllowedCharactersFilterAllowedCharacters(String s) {
+		return Modchu_CastHelper.String(Modchu_Reflect.invokeMethod("ChatAllowedCharacters", "func_71565_a", "filterAllowedCharacters", new Class[]{ String.class }, null, new Object[]{ s }));
+	}
+
 	protected Object damageSourceAnvil() {
 		return Modchu_Reflect.getFieldObject("DamageSource", "field_82728_o", "anvil");
 	}
@@ -5378,6 +6550,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("Entity", "func_82150_aj", "isInvisible", entity));
 	}
 
+	protected boolean entityIsInWeb() {
+		return entityIsInWeb(minecraftThePlayer());
+	}
+
+	protected boolean entityIsInWeb(Object entity) {
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.getFieldObject("Entity", "field_70134_J", "isInWeb", entity));
+	}
+
 	protected boolean entityIsInWater() {
 		return entityIsInWater(minecraftThePlayer());
 	}
@@ -5408,6 +6588,22 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected boolean entityIsWet(Object entity) {
 		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("Entity", "func_70026_G", "isWet", entity));
+	}
+
+	protected boolean entityIsBurning() {
+		return entityIsBurning(minecraftThePlayer());
+	}
+
+	protected boolean entityIsBurning(Object entity) {
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("Entity", "func_70027_ad", "isBurning", entity));
+	}
+
+	protected boolean entityIsSprinting() {
+		return entityIsSprinting(minecraftThePlayer());
+	}
+
+	protected boolean entityIsSprinting(Object entity) {
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("Entity", "func_70051_ag", "isSprinting", entity));
 	}
 
 	protected void entityOnUpdate(Object entity) {
@@ -5448,6 +6644,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected Map entityListClassToIDMapping() {
 		return Modchu_CastHelper.Map(Modchu_Reflect.getFieldObject("EntityList", "field_75624_e", "classToIDMapping"));
+	}
+
+	protected String entityListGetEntityString(Object entity) {
+		return Modchu_CastHelper.String(Modchu_Reflect.invokeMethod("EntityList", "func_70022_Q", "getEntityString"));
 	}
 
 	protected void entitySetLocationAndAngles(double x, double y, double z, float f, float f1) {
@@ -5640,6 +6840,22 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected int entityLivingBaseDeathTime(Object entityLivingBase) {
 		return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject("EntityLivingBase", "field_70725_aQ", "deathTime", entityLivingBase));
+	}
+
+	protected boolean entityLivingBaseIsSwingInProgress() {
+		return entityLivingBaseIsSwingInProgress(minecraftThePlayer());
+	}
+
+	protected boolean entityLivingBaseIsSwingInProgress(Object entityLivingBase) {
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.getFieldObject("EntityLivingBase", "field_82175_bq", "isSwingInProgress", entityLivingBase));
+	}
+
+	protected void setEntityLivingBaseIsSwingInProgress(boolean b) {
+		setEntityLivingBaseIsSwingInProgress(minecraftThePlayer(), b);
+	}
+
+	protected void setEntityLivingBaseIsSwingInProgress(Object entityLivingBase, boolean b) {
+		Modchu_Reflect.setFieldObject("EntityLivingBase", "field_82175_bq", "isSwingInProgress", entityLivingBase);
 	}
 
 	protected int entityLivingBaseMaxHurtResistantTime() {
@@ -5921,6 +7137,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject("EntityLivingBase", "field_41031_b", "health", entity));
 	}
 
+	protected boolean entityLivingGetLeashed(Object entity) {
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("EntityLivingBase", "func_110167_bD", "getLeashed", entity));
+	}
+
 	protected int entityLivingGetMaxHealth() {
 		return entityLivingGetMaxHealth(minecraftThePlayer());
 	}
@@ -5931,10 +7151,6 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected Object entityTameableAiSit(Object entityTameable) {
 		return Modchu_Reflect.getFieldObject("EntityTameable", "field_70911_d", "aiSit", entityTameable);
-	}
-
-	protected String entityTameableGetOwnerName() {
-		return entityTameableGetOwnerName(minecraftThePlayer());
 	}
 
 	protected String entityTameableGetOwnerName(Object entityTameable) {
@@ -5950,12 +7166,20 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		Modchu_Reflect.invokeMethod("EntityTameable", b ? "func_152115_b" : "func_70910_a", b ? "func_152115_b" : "setOwner", new Class[]{ String.class }, entityTameable, new Object[]{ s });
 	}
 
+	protected void entityTameableSetTamed(Object entityTameable, boolean b) {
+		Modchu_Reflect.invokeMethod("EntityTameable", "func_70903_f", "setTamed", new Class[]{ boolean.class }, entityTameable, new Object[]{ b });
+	}
+
 	protected void entityLivingSetHealth(int i) {
 		entityLivingSetHealth(minecraftThePlayer(), i);
 	}
 
 	protected void entityLivingSetHealth(Object entity, int i) {
 		Modchu_Reflect.invokeMethod("EntityLivingBase", "func_9372_a_", "setHealth", new Class[]{ int.class }, entity, new Object[]{ i });
+	}
+
+	protected void entityLivingSetCurrentItemOrArmor(Object entityLiving, int i, Object itemStack) {
+		Modchu_Reflect.invokeMethod("EntityLivingBase", "func_70062_b", "setCurrentItemOrArmor", new Class[]{ int.class, Modchu_Reflect.loadClass("ItemStack") }, entityLiving, new Object[]{ i, itemStack });
 	}
 
 	protected double entityMotionX() {
@@ -6532,6 +7756,22 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		Modchu_Reflect.invokeMethod("Entity", "func_70107_b", "setPosition", new Class[]{ double.class, double.class, double.class }, entity, new Object[]{ x, y, z });
 	}
 
+	protected void entitySetVelocity(double x, double y, double z) {
+		entitySetVelocity(minecraftThePlayer(), x, y, z);
+	}
+
+	protected void entitySetVelocity(Object entity, double x, double y, double z) {
+		Modchu_Reflect.invokeMethod("Entity", "func_70016_h", "setVelocity", new Class[]{ double.class, double.class, double.class }, entity, new Object[]{ x, y, z });
+	}
+
+	protected void entitySetSneaking(boolean b) {
+		entitySetSneaking(minecraftThePlayer(), b);
+	}
+
+	protected void entitySetSneaking(Object entity, boolean b) {
+		Modchu_Reflect.invokeMethod("Entity", "func_70095_a", "setSneaking", new Class[]{ boolean.class }, entity, new Object[]{ b });
+	}
+
 	protected void entitySetSize(float f1, float f2) {
 		entitySetSize(minecraftThePlayer(), f1, f2);
 	}
@@ -6617,12 +7857,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		Modchu_Reflect.invokeMethod("EntityLivingBase", "func_70645_a", "onDeath", new Class[]{ Modchu_Reflect.loadClass("DamageSource") }, entityLivingBase, new Object[]{ damageSource });
 	}
 
-	protected int entityAgeableGetGrowingAge() {
-		return entityAgeableGetGrowingAge(minecraftThePlayer());
+	protected int entityAgeableGetGrowingAge(Object entityTameable) {
+		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("EntityAgeable", "func_70874_b", "getGrowingAge", entityTameable));
 	}
 
-	protected int entityAgeableGetGrowingAge(Object entityLivingBase) {
-		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("EntityAgeable", "func_70874_b", "getGrowingAge", entityLivingBase));
+	protected void entityAgeableSetGrowingAge(Object entityTameable, int i) {
+		Modchu_Reflect.invokeMethod("EntityAgeable", "func_70873_a", "setGrowingAge", new Class[]{ int.class }, entityTameable, new Object[]{ i });
 	}
 
 	protected int entityLivingBaseHurtTime() {
@@ -7519,7 +8759,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object itemSetCreativeTab(Object item, Object creativeTabs) {
-		return Modchu_Reflect.invokeMethod("Item", "func_71849_a", "setCreativeTab", new Class[]{ creativeTabs.getClass() }, item, new Object[]{ creativeTabs });
+		return Modchu_Reflect.invokeMethod("Item", "func_71849_a", "setCreativeTab", new Class[]{ Modchu_Reflect.loadClass("CreativeTabs") }, item, new Object[]{ creativeTabs });
 	}
 
 	protected String itemIconString(Object item) {
@@ -7832,8 +9072,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Float(Modchu_Reflect.invokeMethod("MathHelper", "func_76134_b", "cos", new Class[]{ float.class }, null, new Object[]{ f }));
 	}
 
-	protected double mathHelperFloor_double(double d) {
-		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("MathHelper", "func_76128_c", "floor_double", new Class[]{ double.class }, null, new Object[]{ d }));
+	protected int mathHelperFloor_double(double d) {
+		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("MathHelper", "func_76128_c", "floor_double", new Class[]{ double.class }, null, new Object[]{ d }));
 	}
 
 	protected float mathHelperFloor_float(float f) {
@@ -7951,10 +9191,19 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected Object minecraftGetMinecraft() {
 		if (Modchu_Main.isServer) return null;
+		Class minecraft = Modchu_Reflect.loadClass("Minecraft", -1);
+		if (minecraft != null); else minecraft = Modchu_Reflect.loadClass("net.minecraft.client.Minecraft", -1);
+		if (minecraft != null); else minecraft = Modchu_Reflect.loadClass("net.minecraft.src.Minecraft", -1);
+		if (minecraft == null) {
+			String s = "Modchu_ASAlmighty minecraftGetMinecraft load Class minecraft == null !! isForge="+Modchu_Main.isForge+" getMinecraftVersion()="+Modchu_Main.getMinecraftVersion();
+			Modchu_Debug.lDebug(s);
+			throw new RuntimeException(s);
+		}
+		Modchu_Reflect.classMap.put("Minecraft", minecraft);
 		Object o = null;
 		if (getMinecraftMode == 0
 				| getMinecraftMode == 1) {
-			o = Modchu_Reflect.invokeMethod("Minecraft", "func_71410_x", -1);
+			o = Modchu_Reflect.invokeMethod(minecraft, "func_71410_x", -1);
 			if (o != null) {
 				getMinecraftMode = 1;
 				return o;
@@ -7962,16 +9211,16 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		}
 		if (getMinecraftMode == 0
 				| getMinecraftMode == 2) {
-			o = Modchu_Reflect.invokeMethod("Minecraft", "getMinecraft");
+			o = Modchu_Reflect.invokeMethod(minecraft, "getMinecraft");
 			if (o != null) {
 				getMinecraftMode = 2;
 				return o;
 			}
 		}
-		o = Modchu_Main.getMinecraftVersion() > 129 ? Modchu_Reflect.getPrivateValue("Minecraft", null, 8)
-				: Modchu_Reflect.getPrivateValue("Minecraft", null, 1);
+		o = Modchu_Main.getMinecraftVersion() > 129 ? Modchu_Reflect.getPrivateValue(minecraft, null, 8)
+				: Modchu_Reflect.getPrivateValue(minecraft, null, 1);
 		if (o == null) {
-			String s = "Modchu_Main-getMinecraft o == null !! loadClass(Minecraft)="+Modchu_Reflect.loadClass("Minecraft")+" isForge="+Modchu_Main.isForge+" getMinecraftVersion()="+Modchu_Main.getMinecraftVersion();
+			String s = "Modchu_ASAlmighty minecraftGetMinecraft o == null !! isForge="+Modchu_Main.isForge+" getMinecraftVersion()="+Modchu_Main.getMinecraftVersion();
 			Modchu_Debug.lDebug(s);
 			throw new RuntimeException(s);
 		}
@@ -7986,7 +9235,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected Object minecraftGetResourceManager() {
 		if (Modchu_Main.isServer) return null;
-		return Modchu_Reflect.invokeMethod("Minecraft", "func_110442_L", "getResourceManager", minecraftGetMinecraft());
+		Class minecraft = Modchu_Reflect.loadClass("Minecraft", -1);
+		if (minecraft != null); else minecraft = Modchu_Reflect.loadClass("net.minecraft.client.Minecraft", -1);
+		if (minecraft != null); else minecraft = Modchu_Reflect.loadClass("net.minecraft.src.Minecraft", -1);
+		return Modchu_Reflect.invokeMethod(minecraft, "func_110442_L", "getResourceManager", minecraftGetMinecraft());
 	}
 
 	protected long minecraftGetSystemTime() {
@@ -8006,11 +9258,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected File minecraftMcDataDir() {
 		if (Modchu_Main.isServer) return new File(".");
-		File file = (File) (Modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.getFieldObject("Minecraft", "field_71412_D", minecraftGetMinecraft(), -1) :
-			Modchu_Reflect.invokeMethod("Minecraft", "func_71380_b", minecraftGetMinecraft(), -1));
+		Class minecraft = Modchu_Reflect.loadClass("Minecraft", -1);
+		if (minecraft != null); else minecraft = Modchu_Reflect.loadClass("net.minecraft.client.Minecraft", -1);
+		if (minecraft != null); else minecraft = Modchu_Reflect.loadClass("net.minecraft.src.Minecraft", -1);
+		File file = (File) (Modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.getFieldObject(minecraft, "field_71412_D", minecraftGetMinecraft(), -1) :
+			Modchu_Reflect.invokeMethod(minecraft, "func_71380_b", minecraftGetMinecraft(), -1));
 		if (file != null) return file;
-		file = (File) (Modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.getFieldObject("Minecraft", "mcDataDir", minecraftGetMinecraft()) :
-			Modchu_Reflect.invokeMethod("Minecraft", "getMinecraftDir", minecraftGetMinecraft()));
+		file = (File) (Modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.getFieldObject(minecraft, "mcDataDir", minecraftGetMinecraft()) :
+			Modchu_Reflect.invokeMethod(minecraft, "getMinecraftDir", minecraftGetMinecraft()));
 		return file;
 	}
 
@@ -8122,6 +9377,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object modelRightArm(Object model) {
+		if (model != null); else return null;
 		if (Modchu_Main.isVanillaModel(model)) {
 			if (Modchu_Reflect.loadClass("ModelBiped").isInstance(model)) return modelBipedBipedRightArm(model);
 			if (Modchu_Reflect.loadClass("ModelQuadruped").isInstance(model)) return modelQuadrupedLeg1(model);
@@ -8334,6 +9590,78 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return (ConcurrentHashMap) Modchu_Reflect.invokeMethod(modelRenderer.getClass(), "getTextureOffsetMap", modelRenderer);
 	}
 
+	protected List modelRendererCubeList(Object modelRenderer) {
+		return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject(modelRenderer.getClass(), "field_78804_l", "cubeList", modelRenderer));
+	}
+
+	protected void setModelRendererCubeList(Object modelRenderer, List list) {
+		Modchu_Reflect.setFieldObject(modelRenderer.getClass(), "field_78804_l", "cubeList", modelRenderer, list);
+	}
+
+	protected List modelRendererChildModels(Object modelRenderer) {
+		return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject(modelRenderer.getClass(), "field_78805_m", "childModels", modelRenderer));
+	}
+
+	protected void setModelRendererChildModels(Object modelRenderer, List list) {
+		Modchu_Reflect.setFieldObject(modelRenderer.getClass(), "field_78805_m", "childModels", modelRenderer, list);
+	}
+
+	protected String modelRendererBoxName(Object modelRenderer) {
+		return Modchu_CastHelper.String(Modchu_Reflect.getFieldObject(modelRenderer.getClass(), "field_78802_n", "boxName", modelRenderer));
+	}
+
+	protected void setModelRendererBoxName(Object modelRenderer, String s) {
+		Modchu_Reflect.setFieldObject(modelRenderer.getClass(), "field_78802_n", "boxName", modelRenderer, s);
+	}
+
+	protected float modelRendererTextureWidth(Object modelRenderer) {
+		return Modchu_CastHelper.Float(Modchu_Reflect.getFieldObject(modelRenderer.getClass(), "field_78090_t", "textureWidth", modelRenderer));
+	}
+
+	protected void setModelRendererTextureWidth(Object modelRenderer, float f) {
+		Modchu_Reflect.setFieldObject(modelRenderer.getClass(), "field_78090_t", "textureWidth", modelRenderer, f);
+	}
+
+	protected float modelRendererTextureHeight(Object modelRenderer) {
+		return Modchu_CastHelper.Float(Modchu_Reflect.getFieldObject(modelRenderer.getClass(), "field_78089_u", "textureHeight", modelRenderer));
+	}
+
+	protected void setModelRendererTextureHeight(Object modelRenderer, float f) {
+		Modchu_Reflect.setFieldObject(modelRenderer.getClass(), "field_78089_u", "textureHeight", modelRenderer, f);
+	}
+
+	protected Object modelRendererBaseModel(Object modelRenderer) {
+		return Modchu_Reflect.getFieldObject(modelRenderer.getClass(), "field_78810_s", "baseModel", modelRenderer);
+	}
+
+	protected void setModelRendererBaseModel(Object modelRenderer, Object model) {
+		Modchu_Reflect.setFieldObject(modelRenderer.getClass(), "field_78810_s", "baseModel", modelRenderer, model);
+	}
+
+	protected boolean modelRendererCompiled(Object modelRenderer) {
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.getFieldObject(modelRenderer.getClass(), "field_78812_q", "compiled", modelRenderer));
+	}
+
+	protected void setModelRendererCompiled(Object modelRenderer, boolean b) {
+		Modchu_Reflect.setFieldObject(modelRenderer.getClass(), "field_78812_q", "compiled", modelRenderer, b);
+	}
+
+	protected int modelRendererTextureOffsetX(Object modelRenderer) {
+		return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject(modelRenderer.getClass(), "field_78783_a", "textureOffsetX", modelRenderer));
+	}
+
+	protected void setModelRendererTextureOffsetX(Object modelRenderer, int i) {
+		Modchu_Reflect.setFieldObject(modelRenderer.getClass(), "field_78783_a", "textureOffsetX", modelRenderer, i);
+	}
+
+	protected int modelRendererTextureOffsetY(Object modelRenderer) {
+		return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject(modelRenderer.getClass(), "field_78782_b", "textureOffsetY", modelRenderer));
+	}
+
+	protected void setModelRendererTextureOffsetY(Object modelRenderer, int i) {
+		Modchu_Reflect.setFieldObject(modelRenderer.getClass(), "field_78782_b", "textureOffsetY", modelRenderer, i);
+	}
+
 	protected int movingObjectPositionBlockPosGetX(Object movingObjectPosition) {
 		if (Modchu_Main.getMinecraftVersion() > 179) {
 			Object blockPos = Modchu_Reflect.invokeMethod(movingObjectPosition.getClass(), "func_178782_a", movingObjectPosition);
@@ -8483,9 +9811,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setModelBoxVertexPositions(Object modelBox, Object vertexPositions) {
-		boolean b = Modchu_Reflect.setFieldObject(modelBox.getClass(), "vertexPositions", modelBox, vertexPositions);
-		if (!b) b = Modchu_Reflect.setFieldObject(modelBox.getClass(), "field_78253_h", modelBox, vertexPositions);
-		if (!b) Modchu_Reflect.setFieldObject(modelBox.getClass(), "field_78239_a", modelBox, vertexPositions);
+		//Modchu_Debug.mDebug("setModelBoxVertexPositions modelBox="+modelBox+" vertexPositions="+vertexPositions);
+		boolean b = Modchu_Reflect.setFieldObject("ModelBox", "vertexPositions", modelBox, vertexPositions);
+		if (!b) b = Modchu_Reflect.setFieldObject("ModelBox", "field_78253_h", modelBox, vertexPositions);
+		if (!b) Modchu_Reflect.setFieldObject("ModelBox", "field_78239_a", modelBox, vertexPositions);
 	}
 
 	protected Object[] modelBoxQuadList(Object modelBox) {
@@ -8520,7 +9849,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void nbttagcompoundSetInteger(Object nbttagcompound, String s, int i) {
-		Modchu_Reflect.invokeMethod(nbttagcompound.getClass(), "func_74768_a", "setInteger", new Class[]{ int.class, String.class }, nbttagcompound, new Object[]{ s, i });
+		Modchu_Reflect.invokeMethod(nbttagcompound.getClass(), "func_74768_a", "setInteger", new Class[]{ String.class, int.class }, nbttagcompound, new Object[]{ s, i });
 	}
 
 	protected float nbttagcompoundGetFloat(Object nbttagcompound, String s) {
@@ -8665,6 +9994,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected void openGlHelperSetActiveTexture(int i) {
 		Modchu_Reflect.invokeMethod("OpenGlHelper", "func_77473_a", "setActiveTexture", new Class[]{ int.class }, null, new Object[]{ i });
+	}
+
+	protected void openGlHelperSetLightmapTextureCoords(int i, float f, float f1) {
+		Modchu_Reflect.invokeMethod("OpenGlHelper", "func_77475_a", "setLightmapTextureCoords", new Class[]{ int.class, float.class, float.class }, null, new Object[]{ i, f, f1 });
 	}
 
 	protected Object pathNavigateTryMoveToXYZ(Object pathNavigate, int x, int y, int z, float f) {
@@ -8964,7 +10297,11 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected Object resourceManagerGetResource(Object resourceManager, Object o) {
 		if (Modchu_Main.isServer) return null;
-		return Modchu_Reflect.invokeMethod(resourceManager.getClass(), "func_110536_a", "getResource", new Class[]{ o.getClass() }, resourceManager, new Object[]{ o });
+		Class ResourceManager = Modchu_Reflect.loadClass(Modchu_Main.getMinecraftVersion() > 169 ? "IResourceManager" : "ResourceManager");
+		if (ResourceManager != null); else ResourceManager = Modchu_Reflect.loadClass(Modchu_Main.getMinecraftVersion() > 169 ? "net.minecraft.client.resources.IResourceManager" : "net.minecraft.client.resources.ResourceManager");
+		if (ResourceManager != null); else ResourceManager = Modchu_Reflect.loadClass("net.minecraft.src.ResourceManager");
+		Modchu_Debug.mDebug("Modchu_ASAlmighty resourceManagerGetResource ResourceManager="+ResourceManager);
+		return Modchu_Reflect.invokeMethod(ResourceManager, "func_110536_a", "getResource", new Class[]{ o.getClass() }, resourceManager, new Object[]{ o });
 	}
 
 	protected InputStream resourceManagerInputStream(Object o) {
@@ -9474,6 +10811,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_Reflect.invokeMethod(minecraftTheWorld().getClass(), "func_72912_H", "getWorldInfo", minecraftTheWorld());
 	}
 
+	protected Object worldGetWorldInfo(Object world) {
+		return Modchu_Reflect.invokeMethod(world.getClass(), "func_72912_H", "getWorldInfo", world);
+	}
+
 	protected void worldRemoveEntity(Object world, Object entity) {
 		Modchu_Reflect.invokeMethod("World", "func_72900_e", "removeEntity", new Class[]{ Modchu_Reflect.loadClass("Entity") }, world, new Object[]{ entity });
 	}
@@ -9539,6 +10880,37 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected boolean worldIsRemote(Object worldOrEntity) {
 		return Modchu_CastHelper.Boolean(Modchu_Reflect.getFieldObject("World", "field_72995_K", "isRemote", entityWorldObj(worldOrEntity)));
+	}
+
+	protected long worldInfoGetWorldTotalTime() {
+		return worldInfoGetWorldTotalTime(worldGetWorldInfo(minecraftTheWorld()));
+	}
+
+	protected long worldInfoGetWorldTotalTime(Object entityOrWorldInfo) {
+		return Modchu_CastHelper.Long(Modchu_Reflect.invokeMethod("WorldInfo", "func_82573_f", "getWorldTotalTime", getWorldInfo(entityOrWorldInfo)));
+	}
+
+	protected long worldInfoGetWorldTime() {
+		return worldInfoGetWorldTime(worldGetWorldInfo(minecraftTheWorld()));
+	}
+
+	protected long worldInfoGetWorldTime(Object entityOrWorldInfo) {
+		return Modchu_CastHelper.Long(Modchu_Reflect.invokeMethod("WorldInfo", "func_72820_D", "getWorldTime", getWorldInfo(entityOrWorldInfo)));
+	}
+
+	protected int worldGetMoonPhase() {
+		return worldGetMoonPhase(minecraftTheWorld());
+	}
+
+	protected int worldGetMoonPhase(Object entityOrWorld) {
+		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_72853_d", "GetMoonPhase", entityWorldObj(entityOrWorld)));
+	}
+
+	protected Object getWorldInfo(Object entityOrWorldOrWorldInfo) {
+		if (Modchu_Reflect.loadClass("WorldInfo").isInstance(entityOrWorldOrWorldInfo)) return entityOrWorldOrWorldInfo;
+		if (Modchu_Reflect.loadClass("World").isInstance(entityOrWorldOrWorldInfo)) return worldGetWorldInfo(entityOrWorldOrWorldInfo);
+		if (Modchu_Reflect.loadClass("Entity").isInstance(entityOrWorldOrWorldInfo)) return worldGetWorldInfo(entityWorldObj(entityOrWorldOrWorldInfo));
+		return null;
 	}
 
 	protected List playerEntities() {

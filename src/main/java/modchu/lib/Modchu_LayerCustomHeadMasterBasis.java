@@ -1,12 +1,12 @@
 package modchu.lib;
 
-import modchu.lib.characteristic.Modchu_LayerCustomHead;
+import java.util.HashMap;
 
 public class Modchu_LayerCustomHeadMasterBasis implements Modchu_ILayerCustomHeadMaster  {
-	public Modchu_LayerCustomHead base;
+	public Modchu_ILayerCustomHead base;
 
-	public Modchu_LayerCustomHeadMasterBasis(Object modchu_LayerCustomHead) {
-		base = (Modchu_LayerCustomHead) modchu_LayerCustomHead;
+	public Modchu_LayerCustomHeadMasterBasis(HashMap<String, Object> map) {
+		base = (Modchu_ILayerCustomHead) map.get("base");
 	}
 
 	@Override

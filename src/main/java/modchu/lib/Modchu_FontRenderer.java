@@ -10,10 +10,6 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import modchu.lib.characteristic.Modchu_AS;
-import modchu.lib.characteristic.Modchu_CastHelper;
-import modchu.lib.characteristic.Modchu_GlStateManager;
-
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -181,11 +177,16 @@ public class Modchu_FontRenderer {
 
 	private void readGlyphSizes() {
 		Object resourceManager = Modchu_AS.get(Modchu_AS.minecraftGetResourceManager);
+		if (resourceManager != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() resourceManager == null !!");
 		InputStream inputStream = null;
 		try {
 			//InputStream inputstream = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("font/glyph_sizes.bin")).getInputStream();
 			//inputstream.read(this.glyphWidth);
-			inputStream = Modchu_AS.getInputStream(Modchu_AS.resourceGetInputStream, Modchu_AS.get(Modchu_AS.resourceManagerGetResource, resourceManager, Modchu_Main.newResourceLocation("font/glyph_sizes.bin")));
+			Object resourceLocation = Modchu_Main.newResourceLocation("font/glyph_sizes.bin");
+			if (resourceLocation != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() resourceLocation == null !!");
+			Object resource = Modchu_AS.get(Modchu_AS.resourceManagerGetResource, resourceManager, resourceLocation);
+			if (resource != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() resource == null !!");
+			inputStream = Modchu_AS.getInputStream(Modchu_AS.resourceGetInputStream, resource);
 			inputStream.read(glyphWidth);
 		} catch (IOException ioexception) {
 			throw new RuntimeException(ioexception);

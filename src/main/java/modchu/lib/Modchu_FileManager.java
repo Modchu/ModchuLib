@@ -36,9 +36,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
-import modchu.lib.characteristic.Modchu_AS;
-
-import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ResourceInfo;
 
@@ -934,7 +931,7 @@ public class Modchu_FileManager {
 				&& list1 != null
 				&& !list1.isEmpty()); else {
 			//if (file == null) Modchu_Debug.Debug("Modchu_FileManager List writerFile error ! file == null !!");
-			if (list1.isEmpty()) Modchu_Debug.lDebug("Modchu_FileManager List "+ file.toString() +" writerFile error ! list1.isEmpty()");
+			if (list1.isEmpty()) Modchu_Debug.Debug("Modchu_FileManager writerFile List "+ file.toString() +" writerFile error ! list1.isEmpty()");
 			return;
 		}
 		BufferedWriter bwriter = null;
@@ -952,15 +949,15 @@ public class Modchu_FileManager {
 					bwriter.newLine();
 				}
 				listData.put(file, list);
-				//Modchu_Debug.mDebug("Modchu_FileManager List "+ file.toString() +" writerFile.");
+				//Modchu_Debug.mDebug("Modchu_FileManager writerFile List "+ file.toString() +" writerFile.");
 			} else {
 				if (file.exists()
-						| file.createNewFile()); else Modchu_Debug.lDebug("Modchu_FileManager List "+ file.toString() +" writerFile error ! !(file.exists() | file.createNewFile())");
-				if (!file.canWrite()) Modchu_Debug.lDebug("Modchu_FileManager List "+ file.toString() +" writerFile error ! !file.canWrite()");
+						| file.createNewFile()); else Modchu_Debug.lDebug("Modchu_FileManager writerFile List "+ file.toString() +" writerFile error ! !(file.exists() | file.createNewFile())");
+				if (!file.canWrite()) Modchu_Debug.Debug("Modchu_FileManager writerFile List "+ file.toString() +" writerFile error ! !file.canWrite()");
 			}
 		} catch (ConcurrentModificationException e) {
 		} catch (Exception e) {
-			Modchu_Debug.systemLogDebug("Modchu_FileManager writerFile List file="+ file.toString() +" file writer fail.", 2, e);
+			Modchu_Debug.Debug("Modchu_FileManager writerFile List file="+ file.toString() +" file writer fail.", 2, e);
 			e.printStackTrace();
 		 } finally {
 			 try {

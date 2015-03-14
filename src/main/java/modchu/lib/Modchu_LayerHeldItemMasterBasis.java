@@ -1,12 +1,12 @@
 package modchu.lib;
 
-import modchu.lib.characteristic.Modchu_LayerHeldItem;
+import java.util.HashMap;
 
 public class Modchu_LayerHeldItemMasterBasis implements Modchu_ILayerHeldItemMaster  {
-	public Modchu_LayerHeldItem base;
+	public Modchu_ILayerHeldItem base;
 
-	public Modchu_LayerHeldItemMasterBasis(Object modchu_LayerHeldItem) {
-		base = (Modchu_LayerHeldItem) modchu_LayerHeldItem;
+	public Modchu_LayerHeldItemMasterBasis(HashMap<String, Object> map) {
+		base = (Modchu_ILayerHeldItem) map.get("base");
 	}
 
 	@Override

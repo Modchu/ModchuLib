@@ -1,11 +1,11 @@
 package modchu.lib;
 
-import modchu.lib.characteristic.Modchu_GuiBase;
+import java.util.HashMap;
 
 public interface Modchu_IGuiBaseMaster {
 
 	public void initGui();
-	public void init(Object guiBase, Object guiScreen, Object world, Object... o);
+	public void init(HashMap<String, Object> map);
 	public void reInit();
 	public Object getFontRenderer();
 	public void setFontRenderer(Object fontRenderer);

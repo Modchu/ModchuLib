@@ -1,12 +1,12 @@
 package modchu.lib;
 
-import modchu.lib.characteristic.Modchu_RenderPlayer;
+import java.util.HashMap;
 
 public class Modchu_RendererLivingEntityMasterBasis implements Modchu_IRendererLivingEntityMaster {
 	public Modchu_IRendererLivingEntity base;
 
-	public Modchu_RendererLivingEntityMasterBasis(Modchu_IRendererLivingEntity modchu_IRenderLivingBase, Object[] o) {
-		base = modchu_IRenderLivingBase;
+	public Modchu_RendererLivingEntityMasterBasis(HashMap<String, Object> map) {
+		base = (Modchu_IRendererLivingEntity) map.get("base");
 	}
 
 	@Override

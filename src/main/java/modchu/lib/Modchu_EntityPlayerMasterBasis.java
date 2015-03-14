@@ -1,10 +1,12 @@
 package modchu.lib;
 
+import java.util.HashMap;
+
 public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaster {
 	public Modchu_IEntityPlayer base;
 
-	public Modchu_EntityPlayerMasterBasis(Modchu_IEntityPlayer modchu_IEntityPlayer, Object[] o) {
-		base = modchu_IEntityPlayer;
+	public Modchu_EntityPlayerMasterBasis(HashMap<String, Object> map) {
+		base = (Modchu_IEntityPlayer) map.get("base");
 	}
 
 	@Override
