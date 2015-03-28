@@ -686,4 +686,157 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return super.func_180485_d((BlockPos) blockPos);
 	}
 
+	@Override
+	public void superFunc_98054_a(boolean par1) {
+	}
+
+	@Override
+	public float superGetSpeedModifier() {
+		return 0.0F;
+	}
+
+	@Override
+	public int superFunc_96121_ay() {
+		return -1;
+	}
+
+	@Override
+	public Object superGetLastAttackingEntity() {
+		return null;
+	}
+
+	@Override
+	public void superSetLastAttackingEntity(Object entity) {
+	}
+
+	@Override
+	public float superGetMaximumHomeDistance() {
+		return 0.0F;
+	}
+
+	@Override
+	public String superGetTexture() {
+		return null;
+	}
+
+	@Override
+	public int superGetHealth() {
+		return 0;
+	}
+
+	@Override
+	public void superFunc_85033_bc() {
+	}
+
+	@Override
+	public boolean superIsBlocking() {
+		return false;
+	}
+
+	@Override
+	public int superFunc_82143_as() {
+		return -1;
+	}
+
+	@Override
+	public Object superGetCurrentArmor(int par1) {
+		return null;
+	}
+
+	@Override
+	public void superFunc_82162_bC() {
+	}
+
+	@Override
+	public void superInitCreature() {
+	}
+
+	@Override
+	public void superFunc_94058_c(String par1Str) {
+	}
+
+	@Override
+	public String superFunc_94057_bL() {
+		return null;
+	}
+
+	@Override
+	public boolean superFunc_94056_bM() {
+		return false;
+	}
+
+	@Override
+	public void superFunc_94061_f(boolean par1) {
+	}
+
+	@Override
+	public boolean superFunc_94062_bN() {
+		return false;
+	}
+
+	@Override
+	public boolean superFunc_94059_bO() {
+		return false;
+	}
+
+	@Override
+	public void superFunc_96120_a(int par1, float par2) {
+	}
+
+	@Override
+	public boolean superFunc_104002_bU() {
+		return false;
+	}
+
+	@Override
+	public boolean superAddNotRiddenEntityID(Object nBTTagCompound) {
+		return false;
+	}
+
+	@Override
+	public boolean superAddEntityID(Object nBTTagCompound) {
+		return false;
+	}
+
+	@Override
+	public void superUnmountEntity(Object entity) {
+	}
+
+	@Override
+	public void superUpdateCloak() {
+	}
+
+	@Override
+	public boolean superFunc_98034_c(Object entityPlayer) {
+		return false;
+	}
+
+	@Override
+	public boolean superFunc_85031_j(Object entity) {
+		return false;
+	}
+
+	@Override
+	public void superFunc_82149_j(Object entity) {
+	}
+
+	@Override
+	public float superFunc_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
+		return false;
+	}
+
+	@Override
+	public void superFunc_85029_a(Object crashReportCategory) {
+	}
+
+	@Override
+	public boolean superFunc_96092_aw() {
+		return false;
+	}
+
 }

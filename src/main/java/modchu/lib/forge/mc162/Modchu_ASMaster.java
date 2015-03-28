@@ -4480,4 +4480,14 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 		return ((Resource) resource).getInputStream();
 	}
 
+	@Override
+	public int entityLivingBaseAttackTime(Object entity) {
+		return ((EntityLivingBase) entity).attackTime;
+	}
+
+	@Override
+	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i) {
+		((EntityLivingBase) entityLivingBase).attackTime = i;
+	}
+
 }

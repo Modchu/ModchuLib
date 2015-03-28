@@ -170,16 +170,12 @@ public class Modchu_RenderEngine {
 		String resourceDomain = Modchu_AS.getString(Modchu_AS.resourceLocationGetResourceDomain, resourceLocation);
 		String resourcePath = Modchu_AS.getString(Modchu_AS.resourceLocationGetResourcePath, resourceLocation);
 		//Modchu_Debug.mDebug("Modchu_RenderEngine getResourceLocationString resourcePath="+resourcePath);
-		String s = null;
-		if (Modchu_Main.getMinecraftVersion() < 170) {
-			s = Modchu_Main.lastIndexProcessing(resourcePath, ":");
-			StringBuilder sb = new StringBuilder().append(resourceDomain != null ? "/assets/" +resourceDomain+"/" : "/assets/minecraft/"); 
+		String s = Modchu_Main.getMinecraftVersion() > 169 ? resourcePath : Modchu_Main.lastIndexProcessing(resourcePath, ":");
+		if (s != null
+				&& s.indexOf("assets/") < 0) {
+			StringBuilder sb = new StringBuilder().append(resourceDomain != null ? "/assets/" +resourceDomain+"/" : "/assets/minecraft/");
 			s = sb.append(s).toString();
-			//Modchu_Debug.mDebug("Modchu_RenderEngine getResourceLocationString s="+s);
-			return s;
 		}
-		StringBuilder sb = new StringBuilder().append(resourceDomain != null ? "/assets/" +resourceDomain+"/" : "/assets/minecraft/"); 
-		s = sb.append(resourcePath).toString();
 		//Modchu_Debug.mDebug("Modchu_RenderEngine getResourceLocationString s="+s);
 		return s;
 	}

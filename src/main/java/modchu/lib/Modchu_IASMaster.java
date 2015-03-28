@@ -911,5 +911,8 @@ public interface Modchu_IASMaster {
 	public void entityTameableSetTamed(Object entityTameable, boolean b);
 	public void entityAgeableSetGrowingAge(Object entityTameable, int i);
 	public String chatAllowedCharactersFilterAllowedCharacters(String s);
+	public String itemGetUnlocalizedName(Object item);
+	public int entityLivingBaseAttackTime(Object entity);
+	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i);
 
 }

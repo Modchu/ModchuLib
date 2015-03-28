@@ -30,5 +30,6 @@ public interface Modchu_IEntityLivingMaster {
 	public Object getCurrentArmor(int i);
 	public void setCurrentItemOrArmor(int i, Object itemStack);
 	public Object[] getInventory();
+	public int getMaxHealth();
 
 }

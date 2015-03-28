@@ -273,5 +273,39 @@ public interface Modchu_IEntityTameableB {
 	public float superGetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block);
 	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7);
 	public String superGetTranslatedEntityName();
+	// ~152
+	public void superFunc_98054_a(boolean par1);
+	public float superGetSpeedModifier();
+	public int superFunc_96121_ay();
+	public Object superGetLastAttackingEntity();
+	public void superSetLastAttackingEntity(Object entity);
+	public float superGetMaximumHomeDistance();
+	public String superGetTexture();
+	public int superGetHealth();
+	public void superFunc_85033_bc();
+	public boolean superIsBlocking();
+	public int superFunc_82143_as();
+	public Object superGetCurrentArmor(int par1);
+	public void superFunc_82162_bC();
+	public void superInitCreature();
+	public void superFunc_94058_c(String par1Str);
+	public String superFunc_94057_bL();
+	public boolean superFunc_94056_bM();
+	public void superFunc_94061_f(boolean par1);
+	public boolean superFunc_94062_bN();
+	public boolean superFunc_94059_bO();
+	public void superFunc_96120_a(int par1, float par2);
+	public boolean superFunc_104002_bU();
+	public boolean superAddNotRiddenEntityID(Object nBTTagCompound);
+	public boolean superAddEntityID(Object nBTTagCompound);
+	public void superUnmountEntity(Object entity);
+	public void superUpdateCloak();
+	public boolean superFunc_98034_c(Object entityPlayer);
+	public boolean superFunc_85031_j(Object entity);
+	public void superFunc_82149_j(Object entity);
+	public float superFunc_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block);
+	public boolean superFunc_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7);
+	public void superFunc_85029_a(Object crashReportCategory);
+	public boolean superFunc_96092_aw();
 
 }

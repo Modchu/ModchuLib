@@ -10,7 +10,6 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.io.IOUtils;
 import org.lwjgl.opengl.GL11;
 
 public class Modchu_FontRenderer {
@@ -75,7 +74,7 @@ public class Modchu_FontRenderer {
 		fontSize = 1.0F;
 		locationFontTexture = resourceLocation;
 		unicodeFlag = flag;
-		Modchu_RenderEngine.instance.bindTexture(locationFontTexture);
+		bindTextureLocationFontTexture();
 
 		for (int i = 0; i < 32; ++i) {
 			int j = (i >> 3 & 1) * 85;
@@ -115,18 +114,35 @@ public class Modchu_FontRenderer {
 
 	private void readFontTexture() {
 		BufferedImage bufferedimage;
-		Object resourceManager = Modchu_AS.get(Modchu_AS.minecraftGetResourceManager);
-		InputStream inputStream = Modchu_AS.getInputStream(Modchu_AS.resourceGetInputStream, Modchu_AS.get(Modchu_AS.resourceManagerGetResource, resourceManager, locationFontTexture));
+		InputStream inputStream = null;
+		if (Modchu_Main.getMinecraftVersion() > 159) {
+			Object resourceManager = Modchu_AS.get(Modchu_AS.minecraftGetResourceManager);
+			inputStream = Modchu_AS.getInputStream(Modchu_AS.resourceGetInputStream, Modchu_AS.get(Modchu_AS.resourceManagerGetResource, resourceManager, locationFontTexture));
+		} else {
+			inputStream = Modchu_Reflect.loadClass("RenderEngine").getResourceAsStream((String) locationFontTexture);
+		}
+		System.out.println("inputStream="+inputStream);
 		try {
+			//162~
 			//bufferedimage = ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource((ResourceLocation) locationFontTexture).getInputStream());
+
+			//~152
+			//bufferedimage = ImageIO.read(RenderEngine.class.getResourceAsStream(locationFontTexture));
+
 			bufferedimage = ImageIO.read(inputStream);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 		finally
 		{
-			IOUtils.closeQuietly(inputStream);
-   	    }
+			if (inputStream != null) {
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
 		int i = bufferedimage.getWidth();
 		int j = bufferedimage.getHeight();
@@ -176,25 +192,37 @@ public class Modchu_FontRenderer {
 	}
 
 	private void readGlyphSizes() {
-		Object resourceManager = Modchu_AS.get(Modchu_AS.minecraftGetResourceManager);
-		if (resourceManager != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() resourceManager == null !!");
 		InputStream inputStream = null;
 		try {
-			//InputStream inputstream = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("font/glyph_sizes.bin")).getInputStream();
-			//inputstream.read(this.glyphWidth);
-			Object resourceLocation = Modchu_Main.newResourceLocation("font/glyph_sizes.bin");
-			if (resourceLocation != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() resourceLocation == null !!");
-			Object resource = Modchu_AS.get(Modchu_AS.resourceManagerGetResource, resourceManager, resourceLocation);
-			if (resource != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() resource == null !!");
-			inputStream = Modchu_AS.getInputStream(Modchu_AS.resourceGetInputStream, resource);
+			if (Modchu_Main.getMinecraftVersion() > 159) {
+				//InputStream inputstream = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("font/glyph_sizes.bin")).getInputStream();
+				Object resourceManager = Modchu_AS.get(Modchu_AS.minecraftGetResourceManager);
+				if (resourceManager != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() resourceManager == null !!");
+				Object resourceLocation = Modchu_Main.newResourceLocation("font/glyph_sizes.bin");
+				if (resourceLocation != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() resourceLocation == null !!");
+				Object resource = Modchu_AS.get(Modchu_AS.resourceManagerGetResource, resourceManager, resourceLocation);
+				if (resource != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() resource == null !!");
+				inputStream = Modchu_AS.getInputStream(Modchu_AS.resourceGetInputStream, resource);
+			} else {
+				//InputStream inputstream = Minecraft.getMinecraft().texturePackList.getSelectedTexturePack().getResourceAsStream("/font/glyph_sizes.bin");
+				Object texturePackList = Modchu_AS.get("Minecraft", "texturePackList", Modchu_AS.get(Modchu_AS.minecraftGetMinecraft), (Class[]) null);
+				if (texturePackList != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() texturePackList == null !! minecraft="+Modchu_AS.get(Modchu_AS.minecraftGetMinecraft));
+				Object selectedTexturePack = Modchu_AS.get("TexturePackList", "getSelectedTexturePack", texturePackList, (Class[]) null);
+				if (selectedTexturePack != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() selectedTexturePack == null !!");
+				inputStream = Modchu_AS.getInputStream("ITexturePack", "getResourceAsStream", selectedTexturePack, new Class[]{ String.class }, "/font/glyph_sizes.bin");
+			}
 			inputStream.read(glyphWidth);
 		} catch (IOException ioexception) {
 			throw new RuntimeException(ioexception);
+		} finally {
+			if (inputStream != null) {
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		finally
-		{
-			IOUtils.closeQuietly(inputStream);
-   	    }
 	}
 
 	/**
@@ -211,7 +239,7 @@ public class Modchu_FontRenderer {
 		float f = (float) (c % 16 * 8);
 		float f1 = (float) (c / 16 * 8);
 		float f2 = b ? 1.0F : 0.0F;
-		Modchu_RenderEngine.instance.bindTexture(locationFontTexture);
+		bindTextureLocationFontTexture();
 		float f3 = (float) charWidth[c] - 0.01F;
 		GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
 		GL11.glTexCoord2f(f / 128.0F, f1 / 128.0F);
@@ -224,6 +252,10 @@ public class Modchu_FontRenderer {
 		GL11.glVertex3f(posX + f3 - 1.0F - f2, posY + 7.99F, 0.0F);
 		GL11.glEnd();
 		return (float) charWidth[c];
+	}
+
+	public void bindTextureLocationFontTexture() {
+		Modchu_RenderEngine.instance.bindTexture(locationFontTexture);
 	}
 
 	private Object getUnicodePageLocation(int i) {

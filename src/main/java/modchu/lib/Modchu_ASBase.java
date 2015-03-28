@@ -461,7 +461,6 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int entityTicksExisted = entityTicksExisted_int;
 	public static int renderBindTexture = renderBindTexture_int;
 	public static int rendererLivingEntityRES_ITEM_GLINT = rendererLivingEntityRES_ITEM_GLINT_int;
-	public static int renderLoadTexture = renderLoadTexture_int;
 	public static int openGlHelperDefaultTexUnit = openGlHelperDefaultTexUnit_int;
 	public static int openGlHelperLightmapTexUnit = openGlHelperLightmapTexUnit_int;
 	public static int openGlHelperSetActiveTexture = openGlHelperSetActiveTexture_int;
@@ -544,7 +543,7 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int entityPlayerGetCurrentEquippedItem = entityPlayerGetCurrentEquippedItem_int;
 	public static int entityPlayerInventoryCurrentItem = entityPlayerInventoryCurrentItem_int;
 	public static int entityPlayerInventorySetInventorySlotContents = entityPlayerInventorySetInventorySlotContents_int;
-	public static int entityAttackTime = entityAttackTime_int;
+	public static int entityLivingBaseAttackTime = entityLivingBaseAttackTime_int;
 	public static int enumCreatureTypeAmbient = enumCreatureTypeAmbient_int;
 	public static int enumCreatureTypeCreature = enumCreatureTypeCreature_int;
 	public static int enumCreatureTypeMonster = enumCreatureTypeMonster_int;

@@ -4523,6 +4523,21 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 
 	@Override
 	public String chatAllowedCharactersFilterAllowedCharacters(String s) {
-		return base.chatAllowedCharactersFilterAllowedCharacters(s);
+		return base.superChatAllowedCharactersFilterAllowedCharacters(s);
+	}
+
+	@Override
+	public String itemGetUnlocalizedName(Object item) {
+		return base.superItemGetUnlocalizedName(item);
+	}
+
+	@Override
+	public int entityLivingBaseAttackTime(Object entity) {
+		return base.superEntityLivingBaseAttackTime(entity);
+	}
+
+	@Override
+	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i) {
+		base.superSetEntityLivingBaseAttackTime(entityLivingBase, i);
 	}
 }

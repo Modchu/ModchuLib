@@ -2,6 +2,7 @@ package modchu.lib.forge.mc179;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.IntBuffer;
 import java.util.HashMap;
@@ -68,6 +69,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResource;
+import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.shader.Framebuffer;
@@ -3894,6 +3896,31 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public void rendererLivingEntitySetRenderPassModel(Object rendererLivingEntity, Object modelBase) {
 		((RendererLivingEntity) rendererLivingEntity).setRenderPassModel((ModelBase) modelBase);
+	}
+
+	@Override
+	public Object resourceManagerGetResource(Object resourceManager, Object o) {
+		try {
+			return ((IResourceManager) resourceManager).getResource((ResourceLocation) o);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Object minecraftGetResourceManager() {
+		return ((Minecraft) minecraftGetMinecraft()).getResourceManager();
+	}
+
+	@Override
+	public int entityLivingBaseAttackTime(Object entity) {
+		return ((EntityLivingBase) entity).attackTime;
+	}
+
+	@Override
+	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i) {
+		((EntityLivingBase) entityLivingBase).attackTime = i;
 	}
 
 }

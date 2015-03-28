@@ -530,6 +530,7 @@ public class Modchu_Item extends Item implements Modchu_IItem {
 	}
 
 	public void onUsingItemTick(ItemStack itemStack, EntityPlayer entityPlayer, int count) {
+		onUsingItemTick(itemStack, entityPlayer, count);
 	}
 
 	public void superOnUsingItemTick(Object itemStack, Object entityPlayer, int count) {

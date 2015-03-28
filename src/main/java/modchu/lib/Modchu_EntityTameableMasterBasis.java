@@ -1758,4 +1758,169 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	public boolean func_180485_d(Object blockPos) {
 		return base.superFunc_180485_d(blockPos);
 	}
+
+	@Override
+	public void func_98054_a(boolean par1) {
+		base.superFunc_98054_a(par1);
+	}
+
+	@Override
+	public float getSpeedModifier() {
+		return base.superGetSpeedModifier();
+	}
+
+	@Override
+	public int func_96121_ay() {
+		return base.superFunc_96121_ay();
+	}
+
+	@Override
+	public Object getLastAttackingEntity() {
+		return base.superGetLastAttackingEntity();
+	}
+
+	@Override
+	public void setLastAttackingEntity(Object entity) {
+		base.superSetLastAttackingEntity(entity);
+	}
+
+	@Override
+	public float getMaximumHomeDistance() {
+		return base.superGetMaximumHomeDistance();
+	}
+
+	@Override
+	public String getTexture() {
+		return base.superGetTexture();
+	}
+
+	@Override
+	public int getHealth() {
+		return base.superGetHealth();
+	}
+
+	@Override
+	public void func_85033_bc() {
+		base.superFunc_85033_bc();
+	}
+
+	@Override
+	public boolean isBlocking() {
+		return base.superIsBlocking();
+	}
+
+	@Override
+	public int func_82143_as() {
+		return base.superFunc_82143_as();
+	}
+
+	@Override
+	public Object getCurrentArmor(int par1) {
+		return base.superGetCurrentArmor(par1);
+	}
+
+	@Override
+	public void func_82162_bC() {
+		base.superFunc_82162_bC();
+	}
+
+	@Override
+	public void initCreature() {
+		base.superInitCreature();
+	}
+
+	@Override
+	public void func_94058_c(String par1Str) {
+		base.superFunc_94058_c(par1Str);
+	}
+
+	@Override
+	public String func_94057_bL() {
+		return base.superFunc_94057_bL();
+	}
+
+	@Override
+	public boolean func_94056_bM() {
+		return base.superFunc_94056_bM();
+	}
+
+	@Override
+	public void func_94061_f(boolean par1) {
+		base.superFunc_94061_f(par1);
+	}
+
+	@Override
+	public boolean func_94062_bN() {
+		return base.superFunc_94062_bN();
+	}
+
+	@Override
+	public boolean func_94059_bO() {
+		return base.superFunc_94059_bO();
+	}
+
+	@Override
+	public void func_96120_a(int par1, float par2) {
+		base.superFunc_96120_a(par1, par2);
+	}
+
+	@Override
+	public boolean func_104002_bU() {
+		return base.superFunc_104002_bU();
+	}
+
+	@Override
+	public boolean addNotRiddenEntityID(Object nBTTagCompound) {
+		return base.superAddNotRiddenEntityID(nBTTagCompound);
+	}
+
+	@Override
+	public boolean addEntityID(Object nBTTagCompound) {
+		return base.superAddEntityID(nBTTagCompound);
+	}
+
+	@Override
+	public void unmountEntity(Object entity) {
+		base.superUnmountEntity(entity);
+	}
+
+	@Override
+	public void updateCloak() {
+		base.superUpdateCloak();
+	}
+
+	@Override
+	public boolean func_98034_c(Object entityPlayer) {
+		return base.superFunc_98034_c(entityPlayer);
+	}
+
+	@Override
+	public boolean func_85031_j(Object entity) {
+		return base.superFunc_85031_j(entity);
+	}
+
+	@Override
+	public void func_82149_j(Object entity) {
+		base.superFunc_82149_j(entity);
+	}
+
+	@Override
+	public float func_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block) {
+		return base.superFunc_82146_a(explosion, world, par3, par4, par5, block);
+	}
+
+	@Override
+	public boolean func_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
+		return base.superFunc_96091_a(explosion, world, par3, par4, par5, par6, par7);
+	}
+
+	@Override
+	public void func_85029_a(Object crashReportCategory) {
+		base.superFunc_85029_a(crashReportCategory);
+	}
+
+	@Override
+	public boolean func_96092_aw() {
+		return base.superFunc_96092_aw();
+	}
 }

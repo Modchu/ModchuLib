@@ -13,8 +13,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.google.common.collect.Multimap;
-
 public class Modchu_CastHelper {
 
 	public static String String(Object o) {
@@ -26,11 +24,23 @@ public class Modchu_CastHelper {
 		return Int(o, 0);
 	}
 
+	public static int Int(Object o, boolean warningFlag) {
+		return Int(o, 0, warningFlag);
+	}
+
 	public static int Int(Object o, int i) {
-		return Int(o, i, 2, 1);
+		return Int(o, i, 2, 1, true);
+	}
+
+	public static int Int(Object o, int i, boolean warningFlag) {
+		return Int(o, i, 2, 1, warningFlag);
 	}
 
 	public static int Int(Object o, int i, int i1, int i2) {
+		return Int(o, i, i1, i2, true);
+	}
+
+	public static int Int(Object o, int i, int i1, int i2, boolean warningFlag) {
 		if (o != null); else return i;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
@@ -38,15 +48,15 @@ public class Modchu_CastHelper {
 		}
 		if (o instanceof Integer) return (Integer) o;
 		if (o instanceof Float) {
-			putWarningString("Modchu_CastHelper Int o instanceof Float warning !! o="+o);
+			if (warningFlag) putWarningString("Modchu_CastHelper Int o instanceof Float warning !! o="+o);
 			return (int) (float)((Float) o);
 		}
 		if (o instanceof Double) {
-			putWarningString("Modchu_CastHelper Int o instanceof Double warning !! o="+o);
+			if (warningFlag) putWarningString("Modchu_CastHelper Int o instanceof Double warning !! o="+o);
 			return (int) (double)((Double) o);
 		}
 		if (o instanceof Long) {
-			putWarningString("Modchu_CastHelper Int o instanceof Long warning !! o="+o);
+			if (warningFlag) putWarningString("Modchu_CastHelper Int o instanceof Long warning !! o="+o);
 			return (int) (long)((Long) o);
 		}
 		if (Modchu_Main.integerCheck(""+o)) return Integer.valueOf(""+o);
@@ -160,12 +170,12 @@ public class Modchu_CastHelper {
 		return o != null 
 				&& o instanceof Map[] ? (Map[]) o : null;
 	}
-
-	public static Multimap[] MultimapArray(Object o) {
+/*
+	public static Collection[] CollectionArray(Object o) {
 		return o != null 
-				&& o instanceof Multimap[] ? (Multimap[]) o : null;
+				&& o instanceof Collection[] ? (Collection[]) o : null;
 	}
-
+*/
 	public static IntBuffer[] IntBufferArray(Object o) {
 		return o != null 
 				&& o instanceof IntBuffer[] ? (IntBuffer[]) o : null;
@@ -244,7 +254,7 @@ public class Modchu_CastHelper {
 		if (c1 == ConcurrentHashMap.class) return ConcurrentHashMap(o);
 		if (c1 == HashMap.class) return HashMap(o);
 		if (c1 == Map.class) return Map(o);
-		if (c1 == Multimap.class) return Multimap(o);
+		//if (c1 == Collection.class) return Collection(o);
 		if (c1 == IntBuffer.class) return IntBuffer(o);
 		if (c1 == InputStream.class) return InputStream(o);
 		if (c1 == UUID.class) return UUID(o);
@@ -267,7 +277,7 @@ public class Modchu_CastHelper {
 		if (c1 == ConcurrentHashMap[].class) return ConcurrentHashMapArray(o);
 		if (c1 == HashMap[].class) return HashMapArray(o);
 		if (c1 == Map[].class) return MapArray(o);
-		if (c1 == Multimap[].class) return MultimapArray(o);
+		//if (c1 == Collection[].class) return CollectionArray(o);
 		if (c1 == IntBuffer[].class) return IntBufferArray(o);
 		if (c1 == InputStream[].class) return InputStreamArray(o);
 		if (c1 == UUID[].class) return UUIDArray(o);
@@ -295,10 +305,18 @@ public class Modchu_CastHelper {
 	}
 
 	public static float Float(Object o) {
-		return Float(o, 0.0F);
+		return Float(o, 0.0F, true);
+	}
+
+	public static float Float(Object o, boolean warningFlag) {
+		return Float(o, 0.0F, warningFlag);
 	}
 
 	public static float Float(Object o, float f) {
+		return Float(o, f, true);
+	}
+
+	public static float Float(Object o, float f, boolean warningFlag) {
 		if (o != null); else return f;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
@@ -306,15 +324,15 @@ public class Modchu_CastHelper {
 		}
 		if (o instanceof Float) return (Float) o;
 		if (o instanceof Integer) {
-			putWarningString("Modchu_CastHelper Float o instanceof Integer warning !! o="+o);
+			if (warningFlag) putWarningString("Modchu_CastHelper Float o instanceof Integer warning !! o="+o);
 			return (float) (int)((Integer) o);
 		}
 		if (o instanceof Double) {
-			putWarningString("Modchu_CastHelper Float o instanceof Double warning !! o="+o);
+			if (warningFlag) putWarningString("Modchu_CastHelper Float o instanceof Double warning !! o="+o);
 			return (float) (double)((Double) o);
 		}
 		if (o instanceof Long) {
-			putWarningString("Modchu_CastHelper Float o instanceof Long warning !! o="+o);
+			if (warningFlag) putWarningString("Modchu_CastHelper Float o instanceof Long warning !! o="+o);
 			return (float) (long)((Long) o);
 		}
 		if (Modchu_Main.floatCheck(""+o)) return Float.valueOf(""+o);
@@ -322,10 +340,18 @@ public class Modchu_CastHelper {
 	}
 
 	public static double Double(Object o) {
-		return Double(o, 0.0D);
+		return Double(o, 0.0D, true);
+	}
+
+	public static double Double(Object o, boolean warningFlag) {
+		return Double(o, 0.0D, warningFlag);
 	}
 
 	public static double Double(Object o, double d) {
+		return Double(o, d, true);
+	}
+
+	public static double Double(Object o, double d, boolean warningFlag) {
 		if (o != null); else return d;
 		if (o instanceof Boolean) {
 			boolean b = (Boolean) o;
@@ -333,15 +359,15 @@ public class Modchu_CastHelper {
 		}
 		if (o instanceof Double) return (Double) o;
 		if (o instanceof Integer) {
-			putWarningString("Modchu_CastHelper Double o instanceof Integer warning !! o="+o);
+			if (warningFlag) putWarningString("Modchu_CastHelper Double o instanceof Integer warning !! o="+o);
 			return (double) (int)((Integer) o);
 		}
 		if (o instanceof Float) {
-			putWarningString("Modchu_CastHelper Double o instanceof Float warning !! o="+o);
+			if (warningFlag) putWarningString("Modchu_CastHelper Double o instanceof Float warning !! o="+o);
 			return (double) (float)((Float) o);
 		}
 		if (o instanceof Long) {
-			putWarningString("Modchu_CastHelper Double o instanceof Long warning !! o="+o);
+			if (warningFlag) putWarningString("Modchu_CastHelper Double o instanceof Long warning !! o="+o);
 			return (double) (long)((Long) o);
 		}
 		return Double.valueOf(""+o);
@@ -396,12 +422,12 @@ public class Modchu_CastHelper {
 		return o != null 
 				&& o instanceof Map ? (Map) o : null;
 	}
-
-	public static Multimap Multimap(Object o) {
+/*
+	public static Collection Collection(Object o) {
 		return o != null 
-				&& o instanceof Multimap ? (Multimap) o : null;
+				&& o instanceof Collection ? (Collection) o : null;
 	}
-
+*/
 	public static IntBuffer IntBuffer(Object o) {
 		return o != null 
 				&& o instanceof IntBuffer ? (IntBuffer) o : null;

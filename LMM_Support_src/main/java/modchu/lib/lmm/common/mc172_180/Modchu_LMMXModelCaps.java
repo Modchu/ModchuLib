@@ -1,6 +1,6 @@
 package modchu.lib.lmm.common.mc172_180;
 
-import mmm.lib.MMM_EntityCaps;
+import mmmlibx.lib.MMM_EntityCaps;
 import modchu.lib.Modchu_EntityCapsBase;
 import net.minecraft.entity.EntityLivingBase;
 

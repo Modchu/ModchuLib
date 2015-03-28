@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import modchu.lib.Modchu_Version;
-import modchu.lib.forge.mc162_179.Modchu_ModMetadata;
+import modchu.lib.forge.mc152_179.Modchu_ModMetadata;
 
 import com.google.common.eventbus.EventBus;
 

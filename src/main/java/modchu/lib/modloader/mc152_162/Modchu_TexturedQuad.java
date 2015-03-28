@@ -1,4 +1,4 @@
-package modchu.lib.modloader.mc162;
+package modchu.lib.modloader.mc152_162;
 
 import java.util.HashMap;
 

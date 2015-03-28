@@ -1,6 +1,5 @@
 package modchu.lib;
 
-import java.util.Random;
 
 public interface Modchu_IModelBiped extends Modchu_IModelBase {
 	public Object superGetRandomModelBox(Object random);

@@ -2,10 +2,6 @@ package modchu.lib;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_ITexturedQuad;
-import modchu.lib.Modchu_ITexturedQuadMaster;
-import modchu.lib.Modchu_Main;
-
 public class Modchu_TexturedQuad implements Modchu_ITexturedQuad {
 	public Modchu_ITexturedQuadMaster master;
 

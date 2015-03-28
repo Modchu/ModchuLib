@@ -10,9 +10,11 @@ public class Modchu_Init {
 	private static boolean initFlag = false;
 
 	public static void init() {
+		//System.out.println("Modchu_Init init");
 		if (initFlag) return;
 		initFlag = true;
 		String mcVersion = getMcVersion();
+		//System.out.println("Modchu_Init init mcVersion="+mcVersion);
 		if (mcVersion != null); else {
 			String s = "ModchuLib Modchu_Init mcVersion null error !!";
 			throw new RuntimeException(s);
@@ -34,7 +36,7 @@ public class Modchu_Init {
 		}
 		Modchu_Main.init();
 		Modchu_AS.instanceCheck();
-		Modchu_Debug.systemLogDebug("(1 / 3) - (1 / 2) Modchu_Init static");
+		Modchu_Debug.lDebug("(1 / 3) - (1 / 3) Modchu_Init static");
 		//対応MOD導入チェック class直チェック
 		HashMap<String, Boolean> map = new HashMap();
 		boolean tempIsClient = false;
@@ -88,7 +90,7 @@ public class Modchu_Init {
 			} catch(Exception e) {
 			}
 		}
-		Modchu_Debug.systemLogDebug("(1 / 3) - (2 / 3) Modchu_Init static");
+		Modchu_Debug.lDebug("(1 / 3) - (2 / 3) Modchu_Init static");
 		File mcDataDir = tempIsClient ? Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir) : new File(".");
 		Modchu_Debug.lDebug("Modchu_Init init() mcDataDir="+mcDataDir.getAbsolutePath());
 		String s = mcDataDir.getAbsolutePath();
@@ -105,13 +107,13 @@ public class Modchu_Init {
 			o = Modchu_Reflect.invokeMethod(o.getClass(), "getSide", o);
 			if (o != null) {
 				if ((Boolean) Modchu_Reflect.invokeMethod(o.getClass(), "isServer", o)) Modchu_Main.isServer = true;
-				Modchu_Debug.systemLogDebug("(1 / 3) - (3 / 3) Modchu_Init static Forge isServer="+Modchu_Main.isServer);
+				Modchu_Debug.lDebug("(1 / 3) - (3 / 3) Modchu_Init static Forge isServer="+Modchu_Main.isServer);
 			} else {
-				Modchu_Debug.systemLogDebug("(1 / 3) - (3 / 3) Modchu_Init static o == null !!");
+				Modchu_Debug.lDebug("(1 / 3) - (3 / 3) Modchu_Init static o == null !!");
 			}
 		} else {
 			Modchu_Main.isServer = Modchu_Reflect.invokeMethod("ModLoader", "getMinecraftInstance") == null;
-			Modchu_Debug.systemLogDebug("(1 / 3) - (3 / 3) Modchu_Init static ModLoader isServer="+Modchu_Main.isServer);
+			Modchu_Debug.lDebug("(1 / 3) - (3 / 3) Modchu_Init static ModLoader isServer="+Modchu_Main.isServer);
 		}
 /*
 		float[] ff = new float[]{ 0.0F };
@@ -253,7 +255,8 @@ public class Modchu_Init {
 			return new String[]{
 					"180",
 					"172_180",
-					"164_180"
+					"164_180",
+					"162_180"
 			};
 		}
 		if (version == 179) {
@@ -263,7 +266,9 @@ public class Modchu_Init {
 					"164_179",
 					"172_180",
 					"164_180",
-					"162_179"
+					"162_179",
+					"162_180",
+					"152_179"
 			};
 		}
 		if (version == 172) {
@@ -273,7 +278,9 @@ public class Modchu_Init {
 					"164_179",
 					"172_180",
 					"164_180",
-					"162_179"
+					"162_179",
+					"162_180",
+					"152_179"
 			};
 		}
 		if (version == 164) {
@@ -282,14 +289,25 @@ public class Modchu_Init {
 					"162_164",
 					"164_179",
 					"164_180",
-					"162_179"
+					"162_179",
+					"162_180",
+					"152_179"
 			};
 		}
 		if (version == 162) {
 			return new String[]{
 					"162",
 					"162_164",
-					"162_179"
+					"162_179",
+					"162_180",
+					"152_179"
+			};
+		}
+		if (version == 152) {
+			return new String[]{
+					"152",
+					"152_162",
+					"152_179"
 			};
 		}
 		return null;

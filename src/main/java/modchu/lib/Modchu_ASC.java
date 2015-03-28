@@ -248,7 +248,6 @@ public interface Modchu_ASC {
 	public static final int entityTicksExisted_int = 227;
 	public static final int renderBindTexture_int = 228;
 	public static final int rendererLivingEntityRES_ITEM_GLINT_int = 229;
-	public static final int renderLoadTexture_int = 230;
 	public static final int openGlHelperDefaultTexUnit_int = 231;
 	public static final int openGlHelperLightmapTexUnit_int = 232;
 	public static final int openGlHelperSetActiveTexture_int = 233;
@@ -331,7 +330,7 @@ public interface Modchu_ASC {
 	public static final int entityPlayerGetCurrentEquippedItem_int = 16031;
 	public static final int entityPlayerInventoryCurrentItem_int = 16032;
 	public static final int entityPlayerInventorySetInventorySlotContents_int = 16033;
-	public static final int entityAttackTime_int = 16034;
+	public static final int entityLivingBaseAttackTime_int = 16034;
 	public static final int enumCreatureTypeAmbient_int = 16035;
 	public static final int enumCreatureTypeCreature_int = 16036;
 	public static final int enumCreatureTypeMonster_int = 16037;

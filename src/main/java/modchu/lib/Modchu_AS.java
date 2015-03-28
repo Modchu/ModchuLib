@@ -10,8 +10,6 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.google.common.collect.Multimap;
-
 public class Modchu_AS extends Modchu_ASAlmighty {
 	public static Modchu_IASMaster master;
 
@@ -4304,11 +4302,11 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Multimap itemStackGetAttributeModifiers(Object itemStack) {
-		return (Multimap) (master != null ? master.itemStackGetAttributeModifiers(itemStack) : super.itemStackGetAttributeModifiers(itemStack));
+	protected Object itemStackGetAttributeModifiers(Object itemStack) {
+		return master != null ? master.itemStackGetAttributeModifiers(itemStack) : super.itemStackGetAttributeModifiers(itemStack);
 	}
 
-	public Multimap superItemStackGetAttributeModifiers(Object itemStack) {
+	public Object superItemStackGetAttributeModifiers(Object itemStack) {
 		return super.itemStackGetAttributeModifiers(itemStack);
 	}
 
@@ -8407,5 +8405,32 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	public String superChatAllowedCharactersFilterAllowedCharacters(String s) {
 		return super.chatAllowedCharactersFilterAllowedCharacters(s);
+	}
+
+	@Override
+	public String itemGetUnlocalizedName(Object item) {
+		return master != null ? master.itemGetUnlocalizedName(item) : null;
+	}
+
+	public String superItemGetUnlocalizedName(Object item) {
+		return super.itemGetUnlocalizedName(item);
+	}
+
+	@Override
+	public int entityLivingBaseAttackTime(Object entity) {
+		return master != null ? master.entityLivingBaseAttackTime(entity) : null;
+	}
+
+	public int superEntityLivingBaseAttackTime(Object entity) {
+		return super.entityLivingBaseAttackTime(entity);
+	}
+
+	@Override
+	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i) {
+		if (master != null) master.setEntityLivingBaseAttackTime(entityLivingBase, i);
+	}
+
+	public void superSetEntityLivingBaseAttackTime(Object entityLivingBase, int i) {
+		super.setEntityLivingBaseAttackTime(entityLivingBase, i);
 	}
 }

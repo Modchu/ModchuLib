@@ -612,7 +612,7 @@ public class Modchu_HelperBase {
 	 * @return
 	 */
 	public static double getAttackVSEntity(Object itemStack) {
-		Collection attributeModifier = Modchu_AS.getMultimap(Modchu_AS.itemStackGetAttributeModifiers, itemStack).get(Modchu_AS.getString(Modchu_AS.iAttributeGetAttributeUnlocalizedName, Modchu_AS.get(Modchu_AS.sharedMonsterAttributesAttackDamage)));
+		Collection attributeModifier = (Collection) Modchu_AS.getMap(Modchu_AS.itemStackGetAttributeModifiers, itemStack).get(Modchu_AS.getString(Modchu_AS.iAttributeGetAttributeUnlocalizedName, Modchu_AS.get(Modchu_AS.sharedMonsterAttributesAttackDamage)));
 		return attributeModifier == null ? 0 : Modchu_AS.getDouble(Modchu_AS.attributeModifierGetAmount, attributeModifier);
 	}
 

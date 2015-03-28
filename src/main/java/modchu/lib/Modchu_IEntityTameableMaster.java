@@ -354,5 +354,39 @@ public interface Modchu_IEntityTameableMaster {
 	public Object func_145778_a(Object item, int p_145778_2_, float p_145778_3_);
 	public float func_180484_a(Object blockPos);
 	public boolean func_180485_d(Object blockPos);
+	// ~152
+	public void func_98054_a(boolean par1);
+	public float getSpeedModifier();
+	public int func_96121_ay();
+	public Object getLastAttackingEntity();
+	public void setLastAttackingEntity(Object entity);
+	public float getMaximumHomeDistance();
+	public String getTexture();
+	public int getHealth();
+	public void func_85033_bc();
+	public boolean isBlocking();
+	public int func_82143_as();
+	public Object getCurrentArmor(int par1);
+	public void func_82162_bC();
+	public void initCreature();
+	public void func_94058_c(String par1Str);
+	public String func_94057_bL();
+	public boolean func_94056_bM();
+	public void func_94061_f(boolean par1);
+	public boolean func_94062_bN();
+	public boolean func_94059_bO();
+	public void func_96120_a(int par1, float par2);
+	public boolean func_104002_bU();
+	public boolean addNotRiddenEntityID(Object nBTTagCompound);
+	public boolean addEntityID(Object nBTTagCompound);
+	public void unmountEntity(Object entity);
+	public void updateCloak();
+	public boolean func_98034_c(Object entityPlayer);
+	public boolean func_85031_j(Object entity);
+	public void func_82149_j(Object entity);
+	public float func_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block);
+	public boolean func_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7);
+	public void func_85029_a(Object crashReportCategory);
+	public boolean func_96092_aw();
 
 }

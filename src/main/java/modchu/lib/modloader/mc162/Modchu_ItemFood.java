@@ -903,6 +903,7 @@ public class Modchu_ItemFood extends ItemFood implements Modchu_IItemFood {
 	}
 
 	public void onUsingTick(ItemStack itemStack, EntityPlayer entityPlayer, int count) {
+		onUsingItemTick(itemStack, entityPlayer, count);
 	}
 
 	public void superOnUsingTick(Object itemStack, Object entityPlayer, int count) {

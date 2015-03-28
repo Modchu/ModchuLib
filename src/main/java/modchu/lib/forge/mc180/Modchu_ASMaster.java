@@ -4107,4 +4107,13 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 		return ChatAllowedCharacters.filterAllowedCharacters(s);
 	}
 
+	@Override
+	public int entityLivingBaseAttackTime(Object entity) {
+		return 0;
+	}
+
+	@Override
+	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i) {
+	}
+
 }
