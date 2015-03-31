@@ -1529,6 +1529,19 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 				return entityPlayerCanPlayerEdit((Integer) pArg[0], (Integer) pArg[1], (Integer) pArg[2], (Integer) pArg[3], pArg[4]);
 			}
 		}
+		if (pIndex == entityAttackEntityFrom) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				if (pArg.length > 2
+						&& pArg[2] != null) {
+					return entityAttackEntityFrom(pArg[0], pArg[1], (Float) pArg[2]);
+				} else {
+					return entityAttackEntityFrom(pArg[0], (Float) pArg[1]);
+				}
+			}
+		}
 		if (pIndex == worldGetBlockStateGetBlockMetadata) {
 			if (pArg != null
 			&& pArg.length > 2
@@ -4891,6 +4904,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getBooleanB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static boolean getBoolean(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getBooleanB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static boolean getBoolean(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getBooleanB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static boolean getBoolean(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.Boolean(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
@@ -4907,8 +4928,24 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getIntB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static int getInt(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getIntB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static int getInt(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getIntB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static int getInt(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.Int(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public static int getInt(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Int(instance.getB(accessSupport, s, s1, null, c, (Object[])pArg));
+	}
+
+	public static int getInt(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Int(instance.getB(accessSupport, s, s1, o, c, (Object[])pArg));
 	}
 
 	public int getIntB(String s, String s1, Object... pArg) {
@@ -4921,6 +4958,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	public static long getLong(String s, String s1, Object... pArg) {
 		return instance.getLongB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static long getLong(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getLongB(null, s, s1, o, c, (Object[])pArg);
 	}
 
 	public static long getLong(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
@@ -4939,6 +4980,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getByteB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static byte getByte(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getByteB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static byte getByte(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getByteB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static byte getByte(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.Byte(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
@@ -4951,8 +5000,44 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Byte(getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
 
+	public static short getShort(String s, String s1, Object... pArg) {
+		return instance.getShortB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static short getShort(String s, String s1, Object o, Object... pArg) {
+		return instance.getShortB(null, s, s1, o, null, (Object[])pArg);
+	}
+
+	public static short getShort(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getShortB(null, s, s1, o, c, (Object[])pArg);
+	}
+
+	public static short getShort(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Short(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public short getShortB(String s, String s1, Object... pArg) {
+		return getShortB(null, s, s1, (Object)null, (Class[])null, (Object[])pArg);
+	}
+
+	public short getShortB(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
+		return Modchu_CastHelper.Short(getB(accessSupport, s, s1, null, null, (Object[])pArg));
+	}
+
+	public short getShortB(Modchu_ASBase accessSupport, String s, String s1, Object o, Class[] c, Object... pArg) {
+		return Modchu_CastHelper.Short(getB(accessSupport, s, s1, o, c, (Object[])pArg));
+	}
+
 	public static float getFloat(String s, String s1, Object... pArg) {
 		return instance.getFloatB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static float getFloat(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getFloatB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static float getFloat(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getFloatB(null, s, s1, o, c, (Object[])pArg);
 	}
 
 	public static float getFloat(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
@@ -4971,6 +5056,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getDoubleB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static double getDouble(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getDoubleB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static double getDouble(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getDoubleB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static double getDouble(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.Float(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
@@ -4985,6 +5078,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	public static String getString(String s, String s1, Object... pArg) {
 		return instance.getStringB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static String getString(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getStringB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static String getString(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getStringB(null, s, s1, o, c, (Object[])pArg);
 	}
 
 	public static String getString(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
@@ -5003,6 +5104,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getListB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static List getList(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getListB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static List getList(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getListB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static List getList(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.List(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
@@ -5017,6 +5126,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	public static ArrayList getArrayList(String s, String s1, Object... pArg) {
 		return instance.getArrayListB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static ArrayList getArrayList(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getArrayListB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static ArrayList getArrayList(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getArrayListB(null, s, s1, o, c, (Object[])pArg);
 	}
 
 	public static ArrayList getArrayList(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
@@ -5035,6 +5152,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getLinkedListB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static LinkedList getLinkedList(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getLinkedListB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static LinkedList getLinkedList(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getLinkedListB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static LinkedList getLinkedList(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.LinkedList(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
@@ -5049,6 +5174,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	public static ConcurrentHashMap getConcurrentHashMap(String s, String s1, Object... pArg) {
 		return instance.getConcurrentHashMapB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static ConcurrentHashMap getConcurrentHashMap(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getConcurrentHashMapB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static ConcurrentHashMap getConcurrentHashMap(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getConcurrentHashMapB(null, s, s1, o, c, (Object[])pArg);
 	}
 
 	public static ConcurrentHashMap getConcurrentHashMap(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
@@ -5067,6 +5200,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getHashMapB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static HashMap getHashMap(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getHashMapB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static HashMap getHashMap(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getHashMapB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static HashMap getHashMap(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.HashMap(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
@@ -5081,6 +5222,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	public static Map getMap(String s, String s1, Object... pArg) {
 		return instance.getMapB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static Map getMap(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getMapB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static Map getMap(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getMapB(null, s, s1, o, c, (Object[])pArg);
 	}
 
 	public static Map getMap(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
@@ -5115,6 +5264,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getEnumB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static Enum getEnum(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getEnumB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static Enum getEnum(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getEnumB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static Enum getEnum(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.Enum(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
@@ -5129,6 +5286,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	public static File getFile(String s, String s1, Object... pArg) {
 		return instance.getFileB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static File getFile(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getFileB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static File getFile(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getFileB(null, s, s1, o, c, (Object[])pArg);
 	}
 
 	public static File getFile(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
@@ -5147,6 +5312,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getIntBufferB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static IntBuffer getIntBuffer(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getIntBufferB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static IntBuffer getIntBuffer(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getIntBufferB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static IntBuffer getIntBuffer(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.IntBuffer(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
@@ -5161,6 +5334,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	public static UUID getUUID(String s, String s1, Object... pArg) {
 		return instance.getUUIDB((Modchu_ASBase)null, s, s1, (Object)null, (Class[])null, (Object[])pArg);
+	}
+
+	public static UUID getUUID(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getUUIDB((Modchu_ASBase)null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static UUID getUUID(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getUUIDB((Modchu_ASBase)null, s, s1, o, c, (Object[])pArg);
 	}
 
 	public static UUID getUUID(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
@@ -5179,6 +5360,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getIntArrayB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static int[] getIntArray(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getIntArrayB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static int[] getIntArray(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getIntArrayB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static int[] getIntArray(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.IntArray(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
@@ -5193,6 +5382,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	public static InputStream getInputStream(String s, String s1, Object... pArg) {
 		return instance.getInputStreamB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static InputStream getInputStream(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getInputStreamB(null, s, s1, null, c, (Object[])pArg);
 	}
 
 	public static InputStream getInputStream(String s, String s1, Object o, Class[] c, Object... pArg) {
@@ -5215,6 +5408,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getFloatArrayB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static float[] getFloatArray(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getFloatArrayB(null, s, s1, null, c, (Object[])pArg);
+	}
+
 	public static float[] getFloatArray(String s, String s1, Object o, Class[] c, Object... pArg) {
 		return instance.getFloatArrayB(null, s, s1, o, c, (Object[])pArg);
 	}
@@ -5235,6 +5432,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getDoubleArrayB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static double[] getDoubleArray(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getDoubleArrayB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static double[] getDoubleArray(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getDoubleArrayB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static double[] getDoubleArray(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.DoubleArray(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
@@ -5249,6 +5454,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	public static byte[] getByteArray(String s, String s1, Object... pArg) {
 		return instance.getByteArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static byte[] getByteArray(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getByteArrayB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static byte[] getByteArray(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getByteArrayB(null, s, s1, o, c, (Object[])pArg);
 	}
 
 	public static byte[] getByteArray(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
@@ -5267,6 +5480,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.getStringArrayB(null, s, s1, null, null, (Object[])pArg);
 	}
 
+	public static String[] getStringArray(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getStringArrayB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static String[] getStringArray(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getStringArrayB(null, s, s1, o, c, (Object[])pArg);
+	}
+
 	public static String[] getStringArray(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
 		return Modchu_CastHelper.StringArray(instance.getB(accessSupport, s, s1, null, null, (Object[])pArg));
 	}
@@ -5281,6 +5502,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	public static Object[] getObjectArray(String s, String s1, Object... pArg) {
 		return instance.getObjectArrayB(null, s, s1, null, null, (Object[])pArg);
+	}
+
+	public static Object[] getObjectArray(String s, String s1, Class[] c, Object... pArg) {
+		return instance.getObjectArrayB(null, s, s1, null, c, (Object[])pArg);
+	}
+
+	public static Object[] getObjectArray(String s, String s1, Object o, Class[] c, Object... pArg) {
+		return instance.getObjectArrayB(null, s, s1, o, c, (Object[])pArg);
 	}
 
 	public static Object[] getObjectArray(Modchu_ASBase accessSupport, String s, String s1, Object... pArg) {
@@ -6327,12 +6556,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_Reflect.getFieldObject("EntityArrow", "field_70250_c", "shootingEntity", entityArrow);
 	}
 
-	protected void entityAttackEntityFrom(Object damageSource, float f) {
-		entityAttackEntityFrom(minecraftThePlayer(), damageSource, f);
+	protected boolean entityAttackEntityFrom(Object damageSource, float f) {
+		return entityAttackEntityFrom(minecraftThePlayer(), damageSource, f);
 	}
 
-	protected void entityAttackEntityFrom(Object entity, Object damageSource, float f) {
-		Modchu_Reflect.invokeMethod("Entity", "func_70097_a", "attackEntityFrom", new Class[]{ Modchu_Reflect.loadClass("DamageSource"), float.class }, entity, new Object[]{ damageSource, f });
+	protected boolean entityAttackEntityFrom(Object entity, Object damageSource, float f) {
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("Entity", "func_70097_a", "attackEntityFrom", new Class[]{ Modchu_Reflect.loadClass("DamageSource"), float.class }, entity, new Object[]{ damageSource, f }));
 	}
 
 	protected int entityLivingBaseEntityAge() {
@@ -9241,7 +9470,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (minecraft == null) {
 			String s = "Modchu_ASAlmighty minecraftGetMinecraft load Class minecraft == null !! isForge="+Modchu_Main.isForge+" getMinecraftVersion()="+Modchu_Main.getMinecraftVersion();
 			Modchu_Debug.lDebug(s);
-			throw new RuntimeException(s);
+			return null;
 		}
 		Modchu_Reflect.classMap.put("Minecraft", minecraft);
 		Object o = null;

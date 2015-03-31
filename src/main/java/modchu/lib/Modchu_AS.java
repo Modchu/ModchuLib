@@ -734,13 +734,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void entityAttackEntityFrom(Object entity, Object damageSource, float f) {
-		if (master != null) master.entityAttackEntityFrom(entity, damageSource, f);
-		else super.entityAttackEntityFrom(entity, damageSource, f);
+	protected boolean entityAttackEntityFrom(Object entity, Object damageSource, float f) {
+		return master != null ? master.entityAttackEntityFrom(entity, damageSource, f) : super.entityAttackEntityFrom(entity, damageSource, f);
 	}
 
-	public void superEntityAttackEntityFrom(Object entity, Object damageSource, float f) {
-		super.entityAttackEntityFrom(entity, damageSource, f);
+	public boolean superEntityAttackEntityFrom(Object entity, Object damageSource, float f) {
+		return super.entityAttackEntityFrom(entity, damageSource, f);
 	}
 
 	@Override

@@ -86,7 +86,7 @@ public interface Modchu_IASMaster {
 	public void setEntityAnimalInLove(Object entityLivingBase, int i);
 	public Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, int i);
 	public Object entityArrowShootingEntity(Object entityArrow);
-	public void entityAttackEntityFrom(Object entity, Object damageSource, float f);
+	public boolean entityAttackEntityFrom(Object entity, Object damageSource, float f);
 	public int entityLivingBaseEntityAge(Object entity);
 	public Object entityLivingBaseGetLook(Object entityLivingBase, float f);
 	public void setEntityLivingBaseEntityAge(Object entity, int i);

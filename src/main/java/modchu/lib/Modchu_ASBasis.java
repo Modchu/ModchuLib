@@ -402,8 +402,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public void entityAttackEntityFrom(Object entity, Object damageSource, float f) {
-		base.superEntityAttackEntityFrom(entity, damageSource, f);
+	public boolean entityAttackEntityFrom(Object entity, Object damageSource, float f) {
+		return base.superEntityAttackEntityFrom(entity, damageSource, f);
 	}
 
 	@Override

@@ -561,8 +561,8 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void entityAttackEntityFrom(Object entity, Object damageSource, float f) {
-		((Entity) entity).attackEntityFrom((DamageSource) damageSource, f);
+	public boolean entityAttackEntityFrom(Object entity, Object damageSource, float f) {
+		return ((Entity) entity).attackEntityFrom((DamageSource) damageSource, f);
 	}
 
 	@Override
@@ -3854,6 +3854,21 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i) {
 		((EntityLivingBase) entityLivingBase).attackTime = i;
+	}
+
+	@Override
+	public int movingObjectPositionBlockPosGetX(Object movingObjectPosition) {
+		return ((MovingObjectPosition) movingObjectPosition).blockX;
+	}
+
+	@Override
+	public int movingObjectPositionBlockPosGetY(Object movingObjectPosition) {
+		return ((MovingObjectPosition) movingObjectPosition).blockY;
+	}
+
+	@Override
+	public int movingObjectPositionBlockPosGetZ(Object movingObjectPosition) {
+		return ((MovingObjectPosition) movingObjectPosition).blockZ;
 	}
 
 }

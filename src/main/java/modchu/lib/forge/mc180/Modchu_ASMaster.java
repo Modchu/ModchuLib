@@ -568,8 +568,8 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void entityAttackEntityFrom(Object entity, Object damageSource, float f) {
-		((Entity) entity).attackEntityFrom((DamageSource) damageSource, f);
+	public boolean entityAttackEntityFrom(Object entity, Object damageSource, float f) {
+		return ((Entity) entity).attackEntityFrom((DamageSource) damageSource, f);
 	}
 
 	@Override

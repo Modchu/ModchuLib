@@ -36,21 +36,21 @@ public class Modchu_Init {
 		}
 		Modchu_Main.init();
 		Modchu_AS.instanceCheck();
-		Modchu_Debug.lDebug("(1 / 3) - (1 / 3) Modchu_Init static");
+		Modchu_Debug.lDebug("(1 / 3) - (1 / 5) Modchu_Init init()");
 		//対応MOD導入チェック class直チェック
 		HashMap<String, Boolean> map = new HashMap();
-		boolean tempIsClient = false;
+		//boolean tempIsClient = false;
 		boolean tempIsRenderPlayer2 = false;
 		if (versionInt > 179) map.put("net.minecraftforge.fml.common.FMLCommonHandler", Modchu_Main.isForge);
-		map.put("net.minecraft.client.Minecraft", tempIsClient);
+		//map.put("net.minecraft.client.Minecraft", tempIsClient);
 		if (versionInt < 180) {
 			map.put("FMLRenderAccessLibrary", Modchu_Main.isForge);
 			map.put("net.minecraft.src.FMLRenderAccessLibrary", Modchu_Main.isForge);
 			if (versionInt < 164) {
 				map.put("ItemRendererHD", Modchu_Main.isItemRendererHD);
 				map.put("RenderPlayer2", tempIsRenderPlayer2);
-				map.put("net.minecraft.src.Minecraft", tempIsClient);
-				if (versionInt == 162) map.put("ats", tempIsClient);
+				//map.put("net.minecraft.src.Minecraft", tempIsClient);
+				//if (versionInt == 162) map.put("ats", tempIsClient);
 			}
 		}
 		Class test2 = null;
@@ -65,11 +65,13 @@ public class Modchu_Init {
 							| s.equals("net.minecraft.src.FMLRenderAccessLibrary")) {
 						Modchu_Main.isForge = true;
 					}
+/*
 					if (s.equals("net.minecraft.client.Minecraft")
 							| s.equals("net.minecraft.src.Minecraft")
 							| s.equals("ats")) {
 						tempIsClient = true;
 					}
+*/
 					if (s.equals("ItemRendererHD")) Modchu_Main.isItemRendererHD = true;
 					if (s.equals("RenderPlayer2")) tempIsRenderPlayer2 = true;
 				}
@@ -77,7 +79,7 @@ public class Modchu_Init {
 			}
 		}
 		Modchu_Debug.lDebug("Modchu_Init init() isForge="+Modchu_Main.isForge);
-		Modchu_Debug.lDebug("Modchu_Init init() tempIsClient="+tempIsClient);
+		//Modchu_Debug.lDebug("Modchu_Init init() tempIsClient="+tempIsClient);
 		if (tempIsRenderPlayer2) {
 			try {
 				Object o = getFieldObject("ItemRenderer", "olddays");
@@ -90,9 +92,28 @@ public class Modchu_Init {
 			} catch(Exception e) {
 			}
 		}
-		Modchu_Debug.lDebug("(1 / 3) - (2 / 3) Modchu_Init static");
-		File mcDataDir = tempIsClient ? Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir) : new File(".");
-		Modchu_Debug.lDebug("Modchu_Init init() mcDataDir="+mcDataDir.getAbsolutePath());
+		Modchu_Debug.lDebug("(1 / 3) - (2 / 5) Modchu_Init init()");
+		Class FMLCommonHandler = loadClass("net.minecraftforge.fml.common.FMLCommonHandler");
+		if (FMLCommonHandler != null); else FMLCommonHandler = loadClass("cpw.mods.fml.common.FMLCommonHandler");
+		if (FMLCommonHandler != null); else FMLCommonHandler = loadClass("FMLCommonHandler");
+		if (FMLCommonHandler != null); else FMLCommonHandler = loadClass("net.minecraft.src.FMLCommonHandler");
+		Object o = Modchu_Reflect.invokeMethod(FMLCommonHandler, "instance");
+		if (o != null) {
+			o = invokeMethod(o.getClass(), "getSide", o);
+			if (o != null) {
+				if ((Boolean) invokeMethod(o.getClass(), "isServer", o)) Modchu_Main.isServer = true;
+				Modchu_Debug.lDebug("(1 / 3) - (3 / 5) Modchu_Init init() Forge isServer="+Modchu_Main.isServer);
+			} else {
+				Modchu_Debug.lDebug("(1 / 3) - (3 / 5) Modchu_Init init() o == null !!");
+			}
+		} else {
+			Class ModLoader = loadClass("ModLoader");
+			if (ModLoader != null); else ModLoader = loadClass("net.minecraft.src.ModLoader");
+			if (ModLoader != null) Modchu_Main.isServer = invokeMethod(ModLoader, "getMinecraftInstance") == null;
+			Modchu_Debug.lDebug("(1 / 3) - (3 / 5) Modchu_Init init() ModLoader isServer="+Modchu_Main.isServer);
+		}
+		File mcDataDir = !Modchu_Main.isServer ? Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir) : new File(".");
+		Modchu_Debug.lDebug("(1 / 3) - (4 / 5) Modchu_Init init() mcDataDir="+mcDataDir.getAbsolutePath());
 		String s = mcDataDir.getAbsolutePath();
 		//Modchu_Debug.lDebug("Modchu_Init load() new File= "+(new File(new File(s, "../"), "gradle")));
 		if (s.indexOf("jars") != -1
@@ -100,27 +121,15 @@ public class Modchu_Init {
 				| new File(new File(s, "../"), "gradle").exists()) {
 			Modchu_Main.isRelease = false;
 		}
-		Modchu_Debug.lDebug("Modchu_Init static isRelease="+Modchu_Main.isRelease);
+		Modchu_Debug.lDebug("Modchu_Init init() isRelease="+Modchu_Main.isRelease);
 		Modchu_Reflect.initNameMap();
-		Object o = Modchu_Reflect.invokeMethod("FMLCommonHandler", "instance");
-		if (o != null) {
-			o = Modchu_Reflect.invokeMethod(o.getClass(), "getSide", o);
-			if (o != null) {
-				if ((Boolean) Modchu_Reflect.invokeMethod(o.getClass(), "isServer", o)) Modchu_Main.isServer = true;
-				Modchu_Debug.lDebug("(1 / 3) - (3 / 3) Modchu_Init static Forge isServer="+Modchu_Main.isServer);
-			} else {
-				Modchu_Debug.lDebug("(1 / 3) - (3 / 3) Modchu_Init static o == null !!");
-			}
-		} else {
-			Modchu_Main.isServer = Modchu_Reflect.invokeMethod("ModLoader", "getMinecraftInstance") == null;
-			Modchu_Debug.lDebug("(1 / 3) - (3 / 3) Modchu_Init static ModLoader isServer="+Modchu_Main.isServer);
-		}
 /*
 		float[] ff = new float[]{ 0.0F };
 		float[][] fff = new float[][]{ new float[]{ 0.0F } };
 		HashMap<String, Object> debug = Modchu_Main.getNewModchuCharacteristicMap(ff, fff);
 		throw new RuntimeException("Modchu_Init debug stop");
 */
+		Modchu_Debug.lDebug("(1 / 3) - (5 / 5) Modchu_Init init() end.");
 	}
 
 	public static String getMcVersion() {
@@ -365,6 +374,10 @@ public class Modchu_Init {
 
 	public static Object invokeMethod(Class var0, String var1) {
 		return invokeMethod(var0, var1, (Class[]) null, (Object[]) null);
+	}
+
+	public static Object invokeMethod(Class var0, String var1, Object o) {
+		return invokeMethod(var0, var1, (Class[]) null, o, (Object[]) null);
 	}
 
 	public static Object invokeMethod(Class var0, String var1, Class[] var2, Object[] var3) {

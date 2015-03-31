@@ -1,10 +1,9 @@
-package modchu.lib.forge.mc162;
+package modchu.lib.forge.mc162_164;
 
 import java.util.HashMap;
 
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
-import modchu.lib.Modchu_IGuiMaster;
 import modchu.lib.Modchu_IGuiSlot;
 import modchu.lib.Modchu_IGuiSlotMaster;
 import modchu.lib.Modchu_Main;

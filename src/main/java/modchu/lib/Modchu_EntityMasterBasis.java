@@ -705,4 +705,409 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 		return base.superShouldDismountInWater(entity);
 	}
 
+	@Override
+	public void doBlockCollisions() {
+		base.superDoBlockCollisions();
+	}
+
+	@Override
+	public void playStepSound(int par1, int par2, int par3, int par4) {
+		base.superPlayStepSound(par1, par2, par3, par4);
+	}
+
+	@Override
+	public boolean isInRangeToRenderVec3D(Object vec3) {
+		return base.superIsInRangeToRenderVec3D(vec3);
+	}
+
+	@Override
+	public Object dropItem(int par1, int par2) {
+		return base.superDropItem(par1, par2);
+	}
+
+	@Override
+	public Object dropItemWithOffset(int par1, int par2, float par3) {
+		return base.superDropItemWithOffset(par1, par2, par3);
+	}
+
+	@Override
+	public boolean pushOutOfBlocks(double par1, double par3, double par5) {
+		return base.superPushOutOfBlocks(par1, par3, par5);
+	}
+
+	@Override
+	public String getEntityName() {
+		return base.superGetEntityName();
+	}
+
+	@Override
+	public float getBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block) {
+		return base.superGetBlockExplosionResistance(explosion, world, par3, par4, par5, block);
+	}
+
+	@Override
+	public boolean shouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
+		return base.superShouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7);
+	}
+
+	@Override
+	public String getTranslatedEntityName() {
+		return base.superGetTranslatedEntityName();
+	}
+	// ~152
+	@Override
+	public boolean attackEntityFrom(Object damageSource, int par2) {
+		return base.superAttackEntityFrom(damageSource, par2);
+	}
+
+	@Override
+	public String getTexture() {
+		return base.superGetTexture();
+	}
+
+	@Override
+	public boolean addNotRiddenEntityID(Object nBTTagCompound) {
+		return base.superAddNotRiddenEntityID(nBTTagCompound);
+	}
+
+	@Override
+	public boolean addEntityID(Object nBTTagCompound) {
+		return base.superAddEntityID(nBTTagCompound);
+	}
+
+	@Override
+	public boolean interact(Object entityPlayer) {
+		return base.superInteract(entityPlayer);
+	}
+
+	@Override
+	public void unmountEntity(Object entity) {
+		base.superUnmountEntity(entity);
+	}
+
+	@Override
+	public void updateCloak() {
+		base.superUpdateCloak();
+	}
+
+	@Override
+	public boolean func_98034_c(Object entityPlayer) {
+		return base.superFunc_98034_c(entityPlayer);
+	}
+
+	@Override
+	public boolean func_85031_j(Object entity) {
+		return base.superFunc_85031_j(entity);
+	}
+
+	@Override
+	public void func_82149_j(Object entity) {
+		base.superFunc_82149_j(entity);
+	}
+
+	@Override
+	public float func_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block) {
+		return base.superFunc_82146_a(explosion, world, par3, par4, par5, block);
+	}
+
+	@Override
+	public boolean func_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
+		return base.superFunc_96091_a(explosion, world, par3, par4, par5, par6, par7);
+	}
+
+	@Override
+	public int func_82143_as() {
+		return base.superFunc_82143_as();
+	}
+
+	@Override
+	public void func_85029_a(Object crashReportCategory) {
+		base.superFunc_85029_a(crashReportCategory);
+	}
+
+	@Override
+	public boolean func_96092_aw() {
+		return base.superFunc_96092_aw();
+	}
+	// 180~
+	@Override
+	public void onKillCommand() {
+		base.superOnKillCommand();
+	}
+
+	@Override
+	public void playStepSound(Object blockPos, Object block) {
+		base.superPlayStepSound(blockPos, block);
+	}
+
+	@Override
+	public boolean isSilent() {
+		return base.superIsSilent();
+	}
+
+	@Override
+	public void setSilent(boolean isSilent) {
+		base.superSetSilent(isSilent);
+	}
+
+	@Override
+	public void func_180433_a(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
+		base.superFunc_180433_a(p_180433_1_, p_180433_3_, block, blockPos);
+	}
+
+	@Override
+	public void fall(float distance, float damageMultiplier) {
+		base.superFall(distance, damageMultiplier);
+	}
+
+	@Override
+	public void resetHeight() {
+		base.superResetHeight();
+	}
+
+	@Override
+	public void spawnRunningParticles() {
+		base.superSpawnRunningParticles();
+	}
+
+	@Override
+	public void createRunningParticles() {
+		base.superCreateRunningParticles();
+	}
+
+	@Override
+	public boolean isInLava() {
+		return base.superIsInLava();
+	}
+
+	@Override
+	public void moveToBlockPosAndAngles(Object blockPos, float p_174828_2_, float p_174828_3_) {
+		base.superMoveToBlockPosAndAngles(blockPos, p_174828_2_, p_174828_3_);
+	}
+
+	@Override
+	public double getDistanceSq(Object blockPos) {
+		return base.superGetDistanceSq(blockPos);
+	}
+
+	@Override
+	public double getDistanceSqToCenter(Object blockPos) {
+		return base.superGetDistanceSqToCenter(blockPos);
+	}
+
+	@Override
+	public Object getLook(float p_70676_1_) {
+		return base.superGetLook(p_70676_1_);
+	}
+
+	@Override
+	public Object getPositionEyes(float p_174824_1_) {
+		return base.superGetPositionEyes(p_174824_1_);
+	}
+
+	@Override
+	public Object rayTrace(double p_174822_1_, float p_174822_3_) {
+		return base.superRayTrace(p_174822_1_, p_174822_3_);
+	}
+
+	@Override
+	public Object dropItemWithOffset(Object item, int size, float p_145778_3_) {
+		return base.superDropItemWithOffset(item, size, p_145778_3_);
+	}
+
+	@Override
+	public void func_180426_a(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+		base.superFunc_180426_a(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
+	}
+
+	@Override
+	public Object[] getInventory() {
+		return base.superGetInventory();
+	}
+
+	@Override
+	public String getName() {
+		return base.superGetName();
+	}
+
+	@Override
+	public boolean isEntityInvulnerable(Object damageSource) {
+		return base.superIsEntityInvulnerable(damageSource);
+	}
+
+	@Override
+	public void copyDataFromOld(Object entity) {
+		base.superCopyDataFromOld(entity);
+	}
+
+	@Override
+	public float getExplosionResistance(Object explosion, Object world, Object blockPos, Object iBlockState) {
+		return base.superGetExplosionResistance(explosion, world, blockPos, iBlockState);
+	}
+
+	@Override
+	public boolean func_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
+		return base.superFunc_174816_a(explosion, world, blockPos, iBlockState, p_174816_5_);
+	}
+
+	@Override
+	public int getMaxFallHeight() {
+		return base.superGetMaxFallHeight();
+	}
+
+	@Override
+	public Object getDisplayName() {
+		return base.superGetDisplayName();
+	}
+
+	@Override
+	public void setCustomNameTag(String p_96094_1_) {
+		base.superSetCustomNameTag(p_96094_1_);
+	}
+
+	@Override
+	public String getCustomNameTag() {
+		return base.superGetCustomNameTag();
+	}
+
+	@Override
+	public boolean hasCustomName() {
+		return base.superHasCustomName();
+	}
+
+	@Override
+	public void setAlwaysRenderNameTag(boolean p_174805_1_) {
+		base.superSetAlwaysRenderNameTag(p_174805_1_);
+	}
+
+	@Override
+	public boolean getAlwaysRenderNameTag() {
+		return base.superGetAlwaysRenderNameTag();
+	}
+
+	@Override
+	public void setPositionAndUpdate(double x, double y, double z) {
+		base.superSetPositionAndUpdate(x, y, z);
+	}
+
+	@Override
+	public boolean getAlwaysRenderNameTagForRender() {
+		return base.superGetAlwaysRenderNameTagForRender();
+	}
+
+	@Override
+	public Object getHorizontalFacing() {
+		return base.superGetHorizontalFacing();
+	}
+
+	@Override
+	public Object func_174823_aP() {
+		return base.superFunc_174823_aP();
+	}
+
+	@Override
+	public boolean func_174827_a(Object entityPlayerMP) {
+		return base.superFunc_174827_a(entityPlayerMP);
+	}
+
+	@Override
+	public Object getEntityBoundingBox() {
+		return base.superGetEntityBoundingBox();
+	}
+
+	@Override
+	public void setEntityBoundingBox(Object axisAlignedBB) {
+		base.superSetEntityBoundingBox(axisAlignedBB);
+	}
+
+	@Override
+	public boolean isOutsideBorder() {
+		return base.superIsOutsideBorder();
+	}
+
+	@Override
+	public void setOutsideBorder(boolean p_174821_1_) {
+		base.superSetOutsideBorder(p_174821_1_);
+	}
+
+	@Override
+	public boolean replaceItemInInventory(int p_174820_1_, Object itemStack) {
+		return base.superReplaceItemInInventory(p_174820_1_, itemStack);
+	}
+
+	@Override
+	public void addChatMessage(Object iChatComponent) {
+		base.superAddChatMessage(iChatComponent);
+	}
+
+	@Override
+	public boolean canUseCommand(int permLevel, String commandName) {
+		return base.superCanUseCommand(permLevel, commandName);
+	}
+
+	@Override
+	public Object getPosition() {
+		return base.superGetPosition();
+	}
+
+	@Override
+	public Object getPositionVector() {
+		return base.superGetPositionVector();
+	}
+
+	@Override
+	public Object getEntityWorld() {
+		return base.superGetEntityWorld();
+	}
+
+	@Override
+	public Object getCommandSenderEntity() {
+		return base.superGetCommandSenderEntity();
+	}
+
+	@Override
+	public boolean sendCommandFeedback() {
+		return base.superSendCommandFeedback();
+	}
+
+	@Override
+	public void setCommandStat(Object type, int amount) {
+		base.superSetCommandStat(type, amount);
+	}
+
+	@Override
+	public Object func_174807_aT() {
+		return base.superFunc_174807_aT();
+	}
+
+	@Override
+	public void func_174817_o(Object entity) {
+		base.superFunc_174817_o(entity);
+	}
+
+	@Override
+	public Object func_174819_aU() {
+		return base.superFunc_174819_aU();
+	}
+
+	@Override
+	public void func_174834_g(Object nBTTagCompound) {
+		base.superFunc_174834_g(nBTTagCompound);
+	}
+
+	@Override
+	public boolean func_174825_a(Object entityPlayer, Object vec3) {
+		return base.superFunc_174825_a(entityPlayer, vec3);
+	}
+
+	@Override
+	public boolean func_180427_aV() {
+		return base.superFunc_180427_aV();
+	}
+
+	@Override
+	public void func_174815_a(Object entityLivingBase, Object entity) {
+		base.superFunc_174815_a(entityLivingBase, entity);
+	}
+
 }

@@ -1,4 +1,4 @@
-package modchu.lib.forge.mc179;
+package modchu.lib.forge.mc162_164;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -22,7 +22,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
@@ -77,25 +76,6 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void superWriteEntityToNBT(Object nBTTagCompound) {
-	}
-
-	@Override
-	public int getEntityId() {
-		return master != null ? master.getEntityId() : super.getEntityId();
-	}
-
-	public int superGetEntityId() {
-		return super.getEntityId();
-	}
-
-	@Override
-	public void setEntityId(int p_145769_1_) {
-		if (master != null) master.setEntityId(p_145769_1_);
-		else super.setEntityId(p_145769_1_);
-	}
-
-	public void superSetEntityId(int p_145769_1_) {
-		super.setEntityId(p_145769_1_);
 	}
 
 	@Override
@@ -274,35 +254,6 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	protected String getSwimSound() {
-		return master != null ? master.getSwimSound() : super.getSwimSound();
-	}
-
-	public String superGetSwimSound() {
-		return super.getSwimSound();
-	}
-
-	@Override
-	protected void func_145775_I() {
-		if (master != null) master.func_145775_I();
-		else super.func_145775_I();
-	}
-
-	public void superFunc_145775_I() {
-		super.func_145775_I();
-	}
-
-	@Override
-	protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block block) {
-		if (master != null) master.func_145780_a(p_145780_1_, p_145780_2_, p_145780_3_, block);
-		else super.func_145780_a(p_145780_1_, p_145780_2_, p_145780_3_, block);
-	}
-
-	public void superFunc_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object block) {
-		super.func_145780_a(p_145780_1_, p_145780_2_, p_145780_3_, (Block) block);
-	}
-
-	@Override
 	public void playSound(String p_85030_1_, float p_85030_2_, float p_85030_3_) {
 		if (master != null) master.playSound(p_85030_1_, p_85030_2_, p_85030_3_);
 		else super.playSound(p_85030_1_, p_85030_2_, p_85030_3_);
@@ -385,15 +336,6 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	public boolean superHandleWaterMovement() {
 		return super.handleWaterMovement();
-	}
-
-	@Override
-	protected String getSplashSound() {
-		return master != null ? master.getSplashSound() : super.getSplashSound();
-	}
-
-	public String superGetSplashSound() {
-		return super.getSplashSound();
 	}
 
 	@Override
@@ -595,15 +537,6 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public boolean isInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_) {
-		return master != null ? master.isInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_) : super.isInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_);
-	}
-
-	public boolean superIsInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_) {
-		return super.isInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_);
-	}
-
-	@Override
 	public boolean isInRangeToRenderDist(double p_70112_1_) {
 		return master != null ? master.isInRangeToRenderDist(p_70112_1_) : super.isInRangeToRenderDist(p_70112_1_);
 	}
@@ -685,24 +618,6 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	public NBTTagList superNewFloatNBTList(float... p_70049_1_) {
 		return super.newFloatNBTList(p_70049_1_);
-	}
-
-	@Override
-	public EntityItem dropItem(Item item, int p_145779_2_) {
-		return (EntityItem) (master != null ? master.dropItem(item, p_145779_2_) : super.dropItem(item, p_145779_2_));
-	}
-
-	public EntityItem superDropItem(Object item, int p_145779_2_) {
-		return super.dropItem((Item) item, p_145779_2_);
-	}
-
-	@Override
-	public EntityItem func_145778_a(Item item, int p_145778_2_, float p_145778_3_) {
-		return (EntityItem) (master != null ? master.func_145778_a(item, p_145778_2_, p_145778_3_) : super.func_145778_a(item, p_145778_2_, p_145778_3_));
-	}
-
-	public EntityItem superFunc_145778_a(Object item, int p_145778_2_, float p_145778_3_) {
-		return super.func_145778_a((Item) item, p_145778_2_, p_145778_3_);
 	}
 
 	@Override
@@ -1065,15 +980,6 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	protected boolean func_145771_j(double p_145771_1_, double p_145771_3_, double p_145771_5_) {
-		return master != null ? master.func_145771_j(p_145771_1_, p_145771_3_, p_145771_5_) : super.func_145771_j(p_145771_1_, p_145771_3_, p_145771_5_);
-	}
-
-	public boolean superFunc_145771_j(double p_145771_1_, double p_145771_3_, double p_145771_5_) {
-		return super.func_145771_j(p_145771_1_, p_145771_3_, p_145771_5_);
-	}
-
-	@Override
 	public void setInWeb() {
 		if (master != null) master.setInWeb();
 		else super.setInWeb();
@@ -1081,15 +987,6 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	public void superSetInWeb() {
 		super.setInWeb();
-	}
-
-	@Override
-	public String getCommandSenderName() {
-		return master != null ? master.getCommandSenderName() : super.getCommandSenderName();
-	}
-
-	public String superGetCommandSenderName() {
-		return super.getCommandSenderName();
 	}
 
 	@Override
@@ -1196,24 +1093,6 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public float func_145772_a(Explosion explosion, World world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Block block) {
-		return master != null ? master.func_145772_a(explosion, world, p_145772_3_, p_145772_4_, p_145772_5_, block) : super.func_145772_a(explosion, world, p_145772_3_, p_145772_4_, p_145772_5_, block);
-	}
-
-	public float superFunc_145772_a(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block) {
-		return super.func_145772_a((Explosion) explosion, (World) world, p_145772_3_, p_145772_4_, p_145772_5_, (Block) block);
-	}
-
-	@Override
-	public boolean func_145774_a(Explosion explosion, World world, int p_145774_3_, int p_145774_4_, int p_145774_5_, Block block, float p_145774_7_) {
-		return master != null ? master.func_145774_a(explosion, world, p_145774_3_, p_145774_4_, p_145774_5_, block, p_145774_7_) : super.func_145774_a(explosion, world, p_145774_3_, p_145774_4_, p_145774_5_, block, p_145774_7_);
-	}
-
-	public boolean superFunc_145774_a(Object explosion, Object world, int p_145774_3_, int p_145774_4_, int p_145774_5_, Object block, float p_145774_7_) {
-		return super.func_145774_a((Explosion) explosion, (World) world, p_145774_3_, p_145774_4_, p_145774_5_, (Block) block, p_145774_7_);
-	}
-
-	@Override
 	public int getMaxSafePointTries() {
 		return master != null ? master.getMaxSafePointTries() : super.getMaxSafePointTries();
 	}
@@ -1275,25 +1154,6 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	public boolean superIsPushedByWater() {
 		return super.isPushedByWater();
-	}
-
-	@Override
-	public IChatComponent func_145748_c_() {
-		return (IChatComponent) (master != null ? master.func_145748_c_() : super.func_145748_c_());
-	}
-
-	public IChatComponent superFunc_145748_c_() {
-		return super.func_145748_c_();
-	}
-
-	@Override
-	public void func_145781_i(int p_145781_1_) {
-		if (master != null) master.func_145781_i(p_145781_1_);
-		else super.func_145781_i(p_145781_1_);
-	}
-
-	public void superFunc_145781_i(int p_145781_1_) {
-		super.func_145781_i(p_145781_1_);
 	}
 
 	@Override
@@ -1384,6 +1244,485 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	public boolean superShouldDismountInWater(Object entity) {
 		return super.shouldDismountInWater((Entity) entity);
+	}
+	// ~164
+	@Override
+	protected void doBlockCollisions() {
+		if (master != null) master.doBlockCollisions();
+		else super.doBlockCollisions();
+	}
+
+	public void superDoBlockCollisions() {
+		super.doBlockCollisions();
+	}
+
+	@Override
+	protected void playStepSound(int par1, int par2, int par3, int par4) {
+		if (master != null) master.playStepSound(par1, par2, par3, par4);
+		else super.playStepSound(par1, par2, par3, par4);
+	}
+
+	public void superPlayStepSound(int par1, int par2, int par3, int par4) {
+		super.playStepSound(par1, par2, par3, par4);
+	}
+
+	@Override
+	public boolean isInRangeToRenderVec3D(Vec3 vec3) {
+		return master != null ? master.isInRangeToRenderVec3D(vec3) : super.isInRangeToRenderVec3D(vec3);
+	}
+
+	public boolean superIsInRangeToRenderVec3D(Object vec3) {
+		return super.isInRangeToRenderVec3D((Vec3) vec3);
+	}
+
+	@Override
+	public EntityItem dropItem(int par1, int par2) {
+		return (EntityItem) (master != null ? master.dropItem(par1, par2) : super.dropItem(par1, par2));
+	}
+
+	public EntityItem superDropItem(int par1, int par2) {
+		return super.dropItem(par1, par2);
+	}
+
+	@Override
+	public EntityItem dropItemWithOffset(int par1, int par2, float par3) {
+		return (EntityItem) (master != null ? master.dropItemWithOffset(par1, par2, par3) : super.dropItemWithOffset(par1, par2, par3));
+	}
+
+	public EntityItem superDropItemWithOffset(int par1, int par2, float par3) {
+		return super.dropItemWithOffset(par1, par2, par3);
+	}
+
+	@Override
+	protected boolean pushOutOfBlocks(double par1, double par3, double par5) {
+		return master != null ? master.pushOutOfBlocks(par1, par3, par5) : super.pushOutOfBlocks(par1, par3, par5);
+	}
+
+	public boolean superPushOutOfBlocks(double par1, double par3, double par5) {
+		return super.pushOutOfBlocks(par1, par3, par5);
+	}
+
+	@Override
+	public String getEntityName() {
+		return master != null ? master.getEntityName() : super.getEntityName();
+	}
+
+	public String superGetEntityName() {
+		return super.getEntityName();
+	}
+
+	@Override
+	public float getBlockExplosionResistance(Explosion explosion, World world, int par3, int par4, int par5, Block block) {
+		return master != null ? master.getBlockExplosionResistance(explosion, world, par3, par4, par5, block) : super.getBlockExplosionResistance(explosion, world, par3, par4, par5, block);
+	}
+
+	public float superGetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block) {
+		return super.getBlockExplosionResistance((Explosion) explosion, (World) world, par3, par4, par5, (Block) block);
+	}
+
+	@Override
+	public boolean shouldExplodeBlock(Explosion explosion, World world, int par3, int par4, int par5, int par6, float par7) {
+		return master != null ? master.shouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7) : super.shouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7);
+	}
+
+	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
+		return super.shouldExplodeBlock((Explosion) explosion, (World) world, par3, par4, par5, par6, par7);
+	}
+
+	@Override
+	public String getTranslatedEntityName() {
+		return master != null ? master.getTranslatedEntityName() : super.getTranslatedEntityName();
+	}
+
+	public String superGetTranslatedEntityName() {
+		return super.getTranslatedEntityName();
+	}
+	// 172~
+	public int superGetEntityId() {
+		return entityId;
+	}
+
+	public void superSetEntityId(int p_145769_1_) {
+		entityId = p_145769_1_;
+	}
+
+	public String superGetSwimSound() {
+		return null;
+	}
+
+	public void superFunc_145775_I() {
+	}
+
+	public void superFunc_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object block) {
+	}
+
+	public String superGetSplashSound() {
+		return null;
+	}
+
+	public boolean superIsInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_) {
+		return false;
+	}
+
+	public EntityItem superDropItem(Object item, int p_145779_2_) {
+		return null;
+	}
+
+	public EntityItem superFunc_145778_a(Object item, int p_145778_2_, float p_145778_3_) {
+		return null;
+	}
+
+	public boolean superFunc_145771_j(double p_145771_1_, double p_145771_3_, double p_145771_5_) {
+		return false;
+	}
+
+	public String superGetCommandSenderName() {
+		return null;
+	}
+
+	public float superFunc_145772_a(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block) {
+		return 0.0F;
+	}
+
+	public boolean superFunc_145774_a(Object explosion, Object world, int p_145774_3_, int p_145774_4_, int p_145774_5_, Object block, float p_145774_7_) {
+		return false;
+	}
+
+	public Object superFunc_145748_c_() {
+		return null;
+	}
+
+	public void superFunc_145781_i(int p_145781_1_) {
+	}
+	// 180~
+	@Override
+	public boolean superAttackEntityFrom(Object damageSource, int par2) {
+		return false;
+	}
+
+	@Override
+	public String superGetTexture() {
+		return null;
+	}
+
+	@Override
+	public boolean superAddNotRiddenEntityID(Object nBTTagCompound) {
+		return false;
+	}
+
+	@Override
+	public boolean superAddEntityID(Object nBTTagCompound) {
+		return false;
+	}
+
+	@Override
+	public boolean superInteract(Object entityPlayer) {
+		return false;
+	}
+
+	@Override
+	public void superUnmountEntity(Object entity) {
+	}
+
+	@Override
+	public void superUpdateCloak() {
+	}
+
+	@Override
+	public boolean superFunc_98034_c(Object entityPlayer) {
+		return false;
+	}
+
+	@Override
+	public boolean superFunc_85031_j(Object entity) {
+		return false;
+	}
+
+	@Override
+	public void superFunc_82149_j(Object entity) {
+	}
+
+	@Override
+	public float superFunc_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
+		return false;
+	}
+
+	@Override
+	public int superFunc_82143_as() {
+		return -1;
+	}
+
+	@Override
+	public void superFunc_85029_a(Object crashReportCategory) {
+	}
+
+	@Override
+	public boolean superFunc_96092_aw() {
+		return false;
+	}
+
+	@Override
+	public void superOnKillCommand() {
+	}
+
+	@Override
+	public void superPlayStepSound(Object blockPos, Object block) {
+	}
+
+	@Override
+	public boolean superIsSilent() {
+		return false;
+	}
+
+	@Override
+	public void superSetSilent(boolean isSilent) {
+	}
+
+	@Override
+	public void superFunc_180433_a(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
+	}
+
+	@Override
+	public void superFall(float distance, float damageMultiplier) {
+	}
+
+	@Override
+	public void superResetHeight() {
+	}
+
+	@Override
+	public void superSpawnRunningParticles() {
+	}
+
+	@Override
+	public void superCreateRunningParticles() {
+	}
+
+	@Override
+	public boolean superIsInLava() {
+		return false;
+	}
+
+	@Override
+	public void superMoveToBlockPosAndAngles(Object blockPos, float p_174828_2_, float p_174828_3_) {
+	}
+
+	@Override
+	public double superGetDistanceSq(Object blockPos) {
+		return 0.0D;
+	}
+
+	@Override
+	public double superGetDistanceSqToCenter(Object blockPos) {
+		return 0.0D;
+	}
+
+	@Override
+	public Object superGetLook(float p_70676_1_) {
+		return null;
+	}
+
+	@Override
+	public Object superGetPositionEyes(float p_174824_1_) {
+		return null;
+	}
+
+	@Override
+	public Object superRayTrace(double p_174822_1_, float p_174822_3_) {
+		return null;
+	}
+
+	@Override
+	public Object superDropItemWithOffset(Object item, int size, float p_145778_3_) {
+		return null;
+	}
+
+	@Override
+	public void superFunc_180426_a(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+	}
+
+	@Override
+	public Object[] superGetInventory() {
+		return null;
+	}
+
+	@Override
+	public String superGetName() {
+		return null;
+	}
+
+	@Override
+	public boolean superIsEntityInvulnerable(Object damageSource) {
+		return false;
+	}
+
+	@Override
+	public void superCopyDataFromOld(Object entity) {
+	}
+
+	@Override
+	public float superGetExplosionResistance(Object explosion, Object world, Object blockPos, Object iBlockState) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
+		return false;
+	}
+
+	@Override
+	public int superGetMaxFallHeight() {
+		return -1;
+	}
+
+	@Override
+	public Object superGetDisplayName() {
+		return null;
+	}
+
+	@Override
+	public void superSetCustomNameTag(String p_96094_1_) {
+	}
+
+	@Override
+	public String superGetCustomNameTag() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasCustomName() {
+		return false;
+	}
+
+	@Override
+	public void superSetAlwaysRenderNameTag(boolean p_174805_1_) {
+	}
+
+	@Override
+	public boolean superGetAlwaysRenderNameTag() {
+		return false;
+	}
+
+	@Override
+	public void superSetPositionAndUpdate(double x, double y, double z) {
+	}
+
+	@Override
+	public boolean superGetAlwaysRenderNameTagForRender() {
+		return false;
+	}
+
+	@Override
+	public Object superGetHorizontalFacing() {
+		return null;
+	}
+
+	@Override
+	public Object superFunc_174823_aP() {
+		return null;
+	}
+
+	@Override
+	public boolean superFunc_174827_a(Object entityPlayerMP) {
+		return false;
+	}
+
+	@Override
+	public Object superGetEntityBoundingBox() {
+		return null;
+	}
+
+	@Override
+	public void superSetEntityBoundingBox(Object axisAlignedBB) {
+	}
+
+	@Override
+	public boolean superIsOutsideBorder() {
+		return false;
+	}
+
+	@Override
+	public void superSetOutsideBorder(boolean p_174821_1_) {
+	}
+
+	@Override
+	public boolean superReplaceItemInInventory(int p_174820_1_, Object itemStack) {
+		return false;
+	}
+
+	@Override
+	public void superAddChatMessage(Object iChatComponent) {
+	}
+
+	@Override
+	public boolean superCanUseCommand(int permLevel, String commandName) {
+		return false;
+	}
+
+	@Override
+	public Object superGetPosition() {
+		return null;
+	}
+
+	@Override
+	public Object superGetPositionVector() {
+		return null;
+	}
+
+	@Override
+	public Object superGetEntityWorld() {
+		return null;
+	}
+
+	@Override
+	public Object superGetCommandSenderEntity() {
+		return null;
+	}
+
+	@Override
+	public boolean superSendCommandFeedback() {
+		return false;
+	}
+
+	@Override
+	public void superSetCommandStat(Object type, int amount) {
+	}
+
+	@Override
+	public Object superFunc_174807_aT() {
+		return null;
+	}
+
+	@Override
+	public void superFunc_174817_o(Object entity) {
+	}
+
+	@Override
+	public Object superFunc_174819_aU() {
+		return null;
+	}
+
+	@Override
+	public void superFunc_174834_g(Object nBTTagCompound) {
+	}
+
+	@Override
+	public boolean superFunc_174825_a(Object entityPlayer, Object vec3) {
+		return false;
+	}
+
+	@Override
+	public boolean superFunc_180427_aV() {
+		return false;
+	}
+
+	@Override
+	public void superFunc_174815_a(Object entityLivingBase, Object entity) {
 	}
 
 }
