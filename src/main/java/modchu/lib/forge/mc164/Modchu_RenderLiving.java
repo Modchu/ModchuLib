@@ -294,7 +294,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return mainModel;
 	}
 
-	@Override
 	public Object getRenderPassModel() {
 		return renderPassModel;
 	}
@@ -534,6 +533,15 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public void superFunc_177105_a(Object entityLiving, float p_177105_2_) {
+	}
+	// ~152
+	@Override
+	public void superLoadTexture(String par1Str) {
+	}
+
+	@Override
+	public boolean superLoadDownloadableImageTexture(String par1Str, String par2Str) {
+		return false;
 	}
 
 }

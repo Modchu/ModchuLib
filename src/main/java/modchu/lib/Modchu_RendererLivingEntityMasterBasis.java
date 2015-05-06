@@ -111,9 +111,8 @@ public class Modchu_RendererLivingEntityMasterBasis implements Modchu_IRendererL
 	}
 
 	@Override
-	public double renderLivingLabel(Object entityplayer, String par2Str, double d, double d1, double d2, int i) {
+	public void renderLivingLabel(Object entityplayer, String par2Str, double d, double d1, double d2, int i) {
 		base.superRenderLivingLabel(entityplayer, par2Str, d, d1, d2, i);
-		return d1;
 	}
 
 	@Override
@@ -269,6 +268,16 @@ public class Modchu_RendererLivingEntityMasterBasis implements Modchu_IRendererL
 	@Override
 	public void func_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 		base.superFunc_147906_a(entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
+	}
+
+	@Override
+	public void loadTexture(String par1Str) {
+		base.superLoadTexture(par1Str);
+	}
+
+	@Override
+	public boolean loadDownloadableImageTexture(String par1Str, String par2Str) {
+		return base.superLoadDownloadableImageTexture(par1Str, par2Str);
 	}
 
 }

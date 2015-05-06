@@ -131,6 +131,7 @@ public interface Modchu_IEntityCapsBase {
 	public static final int caps_interestedAngle	= 0x0150;
 
 	public static final int caps_ScaleFactor	= 0x0200;
+	public static final int caps_PartsVisible	= 0x0201;
 	public static final int caps_changeModel		= 0x0300;
 
 	// MMM_test

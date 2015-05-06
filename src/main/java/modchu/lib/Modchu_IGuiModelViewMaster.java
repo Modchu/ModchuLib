@@ -1,6 +1,6 @@
 package modchu.lib;
 
-public interface Modchu_IGuiModelViewMaster extends Modchu_IGuiBaseMaster {
+public interface Modchu_IGuiModelViewMaster extends Modchu_IGuiScreenMaster {
 
 	public void drawGuiContainerBackgroundLayer(float f, int i, int j);
 	public void setTextureArmorPackege();

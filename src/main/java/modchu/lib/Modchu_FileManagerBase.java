@@ -56,30 +56,74 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		int i = 0;
 		try {
 			ProtectionDomain ls1 = c.getProtectionDomain();
+			//Modchu_Debug.lDebug("Modchu_FileManager init ls1="+ls1);
 			CodeSource ls2 = ls1.getCodeSource();
+			//Modchu_Debug.lDebug("Modchu_FileManager init ls2="+ls2);
 			URL ls3 = ls2.getLocation();
+			//Modchu_Debug.lDebug("Modchu_FileManager init ls3="+ls3);
 			URI ls4 = ls3.toURI();
-			Modchu_FileManager.setMinecraftJar(new File(ls4));
-//			base.setMinecraftDir(new File(BaseMod.class.getProtectionDomain().getCodeSource().getLocation().toURI()));
-//			Modchu_Debug.tDebug(String.format("getMincraftFile-file:%s", base.getMinecraftDir().getName()));
+			//Modchu_Debug.lDebug("Modchu_FileManager init ls4="+ls4);
+			int i1 = ls4.toString().lastIndexOf(".class");
+			if (i1 > -1) {
+				//Class c1 = Modchu_Reflect.loadClass(ls4.toString());
+				//Modchu_Debug.lDebug("Modchu_FileManager init c.getName()="+c.getName());
+				String s = ls4.toString();
+				String s1 = c.getName();
+				//Modchu_Debug.lDebug("Modchu_FileManager init s1="+s1);
+				i1 = s.lastIndexOf(s1);
+				if (i1 > -1) {
+					s = s.substring(0, i1);
+				} else {
+					s = s.replaceAll("/", ".");
+					//Modchu_Debug.lDebug("Modchu_FileManager init 2 s="+s);
+					i1 = s.indexOf(s1);
+					if (i1 > -1) {
+						s = s.substring(0, i1);
+						while (s.indexOf(".") > -1) {
+							s = s.replace(".", "\\");
+						}
+					} else {
+						//Modchu_Debug.lDebug("Modchu_FileManager init 4 else s="+s+" "+s1.replaceAll(".", "/").replaceAll("//", ""));
+					}
+				}
+				s = s.replace("file:\\", "");
+				Modchu_Debug.lDebug("Modchu_FileManager init 5 s="+s);
+				File file = new File(s);
+				Modchu_Debug.lDebug("Modchu_FileManager init 6 file="+file);
+				Modchu_Debug.lDebug("Modchu_FileManager init 6-1 file.exists()="+file.exists());
+				String path = file.getPath();
+				Modchu_Debug.lDebug("Modchu_FileManager init 6-2 path="+path);
+				Modchu_FileManager.addMinecraftJar(file);
+				Modchu_Debug.lDebug("Modchu_FileManager init 7");
+			} else {
+				Modchu_FileManager.addMinecraftJar(new File(ls4));
+				Modchu_Debug.lDebug("Modchu_FileManager init 1 ls4="+ls4);
+			}
 			i = 1;
 		} catch (Exception exception) {
-			Modchu_Debug.tDebug("getMinecraftFile-Exception.");
+			Modchu_Debug.tDebug("Modchu_FileManagerBase init getMinecraftFile-Exception1.");
 		}
-		if (Modchu_FileManager.getMinecraftJar() == null) {
+		Modchu_Debug.lDebug("Modchu_FileManager init 8");
+		List<File> list = Modchu_FileManager.getMinecraftJarList();
+		Modchu_Debug.lDebug("Modchu_FileManager init 9 list="+list);
+		if (list.isEmpty()) {
+			Modchu_Debug.lDebug("Modchu_FileManager init 9-1 list.isEmpty()");
 			try {
 				ClassLoader lcl1 = c.getClassLoader();
+				Modchu_Debug.lDebug("Modchu_FileManager init 9-2");
 				String lcls1 = c.getName().concat(".class");
 				URL lclu1 = lcl1.getResource(lcls1);
 				JarURLConnection lclc1 = (JarURLConnection)lclu1.openConnection();
 				JarFile lclj1 = lclc1.getJarFile();
-				Modchu_FileManager.setMinecraftJar(new File(lclj1.getName()));
+				Modchu_FileManager.addMinecraftJar(new File(lclj1.getName()));
 				i = 2;
 			} catch (Exception exception) {
-				Modchu_Debug.tDebug("getMinecraftFile-Exception.");
+				Modchu_Debug.tDebug("Modchu_FileManagerBase init getMinecraftFile-Exception2.");
 			}
+			Modchu_Debug.lDebug("Modchu_FileManager init 9-end");
 		}
-		if (Modchu_FileManager.getMinecraftJar() == null) {
+		Modchu_Debug.lDebug("Modchu_FileManager init 10");
+		if (Modchu_FileManager.getMinecraftJarList().isEmpty()) {
 			String ls = System.getProperty("java.class.path");
 			int li = ls.indexOf(';');
 			if (li > -1) {
@@ -89,17 +133,25 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			if (li > -1) {
 				ls = ls.substring(0, li);
 			}
-			Modchu_FileManager.setMinecraftJar(new File(ls));
+			Modchu_FileManager.addMinecraftJar(new File(ls));
 			i = 3;
 		}
-		Modchu_Debug.lDebug("Modchu_FileManager minecraftJar="+Modchu_FileManager.getMinecraftJar().getAbsolutePath()+" i="+i);
+		//Modchu_Debug.lDebug("Modchu_FileManager init 11");
+		//File file = Modchu_FileManager.getMinecraftJarList().get(0);
+		//Modchu_Debug.lDebug("Modchu_FileManagerBase init 12 file="+file);
+		//Modchu_Debug.lDebug("Modchu_FileManagerBase init 13 minecraftJar="+file.getAbsolutePath()+" i="+i);
 		if (!Modchu_Main.isServer) {
-			Modchu_FileManager.setAssetsDir(new File(Modchu_FileManager.getMinecraftDir(), "assets"));
-			Modchu_Debug.lDebug("Modchu_FileManager assetsDir="+Modchu_FileManager.getAssetsDir().getAbsolutePath());
+			Modchu_FileManager.setAssetsDir(new File(Modchu_FileManager.getMinecraftDir(), "/assets/"));
+			Modchu_Debug.lDebug("Modchu_FileManagerBase init assetsDir="+Modchu_FileManager.getAssetsDir().getAbsolutePath());
 		} else {
 			// サーバー側では使われないはず。
 		}
-		System.out.println("Modchu_FileManagerBase init end.");
+		
+		if (!Modchu_Main.isRelease()) {
+			Modchu_FileManager.addMinecraftJar(new File(Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir), "/bin/minecraft.jar"));
+			Modchu_Debug.lDebug("Modchu_FileManagerBase minecraft.jar file.exists()="+Modchu_FileManager.getMinecraftJarList().get(1).exists());
+		}
+		Modchu_Debug.Debug("Modchu_FileManagerBase init end.");
 	}
 
 	public List<File> getModFile(String pname, String pprefix) {
@@ -299,8 +351,8 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 					return map;
 				}
 				if (!map.containsKey(cn)) {
-					map.put(cn, c);
-					Modchu_Debug.Debug("addModClass-:"+cn);
+					map.put(c.getName(), c);
+					Modchu_Debug.Debug("addModClass-:"+c.getName());
 				}
 			} else {
 				Modchu_Debug.Debug("addModClass-class == null !!: %s", cn);
@@ -310,21 +362,39 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	}
 
 	public String classNameProcessing(String fname) {
+		//Modchu_Debug.Debug("classNameProcessing 1 fname="+fname);
 		String mcDataDirAbsolutePath = Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir).getAbsolutePath();
 		int i1 = mcDataDirAbsolutePath.lastIndexOf("\\.");
 		if (i1 > -1) mcDataDirAbsolutePath = mcDataDirAbsolutePath.substring(0, i1 + 1);
-		String minecraftJarPath = Modchu_FileManager.getMinecraftJar().getAbsolutePath();
+		List<File> list = Modchu_FileManager.getMinecraftJarList();
+		String minecraftJarPath = list.get(0).getAbsolutePath();
+		if (minecraftJarPath.indexOf("file:\\") > -1) minecraftJarPath = minecraftJarPath.substring(6);
+		String minecraftJarPath2 = list.get(0).getPath();
+		if (minecraftJarPath2.indexOf("file:\\") > -1) minecraftJarPath2 = minecraftJarPath2.substring(6);
 		//Modchu_Debug.Debug("classNameProcessing-mcDataDirAbsolutePath="+mcDataDirAbsolutePath);
 		//Modchu_Debug.Debug("classNameProcessing-minecraftJarPath="+minecraftJarPath);
+		//Modchu_Debug.Debug("classNameProcessing-minecraftJarPath2="+minecraftJarPath2);
 		String cn = fname.replace(".class", "");
-		//Modchu_Debug.Debug("classNameProcessing 1 cn="+cn);
+		//Modchu_Debug.Debug("classNameProcessing 2 cn="+cn);
 		if (cn.indexOf(mcDataDirAbsolutePath) > -1) cn = cn.substring(mcDataDirAbsolutePath.length());
 		if (cn.indexOf(minecraftJarPath) > -1) cn = cn.substring(minecraftJarPath.length());
-		//Modchu_Debug.Debug("classNameProcessing 2 cn="+cn);
-		cn = cn.replace("\\", ".").replace("/", ".");
-		if (cn.startsWith(".minecraft.")) cn = cn.substring(11);
-		if (cn.startsWith(".")) cn = cn.substring(1);
-		//Modchu_Debug.Debug("classNameProcessing end. cn="+cn);
+		if (cn.indexOf(minecraftJarPath2) > -1) cn = cn.substring(minecraftJarPath2.length());
+		String s0 = "\\bin\\";
+		i1 = cn.indexOf(s0);
+		if (i1 > -1) cn = cn.substring(i1 + s0.length());
+		s0 = ".bin.";
+		i1 = cn.indexOf(s0);
+		if (i1 > -1) cn = cn.substring(i1 + s0.length());
+		//Modchu_Debug.Debug("classNameProcessing 3 cn="+cn);
+		if ((Modchu_Main.getMinecraftVersion() > 159
+				| !Modchu_Main.isForge)
+				&& cn.indexOf(":/") < 0) cn = cn.replace("\\", ".").replace("/", ".");
+		if (cn.startsWith(".minecraft.")
+				| cn.startsWith("/minecraft/")) cn = cn.substring(11);
+		if (cn.startsWith(".")
+				| cn.startsWith("/")
+				| cn.startsWith("\\")) cn = cn.substring(1);
+		//Modchu_Debug.Debug("classNameProcessing 4 end. cn="+cn);
 		return cn;
 	}
 

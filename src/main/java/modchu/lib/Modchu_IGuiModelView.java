@@ -1,6 +1,6 @@
 package modchu.lib;
 
-public interface Modchu_IGuiModelView extends Modchu_IGuiBase {
+public interface Modchu_IGuiModelView extends Modchu_IGuiScreen {
 	public void drawGuiContainerBackgroundLayer(float f, int i, int j);
 	public void drawString(String s, int i, int j, int k);
 	public void setTextureArmorPackege();

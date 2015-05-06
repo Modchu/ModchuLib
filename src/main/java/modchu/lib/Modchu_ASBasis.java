@@ -4287,8 +4287,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public void worldSpawnParticle(String s, double d, double d1, double d2, double d3, double d4, double d5) {
-		base.superWorldSpawnParticle(s, d, d1, d2, d3, d4, d5);
+	public void worldSpawnParticle(Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
+		base.superWorldSpawnParticle(stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5);
 	}
 
 	@Override
@@ -4539,5 +4539,10 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	@Override
 	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i) {
 		base.superSetEntityLivingBaseAttackTime(entityLivingBase, i);
+	}
+
+	@Override
+	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
+		base.superSetEntityPlayerCapabilitiesIsCreativeMode(entityplayer, b);
 	}
 }

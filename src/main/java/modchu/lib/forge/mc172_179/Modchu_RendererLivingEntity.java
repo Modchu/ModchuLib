@@ -55,6 +55,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		super.doRender((EntityLiving) entityLiving, d, d1, d2, d3, d4);
 	}
 
+	@Override
 	public void superDoRender(Object entity, double d, double d1, double d2, float d3, float d4) {
 		super.doRender((Entity) entity, d, d1, d2, d3, d4);
 	}
@@ -73,7 +74,6 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		shadowOpaque = f;
 	}
 
-	@Override
 	public Object getRenderManager() {
 		return renderManager;
 	}
@@ -102,6 +102,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return false;
 	}
 
+	@Override
 	public boolean superShouldRender(Object entityLiving, Object iCamera, double p_177104_3_, double p_177104_5_, double p_177104_7_) {
 		return false;
 	}
@@ -116,6 +117,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return false;
 	}
 
+	@Override
 	public boolean superCanRenderName(Object entityLivingBase) {
 		return false;
 	}
@@ -132,6 +134,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return false;
 	}
 
+	@Override
 	public boolean superAddLayer(Object layerRenderer) {
 		return false;
 	}
@@ -140,6 +143,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return false;
 	}
 
+	@Override
 	public boolean superRemoveLayer(Object layerRenderer) {
 		return false;
 	}
@@ -148,6 +152,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return 0.0F;
 	}
 
+	@Override
 	public float superInterpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_) {
 		return 0.0F;
 	}
@@ -155,6 +160,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 	public void func_82422_c() {
 	}
 
+	@Override
 	public void superFunc_82422_c() {
 	}
 
@@ -162,6 +168,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return false;
 	}
 
+	@Override
 	public boolean superFunc_177088_c(Object entityLivingBase) {
 		return false;
 	}
@@ -169,6 +176,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 	protected void func_180565_e() {
 	}
 
+	@Override
 	public void superFunc_180565_e() {
 	}
 
@@ -185,6 +193,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return false;
 	}
 
+	@Override
 	public boolean superFunc_177092_a(Object entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
 		return false;
 	}
@@ -192,6 +201,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 	protected void func_177091_f() {
 	}
 
+	@Override
 	public void superFunc_177091_f() {
 	}
 
@@ -207,24 +217,28 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 	protected void func_177093_a(EntityLivingBase entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
 	}
 
+	@Override
 	public void superFunc_177093_a(Object entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
 	}
 
 	public void setRenderOutlines(boolean p_177086_1_) {
 	}
 
+	@Override
 	public void superSetRenderOutlines(boolean p_177086_1_) {
 	}
 
 	public void renderName(Entity entity, double x, double y, double z) {
 	}
 
+	@Override
 	public void superRenderName(Object entity, double x, double y, double z) {
 	}
 
 	protected void func_177069_a(Entity entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 	}
 
+	@Override
 	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 	}
 /*
@@ -232,13 +246,15 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return false;
 	}
 */
+	@Override
 	public boolean superBindEntityTexture(Object entity) {
-		return false;
+		return true;
 	}
 
 	protected void renderLivingLabel(Entity entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 	}
 
+	@Override
 	public void superRenderLivingLabel(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 	}
 
@@ -246,6 +262,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return null;
 	}
 
+	@Override
 	public Object superFunc_177068_d() {
 		return null;
 	}
@@ -292,6 +309,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return null;
 	}
 	// ~179
+	@Override
 	protected void renderEquippedItems(EntityLivingBase entityliving, float f) {
 		if (master != null) master.renderEquippedItems(entityliving, f);
 	}
@@ -441,7 +459,6 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return mainModel;
 	}
 
-	@Override
 	public Object getRenderPassModel() {
 		return renderPassModel;
 	}
@@ -452,6 +469,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		else super.setRenderPassModel(modelBase);
 	}
 
+	@Override
 	public void superSetRenderPassModel(Object modelBase) {
 		super.setRenderPassModel((ModelBase) modelBase);
 	}
@@ -461,6 +479,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return master != null ? master.renderSwingProgress(entityLivingBase, par2) : super.renderSwingProgress(entityLivingBase, par2);
 	}
 
+	@Override
 	public float superRenderSwingProgress(Object entityLivingBase, float par2) {
 		return super.renderSwingProgress((EntityLivingBase) entityLivingBase, par2);
 	}
@@ -471,6 +490,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		else super.renderArrowsStuckInEntity(entityLivingBase, par2);
 	}
 
+	@Override
 	public void superRenderArrowsStuckInEntity(Object entityLivingBase, float par2) {
 		super.renderArrowsStuckInEntity((EntityLivingBase) entityLivingBase, par2);
 	}
@@ -480,6 +500,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return master != null ? master.inheritRenderPass(entityLivingBase, par2, par3) : super.inheritRenderPass(entityLivingBase, par2, par3);
 	}
 
+	@Override
 	public int superInheritRenderPass(Object entityLivingBase, int par2, float par3) {
 		return super.inheritRenderPass((EntityLivingBase) entityLivingBase, par2, par3);
 	}
@@ -489,6 +510,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return master != null ? master.shouldRenderPass(entityLivingBase, par2, par3) : super.shouldRenderPass(entityLivingBase, par2, par3);
 	}
 
+	@Override
 	public int superShouldRenderPass(Object entityLivingBase, int par2, float par3) {
 		return super.shouldRenderPass((EntityLivingBase) entityLivingBase, par2, par3);
 	}
@@ -499,6 +521,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		else super.func_82408_c(entityLivingBase, par2, par3);
 	}
 
+	@Override
 	public void superFunc_82408_c(Object entityLivingBase, int par2, float par3) {
 		super.func_82408_c((EntityLivingBase) entityLivingBase, par2, par3);
 	}
@@ -508,6 +531,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return master != null ? master.func_110813_b(entityLivingBase) : super.func_110813_b(entityLivingBase);
 	}
 
+	@Override
 	public boolean superFunc_110813_b(Object entityLivingBase) {
 		return super.func_110813_b((EntityLivingBase) entityLivingBase);
 	}
@@ -518,6 +542,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		else super.func_96449_a(entityLivingBase, par2, par4, par6, par8Str, par9, par10);
 	}
 
+	@Override
 	public void superFunc_96449_a(Object entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10) {
 		super.func_96449_a((EntityLivingBase) entityLivingBase, par2, par4, par6, par8Str, par9, par10);
 	}
@@ -527,6 +552,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return master != null ? master.isStaticEntity() : super.isStaticEntity();
 	}
 
+	@Override
 	public boolean superIsStaticEntity() {
 		return super.isStaticEntity();
 	}
@@ -543,6 +569,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		else super.setRenderManager(renderManager);
 	}
 
+	@Override
 	public void superSetRenderManager(Object renderManager) {
 		super.setRenderManager((RenderManager) renderManager);
 	}
@@ -553,6 +580,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		else super.updateIcons(iIconRegister);
 	}
 
+	@Override
 	public void superUpdateIcons(Object iIconRegister) {
 		super.updateIcons((IIconRegister) iIconRegister);
 	}
@@ -563,8 +591,18 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		else super.func_147906_a(entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
 	}
 
+	@Override
 	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 		super.func_147906_a((Entity) entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
+	}
+	// ~152
+	@Override
+	public void superLoadTexture(String par1Str) {
+	}
+
+	@Override
+	public boolean superLoadDownloadableImageTexture(String par1Str, String par2Str) {
+		return false;
 	}
 
 }

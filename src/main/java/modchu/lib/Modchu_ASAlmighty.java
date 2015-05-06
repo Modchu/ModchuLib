@@ -1594,10 +1594,13 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		}
 		if (pIndex == worldGetBlockState) {
 			if (pArg != null
-			&& pArg.length > 1
-			&& pArg[0] != null
-			&& pArg[1] != null) {
-				return worldGetBlockState(pArg[0], pArg[1]);
+			&& pArg.length > 0
+			&& pArg[0] != null) {
+				if (pArg.length > 1
+						&& pArg[1] != null) {
+					return worldGetBlockState(pArg[0], pArg[1]);
+				}
+				return worldGetBlockState(pArg[0]);
 			}
 		}
 		if (pIndex == pathNavigateGetPathToEntityLiving) {
@@ -1990,6 +1993,20 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[0] != null
 			&& pArg[1] != null) {
 				entityAgeableSetGrowingAge(pArg[0], (Integer) pArg[1]);
+				return true;
+			}
+			return false;
+		}
+		if (pIndex == entityPlayerCapabilitiesIsCreativeMode) {
+			if (pArg != null
+			&& pArg.length > 0
+			&& pArg[0] != null) {
+				if (pArg.length > 1
+						&& pArg[1] != null) {
+					setEntityPlayerCapabilitiesIsCreativeMode(pArg[0], (Boolean) pArg[1]);
+				} else {
+					setEntityPlayerCapabilitiesIsCreativeMode((Boolean) pArg[0]);
+				}
 				return true;
 			}
 			return false;
@@ -4434,9 +4451,9 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[6] != null) {
 				if (pArg.length > 7
 						&& pArg[7] != null) {
-					worldSpawnParticle(pArg[0], (String) pArg[1], (Double) pArg[2], (Double) pArg[3], (Double) pArg[4], (Double) pArg[5], (Double) pArg[6], (Double) pArg[7]);
+					worldSpawnParticle(pArg[0], pArg[1], (Double) pArg[2], (Double) pArg[3], (Double) pArg[4], (Double) pArg[5], (Double) pArg[6], (Double) pArg[7]);
 				} else {
-					worldSpawnParticle((String) pArg[0], (Double) pArg[1], (Double) pArg[2], (Double) pArg[3], (Double) pArg[4], (Double) pArg[5], (Double) pArg[6]);
+					worldSpawnParticle(pArg[0], (Double) pArg[1], (Double) pArg[2], (Double) pArg[3], (Double) pArg[4], (Double) pArg[5], (Double) pArg[6]);
 				}
 				return true;
 			}
@@ -7638,6 +7655,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return capabilities != null ? Modchu_CastHelper.Boolean(Modchu_Reflect.getFieldObject(capabilities.getClass(), "field_75098_d", "isCreativeMode", capabilities)) : false;
 	}
 
+	protected void setEntityPlayerCapabilitiesIsCreativeMode(boolean b) {
+		setEntityPlayerCapabilitiesIsCreativeMode(minecraftThePlayer(), b);
+	}
+
+	protected void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
+		Object capabilities = Modchu_Reflect.getFieldObject(entityplayer.getClass(), "field_71075_bZ", "capabilities", entityplayer);
+		if (capabilities != null) Modchu_CastHelper.Boolean(Modchu_Reflect.setFieldObject(capabilities.getClass(), "field_75098_d", "isCreativeMode", capabilities, b));
+	}
+
 	protected Object[] entityPlayerMainInventory() {
 		return entityPlayerMainInventory(minecraftThePlayer());
 	}
@@ -9482,6 +9508,11 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 				getMinecraftMode = 1;
 				return o;
 			}
+			o = Modchu_Reflect.invokeMethod(minecraft, "x", -1);
+			if (o != null) {
+				getMinecraftMode = 1;
+				return o;
+			}
 		}
 		if (getMinecraftMode == 0
 				| getMinecraftMode == 2) {
@@ -11089,7 +11120,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object worldGetWorldInfo(Object world) {
-		return Modchu_Reflect.invokeMethod(world.getClass(), "func_72912_H", "getWorldInfo", world);
+		return Modchu_Reflect.invokeMethod("World", "func_72912_H", "getWorldInfo", world);
 	}
 
 	protected void worldRemoveEntity(Object world, Object entity) {
@@ -11101,7 +11132,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object worldGetBlock(Object world, int i, int i2, int i3) {
-		return Modchu_Reflect.invokeMethod(world.getClass(), "func_150810_a", "getBlock", world);
+		return Modchu_Reflect.invokeMethod("World", "func_150810_a", "getBlock", world);
 	}
 
 	protected Enum worldGetWorldInfoGetGameType() {
@@ -11260,8 +11291,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		Modchu_Reflect.invokeMethod("World", "func_608_a", "spawnPlayerWithLoadedChunks", new Class[]{ Modchu_Reflect.loadClass("EntityPlayer") }, entityWorldObj(worldOrEntity), new Object[]{ entity });
 	}
 
-	protected void worldSpawnParticle(String s, double d, double d1, double d2, double d3, double d4, double d5) {
-		worldSpawnParticle(minecraftTheWorld(), s, d, d1, d2, d3, d4, d5);
+	protected void worldSpawnParticle(Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
+		worldSpawnParticle(minecraftTheWorld(), stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5);
 	}
 
 	protected void worldSpawnParticle(Object worldOrEntity, Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
@@ -11418,6 +11449,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected Object newModelResourceLocation(String s, String s1) {
 		return Modchu_Reflect.newInstance("ModelResourceLocation", new Class[]{ String.class, String.class }, new Object[]{ s, s1 });
+	}
+
+	protected Object worldGetBlockState(Object blockPos) {
+		return worldGetBlockState(minecraftTheWorld(), blockPos);
 	}
 
 	protected Object worldGetBlockState(Object worldOrEntity, Object blockPos) {

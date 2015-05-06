@@ -1,13 +1,18 @@
 package modchu.lib.lmm.common.mc172_180;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import mmmlibx.lib.MMM_TextureBox;
 import mmmlibx.lib.multiModel.model.mc162.IModelCaps;
 import mmmlibx.lib.multiModel.model.mc162.ModelMultiBase;
-import modchu.model.ModchuModel_TextureBoxBase;
+import modchu.lib.Modchu_Debug;
 import modchu.model.ModchuModel_IEntityCaps;
 import modchu.model.ModchuModel_ModelDataMaster;
+import modchu.model.ModchuModel_TextureBoxBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -29,6 +34,33 @@ public class Modchu_LmmXTextureBox extends MMM_TextureBox {
 			modelName = "";
 		}
 		textureDir = textureBox.textureDir;
+		//Modchu_Debug.lDebug("Modchu_LmmXTextureBox textureBox.textures="+textureBox.textures);
+		if (textureBox.textures != null
+				&& !textureBox.textures.isEmpty()) {
+			Map<Integer, ResourceLocation> map = new HashMap();
+			for (Entry<Integer, Object> en : ((Map<Integer, Object>) textureBox.textures).entrySet()) {
+				//Modchu_Debug.lDebug("Modchu_LmmXTextureBox en.getValue()="+en.getValue());
+				map.put(en.getKey(), (ResourceLocation) en.getValue());
+			}
+			textures = map;
+			//Modchu_Debug.lDebug("Modchu_LmmXTextureBox end. textures="+textures);
+		}
+		if (textureBox.armors != null
+				&& !textureBox.armors.isEmpty()) {
+			Map<String, Map<Integer, ResourceLocation>> map2 = new TreeMap();
+			for (Entry<String, Map<Integer, Object>> en : ((Map<String, Map<Integer, Object>>) textureBox.armors).entrySet()) {
+				String key = en.getKey();
+				Map<Integer, Object> mapValue = en.getValue();
+				Map<Integer, ResourceLocation> map3 = new HashMap();
+				for (Entry<Integer, Object> en2 : ((Map<Integer, Object>) mapValue).entrySet()) {
+					//Modchu_Debug.lDebug("Modchu_LmmXTextureBox armors en2.getValue()="+en2.getValue());
+					map3.put(en2.getKey(), (ResourceLocation) en2.getValue());
+				}
+				map2.put(key, map3);
+			}
+			armors = map2;
+			//Modchu_Debug.lDebug("Modchu_LmmXTextureBox end. armors="+armors);
+		}
 	}
 
 	public Modchu_LmmXTextureBox(ModchuModel_TextureBoxBase textureBox, String pTextureName, String[] pSearch) {
@@ -58,14 +90,14 @@ public class Modchu_LmmXTextureBox extends MMM_TextureBox {
 	}
 
 	@Override
-	public void setModels(String pModelName, ModelMultiBase[] mMM_ModelMultiBase, ModelMultiBase[] mMM_ModelMultiBase1) {
-		//if (master != null) master.setModels(pModelName, mMM_ModelMultiBase, mMM_ModelMultiBase1);
+	public void setModels(String pModelName, ModelMultiBase[] MultiModelBaseBiped, ModelMultiBase[] MultiModelBaseBiped1) {
+		//if (master != null) master.setModels(pModelName, MultiModelBaseBiped, MultiModelBaseBiped1);
 		//else
-			super.setModels(pModelName, mMM_ModelMultiBase, mMM_ModelMultiBase1);
+			super.setModels(pModelName, MultiModelBaseBiped, MultiModelBaseBiped1);
 	}
 
-	public void superSetModels(String pModelName, Object[] mMM_ModelMultiBase, Object[] mMM_ModelMultiBase1) {
-		super.setModels(pModelName, (ModelMultiBase[]) mMM_ModelMultiBase, (ModelMultiBase[]) mMM_ModelMultiBase1);
+	public void superSetModels(String pModelName, Object[] MultiModelBaseBiped, Object[] MultiModelBaseBiped1) {
+		super.setModels(pModelName, (ModelMultiBase[]) MultiModelBaseBiped, (ModelMultiBase[]) MultiModelBaseBiped1);
 	}
 
 	@Override
@@ -142,7 +174,7 @@ public class Modchu_LmmXTextureBox extends MMM_TextureBox {
 
 	@Override
 	public float getHeight(IModelCaps iModelCaps) {
-		return master != null ? master.getHeight(getModchu_IModelCaps(iModelCaps)) : super.getHeight(iModelCaps);
+		return super.getHeight(iModelCaps);
 	}
 
 	public float superGetHeight(Object iModelCaps) {
@@ -151,7 +183,7 @@ public class Modchu_LmmXTextureBox extends MMM_TextureBox {
 
 	@Override
 	public float getWidth(IModelCaps iModelCaps) {
-		return master != null ? master.getWidth(getModchu_IModelCaps(iModelCaps)) : super.getWidth(iModelCaps);
+		return super.getWidth(iModelCaps);
 	}
 
 	public float superGetWidth(Object iModelCaps) {
@@ -160,7 +192,7 @@ public class Modchu_LmmXTextureBox extends MMM_TextureBox {
 
 	@Override
 	public float getYOffset(IModelCaps iModelCaps) {
-		return master != null ? master.getYOffset(getModchu_IModelCaps(iModelCaps)) : super.getYOffset(iModelCaps);
+		return super.getYOffset(iModelCaps);
 	}
 
 	public float superGetyOffset(Object iModelCaps) {
@@ -169,7 +201,7 @@ public class Modchu_LmmXTextureBox extends MMM_TextureBox {
 
 	@Override
 	public float getMountedYOffset(IModelCaps iModelCaps) {
-		return master != null ? master.getMountedYOffset(getModchu_IModelCaps(iModelCaps)) : super.getMountedYOffset(iModelCaps);
+		return super.getMountedYOffset(iModelCaps);
 	}
 
 	public float superGetMountedyOffset(Object iModelCaps) {
@@ -196,8 +228,7 @@ public class Modchu_LmmXTextureBox extends MMM_TextureBox {
 
 	@Override
 	public void setModelSize(float pHeight, float pWidth, float pyOffset, float pMountedyOffset) {
-		if (master != null) master.setModelSize(pHeight, pWidth, pyOffset, pMountedyOffset);
-		else super.setModelSize(pHeight, pWidth, pyOffset, pMountedyOffset);
+		super.setModelSize(pHeight, pWidth, pyOffset, pMountedyOffset);
 	}
 
 	public void superSetModelSize(float pHeight, float pWidth, float pyOffset, float pMountedyOffset) {
@@ -233,7 +264,7 @@ public class Modchu_LmmXTextureBox extends MMM_TextureBox {
 
 	@Override
 	public float getHeight() {
-		return master != null ? master.getHeight(null) : super.getHeight();
+		return super.getHeight();
 	}
 
 	public float superGetHeight() {
@@ -242,7 +273,7 @@ public class Modchu_LmmXTextureBox extends MMM_TextureBox {
 
 	@Override
 	public float getWidth() {
-		return master != null ? master.getWidth(null) : super.getWidth();
+		return super.getWidth();
 	}
 
 	public float superGetWidth() {
@@ -251,7 +282,7 @@ public class Modchu_LmmXTextureBox extends MMM_TextureBox {
 
 	@Override
 	public float getYOffset() {
-		return master != null ? master.getYOffset(null) : super.getYOffset();
+		return super.getYOffset();
 	}
 
 	public float superGetYOffset() {
@@ -260,7 +291,7 @@ public class Modchu_LmmXTextureBox extends MMM_TextureBox {
 
 	@Override
 	public float getMountedYOffset() {
-		return master != null ? master.getMountedYOffset(null) : super.getMountedYOffset();
+		return super.getMountedYOffset();
 	}
 
 	public float superGetMountedYOffset() {

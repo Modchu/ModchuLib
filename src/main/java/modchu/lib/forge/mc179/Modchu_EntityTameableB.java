@@ -101,6 +101,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 		if (map != null
 				&& !map.isEmpty()); else {
 			Class c = Modchu_Main.getSpownEntityClass(worldObj, posX, posY, posZ);
+			if (c != null); else return;
 			map = new HashMap();
 			map.put("Class", c);
 			map.put("Object", worldObj);
@@ -112,7 +113,9 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		master = instance instanceof Modchu_IEntityTameableMaster ? (Modchu_IEntityTameableMaster) instance : null;
-		entityName = ((Class) map.get("Class")).getName();
+		Object o1 = map.containsKey("Class") ? map.get("Class") : null;
+		Class c1 = o1 != null ? (Class) o1 : null;
+		entityName = c1 != null ? c1.getName() : null;
 		Modchu_Debug.mDebug("initNBTAfter entityName="+(entityName != null ? entityName : "null !!"));
 		String s0 = new StringBuilder(Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this) ? "1" : "0").append(entityUniqueID).toString();
 		if (s0 != null

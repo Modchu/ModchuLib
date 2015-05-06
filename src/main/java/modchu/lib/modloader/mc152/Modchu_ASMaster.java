@@ -96,6 +96,7 @@ import net.minecraft.src.PlayerControllerMP;
 import net.minecraft.src.PositionTextureVertex;
 import net.minecraft.src.Potion;
 import net.minecraft.src.PotionHelper;
+import net.minecraft.src.Render;
 import net.minecraft.src.RenderBlocks;
 import net.minecraft.src.RenderHelper;
 import net.minecraft.src.RenderLiving;
@@ -1007,12 +1008,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public float entityPrevRotationPitch(Object entity) {
-		return ((EntityLiving) entity).prevRotationPitch;
+		return ((Entity) entity).prevRotationPitch;
 	}
 
 	@Override
 	public float entityPrevRotationYaw(Object entity) {
-		return ((EntityLiving) entity).prevRotationYaw;
+		return ((Entity) entity).prevRotationYaw;
 	}
 
 	@Override
@@ -2651,6 +2652,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void renderBindTexture(Object render, Object resourceLocation) {
+		//((Render) render).loadTexture((String)resourceLocation);
 		Modchu_Reflect.invokeMethod("Render", "func_76985_a", "loadTexture", new Class[]{ String.class }, render, new Object[]{ resourceLocation });
 	}
 
@@ -3803,7 +3805,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 			int renderIndex = itemArmorRenderIndex(item);
 			String[] armorFilename = renderBipedBipedArmorFilenamePrefix();
 			String a1 = renderIndex < armorFilename.length ? armorFilename[renderIndex] : armorFilename[armorFilename.length - 1];
-			return String.format("textures/models/armor/%s_layer_%d%s.png", new Object[] {armorFilename[((ItemArmor) item).renderIndex], Integer.valueOf(i == 2 ? 2 : 1), s == null ? "" : String.format("_%s", new Object[]{ s })});
+			return String.format("/armor/%s_layer_%d%s.png", new Object[] {armorFilename[((ItemArmor) item).renderIndex], Integer.valueOf(i == 2 ? 2 : 1), s == null ? "" : String.format("_%s", new Object[]{ s })});
 		}
 		return null;
 	}
@@ -4374,7 +4376,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object entityLivingGetCurrentArmor(Object entityLiving, int i) {
-		return null;
+		return ((EntityLiving) entityLiving).getCurrentArmor(i);
 	}
 
 	@Override
@@ -4448,6 +4450,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public int movingObjectPositionBlockPosGetZ(Object movingObjectPosition) {
 		return ((MovingObjectPosition) movingObjectPosition).blockZ;
+	}
+
+	@Override
+	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
+		((EntityPlayer) entityplayer).capabilities.isCreativeMode = b;
 	}
 
 }

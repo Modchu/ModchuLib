@@ -79,7 +79,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		shadowOpaque = f;
 	}
 
-	@Override
 	public Object getRenderManager() {
 		return renderManager;
 	}
@@ -581,7 +580,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return mainModel;
 	}
 
-	@Override
 	public Object getRenderPassModel() {
 		return null;
 	}
@@ -640,6 +638,15 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public boolean superFunc_130007_b(Object entityLiving) {
+		return false;
+	}
+	// ~152
+	@Override
+	public void superLoadTexture(String par1Str) {
+	}
+
+	@Override
+	public boolean superLoadDownloadableImageTexture(String par1Str, String par2Str) {
 		return false;
 	}
 

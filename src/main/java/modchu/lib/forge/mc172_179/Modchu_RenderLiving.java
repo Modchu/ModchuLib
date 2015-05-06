@@ -61,6 +61,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		super.doRender((EntityLiving) entityLiving, d, d1, d2, d3, d4);
 	}
 
+	@Override
 	public void superDoRender(Object entity, double d, double d1, double d2, float d3, float d4) {
 		super.doRender((Entity) entity, d, d1, d2, d3, d4);
 	}
@@ -79,7 +80,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		shadowOpaque = f;
 	}
 
-	@Override
 	public Object getRenderManager() {
 		return renderManager;
 	}
@@ -112,6 +112,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return false;
 	}
 
+	@Override
 	public boolean superShouldRender(Object entityLiving, Object iCamera, double p_177104_3_, double p_177104_5_, double p_177104_7_) {
 		return false;
 	}
@@ -119,6 +120,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	protected void renderLeash(EntityLiving entityliving, double d, double d1, double d2, float d3, float d4) {
 	}
 
+	@Override
 	public void superRenderLeashedToEntityRope(Object entityLiving, double d, double d1, double d2, float d3, float d4) {
 	}
 
@@ -126,6 +128,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return false;
 	}
 
+	@Override
 	public boolean superCanRenderName(Object entityLivingBase) {
 		return false;
 	}
@@ -142,6 +145,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return false;
 	}
 
+	@Override
 	public boolean superAddLayer(Object layerRenderer) {
 		return false;
 	}
@@ -150,6 +154,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return false;
 	}
 
+	@Override
 	public boolean superRemoveLayer(Object layerRenderer) {
 		return false;
 	}
@@ -158,6 +163,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return 0.0F;
 	}
 
+	@Override
 	public float superInterpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_) {
 		return 0.0F;
 	}
@@ -165,6 +171,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	public void func_82422_c() {
 	}
 
+	@Override
 	public void superFunc_82422_c() {
 	}
 
@@ -172,6 +179,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return false;
 	}
 
+	@Override
 	public boolean superFunc_177088_c(Object entityLivingBase) {
 		return false;
 	}
@@ -179,6 +187,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	protected void func_180565_e() {
 	}
 
+	@Override
 	public void superFunc_180565_e() {
 	}
 
@@ -195,6 +204,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return false;
 	}
 
+	@Override
 	public boolean superFunc_177092_a(Object entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
 		return false;
 	}
@@ -202,6 +212,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	protected void func_177091_f() {
 	}
 
+	@Override
 	public void superFunc_177091_f() {
 	}
 
@@ -217,24 +228,28 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	protected void func_177093_a(EntityLivingBase entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
 	}
 
+	@Override
 	public void superFunc_177093_a(Object entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
 	}
 
 	public void setRenderOutlines(boolean p_177086_1_) {
 	}
 
+	@Override
 	public void superSetRenderOutlines(boolean p_177086_1_) {
 	}
 
 	public void renderName(Entity entity, double x, double y, double z) {
 	}
 
+	@Override
 	public void superRenderName(Object entity, double x, double y, double z) {
 	}
 
 	protected void func_177069_a(Entity entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 	}
 
+	@Override
 	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 	}
 /*
@@ -242,6 +257,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return false;
 	}
 */
+	@Override
 	public boolean superBindEntityTexture(Object entity) {
 		return false;
 	}
@@ -249,6 +265,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	protected void renderLivingLabel(Entity entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 	}
 
+	@Override
 	public void superRenderLivingLabel(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 	}
 
@@ -256,6 +273,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return null;
 	}
 
+	@Override
 	public RenderManager superFunc_177068_d() {
 		return null;
 	}
@@ -301,6 +319,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return null;
 	}
 	// ~179
+	@Override
 	protected void renderEquippedItems(EntityLivingBase entityliving, float f) {
 		if (master != null) master.renderEquippedItems(entityliving, f);
 	}
@@ -458,7 +477,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		return mainModel;
 	}
 
-	@Override
 	public Object getRenderPassModel() {
 		return null;
 	}
@@ -524,6 +542,15 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public boolean superFunc_130007_b(Object entityLiving) {
+		return false;
+	}
+	// ~152
+	@Override
+	public void superLoadTexture(String par1Str) {
+	}
+
+	@Override
+	public boolean superLoadDownloadableImageTexture(String par1Str, String par2Str) {
 		return false;
 	}
 

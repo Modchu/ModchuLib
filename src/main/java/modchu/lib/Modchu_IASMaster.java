@@ -863,7 +863,7 @@ public interface Modchu_IASMaster {
 	public void worldSpawnPlayerWithLoadedChunks(Object entity);
 	public Object worldRand(Object worldOrEntity);
 	public void worldSpawnPlayerWithLoadedChunks(Object worldOrEntity, Object entity);
-	public void worldSpawnParticle(String s, double d, double d1, double d2, double d3, double d4, double d5);
+	public void worldSpawnParticle(Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5);
 	public void worldSpawnParticle(Object worldOrEntity, Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5);
 	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, String s, float f, float f1);
 	public boolean worldIsBlockModifiable(Object worldOrEntity, Object entityPlayer, int x, int y, int z);
@@ -914,5 +914,6 @@ public interface Modchu_IASMaster {
 	public String itemGetUnlocalizedName(Object item);
 	public int entityLivingBaseAttackTime(Object entity);
 	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i);
+	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b);
 
 }

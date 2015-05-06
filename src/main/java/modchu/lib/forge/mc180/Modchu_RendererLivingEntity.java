@@ -94,7 +94,6 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		shadowOpaque = f;
 	}
 
-	@Override
 	public Object getRenderManager() {
 		return renderManager;
 	}
@@ -546,7 +545,6 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return mainModel;
 	}
 
-	@Override
 	public Object getRenderPassModel() {
 		return null;
 	}
@@ -592,6 +590,15 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 
 	@Override
 	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
+	}
+	// ~152
+	@Override
+	public void superLoadTexture(String par1Str) {
+	}
+
+	@Override
+	public boolean superLoadDownloadableImageTexture(String par1Str, String par2Str) {
+		return false;
 	}
 
 }

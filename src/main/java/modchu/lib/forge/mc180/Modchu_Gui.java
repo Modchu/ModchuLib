@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IGui;
-import modchu.lib.Modchu_IGuiBaseMaster;
 import modchu.lib.Modchu_IGuiMaster;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class Modchu_Init {
-	private static boolean initFlag = false;
+	public static boolean initFlag = false;
 
 	public static void init() {
 		//System.out.println("Modchu_Init init");
@@ -144,23 +144,24 @@ public class Modchu_Init {
 			return s;
 		}
 		String s1 = null;
-		o = invokeMethod("net.minecraftforge.common.ForgeVersion", "getMinorVersion");
-		System.out.println("getMcVersion 1 o="+o);
+		o = invokeMethod("net.minecraftforge.common.ForgeVersion", "getMajorVersion");
 		if (o != null) s1 = o instanceof String ? (String) o : ""+o;
-		System.out.println("getMcVersion 2 s1="+s1);
+		System.out.println("getMcVersion 1 s1="+s1);
 		if (s1 != null) {
+			o = invokeMethod("net.minecraftforge.common.ForgeVersion", "getMinorVersion");
+			String s2 = o instanceof String ? (String) o : ""+o;
+			System.out.println("getMcVersion 2 s2="+s2);
+			o = invokeMethod("net.minecraftforge.common.ForgeVersion", "getRevisionVersion");
+			String s3 = o instanceof String ? (String) o : ""+o;
+			System.out.println("getMcVersion 3 s3="+s3);
 			o = invokeMethod("net.minecraftforge.common.ForgeVersion", "getBuildVersion");
-			System.out.println("getMcVersion 3 o="+o);
-			if (o != null) {
-				String s2 = o instanceof String ? (String) o : ""+o;
-				if (s2 != null) {
-					s = getForgeVersionBuildVersionToMcVersion(s1, s2);
-					System.out.println("getMcVersion 4 s="+s);
-				}
-			}
+			String s4 = o instanceof String ? (String) o : ""+o;
+			System.out.println("getMcVersion 4 s4="+s4);
+			s = getForgeVersionBuildVersionToMcVersion(s1, s2, s3, s4);
+			System.out.println("getMcVersion 5 s="+s);
 		}
 		if (s != null) {
-			System.out.println("getMcVersion 5 return s="+s);
+			System.out.println("getMcVersion 6 return s="+s);
 			return s;
 		}
 		Object mc = null;
@@ -172,13 +173,13 @@ public class Modchu_Init {
 			}
 		} catch (Exception e) {
 		}
-		System.out.println("getMcVersion 6 mc="+mc);
+		System.out.println("getMcVersion 7 mc="+mc);
 		if (mc != null); else return null;
 		Field f = getField("net.minecraft.client.Minecraft", "field_110447_Z");
 		if (f != null); else {
 			f = getField("net.minecraft.client.Minecraft", "launchedVersion");
 		}
-		System.out.println("getMcVersion 7 f="+f);
+		System.out.println("getMcVersion 8 f="+f);
 		if (f != null) {
 			try {
 				return (String)f.get(mc);
@@ -190,12 +191,12 @@ public class Modchu_Init {
 			if (o != null
 					&& o instanceof String) return (String) o;
 			o = invokeMethod("net.minecraft.client.Minecraft", "getVersion", mc);
-			System.out.println("getMcVersion 8 o="+o);
+			System.out.println("getMcVersion 9 o="+o);
 			if (o != null
 					&& o instanceof String) return (String) o;
 		} catch (Exception e) {
 		}
-		System.out.println("getMcVersion 9 return null !!");
+		System.out.println("getMcVersion 10 return null !!");
 		return null;
 	}
 
@@ -207,35 +208,48 @@ public class Modchu_Init {
 		return t;
 	}
 
-	public static String getForgeVersionBuildVersionToMcVersion(String s, String s2) {
+	public static String getForgeVersionBuildVersionToMcVersion(String s, String s1, String s2, String s3) {
 		int i = Integer.valueOf(s);
 		if (i > 0) {
-			int i2 = Integer.valueOf(s2);
-			if (i2 < 30) return "1.1";
-			if (i2 < 65) return "1.2.3";
-			if (i2 < 69) return "1.2.4";
-			if (i2 < 172) return "1.2.5";
-			if (i2 < 320) return "1.3.2";
-			if (i2 < 327) return "1.4.0";
-			if (i2 < 330) return "1.4.1";
-			if (i2 < 356) return "1.4.2";
-			if (i2 < 360) return "1.4.3";
-			if (i2 < 379) return "1.4.4";
-			if (i2 < 451) return "1.4.5";
-			if (i2 < 490) return "1.4.6";
-			if (i2 < 559) return "1.4.7";
-			if (i2 < 600) return "1.5";
-			if (i2 < 684) return "1.5.1";
-			if (i2 < 749) return "1.5.2";
-			if (i2 < 776) return "1.6.1";
-			if (i2 < 873) return "1.6.2";
-			if (i2 < 879) return "1.6.3";
-			if (i2 < 967) return "1.6.4";
-			if (i2 < 1150) return "1.7.2";
+			int i1 = Integer.valueOf(s1);
+			int i3 = Integer.valueOf(s3);
 			switch(i) {
-			case 13:
+			case 1:
+				if (i3 < 3) return "1.0";
+				if (i3 < 30) return "1.1";
+				return "1.2.3";
+			case 2:
+				return "1.2.4";
+			case 3:
+				return "1.2.5";
+			case 4:
+				if (i3 < 200) return "1.3.1";
+				return "1.3.2";
+			case 5:
+				return "1.4.0";
+			case 6:
+				if (i3 < 330) return "1.4.1";
+				if (i3 < 356) return "1.4.2";
+				if (i3 < 360) return "1.4.3";
+				if (i3 < 379) return "1.4.4";
+				if (i3 < 451) return "1.4.5";
+				if (i3 < 490) return "1.4.6";
+				return "1.4.7";
+			case 7:
+				if (i3 < 600) return "1.5";
+				if (i3 < 684) return "1.5.1";
+				return "1.5.2";
+			case 8:
+				if (i3 < 776) return "1.6.1";
+				break;
+			case 9:
+				if (i3 < 873) return "1.6.2";
+				if (i3 < 879) return "1.6.3";
+				return "1.6.4";
+			case 10:
+				if (i1 == 12) return "1.7.2";
 				return "1.7.10";
-			case 14:
+			case 11:
 				return "1.8";
 			}
 		}
@@ -306,6 +320,7 @@ public class Modchu_Init {
 		if (version == 162) {
 			return new String[]{
 					"162",
+					"152_162",
 					"162_164",
 					"162_179",
 					"162_180",

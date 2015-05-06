@@ -1878,7 +1878,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public IChatComponent superFunc_145748_c_() {
 		return null;
 	}
-	// ~179
+	// ~152
 	@Override
 	public boolean superAttackEntityFrom(Object damageSource, int par2) {
 		return false;

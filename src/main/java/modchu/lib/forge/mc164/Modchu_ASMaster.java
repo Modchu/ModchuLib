@@ -88,6 +88,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAITasks;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityBat;
@@ -4198,7 +4199,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public String iAttributeGetAttributeUnlocalizedName(Object iAttribute) {
-		return null;
+		return ((Attribute) iAttribute).getAttributeUnlocalizedName();
 	}
 
 	@Override
@@ -4561,7 +4562,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	public Object resourceManagerGetResource(Object resourceManager, Object o) {
 		try {
 			return ((ResourceManager) resourceManager).getResource((ResourceLocation) o);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -4595,6 +4596,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public int movingObjectPositionBlockPosGetZ(Object movingObjectPosition) {
 		return ((MovingObjectPosition) movingObjectPosition).blockZ;
+	}
+
+	@Override
+	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
+		((EntityPlayer) entityplayer).capabilities.isCreativeMode = b;
 	}
 
 }

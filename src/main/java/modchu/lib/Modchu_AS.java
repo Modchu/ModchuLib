@@ -7970,13 +7970,13 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void worldSpawnParticle(String s, double d, double d1, double d2, double d3, double d4, double d5) {
-		if (master != null) master.worldSpawnParticle(s, d, d1, d2, d3, d4, d5);
-		else super.worldSpawnParticle(s, d, d1, d2, d3, d4, d5);
+	protected void worldSpawnParticle(Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
+		if (master != null) master.worldSpawnParticle(stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5);
+		else super.worldSpawnParticle(stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5);
 	}
 
-	public void superWorldSpawnParticle(String s, double d, double d1, double d2, double d3, double d4, double d5) {
-		super.worldSpawnParticle(s, d, d1, d2, d3, d4, d5);
+	public void superWorldSpawnParticle(Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
+		super.worldSpawnParticle(stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5);
 	}
 
 	@Override
@@ -8431,5 +8431,14 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	public void superSetEntityLivingBaseAttackTime(Object entityLivingBase, int i) {
 		super.setEntityLivingBaseAttackTime(entityLivingBase, i);
+	}
+
+	@Override
+	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
+		if (master != null) master.setEntityPlayerCapabilitiesIsCreativeMode(entityplayer, b);
+	}
+
+	public void superSetEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
+		super.setEntityPlayerCapabilitiesIsCreativeMode(entityplayer, b);
 	}
 }

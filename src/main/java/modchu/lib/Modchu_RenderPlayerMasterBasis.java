@@ -71,9 +71,8 @@ public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaste
 	}
 
 	@Override
-	public double renderLivingLabel(Object entityplayer, String par2Str, double d, double d1, double d2, int i) {
+	public void renderLivingLabel(Object entityplayer, String par2Str, double d, double d1, double d2, int i) {
 		base.superRenderLivingLabel(entityplayer, par2Str, d, d1, d2, i);
-		return d1;
 	}
 
 	@Override
@@ -319,6 +318,16 @@ public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaste
 	@Override
 	public void renderFirstPersonLeftArm(Object entityplayer, int i) {
 		base.superFunc_177139_c(entityplayer);
+	}
+	// ~152
+	@Override
+	public void loadTexture(String par1Str) {
+		base.superLoadTexture(par1Str);
+	}
+
+	@Override
+	public boolean loadDownloadableImageTexture(String par1Str, String par2Str) {
+		return base.superLoadDownloadableImageTexture(par1Str, par2Str);
 	}
 
 }

@@ -40,7 +40,7 @@ public class Modchu_FileManager {
 
 	public static Modchu_IFileManagerMaster master;
 	public static Modchu_FileManagerBase base = new Modchu_FileManagerBase(new HashMap());
-	public static File minecraftJar;
+	public static List<File> minecraftJarList;
 	public static File minecraftDir;
 	public static File assetsDir;
 
@@ -233,12 +233,14 @@ public class Modchu_FileManager {
 		assetsDir = file;
 	}
 
-	public static File getMinecraftJar() {
-		return minecraftJar;
+	public static List<File> getMinecraftJarList() {
+		if (minecraftJarList != null); else minecraftJarList = new LinkedList();
+		return minecraftJarList;
 	}
 
-	public static void setMinecraftJar(File file) {
-		minecraftJar = file;
+	public static void addMinecraftJar(File file) {
+		if (minecraftJarList != null); else minecraftJarList = new LinkedList();
+		minecraftJarList.add(file);
 	}
 
 	public static LinkedList<String> getClassLoaderResourcesList(Class c) {

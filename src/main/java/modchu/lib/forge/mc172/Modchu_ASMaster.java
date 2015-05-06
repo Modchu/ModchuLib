@@ -1045,12 +1045,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public float entityPrevRotationPitch(Object entity) {
-		return ((EntityLivingBase) entity).prevRotationPitch;
+		return ((Entity) entity).prevRotationPitch;
 	}
 
 	@Override
 	public float entityPrevRotationYaw(Object entity) {
-		return ((EntityLivingBase) entity).prevRotationYaw;
+		return ((Entity) entity).prevRotationYaw;
 	}
 
 	@Override
@@ -3227,6 +3227,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
+	public Object worldGetBlock(Object world, int i, int i2, int i3) {
+		return ((World) world).getBlock(i, i2, i3);
+	}
+
+	@Override
 	public int[] facingOffsetsXForSide() {
 		return Facing.offsetsXForSide;
 	}
@@ -3869,6 +3874,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public int movingObjectPositionBlockPosGetZ(Object movingObjectPosition) {
 		return ((MovingObjectPosition) movingObjectPosition).blockZ;
+	}
+
+	@Override
+	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
+		((EntityPlayer) entityplayer).capabilities.isCreativeMode = b;
 	}
 
 }

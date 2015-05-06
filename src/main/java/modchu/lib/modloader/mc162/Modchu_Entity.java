@@ -1342,7 +1342,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	public void superFunc_145781_i(int p_145781_1_) {
 	}
-	// 180~
+	// ~152
 	@Override
 	public boolean superAttackEntityFrom(Object damageSource, int par2) {
 		return false;
@@ -1413,7 +1413,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public boolean superFunc_96092_aw() {
 		return false;
 	}
-
+	// 180~
 	@Override
 	public void superOnKillCommand() {
 	}

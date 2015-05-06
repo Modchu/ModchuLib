@@ -18,7 +18,6 @@ public interface Modchu_IRendererLivingEntity extends Modchu_IRender {
 	public List getLayerList();
 	public Object superGetEntityTexture(Object entity);
 	public Object superGetEntityTexture(Object entity, int i);
-	public boolean superBindEntityTexture(Object entity);
 	public void superBindTexture(Object resourceLocation);
 	public void superDoRenderShadowAndFire(Object entity, double p_76979_2_, double p_76979_4_, double p_76979_6_, float p_76979_8_, float p_76979_9_);
 	public Object superGetFontRendererFromRenderManager();

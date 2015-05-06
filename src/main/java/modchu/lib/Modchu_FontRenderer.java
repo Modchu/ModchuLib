@@ -206,9 +206,9 @@ public class Modchu_FontRenderer {
 			} else {
 				//InputStream inputstream = Minecraft.getMinecraft().texturePackList.getSelectedTexturePack().getResourceAsStream("/font/glyph_sizes.bin");
 				Object texturePackList = Modchu_AS.get("Minecraft", "texturePackList", Modchu_AS.get(Modchu_AS.minecraftGetMinecraft), (Class[]) null);
-				if (texturePackList != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() texturePackList == null !! minecraft="+Modchu_AS.get(Modchu_AS.minecraftGetMinecraft));
+				if (texturePackList != null); else System.out.println("Modchu_FontRenderer readGlyphSizes() texturePackList == null !! minecraft="+Modchu_AS.get(Modchu_AS.minecraftGetMinecraft));
 				Object selectedTexturePack = Modchu_AS.get("TexturePackList", "getSelectedTexturePack", texturePackList, (Class[]) null);
-				if (selectedTexturePack != null); else Modchu_Debug.lDebug("Modchu_FontRenderer readGlyphSizes() selectedTexturePack == null !!");
+				if (selectedTexturePack != null); else System.out.println("Modchu_FontRenderer readGlyphSizes() selectedTexturePack == null !!");
 				inputStream = Modchu_AS.getInputStream("ITexturePack", "getResourceAsStream", selectedTexturePack, new Class[]{ String.class }, "/font/glyph_sizes.bin");
 			}
 			inputStream.read(glyphWidth);

@@ -14,9 +14,27 @@ public class Modchu_EntityCapsBase implements Modchu_IEntityCapsBase {
 			//Modchu_Debug.mDebug("owner="+owner+" this="+this);
 			return owner;
 		case caps_health:
-			return owner != null ? Modchu_AS.getInt(Modchu_AS.entityLivingBaseGetHealth, owner) : -1;
+			Object o = owner != null ? Modchu_AS.get(Modchu_AS.entityLivingBaseGetHealth, owner) : -1;
+			int i = -1;
+			if (o != null) {
+				if (o instanceof Integer) i = (Integer) o;
+				if (o instanceof Float) {
+					float f = (Float) o;
+					i = (int) f;
+				}
+			}
+			return i;
 		case caps_healthFloat:
-			return owner != null ? Modchu_AS.getFloat(Modchu_AS.entityLivingBaseGetHealth, owner) : -1.0F;
+			Object o1 = owner != null ? Modchu_AS.get(Modchu_AS.entityLivingBaseGetHealth, owner) : -1F;
+			float f = -1F;
+			if (o1 != null) {
+				if (o1 instanceof Float) f = (Float) o1;
+				if (o1 instanceof Integer) {
+					int i1 = (Integer) o1;
+					f = (float) i1;
+				}
+			}
+			return f;
 		case caps_ticksExisted:
 			return owner != null ? Modchu_AS.getInt(Modchu_AS.entityTicksExisted, owner) : 0;
 		case caps_heldItems:
@@ -170,36 +188,36 @@ public class Modchu_EntityCapsBase implements Modchu_IEntityCapsBase {
 		if (owner != null); else return false;
 		switch (pIndex) {
 		case caps_health:
-			return Modchu_AS.set(Modchu_AS.entityLivingBaseSetHealth, owner, (Integer)pArg[0]);
+			return Modchu_AS.set(Modchu_AS.entityLivingBaseSetHealth, owner, pArg[0]);
 		case caps_ticksExisted:
-			return Modchu_AS.set(Modchu_AS.entityTicksExisted, owner, (Integer)pArg[0]);
+			return Modchu_AS.set(Modchu_AS.entityTicksExisted, owner, pArg[0]);
 		case caps_heldItems:
 		case caps_currentEquippedItem:
-			return Modchu_AS.set(Modchu_AS.entityLivingSetCurrentItemOrArmor, owner, (Integer)pArg[0], pArg[1]);
+			return Modchu_AS.set(Modchu_AS.entityLivingSetCurrentItemOrArmor, owner, pArg[0], pArg[1]);
 		case caps_currentArmor:
 			return Modchu_AS.set(Modchu_AS.entityLivingSetCurrentItemOrArmor, owner, (Integer)pArg[0] + 1, pArg[1]);
 		case caps_posX:
-			return Modchu_AS.set(Modchu_AS.entityPosX, owner, (Double)pArg[0]);
+			return Modchu_AS.set(Modchu_AS.entityPosX, owner, pArg[0]);
 		case caps_posY:
-			return Modchu_AS.set(Modchu_AS.entityPosY, owner, (Double)pArg[0]);
+			return Modchu_AS.set(Modchu_AS.entityPosY, owner, pArg[0]);
 		case caps_posZ:
-			return Modchu_AS.set(Modchu_AS.entityPosZ, owner, (Double)pArg[0]);
+			return Modchu_AS.set(Modchu_AS.entityPosZ, owner, pArg[0]);
 		case caps_pos:
-			return Modchu_AS.set(Modchu_AS.entitySetPosition, owner, (Double)pArg[0], (Double)pArg[1], (Double)pArg[2]);
+			return Modchu_AS.set(Modchu_AS.entitySetPosition, owner, pArg[0], pArg[1], pArg[2]);
 		case caps_motionX:
-			return Modchu_AS.set(Modchu_AS.entityMotionX, owner, (Double)pArg[0]);
+			return Modchu_AS.set(Modchu_AS.entityMotionX, owner, pArg[0]);
 		case caps_motionY:
-			return Modchu_AS.set(Modchu_AS.entityMotionY, owner, (Double)pArg[0]);
+			return Modchu_AS.set(Modchu_AS.entityMotionY, owner, pArg[0]);
 		case caps_motionZ:
-			return Modchu_AS.set(Modchu_AS.entityMotionZ, owner, (Double)pArg[0]);
+			return Modchu_AS.set(Modchu_AS.entityMotionZ, owner, pArg[0]);
 		case caps_motion:
-			return Modchu_AS.set(Modchu_AS.entitySetVelocity, owner, (Double)pArg[0], (Double)pArg[1], (Double)pArg[2]);
+			return Modchu_AS.set(Modchu_AS.entitySetVelocity, owner, pArg[0], pArg[1], pArg[2]);
 		case caps_onGround:
-			return Modchu_AS.set(Modchu_AS.entityOnGround, owner, (Boolean)pArg[0]);
+			return Modchu_AS.set(Modchu_AS.entityOnGround, owner, pArg[0]);
 		case caps_isRiding:
-			return Modchu_AS.set(Modchu_AS.entityIsRiding, owner, (Boolean)pArg[0]);
+			return Modchu_AS.set(Modchu_AS.entityIsRiding, owner, pArg[0]);
 		case caps_isSneak:
-			return Modchu_AS.set(Modchu_AS.entitySetSneaking, owner, (Boolean)pArg[0]);
+			return Modchu_AS.set(Modchu_AS.entitySetSneaking, owner, pArg[0]);
 		}
 
 		return false;

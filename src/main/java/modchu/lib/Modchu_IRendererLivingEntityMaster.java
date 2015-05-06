@@ -14,7 +14,6 @@ public interface Modchu_IRendererLivingEntityMaster extends Modchu_IRenderMaster
 	public int getColorMultiplier(Object entity, float par2, float par3);
 	public void allModelInit(Object entity, boolean debug);
 	public void renderSpecials(Object entityPlayer, float f);
-	public double renderLivingLabel(Object entityplayer, String par2Str, double d, double d1, double d2, int i);
 	public Object getMainModel();
 	public boolean addLayer(Object layerRenderer);
 	public boolean removeLayer(Object layerRenderer);

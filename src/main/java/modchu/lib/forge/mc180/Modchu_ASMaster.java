@@ -1054,12 +1054,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public float entityPrevRotationPitch(Object entity) {
-		return ((EntityLivingBase) entity).prevRotationPitch;
+		return ((Entity) entity).prevRotationPitch;
 	}
 
 	@Override
 	public float entityPrevRotationYaw(Object entity) {
-		return ((EntityLivingBase) entity).prevRotationYaw;
+		return ((Entity) entity).prevRotationYaw;
 	}
 
 	@Override
@@ -4114,6 +4114,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i) {
+	}
+
+	@Override
+	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
+		((EntityPlayer) entityplayer).capabilities.isCreativeMode = b;
 	}
 
 }
