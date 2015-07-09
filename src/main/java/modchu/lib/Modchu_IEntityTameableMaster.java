@@ -354,6 +354,7 @@ public interface Modchu_IEntityTameableMaster {
 	public Object func_145778_a(Object item, int p_145778_2_, float p_145778_3_);
 	public float func_180484_a(Object blockPos);
 	public boolean func_180485_d(Object blockPos);
+	public float getHealth();
 	// ~152
 	public void func_98054_a(boolean par1);
 	public float getSpeedModifier();
@@ -362,7 +363,7 @@ public interface Modchu_IEntityTameableMaster {
 	public void setLastAttackingEntity(Object entity);
 	public float getMaximumHomeDistance();
 	public String getTexture();
-	public int getHealth();
+	public int getHealthInt();
 	public void func_85033_bc();
 	public boolean isBlocking();
 	public int func_82143_as();

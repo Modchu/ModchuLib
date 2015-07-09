@@ -4545,4 +4545,9 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
 		base.superSetEntityPlayerCapabilitiesIsCreativeMode(entityplayer, b);
 	}
+
+	@Override
+	public void setEntityPlayerInventoryCurrentItem(Object entityplayer, int i) {
+		base.superSetEntityPlayerInventoryCurrentItem(entityplayer, i);
+	}
 }

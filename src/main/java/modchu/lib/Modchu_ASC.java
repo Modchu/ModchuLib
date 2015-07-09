@@ -110,9 +110,6 @@ public interface Modchu_ASC {
 	public static final int entityPrevPosX_int = 801;
 	public static final int entityPrevPosY_int = 802;
 	public static final int entityPrevPosZ_int = 803;
-	public static final int setEntityPosX_int = 84;
-	public static final int setEntityPosY_int = 85;
-	public static final int setEntityPosZ_int = 86;
 	public static final int entityMotionX_int = 87;
 	public static final int entityMotionY_int = 88;
 	public static final int entityMotionZ_int = 89;

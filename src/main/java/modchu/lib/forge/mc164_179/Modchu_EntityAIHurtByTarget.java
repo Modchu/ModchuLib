@@ -14,6 +14,7 @@ public class Modchu_EntityAIHurtByTarget extends EntityAIHurtByTarget implements
 
 	public Modchu_EntityAIHurtByTarget(HashMap<String, Object> map) {
 		super((EntityCreature) map.get("Object"), (Boolean)map.get("Boolean"));
+		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		//Modchu_Debug.lDebug("Modchu_EntityAIHurtByTarget init instance="+instance);
 		master = instance != null

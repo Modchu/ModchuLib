@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.entity.EntityLivingBase;
 
 public class Modchu_LayerCustomHead extends LayerCustomHead implements Modchu_ILayerCustomHead {
-	public static Modchu_ILayerCustomHeadMaster master;
+	public Modchu_ILayerCustomHeadMaster master;
 
 	public Modchu_LayerCustomHead(HashMap<String, Object> map) {
 		super((ModelRenderer) map.get("Object"));

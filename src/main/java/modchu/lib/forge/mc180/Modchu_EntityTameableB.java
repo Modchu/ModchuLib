@@ -15,6 +15,7 @@ import modchu.lib.Modchu_Reflect;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.crash.CrashReportCategory;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -34,6 +35,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -55,33 +57,52 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public Modchu_IEntityTameableMaster master;
 	public String entityName;
 	public static ConcurrentHashMap<String, UUID> entityUniqueIDMap = new ConcurrentHashMap();
-	private final CombatTracker combatTracker = new CombatTracker(this);
+	private CombatTracker combatTracker;
 
 	public Modchu_EntityTameableB(World world) {
 		super(world);
 		ignoreFrustumCheck = true;
 		CombatTracker combatTracker = getCombatTracker();
-		//Modchu_Debug.lDebug("Modchu_EntityTameableB init combatTracker="+combatTracker);
+		Modchu_Debug.lDebug("Modchu_EntityTameableB init combatTracker="+combatTracker);
 	}
 
 	public Modchu_EntityTameableB(HashMap<String, Object> map) {
 		this((World) map.get("Object"));
-		init(map);
+		try {
+			init(map);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} catch(Error e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public CombatTracker getCombatTracker() {
-		//Modchu_Debug.lDebug("Modchu_EntityTameableB getCombatTracker combatTracker="+combatTracker);
-		return combatTracker;
+		return getCombatTracker2();
 	}
 
 	public CombatTracker getCombatTracker2() {
 		//Modchu_Debug.lDebug("Modchu_EntityTameableB getCombatTracker2 combatTracker="+combatTracker);
+		if (combatTracker != null); else combatTracker = new CombatTracker(this);
+		//Modchu_Debug.Debug("Modchu_EntityTameableB getCombatTracker2 combatTracker="+combatTracker+" this="+this);
 		return combatTracker;
 	}
 
 	public void setMovementSpeed(double d) {
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(d);
+	}
+
+	public void setFollowRange(double d) {
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(d);
+	}
+
+	public void setKnockbackResistance(double d) {
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(d);
+	}
+
+	public void setAttackDamage(double d) {
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(d);
 	}
 
 	public void setMaxHealth(double d) {
@@ -108,6 +129,8 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	}
 
 	protected void init(String s) {
+		if (s != null
+				&& !s.isEmpty()); else return;
 		Class c = Modchu_Reflect.loadClass(s);
 		if (c != null); else return;
 		HashMap<String, Object> map = Modchu_Main.getNewModchuCharacteristicMap(c);
@@ -123,13 +146,16 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 			map.put("Object", worldObj);
 		}
 		if (map != null
-				&& !map.isEmpty()); else {
+				&& !map.isEmpty()
+				&& map.containsKey("Class")); else {
 			return;
 		}
+		Class c = map.containsKey("Class") ? ((Class) map.get("Class")) : null;
+		if (c != null); else return;
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		master = instance instanceof Modchu_IEntityTameableMaster ? (Modchu_IEntityTameableMaster) instance : null;
-		entityName = ((Class) map.get("Class")).getName();
+		entityName = c.getName();
 		Modchu_Debug.mDebug("initNBTAfter entityName="+(entityName != null ? entityName : "null !!"));
 		String s0 = new StringBuilder(Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this) ? "1" : "0").append(entityUniqueID).toString();
 		if (s0 != null
@@ -1362,7 +1388,54 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public void superOnDeath(Object damageSource) {
-		super.onDeath((DamageSource) damageSource);
+		if (!worldObj.isRemote && worldObj.getGameRules().getGameRuleBooleanValue("showDeathMessages") && hasCustomName() && getOwnerEntity() instanceof EntityPlayerMP) {
+			((EntityPlayerMP) getOwnerEntity()).addChatMessage(getCombatTracker2().getDeathMessage());
+		}
+
+		if (net.minecraftforge.common.ForgeHooks.onLivingDeath(this, (DamageSource) damageSource)) return;
+		Entity entity = ((DamageSource) damageSource).getEntity();
+		EntityLivingBase entitylivingbase = func_94060_bK();
+
+		if (scoreValue >= 0 && entitylivingbase != null) {
+			entitylivingbase.addToPlayerScore(this, scoreValue);
+		}
+
+		if (entity != null) {
+			entity.onKillEntity(this);
+		}
+
+		dead = true;
+		getCombatTracker2().func_94549_h();
+
+		if (!worldObj.isRemote) {
+			int i = 0;
+
+			if (entity instanceof EntityPlayer) {
+				i = EnchantmentHelper.getLootingModifier((EntityLivingBase) entity);
+			}
+
+			captureDrops = true;
+			capturedDrops.clear();
+
+			if (func_146066_aG() && worldObj.getGameRules().getGameRuleBooleanValue("doMobLoot")) {
+				dropFewItems(recentlyHit > 0, i);
+				dropEquipment(recentlyHit > 0, i);
+
+				if (recentlyHit > 0 && rand.nextFloat() < 0.025F + (float) i * 0.01F) {
+					addRandomArmor();
+				}
+			}
+
+			captureDrops = false;
+
+			if (!net.minecraftforge.common.ForgeHooks.onLivingDrops(this, (DamageSource) damageSource, capturedDrops, i, recentlyHit > 0)) {
+				for (EntityItem item : capturedDrops) {
+					worldObj.spawnEntityInWorld(item);
+				}
+			}
+		}
+
+		worldObj.setEntityState(this, (byte) 3);
 	}
 
 	@Override
@@ -1470,15 +1543,30 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	protected void damageEntity(DamageSource damageSource, float par2) {
-		CombatTracker combatTracker = getCombatTracker();
-		Modchu_Debug.lDebug("Modchu_EntityTameableB damageEntity combatTracker="+combatTracker);
+		//CombatTracker combatTracker = getCombatTracker();
+		//Modchu_Debug.lDebug("Modchu_EntityTameableB damageEntity combatTracker="+combatTracker);
 		if (master != null) master.damageEntity(damageSource, par2);
 		else super.damageEntity(damageSource, par2);
 	}
 
 	@Override
 	public void superDamageEntity(Object damageSource, float par2) {
-		super.damageEntity((DamageSource) damageSource, par2);
+		if (!isEntityInvulnerable((DamageSource) damageSource)) {
+			par2 = net.minecraftforge.common.ForgeHooks.onLivingHurt(this, (DamageSource) damageSource, par2);
+			if (par2 <= 0) return;
+			par2 = applyArmorCalculations((DamageSource) damageSource, par2);
+			par2 = applyPotionDamageCalculations((DamageSource) damageSource, par2);
+			float f1 = par2;
+			par2 = Math.max(par2 - getAbsorptionAmount(), 0.0F);
+			setAbsorptionAmount(getAbsorptionAmount() - (f1 - par2));
+
+			if (par2 != 0.0F) {
+				float f2 = getHealth();
+				setHealth(f2 - par2);
+				getCombatTracker2().func_94547_a((DamageSource) damageSource, f2, par2);
+				setAbsorptionAmount(getAbsorptionAmount() - par2);
+			}
+		}
 	}
 
 	@Override
@@ -1856,7 +1944,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public DataWatcher superGetDataWatcher() {
 		return super.getDataWatcher();
 	}
-
+/*
 	@Override
 	public boolean equals(Object par1Obj) {
 		return master != null ? master.equals(par1Obj) : super.equals(par1Obj);
@@ -1876,7 +1964,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public int superHashCode() {
 		return super.hashCode();
 	}
-
+*/
 	@Override
 	protected void preparePlayerToSpawn() {
 		if (master != null) master.preparePlayerToSpawn();
@@ -2660,7 +2748,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public boolean superHitByEntity(Object entity) {
 		return super.hitByEntity((Entity) entity);
 	}
-
+/*
 	@Override
 	public String toString() {
 		return master != null ? master.toString() : super.toString();
@@ -2670,7 +2758,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public String superToString() {
 		return super.toString();
 	}
-
+*/
 	@Override
 	public boolean isEntityInvulnerable(DamageSource damageSource) {
 		return master != null ? master.isEntityInvulnerable(damageSource) : super.isEntityInvulnerable(damageSource);
@@ -2930,8 +3018,6 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public void superFunc_98054_a(boolean par1) {
-		// TODO 自動生成されたメソッド・スタブ
-		
 	}
 
 	@Override
@@ -2964,8 +3050,8 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	}
 
 	@Override
-	public int superGetHealth() {
-		return -1;
+	public int superGetHealthInt() {
+		return (int) superGetHealth();
 	}
 
 	@Override
@@ -3081,6 +3167,16 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	@Override
 	public boolean superFunc_96092_aw() {
 		return false;
+	}
+
+	@Override
+	public float superGetHealth() {
+		return super.getHealth();
+	}
+
+	@Override
+	public float superGetHealthFloat() {
+		return super.getHealth();
 	}
 
 }

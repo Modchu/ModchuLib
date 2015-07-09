@@ -9,7 +9,7 @@ import modchu.lib.Modchu_Main;
 import net.minecraft.entity.EntityLiving;
 
 public class Modchu_LayerCustomHead implements Modchu_ILayerCustomHead {
-	public static Modchu_ILayerCustomHeadMaster master;
+	public Modchu_ILayerCustomHeadMaster master;
 
 	public Modchu_LayerCustomHead(HashMap<String, Object> map) {
 		Modchu_Debug.lDebug("Modchu_LayerCustomHead init");

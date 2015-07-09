@@ -138,8 +138,6 @@ public interface Modchu_IEntityCapsBase {
 	public static final int caps_renderFace			= 0x0310;
 	public static final int caps_renderBody			= 0x0311;
 	public static final int caps_setFaceTexture		= 0x0312;
-	/** TextureDataのインスタンスを返します。 **/
-	public static final int caps_textureData		= 0x0313;
 	/** 発光テクスチャの色補正 */
 	public static final int caps_textureLightColor	= 0x0314;
 

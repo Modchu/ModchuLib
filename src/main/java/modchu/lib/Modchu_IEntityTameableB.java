@@ -5,6 +5,11 @@ import java.util.UUID;
 
 public interface Modchu_IEntityTameableB {
 	public Object getMaster();
+	public void setMovementSpeed(double d);
+	public void setMaxHealth(double d);
+	public void setFollowRange(double d);
+	public void setKnockbackResistance(double d);
+	public void setAttackDamage(double d);
 	public Object getFreeVariable(String s);
 	public void setFreeVariable(String s, Object o);
 	public boolean isAngry();
@@ -168,8 +173,8 @@ public interface Modchu_IEntityTameableB {
 	public void superSetAbsorptionAmount(float par1);
 	public boolean superIsOnTeam(Object team);
 	public Object superGetDataWatcher();
-	public boolean superEquals(Object par1Obj);
-	public int superHashCode();
+	//public boolean superEquals(Object par1Obj);
+	//public int superHashCode();
 	public void superPreparePlayerToSpawn();
 	public void superSetDead();
 	public void superSetRotation(float par1, float par2);
@@ -245,7 +250,7 @@ public interface Modchu_IEntityTameableB {
 	public boolean superIsEntityEqual(Object entity);
 	public boolean superCanAttackWithItem();
 	public boolean superHitByEntity(Object entity);
-	public String superToString();
+	//public String superToString();
 	public boolean superIsEntityInvulnerable(Object damageSource);
 	public void superCopyLocationAndAnglesFrom(Object entity);
 	public void superCopyDataFrom(Object entity);
@@ -273,6 +278,7 @@ public interface Modchu_IEntityTameableB {
 	public float superGetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block);
 	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7);
 	public String superGetTranslatedEntityName();
+	public float superGetHealth();
 	// ~152
 	public void superFunc_98054_a(boolean par1);
 	public float superGetSpeedModifier();
@@ -281,7 +287,7 @@ public interface Modchu_IEntityTameableB {
 	public void superSetLastAttackingEntity(Object entity);
 	public float superGetMaximumHomeDistance();
 	public String superGetTexture();
-	public int superGetHealth();
+	public int superGetHealthInt();
 	public void superFunc_85033_bc();
 	public boolean superIsBlocking();
 	public int superFunc_82143_as();
@@ -307,5 +313,6 @@ public interface Modchu_IEntityTameableB {
 	public boolean superFunc_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7);
 	public void superFunc_85029_a(Object crashReportCategory);
 	public boolean superFunc_96092_aw();
+	public float superGetHealthFloat();
 
 }

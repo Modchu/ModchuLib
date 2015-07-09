@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.entity.EntityLivingBase;
 
 public class Modchu_LayerHeldItem extends LayerHeldItem implements Modchu_ILayerHeldItem {
-	public static Modchu_ILayerHeldItemMaster master;
+	public Modchu_ILayerHeldItemMaster master;
 
 	public Modchu_LayerHeldItem(HashMap<String, Object> map) {
 		super((RendererLivingEntity) map.get("Object"));

@@ -71,6 +71,15 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 		init(map);
 	}
 
+	public void setFollowRange(double d) {
+	}
+
+	public void setKnockbackResistance(double d) {
+	}
+
+	public void setAttackDamage(double d) {
+	}
+
 	public void setMovementSpeed(double d) {
 		moveSpeed = (float) d;
 	}
@@ -747,7 +756,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public void onUpdate() {
 		if (!initFlag) init((HashMap)null);
 		boolean isRemote = Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this);
-		//if (isRemote) 
+		//if (isRemote)
 			Modchu_Debug.mDebug("Modchu_EntityTameableB onUpdate isRemote="+isRemote+" initFlag="+initFlag);
 		if (master != null) master.onUpdate();
 		else super.onUpdate();
@@ -1714,7 +1723,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public DataWatcher superGetDataWatcher() {
 		return super.getDataWatcher();
 	}
-
+/*
 	@Override
 	public boolean equals(Object par1Obj) {
 		return master != null ? master.equals(par1Obj) : super.equals(par1Obj);
@@ -1732,7 +1741,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public int superHashCode() {
 		return super.hashCode();
 	}
-
+*/
 	@Override
 	protected void preparePlayerToSpawn() {
 		if (master != null) master.preparePlayerToSpawn();
@@ -2751,10 +2760,10 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public int getHealth() {
-		return master != null ? master.getHealth() : super.getHealth();
+		return (int) (master != null ? master.getHealth() : super.getHealth());
 	}
 
-	public int superGetHealth() {
+	public int superGetHealthInt() {
 		return super.getHealth();
 	}
 
@@ -3039,6 +3048,16 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	public boolean superFunc_96092_aw() {
 		return super.func_96092_aw();
+	}
+
+	@Override
+	public float superGetHealth() {
+		return super.getHealth();
+	}
+
+	@Override
+	public float superGetHealthFloat() {
+		return super.getHealth();
 	}
 
 }

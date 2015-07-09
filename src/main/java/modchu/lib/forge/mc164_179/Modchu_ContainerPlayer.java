@@ -3,13 +3,12 @@ package modchu.lib.forge.mc164_179;
 import java.util.HashMap;
 import java.util.List;
 
+import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IContainerPlayer;
 import modchu.lib.Modchu_IContainerPlayerMaster;
-import modchu.lib.Modchu_IGuiContainerMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
@@ -100,6 +99,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 	}
 
 	public List superGetInventory() {
+		Modchu_Debug.mDebug("superGetInventory size()="+super.getInventory().size());
 		return super.getInventory();
 	}
 

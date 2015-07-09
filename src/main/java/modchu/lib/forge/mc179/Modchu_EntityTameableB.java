@@ -19,7 +19,6 @@ import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.IEntityLivingData;
@@ -70,6 +69,18 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(d);
 	}
 
+	public void setFollowRange(double d) {
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(d);
+	}
+
+	public void setKnockbackResistance(double d) {
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(d);
+	}
+
+	public void setAttackDamage(double d) {
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(d);
+	}
+
 	public void setMaxHealth(double d) {
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(d);
 	}
@@ -91,6 +102,8 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	}
 
 	protected void init(String s) {
+		if (s != null
+				&& !s.isEmpty()); else return;
 		Class c = Modchu_Reflect.loadClass(s);
 		if (c != null); else return;
 		HashMap<String, Object> map = Modchu_Main.getNewModchuCharacteristicMap(c);
@@ -1687,7 +1700,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public DataWatcher superGetDataWatcher() {
 		return super.getDataWatcher();
 	}
-
+/*
 	@Override
 	public boolean equals(Object par1Obj) {
 		return master != null ? master.equals(par1Obj) : super.equals(par1Obj);
@@ -1705,7 +1718,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public int superHashCode() {
 		return super.hashCode();
 	}
-
+*/
 	@Override
 	protected void preparePlayerToSpawn() {
 		if (master != null) master.preparePlayerToSpawn();
@@ -2526,6 +2539,11 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public IEntityLivingData superOnSpawnWithEgg(Object iEntityLivingData) {
 		return super.onSpawnWithEgg((IEntityLivingData) iEntityLivingData);
 	}
+
+	@Override
+	public float superGetHealth() {
+		return super.getHealth();
+	}
 	// ~162
 	public EntityLivingBase func_130012_q() {
 		return null;
@@ -2705,8 +2723,8 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	}
 
 	@Override
-	public int superGetHealth() {
-		return 0;
+	public int superGetHealthInt() {
+		return (int) superGetHealth();
 	}
 
 	@Override
@@ -2822,6 +2840,11 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	@Override
 	public boolean superFunc_96092_aw() {
 		return false;
+	}
+
+	@Override
+	public float superGetHealthFloat() {
+		return super.getHealth();
 	}
 
 }

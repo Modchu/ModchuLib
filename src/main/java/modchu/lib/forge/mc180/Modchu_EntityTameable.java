@@ -639,6 +639,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	}
 
 	public void superUpdateEntityActionState() {
+		super.updateEntityActionState();
 	}
 
 	public float superFunc_145772_a(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block) {
@@ -717,11 +718,6 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	@Override
 	public String superGetTexture() {
 		return null;
-	}
-
-	@Override
-	public int superGetHealth() {
-		return 0;
 	}
 
 	@Override

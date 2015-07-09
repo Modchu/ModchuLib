@@ -20,6 +20,7 @@ public class Modchu_EntityAISwimming extends EntityAISwimming implements Modchu_
 
 	public Modchu_EntityAISwimming(HashMap<String, Object> map) {
 		super((EntityTameable) map.get("Object"));
+		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		//Modchu_Debug.lDebug("Modchu_EntityAISwimming init instance="+instance);
 		master = instance != null

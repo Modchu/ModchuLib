@@ -1806,4 +1806,789 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 		return base.superShouldDismountInWater(entity);
 	}
 
+	@Override
+	public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
+		base.superSetPositionAndRotation2(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
+
+	}
+
+	@Override
+	public float getShadowSize() {
+		return base.superGetShadowSize();
+	}
+
+	@Override
+	public boolean canCommandSenderUseCommand(int p_70003_1_, String p_70003_2_) {
+		return base.superCanCommandSenderUseCommand(p_70003_1_, p_70003_2_);
+	}
+
+	@Override
+	public Object getPlayerCoordinates() {
+		return base.superGetPlayerCoordinates();
+	}
+
+	@Override
+	public boolean func_152122_n() {
+		return base.superFunc_152122_n();
+	}
+
+	@Override
+	public boolean func_152123_o() {
+		return base.superFunc_152123_o();
+	}
+
+	@Override
+	public void func_152121_a(Object type, Object resourceLocation) {
+		base.superFunc_152121_a(type, resourceLocation);
+
+	}
+
+	@Override
+	public Object func_146097_a(Object itemStack, boolean p_146097_2_, boolean p_146097_3_) {
+		return base.superFunc_146097_a(itemStack, p_146097_2_, p_146097_3_);
+	}
+
+	@Override
+	public float getCurrentPlayerStrVsBlock(Object block, boolean p_146096_2_) {
+		return base.superGetCurrentPlayerStrVsBlock(block, p_146096_2_);
+	}
+
+	@Override
+	public float getBreakSpeed(Object block, boolean p_146096_2_, int meta) {
+		return base.superGetBreakSpeed(block, p_146096_2_, meta);
+	}
+
+	@Override
+	public float getBreakSpeed(Object block, boolean p_146096_2_, int meta, int x, int y, int z) {
+		return base.superGetBreakSpeed(block, p_146096_2_, meta, x, y, z);
+	}
+
+	@Override
+	public void func_146093_a(Object tileEntityHopper) {
+		base.superFunc_146093_a(tileEntityHopper);
+
+	}
+
+	@Override
+	public void displayGUIHopperMinecart(Object entityMinecartHopper) {
+		base.superDisplayGUIHopperMinecart(entityMinecartHopper);
+
+	}
+
+	@Override
+	public void displayGUIEnchantment(int p_71002_1_, int p_71002_2_, int p_71002_3_, String p_71002_4_) {
+		base.superDisplayGUIEnchantment(p_71002_1_, p_71002_2_, p_71002_3_, p_71002_4_);
+
+	}
+
+	@Override
+	public void displayGUIAnvil(int p_82244_1_, int p_82244_2_, int p_82244_3_) {
+		base.superDisplayGUIAnvil(p_82244_1_, p_82244_2_, p_82244_3_);
+
+	}
+
+	@Override
+	public void displayGUIWorkbench(int p_71058_1_, int p_71058_2_, int p_71058_3_) {
+		base.superDisplayGUIWorkbench(p_71058_1_, p_71058_2_, p_71058_3_);
+
+	}
+
+	@Override
+	public void func_146101_a(Object tileEntityFurnace) {
+		base.superFunc_146101_a(tileEntityFurnace);
+
+	}
+
+	@Override
+	public void func_146102_a(Object tileEntityDispenser) {
+		base.superFunc_146102_a(tileEntityDispenser);
+
+	}
+
+	@Override
+	public void func_146100_a(Object tileEntity) {
+		base.superFunc_146100_a(tileEntity);
+
+	}
+
+	@Override
+	public void func_146095_a(Object commandBlockLogic) {
+		base.superFunc_146095_a(commandBlockLogic);
+
+	}
+
+	@Override
+	public void func_146098_a(Object tileEntityBrewingStand) {
+		base.superFunc_146098_a(tileEntityBrewingStand);
+
+	}
+
+	@Override
+	public void func_146104_a(Object tileEntityBeacon) {
+		base.superFunc_146104_a(tileEntityBeacon);
+
+	}
+
+	@Override
+	public void displayGUIMerchant(Object iMerchant, String p_71030_2_) {
+		base.superDisplayGUIMerchant(iMerchant, p_71030_2_);
+
+	}
+
+	@Override
+	public Object sleepInBedAt(int p_71018_1_, int p_71018_2_, int p_71018_3_) {
+		return base.superSleepInBedAt(p_71018_1_, p_71018_2_, p_71018_3_);
+	}
+
+	@Override
+	public boolean getHideCape(int p_82241_1_) {
+		return base.superGetHideCape(p_82241_1_);
+	}
+
+	@Override
+	public void setHideCape(int p_82239_1_, boolean p_82239_2_) {
+		base.superSetHideCape(p_82239_1_, p_82239_2_);
+
+	}
+
+	@Override
+	public void setSpawnChunk(Object chunkCoordinates, boolean p_71063_2_) {
+		base.superSetSpawnChunk(chunkCoordinates, p_71063_2_);
+
+	}
+
+	@Override
+	public void fall(float p_70069_1_) {
+		base.superFall(p_70069_1_);
+
+	}
+
+	@Override
+	public String func_146067_o(int p_146067_1_) {
+		return base.superFunc_146067_o(p_146067_1_);
+	}
+
+	@Override
+	public Object getItemIcon(Object itemStack, int p_70620_2_) {
+		return base.superGetItemIcon(itemStack, p_70620_2_);
+	}
+
+	@Override
+	public boolean isCurrentToolAdventureModeExempt(int p_82246_1_, int p_82246_2_, int p_82246_3_) {
+		return base.superIsCurrentToolAdventureModeExempt(p_82246_1_, p_82246_2_, p_82246_3_);
+	}
+
+	@Override
+	public boolean canPlayerEdit(int p_82247_1_, int p_82247_2_, int p_82247_3_, int p_82247_4_, Object itemStack) {
+		return base.superCanPlayerEdit(p_82247_1_, p_82247_2_, p_82247_3_, p_82247_4_, itemStack);
+	}
+
+	@Override
+	public String getCommandSenderName() {
+		return base.superGetCommandSenderName();
+	}
+
+	@Override
+	public Object[] getLastActiveItems() {
+		return base.superGetLastActiveItems();
+	}
+
+	@Override
+	public boolean getHideCape() {
+		return base.superGetHideCape();
+	}
+
+	@Override
+	public Object func_145748_c_() {
+		return base.superFunc_145748_c_();
+	}
+
+	@Override
+	public Object getPosition(float par1) {
+		return base.superGetPosition(par1);
+	}
+
+	@Override
+	public void updateFallState(double p_70064_1_, boolean p_70064_3_) {
+		base.superUpdateFallState(p_70064_1_, p_70064_3_);
+
+	}
+
+	@Override
+	public int func_142015_aE() {
+		return base.superFunc_142015_aE();
+	}
+
+	@Override
+	public void dropRareDrop(int p_70600_1_) {
+		base.superDropRareDrop(p_70600_1_);
+
+	}
+
+	@Override
+	public Object func_110142_aN() {
+		return base.superFunc_110142_aN();
+	}
+
+	@Override
+	public boolean isAIEnabled() {
+		return base.superIsAIEnabled();
+	}
+
+	@Override
+	public void updateAITasks() {
+		base.superUpdateAITasks();
+
+	}
+
+	@Override
+	public boolean isClientWorld() {
+		return base.superIsClientWorld();
+	}
+
+	@Override
+	public void func_145775_I() {
+		base.superFunc_145775_I();
+
+	}
+
+	@Override
+	public void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object block) {
+		base.superFunc_145780_a(p_145780_1_, p_145780_2_, p_145780_3_, block);
+
+	}
+
+	@Override
+	public boolean handleLavaMovement() {
+		return base.superHandleLavaMovement();
+	}
+
+	@Override
+	public Object func_145778_a(Object item, int p_145778_2_, float p_145778_3_) {
+		return base.superFunc_145778_a(item, p_145778_2_, p_145778_3_);
+	}
+
+	@Override
+	public boolean func_145771_j(double p_145771_1_, double p_145771_3_, double p_145771_5_) {
+		return base.superFunc_145771_j(p_145771_1_, p_145771_3_, p_145771_5_);
+	}
+
+	@Override
+	public boolean isEntityInvulnerable() {
+		return base.superIsEntityInvulnerable();
+	}
+
+	@Override
+	public void copyDataFrom(Object entity, boolean p_82141_2_) {
+		base.superCopyDataFrom(entity, p_82141_2_);
+
+	}
+
+	@Override
+	public float func_145772_a(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block) {
+		return base.superFunc_145772_a(explosion, world, p_145772_3_, p_145772_4_, p_145772_5_, block);
+	}
+
+	@Override
+	public boolean func_145774_a(Object explosion, Object world, int p_145774_3_, int p_145774_4_, int p_145774_5_, Object block, float p_145774_7_) {
+		return base.superFunc_145774_a(explosion, world, p_145774_3_, p_145774_4_, p_145774_5_, block, p_145774_7_);
+	}
+
+	@Override
+	public int getMaxSafePointTries() {
+		return base.superGetMaxSafePointTries();
+	}
+
+	@Override
+	public void sendChatToPlayer(Object chatMessageComponent) {
+		base.superSendChatToPlayer(chatMessageComponent);
+
+	}
+
+	@Override
+	public void setupCustomSkin() {
+		base.superSetupCustomSkin();
+
+	}
+
+	@Override
+	public Object getTextureSkin() {
+		return base.superGetTextureSkin();
+	}
+
+	@Override
+	public Object getTextureCape() {
+		return base.superGetTextureCape();
+	}
+
+	@Override
+	public Object dropPlayerItem(Object itemStack) {
+		return base.superDropPlayerItem(itemStack);
+	}
+
+	@Override
+	public float getCurrentPlayerStrVsBlock(Object block, boolean par2, int meta) {
+		return base.superGetCurrentPlayerStrVsBlock(block, par2, meta);
+	}
+
+	@Override
+	public void displayGUIHopper(Object tileEntityHopper) {
+		base.superDisplayGUIHopper(tileEntityHopper);
+
+	}
+
+	@Override
+	public void displayGUIFurnace(Object tileEntityFurnace) {
+		base.superDisplayGUIFurnace(tileEntityFurnace);
+
+	}
+
+	@Override
+	public void displayGUIDispenser(Object tileEntityDispenser) {
+		base.superDisplayGUIDispenser(tileEntityDispenser);
+
+	}
+
+	@Override
+	public void displayGUIEditSign(Object tileEntity) {
+		base.superDisplayGUIEditSign(tileEntity);
+
+	}
+
+	@Override
+	public void displayGUIBrewingStand(Object tileEntityBrewingStand) {
+		base.superDisplayGUIBrewingStand(tileEntityBrewingStand);
+
+	}
+
+	@Override
+	public void displayGUIBeacon(Object tileEntityBeacon) {
+		base.superDisplayGUIBeacon(tileEntityBeacon);
+
+	}
+
+	@Override
+	public void addChatMessage(String par1Str) {
+		base.superAddChatMessage(par1Str);
+
+	}
+
+	@Override
+	public String getEntityName() {
+		return base.superGetEntityName();
+	}
+
+	@Override
+	public Object getCurrentItemOrArmor(int par1) {
+		return base.superGetCurrentItemOrArmor(par1);
+	}
+
+	@Override
+	public String getTranslatedEntityName() {
+		return base.superGetTranslatedEntityName();
+	}
+
+	@Override
+	public void playStepSound(int par1, int par2, int par3, int par4) {
+		base.superPlayStepSound(par1, par2, par3, par4);
+
+	}
+
+	@Override
+	public boolean isInRangeToRenderVec3D(Object vec3) {
+		return base.superIsInRangeToRenderVec3D(vec3);
+	}
+
+	@Override
+	public Object dropItem(int par1, int par2) {
+		return base.superDropItem(par1, par2);
+	}
+
+	@Override
+	public Object dropItemWithOffset(int par1, int par2, float par3) {
+		return base.superDropItemWithOffset(par1, par2, par3);
+	}
+
+	@Override
+	public float getBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block) {
+		return base.superGetBlockExplosionResistance(explosion, world, par3, par4, par5, block);
+	}
+
+	@Override
+	public boolean shouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
+		return base.superShouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7);
+	}
+
+	@Override
+	public void updateCloak() {
+		base.superUpdateCloak();
+
+	}
+
+	@Override
+	public void sendChatToPlayer(String par1Str) {
+		base.superSendChatToPlayer(par1Str);
+
+	}
+
+	@Override
+	public int getMaxHealth() {
+		return base.superGetMaxHealth();
+	}
+
+	@Override
+	public boolean func_96122_a(Object entityPlayer) {
+		return base.superFunc_96122_a(entityPlayer);
+	}
+
+	@Override
+	public void alertWolves(Object entityLiving, boolean par2) {
+		base.superAlertWolves(entityLiving, par2);
+
+	}
+
+	@Override
+	public void damageArmor(int par1) {
+		base.superDamageArmor(par1);
+
+	}
+
+	@Override
+	public float func_82243_bO() {
+		return base.superFunc_82243_bO();
+	}
+
+	@Override
+	public boolean func_71066_bF() {
+		return base.superFunc_71066_bF();
+	}
+
+	@Override
+	public void func_82162_bC() {
+		base.superFunc_82162_bC();
+
+	}
+
+	@Override
+	public boolean canCurrentToolHarvestBlock(int par1, int par2, int par3) {
+		return base.superCanCurrentToolHarvestBlock(par1, par2, par3);
+	}
+
+	@Override
+	public boolean func_94062_bN() {
+		return base.superFunc_94062_bN();
+	}
+
+	@Override
+	public boolean func_94059_bO() {
+		return base.superFunc_94059_bO();
+	}
+
+	@Override
+	public boolean canPickUpLoot() {
+		return base.superCanPickUpLoot();
+	}
+
+	@Override
+	public Object getTranslator() {
+		return base.superGetTranslator();
+	}
+
+	@Override
+	public String translateString(String par1Str, Object... par2ArrayOfObj) {
+		return base.superTranslateString(par1Str, par2ArrayOfObj);
+	}
+
+	@Override
+	public boolean func_98034_c(Object entityPlayer) {
+		return base.superFunc_98034_c(entityPlayer);
+	}
+
+	@Override
+	public boolean func_96092_aw() {
+		return base.superFunc_96092_aw();
+	}
+
+	@Override
+	public int func_96121_ay() {
+		return base.superFunc_96121_ay();
+	}
+
+	@Override
+	public Object getLookHelper() {
+		return base.superGetLookHelper();
+	}
+
+	@Override
+	public Object getMoveHelper() {
+		return base.superGetMoveHelper();
+	}
+
+	@Override
+	public Object getJumpHelper() {
+		return base.superGetJumpHelper();
+	}
+
+	@Override
+	public Object getNavigator() {
+		return base.superGetNavigator();
+	}
+
+	@Override
+	public Object getEntitySenses() {
+		return base.superGetEntitySenses();
+	}
+
+	@Override
+	public Object getAttackTarget() {
+		return base.superGetAttackTarget();
+	}
+
+	@Override
+	public void setAttackTarget(Object entityLiving) {
+		base.superSetAttackTarget(entityLiving);
+
+	}
+
+	@Override
+	public boolean canAttackClass(Class par1Class) {
+		return base.superCanAttackClass(par1Class);
+	}
+
+	@Override
+	public void eatGrassBonus() {
+		base.superEatGrassBonus();
+
+	}
+
+	@Override
+	public boolean isWithinHomeDistanceCurrentPosition() {
+		return base.superIsWithinHomeDistanceCurrentPosition();
+	}
+
+	@Override
+	public boolean isWithinHomeDistance(int par1, int par2, int par3) {
+		return base.superIsWithinHomeDistance(par1, par2, par3);
+	}
+
+	@Override
+	public void setHomeArea(int par1, int par2, int par3, int par4) {
+		base.superSetHomeArea(par1, par2, par3, par4);
+
+	}
+
+	@Override
+	public Object getHomePosition() {
+		return base.superGetHomePosition();
+	}
+
+	@Override
+	public float getMaximumHomeDistance() {
+		return base.superGetMaximumHomeDistance();
+	}
+
+	@Override
+	public void detachHome() {
+		base.superDetachHome();
+
+	}
+
+	@Override
+	public boolean hasHome() {
+		return base.superHasHome();
+	}
+
+	@Override
+	public String getTexture() {
+		return base.superGetTexture();
+	}
+
+	@Override
+	public int getTalkInterval() {
+		return base.superGetTalkInterval();
+	}
+
+	@Override
+	public void playLivingSound() {
+		base.superPlayLivingSound();
+
+	}
+
+	@Override
+	public void spawnExplosionParticle() {
+		base.superSpawnExplosionParticle();
+
+	}
+
+	@Override
+	public int getHealthInt() {
+		return base.superGetHealthInt();
+	}
+
+	@Override
+	public String getLivingSound() {
+		return base.superGetLivingSound();
+	}
+
+	@Override
+	public int getDropItemId() {
+		return base.superGetDropItemId();
+	}
+
+	@Override
+	public void setMoveForward(float par1) {
+		base.superSetMoveForward(par1);
+
+	}
+
+	@Override
+	public void func_85033_bc() {
+		base.superFunc_85033_bc();
+
+	}
+
+	@Override
+	public boolean canDespawn() {
+		return base.superCanDespawn();
+	}
+
+	@Override
+	public void despawnEntity() {
+		base.superDespawnEntity();
+
+	}
+
+	@Override
+	public int getVerticalFaceSpeed() {
+		return base.superGetVerticalFaceSpeed();
+	}
+
+	@Override
+	public void faceEntity(Object entity, float par2, float par3) {
+		base.superFaceEntity(entity, par2, par3);
+
+	}
+
+	@Override
+	public boolean getCanSpawnHere() {
+		return base.superGetCanSpawnHere();
+	}
+
+	@Override
+	public float getRenderSizeModifier() {
+		return base.superGetRenderSizeModifier();
+	}
+
+	@Override
+	public int getMaxSpawnedInChunk() {
+		return base.superGetMaxSpawnedInChunk();
+	}
+
+	@Override
+	public float getSpeedModifier() {
+		return base.superGetSpeedModifier();
+	}
+
+	@Override
+	public int func_82143_as() {
+		return base.superFunc_82143_as();
+	}
+
+	@Override
+	public void initCreature() {
+		base.superInitCreature();
+
+	}
+
+	@Override
+	public boolean canBeSteered() {
+		return base.superCanBeSteered();
+	}
+
+	@Override
+	public void func_94058_c(String par1Str) {
+		base.superFunc_94058_c(par1Str);
+
+	}
+
+	@Override
+	public String func_94057_bL() {
+		return base.superFunc_94057_bL();
+	}
+
+	@Override
+	public boolean func_94056_bM() {
+		return base.superFunc_94056_bM();
+	}
+
+	@Override
+	public void func_94061_f(boolean par1) {
+		base.superFunc_94061_f(par1);
+
+	}
+
+	@Override
+	public void func_96120_a(int par1, float par2) {
+		base.superFunc_96120_a(par1, par2);
+
+	}
+
+	@Override
+	public void setCanPickUpLoot(boolean par1) {
+		base.superSetCanPickUpLoot(par1);
+
+	}
+
+	@Override
+	public boolean func_104002_bU() {
+		return base.superFunc_104002_bU();
+	}
+
+	@Override
+	public boolean addNotRiddenEntityID(Object nBTTagCompound) {
+		return base.superAddNotRiddenEntityID(nBTTagCompound);
+	}
+
+	@Override
+	public boolean addEntityID(Object nBTTagCompound) {
+		return base.superAddEntityID(nBTTagCompound);
+	}
+
+	@Override
+	public boolean interact(Object entityPlayer) {
+		return base.superInteract(entityPlayer);
+	}
+
+	@Override
+	public void unmountEntity(Object entity) {
+		base.superUnmountEntity(entity);
+
+	}
+
+	@Override
+	public boolean func_85031_j(Object entity) {
+		return base.superFunc_85031_j(entity);
+	}
+
+	@Override
+	public void func_82149_j(Object entity) {
+		base.superFunc_82149_j(entity);
+
+	}
+
+	@Override
+	public float func_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block) {
+		return base.superFunc_82146_a(explosion, world, par3, par4, par5, block);
+	}
+
+	@Override
+	public boolean func_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
+		return base.superFunc_96091_a(explosion, world, par3, par4, par5, par6, par7);
+	}
+
+	@Override
+	public void func_85029_a(Object crashReportCategory) {
+		base.superFunc_85029_a(crashReportCategory);
+	}
+
 }

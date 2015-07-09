@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import modchu.lib.Modchu_CastHelper;
+import modchu.lib.Modchu_Reflect;
 import modchu.lib.Modchu_Version;
 import modchu.lib.forge.mc152_179.Modchu_ModMetadata;
 
@@ -20,9 +22,11 @@ import cpw.mods.fml.common.versioning.VersionRange;
 
 public class Modchu_ModContainer implements ModContainer {
 	public static Modchu_ModContainer instance;
+	public static Object modInstance;
 
-	public Modchu_ModContainer() {
+	public Modchu_ModContainer(Object o) {
 		if (instance != null); else instance = this;
+		modInstance = o;
 	}
 
 	@Override
@@ -37,7 +41,7 @@ public class Modchu_ModContainer implements ModContainer {
 
 	@Override
 	public String getModId() {
-		return "modchupacket";
+		return Modchu_CastHelper.String(Modchu_Reflect.invokeMethod(modInstance.getClass(), "getModId", modInstance));
 	}
 
 	@Override
@@ -90,7 +94,7 @@ public class Modchu_ModContainer implements ModContainer {
 
 	@Override
 	public Object getMod() {
-		return instance;
+		return modInstance;
 	}
 
 	@Override

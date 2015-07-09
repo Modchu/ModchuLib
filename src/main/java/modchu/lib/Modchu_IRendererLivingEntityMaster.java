@@ -9,10 +9,8 @@ public interface Modchu_IRendererLivingEntityMaster extends Modchu_IRenderMaster
 	public int shouldRenderPass(Object entityliving, int i, float f);
 	public void passSpecialRender(Object entityLiving, double d, double d1, double d2);
 	public int inheritRenderPass(Object entity, int par2, float par3);
-	public void modelArmorInit(Object entity, boolean debug);
 	public void renderModel(Object entity, float par2, float par3, float par4, float par5, float par6, float par7);
 	public int getColorMultiplier(Object entity, float par2, float par3);
-	public void allModelInit(Object entity, boolean debug);
 	public void renderSpecials(Object entityPlayer, float f);
 	public Object getMainModel();
 	public boolean addLayer(Object layerRenderer);

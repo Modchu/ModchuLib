@@ -84,7 +84,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public DataWatcher superGetDataWatcher() {
 		return super.getDataWatcher();
 	}
-
+/*
 	@Override
 	public boolean equals(Object p_equals_1_) {
 		return master != null ? master.equals(p_equals_1_) : super.equals(p_equals_1_);
@@ -102,7 +102,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public int superHashCode() {
 		return super.hashCode();
 	}
-
+*/
 	@Override
 	protected void preparePlayerToSpawn() {
 		if (master != null) master.preparePlayerToSpawn();

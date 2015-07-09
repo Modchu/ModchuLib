@@ -84,7 +84,7 @@ public class Modchu_EntityCapsBase implements Modchu_IEntityCapsBase {
 			return owner != null ? Modchu_AS.getFloat(Modchu_AS.entityLivingBaseRenderYawOffset, owner) : 0.0F;
 
 		case caps_onGround:
-			return owner != null ? Modchu_AS.getFloat(Modchu_AS.entityOnGround, owner) : 0.0F;
+			return owner != null ? Modchu_AS.getBoolean(Modchu_AS.entityOnGround, owner) : false;
 		case caps_isRiding:
 			return owner != null ? Modchu_AS.getBoolean(Modchu_AS.entityIsRiding, owner) : false;
 		case caps_isRidingPlayer:
@@ -214,8 +214,6 @@ public class Modchu_EntityCapsBase implements Modchu_IEntityCapsBase {
 			return Modchu_AS.set(Modchu_AS.entitySetVelocity, owner, pArg[0], pArg[1], pArg[2]);
 		case caps_onGround:
 			return Modchu_AS.set(Modchu_AS.entityOnGround, owner, pArg[0]);
-		case caps_isRiding:
-			return Modchu_AS.set(Modchu_AS.entityIsRiding, owner, pArg[0]);
 		case caps_isSneak:
 			return Modchu_AS.set(Modchu_AS.entitySetSneaking, owner, pArg[0]);
 		}

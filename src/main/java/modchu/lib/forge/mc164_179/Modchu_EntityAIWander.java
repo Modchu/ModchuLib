@@ -26,11 +26,11 @@ public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEnt
 
 	@Override
 	public boolean shouldExecute() {
-		return master != null ? master.shouldExecute() : false;
+		return master != null ? master.shouldExecute() : super.shouldExecute();
 	}
 
 	public boolean superShouldExecute() {
-		return false;
+		return super.shouldExecute();
 	}
 
 	@Override

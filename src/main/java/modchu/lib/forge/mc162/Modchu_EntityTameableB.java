@@ -75,6 +75,18 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(d);
 	}
 
+	public void setFollowRange(double d) {
+		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(d);
+	}
+
+	public void setKnockbackResistance(double d) {
+		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(d);
+	}
+
+	public void setAttackDamage(double d) {
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(d);
+	}
+
 	public void setMaxHealth(double d) {
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(d);
 	}
@@ -96,6 +108,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	}
 
 	protected void init(String s) {
+		if (s != null); else return;
 		Class c = Modchu_Reflect.loadClass(s);
 		if (c != null); else return;
 		HashMap<String, Object> map = Modchu_Main.getNewModchuCharacteristicMap(c);
@@ -1934,7 +1947,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public DataWatcher superGetDataWatcher() {
 		return super.getDataWatcher();
 	}
-
+/*
 	@Override
 	public boolean equals(Object par1Obj) {
 		return master != null ? master.equals(par1Obj) : super.equals(par1Obj);
@@ -1952,7 +1965,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	public int superHashCode() {
 		return super.hashCode();
 	}
-
+*/
 	@Override
 	protected void preparePlayerToSpawn() {
 		if (master != null) master.preparePlayerToSpawn();
@@ -3012,11 +3025,6 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	}
 
 	@Override
-	public int superGetHealth() {
-		return -1;
-	}
-
-	@Override
 	public void superFunc_85033_bc() {
 	}
 
@@ -3129,6 +3137,21 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	@Override
 	public boolean superFunc_96092_aw() {
 		return false;
+	}
+
+	@Override
+	public float superGetHealth() {
+		return super.getHealth();
+	}
+
+	@Override
+	public int superGetHealthInt() {
+		return (int) super.getHealth();
+	}
+
+	@Override
+	public float superGetHealthFloat() {
+		return super.getHealth();
 	}
 
 }

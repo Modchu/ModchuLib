@@ -2,6 +2,7 @@ package modchu.lib.forge.mc164;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
@@ -18,6 +19,7 @@ import modchu.lib.Modchu_IPacketMaster;
 import modchu.lib.Modchu_Packet;
 import modchu.lib.Modchu_PacketManager;
 import modchu.lib.Modchu_Reflect;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -96,7 +98,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 
 	private void sendToWorld(Object[] o, String channelName, Object world) {
 		for (Object entityplayer : Modchu_AS.getList(Modchu_AS.playerEntities, world)) {
-			sendTo(newPacket(o, channelName), (EntityPlayerMP) entityplayer, channelName);
+			sendTo(newPacket(o, channelName), entityplayer, channelName);
 		}
 	}
 
@@ -113,6 +115,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		if (player != null) {
 			if (player instanceof Player) PacketDispatcher.sendPacketToPlayer(packet, (Player) player);
 			else if (player instanceof EntityPlayerMP) ((EntityPlayerMP) player).playerNetServerHandler.sendPacketToPlayer(packet);
+			else if (player instanceof EntityClientPlayerMP) ((EntityClientPlayerMP) player).sendQueue.addToSendQueue(packet);
 		}
 	}
 
@@ -240,7 +243,8 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 				} else if (by == Modchu_Packet.packet_Long) {
 					o = Modchu_PacketManager.readLong(input);
 				} else if (by == Modchu_Packet.packet_String) {
-					o = Modchu_PacketManager.readString(input);
+					//o = Modchu_PacketManager.readString(input);
+					o = Packet.readString((DataInput) input, 32767);
 				} else if (by == Modchu_Packet.packet_end) {
 					returnFlag = false;
 				}

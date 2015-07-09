@@ -12,7 +12,7 @@ public class Modchu_EntityAIWatchClosest extends EntityAIWatchClosest implements
 	public Modchu_IEntityAIWatchClosestMaster master;
 
 	public Modchu_EntityAIWatchClosest(HashMap<String, Object> map) {
-		super((EntityLiving)map.get("Object"), (Class)map.get("Class"), (Float)map.get("Float"), (Float)map.get("Float1"));
+		super((EntityLiving)map.get("Object"), (Class)map.get("Class"), (Float)map.get("Float"), map.containsKey("Float1") ? (Float)map.get("Float1") : 0.02F);
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		//Modchu_Debug.lDebug("Modchu_EntityAIWatchClosest2 init instance="+instance);

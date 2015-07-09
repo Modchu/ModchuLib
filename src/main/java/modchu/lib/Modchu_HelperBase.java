@@ -549,7 +549,7 @@ public class Modchu_HelperBase {
 	 */
 	public static boolean hasEffect(Object itemStack) {
 		if (itemStack != null) {
-			Object item = Modchu_AS.get(Modchu_AS.itemStackGetItem, itemStack);
+			Object item = itemStack != null ? Modchu_AS.get(Modchu_AS.itemStackGetItem, itemStack) : null;
 			if (Modchu_Reflect.loadClass("ItemPotion").isInstance(item)) {
 				List list = Modchu_AS.getList(Modchu_AS.itemPotionGetEffects, item, itemStack);
 				return list != null

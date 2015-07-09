@@ -63,30 +63,48 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			//Modchu_Debug.lDebug("Modchu_FileManager init ls3="+ls3);
 			URI ls4 = ls3.toURI();
 			//Modchu_Debug.lDebug("Modchu_FileManager init ls4="+ls4);
-			int i1 = ls4.toString().lastIndexOf(".class");
+			String s = ls4.toString();
+			int i1 = s.lastIndexOf(".class");
 			if (i1 > -1) {
 				//Class c1 = Modchu_Reflect.loadClass(ls4.toString());
 				//Modchu_Debug.lDebug("Modchu_FileManager init c.getName()="+c.getName());
-				String s = ls4.toString();
 				String s1 = c.getName();
-				//Modchu_Debug.lDebug("Modchu_FileManager init s1="+s1);
+				Modchu_Debug.lDebug("Modchu_FileManager init s1="+s1);
 				i1 = s.lastIndexOf(s1);
 				if (i1 > -1) {
 					s = s.substring(0, i1);
 				} else {
-					s = s.replaceAll("/", ".");
-					//Modchu_Debug.lDebug("Modchu_FileManager init 2 s="+s);
-					i1 = s.indexOf(s1);
+					while (s1.indexOf(".") > -1) {
+						s1 = s1.replace(".", "/");
+					}
+					i1 = s.lastIndexOf(s1);
 					if (i1 > -1) {
 						s = s.substring(0, i1);
-						while (s.indexOf(".") > -1) {
-							s = s.replace(".", "\\");
-						}
+						Modchu_Debug.lDebug("Modchu_FileManager init 0 s="+s);
 					} else {
-						//Modchu_Debug.lDebug("Modchu_FileManager init 4 else s="+s+" "+s1.replaceAll(".", "/").replaceAll("//", ""));
+						Modchu_Debug.lDebug("Modchu_FileManager init 1 s="+s);
+						while (s.indexOf("/") > -1) {
+							s = s.replace("/", "\\");
+						}
+						Modchu_Debug.lDebug("Modchu_FileManager init 2 s="+s);
+						i1 = s.indexOf(s1);
+						if (i1 > -1) {
+							s = s.substring(0, i1);
+/*
+							while (s.indexOf(".") > -1) {
+								s = s.replace(".", "\\");
+							}
+*/
+						} else {
+							//Modchu_Debug.lDebug("Modchu_FileManager init 4 else s="+s+" "+s1.replaceAll(".", "/").replaceAll("//", ""));
+						}
 					}
 				}
+				s = s.replace("file:/", "");
 				s = s.replace("file:\\", "");
+				while (s.indexOf("!") > -1) {
+					s = s.replace("!", "");
+				}
 				Modchu_Debug.lDebug("Modchu_FileManager init 5 s="+s);
 				File file = new File(s);
 				Modchu_Debug.lDebug("Modchu_FileManager init 6 file="+file);
@@ -100,7 +118,8 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 				Modchu_Debug.lDebug("Modchu_FileManager init 1 ls4="+ls4);
 			}
 			i = 1;
-		} catch (Exception exception) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			Modchu_Debug.tDebug("Modchu_FileManagerBase init getMinecraftFile-Exception1.");
 		}
 		Modchu_Debug.lDebug("Modchu_FileManager init 8");
@@ -146,7 +165,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		} else {
 			// サーバー側では使われないはず。
 		}
-		
+
 		if (!Modchu_Main.isRelease()) {
 			Modchu_FileManager.addMinecraftJar(new File(Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir), "/bin/minecraft.jar"));
 			Modchu_Debug.lDebug("Modchu_FileManagerBase minecraft.jar file.exists()="+Modchu_FileManager.getMinecraftJarList().get(1).exists());
@@ -462,7 +481,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 					if (ze.getName().equals(s)) break;
 				}
 			}
-			if (ze != null 
+			if (ze != null
 					&& !ze.getName().equals(s)) {
 				Modchu_Debug.lDebug("Modchu_FileManager !ze.getName().equals(s) ze="+ze);
 				return;
@@ -1035,8 +1054,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			}
 		} catch (ConcurrentModificationException e) {
 		} catch (Exception e) {
-			Modchu_Debug.Debug("Modchu_FileManager writerFile List file="+ file.toString() +" file writer fail.", 2, e);
-			e.printStackTrace();
+			Modchu_Debug.lDebug("Modchu_FileManager writerFile List file="+ file.toString() +" file writer fail.", 2, e);
 		 } finally {
 			 try {
 				 if (bwriter != null) bwriter.close();

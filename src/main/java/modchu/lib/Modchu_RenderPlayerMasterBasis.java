@@ -49,10 +49,6 @@ public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaste
 	}
 
 	@Override
-	public void modelArmorInit(Object entity, boolean debug) {
-	}
-
-	@Override
 	public void renderModel(Object entity, float par2, float par3, float par4, float par5, float par6, float par7) {
 		base.superRenderModel(entity, par2, par3, par4, par5, par6, par7);
 	}
@@ -60,10 +56,6 @@ public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaste
 	@Override
 	public int getColorMultiplier(Object entity, float par2, float par3) {
 		return base.superGetColorMultiplier(entity, par2, par3);
-	}
-
-	@Override
-	public void allModelInit(Object entity, boolean debug) {
 	}
 
 	@Override

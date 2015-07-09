@@ -11,7 +11,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 
 public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
-	public static Modchu_ILayerArmorBaseMaster master;
+	public Modchu_ILayerArmorBaseMaster master;
 
 	public Modchu_LayerArmorBase(HashMap<String, Object> map) {
 		Modchu_Debug.lDebug("Modchu_LayerArmorBase init");

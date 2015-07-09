@@ -9,7 +9,7 @@ import modchu.lib.Modchu_Main;
 import net.minecraft.src.EntityLivingBase;
 
 public class Modchu_LayerHeldItem implements Modchu_ILayerHeldItem {
-	public static Modchu_ILayerHeldItemMaster master;
+	public Modchu_ILayerHeldItemMaster master;
 
 	public Modchu_LayerHeldItem(HashMap<String, Object> map) {
 		Modchu_Debug.lDebug("Modchu_LayerHeldItem init");

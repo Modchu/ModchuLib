@@ -1915,6 +1915,16 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
+	protected void setEntityPlayerInventoryCurrentItem(Object entityplayer, int i) {
+		if (master != null) master.setEntityPlayerInventoryCurrentItem(entityplayer, i);
+		else super.setEntityPlayerInventoryCurrentItem(entityplayer, i);
+	}
+
+	public void superSetEntityPlayerInventoryCurrentItem(Object entityplayer, int i) {
+		super.setEntityPlayerInventoryCurrentItem(entityplayer, i);
+	}
+
+	@Override
 	protected Object entityPlayerInventoryGetStackInSlot(Object entityplayer, int i) {
 		return master != null ? master.entityPlayerInventoryGetStackInSlot(entityplayer, i) : super.entityPlayerInventoryGetStackInSlot(entityplayer, i);
 	}

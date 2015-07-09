@@ -23,11 +23,11 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 		if (freeVariableMap != null); else freeVariableMap = new ConcurrentHashMap();
 		freeVariableMap.put(s, o);
 	}
-
+/*
 	public String toString() {
 		return base.superToString();
 	}
-
+*/
 	@Override
 	public void applyEntityAttributes() {
 		base.superApplyEntityAttributes();
@@ -1795,7 +1795,12 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public int getHealth() {
+	public int getHealthInt() {
+		return base.superGetHealthInt();
+	}
+
+	@Override
+	public float getHealth() {
 		return base.superGetHealth();
 	}
 

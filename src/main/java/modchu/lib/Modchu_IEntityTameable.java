@@ -86,7 +86,5 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityTameableB {
 	public Object superFunc_145778_a(Object item, int p_145778_2_, float p_145778_3_);
 	public float superFunc_180484_a(Object blockPos);
 	public boolean superFunc_180485_d(Object blockPos);
-	public void setMovementSpeed(double d);
-	public void setMaxHealth(double d);
 
 }

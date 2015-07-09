@@ -24,10 +24,14 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 
 	@Override
 	public void doRender(Entity entity, double d, double d1, double d2, float d3, float d4) {
-		//Modchu_Debug.mDebug("Modchu_AllRender doRender");
+		Modchu_Debug.mDebug("Modchu_AllRender doRender");
 		Modchu_Render render = renderMapGet(entity);
-		if (render != null) render.doRender(entity, d, d1, d2, d3, d4);
-		else {
+		if (render != null) {
+			setShadowSize(Modchu_AS.getFloat("Render", "shadowSize", render));
+			//setShadowSize(0.0F);
+			//render.setShadowSize(0.0F);
+			render.doRender(entity, d, d1, d2, d3, d4);
+		} else {
 			Modchu_Debug.mDebug("Modchu_AllRender doRender render == null !! entity="+entity+" entity.getClass()="+(entity != null ? entity.getClass() : null));
 		}
 	}

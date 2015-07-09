@@ -915,5 +915,6 @@ public interface Modchu_IASMaster {
 	public int entityLivingBaseAttackTime(Object entity);
 	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i);
 	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b);
+	public void setEntityPlayerInventoryCurrentItem(Object entityplayer, int i);
 
 }

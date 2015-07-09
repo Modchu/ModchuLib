@@ -9,8 +9,8 @@ public interface Modchu_IEntity {
 	public int superGetEntityId();
 	public void superSetEntityId(int p_145769_1_);
 	public Object superGetDataWatcher();
-	public boolean superEquals(Object p_equals_1_);
-	public int superHashCode();
+	//public boolean superEquals(Object p_equals_1_);
+	//public int superHashCode();
 	public void superPreparePlayerToSpawn();
 	public void superSetDead();
 	public void superSetSize(float p_70105_1_, float p_70105_2_);

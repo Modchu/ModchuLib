@@ -859,7 +859,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object[] entityPlayerArmorInventory(Object entityplayerORInventory) {
 		if (entityplayerORInventory instanceof InventoryPlayer) ;else {
-			entityplayerORInventory = entityPlayerArmorInventory(entityplayerORInventory);
+			entityplayerORInventory = entityPlayerInventory(entityplayerORInventory);
 		}
 		return ((InventoryPlayer) entityplayerORInventory).armorInventory;
 	}
@@ -935,8 +935,9 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object entityPlayerInventory(Object entityplayer) {
-		return ((EntityPlayer) entityplayer).inventory;
+	public Object entityPlayerInventory(Object entityplayerORInventory) {
+		if (entityplayerORInventory instanceof InventoryPlayer) return entityplayerORInventory;
+		return ((EntityPlayer) entityplayerORInventory).inventory;
 	}
 
 	@Override
@@ -945,13 +946,17 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object entityPlayerInventoryGetCurrentItem(Object entityplayer) {
-		return ((EntityPlayer) entityplayer).inventory.getCurrentItem();
+	public Object entityPlayerInventoryGetCurrentItem(Object entityplayerORInventory) {
+		if (entityplayerORInventory instanceof InventoryPlayer) {
+			return ((InventoryPlayer) entityplayerORInventory).getCurrentItem();
+		}
+		return ((EntityPlayer) entityplayerORInventory).inventory.getCurrentItem();
 	}
 
 	@Override
-	public Object entityPlayerInventoryGetStackInSlot(Object entityplayer, int i) {
-		return ((EntityPlayer) entityplayer).inventory.getStackInSlot(i);
+	public Object entityPlayerInventoryGetStackInSlot(Object entityplayerORInventory, int i) {
+		if (entityplayerORInventory instanceof InventoryPlayer) return ((InventoryPlayer) entityplayerORInventory).getStackInSlot(i);
+		return ((EntityPlayer) entityplayerORInventory).inventory.getStackInSlot(i);
 	}
 
 	@Override
@@ -2144,7 +2149,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public int itemItemID(Object item) {
-		return -1;
+		return ((Item) item).itemID;
 	}
 
 	@Override
@@ -2902,8 +2907,9 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void setEntityPlayerArmorInventory(Object entityplayer, Object armorInventory) {
-		((EntityPlayer) entityplayer).inventory.armorInventory = (ItemStack[]) armorInventory;
+	public void setEntityPlayerArmorInventory(Object entityplayerORInventory, Object armorInventory) {
+		if (entityplayerORInventory instanceof InventoryPlayer) ((InventoryPlayer) entityplayerORInventory).armorInventory = (ItemStack[]) armorInventory;
+		else ((EntityPlayer) entityplayerORInventory).inventory.armorInventory = (ItemStack[]) armorInventory;
 	}
 
 	@Override
@@ -2917,8 +2923,9 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void setEntityPlayerMainInventory(Object entityplayer, Object mainInventory) {
-		((EntityPlayer) entityplayer).inventory.mainInventory = (ItemStack[]) mainInventory;
+	public void setEntityPlayerMainInventory(Object entityplayerORInventory, Object mainInventory) {
+		if (entityplayerORInventory instanceof InventoryPlayer) ((InventoryPlayer) entityplayerORInventory).mainInventory = (ItemStack[]) mainInventory;
+		else ((EntityPlayer) entityplayerORInventory).inventory.mainInventory = (ItemStack[]) mainInventory;
 	}
 
 	@Override
@@ -3367,17 +3374,19 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object itemStackGetTagCompound(Object itemStack) {
-		return ((ItemStack) itemStack).getTagCompound();
+	public Object itemStackGetTagCompound(Object nBTTagCompoundOrItemStack) {
+		return nBTTagCompoundOrItemStack instanceof NBTTagCompound ? nBTTagCompoundOrItemStack : ((ItemStack) nBTTagCompoundOrItemStack).getTagCompound();
 	}
 
 	@Override
 	public boolean nbtTagCompoundHasKey(Object nBTTagCompoundOrItemStack, String s) {
+		nBTTagCompoundOrItemStack = nBTTagCompoundOrItemStack instanceof NBTTagCompound ? nBTTagCompoundOrItemStack : ((ItemStack) nBTTagCompoundOrItemStack).getTagCompound();
 		return ((NBTTagCompound) nBTTagCompoundOrItemStack).hasKey(s);
 	}
 
 	@Override
 	public String nbtTagCompoundGetString(Object nBTTagCompoundOrItemStack, String s) {
+		nBTTagCompoundOrItemStack = nBTTagCompoundOrItemStack instanceof NBTTagCompound ? nBTTagCompoundOrItemStack : ((ItemStack) nBTTagCompoundOrItemStack).getTagCompound();
 		return ((NBTTagCompound) nBTTagCompoundOrItemStack).getString(s);
 	}
 
@@ -3793,7 +3802,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 						&& o.length > 0 ? o[0] : null;
 			}
 		}
-		return Modchu_Reflect.getFieldObject(model.getClass(), "bipedRightArm", model);
+		return Modchu_Reflect.getFieldObject(model.getClass(), "bipedRightArm", model, -1);
 	}
 
 	@Override
@@ -4469,6 +4478,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void pathNavigateGroundFunc_179690_a(Object pathNavigateGround, boolean b) {
+		((PathNavigate) pathNavigateGround).setAvoidsWater(b);
 	}
 
 	@Override
@@ -4601,6 +4611,24 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
 		((EntityPlayer) entityplayer).capabilities.isCreativeMode = b;
+	}
+
+	@Override
+	public void setEntityPlayerInventoryCurrentItem(Object entityplayer, int i) {
+		((InventoryPlayer) entityPlayerInventory(entityplayer)).currentItem = i;
+	}
+
+	@Override
+	public Object worldGetBlock(Object world, int i, int i2, int i3) {
+		int i1 = ((World) world).getBlockId(i, i2, i3);
+		Block block = i1 < Block.blocksList.length
+				&& i1 > -1 ? Block.blocksList[i1] : null;
+		return block;
+	}
+
+	@Override
+	public Object entityGetDataWatcher(Object dataWatcherOrEntity) {
+		return dataWatcherOrEntity instanceof DataWatcher ? dataWatcherOrEntity : ((Entity) dataWatcherOrEntity).getDataWatcher();
 	}
 
 }

@@ -22,13 +22,13 @@ public class Modchu_TexturedQuadMaster implements Modchu_ITexturedQuadMaster {
 		float f3 = 0.0F / textureHeight;
 		if (vertexPositions != null); else return;
 		if (vertexPositions.length > 0); else return;
-		if (vertexPositions[0] != null) vertexPositions[0] = Modchu_AS.get("PositionTextureVertex", "setTexturePosition", vertexPositions[0], new Class[]{ float.class, float.class }, (float)texcoordU2 / textureWidth - f2, (float)texcoordV1 / textureHeight + f3);
+		if (vertexPositions[0] != null) vertexPositions[0] = Modchu_AS.get("PositionTextureVertex", "setTexturePosition", new Class[]{ float.class, float.class }, vertexPositions[0], new Object[]{ (float)texcoordU2 / textureWidth - f2, (float)texcoordV1 / textureHeight + f3 });
 		if (vertexPositions.length > 1); else return;
-		if (vertexPositions[1] != null) vertexPositions[1] = Modchu_AS.get("PositionTextureVertex", "setTexturePosition", vertexPositions[1], new Class[]{ float.class, float.class }, (float)texcoordU1 / textureWidth + f2, (float)texcoordV1 / textureHeight + f3);
+		if (vertexPositions[1] != null) vertexPositions[1] = Modchu_AS.get("PositionTextureVertex", "setTexturePosition", new Class[]{ float.class, float.class }, vertexPositions[1], new Object[]{ (float)texcoordU1 / textureWidth + f2, (float)texcoordV1 / textureHeight + f3 });
 		if (vertexPositions.length > 2); else return;
-		if (vertexPositions[2] != null) vertexPositions[2] = Modchu_AS.get("PositionTextureVertex", "setTexturePosition", vertexPositions[2], new Class[]{ float.class, float.class }, (float)texcoordU1 / textureWidth + f2, (float)texcoordV2 / textureHeight - f3);
+		if (vertexPositions[2] != null) vertexPositions[2] = Modchu_AS.get("PositionTextureVertex", "setTexturePosition", new Class[]{ float.class, float.class }, vertexPositions[2], new Object[]{ (float)texcoordU1 / textureWidth + f2, (float)texcoordV2 / textureHeight - f3 });
 		if (vertexPositions.length > 3); else return;
-		if (vertexPositions[3] != null) vertexPositions[3] = Modchu_AS.get("PositionTextureVertex", "setTexturePosition", vertexPositions[3], new Class[]{ float.class, float.class }, (float)texcoordU2 / textureWidth - f2, (float)texcoordV2 / textureHeight - f3);
+		if (vertexPositions[3] != null) vertexPositions[3] = Modchu_AS.get("PositionTextureVertex", "setTexturePosition", new Class[]{ float.class, float.class }, vertexPositions[3], new Object[]{ (float)texcoordU2 / textureWidth - f2, (float)texcoordV2 / textureHeight - f3 });
 	}
 
 	@Override
