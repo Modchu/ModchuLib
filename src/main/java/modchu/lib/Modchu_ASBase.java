@@ -1023,5 +1023,6 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int entityTameableSetTamed = entityTameableSetTamed_int;
 	public static int entityAgeableSetGrowingAge = entityAgeableSetGrowingAge_int;
 	public static int chatAllowedCharactersFilterAllowedCharacters = chatAllowedCharactersFilterAllowedCharacters_int;
+	public static int guiSlotHandleMouseInput = guiSlotHandleMouseInput_int;
 
 }

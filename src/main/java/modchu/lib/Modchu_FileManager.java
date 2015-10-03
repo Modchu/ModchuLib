@@ -60,8 +60,8 @@ public class Modchu_FileManager {
 		return master != null ? master.getFileList(pname) : base.getFileList(pname);
 	}
 
-	public static List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search) {
-		return master != null ? master.getModFile(dir, list, map, search) : base.getModFile(dir, list, map, search);
+	public static List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search, boolean subDirCheck) {
+		return master != null ? master.getModFile(dir, list, map, search, subDirCheck) : base.getModFile(dir, list, map, search, subDirCheck);
 	}
 
 	public static boolean addTexturesZip(File file, ConcurrentHashMap<String, Class> map, String search) {

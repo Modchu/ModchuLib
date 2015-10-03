@@ -16,7 +16,7 @@ public interface Modchu_IFileManagerMaster {
 
 	public List<File> getModFile(String pname, String pprefix);
 	public List<File> getFileList(String pname);
-	public List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search);
+	public List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search, boolean subDirCheck);
 	public boolean addTexturesZip(File file, ConcurrentHashMap<String, Class> map, String search);
 	public void addTexturesJar(File file, ConcurrentHashMap<String, Class> map, String search);
 	public boolean addTexturesDir(File file, ConcurrentHashMap<String, Class> map, String search);

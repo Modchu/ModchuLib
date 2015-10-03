@@ -64,6 +64,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 		ignoreFrustumCheck = true;
 		CombatTracker combatTracker = getCombatTracker();
 		Modchu_Debug.lDebug("Modchu_EntityTameableB init combatTracker="+combatTracker);
+		//if (world.isRemote) Modchu_Main.setRuntimeException("debug Modchu_EntityTameableB");
 	}
 
 	public Modchu_EntityTameableB(HashMap<String, Object> map) {
@@ -140,6 +141,10 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	protected void init(HashMap<String, Object> map) {
 		if (map != null
 				&& !map.isEmpty()); else {
+			if (master != null) return;
+			Modchu_Debug.mDebug("Modchu_EntityTameableB init isRemote="+worldObj.isRemote);
+					//setDead();
+					//Modchu_Main.setRuntimeException("init debug");
 			Class c = Modchu_Main.getSpownEntityClass(worldObj, posX, posY, posZ);
 			map = new HashMap();
 			map.put("Class", c);
@@ -383,11 +388,14 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public void onLivingUpdate() {
-		//Modchu_Debug.mDebug("onLivingUpdate masterEntity="+masterEntity);
+		//Modchu_Debug.mDebug("onLivingUpdate master="+master);
 		//Modchu_Debug.mDebug("onLivingUpdate entityName="+entityName);
 		//Modchu_Debug.mDebug("onLivingUpdate posX="+posX+" posY="+posY+" posZ="+posZ);
 		if (master != null
 				&& entityName != null); else {
+			Modchu_Debug.mDebug("onLivingUpdate this="+this);
+			Modchu_Debug.mDebug("onLivingUpdate master="+master);
+			Modchu_Debug.mDebug("onLivingUpdate entityName="+entityName);
 			init((HashMap)null);
 			if (master != null); else {
 				setDead();

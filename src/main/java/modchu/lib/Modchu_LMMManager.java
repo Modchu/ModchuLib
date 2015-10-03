@@ -97,7 +97,8 @@ public class Modchu_LMMManager {
 
 	public static String getLMMTextureArmorName(Object entity) {
 		int version = Modchu_Main.getMinecraftVersion();
-		if (version > 169) {
+		if (!ModchuModel_Main.isLMMX
+				&& version > 169) {
 			Object multiModel = Modchu_Reflect.getFieldObject(entity.getClass(), "multiModel", entity);
 			if (multiModel != null) return Modchu_CastHelper.String(Modchu_Reflect.getFieldObject(multiModel.getClass(), "armorName", multiModel));
 		} else {
@@ -205,6 +206,35 @@ public class Modchu_LMMManager {
 			}
 		}
 		return null;
+	}
+
+	public static int getMaidColor(Object owner) {
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 169
+				&& !ModchuModel_Main.isLMMX) {
+			Object multiModel = Modchu_Reflect.getFieldObject(owner.getClass(), "multiModel", owner);
+			if (multiModel != null) return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject(multiModel.getClass(), "color", multiModel));
+		} else if (version > 159) {
+			Object textureData = Modchu_Reflect.getFieldObject(owner.getClass(), "textureData", owner);
+			if (textureData != null) {
+				return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject(textureData.getClass(), "color", textureData));
+			}
+		}
+		return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject("LMM_EntityLittleMaid", "maidColor", owner));
+	}
+
+	public static void setMaidColor(Object owner, int i) {
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version < 170
+				| ModchuModel_Main.isLMMX) {
+			Object textureData = Modchu_Reflect.getFieldObject(owner.getClass(), "textureData", owner);
+			if (textureData != null) {
+				Modchu_Reflect.setFieldObject(textureData.getClass(), "color", textureData, i);
+			}
+		} else {
+			Object multiModel = Modchu_Reflect.getFieldObject(owner.getClass(), "multiModel", owner);
+			if (multiModel != null) Modchu_Reflect.setFieldObject(multiModel.getClass(), "color", multiModel, i);
+		}
 	}
 
 }

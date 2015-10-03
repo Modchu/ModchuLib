@@ -133,7 +133,9 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 			map.put("Class", c);
 			map.put("Object", worldObj);
 		}
-		if (worldObj != null); else {
+		if (worldObj != null) {
+			map.put("Object", worldObj);
+		} else {
 			worldObj = (World) map.get("Object");
 			return;
 		}

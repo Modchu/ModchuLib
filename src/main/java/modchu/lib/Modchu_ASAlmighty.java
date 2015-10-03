@@ -4050,6 +4050,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			openGlHelperSetActiveTexture((Integer) pArg[0]);
 			return true;
 		}
+		if (pIndex == guiSlotHandleMouseInput) {
+			guiSlotHandleMouseInput(pArg[0]);
+			return true;
+		}
 		if (pIndex == guiSlotRegisterScrollButtons) {
 			if (pArg != null
 			&& pArg.length > 2
@@ -4725,14 +4729,22 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			return false;
 		}
 		if (pIndex == itemModelMesherRegister) {
-			if (pArg != null
-			&& pArg.length > 3
-			&& pArg[0] != null
-			&& pArg[1] != null
-			&& pArg[2] != null
-			&& pArg[3] != null) {
-				itemModelMesherRegister(pArg[0], pArg[1], (Integer) pArg[2], pArg[3]);
-				return true;
+			if (pArg != null) {
+				if (pArg.length > 3
+						&& pArg[0] != null
+						&& pArg[1] != null
+						&& pArg[2] != null
+						&& pArg[3] != null) {
+					itemModelMesherRegister(pArg[0], pArg[1], (Integer) pArg[2], pArg[3]);
+					return true;
+				}
+				if (pArg.length > 2
+						&& pArg[0] != null
+						&& pArg[1] != null
+						&& pArg[2] != null) {
+					itemModelMesherRegister(pArg[0], pArg[1], pArg[2]);
+					return true;
+				}
 			}
 			return false;
 		}
@@ -9447,6 +9459,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject("GuiScreen", Modchu_Main.getMinecraftVersion() > 169 ? "field_146294_l" : "field_73880_f", "width", guiScreen));
 	}
 
+	protected void guiSlotHandleMouseInput(Object guiSlot) {
+		Modchu_Reflect.invokeMethod("GuiSlot", "func_146274_d", "handleMouseInput", guiSlot);
+	}
+
 	protected void guiSlotActionPerformed(Object guiSlot, Object guiButton) {
 		Modchu_Reflect.invokeMethod("GuiSlot", "func_77219_a", "actionPerformed", new Class[]{ Modchu_Reflect.loadClass("GuiButton") }, guiSlot, new Object[]{ guiButton });
 	}
@@ -9693,7 +9709,11 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void itemModelMesherRegister(Object itemModelMesher, Object item, int i, Object modelResourceLocation) {
-		Modchu_Reflect.invokeMethod(itemModelMesher.getClass(), "func_177775_a", "register", new Class[]{ Modchu_Reflect.loadClass("Item"), int.class, Modchu_Reflect.loadClass("ModelResourceLocation") }, itemModelMesher, new Object[]{ item, i, modelResourceLocation });
+		Modchu_Reflect.invokeMethod(itemModelMesher.getClass(), "func_178086_a", "register", new Class[]{ Modchu_Reflect.loadClass("Item"), int.class, Modchu_Reflect.loadClass("ModelResourceLocation") }, itemModelMesher, new Object[]{ item, i, modelResourceLocation });
+	}
+
+	protected void itemModelMesherRegister(Object itemModelMesher, Object item, Object itemMeshDefinition) {
+		Modchu_Reflect.invokeMethod(itemModelMesher.getClass(), "func_178080_a", "register", new Class[]{ Modchu_Reflect.loadClass("Item"), Modchu_Reflect.loadClass("ItemMeshDefinition") }, itemModelMesher, new Object[]{ item, itemMeshDefinition });
 	}
 
 	protected List itemPotionGetEffects(Object itemPotion, Object itemStack) {

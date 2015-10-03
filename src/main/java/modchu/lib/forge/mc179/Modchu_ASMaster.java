@@ -3946,4 +3946,8 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 		return dataWatcherOrEntity instanceof DataWatcher ? dataWatcherOrEntity : ((Entity) dataWatcherOrEntity).getDataWatcher();
 	}
 
+	@Override
+	public void guiSlotHandleMouseInput(Object guiSlot) {
+	}
+
 }

@@ -1,0 +1,52 @@
+package modchu.lib.modloader.mc162;
+
+import java.util.HashMap;
+
+import modchu.lib.Modchu_ISimpleTexture;
+import modchu.lib.Modchu_ISimpleTextureMaster;
+import modchu.lib.Modchu_Main;
+import net.minecraft.src.ResourceLocation;
+import net.minecraft.src.ResourceManager;
+import net.minecraft.src.SimpleTexture;
+
+public class Modchu_SimpleTexture extends SimpleTexture implements Modchu_ISimpleTexture {
+    public Modchu_ISimpleTextureMaster master;
+
+	public Modchu_SimpleTexture(HashMap<String, Object> map) {
+		super((ResourceLocation) map.get("Object"));
+		map.put("base", this);
+		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
+		//Modchu_Debug.lDebug("Modchu_SimpleTexture init instance="+instance);
+		master = instance != null
+				&& instance instanceof Modchu_ISimpleTextureMaster ? (Modchu_ISimpleTextureMaster) instance : null;
+	}
+
+	@Override
+	public void loadTexture(ResourceManager resourceManager) {
+		if (master != null) master.loadTexture(resourceManager);
+		else
+		try {
+			super.loadTexture(resourceManager);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void superLoadTexture(Object resourceManager) {
+		try {
+			super.loadTexture((ResourceManager) resourceManager);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public int getGlTextureId() {
+		return master != null ? master.getGlTextureId() : super.getGlTextureId();
+	}
+
+	public int superGetGlTextureId() {
+		return super.getGlTextureId();
+	}
+
+}

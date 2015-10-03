@@ -111,7 +111,8 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	}
 
 	protected void init(String s) {
-		if (s != null); else return;
+		if (s != null
+				&& !s.isEmpty()); else return;
 		Class c = Modchu_Reflect.loadClass(s);
 		if (c != null); else return;
 		HashMap<String, Object> map = Modchu_Main.getNewModchuCharacteristicMap(c);

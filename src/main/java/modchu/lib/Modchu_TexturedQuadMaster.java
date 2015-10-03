@@ -38,6 +38,7 @@ public class Modchu_TexturedQuadMaster implements Modchu_ITexturedQuadMaster {
 			apositiontexturevertex[i] = vertexPositions[vertexPositions.length - i - 1];
 		}
 		vertexPositions = apositiontexturevertex;
+		//Modchu_Debug.mDebug("ModchuModel_TexturedQuadMaster flipFace vertexPositions="+vertexPositions);
 	}
 
 	@Override

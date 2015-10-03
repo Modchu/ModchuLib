@@ -452,6 +452,7 @@ public interface Modchu_IASMaster {
 	public boolean itemIsFull3D(Object item);
 	public boolean itemItemInteractionForEntity(Object item, Object itemstack, Object entityplayer, Object entityLivingBase);
 	public void itemModelMesherRegister(Object itemModelMesher, Object item, int i, Object modelResourceLocation);
+	public void itemModelMesherRegister(Object itemModelMesher, Object item, Object itemMeshDefinition);
 	public List itemPotionGetEffects(Object itemPotion, Object itemStack);
 	public Object[] itemItemsList();
 	public Object itemSetTextureName(Object item, String s);
@@ -916,5 +917,6 @@ public interface Modchu_IASMaster {
 	public void setEntityLivingBaseAttackTime(Object entityLivingBase, int i);
 	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b);
 	public void setEntityPlayerInventoryCurrentItem(Object entityplayer, int i);
+	public void guiSlotHandleMouseInput(Object guiSlot);
 
 }

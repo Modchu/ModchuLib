@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_Debug;
@@ -23,8 +25,6 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 
 public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 	public ConcurrentHashMap<String, Object> packetModInstanceMap = new ConcurrentHashMap();
@@ -155,6 +155,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 				else if (o1 instanceof Float) dataoutputstream.writeFloat((Float) o1);
 				else if (o1 instanceof Double) dataoutputstream.writeDouble((Double) o1);
 				else if (o1 instanceof Long) dataoutputstream.writeLong((Long) o1);
+				else if (o1 instanceof Boolean) dataoutputstream.writeByte((Boolean)o1 ? (byte) 1 : (byte) 0);
 			}
 			//dataoutputstream.flush();
 			by = byteOutput.toByteArray();
@@ -216,6 +217,9 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 			}
 			else if (o[i] instanceof String) {
 				o2[i * 2] = Modchu_Packet.packet_String;
+			}
+			else if (o[i] instanceof Boolean) {
+				o2[i * 2] = Modchu_Packet.packet_Boolean;
 			} else {
 				o2[i * 2] = Modchu_Packet.packet_Byte;
 			}
@@ -245,6 +249,9 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 				} else if (by == Modchu_Packet.packet_String) {
 					//o = Modchu_PacketManager.readString(input);
 					o = Packet.readString((DataInput) input, 32767);
+				} else if (by == Modchu_Packet.packet_Boolean) {
+					byte by1 = Modchu_PacketManager.readByte(input);
+					o = by1 == 0 ? false : true;
 				} else if (by == Modchu_Packet.packet_end) {
 					returnFlag = false;
 				}

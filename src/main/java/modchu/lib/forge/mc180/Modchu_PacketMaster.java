@@ -219,6 +219,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 					else if ((o1 instanceof Double)) byteBufOutputStream.writeDouble(((Double) o1).doubleValue());
 					else if ((o1 instanceof Long)) byteBufOutputStream.writeLong(((Long) o1).longValue());
 					else if ((o1 instanceof NBTTagCompound)) CompressedStreamTools.write((NBTTagCompound) o1, byteBufOutputStream);
+					else if ((o1 instanceof Boolean)) byteBufOutputStream.writeByte((Boolean)o1 ? (byte) 1 : (byte) 0);
 				}
 			}
 		} catch (Exception e) {
@@ -262,6 +263,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 			else if (o[i] instanceof String) o2[i * 2] = Modchu_Packet.packet_String;
 			else if (o[i] instanceof String) o2[i * 2] = Modchu_Packet.packet_Enum;
 			else if (o[i] instanceof NBTTagCompound) o2[i * 2] = Modchu_Packet.packet_NBTTagCompound;
+			else if (o[i] instanceof Boolean) o2[i * 2] = Modchu_Packet.packet_Boolean;
 			else o2[i * 2] = Modchu_Packet.packet_Byte;
 		}
 		o2[o2.length - 1] = Modchu_Packet.packet_end;
@@ -290,6 +292,9 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 					o = Modchu_PacketManager.readLong(byteBufInput);
 				} else if (by == Modchu_Packet.packet_String) {
 					o = Modchu_PacketManager.readString(byteBufInput);
+				} else if (by == Modchu_Packet.packet_Boolean) {
+					byte by1 = Modchu_PacketManager.readByte(byteBufInput);
+					o = by1 == 0 ? false : true;
 				} else if (by == Modchu_Packet.packet_end) {
 					returnFlag = false;
 				}

@@ -57,6 +57,7 @@ import net.minecraft.client.renderer.BlockModelRenderer;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GLAllocation;
+import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -3895,6 +3896,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
+	public void itemModelMesherRegister(Object itemModelMesher, Object item, Object itemMeshDefinition) {
+		((ItemModelMesher) itemModelMesher).register((Item) item, (ItemMeshDefinition) itemMeshDefinition);
+	}
+
+	@Override
 	public void pathNavigateGroundFunc_179690_a(Object pathNavigateGround, boolean b) {
 		((PathNavigateGround) pathNavigateGround).func_179690_a(b);
 	}
@@ -4131,6 +4137,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object entityGetDataWatcher(Object dataWatcherOrEntity) {
 		return dataWatcherOrEntity instanceof DataWatcher ? dataWatcherOrEntity : ((Entity) dataWatcherOrEntity).getDataWatcher();
+	}
+
+	@Override
+	public void guiSlotHandleMouseInput(Object guiSlot) {
+		((GuiSlot) guiSlot).handleMouseInput();
 	}
 
 }

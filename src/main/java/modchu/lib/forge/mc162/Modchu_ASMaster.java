@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Multimap;
+
 import modchu.lib.Modchu_ASBasis;
 import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_Main;
@@ -126,10 +130,6 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumGameType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-
-import org.lwjgl.opengl.GL11;
-
-import com.google.common.collect.Multimap;
 
 public class Modchu_ASMaster extends Modchu_ASBasis {
 
@@ -4533,6 +4533,16 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object entityGetDataWatcher(Object dataWatcherOrEntity) {
 		return dataWatcherOrEntity instanceof DataWatcher ? dataWatcherOrEntity : ((Entity) dataWatcherOrEntity).getDataWatcher();
+	}
+
+	@Override
+	public void guiSlotHandleMouseInput(Object guiSlot) {
+	}
+
+	@Override
+	public Object minecraftLoadingScreen() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().loadingScreen;
 	}
 
 }

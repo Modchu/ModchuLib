@@ -96,7 +96,6 @@ import net.minecraft.src.PlayerControllerMP;
 import net.minecraft.src.PositionTextureVertex;
 import net.minecraft.src.Potion;
 import net.minecraft.src.PotionHelper;
-import net.minecraft.src.Render;
 import net.minecraft.src.RenderBlocks;
 import net.minecraft.src.RenderHelper;
 import net.minecraft.src.RenderLiving;
@@ -4480,6 +4479,10 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object entityGetDataWatcher(Object dataWatcherOrEntity) {
 		return dataWatcherOrEntity instanceof DataWatcher ? dataWatcherOrEntity : ((Entity) dataWatcherOrEntity).getDataWatcher();
+	}
+
+	@Override
+	public void guiSlotHandleMouseInput(Object guiSlot) {
 	}
 
 }

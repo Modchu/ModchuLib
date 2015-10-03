@@ -3,9 +3,9 @@ package modchu.lib.forge.mc164;
 import java.util.HashMap;
 import java.util.List;
 
+import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IGuiContainer;
 import modchu.lib.Modchu_IGuiContainerMaster;
-import modchu.lib.Modchu_IRendererLivingEntityMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -21,6 +21,7 @@ public class Modchu_GuiContainer extends GuiContainer implements Modchu_IGuiCont
 
 	public Modchu_GuiContainer(HashMap<String, Object> map) {
 		super((Container) map.get("Object"));
+		Modchu_Debug.mDebug("Modchu_GuiContainer init map.get Object="+map.get("Object"));
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		//Modchu_Debug.lDebug("Modchu_GuiContainer init instance="+instance);
@@ -196,6 +197,7 @@ public class Modchu_GuiContainer extends GuiContainer implements Modchu_IGuiCont
 
 	@Override
 	public void handleInput() {
+		Modchu_Debug.mDebug("handleInput Modchu_GuiContainer master="+master);
 		if (master != null) master.handleInput();
 		else super.handleInput();
 	}

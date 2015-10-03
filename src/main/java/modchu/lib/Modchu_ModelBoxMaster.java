@@ -29,6 +29,7 @@ public class Modchu_ModelBoxMaster extends Modchu_ModelBoxMasterBasis {
 		//Modchu_Debug.mDebug("Modchu_ModelBoxMaster pX="+pX+" pY="+pY+" pZ="+pZ);
 		//Modchu_Debug.mDebug("Modchu_ModelBoxMaster pW="+pW+" pH="+pH+" pD="+pD);
 		//Modchu_Debug.mDebug("Modchu_ModelBoxMaster pSize="+pSize);
+		//Modchu_Debug.mDebug("Modchu_ModelBoxMaster renderer="+renderer);
 		renderer = Modchu_Main.getModchuCharacteristicObjectMaster(renderer);
 		posX1 = pX;
 		posY1 = pY;
@@ -48,10 +49,12 @@ public class Modchu_ModelBoxMaster extends Modchu_ModelBoxMasterBasis {
 		ly += pSize;
 		lz += pSize;
 		boolean mirror = Modchu_CastHelper.Boolean(Modchu_Reflect.getFieldObject(renderer.getClass(), "mirror", renderer));
+		//Modchu_Debug.mDebug("Modchu_ModelBoxMaster mirror="+mirror);
 		if (mirror) {
 			float var14 = lx;
 			lx = pX;
 			pX = var14;
+			//Modchu_Debug.mDebug("Modchu_ModelBoxMaster mirror lx="+lx+" pX="+pX);
 		}
 
 		Object lxyz = newPositionTextureVertex(pX, pY, pZ, 0.0F, 0.0F);

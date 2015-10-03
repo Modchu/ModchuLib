@@ -2232,6 +2232,11 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
+	public void itemModelMesherRegister(Object itemModelMesher, Object item, Object itemMeshDefinition) {
+		base.superItemModelMesherRegister(itemModelMesher, item, itemMeshDefinition);
+	}
+
+	@Override
 	public List itemPotionGetEffects(Object itemPotion, Object itemStack) {
 		return base.superItemPotionGetEffects(itemPotion, itemStack);
 	}
@@ -4550,4 +4555,10 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	public void setEntityPlayerInventoryCurrentItem(Object entityplayer, int i) {
 		base.superSetEntityPlayerInventoryCurrentItem(entityplayer, i);
 	}
+
+	@Override
+	public void guiSlotHandleMouseInput(Object guiSlot) {
+		base.superGuiSlotHandleMouseInput(guiSlot);
+	}
+
 }

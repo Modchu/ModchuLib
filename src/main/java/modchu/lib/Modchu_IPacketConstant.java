@@ -11,6 +11,7 @@ public interface Modchu_IPacketConstant {
 	public final byte packet_String = 5;
 	public final byte packet_Enum = 6;
 	public final byte packet_NBTTagCompound = 7;
+	public final byte packet_Boolean = 8;
 	public final byte packet_end = Byte.MIN_VALUE;
 
 }

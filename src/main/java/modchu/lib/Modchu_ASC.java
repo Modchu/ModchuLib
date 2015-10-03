@@ -759,5 +759,6 @@ public interface Modchu_ASC {
 	public static final int entityTameableSetTamed_int = 16463;
 	public static final int entityAgeableSetGrowingAge_int = 16464;
 	public static final int chatAllowedCharactersFilterAllowedCharacters_int = 16465;
+	public static final int guiSlotHandleMouseInput_int = 16466;
 
 }

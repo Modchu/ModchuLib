@@ -4425,4 +4425,14 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 		return dataWatcherOrEntity instanceof DataWatcher ? dataWatcherOrEntity : ((Entity) dataWatcherOrEntity).getDataWatcher();
 	}
 
+	@Override
+	public void guiSlotHandleMouseInput(Object guiSlot) {
+	}
+
+	@Override
+	public Object minecraftLoadingScreen() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().loadingScreen;
+	}
+
 }

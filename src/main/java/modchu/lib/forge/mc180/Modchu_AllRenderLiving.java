@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IAllRenderLiving;
+import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.culling.ICamera;
@@ -73,6 +74,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	public void doRender(Entity entity, double d, double d1, double d2, float d3, float d4) {
 		//Modchu_Debug.mDebug("Modchu_AllRenderLiving doRender");
 		Modchu_RenderLiving render = renderMapGet(entity);
+		Modchu_Debug.mDebug1("Modchu_AllRenderLiving doRender render="+render);
 		if (render != null) render.doRender(entity, d, d1, d2, d3, d4);
 		else {
 			Modchu_Debug.mDebug("Modchu_AllRenderLiving doRender render == null !! entity="+entity+" entity.getClass()="+(entity != null ? entity.getClass() : null));
@@ -176,7 +178,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	}
 
 	private Modchu_RenderLiving renderMapGet(Entity entity) {
-		Object entity2 = Modchu_Reflect.invokeMethod(entity.getClass(), "getMaster", entity);
+		Object entity2 = Modchu_Main.getModchuCharacteristicObjectMaster(entity);
 		//Modchu_Debug.mDebug("renderMapGet entity2.getClass()="+(entity2 != null ? entity2.getClass() : null));
 		Class c = entity2 != null ? entity2.getClass() : entity.getClass();
 		//Modchu_Debug.mDebug("renderMapGet c="+c);

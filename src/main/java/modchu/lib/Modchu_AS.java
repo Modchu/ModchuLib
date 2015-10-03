@@ -4118,6 +4118,10 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 		super.itemModelMesherRegister(itemModelMesher, item, i, modelResourceLocation);
 	}
 
+	public void superItemModelMesherRegister(Object itemModelMesher, Object item, Object itemMeshDefinition) {
+		super.itemModelMesherRegister(itemModelMesher, item, itemMeshDefinition);
+	}
+
 	@Override
 	protected List itemPotionGetEffects(Object itemPotion, Object itemStack) {
 		return master != null ? master.itemPotionGetEffects(itemPotion, itemStack) : super.itemPotionGetEffects(itemPotion, itemStack);
@@ -8451,4 +8455,14 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	public void superSetEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
 		super.setEntityPlayerCapabilitiesIsCreativeMode(entityplayer, b);
 	}
+
+	@Override
+	public void guiSlotHandleMouseInput(Object guiSlot) {
+		if (master != null) master.guiSlotHandleMouseInput(guiSlot);
+	}
+
+	public void superGuiSlotHandleMouseInput(Object guiSlot) {
+		super.guiSlotHandleMouseInput(guiSlot);
+	}
+
 }
