@@ -2737,7 +2737,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void renderBindTexture(Object render, Object resourceLocation) {
-		Modchu_Reflect.invokeMethod("Render", "func_110776_a", "bindTexture", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, render, new Object[]{ resourceLocation });
+		if (Modchu_Reflect.loadClass("Render").isInstance(render)
+				&& Modchu_Reflect.loadClass("ResourceLocation").isInstance(resourceLocation)) {
+			//Modchu_Debug.mDebug("renderBindTexture render="+render+" resourceLocation="+resourceLocation);
+			Modchu_Reflect.invokeMethod("Render", "func_110776_a", "bindTexture", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, render, new Object[]{ resourceLocation });
+		}
 	}
 
 	@Override

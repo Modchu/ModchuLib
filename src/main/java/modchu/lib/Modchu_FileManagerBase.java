@@ -40,6 +40,7 @@ import java.util.zip.ZipInputStream;
 public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	public Map<String, List<File>> fileList = new TreeMap<String, List<File>>();
 	protected ArrayList<String> failureShowModelList = new ArrayList<String>();
+	private boolean getResourceBufferedReaderJarReaderFlag = false;
 	public static HashMap<Object, List<String>> listData = new HashMap();
 	public static final int TYPE_FILE_OR_DIR = 1;
 	public static final int TYPE_FILE = 2;
@@ -160,13 +161,14 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		//Modchu_Debug.lDebug("Modchu_FileManagerBase init 12 file="+file);
 		//Modchu_Debug.lDebug("Modchu_FileManagerBase init 13 minecraftJar="+file.getAbsolutePath()+" i="+i);
 		if (!Modchu_Main.isServer) {
-			Modchu_FileManager.setAssetsDir(new File(Modchu_FileManager.getMinecraftDir(), "/assets/"));
+			Modchu_FileManager.setAssetsDir(new File(Modchu_FileManager.getMinecraftDir(), "assets"));
 			Modchu_Debug.lDebug("Modchu_FileManagerBase init assetsDir="+Modchu_FileManager.getAssetsDir().getAbsolutePath());
 		} else {
 			// サーバー側では使われないはず。
 		}
 
-		if (!Modchu_Main.isRelease()) {
+		if (!Modchu_Main.isRelease()
+				&& Modchu_Main.getMinecraftVersion() < 164) {
 			Modchu_FileManager.addMinecraftJar(new File(Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir), "/bin/minecraft.jar"));
 			Modchu_Debug.lDebug("Modchu_FileManagerBase minecraft.jar file.exists()="+Modchu_FileManager.getMinecraftJarList().get(1).exists());
 		}
@@ -914,7 +916,9 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	}
 
 	public BufferedReader getResourceBufferedReader(Class c, String s) {
-		if (Modchu_Main.isRelease()) {
+		if (Modchu_Main.isRelease()
+				| getResourceBufferedReaderJarReaderFlag
+				| Modchu_Main.isDev) {
 			try {
 				return getJarReader(s);
 /*
@@ -945,20 +949,42 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 				Modchu_Debug.lDebug("Modchu_FileManagerBase getResourceBufferedReader Exception !!", 2, e);
 			}
 		} else {
-			//Modchu_Debug.lDebug1("Modchu_FileManagerBase getResourceFile s="+s);
-			if (!s.startsWith("/")) s = "/"+s;
-			//Modchu_Debug.lDebug1("Modchu_FileManagerBase getResourceFile 1 s="+s);
+			//Modchu_Debug.lDebug1("Modchu_FileManagerBase getResourceBufferedReader s="+s);
 			URL url = c.getResource(s);
-			//Modchu_Debug.lDebug1("Modchu_FileManagerBase getResourceFile 2 url="+url);
+			if (url != null); else {
+				if (!s.startsWith("/")) s = "/"+s;
+				url = c.getResource(s);
+			}
 			File file = null;
+			//Modchu_Debug.lDebug1("Modchu_FileManagerBase getResourceBufferedReader url="+url);
 			if (url != null) {
 				file = new File(url.getFile());
-				//Modchu_Debug.lDebug1("Modchu_FileManagerBase getResourceFile return file="+file);
+				//Modchu_Debug.lDebug1("Modchu_FileManagerBase getResourceBufferedReader return file="+file);
+				if (!file.exists()) {
+					if (!s.startsWith("/")) s = "/"+s;
+					url = c.getResource(s);
+					file = new File(url.getFile());
+				}
+				if (!file.exists()) {
+					//Modchu_Debug.lDebug1("Modchu_FileManagerBase getResourceBufferedReader return !file.exists() !! file="+file+" s="+s);
+					try {
+						BufferedReader bufferedReader = getJarReader(s);
+						if (bufferedReader != null) {
+							getResourceBufferedReaderJarReaderFlag = true;
+							return bufferedReader;
+						}
+					} catch (Exception e) {
+						Modchu_Debug.lDebug("Modchu_FileManagerBase getResourceBufferedReader 2 Exception !!", 2, e);
+						return null;
+					}
+				}
 				try {
 					return new BufferedReader(new FileReader(file));
 				} catch (Exception e) {
 					Modchu_Debug.lDebug("Modchu_FileManagerBase getResourceBufferedReader Exception !!", 2, e);
 				}
+			} else {
+				Modchu_Debug.lDebug1("Modchu_FileManagerBase getResourceBufferedReader return url null !! s="+s);
 			}
 		}
 		Modchu_Debug.lDebug1("Modchu_FileManagerBase getResourceBufferedReader null !! s="+s);
@@ -968,13 +994,25 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	public BufferedReader getJarReader(String s) {
 		BufferedReader bufferedReader = null;
 		InputStream inputStream = Modchu_FileManagerBase.class.getClassLoader().getResourceAsStream(s);
+		//Modchu_Debug.lDebug("getJarReader s="+s+" inputStream="+inputStream);
 		if (inputStream != null) {
 			bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+			//Modchu_Debug.lDebug("getJarReader 1 bufferedReader="+bufferedReader);
 		} else {
-			Modchu_Debug.lDebug1("getJarReader inputStream == null !! s="+s);
-			File file = new File(s);
-			if (file.exists()) Modchu_Debug.lDebug1("getJarReader ok. file="+file);
-			else Modchu_Debug.lDebug1("getJarReader !file.exists() !! file="+file);
+			if (s.startsWith("/")
+					| s.startsWith("\\")) {
+				s = s.substring(1);
+				inputStream = Modchu_FileManagerBase.class.getClassLoader().getResourceAsStream(s);
+			}
+			if (inputStream != null) {
+				bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+				//Modchu_Debug.lDebug("getJarReader 2 bufferedReader="+bufferedReader);
+			} else {
+				Modchu_Debug.lDebug("getJarReader inputStream == null !! s="+s);
+				File file = new File(s);
+				if (file.exists()) Modchu_Debug.lDebug("getJarReader ok. file="+file);
+				else Modchu_Debug.lDebug("getJarReader !file.exists() !! file="+file);
+			}
 		}
 		return bufferedReader;
 	}
@@ -1210,6 +1248,24 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 				if (!list.contains(s)) list.add(s);
 			}
 		}
+	}
+
+	public String[] getSystemClassPaths() {
+		return System.getProperty("java.class.path").split(File.pathSeparator);
+	}
+
+	public List<File> getClassPathFileList(String s) {
+		List<File> list = new LinkedList();
+		String[] paths = Modchu_FileManager.getSystemClassPaths();
+		for (String s1 : paths) {
+			Modchu_Debug.lDebug("Modchu_TextureManager getClassPathFileList s1="+s1);
+			if (s1.indexOf(s) > -1
+					&& s1.lastIndexOf(".jar") > -1) {
+				list.add(new File(s1));
+				Modchu_Debug.lDebug("Modchu_TextureManager getClassPathFileList add s1="+s1);
+			}
+		}
+		return list;
 	}
 
 }

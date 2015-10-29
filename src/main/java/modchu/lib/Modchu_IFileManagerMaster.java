@@ -53,5 +53,7 @@ public interface Modchu_IFileManagerMaster {
 	public void writerFile(File file, List<String> list1);
 	public void writerFile(File file, Map map);
 	public LinkedList<String> getClassLoaderResourcesList(Class c);
+	public String[] getSystemClassPaths();
+	public List<File> getClassPathFileList(String s);
 
 }

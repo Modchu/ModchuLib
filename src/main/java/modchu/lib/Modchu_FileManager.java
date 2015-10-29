@@ -246,4 +246,12 @@ public class Modchu_FileManager {
 	public static LinkedList<String> getClassLoaderResourcesList(Class c) {
 		return master != null ? master.getClassLoaderResourcesList(c) : base.getClassLoaderResourcesList(c);
 	}
+
+	public static String[] getSystemClassPaths() {
+		return master != null ? master.getSystemClassPaths() : base.getSystemClassPaths();
+	}
+
+	public static List<File> getClassPathFileList(String s) {
+		return master != null ? master.getClassPathFileList(s) : base.getClassPathFileList(s);
+	}
 }

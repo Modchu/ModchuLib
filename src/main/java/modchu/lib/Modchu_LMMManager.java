@@ -85,10 +85,10 @@ public class Modchu_LMMManager {
 			Object textureData = Modchu_Reflect.getFieldObject(entity.getClass(), "textureData", entity);
 			if (textureData != null) {
 				Object[] textureBox = Modchu_CastHelper.ObjectArray(Modchu_Reflect.getFieldObject(textureData.getClass(), "textureBox", textureData));
-				Class MMM_TextureBoxServer = Modchu_Reflect.loadClass("MMM_TextureBoxServer");
+				Class MMM_TextureBoxServer = getMMMTextureBoxServerClass();
 				if (MMM_TextureBoxServer != null
 						&& MMM_TextureBoxServer.isInstance(textureBox[0])); else {
-					if (textureBox != null) return Modchu_CastHelper.String(Modchu_Reflect.getFieldObject("MMM_TextureBoxBase", "textureName", textureBox[0], Modchu_Main.isRelease() ? -1 : 0));
+					if (textureBox != null) return Modchu_CastHelper.String(Modchu_Reflect.getFieldObject(textureBox[0].getClass(), "textureName", textureBox[0], Modchu_Main.isRelease() ? -1 : 0));
 				}
 			}
 		}
@@ -105,7 +105,7 @@ public class Modchu_LMMManager {
 			Object textureData = Modchu_Reflect.getFieldObject(entity.getClass(), "textureData", entity);
 			if (textureData != null) {
 				Object[] textureBox = Modchu_CastHelper.ObjectArray(Modchu_Reflect.getFieldObject(textureData.getClass(), "textureBox", textureData));
-				Class MMM_TextureBoxServer = Modchu_Reflect.loadClass("MMM_TextureBoxServer");
+				Class MMM_TextureBoxServer = getMMMTextureBoxServerClass();
 				if (MMM_TextureBoxServer != null
 						&& MMM_TextureBoxServer.isInstance(textureBox[1])); else {
 					if (textureBox != null) return Modchu_CastHelper.String(Modchu_Reflect.getFieldObject(textureBox[1].getClass(), "textureName", textureBox[1], Modchu_Main.isRelease() ? -1 : 0));
@@ -156,6 +156,10 @@ public class Modchu_LMMManager {
 
 	public static Class getMMMTextureBoxClass() {
 		return Modchu_Reflect.loadClass(ModchuModel_Main.isLMMX ? "mmmlibx.lib.MMM_TextureBox" : "MMM_TextureBox", -1);
+	}
+
+	public static Class getMMMTextureBoxServerClass() {
+		return Modchu_Reflect.loadClass(ModchuModel_Main.isLMMX ? "mmmlibx.lib.MMM_TextureBoxServer" : "MMM_TextureBoxServer", -1);
 	}
 
 	public static Class getModelLittleMaidOrignClass() {

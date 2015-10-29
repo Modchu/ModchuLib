@@ -156,7 +156,9 @@ public class Modchu_ItemSpawnEggMaster extends Modchu_ItemMasterBasis {
 
 	@Override
 	public Object getIconFromDamageForRenderPass(int i, int i1) {
-		return i1 > 0 ? theIcon : super.getIconFromDamageForRenderPass(i, i1);
+		Object o = i1 > 0 ? theIcon : super.getIconFromDamageForRenderPass(i, i1);
+		//Modchu_Debug.mDebug("getIconFromDamageForRenderPass o="+o);
+		return o;
 	}
 
 	@Override
@@ -168,6 +170,7 @@ public class Modchu_ItemSpawnEggMaster extends Modchu_ItemMasterBasis {
 		//Modchu_AS.set(Modchu_AS.itemItemIcon, base, itemIcon);
 		Modchu_AS.set(Modchu_AS.itemItemIcon, base, Modchu_AS.get(Modchu_AS.iIconRegisterRegisterIcon, iIconRegister, name));
 		theIcon = Modchu_AS.get(Modchu_AS.iIconRegisterRegisterIcon, iIconRegister, name + "_overlay");
+		//Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster registerIcons theIcon="+theIcon);
 	}
 
 }
