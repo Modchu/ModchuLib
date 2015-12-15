@@ -6,18 +6,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IAllRender;
-import modchu.lib.Modchu_IAllRenderLiving;
 import modchu.lib.Modchu_Main;
-import modchu.lib.Modchu_Reflect;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
 public class Modchu_AllRender extends Render implements Modchu_IAllRender {
@@ -75,6 +69,7 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 		return render != null ? render.bindEntityTexture(entity) : super.bindEntityTexture(entity);
 	}
 
+	@Override
 	public boolean superBindEntityTexture(Object entity) {
 		return super.bindEntityTexture((Entity) entity);
 	}
@@ -86,6 +81,7 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 		else super.doRenderShadowAndFire(entity, p_76979_2_, p_76979_4_, p_76979_6_, p_76979_8_, p_76979_9_);
 	}
 
+	@Override
 	public void superDoRenderShadowAndFire(Object entity, double p_76979_2_, double p_76979_4_, double p_76979_6_, float p_76979_8_, float p_76979_9_) {
 		super.doRenderShadowAndFire((Entity) entity, p_76979_2_, p_76979_4_, p_76979_6_, p_76979_8_, p_76979_9_);
 	}
@@ -97,7 +93,8 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 		else super.func_177069_a(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_9_, p_177069_10_);
 	}
 
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+	@Override
+	public void superRenderOffsetLivingLabel(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 		super.func_177069_a((Entity) entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_9_, p_177069_10_);
 	}
 
@@ -108,6 +105,7 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 		else super.renderLivingLabel(entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
 	}
 
+	@Override
 	public void superRenderLivingLabel(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 		super.renderLivingLabel((Entity) entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
 	}

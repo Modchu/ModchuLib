@@ -222,7 +222,7 @@ public interface Modchu_IEntityPlayer {
 	public void supermoveEntity(double par1, double par3, double par5);
 	public void superdoBlockCollisions();
 	public void superplayStepSound(int par1, int par2, int par3, int par4);
-	public Object supergetBoundingBox();
+	public Object supergetCollisionBoundingBox();
 	public void superdealFireDamage(int par1);
 	public boolean superisWet();
 	public boolean superisInWater();
@@ -260,7 +260,7 @@ public interface Modchu_IEntityPlayer {
 	public Object supergetCollisionBox(Object entity);
 	public void superupdateRiderPosition();
 	public float supergetCollisionBorderSize();
-	public void supersetInPortal();
+	public void supersetInPortal(Object bockPos);
 	public void supersetVelocity(double par1, double par3, double par5);
 	public boolean superisBurning();
 	public boolean superisRiding();
@@ -288,7 +288,7 @@ public interface Modchu_IEntityPlayer {
 	public float supergetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block);
 	public boolean supershouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7);
 	public int supergetMaxSafePointTries();
-	public int supergetTeleportDirection();
+	public Object supergetTeleportDirection();
 	public boolean superdoesEntityNotTriggerPressurePlate();
 	public void superaddEntityCrashInfo(Object crashReportCategory);
 	public boolean supercanRenderOnFire();
@@ -405,7 +405,7 @@ public interface Modchu_IEntityPlayer {
 	public int supergetRevengeTimer();
 	public void superfunc_175135_B();
 	public void superfunc_175133_bi();
-	public void superaddRandomArmor();
+	public void superaddRandomDrop();
 	public Object supergetCombatTracker();
 	public float superfunc_175134_bD();
 	public void superfunc_180466_bG();

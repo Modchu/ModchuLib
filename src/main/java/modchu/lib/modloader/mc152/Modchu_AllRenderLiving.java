@@ -6,7 +6,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IAllRenderLiving;
-import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityLiving;
@@ -56,7 +55,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 
 	@Override
 	public void doRenderLiving(EntityLiving entity, double d, double d1, double d2, float d3, float d4) {
-		doRender((Entity) entity, d, d1, d2, d3, d4);
+		doRender(entity, d, d1, d2, d3, d4);
 	}
 
 	@Override
@@ -166,30 +165,30 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	}
 
 	@Override
-	public void superFunc_82422_c() {
+	public void superTransformHeldFull3DItemLayer() {
 	}
 
 	@Override
-	public boolean superFunc_177088_c(Object entityLivingBase) {
+	public boolean superSetScoreTeamColor(Object entityLivingBase) {
 		return false;
 	}
 
 	@Override
-	public void superFunc_180565_e() {
+	public void superUnsetScoreTeamColor() {
 	}
 
 	@Override
-	public boolean superFunc_177090_c(Object entityLivingBase, float p_177090_2_) {
+	public boolean superSetDoRenderBrightness(Object entityLivingBase, float p_177090_2_) {
 		return false;
 	}
 
 	@Override
-	public boolean superFunc_177092_a(Object entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
+	public boolean superSetBrightness(Object entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
 		return false;
 	}
 
 	@Override
-	public void superFunc_177091_f() {
+	public void superUnsetBrightness() {
 	}
 
 	@Override
@@ -198,7 +197,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	}
 
 	@Override
-	public void superFunc_177093_a(Object entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
+	public void superRenderLayers(Object entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
 	}
 
 	@Override

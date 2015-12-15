@@ -6,7 +6,6 @@ import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_ILayerArmorBase;
 import modchu.lib.Modchu_ILayerArmorBaseMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.src.Entity;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModelBase;
@@ -38,10 +37,10 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 	}
 
 	public ItemStack func_177176_a(EntityLiving EntityLiving, int i) {
-		return (ItemStack) (master != null ? master.func_177176_a(EntityLiving, i) : null);
+		return (ItemStack) (master != null ? master.getCurrentArmor(EntityLiving, i) : null);
 	}
 
-	public ItemStack superFunc_177176_a(Object EntityLiving, int i) {
+	public ItemStack superGetCurrentArmor(Object EntityLiving, int i) {
 		return null;
 	}
 
@@ -54,10 +53,10 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 	}
 
 	protected void func_177177_a() {
-		if (master != null) master.func_177177_a();
+		if (master != null) master.initArmor();
 	}
 
-	public void superFunc_177177_a() {
+	public void superInitArmor() {
 	}
 
 	protected void func_177179_a(ModelBase modelBase, int i) {
@@ -70,6 +69,11 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 	@Override
 	public Object superGetArmorResource(Object entity, Object itemStack, int slot, String type) {
 		return null;
+	}
+
+	@Override
+	public Object superGetArmorModelHook(Object entityLivingBase, Object itemStack, int slot, Object modelBase) {
+		return modelBase;
 	}
 
 }

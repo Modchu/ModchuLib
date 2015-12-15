@@ -176,11 +176,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 
 	@Override
 	public EntityPlayer func_146083_cb() {
-		return (EntityPlayer) (master != null ? master.func_146083_cb() : super.func_146083_cb());
+		return (EntityPlayer) (master != null ? master.getPlayerInLove() : super.func_146083_cb());
 	}
 
 	@Override
-	public EntityPlayer superFunc_146083_cb() {
+	public EntityPlayer superGetPlayerInLove() {
 		return super.func_146083_cb();
 	}
 
@@ -227,21 +227,16 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 
 	@Override
 	public String getName() {
-		return master != null ? master.getName() : super.getName();
-	}
-
-	@Override
-	public String superGetName() {
-		return super.getName();
+		return master != null ? master.getCommandSenderName() : super.getName();
 	}
 
 	@Override
 	protected boolean func_146066_aG() {
-		return master != null ? master.func_146066_aG() : super.func_146066_aG();
+		return master != null ? master.canDropLoot() : super.func_146066_aG();
 	}
 
 	@Override
-	public boolean superFunc_146066_aG() {
+	public boolean superCanDropLoot() {
 		return super.func_146066_aG();
 	}
 
@@ -358,11 +353,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 
 	@Override
 	public boolean func_174816_a(Explosion explosion, World world, BlockPos blockPos, IBlockState iBlockState, float f) {
-		return master != null ? master.func_174816_a(explosion, world, blockPos, iBlockState, f) : super.func_174816_a(explosion, world, blockPos, iBlockState, f);
+		return master != null ? master.verifyExplosion(explosion, world, blockPos, iBlockState, f) : super.func_174816_a(explosion, world, blockPos, iBlockState, f);
 	}
 
 	@Override
-	public boolean superFunc_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
+	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
 		return super.func_174816_a((Explosion) explosion, (World) world, (BlockPos) blockPos, (IBlockState) iBlockState, f);
 	}
 
@@ -378,12 +373,12 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 
 	@Override
 	public void func_145781_i(int p_145781_1_) {
-		if (master != null) master.func_145781_i(p_145781_1_);
+		if (master != null) master.onDataWatcherUpdate(p_145781_1_);
 		else super.func_145781_i(p_145781_1_);
 	}
 
 	@Override
-	public void superFunc_145781_i(int p_145781_1_) {
+	public void superOnDataWatcherUpdate(int p_145781_1_) {
 		super.func_145781_i(p_145781_1_);
 	}
 	// ~179
@@ -641,8 +636,8 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	}
 
 	@Override
-	public IEntityLivingData superOnSpawnWithEgg(Object iEntityLivingData) {
-		return superOnSpawnWithEgg(null, iEntityLivingData);
+	public IEntityLivingData superOnInitialSpawn(Object iEntityLivingData) {
+		return superOnInitialSpawn(null, iEntityLivingData);
 	}
 
 	public void func_146082_f(EntityPlayer entityPlayer) {
@@ -723,7 +718,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	// 180~
 	@Override
 	public float func_180484_a(BlockPos blockPos) {
-		return master != null ? master.func_180484_a(blockPos) : super.func_180484_a(blockPos);
+		return master != null ? master.getBlockPathWeight(blockPos) : super.func_180484_a(blockPos);
 	}
 
 	@Override
@@ -733,11 +728,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 
 	@Override
 	public boolean func_180485_d(BlockPos blockPos) {
-		return master != null ? master.func_180485_d(blockPos) : super.func_180485_d(blockPos);
+		return master != null ? master.isWithinHomeDistanceFromPosition(blockPos) : super.func_180485_d(blockPos);
 	}
 
 	@Override
-	public boolean superIsWithinHomeDistance(Object blockPos) {
+	public boolean superIsWithinHomeDistanceFromPosition(Object blockPos) {
 		return super.func_180485_d((BlockPos) blockPos);
 	}
 
@@ -758,16 +753,6 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	@Override
 	public Object superFunc_145778_a(Object item, int p_145778_2_, float p_145778_3_) {
 		return null;
-	}
-
-	@Override
-	public float superFunc_180484_a(Object blockPos) {
-		return super.func_180484_a((BlockPos) blockPos);
-	}
-
-	@Override
-	public boolean superFunc_180485_d(Object blockPos) {
-		return super.func_180485_d((BlockPos) blockPos);
 	}
 
 	@Override

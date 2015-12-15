@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 public class Modchu_Init {
@@ -41,9 +42,10 @@ public class Modchu_Init {
 		HashMap<String, Boolean> map = new HashMap();
 		//boolean tempIsClient = false;
 		boolean tempIsRenderPlayer2 = false;
-		if (versionInt > 179) map.put("net.minecraftforge.fml.common.FMLCommonHandler", Modchu_Main.isForge);
 		//map.put("net.minecraft.client.Minecraft", tempIsClient);
-		if (versionInt < 180) {
+		if (versionInt > 179) {
+			map.put("net.minecraftforge.fml.common.FMLCommonHandler", Modchu_Main.isForge);
+		} else {
 			map.put("FMLRenderAccessLibrary", Modchu_Main.isForge);
 			map.put("net.minecraft.src.FMLRenderAccessLibrary", Modchu_Main.isForge);
 			if (versionInt < 164) {
@@ -112,14 +114,25 @@ public class Modchu_Init {
 			if (ModLoader != null) Modchu_Main.isServer = invokeMethod(ModLoader, "getMinecraftInstance") == null;
 			Modchu_Debug.lDebug("(1 / 3) - (3 / 5) Modchu_Init init() ModLoader isServer="+Modchu_Main.isServer);
 		}
-		File mcDataDir = !Modchu_Main.isServer ? Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir) : new File(".");
-		Modchu_Debug.lDebug("(1 / 3) - (4 / 5) Modchu_Init init() mcDataDir="+mcDataDir.getAbsolutePath());
-		String s = mcDataDir.getAbsolutePath();
-		//Modchu_Debug.lDebug("Modchu_Init load() new File= "+(new File(new File(s, "../"), "gradle")));
-		if (s.indexOf("jars") != -1
-				| new File(s, "gradle").exists()
-				| new File(new File(s, "../"), "gradle").exists()) {
-			Modchu_Main.isRelease = false;
+		Modchu_FileManager.init();
+		String s = null;
+		List<File> list = Modchu_FileManager.getMinecraftJarList();
+		if (list != null) {
+			Modchu_Debug.lDebug("(1 / 3) - (4 / 5) 1 Modchu_Init init()");
+			for (File file : list) {
+				s = file.getAbsolutePath();
+				Modchu_Debug.lDebug("(1 / 3) - (4 / 5) r Modchu_Init init() s="+s);
+				if (!checkIsRelease(s)) {
+					Modchu_Main.isRelease = false;
+					Modchu_Debug.lDebug("(1 / 3) - (4 / 5) r Modchu_Init init() Modchu_Main.isRelease = false break.");
+					break;
+				}
+			}
+		} else {
+			File mcDataDir = !Modchu_Main.isServer ? Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir) : new File(".");
+			Modchu_Debug.lDebug("(1 / 3) - (4 / 5) 2 Modchu_Init init() mcDataDir="+mcDataDir.getAbsolutePath());
+			s = mcDataDir.getAbsolutePath();
+			Modchu_Main.isRelease = checkIsRelease(s);
 		}
 		Modchu_Debug.lDebug("Modchu_Init init() isRelease="+Modchu_Main.isRelease);
 		Modchu_Reflect.initNameMap();
@@ -130,6 +143,21 @@ public class Modchu_Init {
 		throw new RuntimeException("Modchu_Init debug stop");
 */
 		Modchu_Debug.lDebug("(1 / 3) - (5 / 5) Modchu_Init init() end.");
+	}
+
+	private static boolean checkIsRelease(String s) {
+		//Modchu_Debug.lDebug("Modchu_Init checkIsRelease new File= "+(new File(new File(s, "../"), "gradle")));
+		if (s != null
+				&& (s.indexOf("jars") != -1
+						| s.indexOf("gradle") != -1
+								| s.indexOf("mcp") != -1
+								| new File(s, ".gradle").exists()
+								| new File(new File(s, "../"), ".gradle").exists())) {
+			return false;
+		} else {
+			Modchu_Debug.lDebug("Modchu_Init init() isRelease checkIsRelease s="+s+" error !!", 2);
+		}
+		return true;
 	}
 
 	public static String getMcVersion() {
@@ -250,6 +278,8 @@ public class Modchu_Init {
 				if (i1 == 12) return "1.7.2";
 				return "1.7.10";
 			case 11:
+				if (i3 == 1590
+				| i1 == 15) return "1.8.8";
 				return "1.8";
 			}
 		}
@@ -257,6 +287,7 @@ public class Modchu_Init {
 	}
 
 	public static int getVersionStringToMinecraftVersionInt(String s) {
+		if (s.equals("1.8.8")) return 188;
 		if (s.equals("1.8")) return 180;
 		if (s.equals("1.7.10")) return 179;
 		if (s.equals("1.7.2")) return 172;
@@ -274,9 +305,22 @@ public class Modchu_Init {
 
 	public static String[] getModchuCharacteristicVersionStrings() {
 		int version = Modchu_Version.getMinecraftVersion();
+		if (version == 188) {
+			return new String[]{
+					"188",
+					"180_188",
+					"172_188",
+					"164_188",
+					"162_188"
+			};
+		}
 		if (version == 180) {
 			return new String[]{
 					"180",
+					"180_188",
+					"172_188",
+					"164_188",
+					"162_188",
 					"172_180",
 					"164_180",
 					"162_180"
@@ -287,10 +331,13 @@ public class Modchu_Init {
 					"179",
 					"172_179",
 					"164_179",
+					"162_179",
 					"172_180",
 					"164_180",
-					"162_179",
 					"162_180",
+					"172_188",
+					"164_188",
+					"162_188",
 					"152_179"
 			};
 		}
@@ -299,10 +346,13 @@ public class Modchu_Init {
 					"172",
 					"172_179",
 					"164_179",
+					"162_179",
 					"172_180",
 					"164_180",
-					"162_179",
 					"162_180",
+					"172_188",
+					"164_188",
+					"162_188",
 					"152_179"
 			};
 		}
@@ -311,9 +361,11 @@ public class Modchu_Init {
 					"164",
 					"162_164",
 					"164_179",
-					"164_180",
 					"162_179",
+					"164_180",
 					"162_180",
+					"164_188",
+					"162_188",
 					"152_179"
 			};
 		}
@@ -324,6 +376,7 @@ public class Modchu_Init {
 					"162_164",
 					"162_179",
 					"162_180",
+					"162_188",
 					"152_179"
 			};
 		}

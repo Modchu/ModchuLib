@@ -40,12 +40,12 @@ public interface Modchu_IGuiScreen {
 	public void superFunc_146283_a(List p_146283_1_, int p_146283_2_, int p_146283_3_);
 	public void superDrawHoveringText(List p_146283_1_, int p_146283_2_, int p_146283_3_, Object fontRenderer);
 	public void superDrawHoveringText(List textLines, int x, int y);
-	public void superFunc_175272_a(Object iChatComponent, int p_175272_2_, int p_175272_3_);
+	public void superHandleComponentHover(Object iChatComponent, int p_175272_2_, int p_175272_3_);
 	public void superSetText(String newChatText, boolean shouldOverwrite);
-	public boolean superFunc_175276_a(Object iChatComponent);
+	public boolean superHandleComponentClick(Object iChatComponent);
 	public void superSendChatMessage(String msg);
 	public void superSendChatMessage(String msg, boolean addToChat);
-	public void superFunc_175273_b(Object minecraft, int p_175273_2_, int p_175273_3_);
+	public void superOnResize(Object minecraft, int p_175273_2_, int p_175273_3_);
 	public void superDrawTexturedModalRect(float xCoord, float yCoord, int minU, int minV, int maxU, int maxV);
 	public void superDrawTexturedModalRect(int xCoord, int yCoord, Object textureAtlasSprite, int p_175175_4_, int p_175175_5_);
 

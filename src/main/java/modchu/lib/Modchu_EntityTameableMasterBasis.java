@@ -265,8 +265,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public boolean func_142018_a(Object entityLivingBase, Object entityLivingBase2) {
-		return base.superFunc_142018_a(entityLivingBase, entityLivingBase2);
+	public boolean shouldAttackEntity(Object entityLivingBase, Object entityLivingBase2) {
+		return base.superShouldAttackEntity(entityLivingBase, entityLivingBase2);
 	}
 
 	@Override
@@ -310,8 +310,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public Object func_146083_cb() {
-		return base.superFunc_146083_cb();
+	public Object getPlayerInLove() {
+		return base.superGetPlayerInLove();
 	}
 
 	@Override
@@ -367,11 +367,6 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	@Override
 	public void setTarget(Object entity) {
 		base.superSetTarget(entity);
-	}
-
-	@Override
-	public boolean isWithinHomeDistanceCurrentPosition() {
-		return base.superIsWithinHomeDistanceCurrentPosition();
 	}
 
 	@Override
@@ -560,8 +555,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void addRandomArmor() {
-		base.superAddRandomArmor();
+	public void addRandomDrop() {
+		base.superAddRandomDrop();
 	}
 
 	@Override
@@ -570,8 +565,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public Object onSpawnWithEgg(Object iEntityLivingData) {
-		return base.superOnSpawnWithEgg(iEntityLivingData);
+	public Object onInitialSpawn(Object iEntityLivingData) {
+		return base.superOnInitialSpawn(iEntityLivingData);
 	}
 
 	@Override
@@ -675,8 +670,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public boolean func_146066_aG() {
-		return base.superFunc_146066_aG();
+	public boolean canDropLoot() {
+		return base.superCanDropLoot();
 	}
 
 	@Override
@@ -1175,8 +1170,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public Object getBoundingBox() {
-		return base.superGetBoundingBox();
+	public Object getCollisionBoundingBox() {
+		return base.superGetCollisionBoundingBox();
 	}
 
 	@Override
@@ -1210,8 +1205,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public boolean handleLavaMovement() {
-		return base.superHandleLavaMovement();
+	public boolean isNotColliding() {
+		return base.superIsNotColliding();
 	}
 
 	@Override
@@ -1375,8 +1370,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void setInPortal() {
-		base.superSetInPortal();
+	public void setInPortal(Object bockPos) {
+		base.superSetInPortal(bockPos);
 	}
 
 	@Override
@@ -1525,7 +1520,7 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public int getTeleportDirection() {
+	public Object getTeleportDirection() {
 		return base.superGetTeleportDirection();
 	}
 
@@ -1560,8 +1555,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void func_145781_i(int p_145781_1_) {
-		base.superFunc_145781_i(p_145781_1_);
+	public void onDataWatcherUpdate(int p_145781_1_) {
+		base.superOnDataWatcherUpdate(p_145781_1_);
 	}
 
 	@Override
@@ -1696,18 +1691,13 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public boolean isWithinHomeDistance(Object blockPos) {
-		return base.superIsWithinHomeDistance(blockPos);
+	public boolean isWithinHomeDistanceFromPosition(Object blockPos) {
+		return base.superIsWithinHomeDistanceFromPosition(blockPos);
 	}
 
 	@Override
-	public Object onSpawnWithEgg(Object difficultyInstance, Object iEntityLivingData) {
-		return base.superOnSpawnWithEgg(difficultyInstance, iEntityLivingData);
-	}
-
-	@Override
-	public String getName() {
-		return base.superGetName();
+	public Object onInitialSpawn(Object difficultyInstance, Object iEntityLivingData) {
+		return base.superOnInitialSpawn(difficultyInstance, iEntityLivingData);
 	}
 
 	@Override
@@ -1716,8 +1706,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public boolean func_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
-		return base.superFunc_174816_a(explosion, world, blockPos, iBlockState, f);
+	public boolean verifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
+		return base.superVerifyExplosion(explosion, world, blockPos, iBlockState, f);
 	}
 
 	@Override
@@ -1747,16 +1737,6 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	@Override
 	public Object func_145778_a(Object item, int p_145778_2_, float p_145778_3_) {
 		return base.superFunc_145778_a(item, p_145778_2_, p_145778_3_);
-	}
-
-	@Override
-	public float func_180484_a(Object blockPos) {
-		return base.superFunc_180484_a(blockPos);
-	}
-
-	@Override
-	public boolean func_180485_d(Object blockPos) {
-		return base.superFunc_180485_d(blockPos);
 	}
 
 	@Override
@@ -1927,5 +1907,10 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	@Override
 	public boolean func_96092_aw() {
 		return base.superFunc_96092_aw();
+	}
+
+	@Override
+	public boolean isWithinHomeDistanceCurrentPosition() {
+		return base.superIsWithinHomeDistanceCurrentPosition();
 	}
 }

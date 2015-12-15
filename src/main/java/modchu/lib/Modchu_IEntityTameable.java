@@ -16,13 +16,12 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityTameableB {
 	public boolean superCanRiderInteract();
 	public boolean superShouldDismountInWater(Object entity);
 	public Object superGetOwner();
-	public Object superFunc_146083_cb();
+	public Object superGetPlayerInLove();
 	public boolean superIsWithinHomeDistanceCurrentPosition();
 	public void superUpdateLeashedState();
 	public Object superGetDropItem();
 	public Object superGetEquipmentInSlot(int par1);
-	public String superGetName();
-	public boolean superFunc_146066_aG();
+	public boolean superCanDropLoot();
 	public String superGetFallSoundString(int p_146067_1_);
 	public Object superGetEntityAttribute(Object iAttribute);
 	public int superGetEntityId();
@@ -34,9 +33,9 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityTameableB {
 	public Object superDropItemWithOffset(Object item, int p_145778_2_, float p_145778_3_);
 	public boolean superPushOutOfBlocks(double p_145771_1_, double p_145771_3_, double p_145771_5_);
 	public float superGetExplosionResistance(Object explosion, Object world, Object blockPos, Object iBlockState);
-	public boolean superFunc_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float f);
+	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float f);
 	public Object superGetDisplayName();
-	public void superFunc_145781_i(int p_145781_1_);
+	public void superOnDataWatcherUpdate(int p_145781_1_);
 	public void superAttackEntity(Object entity, float par2);
 	public float superGetBlockPathWeight(int par1, int par2, int par3);
 	public Object superFindPlayerToAttack();
@@ -46,7 +45,6 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityTameableB {
 	public Object superGetEntityToAttack();
 	public void superSetTarget(Object entity);
 	public void superSetHomeArea(int par1, int par2, int par3, int par4);
-	public Object superGetHomePosition();
 	public float superFunc_110174_bM();
 	public boolean superIsAIEnabled();
 	public int superGetMaxSafePointTries();
@@ -67,7 +65,7 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityTameableB {
 	public float superGetShadowSize();
 	public boolean superIsEntityInvulnerable();
 	public void superCopyDataFrom(Object entity, boolean par2);
-	public Object superOnSpawnWithEgg(Object iEntityLivingData);
+	public Object superOnInitialSpawn(Object iEntityLivingData);
 	public void superFunc_146082_f(Object entityPlayer);
 	public boolean superIsWithinHomeDistance(int par1, int par2, int par3);
 	public String superGetCommandSenderName();
@@ -79,12 +77,10 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityTameableB {
 	public void superUpdateEntityActionState();
 	public float superFunc_145772_a(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block);
 	public float superGetBlockPathWeight(Object blockPos);
-	public boolean superIsWithinHomeDistance(Object blockPos);
 	public String superFunc_152113_b();
 	public void superFunc_152115_b(String par1Str);
 	public String superFunc_146067_o(int p_146067_1_);
 	public Object superFunc_145778_a(Object item, int p_145778_2_, float p_145778_3_);
-	public float superFunc_180484_a(Object blockPos);
-	public boolean superFunc_180485_d(Object blockPos);
+	public boolean superIsWithinHomeDistanceFromPosition(Object blockPos);
 
 }

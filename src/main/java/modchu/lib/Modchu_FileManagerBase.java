@@ -41,13 +41,19 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	public Map<String, List<File>> fileList = new TreeMap<String, List<File>>();
 	protected ArrayList<String> failureShowModelList = new ArrayList<String>();
 	private boolean getResourceBufferedReaderJarReaderFlag = false;
+	private static boolean initFlag;
 	public static HashMap<Object, List<String>> listData = new HashMap();
 	public static final int TYPE_FILE_OR_DIR = 1;
 	public static final int TYPE_FILE = 2;
 	public static final int TYPE_DIR = 3;
 
 	public Modchu_FileManagerBase(HashMap<String, Object> map) {
-		System.out.println("Modchu_FileManagerBase init");
+		Modchu_Debug.lDebug("Modchu_FileManagerBase init");
+		if (initFlag) {
+			Modchu_Debug.lDebug("Modchu_FileManagerBase init initFlag return.");
+			return;
+		}
+		initFlag = true;
 		// 初期化
 		Modchu_FileManager.setMinecraftDir(Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir));
 
@@ -225,6 +231,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return minecraftJar;
 	}
 
+	@Override
 	public List<File> getModFile(String pname, String pprefix) {
 		// 検索済みかどうかの判定
 		List<File> llist;
@@ -237,10 +244,12 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 
 		Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile:[%s]:%s", pname, Modchu_Main.modsDir.getAbsolutePath());
 		// ファイル・ディレクトリを検索
-		return getModFile(pname, pprefix, Modchu_Main.modsDir, llist);
+		getModFile(pname, pprefix, Modchu_Main.modsDir, llist);
+		return llist;
 	}
 
-	private List<File> getModFile(String pname, String pprefix, File dir, List<File> llist) {
+	private boolean getModFile(String pname, String pprefix, File dir, List<File> llist) {
+		boolean b = false;
 		try {
 			Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile dir="+dir);
 			if (dir.isDirectory()) {
@@ -254,30 +263,32 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 					if (t.getName().indexOf(pprefix) != -1) {
 						if (t.getName().endsWith(".zip")) {
 							llist.add(t);
-							Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile-file:%s", t.getName());
+							b = true;
+							Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile file:%s", t.getName());
 						}
 					} else {
 						Modchu_Debug.tDebug("Modchu_FileManagerBase prefix else file:%s", t.getName());
 					}
 				}
-				Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile-files:%d", llist.size());
+				Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile files:%d", llist.size());
 			} else {
-				// まずありえない
-				Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile-fail.");
+				Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile !dir.isDirectory().");
 			}
-			return llist;
 		} catch (Exception exception) {
 			Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile-Exception.");
-			return null;
 		}
+		return b;
 	}
 
+	@Override
 	public List<File> getFileList(String pname) {
 		return fileList.get(pname);
 	}
 
+	@Override
 	public List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search, boolean subDirCheck) {
-		Modchu_Debug.Debug1("Modchu_FileManagerBase getModFile search="+search);
+		boolean debug = false;
+		if (debug) Modchu_Debug.Debug1("Modchu_FileManagerBase getModFile search="+search);
 		if (list != null); else list = new ArrayList();
 		try {
 			if (dir.isDirectory()) {
@@ -287,26 +298,26 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 					if (t.isDirectory()) {
 						if (subDirCheck) {
 							if (name.indexOf(search) > -1) {
-								Modchu_Debug.Debug("Modchu_FileManagerBase getModFile list.add directory="+name);
+								if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile list.add directory="+name);
 								list.add(t);
 							} else {
-								Modchu_Debug.Debug("Modchu_FileManagerBase getModFile list not add directory="+name);
+								if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile list not add directory="+name);
 							}
 							list = getModFile(t, list, map, search, subDirCheck);
 						}
 					} else if (name.endsWith(".zip")
 							| name.endsWith(".jar")) {
-						list.add(t);
 						if (addTexturesZip(t, map, search)) {
-							Modchu_Debug.Debug("Modchu_FileManagerBase getModFile-file:"+name);
+							list.add(t);
+							if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile file name="+name);
 						} else {
-							Modchu_Debug.Debug("Modchu_FileManagerBase getModFile-fail.");
+							if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile addTexturesZip not list.add.");
 						}
 					}
 				}
-				Modchu_Debug.Debug("Modchu_FileManagerBase getModFile-files:%d", list.size());
+				if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile files list.size()="+list.size());
 			} else {
-				Modchu_Debug.Debug("Modchu_FileManagerBase getModFile-fail.");
+				if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile !dir.isDirectory() dir="+dir);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -314,9 +325,11 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return list;
 	}
 
+	@Override
 	public boolean addTexturesZip(File file, ConcurrentHashMap<String, Class> map, String search) {
 		if (file != null
 				&& file.isFile()); else return false;
+		boolean b = false;
 		FileInputStream fileinputstream = null;
 		ZipInputStream zipinputstream = null;
 		try {
@@ -325,16 +338,16 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			ZipEntry zipentry;
 			do {
 				zipentry = zipinputstream.getNextEntry();
-				if(zipentry == null) break;
+				if (zipentry == null) break;
 
 				if (!zipentry.isDirectory()) {
-					if (zipentry.getName().endsWith(".class")) map = addModClass(map, zipentry.getName(), search);
+					if (zipentry.getName().endsWith(".class")) {
+						if (addModClass(map, zipentry.getName(), search)) b = true;
+					}
 				}
 			} while(true);
-			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		} finally {
 			try {
 				if (zipinputstream != null) zipinputstream.close();
@@ -342,78 +355,82 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			} catch (Exception e) {
 			}
 		}
+		return b;
 	}
 
+	@Override
 	public void addTexturesJar(File file, ConcurrentHashMap<String, Class> map, String search) {
 		if (file != null); else {
 			Modchu_Debug.Debug("Modchu_FileManagerBase addTextureJar file == null !!");
 			return;
 		}
 		if (file.isFile()) {
-			Modchu_Debug.Debug("Modchu_FileManagerBase addTextureJar-zip.");
+			Modchu_Debug.Debug("Modchu_FileManagerBase addTextureJar file.isFile()");
 			if (addTexturesZip(file, map, search)) {
-				Modchu_Debug.Debug("Modchu_FileManagerBase getTexture-append-jar-done.");
+				Modchu_Debug.Debug("Modchu_FileManagerBase addTexturesJar addTexturesZip true.");
 			} else {
-				Modchu_Debug.Debug("Modchu_FileManagerBase getTexture-append-jar-fail.");
+				Modchu_Debug.Debug("Modchu_FileManagerBase addTexturesJar addTexturesZip false.");
 			}
 		}
 		if (file.isDirectory()) {
-			Modchu_Debug.Debug("Modchu_FileManagerBase addTextureJar-file.");
-			boolean lflag = false;
-			for (File t : file.listFiles()) {
-				if (t.isDirectory()) {
-					lflag |= addTexturesDir(t, map, search);
-				}
-			}
-			if (lflag) {
-				Modchu_Debug.Debug("Modchu_FileManagerBase getTexture-append-jar-done.");
-			} else {
-				Modchu_Debug.Debug("Modchu_FileManagerBase getTexture-append-jar-fail.");
-			}
+			Modchu_Debug.Debug("Modchu_FileManagerBase addTextureJar file.isDirectory().");
 			if (addTexturesDir(file, map, search)) {
-				Modchu_Debug.Debug("Modchu_FileManagerBase getTexture-append-jar-done.");
+				Modchu_Debug.Debug("Modchu_FileManagerBase addTextureJar file.isDirectory() true.");
 			} else {
-				Modchu_Debug.Debug("Modchu_FileManagerBase getTexture-append-jar-fail.");
+				Modchu_Debug.Debug("Modchu_FileManagerBase addTextureJar file.isDirectory() false.");
 			}
 		}
 	}
 
+	@Override
 	public boolean addTexturesDir(File file, ConcurrentHashMap<String, Class> map, String search) {
 		if (file != null); else return false;
+		boolean debug = false;
+		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addTexturesDir file.getName()="+file.getName());
+		boolean b = false;
 		try {
 			for (File t : file.listFiles()) {
+				if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addTexturesDir r t.getName()="+t.getName());
 				if (t.isDirectory()) {
 					addTexturesDir(t, map, search);
-				} else if (t.getName().endsWith(".class")) map = addModClass(map, t.getAbsolutePath(), search);
+				} else if (t.getName().endsWith(".class")) {
+					if (addModClass(map, t.getAbsolutePath(), search)) b = true;
+				}
 			}
-			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		}
+		return b;
 	}
 
+	@Override
 	public boolean addResourcesMod(Class c, ConcurrentHashMap<String, Class> map, String search) {
 		if (c != null); else return false;
+		boolean debug = false;
+		boolean b = false;
 		URLClassLoader urlClassLoader = null;
 		try {
 			ClassLoader classloader = c.getClassLoader();
 			if (classloader instanceof URLClassLoader) {
 				urlClassLoader = (URLClassLoader) classloader;
+				if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addResourcesMod urlClassLoader.getURLs().length="+urlClassLoader.getURLs().length);
 				for (URL entry : urlClassLoader.getURLs()) {
 					String resourceName = entry.getPath();
-					System.out.println("Modchu_FileManagerBase addResourcesMod resourceName="+resourceName);
+					if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addResourcesMod resourceName="+resourceName);
+					if (resourceName.equals("/")
+							| resourceName.equals(".")) continue;
 					File file = new File(resourceName);
 					if (file != null) {
 						if (file.isDirectory()) {
 							addTexturesDir(file, map, search);
-						} else if (file.getName().endsWith(".class")) map = addModClass(map, file.getAbsolutePath(), search);
+						} else if (file.getName().endsWith(".class")) {
+							if (addModClass(map, file.getAbsolutePath(), search)) b = true;
+						}
 					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		} finally {
 			if (Modchu_Main.getMinecraftVersion() > 159) {
 				try {
@@ -422,32 +439,35 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 				}
 			}
 		}
-		return true;
+		return b;
 	}
 
-	public ConcurrentHashMap addModClass(ConcurrentHashMap map, String fname, String search) {
+	@Override
+	public boolean addModClass(ConcurrentHashMap map, String fname, String search) {
 		int i1 = fname.indexOf(search);
 		if (i1 > -1
 				&& fname.endsWith(".class")) {
 			String cn = classNameProcessing(fname);
-			if (map.containsKey(cn)) return map;
+			if (map.containsKey(cn)) return false;
 			Class c = Modchu_Reflect.loadClass(cn);
 			if (c != null) {
 				if (Modifier.isAbstract(c.getModifiers())) {
 					Modchu_Debug.Debug("Modchu_FileManagerBase addModClass-skip."+cn);
-					return map;
+					return false;
 				}
 				if (!map.containsKey(cn)) {
 					map.put(c.getName(), c);
 					Modchu_Debug.Debug("Modchu_FileManagerBase addModClass-:"+c.getName());
+					return true;
 				}
 			} else {
 				Modchu_Debug.Debug("Modchu_FileManagerBase addModClass-class == null !!: %s", cn);
 			}
 		}
-		return map;
+		return false;
 	}
 
+	@Override
 	public String classNameProcessing(String fname) {
 		//Modchu_Debug.Debug("classNameProcessing 1 fname="+fname);
 		String mcDataDirAbsolutePath = Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir).getAbsolutePath();
@@ -508,6 +528,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return crc.getValue();
 	}
 
+	@Override
 	public ZipFile getZipFile(Class c) {
 		ZipFile zipFile = null;
 		try
@@ -533,6 +554,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return null;
 	}
 
+	@Override
 	public void copyZipResource(Class c, ZipFile zipFile, String s, File copydir) {
 		File file = null;
 		boolean flag = false;
@@ -658,6 +680,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		}
 	}
 
+	@Override
 	public void copyZipResource(ZipFile zipFile, File baseDir, String s) {
 		Modchu_Debug.lDebug("Modchu_FileManagerBase copyZipResource");
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
@@ -676,6 +699,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		//Modchu_Debug.lDebug("copyZipResource end.");
 	}
 
+	@Override
 	public void copyZipResourceAll(ZipFile zipFile, File baseDir) {
 		Modchu_Debug.lDebug("Modchu_FileManagerBase copyZipResourceAll");
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
@@ -690,6 +714,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		//Modchu_Debug.lDebug("Modchu_FileManagerBase copyZipResourceAll end.");
 	}
 
+	@Override
 	public void copyResource(ZipFile zipFile, ZipEntry ze, File outFile) {
 		InputStream is = null;
 		try {
@@ -705,6 +730,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		}
 	}
 
+	@Override
 	public void copyResource(InputStream is, ZipEntry ze, File outFile) {
 		if (ze.isDirectory()) {
 			outFile.mkdirs();
@@ -742,6 +768,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		}
 	}
 
+	@Override
 	public void copyResource(InputStream is, HashMap<ZipEntry, File> map) {
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;
@@ -783,6 +810,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		}
 	}
 
+	@Override
 	public void copyResource(Class c, String s, File file) {
 		BufferedInputStream reader = null;
 		BufferedOutputStream writer = null;
@@ -808,15 +836,17 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		}
 	}
 
+	@Override
 	public void copyResourceText(InputStream is, File outFile) {
 		ArrayList<String> list = new ArrayList();
 		try {
 			writerFile(outFile, inputStreamToList(is, null));
 		} catch (Exception e) {
-			Modchu_Debug.lDebug("Modchu_FileManagerBase copyResourceText load fail.", 2, e);
+			Modchu_Debug.lDebug("Modchu_FileManagerBase copyResourceText load Exception.", 2, e);
 		}
 	}
 
+	@Override
 	public File getFile(String directoryPath, String matchingFileName, String indexofFileName) {
 		ArrayList<File> list = listFiles(directoryPath, null, matchingFileName, indexofFileName);
 		if (list != null
@@ -833,10 +863,12 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return null;
 	}
 
+	@Override
 	public ArrayList<File> listFiles(String directoryPath, String fileName) {
 		return listFiles(directoryPath, fileName, null, null);
 	}
 
+	@Override
 	public ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName) {
 		if (fileName != null) {
 			fileName = fileName.replace(".", "\\.");
@@ -846,6 +878,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return listFiles(directoryPath, fileName, matchingFileName, indexofFileName, list, TYPE_FILE, true, 0);
 	}
 
+	@Override
 	public ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName, ArrayList list, int type, boolean isRecursive, int period) {
 		File dir = new File(directoryPath);
 		if (!dir.isDirectory()) {
@@ -901,6 +934,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return list;
 	}
 
+	@Override
 	public void createDir(String s) {
 		String s1 = "";
 		String as[] = s.split("/");
@@ -911,10 +945,12 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		}
 	}
 
+	@Override
 	public BufferedReader getResourceBufferedReader(String s) {
 		return getResourceBufferedReader(Modchu_FileManagerBase.class, s);
 	}
 
+	@Override
 	public BufferedReader getResourceBufferedReader(Class c, String s) {
 		if (Modchu_Main.isRelease()
 				| getResourceBufferedReaderJarReaderFlag
@@ -991,6 +1027,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return null;
 	}
 
+	@Override
 	public BufferedReader getJarReader(String s) {
 		BufferedReader bufferedReader = null;
 		InputStream inputStream = Modchu_FileManagerBase.class.getClassLoader().getResourceAsStream(s);
@@ -1017,18 +1054,21 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return bufferedReader;
 	}
 
+	@Override
 	public ArrayList<String> loadFileToArrayList(File file) {
 		// File読み込みArrayListで返す
 		if (listData.containsKey(file)) return (ArrayList<String>) listData.get(file);
 		return (ArrayList<String>) loadFileToList(file, new ArrayList());
 	}
 
+	@Override
 	public LinkedList<String> loadFileToLinkedList(File file) {
 		// File読み込みLinkedListで返す
 		if (listData.containsKey(file)) return (LinkedList<String>) listData.get(file);
 		return (LinkedList<String>) loadFileToList(file, new LinkedList());
 	}
 
+	@Override
 	public List<String> loadFileToList(File file, List list) {
 		// File読み込みListで返す
 		if (listData.containsKey(file)) return listData.get(file);
@@ -1037,22 +1077,25 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			listData.put(file, list);
 			return list;
 		} catch (Exception e) {
-			Modchu_Debug.lDebug("Modchu_FileManagerBase loadFileToList "+ file.toString() +" load fail.", 2, e);
+			Modchu_Debug.lDebug("Modchu_FileManagerBase loadFileToList "+ file.toString() +" load Exception.", 2, e);
 			e.printStackTrace();
 		}
 		return null;
 	}
 
+	@Override
 	public ArrayList<String> bufferedReaderToArrayList(BufferedReader breader) {
 		// BufferedReader読み込みArrayListで返す
 		return (ArrayList<String>) bufferedReaderToList(breader, new ArrayList());
 	}
 
+	@Override
 	public LinkedList<String> bufferedReaderToLinkedList(BufferedReader breader) {
 		// BufferedReader読み込みLinkedListで返す
 		return (LinkedList<String>) bufferedReaderToList(breader, new LinkedList());
 	}
 
+	@Override
 	public List<String> bufferedReaderToList(BufferedReader breader, List list) {
 		// BufferedReader読み込みListで返す
 		try {
@@ -1062,7 +1105,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 				list.add(rl);
 			}
 		} catch (Exception e) {
-			Modchu_Debug.lDebug("Modchu_FileManagerBase bufferedReaderToList " + breader + " load fail.", 2, e);
+			Modchu_Debug.lDebug("Modchu_FileManagerBase bufferedReaderToList " + breader + " load Exception.", 2, e);
 			e.printStackTrace();
 		} finally {
 			try {
@@ -1074,16 +1117,19 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return list;
 	}
 
+	@Override
 	public ArrayList<String> inputStreamToArrayList(InputStream is) {
 		// InputStream読み込みArrayListで返す
 		return (ArrayList<String>) inputStreamToList(is, new ArrayList());
 	}
 
+	@Override
 	public LinkedList<String> inputStreamToLinkedList(InputStream is) {
 		// InputStream読み込みLinkedListで返す
 		return (LinkedList<String>) inputStreamToList(is, new LinkedList());
 	}
 
+	@Override
 	public List<String> inputStreamToList(InputStream is, List list) {
 		if (list != null); else list = new LinkedList();
 		BufferedReader breader = null;
@@ -1095,7 +1141,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			}
 			return list;
 		} catch (Exception e) {
-			Modchu_Debug.lDebug("Modchu_FileManagerBase inputStreamToList " + breader + " load fail.", 2, e);
+			Modchu_Debug.lDebug("Modchu_FileManagerBase inputStreamToList " + breader + " load Exception.", 2, e);
 			//e.printStackTrace();
 		} finally {
 			try {
@@ -1106,6 +1152,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return null;
 	}
 
+	@Override
 	public void writerFile(File file, String[] s) {
 		//ファイル書き込み
 		try {
@@ -1121,11 +1168,12 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			bwriter.close();
 			Modchu_Debug.lDebug("Modchu_FileManagerBase String[] "+ file.toString() +" new file create.");
 		} catch (Exception e) {
-			Modchu_Debug.lDebug("Modchu_FileManagerBase writerFile String[] file="+ file.toString() +" file writer fail.", 2, e);
+			Modchu_Debug.lDebug("Modchu_FileManagerBase writerFile String[] file="+ file.toString() +" file writer Exception.", 2, e);
 			e.printStackTrace();
 		}
 	}
 
+	@Override
 	public void writerFile(File file, List<String> list1) {
 		//ファイル書き込み
 		if (file != null
@@ -1158,7 +1206,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			}
 		} catch (ConcurrentModificationException e) {
 		} catch (Exception e) {
-			Modchu_Debug.lDebug("Modchu_FileManagerBase writerFile List file="+ file.toString() +" file writer fail.", 2, e);
+			Modchu_Debug.lDebug("Modchu_FileManagerBase writerFile List file="+ file.toString() +" file writer Exception.", 2, e);
 		 } finally {
 			 try {
 				 if (bwriter != null) bwriter.close();
@@ -1167,6 +1215,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		 }
 	}
 
+	@Override
 	public void writerFile(File file, Map map) {
 		//ファイル書き込み
 		BufferedWriter bwriter = null;
@@ -1191,7 +1240,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 				Modchu_Debug.lDebug("Modchu_FileManagerBase Map "+ file.toString() +" writerFile. error map="+map+" file="+file);
 			}
 		} catch (Exception e) {
-			Modchu_Debug.lDebug("Modchu_FileManagerBase writerFile Map file="+ file.toString() +" file writer fail.", 2, e);
+			Modchu_Debug.lDebug("Modchu_FileManagerBase writerFile Map file="+ file.toString() +" file writer Exception.", 2, e);
 			e.printStackTrace();
 		 } finally {
 			 try {
@@ -1201,6 +1250,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		 }
 	}
 
+	@Override
 	public LinkedList getClassLoaderResourcesList(Class c) {
 		LinkedList list = new LinkedList();
 		if (c != null); else return null;
@@ -1250,10 +1300,12 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		}
 	}
 
+	@Override
 	public String[] getSystemClassPaths() {
 		return System.getProperty("java.class.path").split(File.pathSeparator);
 	}
 
+	@Override
 	public List<File> getClassPathFileList(String s) {
 		List<File> list = new LinkedList();
 		String[] paths = Modchu_FileManager.getSystemClassPaths();

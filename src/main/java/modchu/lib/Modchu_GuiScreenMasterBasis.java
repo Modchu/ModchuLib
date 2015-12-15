@@ -188,8 +188,8 @@ public class Modchu_GuiScreenMasterBasis implements Modchu_IGuiScreenMaster {
 	}
 
 	@Override
-	public void func_175272_a(Object iChatComponent, int p_175272_2_, int p_175272_3_) {
-		base.superFunc_175272_a(iChatComponent, p_175272_2_, p_175272_3_);
+	public void handleComponentHover(Object iChatComponent, int p_175272_2_, int p_175272_3_) {
+		base.superHandleComponentHover(iChatComponent, p_175272_2_, p_175272_3_);
 	}
 
 	@Override
@@ -198,8 +198,8 @@ public class Modchu_GuiScreenMasterBasis implements Modchu_IGuiScreenMaster {
 	}
 
 	@Override
-	public boolean func_175276_a(Object iChatComponent) {
-		return base.superFunc_175276_a(iChatComponent);
+	public boolean handleComponentClick(Object iChatComponent) {
+		return base.superHandleComponentClick(iChatComponent);
 	}
 
 	@Override
@@ -213,8 +213,8 @@ public class Modchu_GuiScreenMasterBasis implements Modchu_IGuiScreenMaster {
 	}
 
 	@Override
-	public void func_175273_b(Object minecraft, int p_175273_2_, int p_175273_3_) {
-		base.superFunc_175273_b(minecraft, p_175273_2_, p_175273_3_);
+	public void onResize(Object minecraft, int p_175273_2_, int p_175273_3_) {
+		base.superOnResize(minecraft, p_175273_2_, p_175273_3_);
 	}
 
 	@Override

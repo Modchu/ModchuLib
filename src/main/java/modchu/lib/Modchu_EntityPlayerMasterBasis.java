@@ -1157,8 +1157,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public Object getBoundingBox() {
-		return base.supergetBoundingBox();
+	public Object getCollisionBoundingBox() {
+		return base.supergetCollisionBoundingBox();
 	}
 
 	@Override
@@ -1352,8 +1352,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void setInPortal() {
-		base.supersetInPortal();
+	public void setInPortal(Object bockPos) {
+		base.supersetInPortal(null);
 	}
 
 	@Override
@@ -1492,8 +1492,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public int getTeleportDirection() {
-		return base.supergetTeleportDirection();
+	public Object getTeleportDirection() {
+		return (Integer) base.supergetTeleportDirection();
 	}
 
 	@Override

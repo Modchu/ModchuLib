@@ -21,7 +21,7 @@ public interface Modchu_IFileManagerMaster {
 	public void addTexturesJar(File file, ConcurrentHashMap<String, Class> map, String search);
 	public boolean addTexturesDir(File file, ConcurrentHashMap<String, Class> map, String search);
 	public boolean addResourcesMod(Class c, ConcurrentHashMap<String, Class> map, String search);
-	public ConcurrentHashMap addModClass(ConcurrentHashMap map, String fname, String search);
+	public boolean addModClass(ConcurrentHashMap map, String fname, String search);
 	public String classNameProcessing(String fname);
 	public ZipFile getZipFile(Class c);
 	public void copyZipResource(Class c, ZipFile zipFile, String s, File copydir);

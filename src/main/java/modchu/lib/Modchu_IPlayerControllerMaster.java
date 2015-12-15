@@ -4,9 +4,9 @@ public interface Modchu_IPlayerControllerMaster {
 
 	// 180~
 	public boolean onPlayerDestroyBlock(Object blockPos, Object enumFacing);
-	public boolean func_180511_b(Object blockPos, Object enumFacing);
-	public boolean func_180512_c(Object blockPos, Object enumFacing);
-	public boolean func_178890_a(Object entityPlayerSP, Object worldClient, Object itemStack, Object blockPos, Object enumFacing, Object vec3);
+	public boolean clickBlock(Object blockPos, Object enumFacing);
+	public boolean onPlayerDamageBlock(Object blockPos, Object enumFacing);
+	public boolean onPlayerRightClick(Object entityPlayerSP, Object worldClient, Object itemStack, Object blockPos, Object enumFacing, Object vec3);
 
 	public Object createPlayer(Object world);
 	public void setPlayerCapabilities(Object entityPlayer);

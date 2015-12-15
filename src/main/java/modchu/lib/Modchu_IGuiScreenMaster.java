@@ -40,12 +40,12 @@ public interface Modchu_IGuiScreenMaster {
 	public void func_146283_a(List p_146283_1_, int p_146283_2_, int p_146283_3_);
 	public void drawHoveringText(List p_146283_1_, int p_146283_2_, int p_146283_3_, Object fontRenderer);
 	public void drawHoveringText(List textLines, int x, int y);
-	public void func_175272_a(Object iChatComponent, int p_175272_2_, int p_175272_3_);
+	public void handleComponentHover(Object iChatComponent, int p_175272_2_, int p_175272_3_);
 	public void setText(String newChatText, boolean shouldOverwrite);
-	public boolean func_175276_a(Object iChatComponent);
+	public boolean handleComponentClick(Object iChatComponent);
 	public void sendChatMessage(String msg);
 	public void sendChatMessage(String msg, boolean addToChat);
-	public void func_175273_b(Object minecraft, int p_175273_2_, int p_175273_3_);
+	public void onResize(Object minecraft, int p_175273_2_, int p_175273_3_);
 	public void drawTexturedModalRect(float xCoord, float yCoord, int minU, int minV, int maxU, int maxV);
 	public void drawTexturedModalRect(int xCoord, int yCoord, Object textureAtlasSprite, int p_175175_4_, int p_175175_5_);
 

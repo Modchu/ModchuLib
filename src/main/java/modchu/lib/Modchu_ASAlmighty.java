@@ -692,12 +692,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == entityBoundingBoxMaxZ) return pArg != null && pArg.length > 0 ? entityBoundingBoxMaxZ(pArg[0]) : entityBoundingBoxMaxZ();
 		if (pIndex == entityIsSneaking) return pArg != null && pArg.length > 0 ? entityIsSneaking(pArg[0]) : entityIsSneaking();
 		if (pIndex == entityWorldObj) return pArg != null && pArg.length > 0 ? entityWorldObj(pArg[0]) : entityWorldObj();
-		if (pIndex == entityPlayerField_71091_bM) return pArg != null && pArg.length > 0 ? entityPlayerField_71091_bM(pArg[0]) : entityPlayerField_71091_bM();
-		if (pIndex == entityPlayerField_71096_bN) return pArg != null && pArg.length > 0 ? entityPlayerField_71096_bN(pArg[0]) : entityPlayerField_71096_bN();
-		if (pIndex == entityPlayerField_71097_bO) return pArg != null && pArg.length > 0 ? entityPlayerField_71097_bO(pArg[0]) : entityPlayerField_71097_bO();
-		if (pIndex == entityPlayerField_71094_bP) return pArg != null && pArg.length > 0 ? entityPlayerField_71094_bP(pArg[0]) : entityPlayerField_71094_bP();
-		if (pIndex == entityPlayerField_71095_bQ) return pArg != null && pArg.length > 0 ? entityPlayerField_71095_bQ(pArg[0]) : entityPlayerField_71095_bQ();
-		if (pIndex == entityPlayerField_71085_bR) return pArg != null && pArg.length > 0 ? entityPlayerField_71085_bR(pArg[0]) : entityPlayerField_71085_bR();
+		if (pIndex == entityPlayerPrevChasingPosX) return pArg != null && pArg.length > 0 ? entityPlayerPrevChasingPosX(pArg[0]) : entityPlayerPrevChasingPosX();
+		if (pIndex == entityPlayerPrevChasingPosY) return pArg != null && pArg.length > 0 ? entityPlayerPrevChasingPosY(pArg[0]) : entityPlayerPrevChasingPosY();
+		if (pIndex == entityPlayerPrevChasingPosZ) return pArg != null && pArg.length > 0 ? entityPlayerPrevChasingPosZ(pArg[0]) : entityPlayerPrevChasingPosZ();
+		if (pIndex == entityPlayerChasingPosX) return pArg != null && pArg.length > 0 ? entityPlayerChasingPosX(pArg[0]) : entityPlayerChasingPosX();
+		if (pIndex == entityPlayerChasingPosY) return pArg != null && pArg.length > 0 ? entityPlayerChasingPosY(pArg[0]) : entityPlayerChasingPosY();
+		if (pIndex == entityPlayerChasingPosZ) return pArg != null && pArg.length > 0 ? entityPlayerChasingPosZ(pArg[0]) : entityPlayerChasingPosZ();
 		if (pIndex == worldIsAirBlock) {
 			if (pArg != null
 			&& pArg.length > 2
@@ -786,7 +786,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == vec3ZCoord) return pArg != null && pArg.length > 0 ? vec3ZCoord(pArg[0]) : null;
 		if (pIndex == entityAnimalInLove) return pArg != null && pArg.length > 0 ? entityAnimalInLove(pArg[0]) : entityAnimalInLove();
 		if (pIndex == entityRidingEntity) return pArg != null && pArg.length > 0 ? entityRidingEntity(pArg[0]) : entityRidingEntity();
-		if (pIndex == entityGetBoundingBox) return pArg != null && pArg.length > 0 ? entityGetBoundingBox(pArg[0]) : entityGetBoundingBox();
+		if (pIndex == entityGetBoundingBox) return pArg != null && pArg.length > 0 ? entityGetCollisionBoundingBox(pArg[0]) : entityGetBoundingBox();
 		if (pIndex == entityCanBeCollidedWith) return pArg != null && pArg.length > 0 ? entityCanBeCollidedWith(pArg[0]) : entityCanBeCollidedWith();
 		if (pIndex == entityGetCollisionBorderSize) return pArg != null && pArg.length > 0 ? entityGetCollisionBorderSize(pArg[0]) : entityGetCollisionBorderSize();
 		if (pIndex == entityRiddenByEntity) return pArg != null && pArg.length > 0 ? entityRiddenByEntity(pArg[0]) : entityRiddenByEntity();
@@ -3934,7 +3934,17 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			return false;
 		}
 		if (pIndex == tessellatorStartDrawingQuads) {
-			tessellatorStartDrawingQuads(pArg[0]);
+			if (pArg != null
+			&& pArg.length > 0
+			&& pArg[0] != null) {
+				if (pArg.length > 2
+						&& pArg[1] != null
+						&& pArg[2] != null) {
+					tessellatorStartDrawingQuads(pArg[0], (Integer) pArg[1], pArg[2]);
+				} else {
+					tessellatorStartDrawingQuads(pArg[0]);
+				}
+			}
 			return true;
 		}
 		if (pIndex == tessellatorStartDrawing) {
@@ -3942,7 +3952,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg.length > 1
 			&& pArg[0] != null
 			&& pArg[1] != null) {
-				tessellatorStartDrawing(pArg[0], (Byte) pArg[1]);
+				if (pArg.length > 2
+						&& pArg[2] != null) {
+					tessellatorStartDrawing(pArg[0], (Integer) pArg[1], pArg[2]);
+					return true;
+				}
+				tessellatorStartDrawing(pArg[0], (Integer) pArg[1]);
 				return true;
 			}
 			return false;
@@ -3998,7 +4013,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[1] != null
 			&& pArg[2] != null
 			&& pArg[3] != null) {
-				tessellatorAddVertex(pArg[0], (Double) pArg[1], (Double) pArg[2], (Double) pArg[3]);
+				if (pArg.length > 7
+						&& pArg[4] != null
+						&& pArg[5] != null
+						&& pArg[6] != null
+						&& pArg[7] != null) {
+					tessellatorAddVertex(pArg[0], (Double) pArg[1], (Double) pArg[2], (Double) pArg[3], (Integer) pArg[4], (Integer) pArg[5], (Integer) pArg[6], (Integer) pArg[7]);
+				} else {
+					tessellatorAddVertex(pArg[0], (Double) pArg[1], (Double) pArg[2], (Double) pArg[3]);
+				}
 				return true;
 			}
 			return false;
@@ -4012,7 +4035,22 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[3] != null
 			&& pArg[4] != null
 			&& pArg[5] != null) {
-				tessellatorAddVertexWithUV(pArg[0], (Double) pArg[1], (Double) pArg[2], (Double) pArg[3], (Double) pArg[4], (Double) pArg[5]);
+				if (pArg.length > 9
+						&& pArg[6] != null
+						&& pArg[7] != null
+						&& pArg[8] != null
+						&& pArg[9] != null) {
+					tessellatorAddVertexWithUV(pArg[0], (Double) pArg[1], (Double) pArg[2], (Double) pArg[3], (Double) pArg[4], (Double) pArg[5], (Integer) pArg[6], (Integer) pArg[7], (Integer) pArg[8], (Integer) pArg[9]);
+				} else {
+					if (pArg.length > 8
+							&& pArg[6] != null
+							&& pArg[7] != null
+							&& pArg[8] != null) {
+						tessellatorAddVertexWithUV(pArg[0], (Double) pArg[1], (Double) pArg[2], (Double) pArg[3], (Double) pArg[4], (Double) pArg[5], (Float) pArg[6], (Float) pArg[7], (Float) pArg[8]);
+					} else {
+						tessellatorAddVertexWithUV(pArg[0], (Double) pArg[1], (Double) pArg[2], (Double) pArg[3], (Double) pArg[4], (Double) pArg[5]);
+					}
+				}
 				return true;
 			}
 			return false;
@@ -8142,52 +8180,52 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject("EntityPlayer", "field_35211_aX", "currentXP", entityplayer));
 	}
 
-	protected double entityPlayerField_71085_bR() {
-		return entityPlayerField_71085_bR(minecraftThePlayer());
+	protected double entityPlayerChasingPosZ() {
+		return entityPlayerChasingPosZ(minecraftThePlayer());
 	}
 
-	protected double entityPlayerField_71085_bR(Object entityplayer) {
-		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71085_bR", entityplayer));
+	protected double entityPlayerChasingPosZ(Object entityplayer) {
+		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71085_bR", "chasingPosZ", entityplayer));
 	}
 
-	protected double entityPlayerField_71091_bM() {
-		return entityPlayerField_71091_bM(minecraftThePlayer());
+	protected double entityPlayerPrevChasingPosX() {
+		return entityPlayerPrevChasingPosX(minecraftThePlayer());
 	}
 
-	protected double entityPlayerField_71091_bM(Object entityplayer) {
-		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71091_bM", entityplayer));
+	protected double entityPlayerPrevChasingPosX(Object entityplayer) {
+		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71091_bM", "prevChasingPosX", entityplayer));
 	}
 
-	protected double entityPlayerField_71094_bP() {
-		return entityPlayerField_71094_bP(minecraftThePlayer());
+	protected double entityPlayerChasingPosX() {
+		return entityPlayerChasingPosX(minecraftThePlayer());
 	}
 
-	protected double entityPlayerField_71094_bP(Object entityplayer) {
-		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71094_bP", entityplayer));
+	protected double entityPlayerChasingPosX(Object entityplayer) {
+		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71094_bP", "chasingPosX", entityplayer));
 	}
 
-	protected double entityPlayerField_71095_bQ() {
-		return entityPlayerField_71095_bQ(minecraftThePlayer());
+	protected double entityPlayerChasingPosY() {
+		return entityPlayerChasingPosY(minecraftThePlayer());
 	}
 
-	protected double entityPlayerField_71095_bQ(Object entityplayer) {
-		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71095_bQ", entityplayer));
+	protected double entityPlayerChasingPosY(Object entityplayer) {
+		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71095_bQ", "chasingPosY", entityplayer));
 	}
 
-	protected double entityPlayerField_71096_bN() {
-		return entityPlayerField_71096_bN(minecraftThePlayer());
+	protected double entityPlayerPrevChasingPosY() {
+		return entityPlayerPrevChasingPosY(minecraftThePlayer());
 	}
 
-	protected double entityPlayerField_71096_bN(Object entityplayer) {
-		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71096_bN", entityplayer));
+	protected double entityPlayerPrevChasingPosY(Object entityplayer) {
+		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71096_bN", "prevChasingPosY", entityplayer));
 	}
 
-	protected double entityPlayerField_71097_bO() {
-		return entityPlayerField_71097_bO(minecraftThePlayer());
+	protected double entityPlayerPrevChasingPosZ() {
+		return entityPlayerPrevChasingPosZ(minecraftThePlayer());
 	}
 
-	protected double entityPlayerField_71097_bO(Object entityplayer) {
-		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71097_bO", entityplayer));
+	protected double entityPlayerPrevChasingPosZ(Object entityplayer) {
+		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("EntityPlayer", "field_71097_bO", "prevChasingPosZ", entityplayer));
 	}
 
 	protected Object entityPlayerFoodStats() {
@@ -8574,11 +8612,11 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityGetBoundingBox() {
-		return entityGetBoundingBox(minecraftThePlayer());
+		return entityGetCollisionBoundingBox(minecraftThePlayer());
 	}
 
-	protected Object entityGetBoundingBox(Object entity) {
-		return Modchu_Reflect.invokeMethod("Entity", "func_70046_E", "getBoundingBox", entity);
+	protected Object entityGetCollisionBoundingBox(Object entity) {
+		return Modchu_Reflect.invokeMethod("Entity", "func_70046_E", Modchu_Main.getMinecraftVersion() > 187 ? "getCollisionBoundingBox" : "getBoundingBox", entity);
 	}
 
 	protected boolean entityCanBeCollidedWith() {
@@ -9518,7 +9556,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean isCtrlKeyDown() {
-		return isMac() ? Keyboard.isKeyDown(219) || Keyboard.isKeyDown(220) : Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157);
+		return !Keyboard.isCreated() ? false :
+			isMac() ? Keyboard.isKeyDown(219) || Keyboard.isKeyDown(220) : Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157);
 	}
 
 	protected boolean isIntegratedServerRunning() {
@@ -10227,7 +10266,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		Class minecraft = Modchu_Reflect.loadClass("Minecraft", -1);
 		if (minecraft != null); else minecraft = Modchu_Reflect.loadClass("net.minecraft.client.Minecraft", -1);
 		if (minecraft != null); else minecraft = Modchu_Reflect.loadClass("net.minecraft.src.Minecraft", -1);
-		return Modchu_Reflect.invokeMethod(minecraft, "func_110442_L", "getResourceManager", minecraftGetMinecraft());
+		return Modchu_Reflect.invokeMethod(minecraft, "func_110442_L", "getResourceManager", minecraftGetMinecraft(), -1);
 	}
 
 	protected long minecraftGetSystemTime() {
@@ -11616,8 +11655,20 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		Modchu_Reflect.invokeMethod("Tessellator", "func_78377_a", "addVertex", new Class[]{ double.class, double.class, double.class }, tessellator, new Object[]{ d, d2, d3 });
 	}
 
+	protected void tessellatorAddVertex(Object tessellator, double d, double d2, double d3, int i, int i1, int i2, int i3) {
+		Modchu_Reflect.invokeMethod("Tessellator", "func_181669_b", new Class[]{ int.class, int.class, int.class }, Modchu_Reflect.invokeMethod("Tessellator", "func_78377_a", "addVertex", new Class[]{ double.class, double.class, double.class }, tessellator, new Object[]{ d, d2, d3 }), new Object[]{ i, i1, i2, i3 });
+	}
+
 	protected void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5) {
 		Modchu_Reflect.invokeMethod("Tessellator", "func_78374_a", "addVertexWithUV", new Class[]{ double.class, double.class, double.class, double.class, double.class }, tessellator, new Object[]{ d, d2, d3, d4, d5 });
+	}
+
+	protected void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, float f, float f1, float f2) {
+		Modchu_Reflect.invokeMethod("WorldRenderer", "func_181663_c", new Class[]{ float.class, float.class, float.class }, Modchu_Reflect.invokeMethod("Tessellator", "func_78374_a", "addVertexWithUV", new Class[]{ double.class, double.class, double.class, double.class, double.class }, worldRendererInstance(tessellator), new Object[]{ d, d2, d3, d4, d5 }), new Object[]{ f, f1, f2 });
+	}
+
+	protected void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, int i, int i1, int i2, int i3) {
+		Modchu_Reflect.invokeMethod("WorldRenderer", "func_181669_b", new Class[]{ int.class, int.class, int.class }, Modchu_Reflect.invokeMethod("Tessellator", "func_78374_a", "addVertexWithUV", new Class[]{ double.class, double.class, double.class, double.class, double.class }, worldRendererInstance(tessellator), new Object[]{ d, d2, d3, d4, d5 }), new Object[]{ i, i1, i2, i3 });
 	}
 
 	protected void tessellatorDraw(Object tessellator) {
@@ -11626,6 +11677,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected Object tessellatorInstance() {
 		return Modchu_Reflect.getFieldObject("Tessellator", "field_78398_a", "instance");
+	}
+
+	protected Object worldRendererInstance() {
+		return Modchu_Reflect.getFieldObject("Tessellator", "getWorldRenderer", "func_178180_c");
+	}
+
+	protected Object worldRendererInstance(Object tessellator) {
+		return Modchu_Reflect.loadClass("WorldRenderer").isInstance(tessellator) ? tessellator : worldRendererInstance();
 	}
 
 	protected void tessellatorSetColorOpaque_I(int i) {
@@ -11660,8 +11719,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		Modchu_Reflect.invokeMethod("Tessellator", "func_78375_b", "setNormal", new Class[]{ float.class, float.class, float.class }, tessellator, new Object[]{ f, f2, f3 });
 	}
 
-	protected void tessellatorStartDrawing(Object tessellator, byte by) {
-		Modchu_Reflect.invokeMethod("Tessellator", "func_78371_b", "startDrawing", new Class[]{ byte.class }, tessellator, new Object[]{ by });
+	protected void tessellatorStartDrawing(Object tessellator, int i) {
+		Modchu_Reflect.invokeMethod("Tessellator", "func_78371_b", "startDrawing", new Class[]{ int.class }, tessellator, new Object[]{ i });
+	}
+
+	protected void tessellatorStartDrawing(Object tessellator, int i, Object vertexFormat) {
+		Modchu_Reflect.invokeMethod("WorldRenderer", "func_181668_a", new Class[]{ int.class, Modchu_Reflect.loadClass("VertexFormat") }, worldRendererInstance(tessellator), new Object[]{ i, vertexFormat });
 	}
 
 	protected void tessellatorStartDrawingQuads() {
@@ -11670,6 +11733,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected void tessellatorStartDrawingQuads(Object tessellator) {
 		Modchu_Reflect.invokeMethod("Tessellator", "func_78382_b", "startDrawingQuads", tessellator);
+	}
+
+	protected void tessellatorStartDrawingQuads(Object tessellator, int i, Object vertexFormat) {
+		Modchu_Reflect.invokeMethod("WorldRenderer", "func_181668_a", new Class[]{ int.class, Modchu_Reflect.loadClass("VertexFormat") }, worldRendererInstance(tessellator), new Object[]{ i, vertexFormat });
 	}
 
 	protected void texturedQuadDraw(Object texturedQuad, Object tessellator, float f) {

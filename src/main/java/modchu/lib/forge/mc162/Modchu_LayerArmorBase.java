@@ -27,6 +27,7 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 		if (master != null) master.doRenderLayer(entityLivingBase, f, f1, f2, f3, f4, f5, f6);
 	}
 
+	@Override
 	public void superDoRenderLayer(Object entityLivingBase, float f, float f1, float f2, float f3, float f4, float f5, float f6) {
 	}
 
@@ -34,15 +35,17 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 		return master != null ? master.shouldCombineTextures() : false;
 	}
 
+	@Override
 	public boolean superShouldCombineTextures() {
 		return false;
 	}
 
 	public ItemStack func_177176_a(EntityLivingBase entityLivingBase, int i) {
-		return (ItemStack) (master != null ? master.func_177176_a(entityLivingBase, i) : null);
+		return (ItemStack) (master != null ? master.getCurrentArmor(entityLivingBase, i) : null);
 	}
 
-	public ItemStack superFunc_177176_a(Object entityLivingBase, int i) {
+	@Override
+	public ItemStack superGetCurrentArmor(Object entityLivingBase, int i) {
 		return null;
 	}
 
@@ -50,6 +53,7 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 		return (ModelBase) (master != null ? master.func_177175_a(i) : null);
 	}
 
+	@Override
 	public ModelBase superFunc_177175_a(int i) {
 		return null;
 	}
@@ -58,22 +62,30 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 		return (ResourceLocation) (master != null ? master.getArmorResource(entity, itemStack, slot, type) : null);
 	}
 
+	@Override
 	public ResourceLocation superGetArmorResource(Object entity, Object itemStack, int slot, String type) {
 		return null;
 	}
 
 	protected void func_177177_a() {
-		if (master != null) master.func_177177_a();
+		if (master != null) master.initArmor();
 	}
 
-	public void superFunc_177177_a() {
+	@Override
+	public void superInitArmor() {
 	}
 
 	protected void func_177179_a(ModelBase modelBase, int i) {
 		if (master != null) master.func_177179_a(modelBase, i);
 	}
 
+	@Override
 	public void superFunc_177179_a(Object modelBase, int i) {
+	}
+
+	@Override
+	public Object superGetArmorModelHook(Object entityLivingBase, Object itemStack, int slot, Object modelBase) {
+		return modelBase;
 	}
 
 }

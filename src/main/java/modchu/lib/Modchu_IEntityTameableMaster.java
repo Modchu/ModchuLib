@@ -53,7 +53,7 @@ public interface Modchu_IEntityTameableMaster {
 	public void writeEntityToNBT(Object nbttagcompound);
 	public void setResourceLocation(Object resourceLocation);
 	public void onDeathUpdate();
-	public boolean func_142018_a(Object entityLivingBase, Object entityLivingBase2);
+	public boolean shouldAttackEntity(Object entityLivingBase, Object entityLivingBase2);
 	public Object getTeam();
 	public boolean isOnSameTeam(Object entityLivingBase);
 	public void updateAITick();
@@ -62,7 +62,7 @@ public interface Modchu_IEntityTameableMaster {
 	public int getTalkInterval();
 	public int getExperiencePoints(Object entityPlayer);
 	public void func_146082_f(Object entityPlayer);
-	public Object func_146083_cb();
+	public Object getPlayerInLove();
 	public boolean canMateWith(Object entityAnimal);
 	public int getGrowingAge();
 	public void addGrowth(int par1);
@@ -76,7 +76,7 @@ public interface Modchu_IEntityTameableMaster {
 	public void setTarget(Object entity);
 	public boolean isWithinHomeDistanceCurrentPosition();
 	public boolean isWithinHomeDistance(int par1, int par2, int par3);
-	public boolean isWithinHomeDistance(Object blockPos);
+	public boolean isWithinHomeDistanceFromPosition(Object blockPos);
 	public void setHomeArea(int par1, int par2, int par3, int par4);
 	public Object getHomePosition();
 	public float func_110174_bM();
@@ -113,13 +113,12 @@ public interface Modchu_IEntityTameableMaster {
 	public void setCurrentItemOrArmor(int par1, Object itemStack);
 	public Object getLastActiveItems();
 	public void dropEquipment(boolean par1, int par2);
-	public void addRandomArmor();
+	public void addRandomDrop();
 	public void enchantEquipment();
-	public Object onSpawnWithEgg(Object iEntityLivingData);
-	public Object onSpawnWithEgg(Object difficultyInstance, Object iEntityLivingData);
+	public Object onInitialSpawn(Object iEntityLivingData);
+	public Object onInitialSpawn(Object difficultyInstance, Object iEntityLivingData);
 	public boolean canBeSteered();
 	public String getCommandSenderName();
-	public String getName();
 	public void func_110163_bv();
 	public void setCustomNameTag(String par1Str);
 	public String getCustomNameTag();
@@ -138,7 +137,7 @@ public interface Modchu_IEntityTameableMaster {
 	public void setLeashedToEntity(Object entity, boolean par2);
 	public void updateFallState(double par1, boolean par3);
 	public boolean canBreatheUnderwater();
-	public boolean func_146066_aG();
+	public boolean canDropLoot();
 	public int decreaseAirSupply(int par1);
 	public boolean isPlayer();
 	public Random getRNG();
@@ -238,14 +237,14 @@ public interface Modchu_IEntityTameableMaster {
 	public void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object p_145780_4_);
 	public void playSound(String par1Str, float par2, float par3);
 	public boolean canTriggerWalking();
-	public Object getBoundingBox();
+	public Object getCollisionBoundingBox();
 	public void dealFireDamage(int par1);
 	public boolean isWet();
 	public boolean isInWater();
 	public boolean handleWaterMovement();
 	public String getSplashSound();
 	public boolean isInsideOfMaterial(Object material);
-	public boolean handleLavaMovement();
+	public boolean isNotColliding();
 	public void moveFlying(float par1, float par2, float par3);
 	public int getBrightnessForRender(float par1);
 	public float getBrightness(float par1);
@@ -278,7 +277,7 @@ public interface Modchu_IEntityTameableMaster {
 	public void updateRiderPosition();
 	public void mountEntity(Object entity);
 	public float getCollisionBorderSize();
-	public void setInPortal();
+	public void setInPortal(Object bockPos);
 	public int getPortalCooldown();
 	public void setVelocity(double par1, double par3, double par5);
 	public boolean isBurning();
@@ -309,15 +308,15 @@ public interface Modchu_IEntityTameableMaster {
 	public void travelToDimension(int par1);
 	public float func_145772_a(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block);
 	public boolean func_145774_a(Object explosion, Object world, int p_145774_3_, int p_145774_4_, int p_145774_5_, Object block, float p_145774_7_);
-	public boolean func_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float f);
-	public int getTeleportDirection();
+	public boolean verifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float f);
+	public Object getTeleportDirection();
 	public boolean doesEntityNotTriggerPressurePlate();
 	public void addEntityCrashInfo(Object crashReportCategory);
 	public boolean canRenderOnFire();
 	public UUID getUniqueID();
 	public boolean isPushedByWater();
 	public Object getDisplayName();
-	public void func_145781_i(int p_145781_1_);
+	public void onDataWatcherUpdate(int p_145781_1_);
 	public Object getEntityData();
 	public boolean shouldRiderSit();
 	public Object getPickedResult(Object movingObjectPosition);
@@ -352,8 +351,6 @@ public interface Modchu_IEntityTameableMaster {
 	public void func_152115_b(String par1Str);
 	public String func_146067_o(int p_146067_1_);
 	public Object func_145778_a(Object item, int p_145778_2_, float p_145778_3_);
-	public float func_180484_a(Object blockPos);
-	public boolean func_180485_d(Object blockPos);
 	public float getHealth();
 	// ~152
 	public void func_98054_a(boolean par1);

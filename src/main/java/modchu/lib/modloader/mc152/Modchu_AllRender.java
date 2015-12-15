@@ -67,7 +67,7 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 	}
 	// 180~
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+	public void superRenderOffsetLivingLabel(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 	}
 
 	public void superRenderLivingLabel(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
@@ -79,4 +79,5 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 	public Object getRenderBlocks() {
 		return null;
 	}
+
 }

@@ -28,7 +28,7 @@ public interface Modchu_IEntityTameableB {
 	public String superGetOwnerName();
 	public void superSetOwner(String par1Str);
 	public Object superGetAISit();
-	public boolean superFunc_142018_a(Object entityLivingBase, Object entityLivingBase1);
+	public boolean superShouldAttackEntity(Object entityLivingBase, Object entityLivingBase1);
 	public Object superGetTeam();
 	public boolean superIsOnSameTeam(Object entityLivingBase);
 	public void superUpdateAITick();
@@ -80,7 +80,7 @@ public interface Modchu_IEntityTameableB {
 	public Object superGetHeldItem();
 	public void superSetCurrentItemOrArmor(int par1, Object itemStack);
 	public void superDropEquipment(boolean par1, int par2);
-	public void superAddRandomArmor();
+	public void superAddRandomDrop();
 	public boolean superCanBeSteered();
 	public void superSetCustomNameTag(String par1Str);
 	public String superGetCustomNameTag();
@@ -188,13 +188,13 @@ public interface Modchu_IEntityTameableB {
 	public void superMoveEntity(double par1, double par3, double par5);
 	public void superPlaySound(String par1Str, float par2, float par3);
 	public boolean superCanTriggerWalking();
-	public Object superGetBoundingBox();
+	public Object superGetCollisionBoundingBox();
 	public void superDealFireDamage(int par1);
 	public boolean superIsWet();
 	public boolean superIsInWater();
 	public boolean superHandleWaterMovement();
 	public boolean superIsInsideOfMaterial(Object material);
-	public boolean superHandleLavaMovement();
+	public boolean superIsNotColliding();
 	public void superMoveFlying(float par1, float par2, float par3);
 	public int superGetBrightnessForRender(float par1);
 	public float superGetBrightness(float par1);
@@ -226,7 +226,7 @@ public interface Modchu_IEntityTameableB {
 	public double superGetMountedYOffset();
 	public void superMountEntity(Object entity);
 	public float superGetCollisionBorderSize();
-	public void superSetInPortal();
+	public void superSetInPortal(Object bockPos);
 	public int superGetPortalCooldown();
 	public void superSetVelocity(double par1, double par3, double par5);
 	public boolean superIsBurning();
@@ -255,13 +255,13 @@ public interface Modchu_IEntityTameableB {
 	public void superCopyLocationAndAnglesFrom(Object entity);
 	public void superCopyDataFrom(Object entity);
 	public void superTravelToDimension(int par1);
-	public int superGetTeleportDirection();
+	public Object superGetTeleportDirection();
 	public boolean superDoesEntityNotTriggerPressurePlate();
 	public void superAddEntityCrashInfo(Object crashReportCategory);
 	public boolean superCanRenderOnFire();
 	public UUID superGetUniqueID();
 	public boolean superIsPushedByWater();
-	public Object superOnSpawnWithEgg(Object difficultyInstance, Object iEntityLivingData);
+	public Object superOnInitialSpawn(Object difficultyInstance, Object iEntityLivingData);
 	public Object superFunc_130012_q();
 	public void superFunc_110196_bT();
 	public boolean superFunc_110173_bK();
@@ -314,5 +314,6 @@ public interface Modchu_IEntityTameableB {
 	public void superFunc_85029_a(Object crashReportCategory);
 	public boolean superFunc_96092_aw();
 	public float superGetHealthFloat();
+	public Object superGetHomePosition();
 
 }

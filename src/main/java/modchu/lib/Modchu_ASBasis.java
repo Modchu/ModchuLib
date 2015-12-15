@@ -967,33 +967,33 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public double entityPlayerField_71085_bR(Object entityplayer) {
-		return base.superEntityPlayerField_71085_bR(entityplayer);
+	public double entityPlayerChasingPosZ(Object entityplayer) {
+		return base.superEntityPlayerChasingPosZ(entityplayer);
 	}
 
 	@Override
-	public double entityPlayerField_71091_bM(Object entityplayer) {
-		return base.superEntityPlayerField_71091_bM(entityplayer);
+	public double entityPlayerPrevChasingPosX(Object entityplayer) {
+		return base.superEntityPlayerPrevChasingPosX(entityplayer);
 	}
 
 	@Override
-	public double entityPlayerField_71094_bP(Object entityplayer) {
-		return base.superEntityPlayerField_71094_bP(entityplayer);
+	public double entityPlayerChasingPosX(Object entityplayer) {
+		return base.superEntityPlayerChasingPosX(entityplayer);
 	}
 
 	@Override
-	public double entityPlayerField_71095_bQ(Object entityplayer) {
-		return base.superEntityPlayerField_71095_bQ(entityplayer);
+	public double entityPlayerChasingPosY(Object entityplayer) {
+		return base.superEntityPlayerChasingPosY(entityplayer);
 	}
 
 	@Override
-	public double entityPlayerField_71096_bN(Object entityplayer) {
-		return base.superEntityPlayerField_71096_bN(entityplayer);
+	public double entityPlayerPrevChasingPosY(Object entityplayer) {
+		return base.superEntityPlayerPrevChasingPosY(entityplayer);
 	}
 
 	@Override
-	public double entityPlayerField_71097_bO(Object entityplayer) {
-		return base.superEntityPlayerField_71097_bO(entityplayer);
+	public double entityPlayerPrevChasingPosZ(Object entityplayer) {
+		return base.superEntityPlayerPrevChasingPosZ(entityplayer);
 	}
 
 	@Override
@@ -1212,8 +1212,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public Object entityGetBoundingBox(Object entity) {
-		return base.superEntityGetBoundingBox(entity);
+	public Object entityGetCollisionBoundingBox(Object entity) {
+		return base.superEntityGetCollisionBoundingBox(entity);
 	}
 
 	@Override
@@ -3972,8 +3972,23 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
+	public void tessellatorAddVertex(Object tessellator, double d, double d2, double d3, int i, int i1, int i2, int i3) {
+		base.superTessellatorAddVertex(tessellator, d, d2, d3, i, i1, i2, i3);
+	}
+
+	@Override
 	public void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5) {
 		base.superTessellatorAddVertexWithUV(tessellator, d, d2, d3, d4, d5);
+	}
+
+	@Override
+	public void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, float f, float f1, float f2) {
+		base.superTessellatorAddVertexWithUV(tessellator, d, d2, d3, d4, d5, f, f1, f2);
+	}
+
+	@Override
+	public void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, int i, int i1, int i2, int i3) {
+		base.superTessellatorAddVertexWithUV(tessellator, d, d2, d3, d4, d5, i, i1, i2, i3);
 	}
 
 	@Override
@@ -4027,8 +4042,13 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public void tessellatorStartDrawing(Object tessellator, byte by) {
-		base.superTessellatorStartDrawing(tessellator, by);
+	public void tessellatorStartDrawing(Object tessellator, int i) {
+		base.superTessellatorStartDrawing(tessellator, i);
+	}
+
+	@Override
+	public void tessellatorStartDrawing(Object tessellator, int i, Object vertexFormat) {
+		base.superTessellatorStartDrawing(tessellator, i, vertexFormat);
 	}
 
 	@Override
@@ -4039,6 +4059,11 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	@Override
 	public void tessellatorStartDrawingQuads(Object tessellator) {
 		base.superTessellatorStartDrawingQuads(tessellator);
+	}
+
+	@Override
+	public void tessellatorStartDrawingQuads(Object tessellator, int i, Object vertexFormat) {
+		base.superTessellatorStartDrawingQuads(tessellator, i, vertexFormat);
 	}
 
 	@Override

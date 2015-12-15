@@ -310,10 +310,10 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public AxisAlignedBB getBoundingBox() {
-		return (AxisAlignedBB) (master != null ? master.getBoundingBox() : super.getBoundingBox());
+		return (AxisAlignedBB) (master != null ? master.getCollisionBoundingBox() : super.getBoundingBox());
 	}
 
-	public AxisAlignedBB superGetBoundingBox() {
+	public AxisAlignedBB superGetCollisionBoundingBox() {
 		return super.getBoundingBox();
 	}
 
@@ -767,11 +767,11 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void setInPortal() {
-		if (master != null) master.setInPortal();
+		if (master != null) master.setInPortal(null);
 		else super.setInPortal();
 	}
 
-	public void superSetInPortal() {
+	public void superSetInPortal(Object bockPos) {
 		super.setInPortal();
 	}
 
@@ -1081,10 +1081,10 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public int getTeleportDirection() {
-		return master != null ? master.getTeleportDirection() : super.getTeleportDirection();
+		return (Integer) (master != null ? master.getTeleportDirection() : super.getTeleportDirection());
 	}
 
-	public int superGetTeleportDirection() {
+	public Object superGetTeleportDirection() {
 		return super.getTeleportDirection();
 	}
 
@@ -1136,11 +1136,11 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void func_145781_i(int p_145781_1_) {
-		if (master != null) master.func_145781_i(p_145781_1_);
+		if (master != null) master.onDataWatcherUpdate(p_145781_1_);
 		else super.func_145781_i(p_145781_1_);
 	}
 
-	public void superFunc_145781_i(int p_145781_1_) {
+	public void superOnDataWatcherUpdate(int p_145781_1_) {
 		super.func_145781_i(p_145781_1_);
 	}
 
@@ -1285,11 +1285,11 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	protected void func_180433_a(double p_180433_1_, boolean p_180433_3_, Block block, BlockPos blockPos) {
-		if (master != null) master.func_180433_a(p_180433_1_, p_180433_3_, block, blockPos);
+		if (master != null) master.updateFallState(p_180433_1_, p_180433_3_, block, blockPos);
 		else super.func_180433_a(p_180433_1_, p_180433_3_, block, blockPos);
 	}
 
-	public void superFunc_180433_a(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
+	public void superUpdateFallState(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
 		super.func_180433_a(p_180433_1_, p_180433_3_, (Block) block, (BlockPos) blockPos);
 	}
 
@@ -1408,11 +1408,11 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void func_180426_a(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
-		if (master != null) master.func_180426_a(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
+		if (master != null) master.setPositionAndRotation2(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
 		else super.func_180426_a(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
 	}
 
-	public void superFunc_180426_a(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+	public void superSetPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 		super.func_180426_a(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
 	}
 
@@ -1436,10 +1436,10 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public String getName() {
-		return master != null ? master.getName() : super.getName();
+		return master != null ? master.getCommandSenderName() : super.getName();
 	}
 
-	public String superGetName() {
+	public String superGetCommandSenderName() {
 		return super.getName();
 	}
 
@@ -1473,10 +1473,10 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public boolean func_174816_a(Explosion explosion, World world, BlockPos blockPos, IBlockState iBlockState, float p_174816_5_) {
-		return master != null ? master.func_174816_a(explosion, world, blockPos, iBlockState, p_174816_5_) : super.func_174816_a(explosion, world, blockPos, iBlockState, p_174816_5_);
+		return master != null ? master.verifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_) : super.func_174816_a(explosion, world, blockPos, iBlockState, p_174816_5_);
 	}
 
-	public boolean superFunc_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
+	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
 		return super.func_174816_a((Explosion) explosion, (World) world, (BlockPos) blockPos, (IBlockState) iBlockState, p_174816_5_);
 	}
 
@@ -1575,19 +1575,19 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	protected HoverEvent func_174823_aP() {
-		return (HoverEvent) (master != null ? master.func_174823_aP() : super.func_174823_aP());
+		return (HoverEvent) (master != null ? master.getHoverEvent() : super.func_174823_aP());
 	}
 
-	public HoverEvent superFunc_174823_aP() {
+	public HoverEvent superGetHoverEvent() {
 		return super.func_174823_aP();
 	}
 
 	@Override
 	public boolean func_174827_a(EntityPlayerMP entityPlayerMP) {
-		return master != null ? master.func_174827_a(entityPlayerMP) : super.func_174827_a(entityPlayerMP);
+		return master != null ? master.isSpectatedByPlayer(entityPlayerMP) : super.func_174827_a(entityPlayerMP);
 	}
 
-	public boolean superFunc_174827_a(Object entityPlayerMP) {
+	public boolean superIsSpectatedByPlayer(Object entityPlayerMP) {
 		return super.func_174827_a((EntityPlayerMP) entityPlayerMP);
 	}
 
@@ -1650,10 +1650,10 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public boolean canUseCommand(int permLevel, String commandName) {
-		return master != null ? master.canUseCommand(permLevel, commandName) : super.canUseCommand(permLevel, commandName);
+		return master != null ? master.canCommandSenderUseCommand(permLevel, commandName) : super.canUseCommand(permLevel, commandName);
 	}
 
-	public boolean superCanUseCommand(int permLevel, String commandName) {
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
 		return super.canUseCommand(permLevel, commandName);
 	}
 
@@ -1714,10 +1714,10 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public CommandResultStats func_174807_aT() {
-		return (CommandResultStats) (master != null ? master.func_174807_aT() : super.func_174807_aT());
+		return (CommandResultStats) (master != null ? master.getCommandStats() : super.func_174807_aT());
 	}
 
-	public CommandResultStats superFunc_174807_aT() {
+	public CommandResultStats superGetCommandStats() {
 		return super.func_174807_aT();
 	}
 
@@ -1733,48 +1733,48 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public NBTTagCompound func_174819_aU() {
-		return (NBTTagCompound) (master != null ? master.func_174819_aU() : super.func_174819_aU());
+		return (NBTTagCompound) (master != null ? master.getNBTTagCompound() : super.func_174819_aU());
 	}
 
-	public NBTTagCompound superFunc_174819_aU() {
+	public NBTTagCompound superGetNBTTagCompound() {
 		return super.func_174819_aU();
 	}
 
 	@Override
 	public void func_174834_g(NBTTagCompound nBTTagCompound) {
-		if (master != null) master.func_174834_g(nBTTagCompound);
+		if (master != null) master.clientUpdateEntityNBT(nBTTagCompound);
 		else super.func_174834_g(nBTTagCompound);
 	}
 
-	public void superFunc_174834_g(Object nBTTagCompound) {
+	public void superClientUpdateEntityNBT(Object nBTTagCompound) {
 		super.func_174834_g((NBTTagCompound) nBTTagCompound);
 	}
 
 	@Override
 	public boolean func_174825_a(EntityPlayer entityPlayer, Vec3 vec3) {
-		return master != null ? master.func_174825_a(entityPlayer, vec3) : super.func_174825_a(entityPlayer, vec3);
+		return master != null ? master.interactAt(entityPlayer, vec3) : super.func_174825_a(entityPlayer, vec3);
 	}
 
-	public boolean superFunc_174825_a(Object entityPlayer, Object vec3) {
+	public boolean superInteractAt(Object entityPlayer, Object vec3) {
 		return super.func_174825_a((EntityPlayer) entityPlayer, (Vec3) vec3);
 	}
 
 	@Override
 	public boolean func_180427_aV() {
-		return master != null ? master.func_180427_aV() : super.func_180427_aV();
+		return master != null ? master.isImmuneToExplosions() : super.func_180427_aV();
 	}
 
-	public boolean superFunc_180427_aV() {
+	public boolean superIsImmuneToExplosions() {
 		return super.func_180427_aV();
 	}
 
 	@Override
 	protected void func_174815_a(EntityLivingBase entityLivingBase, Entity entity) {
-		if (master != null) master.func_174815_a(entityLivingBase, entity);
+		if (master != null) master.applyEnchantments(entityLivingBase, entity);
 		else super.func_174815_a(entityLivingBase, entity);
 	}
 
-	public void superFunc_174815_a(Object entityLivingBase, Object entity) {
+	public void superApplyEnchantments(Object entityLivingBase, Object entity) {
 		super.func_174815_a((EntityLivingBase) entityLivingBase, (Entity) entity);
 	}
 	// ~164
@@ -1850,10 +1850,6 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	public boolean superFunc_145771_j(double p_145771_1_, double p_145771_3_, double p_145771_5_) {
 		return false;
-	}
-
-	public String superGetCommandSenderName() {
-		return null;
 	}
 
 	public boolean superIsEntityInvulnerable() {

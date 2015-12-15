@@ -1,22 +1,15 @@
 package modchu.lib.forge.mc164;
 
 import java.util.HashMap;
-import java.util.UUID;
-
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntityTameable;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Modchu_IEntityTameable {
 
@@ -71,6 +64,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return entityId;
 	}
 
+	@Override
 	public int superGetEntityId() {
 		return entityId;
 	}
@@ -79,6 +73,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		entityId = p_145769_1_;
 	}
 
+	@Override
 	public void superSetEntityId(int p_145769_1_) {
 		entityId = p_145769_1_;
 	}
@@ -87,6 +82,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public String superGetSwimSound() {
 		return null;
 	}
@@ -141,7 +137,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	}
 
 	@Override
-	public Object superFunc_146083_cb() {
+	public Object superGetPlayerInLove() {
 		return null;
 	}
 
@@ -165,12 +161,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	}
 
 	@Override
-	public String superGetName() {
-		return null;
-	}
-
-	@Override
-	public boolean superFunc_146066_aG() {
+	public boolean superCanDropLoot() {
 		return false;
 	}
 
@@ -205,7 +196,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	}
 
 	@Override
-	public boolean superFunc_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
+	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
 		return false;
 	}
 
@@ -215,7 +206,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	}
 
 	@Override
-	public void superFunc_145781_i(int p_145781_1_) {
+	public void superOnDataWatcherUpdate(int p_145781_1_) {
 	}
 
 	@Override
@@ -261,7 +252,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	}
 
 	@Override
-	public boolean superIsWithinHomeDistance(Object blockPos) {
+	public boolean superIsWithinHomeDistanceFromPosition(Object blockPos) {
 		return false;
 	}
 
@@ -282,16 +273,6 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	@Override
 	public Object superFunc_145778_a(Object item, int p_145778_2_, float p_145778_3_) {
 		return null;
-	}
-
-	@Override
-	public float superFunc_180484_a(Object blockPos) {
-		return 0;
-	}
-
-	@Override
-	public boolean superFunc_180485_d(Object blockPos) {
-		return false;
 	}
 
 }

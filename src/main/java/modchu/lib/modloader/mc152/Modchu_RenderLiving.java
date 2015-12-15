@@ -59,7 +59,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public void doRenderLiving(EntityLiving entity, double d, double d1, double d2, float d3, float d4) {
-		doRender((Entity) entity, d, d1, d2, d3, d4);
+		doRender(entity, d, d1, d2, d3, d4);
 	}
 
 	@Override
@@ -98,6 +98,11 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	public Object getRenderManager() {
+		return master != null ? master.getRenderManager() : renderManager;
+	}
+
+	@Override
+	public Object superGetRenderManager() {
 		return renderManager;
 	}
 
@@ -278,11 +283,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public Object superFunc_177068_d() {
-		return null;
-	}
-
-	@Override
 	public void superRenderModel(Object entity, float par2, float par3, float par4, float par5, float par6, float par7) {
 		super.renderModel((EntityLiving) entity, par2, par3, par4, par5, par6, par7);
 	}
@@ -313,26 +313,26 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public boolean superFunc_177088_c(Object EntityLiving) {
+	public boolean superSetScoreTeamColor(Object EntityLiving) {
 		return false;
 	}
 
 	@Override
-	public void superFunc_180565_e() {
+	public void superUnsetScoreTeamColor() {
 	}
 
 	@Override
-	public boolean superFunc_177090_c(Object EntityLiving, float p_177090_2_) {
+	public boolean superSetDoRenderBrightness(Object EntityLiving, float p_177090_2_) {
 		return false;
 	}
 
 	@Override
-	public boolean superFunc_177092_a(Object EntityLiving, float p_177092_2_, boolean p_177092_3_) {
+	public boolean superSetBrightness(Object EntityLiving, float p_177092_2_, boolean p_177092_3_) {
 		return false;
 	}
 
 	@Override
-	public void superFunc_177091_f() {
+	public void superUnsetBrightness() {
 	}
 
 	@Override
@@ -346,7 +346,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void superFunc_177093_a(Object EntityLiving, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
+	public void superRenderLayers(Object EntityLiving, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
 	}
 
 	@Override
@@ -373,7 +373,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void superFunc_82422_c() {
+	public void superTransformHeldFull3DItemLayer() {
 	}
 
 	@Override
@@ -387,7 +387,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+	public void superRenderOffsetLivingLabel(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 	}
 
 	@Override

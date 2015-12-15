@@ -49,11 +49,11 @@ public class Modchu_LayerArmorBase extends LayerArmorBase implements Modchu_ILay
 
 	@Override
 	public ItemStack func_177176_a(EntityLivingBase entityLivingBase, int i) {
-		return (ItemStack) (master != null ? master.func_177176_a(entityLivingBase, i) : super.func_177176_a(entityLivingBase, i));
+		return (ItemStack) (master != null ? master.getCurrentArmor(entityLivingBase, i) : super.func_177176_a(entityLivingBase, i));
 	}
 
 	@Override
-	public ItemStack superFunc_177176_a(Object entityLivingBase, int i) {
+	public ItemStack superGetCurrentArmor(Object entityLivingBase, int i) {
 		return super.func_177176_a((EntityLivingBase) entityLivingBase, i);
 	}
 
@@ -79,11 +79,11 @@ public class Modchu_LayerArmorBase extends LayerArmorBase implements Modchu_ILay
 
 	@Override
 	protected void func_177177_a() {
-		if (master != null) master.func_177177_a();
+		if (master != null) master.initArmor();
 	}
 
 	@Override
-	public void superFunc_177177_a() {
+	public void superInitArmor() {
 	}
 
 	@Override
@@ -93,6 +93,11 @@ public class Modchu_LayerArmorBase extends LayerArmorBase implements Modchu_ILay
 
 	@Override
 	public void superFunc_177179_a(Object modelBase, int i) {
+	}
+
+	@Override
+	public Object superGetArmorModelHook(Object entityLivingBase, Object itemStack, int slot, Object modelBase) {
+		return modelBase;
 	}
 
 }

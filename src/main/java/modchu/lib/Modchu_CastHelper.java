@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Modchu_CastHelper {
 
 	public static String String(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof String ? (String) o : o != null ? o.toString() : null;
 	}
 
@@ -92,112 +92,112 @@ public class Modchu_CastHelper {
 	}
 
 	public static int[] IntArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof int[] ? (int[]) o : null;
 	}
 
 	public static long[] LongArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof long[] ? (long[]) o : null;
 	}
 
 	public static short[] ShortArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof short[] ? (short[]) o : null;
 	}
 
 	public static float[] FloatArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof float[] ? (float[]) o : null;
 	}
 
 	public static double[] DoubleArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof double[] ? (double[]) o : null;
 	}
 
 	public static byte[] ByteArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof byte[] ? (byte[]) o : null;
 	}
 
 	public static String[] StringArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof String[] ? (String[]) o : null;
 	}
 
 	public static boolean[] BooleanArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof boolean[] ? (boolean[]) o : null;
 	}
 
 	public static Enum[] EnumArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof Enum[] ? (Enum[]) o : null;
 	}
 
 	public static List[] ListArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof List[] ? (List[]) o : null;
 	}
 
 	public static ArrayList[] ArrayListArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof ArrayList[] ? (ArrayList[]) o : null;
 	}
 
 	public static LinkedList[] LinkedListArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof LinkedList[] ? (LinkedList[]) o : null;
 	}
 
 	public static File[] FileArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof File[] ? (File[]) o : null;
 	}
 
 	public static ConcurrentHashMap[] ConcurrentHashMapArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof ConcurrentHashMap[] ? (ConcurrentHashMap[]) o : null;
 	}
 
 	public static HashMap[] HashMapArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof HashMap[] ? (HashMap[]) o : null;
 	}
 
 	public static Map[] MapArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof Map[] ? (Map[]) o : null;
 	}
 /*
 	public static Collection[] CollectionArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof Collection[] ? (Collection[]) o : null;
 	}
 */
 	public static IntBuffer[] IntBufferArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof IntBuffer[] ? (IntBuffer[]) o : null;
 	}
 
 	public static InputStream[] InputStreamArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof InputStream[] ? (InputStream[]) o : null;
 	}
 
 	public static UUID[] UUIDArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof UUID[] ? (UUID[]) o : null;
 	}
 
 	public static BufferedImage[] BufferedImageArray(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof BufferedImage[] ? (BufferedImage[]) o : null;
 	}
 
 	public static Object[] ObjectArray(Object o) {
-		return o != null 
+		return o != null
 				&& o.getClass().isArray() ? (Object[]) o : null;
 	}
 
@@ -384,67 +384,67 @@ public class Modchu_CastHelper {
 	}
 
 	public static Enum Enum(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof Enum ? (Enum) o : null;
 	}
 
 	public static List List(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof List ? (List) o : null;
 	}
 
 	public static ArrayList ArrayList(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof ArrayList ? (ArrayList) o : null;
 	}
 
 	public static LinkedList LinkedList(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof LinkedList ? (LinkedList) o : null;
 	}
 
 	public static File File(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof File ? (File) o : null;
 	}
 
 	public static ConcurrentHashMap ConcurrentHashMap(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof ConcurrentHashMap ? (ConcurrentHashMap) o : null;
 	}
 
 	public static HashMap HashMap(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof HashMap ? (HashMap) o : null;
 	}
 
 	public static Map Map(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof Map ? (Map) o : null;
 	}
 /*
 	public static Collection Collection(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof Collection ? (Collection) o : null;
 	}
 */
 	public static IntBuffer IntBuffer(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof IntBuffer ? (IntBuffer) o : null;
 	}
 
 	public static InputStream InputStream(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof InputStream ? (InputStream) o : null;
 	}
 
 	public static UUID UUID(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof UUID ? (UUID) o : null;
 	}
 
 	public static BufferedImage BufferedImage(Object o) {
-		return o != null 
+		return o != null
 				&& o instanceof BufferedImage ? (BufferedImage) o : null;
 	}
 

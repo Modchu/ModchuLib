@@ -185,11 +185,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 
 	@Override
 	public EntityPlayer func_146083_cb() {
-		return (EntityPlayer) (master != null ? master.func_146083_cb() : super.func_146083_cb());
+		return (EntityPlayer) (master != null ? master.getPlayerInLove() : super.func_146083_cb());
 	}
 
 	@Override
-	public EntityPlayer superFunc_146083_cb() {
+	public EntityPlayer superGetPlayerInLove() {
 		return super.func_146083_cb();
 	}
 
@@ -256,11 +256,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 
 	@Override
 	protected boolean func_146066_aG() {
-		return master != null ? master.func_146066_aG() : super.func_146066_aG();
+		return master != null ? master.canDropLoot() : super.func_146066_aG();
 	}
 
 	@Override
-	public boolean superFunc_146066_aG() {
+	public boolean superCanDropLoot() {
 		return super.func_146066_aG();
 	}
 
@@ -409,12 +409,12 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 
 	@Override
 	public void func_145781_i(int p_145781_1_) {
-		if (master != null) master.func_145781_i(p_145781_1_);
+		if (master != null) master.onDataWatcherUpdate(p_145781_1_);
 		else super.func_145781_i(p_145781_1_);
 	}
 
 	@Override
-	public void superFunc_145781_i(int p_145781_1_) {
+	public void superOnDataWatcherUpdate(int p_145781_1_) {
 		super.func_145781_i(p_145781_1_);
 	}
 	// ~179
@@ -720,7 +720,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	}
 	// 180~
 	@Override
-	public boolean superFunc_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
+	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
 		return false;
 	}
 
@@ -740,18 +740,13 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	}
 
 	@Override
-	public boolean superIsWithinHomeDistance(Object blockPos) {
+	public boolean superIsWithinHomeDistanceFromPosition(Object blockPos) {
 		return false;
 	}
 
 	@Override
-	public Object superOnSpawnWithEgg(Object difficultyInstance, Object iEntityLivingData) {
-		return superOnSpawnWithEgg(iEntityLivingData);
-	}
-
-	@Override
-	public String superGetName() {
-		return superGetCommandSenderName();
+	public Object superOnInitialSpawn(Object difficultyInstance, Object iEntityLivingData) {
+		return superOnInitialSpawn(iEntityLivingData);
 	}
 
 	@Override
@@ -771,16 +766,6 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	@Override
 	public Object superFunc_145778_a(Object item, int p_145778_2_, float p_145778_3_) {
 		return super.func_145778_a((Item) item, p_145778_2_, p_145778_3_);
-	}
-
-	@Override
-	public float superFunc_180484_a(Object blockPos) {
-		return 0.0F;
-	}
-
-	@Override
-	public boolean superFunc_180485_d(Object blockPos) {
-		return false;
 	}
 
 	@Override

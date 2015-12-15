@@ -63,6 +63,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -894,32 +895,32 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public double entityPlayerField_71085_bR(Object entityplayer) {
+	public double entityPlayerChasingPosZ(Object entityplayer) {
 		return ((EntityPlayer) entityplayer).field_71085_bR;
 	}
 
 	@Override
-	public double entityPlayerField_71091_bM(Object entityplayer) {
+	public double entityPlayerPrevChasingPosX(Object entityplayer) {
 		return ((EntityPlayer) entityplayer).field_71091_bM;
 	}
 
 	@Override
-	public double entityPlayerField_71094_bP(Object entityplayer) {
+	public double entityPlayerChasingPosX(Object entityplayer) {
 		return ((EntityPlayer) entityplayer).field_71094_bP;
 	}
 
 	@Override
-	public double entityPlayerField_71095_bQ(Object entityplayer) {
+	public double entityPlayerChasingPosY(Object entityplayer) {
 		return ((EntityPlayer) entityplayer).field_71095_bQ;
 	}
 
 	@Override
-	public double entityPlayerField_71096_bN(Object entityplayer) {
+	public double entityPlayerPrevChasingPosY(Object entityplayer) {
 		return ((EntityPlayer) entityplayer).field_71096_bN;
 	}
 
 	@Override
-	public double entityPlayerField_71097_bO(Object entityplayer) {
+	public double entityPlayerPrevChasingPosZ(Object entityplayer) {
 		return ((EntityPlayer) entityplayer).field_71097_bO;
 	}
 
@@ -2396,6 +2397,16 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
+	public void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, float f, float f1, float f2) {
+		((Tessellator) tessellator).getWorldRenderer().addVertexWithUV(d, d2, d3, d4, d5);
+	}
+
+	@Override
+	public void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, int i, int i1, int i2, int i3) {
+		((Tessellator) tessellator).getWorldRenderer().addVertexWithUV(d, d2, d3, d4, d5);
+	}
+
+	@Override
 	public void tessellatorDraw(Object tessellator) {
 		((Tessellator) tessellator).draw();
 	}
@@ -2421,12 +2432,22 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void tessellatorStartDrawing(Object tessellator, byte by) {
-		((Tessellator) tessellator).getWorldRenderer().startDrawing(by);
+	public void tessellatorStartDrawing(Object tessellator, int i) {
+		((Tessellator) tessellator).getWorldRenderer().startDrawing(i);
+	}
+
+	@Override
+	public void tessellatorStartDrawing(Object tessellator, int i, Object vertexFormat) {
+		((Tessellator) tessellator).getWorldRenderer().startDrawing(i);
 	}
 
 	@Override
 	public void tessellatorStartDrawingQuads(Object tessellator) {
+		((Tessellator) tessellator).getWorldRenderer().startDrawingQuads();
+	}
+
+	@Override
+	public void tessellatorStartDrawingQuads(Object tessellator, int i, Object vertexFormat) {
 		((Tessellator) tessellator).getWorldRenderer().startDrawingQuads();
 	}
 
@@ -3295,6 +3316,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
+	public void tessellatorAddVertex(Object tessellator, double d, double d2, double d3, int i, int i1, int i2, int i3) {
+		((Tessellator) tessellator).getWorldRenderer().addVertex(d, d2, d3);
+	}
+
+	@Override
 	public double mathHelperSqrt_double(double d) {
 		return MathHelper.sqrt_double(d);
 	}
@@ -3542,7 +3568,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object entityGetBoundingBox(Object entity) {
+	public Object entityGetCollisionBoundingBox(Object entity) {
 		return ((Entity) entity).getBoundingBox();
 	}
 

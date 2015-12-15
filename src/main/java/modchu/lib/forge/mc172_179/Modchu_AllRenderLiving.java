@@ -37,15 +37,18 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		if (render != null) render.renderEquippedItems(entityliving, f);
 	}
 
+	@Override
 	protected void func_110827_b(EntityLiving entityliving, double par2, double par4, double par6, float par8, float par9) {
 		Modchu_RenderLiving render = renderMapGet(entityliving);
 		if (render != null) Modchu_AS.set(Modchu_AS.renderLivingFunc_110827_b, render, entityliving, par2, par4, par6, par8, par9);
 	}
 
+	@Override
 	public void superRenderLeashedToEntityRope(Object entityLiving, double par2, double par4, double par6, float par8, float par9) {
 		super.func_110827_b((EntityLiving) entityLiving, par2, par4, par6, par8, par9);
 	}
 
+	@Override
 	protected boolean func_110813_b(EntityLivingBase entityLivingBase) {
 		Modchu_RenderLiving render = renderMapGet(entityLivingBase);
 		if (render != null) return Modchu_AS.getBoolean(Modchu_AS.renderLivingFunc_110813_b, render, entityLivingBase);
@@ -77,10 +80,12 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		}
 	}
 
+	@Override
 	public void superDoRenderLiving(Object entityLiving, double d, double d1, double d2, float d3, float d4) {
 		super.doRender((EntityLiving) entityLiving, d, d1, d2, d3, d4);
 	}
 
+	@Override
 	public void superDoRender(Object entity, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender((Entity)entity, par2, par4, par6, par8, par9);
 	}
@@ -94,7 +99,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		Modchu_RenderLiving render = renderMapGet(entity);
-		if (render != null) return (ResourceLocation) render.getEntityTexture(entity);
+		if (render != null) return render.getEntityTexture(entity);
 		return null;
 	}
 
@@ -105,6 +110,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		else super.renderModel(entityLivingBase, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
 	}
 
+	@Override
 	public void superRenderModel(Object entityLivingBase, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
 		super.renderModel((EntityLivingBase) entityLivingBase, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
 	}
@@ -116,6 +122,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		else super.renderLivingAt(entityLivingBase, p_77039_2_, p_77039_4_, p_77039_6_);
 	}
 
+	@Override
 	public void superRenderLivingAt(Object entityLivingBase, double p_77039_2_, double p_77039_4_, double p_77039_6_) {
 		super.renderLivingAt((EntityLivingBase) entityLivingBase, p_77039_2_, p_77039_4_, p_77039_6_);
 	}
@@ -127,6 +134,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		else super.rotateCorpse(entityLivingBase, p_77043_2_, p_77043_3_, p_77043_4_);
 	}
 
+	@Override
 	public void superRotateCorpse(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_) {
 		super.rotateCorpse((EntityLivingBase) entityLivingBase, p_77043_2_, p_77043_3_, p_77043_4_);
 	}
@@ -137,6 +145,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		return render != null ? render.handleRotationFloat(entityLivingBase, p_77044_2_) : super.handleRotationFloat(entityLivingBase, p_77044_2_);
 	}
 
+	@Override
 	public float superHandleRotationFloat(Object entityLivingBase, float p_77044_2_) {
 		return super.handleRotationFloat((EntityLivingBase) entityLivingBase, p_77044_2_);
 	}
@@ -147,6 +156,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		return render != null ? render.getDeathMaxRotation(entityLivingBase) : super.getDeathMaxRotation(entityLivingBase);
 	}
 
+	@Override
 	public float superGetDeathMaxRotation(Object entityLivingBase) {
 		return super.getDeathMaxRotation((EntityLivingBase) entityLivingBase);
 	}
@@ -157,6 +167,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		return render != null ? render.getColorMultiplier(entityLivingBase, p_77030_2_, p_77030_3_) : super.getColorMultiplier(entityLivingBase, p_77030_2_, p_77030_3_);
 	}
 
+	@Override
 	public int superGetColorMultiplier(Object entityLivingBase, float p_77030_2_, float p_77030_3_) {
 		return super.getColorMultiplier((EntityLivingBase) entityLivingBase, p_77030_2_, p_77030_3_);
 	}
@@ -168,6 +179,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		else super.passSpecialRender(entityLivingBase, p_77033_2_, p_77033_4_, p_77033_6_);
 	}
 
+	@Override
 	public void superPassSpecialRender(Object entityLivingBase, double p_77033_2_, double p_77033_4_, double p_77033_6_) {
 		super.passSpecialRender((EntityLivingBase) entityLivingBase, p_77033_2_, p_77033_4_, p_77033_6_);
 	}
@@ -204,6 +216,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		return false;
 	}
 
+	@Override
 	public boolean superCanRenderName(Object entityLiving) {
 		return false;
 	}
@@ -212,6 +225,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		return false;
 	}
 
+	@Override
 	public boolean superAddLayer(Object layerRenderer) {
 		return false;
 	}
@@ -224,6 +238,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		return false;
 	}
 
+	@Override
 	public boolean superRemoveLayer(Object layerRenderer) {
 		return false;
 	}
@@ -236,6 +251,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		return 0.0F;
 	}
 
+	@Override
 	public float superInterpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_) {
 		return 0.0F;
 	}
@@ -244,52 +260,58 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		return 0.0F;
 	}
 
-	public void func_82422_c() {
+	public void transformHeldFull3DItemLayer() {
 	}
 
-	public void superFunc_82422_c() {
+	@Override
+	public void superTransformHeldFull3DItemLayer() {
 	}
 
 	public void func_82422_c(EntityLiving entityLiving) {
 	}
 
-	protected boolean func_177088_c(EntityLivingBase entityLivingBase) {
+	protected boolean setScoreTeamColor(EntityLivingBase entityLivingBase) {
 		return false;
 	}
 
-	public boolean superFunc_177088_c(Object entityLivingBase) {
+	@Override
+	public boolean superSetScoreTeamColor(Object entityLivingBase) {
 		return false;
 	}
 
-	protected void func_180565_e() {
+	protected void unsetScoreTeamColor() {
 	}
 
-	public void superFunc_180565_e() {
+	@Override
+	public void superUnsetScoreTeamColor() {
 	}
 
 	protected void func_180565_e(EntityLiving entityLiving) {
 	}
 
-	protected boolean func_177090_c(EntityLivingBase entityLivingBase, float p_177090_2_) {
+	protected boolean setDoRenderBrightness(EntityLivingBase entityLivingBase, float p_177090_2_) {
 		return false;
 	}
 
-	public boolean superFunc_177090_c(Object entityLivingBase, float p_177090_2_) {
+	@Override
+	public boolean superSetDoRenderBrightness(Object entityLivingBase, float p_177090_2_) {
 		return false;
 	}
 
-	protected boolean func_177092_a(EntityLivingBase entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
+	protected boolean setBrightness(EntityLivingBase entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
 		return false;
 	}
 
-	public boolean superFunc_177092_a(Object entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
+	@Override
+	public boolean superSetBrightness(Object entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
 		return false;
 	}
 
-	protected void func_177091_f() {
+	protected void unsetBrightness() {
 	}
 
-	public void superFunc_177091_f() {
+	@Override
+	public void superUnsetBrightness() {
 	}
 
 	protected void func_177091_f(EntityLivingBase entityLivingBase) {
@@ -299,19 +321,22 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		return 0.0F;
 	}
 
+	@Override
 	public float superGetSwingProgress(Object entityLivingBase, float p_77040_2_) {
 		return 0.0F;
 	}
 
-	protected void func_177093_a(EntityLivingBase entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
+	protected void renderLayers(EntityLivingBase entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
 	}
 
-	public void superFunc_177093_a(Object entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
+	@Override
+	public void superRenderLayers(Object entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
 	}
 
 	public void setRenderOutlines(boolean p_177086_1_) {
 	}
 
+	@Override
 	public void superSetRenderOutlines(boolean p_177086_1_) {
 	}
 
@@ -321,6 +346,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	public void renderName(Entity entity, double x, double y, double z) {
 	}
 
+	@Override
 	public void superRenderName(Object entity, double x, double y, double z) {
 	}
 

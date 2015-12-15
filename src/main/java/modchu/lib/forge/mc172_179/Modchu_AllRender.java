@@ -7,11 +7,9 @@ import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IAllRender;
 import modchu.lib.Modchu_Main;
-import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 public class Modchu_AllRender extends Render implements Modchu_IAllRender {
@@ -66,6 +64,7 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 		else super.bindEntityTexture(entity);
 	}
 
+	@Override
 	public boolean superBindEntityTexture(Object entity) {
 		super.bindEntityTexture((Entity) entity);
 		return true;
@@ -78,6 +77,7 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 		else super.doRenderShadowAndFire(entity, p_76979_2_, p_76979_4_, p_76979_6_, p_76979_8_, p_76979_9_);
 	}
 
+	@Override
 	public void superDoRenderShadowAndFire(Object entity, double p_76979_2_, double p_76979_4_, double p_76979_6_, float p_76979_8_, float p_76979_9_) {
 		super.doRenderShadowAndFire((Entity) entity, p_76979_2_, p_76979_4_, p_76979_6_, p_76979_8_, p_76979_9_);
 	}
@@ -93,16 +93,20 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 		super.func_147906_a((Entity) entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
 	}
 	// 180~
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+	@Override
+	public void superRenderOffsetLivingLabel(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 	}
 
+	@Override
 	public void superRenderLivingLabel(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 	}
 
+	@Override
 	public void superRenderName(Object entity, double x, double y, double z) {
 	}
 	// ~179
 	public Object getRenderBlocks() {
 		return null;
 	}
+
 }

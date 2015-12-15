@@ -2274,10 +2274,10 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public AxisAlignedBB getBoundingBox() {
-		return (AxisAlignedBB) (master != null ? master.getBoundingBox() : super.getBoundingBox());
+		return (AxisAlignedBB) (master != null ? master.getCollisionBoundingBox() : super.getBoundingBox());
 	}
 
-	public AxisAlignedBB supergetBoundingBox() {
+	public AxisAlignedBB supergetCollisionBoundingBox() {
 		return super.getBoundingBox();
 	}
 
@@ -2637,11 +2637,11 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public void setInPortal() {
-		if (master != null) master.setInPortal();
+		if (master != null) master.setInPortal(null);
 		else super.setInPortal();
 	}
 
-	public void supersetInPortal() {
+	public void supersetInPortal(Object bockPos) {
 		super.setInPortal();
 	}
 
@@ -2909,10 +2909,10 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public int getTeleportDirection() {
-		return master != null ? master.getTeleportDirection() : super.getTeleportDirection();
+		return (Integer) (master != null ? master.getTeleportDirection() : super.getTeleportDirection());
 	}
 
-	public int supergetTeleportDirection() {
+	public Object supergetTeleportDirection() {
 		return super.getTeleportDirection();
 	}
 
@@ -3468,7 +3468,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 	}
 
 	@Override
-	public void superaddRandomArmor() {
+	public void superaddRandomDrop() {
 	}
 
 	@Override

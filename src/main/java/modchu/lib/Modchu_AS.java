@@ -1789,57 +1789,57 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected double entityPlayerField_71085_bR(Object entityplayer) {
-		return master != null ? master.entityPlayerField_71085_bR(entityplayer) : super.entityPlayerField_71085_bR(entityplayer);
+	protected double entityPlayerChasingPosZ(Object entityplayer) {
+		return master != null ? master.entityPlayerChasingPosZ(entityplayer) : super.entityPlayerChasingPosZ(entityplayer);
 	}
 
-	public double superEntityPlayerField_71085_bR(Object entityplayer) {
-		return super.entityPlayerField_71085_bR(entityplayer);
-	}
-
-	@Override
-	protected double entityPlayerField_71091_bM(Object entityplayer) {
-		return master != null ? master.entityPlayerField_71091_bM(entityplayer) : super.entityPlayerField_71091_bM(entityplayer);
-	}
-
-	public double superEntityPlayerField_71091_bM(Object entityplayer) {
-		return super.entityPlayerField_71091_bM(entityplayer);
+	public double superEntityPlayerChasingPosZ(Object entityplayer) {
+		return super.entityPlayerChasingPosZ(entityplayer);
 	}
 
 	@Override
-	protected double entityPlayerField_71094_bP(Object entityplayer) {
-		return master != null ? master.entityPlayerField_71094_bP(entityplayer) : super.entityPlayerField_71094_bP(entityplayer);
+	protected double entityPlayerPrevChasingPosX(Object entityplayer) {
+		return master != null ? master.entityPlayerPrevChasingPosX(entityplayer) : super.entityPlayerPrevChasingPosX(entityplayer);
 	}
 
-	public double superEntityPlayerField_71094_bP(Object entityplayer) {
-		return super.entityPlayerField_71094_bP(entityplayer);
-	}
-
-	@Override
-	protected double entityPlayerField_71095_bQ(Object entityplayer) {
-		return master != null ? master.entityPlayerField_71095_bQ(entityplayer) : super.entityPlayerField_71095_bQ(entityplayer);
-	}
-
-	public double superEntityPlayerField_71095_bQ(Object entityplayer) {
-		return super.entityPlayerField_71095_bQ(entityplayer);
+	public double superEntityPlayerPrevChasingPosX(Object entityplayer) {
+		return super.entityPlayerPrevChasingPosX(entityplayer);
 	}
 
 	@Override
-	protected double entityPlayerField_71096_bN(Object entityplayer) {
-		return master != null ? master.entityPlayerField_71096_bN(entityplayer) : super.entityPlayerField_71096_bN(entityplayer);
+	protected double entityPlayerChasingPosX(Object entityplayer) {
+		return master != null ? master.entityPlayerChasingPosX(entityplayer) : super.entityPlayerChasingPosX(entityplayer);
 	}
 
-	public double superEntityPlayerField_71096_bN(Object entityplayer) {
-		return super.entityPlayerField_71096_bN(entityplayer);
+	public double superEntityPlayerChasingPosX(Object entityplayer) {
+		return super.entityPlayerChasingPosX(entityplayer);
 	}
 
 	@Override
-	protected double entityPlayerField_71097_bO(Object entityplayer) {
-		return master != null ? master.entityPlayerField_71097_bO(entityplayer) : super.entityPlayerField_71097_bO(entityplayer);
+	protected double entityPlayerChasingPosY(Object entityplayer) {
+		return master != null ? master.entityPlayerChasingPosY(entityplayer) : super.entityPlayerChasingPosY(entityplayer);
 	}
 
-	public double superEntityPlayerField_71097_bO(Object entityplayer) {
-		return super.entityPlayerField_71097_bO(entityplayer);
+	public double superEntityPlayerChasingPosY(Object entityplayer) {
+		return super.entityPlayerChasingPosY(entityplayer);
+	}
+
+	@Override
+	protected double entityPlayerPrevChasingPosY(Object entityplayer) {
+		return master != null ? master.entityPlayerPrevChasingPosY(entityplayer) : super.entityPlayerPrevChasingPosY(entityplayer);
+	}
+
+	public double superEntityPlayerPrevChasingPosY(Object entityplayer) {
+		return super.entityPlayerPrevChasingPosY(entityplayer);
+	}
+
+	@Override
+	protected double entityPlayerPrevChasingPosZ(Object entityplayer) {
+		return master != null ? master.entityPlayerPrevChasingPosZ(entityplayer) : super.entityPlayerPrevChasingPosZ(entityplayer);
+	}
+
+	public double superEntityPlayerPrevChasingPosZ(Object entityplayer) {
+		return super.entityPlayerPrevChasingPosZ(entityplayer);
 	}
 
 	@Override
@@ -2251,12 +2251,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object entityGetBoundingBox(Object entity) {
-		return master != null ? master.entityGetBoundingBox(entity) : super.entityGetBoundingBox(entity);
+	protected Object entityGetCollisionBoundingBox(Object entity) {
+		return master != null ? master.entityGetCollisionBoundingBox(entity) : super.entityGetCollisionBoundingBox(entity);
 	}
 
-	public Object superEntityGetBoundingBox(Object entity) {
-		return super.entityGetBoundingBox(entity);
+	public Object superEntityGetCollisionBoundingBox(Object entity) {
+		return super.entityGetCollisionBoundingBox(entity);
 	}
 
 	@Override
@@ -7386,6 +7386,10 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 		super.tessellatorAddVertex(tessellator, d, d2, d3);
 	}
 
+	public void superTessellatorAddVertex(Object tessellator, double d, double d2, double d3, int i, int i1, int i2, int i3) {
+		super.tessellatorAddVertex(tessellator, d, d2, d3, i, i1, i2, i3);
+	}
+
 	@Override
 	protected void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5) {
 		if (master != null) master.tessellatorAddVertexWithUV(tessellator, d, d2, d3, d4, d5);
@@ -7394,6 +7398,26 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	public void superTessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5) {
 		super.tessellatorAddVertexWithUV(tessellator, d, d2, d3, d4, d5);
+	}
+
+	@Override
+	protected void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, float f, float f1, float f2) {
+		if (master != null) master.tessellatorAddVertexWithUV(tessellator, d, d2, d3, d4, d5, f, f1, f2);
+		else super.tessellatorAddVertexWithUV(tessellator, d, d2, d3, d4, d5, f, f1, f2);
+	}
+
+	public void superTessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, float f, float f1, float f2) {
+		super.tessellatorAddVertexWithUV(tessellator, d, d2, d3, d4, d5, f, f1, f2);
+	}
+
+	@Override
+	protected void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, int i, int i1, int i2, int i3) {
+		if (master != null) master.tessellatorAddVertexWithUV(tessellator, d, d2, d3, d4, d5, i, i1, i2, i3);
+		else super.tessellatorAddVertexWithUV(tessellator, d, d2, d3, d4, d5, i, i1, i2, i3);
+	}
+
+	public void superTessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, int i, int i1, int i2, int i3) {
+		super.tessellatorAddVertexWithUV(tessellator, d, d2, d3, d4, d5, i, i1, i2, i3);
 	}
 
 	@Override
@@ -7496,13 +7520,23 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void tessellatorStartDrawing(Object tessellator, byte by) {
-		if (master != null) master.tessellatorStartDrawing(tessellator, by);
-		else super.tessellatorStartDrawing(tessellator, by);
+	protected void tessellatorStartDrawing(Object tessellator, int i) {
+		if (master != null) master.tessellatorStartDrawing(tessellator, i);
+		else super.tessellatorStartDrawing(tessellator, i);
 	}
 
-	public void superTessellatorStartDrawing(Object tessellator, byte by) {
-		super.tessellatorStartDrawing(tessellator, by);
+	public void superTessellatorStartDrawing(Object tessellator, int i) {
+		super.tessellatorStartDrawing(tessellator, i);
+	}
+
+	@Override
+	protected void tessellatorStartDrawing(Object tessellator, int i, Object vertexFormat) {
+		if (master != null) master.tessellatorStartDrawing(tessellator, i, vertexFormat);
+		else super.tessellatorStartDrawing(tessellator, i, vertexFormat);
+	}
+
+	public void superTessellatorStartDrawing(Object tessellator, int i, Object vertexFormat) {
+		super.tessellatorStartDrawing(tessellator, i, vertexFormat);
 	}
 
 	@Override
@@ -7523,6 +7557,16 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	public void superTessellatorStartDrawingQuads(Object tessellator) {
 		super.tessellatorStartDrawingQuads(tessellator);
+	}
+
+	@Override
+	protected void tessellatorStartDrawingQuads(Object tessellator, int i, Object vertexFormat) {
+		if (master != null) master.tessellatorStartDrawingQuads(tessellator, i, vertexFormat);
+		else super.tessellatorStartDrawingQuads(tessellator, i, vertexFormat);
+	}
+
+	public void superTessellatorStartDrawingQuads(Object tessellator, int i, Object vertexFormat) {
+		super.tessellatorStartDrawingQuads(tessellator, i, vertexFormat);
 	}
 
 	@Override

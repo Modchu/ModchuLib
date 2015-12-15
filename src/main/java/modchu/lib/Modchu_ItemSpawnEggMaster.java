@@ -1,5 +1,6 @@
 package modchu.lib;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -136,7 +137,14 @@ public class Modchu_ItemSpawnEggMaster extends Modchu_ItemMasterBasis {
 			Modchu_AS.set(Modchu_AS.entityLivingBaseRenderYawOffset, entity, rotationYaw);
 			int version = Modchu_Main.getMinecraftVersion();
 			if (version > 179) {
-				Modchu_AS.set("EntityLiving", "func_180482_a", new Class[]{ Modchu_Reflect.loadClass("DifficultyInstance"), Modchu_Reflect.loadClass("IEntityLivingData") }, entity, new Object[]{ Modchu_AS.get("World", "getDifficultyForLocation", new Class[]{ Modchu_Reflect.loadClass("BlockPos") }, world, new Object[]{ Modchu_AS.get(Modchu_AS.newBlockPos, Modchu_AS.getDouble(Modchu_AS.entityPosX, entity), Modchu_AS.getDouble(Modchu_AS.entityPosY, entity), Modchu_AS.getDouble(Modchu_AS.entityPosZ, entity)) }), null });
+				Object blockPos = Modchu_AS.get(Modchu_AS.newBlockPos, Modchu_AS.getDouble(Modchu_AS.entityPosX, entity), Modchu_AS.getDouble(Modchu_AS.entityPosY, entity), Modchu_AS.getDouble(Modchu_AS.entityPosZ, entity));
+				//Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster spawnCreature blockPos="+blockPos);
+				Object difficultyForLocation = Modchu_AS.get("World", "getDifficultyForLocation", new Class[]{ Modchu_Reflect.loadClass("BlockPos") }, world, new Object[]{ blockPos });
+				//Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster spawnCreature difficultyForLocation="+difficultyForLocation);
+				//Method method = Modchu_Reflect.getMethod("EntityLiving", "func_180482_a", version > 180 ? "onInitialSpawn" : "func_180482_a", new Class[]{ Modchu_Reflect.loadClass("DifficultyInstance"), Modchu_Reflect.loadClass("IEntityLivingData") });
+				//Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster spawnCreature method="+method);
+				//Modchu_Reflect.invoke(method, entity, new Object[]{ difficultyForLocation, null });
+				Modchu_AS.get("EntityLiving", version > 180 ? "onInitialSpawn" : "func_180482_a", new Class[]{ Modchu_Reflect.loadClass("DifficultyInstance"), Modchu_Reflect.loadClass("IEntityLivingData") }, entity, new Object[]{ difficultyForLocation, null });
 			} else if (version > 159) {
 				Modchu_AS.set("EntityLiving", "onSpawnWithEgg", new Class[]{ Modchu_Reflect.loadClass(version > 169 ? "IEntityLivingData" : "EntityLivingData") }, entity, new Object[]{ null });
 			}

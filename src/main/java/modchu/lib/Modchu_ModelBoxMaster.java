@@ -30,6 +30,9 @@ public class Modchu_ModelBoxMaster extends Modchu_ModelBoxMasterBasis {
 		//Modchu_Debug.mDebug("Modchu_ModelBoxMaster pW="+pW+" pH="+pH+" pD="+pD);
 		//Modchu_Debug.mDebug("Modchu_ModelBoxMaster pSize="+pSize);
 		//Modchu_Debug.mDebug("Modchu_ModelBoxMaster renderer="+renderer);
+		//Modchu_Debug.mDebug("Modchu_ModelBoxMaster this="+this);
+		//try {
+		//Modchu_Debug.mDebug("Modchu_ModelBoxMaster test="+test);
 		renderer = Modchu_Main.getModchuCharacteristicObjectMaster(renderer);
 		posX1 = pX;
 		posY1 = pY;
@@ -124,6 +127,13 @@ public class Modchu_ModelBoxMaster extends Modchu_ModelBoxMasterBasis {
 				quadList[li].setInvertNormal(b);
 			}
 		}
+/*
+		} catch (Error e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+*/
 	}
 
 	@Override

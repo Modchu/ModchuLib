@@ -2231,10 +2231,10 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public AxisAlignedBB getBoundingBox() {
-		return (AxisAlignedBB) (master != null ? master.getBoundingBox() : super.getBoundingBox());
+		return (AxisAlignedBB) (master != null ? master.getCollisionBoundingBox() : super.getBoundingBox());
 	}
 
-	public AxisAlignedBB superGetBoundingBox() {
+	public AxisAlignedBB superGetCollisionBoundingBox() {
 		return super.getBoundingBox();
 	}
 
@@ -2585,11 +2585,11 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void setInPortal() {
-		if (master != null) master.setInPortal();
+		if (master != null) master.setInPortal(null);
 		else super.setInPortal();
 	}
 
-	public void superSetInPortal() {
+	public void superSetInPortal(Object bockPos) {
 		super.setInPortal();
 	}
 
@@ -2857,10 +2857,10 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public int getTeleportDirection() {
-		return master != null ? master.getTeleportDirection() : super.getTeleportDirection();
+		return (Integer) (master != null ? master.getTeleportDirection() : super.getTeleportDirection());
 	}
 
-	public int superGetTeleportDirection() {
+	public Object superGetTeleportDirection() {
 		return super.getTeleportDirection();
 	}
 
@@ -2997,16 +2997,11 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superFunc_180426_a(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+	public void superSetPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 	}
 
 	@Override
 	public void superAddChatMessage(Object iChatComponent) {
-	}
-
-	@Override
-	public boolean superCanUseCommand(int permLevel, String commandName) {
-		return super.canCommandSenderUseCommand(permLevel, commandName);
 	}
 
 	@Override
@@ -3157,7 +3152,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean superFunc_175148_a(Object enumPlayerModelParts) {
+	public boolean superIsWearing(Object enumPlayerModelParts) {
 		return false;
 	}
 
@@ -3185,11 +3180,11 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superFunc_180433_a(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
+	public void superUpdateFallState(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
 	}
 
 	@Override
-	public boolean superFunc_146066_aG() {
+	public boolean superCanDropLoot() {
 		return false;
 	}
 
@@ -3199,15 +3194,15 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superFunc_175135_B() {
+	public void superUpdatePotionMetadata() {
 	}
 
 	@Override
-	public void superFunc_175133_bi() {
+	public void superResetPotionEffectMetadata() {
 	}
 
 	@Override
-	public void superAddRandomArmor() {
+	public void superAddRandomDrop() {
 	}
 
 	@Override
@@ -3216,12 +3211,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public float superFunc_175134_bD() {
+	public float superGetJumpUpwardsMotion() {
 		return 0.0F;
 	}
 
 	@Override
-	public void superFunc_180466_bG() {
+	public void superHandleJumpLava() {
 	}
 
 	@Override
@@ -3230,15 +3225,15 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superFunc_152111_bt() {
+	public void superSendEnterCombat() {
 	}
 
 	@Override
-	public void superFunc_152112_bu() {
+	public void superSendEndCombat() {
 	}
 
 	@Override
-	public void superFunc_175136_bO() {
+	public void superMarkPotionsDirty() {
 	}
 
 	@Override
@@ -3326,7 +3321,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean superFunc_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
+	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
 		return false;
 	}
 
@@ -3359,7 +3354,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superFunc_145781_i(int p_145781_1_) {
+	public void superOnDataWatcherUpdate(int p_145781_1_) {
 	}
 
 	@Override
@@ -3368,12 +3363,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public Object superFunc_174823_aP() {
+	public Object superGetHoverEvent() {
 		return null;
 	}
 
 	@Override
-	public boolean superFunc_174827_a(Object entityPlayerMP) {
+	public boolean superIsSpectatedByPlayer(Object entityPlayerMP) {
 		return false;
 	}
 
@@ -3410,7 +3405,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public Object superFunc_174807_aT() {
+	public Object superGetCommandStats() {
 		return null;
 	}
 
@@ -3419,26 +3414,26 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public Object superFunc_174819_aU() {
+	public Object superGetNBTTagCompound() {
 		return null;
 	}
 
 	@Override
-	public void superFunc_174834_g(Object nBTTagCompound) {
+	public void superClientUpdateEntityNBT(Object nBTTagCompound) {
 	}
 
 	@Override
-	public boolean superFunc_174825_a(Object entityPlayer, Object vec3) {
+	public boolean superInteractAt(Object entityPlayer, Object vec3) {
 		return false;
 	}
 
 	@Override
-	public boolean superFunc_180427_aV() {
+	public boolean superIsImmuneToExplosions() {
 		return false;
 	}
 
 	@Override
-	public void superFunc_174815_a(Object entityLivingBase, Object entity) {
+	public void superApplyEnchantments(Object entityLivingBase, Object entity) {
 	}
 
 	@Override
@@ -3535,11 +3530,6 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	@Override
 	public boolean superShouldDismountInWater(Object entity) {
 		return false;
-	}
-
-	@Override
-	public String superGetName() {
-		return null;
 	}
 
 	@Override

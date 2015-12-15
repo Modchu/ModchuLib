@@ -1316,8 +1316,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public Object getBoundingBox() {
-		return base.superGetBoundingBox();
+	public Object getCollisionBoundingBox() {
+		return base.superGetCollisionBoundingBox();
 	}
 
 	@Override
@@ -1506,8 +1506,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void setInPortal() {
-		base.superSetInPortal();
+	public void setInPortal(Object bockPos) {
+		base.superSetInPortal(bockPos);
 	}
 
 	@Override
@@ -1636,7 +1636,7 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public int getTeleportDirection() {
+	public Object getTeleportDirection() {
 		return base.superGetTeleportDirection();
 	}
 
@@ -1811,8 +1811,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public boolean func_146066_aG() {
-		return base.superFunc_146066_aG();
+	public boolean canDropLoot() {
+		return base.superCanDropLoot();
 	}
 
 	@Override
@@ -1861,8 +1861,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void func_145781_i(int p_145781_1_) {
-		base.superFunc_145781_i(p_145781_1_);
+	public void onDataWatcherUpdate(int p_145781_1_) {
+		base.superOnDataWatcherUpdate(p_145781_1_);
 	}
 	// 179~
 	@Override
@@ -1881,13 +1881,13 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void func_152111_bt() {
-		base.superFunc_152111_bt();
+	public void sendEnterCombat() {
+		base.superSendEnterCombat();
 	}
 
 	@Override
-	public void func_152112_bu() {
-		base.superFunc_152112_bu();
+	public void sendEndCombat() {
+		base.superSendEndCombat();
 	}
 
 	@Override
@@ -1896,8 +1896,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void func_175159_q() {
-		base.superFunc_175159_q();
+	public void closeScreenAndDropStack() {
+		base.superCloseScreenAndDropStack();
 	}
 
 	@Override
@@ -1923,11 +1923,6 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	@Override
 	public String getClientBrand() {
 		return base.superGetClientBrand();
-	}
-
-	@Override
-	public boolean canUseCommand(int permLevel, String commandName) {
-		return base.superCanUseCommand(permLevel, commandName);
 	}
 
 	@Override
@@ -2071,8 +2066,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public boolean func_175148_a(Object enumPlayerModelParts) {
-		return base.superFunc_175148_a(enumPlayerModelParts);
+	public boolean isWearing(Object enumPlayerModelParts) {
+		return base.superIsWearing(enumPlayerModelParts);
 	}
 
 	@Override
@@ -2106,8 +2101,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void func_180433_a(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
-		base.superFunc_180433_a(p_180433_1_, p_180433_3_, block, blockPos);
+	public void updateFallState(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
+		base.superUpdateFallState(p_180433_1_, p_180433_3_, block, blockPos);
 	}
 
 	@Override
@@ -2116,18 +2111,18 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void func_175135_B() {
-		base.superFunc_175135_B();
+	public void updatePotionMetadata() {
+		base.superUpdatePotionMetadata();
 	}
 
 	@Override
-	public void func_175133_bi() {
-		base.superFunc_175133_bi();
+	public void resetPotionEffectMetadata() {
+		base.superResetPotionEffectMetadata();
 	}
 
 	@Override
-	public void addRandomArmor() {
-		base.superAddRandomArmor();
+	public void addRandomDrop() {
+		base.superAddRandomDrop();
 	}
 
 	@Override
@@ -2136,23 +2131,23 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public float func_175134_bD() {
-		return base.superFunc_175134_bD();
+	public float getJumpUpwardsMotion() {
+		return base.superGetJumpUpwardsMotion();
 	}
 
 	@Override
-	public void func_180466_bG() {
-		base.superFunc_180466_bG();
+	public void handleJumpLava() {
+		base.superHandleJumpLava();
 	}
 
 	@Override
-	public void func_180426_a(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
-		base.superFunc_180426_a(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
+	public void setPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+		base.superSetPositionAndRotation2(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
 	}
 
 	@Override
-	public void func_175136_bO() {
-		base.superFunc_175136_bO();
+	public void markPotionsDirty() {
+		base.superMarkPotionsDirty();
 	}
 
 	@Override
@@ -2226,8 +2221,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public boolean func_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
-		return base.superFunc_174816_a(explosion, world, blockPos, iBlockState, p_174816_5_);
+	public boolean verifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
+		return base.superVerifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_);
 	}
 
 	@Override
@@ -2266,13 +2261,13 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public Object func_174823_aP() {
-		return base.superFunc_174823_aP();
+	public Object getHoverEvent() {
+		return base.superGetHoverEvent();
 	}
 
 	@Override
-	public boolean func_174827_a(Object entityPlayerMP) {
-		return base.superFunc_174827_a(entityPlayerMP);
+	public boolean isSpectatedByPlayer(Object entityPlayerMP) {
+		return base.superIsSpectatedByPlayer(entityPlayerMP);
 	}
 
 	@Override
@@ -2311,8 +2306,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public Object func_174807_aT() {
-		return base.superFunc_174807_aT();
+	public Object getCommandStats() {
+		return base.superGetCommandStats();
 	}
 
 	@Override
@@ -2321,28 +2316,28 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public Object func_174819_aU() {
-		return base.superFunc_174819_aU();
+	public Object getNBTTagCompound() {
+		return base.superGetNBTTagCompound();
 	}
 
 	@Override
-	public void func_174834_g(Object nBTTagCompound) {
-		base.superFunc_174834_g(nBTTagCompound);
+	public void clientUpdateEntityNBT(Object nBTTagCompound) {
+		base.superClientUpdateEntityNBT(nBTTagCompound);
 	}
 
 	@Override
-	public boolean func_174825_a(Object entityPlayer, Object vec3) {
-		return base.superFunc_174825_a(entityPlayer, vec3);
+	public boolean interactAt(Object entityPlayer, Object vec3) {
+		return base.superInteractAt(entityPlayer, vec3);
 	}
 
 	@Override
-	public boolean func_180427_aV() {
-		return base.superFunc_180427_aV();
+	public boolean isImmuneToExplosions() {
+		return base.superIsImmuneToExplosions();
 	}
 
 	@Override
-	public void func_174815_a(Object entityLivingBase, Object entity) {
-		base.superFunc_174815_a(entityLivingBase, entity);
+	public void applyEnchantments(Object entityLivingBase, Object entity) {
+		base.superApplyEnchantments(entityLivingBase, entity);
 	}
 
 	@Override

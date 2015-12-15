@@ -75,8 +75,8 @@ public class Modchu_RenderMasterBasis implements Modchu_IRenderMaster {
 	}
 
 	@Override
-	public void func_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
-		base.superFunc_177069_a(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_9_, p_177069_10_);
+	public void renderOffsetLivingLabel(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+		base.superRenderOffsetLivingLabel(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_9_, p_177069_10_);
 	}
 
 	@Override
@@ -85,8 +85,8 @@ public class Modchu_RenderMasterBasis implements Modchu_IRenderMaster {
 	}
 
 	@Override
-	public Object func_177068_d() {
-		return base.superFunc_177068_d();
+	public Object getRenderManager() {
+		return base.superGetRenderManager();
 	}
 	// ~152
 	@Override

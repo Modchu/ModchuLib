@@ -310,10 +310,10 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public boolean func_142018_a(EntityLivingBase entityLivingBase, EntityLivingBase entityLivingBase1) {
-		return master != null ? master.func_142018_a(entityLivingBase, entityLivingBase1) : super.func_142018_a(entityLivingBase, entityLivingBase1);
+		return master != null ? master.shouldAttackEntity(entityLivingBase, entityLivingBase1) : super.func_142018_a(entityLivingBase, entityLivingBase1);
 	}
 
-	public boolean superFunc_142018_a(Object entityLivingBase, Object entityLivingBase1) {
+	public boolean superShouldAttackEntity(Object entityLivingBase, Object entityLivingBase1) {
 		return super.func_142018_a((EntityLivingBase) entityLivingBase, (EntityLivingBase) entityLivingBase1);
 	}
 
@@ -966,11 +966,11 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	protected void addRandomArmor() {
-		if (master != null) master.addRandomArmor();
+		if (master != null) master.addRandomDrop();
 		else super.addRandomArmor();
 	}
 
-	public void superAddRandomArmor() {
+	public void superAddRandomDrop() {
 		super.addRandomArmor();
 	}
 
@@ -2095,10 +2095,10 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public AxisAlignedBB getBoundingBox() {
-		return (AxisAlignedBB) (master != null ? master.getBoundingBox() : super.getBoundingBox());
+		return (AxisAlignedBB) (master != null ? master.getCollisionBoundingBox() : super.getBoundingBox());
 	}
 
-	public AxisAlignedBB superGetBoundingBox() {
+	public AxisAlignedBB superGetCollisionBoundingBox() {
 		return super.getBoundingBox();
 	}
 
@@ -2150,10 +2150,10 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public boolean handleLavaMovement() {
-		return master != null ? master.handleLavaMovement() : super.handleLavaMovement();
+		return master != null ? master.isNotColliding() : super.handleLavaMovement();
 	}
 
-	public boolean superHandleLavaMovement() {
+	public boolean superIsNotColliding() {
 		return super.handleLavaMovement();
 	}
 
@@ -2460,11 +2460,11 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public void setInPortal() {
-		if (master != null) master.setInPortal();
+		if (master != null) master.setInPortal(null);
 		else super.setInPortal();
 	}
 
-	public void superSetInPortal() {
+	public void superSetInPortal(Object bockPos) {
 		super.setInPortal();
 	}
 
@@ -2734,10 +2734,10 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public int getTeleportDirection() {
-		return master != null ? master.getTeleportDirection() : super.getTeleportDirection();
+		return (Integer) (master != null ? master.getTeleportDirection() : super.getTeleportDirection());
 	}
 
-	public int superGetTeleportDirection() {
+	public Object superGetTeleportDirection() {
 		return super.getTeleportDirection();
 	}
 
@@ -2789,10 +2789,10 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public EntityLivingData onSpawnWithEgg(EntityLivingData entityLivingData) {
-		return (EntityLivingData) (master != null ? master.onSpawnWithEgg(entityLivingData) : super.onSpawnWithEgg(entityLivingData));
+		return (EntityLivingData) (master != null ? master.onInitialSpawn(entityLivingData) : super.onSpawnWithEgg(entityLivingData));
 	}
 
-	public EntityLivingData superOnSpawnWithEgg(Object entityLivingData) {
+	public EntityLivingData superOnInitialSpawn(Object entityLivingData) {
 		return super.onSpawnWithEgg((EntityLivingData) entityLivingData);
 	}
 
@@ -2988,7 +2988,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	}
 
 	@Override
-	public Object superOnSpawnWithEgg(Object difficultyInstance, Object entityLivingData) {
+	public Object superOnInitialSpawn(Object difficultyInstance, Object entityLivingData) {
 		return super.onSpawnWithEgg((EntityLivingData) entityLivingData);
 	}
 

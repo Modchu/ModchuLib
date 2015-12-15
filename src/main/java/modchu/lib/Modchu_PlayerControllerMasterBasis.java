@@ -162,17 +162,17 @@ public class Modchu_PlayerControllerMasterBasis implements Modchu_IPlayerControl
 	}
 
 	@Override
-	public boolean func_180511_b(Object blockPos, Object enumFacing) {
-		return base.superFunc_180511_b(blockPos, enumFacing);
+	public boolean clickBlock(Object blockPos, Object enumFacing) {
+		return base.superClickBlock(blockPos, enumFacing);
 	}
 
 	@Override
-	public boolean func_180512_c(Object blockPos, Object enumFacing) {
-		return base.superFunc_180512_c(blockPos, enumFacing);
+	public boolean onPlayerDamageBlock(Object blockPos, Object enumFacing) {
+		return base.superOnPlayerDamageBlock(blockPos, enumFacing);
 	}
 
 	@Override
-	public boolean func_178890_a(Object entityPlayerSP, Object worldClient, Object itemStack, Object blockPos, Object enumFacing, Object vec3) {
-		return base.superFunc_178890_a(entityPlayerSP, worldClient, itemStack, blockPos, enumFacing, vec3);
+	public boolean onPlayerRightClick(Object entityPlayerSP, Object worldClient, Object itemStack, Object blockPos, Object enumFacing, Object vec3) {
+		return base.superOnPlayerRightClick(entityPlayerSP, worldClient, itemStack, blockPos, enumFacing, vec3);
 	}
 }

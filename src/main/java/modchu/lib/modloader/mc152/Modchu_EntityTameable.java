@@ -8,7 +8,6 @@ import modchu.lib.Modchu_IEntityTameable;
 import net.minecraft.src.Block;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumCreatureType;
 import net.minecraft.src.Explosion;
@@ -134,11 +133,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	public void superFunc_146082_f(Object entityPlayer) {
 	}
 
-	public EntityPlayer func_146083_cb() {
+	public EntityPlayer getPlayerInLove() {
 		return null;
 	}
 
-	public EntityPlayer superFunc_146083_cb() {
+	public EntityPlayer superGetPlayerInLove() {
 		return null;
 	}
 
@@ -172,11 +171,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
-	protected boolean func_146066_aG() {
+	protected boolean canDropLoot() {
 		return false;
 	}
 
-	public boolean superFunc_146066_aG() {
+	public boolean superCanDropLoot() {
 		return false;
 	}
 
@@ -288,19 +287,24 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
-	public void func_145781_i(int p_145781_1_) {
+	public void onDataWatcherUpdate(int p_145781_1_) {
 	}
 
-	public void superFunc_145781_i(int p_145781_1_) {
+	public void superOnDataWatcherUpdate(int p_145781_1_) {
 	}
 
 	// 180~
-	public boolean superIsWithinHomeDistance(Object blockPos) {
+	public boolean superIsWithinHomeDistanceFromPosition(Object blockPos) {
 		return false;
 	}
 
 	@Override
-	public Object superOnSpawnWithEgg(Object difficultyInstance, Object iEntityLivingData) {
+	public Object superOnInitialSpawn(Object iEntityLivingData) {
+		return null;
+	}
+
+	@Override
+	public Object superOnInitialSpawn(Object difficultyInstance, Object iEntityLivingData) {
 		return null;
 	}
 
@@ -312,7 +316,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	public void superCopyDataFrom(Object entity) {
 	}
 
-	public boolean superFunc_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
+	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
 		return false;
 	}
 

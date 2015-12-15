@@ -90,22 +90,27 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 		return combatTracker;
 	}
 
+	@Override
 	public void setMovementSpeed(double d) {
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(d);
 	}
 
+	@Override
 	public void setFollowRange(double d) {
 		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(d);
 	}
 
+	@Override
 	public void setKnockbackResistance(double d) {
 		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(d);
 	}
 
+	@Override
 	public void setAttackDamage(double d) {
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(d);
 	}
 
+	@Override
 	public void setMaxHealth(double d) {
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(d);
 	}
@@ -347,11 +352,11 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public boolean func_142018_a(EntityLivingBase entityLivingBase, EntityLivingBase entityLivingBase1) {
-		return master != null ? master.func_142018_a(entityLivingBase, entityLivingBase1) : super.func_142018_a(entityLivingBase, entityLivingBase1);
+		return master != null ? master.shouldAttackEntity(entityLivingBase, entityLivingBase1) : super.func_142018_a(entityLivingBase, entityLivingBase1);
 	}
 
 	@Override
-	public boolean superFunc_142018_a(Object entityLivingBase, Object entityLivingBase1) {
+	public boolean superShouldAttackEntity(Object entityLivingBase, Object entityLivingBase1) {
 		return super.func_142018_a((EntityLivingBase) entityLivingBase, (EntityLivingBase) entityLivingBase1);
 	}
 
@@ -917,12 +922,12 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	protected void addRandomArmor() {
-		if (master != null) master.addRandomArmor();
+		if (master != null) master.addRandomDrop();
 		else super.addRandomArmor();
 	}
 
 	@Override
-	public void superAddRandomArmor() {
+	public void superAddRandomDrop() {
 		super.addRandomArmor();
 	}
 
@@ -1429,7 +1434,7 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 				dropFewItems(recentlyHit > 0, i);
 				dropEquipment(recentlyHit > 0, i);
 
-				if (recentlyHit > 0 && rand.nextFloat() < 0.025F + (float) i * 0.01F) {
+				if (recentlyHit > 0 && rand.nextFloat() < 0.025F + i * 0.01F) {
 					addRandomArmor();
 				}
 			}
@@ -2115,11 +2120,11 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public AxisAlignedBB getBoundingBox() {
-		return (AxisAlignedBB) (master != null ? master.getBoundingBox() : super.getBoundingBox());
+		return (AxisAlignedBB) (master != null ? master.getCollisionBoundingBox() : super.getBoundingBox());
 	}
 
 	@Override
-	public AxisAlignedBB superGetBoundingBox() {
+	public AxisAlignedBB superGetCollisionBoundingBox() {
 		return super.getBoundingBox();
 	}
 
@@ -2176,11 +2181,11 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public boolean handleLavaMovement() {
-		return master != null ? master.handleLavaMovement() : super.handleLavaMovement();
+		return master != null ? master.isNotColliding() : super.handleLavaMovement();
 	}
 
 	@Override
-	public boolean superHandleLavaMovement() {
+	public boolean superIsNotColliding() {
 		return super.handleLavaMovement();
 	}
 
@@ -2509,12 +2514,12 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public void setInPortal() {
-		if (master != null) master.setInPortal();
+		if (master != null) master.setInPortal(null);
 		else super.setInPortal();
 	}
 
 	@Override
-	public void superSetInPortal() {
+	public void superSetInPortal(Object bockPos) {
 		super.setInPortal();
 	}
 
@@ -2812,11 +2817,11 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public int getTeleportDirection() {
-		return master != null ? master.getTeleportDirection() : super.getTeleportDirection();
+		return (Integer) (master != null ? master.getTeleportDirection() : super.getTeleportDirection());
 	}
 
 	@Override
-	public int superGetTeleportDirection() {
+	public Object superGetTeleportDirection() {
 		return super.getTeleportDirection();
 	}
 
@@ -2873,11 +2878,11 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public IEntityLivingData func_180482_a(DifficultyInstance difficultyInstance, IEntityLivingData iEntityLivingData) {
-		return (IEntityLivingData) (master != null ? master.onSpawnWithEgg(iEntityLivingData) : super.func_180482_a(difficultyInstance, iEntityLivingData));
+		return (IEntityLivingData) (master != null ? master.onInitialSpawn(iEntityLivingData) : super.func_180482_a(difficultyInstance, iEntityLivingData));
 	}
 
 	@Override
-	public IEntityLivingData superOnSpawnWithEgg(Object difficultyInstance, Object iEntityLivingData) {
+	public IEntityLivingData superOnInitialSpawn(Object difficultyInstance, Object iEntityLivingData) {
 		return super.func_180482_a((DifficultyInstance) difficultyInstance, (IEntityLivingData) iEntityLivingData);
 	}
 
@@ -3185,6 +3190,11 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 	@Override
 	public float superGetHealthFloat() {
 		return super.getHealth();
+	}
+	// 188~
+	@Override
+	public Object superGetHomePosition() {
+		return null;
 	}
 
 }

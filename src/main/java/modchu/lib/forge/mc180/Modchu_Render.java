@@ -3,7 +3,6 @@ package modchu.lib.forge.mc180;
 import java.util.HashMap;
 
 import modchu.lib.Modchu_AS;
-import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IRender;
 import modchu.lib.Modchu_IRenderMaster;
 import modchu.lib.Modchu_Main;
@@ -34,6 +33,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		if (master != null) master.doRender(entity, d0, d1, d2, f, f1);
 	}
 
+	@Override
 	public void superDoRender(Object entity, double d0, double d1, double d2, float f, float f1) {
 	}
 
@@ -42,6 +42,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		return (ResourceLocation) (master != null ? master.getEntityTexture(entity) : null);
 	}
 
+	@Override
 	public ResourceLocation superGetEntityTexture(Object entity) {
 		return null;
 	}
@@ -51,6 +52,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		return master != null ? master.bindEntityTexture(entity) : super.bindEntityTexture(entity);
 	}
 
+	@Override
 	public boolean superBindEntityTexture(Object entity) {
 		return super.bindEntityTexture((Entity) entity);
 	}
@@ -61,10 +63,12 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		else super.bindTexture(resourceLocation);
 	}
 
+	@Override
 	public void superBindTexture(Object resourceLocation) {
 		super.bindTexture((ResourceLocation) resourceLocation);
 	}
 
+	@Override
 	public void superSetRenderManager(Object renderManager) {
 	}
 
@@ -74,6 +78,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		else super.doRenderShadowAndFire(entity, par2, par4, par6, par8, par9);
 	}
 
+	@Override
 	public void superDoRenderShadowAndFire(Object entity, double par2, double par4, double par6, float par8, float par9) {
 		super.doRenderShadowAndFire((Entity) entity, par2, par4, par6, par8, par9);
 	}
@@ -83,10 +88,12 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		return (FontRenderer) (master != null ? master.getFontRendererFromRenderManager() : super.getFontRendererFromRenderManager());
 	}
 
+	@Override
 	public FontRenderer superGetFontRendererFromRenderManager() {
 		return super.getFontRendererFromRenderManager();
 	}
 
+	@Override
 	public void superUpdateIcons(Object iconRegister) {
 	}
 	// 180~
@@ -95,6 +102,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		return master != null ? master.shouldRender(entity, iCamera, camX, camY, camZ) : super.shouldRender(entity, iCamera, camX, camY, camZ);
 	}
 
+	@Override
 	public boolean superShouldRender(Object entity, Object iCamera, double camX, double camY, double camZ) {
 		return super.shouldRender((Entity) entity, (ICamera) iCamera, camX, camY, camZ);
 	}
@@ -105,6 +113,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		else super.renderName(entity, x, y, z);
 	}
 
+	@Override
 	public void superRenderName(Object entity, double x, double y, double z) {
 		super.renderName((Entity) entity, x, y, z);
 	}
@@ -114,17 +123,19 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		return master != null ? master.canRenderName(entity) : super.canRenderName(entity);
 	}
 
+	@Override
 	public boolean superCanRenderName(Object entity) {
 		return super.canRenderName((Entity) entity);
 	}
 
 	@Override
 	protected void func_177069_a(Entity entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
-		if (master != null) master.func_177069_a(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_9_, p_177069_10_);
+		if (master != null) master.renderOffsetLivingLabel(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_9_, p_177069_10_);
 		else super.func_177069_a(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_9_, p_177069_10_);
 	}
 
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+	@Override
+	public void superRenderOffsetLivingLabel(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 		super.func_177069_a((Entity) entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_9_, p_177069_10_);
 	}
 
@@ -134,24 +145,28 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		else super.renderLivingLabel(entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
 	}
 
+	@Override
 	public void superRenderLivingLabel(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 		super.renderLivingLabel((Entity) entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
 	}
 
 	@Override
 	public RenderManager func_177068_d() {
-		return (RenderManager) (master != null ? master.func_177068_d() : super.func_177068_d());
+		return (RenderManager) (master != null ? master.getRenderManager() : super.func_177068_d());
 	}
 
-	public RenderManager superFunc_177068_d() {
+	@Override
+	public RenderManager superGetRenderManager() {
 		return super.func_177068_d();
 	}
 
 	// 172~179
+	@Override
 	public boolean superIsStaticEntity() {
 		return false;
 	}
 
+	@Override
 	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 	}
 	// ~152

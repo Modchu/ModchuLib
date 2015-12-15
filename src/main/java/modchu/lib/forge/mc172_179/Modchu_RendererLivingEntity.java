@@ -157,11 +157,11 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return 0.0F;
 	}
 
-	public void func_82422_c() {
+	public void transformHeldFull3DItemLayer() {
 	}
 
 	@Override
-	public void superFunc_82422_c() {
+	public void superTransformHeldFull3DItemLayer() {
 	}
 
 	protected boolean func_177088_c(EntityLivingBase entityLivingBase) {
@@ -169,40 +169,40 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 	}
 
 	@Override
-	public boolean superFunc_177088_c(Object entityLivingBase) {
+	public boolean superSetScoreTeamColor(Object entityLivingBase) {
 		return false;
 	}
 
-	protected void func_180565_e() {
+	protected void unsetScoreTeamColor() {
 	}
 
 	@Override
-	public void superFunc_180565_e() {
+	public void superUnsetScoreTeamColor() {
 	}
 
-	protected boolean func_177090_c(EntityLivingBase entityLivingBase, float p_177090_2_) {
-		return false;
-	}
-
-	@Override
-	public boolean superFunc_177090_c(Object entityLivingBase, float p_177090_2_) {
-		return false;
-	}
-
-	protected boolean func_177092_a(EntityLivingBase entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
+	protected boolean setDoRenderBrightness(EntityLivingBase entityLivingBase, float p_177090_2_) {
 		return false;
 	}
 
 	@Override
-	public boolean superFunc_177092_a(Object entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
+	public boolean superSetDoRenderBrightness(Object entityLivingBase, float p_177090_2_) {
 		return false;
 	}
 
-	protected void func_177091_f() {
+	protected boolean setBrightness(EntityLivingBase entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
+		return false;
 	}
 
 	@Override
-	public void superFunc_177091_f() {
+	public boolean superSetBrightness(Object entityLivingBase, float p_177092_2_, boolean p_177092_3_) {
+		return false;
+	}
+
+	protected void unsetBrightness() {
+	}
+
+	@Override
+	public void superUnsetBrightness() {
 	}
 
 	protected float getSwingProgress(EntityLivingBase entityLivingBase, float p_77040_2_) {
@@ -214,11 +214,11 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 		return 0.0F;
 	}
 
-	protected void func_177093_a(EntityLivingBase entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
+	protected void renderLayers(EntityLivingBase entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
 	}
 
 	@Override
-	public void superFunc_177093_a(Object entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
+	public void superRenderLayers(Object entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
 	}
 
 	public void setRenderOutlines(boolean p_177086_1_) {
@@ -239,7 +239,7 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 	}
 
 	@Override
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+	public void superRenderOffsetLivingLabel(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 	}
 /*
 	protected boolean bindEntityTexture(Entity entity) {
@@ -258,13 +258,9 @@ public class Modchu_RendererLivingEntity extends RendererLivingEntity implements
 	public void superRenderLivingLabel(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 	}
 
-	public RenderManager func_177068_d() {
-		return null;
-	}
-
 	@Override
-	public Object superFunc_177068_d() {
-		return null;
+	public Object superGetRenderManager() {
+		return renderManager;
 	}
 
 	@Override

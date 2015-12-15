@@ -10,8 +10,8 @@ public class Modchu_LayerArmorBaseMasterBasis implements Modchu_ILayerArmorBaseM
 	}
 
 	@Override
-	public void func_177177_a() {
-		base.superFunc_177177_a();
+	public void initArmor() {
+		base.superInitArmor();
 	}
 
 	@Override
@@ -30,8 +30,8 @@ public class Modchu_LayerArmorBaseMasterBasis implements Modchu_ILayerArmorBaseM
 	}
 
 	@Override
-	public Object func_177176_a(Object entityLivingBase, int i) {
-		return base.superFunc_177176_a(entityLivingBase, i);
+	public Object getCurrentArmor(Object entityLivingBase, int i) {
+		return base.superGetCurrentArmor(entityLivingBase, i);
 	}
 
 	@Override
@@ -42,6 +42,11 @@ public class Modchu_LayerArmorBaseMasterBasis implements Modchu_ILayerArmorBaseM
 	@Override
 	public Object getArmorResource(Object entity, Object itemStack, int slot, String type) {
 		return base.superGetArmorResource(entity, itemStack, slot, type);
+	}
+
+	@Override
+	public Object getArmorModelHook(Object entityLivingBase, Object itemStack, int slot, Object modelBase) {
+		return base.superGetArmorModelHook(entityLivingBase, itemStack, slot, modelBase);
 	}
 
 }

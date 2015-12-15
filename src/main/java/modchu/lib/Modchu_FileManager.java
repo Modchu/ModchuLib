@@ -1,51 +1,32 @@
 package modchu.lib;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Modifier;
-import java.net.JarURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.security.CodeSource;
-import java.security.ProtectionDomain;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.Date;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.jar.JarFile;
-import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 
 public class Modchu_FileManager {
 
 	public static Modchu_IFileManagerMaster master;
-	public static Modchu_FileManagerBase base = new Modchu_FileManagerBase(new HashMap());
+	public static Modchu_FileManagerBase base;
 	public static List<File> minecraftJarList;
 	public static File minecraftDir;
 	public static File assetsDir;
 
 	public static void init() {
 		System.out.println("Modchu_FileManager init()");
+		if (base != null) {
+			System.out.println("Modchu_FileManager init() base != null return.");
+			return;
+		}
+		base = new Modchu_FileManagerBase(new HashMap());
 		Object o = Modchu_Main.newModchuCharacteristicObject("Modchu_FileManagerMaster");
 		System.out.println("Modchu_FileManager init() o="+o);
 		master = (Modchu_IFileManagerMaster) o;
@@ -81,7 +62,7 @@ public class Modchu_FileManager {
 		return master != null ? master.addResourcesMod(c, map, search) : base.addResourcesMod(c, map, search);
 	}
 
-	public static ConcurrentHashMap addModClass(ConcurrentHashMap map, String fname, String search) {
+	public static boolean addModClass(ConcurrentHashMap map, String fname, String search) {
 		return master != null ? master.addModClass(map, fname, search) : base.addModClass(map, fname, search);
 	}
 

@@ -15,14 +15,14 @@ public interface Modchu_IAllRenderLiving {
 	public boolean superAddLayer(Object layerRenderer);
 	public boolean superRemoveLayer(Object layerRenderer);
 	public float superInterpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_);
-	public void superFunc_82422_c();
-	public boolean superFunc_177088_c(Object entityLivingBase);
-	public void superFunc_180565_e();
-	public boolean superFunc_177090_c(Object entityLivingBase, float p_177090_2_);
-	public boolean superFunc_177092_a(Object entityLivingBase, float p_177092_2_, boolean p_177092_3_);
-	public void superFunc_177091_f();
+	public void superTransformHeldFull3DItemLayer();
+	public boolean superSetScoreTeamColor(Object entityLivingBase);
+	public void superUnsetScoreTeamColor();
+	public boolean superSetDoRenderBrightness(Object entityLivingBase, float p_177090_2_);
+	public boolean superSetBrightness(Object entityLivingBase, float p_177092_2_, boolean p_177092_3_);
+	public void superUnsetBrightness();
 	public float superGetSwingProgress(Object entityLivingBase, float p_77040_2_);
-	public void superFunc_177093_a(Object entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_);
+	public void superRenderLayers(Object entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_);
 	public void superSetRenderOutlines(boolean p_177086_1_);
 	public void superRenderName(Object entity, double x, double y, double z);
 

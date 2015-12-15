@@ -33,64 +33,80 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		Modchu_Debug.lDebug("Modchu_EntityTameable init end.");
 	}
 	// 164~
+	@Override
 	public void curePotionEffects(ItemStack itemStack) {
 	}
 
+	@Override
 	public void superCurePotionEffects(Object itemStack) {
 	}
 
+	@Override
 	public boolean shouldRiderFaceForward(EntityPlayer entityPlayer) {
 		return false;
 	}
 
+	@Override
 	public boolean superShouldRiderFaceForward(Object entityPlayer) {
 		return false;
 	}
 
+	@Override
 	public NBTTagCompound getEntityData() {
 		return null;
 	}
 
+	@Override
 	public NBTTagCompound superGetEntityData() {
 		return null;
 	}
 
+	@Override
 	public boolean shouldRiderSit() {
 		return false;
 	}
 
+	@Override
 	public boolean superShouldRiderSit() {
 		return false;
 	}
 
+	@Override
 	public ItemStack getPickedResult(MovingObjectPosition movingObjectPosition) {
 		return null;
 	}
 
+	@Override
 	public ItemStack superGetPickedResult(Object movingObjectPosition) {
 		return null;
 	}
 
+	@Override
 	public UUID getPersistentID() {
 		return null;
 	}
 
+	@Override
 	public UUID superGetPersistentID() {
 		return null;
 	}
 
+	@Override
 	public boolean shouldRenderInPass(int pass) {
 		return true;
 	}
 
+	@Override
 	public boolean superShouldRenderInPass(int pass) {
 		return true;
 	}
 
+	@Override
 	public boolean isCreatureType(EnumCreatureType enumCreatureType, boolean forSpawnCount) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsCreatureType(Object enumCreatureType, boolean forSpawnCount) {
 		return false;
 	}
@@ -99,6 +115,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public String superRegisterExtendedProperties(String identifier, Object iExtendedEntityProperties) {
 		return null;
 	}
@@ -107,22 +124,27 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 */
+	@Override
 	public Object superGetExtendedProperties(String identifier) {
 		return null;
 	}
 
+	@Override
 	public boolean canRiderInteract() {
 		return false;
 	}
 
+	@Override
 	public boolean superCanRiderInteract() {
 		return false;
 	}
 
+	@Override
 	public boolean shouldDismountInWater(Entity entity) {
 		return false;
 	}
 
+	@Override
 	public boolean superShouldDismountInWater(Object entity) {
 		return false;
 	}
@@ -133,6 +155,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public EntityLivingBase superGetOwner() {
 		return null;
 	}
@@ -140,14 +163,16 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	public void func_146082_f(EntityPlayer entityPlayer) {
 	}
 
+	@Override
 	public void superFunc_146082_f(Object entityPlayer) {
 	}
 
-	public EntityPlayer func_146083_cb() {
+	public EntityPlayer getPlayerInLove() {
 		return null;
 	}
 
-	public EntityPlayer superFunc_146083_cb() {
+	@Override
+	public EntityPlayer superGetPlayerInLove() {
 		return null;
 	}
 
@@ -155,6 +180,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return false;
 	}
 
+	@Override
 	public boolean superIsWithinHomeDistanceCurrentPosition() {
 		return false;
 	}
@@ -163,6 +189,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return false;
 	}
 
+	@Override
 	public boolean superIsWithinHomeDistance(int par1, int par2, int par3) {
 		return false;
 	}
@@ -170,6 +197,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	protected void updateLeashedState() {
 	}
 
+	@Override
 	public void superUpdateLeashedState() {
 	}
 
@@ -177,6 +205,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public Item superGetDropItem() {
 		return null;
 	}
@@ -185,6 +214,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public ItemStack superGetEquipmentInSlot(int par1) {
 		return null;
 	}
@@ -193,15 +223,17 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public String superGetCommandSenderName() {
 		return null;
 	}
 
-	protected boolean func_146066_aG() {
+	protected boolean canDropLoot() {
 		return false;
 	}
 
-	public boolean superFunc_146066_aG() {
+	@Override
+	public boolean superCanDropLoot() {
 		return false;
 	}
 
@@ -209,6 +241,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public String superGetFallSoundString(int p_146067_1_) {
 		return null;
 	}
@@ -217,6 +250,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return -1;
 	}
 
+	@Override
 	public int superGetEntityId() {
 		return -1;
 	}
@@ -224,6 +258,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	public void setEntityId(int p_145769_1_) {
 	}
 
+	@Override
 	public void superSetEntityId(int p_145769_1_) {
 	}
 
@@ -231,6 +266,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public String superGetSwimSound() {
 		return null;
 	}
@@ -238,12 +274,14 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	protected void func_145775_I() {
 	}
 
+	@Override
 	public void superFunc_145775_I() {
 	}
 
 	protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block block) {
 	}
 
+	@Override
 	public void superFunc_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object block) {
 	}
 /*
@@ -251,6 +289,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 */
+	@Override
 	public String superGetSplashSound() {
 		return null;
 	}
@@ -259,6 +298,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return false;
 	}
 
+	@Override
 	public boolean superIsInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_) {
 		return false;
 	}
@@ -267,6 +307,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public EntityItem superDropItem(Object item, int p_145779_2_) {
 		return null;
 	}
@@ -275,6 +316,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public EntityItem superFunc_145778_a(Object item, int p_145778_2_, float p_145778_3_) {
 		return null;
 	}
@@ -291,6 +333,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return 0.0F;
 	}
 
+	@Override
 	public float superFunc_145772_a(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block) {
 		return 0.0F;
 	}
@@ -299,6 +342,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return false;
 	}
 
+	@Override
 	public boolean superFunc_145774_a(Object explosion, Object world, int p_145774_3_, int p_145774_4_, int p_145774_5_, Object block, float p_145774_7_) {
 		return false;
 	}
@@ -311,10 +355,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
-	public void func_145781_i(int p_145781_1_) {
+	public void onDataWatcherUpdate(int p_145781_1_) {
 	}
 
-	public void superFunc_145781_i(int p_145781_1_) {
+	@Override
+	public void superOnDataWatcherUpdate(int p_145781_1_) {
 	}
 
 	// 180~
@@ -330,36 +375,45 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public void superCopyDataFrom(Object entity) {
 	}
 
-	public boolean superFunc_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
+	@Override
+	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
 		return false;
 	}
 
+	@Override
 	public float superGetBlockPathWeight(Object blockPos) {
 		return 0;
 	}
 
+	@Override
 	public float superGetExplosionResistance(Object explosion, Object world, Object blockPos, Object iBlockState) {
 		return 0;
 	}
 
+	@Override
 	public Object superDropItemWithOffset(Object item, int p_145778_2_, float p_145778_3_) {
 		return superFunc_145778_a(item, p_145778_2_, p_145778_3_);
 	}
 
+	@Override
 	public Object superGetDisplayName() {
 		return superFunc_145748_c_();
 	}
 
+	@Override
 	public String superFunc_152113_b() {
 		return null;
 	}
 
+	@Override
 	public void superFunc_152115_b(String par1Str) {
 	}
 
+	@Override
 	public String superFunc_146067_o(int p_146067_1_) {
 		return null;
 	}
@@ -368,7 +422,8 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return 0.0F;
 	}
 
-	public boolean superFunc_180485_d(Object blockPos) {
+	@Override
+	public boolean superIsWithinHomeDistanceFromPosition(Object blockPos) {
 		return false;
 	}
 

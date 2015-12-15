@@ -235,7 +235,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public void moveEntity(double par1, double par3, double par5);
 	public void doBlockCollisions();
 	public void playStepSound(int par1, int par2, int par3, int par4);
-	public Object getBoundingBox();
+	public Object getCollisionBoundingBox();
 	public void dealFireDamage(int par1);
 	public boolean isWet();
 	public boolean isInWater();
@@ -274,7 +274,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public void updateRiderPosition();
 	public double getMountedYOffset();
 	public float getCollisionBorderSize();
-	public void setInPortal();
+	public void setInPortal(Object bockPos);
 	public void setVelocity(double par1, double par3, double par5);
 	public boolean isBurning();
 	public boolean isRiding();
@@ -303,7 +303,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public float getBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block);
 	public boolean shouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7);
 	public int getMaxSafePointTries();
-	public int getTeleportDirection();
+	public Object getTeleportDirection();
 	public boolean doesEntityNotTriggerPressurePlate();
 	public void addEntityCrashInfo(Object crashReportCategory);
 	public boolean canRenderOnFire();

@@ -536,7 +536,11 @@ public class Modchu_FontRenderer {
 				if (strikethroughStyle) {
 					tessellator = Modchu_AS.get(Modchu_AS.tessellatorInstance);
 					Modchu_GlStateManager.disableTexture2D();
-					Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator);
+					if (Modchu_Main.getMinecraftVersion() > 180) {
+						Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator, 7, Modchu_AS.get("DefaultVertexFormats", "field_181705_e"));
+					} else {
+						Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator);
+					}
 					Modchu_AS.set(Modchu_AS.tessellatorAddVertex, tessellator, (double) posX, (double) (posY + (float) (FONT_HEIGHT / 2)), 0.0D);
 					Modchu_AS.set(Modchu_AS.tessellatorAddVertex, tessellator, (double) (posX + f), (double) (posY + (float) (FONT_HEIGHT / 2)), 0.0D);
 					Modchu_AS.set(Modchu_AS.tessellatorAddVertex, tessellator, (double) (posX + f), (double) (posY + (float) (FONT_HEIGHT / 2) - 1.0F), 0.0D);
@@ -548,7 +552,11 @@ public class Modchu_FontRenderer {
 				if (underlineStyle) {
 					tessellator = Modchu_AS.get(Modchu_AS.tessellatorInstance);
 					Modchu_GlStateManager.disableTexture2D();
-					Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator);
+					if (Modchu_Main.getMinecraftVersion() > 180) {
+						Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator, 7, Modchu_AS.get("DefaultVertexFormats", "field_181705_e"));
+					} else {
+						Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator);
+					}
 					int l = underlineStyle ? -1 : 0;
 					Modchu_AS.set(Modchu_AS.tessellatorAddVertex, tessellator, (double) (posX + (float) l), (double) (posY + (float) FONT_HEIGHT), 0.0D);
 					Modchu_AS.set(Modchu_AS.tessellatorAddVertex, tessellator, (double) (posX + f), (double) (posY + (float) FONT_HEIGHT), 0.0D);

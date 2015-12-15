@@ -8,12 +8,12 @@ public interface Modchu_IPlayerController {
 	public void superFlipPlayer(Object entityPlayer);
 	public boolean superShouldDrawHUD();
 	public boolean superOnPlayerDestroyBlock(Object blockPos, Object enumFacing);
-	public boolean superFunc_180511_b(Object blockPos, Object enumFacing);
+	public boolean superClickBlock(Object blockPos, Object enumFacing);
 	public void superResetBlockRemoving();
-	public boolean superFunc_180512_c(Object blockPos, Object enumFacing);
+	public boolean superOnPlayerDamageBlock(Object blockPos, Object enumFacing);
 	public float superGetBlockReachDistance();
 	public void superUpdateController();
-	public boolean superFunc_178890_a(Object entityPlayerSP, Object world, Object itemStack, Object blockPos, Object enumFacing, Object vec3);
+	public boolean superOnPlayerRightClick(Object entityPlayerSP, Object world, Object itemStack, Object blockPos, Object enumFacing, Object vec3);
 	public boolean superSendUseItem(Object entityPlayer, Object world, Object itemStack);
 	public void superAttackEntity(Object entityPlayer, Object entity);
 	public Object superWindowClick(int par1, int par2, int par3, int par4, Object entityPlayer);

@@ -143,11 +143,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	public void superFunc_146082_f(Object entityPlayer) {
 	}
 
-	public EntityPlayer func_146083_cb() {
+	public EntityPlayer getPlayerInLove() {
 		return null;
 	}
 
-	public EntityPlayer superFunc_146083_cb() {
+	public EntityPlayer superGetPlayerInLove() {
 		return null;
 	}
 
@@ -197,11 +197,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
-	protected boolean func_146066_aG() {
+	protected boolean canDropLoot() {
 		return false;
 	}
 
-	public boolean superFunc_146066_aG() {
+	public boolean superCanDropLoot() {
 		return false;
 	}
 
@@ -311,10 +311,10 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
-	public void func_145781_i(int p_145781_1_) {
+	public void onDataWatcherUpdate(int p_145781_1_) {
 	}
 
-	public void superFunc_145781_i(int p_145781_1_) {
+	public void superOnDataWatcherUpdate(int p_145781_1_) {
 	}
 
 	// 180~
@@ -330,10 +330,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
+	@Override
 	public void superCopyDataFrom(Object entity) {
 	}
 
-	public boolean superFunc_174816_a(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
+	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float f) {
 		return false;
 	}
 
@@ -368,7 +369,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return 0.0F;
 	}
 
-	public boolean superFunc_180485_d(Object blockPos) {
+	public boolean superIsWithinHomeDistanceFromPosition(Object blockPos) {
 		return false;
 	}
 
