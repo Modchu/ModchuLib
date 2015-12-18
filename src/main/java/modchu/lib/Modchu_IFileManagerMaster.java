@@ -16,6 +16,7 @@ public interface Modchu_IFileManagerMaster {
 
 	public List<File> getModFile(String pname, String pprefix);
 	public List<File> getFileList(String pname);
+	public List<File> getModFile(List<File> list, ConcurrentHashMap<String, Class> map, String search);
 	public List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search, boolean subDirCheck);
 	public boolean addTexturesZip(File file, ConcurrentHashMap<String, Class> map, String search);
 	public void addTexturesJar(File file, ConcurrentHashMap<String, Class> map, String search);
@@ -32,9 +33,9 @@ public interface Modchu_IFileManagerMaster {
 	public void copyResource(InputStream is, HashMap<ZipEntry, File> map);
 	public void copyResource(Class c, String s, File file);
 	public void copyResourceText(InputStream is, File outFile);
-	public File getFile(String directoryPath, String matchingFileName, String indexofFileName);
+	public File getFile(String directoryPath, String matchingFileName, String indexofFileName, boolean subDirCheck);
 	public ArrayList<File> listFiles(String directoryPath, String fileName);
-	public ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName);
+	public ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName, boolean subDirCheck);
 	public ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName, ArrayList list, int type, boolean isRecursive, int period);
 	public void createDir(String s);
 	public BufferedReader getResourceBufferedReader(String s);

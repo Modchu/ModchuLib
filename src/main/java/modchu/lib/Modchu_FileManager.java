@@ -41,6 +41,10 @@ public class Modchu_FileManager {
 		return master != null ? master.getFileList(pname) : base.getFileList(pname);
 	}
 
+	public static List<File> getModFile(List<File> list, ConcurrentHashMap<String, Class> map, String search) {
+		return master != null ? master.getModFile(list, map, search) : base.getModFile(list, map, search);
+	}
+
 	public static List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search, boolean subDirCheck) {
 		return master != null ? master.getModFile(dir, list, map, search, subDirCheck) : base.getModFile(dir, list, map, search, subDirCheck);
 	}
@@ -114,16 +118,16 @@ public class Modchu_FileManager {
 		else base.copyResourceText(is, outFile);
 	}
 
-	public static File getFile(String directoryPath, String matchingFileName, String indexofFileName) {
-		return master != null ? master.getFile(directoryPath, matchingFileName, indexofFileName) : base.getFile(directoryPath, matchingFileName, indexofFileName);
+	public static File getFile(String directoryPath, String matchingFileName, String indexofFileName, boolean subDirCheck) {
+		return master != null ? master.getFile(directoryPath, matchingFileName, indexofFileName, subDirCheck) : base.getFile(directoryPath, matchingFileName, indexofFileName, subDirCheck);
 	}
 
 	public static ArrayList<File> listFiles(String directoryPath, String fileName) {
 		return master != null ? master.listFiles(directoryPath, fileName) : base.listFiles(directoryPath, fileName);
 	}
 
-	public static ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName) {
-		return master != null ? master.listFiles(directoryPath, fileName, matchingFileName, indexofFileName) : base.listFiles(directoryPath, fileName, matchingFileName, indexofFileName);
+	public static ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName, boolean subDirCheck) {
+		return master != null ? master.listFiles(directoryPath, fileName, matchingFileName, indexofFileName, subDirCheck) : base.listFiles(directoryPath, fileName, matchingFileName, indexofFileName, subDirCheck);
 	}
 
 	public static ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName, ArrayList list, int type, boolean isRecursive, int period) {

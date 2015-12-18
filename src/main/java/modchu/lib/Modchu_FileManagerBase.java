@@ -244,21 +244,23 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 
 		Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile:[%s]:%s", pname, Modchu_Main.modsDir.getAbsolutePath());
 		// ファイル・ディレクトリを検索
-		getModFile(pname, pprefix, Modchu_Main.modsDir, llist);
+		getModFile(pname, pprefix, Modchu_Main.modsDir, llist, false);
+		getModFile(pname, pprefix, new File(Modchu_Main.modsDir, Modchu_Version.getMinecraftVersionString()), llist, true);
 		return llist;
 	}
 
-	private boolean getModFile(String pname, String pprefix, File dir, List<File> llist) {
+	protected boolean getModFile(String pname, String pprefix, File dir, List<File> llist, boolean subDirCheck) {
 		boolean b = false;
 		try {
 			Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile dir="+dir);
 			if (dir.isDirectory()) {
 				Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile-get:%d.", dir.list().length);
 				for (File t : dir.listFiles()) {
-					if (t.isDirectory()) {
+					if (subDirCheck
+							&& t.isDirectory()) {
 						llist.add(t);
 						Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile-directory:%s", t.getName());
-						getModFile(pname, pprefix, t, llist);
+						getModFile(pname, pprefix, t, llist, subDirCheck);
 					}
 					if (t.getName().indexOf(pprefix) != -1) {
 						if (t.getName().endsWith(".zip")) {
@@ -283,6 +285,13 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	@Override
 	public List<File> getFileList(String pname) {
 		return fileList.get(pname);
+	}
+
+	@Override
+	public List<File> getModFile(List<File> list, ConcurrentHashMap<String, Class> map, String search) {
+		getModFile(Modchu_Main.modsDir, list, map, search, false);
+		getModFile(new File(Modchu_Main.modsDir, Modchu_Version.getMinecraftVersionString()), list, map, search, true);
+		return list;
 	}
 
 	@Override
@@ -458,6 +467,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 				if (!map.containsKey(cn)) {
 					map.put(c.getName(), c);
 					Modchu_Debug.Debug("Modchu_FileManagerBase addModClass-:"+c.getName());
+					addModResourcePack(c);
 					return true;
 				}
 			} else {
@@ -467,20 +477,43 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return false;
 	}
 
+	protected void addModResourcePack(Class c) {
+		boolean debug = true;
+		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 1 c="+c);
+		Object o = Modchu_Main.newModchuCharacteristicObject("Modchu_ResourcePack", Modchu_ModResourcePackMaster.class, c);
+		if (o != null) {
+			if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 2 o="+o);
+			List list = Modchu_AS.getList("Minecraft", "defaultResourcePacks", Modchu_AS.get(Modchu_AS.minecraftGetMinecraft));
+			if (list != null) {
+				if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 3 list="+list);
+				list.add(o);
+			} else {
+				String s = "Modchu_FileManagerBase addModResourcePack defaultResourcePacks null error !!";
+				if (debug) Modchu_Debug.mDebug(s);
+				Modchu_Main.setRuntimeException(s);
+			}
+		} else {
+			String s = "Modchu_FileManagerBase addModResourcePack null error !! c="+c;
+			if (debug) Modchu_Debug.mDebug(s);
+			Modchu_Main.setRuntimeException(s);
+		}
+		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack end.");
+	}
+
 	@Override
 	public String classNameProcessing(String fname) {
-		//Modchu_Debug.Debug("classNameProcessing 1 fname="+fname);
+		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing 1 fname="+fname);
 		String mcDataDirAbsolutePath = Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir).getAbsolutePath();
 		int i1 = mcDataDirAbsolutePath.lastIndexOf("\\.");
-		if (i1 > -1) mcDataDirAbsolutePath = mcDataDirAbsolutePath.substring(0, i1 + 1);
+		if (i1 == mcDataDirAbsolutePath.length() - 1) mcDataDirAbsolutePath = mcDataDirAbsolutePath.substring(0, i1);
 		List<File> list = Modchu_FileManager.getMinecraftJarList();
 		String minecraftJarPath = list.get(0).getAbsolutePath();
 		if (minecraftJarPath.indexOf("file:\\") > -1) minecraftJarPath = minecraftJarPath.substring(6);
 		String minecraftJarPath2 = list.get(0).getPath();
 		if (minecraftJarPath2.indexOf("file:\\") > -1) minecraftJarPath2 = minecraftJarPath2.substring(6);
-		//Modchu_Debug.Debug("classNameProcessing-mcDataDirAbsolutePath="+mcDataDirAbsolutePath);
-		//Modchu_Debug.Debug("classNameProcessing-minecraftJarPath="+minecraftJarPath);
-		//Modchu_Debug.Debug("classNameProcessing-minecraftJarPath2="+minecraftJarPath2);
+		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing-mcDataDirAbsolutePath="+mcDataDirAbsolutePath);
+		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing-minecraftJarPath="+minecraftJarPath);
+		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing-minecraftJarPath2="+minecraftJarPath2);
 		String cn = fname.replace(".class", "");
 		//Modchu_Debug.Debug("classNameProcessing 2 cn="+cn);
 		if (cn.indexOf(mcDataDirAbsolutePath) > -1) cn = cn.substring(mcDataDirAbsolutePath.length());
@@ -492,7 +525,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		s0 = ".bin.";
 		i1 = cn.indexOf(s0);
 		if (i1 > -1) cn = cn.substring(i1 + s0.length());
-		//Modchu_Debug.Debug("classNameProcessing 3 cn="+cn);
+		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing 3 cn="+cn);
 		if ((Modchu_Main.getMinecraftVersion() > 159
 				| !Modchu_Main.isForge)
 				&& cn.indexOf(":/") < 0) cn = cn.replace("\\", ".").replace("/", ".");
@@ -501,11 +534,11 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		if (cn.startsWith(".")
 				| cn.startsWith("/")
 				| cn.startsWith("\\")) cn = cn.substring(1);
-		//Modchu_Debug.Debug("classNameProcessing 4 end. cn="+cn);
+		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing 4 end. cn="+cn);
 		return cn;
 	}
 
-	private long getCRCValue(File file) {
+	protected long getCRCValue(File file) {
 		CRC32 crc = new CRC32();
 
 		BufferedInputStream input = null;
@@ -847,8 +880,8 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	}
 
 	@Override
-	public File getFile(String directoryPath, String matchingFileName, String indexofFileName) {
-		ArrayList<File> list = listFiles(directoryPath, null, matchingFileName, indexofFileName);
+	public File getFile(String directoryPath, String matchingFileName, String indexofFileName, boolean subDirCheck) {
+		ArrayList<File> list = listFiles(directoryPath, null, matchingFileName, indexofFileName, subDirCheck);
 		if (list != null
 				&& !list.isEmpty()) {
 			for (File file : list) {
@@ -865,21 +898,21 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 
 	@Override
 	public ArrayList<File> listFiles(String directoryPath, String fileName) {
-		return listFiles(directoryPath, fileName, null, null);
+		return listFiles(directoryPath, fileName, null, null, true);
 	}
 
 	@Override
-	public ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName) {
+	public ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName, boolean subDirCheck) {
 		if (fileName != null) {
 			fileName = fileName.replace(".", "\\.");
 			fileName = fileName.replace("*", ".*");
 		}
 		ArrayList<File> list = new ArrayList<File>();
-		return listFiles(directoryPath, fileName, matchingFileName, indexofFileName, list, TYPE_FILE, true, 0);
+		return listFiles(directoryPath, fileName, matchingFileName, indexofFileName, list, TYPE_FILE, subDirCheck, 0);
 	}
 
 	@Override
-	public ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName, ArrayList list, int type, boolean isRecursive, int period) {
+	public ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName, ArrayList list, int type, boolean subDirCheck, int period) {
 		File dir = new File(directoryPath);
 		if (!dir.isDirectory()) {
 			String s = "Modchu_FileManagerBase listFiles Exception [" + dir.getAbsolutePath() + "] is not a directory.";
@@ -890,14 +923,14 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		for (int i = 0; i < files.length; i++) {
 			File file = files[i];
 			list = addFile(type, fileName, matchingFileName, indexofFileName, list, file, period);
-			if (isRecursive && file.isDirectory()) {
-				list = listFiles(file.getAbsolutePath(), fileName, matchingFileName, indexofFileName, list, type, isRecursive, period);
+			if (subDirCheck && file.isDirectory()) {
+				list = listFiles(file.getAbsolutePath(), fileName, matchingFileName, indexofFileName, list, type, subDirCheck, period);
 			}
 		}
 		return list;
 	}
 
-	private static ArrayList addFile(int type, String fileName, String matchingFileName, String indexofFileName, ArrayList list, File file,int period) {
+	protected static ArrayList addFile(int type, String fileName, String matchingFileName, String indexofFileName, ArrayList list, File file,int period) {
 		switch (type) {
 		case TYPE_FILE:
 			if (!file.isFile()) return list;
