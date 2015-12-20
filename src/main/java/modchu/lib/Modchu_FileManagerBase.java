@@ -915,9 +915,9 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	public ArrayList<File> listFiles(String directoryPath, String fileName, String matchingFileName, String indexofFileName, ArrayList list, int type, boolean subDirCheck, int period) {
 		File dir = new File(directoryPath);
 		if (!dir.isDirectory()) {
-			String s = "Modchu_FileManagerBase listFiles Exception [" + dir.getAbsolutePath() + "] is not a directory.";
-			Modchu_Main.setRuntimeException(s);
-			throw new IllegalArgumentException (s);
+			String s = "Modchu_FileManagerBase listFiles [" + dir.getAbsolutePath() + "] is not a directory.";
+			Modchu_Debug.Debug(s);
+			return list;
 		}
 		File[] files = dir.listFiles();
 		for (int i = 0; i < files.length; i++) {
@@ -1343,11 +1343,11 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		List<File> list = new LinkedList();
 		String[] paths = Modchu_FileManager.getSystemClassPaths();
 		for (String s1 : paths) {
-			Modchu_Debug.lDebug("Modchu_TextureManager getClassPathFileList s1="+s1);
+			//Modchu_Debug.lDebug("Modchu_FileManagerBase getClassPathFileList s1="+s1);
 			if (s1.indexOf(s) > -1
 					&& s1.lastIndexOf(".jar") > -1) {
 				list.add(new File(s1));
-				Modchu_Debug.lDebug("Modchu_TextureManager getClassPathFileList add s1="+s1);
+				//Modchu_Debug.lDebug("Modchu_FileManagerBase getClassPathFileList add s1="+s1);
 			}
 		}
 		return list;
