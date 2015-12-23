@@ -24,8 +24,8 @@ public class Modchu_TextCalculation {
 			calculationStringList.add(s);
 		}
 		String[] s3 = new String[]{
-				"cos@",
-				"sin@"
+				"cos",
+				"sin"
 		};
 		calculationTrigonometricFunctionStringList = new ArrayList();
 		for (String s2 : s3) {
@@ -41,11 +41,13 @@ public class Modchu_TextCalculation {
 			return null;
 		}
 		ArrayList list = new ArrayList();
-		ArrayList<String> tempList = new ArrayList();
+		List<String> tempList = new ArrayList();
+/*
 		if (debug) {
 			Modchu_Debug.mDebug("Modchu_TextCalculation getTextCalculationList list="+Modchu_Main.listToString(list));
 			Modchu_Debug.mDebug("Modchu_TextCalculation getTextCalculationList tempList.hashCode()="+tempList.hashCode()+ "tempList="+tempList);
 		}
+*/
 		tempList.add(s);
 		for(int i = 0; i < maxLoop; i++) {
 			settingTextCalculationList_r(list, tempList);
@@ -67,7 +69,7 @@ public class Modchu_TextCalculation {
 		list1.remove(0);
 		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r "+s+" ------------------- start.");
 		if (Modchu_Main.calculationCharacterStringCheck(s)) {
-			LinkedList<Object[]> list2 = getCalculationDataList(s);
+			List<Object[]> list2 = getCalculationDataList(s);
 			if (list2 != null
 					&& !list2.isEmpty()) {
 				list.add(list2);
@@ -77,13 +79,13 @@ public class Modchu_TextCalculation {
 		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r "+s+" ------------------- end. list.size()="+list.size());
 	}
 
-	protected LinkedList<Object[]> getCalculationDataList(String s) {
+	protected List<Object[]> getCalculationDataList(String s) {
 		boolean debug = true;
 		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataList "+s+" ------------------- start.");
-		LinkedList<Object[]> list = new LinkedList();
-		ArrayList<String> tempList = new ArrayList();
-		ArrayList<String> tempList1 = new ArrayList();
-		tempList1.add(s);
+		List<Object[]> list = new LinkedList();
+		List tempList = new ArrayList();
+		List tempList1 = getCalculationDataStringList(s);
+/*
 		for(int i = 0; i < maxLoop; i++) {
 			settingCalculationParenthesis_r(tempList, tempList1);
 			if (tempList1.isEmpty()) {
@@ -91,6 +93,7 @@ public class Modchu_TextCalculation {
 				break;
 			}
 		}
+*/
 		if (tempList != null
 				&& !tempList.isEmpty()) {
 			for(int i = 0; i < maxLoop; i++) {
@@ -105,64 +108,150 @@ public class Modchu_TextCalculation {
 		return list;
 	}
 
-	protected void settingCalculationData_r(List<Object[]> list, List<String> list1) {
+	protected List getCalculationDataStringList(String s) {
 		boolean debug = true;
-		Object[] o = null;
-		String s0 = null;
-		String s = list1.get(0);
-		list1.remove(0);
-		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r "+s+" ------------------- start.");
-		Object[] o0 = getCalculationDataStringArray(s);
-		if (o0 != null
-				&& o0.length > 5); else {
-			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r "+s+" ------------------- end. o0== null !! return");
-			return;
-		}
-		int i = Modchu_CastHelper.Int(o0[0]);
-		int i1 = Modchu_CastHelper.Int(o0[1]);
-		int i2 = Modchu_CastHelper.Int(o0[2]);
-		int i3 = Modchu_CastHelper.Int(o0[3]);
-		String s1 = Modchu_CastHelper.String(o0[4]);
-		s0 = s1 != null
-				&& !s1.isEmpty() ? s1 : Modchu_CastHelper.String(o0[5]);
-		String s2 = Modchu_CastHelper.String(o0[6]);
-		String s3 = Modchu_CastHelper.String(o0[7]);
-		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r 1 s0="+s0+" s2="+s2+" s3="+s3+" i1="+i1);
-		Object o1 = getCalculationDataTrigonometricFunction(s0);
-		if (o1 != null); else o1 = Modchu_Main.stringToSuitableObject(s0);
-		int i4 = i == 1 ? 0 : i < 3 ? i1 + 1 : i == 3 ? 100 + (i1 - calculationStringList.size()) : 0;
-		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r 2 i3="+i4+" i1="+i1+" i="+i);
-		String s4 = i1 == 0 
-				&& i3 < calculationStringList.size() ? s3 + s0 : s0;
-		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r 3 s4="+s4);
-		if (o1 != null) {
-			o = new Object[]{ i4, o1, s4 };
-		} else if (s != null
-				&& !s.isEmpty()) {
-			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r 4 o1 == null. s="+s);
-			o1 = Modchu_Main.stringToSuitableObject(s);
-			if (o1 != null) {
-				o = new Object[]{ -1, o1, s };
-			} else {
-				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r 5 o1 == null.");
+		List tempList = new ArrayList();
+		List<String> tempList1 = new ArrayList();
+		tempList1.add(s);
+		for(int i = 0; i < maxLoop; i++) {
+			calculationDataStringList_r(tempList, tempList1);
+			if (tempList1.isEmpty()) {
+				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataStringList tempList.isEmpty() break.");
+				break;
 			}
 		}
-		if (s2 != null
-				&& !s2.isEmpty()) list1.add(s2);
-		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r 6 s2="+s2);
-		if (o != null
-				&& o.length > 0) {
-			list.add(o);
-			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r list.add 5 o[0]="+(o != null && o.length > 0 ? o[0] : null)+" o[1]="+(o != null && o.length > 1 ? o[1] : null)+" o[1].getClass()="+(o != null && o.length > 1 ? o[1].getClass() : null)+" list="+Modchu_Main.listToString(list));
+		return tempList;
+	}
+
+	protected void calculationDataStringList_r(List list, List<String> list1) {
+		boolean debug = true;
+		String s = list1.get(0);
+		list1.remove(0);
+		for (String s1 : calculationTrigonometricFunctionStringList) {
+			if (s.startsWith(s1)) {
+				String s2 = s1 + "(";
+				if (s.startsWith(s2)) {
+					int i1 = s.indexOf(")");
+					if (i1 > -1) {
+						Object[] o = Modchu_Main.getInsideParenthesesData(s);
+						int i2 = Modchu_CastHelper.Int(o[2]);
+						String s3 = s.substring(0, i2 + 1);
+						String s4 = s.substring(i2 + 1);
+						List tempList = new ArrayList();
+						List<String> tempList1 = new ArrayList();
+						tempList1.add(s3);
+						for(int i = 0; i < maxLoop; i++) {
+							calculationDataStringList_r(tempList, tempList1);
+							if (tempList1.isEmpty()) {
+								if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationDataStringList_r tempList1.isEmpty() break.");
+								break;
+							}
+						}
+						list.add(tempList);
+						if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationDataStringList_r list.add s3="+s3);
+						list1.add(s4);
+						if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationDataStringList_r list1.add s4="+s4);
+						return;
+					}
+				}
+			}
 		}
-		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r "+s+" end. -------------------");
+		for (String s2 : calculationStringList) {
+			int i1 = s.indexOf(s2);
+			if (i1 > -1) {
+				String s3 = i1 > 0 ? s.substring(0, i1) : null;
+				String s4 = s.substring(i1, i1 + s2.length());
+				String s5 = s.substring(i1 + s2.length());
+				if (s3 != null) {
+					list.add(s3);
+					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationDataStringList_r list.add s3="+s3);
+				}
+				if (s4 != null) {
+					list.add(s4);
+					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationDataStringList_r list.add s4="+s4);
+				}
+				if (s5 != null) {
+					list1.add(s5);
+					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationDataStringList_r list1.add s5="+s5);
+				}
+				return;
+			}
+		}
+		list.add(s);
+		return;
+	}
+
+	protected void settingCalculationData_r(List list, List list1) {
+		boolean debug = true;
+		Object o2 = list1.get(0);
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r "+o2+" ------------------- start.");
+		list1.remove(0);
+		if (o2 instanceof List) {
+			List list2 = (List) o2;
+			settingCalculationData_r(list1, list2);
+		} else if (o2 instanceof String) {
+			String s = (String) o2;
+			settingCalculationData_r_s(list, list1, s);
+		}
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r "+o2+" ------------------- end.");
+	}
+
+	protected void settingCalculationData_r_s(List list, List list1, String s) {
+		boolean debug = true;
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r_s "+s+" ------------------- start.");
+		for (String tempS : calculationTrigonometricFunctionStringList) {
+			if (s.startsWith(tempS)) {
+				Object o1 = list1.get(0);
+				list1.remove(0);
+				if (!(o1 instanceof List)
+						&& !(o1 instanceof String)) {
+					String ss = "Modchu_TextCalculation settingCalculationData_r_s !(o1 instanceof List) && !(o1 instanceof String) error !! o1="+o1+" o1.getClass()="+(o1 != null ? o1.getClass() : null);
+					if (debug) Modchu_Debug.mDebug(ss);
+					Modchu_Main.setRuntimeException(ss);
+					return;
+				}
+				Object[] o2 = null;
+				if (o1 instanceof List) {
+					List list2 =  (List) o1;
+					o2 = getCalculationDataTrigonometricFunction(s, list2);
+				}
+				if (o1 instanceof String) {
+					String s1 = o1 instanceof String ? (String) o1 : null;
+					o2 = getCalculationDataTrigonometricFunction(s, s1);
+				}
+				if (o2 != null) {
+					list.add(o2);
+					return;
+				}
+			}
+		}
+		for (String tempS2 : calculationStringList) {
+			if (s.equals(tempS2)) {
+				Object o1 = list1.get(0);
+				if (!(o1 instanceof String)) {
+					String ss = "Modchu_TextCalculation settingCalculationData_r_s !(o1 instanceof String) error !!";
+					if (debug) Modchu_Debug.mDebug(ss);
+					Modchu_Main.setRuntimeException(ss);
+					return;
+				}
+				String s1 = (String) o1;
+				list1.remove(0);
+				Object[] o2 = getCalculationData(s, s1);
+				if (o2 != null) {
+					list.add(o2);
+					return;
+				}
+			}
+		}
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationData_r_s "+s+" end. -------------------");
 	}
 
 	protected Object[] getCalculationDataStringArray(String s) {
 		boolean debug = true;
 		List<String> list = Modchu_Main.copyList(calculationStringList);
 		list.addAll(calculationTrigonometricFunctionStringList);
-		list.add(0, "(");
+		list.add("(");
+		int i0 = list.size() - 1;
 		Object[] o0 = Modchu_Main.getIndexOf(s, list);
 		int i1 = -1;
 		int i = -1;
@@ -183,7 +272,7 @@ public class Modchu_TextCalculation {
 		String s4 = null;
 		int i2 = -1;
 		int i3 = -1;
-		if (i != 0) {
+		if (i != i0) {
 			boolean flag = false;
 			String s5 = s;
 			String s6 = s1;
@@ -271,13 +360,9 @@ public class Modchu_TextCalculation {
 	protected boolean trigonometricFunctionCheck(String s) {
 		boolean debug = true;
 		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationDataTrigonometricFunctionCheck "+s+" ------------------- start.");
-		String[] s3 = new String[]{
-				"cos@",
-				"sin@"
-		};
-		for (int i = 0; i < s3.length; i++) {
-			String s4 = s3[i];
-			int i1 = s.indexOf(s4);
+		for (String s4 : calculationTrigonometricFunctionStringList) {
+			String s5 = s4+"@";
+			int i1 = s.indexOf(s5);
 			if (i1 > -1) {
 				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationDataTrigonometricFunctionCheck "+s+" ------------------- end. return true");
 				return true;
@@ -295,17 +380,13 @@ public class Modchu_TextCalculation {
 			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getTrigonometricFunctionStringArray "+s+" ------------------- end. 1 return null");
 			return null;
 		}
-		String[] s3 = new String[]{
-				"cos@",
-				"sin@"
-		};
-		for (int i = 0; i < s3.length; i++) {
-			String s4 = s3[i];
-			int i1 = s.indexOf(s4);
+		for (String s4 : calculationTrigonometricFunctionStringList) {
+			String s5 = s4+"@";
+			int i1 = s.indexOf(s5);
 			if (i1 > -1) {
 				String[] s0 = new String[3];
 				if (i1 > 0) s0[0] = s.substring(0, i1);
-				int i2 = s.indexOf("@", i1 + s4.length());
+				int i2 = s.indexOf("@", i1 + s5.length());
 				if (i2 > -1) {
 					s0[1] = s.substring(i1, i2 + 1);
 					if (i2 + 1 < s.length()) s0[2] = s.substring(i2 + 1);
@@ -320,63 +401,62 @@ public class Modchu_TextCalculation {
 		return null;
 	}
 
-	protected Object[] getCalculationDataTrigonometricFunction(String s) {
+	protected Object[] getCalculationDataTrigonometricFunction(String s, Object o) {
 		boolean debug = true;
 		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction "+s+" ------------------- start.");
-		Object[] o = null;
-		String[] s3 = new String[]{
-				"cos@",
-				"sin@"
-		};
-		for (int i = 0; i < s3.length; i++) {
-			String s4 = s3[i];
-			int i1 = s.indexOf(s4);
+		Object[] o1 = null;
+		int i = 0;
+		for (String s1 : calculationTrigonometricFunctionStringList) {
+			String s2 = s1+"(";
+			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction s2="+s2);
+			int i1 = s.indexOf(s2);
 			if (i1 > -1) {
-				String s5 = s4+"\\|";
-				int i2 = s.indexOf(s5);
-				if (i2 < 0) {
-					int i3 = i1 + s4.length();
-					int i4 = s.indexOf("@", i3);
-					if (i4 > -1) {
-						if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction List i3="+i3+" i4="+i4);
-						if (i4 - i3 < 0) {
-							String ss = "Modchu_TextCalculation getCalculationDataTrigonometricFunction List index Error i3 - i4 < 0 s="+s+" s4="+s4;
-							if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction List error ss="+ss);
-							Modchu_Main.setRuntimeException(ss);
-							return null;
-						}
-						String s6 = s.substring(i3, i4);
-						LinkedList<Object[]> list2 = new LinkedList();
-						ArrayList<String> tempList2 = new ArrayList();
-						if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction List "+s6+" ------------------- start.");
-						tempList2.add(s6);
-						for(int i5 = 0; i5 < maxLoop; i5++) {
-							settingCalculationData_r(list2, tempList2);
-							if (tempList2.isEmpty()) {
-								if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction tempList2.isEmpty() break.");
-								break;
-							}
-						}
-						if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction List "+s6+" ------------------- end.");
-						int i6 = 100 + i;
-						if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction i6="+i6+" s6="+s6);
-						o = new Object[]{ i6, list2, s4.replace("@", "(") + s6 + ")" };
-/*
-						String s7 = s.length() > i4 + 1 ? s.substring(i4 + 1) : null;
-						if (s7 != null
-								&& !s7.isEmpty()) {
-							String s8 = "Modchu_TextCalculation getCalculationDataTrigonometricFunction error s7="+s7;
-							if (debug) Modchu_Debug.mDebug(s8);
-							Modchu_Main.setRuntimeException(s8);
-						}
-*/
-						if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction end.");
-					}
+				int i2 = s.indexOf(")");
+				if (i2 > -1) {
+					String s3 = Modchu_Main.getInsideParentheses(s1);
+					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction InsideParentheses "+s3+" ------------------- start.");
+					// TODO
+					Object[] o2 = getCalculationData(s3, o);
+					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction InsideParentheses "+s3+" ------------------- end.");
+					int i3 = 100 + i;
+					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction i3="+i3+" s3="+s3);
+					o2 = new Object[]{ i3, o2, s };
+					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction end.");
+				}
+			}
+			i++;
+		}
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction "+s+" ------------------- end. o[0]="+(o1 != null && o1.length > 0 ? o1[0] : null)+" o[1]="+(o1 != null && o1.length > 1 ? o1[1] : null)+" o[1].getClass()="+(o1 != null && o1.length > 1 ? o1[1].getClass() : null));
+		return o1;
+	}
+
+	protected Object[] getCalculationData(String s, Object o) {
+		boolean debug = true;
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationData "+s+" o="+o+" ------------------- start.");
+		Object[] o1 = null;
+		int i = 0;
+		for (String s2 : calculationStringList) {
+			if (s.equals(s2)) {
+				if (!(o instanceof List)
+						&& !(o instanceof String)) {
+					String ss = "Modchu_TextCalculation getCalculationData !(o instanceof List) && !(o instanceof String) error !! o="+o+" o.getClass()="+(o != null ? o.getClass() : null);
+					if (debug) Modchu_Debug.mDebug(ss);
+					Modchu_Main.setRuntimeException(ss);
+					return null;
+				}
+				// TODO
+				if (o instanceof List) {
+					List list2 =  (List) o;
+					//Object[] o4 = getCalculationData(list2);
+				}
+				if (o instanceof String) {
+					String s1 = o instanceof String ? (String) o : null;
+					//o1 = getCalculationData(s1);
 				}
 			}
 		}
-		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationDataTrigonometricFunction "+s+" ------------------- end. o[0]="+(o != null && o.length > 0 ? o[0] : null)+" o[1]="+(o != null && o.length > 1 ? o[1] : null)+" o[1].getClass()="+(o != null && o.length > 1 ? o[1].getClass() : null));
-		return o;
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation getCalculationData "+s+" o="+o+" ------------------- end.");
+		return o1;
 	}
 
 	protected void settingCalculationParenthesis_r(List<String> list, List<String> list1) {
@@ -385,45 +465,43 @@ public class Modchu_TextCalculation {
 		list1.remove(0);
 		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r "+s+" ------------------- start.");
 		Object[] o = new Object[3];
-		String[] s0 = new String[]{
-				"cos(",
-				"sin("
-		};
-		for (int i = 0; i < s0.length; i++) {
-			String s1 = s0[i];
-			int i1 = s.indexOf(s1);
-			if (i1 > -1) {
-				int i2 = s.indexOf(")");
-				if (i2 > -1) {
-					s = s.replace(s1, s1.substring(0, s1.length() - 1)+"@");
-					s = s.substring(0, i2) + "@" + s.substring(i2 + 1);
-					list1.add(s);
-					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r 1 list1.add s="+s);
-					return;
-				}
+		for (String s1 : calculationTrigonometricFunctionStringList) {
+			String s2 = s1+"@";
+			if (s.startsWith(s1)
+					&& !s.startsWith(s2)); else continue;
+			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r 1 1 s1="+s1);
+			Object[] o1 = Modchu_Main.getInsideParenthesesData(s);
+			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r 1 2 "+Modchu_Debug.getDebugArrayString("o1", o1));
+			if (o1 != null
+					&& o1.length > 2) {
+				String s3 = Modchu_CastHelper.String(o1[0]);
+				int i2 = Modchu_CastHelper.Int(o1[2]);
+				s = s1 + "@" + s3 + "@" + s.substring(i2 + 1);
+				list1.add(s);
+				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r 1 3 list1.add s="+s);
+				return;
 			}
 		}
-		int i1 = s.lastIndexOf("(");
-		if (i1 > -1) {
-			int i2 = i1 + 1;
+		if (s.startsWith("(")) {
+			int i2 = 1;
 			String s1 = s.substring(i2);
 			int i3 = s1.indexOf(")");
 			if (i3 > -1) {
 				i2 += i3;
 				s1 = s1.substring(0, i3);
 				list.add(0, s1);
-				String s3 = new StringBuilder().append(s.substring(0, i1)).append(s.substring(i2 + 1)).toString();
+				String s3 = s.substring(i2 + 1);
 				list1.add(s3);
 				if (debug) {
-					Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r 2 list.add s1="+s1);
-					Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r 2 list1.add s3="+s3);
+					Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r 4 list.add s1="+s1);
+					Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r 5 list1.add s3="+s3);
 				}
 				return;
 			}
 		}
 		list.add(s);
 		if (debug) {
-			Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r 3 list.add s="+s);
+			Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r 6 list.add s="+s);
 			Modchu_Debug.mDebug("Modchu_TextCalculation settingCalculationParenthesis_r "+s+" ------------------- end.");
 		}
 	}
@@ -482,7 +560,7 @@ public class Modchu_TextCalculation {
 							&& (Float) o3 > 0.0F) Modchu_Debug.mDebug("Modchu_TextCalculation runCalculation o2 instanceof String. get argument o3="+o3);
 				}
 			} else {
-				Modchu_Main.setRuntimeException("Modchu_TextCalculation runCalculation !map.containsKey("+s+") ERROR !!");
+				Modchu_Main.setRuntimeException("Modchu_TextCalculation runCalculation !map.containsKey ERROR !! s="+s);
 				return null;
 			}
 		} else {
@@ -654,25 +732,75 @@ public class Modchu_TextCalculation {
 	}
 
 	public String calculationObjectArrayToString(Object[] o) {
-		boolean debug = false;
+		return calculationObjectArrayToString(o, true);
+	}
+
+	public String calculationObjectArrayToString(Object[] o, boolean isDetail) {
+		return isDetail ? calculationObjectArrayToStringDetail(o) : calculationObjectArrayToStringSimplicity(o);
+	}
+
+	public String calculationObjectArrayToStringDetail(Object[] o) {
+		boolean debug = true;
 		if (o != null
 				&& o.length > 1); else return null;
 		int i = Modchu_CastHelper.Int(o[0]);
-		Object o2 = o[2];
-		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationObjectArrayToString i="+i+" o2="+o2);
+		Object o2 = o[1];
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationObjectArrayToStringDetail i="+i+" o2="+o2);
 		String s = null;
 		if (o2 instanceof List) {
 			List list = (List) o2;
-			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationObjectArrayToString o2 instanceof List ----------- list="+Modchu_Main.listToString(list));
+			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationObjectArrayToStringDetail o2 instanceof List ----------- list="+Modchu_Main.listToString(list));
 			s = calculationListToString(list);
 		}
 		else if (o2 instanceof String) {
 			s = (String) o2;
-			return s;
+		} else {
+			StringBuilder sd = new StringBuilder();
+			switch(i) {
+			case 1:
+				sd.append("*");
+			case 2:
+				sd.append("/");
+			case 3:
+				sd.append("+");
+			case 4:
+				sd.append("-");
+			case 5:
+				sd.append("%");
+			case 100:
+				sd.append("cos(");
+			case 101:
+				sd.append("sin(");
+			}
+			sd.append(o2.toString());
+			if (i > 99) sd.append(")");
+			s = sd.toString();
+		}
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationObjectArrayToStringDetail end. s="+s);
+		return s;
+	}
+
+	public String calculationObjectArrayToStringSimplicity(Object[] o) {
+		boolean debug = false;
+		if (o != null
+				&& o.length > 1); else return null;
+		Object o2 = o[2];
+		if (debug) {
+			int i = Modchu_CastHelper.Int(o[0]);
+			Modchu_Debug.mDebug("Modchu_TextCalculation calculationObjectArrayToStringSimplicity i="+i+" o2="+o2);
+		}
+		String s = null;
+		if (o2 instanceof List) {
+			List list = (List) o2;
+			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationObjectArrayToStringSimplicity o2 instanceof List ----------- list="+Modchu_Main.listToString(list));
+			s = calculationListToString(list);
+		}
+		else if (o2 instanceof String) {
+			s = (String) o2;
 		} else {
 			s = o2.toString();
 		}
-		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationObjectArrayToString end. s="+s);
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation calculationObjectArrayToStringSimplicity end. s="+s);
 		return s;
 	}
 

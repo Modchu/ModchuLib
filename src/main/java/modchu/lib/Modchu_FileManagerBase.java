@@ -478,6 +478,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	}
 
 	protected void addModResourcePack(Class c) {
+		if (Modchu_Main.isServer) return;
 		boolean debug = true;
 		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 1 c="+c);
 		Object o = Modchu_Main.newModchuCharacteristicObject("Modchu_ResourcePack", Modchu_ModResourcePackMaster.class, c);
