@@ -190,12 +190,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 		return null;
 	}
 
-	public String getCommandSenderName() {
-		return null;
-	}
-
-	@Override
-	public String superGetCommandSenderName() {
+	public String getName() {
 		return null;
 	}
 

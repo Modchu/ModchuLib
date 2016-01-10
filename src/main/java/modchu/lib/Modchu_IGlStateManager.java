@@ -52,7 +52,7 @@ public interface Modchu_IGlStateManager {
 	public void enableTexGenCoord(Object glStateManagerTexGen);
 	public void disableTexGenCoord(Object glStateManagerTexGen);
 	public void texGen(Object glStateManagerTexGen, int p_179149_1_);
-	public void func_179105_a(Object glStateManagerTexGen, int p_179105_1_, Object floatBuffer);
+	public void texGen(Object glStateManagerTexGen, int p_179105_1_, Object floatBuffer);
 	public void disableTexture2D();
 	public void deleteTexture(int p_179150_0_);
 	public void bindTexture(int p_179144_0_);

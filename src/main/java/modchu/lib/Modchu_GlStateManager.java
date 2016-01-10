@@ -215,8 +215,8 @@ public class Modchu_GlStateManager {
 		master.texGen(glStateManagerTexGen, p_179149_1_);
 	}
 
-	public static void func_179105_a(Object glStateManagerTexGen, int p_179105_1_, Object floatBuffer) {
-		master.func_179105_a(glStateManagerTexGen, p_179105_1_, (FloatBuffer) floatBuffer);
+	public static void texGen(Object glStateManagerTexGen, int p_179105_1_, Object floatBuffer) {
+		master.texGen(glStateManagerTexGen, p_179105_1_, (FloatBuffer) floatBuffer);
 	}
 
 	public static void disableTexture2D() {

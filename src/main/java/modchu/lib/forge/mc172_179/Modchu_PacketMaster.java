@@ -20,7 +20,7 @@ import modchu.lib.Modchu_IPacketMaster;
 import modchu.lib.Modchu_Packet;
 import modchu.lib.Modchu_PacketManager;
 import modchu.lib.Modchu_Reflect;
-import modchu.lib.forge.mc172_188.Modchu_Message;
+import modchu.lib.forge.mc172_189.Modchu_Message;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;

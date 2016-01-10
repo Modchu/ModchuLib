@@ -624,9 +624,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.onItemUseFinish();
 	}	@Override
 	public void handleHealthUpdate(byte par1) {
-		if (master != null) master.handleHealthUpdate(par1);
+		if (master != null) master.handleStatusUpdate(par1);
 		else super.handleHealthUpdate(par1);
-	}	@Override	public void superHandleHealthUpdate(byte par1) {
+	}	@Override	public void superHandleStatusUpdate(byte par1) {
 		super.handleHealthUpdate(par1);
 	}	@Override
 	protected boolean isMovementBlocked() {
@@ -965,8 +965,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.setGameType((EnumGameType) enumGameType);
 	}	@Override
 	public String getCommandSenderName() {
-		return master != null ? master.getCommandSenderName() : super.getCommandSenderName();
-	}	@Override	public String superGetCommandSenderName() {
+		return master != null ? master.getName() : super.getCommandSenderName();
+	}	@Override	public String superGetName() {
 		return super.getCommandSenderName();
 	}	@Override
 	public World getEntityWorld() {
@@ -1738,9 +1738,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.getCollisionBorderSize();
 	}	@Override
 	public void setInPortal() {
-		if (master != null) master.setInPortal(null);
+		if (master != null) master.setPortal(null);
 		else super.setInPortal();
-	}	@Override	public void superSetInPortal(Object bockPos) {
+	}	@Override	public void superSetPortal(Object bockPos) {
 		super.setInPortal();
 	}	@Override
 	public void setVelocity(double par1, double par3, double par5) {
@@ -2133,9 +2133,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public boolean superCanPlayerEdit(Object blockPos, Object enumFacing, Object itemStack) {
 		return false;
-	}	@Override
-	public String superGetName() {
-		return null;
 	}	@Override
 	public Object[] superGetInventory() {
 		return null;

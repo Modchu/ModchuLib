@@ -64,8 +64,9 @@ public class Modchu_TexturedQuadMaster implements Modchu_ITexturedQuadMaster {
 		Object vec3_3 = vec3_2 != null
 				&& vec3_0 != null ? Modchu_AS.get(Modchu_AS.vec3Normalize, Modchu_AS.get(Modchu_AS.vec3CrossProduct, vec3_2, vec3_0)) : null;
 		//Modchu_Debug.mDebug("Modchu_TexturedQuadMaster draw vec3_3="+vec3_3);
-		if (Modchu_Main.getMinecraftVersion() > 180) {
-			Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, worldRendererOrTessellator, 7, Modchu_AS.get("DefaultVertexFormats", "field_181703_c"));
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 180) {
+			Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, worldRendererOrTessellator, 7, Modchu_AS.get("DefaultVertexFormats", version > 188 ? "OLDMODEL_POSITION_TEX_NORMAL" : "field_181703_c"));
 		} else {
 			Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, worldRendererOrTessellator);
 		}

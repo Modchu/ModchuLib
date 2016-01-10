@@ -411,12 +411,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void handleHealthUpdate(byte p_70103_1_) {
-		if (master != null) master.handleHealthUpdate(p_70103_1_);
+		if (master != null) master.handleStatusUpdate(p_70103_1_);
 		else super.handleHealthUpdate(p_70103_1_);
 	}
 
 	@Override
-	public void superHandleHealthUpdate(byte p_70103_1_) {
+	public void superHandleStatusUpdate(byte p_70103_1_) {
 		super.handleHealthUpdate(p_70103_1_);
 	}
 
@@ -1339,7 +1339,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public String getCommandSenderName() {
-		return master != null ? master.getCommandSenderName() : super.getCommandSenderName();
+		return master != null ? master.getName() : super.getCommandSenderName();
 	}
 
 	public String supergetCommandSenderName() {
@@ -3141,12 +3141,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void func_181015_d(BlockPos bockPos) {
-		if (master != null) master.setInPortal(bockPos);
+		if (master != null) master.setPortal(bockPos);
 		else super.func_181015_d(bockPos);
 	}
 
 	@Override
-	public void superSetInPortal(Object bockPos) {
+	public void superSetPortal(Object bockPos) {
 		super.func_181015_d((BlockPos) bockPos);
 	}
 
@@ -3994,7 +3994,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public String superGetCommandSenderName() {
+	public String superGetName() {
 		return null;
 	}
 

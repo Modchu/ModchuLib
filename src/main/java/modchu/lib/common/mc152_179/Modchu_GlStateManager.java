@@ -215,7 +215,7 @@ public class Modchu_GlStateManager implements Modchu_IGlStateManager {
 		Modchu_GlStateManagerBase.texGen(glStateManagerTexGen, p_179149_1_);
 	}
 
-	public void func_179105_a(Object glStateManagerTexGen, int p_179105_1_, Object floatBuffer) {
+	public void texGen(Object glStateManagerTexGen, int p_179105_1_, Object floatBuffer) {
 		Modchu_GlStateManagerBase.func_179105_a(glStateManagerTexGen, p_179105_1_, (FloatBuffer) floatBuffer);
 	}
 

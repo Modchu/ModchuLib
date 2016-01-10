@@ -379,11 +379,11 @@ public class Modchu_EntityOtherPlayerMPB extends EntityOtherPlayerMP {
 
 	@Override
 	public void handleHealthUpdate(byte p_70103_1_) {
-		if (master != null) master.handleHealthUpdate(p_70103_1_);
+		if (master != null) master.handleStatusUpdate(p_70103_1_);
 		else super.handleHealthUpdate(p_70103_1_);
 	}
 
-	public void superHandleHealthUpdate(byte p_70103_1_) {
+	public void superHandleStatusUpdate(byte p_70103_1_) {
 		super.handleHealthUpdate(p_70103_1_);
 	}
 
@@ -1219,10 +1219,10 @@ public class Modchu_EntityOtherPlayerMPB extends EntityOtherPlayerMP {
 
 	@Override
 	public String getName() {
-		return master != null ? master.getCommandSenderName() : super.getName();
+		return master != null ? master.getName() : super.getName();
 	}
 
-	public String superGetCommandSenderName() {
+	public String superGetName() {
 		return super.getName();
 	}
 
@@ -2852,11 +2852,11 @@ public class Modchu_EntityOtherPlayerMPB extends EntityOtherPlayerMP {
 
 	@Override
 	public void setInPortal() {
-		if (master != null) master.setInPortal(null);
+		if (master != null) master.setPortal(null);
 		else super.setInPortal();
 	}
 
-	public void superSetInPortal(Object bockPos) {
+	public void superSetPortal(Object bockPos) {
 		super.setInPortal();
 	}
 

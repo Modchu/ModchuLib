@@ -88,11 +88,11 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
-		return (ItemStack) (master != null ? master.getStackInSlotOnClosing(par1) : super.getStackInSlotOnClosing(par1));
+		return (ItemStack) (master != null ? master.removeStackFromSlot(par1) : super.getStackInSlotOnClosing(par1));
 	}
 
 	@Override
-	public ItemStack superGetStackInSlotOnClosing(int par1) {
+	public ItemStack superRemoveStackFromSlot(int par1) {
 		return super.getStackInSlotOnClosing(par1);
 	}
 

@@ -100,7 +100,7 @@ public interface Modchu_IEntityPlayerSPMaster {
 	public int getPortalCooldown();
 	public void updateItemUse(Object itemStack, int par2);
 	public void onItemUseFinish();
-	public void handleHealthUpdate(byte par1);
+	public void handleStatusUpdate(byte par1);
 	public boolean isMovementBlocked();
 	public void mountEntity(Object entity);
 	public int getScore();
@@ -163,7 +163,6 @@ public interface Modchu_IEntityPlayerSPMaster {
 	public void clonePlayer(Object entityPlayer, boolean par2);
 	public boolean canTriggerWalking();
 	public void setGameType(Object enumGameType);
-	public String getCommandSenderName();
 	public Object getEntityWorld();
 	public Object getInventoryEnderChest();
 	public Object getCurrentItemOrArmor(int par1);
@@ -306,7 +305,7 @@ public interface Modchu_IEntityPlayerSPMaster {
 	public Object getCollisionBox(Object entity);
 	public void updateRiderPosition();
 	public float getCollisionBorderSize();
-	public void setInPortal(Object blockPos);
+	public void setPortal(Object blockPos);
 	public void setVelocity(double par1, double par3, double par5);
 	public boolean isBurning();
 	public boolean isRiding();

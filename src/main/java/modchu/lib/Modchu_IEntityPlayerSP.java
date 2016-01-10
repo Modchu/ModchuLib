@@ -102,7 +102,7 @@ public interface Modchu_IEntityPlayerSP {
 	public int superGetPortalCooldown();
 	public void superUpdateItemUse(Object itemStack, int par2);
 	public void superOnItemUseFinish();
-	public void superHandleHealthUpdate(byte par1);
+	public void superHandleStatusUpdate(byte par1);
 	public boolean superIsMovementBlocked();
 	public void superMountEntity(Object entity);
 	public int superGetScore();
@@ -165,7 +165,7 @@ public interface Modchu_IEntityPlayerSP {
 	public void superClonePlayer(Object entityPlayer, boolean par2);
 	public boolean superCanTriggerWalking();
 	public void superSetGameType(Object enumGameType);
-	public String superGetCommandSenderName();
+	public String superGetName();
 	public Object superGetEntityWorld();
 	public Object superGetInventoryEnderChest();
 	public Object superGetCurrentItemOrArmor(int par1);
@@ -308,7 +308,7 @@ public interface Modchu_IEntityPlayerSP {
 	public Object superGetCollisionBox(Object entity);
 	public void superUpdateRiderPosition();
 	public float superGetCollisionBorderSize();
-	public void superSetInPortal(Object blockPos);
+	public void superSetPortal(Object blockPos);
 	public void superSetVelocity(double par1, double par3, double par5);
 	public boolean superIsBurning();
 	public boolean superIsRiding();
@@ -502,7 +502,6 @@ public interface Modchu_IEntityPlayerSP {
 	public void superRemoveExperienceLevel(int levels);
 	public boolean superIsAllowEdit();
 	public boolean superCanPlayerEdit(Object blockPos, Object enumFacing, Object itemStack);
-	public String superGetName();
 	public Object[] superGetInventory();
 	public boolean superCanOpen(Object lockCode);
 	public boolean superIsWearing(Object enumPlayerModelParts);

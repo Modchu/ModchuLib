@@ -268,12 +268,12 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public void handleHealthUpdate(byte par1) {
-		if (master != null) master.handleHealthUpdate(par1);
+		if (master != null) master.handleStatusUpdate(par1);
 		else super.handleHealthUpdate(par1);
 	}
 
 	@Override
-	public void superHandleHealthUpdate(byte par1) {
+	public void superHandleStatusUpdate(byte par1) {
 		super.handleHealthUpdate(par1);
 	}
 
@@ -2514,12 +2514,12 @@ public class Modchu_EntityTameableB extends EntityTameable implements Modchu_IEn
 
 	@Override
 	public void setInPortal() {
-		if (master != null) master.setInPortal(null);
+		if (master != null) master.setPortal(null);
 		else super.setInPortal();
 	}
 
 	@Override
-	public void superSetInPortal(Object bockPos) {
+	public void superSetPortal(Object bockPos) {
 		super.setInPortal();
 	}
 

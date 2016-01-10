@@ -12,7 +12,7 @@ public interface Modchu_IInventoryPlayer {
 	public boolean superHasItem(int par1);
 	public boolean superAddItemStackToInventory(Object itemStack);
 	public Object superDecrStackSize(int par1, int par2);
-	public Object superGetStackInSlotOnClosing(int par1);
+	public Object superRemoveStackFromSlot(int par1);
 	public void superSetInventorySlotContents(int par1, Object itemStack);
 	public float superGetStrVsBlock(Object block);
 	public Object superWriteToNBT(Object nBTTagList);

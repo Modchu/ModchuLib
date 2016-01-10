@@ -22,7 +22,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public void playSound(String par1Str, float par2, float par3);
 	public void updateItemUse(Object itemStack, int par2);
 	public void onItemUseFinish();
-	public void handleHealthUpdate(byte par1);
+	public void handleStatusUpdate(byte par1);
 	public boolean isMovementBlocked();
 	public void closeScreen();
 	public void mountEntity(Object entity);
@@ -274,7 +274,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public void updateRiderPosition();
 	public double getMountedYOffset();
 	public float getCollisionBorderSize();
-	public void setInPortal(Object bockPos);
+	public void setPortal(Object bockPos);
 	public void setVelocity(double par1, double par3, double par5);
 	public boolean isBurning();
 	public boolean isRiding();

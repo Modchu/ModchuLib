@@ -224,7 +224,7 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	}
 
 	@Override
-	public String superGetCommandSenderName() {
+	public String superGetName() {
 		return null;
 	}
 
@@ -368,10 +368,6 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 	}
 
 	public Object superOnSpawnWithEgg(Object difficultyInstance, Object iEntityLivingData) {
-		return null;
-	}
-
-	public String superGetName() {
 		return null;
 	}
 

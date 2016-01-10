@@ -2,7 +2,6 @@ package modchu.lib.forge.mc164;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IContainerPlayerMaster;
 import modchu.lib.Modchu_IInventoryPlayer;
 import modchu.lib.Modchu_IInventoryPlayerMaster;
 import modchu.lib.Modchu_Main;
@@ -30,6 +29,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return (ItemStack) (master != null ? master.getCurrentItem() : super.getCurrentItem());
 	}
 
+	@Override
 	public ItemStack superGetCurrentItem() {
 		return super.getCurrentItem();
 	}
@@ -39,6 +39,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.getFirstEmptyStack() : super.getFirstEmptyStack();
 	}
 
+	@Override
 	public int superGetFirstEmptyStack() {
 		return super.getFirstEmptyStack();
 	}
@@ -49,6 +50,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.setCurrentItem(par1, par2, par3, par4);
 	}
 
+	@Override
 	public void superSetCurrentItem(int par1, int par2, boolean par3, boolean par4) {
 		super.setCurrentItem(par1, par2, par3, par4);
 	}
@@ -59,6 +61,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.changeCurrentItem(par1);
 	}
 
+	@Override
 	public void superChangeCurrentItem(int par1) {
 		super.changeCurrentItem(par1);
 	}
@@ -68,6 +71,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.clearInventory(par1, par2) : super.clearInventory(par1, par2);
 	}
 
+	@Override
 	public int superClearInventory(int par1, int par2) {
 		return super.clearInventory(par1, par2);
 	}
@@ -78,6 +82,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.func_70439_a(item, par2);
 	}
 
+	@Override
 	public void superFunc_70439_a(Object item, int par2) {
 		super.func_70439_a((Item) item, par2);
 	}
@@ -88,6 +93,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.decrementAnimations();
 	}
 
+	@Override
 	public void superDecrementAnimations() {
 		super.decrementAnimations();
 	}
@@ -97,6 +103,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.consumeInventoryItem(par1) : super.consumeInventoryItem(par1);
 	}
 
+	@Override
 	public boolean superConsumeInventoryItem(int par1) {
 		return super.consumeInventoryItem(par1);
 	}
@@ -106,6 +113,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.hasItem(par1) : super.hasItem(par1);
 	}
 
+	@Override
 	public boolean superHasItem(int par1) {
 		return super.hasItem(par1);
 	}
@@ -115,6 +123,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.addItemStackToInventory(itemStack) : super.addItemStackToInventory(itemStack);
 	}
 
+	@Override
 	public boolean superAddItemStackToInventory(Object itemStack) {
 		return super.addItemStackToInventory((ItemStack) itemStack);
 	}
@@ -124,16 +133,18 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return (ItemStack) (master != null ? master.decrStackSize(par1, par2) : super.decrStackSize(par1, par2));
 	}
 
+	@Override
 	public ItemStack superDecrStackSize(int par1, int par2) {
 		return super.decrStackSize(par1, par2);
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
-		return (ItemStack) (master != null ? master.getStackInSlotOnClosing(par1) : super.getStackInSlotOnClosing(par1));
+		return (ItemStack) (master != null ? master.removeStackFromSlot(par1) : super.getStackInSlotOnClosing(par1));
 	}
 
-	public ItemStack superGetStackInSlotOnClosing(int par1) {
+	@Override
+	public ItemStack superRemoveStackFromSlot(int par1) {
 		return super.getStackInSlotOnClosing(par1);
 	}
 
@@ -143,6 +154,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.setInventorySlotContents(par1, itemStack);
 	}
 
+	@Override
 	public void superSetInventorySlotContents(int par1, Object itemStack) {
 		super.setInventorySlotContents(par1, (ItemStack) itemStack);
 	}
@@ -152,6 +164,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.getStrVsBlock(block) : super.getStrVsBlock(block);
 	}
 
+	@Override
 	public float superGetStrVsBlock(Object block) {
 		return super.getStrVsBlock((Block) block);
 	}
@@ -161,6 +174,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return (NBTTagList) (master != null ? master.writeToNBT(nBTTagList) : super.writeToNBT(nBTTagList));
 	}
 
+	@Override
 	public NBTTagList superWriteToNBT(Object nBTTagList) {
 		return super.writeToNBT((NBTTagList) nBTTagList);
 	}
@@ -171,6 +185,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.readFromNBT(nBTTagList);
 	}
 
+	@Override
 	public void superReadFromNBT(Object nBTTagList) {
 		super.readFromNBT((NBTTagList) nBTTagList);
 	}
@@ -180,6 +195,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.getSizeInventory() : super.getSizeInventory();
 	}
 
+	@Override
 	public int superGetSizeInventory() {
 		return super.getSizeInventory();
 	}
@@ -189,6 +205,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return (ItemStack) (master != null ? master.getStackInSlot(par1) : super.getStackInSlot(par1));
 	}
 
+	@Override
 	public ItemStack superGetStackInSlot(int par1) {
 		return super.getStackInSlot(par1);
 	}
@@ -198,6 +215,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.getInvName() : super.getInvName();
 	}
 
+	@Override
 	public String superGetInvName() {
 		return super.getInvName();
 	}
@@ -207,6 +225,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.isInvNameLocalized() : super.isInvNameLocalized();
 	}
 
+	@Override
 	public boolean superIsInvNameLocalized() {
 		return super.isInvNameLocalized();
 	}
@@ -216,6 +235,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.getInventoryStackLimit() : super.getInventoryStackLimit();
 	}
 
+	@Override
 	public int superGetInventoryStackLimit() {
 		return super.getInventoryStackLimit();
 	}
@@ -225,6 +245,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.canHarvestBlock(block) : super.canHarvestBlock(block);
 	}
 
+	@Override
 	public boolean superCanHarvestBlock(Object block) {
 		return super.canHarvestBlock((Block) block);
 	}
@@ -234,6 +255,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return (ItemStack) (master != null ? master.armorItemInSlot(par1) : super.armorItemInSlot(par1));
 	}
 
+	@Override
 	public ItemStack superArmorItemInSlot(int par1) {
 		return super.armorItemInSlot(par1);
 	}
@@ -243,6 +265,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.getTotalArmorValue() : super.getTotalArmorValue();
 	}
 
+	@Override
 	public int superGetTotalArmorValue() {
 		return super.getTotalArmorValue();
 	}
@@ -253,6 +276,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.damageArmor(par1);
 	}
 
+	@Override
 	public void superDamageArmor(float par1) {
 		super.damageArmor(par1);
 	}
@@ -263,6 +287,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.dropAllItems();
 	}
 
+	@Override
 	public void superDropAllItems() {
 		super.dropAllItems();
 	}
@@ -273,6 +298,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.onInventoryChanged();
 	}
 
+	@Override
 	public void superOnInventoryChanged() {
 		super.onInventoryChanged();
 	}
@@ -283,6 +309,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.setItemStack(itemStack);
 	}
 
+	@Override
 	public void superSetItemStack(Object itemStack) {
 		super.setItemStack((ItemStack) itemStack);
 	}
@@ -292,6 +319,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return (ItemStack) (master != null ? master.getItemStack() : super.getItemStack());
 	}
 
+	@Override
 	public ItemStack superGetItemStack() {
 		return super.getItemStack();
 	}
@@ -301,6 +329,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.isUseableByPlayer(entityPlayer) : super.isUseableByPlayer(entityPlayer);
 	}
 
+	@Override
 	public boolean superIsUseableByPlayer(Object entityPlayer) {
 		return super.isUseableByPlayer((EntityPlayer) entityPlayer);
 	}
@@ -310,6 +339,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.hasItemStack(itemStack) : super.hasItemStack(itemStack);
 	}
 
+	@Override
 	public boolean superHasItemStack(Object itemStack) {
 		return super.hasItemStack((ItemStack) itemStack);
 	}
@@ -320,6 +350,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.openChest();
 	}
 
+	@Override
 	public void superOpenChest() {
 		super.openChest();
 	}
@@ -330,6 +361,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.closeChest();
 	}
 
+	@Override
 	public void superCloseChest() {
 		super.closeChest();
 	}
@@ -339,6 +371,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return master != null ? master.isItemValidForSlot(par1, itemStack) : super.isItemValidForSlot(par1, itemStack);
 	}
 
+	@Override
 	public boolean superIsItemValidForSlot(int par1, Object itemStack) {
 		return super.isItemValidForSlot(par1, (ItemStack) itemStack);
 	}
@@ -349,6 +382,7 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		else super.copyInventory(inventoryPlayer);
 	}
 
+	@Override
 	public void superCopyInventory(Object inventoryPlayer) {
 		super.copyInventory((InventoryPlayer) inventoryPlayer);
 	}

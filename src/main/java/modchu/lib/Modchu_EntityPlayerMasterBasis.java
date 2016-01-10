@@ -102,8 +102,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void handleHealthUpdate(byte par1) {
-		base.superhandleHealthUpdate(par1);
+	public void handleStatusUpdate(byte par1) {
+		base.superhandleStatusUpdate(par1);
 	}
 
 	@Override
@@ -593,7 +593,7 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 
 	@Override
 	public String getCommandSenderName() {
-		return base.supergetCommandSenderName();
+		return base.supergetName();
 	}
 
 	@Override
@@ -1352,8 +1352,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void setInPortal(Object bockPos) {
-		base.supersetInPortal(null);
+	public void setPortal(Object bockPos) {
+		base.supersetPortal(null);
 	}
 
 	@Override

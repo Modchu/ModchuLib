@@ -486,8 +486,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void handleHealthUpdate(byte par1) {
-		base.superHandleHealthUpdate(par1);
+	public void handleStatusUpdate(byte par1) {
+		base.superHandleStatusUpdate(par1);
 	}
 
 	@Override
@@ -801,8 +801,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public String getCommandSenderName() {
-		return base.superGetCommandSenderName();
+	public String getName() {
+		return base.superGetName();
 	}
 
 	@Override
@@ -1506,8 +1506,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void setInPortal(Object bockPos) {
-		base.superSetInPortal(bockPos);
+	public void setPortal(Object bockPos) {
+		base.superSetPortal(bockPos);
 	}
 
 	@Override
@@ -2048,11 +2048,6 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	@Override
 	public boolean canPlayerEdit(Object blockPos, Object enumFacing, Object itemStack) {
 		return base.superCanPlayerEdit(blockPos, enumFacing, itemStack);
-	}
-
-	@Override
-	public String getName() {
-		return base.superGetName();
 	}
 
 	@Override

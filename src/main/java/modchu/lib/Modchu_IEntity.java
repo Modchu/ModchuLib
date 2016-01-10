@@ -86,10 +86,10 @@ public interface Modchu_IEntity {
 	public void superSetPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_);
 	public float superGetCollisionBorderSize();
 	public Object superGetLookVec();
-	public void superSetInPortal(Object blockPos);
+	public void superSetPortal(Object blockPos);
 	public int superGetPortalCooldown();
 	public void superSetVelocity(double p_70016_1_, double p_70016_3_, double p_70016_5_);
-	public void superHandleHealthUpdate(byte p_70103_1_);
+	public void superHandleStatusUpdate(byte p_70103_1_);
 	public void superPerformHurtAnimation();
 	public Object[] superGetLastActiveItems();
 	public void superSetCurrentItemOrArmor(int p_70062_1_, Object itemStack);
@@ -112,7 +112,7 @@ public interface Modchu_IEntity {
 	public void superOnKillEntity(Object entityLivingBase);
 	public boolean superFunc_145771_j(double p_145771_1_, double p_145771_3_, double p_145771_5_);
 	public void superSetInWeb();
-	public String superGetCommandSenderName();
+	public String superGetName();
 	public Object[] superGetParts();
 	public boolean superIsEntityEqual(Object entity);
 	public float superGetRotationYawHead();

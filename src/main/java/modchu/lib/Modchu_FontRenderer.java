@@ -73,6 +73,7 @@ public class Modchu_FontRenderer {
 	public Modchu_FontRenderer(Object resourceLocation, boolean flag) {
 		fontSize = 1.0F;
 		locationFontTexture = resourceLocation;
+		//Modchu_Debug.lDebug("Modchu_FontRenderer locationFontTexture="+locationFontTexture);
 		unicodeFlag = flag;
 		bindTextureLocationFontTexture();
 
@@ -536,8 +537,9 @@ public class Modchu_FontRenderer {
 				if (strikethroughStyle) {
 					tessellator = Modchu_AS.get(Modchu_AS.tessellatorInstance);
 					Modchu_GlStateManager.disableTexture2D();
-					if (Modchu_Main.getMinecraftVersion() > 180) {
-						Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator, 7, Modchu_AS.get("DefaultVertexFormats", "field_181705_e"));
+					int version = Modchu_Main.getMinecraftVersion();
+					if (version > 180) {
+						Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator, 7, Modchu_AS.get("DefaultVertexFormats", version > 188 ? "POSITION" : "field_181705_e"));
 					} else {
 						Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator);
 					}
@@ -552,8 +554,9 @@ public class Modchu_FontRenderer {
 				if (underlineStyle) {
 					tessellator = Modchu_AS.get(Modchu_AS.tessellatorInstance);
 					Modchu_GlStateManager.disableTexture2D();
-					if (Modchu_Main.getMinecraftVersion() > 180) {
-						Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator, 7, Modchu_AS.get("DefaultVertexFormats", "field_181705_e"));
+					int version = Modchu_Main.getMinecraftVersion();
+					if (version > 180) {
+						Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator, 7, Modchu_AS.get("DefaultVertexFormats", version > 188 ? "POSITION" : "field_181705_e"));
 					} else {
 						Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator);
 					}

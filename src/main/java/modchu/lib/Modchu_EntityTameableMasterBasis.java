@@ -124,8 +124,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void handleHealthUpdate(byte par1) {
-		base.superHandleHealthUpdate(par1);
+	public void handleStatusUpdate(byte par1) {
+		base.superHandleStatusUpdate(par1);
 	}
 
 	@Override
@@ -575,8 +575,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public String getCommandSenderName() {
-		return base.superGetCommandSenderName();
+	public String getName() {
+		return base.superGetName();
 	}
 
 	@Override
@@ -1370,8 +1370,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void setInPortal(Object bockPos) {
-		base.superSetInPortal(bockPos);
+	public void setPortal(Object bockPos) {
+		base.superSetPortal(bockPos);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public interface Modchu_IEntityTameableB {
 	public void superWriteEntityToNBT(Object nBTTagCompound);
 	public void superReadEntityFromNBT(Object nBTTagCompound);
 	public void superPlayTameEffect(boolean par1);
-	public void superHandleHealthUpdate(byte par1);
+	public void superHandleStatusUpdate(byte par1);
 	public boolean superIsTamed();
 	public void superSetTamed(boolean par1);
 	public boolean superIsSitting();
@@ -226,7 +226,7 @@ public interface Modchu_IEntityTameableB {
 	public double superGetMountedYOffset();
 	public void superMountEntity(Object entity);
 	public float superGetCollisionBorderSize();
-	public void superSetInPortal(Object bockPos);
+	public void superSetPortal(Object bockPos);
 	public int superGetPortalCooldown();
 	public void superSetVelocity(double par1, double par3, double par5);
 	public boolean superIsBurning();

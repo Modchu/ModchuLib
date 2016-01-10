@@ -68,7 +68,7 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityTameableB {
 	public Object superOnInitialSpawn(Object iEntityLivingData);
 	public void superFunc_146082_f(Object entityPlayer);
 	public boolean superIsWithinHomeDistance(int par1, int par2, int par3);
-	public String superGetCommandSenderName();
+	public String superGetName();
 	public Object superGetItemIcon(Object itemStack, int par2);
 	public void superFunc_145775_I();
 	public void superFunc_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object block);

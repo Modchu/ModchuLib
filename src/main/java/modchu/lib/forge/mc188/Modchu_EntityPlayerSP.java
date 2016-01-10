@@ -614,9 +614,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.onItemUseFinish();
 	}	@Override
 	public void handleHealthUpdate(byte p_70103_1_) {
-		if (master != null) master.handleHealthUpdate(p_70103_1_);
+		if (master != null) master.handleStatusUpdate(p_70103_1_);
 		else super.handleHealthUpdate(p_70103_1_);
-	}	@Override	public void superHandleHealthUpdate(byte p_70103_1_) {
+	}	@Override	public void superHandleStatusUpdate(byte p_70103_1_) {
 		super.handleHealthUpdate(p_70103_1_);
 	}	@Override
 	protected boolean isMovementBlocked() {
@@ -939,7 +939,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.setGameType((GameType) gameType);
 	}	@Override
 	public String getCommandSenderName() {
-		return master != null ? master.getCommandSenderName() : super.getCommandSenderName();
+		return master != null ? master.getName() : super.getCommandSenderName();
 	}	@Override	public String superGetName() {		return super.getCommandSenderName();	}	@Override
 	public InventoryEnderChest getInventoryEnderChest() {
 		return (InventoryEnderChest) (master != null ? master.getInventoryEnderChest() : super.getInventoryEnderChest());
@@ -1838,9 +1838,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.getCollisionBorderSize();
 	}	@Override
 	public void func_181015_d(BlockPos blockPos) {
-		if (master != null) master.setInPortal(blockPos);
+		if (master != null) master.setPortal(blockPos);
 		else super.func_181015_d(blockPos);
-	}	@Override	public void superSetInPortal(Object blockPos) {		super.func_181015_d((BlockPos) blockPos);	}	@Override
+	}	@Override	public void superSetPortal(Object blockPos) {		super.func_181015_d((BlockPos) blockPos);	}	@Override
 	public void setVelocity(double x, double y, double z) {
 		if (master != null) master.setVelocity(x, y, z);
 		else super.setVelocity(x, y, z);
@@ -2284,9 +2284,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return false;
 	}	@Override
 	public String superGetEntityName() {
-		return null;
-	}	@Override
-	public String superGetCommandSenderName() {
 		return null;
 	}	@Override
 	public Object superGetCurrentItemOrArmor(int par1) {

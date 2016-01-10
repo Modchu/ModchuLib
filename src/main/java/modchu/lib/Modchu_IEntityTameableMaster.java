@@ -24,7 +24,7 @@ public interface Modchu_IEntityTameableMaster {
 	public Object getResourceLocation();
 	public int getTextureColor();
 	public double getYOffset();
-	public void handleHealthUpdate(byte par1);
+	public void handleStatusUpdate(byte par1);
 	public void heal(float f);
 	public boolean interact(Object entityplayer);
 	public boolean isAngry();
@@ -118,7 +118,7 @@ public interface Modchu_IEntityTameableMaster {
 	public Object onInitialSpawn(Object iEntityLivingData);
 	public Object onInitialSpawn(Object difficultyInstance, Object iEntityLivingData);
 	public boolean canBeSteered();
-	public String getCommandSenderName();
+	public String getName();
 	public void func_110163_bv();
 	public void setCustomNameTag(String par1Str);
 	public String getCustomNameTag();
@@ -277,7 +277,7 @@ public interface Modchu_IEntityTameableMaster {
 	public void updateRiderPosition();
 	public void mountEntity(Object entity);
 	public float getCollisionBorderSize();
-	public void setInPortal(Object bockPos);
+	public void setPortal(Object bockPos);
 	public int getPortalCooldown();
 	public void setVelocity(double par1, double par3, double par5);
 	public boolean isBurning();

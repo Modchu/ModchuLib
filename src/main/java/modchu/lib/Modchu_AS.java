@@ -11,21 +11,32 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Modchu_AS extends Modchu_ASAlmighty {
-	public static Modchu_IASMaster master;
+	public Modchu_IASMaster master;
 
 	public static void instanceCheck() {
 		if (instance != null
 				&& instance instanceof Modchu_AS); else instance = new Modchu_AS();
-		//Modchu_Debug.lDebug("Modchu_AS init");
-		HashMap<String, Object> map = new HashMap();
+		Modchu_Debug.lDebug("Modchu_AS init");
 		Class Modchu_ASMaster = Modchu_Reflect.loadClass("modchu.lib.forge.mc"+Modchu_Main.getMinecraftVersion()+".Modchu_ASMaster", -1);
 		if (Modchu_ASMaster != null); else Modchu_ASMaster = Modchu_Reflect.loadClass("modchu.lib.modloader.mc"+Modchu_Main.getMinecraftVersion()+".Modchu_ASMaster", -1);
+		//Modchu_Debug.lDebug("Modchu_AS init Modchu_ASMaster="+Modchu_ASMaster);
+		HashMap<String, Object> map = new HashMap();
 		map.put("Class", Modchu_ASMaster);
-		map.put("base", instance);
-		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
-		//Modchu_Debug.lDebug("Modchu_AS init instance="+instance);
-		master = instance instanceof Modchu_IASMaster ? (Modchu_IASMaster) instance : null;
-		//Modchu_Debug.lDebug("Modchu_AS init master="+master);
+		map.put("Object", instance);
+		//Modchu_Debug.lDebug("Modchu_AS init map="+map);
+		Object instance1 = Modchu_Main.newModchuCharacteristicInstance(map);
+		if (instance1 != null); else {
+			String ss = "Modchu_AS instanceCheck instance1 null error !!";
+			Modchu_Main.setRuntimeException(ss);
+			return;
+		}
+		Modchu_Debug.lDebug("Modchu_AS init instance="+instance1);
+		((Modchu_AS) instance).master = instance1 instanceof Modchu_IASMaster ? (Modchu_IASMaster) instance1 : null;
+		if (((Modchu_AS) instance).master != null); else {
+			String ss = "Modchu_AS instanceCheck instance.master null error !!";
+			Modchu_Main.setRuntimeException(ss);
+		}
+		Modchu_Debug.lDebug("Modchu_AS init master="+((Modchu_AS) instance).master);
 	}
 
 	public Modchu_AS() {
@@ -3489,6 +3500,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object getBlock(String s) {
+		Modchu_Debug.mDebug("Modchu_AS getBlock String master="+master);
 		return master != null ? master.getBlock(s) : super.getBlock(s);
 	}
 

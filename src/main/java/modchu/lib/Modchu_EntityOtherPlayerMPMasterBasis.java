@@ -167,8 +167,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public void handleHealthUpdate(byte p_70103_1_) {
-		base.superHandleHealthUpdate(p_70103_1_);
+	public void handleStatusUpdate(byte p_70103_1_) {
+		base.superHandleStatusUpdate(p_70103_1_);
 	}
 
 	@Override
@@ -1457,8 +1457,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public void setInPortal(Object bockPos) {
-		base.superSetInPortal(bockPos);
+	public void setPortal(Object bockPos) {
+		base.superSetPortal(bockPos);
 	}
 
 	@Override
@@ -1974,8 +1974,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public String getCommandSenderName() {
-		return base.superGetCommandSenderName();
+	public String getName() {
+		return base.superGetName();
 	}
 
 	@Override

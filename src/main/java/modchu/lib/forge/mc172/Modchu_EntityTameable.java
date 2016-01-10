@@ -246,11 +246,11 @@ public class Modchu_EntityTameable extends Modchu_EntityTameableB implements Mod
 
 	@Override
 	public String getCommandSenderName() {
-		return master != null ? master.getCommandSenderName() : super.getCommandSenderName();
+		return master != null ? master.getName() : super.getCommandSenderName();
 	}
 
 	@Override
-	public String superGetCommandSenderName() {
+	public String superGetName() {
 		return super.getCommandSenderName();
 	}
 

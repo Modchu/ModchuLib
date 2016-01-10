@@ -130,7 +130,7 @@ public interface Modchu_IEntityOtherPlayerMP {
 	public Object superGetItemIcon(Object itemStack, int p_70620_2_);
 	public boolean superIsCurrentToolAdventureModeExempt(int p_82246_1_, int p_82246_2_, int p_82246_3_);
 	public boolean superCanPlayerEdit(int p_82247_1_, int p_82247_2_, int p_82247_3_, int p_82247_4_, Object itemStack);
-	public String superGetCommandSenderName();
+	public String superGetName();
 	public Object[] superGetLastActiveItems();
 	public boolean superGetHideCape();
 	public Object superFunc_145748_c_();
@@ -184,7 +184,7 @@ public interface Modchu_IEntityOtherPlayerMP {
 	public void superPlaySound(String name, float volume, float pitch);
 	public void superUpdateItemUse(Object itemStack, int p_71010_2_);
 	public void superOnItemUseFinish();
-	public void superHandleHealthUpdate(byte p_70103_1_);
+	public void superHandleStatusUpdate(byte p_70103_1_);
 	public boolean superIsMovementBlocked();
 	public void superCloseScreen();
 	public void superUpdateRidden();
@@ -442,7 +442,7 @@ public interface Modchu_IEntityOtherPlayerMP {
 	public void superUpdateRiderPosition();
 	public double superGetMountedYOffset();
 	public float superGetCollisionBorderSize();
-	public void superSetInPortal(Object bockPos);
+	public void superSetPortal(Object bockPos);
 	public void superSetVelocity(double x, double y, double z);
 	public boolean superIsBurning();
 	public boolean superIsRiding();

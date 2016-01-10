@@ -10213,7 +10213,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (minecraft != null); else minecraft = Modchu_Reflect.loadClass("net.minecraft.client.Minecraft", -1);
 		if (minecraft != null); else minecraft = Modchu_Reflect.loadClass("net.minecraft.src.Minecraft", -1);
 		if (minecraft != null); else minecraft = Modchu_Reflect.loadClass("ats", -1);
-		//System.out.println("minecraftGetMinecraft minecraft="+minecraft);
+		//Modchu_Debug.lDebug("Modchu_ASAlmighty minecraftGetMinecraft minecraft="+minecraft);
 		if (minecraft == null) {
 			String s = "Modchu_ASAlmighty minecraftGetMinecraft load Class minecraft == null !! isForge="+Modchu_Main.isForge+" getMinecraftVersion()="+Modchu_Main.getMinecraftVersion();
 			Modchu_Debug.lDebug(s);
@@ -10224,12 +10224,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (getMinecraftMode == 0
 				| getMinecraftMode == 1) {
 			o = Modchu_Reflect.invokeMethod(minecraft, "func_71410_x", -1);
+			//Modchu_Debug.lDebug("Modchu_ASAlmighty minecraftGetMinecraft 1 o="+o);
 			if (o != null) {
 				//System.out.println("Modchu_ASAlmighty minecraftGetMinecraft getMinecraftMode = 1");
 				getMinecraftMode = 1;
 				return o;
 			}
-			o = Modchu_Reflect.invokeMethod(minecraft, "x", -1);
+			o = Modchu_Reflect.invokeMethod(minecraft, "w", -1);
+			//Modchu_Debug.lDebug("Modchu_ASAlmighty minecraftGetMinecraft 2 o="+o);
 			if (o != null) {
 				getMinecraftMode = 1;
 				return o;
@@ -10245,7 +10247,17 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 		}
 		//System.out.println("Modchu_ASAlmighty minecraftGetMinecraft getMinecraftMode = 3");
-		o = Modchu_Main.getMinecraftVersion() > 129 ? Modchu_Reflect.getPrivateValue(minecraft, null, 8)
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 152) {
+			String ss = "Modchu_ASAlmighty minecraftGetMinecraft null error !!";
+			if (version > 179
+					&& Modchu_Main.isForge) {
+				Modchu_Main.setRuntimeException(ss);
+				return null;
+			}
+			throw new RuntimeException(ss);
+		}
+		o = version > 129 ? Modchu_Reflect.getPrivateValue(minecraft, null, 8)
 				: Modchu_Reflect.getPrivateValue(minecraft, null, 1);
 		if (o == null) {
 			String s = "Modchu_ASAlmighty minecraftGetMinecraft o == null !! isForge="+Modchu_Main.isForge+" getMinecraftVersion()="+Modchu_Main.getMinecraftVersion();

@@ -615,9 +615,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.onItemUseFinish();
 	}	@Override
 	public void handleHealthUpdate(byte p_70103_1_) {
-		if (master != null) master.handleHealthUpdate(p_70103_1_);
+		if (master != null) master.handleStatusUpdate(p_70103_1_);
 		else super.handleHealthUpdate(p_70103_1_);
-	}	@Override	public void superHandleHealthUpdate(byte p_70103_1_) {
+	}	@Override	public void superHandleStatusUpdate(byte p_70103_1_) {
 		super.handleHealthUpdate(p_70103_1_);
 	}	@Override
 	protected boolean isMovementBlocked() {
@@ -1841,9 +1841,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.getCollisionBorderSize();
 	}	@Override
 	public void setInPortal() {
-		if (master != null) master.setInPortal(null);
+		if (master != null) master.setPortal(null);
 		else super.setInPortal();
-	}	@Override	public void superSetInPortal(Object bockPos) {
+	}	@Override	public void superSetPortal(Object bockPos) {
 		super.setInPortal();
 	}	@Override
 	public void setVelocity(double x, double y, double z) {
@@ -2286,9 +2286,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return false;
 	}	@Override
 	public String superGetEntityName() {
-		return null;
-	}	@Override
-	public String superGetCommandSenderName() {
 		return null;
 	}	@Override
 	public Object superGetCurrentItemOrArmor(int par1) {

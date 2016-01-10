@@ -13,7 +13,7 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	public Modchu_AS base;
 
 	public Modchu_ASBasis(HashMap<String, Object> map) {
-		base = (Modchu_AS) map.get("base");
+		base = (Modchu_AS) map.get("Object");
 	}
 
 	@Override

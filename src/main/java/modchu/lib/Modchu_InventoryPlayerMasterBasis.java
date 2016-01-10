@@ -65,8 +65,8 @@ public class Modchu_InventoryPlayerMasterBasis implements Modchu_IInventoryPlaye
 	}
 
 	@Override
-	public Object getStackInSlotOnClosing(int par1) {
-		return base.superGetStackInSlotOnClosing(par1);
+	public Object removeStackFromSlot(int par1) {
+		return base.superRemoveStackFromSlot(par1);
 	}
 
 	@Override

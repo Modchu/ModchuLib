@@ -334,6 +334,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 		return (AxisAlignedBB) (master != null ? master.getCollisionBoundingBox() : super.getCollisionBoundingBox());
 	}
 
+	@Override
 	public AxisAlignedBB superGetCollisionBoundingBox() {
 		return super.getCollisionBoundingBox();
 	}
@@ -836,15 +837,16 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void func_181015_d(BlockPos blockPos) {
-		if (master != null) master.setInPortal(blockPos);
+		if (master != null) master.setPortal(blockPos);
 		else super.func_181015_d(blockPos);
 	}
 
-	public void superSetInPortal(Object blockPos) {
+	@Override
+	public void superSetPortal(Object blockPos) {
 		super.func_181015_d((BlockPos) blockPos);
 	}
 
-	public void superSetInPortal() {
+	public void superSetPortal() {
 	}
 
 	@Override
@@ -870,12 +872,12 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void handleHealthUpdate(byte p_70103_1_) {
-		if (master != null) master.handleHealthUpdate(p_70103_1_);
+		if (master != null) master.handleStatusUpdate(p_70103_1_);
 		else super.handleHealthUpdate(p_70103_1_);
 	}
 
 	@Override
-	public void superHandleHealthUpdate(byte p_70103_1_) {
+	public void superHandleStatusUpdate(byte p_70103_1_) {
 		super.handleHealthUpdate(p_70103_1_);
 	}
 
@@ -1578,7 +1580,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public String getCommandSenderName() {
-		return master != null ? master.getCommandSenderName() : super.getCommandSenderName();
+		return master != null ? master.getName() : super.getCommandSenderName();
 	}
 
 	@Override
@@ -2037,7 +2039,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public String superGetCommandSenderName() {
+	public String superGetName() {
 		return null;
 	}
 

@@ -86,10 +86,10 @@ public interface Modchu_IEntityMaster {
 	public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_);
 	public float getCollisionBorderSize();
 	public Object getLookVec();
-	public void setInPortal(Object blockPos);
+	public void setPortal(Object blockPos);
 	public int getPortalCooldown();
 	public void setVelocity(double p_70016_1_, double p_70016_3_, double p_70016_5_);
-	public void handleHealthUpdate(byte p_70103_1_);
+	public void handleStatusUpdate(byte p_70103_1_);
 	public void performHurtAnimation();
 	public Object[] getLastActiveItems();
 	public void setCurrentItemOrArmor(int p_70062_1_, Object itemStack);
@@ -112,7 +112,7 @@ public interface Modchu_IEntityMaster {
 	public void onKillEntity(Object entityLivingBase);
 	public boolean func_145771_j(double p_145771_1_, double p_145771_3_, double p_145771_5_);
 	public void setInWeb();
-	public String getCommandSenderName();
+	public String getName();
 	public Object[] getParts();
 	public boolean isEntityEqual(Object entity);
 	public float getRotationYawHead();
