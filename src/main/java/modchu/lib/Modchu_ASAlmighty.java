@@ -9983,12 +9983,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected Enum itemCameraTransformsTransformTypeTHIRD_PERSON() {
 		Class c = Modchu_Reflect.loadClass("net.minecraft.client.renderer.block.model.ItemCameraTransforms$TransformType");
-		return Modchu_Reflect.getEnum(c, "THIRD_PERSON");
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_Reflect.getEnum(c, version > 189 ? "THIRD_PERSON_RIGHT_HAND" : "THIRD_PERSON");
 	}
 
 	protected Enum itemCameraTransformsTransformTypeFIRST_PERSON() {
 		Class c = Modchu_Reflect.loadClass("net.minecraft.client.renderer.block.model.ItemCameraTransforms$TransformType");
-		return Modchu_Reflect.getEnum(c, "FIRST_PERSON");
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_Reflect.getEnum(c, version > 189 ? "FIRST_PERSON_RIGHT_HAND" : "FIRST_PERSON");
 	}
 
 	protected Enum itemCameraTransformsTransformTypeHEAD() {
