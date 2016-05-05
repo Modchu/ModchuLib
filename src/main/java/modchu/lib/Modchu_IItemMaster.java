@@ -97,9 +97,9 @@ public interface Modchu_IItemMaster {
 	public Object getChestGenBase(Object chestGenHooks, Object random, Object weightedRandomChestContent);
 	public boolean doesSneakBypassUse(Object world, int x, int y, int z, Object entityPlayer);
 	public void onArmorTick(Object world, Object entityPlayer, Object itemStack);
-	public boolean isValidArmor(Object itemStack, int armorType, Object entity);
+	public boolean isValidArmor(Object itemStack, Object entityEquipmentSlot, Object entity);
 	public boolean isBookEnchantable(Object itemStack, Object itemStack1);
-	public String getArmorTexture(Object itemStack, Object entity, int slot, String type);
+	public String getArmorTexture(Object itemStack, Object entity, Object entityEquipmentSlot, String type);
 	public Object getFontRenderer(Object itemStack);
 	public Object getArmorModel(Object entityLivingBase, Object itemStack, int armorSlot);
 	public boolean onEntitySwing(Object entityLivingBase, Object itemStack);
@@ -134,5 +134,21 @@ public interface Modchu_IItemMaster {
 	public void onArmorTickUpdate(Object world, Object entityPlayer, Object itemStack);
 	public float getDamageVsEntity(Object entity, Object itemStack);
 	public String getArmorTexture(Object itemStack, Object entity, int slot, int layer);
-
+	// 190~
+	public Object onItemUse(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumHand, Object enumFacing, float f, float f1, float f2);
+	public Object onItemRightClick(Object itemStack, Object world, Object entityPlayer, Object enumHand);
+	public boolean itemInteractionForEntity(Object itemStack, Object entityPlayer, Object entityLivingBase, Object enumHand);
+	public Object getItemAttributeModifiers(Object entityEquipmentSlot);
+	public Object onItemUseFirst(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, Object enumHand);
+	public Object getArmorModel(Object entityLivingBase, Object itemStack, Object entityEquipmentSlot, Object modelBiped);
+	public Object getAttributeModifiers(Object entityEquipmentSlot, Object itemStack);
+	public boolean doesSneakBypassUse(Object itemStack, Object iBlockAccess, Object blockPos, Object entityPlayer);
+	public Object getPropertyGetter(Object resourceLocation);
+	public boolean updateItemStackNBT(Object nBTTagCompound);
+	public boolean hasCustomProperties();
+	public String getHighlightTip(Object itemStack, String displayName);
+	public int getItemEnchantability(Object itemStack);
+	public boolean isBeaconPayment(Object itemStack);
+	public boolean shouldCauseReequipAnimation(Object itemStack, Object itemStack1, boolean slotChanged);
+	public Object initCapabilities(Object itemStack, Object nBTTagCompound);
 }

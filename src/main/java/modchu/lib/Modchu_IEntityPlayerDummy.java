@@ -12,9 +12,10 @@ public interface Modchu_IEntityPlayerDummy {
 	public boolean superattackEntityFrom(Object damageSource, int par2);
 	public void superonDeath(Object damageSource);
 	public Object superGetHeldItem();
-	public Object superGetEquipmentInSlot(int i);
-	public Object superFunc_130225_q(int i);
+	public Object superGetItemStackFromSlot(int i);
 	public void superSetCurrentItemOrArmor(int i, Object itemStack);
 	public Object[] superGetInventory();
+	public Object superFunc_130225_q(int i);
+	public void superMoveEntityWithHeading(float f, float f1);
 
 }

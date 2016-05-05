@@ -11,7 +11,7 @@ public interface Modchu_IEntityPlayer {
 	public void superentityInit();
 	public Object supergetItemInUse();
 	public int supergetItemInUseCount();
-	public boolean superisUsingItem();
+	public boolean superisHandActive();
 	public int supergetItemInUseDuration();
 	public void superstopUsingItem();
 	public void superclearItemInUse();
@@ -25,7 +25,7 @@ public interface Modchu_IEntityPlayer {
 	public void superhandleStatusUpdate(byte par1);
 	public boolean superisMovementBlocked();
 	public void supercloseScreen();
-	public void supermountEntity(Object entity);
+	public boolean superstartRiding(Object entity);
 	public void superupdateEntityActionState();
 	public int supergetScore();
 	public void supersetScore(int par1);
@@ -34,7 +34,7 @@ public interface Modchu_IEntityPlayer {
 	public Object superdropOneItem(boolean par1);
 	public Object superdropPlayerItem(Object itemStack);
 	public Object superdropPlayerItemWithRandomChoice(Object itemStack, boolean par2);
-	public void superjoinEntityItemWithWorld(Object entityItem);
+	public void superdropItemAndGetStack(Object entityItem);
 	public float supergetCurrentPlayerStrVsBlock(Object block, boolean par2);
 	public float supergetCurrentPlayerStrVsBlock(Object block, boolean par2, int meta);
 	public boolean supercanHarvestBlock(Object block);
@@ -43,7 +43,7 @@ public interface Modchu_IEntityPlayer {
 	public void superdisplayGUIChest(Object iInventory);
 	public void superdisplayGUIHopper(Object tileEntityHopper);
 	public void superdisplayGUIHopperMinecart(Object entityMinecartHopper);
-	public void superdisplayGUIHorse(Object entityHorse, Object iInventory);
+	public void superopenGuiHorseInventory(Object entityHorse, Object iInventory);
 	public void superdisplayGUIEnchantment(int par1, int par2, int par3, String par4Str);
 	public void superdisplayGUIAnvil(int par1, int par2, int par3);
 	public void superdisplayGUIWorkbench(int par1, int par2, int par3);
@@ -60,9 +60,9 @@ public interface Modchu_IEntityPlayer {
 	public void superdisplayGUIBrewingStand(Object tileEntityBrewingStand);
 	public void superdisplayGUIBeacon(Object tileEntityBeacon);
 	public void superdisplayGUIMerchant(Object iMerchant, String par2Str);
-	public void superdisplayGUIBook(Object itemStack);
+	public void superopenBook(Object itemStack);
 	public boolean superinteractWith(Object entity);
-	public Object supergetCurrentEquippedItem();
+	public Object supergetHeldItemMainhand();
 	public void superdestroyCurrentEquippedItem();
 	public void superattackTargetEntityWithCurrentItem(Object entity);
 	public void superonCriticalHit(Object entity);
@@ -83,7 +83,7 @@ public interface Modchu_IEntityPlayer {
 	public boolean superisSpawnForced(int dimension);
 	public void supersetSpawnChunk(Object chunkCoordinates, boolean par2);
 	public void supersetSpawnChunk(Object chunkCoordinates, boolean forced, int dimension);
-	public void supertriggerAchievement(Object statBase);
+	public void superaddStat(Object statBase);
 	public void superaddStat(Object statBase, int par2);
 	public void superjump();
 	public float supergetAIMoveSpeed();
@@ -168,11 +168,11 @@ public interface Modchu_IEntityPlayer {
 	public boolean superisOnLadder();
 	public boolean superisEntityAlive();
 	public void superperformHurtAnimation();
-	public float superapplyArmorCalculations(Object damageSource, float par2);
-	public float superapplyPotionDamageCalculations(Object damageSource, float par2);
+	public Object superapplyArmorCalculations(Object damageSource, float par2);
+	public Object superapplyPotionDamageCalculations(Object damageSource, float par2);
 	public Object superfunc_110142_aN();
-	public Object superfunc_94060_bK();
-	public void superswingItem();
+	public Object supergetAttackingEntity();
+	public void superswingArm();
 	public void superkill();
 	public void superupdateArmSwingProgress();
 	public Object supergetEntityAttribute(Object attribute);
@@ -185,7 +185,7 @@ public interface Modchu_IEntityPlayer {
 	public boolean superisAIEnabled();
 	public void supersetAIMoveSpeed(float par1);
 	public boolean superattackEntityAsMob(Object entity);
-	public float superfunc_110146_f(float par1, float par2);
+	public float superupdateDistance(float par1, float par2);
 	public void superupdateAITasks();
 	public void supercollideWithNearbyEntities();
 	public void supercollideWithEntity(Object entity);
@@ -209,7 +209,7 @@ public interface Modchu_IEntityPlayer {
 	public boolean superisOnTeam(Object team);
 	public void supercurePotionEffects(Object itemStack);
 	public boolean supershouldRiderFaceForward(Object entityPlayer);
-	public Object supergetDataWatcher();
+	public Object supergetDataManager();
 	//public boolean superequals(Object par1Obj);
 	//public int superhashCode();
 	public void supersetRotation(float par1, float par2);
@@ -244,7 +244,7 @@ public interface Modchu_IEntityPlayer {
 	public void superaddVelocity(double par1, double par3, double par5);
 	public boolean superisInRangeToRenderVec3D(Object vec3);
 	public boolean superisInRangeToRenderDist(double par1);
-	public boolean superwriteMountToNBT(Object nBTTagCompound);
+	public boolean superwriteToNBTAtomically(Object nBTTagCompound);
 	public boolean superwriteToNBTOptional(Object nBTTagCompound);
 	public void superwriteToNBT(Object nBTTagCompound);
 	public void superreadFromNBT(Object nBTTagCompound);
@@ -256,9 +256,9 @@ public interface Modchu_IEntityPlayer {
 	public Object superdropItem(int par1, int par2);
 	public Object superdropItemWithOffset(int par1, int par2, float par3);
 	public Object superentityDropItem(Object itemStack, float par2);
-	public boolean superinteractFirst(Object entityPlayer);
+	public boolean superprocessInitialInteract(Object entityPlayer);
 	public Object supergetCollisionBox(Object entity);
-	public void superupdateRiderPosition();
+	public void superupdatePassenger();
 	public float supergetCollisionBorderSize();
 	public void supersetPortal(Object bockPos);
 	public void supersetVelocity(double par1, double par3, double par5);
@@ -284,11 +284,11 @@ public interface Modchu_IEntityPlayer {
 	public boolean superisEntityInvulnerable();
 	public void supercopyLocationAndAnglesFrom(Object entity);
 	public void supercopyDataFrom(Object entity, boolean par2);
-	public void supertravelToDimension(int par1);
+	public void superchangeDimension(int par1);
 	public float supergetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block);
 	public boolean supershouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7);
 	public int supergetMaxSafePointTries();
-	public Object supergetTeleportDirection();
+	public Object supergetLastPortalVec();
 	public boolean superdoesEntityNotTriggerPressurePlate();
 	public void superaddEntityCrashInfo(Object crashReportCategory);
 	public boolean supercanRenderOnFire();

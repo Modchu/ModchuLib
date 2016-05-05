@@ -11,7 +11,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public void entityInit();
 	public Object getItemInUse();
 	public int getItemInUseCount();
-	public boolean isUsingItem();
+	public boolean isHandActive();
 	public int getItemInUseDuration();
 	public void stopUsingItem();
 	public void clearItemInUse();
@@ -25,7 +25,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public void handleStatusUpdate(byte par1);
 	public boolean isMovementBlocked();
 	public void closeScreen();
-	public void mountEntity(Object entity);
+	public boolean startRiding(Object entity);
 	public void updateRidden();
 	public void preparePlayerToSpawn();
 	public void updateEntityActionState();
@@ -38,7 +38,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public Object dropOneItem(boolean par1);
 	public Object dropPlayerItem(Object itemStack);
 	public Object dropPlayerItemWithRandomChoice(Object itemStack, boolean par2);
-	public void joinEntityItemWithWorld(Object entityItem);
+	public void dropItemAndGetStack(Object entityItem);
 	public float getCurrentPlayerStrVsBlock(Object block, boolean par2);
 	public float getCurrentPlayerStrVsBlock(Object block, boolean par2, int meta);
 	public boolean canHarvestBlock(Object block);
@@ -47,7 +47,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public void displayGUIChest(Object iInventory);
 	public void displayGUIHopper(Object tileEntityHopper);
 	public void displayGUIHopperMinecart(Object entityMinecartHopper);
-	public void displayGUIHorse(Object entityHorse, Object iInventory);
+	public void openGuiHorseInventory(Object entityHorse, Object iInventory);
 	public void displayGUIEnchantment(int par1, int par2, int par3, String par4Str);
 	public void displayGUIAnvil(int par1, int par2, int par3);
 	public void displayGUIWorkbench(int par1, int par2, int par3);
@@ -65,9 +65,9 @@ public interface Modchu_IEntityPlayerMaster {
 	public void displayGUIBrewingStand(Object tileEntityBrewingStand);
 	public void displayGUIBeacon(Object tileEntityBeacon);
 	public void displayGUIMerchant(Object iMerchant, String par2Str);
-	public void displayGUIBook(Object itemStack);
+	public void openBook(Object itemStack);
 	public boolean interactWith(Object entity);
-	public Object getCurrentEquippedItem();
+	public Object getHeldItemMainhand();
 	public void destroyCurrentEquippedItem();
 	public double getYOffset();
 	public void attackTargetEntityWithCurrentItem(Object entity);
@@ -91,7 +91,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public boolean isSpawnForced(int dimension);
 	public void setSpawnChunk(Object chunkCoordinates, boolean par2);
 	public void setSpawnChunk(Object chunkCoordinates, boolean forced, int dimension);
-	public void triggerAchievement(Object statBase);
+	public void addStat(Object statBase);
 	public void addStat(Object statBase, int par2);
 	public void jump();
 	public void moveEntityWithHeading(float par1, float par2);
@@ -179,11 +179,11 @@ public interface Modchu_IEntityPlayerMaster {
 	public boolean isOnLadder();
 	public boolean isEntityAlive();
 	public void performHurtAnimation();
-	public float applyArmorCalculations(Object damageSource, float par2);
-	public float applyPotionDamageCalculations(Object damageSource, float par2);
+	public Object applyArmorCalculations(Object damageSource, float par2);
+	public Object applyPotionDamageCalculations(Object damageSource, float par2);
 	public Object func_110142_aN();
-	public Object func_94060_bK();
-	public void swingItem();
+	public Object getAttackingEntity();
+	public void swingArm();
 	public void kill();
 	public void updateArmSwingProgress();
 	public Object getEntityAttribute(Object attribute);
@@ -197,7 +197,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public boolean isAIEnabled();
 	public void setAIMoveSpeed(float par1);
 	public boolean attackEntityAsMob(Object entity);
-	public float func_110146_f(float par1, float par2);
+	public float updateDistance(float par1, float par2);
 	public void updateAITasks();
 	public void collideWithNearbyEntities();
 	public void collideWithEntity(Object entity);
@@ -221,7 +221,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public boolean isOnTeam(Object team);
 	public void curePotionEffects(Object itemStack);
 	public boolean shouldRiderFaceForward(Object entityPlayer);
-	public Object getDataWatcher();
+	public Object getDataManager();
 	//public boolean equals(Object par1Obj);
 	//public int hashCode();
 	public void setSize(float par1, float par2);
@@ -257,7 +257,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public void addVelocity(double par1, double par3, double par5);
 	public boolean isInRangeToRenderVec3D(Object vec3);
 	public boolean isInRangeToRenderDist(double par1);
-	public boolean writeMountToNBT(Object nBTTagCompound);
+	public boolean writeToNBTAtomically(Object nBTTagCompound);
 	public boolean writeToNBTOptional(Object nBTTagCompound);
 	public void writeToNBT(Object nBTTagCompound);
 	public void readFromNBT(Object nBTTagCompound);
@@ -269,9 +269,9 @@ public interface Modchu_IEntityPlayerMaster {
 	public Object dropItem(int par1, int par2);
 	public Object dropItemWithOffset(int par1, int par2, float par3);
 	public Object entityDropItem(Object itemStack, float par2);
-	public boolean interactFirst(Object entityPlayer);
+	public boolean processInitialInteract(Object entityPlayer);
 	public Object getCollisionBox(Object entity);
-	public void updateRiderPosition();
+	public void updatePassenger();
 	public double getMountedYOffset();
 	public float getCollisionBorderSize();
 	public void setPortal(Object bockPos);
@@ -299,11 +299,11 @@ public interface Modchu_IEntityPlayerMaster {
 	public boolean isEntityInvulnerable();
 	public void copyLocationAndAnglesFrom(Object entity);
 	public void copyDataFrom(Object entity, boolean par2);
-	public void travelToDimension(int par1);
+	public void changeDimension(int par1);
 	public float getBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block);
 	public boolean shouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7);
 	public int getMaxSafePointTries();
-	public Object getTeleportDirection();
+	public Object getLastPortalVec();
 	public boolean doesEntityNotTriggerPressurePlate();
 	public void addEntityCrashInfo(Object crashReportCategory);
 	public boolean canRenderOnFire();

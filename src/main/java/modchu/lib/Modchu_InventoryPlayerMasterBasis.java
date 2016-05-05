@@ -184,4 +184,74 @@ public class Modchu_InventoryPlayerMasterBasis implements Modchu_IInventoryPlaye
 		base.superCopyInventory(inventoryPlayer);
 	}
 
+	@Override
+	public void setCurrentItem(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_) {
+		base.superSetCurrentItem(item, p_146030_2_, p_146030_3_, p_146030_4_);
+	}
+
+	@Override
+	public int clearMatchingItems(Object item, int metadataIn, int removeCount, Object nBTTagCompound) {
+		return base.superClearMatchingItems(item, metadataIn, removeCount, nBTTagCompound);
+	}
+
+	@Override
+	public boolean consumeInventoryItem(Object item) {
+		return base.superConsumeInventoryItem(item);
+	}
+
+	@Override
+	public boolean hasItem(Object item) {
+		return base.superHasItem(item);
+	}
+
+	@Override
+	public String getName() {
+		return base.superGetName();
+	}
+
+	@Override
+	public boolean hasCustomName() {
+		return base.superHasCustomName();
+	}
+
+	@Override
+	public Object getDisplayName() {
+		return base.superGetDisplayName();
+	}
+
+	@Override
+	public void markDirty() {
+		base.superMarkDirty();
+	}
+
+	@Override
+	public void openInventory(Object entityPlayer) {
+		base.superOpenInventory(entityPlayer);
+	}
+
+	@Override
+	public void closeInventory(Object entityPlayer) {
+		base.superCloseInventory(entityPlayer);
+	}
+
+	@Override
+	public int getField(int id) {
+		return base.superGetField(id);
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		base.superSetField(id, value);
+	}
+
+	@Override
+	public int getFieldCount() {
+		return base.superGetFieldCount();
+	}
+
+	@Override
+	public void clear() {
+		base.superClear();
+	}
+
 }

@@ -371,7 +371,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public int blockGetRenderType(Object block) {
+	public Object blockGetRenderType(Object block) {
 		return ((Block) block).getRenderType();
 	}
 
@@ -521,25 +521,25 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void dataWatcherAddObject(Object dataWatcherOrEntity, int i, Object o) {
-		((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).addObject(i, o);
+	public void dataWatcherAddObject(Object dataWatcherOrEntity, Object i, Object o) {
+		((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).addObject((Integer) i, o);
 	}
 
 	@Override
-	public byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, int i) {
-		return ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).getWatchableObjectByte(i);
+	public byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, Object i) {
+		return ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).getWatchableObjectByte((Integer) i);
 	}
 
 	@Override
-	public Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, int i) {
-		return ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).getWatchableObjectItemStack(i);
+	public Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, Object i) {
+		return ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).getWatchableObjectItemStack((Integer) i);
 	}
 
 	@Override
-	public void dataWatcherUpdateObject(Object dataWatcherOrEntity, int i, Object o) {
+	public void dataWatcherUpdateObject(Object dataWatcherOrEntity, Object i, Object o) {
 		DataWatcher dataWatcher = ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity));
-		if (dataWatcherGetWatchedObject(dataWatcherOrEntity, i) != null) dataWatcher.updateObject(i, o);
-		else dataWatcher.addObject(i, o);
+		if (dataWatcherGetWatchedObject(dataWatcherOrEntity, i) != null) dataWatcher.updateObject((Integer) i, o);
+		else dataWatcher.addObject((Integer) i, o);
 	}
 
 	@Override
@@ -691,8 +691,8 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, int i) {
-		return ((EntityLivingBase) entityLivingBase).getCurrentItemOrArmor(i);
+	public Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, Object i) {
+		return ((EntityLivingBase) entityLivingBase).getCurrentItemOrArmor((Integer) i);
 	}
 
 	@Override
@@ -838,8 +838,14 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void entityMountEntity(Object entity, Object entity2) {
+	public boolean entityStartRiding(Object entity, Object entity2) {
+		return entityStartRiding(entity, entity2, false);
+	}
+
+	@Override
+	public boolean entityStartRiding(Object entity, Object entity2, boolean b) {
 		((Entity) entity).mountEntity((Entity) entity2);
+		return true;
 	}
 
 	@Override
@@ -1001,8 +1007,8 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void entityPlaySound(Object entity, String s, float f1, float f2) {
-		((Entity) entity).playSound(s, f1, f2);
+	public void entityPlaySound(Object entity, Object s, float f1, float f2) {
+		((Entity) entity).playSound((String) s, f1, f2);
 	}
 
 	@Override
@@ -2111,6 +2117,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public boolean itemItemInteractionForEntity(Object item, Object itemstack, Object entityplayer, Object entityLivingBase) {
+		return itemItemInteractionForEntity(item, itemstack, entityplayer, entityLivingBase, null);
+	}
+
+	@Override
+	public boolean itemItemInteractionForEntity(Object item, Object itemstack, Object entityplayer, Object entityLivingBase, Object enumHand) {
 		return ((Item) item).itemInteractionForEntity((ItemStack) itemstack, (EntityPlayer) entityplayer, (EntityLivingBase) entityLivingBase);
 	}
 
@@ -3219,9 +3230,9 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, String s, float f, float f1) {
+	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, Object soundEventOrString, float f, float f1) {
 		World world = ((World) entityWorldObj(worldOrEntity));
-		if (world != null) world.playSoundAtEntity((Entity) entity, s, f, f1);
+		if (world != null) world.playSoundAtEntity((Entity) entity, (String) soundEventOrString, f, f1);
 	}
 
 	@Override
@@ -3278,6 +3289,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public void entityLivingBaseSwingItem(Object entityLivingBase) {
 		((EntityLivingBase) entityLivingBase).swingItem();
+	}
+
+	@Override
+	public void entityLivingBaseSwingItem(Object entityLivingBase, Object enumHand) {
+		entityLivingBaseSwingItem(entityLivingBase);
 	}
 
 	@Override
@@ -3874,19 +3890,24 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void tileEntitySkullRendererRenderSkull(Object skullRenderer, float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2) {
-		((TileEntitySkullRenderer) skullRenderer).func_82393_a(f, f1, f2, i, f3, i2, Modchu_CastHelper.String(gameProfile));
+	public void tileEntitySkullRendererRenderSkull(float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2) {
+		tileEntitySkullRendererRenderSkull(f, f1, f2, en, f3, i, gameProfile, i2, 0.0F);
 	}
 
 	@Override
-	public Object getBipedArmor(Object entityPlayer, Object itemStack, int i, int i2, String s) {
+	public void tileEntitySkullRendererRenderSkull(float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2, float f4) {
+		TileEntitySkullRenderer.skullRenderer.func_82393_a(f, f1, f2, i, f3, i2, Modchu_CastHelper.String(gameProfile));
+	}
+
+	@Override
+	public Object getBipedArmor(Object entityPlayer, Object itemStack, int i, Object entityEquipmentSlotOrInt, String s) {
 		if (Modchu_Main.isServer) return null;
 		Item item = (Item) itemStackGetItem(itemStack);
 		if (item instanceof ItemArmor) {
 			int renderIndex = itemArmorRenderIndex(item);
 			String[] armorFilename = renderBipedBipedArmorFilenamePrefix();
 			String a1 = renderIndex < armorFilename.length ? armorFilename[renderIndex] : armorFilename[armorFilename.length - 1];
-			return RenderBiped.func_110858_a((ItemArmor)item, i, s);
+			return RenderBiped.func_110858_a((ItemArmor)item, (Integer) i, s);
 		}
 		return null;
 	}
@@ -4358,8 +4379,8 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void entityTameableSetOwner(Object entityTameable, String s) {
-		((EntityTameable) entityTameable).setOwner(s);
+	public void entityTameableSetOwner(Object entityTameable, Object s) {
+		((EntityTameable) entityTameable).setOwner((String) s);
 	}
 
 	@Override
@@ -4559,6 +4580,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	public Object minecraftLoadingScreen() {
 		if (Modchu_Main.isServer) return null;
 		return Minecraft.getMinecraft().loadingScreen;
+	}
+
+	@Override
+	public Object newResourceLocation(String s) {
+		return new ResourceLocation(s);
 	}
 
 }

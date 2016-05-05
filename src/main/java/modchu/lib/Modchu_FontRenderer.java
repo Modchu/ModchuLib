@@ -73,7 +73,7 @@ public class Modchu_FontRenderer {
 	public Modchu_FontRenderer(Object resourceLocation, boolean flag) {
 		fontSize = 1.0F;
 		locationFontTexture = resourceLocation;
-		//Modchu_Debug.lDebug("Modchu_FontRenderer locationFontTexture="+locationFontTexture);
+		Modchu_Debug.lDebug("Modchu_FontRenderer locationFontTexture="+locationFontTexture);
 		unicodeFlag = flag;
 		bindTextureLocationFontTexture();
 
@@ -206,6 +206,12 @@ public class Modchu_FontRenderer {
 				inputStream = Modchu_AS.getInputStream(Modchu_AS.resourceGetInputStream, resource);
 			} else {
 				//InputStream inputstream = Minecraft.getMinecraft().texturePackList.getSelectedTexturePack().getResourceAsStream("/font/glyph_sizes.bin");
+				//Object l = Modchu_Reflect.loadClass("Minecraft");
+				//System.out.println("Modchu_FontRenderer readGlyphSizes() l="+l);
+				//Object fi = Modchu_Reflect.getField("Minecraft", "D");
+				//System.out.println("Modchu_FontRenderer readGlyphSizes() D="+fi);
+				//Object fi1 = Modchu_Reflect.getField("Minecraft", "field_71418_C");
+				//System.out.println("Modchu_FontRenderer readGlyphSizes() field_71418_C="+fi1);
 				Object texturePackList = Modchu_AS.get("Minecraft", "texturePackList", Modchu_AS.get(Modchu_AS.minecraftGetMinecraft));
 				if (texturePackList != null); else System.out.println("Modchu_FontRenderer readGlyphSizes() texturePackList == null !! minecraft="+Modchu_AS.get(Modchu_AS.minecraftGetMinecraft));
 				Object selectedTexturePack = Modchu_AS.get("TexturePackList", "getSelectedTexturePack", texturePackList);

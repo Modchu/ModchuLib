@@ -18,7 +18,7 @@ public interface Modchu_IASMaster {
 	public String abstractClientPlayerGetSkinType(Object abstractClientPlayer);
 	public void allModelInit(Object render, Object entity, boolean b);
 	public double attributeModifierGetAmount(Object attributeModifier);
-	public Object getBipedArmor(Object entityPlayer, Object itemStack, int i, int i2, String s);
+	public Object getBipedArmor(Object entityPlayer, Object itemStack, int i, Object entityEquipmentSlotOrInt, String s);
 	public Object[] blockBlockList();
 	public Object blockGetBlockFromItem(Object item);
 	public Object blockGetStateFromMeta(Object block, int i);
@@ -26,7 +26,7 @@ public interface Modchu_IASMaster {
 	public float blockPosGetY(Object blockPos);
 	public float blockPosGetZ(Object blockPos);
 	public void blockSetLightOpacity(Object block, int lightOpacity);
-	public int blockGetRenderType(Object block);
+	public Object blockGetRenderType(Object block);
 	public int blockGetMetaFromState(Object block, Object iBlockState);
 	public int blockColorMultiplier(Object block, Object iBlockAccess, Object blockPos, int i);
 	public Object blockGetDefaultState(Object block);
@@ -84,7 +84,7 @@ public interface Modchu_IASMaster {
 	public Object entityLivingCurrentTarget(Object entityLivingBase);
 	public Object entityAnimalInLove(Object entityLivingBase);
 	public void setEntityAnimalInLove(Object entityLivingBase, int i);
-	public Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, int i);
+	public Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, Object entityEquipmentSlotOrInt);
 	public Object entityArrowShootingEntity(Object entityArrow);
 	public boolean entityAttackEntityFrom(Object entity, Object damageSource, float f);
 	public int entityLivingBaseEntityAge(Object entity);
@@ -106,12 +106,12 @@ public interface Modchu_IASMaster {
 	public int entityGetBrightnessForRender(Object entity, float f);
 	public Object entityGetDataWatcher(Object dataWatcherOrEntity);
 	public void entitySetCustomNameTag(Object entity, String s);
-	public Object dataWatcherGetWatchedObject(Object dataWatcherOrEntity, int i);
-	public void dataWatcherAddObject(Object dataWatcherOrEntity, int i, Object o);
-	public Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, int i);
-	public String dataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, int i);
-	public byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, int i);
-	public void dataWatcherUpdateObject(Object dataWatcherOrEntity, int i, Object o);
+	public Object dataWatcherGetWatchedObject(Object dataWatcherOrEntity, Object dataParameterOrInt);
+	public void dataWatcherAddObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o);
+	public Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, Object dataParameterOrInt);
+	public String dataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, Object dataParameterOrInt);
+	public byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, Object dataParameterOrInt);
+	public void dataWatcherUpdateObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o);
 	public void entityAITasksAddTask(Object entityAITasks, int i, Object entityAIBase);
 	public float entityGetEyeHeight(Object entityplayer);
 	public float entityHeight(Object entity);
@@ -121,8 +121,9 @@ public interface Modchu_IASMaster {
 	public boolean entityIsSneaking(Object entity);
 	public boolean entityIsWet(Object entity);
 	public void entityOnUpdate(Object entity);
-	public void entityMountEntity(Object entity);
-	public void entityMountEntity(Object entity, Object entity2);
+	public boolean entityStartRiding(Object entity);
+	public boolean entityStartRiding(Object entity, Object entity2);
+	public boolean entityStartRiding(Object entity, Object entity2, boolean b);
 	public Object entityLivingTasks(Object entityLiving);
 	public void entityLivingBaseSetPositionAndUpdate(Object entity, double x, double y, double z);
 	public Map entityListStringToClassMapping();
@@ -159,6 +160,7 @@ public interface Modchu_IASMaster {
 	public void setEntityHurtResistantTime(Object entity, int i);
 	public UUID entityGetUniqueID(Object entity);
 	public Object entityLivingBaseGetHeldItem(Object entityLivingBase);
+	public Object entityLivingBaseGetHeldItem(Object entityLivingBase, Object enumHand);
 	public float entityLivingBaseGetHealth(Object entity);
 	public float entityLivingBaseGetMaxHealth(Object entity);
 	public void entityLivingBaseDamageEntity(Object entity, Object damageSource, float f);
@@ -191,7 +193,7 @@ public interface Modchu_IASMaster {
 	public Object entityTameableAiSit(Object entityTameable);
 	public String entityTameableGetOwnerName(Object entityTameable);
 	public void entityTameableSetOwner(Object entityTameable);
-	public void entityTameableSetOwner(Object entityTameable, String s);
+	public void entityTameableSetOwner(Object entityTameable, Object uUIDOrString);
 	public void entityLivingSetHealth(Object entity, int i);
 	public double entityMotionX(Object entity);
 	public double entityMotionY(Object entity);
@@ -222,6 +224,7 @@ public interface Modchu_IASMaster {
 	public void entityPlayerPreparePlayerToSpawn(Object entityplayer);
 	public Object entityClientPlayerMPSendQueue(Object entityClientPlayerMP);
 	public void entityLivingBaseSwingItem(Object entityLivingBase);
+	public void entityLivingBaseSwingItem(Object entityLivingBase, Object enumHand);
 	public int entityPlayerPlayerLevel(Object entityplayer);
 	public float entityPlayerPrevCameraYaw(Object entity);
 	public int entityPlayerScore(Object entityplayer);
@@ -267,7 +270,7 @@ public interface Modchu_IASMaster {
 	public void entitySetFire(Object entity, int i);
 	public void entitySetPosition(Object entity, double x, double y, double z);
 	public void entitySetSize(Object entity, float f1, float f2);
-	public void entityPlaySound(Object entity, String s, float f1, float f2);
+	public void entityPlaySound(Object entity, Object soundEventOrString, float f1, float f2);
 	public int entityTicksExisted(Object entity);
 	public void setEntityTicksExisted(Object entity, int i);
 	public Object entityLivingGetNavigator(Object entityLivingOrPathNavigate);
@@ -451,6 +454,7 @@ public interface Modchu_IASMaster {
 	public Object iBlockStateWithProperty(Object blockOrIBlockState, Object iProperty, Comparable comparable);
 	public boolean itemIsFull3D(Object item);
 	public boolean itemItemInteractionForEntity(Object item, Object itemstack, Object entityplayer, Object entityLivingBase);
+	public boolean itemItemInteractionForEntity(Object item, Object itemstack, Object entityplayer, Object entityLivingBase, Object enumHand);
 	public void itemModelMesherRegister(Object itemModelMesher, Object item, int i, Object modelResourceLocation);
 	public void itemModelMesherRegister(Object itemModelMesher, Object item, Object itemMeshDefinition);
 	public List itemPotionGetEffects(Object itemPotion, Object itemStack);
@@ -463,6 +467,7 @@ public interface Modchu_IASMaster {
 	public Object itemItemIcon(Object item);
 	public void setItemItemIcon(Object item, Object icon);
 	public void itemOnItemRightClick(Object item, Object itemStack, Object world, Object entityplayer);
+	public void itemOnItemRightClick(Object item, Object itemStack, Object world, Object entityplayer, Object enumHand);
 	public Object iIconRegisterRegisterIcon(Object iIconRegister, String s);
 	public Object itemStackCopyItemStack(Object itemStack);
 	public Object itemStackGetItem(Object itemstack);
@@ -475,6 +480,7 @@ public interface Modchu_IASMaster {
 	public boolean itemStackHasTagCompound(Object itemStack);
 	public Object itemStackGetTagCompound(Object nBTTagCompoundOrItemStack);
 	public Object itemStackGetAttributeModifiers(Object itemStack);
+	public Object itemStackGetAttributeModifiers(Object itemStack, Object entityEquipmentSlot);
 	public int itemStackGetMetadata(Object itemStack);
 	public Enum itemCameraTransformsTransformTypeNONE();
 	public Enum itemCameraTransformsTransformTypeTHIRD_PERSON();
@@ -492,7 +498,8 @@ public interface Modchu_IASMaster {
 	public Object tileEntitySkullUpdateGameprofile(Object gameprofile);
 	public void tileEntitySkullRendererRenderSkull(float f, float f1, float f2, int i, float f3, int i2, Object gameProfile);
 	public void tileEntitySkullRendererRenderSkull(float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2);
-	public void tileEntitySkullRendererRenderSkull(Object skullRenderer, float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2);
+	public void tileEntitySkullRendererRenderSkull(float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2, float f4);
+	public void tileEntitySkullRendererRenderSkull(Object skullRenderer, float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2, float f4);
 	public int itemStackItemID(Object itemstack);
 	public int itemStackStackSize(Object itemstack);
 	public void setItemStackStackSize(Object itemstack, int i);
@@ -871,7 +878,8 @@ public interface Modchu_IASMaster {
 	public void worldSpawnPlayerWithLoadedChunks(Object worldOrEntity, Object entity);
 	public void worldSpawnParticle(Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5);
 	public void worldSpawnParticle(Object worldOrEntity, Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5);
-	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, String s, float f, float f1);
+	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, Object soundEventOrString, float f, float f1);
+	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entityPlayer, double x, double y, double z, Object soundEvent, Object soundCategory, float f, float f1);
 	public boolean worldIsBlockModifiable(Object worldOrEntity, Object entityPlayer, int x, int y, int z);
 	public void worldSetEntityState(Object worldOrEntity, Object entity, byte by);
 	public Object worldGetPathEntityToEntity(Object worldOrEntity, Object entity, Object entity2, float f, boolean b, boolean b1, boolean b2, boolean b3);
@@ -910,7 +918,7 @@ public interface Modchu_IASMaster {
 	public long worldInfoGetWorldTotalTime(Object entityOrWorldOrWorldInfo);
 	public long worldInfoGetWorldTime(Object entityOrWorldOrWorldInfo);
 	public int worldGetMoonPhase(Object entityOrWorld);
-	public void entityLivingSetCurrentItemOrArmor(Object entityLiving, int i, Object itemStack);
+	public void entityLivingSetCurrentItemOrArmor(Object entityLiving, Object entityequipmentslotOrInt, Object itemStack);
 	public void entitySetVelocity(Object entity, double d, double d1, double d2);
 	public void entitySetSneaking(Object entity, boolean b);
 	public void openGlHelperSetLightmapTextureCoords(int i, float f, float f1);
@@ -923,5 +931,8 @@ public interface Modchu_IASMaster {
 	public void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b);
 	public void setEntityPlayerInventoryCurrentItem(Object entityplayer, int i);
 	public void guiSlotHandleMouseInput(Object guiSlot);
+	public Object newDataParameter(Class c, Class[] c1, int i);
+	public Object newSoundEvent(Object resourceLocationOrString);
+	public Object newResourceLocation(String s);
 
 }

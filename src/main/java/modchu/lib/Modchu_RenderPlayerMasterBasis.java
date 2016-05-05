@@ -273,11 +273,6 @@ public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaste
 	}
 
 	@Override
-	public boolean func_110813_b(Object entityLivingBase) {
-		return base.superFunc_110813_b(entityLivingBase);
-	}
-
-	@Override
 	public void func_96449_a(Object entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10) {
 		base.superFunc_96449_a(entityLivingBase, par2, par4, par6, par8Str, par9, par10);
 	}
@@ -315,6 +310,11 @@ public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaste
 	@Override
 	public boolean loadDownloadableImageTexture(String par1Str, String par2Str) {
 		return base.superLoadDownloadableImageTexture(par1Str, par2Str);
+	}
+
+	@Override
+	public void renderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
+		base.superRenderEntityName(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_10_);
 	}
 
 }

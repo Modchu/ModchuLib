@@ -6,9 +6,12 @@ public class Modchu_GlStateManager {
 	public static Modchu_IGlStateManager master;
 	
 	public static void init() {
+		Modchu_Debug.mDebug("Modchu_GlStateManager init() strat.");
 		Object instance = Modchu_Main.newModchuCharacteristicObject("Modchu_GlStateManager");
 		//Modchu_Debug.mDebug("Modchu_GlStateManager init instance="+instance);
 		master = instance instanceof Modchu_IGlStateManager ? (Modchu_IGlStateManager) instance : null;
+		Modchu_Debug.mDebug("Modchu_GlStateManager init() master="+master);
+		Modchu_Debug.mDebug("Modchu_GlStateManager init() end.");
 	}
 
 	public static void pushMatrix() {
@@ -150,11 +153,11 @@ public class Modchu_GlStateManager {
 	public static void enableFog() {
 		master.enableFog();
 	}
-
+/*
 	public static void setFog(int p_179093_0_) {
 		master.setFog(p_179093_0_);
 	}
-
+*/
 	public static void setFogDensity(float p_179095_0_) {
 		master.setFogDensity(p_179095_0_);
 	}
@@ -174,11 +177,11 @@ public class Modchu_GlStateManager {
 	public static void disableCull() {
 		master.disableCull();
 	}
-
+/*
 	public static void cullFace(int p_179107_0_) {
 		master.cullFace(p_179107_0_);
 	}
-
+*/
 	public static void enablePolygonOffset() {
 		master.enablePolygonOffset();
 	}

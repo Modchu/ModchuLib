@@ -93,6 +93,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldSettings;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -377,7 +378,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 	}
 
 	@Override
-	public Object getBipedArmor(Object entityPlayer, Object itemStack, int i, int i2, String s) {
+	public Object getBipedArmor(Object entityPlayer, Object itemStack, int i, Object entityEquipmentSlotOrInt, String s) {
 		if (Modchu_Main.isServer
 				| itemStack == null) return null;
 		Object render = renderManagerGetEntityRenderObject(entityPlayer);
@@ -524,7 +525,12 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 	}
 
 	@Override
-	public void tileEntitySkullRendererRenderSkull(Object skullRenderer, float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2) {
+	public void tileEntitySkullRendererRenderSkull(float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2) {
+		TileEntitySkullRenderer.instance.renderSkull(f, f1, f2, (EnumFacing) en, f3, i, (GameProfile) gameProfile, i2);
+	}
+
+	@Override
+	public void tileEntitySkullRendererRenderSkull(float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2, float f4) {
 		TileEntitySkullRenderer.instance.renderSkull(f, f1, f2, (EnumFacing) en, f3, i, (GameProfile) gameProfile, i2);
 	}
 
@@ -605,8 +611,8 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 	}
 
 	@Override
-	public void entityTameableSetOwner(Object entityTameable, String s) {
-		((EntityTameable) entityTameable).setOwnerId(s);
+	public void entityTameableSetOwner(Object entityTameable, Object s) {
+		((EntityTameable) entityTameable).setOwnerId((String) s);
 	}
 
 	@Override
@@ -757,6 +763,26 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public void tessellatorSetNormal(Object tessellator, float f, float f2, float f3) {
+	}
+
+	@Override
+	public Enum worldSettingsGameTypeADVENTURE() {
+		return WorldSettings.GameType.ADVENTURE;
+	}
+
+	@Override
+	public Enum worldSettingsGameTypeCREATIVE() {
+		return WorldSettings.GameType.CREATIVE;
+	}
+
+	@Override
+	public Enum worldSettingsGameTypeNOT_SET() {
+		return WorldSettings.GameType.NOT_SET;
+	}
+
+	@Override
+	public Enum worldSettingsGameTypeSURVIVAL() {
+		return WorldSettings.GameType.SURVIVAL;
 	}
 
 	@Override
@@ -956,6 +982,11 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 			//Modchu_Debug.mDebug("renderBindTexture render="+render+" resourceLocation="+resourceLocation);
 			((Render) render).bindTexture((ResourceLocation) resourceLocation);
 		}
+	}
+
+	@Override
+	public Object newResourceLocation(String s) {
+		return new ResourceLocation(s);
 	}
 	// ビルド時にバージョン別変化有り ↓
 	@Override

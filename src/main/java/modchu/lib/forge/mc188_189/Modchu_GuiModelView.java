@@ -1,5 +1,4 @@
-package modchu.lib.forge.mc188_189;import java.util.HashMap;import modchu.lib.Modchu_IGuiModelView;
-import modchu.lib.Modchu_IGuiModelViewMaster;public class Modchu_GuiModelView extends Modchu_GuiScreen implements Modchu_IGuiModelView {	public Modchu_GuiModelView(HashMap<String, Object> map) {
+package modchu.lib.forge.mc188_189;import java.util.HashMap;import modchu.lib.Modchu_IGuiModelView;import modchu.lib.Modchu_IGuiModelViewMaster;import modchu.lib.forge.mc188_189.Modchu_GuiScreen;public class Modchu_GuiModelView extends Modchu_GuiScreen implements Modchu_IGuiModelView {	public Modchu_GuiModelView(HashMap<String, Object> map) {
 		super(map);
 	}	public void reInit() {
 		((Modchu_IGuiModelViewMaster) master).reInit();
@@ -21,17 +20,6 @@ import modchu.lib.Modchu_IGuiModelViewMaster;public class Modchu_GuiModelView 
 	}	public void setArmorTextureValue() {
 		if (master instanceof Modchu_IGuiModelViewMaster); else return;
 		((Modchu_IGuiModelViewMaster) master).setArmorTextureValue();
-	}	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, boolean move) {
-		if (master instanceof Modchu_IGuiModelViewMaster); else return;
-		((Modchu_IGuiModelViewMaster) master).drawMobModel(i, j, x, y, x2, y2, f, f1, move);
-	}	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, boolean move, Object entity) {
-		if (master instanceof Modchu_IGuiModelViewMaster); else return;
-		((Modchu_IGuiModelViewMaster) master).drawMobModel(i, j, x, y, x2, y2, f, f1, move, entity);
-	}	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, float f2, float f3, float f4, float f5, boolean move) {
-		if (master instanceof Modchu_IGuiModelViewMaster); else return;
-		((Modchu_IGuiModelViewMaster) master).drawMobModel(i, j, x, y, x2, y2, f, f1, f2, f3, f4, f5, move);
-	}	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, float f2, float f3, float f4, float f5, boolean move, Object entity) {
-		((Modchu_IGuiModelViewMaster) master).drawMobModel(i, j, x, y, x2, y2, f, f1, f2, f3, f4, f5, move, entity);
 	}	public void selected(String textureName, String textureArmorName, int color, boolean armorMode) {
 		if (master instanceof Modchu_IGuiModelViewMaster); else return;
 		((Modchu_IGuiModelViewMaster) master).selected(textureName, textureArmorName, color, armorMode);

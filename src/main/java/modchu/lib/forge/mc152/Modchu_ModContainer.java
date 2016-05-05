@@ -27,7 +27,7 @@ public class Modchu_ModContainer implements ModContainer {
 
 	@Override
 	public String getName() {
-		return Modchu_Version.modSimpleName+"-ModContainer";
+		return Modchu_Version.modName+"-ModContainer";
 	}
 
 	@Override

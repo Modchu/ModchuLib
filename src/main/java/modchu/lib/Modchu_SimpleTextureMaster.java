@@ -32,7 +32,8 @@ public class Modchu_SimpleTextureMaster extends Modchu_SimpleTextureMasterBasis 
 			bufferedImage = ImageIO.read(new File(Modchu_AS.getString(Modchu_AS.resourceLocationGetResourcePath, resourceLocation)));
 			//Modchu_Debug.mDebug("Modchu_SimpleTexture getBufferedImage bufferedImage="+bufferedImage);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Modchu_Debug.mDebug("Modchu_SimpleTexture getBufferedImage Exception !! getResourcePath="+Modchu_AS.getString(Modchu_AS.resourceLocationGetResourcePath, resourceLocation));
+			//e.printStackTrace();
 		}
 		return bufferedImage;
 	}

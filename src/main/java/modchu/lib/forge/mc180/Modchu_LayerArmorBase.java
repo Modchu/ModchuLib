@@ -59,12 +59,12 @@ public class Modchu_LayerArmorBase extends LayerArmorBase implements Modchu_ILay
 
 	@Override
 	public ModelBase func_177175_a(int i) {
-		return (ModelBase) (master != null ? master.func_177175_a(i) : super.func_177175_a(i));
+		return (ModelBase) (master != null ? master.getModelFromSlot(i) : super.func_177175_a(i));
 	}
 
 	@Override
-	public ModelBase superFunc_177175_a(int i) {
-		return super.func_177175_a(i);
+	public ModelBase superGetModelFromSlot(Object i) {
+		return super.func_177175_a((Integer) i);
 	}
 
 	@Override
@@ -73,8 +73,8 @@ public class Modchu_LayerArmorBase extends LayerArmorBase implements Modchu_ILay
 	}
 
 	@Override
-	public ResourceLocation superGetArmorResource(Object entity, Object itemStack, int slot, String type) {
-		return super.getArmorResource((Entity) entity, (ItemStack) itemStack, slot, type);
+	public ResourceLocation superGetArmorResource(Object entity, Object itemStack, Object slot, String type) {
+		return super.getArmorResource((Entity) entity, (ItemStack) itemStack, (Integer) slot, type);
 	}
 
 	@Override
@@ -88,16 +88,21 @@ public class Modchu_LayerArmorBase extends LayerArmorBase implements Modchu_ILay
 
 	@Override
 	protected void func_177179_a(ModelBase modelBase, int i) {
-		if (master != null) master.func_177179_a(modelBase, i);
+		if (master != null) master.setModelSlotVisible(modelBase, i);
 	}
 
 	@Override
-	public void superFunc_177179_a(Object modelBase, int i) {
+	public void superSetModelSlotVisible(Object modelBase, Object i) {
 	}
 
 	@Override
-	public Object superGetArmorModelHook(Object entityLivingBase, Object itemStack, int slot, Object modelBase) {
+	public Object superGetArmorModelHook(Object entityLivingBase, Object itemStack, Object slot, Object modelBase) {
 		return modelBase;
+	}
+
+	@Override
+	public Object superGetItemStackFromSlot(Object entityLivingBase, Object entityEquipmentSlotOrInt) {
+		return null;
 	}
 
 }

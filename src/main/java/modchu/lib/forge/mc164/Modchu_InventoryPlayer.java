@@ -386,5 +386,55 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 	public void superCopyInventory(Object inventoryPlayer) {
 		super.copyInventory((InventoryPlayer) inventoryPlayer);
 	}
+	// 190~
+	public void superSetCurrentItem(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_) {
+	}
+
+	public int superClearMatchingItems(Object item, int metadataIn, int removeCount, Object nBTTagCompound) {
+		return -1;
+	}
+
+	public boolean superConsumeInventoryItem(Object item) {
+		return false;
+	}
+
+	public boolean superHasItem(Object item) {
+		return false;
+	}
+
+	public String superGetName() {
+		return null;
+	}
+
+	public boolean superHasCustomName() {
+		return false;
+	}
+
+	public Object superGetDisplayName() {
+		return null;
+	}
+
+	public void superMarkDirty() {
+	}
+
+	public void superOpenInventory(Object entityPlayer) {
+	}
+
+	public void superCloseInventory(Object entityPlayer) {
+	}
+
+	public int superGetField(int id) {
+		return -1;
+	}
+
+	public void superSetField(int id, int value) {
+	}
+
+	public int superGetFieldCount() {
+		return -1;
+	}
+
+	public void superClear() {
+	}
 
 }

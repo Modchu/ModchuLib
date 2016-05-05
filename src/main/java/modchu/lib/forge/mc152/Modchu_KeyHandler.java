@@ -3,9 +3,10 @@ package modchu.lib.forge.mc152;
 import java.util.EnumSet;
 import java.util.HashMap;
 
-import net.minecraft.client.settings.KeyBinding;
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
 import cpw.mods.fml.common.TickType;
+import modchu.lib.Modchu_Main;
+import net.minecraft.client.settings.KeyBinding;
 
 public class Modchu_KeyHandler extends KeyHandler {
 
@@ -21,7 +22,7 @@ public class Modchu_KeyHandler extends KeyHandler {
 	@Override
 	public void keyDown(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd, boolean isRepeat) {
 		//Modchu_Debug.mDebug("Modchu_KeyHandler keyDown");
-		Modchu_ModchuLib.instance.keyboardEvent(kb);
+		Modchu_Main.keyboardEvent(kb);
 	}
 
 	@Override

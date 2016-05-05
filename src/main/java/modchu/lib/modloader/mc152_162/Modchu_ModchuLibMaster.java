@@ -30,47 +30,46 @@ import net.minecraft.src.World;
 
 public class Modchu_ModchuLibMaster implements Modchu_IBaseModMaster {
 	public Object base;
-	public Object loadCheckThread;
-	public Modchu_ModchuLibMaster instance;
 
 	public Modchu_ModchuLibMaster(HashMap<String, Object> map) {
-		instance = this;
-		base = map.get("Object");
+		base = map.containsKey("Object") ? map.get("Object") : null;
 	}
 
-	@Override
 	public String getName() {
-		return Modchu_Version.modSimpleName+";for ModLoader";
+		return Modchu_Version.modName+";for ModLoader mc"+Modchu_Version.getMinecraftVersionString();
 	}
 
-	@Override
 	public String getVersion() {
-		return Modchu_Version.modchulibForForgeVersionString+";for ModLoader";
+		return Modchu_Version.modchulibForForgeVersionString;
 	}
 
 	@Override
 	public void load() {
 		if (Modchu_Main.isForge) return;
-		Modchu_Debug.systemLogDebug("2 - (1 / 2) mod_Modchu_ModchuLib load()");
-		Modchu_Main.load(base);
+		Modchu_Debug.systemLogDebug("2 - (1 / 2) Modchu_ModchuLibMaster load()");
 		BaseMod modchuLibTick = (BaseMod) Modchu_Main.newModchuCharacteristicObject("ModchuLibTick");
 		ModLoader.setInGameHook(modchuLibTick, true, true);
 		ModLoader.setInGUIHook(modchuLibTick, true, false);
-		Modchu_Debug.systemLogDebug("2 - (2 / 2) mod_Modchu_ModchuLib load() end.");
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version == 162) Modchu_Main.load(base);
+		Modchu_Debug.systemLogDebug("2 - (2 / 2) Modchu_ModchuLibMaster load() end.");
 	}
 
 	@Override
 	public void modsLoaded() {
-		if (Modchu_Main.isForge) return;
-		Modchu_Main.modsLoaded();
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version == 162) Modchu_Main.modsLoaded();
 	}
 
 	@Override
 	public void addRenderer(Map map) {
 		if (Modchu_Main.isForge) return;
-		String s = "addRenderer";
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ map });
-		Modchu_Main.addRenderer(map);
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version == 162) {
+			String s = "addRenderer";
+			Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ map });
+			Modchu_Main.addRenderer(map);
+		}
 	}
 
 	@Override
@@ -243,7 +242,7 @@ public class Modchu_ModchuLibMaster implements Modchu_IBaseModMaster {
 	}
 
 	public String getLabel() {
-		return "ModchuLib";
+		return "Modchu_ModchuLibMaster";
 	}
 
 }

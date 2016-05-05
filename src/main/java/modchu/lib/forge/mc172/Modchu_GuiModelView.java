@@ -22,17 +22,6 @@ import modchu.lib.forge.mc172_179.Modchu_GuiScreen;public class Modchu_GuiMode
 	}	public void setArmorTextureValue() {
 		if (master instanceof Modchu_IGuiModelViewMaster); else return;
 		((Modchu_IGuiModelViewMaster) master).setArmorTextureValue();
-	}	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, boolean move) {
-		if (master instanceof Modchu_IGuiModelViewMaster); else return;
-		((Modchu_IGuiModelViewMaster) master).drawMobModel(i, j, x, y, x2, y2, f, f1, move);
-	}	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, boolean move, Object entity) {
-		if (master instanceof Modchu_IGuiModelViewMaster); else return;
-		((Modchu_IGuiModelViewMaster) master).drawMobModel(i, j, x, y, x2, y2, f, f1, move, entity);
-	}	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, float f2, float f3, float f4, float f5, boolean move) {
-		if (master instanceof Modchu_IGuiModelViewMaster); else return;
-		((Modchu_IGuiModelViewMaster) master).drawMobModel(i, j, x, y, x2, y2, f, f1, f2, f3, f4, f5, move);
-	}	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, float f2, float f3, float f4, float f5, boolean move, Object entity) {
-		((Modchu_IGuiModelViewMaster) master).drawMobModel(i, j, x, y, x2, y2, f, f1, f2, f3, f4, f5, move, entity);
 	}	public void selected(String textureName, String textureArmorName, int color, boolean armorMode) {
 		if (master instanceof Modchu_IGuiModelViewMaster); else return;
 		((Modchu_IGuiModelViewMaster) master).selected(textureName, textureArmorName, color, armorMode);

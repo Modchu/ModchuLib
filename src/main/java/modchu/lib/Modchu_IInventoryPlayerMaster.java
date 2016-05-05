@@ -36,5 +36,19 @@ public interface Modchu_IInventoryPlayerMaster {
 	public void closeChest();
 	public boolean isItemValidForSlot(int par1, Object itemStack);
 	public void copyInventory(Object inventoryPlayer);
+	public void setCurrentItem(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_);
+	public int clearMatchingItems(Object item, int metadataIn, int removeCount, Object nBTTagCompound);
+	public boolean consumeInventoryItem(Object item);
+	public boolean hasItem(Object item);
+	public String getName();
+	public boolean hasCustomName();
+	public Object getDisplayName();
+	public void markDirty();
+	public void openInventory(Object entityPlayer);
+	public void closeInventory(Object entityPlayer);
+	public int getField(int id);
+	public void setField(int id, int value);
+	public int getFieldCount();
+	public void clear();
 
 }

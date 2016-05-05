@@ -7,10 +7,6 @@ public interface Modchu_IGuiModelView extends Modchu_IGuiScreen {
 	public void setTextureArmorPackege(int i);
 	public void setTextureValue();
 	public void setArmorTextureValue();
-	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, boolean move);
-	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, boolean move, Object entity);
-	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, float f2, float f3, float f4, float f5, boolean move);
-	public void drawMobModel(int i, int j, int x, int y, int x2, int y2, float f, float f1, float f2, float f3, float f4, float f5, boolean move, Object entity);
 	public void selected(String textureName, String textureArmorName, int color, boolean armorMode);
 	public int colorCheck(String textureName, int i, boolean colorReverse);
 	public String getTextureName();

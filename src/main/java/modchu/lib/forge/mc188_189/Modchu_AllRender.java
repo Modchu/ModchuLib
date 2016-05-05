@@ -139,4 +139,9 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 		super.renderName((Entity) entity, x, y, z);
 	}
 
+	@Override
+	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
+		superRenderOffsetLivingLabel(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, 0.0F, p_177069_10_);
+	}
+
 }

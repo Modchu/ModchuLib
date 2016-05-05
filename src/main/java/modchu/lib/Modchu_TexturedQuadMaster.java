@@ -50,20 +50,42 @@ public class Modchu_TexturedQuadMaster implements Modchu_ITexturedQuadMaster {
 				&& vertexPositions.length > 0);
 		else {
 			//Modchu_Debug.mDebug("Modchu_TexturedQuadMaster vertexPositions="+vertexPositions);
+			String ss = "Modchu_TexturedQuadMaster draw vertexPositions == null error !!";
+			Modchu_Main.setRuntimeException(ss);
 			return;
 		}
 		Object vec3_1 = vertexPositions[1] != null ? Modchu_AS.get(Modchu_AS.positionTextureVertexVector3D, vertexPositions[1]) : null;
+		if (vec3_1 != null); else {
+			String ss = "Modchu_TexturedQuadMaster draw vec3_1 == null error !!";
+			Modchu_Main.setRuntimeException(ss);
+			return;
+		}
 		//Modchu_Debug.lDebug("Modchu_TexturedQuadMaster draw vec3_1="+vec3_1);
 		//Modchu_Debug.lDebug("Modchu_TexturedQuadMaster draw vertexPositions[1]="+vertexPositions[1]);
 		//Modchu_Debug.lDebug("Modchu_TexturedQuadMaster draw positionTextureVertexVector3D="+Modchu_AS.get(Modchu_AS.positionTextureVertexVector3D, vertexPositions[1]));
 		Object vec3_0 = vec3_1 != null ? Modchu_AS.get(Modchu_AS.vec3Subtract, vec3_1, Modchu_AS.get(Modchu_AS.positionTextureVertexVector3D, vertexPositions[0])) : null;
 		//Modchu_Debug.mDebug("Modchu_TexturedQuadMaster draw vec3_0="+vec3_0);
+		if (vec3_0 != null); else {
+			String ss = "Modchu_TexturedQuadMaster draw vec3_0 == null error !!";
+			Modchu_Main.setRuntimeException(ss);
+			return;
+		}
 		Object vec3_2 = vec3_1 != null
 				&& vertexPositions[2] != null ? Modchu_AS.get(Modchu_AS.vec3Subtract, vec3_1, Modchu_AS.get(Modchu_AS.positionTextureVertexVector3D, vertexPositions[2])) : null;
 		//Modchu_Debug.mDebug("Modchu_TexturedQuadMaster draw vec3_2="+vec3_2);
+		if (vec3_2 != null); else {
+			String ss = "Modchu_TexturedQuadMaster draw vec3_2 == null error !!";
+			Modchu_Main.setRuntimeException(ss);
+			return;
+		}
 		Object vec3_3 = vec3_2 != null
 				&& vec3_0 != null ? Modchu_AS.get(Modchu_AS.vec3Normalize, Modchu_AS.get(Modchu_AS.vec3CrossProduct, vec3_2, vec3_0)) : null;
 		//Modchu_Debug.mDebug("Modchu_TexturedQuadMaster draw vec3_3="+vec3_3);
+		if (vec3_3 != null); else {
+			String ss = "Modchu_TexturedQuadMaster draw vec3_3 == null error !!";
+			Modchu_Main.setRuntimeException(ss);
+			return;
+		}
 		int version = Modchu_Main.getMinecraftVersion();
 		if (version > 180) {
 			Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, worldRendererOrTessellator, 7, Modchu_AS.get("DefaultVertexFormats", version > 188 ? "OLDMODEL_POSITION_TEX_NORMAL" : "field_181703_c"));

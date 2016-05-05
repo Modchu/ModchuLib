@@ -36,5 +36,19 @@ public interface Modchu_IInventoryPlayer {
 	public void superCloseChest();
 	public boolean superIsItemValidForSlot(int par1, Object itemStack);
 	public void superCopyInventory(Object inventoryPlayer);
+	public void superSetCurrentItem(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_);
+	public int superClearMatchingItems(Object item, int metadataIn, int removeCount, Object nBTTagCompound);
+	public boolean superConsumeInventoryItem(Object item);
+	public boolean superHasItem(Object item);
+	public String superGetName();
+	public boolean superHasCustomName();
+	public Object superGetDisplayName();
+	public void superMarkDirty();
+	public void superOpenInventory(Object entityPlayer);
+	public void superCloseInventory(Object entityPlayer);
+	public int superGetField(int id);
+	public void superSetField(int id, int value);
+	public int superGetFieldCount();
+	public void superClear();
 
 }

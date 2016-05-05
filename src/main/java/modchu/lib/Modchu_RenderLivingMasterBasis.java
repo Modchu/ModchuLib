@@ -16,13 +16,12 @@ public class Modchu_RenderLivingMasterBasis extends Modchu_RendererLivingEntityM
 	}
 
 	@Override
-	public void func_177105_a(Object entityLiving, float p_177105_2_) {
-		base.superFunc_177105_a(entityLiving, p_177105_2_);
+	public void setLightmap(Object entityLiving, float p_177105_2_) {
+		base.superSetLightmap(entityLiving, p_177105_2_);
 	}
 
-	@Override
 	public boolean usePassSpecialRender(Object entityLivingBase) {
-		return base.superUsePassSpecialRender(entityLivingBase);
+		return false;
 	}
 
 	@Override

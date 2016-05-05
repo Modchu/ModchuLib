@@ -58,7 +58,6 @@ import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -287,7 +286,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public int blockGetRenderType(Object block) {
+	public Object blockGetRenderType(Object block) {
 		return ((Block) block).getRenderType();
 	}
 
@@ -432,25 +431,25 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void dataWatcherAddObject(Object dataWatcherOrEntity, int i, Object o) {
-		((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).addObject(i, o);
+	public void dataWatcherAddObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
+		((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).addObject((Integer) dataParameterOrInt, o);
 	}
 
 	@Override
-	public byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, int i) {
-		return ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).getWatchableObjectByte(i);
+	public byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).getWatchableObjectByte((Integer) dataParameterOrInt);
 	}
 
 	@Override
-	public Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, int i) {
-		return ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).getWatchableObjectItemStack(i);
+	public Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).getWatchableObjectItemStack((Integer) dataParameterOrInt);
 	}
 
 	@Override
-	public void dataWatcherUpdateObject(Object dataWatcherOrEntity, int i, Object o) {
+	public void dataWatcherUpdateObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
 		DataWatcher dataWatcher = ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity));
-		if (dataWatcherGetWatchedObject(dataWatcherOrEntity, i) != null) dataWatcher.updateObject(i, o);
-		else dataWatcher.addObject(i, o);
+		if (dataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt) != null) dataWatcher.updateObject((Integer) dataParameterOrInt, o);
+		else dataWatcher.addObject((Integer) dataParameterOrInt, o);
 	}
 
 	@Override
@@ -554,8 +553,14 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void entityMountEntity(Object entity, Object entity2) {
+	public boolean entityStartRiding(Object entity, Object entity2) {
+		return entityStartRiding(entity, entity2, false);
+	}
+
+	@Override
+	public boolean entityStartRiding(Object entity, Object entity2, boolean b) {
 		((Entity) entity).mountEntity((Entity) entity2);
+		return true;
 	}
 
 	@Override
@@ -668,8 +673,8 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void entityPlaySound(Object entity, String s, float f1, float f2) {
-		((Entity) entity).playSound(s, f1, f2);
+	public void entityPlaySound(Object entity, Object s, float f1, float f2) {
+		((Entity) entity).playSound((String) s, f1, f2);
 	}
 
 	@Override
@@ -1686,9 +1691,9 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, String s, float f, float f1) {
+	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, Object soundEventOrString, float f, float f1) {
 		World world = ((World) entityWorldObj(worldOrEntity));
-		if (world != null) world.playSoundAtEntity((Entity) entity, s, f, f1);
+		if (world != null) world.playSoundAtEntity((Entity) entity, (String) soundEventOrString, f, f1);
 	}
 
 	@Override
@@ -2340,8 +2345,8 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void entityLivingSetCurrentItemOrArmor(Object entityLiving, int i, Object itemStack) {
-		((EntityLiving) entityLiving).setCurrentItemOrArmor(i, (ItemStack) itemStack);
+	public void entityLivingSetCurrentItemOrArmor(Object entityLiving, Object dataParameterOrInt, Object itemStack) {
+		((EntityLiving) entityLiving).setCurrentItemOrArmor((Integer) dataParameterOrInt, (ItemStack) itemStack);
 	}
 
 	@Override
@@ -2552,6 +2557,11 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public boolean itemItemInteractionForEntity(Object item, Object itemstack, Object entityplayer, Object entityLivingBase) {
+		return itemItemInteractionForEntity(item, itemstack, entityplayer, entityLivingBase, null);
+	}
+
+	@Override
+	public boolean itemItemInteractionForEntity(Object item, Object itemstack, Object entityplayer, Object entityLivingBase, Object enumHand) {
 		return ((Item) item).itemInteractionForEntity((ItemStack) itemstack, (EntityPlayer) entityplayer, (EntityLivingBase) entityLivingBase);
 	}
 
@@ -2628,6 +2638,11 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public void entityLivingBaseSwingItem(Object entityLivingBase) {
 		((EntityLivingBase) entityLivingBase).swingItem();
+	}
+
+	@Override
+	public void entityLivingBaseSwingItem(Object entityLivingBase, Object enumHand) {
+		entityLivingBaseSwingItem(entityLivingBase);
 	}
 
 	@Override
@@ -2991,8 +3006,8 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, int i) {
-		return ((EntityLivingBase) entityLivingBase).getEquipmentInSlot(i);
+	public Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, Object dataParameterOrInt) {
+		return ((EntityLivingBase) entityLivingBase).getEquipmentInSlot((Integer) dataParameterOrInt);
 	}
 
 	@Override

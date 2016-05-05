@@ -29,8 +29,8 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc172_179.Modchu_ASMaster 
 	}
 
 	@Override
-	public void entityTameableSetOwner(Object entityTameable, String s) {
-		((EntityTameable) entityTameable).func_152115_b(s);
+	public void entityTameableSetOwner(Object entityTameable, Object s) {
+		((EntityTameable) entityTameable).func_152115_b((String) s);
 	}
 
 }

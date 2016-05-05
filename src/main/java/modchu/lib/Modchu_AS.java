@@ -16,10 +16,16 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	public static void instanceCheck() {
 		if (instance != null
 				&& instance instanceof Modchu_AS); else instance = new Modchu_AS();
-		Modchu_Debug.lDebug("Modchu_AS init");
-		Class Modchu_ASMaster = Modchu_Reflect.loadClass("modchu.lib.forge.mc"+Modchu_Main.getMinecraftVersion()+".Modchu_ASMaster", -1);
-		if (Modchu_ASMaster != null); else Modchu_ASMaster = Modchu_Reflect.loadClass("modchu.lib.modloader.mc"+Modchu_Main.getMinecraftVersion()+".Modchu_ASMaster", -1);
-		//Modchu_Debug.lDebug("Modchu_AS init Modchu_ASMaster="+Modchu_ASMaster);
+		Modchu_Debug.lDebug("Modchu_AS init Modchu_Main.isForge="+Modchu_Main.isForge);
+		String modchu_AS_ClassName = (Modchu_Main.isForge ? "modchu.lib.forge.mc" : "modchu.lib.modloader.mc")+Modchu_Main.getMinecraftVersion()+".Modchu_ASMaster";
+		Modchu_Debug.lDebug("Modchu_AS init modchu_AS_ClassName="+modchu_AS_ClassName);
+		Class Modchu_ASMaster = Modchu_Reflect.loadClass(modchu_AS_ClassName, 1, true);
+		Modchu_Debug.lDebug("Modchu_AS init Modchu_ASMaster="+Modchu_ASMaster);
+		if (Modchu_ASMaster != null); else {
+			String ss = "Modchu_AS instanceCheck Modchu_ASMaster null error !!";
+			Modchu_Main.setRuntimeException(ss);
+			return;
+		}
 		HashMap<String, Object> map = new HashMap();
 		map.put("Class", Modchu_ASMaster);
 		map.put("Object", instance);
@@ -36,7 +42,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 			String ss = "Modchu_AS instanceCheck instance.master null error !!";
 			Modchu_Main.setRuntimeException(ss);
 		}
-		Modchu_Debug.lDebug("Modchu_AS init master="+((Modchu_AS) instance).master);
+		Modchu_Debug.lDebug("Modchu_AS init end. master="+((Modchu_AS) instance).master);
 	}
 
 	public Modchu_AS() {
@@ -129,12 +135,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object getBipedArmor(Object entityPlayer, Object itemStack, int i, int i2, String s) {
-		return master != null ? master.getBipedArmor(entityPlayer, itemStack, i, i2, s) : super.getBipedArmor(entityPlayer, itemStack, i, i2, s);
+	protected Object getBipedArmor(Object entityPlayer, Object itemStack, int i, Object entityEquipmentSlotOrInt, String s) {
+		return master != null ? master.getBipedArmor(entityPlayer, itemStack, i, entityEquipmentSlotOrInt, s) : super.getBipedArmor(entityPlayer, itemStack, i, entityEquipmentSlotOrInt, s);
 	}
 
-	public Object superGetBipedArmor(Object entityPlayer, Object itemStack, int i, int i2, String s) {
-		return super.getBipedArmor(entityPlayer, itemStack, i, i2, s);
+	public Object superGetBipedArmor(Object entityPlayer, Object itemStack, int i, Object entityEquipmentSlotOrInt, String s) {
+		return super.getBipedArmor(entityPlayer, itemStack, i, entityEquipmentSlotOrInt, s);
 	}
 
 	@Override
@@ -202,11 +208,11 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected int blockGetRenderType(Object block) {
+	protected Object blockGetRenderType(Object block) {
 		return master != null ? master.blockGetRenderType(block) : super.blockGetRenderType(block);
 	}
 
-	public int superBlockGetRenderType(Object block) {
+	public Object superBlockGetRenderType(Object block) {
 		return super.blockGetRenderType(block);
 	}
 
@@ -727,12 +733,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, int i) {
-		return master != null ? master.entityLivingBaseGetEquipmentInSlot(entityLivingBase, i) : super.entityLivingBaseGetEquipmentInSlot(entityLivingBase, i);
+	protected Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, Object entityEquipmentSlotOrInt) {
+		return master != null ? master.entityLivingBaseGetEquipmentInSlot(entityLivingBase, entityEquipmentSlotOrInt) : super.entityLivingBaseGetEquipmentInSlot(entityLivingBase, entityEquipmentSlotOrInt);
 	}
 
-	public Object superEntityLivingBaseGetEquipmentInSlot(Object entityLivingBase, int i) {
-		return super.entityLivingBaseGetEquipmentInSlot(entityLivingBase, i);
+	public Object superEntityLivingBaseGetEquipmentInSlot(Object entityLivingBase, Object entityEquipmentSlotOrInt) {
+		return super.entityLivingBaseGetEquipmentInSlot(entityLivingBase, entityEquipmentSlotOrInt);
 	}
 
 	@Override
@@ -928,59 +934,59 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object dataWatcherGetWatchedObject(Object dataWatcherOrEntity, int i) {
-		return master != null ? master.dataWatcherGetWatchedObject(dataWatcherOrEntity, i) : super.dataWatcherGetWatchedObject(dataWatcherOrEntity, i);
+	protected Object dataWatcherGetWatchedObject(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return master != null ? master.dataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt) : super.dataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt);
 	}
 
-	public Object superDataWatcherGetWatchedObject(Object dataWatcherOrEntity, int i) {
-		return super.dataWatcherGetWatchedObject(dataWatcherOrEntity, i);
-	}
-
-	@Override
-	protected void dataWatcherAddObject(Object dataWatcherOrEntity, int i, Object o) {
-		if (master != null) master.dataWatcherAddObject(dataWatcherOrEntity, i, o);
-		else super.dataWatcherAddObject(dataWatcherOrEntity, i, o);
-	}
-
-	public void superDataWatcherAddObject(Object dataWatcherOrEntity, int i, Object o) {
-		super.dataWatcherAddObject(dataWatcherOrEntity, i, o);
+	public Object superDataWatcherGetWatchedObject(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return super.dataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	protected Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, int i) {
-		return master != null ? master.dataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, i) : super.dataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, i);
+	protected void dataWatcherAddObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
+		if (master != null) master.dataWatcherAddObject(dataWatcherOrEntity, dataParameterOrInt, o);
+		else super.dataWatcherAddObject(dataWatcherOrEntity, dataParameterOrInt, o);
 	}
 
-	public Object superDataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, int i) {
-		return super.dataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, i);
-	}
-
-	@Override
-	protected String dataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, int i) {
-		return master != null ? master.dataWatcherGetWatchableObjectString(dataWatcherOrEntity, i) : super.dataWatcherGetWatchableObjectString(dataWatcherOrEntity, i);
-	}
-
-	public String superDataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, int i) {
-		return super.dataWatcherGetWatchableObjectString(dataWatcherOrEntity, i);
+	public void superDataWatcherAddObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
+		super.dataWatcherAddObject(dataWatcherOrEntity, dataParameterOrInt, o);
 	}
 
 	@Override
-	protected byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, int i) {
-		return master != null ? master.dataWatcherGetWatchableObjectByte(dataWatcherOrEntity, i) : super.dataWatcherGetWatchableObjectByte(dataWatcherOrEntity, i);
+	protected Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return master != null ? master.dataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, dataParameterOrInt) : super.dataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, dataParameterOrInt);
 	}
 
-	public byte superDataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, int i) {
-		return super.dataWatcherGetWatchableObjectByte(dataWatcherOrEntity, i);
+	public Object superDataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return super.dataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	protected void dataWatcherUpdateObject(Object dataWatcherOrEntity, int i, Object o) {
-		if (master != null) master.dataWatcherUpdateObject(dataWatcherOrEntity, i, o);
-		else super.dataWatcherUpdateObject(dataWatcherOrEntity, i, o);
+	protected String dataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return master != null ? master.dataWatcherGetWatchableObjectString(dataWatcherOrEntity, dataParameterOrInt) : super.dataWatcherGetWatchableObjectString(dataWatcherOrEntity, dataParameterOrInt);
 	}
 
-	public void superDataWatcherUpdateObject(Object dataWatcherOrEntity, int i, Object o) {
-		super.dataWatcherUpdateObject(dataWatcherOrEntity, i, o);
+	public String superDataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return super.dataWatcherGetWatchableObjectString(dataWatcherOrEntity, dataParameterOrInt);
+	}
+
+	@Override
+	protected byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return master != null ? master.dataWatcherGetWatchableObjectByte(dataWatcherOrEntity, dataParameterOrInt) : super.dataWatcherGetWatchableObjectByte(dataWatcherOrEntity, dataParameterOrInt);
+	}
+
+	public byte superDataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return super.dataWatcherGetWatchableObjectByte(dataWatcherOrEntity, dataParameterOrInt);
+	}
+
+	@Override
+	protected void dataWatcherUpdateObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
+		if (master != null) master.dataWatcherUpdateObject(dataWatcherOrEntity, dataParameterOrInt, o);
+		else super.dataWatcherUpdateObject(dataWatcherOrEntity, dataParameterOrInt, o);
+	}
+
+	public void superDataWatcherUpdateObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
+		super.dataWatcherUpdateObject(dataWatcherOrEntity, dataParameterOrInt, o);
 	}
 
 	@Override
@@ -1067,23 +1073,30 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void entityMountEntity(Object entity) {
-		if (master != null) master.entityMountEntity(entity);
-		else super.entityMountEntity(entity);
+	protected boolean entityStartRiding(Object entity) {
+		return master != null ? master.entityStartRiding(entity) : super.entityStartRiding(entity);
 	}
 
-	public void superEntityMountEntity(Object entity) {
-		super.entityMountEntity(entity);
+	public boolean superEntityStartRiding(Object entity) {
+		return super.entityStartRiding(entity);
 	}
 
 	@Override
-	protected void entityMountEntity(Object entity, Object entity2) {
-		if (master != null) master.entityMountEntity(entity, entity2);
-		else super.entityMountEntity(entity, entity2);
+	protected boolean entityStartRiding(Object entity, Object entity2) {
+		return master != null ? master.entityStartRiding(entity, entity2) : super.entityStartRiding(entity, entity2);
 	}
 
-	public void superEntityMountEntity(Object entity, Object entity2) {
-		super.entityMountEntity(entity, entity2);
+	public boolean superEntityStartRiding(Object entity, Object entity2) {
+		return super.entityStartRiding(entity, entity2);
+	}
+
+	@Override
+	protected boolean entityStartRiding(Object entity, Object entity2, boolean b) {
+		return master != null ? master.entityStartRiding(entity, entity2, b) : super.entityStartRiding(entity, entity2, b);
+	}
+
+	public boolean superEntityStartRiding(Object entity, Object entity2, boolean b) {
+		return super.entityStartRiding(entity, entity2, b);
 	}
 
 	@Override
@@ -1424,6 +1437,15 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
+	protected Object entityLivingBaseGetHeldItem(Object entityLivingBase, Object enumHand) {
+		return master != null ? master.entityLivingBaseGetHeldItem(entityLivingBase, enumHand) : super.entityLivingBaseGetHeldItem(entityLivingBase, enumHand);
+	}
+
+	public Object superEntityLivingBaseGetHeldItem(Object entityLivingBase, Object enumHand) {
+		return super.entityLivingBaseGetHeldItem(entityLivingBase, enumHand);
+	}
+
+	@Override
 	protected float entityLivingBaseGetHealth(Object entity) {
 		return master != null ? master.entityLivingBaseGetHealth(entity) : super.entityLivingBaseGetHealth(entity);
 	}
@@ -1726,13 +1748,13 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void entityTameableSetOwner(Object entityTameable, String s) {
-		if (master != null) master.entityTameableSetOwner(entityTameable, s);
-		else super.entityTameableSetOwner(entityTameable, s);
+	protected void entityTameableSetOwner(Object entityTameable, Object entityOrString) {
+		if (master != null) master.entityTameableSetOwner(entityTameable, entityOrString);
+		else super.entityTameableSetOwner(entityTameable, entityOrString);
 	}
 
-	public void superEntityTameableSetOwner(Object entityTameable, String s) {
-		super.entityTameableSetOwner(entityTameable, s);
+	public void superEntityTameableSetOwner(Object entityTameable, Object uUIDOrString) {
+		super.entityTameableSetOwner(entityTameable, uUIDOrString);
 	}
 
 	@Override
@@ -2017,6 +2039,16 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	public void superEntityLivingBaseSwingItem(Object entityLivingBase) {
 		super.entityLivingBaseSwingItem(entityLivingBase);
+	}
+
+	@Override
+	protected void entityLivingBaseSwingItem(Object entityLivingBase, Object enumHand) {
+		if (master != null) master.entityLivingBaseSwingItem(entityLivingBase, enumHand);
+		else super.entityLivingBaseSwingItem(entityLivingBase, enumHand);
+	}
+
+	public void superEntityLivingBaseSwingItem(Object entityLivingBase, Object enumHand) {
+		super.entityLivingBaseSwingItem(entityLivingBase, enumHand);
 	}
 
 	@Override
@@ -2442,13 +2474,13 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void entityPlaySound(Object entity, String s, float f1, float f2) {
-		if (master != null) master.entityPlaySound(entity, s, f1, f2);
-		else super.entityPlaySound(entity, s, f1, f2);
+	protected void entityPlaySound(Object entity, Object soundEventOrString, float f1, float f2) {
+		if (master != null) master.entityPlaySound(entity, soundEventOrString, f1, f2);
+		else super.entityPlaySound(entity, soundEventOrString, f1, f2);
 	}
 
-	public void superEntityPlaySound(Object entity, String s, float f1, float f2) {
-		super.entityPlaySound(entity, s, f1, f2);
+	public void superEntityPlaySound(Object entity, Object soundEventOrString, float f1, float f2) {
+		super.entityPlaySound(entity, soundEventOrString, f1, f2);
 	}
 
 	@Override
@@ -4121,6 +4153,15 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
+	protected boolean itemItemInteractionForEntity(Object item, Object itemstack, Object entityplayer, Object entityLivingBase, Object enumHand) {
+		return master != null ? master.itemItemInteractionForEntity(item, itemstack, entityplayer, entityLivingBase, enumHand) : super.itemItemInteractionForEntity(item, itemstack, entityplayer, entityLivingBase, enumHand);
+	}
+
+	public boolean superItemItemInteractionForEntity(Object item, Object itemstack, Object entityplayer, Object entityLivingBase, Object enumHand) {
+		return super.itemItemInteractionForEntity(item, itemstack, entityplayer, entityLivingBase, enumHand);
+	}
+
+	@Override
 	protected void itemModelMesherRegister(Object itemModelMesher, Object item, int i, Object modelResourceLocation) {
 		if (master != null) master.itemModelMesherRegister(itemModelMesher, item, i, modelResourceLocation);
 		else super.itemModelMesherRegister(itemModelMesher, item, i, modelResourceLocation);
@@ -4225,6 +4266,16 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	public void superItemOnItemRightClick(Object item, Object itemStack, Object world, Object entityplayer) {
 		super.itemOnItemRightClick(item, itemStack, world, entityplayer);
+	}
+
+	@Override
+	protected void itemOnItemRightClick(Object item, Object itemStack, Object world, Object entityplayer, Object enumHand) {
+		if (master != null) master.itemOnItemRightClick(item, itemStack, world, entityplayer, enumHand);
+		else super.itemOnItemRightClick(item, itemStack, world, entityplayer, enumHand);
+	}
+
+	public void superItemOnItemRightClick(Object item, Object itemStack, Object world, Object entityplayer, Object enumHand) {
+		super.itemOnItemRightClick(item, itemStack, world, entityplayer, enumHand);
 	}
 
 	@Override
@@ -4333,6 +4384,15 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	public Object superItemStackGetAttributeModifiers(Object itemStack) {
 		return super.itemStackGetAttributeModifiers(itemStack);
+	}
+
+	@Override
+	protected Object itemStackGetAttributeModifiers(Object itemStack, Object entityEquipmentSlot) {
+		return master != null ? master.itemStackGetAttributeModifiers(itemStack, entityEquipmentSlot) : super.itemStackGetAttributeModifiers(itemStack, entityEquipmentSlot);
+	}
+
+	public Object superItemStackGetAttributeModifiers(Object itemStack, Object entityEquipmentSlot) {
+		return super.itemStackGetAttributeModifiers(itemStack, entityEquipmentSlot);
 	}
 
 	@Override
@@ -4492,13 +4552,23 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void tileEntitySkullRendererRenderSkull(Object skullRenderer, float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2) {
-		if (master != null) master.tileEntitySkullRendererRenderSkull(skullRenderer, f, f1, f2, en, f3, i, gameProfile, i2);
-		else super.tileEntitySkullRendererRenderSkull(skullRenderer, f, f1, f2, en, f3, i, gameProfile, i2);
+	protected void tileEntitySkullRendererRenderSkull(float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2, float f4) {
+		if (master != null) master.tileEntitySkullRendererRenderSkull(null, f, f1, f2, en, f3, i, gameProfile, i2, f4);
+		else super.tileEntitySkullRendererRenderSkull(null, f, f1, f2, en, f3, i, gameProfile, i2, f4);
 	}
 
-	public void superTileEntitySkullRendererRenderSkull(Object skullRenderer, float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2) {
-		super.tileEntitySkullRendererRenderSkull(skullRenderer, f, f1, f2, en, f3, i, gameProfile, i2);
+	public void superTileEntitySkullRendererRenderSkull(float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2, float f4) {
+		super.tileEntitySkullRendererRenderSkull(null, f, f1, f2, en, f3, i, gameProfile, i2, f4);
+	}
+
+	@Override
+	protected void tileEntitySkullRendererRenderSkull(Object skullRenderer, float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2, float f4) {
+		if (master != null) master.tileEntitySkullRendererRenderSkull(skullRenderer, f, f1, f2, en, f3, i, gameProfile, i2, f4);
+		else super.tileEntitySkullRendererRenderSkull(skullRenderer, f, f1, f2, en, f3, i, gameProfile, i2, f4);
+	}
+
+	public void superTileEntitySkullRendererRenderSkull(Object skullRenderer, float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2, float f4) {
+		super.tileEntitySkullRendererRenderSkull(skullRenderer, f, f1, f2, en, f3, i, gameProfile, i2, f4);
 	}
 
 	@Override
@@ -6749,6 +6819,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object renderManagerInstance() {
+		//Modchu_Debug.lDebug("Modchu_AS renderManagerInstance master="+master);
 		return master != null ? master.renderManagerInstance() : super.renderManagerInstance();
 	}
 
@@ -8060,13 +8131,23 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, String s, float f, float f1) {
-		if (master != null) master.worldPlaySoundAtEntity(worldOrEntity, entity, s, f, f1);
-		else super.worldPlaySoundAtEntity(worldOrEntity, entity, s, f, f1);
+	protected void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, Object soundEventOrString, float f, float f1) {
+		if (master != null) master.worldPlaySoundAtEntity(worldOrEntity, entity, soundEventOrString, f, f1);
+		else super.worldPlaySoundAtEntity(worldOrEntity, entity, soundEventOrString, f, f1);
 	}
 
-	public void superWorldPlaySoundAtEntity(Object worldOrEntity, Object entity, String s, float f, float f1) {
-		super.worldPlaySoundAtEntity(worldOrEntity, entity, s, f, f1);
+	public void superWorldPlaySoundAtEntity(Object worldOrEntity, Object entity, Object soundEventOrString, float f, float f1) {
+		super.worldPlaySoundAtEntity(worldOrEntity, entity, soundEventOrString, f, f1);
+	}
+
+	@Override
+	protected void worldPlaySoundAtEntity(Object worldOrEntity, Object entityPlayer, double x, double y, double z, Object soundEvent, Object soundCategory, float f, float f1) {
+		if (master != null) master.worldPlaySoundAtEntity(worldOrEntity, entityPlayer, x, y, z, soundEvent, soundCategory, f, f1);
+		else super.worldPlaySoundAtEntity(worldOrEntity, entityPlayer, x, y, z, soundEvent, soundCategory, f, f1);
+	}
+
+	public void superWorldPlaySoundAtEntity(Object worldOrEntity, Object entityPlayer, double x, double y, double z, Object soundEvent, Object soundCategory, float f, float f1) {
+		super.worldPlaySoundAtEntity(worldOrEntity, entityPlayer, x, y, z, soundEvent, soundCategory, f, f1);
 	}
 
 	@Override
@@ -8414,12 +8495,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	public void entityLivingSetCurrentItemOrArmor(Object entityLiving, int i, Object itemStack) {
-		if (master != null) master.entityLivingSetCurrentItemOrArmor(entityLiving, i, itemStack);
+	public void entityLivingSetCurrentItemOrArmor(Object entityLiving, Object entityEquipmentSlotOrInt, Object itemStack) {
+		if (master != null) master.entityLivingSetCurrentItemOrArmor(entityLiving, entityEquipmentSlotOrInt, itemStack);
 	}
 
-	public void superEntityLivingSetCurrentItemOrArmor(Object entityLiving, int i, Object itemStack) {
-		super.entityLivingSetCurrentItemOrArmor(entityLiving, i, itemStack);
+	public void superEntityLivingSetCurrentItemOrArmor(Object entityLiving, Object entityEquipmentSlotOrInt, Object itemStack) {
+		super.entityLivingSetCurrentItemOrArmor(entityLiving, entityEquipmentSlotOrInt, itemStack);
 	}
 
 	@Override
@@ -8519,6 +8600,33 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	public void superGuiSlotHandleMouseInput(Object guiSlot) {
 		super.guiSlotHandleMouseInput(guiSlot);
+	}
+
+	@Override
+	public Object newDataParameter(Class c, Class[] c1, int i) {
+		return master != null ? master.newDataParameter(c, c1, i) : null;
+	}
+
+	public Object superNewDataParameter(Class c, Class[] c1, int i) {
+		return super.newDataParameter(c, c1, i);
+	}
+
+	@Override
+	public Object newSoundEvent(Object resourceLocationOrString) {
+		return master != null ? master.newSoundEvent(resourceLocationOrString) : null;
+	}
+
+	public Object superNewSoundEvent(Object resourceLocationOrString) {
+		return super.newSoundEvent(resourceLocationOrString);
+	}
+
+	@Override
+	public Object newResourceLocation(String s) {
+		return master != null ? master.newResourceLocation(s) : null;
+	}
+
+	public Object superNewResourceLocation(String s) {
+		return super.newResourceLocation(s);
 	}
 
 }

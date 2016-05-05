@@ -56,5 +56,11 @@ public interface Modchu_IFileManagerMaster {
 	public LinkedList<String> getClassLoaderResourcesList(Class c);
 	public String[] getSystemClassPaths();
 	public List<File> getClassPathFileList(String s);
+	public List<Class> getModTextureStitchedClassList();
+	public List<ZipFile> getModZipFileList();
+	public List<ZipFile> getModZipFileList(List<File> list);
+	public void setModZipFileList(List<ZipFile> list);
+	public List<ZipFile> getModsZipFileList();
+	public void setModsZipFileList(List<ZipFile> list);
 
 }

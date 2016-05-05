@@ -175,5 +175,9 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 	public boolean superLoadDownloadableImageTexture(String par1Str, String par2Str) {
 		return false;
 	}
+	// 190~
+	@Override
+	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
+	}
 
 }

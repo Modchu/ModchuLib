@@ -5,7 +5,6 @@ import java.util.List;
 
 import modchu.lib.Modchu_IGuiContainer;
 import modchu.lib.Modchu_IGuiContainerMaster;
-import modchu.lib.Modchu_IRendererLivingEntityMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

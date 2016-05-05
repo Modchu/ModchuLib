@@ -143,10 +143,10 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public boolean isUsingItem() {
-		return master != null ? master.isUsingItem() : super.isUsingItem();
+		return master != null ? master.isHandActive() : super.isUsingItem();
 	}
 
-	public boolean superisUsingItem() {
+	public boolean superisHandActive() {
 		return super.isUsingItem();
 	}
 
@@ -277,12 +277,13 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public void mountEntity(Entity entity) {
-		if (master != null) master.mountEntity(entity);
+		if (master != null) master.startRiding(entity);
 		else super.mountEntity(entity);
 	}
 
-	public void supermountEntity(Object entity) {
+	public boolean superstartRiding(Object entity) {
 		super.mountEntity((Entity) entity);
+		return true;
 	}
 
 	@Override
@@ -403,11 +404,11 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public void joinEntityItemWithWorld(EntityItem entityItem) {
-		if (master != null) master.joinEntityItemWithWorld(entityItem);
+		if (master != null) master.dropItemAndGetStack(entityItem);
 		else super.joinEntityItemWithWorld(entityItem);
 	}
 
-	public void superjoinEntityItemWithWorld(Object entityItem) {
+	public void superdropItemAndGetStack(Object entityItem) {
 		super.joinEntityItemWithWorld((EntityItem) entityItem);
 	}
 
@@ -490,11 +491,11 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public void displayGUIHorse(EntityHorse entityHorse, IInventory iInventory) {
-		if (master != null) master.displayGUIHorse(entityHorse, iInventory);
+		if (master != null) master.openGuiHorseInventory(entityHorse, iInventory);
 		else super.displayGUIHorse(entityHorse, iInventory);
 	}
 
-	public void superdisplayGUIHorse(Object entityHorse, Object iInventory) {
+	public void superopenGuiHorseInventory(Object entityHorse, Object iInventory) {
 		super.displayGUIHorse((EntityHorse) entityHorse, (IInventory) iInventory);
 	}
 
@@ -665,11 +666,11 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public void displayGUIBook(ItemStack itemStack) {
-		if (master != null) master.displayGUIBook(itemStack);
+		if (master != null) master.openBook(itemStack);
 		else super.displayGUIBook(itemStack);
 	}
 
-	public void superdisplayGUIBook(Object itemStack) {
+	public void superopenBook(Object itemStack) {
 		super.displayGUIBook((ItemStack) itemStack);
 	}
 
@@ -684,10 +685,10 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public ItemStack getCurrentEquippedItem() {
-		return (ItemStack) (master != null ? master.getCurrentEquippedItem() : super.getCurrentEquippedItem());
+		return (ItemStack) (master != null ? master.getHeldItemMainhand() : super.getCurrentEquippedItem());
 	}
 
-	public ItemStack supergetCurrentEquippedItem() {
+	public ItemStack supergetHeldItemMainhand() {
 		return super.getCurrentEquippedItem();
 	}
 
@@ -911,11 +912,11 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public void triggerAchievement(StatBase statBase) {
-		if (master != null) master.triggerAchievement(statBase);
+		if (master != null) master.addStat(statBase);
 		else super.triggerAchievement(statBase);
 	}
 
-	public void supertriggerAchievement(Object statBase) {
+	public void superaddStat(Object statBase) {
 		super.triggerAchievement((StatBase) statBase);
 	}
 
@@ -1743,19 +1744,19 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	protected float applyArmorCalculations(DamageSource damageSource, float par2) {
-		return master != null ? master.applyArmorCalculations(damageSource, par2) : super.applyArmorCalculations(damageSource, par2);
+		return (Float) (master != null ? master.applyArmorCalculations(damageSource, par2) : super.applyArmorCalculations(damageSource, par2));
 	}
 
-	public float superapplyArmorCalculations(Object damageSource, float par2) {
+	public Object superapplyArmorCalculations(Object damageSource, float par2) {
 		return super.applyArmorCalculations((DamageSource) damageSource, par2);
 	}
 
 	@Override
 	protected float applyPotionDamageCalculations(DamageSource damageSource, float par2) {
-		return master != null ? master.applyPotionDamageCalculations(damageSource, par2) : super.applyPotionDamageCalculations(damageSource, par2);
+		return (Float) (master != null ? master.applyPotionDamageCalculations(damageSource, par2) : super.applyPotionDamageCalculations(damageSource, par2));
 	}
 
-	public float superapplyPotionDamageCalculations(Object damageSource, float par2) {
+	public Object superapplyPotionDamageCalculations(Object damageSource, float par2) {
 		return super.applyPotionDamageCalculations((DamageSource) damageSource, par2);
 	}
 
@@ -1770,20 +1771,20 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public EntityLivingBase func_94060_bK() {
-		return (EntityLivingBase) (master != null ? master.func_94060_bK() : super.func_94060_bK());
+		return (EntityLivingBase) (master != null ? master.getAttackingEntity() : super.func_94060_bK());
 	}
 
-	public EntityLivingBase superfunc_94060_bK() {
+	public EntityLivingBase supergetAttackingEntity() {
 		return super.func_94060_bK();
 	}
 
 	@Override
 	public void swingItem() {
-		if (master != null) master.swingItem();
+		if (master != null) master.swingArm();
 		else super.swingItem();
 	}
 
-	public void superswingItem() {
+	public void superswingArm() {
 		super.swingItem();
 	}
 
@@ -1912,10 +1913,10 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	protected float func_110146_f(float par1, float par2) {
-		return master != null ? master.func_110146_f(par1, par2) : super.func_110146_f(par1, par2);
+		return master != null ? master.updateDistance(par1, par2) : super.func_110146_f(par1, par2);
 	}
 
-	public float superfunc_110146_f(float par1, float par2) {
+	public float superupdateDistance(float par1, float par2) {
 		return super.func_110146_f(par1, par2);
 	}
 
@@ -2138,10 +2139,10 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public DataWatcher getDataWatcher() {
-		return (DataWatcher) (master != null ? master.getDataWatcher() : super.getDataWatcher());
+		return (DataWatcher) (master != null ? master.getDataManager() : super.getDataWatcher());
 	}
 
-	public DataWatcher supergetDataWatcher() {
+	public DataWatcher supergetDataManager() {
 		return super.getDataWatcher();
 	}
 /*
@@ -2480,10 +2481,10 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public boolean writeMountToNBT(NBTTagCompound nBTTagCompound) {
-		return master != null ? master.writeMountToNBT(nBTTagCompound) : super.writeMountToNBT(nBTTagCompound);
+		return master != null ? master.writeToNBTAtomically(nBTTagCompound) : super.writeMountToNBT(nBTTagCompound);
 	}
 
-	public boolean superwriteMountToNBT(Object nBTTagCompound) {
+	public boolean superwriteToNBTAtomically(Object nBTTagCompound) {
 		return super.writeMountToNBT((NBTTagCompound) nBTTagCompound);
 	}
 
@@ -2591,10 +2592,10 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public boolean interactFirst(EntityPlayer entityPlayer) {
-		return master != null ? master.interactFirst(entityPlayer) : super.interactFirst(entityPlayer);
+		return master != null ? master.processInitialInteract(entityPlayer) : super.interactFirst(entityPlayer);
 	}
 
-	public boolean superinteractFirst(Object entityPlayer) {
+	public boolean superprocessInitialInteract(Object entityPlayer) {
 		return super.interactFirst((EntityPlayer) entityPlayer);
 	}
 
@@ -2609,11 +2610,11 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public void updateRiderPosition() {
-		if (master != null) master.updateRiderPosition();
+		if (master != null) master.updatePassenger();
 		else super.updateRiderPosition();
 	}
 
-	public void superupdateRiderPosition() {
+	public void superupdatePassenger() {
 		super.updateRiderPosition();
 	}
 
@@ -2872,11 +2873,11 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public void travelToDimension(int par1) {
-		if (master != null) master.travelToDimension(par1);
+		if (master != null) master.changeDimension(par1);
 		else super.travelToDimension(par1);
 	}
 
-	public void supertravelToDimension(int par1) {
+	public void superchangeDimension(int par1) {
 		super.travelToDimension(par1);
 	}
 
@@ -2909,10 +2910,10 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public int getTeleportDirection() {
-		return (Integer) (master != null ? master.getTeleportDirection() : super.getTeleportDirection());
+		return (Integer) (master != null ? master.getLastPortalVec() : super.getTeleportDirection());
 	}
 
-	public Object supergetTeleportDirection() {
+	public Object supergetLastPortalVec() {
 		return super.getTeleportDirection();
 	}
 

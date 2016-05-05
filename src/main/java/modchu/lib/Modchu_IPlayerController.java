@@ -1,7 +1,7 @@
 package modchu.lib;
 
 public interface Modchu_IPlayerController {
-	public Object superCreatePlayer(Object world, Object statFileWriter);
+	public Object superCreateClientPlayer(Object world, Object statFileWriter);
 	public void superSetPlayerCapabilities(Object entityPlayer);
 	public boolean superIsSpectator();
 	public void superSetGameType(Object gameType);
@@ -13,8 +13,8 @@ public interface Modchu_IPlayerController {
 	public boolean superOnPlayerDamageBlock(Object blockPos, Object enumFacing);
 	public float superGetBlockReachDistance();
 	public void superUpdateController();
-	public boolean superOnPlayerRightClick(Object entityPlayerSP, Object world, Object itemStack, Object blockPos, Object enumFacing, Object vec3);
-	public boolean superSendUseItem(Object entityPlayer, Object world, Object itemStack);
+	public Object superProcessRightClickBlock(Object entityPlayerSP, Object world, Object itemStack, Object blockPos, Object enumFacing, Object vec3);
+	public boolean superProcessRightClick(Object entityPlayer, Object world, Object itemStack);
 	public void superAttackEntity(Object entityPlayer, Object entity);
 	public Object superWindowClick(int par1, int par2, int par3, int par4, Object entityPlayer);
 	public void superSendEnchantPacket(int par1, int par2);
@@ -34,5 +34,12 @@ public interface Modchu_IPlayerController {
 	public void superClickBlock(int par1, int par2, int par3, int par4);
 	public void superOnPlayerDamageBlock(int par1, int par2, int par3, int par4);
 	public boolean superOnPlayerRightClick(Object entityPlayer, Object world, Object itemStack, int par4, int par5, int par6, int par7, Object vec3);
+	// 190~
+	public boolean superOnPlayerDestroyBlock(Object blockPos);
+	public Object superProcessRightClickBlock(Object entityPlayerSP, Object world, Object itemStack, Object blockPos, Object enumFacing, Object vec3, Object enumHand);
+	public Object superSendUseItem(Object entityPlayer, Object world, Object itemStack, Object enumHand);
+	public Object superWindowClick(int par1, int par2, int par3, Object clickType, Object entityPlayer);
+	public Object superInteractWithEntitySendPacket(Object entityPlayer, Object entity, Object itemStack, Object enumHand);
+	public Object superProcessRightClick(Object entityPlayer, Object world, Object itemStack, Object enumHand);
 
 }

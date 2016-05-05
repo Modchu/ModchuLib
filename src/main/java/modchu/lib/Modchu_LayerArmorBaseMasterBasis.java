@@ -15,8 +15,8 @@ public class Modchu_LayerArmorBaseMasterBasis implements Modchu_ILayerArmorBaseM
 	}
 
 	@Override
-	public void func_177179_a(Object modelBase, int i) {
-		base.superFunc_177179_a(modelBase, i);
+	public void setModelSlotVisible(Object modelBase, Object entityEquipmentSlotOrInt) {
+		base.superSetModelSlotVisible(modelBase, entityEquipmentSlotOrInt);
 	}
 
 	@Override
@@ -30,23 +30,28 @@ public class Modchu_LayerArmorBaseMasterBasis implements Modchu_ILayerArmorBaseM
 	}
 
 	@Override
+	public Object getItemStackFromSlot(Object entityLivingBase, Object entityEquipmentSlotOrInt) {
+		return base.superGetItemStackFromSlot(entityLivingBase, entityEquipmentSlotOrInt);
+	}
+
+	@Override
+	public Object getModelFromSlot(Object entityEquipmentSlotOrInt) {
+		return base.superGetModelFromSlot(entityEquipmentSlotOrInt);
+	}
+
+	@Override
+	public Object getArmorResource(Object entity, Object itemStack, Object entityEquipmentSlotOrInt, String type) {
+		return base.superGetArmorResource(entity, itemStack, entityEquipmentSlotOrInt, type);
+	}
+
+	@Override
+	public Object getArmorModelHook(Object entityLivingBase, Object itemStack, Object entityEquipmentSlotOrInt, Object modelBase) {
+		return base.superGetArmorModelHook(entityLivingBase, itemStack, entityEquipmentSlotOrInt, modelBase);
+	}
+
+	@Override
 	public Object getCurrentArmor(Object entityLivingBase, int i) {
 		return base.superGetCurrentArmor(entityLivingBase, i);
-	}
-
-	@Override
-	public Object func_177175_a(int i) {
-		return base.superFunc_177175_a(i);
-	}
-
-	@Override
-	public Object getArmorResource(Object entity, Object itemStack, int slot, String type) {
-		return base.superGetArmorResource(entity, itemStack, slot, type);
-	}
-
-	@Override
-	public Object getArmorModelHook(Object entityLivingBase, Object itemStack, int slot, Object modelBase) {
-		return base.superGetArmorModelHook(entityLivingBase, itemStack, slot, modelBase);
 	}
 
 }

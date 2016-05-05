@@ -29,6 +29,13 @@ public class Modchu_FileManager {
 		base = new Modchu_FileManagerBase(new HashMap());
 		Object o = Modchu_Main.newModchuCharacteristicObject("Modchu_FileManagerMaster");
 		System.out.println("Modchu_FileManager init() o="+o);
+		if (o != null); else {
+			String ss = "Modchu_FileManager init() o == null error !!";
+			System.out.println(ss);
+			Modchu_Debug.calledFrom(1);
+			Modchu_Main.setRuntimeException(ss);
+			return;
+		}
 		master = (Modchu_IFileManagerMaster) o;
 		System.out.println("Modchu_FileManager init() master="+master);
 	}
@@ -239,4 +246,31 @@ public class Modchu_FileManager {
 	public static List<File> getClassPathFileList(String s) {
 		return master != null ? master.getClassPathFileList(s) : base.getClassPathFileList(s);
 	}
+
+	public static List<Class> getModTextureStitchedClassList() {
+		return master != null ? master.getModTextureStitchedClassList() : base.getModTextureStitchedClassList();
+	}
+
+	public static List<ZipFile> getModZipFileList() {
+		return master != null ? master.getModZipFileList() : base.getModZipFileList();
+	}
+
+	public static List<ZipFile> getModZipFileList(List<File> list) {
+		return master != null ? master.getModZipFileList(list) : base.getModZipFileList(list);
+	}
+
+	public void setModZipFileList(List<ZipFile> list) {
+		if (master != null) master.setModZipFileList(list);
+		else base.setModZipFileList(list);
+	}
+
+	public static List<ZipFile> getModsZipFileList() {
+		return master != null ? master.getModsZipFileList() : base.getModsZipFileList();
+	}
+
+	public void setModsZipFileList(List<ZipFile> list) {
+		if (master != null) master.setModsZipFileList(list);
+		else base.setModsZipFileList(list);
+	}
+
 }

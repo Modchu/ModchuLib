@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -36,7 +37,6 @@ public class Modchu_Init {
 			//}
 		}
 		Modchu_Main.init();
-		Modchu_AS.instanceCheck();
 		Modchu_Debug.lDebug("(1 / 3) - (1 / 5) Modchu_Init init()");
 		//対応MOD導入チェック class直チェック
 		HashMap<String, Boolean> map = new HashMap();
@@ -81,6 +81,28 @@ public class Modchu_Init {
 			}
 		}
 		Modchu_Debug.lDebug("Modchu_Init init() isForge="+Modchu_Main.isForge);
+		if (Modchu_Main.isForge) {
+			Class FMLCommonHandler = loadClass("net.minecraftforge.fml.common.FMLCommonHandler");
+			if (FMLCommonHandler != null); else FMLCommonHandler = loadClass("cpw.mods.fml.common.FMLCommonHandler");
+			if (FMLCommonHandler != null); else FMLCommonHandler = loadClass("FMLCommonHandler");
+			if (FMLCommonHandler != null); else FMLCommonHandler = loadClass("net.minecraft.src.FMLCommonHandler");
+			Object o = FMLCommonHandler != null ? invokeMethod(FMLCommonHandler, "instance") : null;
+			if (o != null) {
+				o = invokeMethod(o.getClass(), "getSide", o);
+				if (o != null) {
+					if ((Boolean) invokeMethod(o.getClass(), "isServer", o)) Modchu_Main.isServer = true;
+					Modchu_Debug.lDebug("(1 / 3) - (3 / 5) Modchu_Init init() Forge isServer="+Modchu_Main.isServer);
+				} else {
+					Modchu_Debug.lDebug("(1 / 3) - (3 / 5) Modchu_Init init() o == null !!");
+				}
+			}
+		} else {
+			Class ModLoader = loadClass("ModLoader");
+			if (ModLoader != null); else ModLoader = loadClass("net.minecraft.src.ModLoader");
+			if (ModLoader != null) Modchu_Main.isServer = invokeMethod(ModLoader, "getMinecraftInstance") == null;
+			Modchu_Debug.lDebug("(1 / 3) - (3 / 5) Modchu_Init init() ModLoader isServer="+Modchu_Main.isServer);
+		}
+		Modchu_AS.instanceCheck();
 		//Modchu_Debug.lDebug("Modchu_Init init() tempIsClient="+tempIsClient);
 		if (tempIsRenderPlayer2) {
 			try {
@@ -95,45 +117,9 @@ public class Modchu_Init {
 			}
 		}
 		Modchu_Debug.lDebug("(1 / 3) - (2 / 5) Modchu_Init init()");
-		Class FMLCommonHandler = loadClass("net.minecraftforge.fml.common.FMLCommonHandler");
-		if (FMLCommonHandler != null); else FMLCommonHandler = loadClass("cpw.mods.fml.common.FMLCommonHandler");
-		if (FMLCommonHandler != null); else FMLCommonHandler = loadClass("FMLCommonHandler");
-		if (FMLCommonHandler != null); else FMLCommonHandler = loadClass("net.minecraft.src.FMLCommonHandler");
-		Object o = Modchu_Reflect.invokeMethod(FMLCommonHandler, "instance");
-		if (o != null) {
-			o = invokeMethod(o.getClass(), "getSide", o);
-			if (o != null) {
-				if ((Boolean) invokeMethod(o.getClass(), "isServer", o)) Modchu_Main.isServer = true;
-				Modchu_Debug.lDebug("(1 / 3) - (3 / 5) Modchu_Init init() Forge isServer="+Modchu_Main.isServer);
-			} else {
-				Modchu_Debug.lDebug("(1 / 3) - (3 / 5) Modchu_Init init() o == null !!");
-			}
-		} else {
-			Class ModLoader = loadClass("ModLoader");
-			if (ModLoader != null); else ModLoader = loadClass("net.minecraft.src.ModLoader");
-			if (ModLoader != null) Modchu_Main.isServer = invokeMethod(ModLoader, "getMinecraftInstance") == null;
-			Modchu_Debug.lDebug("(1 / 3) - (3 / 5) Modchu_Init init() ModLoader isServer="+Modchu_Main.isServer);
-		}
 		Modchu_FileManager.init();
 		String s = null;
-		List<File> list = Modchu_FileManager.getMinecraftJarList();
-		if (list != null) {
-			Modchu_Debug.lDebug("(1 / 3) - (4 / 5) 1 Modchu_Init init()");
-			for (File file : list) {
-				s = file.getAbsolutePath();
-				Modchu_Debug.lDebug("(1 / 3) - (4 / 5) r Modchu_Init init() s="+s);
-				if (!checkIsRelease(s)) {
-					Modchu_Main.isRelease = false;
-					Modchu_Debug.lDebug("(1 / 3) - (4 / 5) r Modchu_Init init() Modchu_Main.isRelease = false break.");
-					break;
-				}
-			}
-		} else {
-			File mcDataDir = !Modchu_Main.isServer ? Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir) : new File(".");
-			Modchu_Debug.lDebug("(1 / 3) - (4 / 5) 2 Modchu_Init init() mcDataDir="+mcDataDir.getAbsolutePath());
-			s = mcDataDir.getAbsolutePath();
-			Modchu_Main.isRelease = checkIsRelease(s);
-		}
+		checkIsRelease();
 		Modchu_Debug.lDebug("Modchu_Init init() isRelease="+Modchu_Main.isRelease);
 		Modchu_Reflect.initNameMap();
 /*
@@ -142,22 +128,90 @@ public class Modchu_Init {
 		HashMap<String, Object> debug = Modchu_Main.getNewModchuCharacteristicMap(ff, fff);
 		throw new RuntimeException("Modchu_Init debug stop");
 */
-		Modchu_Debug.lDebug("(1 / 3) - (5 / 5) Modchu_Init init() end.");
+		Modchu_Debug.lDebug("(1 / 3) - (5 / 5)  init() end.");
 	}
 
-	private static boolean checkIsRelease(String s) {
-		//Modchu_Debug.lDebug("Modchu_Init checkIsRelease new File= "+(new File(new File(s, "../"), "gradle")));
-		if (s != null
-				&& (s.indexOf("jars") != -1
-						| s.indexOf("gradle") != -1
-								| s.indexOf("mcp") != -1
-								| new File(s, ".gradle").exists()
-								| new File(new File(s, "../"), ".gradle").exists())) {
-			return false;
-		} else {
-			Modchu_Debug.lDebug("Modchu_Init init() isRelease checkIsRelease s="+s+" error !!", 2);
+	private static void checkIsRelease() {
+		Class minecraft = loadClass("net.minecraft.src.Minecraft", false);
+		if (minecraft != null) {
+			// 1.6.2開発環境確定
+			System.out.println("Modchu_Init checkIsRelease 1.6.2開発環境 return.");
+			Modchu_Main.isRelease = false;
+			return;
 		}
-		return true;
+		minecraft = loadClass("net.minecraft.client.Minecraft", false);
+		if (minecraft != null); else {
+			minecraft = loadClass("ats", false);
+			if (minecraft != null) {
+				Object o = getFieldObject(minecraft.getClass(), "lu", minecraft);
+				if (o != null) {
+					// 1.6.2通常環境確定
+					System.out.println("Modchu_Init checkIsRelease 1.6.2通常環境 o="+o);
+					Modchu_Main.isRelease = true;
+					return;
+				}
+				minecraft = null;
+			}
+		}
+		System.out.println("Modchu_Init checkIsRelease minecraft="+minecraft);
+		if (minecraft == null) {
+			// Server環境確定
+			Class c = loadClass("net.minecraft.server.MinecraftServer", false);
+			if (c != null) {
+				Method method = getRawMethod(c, "getServer", null);
+				boolean b = method == null;
+				System.out.println("Modchu_Init checkIsRelease "+(b ? "通常" : "開発")+"環境 Server return.");
+				Modchu_Main.isRelease = b;
+				return;
+			}
+			String s = "Modchu_Init checkIsRelease check error !! isForge="+Modchu_Main.isForge+" getMinecraftVersion()="+Modchu_Main.getMinecraftVersion();
+			Modchu_Main.setRuntimeException(s);
+			return;
+		}
+		Object o = invokeMethod(minecraft, "func_71410_x");
+		System.out.println("Modchu_Init checkIsRelease 1 o="+o);
+		if (o != null
+				&& minecraft.isInstance(o)) {
+			// 通常環境確定
+			System.out.println("Modchu_Init checkIsRelease func_71410_x return.");
+			Modchu_Main.isRelease = true;
+			return;
+		}
+		o = invokeMethod(minecraft, "x");
+		System.out.println("Modchu_Init checkIsRelease 2 o="+o);
+		if (o != null
+				&& minecraft.isInstance(o)) {
+			// 通常環境確定
+			Modchu_Main.isRelease = true;
+			return;
+		}
+		o = invokeMethod(minecraft, "w");
+		System.out.println("Modchu_Init checkIsRelease 3 o="+o);
+		if (o != null
+				&& minecraft.isInstance(o)) {
+			// 通常環境確定
+			System.out.println("Modchu_Init checkIsRelease 4 return.");
+			Modchu_Main.isRelease = true;
+			return;
+		}
+		o = invokeMethod(minecraft, "getMinecraft");
+		System.out.println("Modchu_Init checkIsRelease 5 o="+o);
+		if (o != null
+				&& minecraft.isInstance(o)) {
+			System.out.println("Modchu_Init checkIsRelease 6 return.");
+			// 開発環境確定
+			Modchu_Main.isRelease = false;
+			return;
+		}
+		int version = Modchu_Main.getMinecraftVersion();
+		String ss = "Modchu_Init checkIsRelease null error !! version="+version;
+		System.out.println(ss);
+		if (version > 179
+				&& Modchu_Main.isForge) {
+			Modchu_Main.setRuntimeException(ss);
+			return;
+		}
+		throw new RuntimeException(ss);
 	}
 
 	public static String getMcVersion() {
@@ -279,15 +333,24 @@ public class Modchu_Init {
 				return "1.7.10";
 			case 11:
 				if (i3 > 1660) return "1.8.9";
-				if (i3 == 1590
-				| i1 == 15) return "1.8.8";
+				if (i3 != 1577) {
+					if (i3 > 1574
+							| i1 == 15) {
+						//return "1.8.8";
+						//強制1.8.9判定
+						return "1.8.9";
+					}
+				}
 				return "1.8";
+			case 12:
+				return "1.9";
 			}
 		}
-		return null;
+		return "1.9";
 	}
 
 	public static int getVersionStringToMinecraftVersionInt(String s) {
+		if (s.equals("1.9")) return 190;
 		if (s.equals("1.8.9")) return 189;
 		if (s.equals("1.8.8")) return 188;
 		if (s.equals("1.8")) return 180;
@@ -307,30 +370,55 @@ public class Modchu_Init {
 
 	public static String[] getModchuCharacteristicVersionStrings() {
 		int version = Modchu_Version.getMinecraftVersion();
+		if (version == 190) {
+			return new String[]{
+					"190",
+					"189_190",
+					"188_190",
+					"180_190",
+					"172_190",
+					"164_190",
+					"162_190",
+					"152_190"
+			};
+		}
 		if (version == 189) {
 			return new String[]{
 					"189",
+					"189_190",
 					"188_189",
+					"188_190",
 					"180_189",
+					"180_190",
 					"172_189",
+					"172_190",
 					"164_189",
+					"164_190",
 					"162_189",
-					"152_189"
+					"162_190",
+					"152_189",
+					"152_190"
 			};
 		}
 		if (version == 188) {
 			return new String[]{
 					"188",
 					"188_189",
+					"188_190",
 					"180_188",
 					"180_189",
+					"180_190",
 					"172_188",
 					"172_189",
+					"172_190",
 					"164_188",
 					"164_189",
+					"164_190",
 					"162_188",
 					"162_189",
-					"152_189"
+					"162_190",
+					"152_189",
+					"152_190"
 			};
 		}
 		if (version == 180) {
@@ -338,16 +426,21 @@ public class Modchu_Init {
 					"180",
 					"180_188",
 					"180_189",
+					"180_190",
 					"172_180",
 					"172_188",
 					"172_189",
-					"164_180",
+					"172_190",
 					"164_188",
 					"164_189",
+					"164_190",
+					"164_180",
 					"162_180",
 					"162_188",
 					"162_189",
-					"152_189"
+					"162_190",
+					"152_189",
+					"152_190"
 			};
 		}
 		if (version == 179) {
@@ -357,16 +450,20 @@ public class Modchu_Init {
 					"172_180",
 					"172_188",
 					"172_189",
+					"172_190",
 					"164_179",
 					"164_180",
 					"164_188",
 					"164_189",
+					"164_190",
 					"162_179",
 					"162_180",
 					"162_188",
 					"162_189",
+					"162_190",
 					"152_179",
-					"152_189"
+					"152_189",
+					"152_190"
 			};
 		}
 		if (version == 172) {
@@ -376,47 +473,56 @@ public class Modchu_Init {
 					"172_180",
 					"172_188",
 					"172_189",
+					"172_190",
 					"164_179",
 					"164_180",
 					"164_188",
 					"164_189",
+					"164_190",
 					"162_179",
 					"162_180",
 					"162_188",
 					"162_189",
+					"162_190",
 					"152_179",
-					"152_189"
+					"152_189",
+					"152_190"
 			};
 		}
 		if (version == 164) {
 			return new String[]{
 					"164",
-					"162_164",
 					"164_179",
 					"164_180",
 					"164_188",
 					"164_189",
+					"164_190",
+					"162_164",
 					"162_179",
 					"162_180",
 					"162_188",
 					"162_189",
+					"162_190",
 					"152_164",
 					"152_179",
-					"152_189"
+					"152_189",
+					"152_190"
 			};
 		}
 		if (version == 162) {
 			return new String[]{
 					"162",
-					"152_162",
 					"162_164",
 					"162_179",
 					"162_180",
 					"162_188",
 					"162_189",
+					"162_190",
+					"152_162",
 					"152_164",
 					"152_179",
-					"152_189"
+					"152_189",
+					"152_190"
 			};
 		}
 		if (version == 152) {
@@ -425,22 +531,46 @@ public class Modchu_Init {
 					"152_162",
 					"152_164",
 					"152_179",
-					"152_189"
+					"152_189",
+					"152_190"
 			};
 		}
 		return null;
 	}
 
 	private static Object getFieldObject(String var0, String var1) {
+		return getFieldObject(loadClass(var0), var1, null);
+	}
+
+	private static Object getFieldObject(Class var0, String var1) {
+		return getFieldObject(var0, var1, null);
+	}
+
+	private static Object getFieldObject(String var0, String var1, Object o) {
+		return getFieldObject(loadClass(var0), var1, o);
+	}
+
+	private static Object getFieldObject(Class var0, String var1, Object o) {
 		Field f = null;
-		Class c = null;
 		try {
-			c = loadClass(var0);
-			if (c != null) f = getField(c, var1);
-			if (f != null) return f.get(null);
+			if (var0 != null) {
+				f = getField(var0, var1);
+				if (f != null) return f.get(o);
+			}
 		} catch (Exception e) {
 		}
 		return null;
+	}
+
+	private static Object getFieldObject(String var0, String var1, String var2) {
+		return getFieldObject(var0, var1, var2, null);
+	}
+
+	private static Object getFieldObject(String var0, String var1, String var2, Object o) {
+		Object o1 = getFieldObject(var0, var1, o);
+		if (o1 != null) return o1;
+		o1 = getFieldObject(var0, var2, o);
+		return o1;
 	}
 
 	private static Field getField(String var0, String var1) {
@@ -463,6 +593,10 @@ public class Modchu_Init {
 	}
 
 	private static Class loadClass(String var0) {
+		return loadClass(var0, true);
+	}
+
+	private static Class loadClass(String var0, boolean b) {
 		Class c = null;
 		try {
 			c = Class.forName(var0);
@@ -470,30 +604,37 @@ public class Modchu_Init {
 		} catch (Error e) {
 		} catch (Exception e) {
 		}
+		if (!b) return null;
+		try {
+			c = Class.forName("net.minecraft.src."+var0);
+			if (c != null) return c;
+		} catch (Error e) {
+		} catch (Exception e) {
+		}
 		return null;
 	}
 
-	public static Object invokeMethod(String var0, String var1) {
+	private static Object invokeMethod(String var0, String var1) {
 		return invokeMethod(loadClass(var0), var1, (Class[]) null, (Object[]) null);
 	}
 
-	public static Object invokeMethod(String var0, String var1, Object var3) {
+	private static Object invokeMethod(String var0, String var1, Object var3) {
 		return invokeMethod(loadClass(var0), var1, (Class[]) null, var3, (Object[]) null);
 	}
 
-	public static Object invokeMethod(Class var0, String var1) {
+	private static Object invokeMethod(Class var0, String var1) {
 		return invokeMethod(var0, var1, (Class[]) null, (Object[]) null);
 	}
 
-	public static Object invokeMethod(Class var0, String var1, Object o) {
+	private static Object invokeMethod(Class var0, String var1, Object o) {
 		return invokeMethod(var0, var1, (Class[]) null, o, (Object[]) null);
 	}
 
-	public static Object invokeMethod(Class var0, String var1, Class[] var2, Object[] var3) {
+	private static Object invokeMethod(Class var0, String var1, Class[] var2, Object[] var3) {
 		return invokeMethod(var0, var1, var2, null, var3);
 	}
 
-	public static Object invokeMethod(Class var0, String var1, Class[] var2, Object var3, Object[] var4) {
+	private static Object invokeMethod(Class var0, String var1, Class[] var2, Object var3, Object[] var4) {
 		Method method = null;
 		try {
 			method = getRawMethod(var0, var1, var2);

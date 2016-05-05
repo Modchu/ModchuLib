@@ -473,14 +473,14 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 	}
 
 	@Override
-	public Object getBipedArmor(Object entityPlayer, Object itemStack, int i, int i2, String s) {
+	public Object getBipedArmor(Object entityPlayer, Object itemStack, int i, Object entityEquipmentSlotOrInt, String s) {
 		if (Modchu_Main.isServer) return null;
 		Item item = (Item) itemStackGetItem(itemStack);
 		if (item instanceof ItemArmor) {
 			//int renderIndex = itemArmorRenderIndex(item);
 			//String[] armorFilename = renderBipedBipedArmorFilenamePrefix();
 			//String a1 = renderIndex < armorFilename.length ? armorFilename[renderIndex] : armorFilename[armorFilename.length - 1];
-			return RenderBiped.getArmorResource((Entity)entityPlayer, (ItemStack)itemStack, i, s);
+			return RenderBiped.getArmorResource((Entity)entityPlayer, (ItemStack)itemStack, (Integer) i, s);
 		}
 		return null;
 	}
@@ -1089,6 +1089,11 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 			//Modchu_Debug.mDebug("renderBindTexture render="+render+" resourceLocation="+resourceLocation);
 			Modchu_Reflect.invokeMethod("Render", "func_110776_a", "bindTexture", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, render, new Object[]{ resourceLocation });
 		}
+	}
+
+	@Override
+	public Object newResourceLocation(String s) {
+		return new ResourceLocation(s);
 	}
 	// ビルド時にバージョン別変化有り ↓
 	@Override

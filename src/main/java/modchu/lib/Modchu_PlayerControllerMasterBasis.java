@@ -10,8 +10,8 @@ public class Modchu_PlayerControllerMasterBasis implements Modchu_IPlayerControl
 	}
 
 	@Override
-	public Object createPlayer(Object world) {
-		return base.superCreatePlayer(world, null);
+	public Object createClientPlayer(Object world) {
+		return base.superCreateClientPlayer(world, null);
 	}
 
 	@Override
@@ -75,8 +75,8 @@ public class Modchu_PlayerControllerMasterBasis implements Modchu_IPlayerControl
 	}
 
 	@Override
-	public boolean sendUseItem(Object entityPlayer, Object world, Object itemStack) {
-		return base.superSendUseItem(entityPlayer, world, itemStack);
+	public boolean processRightClick(Object entityPlayer, Object world, Object itemStack) {
+		return base.superProcessRightClick(entityPlayer, world, itemStack);
 	}
 
 	@Override
@@ -90,8 +90,8 @@ public class Modchu_PlayerControllerMasterBasis implements Modchu_IPlayerControl
 	}
 
 	@Override
-	public Object windowClick(int par1, int par2, int par3, int par4, Object entityPlayer) {
-		return base.superWindowClick(par1, par2, par3, par4, entityPlayer);
+	public Object windowClick(int par1, int par2, int par3, Object clickTypeOrInt, Object entityPlayer) {
+		return base.superWindowClick(par1, par2, par3, clickTypeOrInt, entityPlayer);
 	}
 
 	@Override
@@ -172,7 +172,27 @@ public class Modchu_PlayerControllerMasterBasis implements Modchu_IPlayerControl
 	}
 
 	@Override
-	public boolean onPlayerRightClick(Object entityPlayerSP, Object worldClient, Object itemStack, Object blockPos, Object enumFacing, Object vec3) {
-		return base.superOnPlayerRightClick(entityPlayerSP, worldClient, itemStack, blockPos, enumFacing, vec3);
+	public Object processRightClickBlock(Object entityPlayerSP, Object worldClient, Object itemStack, Object blockPos, Object enumFacing, Object vec3) {
+		return base.superProcessRightClickBlock(entityPlayerSP, worldClient, itemStack, blockPos, enumFacing, vec3);
+	}
+
+	@Override
+	public boolean onPlayerDestroyBlock(Object blockPos) {
+		return (boolean) (base.superOnPlayerDestroyBlock(blockPos));
+	}
+
+	@Override
+	public Object processRightClickBlock(Object entityPlayerSP, Object worldClient, Object itemStack, Object blockPos, Object enumFacing, Object vec3, Object enumHand) {
+		return base.superProcessRightClickBlock(entityPlayerSP, worldClient, itemStack, blockPos, enumFacing, vec3, enumHand);
+	}
+
+	@Override
+	public Object processRightClick(Object entityPlayer, Object world, Object itemStack, Object enumHand) {
+		return base.superProcessRightClick(entityPlayer, world, itemStack, enumHand);
+	}
+
+	@Override
+	public Object interactWithEntitySendPacket(Object entityPlayer, Object entity, Object itemStack, Object enumHand) {
+		return base.superInteractWithEntitySendPacket(entityPlayer, entity, itemStack, enumHand);
 	}
 }

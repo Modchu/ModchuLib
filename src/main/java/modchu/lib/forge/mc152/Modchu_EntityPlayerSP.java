@@ -70,7 +70,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	public void init() {
 		if (master != null) master.init();
 		initFlag = true;
-	}	@Override
+	}	@Override	public Object getFreeVariable(String s) {		return master.getFreeVariable(s);	}	@Override	public Object superGetFreeVariable(String s) {		return null;	}	@Override	public void setFreeVariable(String s, Object o) {		master.setFreeVariable(s, o);	}	@Override	public void superSetFreeVariable(String s, Object o) {	}	@Override
 	public void wakeUpPlayer(boolean flag, boolean flag1, boolean flag2) {
 		super.wakeUpPlayer(flag, flag1, flag2);
 		if (master != null) master.wakeUpPlayer(flag, flag1, flag2);
@@ -92,7 +92,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public String getHurtSound() {
 		Modchu_Debug.mDebug("Modchu_EntityPlayerSP getHurtSound");
-		if (master != null) return master.getHurtSound();
+		if (master != null) return (String) master.getHurtSound();
 		return super.getHurtSound();
 	}	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
@@ -174,7 +174,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}
 */
 	public float getEntityHealth() {
-		return master != null ? master.getHealth() : super.getHealth();
+		return (Float) (master != null ? master.getHealth() : super.getHealth());
 	}	public void setEntityHealth(float f) {
 		if (master != null) master.setHealth(f);
 	}	@Override
@@ -255,10 +255,10 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.dropOneItem(par1);
 	}	@Override
 	public void joinEntityItemWithWorld(EntityItem entityItem) {
-		if (master != null) master.joinEntityItemWithWorld(entityItem);
+		if (master != null) master.dropItemAndGetStack(entityItem);
 		else super.joinEntityItemWithWorld(entityItem);
-	}	@Override	public void superJoinEntityItemWithWorld(Object entityItem) {
-		super.joinEntityItemWithWorld((EntityItem) entityItem);
+	}	@Override	public Object superDropItemAndGetStack(Object entityItem) {
+		super.joinEntityItemWithWorld((EntityItem) entityItem);		return ((EntityItem) entityItem).getEntityItem();
 	}	@Override
 	public void sendChatMessage(String par1Str) {
 		if (master != null) master.sendChatMessage(par1Str);
@@ -267,9 +267,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.sendChatMessage(par1Str);
 	}	@Override
 	public void swingItem() {
-		if (master != null) master.swingItem();
+		if (master != null) master.swingArm();
 		else super.swingItem();
-	}	@Override	public void superSwingItem() {
+	}	@Override	public void superSwingArm() {
 		super.swingItem();
 	}	@Override
 	public void respawnPlayer() {
@@ -354,9 +354,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.displayGUIEditSign((TileEntity) tileEntity);
 	}	@Override
 	public void displayGUIBook(ItemStack itemStack) {
-		if (master != null) master.displayGUIBook(itemStack);
+		if (master != null) master.openBook(itemStack);
 		else super.displayGUIBook(itemStack);
-	}	@Override	public void superDisplayGUIBook(Object itemStack) {
+	}	@Override	public void superOpenBook(Object itemStack) {
 		super.displayGUIBook((ItemStack) itemStack);
 	}	@Override
 	public void displayGUIChest(IInventory iInventory) {
@@ -490,8 +490,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	public void playSound(String par1Str, float par2, float par3) {
 		if (master != null) master.playSound(par1Str, par2, par3);
 		else super.playSound(par1Str, par2, par3);
-	}	@Override	public void superPlaySound(String par1Str, float par2, float par3) {
-		super.playSound(par1Str, par2, par3);
+	}	@Override	public void superPlaySound(Object par1Str, float par2, float par3) {
+		super.playSound((String) par1Str, par2, par3);
 	}	@Override
 	public int getMaxHealth() {
 		return (int) (master != null ? master.getMaxHealth() : super.getMaxHealth());
@@ -515,8 +515,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.getItemInUseCount();
 	}	@Override
 	public boolean isUsingItem() {
-		return master != null ? master.isUsingItem() : super.isUsingItem();
-	}	@Override	public boolean superIsUsingItem() {
+		return master != null ? master.isHandActive() : super.isUsingItem();
+	}	@Override	public boolean superIsHandActive() {
 		return super.isUsingItem();
 	}	@Override
 	public int getItemInUseDuration() {
@@ -575,10 +575,10 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.isMovementBlocked();
 	}	@Override
 	public void mountEntity(Entity entity) {
-		if (master != null) master.mountEntity(entity);
+		if (master != null) master.startRiding(entity);
 		else super.mountEntity(entity);
-	}	@Override	public void superMountEntity(Object entity) {
-		super.mountEntity((Entity) entity);
+	}	@Override	public boolean superStartRiding(Object entity) {
+		super.mountEntity((Entity) entity);		return true;
 	}	@Override
 	public int getScore() {
 		return master != null ? master.getScore() : super.getScore();
@@ -646,8 +646,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.getEyeHeight();
 	}	@Override
 	public boolean func_96122_a(EntityPlayer entityPlayer) {
-		return master != null ? master.func_96122_a(entityPlayer) : super.func_96122_a(entityPlayer);
-	}	@Override	public boolean superFunc_96122_a(Object entityPlayer) {
+		return master != null ? master.canAttackPlayer(entityPlayer) : super.func_96122_a(entityPlayer);
+	}	@Override	public boolean superCanAttackPlayer(Object entityPlayer) {
 		return super.func_96122_a((EntityPlayer) entityPlayer);
 	}	@Override
 	protected void alertWolves(EntityLiving entityLiving, boolean par2) {
@@ -668,8 +668,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.getTotalArmorValue();
 	}	@Override
 	public float func_82243_bO() {
-		return master != null ? master.func_82243_bO() : super.func_82243_bO();
-	}	@Override	public float superFunc_82243_bO() {
+		return master != null ? master.getArmorVisibility() : super.func_82243_bO();
+	}	@Override	public float superGetArmorVisibility() {
 		return super.func_82243_bO();
 	}	@Override
 	public boolean interactWith(Entity entity) {
@@ -678,8 +678,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.interactWith((Entity) entity);
 	}	@Override
 	public ItemStack getCurrentEquippedItem() {
-		return (ItemStack) (master != null ? master.getCurrentEquippedItem() : super.getCurrentEquippedItem());
-	}	@Override	public ItemStack superGetCurrentEquippedItem() {
+		return (ItemStack) (master != null ? master.getHeldItemMainhand() : super.getCurrentEquippedItem());
+	}	@Override	public ItemStack superGetHeldItemMainhand() {
 		return super.getCurrentEquippedItem();
 	}	@Override
 	public void destroyCurrentEquippedItem() {
@@ -753,9 +753,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.setSpawnChunk((ChunkCoordinates) chunkCoordinates, par2);
 	}	@Override
 	public void triggerAchievement(StatBase statBase) {
-		if (master != null) master.triggerAchievement(statBase);
+		if (master != null) master.addStat(statBase);
 		else super.triggerAchievement(statBase);
-	}	@Override	public void superTriggerAchievement(Object statBase) {
+	}	@Override	public void superAddStat(Object statBase) {
 		super.triggerAchievement((StatBase) statBase);
 	}	@Override
 	protected void jump() {
@@ -799,9 +799,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.getCurrentArmor(par1);
 	}	@Override
 	protected void addRandomArmor() {
-		if (master != null) master.addRandomDrop();
+		if (master != null) master.dropLoot();
 		else super.addRandomArmor();
-	}	@Override	public void superAddRandomDrop() {
+	}	@Override	public void superDropLoot() {
 		super.addRandomArmor();
 	}	@Override
 	protected void func_82162_bC() {
@@ -885,8 +885,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.func_94062_bN();
 	}	@Override
 	public boolean func_94059_bO() {
-		return master != null ? master.func_94059_bO() : super.func_94059_bO();
-	}	@Override	public boolean superFunc_94059_bO() {
+		return master != null ? master.getAlwaysRenderNameTagForRender() : super.func_94059_bO();
+	}	@Override	public boolean superGetAlwaysRenderNameTagForRender() {
 		return super.func_94059_bO();
 	}	@Override
 	public boolean canPickUpLoot() {
@@ -943,8 +943,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.setCurrentItemOrArmor(par1, (ItemStack) itemStack);
 	}	@Override
 	public boolean func_98034_c(EntityPlayer entityPlayer) {
-		return master != null ? master.func_98034_c(entityPlayer) : super.func_98034_c(entityPlayer);
-	}	@Override	public boolean superFunc_98034_c(Object entityPlayer) {
+		return master != null ? master.isInvisibleToPlayer(entityPlayer) : super.func_98034_c(entityPlayer);
+	}	@Override	public boolean superIsInvisibleToPlayer(Object entityPlayer) {
 		return super.func_98034_c((EntityPlayer) entityPlayer);
 	}	@Override
 	public ItemStack[] getLastActiveItems() {
@@ -958,8 +958,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.getHideCape();
 	}	@Override
 	public boolean func_96092_aw() {
-		return master != null ? master.func_96092_aw() : super.func_96092_aw();
-	}	@Override	public boolean superFunc_96092_aw() {
+		return master != null ? master.isPushedByWater() : super.func_96092_aw();
+	}	@Override	public boolean superIsPushedByWater() {
 		return super.func_96092_aw();
 	}	@Override
 	public Scoreboard getWorldScoreboard() {
@@ -1198,7 +1198,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
 	}	@Override
 	public int getHealth() {
-		return (int) (master != null ? master.getHealth() : super.getHealth());
+		return (Integer) (master != null ? master.getHealth() : super.getHealth());
 	}	@Override	public int superGetHealth() {
 		return super.getHealth();
 	}	@Override
@@ -1220,13 +1220,13 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.performHurtAnimation();
 	}	@Override
 	protected int applyArmorCalculations(DamageSource damageSource, int par2) {
-		return master != null ? master.applyArmorCalculations(damageSource, par2) : super.applyArmorCalculations(damageSource, par2);
-	}	@Override	public int superApplyArmorCalculations(Object damageSource, int par2) {
+		return (Integer) (master != null ? master.applyArmorCalculations(damageSource, par2) : super.applyArmorCalculations(damageSource, par2));
+	}	@Override	public Object superApplyArmorCalculations(Object damageSource, int par2) {
 		return super.applyArmorCalculations((DamageSource) damageSource, par2);
 	}	@Override
 	protected int applyPotionDamageCalculations(DamageSource damageSource, int par2) {
-		return master != null ? master.applyPotionDamageCalculations(damageSource, par2) : super.applyPotionDamageCalculations(damageSource, par2);
-	}	@Override	public int superApplyPotionDamageCalculations(Object damageSource, int par2) {
+		return (Integer) (master != null ? master.applyPotionDamageCalculations(damageSource, par2) : super.applyPotionDamageCalculations(damageSource, par2));
+	}	@Override	public Object superApplyPotionDamageCalculations(Object damageSource, int par2) {
 		return super.applyPotionDamageCalculations((DamageSource) damageSource, par2);
 	}	@Override
 	protected float getSoundVolume() {
@@ -1235,12 +1235,12 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.getSoundVolume();
 	}	@Override
 	protected String getLivingSound() {
-		return master != null ? master.getLivingSound() : super.getLivingSound();
+		return (String) (master != null ? master.getAmbientSound() : super.getLivingSound());
 	}	@Override	public String superGetLivingSound() {
 		return super.getLivingSound();
 	}	@Override
 	protected String getDeathSound() {
-		return master != null ? master.getDeathSound() : super.getDeathSound();
+		return (String) (master != null ? master.getDeathSound() : super.getDeathSound());
 	}	@Override	public String superGetDeathSound() {
 		return super.getDeathSound();
 	}	@Override
@@ -1295,9 +1295,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.setJumping(par1);
 	}	@Override
 	protected void func_85033_bc() {
-		if (master != null) master.func_85033_bc();
+		if (master != null) master.collideWithNearbyEntities();
 		else super.func_85033_bc();
-	}	@Override	public void superFunc_85033_bc() {
+	}	@Override	public void superCollideWithNearbyEntities() {
 		super.func_85033_bc();
 	}	@Override
 	protected void collideWithEntity(Entity entity) {
@@ -1498,8 +1498,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.renderBrokenItemStack((ItemStack) itemStack);
 	}	@Override
 	public int func_82143_as() {
-		return master != null ? master.func_82143_as() : super.func_82143_as();
-	}	@Override	public int superFunc_82143_as() {
+		return master != null ? master.getMaxFallHeight() : super.func_82143_as();
+	}	@Override	public int superGetMaxFallHeight() {
 		return super.func_82143_as();
 	}	@Override
 	protected void dropEquipment(boolean par1, int par2) {
@@ -1520,8 +1520,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.canBeSteered();
 	}	@Override
 	public EntityLiving func_94060_bK() {
-		return (EntityLiving) (master != null ? master.func_94060_bK() : super.func_94060_bK());
-	}	@Override	public EntityLiving superFunc_94060_bK() {
+		return (EntityLiving) (master != null ? master.getAttackingEntity() : super.func_94060_bK());
+	}	@Override	public EntityLiving superGetAttackingEntity() {
 		return super.func_94060_bK();
 	}	@Override
 	public void func_94058_c(String par1Str) {
@@ -1541,9 +1541,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.func_94056_bM();
 	}	@Override
 	public void func_94061_f(boolean par1) {
-		if (master != null) master.func_94061_f(par1);
+		if (master != null) master.setNoAI(par1);
 		else super.func_94061_f(par1);
-	}	@Override	public void superFunc_94061_f(boolean par1) {
+	}	@Override	public void superSetNoAI(boolean par1) {
 		super.func_94061_f(par1);
 	}	@Override
 	public void func_96120_a(int par1, float par2) {
@@ -1559,8 +1559,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.setCanPickUpLoot(par1);
 	}	@Override
 	public boolean func_104002_bU() {
-		return master != null ? master.func_104002_bU() : super.func_104002_bU();
-	}	@Override	public boolean superFunc_104002_bU() {
+		return master != null ? master.isNoDespawnRequired() : super.func_104002_bU();
+	}	@Override	public boolean superIsNoDespawnRequired() {
 		return super.func_104002_bU();
 	}	@Override
 	public void curePotionEffects(ItemStack itemStack) {
@@ -1575,20 +1575,10 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.shouldRiderFaceForward((EntityPlayer) entityPlayer);
 	}	@Override
 	public DataWatcher getDataWatcher() {
-		return (DataWatcher) (master != null ? master.getDataWatcher() : super.getDataWatcher());
-	}	@Override	public DataWatcher superGetDataWatcher() {
+		return (DataWatcher) (master != null ? master.getDataManager() : super.getDataWatcher());
+	}	@Override	public DataWatcher superGetDataManager() {
 		return super.getDataWatcher();
-	}/*	@Override
-	public boolean equals(Object par1Obj) {
-		return master != null ? master.equals(par1Obj) : super.equals(par1Obj);
-	}	public boolean superEquals(Object par1Obj) {
-		return super.equals(par1Obj);
 	}	@Override
-	public int hashCode() {
-		return master != null ? master.hashCode() : super.hashCode();
-	}	public int superHashCode() {
-		return super.hashCode();
-	}*/	@Override
 	protected void setRotation(float par1, float par2) {
 		if (master != null) master.setRotation(par1, par2);
 		else super.setRotation(par1, par2);
@@ -1829,9 +1819,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.getCollisionBox((Entity) entity);
 	}	@Override
 	public void updateRiderPosition() {
-		if (master != null) master.updateRiderPosition();
+		if (master != null) master.updatePassenger();
 		else super.updateRiderPosition();
-	}	@Override	public void superUpdateRiderPosition() {
+	}	@Override	public void superUpdatePassenger() {
 		super.updateRiderPosition();
 	}	@Override
 	public void unmountEntity(Entity entity) {
@@ -1944,8 +1934,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.canAttackWithItem();
 	}	@Override
 	public boolean func_85031_j(Entity entity) {
-		return master != null ? master.func_85031_j(entity) : super.func_85031_j(entity);
-	}	@Override	public boolean superFunc_85031_j(Object entity) {
+		return master != null ? master.hitByEntity(entity) : super.func_85031_j(entity);
+	}	@Override	public boolean superHitByEntity(Object entity) {
 		return super.func_85031_j((Entity) entity);
 	}	@Override
 	public String toString() {
@@ -1959,9 +1949,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.isEntityInvulnerable();
 	}	@Override
 	public void func_82149_j(Entity entity) {
-		if (master != null) master.func_82149_j(entity);
+		if (master != null) master.copyLocationAndAnglesFrom(entity);
 		else super.func_82149_j(entity);
-	}	@Override	public void superFunc_82149_j(Object entity) {
+	}	@Override	public void superCopyLocationAndAnglesFrom(Object entity) {
 		super.func_82149_j((Entity) entity);
 	}	@Override
 	public void copyDataFrom(Entity entity, boolean par2) {
@@ -1971,10 +1961,10 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.copyDataFrom((Entity) entity, par2);
 	}	@Override
 	public void travelToDimension(int par1) {
-		if (master != null) master.travelToDimension(par1);
+		if (master != null) master.changeDimension(par1);
 		else super.travelToDimension(par1);
-	}	@Override	public void superTravelToDimension(int par1) {
-		super.travelToDimension(par1);
+	}	@Override	public Object superChangeDimension(int par1) {
+		super.travelToDimension(par1);		return this;
 	}	@Override
 	public float func_82146_a(Explosion explosion, World world, int par3, int par4, int par5, Block block) {
 		return master != null ? master.func_82146_a(explosion, world, par3, par4, par5, block) : super.func_82146_a(explosion, world, par3, par4, par5, block);
@@ -1987,8 +1977,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.func_96091_a((Explosion) explosion, (World) world, par3, par4, par5, par6, par7);
 	}	@Override
 	public int getTeleportDirection() {
-		return (Integer) (master != null ? master.getTeleportDirection() : super.getTeleportDirection());
-	}	@Override	public Object superGetTeleportDirection() {
+		return (Integer) (master != null ? master.getLastPortalVec() : super.getTeleportDirection());
+	}	@Override	public Object superGetLastPortalVec() {
 		return super.getTeleportDirection();
 	}	@Override
 	public boolean doesEntityNotTriggerPressurePlate() {
@@ -1997,9 +1987,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.doesEntityNotTriggerPressurePlate();
 	}	@Override
 	public void func_85029_a(CrashReportCategory crashReportCategory) {
-		if (master != null) master.func_85029_a(crashReportCategory);
+		if (master != null) master.addEntityCrashInfo(crashReportCategory);
 		else super.func_85029_a(crashReportCategory);
-	}	@Override	public void superFunc_85029_a(Object crashReportCategory) {
+	}	@Override	public void superAddEntityCrashInfo(Object crashReportCategory) {
 		super.func_85029_a((CrashReportCategory) crashReportCategory);
 	}	@Override
 	public boolean canRenderOnFire() {
@@ -2058,16 +2048,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public void superSetPlayerSPHealth(float par1) {
 	}	@Override
-	public void superFunc_110318_g() {
-	}	@Override
 	public void superFunc_110322_i() {
 	}	@Override
 	public void superFunc_142020_c(String par1Str) {
-	}	@Override
-	public String superFunc_142021_k() {
-		return null;
-	}	@Override
-	public void superDisplayGUIHorse(Object entityHorse, Object iInventory) {
 	}	@Override
 	public void superSendChatToPlayer(Object chatMessageComponent) {
 	}	@Override
@@ -2093,13 +2076,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public void superApplyEntityAttributes() {
 	}	@Override
-	public boolean superCanAttackPlayer(Object entityPlayer) {
-		return false;
-	}	@Override
 	public void superDamageArmor(float par1) {
-	}	@Override
-	public float superGetArmorVisibility() {
-		return 0;
 	}	@Override
 	public Object superGetBedLocation(int dimension) {
 		return null;
@@ -2112,17 +2089,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	public boolean superIsCurrentToolAdventureModeExempt(int par1, int par2, int par3) {
 		return false;
 	}	@Override
-	public boolean superGetAlwaysRenderNameTagForRender() {
-		return false;
-	}	@Override
 	public Object superGetEntityWorld() {
 		return null;
-	}	@Override
-	public boolean superIsInvisibleToPlayer(Object entityPlayer) {
-		return false;
-	}	@Override
-	public boolean superIsPushedByWater() {
-		return false;
 	}	@Override
 	public void superSetAbsorptionAmount(float par1) {
 	}	@Override
@@ -2152,11 +2120,11 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public void superKnockBack(Object entity, float par2, double par3, double par5) {
 	}	@Override
-	public float superApplyArmorCalculations(Object damageSource, float par2) {
-		return 0;
+	public Object superApplyArmorCalculations(Object damageSource, float par2) {
+		return 0F;
 	}	@Override
-	public float superApplyPotionDamageCalculations(Object damageSource, float par2) {
-		return 0;
+	public Object superApplyPotionDamageCalculations(Object damageSource, float par2) {
+		return 0F;
 	}	@Override
 	public Object superFunc_110142_aN() {
 		return null;
@@ -2169,18 +2137,10 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public void superDismountEntity(Object entity) {
 	}	@Override
-	public float superFunc_110146_f(float par1, float par2) {
-		return 0;
-	}	@Override
-	public void superCollideWithNearbyEntities() {
-	}	@Override
 	public boolean superIsOnSameTeam(Object entityLivingBase) {
 		return false;
 	}	@Override
 	public boolean superIsOnTeam(Object team) {
-		return false;
-	}	@Override
-	public boolean superWriteMountToNBT(Object nBTTagCompound) {
 		return false;
 	}	@Override
 	public boolean superWriteToNBTOptional(Object nBTTagCompound) {
@@ -2191,14 +2151,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public void superOnChunkLoad() {
 	}	@Override
-	public boolean superInteractFirst(Object entityPlayer) {
-		return false;
-	}	@Override
-	public boolean superHitByEntity(Object entity) {
-		return false;
-	}	@Override
-	public void superCopyLocationAndAnglesFrom(Object entity) {
-	}	@Override
 	public float superGetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block) {
 		return 0;
 	}	@Override
@@ -2207,8 +2159,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public int superGetMaxSafePointTries() {
 		return 0;
-	}	@Override
-	public void superAddEntityCrashInfo(Object crashReportCategory) {
 	}	@Override
 	public UUID superGetUniqueID() {
 		return null;
@@ -2254,19 +2204,10 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	public float superGetBreakSpeed(Object block, boolean p_146096_2_, int meta, int x, int y, int z) {
 		return 0;
 	}	@Override
-	public Object superFunc_146097_a(Object itemStack, boolean p_146097_2_, boolean p_146097_3_) {
-		return null;
-	}	@Override
 	public Object superGetGameProfile() {
 		return null;
 	}	@Override
 	public String superFunc_146067_o(int p_146067_1_) {
-		return null;
-	}	@Override
-	public Object superGetEquipmentInSlot(int par1) {
-		return null;
-	}	@Override
-	public Object superFunc_145748_c_() {
 		return null;
 	}	@Override
 	public boolean superCanDropLoot() {
@@ -2280,13 +2221,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public void superFunc_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object block) {
 	}	@Override
-	public void superFunc_145775_I() {
-	}	@Override
 	public boolean superIsInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_) {
 		return false;
-	}	@Override
-	public Object superFunc_145778_a(Object item, int p_145778_2_, float p_145778_3_) {
-		return null;
 	}	@Override
 	public Object superDropItem(Object item, int p_145779_2_) {
 		return null;
@@ -2298,12 +2234,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return false;
 	}	@Override
 	public void superOnDataWatcherUpdate(int p_145781_1_) {
-	}	@Override
-	public boolean superFunc_152122_n() {
-		return false;
-	}	@Override
-	public boolean superFunc_152123_o() {
-		return false;
 	}	@Override
 	public void superFunc_152121_a(Object type, Object resourceLocation) {
 	}	@Override
@@ -2334,8 +2264,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return false;
 	}	@Override
 	public void superOpenEditSign(Object tileEntitySign) {
-	}	@Override
-	public void superOpenEditCommandBlock(Object commandBlockLogic) {
 	}	@Override
 	public void superDisplayGui(Object iInteractionObject) {
 	}	@Override
@@ -2376,12 +2304,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public void superSetSpawnPoint(Object blockPos, boolean forced) {
 	}	@Override
-	public void superFunc_175145_a(Object statBase) {
-	}	@Override
 	public void superFall(float distance, float damageMultiplier) {
-	}	@Override
-	public String superGetFallSoundString(int damageValue) {
-		return null;
 	}	@Override
 	public int superGetXPSeed() {
 		return 0;
@@ -2479,9 +2402,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
 		return false;
 	}	@Override
-	public int superGetMaxFallHeight() {
-		return 0;
-	}	@Override
 	public void superSetCustomNameTag(String p_96094_1_) {
 	}	@Override
 	public String superGetCustomNameTag() {
@@ -2525,8 +2445,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	public Object superGetCommandStats() {
 		return null;
 	}	@Override
-	public void superFunc_174817_o(Object entity) {
-	}	@Override
 	public Object superGetNBTTagCompound() {
 		return null;
 	}	@Override
@@ -2539,4 +2457,4 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return false;
 	}	@Override
 	public void superApplyEnchantments(Object entityLivingBase, Object entity) {
-	}}
+	}	public void superSetInPortal() {		super.setInPortal();	}	public boolean superEquals(Object p_equals_1_) {		return super.equals(p_equals_1_);	}	public int superHashCode() {		return super.hashCode();	}	public boolean superattackEntityFrom(Object damageSource, Object p_70097_2_) {		return super.attackEntityFrom((DamageSource) damageSource, (Integer) p_70097_2_);	}	// 190~	public void superOpenGuiHorseInventory(Object entityHorse, Object iInventory) {	}	public Object superGetItemStackFromSlot(Object par1) {		return null;	}	public void superSetItemStackToSlot(Object entityEquipmentSlot, Object itemStack) {	}	public float superUpdateDistance(float par1, float par2) {		return 0.0F;	}	public boolean superWriteToNBTAtomically(Object nBTTagCompound) {		return false;	}	public boolean superProcessInitialInteract(Object entityPlayer) {		return false;	}	public Object superGetItemStackFromSlot(int par1) {		return null;	}	public Object superFropItemWithOffset(Object item, int p_145778_2_, float p_145778_3_) {		return null;	}	public void superDisplayGuiEditCommandCart(Object commandBlockLogic) {	}	public void superTakeStat(Object statBase) {	}	public Object superGetFallSound(int damageValue) {		return null;	}	public void superSetCommandStats(Object entity) {	}	public void superSwingArm(Object enumHand) {	}	public void superOpenBook(Object itemStack, Object enumHand) {	}	public Object superInteract(Object entity, Object itemStack, Object enumHand) {		return null;	}	public void superUpdatePassenger(Object entity) {	}	public boolean superProcessInitialInteract(Object entityPlayer, Object itemStack, Object enumHand) {		return false;	}	public void superSetRenderYawOffset(float p_181013_1_) {	}	public void superDropLoot(boolean p_184610_1_, int p_184610_2_, Object damageSource) {	}	public void superFrostWalk(Object blockPos) {	}	public void superPlayEquipSound(Object itemStack) {	}	public Object superRemoveActivePotionEffect(Object potion) {		return null;	}	public void superRemovePotionEffect(Object potion) {	}	public void superPlayHurtSound(Object damageSource) {	}	public void superDamageShield(float p_184590_1_) {	}	public Object superGetHeldItemOffhand() {		return null;	}	public Object superGetHeldItem(Object enumHand) {		return null;	}	public void superSetHeldItem(Object enumHand, Object itemStack) {	}	public Object superGetActiveHand() {		return null;	}	public void superUpdateActiveHand() {	}	public void superSetActiveHand(Object enumHand) {	}	public Object superGetActiveItemStack() {		return null;	}	public int superGetItemInUseMaxCount() {		return -1;	}	public void superStopActiveHand() {	}	public void superResetActiveHand() {	}	public boolean superIsActiveItemStackBlocking() {		return false;	}	public boolean superIsElytraFlying() {		return false;	}	public int superGetTicksElytraFlying() {		return -1;	}	public boolean superTeleportTo_(double x, double y, double z) {		return false;	}	public boolean superCanBeHitWithPotion() {		return false;	}	public void superPlayStepSound(int par1, int par2, int par3, Object par4) {	}	public boolean superIsInRangeToRender3d(Object vec3) {		return false;	}	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, Object par6, float par7) {		return false;	}	public Object superGetTags() {		return null;	}	public boolean superAddTag(String tag) {		return false;	}	public boolean superRemoveTag(String tag) {		return false;	}	public void superSetDropItemsWhenDead(boolean p_184174_1_) {	}	public void superDecrementTimeUntilPortal() {	}	public void superResetPositionToBB() {	}	public void superApplyOrientationToEntity(Object entity) {	}	public boolean superStartRiding(Object entity, boolean force) {		return false;	}	public boolean superCanBeRidden(Object entity) {		return false;	}	public void superRemovePassengers() {	}	public void superDismountRidingEntity() {	}	public void superAddPassenger(Object entity) {	}	public void superRemovePassenger(Object entity) {	}	public boolean superCanFitPassenger(Object entity) {		return false;	}	public Object superGetHeldEquipment() {		return null;	}	public Object superGetArmorInventoryList() {		return null;	}	public Object superGetEquipmentAndArmor() {		return null;	}	public boolean superIsBeingRidden() {		return false;	}	public boolean superIsGlowing() {		return false;	}	public void superSetGlowing(boolean p_184195_1_) {	}	public boolean superIsOnScoreboardTeam(Object team) {		return false;	}	public void superSetEntityInvulnerable(boolean isInvulnerable) {	}	public boolean superIsNonBoss() {		return false;	}	public void superSetUniqueId(UUID uniqueIdIn) {	}	public void superNotifyDataManagerChange(Object dataParameter) {	}	public Object superGetAdjustedHorizontalFacing() {		return null;	}	public Object superGetRenderBoundingBox() {		return null;	}	public Object superGetServer() {		return null;	}	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object itemStack, Object enumHand) {		return null;	}	public boolean superHasCapability(Object capability, Object enumFacing) {		return false;	}	public void superDeserializeNBT(Object nBTTagCompound) {	}	public Object superSerializeNBT() {		return null;	}	public void superSetBossVisibleTo(Object entityPlayerMP) {	}	public void superSetBossNonVisibleTo(Object entityPlayerMP) {	}	public float superGetRotatedYaw(Object rotation) {		return 0.0F;	}	public float superGetMirroredYaw(Object mirror) {		return 0.0F;	}	public boolean superSetPositionNonDirty() {		return false;	}	public Object superGetControllingPassenger() {		return null;	}	public Object superGetPassengers() {		return null;	}	public boolean superIsPassenger(Object entity) {		return false;	}	public Object superGetRecursivePassengers() {		return null;	}	public Object superGetLowestRidingEntity() {		return null;	}	public boolean superIsRidingSameEntity(Object entity) {		return false;	}	public boolean superIsRidingOrBeingRiddenBy(Object entity) {		return false;	}	public boolean superCanPassengerSteer() {		return false;	}	public Object superGetRidingEntity() {		return null;	}	public Object superGetPushReaction() {		return null;	}	public Object superGetSoundCategory() {		return null;	}	public Object superGetCapability(Object capability, Object enumFacing) {		return null;	}	public Object superGetRecursivePassengersByType(Class entityClass) {		return null;	}	public void superSetServerBrand(String brand) {	}	public String superGetServerBrand() {		return null;	}	public int superGetPermissionLevel() {		return -1;	}	public void superSetPermissionLevel(int p_184839_1_) {	}	public void superDisplayGuiCommandBlock(Object tileEntityCommandBlock) {	}	public boolean superIsRowingBoat() {		return false;	}	public boolean superIsCreative() {		return false;	}	public boolean superIsPlayerInfoSet() {		return false;	}	public Object superGetLocationElytra() {		return null;	}	public Object superCreateCooldownTracker() {		return null;	}	public void superUpdateSize() {	}	public void superSpawnSweepParticles() {	}	public boolean superHasAchievement(Object achievement) {		return false;	}	public Object superGetPrimaryHand() {		return null;	}	public void superSetPrimaryHand(Object enumHandSide) {	}	public float superGetCooldownPeriod() {		return 0.0F;	}	public float superGetCooledAttackStrength(float adjustTicks) {		return 0.0F;	}	public void superResetCooldown() {	}	public Object superGetCooldownTracker() {		return null;	}	public float superGetLuck() {		return 0.0F;	}	public void superAddPrefix(Object iTextComponent) {	}	public void superAddSuffix(Object iTextComponent) {	}	public Object superGetPrefixes() {		return null;	}	public Object superGetSuffixes() {		return null;	}	public boolean superFunc_184213_bq() {		return false;	}	public void superSetItemStackToSlot(int p_70062_1_, Object itemStack) {	}	public boolean superIsEntityInsideOpaqueBlock() {		return false;	}	public void superUpdateRidden() {	}	public boolean superIsNotColliding() {		return false;	}	@Override	public void superSetMaxHealth(Object floatOrInt) {		maxHealth = (Integer) floatOrInt;	}}

@@ -586,7 +586,7 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int entityLivingBaseGetSoundVolume = entityLivingBaseGetSoundVolume_int;
 	public static int entityLivingBaseGetSoundPitch = entityLivingBaseGetSoundPitch_int;
 	public static int entityLivingCurrentTarget = entityLivingCurrentTarget_int;
-	public static int entityMountEntity = entityMountEntity_int;
+	public static int entityStartRiding = entityStartRiding_int;
 	public static int entityPlayerGetCurrentEquippedItem = entityPlayerGetCurrentEquippedItem_int;
 	public static int entityPlayerInventoryCurrentItem = entityPlayerInventoryCurrentItem_int;
 	public static int entityPlayerInventorySetInventorySlotContents = entityPlayerInventorySetInventorySlotContents_int;
@@ -1024,5 +1024,8 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int entityAgeableSetGrowingAge = entityAgeableSetGrowingAge_int;
 	public static int chatAllowedCharactersFilterAllowedCharacters = chatAllowedCharactersFilterAllowedCharacters_int;
 	public static int guiSlotHandleMouseInput = guiSlotHandleMouseInput_int;
+	public static int newDataParameter = newDataParameter_int;
+	public static int newSoundEvent = newSoundEvent_int;
+	public static int newResourceLocation = newResourceLocation_int;
 
 }

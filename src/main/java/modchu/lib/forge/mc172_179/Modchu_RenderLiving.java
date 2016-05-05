@@ -94,7 +94,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void superFunc_177105_a(Object entityLiving, float p_177105_2_) {
+	public void superSetLightmap(Object entityLiving, float p_177105_2_) {
 	}
 
 	public void func_177105_a(EntityLiving entityLiving, float p_177105_2_) {
@@ -122,15 +122,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public void superRenderLeashedToEntityRope(Object entityLiving, double d, double d1, double d2, float d3, float d4) {
-	}
-
-	protected boolean canRenderName(EntityLivingBase entityLivingBase) {
-		return false;
-	}
-
-	@Override
-	public boolean superCanRenderName(Object entityLivingBase) {
-		return false;
 	}
 
 	public ModelBase getMainModel() {
@@ -293,16 +284,8 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void setLayerArmorBase(Object layerArmorBase) {
-	}
-
-	@Override
 	public Object getLayerHeldItem() {
 		return null;
-	}
-
-	@Override
-	public void setLayerHeldItem(Object layerHeldItem) {
 	}
 
 	@Override
@@ -311,9 +294,9 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void setLayerCustomHead(Object layerCustomHead) {
+	public void setLayer(Class c, Object layer) {
 	}
-	
+
 	@Override
 	public List getLayerList() {
 		return null;
@@ -482,11 +465,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public boolean superUsePassSpecialRender(Object entityLivingBase) {
-		return false;
-	}
-
-	@Override
 	public void renderLeashedToEntityRope(Object entityLiving, double d, double d1, double d2, float d3, float d4) {
 	}
 
@@ -511,7 +489,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public boolean superFunc_110813_b(Object entityLivingBase) {
+	public boolean superCanRenderName(Object entityLivingBase) {
 		return super.func_110813_b((EntityLivingBase) entityLivingBase);
 	}
 
@@ -552,6 +530,10 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	@Override
 	public boolean superLoadDownloadableImageTexture(String par1Str, String par2Str) {
 		return false;
+	}
+	// 190~
+	@Override
+	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
 	}
 
 }

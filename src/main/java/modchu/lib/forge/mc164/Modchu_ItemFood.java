@@ -1196,5 +1196,73 @@ public class Modchu_ItemFood extends ItemFood implements Modchu_IItemFood {
 	public Object superOnItemUseFinish(Object itemStack, Object world, Object entityPlayer) {
 		return null;
 	}
+	// 190~
+	public String superGetArmorTexture(Object itemStack, Object entity, Object entityEquipmentSlot, int layer) {
+		return null;
+	}
+
+	public boolean superIsValidArmor(Object itemStack, Object entityEquipmentSlot, Object entity) {
+		return false;
+	}
+
+	public String superGetArmorTexture(Object itemStack, Object entity, Object entityEquipmentSlot, String type) {
+		return null;
+	}
+
+	public Object superOnItemUse(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumHand, Object enumFacing, float f, float f1, float f2) {
+		return null;
+	}
+
+	public Object superOnItemRightClick(Object itemStack, Object world, Object entityPlayer, Object enumHand) {
+		return null;
+	}
+
+	public boolean superItemInteractionForEntity(Object itemStack, Object entityPlayer, Object entityLivingBase, Object enumHand) {
+		return false;
+	}
+
+	public Multimap<String, Object> superGetItemAttributeModifiers(Object entityEquipmentSlot) {
+		return null;
+	}
+
+	public Object superOnItemUseFirst(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, Object enumHand) {
+		return null;
+	}
+
+	public Object superGetArmorModel(Object entityLivingBase, Object itemStack, Object entityEquipmentSlot, Object modelBiped) {
+		return null;
+	}
+
+	public Multimap superGetAttributeModifiers(Object entityEquipmentSlot, Object itemStack) {
+		return null;
+	}
+
+	public boolean superDoesSneakBypassUse(Object itemStack, Object iBlockAccess, Object blockPos, Object entityPlayer) {
+		return false;
+	}
+
+	public Object superSetPotionEffect(Object potionEffect, float p_185070_2_) {
+		return null;
+	}
+
+	public Object superGetPropertyGetter(Object resourceLocation) {
+		return null;
+	}
+
+	public boolean superHasCustomProperties() {
+		return false;
+	}
+
+	public String superGetHighlightTip(Object itemStack, String displayName) {
+		return null;
+	}
+
+	public boolean superShouldCauseReequipAnimation(Object itemStack, Object itemStack1, boolean slotChanged) {
+		return false;
+	}
+
+	public Object superInitCapabilities(Object itemStack, Object nBTTagCompound) {
+		return null;
+	}
 
 }

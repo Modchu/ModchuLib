@@ -36,13 +36,11 @@ public interface Modchu_IGlStateManager {
 	public void blendFunc(int p_179112_0_, int p_179112_1_);
 	public void tryBlendFuncSeparate(int p_179120_0_, int p_179120_1_, int p_179120_2_, int p_179120_3_);
 	public void enableFog();
-	public void setFog(int p_179093_0_);
 	public void setFogDensity(float p_179095_0_);
 	public void setFogStart(float p_179102_0_);
 	public void setFogEnd(float p_179153_0_);
 	public void enableCull();
 	public void disableCull();
-	public void cullFace(int p_179107_0_);
 	public void enablePolygonOffset();
 	public void disablePolygonOffset();
 	public void doPolygonOffset(float p_179136_0_, float p_179136_1_);

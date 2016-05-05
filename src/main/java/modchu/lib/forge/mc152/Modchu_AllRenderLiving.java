@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IAllRenderLiving;
+import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -81,13 +82,13 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	}
 
 	private Modchu_RenderLiving renderMapGet(Entity entity) {
-		Object entity2 = Modchu_Reflect.invokeMethod(entity.getClass(), "getMaster", entity);
+		Object master = Modchu_Main.getModchuCharacteristicObjectMaster(entity);
 		//Modchu_Debug.mDebug("renderMapGet getMethod="+Modchu_Reflect.getMethod(entity.getClass(), "getMaster"));
 		//Modchu_Debug.mDebug("renderMapGet entity="+entity);
 		//Modchu_Debug.mDebug("renderMapGet entity2.getClass()="+(entity2 != null ? entity2.getClass() : null));
 		//Modchu_Debug.mDebug("renderMapGet getField="+Modchu_Reflect.getField(entity.getClass(), "master"));
 		//Modchu_Debug.mDebug("renderMapGet entity.master="+Modchu_Reflect.getFieldObject(entity.getClass(), "master", entity));
-		Class c = entity2 != null ? entity2.getClass() : entity.getClass();
+		Class c = master != null ? master.getClass() : entity.getClass();
 		//Modchu_Debug.mDebug("renderMapGet c="+c);
 		return renderMap.get(c);
 	}

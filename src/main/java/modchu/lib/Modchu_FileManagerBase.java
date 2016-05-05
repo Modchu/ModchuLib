@@ -39,9 +39,12 @@ import java.util.zip.ZipInputStream;
 
 public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	public Map<String, List<File>> fileList = new TreeMap<String, List<File>>();
-	protected ArrayList<String> failureShowModelList = new ArrayList<String>();
-	private boolean getResourceBufferedReaderJarReaderFlag = false;
-	private static boolean initFlag;
+	protected List<String> failureShowModelList = new ArrayList();
+	protected List<Class> modTextureStitchedClassList;
+	protected List<ZipFile> modZipFileList;
+	protected List<ZipFile> modsZipFileList;
+	protected boolean getResourceBufferedReaderJarReaderFlag = false;
+	protected static boolean initFlag;
 	public static HashMap<Object, List<String>> listData = new HashMap();
 	public static final int TYPE_FILE_OR_DIR = 1;
 	public static final int TYPE_FILE = 2;
@@ -478,8 +481,15 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	}
 
 	protected void addModResourcePack(Class c) {
+		int version = Modchu_Main.getMinecraftVersion();
 		if (Modchu_Main.isServer
-				| Modchu_Main.getMinecraftVersion() < 162) return;
+				| version > 189) {
+			return;
+		}
+		if (version < 162) {
+			addModTextureStitchedClassList(c);
+			return;
+		}
 		boolean debug = false;
 		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 1 c="+c);
 		Object o = Modchu_Main.newModchuCharacteristicObject("Modchu_ResourcePack", Modchu_ModResourcePackMaster.class, c);
@@ -500,6 +510,15 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			Modchu_Main.setRuntimeException(s);
 		}
 		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack end.");
+	}
+
+	protected void addModTextureStitchedClassList(Class c) {
+		if (modTextureStitchedClassList != null); else modTextureStitchedClassList = new ArrayList();
+		if (!modTextureStitchedClassList.contains(c)) modTextureStitchedClassList.add(c);
+	}
+
+	public List<Class> getModTextureStitchedClassList() {
+		return modTextureStitchedClassList;
 	}
 
 	@Override
@@ -1353,6 +1372,64 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			}
 		}
 		return list;
+	}
+
+	public List<ZipFile> getModZipFileList(List<File> list) {
+		boolean debug = false;
+		if (list != null
+				&& !list.isEmpty()); else return null;
+		if (modZipFileList != null) return modZipFileList;
+		List<ZipFile> list1 = new ArrayList();
+		String s = ".zip";
+		String s1 = ".jar";
+		for (File file : list) {
+			String path = file.getPath();
+			if (path.lastIndexOf(s) < 0
+					&& path.lastIndexOf(s1) < 0) continue;
+			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getModZipFileList path="+path);
+			try {
+				list1.add(new ZipFile(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		setModZipFileList(list1);
+		return list1;
+	}
+
+	public List<ZipFile> getModZipFileList() {
+		if (modZipFileList != null) return modZipFileList;
+		return getModZipFileList(Modchu_Main.modFileList);
+	}
+
+	public void setModZipFileList(List<ZipFile> list) {
+		modZipFileList = list;
+	}
+
+	public List<ZipFile> getModsZipFileList() {
+		boolean debug = false;
+		if (modsZipFileList != null) return modsZipFileList;
+		List<ZipFile> list1 = new ArrayList();
+		String s = ".zip";
+		String s1 = ".jar";
+		File modsDir = Modchu_Main.modsDir;
+		for (File file : modsDir.listFiles()) {
+			String path = file.getPath();
+			if (path.lastIndexOf(s) < 0
+					&& path.lastIndexOf(s1) < 0) continue;
+			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getModsZipFileList path="+path);
+			try {
+				list1.add(new ZipFile(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		setModsZipFileList(list1);
+		return list1;
+	}
+
+	public void setModsZipFileList(List<ZipFile> list) {
+		modsZipFileList = list;
 	}
 
 }

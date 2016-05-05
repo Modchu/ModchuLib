@@ -22,6 +22,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	public Modchu_RenderLiving(HashMap<String, Object> map) {
 		super((ModelBase) (map != null && map.containsKey("Object") ? map.get("Object") : null), (Float) (map != null && map.containsKey("Float") ? map.get("Float") : 1.0F));
+		Modchu_Debug.lDebug("Modchu_RenderLiving init 1");
 		renderManager = (RenderManager) Modchu_AS.get(Modchu_AS.renderManagerInstance);
 		Modchu_Debug.lDebug("Modchu_RenderLiving init renderManager="+renderManager);
 		map.put("base", this);
@@ -48,15 +49,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	public void superRenderLeashedToEntityRope(Object entityLiving, double d, double d1, double d2, float d3, float d4) {
 	}
 
-	protected boolean func_110813_b(EntityLiving EntityLiving) {
-		if (master != null) return master.usePassSpecialRender(EntityLiving);
-		return false;
-	}
-
-	public boolean superUsePassSpecialRender(Object EntityLiving) {
-		return true;
-	}
-
 	@Override
 	public void doRenderLiving(EntityLiving entity, double d, double d1, double d2, float d3, float d4) {
 		doRender(entity, d, d1, d2, d3, d4);
@@ -65,6 +57,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	@Override
 	public void doRender(Entity entity, double d, double d1, double d2, float d3, float d4) {
 		//Modchu_Debug.mDebug("Modchu_RenderLivingBase doRender");
+		if (renderManager != null); else renderManager = (RenderManager) Modchu_AS.get(Modchu_AS.renderManagerInstance);
 		if (master != null) master.doRender(entity, d, d1, d2, d3, d4);
 	}
 
@@ -188,8 +181,12 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		super.func_82408_c((EntityLiving) EntityLiving, par2, par3);
 	}
 
+	protected boolean func_110813_b(EntityLiving entityLivingBase) {
+		return false;
+	}
+
 	@Override
-	public boolean superFunc_110813_b(Object EntityLiving) {
+	public boolean superCanRenderName(Object entityLivingBase) {
 		return false;
 	}
 
@@ -237,16 +234,8 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void setLayerArmorBase(Object layerBipedArmor) {
-	}
-
-	@Override
 	public Object getLayerHeldItem() {
 		return null;
-	}
-
-	@Override
-	public void setLayerHeldItem(Object layerHeldItem) {
 	}
 
 	@Override
@@ -255,7 +244,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void setLayerCustomHead(Object layerCustomHead) {
+	public void setLayer(Class c, Object layer) {
 	}
 
 	@Override
@@ -355,11 +344,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public boolean superCanRenderName(Object EntityLiving) {
-		return false;
-	}
-
-	@Override
 	public void superSetRenderOutlines(boolean p_177086_1_) {
 	}
 
@@ -391,7 +375,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void superFunc_177105_a(Object entityLiving, float p_177105_2_) {
+	public void superSetLightmap(Object entityLiving, float p_177105_2_) {
 	}
 
 	@Override
@@ -408,4 +392,9 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	public boolean superLoadDownloadableImageTexture(String par1Str, String par2Str) {
 		return super.loadDownloadableImageTexture(par1Str, par2Str);
 	}
+	// 190~
+	@Override
+	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
+	}
+
 }

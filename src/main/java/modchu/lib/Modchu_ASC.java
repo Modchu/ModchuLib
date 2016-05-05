@@ -323,7 +323,7 @@ public interface Modchu_ASC {
 	public static final int entityLivingBaseGetSoundVolume_int = 16027;
 	public static final int entityLivingBaseGetSoundPitch_int = 16028;
 	public static final int entityLivingCurrentTarget_int = 16029;
-	public static final int entityMountEntity_int = 16030;
+	public static final int entityStartRiding_int = 16030;
 	public static final int entityPlayerGetCurrentEquippedItem_int = 16031;
 	public static final int entityPlayerInventoryCurrentItem_int = 16032;
 	public static final int entityPlayerInventorySetInventorySlotContents_int = 16033;
@@ -760,5 +760,8 @@ public interface Modchu_ASC {
 	public static final int entityAgeableSetGrowingAge_int = 16464;
 	public static final int chatAllowedCharactersFilterAllowedCharacters_int = 16465;
 	public static final int guiSlotHandleMouseInput_int = 16466;
+	public static final int newDataParameter_int = 16467;
+	public static final int newSoundEvent_int = 16468;
+	public static final int newResourceLocation_int = 16469;
 
 }

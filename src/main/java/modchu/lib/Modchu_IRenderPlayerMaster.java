@@ -1,6 +1,6 @@
 package modchu.lib;
 
-public interface Modchu_IRenderPlayerMaster extends Modchu_IRendererLivingEntityMaster {
+public interface Modchu_IRenderPlayerMaster extends Modchu_IRenderLivingBaseMaster {
 	public void renderFirstPersonArm(Object entityplayer, int i);
 	public void renderFirstPersonLeftArm(Object entityplayer, int i);
 	public boolean isActivatedForPlayer(Object entityPlayer);

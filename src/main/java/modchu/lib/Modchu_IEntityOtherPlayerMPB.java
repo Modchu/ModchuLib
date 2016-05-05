@@ -442,7 +442,7 @@ public interface Modchu_IEntityOtherPlayerMPB {
 	public void superUpdateRiderPosition();
 	public double superGetMountedYOffset();
 	public float superGetCollisionBorderSize();
-	public void superSetInPortal(Object bockPos);
+	public void superSetPortal(Object bockPos);
 	public void superSetVelocity(double x, double y, double z);
 	public boolean superIsBurning();
 	public boolean superIsRiding();

@@ -10,7 +10,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.IChatComponent;
 
 public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_IInventoryPlayer {
 	public Modchu_IInventoryPlayerMaster master;
@@ -261,6 +263,147 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 	public void superCopyInventory(Object inventoryPlayer) {
 		super.copyInventory((InventoryPlayer) inventoryPlayer);
 	}
+
+	@Override
+	public void setCurrentItem(Item item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_) {
+		if (master != null) master.setCurrentItem(item, p_146030_2_, p_146030_3_, p_146030_4_);
+		else super.setCurrentItem(item, p_146030_2_, p_146030_3_, p_146030_4_);
+	}
+
+	public void superSetCurrentItem(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_) {
+		super.setCurrentItem((Item) item, p_146030_2_, p_146030_3_, p_146030_4_);
+	}
+
+	@Override
+	public int clearMatchingItems(Item item, int metadataIn, int removeCount, NBTTagCompound nBTTagCompound) {
+		return master != null ? master.clearMatchingItems(item, metadataIn, removeCount, nBTTagCompound) : super.clearMatchingItems(item, metadataIn, removeCount, nBTTagCompound);
+	}
+
+	public int superClearMatchingItems(Object item, int metadataIn, int removeCount, Object nBTTagCompound) {
+		return super.clearMatchingItems((Item) item, metadataIn, removeCount, (NBTTagCompound) nBTTagCompound);
+	}
+
+	@Override
+	public boolean consumeInventoryItem(Item item) {
+		return master != null ? master.consumeInventoryItem(item) : super.consumeInventoryItem(item);
+	}
+
+	public boolean superConsumeInventoryItem(Object item) {
+		return super.consumeInventoryItem((Item) item);
+	}
+
+	@Override
+	public boolean hasItem(Item item) {
+		return master != null ? master.hasItem(item) : super.hasItem(item);
+	}
+
+	public boolean superHasItem(Object item) {
+		return super.hasItem((Item) item);
+	}
+
+	@Override
+	public String getName() {
+		return master != null ? master.getName() : super.getName();
+	}
+
+	public String superGetName() {
+		return super.getName();
+	}
+
+	@Override
+	public boolean hasCustomName() {
+		return master != null ? master.hasCustomName() : super.hasCustomName();
+	}
+
+	public boolean superHasCustomName() {
+		return super.hasCustomName();
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		return (IChatComponent) (master != null ? master.getDisplayName() : super.getDisplayName());
+	}
+
+	public IChatComponent superGetDisplayName() {
+		return super.getDisplayName();
+	}
+
+	@Override
+	public boolean canHeldItemHarvest(Block block) {
+		return master != null ? master.canHarvestBlock(block) : super.canHeldItemHarvest(block);
+	}
+
+	public boolean superCanHarvestBlock(Object block) {
+		return super.canHeldItemHarvest((Block) block);
+	}
+
+	@Override
+	public void markDirty() {
+		if (master != null) master.markDirty();
+		else super.markDirty();
+	}
+
+	public void superMarkDirty() {
+		super.markDirty();
+	}
+
+	@Override
+	public void openInventory(EntityPlayer entityPlayer) {
+		if (master != null) master.openInventory(entityPlayer);
+		else super.openInventory(entityPlayer);
+	}
+
+	public void superOpenInventory(Object entityPlayer) {
+		super.openInventory((EntityPlayer) entityPlayer);
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer entityPlayer) {
+		if (master != null) master.closeInventory(entityPlayer);
+		else super.closeInventory(entityPlayer);
+	}
+
+	public void superCloseInventory(Object entityPlayer) {
+		super.closeInventory((EntityPlayer) entityPlayer);
+	}
+
+	@Override
+	public int getField(int id) {
+		return master != null ? master.getField(id) : super.getField(id);
+	}
+
+	public int superGetField(int id) {
+		return super.getField(id);
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		if (master != null) master.setField(id, value);
+		else super.setField(id, value);
+	}
+
+	public void superSetField(int id, int value) {
+		super.setField(id, value);
+	}
+
+	@Override
+	public int getFieldCount() {
+		return master != null ? master.getFieldCount() : super.getFieldCount();
+	}
+
+	public int superGetFieldCount() {
+		return super.getFieldCount();
+	}
+
+	@Override
+	public void clear() {
+		if (master != null) master.clear();
+		else super.clear();
+	}
+
+	public void superClear() {
+		super.clear();
+	}
 	// ~164
 	@Override
 	public String superGetInvName() {
@@ -311,11 +454,6 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 	}
 
 	public boolean canHarvestBlock(Block block) {
-		return false;
-	}
-
-	@Override
-	public boolean superCanHarvestBlock(Object block) {
 		return false;
 	}
 

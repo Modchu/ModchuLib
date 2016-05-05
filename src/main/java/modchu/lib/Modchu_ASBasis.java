@@ -62,8 +62,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public Object getBipedArmor(Object entityPlayer, Object itemStack, int i, int i2, String s) {
-		return base.superGetBipedArmor(entityPlayer, itemStack, i, i2, s);
+	public Object getBipedArmor(Object entityPlayer, Object itemStack, int i, Object entityEquipmentSlotOrInt, String s) {
+		return base.superGetBipedArmor(entityPlayer, itemStack, i, entityEquipmentSlotOrInt, s);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public int blockGetRenderType(Object block) {
+	public Object blockGetRenderType(Object block) {
 		return base.superBlockGetRenderType(block);
 	}
 
@@ -392,8 +392,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, int i) {
-		return base.superEntityLivingBaseGetEquipmentInSlot(entityLivingBase, i);
+	public Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, Object entityEquipmentSlotOrInt) {
+		return base.superEntityLivingBaseGetEquipmentInSlot(entityLivingBase, entityEquipmentSlotOrInt);
 	}
 
 	@Override
@@ -502,33 +502,33 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public Object dataWatcherGetWatchedObject(Object dataWatcherOrEntity, int i) {
-		return base.superDataWatcherGetWatchedObject(dataWatcherOrEntity, i);
+	public Object dataWatcherGetWatchedObject(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return base.superDataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	public void dataWatcherAddObject(Object dataWatcherOrEntity, int i, Object o) {
-		base.superDataWatcherAddObject(dataWatcherOrEntity, i, o);
+	public void dataWatcherAddObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
+		base.superDataWatcherAddObject(dataWatcherOrEntity, dataParameterOrInt, o);
 	}
 
 	@Override
-	public Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, int i) {
-		return base.superDataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, i);
+	public Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return base.superDataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	public String dataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, int i) {
-		return base.superDataWatcherGetWatchableObjectString(dataWatcherOrEntity, i);
+	public String dataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return base.superDataWatcherGetWatchableObjectString(dataWatcherOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	public byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, int i) {
-		return base.superDataWatcherGetWatchableObjectByte(dataWatcherOrEntity, i);
+	public byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, Object dataParameterOrInt) {
+		return base.superDataWatcherGetWatchableObjectByte(dataWatcherOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	public void dataWatcherUpdateObject(Object dataWatcherOrEntity, int i, Object o) {
-		base.superDataWatcherUpdateObject(dataWatcherOrEntity, i, o);
+	public void dataWatcherUpdateObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
+		base.superDataWatcherUpdateObject(dataWatcherOrEntity, dataParameterOrInt, o);
 	}
 
 	@Override
@@ -577,13 +577,18 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public void entityMountEntity(Object entity) {
-		base.superEntityMountEntity(entity);
+	public boolean entityStartRiding(Object entity) {
+		return base.superEntityStartRiding(entity);
 	}
 
 	@Override
-	public void entityMountEntity(Object entity, Object entity2) {
-		base.superEntityMountEntity(entity, entity2);
+	public boolean entityStartRiding(Object entity, Object entity2) {
+		return base.superEntityStartRiding(entity, entity2);
+	}
+
+	@Override
+	public boolean entityStartRiding(Object entity, Object entity2, boolean b) {
+		return base.superEntityStartRiding(entity, entity2, b);
 	}
 
 	@Override
@@ -767,6 +772,11 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
+	public Object entityLivingBaseGetHeldItem(Object entityLivingBase, Object enumHand) {
+		return base.superEntityLivingBaseGetHeldItem(entityLivingBase, enumHand);
+	}
+
+	@Override
 	public float entityLivingBaseGetHealth(Object entity) {
 		return base.superEntityLivingBaseGetHealth(entity);
 	}
@@ -927,8 +937,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public void entityTameableSetOwner(Object entityTameable, String s) {
-		base.superEntityTameableSetOwner(entityTameable, s);
+	public void entityTameableSetOwner(Object entityTameable, Object uUIDOrString) {
+		base.superEntityTameableSetOwner(entityTameable, uUIDOrString);
 	}
 
 	@Override
@@ -1079,6 +1089,11 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	@Override
 	public void entityLivingBaseSwingItem(Object entityLivingBase) {
 		base.superEntityLivingBaseSwingItem(entityLivingBase);
+	}
+
+	@Override
+	public void entityLivingBaseSwingItem(Object entityLivingBase, Object enumHand) {
+		base.superEntityLivingBaseSwingItem(entityLivingBase, enumHand);
 	}
 
 	@Override
@@ -1307,8 +1322,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public void entityPlaySound(Object entity, String s, float f1, float f2) {
-		base.superEntityPlaySound(entity, s, f1, f2);
+	public void entityPlaySound(Object entity, Object soundEventOrString, float f1, float f2) {
+		base.superEntityPlaySound(entity, soundEventOrString, f1, f2);
 	}
 
 	@Override
@@ -2227,6 +2242,11 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
+	public boolean itemItemInteractionForEntity(Object item, Object itemstack, Object entityplayer, Object entityLivingBase, Object enumHand) {
+		return base.superItemItemInteractionForEntity(item, itemstack, entityplayer, entityLivingBase, enumHand);
+	}
+
+	@Override
 	public void itemModelMesherRegister(Object itemModelMesher, Object item, int i, Object modelResourceLocation) {
 		base.superItemModelMesherRegister(itemModelMesher, item, i, modelResourceLocation);
 	}
@@ -2287,6 +2307,11 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
+	public void itemOnItemRightClick(Object item, Object itemStack, Object world, Object entityplayer, Object enumHand) {
+		base.superItemOnItemRightClick(item, itemStack, world, entityplayer, enumHand);
+	}
+
+	@Override
 	public Object iIconRegisterRegisterIcon(Object iIconRegister, String s) {
 		return base.superIIconRegisterRegisterIcon(iIconRegister, s);
 	}
@@ -2344,6 +2369,11 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	@Override
 	public Object itemStackGetAttributeModifiers(Object itemStack) {
 		return base.superItemStackGetAttributeModifiers(itemStack);
+	}
+
+	@Override
+	public Object itemStackGetAttributeModifiers(Object itemStack, Object entityEquipmentSlot) {
+		return base.superItemStackGetAttributeModifiers(itemStack, entityEquipmentSlot);
 	}
 
 	@Override
@@ -2432,8 +2462,13 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public void tileEntitySkullRendererRenderSkull(Object skullRenderer, float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2) {
-		base.superTileEntitySkullRendererRenderSkull(skullRenderer, f, f1, f2, en, f3, i, gameProfile, i2);
+	public void tileEntitySkullRendererRenderSkull(float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2, float f4) {
+		base.superTileEntitySkullRendererRenderSkull(null, f, f1, f2, en, f3, i, gameProfile, i2, f4);
+	}
+
+	@Override
+	public void tileEntitySkullRendererRenderSkull(Object skullRenderer, float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2, float f4) {
+		base.superTileEntitySkullRendererRenderSkull(skullRenderer, f, f1, f2, en, f3, i, gameProfile, i2, f4);
 	}
 
 	@Override
@@ -4327,8 +4362,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, String s, float f, float f1) {
-		base.superWorldPlaySoundAtEntity(worldOrEntity, entity, s, f, f1);
+	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, Object soundEventOrString, float f, float f1) {
+		base.superWorldPlaySoundAtEntity(worldOrEntity, entity, soundEventOrString, f, f1);
 	}
 
 	@Override
@@ -4522,8 +4557,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public void entityLivingSetCurrentItemOrArmor(Object entityLiving, int i, Object itemStack) {
-		base.superEntityLivingSetCurrentItemOrArmor(entityLiving, i, itemStack);
+	public void entityLivingSetCurrentItemOrArmor(Object entityLiving, Object entityEquipmentSlotOrInt, Object itemStack) {
+		base.superEntityLivingSetCurrentItemOrArmor(entityLiving, entityEquipmentSlotOrInt, itemStack);
 	}
 
 	@Override
@@ -4584,6 +4619,26 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	@Override
 	public void guiSlotHandleMouseInput(Object guiSlot) {
 		base.superGuiSlotHandleMouseInput(guiSlot);
+	}
+
+	@Override
+	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entityPlayer, double x, double y, double z, Object soundEvent, Object soundCategory, float f, float f1) {
+		base.superWorldPlaySoundAtEntity(worldOrEntity, entityPlayer, x, y, z, soundEvent, soundCategory, f, f1);
+	}
+
+	@Override
+	public Object newDataParameter(Class c, Class[] c1, int i) {
+		return base.superNewDataParameter(c, c1, i);
+	}
+
+	@Override
+	public Object newSoundEvent(Object resourceLocationOrString) {
+		return base.superNewSoundEvent(resourceLocationOrString);
+	}
+
+	@Override
+	public Object newResourceLocation(String s) {
+		return base.superNewResourceLocation(s);
 	}
 
 }

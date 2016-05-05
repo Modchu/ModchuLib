@@ -47,8 +47,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public boolean isUsingItem() {
-		return base.superisUsingItem();
+	public boolean isHandActive() {
+		return base.superisHandActive();
 	}
 
 	@Override
@@ -117,8 +117,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void mountEntity(Object entity) {
-		base.supermountEntity(entity);
+	public boolean startRiding(Object entity) {
+		return base.superstartRiding(entity);
 	}
 
 	@Override
@@ -182,8 +182,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void joinEntityItemWithWorld(Object entityItem) {
-		base.superjoinEntityItemWithWorld(entityItem);
+	public void dropItemAndGetStack(Object entityItem) {
+		base.superdropItemAndGetStack(entityItem);
 	}
 
 	@Override
@@ -227,8 +227,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void displayGUIHorse(Object entityHorse, Object iInventory) {
-		base.superdisplayGUIHorse(entityHorse, iInventory);
+	public void openGuiHorseInventory(Object entityHorse, Object iInventory) {
+		base.superopenGuiHorseInventory(entityHorse, iInventory);
 	}
 
 	@Override
@@ -317,8 +317,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void displayGUIBook(Object itemStack) {
-		base.superdisplayGUIBook(itemStack);
+	public void openBook(Object itemStack) {
+		base.superopenBook(itemStack);
 	}
 
 	@Override
@@ -327,8 +327,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public Object getCurrentEquippedItem() {
-		return base.supergetCurrentEquippedItem();
+	public Object getHeldItemMainhand() {
+		return base.supergetHeldItemMainhand();
 	}
 
 	@Override
@@ -447,8 +447,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void triggerAchievement(Object statBase) {
-		base.supertriggerAchievement(statBase);
+	public void addStat(Object statBase) {
+		base.superaddStat(statBase);
 	}
 
 	@Override
@@ -887,12 +887,12 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public float applyArmorCalculations(Object damageSource, float par2) {
+	public Object applyArmorCalculations(Object damageSource, float par2) {
 		return base.superapplyArmorCalculations(damageSource, par2);
 	}
 
 	@Override
-	public float applyPotionDamageCalculations(Object damageSource, float par2) {
+	public Object applyPotionDamageCalculations(Object damageSource, float par2) {
 		return base.superapplyPotionDamageCalculations(damageSource, par2);
 	}
 
@@ -902,13 +902,13 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public Object func_94060_bK() {
-		return base.superfunc_94060_bK();
+	public Object getAttackingEntity() {
+		return base.supergetAttackingEntity();
 	}
 
 	@Override
-	public void swingItem() {
-		base.superswingItem();
+	public void swingArm() {
+		base.superswingArm();
 	}
 
 	@Override
@@ -977,8 +977,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public float func_110146_f(float par1, float par2) {
-		return base.superfunc_110146_f(par1, par2);
+	public float updateDistance(float par1, float par2) {
+		return base.superupdateDistance(par1, par2);
 	}
 
 	@Override
@@ -1097,8 +1097,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public Object getDataWatcher() {
-		return base.supergetDataWatcher();
+	public Object getDataManager() {
+		return base.supergetDataManager();
 	}
 
 	@Override
@@ -1267,8 +1267,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public boolean writeMountToNBT(Object nBTTagCompound) {
-		return base.superwriteMountToNBT(nBTTagCompound);
+	public boolean writeToNBTAtomically(Object nBTTagCompound) {
+		return base.superwriteToNBTAtomically(nBTTagCompound);
 	}
 
 	@Override
@@ -1327,8 +1327,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public boolean interactFirst(Object entityPlayer) {
-		return base.superinteractFirst(entityPlayer);
+	public boolean processInitialInteract(Object entityPlayer) {
+		return base.superprocessInitialInteract(entityPlayer);
 	}
 
 	@Override
@@ -1337,8 +1337,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void updateRiderPosition() {
-		base.superupdateRiderPosition();
+	public void updatePassenger() {
+		base.superupdatePassenger();
 	}
 
 	@Override
@@ -1472,8 +1472,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void travelToDimension(int par1) {
-		base.supertravelToDimension(par1);
+	public void changeDimension(int par1) {
+		base.superchangeDimension(par1);
 	}
 
 	@Override
@@ -1492,8 +1492,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public Object getTeleportDirection() {
-		return (Integer) base.supergetTeleportDirection();
+	public Object getLastPortalVec() {
+		return (Integer) base.supergetLastPortalVec();
 	}
 
 	@Override

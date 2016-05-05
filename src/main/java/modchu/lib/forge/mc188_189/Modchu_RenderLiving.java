@@ -9,6 +9,7 @@ import modchu.lib.Modchu_IRenderLiving;
 import modchu.lib.Modchu_IRenderLivingMaster;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.culling.ICamera;
@@ -79,13 +80,13 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 	// 180~
 	@Override
-	public void superFunc_177105_a(Object entityLiving, float p_177105_2_) {
+	public void superSetLightmap(Object entityLiving, float p_177105_2_) {
 		super.func_177105_a((EntityLiving) entityLiving, p_177105_2_);
 	}
 
 	@Override
 	public void func_177105_a(EntityLiving entityLiving, float p_177105_2_) {
-		if (master != null) master.func_177105_a(entityLiving, p_177105_2_);
+		if (master != null) master.setLightmap(entityLiving, p_177105_2_);
 		else super.func_177105_a(entityLiving, p_177105_2_);
 	}
 
@@ -318,21 +319,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void setLayerArmorBase(Object layerArmorBase) {
-		if (layerRenderers != null
-				&& !layerRenderers.isEmpty()) {
-			for (int i = 0; i < layerRenderers.size(); i++) {
-				Object o = layerRenderers.get(i);
-				if (o instanceof LayerArmorBase) {
-					layerRenderers.set(i, layerArmorBase);
-					return;
-				}
-			}
-		}
-		layerRenderers.add(layerArmorBase);
-	}
-
-	@Override
 	public Object getLayerHeldItem() {
 		for (Object layerHeldItem : layerRenderers) {
 			if (layerHeldItem instanceof LayerHeldItem) {
@@ -340,21 +326,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public void setLayerHeldItem(Object layerHeldItem) {
-		if (layerRenderers != null
-				&& !layerRenderers.isEmpty()) {
-			for (int i = 0; i < layerRenderers.size(); i++) {
-				Object o = layerRenderers.get(i);
-				if (o instanceof LayerHeldItem) {
-					layerRenderers.set(i, layerHeldItem);
-					return;
-				}
-			}
-		}
-		layerRenderers.add(layerHeldItem);
 	}
 
 	@Override
@@ -368,20 +339,21 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void setLayerCustomHead(Object layerCustomHead) {
+	public void setLayer(Class c, Object layer) {
 		if (layerRenderers != null
-				&& !layerRenderers.isEmpty()) {
-			for (int i = 0; i < layerRenderers.size(); i++) {
-				Object o = layerRenderers.get(i);
-				if (o instanceof LayerCustomHead) {
-					layerRenderers.set(i, layerCustomHead);
-					return;
-				}
+				&& !layerRenderers.isEmpty()
+				&& c != null
+				&& layer != null); else return;
+		for (int i = 0; i < layerRenderers.size(); i++) {
+			Object o = layerRenderers.get(i);
+			if (c.isInstance(o)) {
+				layerRenderers.set(i, (LayerRenderer<AbstractClientPlayer>) layer);
+				return;
 			}
 		}
-		layerRenderers.add(layerCustomHead);
+		layerRenderers.add((LayerRenderer<AbstractClientPlayer>) layer);
 	}
-	
+
 	@Override
 	public List getLayerList() {
 		return layerRenderers;
@@ -559,11 +531,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public boolean superUsePassSpecialRender(Object entityLivingBase) {
-		return super.canRenderName((EntityLiving) entityLivingBase);
-	}
-
-	@Override
 	public void renderLeashedToEntityRope(Object entityLiving, double d, double d1, double d2, float d3, float d4) {
 	}
 
@@ -582,11 +549,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public void superFunc_82408_c(Object entityLivingBase, int par2, float par3) {
-	}
-
-	@Override
-	public boolean superFunc_110813_b(Object entityLivingBase) {
-		return false;
 	}
 
 	@Override
@@ -622,6 +584,11 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	@Override
 	public boolean superLoadDownloadableImageTexture(String par1Str, String par2Str) {
 		return false;
+	}
+	// 190~
+	@Override
+	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
+		super.renderOffsetLivingLabel((Entity) entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, 0.0F, p_177069_10_);
 	}
 
 }

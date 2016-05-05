@@ -366,8 +366,8 @@ public class Modchu_ItemMasterBasis implements Modchu_IItemMaster {
 	}
 
 	@Override
-	public boolean isValidArmor(Object itemStack, int armorType, Object entity) {
-		return base.superIsValidArmor(itemStack, armorType, entity);
+	public boolean isValidArmor(Object itemStack, Object entityEquipmentSlot, Object entity) {
+		return base.superIsValidArmor(itemStack, entityEquipmentSlot, entity);
 	}
 
 	@Override
@@ -376,8 +376,8 @@ public class Modchu_ItemMasterBasis implements Modchu_IItemMaster {
 	}
 
 	@Override
-	public String getArmorTexture(Object itemStack, Object entity, int slot, String type) {
-		return base.superGetArmorTexture(itemStack, entity, slot, type);
+	public String getArmorTexture(Object itemStack, Object entity, Object entityEquipmentSlot, String type) {
+		return base.superGetArmorTexture(itemStack, entity, entityEquipmentSlot, type);
 	}
 
 	@Override
@@ -640,5 +640,85 @@ public class Modchu_ItemMasterBasis implements Modchu_IItemMaster {
 	@Override
 	public boolean func_150897_b(Object block) {
 		return base.superCanHarvestBlock(block);
+	}
+
+	@Override
+	public Object onItemUse(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumHand, Object enumFacing, float f, float f1, float f2) {
+		return base.superOnItemUse(itemStack, entityPlayer, world, blockPos, enumHand, enumFacing, f, f1, f2);
+	}
+
+	@Override
+	public Object onItemRightClick(Object itemStack, Object world, Object entityPlayer, Object enumHand) {
+		return base.superOnItemRightClick(itemStack, world, entityPlayer, enumHand);
+	}
+
+	@Override
+	public boolean itemInteractionForEntity(Object itemStack, Object entityPlayer, Object entityLivingBase, Object enumHand) {
+		return base.superItemInteractionForEntity(itemStack, entityPlayer, entityLivingBase, enumHand);
+	}
+
+	@Override
+	public Object getItemAttributeModifiers(Object entityEquipmentSlot) {
+		return base.superGetItemAttributeModifiers(entityEquipmentSlot);
+	}
+
+	@Override
+	public Object onItemUseFirst(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, Object enumHand) {
+		return base.superOnItemUseFirst(itemStack, entityPlayer, world, blockPos, enumFacing, hitX, hitY, hitZ, enumHand);
+	}
+
+	@Override
+	public Object getArmorModel(Object entityLivingBase, Object itemStack, Object entityEquipmentSlot, Object modelBiped) {
+		return base.superGetArmorModel(entityLivingBase, itemStack, entityEquipmentSlot, modelBiped);
+	}
+
+	@Override
+	public Object getAttributeModifiers(Object entityEquipmentSlot, Object itemStack) {
+		return base.superGetAttributeModifiers(entityEquipmentSlot, itemStack);
+	}
+
+	@Override
+	public boolean doesSneakBypassUse(Object itemStack, Object iBlockAccess, Object blockPos, Object entityPlayer) {
+		return base.superDoesSneakBypassUse(itemStack, iBlockAccess, blockPos, entityPlayer);
+	}
+
+	@Override
+	public Object getPropertyGetter(Object resourceLocation) {
+		return base.superGetPropertyGetter(resourceLocation);
+	}
+
+	@Override
+	public boolean updateItemStackNBT(Object nBTTagCompound) {
+		return base.superUpdateItemStackNBT(nBTTagCompound);
+	}
+
+	@Override
+	public boolean hasCustomProperties() {
+		return base.superHasCustomProperties();
+	}
+
+	@Override
+	public String getHighlightTip(Object itemStack, String displayName) {
+		return base.superGetHighlightTip(itemStack, displayName);
+	}
+
+	@Override
+	public int getItemEnchantability(Object itemStack) {
+		return base.superGetItemEnchantability(itemStack);
+	}
+
+	@Override
+	public boolean isBeaconPayment(Object itemStack) {
+		return base.superIsBeaconPayment(itemStack);
+	}
+
+	@Override
+	public boolean shouldCauseReequipAnimation(Object itemStack, Object itemStack1, boolean slotChanged) {
+		return base.superShouldCauseReequipAnimation(itemStack, itemStack1, slotChanged);
+	}
+
+	@Override
+	public Object initCapabilities(Object itemStack, Object nBTTagCompound) {
+		return base.superInitCapabilities(itemStack, nBTTagCompound);
 	}
 }

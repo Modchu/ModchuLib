@@ -617,8 +617,8 @@ public class Modchu_Item extends Item implements Modchu_IItem {
 	}
 
 	@Override
-	public String superGetArmorTexture(Object itemStack, Object entity, int slot, int layer) {
-		return super.getArmorTexture((ItemStack) itemStack, (Entity) entity, slot, layer);
+	public String superGetArmorTexture(Object itemStack, Object entity, Object slot, int layer) {
+		return super.getArmorTexture((ItemStack) itemStack, (Entity) entity, (Integer) slot, layer);
 	}
 
 	public void registerIcons(Object iconRegister) {
@@ -797,8 +797,8 @@ public class Modchu_Item extends Item implements Modchu_IItem {
 	}
 
 	@Override
-	public boolean superIsValidArmor(Object itemStack, int armorType, Object entity) {
-		return super.isValidArmor((ItemStack) itemStack, armorType, (Entity) entity);
+	public boolean superIsValidArmor(Object itemStack, Object armorType, Object entity) {
+		return super.isValidArmor((ItemStack) itemStack, (Integer) armorType, (Entity) entity);
 	}
 
 	@Override
@@ -812,7 +812,7 @@ public class Modchu_Item extends Item implements Modchu_IItem {
 	}
 
 	@Override
-	public String superGetArmorTexture(Object itemStack, Object entity, int slot, String type) {
+	public String superGetArmorTexture(Object itemStack, Object entity, Object slot, String type) {
 		return null;
 	}
 
@@ -1198,6 +1198,70 @@ public class Modchu_Item extends Item implements Modchu_IItem {
 	@Override
 	public Object superOnItemUseFinish(Object itemStack, Object world, Object entityPlayer) {
 		return superOnEaten(itemStack, world, entityPlayer);
+	}
+	// 190~
+	public Object superOnItemUse(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumHand, Object enumFacing, float f, float f1, float f2) {
+		return null;
+	}
+
+	public Object superOnItemRightClick(Object itemStack, Object world, Object entityPlayer, Object enumHand) {
+		return null;
+	}
+
+	public boolean superItemInteractionForEntity(Object itemStack, Object entityPlayer, Object entityLivingBase, Object enumHand) {
+		return false;
+	}
+
+	public Multimap<String, Object> superGetItemAttributeModifiers(Object entityEquipmentSlot) {
+		return null;
+	}
+
+	public Object superOnItemUseFirst(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, Object enumHand) {
+		return null;
+	}
+
+	public Object superGetArmorModel(Object entityLivingBase, Object itemStack, Object entityEquipmentSlot, Object modelBiped) {
+		return null;
+	}
+
+	public Multimap superGetAttributeModifiers(Object entityEquipmentSlot, Object itemStack) {
+		return null;
+	}
+
+	public boolean superDoesSneakBypassUse(Object itemStack, Object iBlockAccess, Object blockPos, Object entityPlayer) {
+		return false;
+	}
+
+	public Object superGetPropertyGetter(Object resourceLocation) {
+		return null;
+	}
+
+	public boolean superUpdateItemStackNBT(Object nBTTagCompound) {
+		return false;
+	}
+
+	public boolean superHasCustomProperties() {
+		return false;
+	}
+
+	public String superGetHighlightTip(Object itemStack, String displayName) {
+		return null;
+	}
+
+	public int superGetItemEnchantability(Object itemStack) {
+		return -1;
+	}
+
+	public boolean superIsBeaconPayment(Object itemStack) {
+		return false;
+	}
+
+	public boolean superShouldCauseReequipAnimation(Object itemStack, Object itemStack1, boolean slotChanged) {
+		return false;
+	}
+
+	public Object superInitCapabilities(Object itemStack, Object nBTTagCompound) {
+		return null;
 	}
 
 }
