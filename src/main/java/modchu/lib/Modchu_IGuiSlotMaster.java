@@ -5,14 +5,14 @@ public interface Modchu_IGuiSlotMaster {
 	public void setShowSelectionBox(boolean p_148130_1_);
 	public void setHasListHeader(boolean p_148133_1_, int p_148133_2_);
 	public int getContentHeight();
-	public void func_178040_a(int p_178040_1_, int p_178040_2_, int p_178040_3_);
+	public void updateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_);
 	public void drawListHeader(int p_148129_1_, int p_148129_2_, Object tessellator);
-	public void func_148132_a(int p_148132_1_, int p_148132_2_);
-	public void func_148142_b(int p_148142_1_, int p_148142_2_);
+	public void clickedHeader(int p_148132_1_, int p_148132_2_);
+	public void renderDecorations(int p_148142_1_, int p_148142_2_);
 	public int getSlotIndexFromScreenCoords(int p_148124_1_, int p_148124_2_);
 	public void registerScrollButtons(int p_148134_1_, int p_148134_2_);
 	public void bindAmountScrolled();
-	public int func_148135_f();
+	public int getMaxScroll();
 	public int getAmountScrolled();
 	public boolean isMouseYWithinSlotBounds(int p_148141_1_);
 	public void scrollBy(int p_148145_1_);

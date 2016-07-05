@@ -11,11 +11,6 @@ public class Modchu_RenderLivingMasterBasis extends Modchu_RendererLivingEntityM
 	}
 
 	@Override
-	public void renderLeashedToEntityRope(Object entityliving, double d, double d1, double d2, float d3, float d4) {
-		base.superRenderLeashedToEntityRope(entityliving, d, d1, d2, d3, d4);
-	}
-
-	@Override
 	public void setLightmap(Object entityLiving, float p_177105_2_) {
 		base.superSetLightmap(entityLiving, p_177105_2_);
 	}
@@ -27,6 +22,16 @@ public class Modchu_RenderLivingMasterBasis extends Modchu_RendererLivingEntityM
 	@Override
 	public boolean func_130007_b(Object entityLiving) {
 		return base.superFunc_130007_b(entityLiving);
+	}
+
+	@Override
+	public void func_98190_a(Object entityLiving) {
+		base.superFunc_98190_a(entityLiving);
+	}
+
+	@Override
+	public void renderLeash(Object entityLiving, double x, double y, double z, float entityYaw, float partialTicks) {
+		base.superRenderLeash(entityLiving, x, y, z, entityYaw, partialTicks);
 	}
 
 }

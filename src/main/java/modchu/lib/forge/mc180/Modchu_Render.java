@@ -165,10 +165,6 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 	public boolean superIsStaticEntity() {
 		return false;
 	}
-
-	@Override
-	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
-	}
 	// ~152
 	@Override
 	public void superLoadTexture(String par1Str) {
@@ -178,15 +174,33 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 	public boolean superLoadDownloadableImageTexture(String par1Str, String par2Str) {
 		return false;
 	}
-
-	@Override
-	public Object superGetEntityTexture(Object entity, int i) {
-		return null;
-	}
 	// 190~
 	@Override
 	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
 		super.func_177069_a((Entity) entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, 0.0F, p_177069_10_);
+	}
+
+	@Override
+	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+		super.func_177069_a((Entity) entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, 0.0F, p_177069_10_);
+	}
+
+	@Override
+	public int superGetTeamColor(Object entity) {
+		return -1;
+	}
+
+	@Override
+	public boolean superIsMultipass() {
+		return false;
+	}
+
+	@Override
+	public void superRenderMultipass(Object entity, double p_188300_2_, double p_188300_4_, double p_188300_6_, float p_188300_8_, float p_188300_9_) {
+	}
+
+	public int setArmorModel(Object entity, int i, float f) {
+		return -1;
 	}
 
 }

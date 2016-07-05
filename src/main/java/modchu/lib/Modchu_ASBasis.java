@@ -492,8 +492,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public Object entityGetDataWatcher(Object dataWatcherOrEntity) {
-		return base.superEntityGetDataWatcher(dataWatcherOrEntity);
+	public Object entityGetDataWatcher(Object dataManagerOrEntity) {
+		return base.superEntityGetDataWatcher(dataManagerOrEntity);
 	}
 
 	@Override
@@ -502,33 +502,33 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public Object dataWatcherGetWatchedObject(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return base.superDataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt);
+	public Object dataManagerGetWatchedObject(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return base.superDataWatcherGetWatchedObject(dataManagerOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	public void dataWatcherAddObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
-		base.superDataWatcherAddObject(dataWatcherOrEntity, dataParameterOrInt, o);
+	public void dataManagerAddObject(Object dataManagerOrEntity, Object dataParameterOrInt, Object o) {
+		base.superDataWatcherAddObject(dataManagerOrEntity, dataParameterOrInt, o);
 	}
 
 	@Override
-	public Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return base.superDataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, dataParameterOrInt);
+	public Object dataManagerGetWatchableObjectItemStack(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return base.superDataWatcherGetWatchableObjectItemStack(dataManagerOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	public String dataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return base.superDataWatcherGetWatchableObjectString(dataWatcherOrEntity, dataParameterOrInt);
+	public String dataManagerGetWatchableObjectString(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return base.superDataWatcherGetWatchableObjectString(dataManagerOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	public byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return base.superDataWatcherGetWatchableObjectByte(dataWatcherOrEntity, dataParameterOrInt);
+	public byte dataManagerGetWatchableObjectByte(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return base.superDataWatcherGetWatchableObjectByte(dataManagerOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	public void dataWatcherUpdateObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
-		base.superDataWatcherUpdateObject(dataWatcherOrEntity, dataParameterOrInt, o);
+	public void dataManagerUpdateObject(Object dataManagerOrEntity, Object dataParameterOrInt, Object o) {
+		base.superDataWatcherUpdateObject(dataManagerOrEntity, dataParameterOrInt, o);
 	}
 
 	@Override
@@ -1552,203 +1552,203 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public Object biomeGenBaseOcean() {
-		return base.superBiomeGenBaseOcean();
+	public Object biomeOcean() {
+		return base.superBiomeOcean();
 	}
 
 	@Override
-	public Object biomeGenBasePlains() {
-		return base.superBiomeGenBasePlains();
+	public Object biomePlains() {
+		return base.superBiomePlains();
 	}
 
 	@Override
-	public Object biomeGenBaseDesert() {
-		return base.superBiomeGenBaseDesert();
+	public Object biomeDesert() {
+		return base.superBiomeDesert();
 	}
 
 	@Override
-	public Object biomeGenBaseExtremeHills() {
-		return base.superBiomeGenBaseExtremeHills();
+	public Object biomeExtremeHills() {
+		return base.superBiomeExtremeHills();
 	}
 
 	@Override
-	public Object biomeGenBaseForest() {
-		return base.superBiomeGenBaseForest();
+	public Object biomeForest() {
+		return base.superBiomeForest();
 	}
 
 	@Override
-	public Object biomeGenBaseTaiga() {
-		return base.superBiomeGenBaseTaiga();
+	public Object biomeTaiga() {
+		return base.superBiomeTaiga();
 	}
 
 	@Override
-	public Object biomeGenBaseSwampland() {
-		return base.superBiomeGenBaseSwampland();
+	public Object biomeSwampland() {
+		return base.superBiomeSwampland();
 	}
 
 	@Override
-	public Object biomeGenBaseRiver() {
-		return base.superBiomeGenBaseRiver();
+	public Object biomeRiver() {
+		return base.superBiomeRiver();
 	}
 
 	@Override
-	public Object biomeGenBaseHell() {
-		return base.superBiomeGenBaseHell();
+	public Object biomeHell() {
+		return base.superBiomeHell();
 	}
 
 	@Override
-	public Object biomeGenBaseSky() {
-		return base.superBiomeGenBaseSky();
+	public Object biomeSky() {
+		return base.superBiomeSky();
 	}
 
 	@Override
-	public Object biomeGenBaseFrozenOcean() {
-		return base.superBiomeGenBaseFrozenOcean();
+	public Object biomeFrozenOcean() {
+		return base.superBiomeFrozenOcean();
 	}
 
 	@Override
-	public Object biomeGenBaseFrozenRiver() {
-		return base.superBiomeGenBaseFrozenRiver();
+	public Object biomeFrozenRiver() {
+		return base.superBiomeFrozenRiver();
 	}
 
 	@Override
-	public Object biomeGenBaseIcePlains() {
-		return base.superBiomeGenBaseIcePlains();
+	public Object biomeIcePlains() {
+		return base.superBiomeIcePlains();
 	}
 
 	@Override
-	public Object biomeGenBaseIceMountains() {
-		return base.superBiomeGenBaseIceMountains();
+	public Object biomeIceMountains() {
+		return base.superBiomeIceMountains();
 	}
 
 	@Override
-	public Object biomeGenBaseMushroomIsland() {
-		return base.superBiomeGenBaseMushroomIsland();
+	public Object biomeMushroomIsland() {
+		return base.superBiomeMushroomIsland();
 	}
 
 	@Override
-	public Object biomeGenBaseMushroomIslandShore() {
-		return base.superBiomeGenBaseMushroomIslandShore();
+	public Object biomeMushroomIslandShore() {
+		return base.superBiomeMushroomIslandShore();
 	}
 
 	@Override
-	public Object biomeGenBaseBeach() {
-		return base.superBiomeGenBaseBeach();
+	public Object biomeBeach() {
+		return base.superBiomeBeach();
 	}
 
 	@Override
-	public Object biomeGenBaseDesertHills() {
-		return base.superBiomeGenBaseDesertHills();
+	public Object biomeDesertHills() {
+		return base.superBiomeDesertHills();
 	}
 
 	@Override
-	public Object biomeGenBaseForestHills() {
-		return base.superBiomeGenBaseForestHills();
+	public Object biomeForestHills() {
+		return base.superBiomeForestHills();
 	}
 
 	@Override
-	public Object biomeGenBaseTaigaHills() {
-		return base.superBiomeGenBaseTaigaHills();
+	public Object biomeTaigaHills() {
+		return base.superBiomeTaigaHills();
 	}
 
 	@Override
-	public Object biomeGenBaseExtremeHillsEdge() {
-		return base.superBiomeGenBaseExtremeHillsEdge();
+	public Object biomeExtremeHillsEdge() {
+		return base.superBiomeExtremeHillsEdge();
 	}
 
 	@Override
-	public Object biomeGenBaseJungle() {
-		return base.superBiomeGenBaseJungle();
+	public Object biomeJungle() {
+		return base.superBiomeJungle();
 	}
 
 	@Override
-	public Object biomeGenBaseJungleHills() {
-		return base.superBiomeGenBaseJungleHills();
+	public Object biomeJungleHills() {
+		return base.superBiomeJungleHills();
 	}
 
 	@Override
-	public Object biomeGenBaseJungleEdge() {
-		return base.superBiomeGenBaseJungleEdge();
+	public Object biomeJungleEdge() {
+		return base.superBiomeJungleEdge();
 	}
 
 	@Override
-	public Object biomeGenBaseDeepOcean() {
-		return base.superBiomeGenBaseDeepOcean();
+	public Object biomeDeepOcean() {
+		return base.superBiomeDeepOcean();
 	}
 
 	@Override
-	public Object biomeGenBaseStoneBeach() {
-		return base.superBiomeGenBaseStoneBeach();
+	public Object biomeStoneBeach() {
+		return base.superBiomeStoneBeach();
 	}
 
 	@Override
-	public Object biomeGenBaseStoneColdBeach() {
-		return base.superBiomeGenBaseStoneColdBeach();
+	public Object biomeStoneColdBeach() {
+		return base.superBiomeStoneColdBeach();
 	}
 
 	@Override
-	public Object biomeGenBaseBirchForest() {
-		return base.superBiomeGenBaseBirchForest();
+	public Object biomeBirchForest() {
+		return base.superBiomeBirchForest();
 	}
 
 	@Override
-	public Object biomeGenBaseBirchForestHills() {
-		return base.superBiomeGenBaseBirchForestHills();
+	public Object biomeBirchForestHills() {
+		return base.superBiomeBirchForestHills();
 	}
 
 	@Override
-	public Object biomeGenBaseRoofedForest() {
-		return base.superBiomeGenBaseRoofedForest();
+	public Object biomeRoofedForest() {
+		return base.superBiomeRoofedForest();
 	}
 
 	@Override
-	public Object biomeGenBaseColdTaiga() {
-		return base.superBiomeGenBaseColdTaiga();
+	public Object biomeColdTaiga() {
+		return base.superBiomeColdTaiga();
 	}
 
 	@Override
-	public Object biomeGenBaseColdTaigaHills() {
-		return base.superBiomeGenBaseColdTaigaHills();
+	public Object biomeColdTaigaHills() {
+		return base.superBiomeColdTaigaHills();
 	}
 
 	@Override
-	public Object biomeGenBaseMegaTaiga() {
-		return base.superBiomeGenBaseMegaTaiga();
+	public Object biomeMegaTaiga() {
+		return base.superBiomeMegaTaiga();
 	}
 
 	@Override
-	public Object biomeGenBaseMegaTaigaHills() {
-		return base.superBiomeGenBaseMegaTaigaHills();
+	public Object biomeMegaTaigaHills() {
+		return base.superBiomeMegaTaigaHills();
 	}
 
 	@Override
-	public Object biomeGenBaseExtremeHillsPlus() {
-		return base.superBiomeGenBaseExtremeHillsPlus();
+	public Object biomeExtremeHillsPlus() {
+		return base.superBiomeExtremeHillsPlus();
 	}
 
 	@Override
-	public Object biomeGenBaseSavanna() {
-		return base.superBiomeGenBaseSavanna();
+	public Object biomeSavanna() {
+		return base.superBiomeSavanna();
 	}
 
 	@Override
-	public Object biomeGenBaseSavannaPlateau() {
-		return base.superBiomeGenBaseSavannaPlateau();
+	public Object biomeSavannaPlateau() {
+		return base.superBiomeSavannaPlateau();
 	}
 
 	@Override
-	public Object biomeGenBaseMesa() {
-		return base.superBiomeGenBaseMesa();
+	public Object biomeMesa() {
+		return base.superBiomeMesa();
 	}
 
 	@Override
-	public Object biomeGenBaseMesaPlateau_F() {
-		return base.superBiomeGenBaseMesaPlateau_F();
+	public Object biomeMesaPlateau_F() {
+		return base.superBiomeMesaPlateau_F();
 	}
 
 	@Override
-	public Object biomeGenBaseMesaPlateau() {
-		return base.superBiomeGenBaseMesaPlateau();
+	public Object biomeMesaPlateau() {
+		return base.superBiomeMesaPlateau();
 	}
 
 	@Override
@@ -2527,13 +2527,13 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public int biomeGenBaseGetBiomeGrassColor(Object biomeGenBase) {
-		return base.superBiomeGenBaseGetBiomeGrassColor(biomeGenBase);
+	public int biomeGetBiomeGrassColor(Object biome) {
+		return base.superBiomeGetBiomeGrassColor(biome);
 	}
 
 	@Override
-	public int biomeGenBaseGetBiomeGrassColor(Object biomeGenBase, int x, int y, int z) {
-		return base.superBiomeGenBaseGetBiomeGrassColor(biomeGenBase, x, y, z);
+	public int biomeGetBiomeGrassColor(Object biome, int x, int y, int z) {
+		return base.superBiomeGetBiomeGrassColor(biome, x, y, z);
 	}
 
 	@Override

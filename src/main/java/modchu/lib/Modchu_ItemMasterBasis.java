@@ -226,8 +226,8 @@ public class Modchu_ItemMasterBasis implements Modchu_IItemMaster {
 	}
 
 	@Override
-	public Object getMovingObjectPositionFromPlayer(Object world, Object entityPlayer, boolean par3) {
-		return base.superGetMovingObjectPositionFromPlayer(world, entityPlayer, par3);
+	public Object rayTrace(Object world, Object entityPlayer, boolean par3) {
+		return base.superRayTrace(world, entityPlayer, par3);
 	}
 
 	@Override
@@ -721,4 +721,55 @@ public class Modchu_ItemMasterBasis implements Modchu_IItemMaster {
 	public Object initCapabilities(Object itemStack, Object nBTTagCompound) {
 		return base.superInitCapabilities(itemStack, nBTTagCompound);
 	}
+
+	@Override
+	public int getDamageVsEntity(Object entity) {
+		return base.superGetDamageVsEntity(entity);
+	}
+
+	@Override
+	public String getLocalizedName(Object itemStack) {
+		return base.superGetLocalizedName(itemStack);
+	}
+
+	@Override
+	public String func_77653_i(Object itemStack) {
+		return base.superFunc_77653_i(itemStack);
+	}
+
+	@Override
+	public boolean func_82788_x() {
+		return base.superFunc_82788_x();
+	}
+
+	@Override
+	public boolean isValidArmor(Object itemStack, int armorType) {
+		return base.superIsValidArmor(itemStack, armorType);
+	}
+
+	@Override
+	public int getItemDamageFromStack(Object itemStack) {
+		return base.superGetItemDamageFromStack(itemStack);
+	}
+
+	@Override
+	public int getItemDamageFromStackForDisplay(Object itemStack) {
+		return base.superGetItemDamageFromStackForDisplay(itemStack);
+	}
+
+	@Override
+	public int getItemMaxDamageFromStack(Object itemStack) {
+		return base.superGetItemMaxDamageFromStack(itemStack);
+	}
+
+	@Override
+	public boolean isItemStackDamaged(Object itemStack) {
+		return base.superIsItemStackDamaged(itemStack);
+	}
+
+	@Override
+	public void setItemDamageForStack(Object itemStack, int damage) {
+		base.superSetItemDamageForStack(itemStack, damage);
+	}
+
 }

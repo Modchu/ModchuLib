@@ -247,40 +247,65 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 
 		Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile:[%s]:%s", pname, Modchu_Main.modsDir.getAbsolutePath());
 		// ファイル・ディレクトリを検索
-		getModFile(pname, pprefix, Modchu_Main.modsDir, llist, false);
-		getModFile(pname, pprefix, new File(Modchu_Main.modsDir, Modchu_Version.getMinecraftVersionString()), llist, true);
+		getModFile(pname, pprefix, Modchu_Main.modsDir, llist, true);
 		return llist;
 	}
 
-	protected boolean getModFile(String pname, String pprefix, File dir, List<File> llist, boolean subDirCheck) {
+	protected boolean getModFile(String pname, String pprefix, File dir, List<File> llist, boolean versionDirCheck) {
 		boolean b = false;
+		String versionString = versionDirCheck ? Modchu_Version.getMinecraftVersionString() : null;
+		//Modchu_Debug.mDebug("Modchu_FileManagerBase getModFile versionString="+versionString);
 		try {
 			Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile dir="+dir);
 			if (dir.isDirectory()) {
 				Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile-get:%d.", dir.list().length);
 				for (File t : dir.listFiles()) {
-					if (subDirCheck
-							&& t.isDirectory()) {
-						llist.add(t);
-						Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile-directory:%s", t.getName());
-						getModFile(pname, pprefix, t, llist, subDirCheck);
+					if (t.isDirectory()) {
+						boolean flag1 = true;
+						if (versionDirCheck) {
+							String path = t.getAbsolutePath();
+							Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile path="+path);
+							if (path.indexOf("\\") > -1) path = Modchu_Main.lastIndexProcessing(t.getAbsolutePath(), "\\");
+							if (path.indexOf("/") > -1) path = Modchu_Main.lastIndexProcessing(t.getAbsolutePath(), "/");
+							if (!path.equals(versionString)) {
+								if (path.length() > 2) { 
+									int i1 = path.indexOf(".");
+									if (i1 > -1) {
+										String s1 = path.substring(0, 1);
+										if (Modchu_Main.integerCheck(s1)) {
+											String s2 = path.substring(2, 3);
+											if (Modchu_Main.integerCheck(s2)) {
+												flag1 = false;
+												Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile flag1 = false path="+path);
+											}
+										}
+									}
+								}
+							}
+						}
+						if (flag1) {
+							llist.add(t);
+							Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile-directory:%s", t.getName());
+							getModFile(pname, pprefix, t, llist, false);
+						}
 					}
 					if (t.getName().indexOf(pprefix) != -1) {
 						if (t.getName().endsWith(".zip")) {
 							llist.add(t);
 							b = true;
-							Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile file:%s", t.getName());
+							Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile zip file:%s", t.getName());
 						}
 					} else {
-						Modchu_Debug.tDebug("Modchu_FileManagerBase prefix else file:%s", t.getName());
+						Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile zip prefix else file:%s", t.getName());
 					}
 				}
-				Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile files:%d", llist.size());
+				Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile zip files:%d", llist.size());
 			} else {
-				Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile !dir.isDirectory().");
+				Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile zip !dir.isDirectory().");
 			}
-		} catch (Exception exception) {
-			Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile-Exception.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile zip Exception.");
 		}
 		return b;
 	}
@@ -342,6 +367,8 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		if (file != null
 				&& file.isFile()); else return false;
 		boolean b = false;
+		boolean classCheck = false;
+		boolean pngCheck = false;
 		FileInputStream fileinputstream = null;
 		ZipInputStream zipinputstream = null;
 		try {
@@ -354,10 +381,20 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 
 				if (!zipentry.isDirectory()) {
 					if (zipentry.getName().endsWith(".class")) {
+						classCheck = true;
 						if (addModClass(map, zipentry.getName(), search)) b = true;
+					}
+					if (!pngCheck
+							&& zipentry.getName().endsWith(".png")) {
+						pngCheck = true;
 					}
 				}
 			} while(true);
+/*
+ * 不要だったので封印
+			if (!classCheck
+					&& pngCheck) addModResourcePack(file);
+*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -493,23 +530,41 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		boolean debug = false;
 		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 1 c="+c);
 		Object o = Modchu_Main.newModchuCharacteristicObject("Modchu_ResourcePack", Modchu_ModResourcePackMaster.class, c);
+		addModchuResourcePack(o);
+		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack end.");
+	}
+
+	protected void addModResourcePack(File file) {
+		int version = Modchu_Main.getMinecraftVersion();
+		if (Modchu_Main.isServer
+				| version < 190) {
+			return;
+		}
+		boolean debug = false;
+		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 1 file="+file);
+		Object o = Modchu_Main.newModchuCharacteristicObject("Modchu_ResourcePack", Modchu_ModResourcePackMaster.class, file);
+		addModchuResourcePack(o);
+		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack end.");
+	}
+
+	protected void addModchuResourcePack(Object o) {
+		boolean debug = false;
 		if (o != null) {
-			if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 2 o="+o);
+			if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModchuResourcePack 1 o="+o);
 			List list = Modchu_AS.getList("Minecraft", "defaultResourcePacks", Modchu_AS.get(Modchu_AS.minecraftGetMinecraft));
 			if (list != null) {
-				if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 3 list="+list);
+				if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModchuResourcePack 2 list="+list);
 				list.add(o);
 			} else {
-				String s = "Modchu_FileManagerBase addModResourcePack defaultResourcePacks null error !!";
+				String s = "Modchu_FileManagerBase addModchuResourcePack defaultResourcePacks null error !!";
 				if (debug) Modchu_Debug.mDebug(s);
 				Modchu_Main.setRuntimeException(s);
 			}
 		} else {
-			String s = "Modchu_FileManagerBase addModResourcePack null error !! c="+c;
+			String s = "Modchu_FileManagerBase addModchuResourcePack null error !!";
 			if (debug) Modchu_Debug.mDebug(s);
 			Modchu_Main.setRuntimeException(s);
 		}
-		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack end.");
 	}
 
 	protected void addModTextureStitchedClassList(Class c) {
@@ -1111,24 +1166,24 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	@Override
 	public ArrayList<String> loadFileToArrayList(File file) {
 		// File読み込みArrayListで返す
-		if (listData.containsKey(file)) return (ArrayList<String>) listData.get(file);
+		if (listData.containsKey(file)) return (ArrayList<String>) listData.get(file.getAbsolutePath());
 		return (ArrayList<String>) loadFileToList(file, new ArrayList());
 	}
 
 	@Override
 	public LinkedList<String> loadFileToLinkedList(File file) {
 		// File読み込みLinkedListで返す
-		if (listData.containsKey(file)) return (LinkedList<String>) listData.get(file);
+		if (listData.containsKey(file)) return (LinkedList<String>) listData.get(file.getAbsolutePath());
 		return (LinkedList<String>) loadFileToList(file, new LinkedList());
 	}
 
 	@Override
 	public List<String> loadFileToList(File file, List list) {
 		// File読み込みListで返す
-		if (listData.containsKey(file)) return listData.get(file);
+		if (listData.containsKey(file)) return listData.get(file.getAbsolutePath());
 		try {
 			list = bufferedReaderToList(new BufferedReader(new FileReader(file)), list);
-			listData.put(file, list);
+			listData.put(file.getAbsolutePath(), list);
 			return list;
 		} catch (Exception e) {
 			Modchu_Debug.lDebug("Modchu_FileManagerBase loadFileToList "+ file.toString() +" load Exception.", 2, e);
@@ -1218,7 +1273,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 				bwriter.write(s0);
 				bwriter.newLine();
 			}
-			listData.put(file, list);
+			listData.put(file.getAbsolutePath(), list);
 			bwriter.close();
 			Modchu_Debug.lDebug("Modchu_FileManagerBase String[] "+ file.toString() +" new file create.");
 		} catch (Exception e) {
@@ -1251,7 +1306,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 					bwriter.write(s1);
 					bwriter.newLine();
 				}
-				listData.put(file, list);
+				listData.put(file.getAbsolutePath(), list);
 				//Modchu_Debug.mDebug("Modchu_FileManagerBase writerFile List "+ file.toString() +" writerFile.");
 			} else {
 				if (file.exists()
@@ -1288,7 +1343,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 					bwriter.write(s1);
 					bwriter.newLine();
 				}
-				listData.put(file, list);
+				listData.put(file.getAbsolutePath(), list);
 				Modchu_Debug.lDebug("Modchu_FileManagerBase Map "+ file.toString() +" writerFile.");
 			} else {
 				Modchu_Debug.lDebug("Modchu_FileManagerBase Map "+ file.toString() +" writerFile. error map="+map+" file="+file);

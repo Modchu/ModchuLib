@@ -20,11 +20,6 @@ public class Modchu_RendererLivingEntityMasterBasis implements Modchu_IRenderLiv
 	}
 
 	@Override
-	public Object getEntityTexture(Object entity, int i) {
-		return base.superGetEntityTexture(entity, i);
-	}
-
-	@Override
 	public boolean bindEntityTexture(Object entity) {
 		return base.superBindEntityTexture(entity);
 	}
@@ -50,16 +45,6 @@ public class Modchu_RendererLivingEntityMasterBasis implements Modchu_IRenderLiv
 	}
 
 	@Override
-	public int setArmorModel(Object entity, int i, float f) {
-		return base.superSetArmorModel(null, entity, i, f, 0);
-	}
-
-	@Override
-	public int setArmorModel(Object model, Object entityplayer, int i, float f, int i2) {
-		return base.superSetArmorModel(model, entityplayer, i, f, i2);
-	}
-
-	@Override
 	public void preRenderCallback(Object entityliving, float f) {
 		base.superPreRenderCallback(entityliving, f);
 	}
@@ -76,11 +61,6 @@ public class Modchu_RendererLivingEntityMasterBasis implements Modchu_IRenderLiv
 	@Override
 	public int shouldRenderPass(Object entityliving, int i, float f) {
 		return base.superShouldRenderPass(entityliving, i, f);
-	}
-
-	@Override
-	public void passSpecialRender(Object entityLiving, double d, double d1, double d2) {
-		base.superPassSpecialRender(entityLiving, d, d1, d2);
 	}
 
 	@Override
@@ -218,11 +198,6 @@ public class Modchu_RendererLivingEntityMasterBasis implements Modchu_IRenderLiv
 	}
 
 	@Override
-	public float renderSwingProgress(Object entityLivingBase, float par2) {
-		return base.superRenderSwingProgress(entityLivingBase, par2);
-	}
-
-	@Override
 	public void renderArrowsStuckInEntity(Object entityLivingBase, float par2) {
 		base.superRenderArrowsStuckInEntity(entityLivingBase, par2);
 	}
@@ -253,11 +228,6 @@ public class Modchu_RendererLivingEntityMasterBasis implements Modchu_IRenderLiv
 	}
 
 	@Override
-	public void func_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
-		base.superFunc_147906_a(entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
-	}
-
-	@Override
 	public void loadTexture(String par1Str) {
 		base.superLoadTexture(par1Str);
 	}
@@ -270,6 +240,51 @@ public class Modchu_RendererLivingEntityMasterBasis implements Modchu_IRenderLiv
 	@Override
 	public void renderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
 		base.superRenderEntityName(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_10_);
+	}
+
+	@Override
+	public void passSpecialRender(Object entityLiving, double d, double d1, double d2) {
+		base.superPassSpecialRender(entityLiving, d, d1, d2);
+	}
+
+	@Override
+	public void func_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+		base.superFunc_177069_a(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_9_, p_177069_10_);
+	}
+
+	@Override
+	public int getTeamColor(Object entity) {
+		return base.superGetTeamColor(entity);
+	}
+
+	@Override
+	public boolean isMultipass() {
+		return base.superIsMultipass();
+	}
+
+	@Override
+	public void renderMultipass(Object entity, double p_188300_2_, double p_188300_4_, double p_188300_6_, float p_188300_8_, float p_188300_9_) {
+		base.superRenderMultipass(entity, p_188300_2_, p_188300_4_, p_188300_6_, p_188300_8_, p_188300_9_);
+	}
+
+	@Override
+	public float prepareScale(Object entityLivingBase, float partialTicks) {
+		return base.superPrepareScale(entityLivingBase, partialTicks);
+	}
+
+	@Override
+	public void doRenderLiving(Object entityLivingBase, double par2, double par4, double par6, float par8, float par9) {
+		base.superDoRenderLiving(entityLivingBase, par2, par4, par6, par8, par9);
+	}
+
+	@Override
+	public int setArmorModel(Object entity, int i, float f) {
+		return base.superSetArmorModel(entity, i, f);
+	}
+
+	@Override
+	public int setArmorModel(Object model, Object entityplayer, int i, float f, int i2) {
+		return base.superSetArmorModel(model, entityplayer, i, f, i2);
 	}
 
 }

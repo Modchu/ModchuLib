@@ -30,8 +30,8 @@ public class Modchu_TileEntityMasterBasis implements Modchu_ITileEntityMaster {
 	}
 
 	@Override
-	public void writeToNBT(Object nBTTagCompound) {
-		base.superWriteToNBT(nBTTagCompound);
+	public Object writeToNBT(Object nBTTagCompound) {
+		return base.superWriteToNBT(nBTTagCompound);
 	}
 
 	@Override
@@ -175,8 +175,8 @@ public class Modchu_TileEntityMasterBasis implements Modchu_ITileEntityMaster {
 	}
 
 	@Override
-	public boolean func_183000_F() {
-		return base.superFunc_183000_F();
+	public boolean onlyOpsCanSetNbt() {
+		return base.superOnlyOpsCanSetNbt();
 	}
 
 	@Override
@@ -207,6 +207,16 @@ public class Modchu_TileEntityMasterBasis implements Modchu_ITileEntityMaster {
 	@Override
 	public Object serializeNBT() {
 		return base.superSerializeNBT();
+	}
+
+	@Override
+	public Object getUpdatePacket() {
+		return base.superGetUpdatePacket();
+	}
+
+	@Override
+	public Object getUpdateTag() {
+		return base.superGetUpdateTag();
 	}
 
 }

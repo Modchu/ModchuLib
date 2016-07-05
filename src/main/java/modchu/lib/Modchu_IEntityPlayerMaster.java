@@ -35,9 +35,9 @@ public interface Modchu_IEntityPlayerMaster {
 	public void addScore(int par1);
 	public void onDeath(Object damageSource);
 	public void addToPlayerScore(Object entity, int par2);
-	public Object dropOneItem(boolean par1);
+	public Object dropItem(boolean par1);
 	public Object dropPlayerItem(Object itemStack);
-	public Object dropPlayerItemWithRandomChoice(Object itemStack, boolean par2);
+	public Object dropItem(Object itemStack, boolean par2);
 	public void dropItemAndGetStack(Object entityItem);
 	public float getCurrentPlayerStrVsBlock(Object block, boolean par2);
 	public float getCurrentPlayerStrVsBlock(Object block, boolean par2, int meta);
@@ -201,8 +201,8 @@ public interface Modchu_IEntityPlayerMaster {
 	public void updateAITasks();
 	public void collideWithNearbyEntities();
 	public void collideWithEntity(Object entity);
-	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9);
-	public void updateAITick();
+	public void setPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9);
+	public void handleJumpWater();
 	public void setJumping(boolean par1);
 	public void onItemPickup(Object entity, int par2);
 	public boolean canEntityBeSeen(Object entity);
@@ -242,7 +242,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public boolean handleWaterMovement();
 	public boolean isInsideOfMaterial(Object material);
 	public boolean handleLavaMovement();
-	public void moveFlying(float par1, float par2, float par3);
+	public void moveRelative(float par1, float par2, float par3);
 	public int getBrightnessForRender(float par1);
 	public float getBrightness(float par1);
 	public void setWorld(Object world);
@@ -293,7 +293,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public boolean pushOutOfBlocks(double par1, double par3, double par5);
 	public Object[] getParts();
 	public boolean isEntityEqual(Object entity);
-	public boolean canAttackWithItem();
+	public boolean canBeAttackedWithItem();
 	public boolean hitByEntity(Object entity);
 	public String toString();
 	public boolean isEntityInvulnerable();

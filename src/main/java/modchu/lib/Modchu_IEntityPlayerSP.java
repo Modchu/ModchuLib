@@ -38,7 +38,7 @@ public interface Modchu_IEntityPlayerSP {
 	public boolean superAttackEntityFrom(Object damageSource, float par2);
 	public void superHeal(float par1);
 	public void superOnUpdate();
-	public Object superDropOneItem(boolean par1);
+	public Object superDropItem(boolean par1);
 	public Object superDropItemAndGetStack(Object entityItem);
 	public void superSendChatMessage(String par1Str);
 	public void superSwingArm();
@@ -110,7 +110,7 @@ public interface Modchu_IEntityPlayerSP {
 	public void superAddScore(int par1);
 	public void superAddToPlayerScore(Object entity, int par2);
 	public Object superDropPlayerItem(Object itemStack);
-	public Object superDropPlayerItemWithRandomChoice(Object itemStack, boolean par2);
+	public Object superDropItem(Object itemStack, boolean par2);
 	public float superGetCurrentPlayerStrVsBlock(Object block, boolean par2);
 	public float superGetCurrentPlayerStrVsBlock(Object block, boolean par2, int meta);
 	public boolean superCanHarvestBlock(Object block);
@@ -240,8 +240,8 @@ public interface Modchu_IEntityPlayerSP {
 	public void superUpdateAITasks();
 	public void superCollideWithNearbyEntities();
 	public void superCollideWithEntity(Object entity);
-	public void superSetPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9);
-	public void superUpdateAITick();
+	public void superSetPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9);
+	public void superHandleJumpWater();
 	public void superSetJumping(boolean par1);
 	public boolean superCanEntityBeSeen(Object entity);
 	public Object superGetLookVec();
@@ -278,7 +278,7 @@ public interface Modchu_IEntityPlayerSP {
 	public boolean superHandleWaterMovement();
 	public boolean superIsInsideOfMaterial(Object material);
 	public boolean superHandleLavaMovement();
-	public void superMoveFlying(float par1, float par2, float par3);
+	public void superMoveRelative(float par1, float par2, float par3);
 	public int superGetBrightnessForRender(float par1);
 	public float superGetBrightness(float par1);
 	public void superSetWorld(Object world);
@@ -295,7 +295,7 @@ public interface Modchu_IEntityPlayerSP {
 	public boolean superIsInRangeToRenderDist(double par1);
 	public boolean superWriteToNBTAtomically(Object nBTTagCompound);
 	public boolean superWriteToNBTOptional(Object nBTTagCompound);
-	public void superWriteToNBT(Object nBTTagCompound);
+	public Object superWriteToNBT(Object nBTTagCompound);
 	public void superReadFromNBT(Object nBTTagCompound);
 	public boolean superShouldSetPosAfterLoading();
 	public void superOnChunkLoad();
@@ -325,7 +325,7 @@ public interface Modchu_IEntityPlayerSP {
 	public void superOnStruckByLightning(Object entityLightningBolt);
 	public Object[] superGetParts();
 	public boolean superIsEntityEqual(Object entity);
-	public boolean superCanAttackWithItem();
+	public boolean superCanBeAttackedWithItem();
 	public boolean superHitByEntity(Object entity);
 	public String superToString();
 	public boolean superIsEntityInvulnerable();
@@ -477,7 +477,7 @@ public interface Modchu_IEntityPlayerSP {
 	public String superGetSkinType();
 	public float superGetFovModifier();
 	public float superGetToolDigEfficiency(Object block);
-	public float superGetBreakSpeed(Object iBlockState, Object blockPos);
+	public float superGetDigSpeed(Object iBlockState, Object blockPos);
 	public Object superTrySleep(Object blockPos);
 	public void superSetSpawnPoint(Object blockPos, boolean forced);
 	public void superTakeStat(Object statBase);
@@ -504,7 +504,7 @@ public interface Modchu_IEntityPlayerSP {
 	public Object superGetCombatTracker();
 	public float superGetJumpUpwardsMotion();
 	public void superHandleJumpLava();
-	public void superSetPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_);
+	public void superSetPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_);
 	public void superMarkPotionsDirty();
 	public void superPlayStepSound(Object blockPos, Object block);
 	public boolean superIsSilent();
@@ -572,7 +572,7 @@ public interface Modchu_IEntityPlayerSP {
 	public boolean superIsActiveItemStackBlocking();
 	public boolean superIsElytraFlying();
 	public int superGetTicksElytraFlying();
-	public boolean superTeleportTo_(double x, double y, double z);
+	public boolean superAttemptTeleport(double x, double y, double z);
 	public boolean superCanBeHitWithPotion();
 	public Object superGetFreeVariable(String s);
 	public void superSetFreeVariable(String s, Object o);
@@ -611,8 +611,8 @@ public interface Modchu_IEntityPlayerSP {
 	public boolean superHasCapability(Object capability, Object enumFacing);
 	public void superDeserializeNBT(Object nBTTagCompound);
 	public Object superSerializeNBT();
-	public void superSetBossVisibleTo(Object entityPlayerMP);
-	public void superSetBossNonVisibleTo(Object entityPlayerMP);
+	public void superAddTrackingPlayer(Object entityPlayerMP);
+	public void superRemoveTrackingPlayer(Object entityPlayerMP);
 	public float superGetRotatedYaw(Object rotation);
 	public float superGetMirroredYaw(Object mirror);
 	public boolean superSetPositionNonDirty();
@@ -653,7 +653,7 @@ public interface Modchu_IEntityPlayerSP {
 	public void superAddSuffix(Object iTextComponent);
 	public Object superGetPrefixes();
 	public Object superGetSuffixes();
-	public boolean superFunc_184213_bq();
+	public boolean superIgnoreItemEntityData();
 	public void superSetItemStackToSlot(int p_70062_1_, Object itemStack);
 	public boolean superEquals(Object p_equals_1_);
 	public int superHashCode();
@@ -664,5 +664,6 @@ public interface Modchu_IEntityPlayerSP {
 	public void superUpdateRidden();
 	public boolean superIsNotColliding();
 	public void superSetMaxHealth(Object floatOrInt);
+	public String superGetCachedUniqueIdString();
 
 }

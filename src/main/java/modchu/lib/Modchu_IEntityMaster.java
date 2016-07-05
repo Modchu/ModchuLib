@@ -5,6 +5,7 @@ import java.util.UUID;
 public interface Modchu_IEntityMaster {
 	public Object getFreeVariable(String s);
 	public void setFreeVariable(String s, Object o);
+	public String thisToString();
 	public void init();
 	public void entityInit();
 	public void readEntityFromNBT(Object nBTTagCompound);
@@ -45,7 +46,7 @@ public interface Modchu_IEntityMaster {
 	public boolean isInsideOfMaterial(Object material);
 	public float getEyeHeight();
 	public boolean handleLavaMovement();
-	public void moveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_);
+	public void moveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_);
 	public int getBrightnessForRender(float p_70070_1_);
 	public float getBrightness(float p_70013_1_);
 	public void setWorld(Object world);
@@ -67,7 +68,7 @@ public interface Modchu_IEntityMaster {
 	public boolean isInRangeToRenderDist(double p_70112_1_);
 	public boolean writeToNBTAtomically(Object nBTTagCompound);
 	public boolean writeToNBTOptional(Object nBTTagCompound);
-	public void writeToNBT(Object nBTTagCompound);
+	public Object writeToNBT(Object nBTTagCompound);
 	public void readFromNBT(Object nBTTagCompound);
 	public boolean shouldSetPosAfterLoading();
 	public void onChunkLoad();
@@ -86,7 +87,7 @@ public interface Modchu_IEntityMaster {
 	public double getYOffset();
 	public double getMountedYOffset();
 	public boolean startRiding(Object entity);
-	public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_);
+	public void setPositionAndRotationDirect(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_);
 	public float getCollisionBorderSize();
 	public Object getLookVec();
 	public void setPortal(Object blockPos);
@@ -120,7 +121,7 @@ public interface Modchu_IEntityMaster {
 	public boolean isEntityEqual(Object entity);
 	public float getRotationYawHead();
 	public void setRotationYawHead(float p_70034_1_);
-	public boolean canAttackWithItem();
+	public boolean canBeAttackedWithItem();
 	public boolean hitByEntity(Object entity);
 	public String toString();
 	public boolean isEntityInvulnerable();
@@ -188,7 +189,7 @@ public interface Modchu_IEntityMaster {
 	public Object getLook(float p_70676_1_);
 	public Object getPositionEyes(float p_174824_1_);
 	public Object rayTrace(double p_174822_1_, float p_174822_3_);
-	public void setPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_);
+	public void setPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_);
 	public Object[] getInventory();
 	public boolean isEntityInvulnerable(Object damageSource);
 	public void copyDataFromOld(Object entity);
@@ -261,11 +262,11 @@ public interface Modchu_IEntityMaster {
 	public boolean hasCapability(Object capability, Object enumFacing);
 	public void deserializeNBT(Object nBTTagCompound);
 	public Object serializeNBT();
-	public void setBossVisibleTo(Object entityPlayerMP);
-	public void setBossNonVisibleTo(Object entityPlayerMP);
+	public void addTrackingPlayer(Object entityPlayerMP);
+	public void removeTrackingPlayer(Object entityPlayerMP);
 	public float getRotatedYaw(Object rotation);
 	public float getMirroredYaw(Object mirror);
-	public boolean func_184213_bq();
+	public boolean ignoreItemEntityData();
 	public boolean setPositionNonDirty();
 	public Object getControllingPassenger();
 	public Object getPassengers();

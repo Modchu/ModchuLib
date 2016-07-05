@@ -550,7 +550,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return null;
 		}
-		if (pIndex == biomeGenBaseGetBiomeGrassColor) {
+		if (pIndex == biomeGetBiomeGrassColor) {
 			if (pArg != null
 			&& pArg.length > 0
 			&& pArg[0] != null) {
@@ -558,9 +558,9 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 						&& pArg[1] != null
 						&& pArg[2] != null
 						&& pArg[3] != null) {
-					return biomeGenBaseGetBiomeGrassColor(pArg[0], (Integer) pArg[1], (Integer) pArg[2], (Integer) pArg[3]);
+					return biomeGetBiomeGrassColor(pArg[0], (Integer) pArg[1], (Integer) pArg[2], (Integer) pArg[3]);
 				} else {
-					return biomeGenBaseGetBiomeGrassColor(pArg[0]);
+					return biomeGetBiomeGrassColor(pArg[0]);
 				}
 			}
 			return null;
@@ -991,45 +991,45 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == enumFacingNORTH) return enumFacingNORTH();
 		if (pIndex == enumFacingSOUTH) return enumFacingSOUTH();
 		if (pIndex == enumFacingWEST) return enumFacingWEST();
-		if (pIndex == biomeGenBaseOcean) return biomeGenBaseOcean();
-		if (pIndex == biomeGenBasePlains) return biomeGenBasePlains();
-		if (pIndex == biomeGenBaseDesert) return biomeGenBaseDesert();
-		if (pIndex == biomeGenBaseExtremeHills) return biomeGenBaseExtremeHills();
-		if (pIndex == biomeGenBaseForest) return biomeGenBaseForest();
-		if (pIndex == biomeGenBaseTaiga) return biomeGenBaseTaiga();
-		if (pIndex == biomeGenBaseRiver) return biomeGenBaseRiver();
-		if (pIndex == biomeGenBaseHell) return biomeGenBaseHell();
-		if (pIndex == biomeGenBaseSky) return biomeGenBaseSky();
-		if (pIndex == biomeGenBaseFrozenOcean) return biomeGenBaseFrozenOcean();
-		if (pIndex == biomeGenBaseFrozenRiver) return biomeGenBaseFrozenRiver();
-		if (pIndex == biomeGenBaseIcePlains) return biomeGenBaseIcePlains();
-		if (pIndex == biomeGenBaseIceMountains) return biomeGenBaseIceMountains();
-		if (pIndex == biomeGenBaseMushroomIsland) return biomeGenBaseMushroomIsland();
-		if (pIndex == biomeGenBaseMushroomIslandShore) return biomeGenBaseMushroomIslandShore();
-		if (pIndex == biomeGenBaseBeach) return biomeGenBaseBeach();
-		if (pIndex == biomeGenBaseDesertHills) return biomeGenBaseDesertHills();
-		if (pIndex == biomeGenBaseForestHills) return biomeGenBaseForestHills();
-		if (pIndex == biomeGenBaseTaigaHills) return biomeGenBaseTaigaHills();
-		if (pIndex == biomeGenBaseExtremeHillsEdge) return biomeGenBaseExtremeHillsEdge();
-		if (pIndex == biomeGenBaseJungle) return biomeGenBaseJungle();
-		if (pIndex == biomeGenBaseJungleHills) return biomeGenBaseJungleHills();
-		if (pIndex == biomeGenBaseJungleEdge) return biomeGenBaseJungleEdge();
-		if (pIndex == biomeGenBaseDeepOcean) return biomeGenBaseDeepOcean();
-		if (pIndex == biomeGenBaseStoneBeach) return biomeGenBaseStoneBeach();
-		if (pIndex == biomeGenBaseStoneColdBeach) return biomeGenBaseStoneColdBeach();
-		if (pIndex == biomeGenBaseBirchForest) return biomeGenBaseBirchForest();
-		if (pIndex == biomeGenBaseBirchForestHills) return biomeGenBaseBirchForestHills();
-		if (pIndex == biomeGenBaseRoofedForest) return biomeGenBaseRoofedForest();
-		if (pIndex == biomeGenBaseColdTaiga) return biomeGenBaseColdTaiga();
-		if (pIndex == biomeGenBaseColdTaigaHills) return biomeGenBaseColdTaigaHills();
-		if (pIndex == biomeGenBaseMegaTaiga) return biomeGenBaseMegaTaiga();
-		if (pIndex == biomeGenBaseMegaTaigaHills) return biomeGenBaseMegaTaigaHills();
-		if (pIndex == biomeGenBaseExtremeHillsPlus) return biomeGenBaseExtremeHillsPlus();
-		if (pIndex == biomeGenBaseSavanna) return biomeGenBaseSavanna();
-		if (pIndex == biomeGenBaseSavannaPlateau) return biomeGenBaseSavannaPlateau();
-		if (pIndex == biomeGenBaseMesa) return biomeGenBaseMesa();
-		if (pIndex == biomeGenBaseMesaPlateau_F) return biomeGenBaseMesaPlateau_F();
-		if (pIndex == biomeGenBaseMesaPlateau) return biomeGenBaseMesaPlateau();
+		if (pIndex == biomeOcean) return biomeOcean();
+		if (pIndex == biomePlains) return biomePlains();
+		if (pIndex == biomeDesert) return biomeDesert();
+		if (pIndex == biomeExtremeHills) return biomeExtremeHills();
+		if (pIndex == biomeForest) return biomeForest();
+		if (pIndex == biomeTaiga) return biomeTaiga();
+		if (pIndex == biomeRiver) return biomeRiver();
+		if (pIndex == biomeHell) return biomeHell();
+		if (pIndex == biomeSky) return biomeSky();
+		if (pIndex == biomeFrozenOcean) return biomeFrozenOcean();
+		if (pIndex == biomeFrozenRiver) return biomeFrozenRiver();
+		if (pIndex == biomeIcePlains) return biomeIcePlains();
+		if (pIndex == biomeIceMountains) return biomeIceMountains();
+		if (pIndex == biomeMushroomIsland) return biomeMushroomIsland();
+		if (pIndex == biomeMushroomIslandShore) return biomeMushroomIslandShore();
+		if (pIndex == biomeBeach) return biomeBeach();
+		if (pIndex == biomeDesertHills) return biomeDesertHills();
+		if (pIndex == biomeForestHills) return biomeForestHills();
+		if (pIndex == biomeTaigaHills) return biomeTaigaHills();
+		if (pIndex == biomeExtremeHillsEdge) return biomeExtremeHillsEdge();
+		if (pIndex == biomeJungle) return biomeJungle();
+		if (pIndex == biomeJungleHills) return biomeJungleHills();
+		if (pIndex == biomeJungleEdge) return biomeJungleEdge();
+		if (pIndex == biomeDeepOcean) return biomeDeepOcean();
+		if (pIndex == biomeStoneBeach) return biomeStoneBeach();
+		if (pIndex == biomeStoneColdBeach) return biomeStoneColdBeach();
+		if (pIndex == biomeBirchForest) return biomeBirchForest();
+		if (pIndex == biomeBirchForestHills) return biomeBirchForestHills();
+		if (pIndex == biomeRoofedForest) return biomeRoofedForest();
+		if (pIndex == biomeColdTaiga) return biomeColdTaiga();
+		if (pIndex == biomeColdTaigaHills) return biomeColdTaigaHills();
+		if (pIndex == biomeMegaTaiga) return biomeMegaTaiga();
+		if (pIndex == biomeMegaTaigaHills) return biomeMegaTaigaHills();
+		if (pIndex == biomeExtremeHillsPlus) return biomeExtremeHillsPlus();
+		if (pIndex == biomeSavanna) return biomeSavanna();
+		if (pIndex == biomeSavannaPlateau) return biomeSavannaPlateau();
+		if (pIndex == biomeMesa) return biomeMesa();
+		if (pIndex == biomeMesaPlateau_F) return biomeMesaPlateau_F();
+		if (pIndex == biomeMesaPlateau) return biomeMesaPlateau();
 		if (pIndex == creativeTabsTabBlock) return creativeTabsTabBlock();
 		if (pIndex == creativeTabsTabDecorations) return creativeTabsTabDecorations();
 		if (pIndex == creativeTabsTabRedstone) return creativeTabsTabRedstone();
@@ -1213,54 +1213,54 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return null;
 		}
-		if (pIndex == dataWatcherGetWatchedObject) {
+		if (pIndex == dataManagerGetWatchedObject) {
 			if (pArg != null
 			&& pArg.length > 0
 			&& pArg[0] != null) {
 				if (pArg.length > 1
 						&& pArg[1] != null) {
-					return dataWatcherGetWatchedObject(pArg[0], (Integer) pArg[1]);
+					return dataManagerGetWatchedObject(pArg[0], (Integer) pArg[1]);
 				} else {
-					return dataWatcherGetWatchedObject((Integer) pArg[0]);
+					return dataManagerGetWatchedObject((Integer) pArg[0]);
 				}
 			}
 			return null;
 		}
-		if (pIndex == dataWatcherGetWatchableObjectItemStack) {
+		if (pIndex == dataManagerGetWatchableObjectItemStack) {
 			if (pArg != null
 			&& pArg.length > 0
 			&& pArg[0] != null) {
 				if (pArg.length > 1
 						&& pArg[1] != null) {
-					return dataWatcherGetWatchableObjectItemStack(pArg[0], (Integer) pArg[1]);
+					return dataManagerGetWatchableObjectItemStack(pArg[0], (Integer) pArg[1]);
 				} else {
-					return dataWatcherGetWatchableObjectItemStack((Integer) pArg[0]);
+					return dataManagerGetWatchableObjectItemStack((Integer) pArg[0]);
 				}
 			}
 			return null;
 		}
-		if (pIndex == dataWatcherGetWatchableObjectString) {
+		if (pIndex == dataManagerGetWatchableObjectString) {
 			if (pArg != null
 			&& pArg.length > 0
 			&& pArg[0] != null) {
 				if (pArg.length > 1
 						&& pArg[1] != null) {
-					return dataWatcherGetWatchableObjectString(pArg[0], (Integer) pArg[1]);
+					return dataManagerGetWatchableObjectString(pArg[0], (Integer) pArg[1]);
 				} else {
-					return dataWatcherGetWatchableObjectString((Integer) pArg[0]);
+					return dataManagerGetWatchableObjectString((Integer) pArg[0]);
 				}
 			}
 			return null;
 		}
-		if (pIndex == dataWatcherGetWatchableObjectByte) {
+		if (pIndex == dataManagerGetWatchableObjectByte) {
 			if (pArg != null
 			&& pArg.length > 0
 			&& pArg[0] != null) {
 				if (pArg.length > 1
 						&& pArg[1] != null) {
-					return dataWatcherGetWatchableObjectByte(pArg[0], (Integer) pArg[1]);
+					return dataManagerGetWatchableObjectByte(pArg[0], (Integer) pArg[1]);
 				} else {
-					return dataWatcherGetWatchableObjectByte((Integer) pArg[0]);
+					return dataManagerGetWatchableObjectByte((Integer) pArg[0]);
 				}
 			}
 			return null;
@@ -2681,15 +2681,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return false;
 		}
-		if (pIndex == dataWatcherAddObject) {
+		if (pIndex == dataManagerAddObject) {
 			if (pArg != null
 			&& pArg.length > 1
 			&& pArg[0] != null) {
 				if (pArg.length > 2
 						&& pArg[1] != null) {
-					dataWatcherAddObject(pArg[0], pArg[1], pArg[2]);
+					dataManagerAddObject(pArg[0], pArg[1], pArg[2]);
 				} else {
-					dataWatcherAddObject((Integer) pArg[0], pArg[1]);
+					dataManagerAddObject((Integer) pArg[0], pArg[1]);
 				}
 				return true;
 			}
@@ -4739,16 +4739,16 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return false;
 		}
-		if (pIndex == dataWatcherUpdateObject) {
+		if (pIndex == dataManagerUpdateObject) {
 			if (pArg != null
 			&& pArg.length > 1
 			&& pArg[0] != null
 			&& pArg[1] != null) {
 				if (pArg.length > 2
 						&& pArg[2] != null) {
-					dataWatcherUpdateObject(pArg[0], (Integer) pArg[1], pArg[2]);
+					dataManagerUpdateObject(pArg[0], (Integer) pArg[1], pArg[2]);
 				} else {
-					dataWatcherUpdateObject((Integer) pArg[0], pArg[1]);
+					dataManagerUpdateObject((Integer) pArg[0], pArg[1]);
 				}
 				return true;
 			}
@@ -7496,8 +7496,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return entityGetDataWatcher(minecraftThePlayer());
 	}
 
-	protected Object entityGetDataWatcher(Object dataWatcherOrEntity) {
-		return Modchu_Reflect.loadClass("DataWatcher").isInstance(dataWatcherOrEntity) ? dataWatcherOrEntity : Modchu_Reflect.invokeMethod("Entity", "func_70096_w", "getDataWatcher", dataWatcherOrEntity);
+	protected Object entityGetDataWatcher(Object dataManagerOrEntity) {
+		return Modchu_Reflect.loadClass("DataWatcher").isInstance(dataManagerOrEntity) ? dataManagerOrEntity : Modchu_Reflect.invokeMethod("Entity", "func_70096_w", "getDataWatcher", dataManagerOrEntity);
 	}
 
 	protected void entitySetCustomNameTag(String s) {
@@ -7508,56 +7508,56 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		Modchu_Reflect.invokeMethod("Entity", "func_94058_c", "setCustomNameTag", new Class[]{ String.class }, entity, new Object[]{ s });
 	}
 
-	protected Object dataWatcherGetWatchedObject(int i) {
-		return dataWatcherGetWatchedObject(minecraftThePlayer(), i);
+	protected Object dataManagerGetWatchedObject(int i) {
+		return dataManagerGetWatchedObject(minecraftThePlayer(), i);
 	}
 
-	protected Object dataWatcherGetWatchedObject(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		Object dataWatcher = entityGetDataWatcher(dataWatcherOrEntity);
-		Object o = Modchu_Reflect.invokeMethod("DataWatcher", "func_75691_i", "getWatchedObject", new Class[]{ int.class }, dataWatcher, new Object[]{ dataParameterOrInt });
+	protected Object dataManagerGetWatchedObject(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		Object dataManager = entityGetDataWatcher(dataManagerOrEntity);
+		Object o = Modchu_Reflect.invokeMethod("DataWatcher", "func_75691_i", "getWatchedObject", new Class[]{ int.class }, dataManager, new Object[]{ dataParameterOrInt });
 		return o != null ? Modchu_Reflect.invokeMethod(o.getClass(), "func_75669_b", "getObject", o) : null;
 	}
 
-	protected void dataWatcherAddObject(int i, Object o) {
-		dataWatcherAddObject(minecraftThePlayer(), i, o);
+	protected void dataManagerAddObject(int i, Object o) {
+		dataManagerAddObject(minecraftThePlayer(), i, o);
 	}
 
-	protected void dataWatcherAddObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
+	protected void dataManagerAddObject(Object dataManagerOrEntity, Object dataParameterOrInt, Object o) {
 		int version = Modchu_Main.getMinecraftVersion();
-		if (version < 190) Modchu_Reflect.invokeMethod("DataWatcher", "func_75682_a", "addObject", new Class[]{ int.class, Object.class }, entityGetDataWatcher(dataWatcherOrEntity), new Object[]{ dataParameterOrInt, o });
+		if (version < 190) Modchu_Reflect.invokeMethod("DataWatcher", "func_75682_a", "addObject", new Class[]{ int.class, Object.class }, entityGetDataWatcher(dataManagerOrEntity), new Object[]{ dataParameterOrInt, o });
 	}
 
-	protected Object dataWatcherGetWatchableObjectItemStack(Object dataParameterOrInt) {
-		return dataWatcherGetWatchableObjectItemStack(minecraftThePlayer(), dataParameterOrInt);
+	protected Object dataManagerGetWatchableObjectItemStack(Object dataParameterOrInt) {
+		return dataManagerGetWatchableObjectItemStack(minecraftThePlayer(), dataParameterOrInt);
 	}
 
-	protected Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return Modchu_Reflect.invokeMethod("DataWatcher", "func_82710_f", "getWatchableObjectItemStack", new Class[]{ int.class }, entityGetDataWatcher(dataWatcherOrEntity), new Object[]{ dataParameterOrInt });
+	protected Object dataManagerGetWatchableObjectItemStack(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return Modchu_Reflect.invokeMethod("DataWatcher", "func_82710_f", "getWatchableObjectItemStack", new Class[]{ int.class }, entityGetDataWatcher(dataManagerOrEntity), new Object[]{ dataParameterOrInt });
 	}
 
-	protected String dataWatcherGetWatchableObjectString(Object dataParameterOrInt) {
-		return dataWatcherGetWatchableObjectString(minecraftThePlayer(), dataParameterOrInt);
+	protected String dataManagerGetWatchableObjectString(Object dataParameterOrInt) {
+		return dataManagerGetWatchableObjectString(minecraftThePlayer(), dataParameterOrInt);
 	}
 
-	protected String dataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return Modchu_CastHelper.String(dataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt));
+	protected String dataManagerGetWatchableObjectString(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return Modchu_CastHelper.String(dataManagerGetWatchedObject(dataManagerOrEntity, dataParameterOrInt));
 	}
 
-	protected byte dataWatcherGetWatchableObjectByte(Object dataParameterOrInt) {
-		return dataWatcherGetWatchableObjectByte(minecraftThePlayer(), dataParameterOrInt);
+	protected byte dataManagerGetWatchableObjectByte(Object dataParameterOrInt) {
+		return dataManagerGetWatchableObjectByte(minecraftThePlayer(), dataParameterOrInt);
 	}
 
-	protected byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return Modchu_CastHelper.Byte(dataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt));
+	protected byte dataManagerGetWatchableObjectByte(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return Modchu_CastHelper.Byte(dataManagerGetWatchedObject(dataManagerOrEntity, dataParameterOrInt));
 	}
 
-	protected void dataWatcherUpdateObject(Object dataParameterOrInt, Object o) {
-		dataWatcherUpdateObject(minecraftThePlayer(), dataParameterOrInt, o);
+	protected void dataManagerUpdateObject(Object dataParameterOrInt, Object o) {
+		dataManagerUpdateObject(minecraftThePlayer(), dataParameterOrInt, o);
 	}
 
-	protected void dataWatcherUpdateObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
-		if (dataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt) != null) Modchu_Reflect.invokeMethod("DataWatcher", "func_75692_b", "updateObject", new Class[]{ int.class, Object.class }, entityGetDataWatcher(dataWatcherOrEntity), new Object[]{ dataParameterOrInt, o });
-		else dataWatcherAddObject(dataWatcherOrEntity, dataParameterOrInt, o);
+	protected void dataManagerUpdateObject(Object dataManagerOrEntity, Object dataParameterOrInt, Object o) {
+		if (dataManagerGetWatchedObject(dataManagerOrEntity, dataParameterOrInt) != null) Modchu_Reflect.invokeMethod("DataWatcher", "func_75692_b", "updateObject", new Class[]{ int.class, Object.class }, entityGetDataWatcher(dataManagerOrEntity), new Object[]{ dataParameterOrInt, o });
+		else dataManagerAddObject(dataManagerOrEntity, dataParameterOrInt, o);
 	}
 
 	protected void entityAITasksAddTask(Object entityAITasks, int i, Object entityAIBase) {
@@ -7686,7 +7686,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Map entityListClassToIDMapping() {
-		return Modchu_CastHelper.Map(Modchu_Reflect.getFieldObject("EntityList", "field_75624_e", "classToIDMapping"));
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Map(Modchu_Reflect.getFieldObject("EntityList", "field_75624_e", version > 190 ? "CLASS_TO_ID" : "classToIDMapping"));
 	}
 
 	protected String entityListGetEntityString(Object entity) {
@@ -7842,7 +7843,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLastDamage(Object entityLivingBase) {
-		return Modchu_CastHelper.Float(Modchu_Reflect.getFieldObject("EntityLivingBase", "field_110153_bc", "lastDamage", entityLivingBase));
+		return Modchu_CastHelper.Float(Modchu_Reflect.getFieldObject("EntityLivingBase", "field_110153_bc", "lastDamage", entityLivingBase), 0.0F, false);
 	}
 
 	protected int entityLivingBaseRecentlyHit() {
@@ -7976,7 +7977,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingBaseDamageEntity(Object entity, Object damageSource, float f) {
-		Modchu_Reflect.invokeMethod("EntityLivingBase", "func_70665_d", "damageEntity", new Class[]{ Modchu_Reflect.loadClass("DamageSource"), float.class }, entity, new Object[]{ damageSource, f });
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 159) {
+			Modchu_Reflect.invokeMethod("EntityLivingBase", "func_70665_d", "damageEntity", new Class[]{ Modchu_Reflect.loadClass("DamageSource"), float.class }, entity, new Object[]{ damageSource, f });
+		} else {
+			Modchu_Reflect.invokeMethod("EntityLiving", "func_70665_d", "damageEntity", new Class[]{ Modchu_Reflect.loadClass("DamageSource"), int.class }, entity, new Object[]{ damageSource, (int) f });
+		}
 	}
 
 	protected void entityLivingBaseHeal(float f) {
@@ -9178,163 +9184,163 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Boolean(Modchu_Reflect.getFieldObject("GameSettings", "anaglyph", gameSettings));
 	}
 
-	protected Object biomeGenBaseOcean() {
+	protected Object biomeOcean() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "ocean");
 	}
 
-	protected Object biomeGenBasePlains() {
+	protected Object biomePlains() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "plains");
 	}
 
-	protected Object biomeGenBaseDesert() {
+	protected Object biomeDesert() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "desert");
 	}
 
-	protected Object biomeGenBaseExtremeHills() {
+	protected Object biomeExtremeHills() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "extremeHills");
 	}
 
-	protected Object biomeGenBaseForest() {
+	protected Object biomeForest() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "forest");
 	}
 
-	protected Object biomeGenBaseTaiga() {
+	protected Object biomeTaiga() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "taiga");
 	}
 
-	protected Object biomeGenBaseSwampland() {
+	protected Object biomeSwampland() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "swampland");
 	}
 
-	protected Object biomeGenBaseRiver() {
+	protected Object biomeRiver() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "river");
 	}
 
-	protected Object biomeGenBaseHell() {
+	protected Object biomeHell() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "hell");
 	}
 
-	protected Object biomeGenBaseSky() {
+	protected Object biomeSky() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "sky");
 	}
 
-	protected Object biomeGenBaseFrozenOcean() {
+	protected Object biomeFrozenOcean() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "frozenOcean");
 	}
 
-	protected Object biomeGenBaseFrozenRiver() {
+	protected Object biomeFrozenRiver() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "frozenRiver");
 	}
 
-	protected Object biomeGenBaseIcePlains() {
+	protected Object biomeIcePlains() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "icePlains");
 	}
 
-	protected Object biomeGenBaseIceMountains() {
+	protected Object biomeIceMountains() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "iceMountains");
 	}
 
-	protected Object biomeGenBaseMushroomIsland() {
+	protected Object biomeMushroomIsland() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "mushroomIsland");
 	}
 
-	protected Object biomeGenBaseMushroomIslandShore() {
+	protected Object biomeMushroomIslandShore() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "mushroomIslandShore");
 	}
 
-	protected Object biomeGenBaseBeach() {
+	protected Object biomeBeach() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "beach");
 	}
 
-	protected Object biomeGenBaseDesertHills() {
+	protected Object biomeDesertHills() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "desertHills");
 	}
 
-	protected Object biomeGenBaseForestHills() {
+	protected Object biomeForestHills() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "forestHills");
 	}
 
-	protected Object biomeGenBaseTaigaHills() {
+	protected Object biomeTaigaHills() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "taigaHills");
 	}
 
-	protected Object biomeGenBaseExtremeHillsEdge() {
+	protected Object biomeExtremeHillsEdge() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "extremeHillsEdge");
 	}
 
-	protected Object biomeGenBaseJungle() {
+	protected Object biomeJungle() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "jungle");
 	}
 
-	protected Object biomeGenBaseJungleHills() {
+	protected Object biomeJungleHills() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "jungleHills");
 	}
 
-	protected Object biomeGenBaseJungleEdge() {
+	protected Object biomeJungleEdge() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "jungleEdge");
 	}
 
-	protected Object biomeGenBaseDeepOcean() {
+	protected Object biomeDeepOcean() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "deepOcean");
 	}
 
-	protected Object biomeGenBaseStoneBeach() {
+	protected Object biomeStoneBeach() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "stoneBeach");
 	}
 
-	protected Object biomeGenBaseStoneColdBeach() {
+	protected Object biomeStoneColdBeach() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "coldBeach");
 	}
 
-	protected Object biomeGenBaseBirchForest() {
+	protected Object biomeBirchForest() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "birchForest");
 	}
 
-	protected Object biomeGenBaseBirchForestHills() {
+	protected Object biomeBirchForestHills() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "birchForestHills");
 	}
 
-	protected Object biomeGenBaseRoofedForest() {
+	protected Object biomeRoofedForest() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "roofedForest");
 	}
 
-	protected Object biomeGenBaseColdTaiga() {
+	protected Object biomeColdTaiga() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "coldTaiga");
 	}
 
-	protected Object biomeGenBaseColdTaigaHills() {
+	protected Object biomeColdTaigaHills() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "coldTaigaHills");
 	}
 
-	protected Object biomeGenBaseMegaTaiga() {
+	protected Object biomeMegaTaiga() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "megaTaiga");
 	}
 
-	protected Object biomeGenBaseMegaTaigaHills() {
+	protected Object biomeMegaTaigaHills() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "megaTaigaHills");
 	}
 
-	protected Object biomeGenBaseExtremeHillsPlus() {
+	protected Object biomeExtremeHillsPlus() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "extremeHillsPlus");
 	}
 
-	protected Object biomeGenBaseSavanna() {
+	protected Object biomeSavanna() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "savanna");
 	}
 
-	protected Object biomeGenBaseSavannaPlateau() {
+	protected Object biomeSavannaPlateau() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "savannaPlateau");
 	}
 
-	protected Object biomeGenBaseMesa() {
+	protected Object biomeMesa() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "mesa");
 	}
 
-	protected Object biomeGenBaseMesaPlateau_F() {
+	protected Object biomeMesaPlateau_F() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "mesaPlateau_F");
 	}
 
-	protected Object biomeGenBaseMesaPlateau() {
+	protected Object biomeMesaPlateau() {
 		return Modchu_Reflect.getFieldObject("BiomeGenBase", "mesaPlateau");
 	}
 
@@ -10110,13 +10116,13 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod(blockDoublePlant.getClass(), "func_149720_d", "colorMultiplier", new Class[]{ Modchu_Reflect.loadClass("net.minecraft.world.IBlockAccess"), int.class, int.class, int.class }, blockDoublePlant, new Object[]{ world, x, y, z }));
 	}
 
-	protected int biomeGenBaseGetBiomeGrassColor(Object biomeGenBase) {
-		return biomeGenBaseGetBiomeGrassColor(biomeGenBase, 0, 0, 0);
+	protected int biomeGetBiomeGrassColor(Object biome) {
+		return biomeGetBiomeGrassColor(biome, 0, 0, 0);
 	}
 
-	protected int biomeGenBaseGetBiomeGrassColor(Object biomeGenBase, int x, int y, int z) {
-		return Modchu_Main.getMinecraftVersion() > 169 ? Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod(biomeGenBase.getClass(), "func_76737_k", "getBiomeGrassColor", new Class[]{ int.class, int.class, int.class }, biomeGenBase, new Object[]{ x, y, z })) :
-			Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod(biomeGenBase.getClass(), "func_76737_k", "getBiomeGrassColor", biomeGenBase));
+	protected int biomeGetBiomeGrassColor(Object biome, int x, int y, int z) {
+		return Modchu_Main.getMinecraftVersion() > 169 ? Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod(biome.getClass(), "func_76737_k", "getBiomeGrassColor", new Class[]{ int.class, int.class, int.class }, biome, new Object[]{ x, y, z })) :
+			Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod(biome.getClass(), "func_76737_k", "getBiomeGrassColor", biome));
 	}
 
 	protected boolean blockDoublePlantFunc_149887_c(int i) {
@@ -10160,7 +10166,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected List keybindArray() {
-		return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("KeyBinding", "field_74516_a", "keybindArray"));
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("KeyBinding", "field_74516_a", version > 190 ? "KEYBIND_ARRAY" : "keybindArray"));
 	}
 
 	protected boolean entityRendererAnaglyphEnable() {
@@ -11359,7 +11366,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object rendererLivingEntityRES_ITEM_GLINT(Object render) {
-		return Modchu_Reflect.getFieldObject("RendererLivingEntity", "field_110814_a", "RES_ITEM_GLINT", render);
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_Reflect.getFieldObject(version > 189 ? "RenderLivingBase" : version > 159 ? "RendererLivingEntity" : "RenderLiving", "field_110814_a", "RES_ITEM_GLINT", render);
 	}
 
 	protected void rendererLivingEntityPassSpecialRender(Object rendererLivingEntity, double d, double d1, double d2) {
@@ -11367,11 +11375,13 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void rendererLivingEntityPassSpecialRender(Object rendererLivingEntity, Object entity, double d, double d1, double d2) {
-		Modchu_Reflect.invokeMethod("RendererLivingEntity", "func_77033_b", "passSpecialRender", new Class[]{ Modchu_Reflect.loadClass("EntityLivingBase"), double.class, double.class, double.class }, rendererLivingEntity, new Object[]{ entity, d, d1, d2 });
+		int version = Modchu_Main.getMinecraftVersion();
+		Modchu_Reflect.invokeMethod(version > 189 ? "RenderLivingBase" : version > 159 ? "RendererLivingEntity" : "RenderLiving", "func_77033_b", "passSpecialRender", new Class[]{ Modchu_Reflect.loadClass("EntityLivingBase"), double.class, double.class, double.class }, rendererLivingEntity, new Object[]{ entity, d, d1, d2 });
 	}
 
 	protected void rendererLivingEntitySetRenderPassModel(Object rendererLivingEntity, Object modelBase) {
-		Modchu_Reflect.invokeMethod("RendererLivingEntity", "func_77042_a", "setRenderPassModel", new Class[]{ Modchu_Reflect.loadClass("ModelBase") }, rendererLivingEntity, new Object[]{ modelBase });
+		int version = Modchu_Main.getMinecraftVersion();
+		Modchu_Reflect.invokeMethod(version > 189 ? "RenderLivingBase" : version > 159 ? "RendererLivingEntity" : "RenderLiving", "func_77042_a", "setRenderPassModel", new Class[]{ Modchu_Reflect.loadClass("ModelBase") }, rendererLivingEntity, new Object[]{ modelBase });
 	}
 
 	protected void renderFirstPersonArm(Object render, Object entityplayer) {
@@ -11399,7 +11409,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object renderMainModel(Object render) {
-		return Modchu_Reflect.getFieldObject("RendererLivingEntity", "field_77045_g",  "mainModel", render);
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_Reflect.getFieldObject(version > 189 ? "RenderLivingBase" : version > 159 ? "RendererLivingEntity" : "RenderLiving", "field_77045_g",  "mainModel", render);
 	}
 
 	protected void renderLivingFunc_110827_b(Object renderLiving, Object entityLiving, double d, double d2, double d3, float f, float f1) {

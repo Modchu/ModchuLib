@@ -6,7 +6,7 @@ import java.util.Random;
 
 public interface Modchu_IBlock {
 	public void superInitializeBlock();
-	public Object superSetStepSound(Object stepSound);
+	public Object superSetSoundType(Object stepSound);
 	public Object superSetLightOpacity(int par1);
 	public Object superSetLightLevel(float par1);
 	public Object superSetResistance(float par1);
@@ -34,7 +34,7 @@ public interface Modchu_IBlock {
 	public void superUpdateTick(Object world, int par2, int par3, int par4, Random par5Random);
 	public void superRandomDisplayTick(Object world, int par2, int par3, int par4, Random par5Random);
 	public void superOnBlockDestroyedByPlayer(Object world, int par2, int par3, int par4, int par5);
-	public void superOnNeighborBlockChange(Object world, int par2, int par3, int par4, Object par5);
+	public void superNeighborChanged(Object world, int par2, int par3, int par4, Object par5);
 	public int superTickRate(Object world);
 	public void superOnBlockAdded(Object world, int par2, int par3, int par4);
 	public void superBreakBlock(Object world, int par2, int par3, int par4, Object par5, int par6);
@@ -63,7 +63,7 @@ public interface Modchu_IBlock {
 	public int superGetWeakPower(Object iBlockAccess, int par2, int par3, int par4, int par5);
 	public int superColorMultiplier(Object iBlockAccess, int par2, int par3, int par4);
 	public boolean superCanProvidePower();
-	public void superOnEntityCollidedWithBlock(Object world, int par2, int par3, int par4, Object entity);
+	public void superOnEntityWalk(Object world, int par2, int par3, int par4, Object entity);
 	public int superGetStrongPower(Object iBlockAccess, int par2, int par3, int par4, int par5);
 	public void superSetBlockBoundsForItemRender();
 	public void superHarvestBlock(Object world, Object entityPlayer, int par3, int par4, int par5, int par6);
@@ -76,7 +76,7 @@ public interface Modchu_IBlock {
 	public Object superSetUnlocalizedName(String par1Str);
 	public String superGetLocalizedName();
 	public String superGetUnlocalizedName();
-	public boolean superOnBlockEventReceived(Object world, int par2, int par3, int par4, int par5, int par6);
+	public boolean superEventReceived(Object world, int par2, int par3, int par4, int par5, int par6);
 	public boolean superGetEnableStats();
 	public Object superDisableStats();
 	public int superGetMobilityFlag();
@@ -178,7 +178,7 @@ public interface Modchu_IBlock {
 	public void superOnBlockAdded(Object world, Object blockPos, Object iBlockState);
 	public float superGetPlayerRelativeBlockHardness(Object entityPlayer, Object world, Object blockPos);
 	public void superDropBlockAsItemWithChance(Object world, Object blockPos, Object iBlockState, float par6, int par7);
-	public void superOnEntityCollidedWithBlock(Object world, Object blockPos, Object entity);
+	public void superOnEntityWalk(Object world, Object blockPos, Object entity);
 	public boolean superIsFullBlock();
 	public int superGetLightOpacity();
 	public boolean superIsTranslucent();
@@ -194,7 +194,7 @@ public interface Modchu_IBlock {
 	public boolean superIsReplaceable(Object world, Object blockPos);
 	public Object superGetSelectedBoundingBox(Object world, Object blockPos);
 	public void superRandomTick(Object world, Object blockPos, Object iBlockState, Random random);
-	public void superOnNeighborBlockChange(Object world, Object blockPos, Object iBlockState, Object block);
+	public void superNeighborChanged(Object iBlockState, Object world, Object blockPos, Object block);
 	public void superBreakBlock(Object world, Object blockPos, Object iBlockState);
 	public Object superGetItemDropped(Object iBlockState, Random rand, int fortune);
 	public void superDropXpOnBlockBreak(Object world, Object blockPos, int amount);
@@ -213,12 +213,12 @@ public interface Modchu_IBlock {
 	public int superGetRenderColor(Object iBlockState);
 	public int superColorMultiplier(Object iBlockAccess, Object blockPos, int renderPass);
 	public int superGetWeakPower(Object iBlockAccess, Object blockPos, Object iBlockState, Object enumFacing);
-	public void superOnEntityCollidedWithBlock(Object world, Object blockPos, Object iBlockState, Object entity);
+	public void superOnEntityWalk(Object world, Object blockPos, Object iBlockState, Object entity);
 	public int superGetStrongPower(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing);
 	public void superHarvestBlock(Object world, Object entityPlayer, Object blockPos, Object iBlockState, Object tileEntity);
 	public Object superCreateStackedBlock(Object iBlockState);
 	public void superOnBlockPlacedBy(Object world, Object blockPos, Object iBlockState, Object entityLivingBase, Object itemStack);
-	public boolean superOnBlockEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam);
+	public boolean superEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam);
 	public void superOnFallenUpon(Object world, Object blockPos, Object entity, float fallDistance);
 	public void superOnLanded(Object world, Object entity);
 	public Object superGetItem(Object world, Object blockPos);
@@ -349,11 +349,13 @@ public interface Modchu_IBlock {
 	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity);
 	public Object superRayTrace(Object blockPos, Object vec3d, Object vec3d1, Object axisAlignedBB);
 	public boolean superCanSpawnInBlock();
-	public Object superGetStepSound();
+	public Object superGetSoundType();
 	public String superToString();
 	public boolean superDoesSideBlockRendering(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing);
 	public boolean superAddLandingEffects(Object iBlockState, Object worldServer, Object blockPos, Object iBlockState1, Object entityLivingBase, int numberOfParticles);
 	public Object superIsEntityInsideMaterial(Object iBlockAccess, Object blockPos, Object iBlockState, Object entity, double yToTest, Object material, boolean testingHead);
 	public Object superIsAABBInsideMaterial(Object world, Object blockPos, Object axisAlignedBB, Object material);
+	public void superEventReceived(Object world, int par2, int par3, int par4, Object par5);
+	public boolean superNeighborChanged(Object world, int par2, int par3, int par4, int par5, int par6);
 
 }

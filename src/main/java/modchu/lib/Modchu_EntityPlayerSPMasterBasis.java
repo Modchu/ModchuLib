@@ -162,8 +162,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public Object dropOneItem(boolean par1) {
-		return base.superDropOneItem(par1);
+	public Object dropItem(boolean par1) {
+		return base.superDropItem(par1);
 	}
 
 	@Override
@@ -527,8 +527,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public Object dropPlayerItemWithRandomChoice(Object itemStack, boolean par2) {
-		return base.superDropPlayerItemWithRandomChoice(itemStack, par2);
+	public Object dropItem(Object itemStack, boolean par2) {
+		return base.superDropItem(itemStack, par2);
 	}
 
 	@Override
@@ -1167,13 +1167,13 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
-		base.superSetPositionAndRotation2(par1, par3, par5, par7, par8, par9);
+	public void setPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9) {
+		base.superSetPositionAndRotationDirect(par1, par3, par5, par7, par8, par9);
 	}
 
 	@Override
-	public void updateAITick() {
-		base.superUpdateAITick();
+	public void handleJumpWater() {
+		base.superHandleJumpWater();
 	}
 
 	@Override
@@ -1347,8 +1347,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void moveFlying(float par1, float par2, float par3) {
-		base.superMoveFlying(par1, par2, par3);
+	public void moveRelative(float par1, float par2, float par3) {
+		base.superMoveRelative(par1, par2, par3);
 	}
 
 	@Override
@@ -1432,8 +1432,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void writeToNBT(Object nBTTagCompound) {
-		base.superWriteToNBT(nBTTagCompound);
+	public Object writeToNBT(Object nBTTagCompound) {
+		return base.superWriteToNBT(nBTTagCompound);
 	}
 
 	@Override
@@ -1587,8 +1587,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public boolean canAttackWithItem() {
-		return base.superCanAttackWithItem();
+	public boolean canBeAttackedWithItem() {
+		return base.superCanBeAttackedWithItem();
 	}
 
 	@Override
@@ -1977,8 +1977,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public float getBreakSpeed(Object iBlockState, Object blockPos) {
-		return base.superGetBreakSpeed(iBlockState, blockPos);
+	public float getDigSpeed(Object iBlockState, Object blockPos) {
+		return base.superGetDigSpeed(iBlockState, blockPos);
 	}
 
 	@Override
@@ -2112,8 +2112,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void setPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
-		base.superSetPositionAndRotation2(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
+	public void setPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+		base.superSetPositionAndRotationDirect(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
 	}
 
 	@Override
@@ -2622,8 +2622,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public boolean teleportTo_(double x, double y, double z) {
-		return base.superTeleportTo_(x, y, z);
+	public boolean attemptTeleport(double x, double y, double z) {
+		return base.superAttemptTeleport(x, y, z);
 	}
 
 	@Override
@@ -2832,13 +2832,13 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void setBossVisibleTo(Object entityPlayerMP) {
-		base.superSetBossVisibleTo(entityPlayerMP);
+	public void addTrackingPlayer(Object entityPlayerMP) {
+		base.superAddTrackingPlayer(entityPlayerMP);
 	}
 
 	@Override
-	public void setBossNonVisibleTo(Object entityPlayerMP) {
-		base.superSetBossNonVisibleTo(entityPlayerMP);
+	public void removeTrackingPlayer(Object entityPlayerMP) {
+		base.superRemoveTrackingPlayer(entityPlayerMP);
 	}
 
 	@Override
@@ -3052,8 +3052,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public boolean func_184213_bq() {
-		return base.superFunc_184213_bq();
+	public boolean ignoreItemEntityData() {
+		return base.superIgnoreItemEntityData();
 	}
 
 	@Override
@@ -3229,6 +3229,16 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	@Override
 	public boolean interact(Object entityPlayer) {
 		return base.superInteract(entityPlayer);
+	}
+
+	@Override
+	public String getCachedUniqueIdString() {
+		return base.superGetCachedUniqueIdString();
+	}
+
+	@Override
+	public String thisToString() {
+		return getClass().getName() + "@" + Integer.toHexString(super.hashCode());
 	}
 
 }

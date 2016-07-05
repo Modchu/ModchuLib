@@ -5,21 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import modchu.lib.Modchu_IBlock;
 import modchu.lib.Modchu_IBlockContainer;
 import modchu.lib.Modchu_IBlockContainerMaster;
-import modchu.lib.Modchu_IBlockMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.BlockContainer;
-import net.minecraft.src.ChunkCoordinates;
 import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.EffectRenderer;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityLivingBase;
 import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.EnumCreatureType;
 import net.minecraft.src.Explosion;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Icon;
@@ -468,7 +463,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public void onEntityWalking(World world, int par2, int par3, int par4, Entity entity) {
-		if (master != null) master.onEntityCollidedWithBlock(world, par2, par3, par4, entity);
+		if (master != null) master.onEntityWalk(world, par2, par3, par4, entity);
 		else super.onEntityWalking(world, par2, par3, par4, entity);
 	}
 
@@ -567,12 +562,12 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, int par2, int par3, int par4, Entity entity) {
-		if (master != null) master.onEntityCollidedWithBlock(world, par2, par3, par4, entity);
+		if (master != null) master.onEntityWalk(world, par2, par3, par4, entity);
 		else super.onEntityCollidedWithBlock(world, par2, par3, par4, entity);
 	}
 
 	@Override
-	public void superOnEntityCollidedWithBlock(Object world, int par2, int par3, int par4, Object entity) {
+	public void superOnEntityWalk(Object world, int par2, int par3, int par4, Object entity) {
 		super.onEntityCollidedWithBlock((World) world, par2, par3, par4, (Entity) entity);
 	}
 
@@ -692,11 +687,11 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public boolean onBlockEventReceived(World world, int par2, int par3, int par4, int par5, int par6) {
-		return master != null ? master.onBlockEventReceived(world, par2, par3, par4, par5, par6) : super.onBlockEventReceived(world, par2, par3, par4, par5, par6);
+		return master != null ? master.eventReceived(world, par2, par3, par4, par5, par6) : super.onBlockEventReceived(world, par2, par3, par4, par5, par6);
 	}
 
 	@Override
-	public boolean superOnBlockEventReceived(Object world, int par2, int par3, int par4, int par5, int par6) {
+	public boolean superEventReceived(Object world, int par2, int par3, int par4, int par5, int par6) {
 		return super.onBlockEventReceived((World) world, par2, par3, par4, par5, par6);
 	}
 
@@ -866,11 +861,11 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public Block setStepSound(StepSound stepSound) {
-		return (Block) (master != null ? master.setStepSound(stepSound) : super.setStepSound(stepSound));
+		return (Block) (master != null ? master.setSoundType(stepSound) : super.setStepSound(stepSound));
 	}
 
 	@Override
-	public Block superSetStepSound(Object stepSound) {
+	public Block superSetSoundType(Object stepSound) {
 		return super.setStepSound((StepSound) stepSound);
 	}
 
@@ -927,12 +922,12 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public void onNeighborBlockChange(World world, int par2, int par3, int par4, int par5) {
-		if (master != null) master.onNeighborBlockChange(world, par2, par3, par4, par5);
+		if (master != null) master.neighborChanged(world, par2, par3, par4, par5);
 		else super.onNeighborBlockChange(world, par2, par3, par4, par5);
 	}
 
 	@Override
-	public void superOnNeighborBlockChange(Object world, int par2, int par3, int par4, Object par5) {
+	public void superNeighborChanged(Object world, int par2, int par3, int par4, Object par5) {
 		super.onNeighborBlockChange((World) world, par2, par3, par4, (Integer) par5);
 	}
 
@@ -1153,7 +1148,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public void superOnEntityCollidedWithBlock(Object world, Object blockPos, Object entity) {
+	public void superOnEntityWalk(Object world, Object blockPos, Object entity) {
 	}
 
 	@Override
@@ -1226,7 +1221,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public void superOnNeighborBlockChange(Object world, Object blockPos, Object iBlockState, Object block) {
+	public void superNeighborChanged(Object world, Object blockPos, Object iBlockState, Object block) {
 	}
 
 	@Override
@@ -1315,7 +1310,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public void superOnEntityCollidedWithBlock(Object world, Object blockPos, Object iBlockState, Object entity) {
+	public void superOnEntityWalk(Object world, Object blockPos, Object iBlockState, Object entity) {
 	}
 
 	@Override
@@ -1337,7 +1332,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public boolean superOnBlockEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
+	public boolean superEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
 		return false;
 	}
 
@@ -1679,473 +1674,602 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 		return false;
 	}
 	// forge
+	@Override
 	public int superGetLightValue(Object iBlockAccess, int x, int y, int z) {
 		return -1;
 	}
 
+	@Override
 	public boolean superIsLadder(Object world, int x, int y, int z, Object entityLivingBase) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsNormalCube(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsSideSolid(Object world, int x, int y, int z, Object forgeDirection) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsReplaceable(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsBurning(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsAir(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanHarvestBlock(Object entityPlayer, int meta) {
 		return false;
 	}
 
+	@Override
 	public boolean superRemovedByPlayer(Object world, Object entityPlayer, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public void superAddCreativeItems(ArrayList itemList) {
 	}
 
+	@Override
 	public int superGetFlammability(Object iBlockAccess, int x, int y, int z, int metadata, Object forgeDirection) {
 		return -1;
 	}
 
+	@Override
 	public boolean superIsFlammable(Object iBlockAccess, int x, int y, int z, int metadata, Object forgeDirection) {
 		return false;
 	}
 
+	@Override
 	public int superGetFireSpreadSpeed(Object world, int x, int y, int z, int metadata, Object forgeDirection) {
 		return -1;
 	}
 
+	@Override
 	public boolean superIsFireSource(Object world, int x, int y, int z, int metadata, Object forgeDirection) {
 		return false;
 	}
 
+	@Override
 	public boolean superHasTileEntity(int metadata) {
 		return false;
 	}
 
+	@Override
 	public Object superCreateTileEntity(Object world, int metadata) {
 		return null;
 	}
 
+	@Override
 	public int superQuantityDropped(int meta, int fortune, Random random) {
 		return -1;
 	}
 
+	@Override
 	public Object superGetDrops(Object world, int x, int y, int z, int metadata, int fortune) {
 		return null;
 	}
 
+	@Override
 	public boolean superCanSilkHarvest(Object world, Object entityPlayer, int x, int y, int z, int metadata) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanCreatureSpawn(Object enumCreatureType, Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsBed(Object world, int x, int y, int z, Object entityLivingBase) {
 		return false;
 	}
 
+	@Override
 	public Object superGetBedSpawnPosition(Object world, int x, int y, int z, Object entityPlayer) {
 		return null;
 	}
 
+	@Override
 	public void superSetBedOccupied(Object world, int x, int y, int z, Object entityPlayer, boolean occupied) {
 	}
 
+	@Override
 	public int superGetBedDirection(Object iBlockAccess, int x, int y, int z) {
 		return -1;
 	}
 
+	@Override
 	public boolean superIsBedFoot(Object iBlockAccess, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public void superBeginLeavesDecay(Object world, int x, int y, int z) {
 	}
 
+	@Override
 	public boolean superCanSustainLeaves(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsLeaves(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanBeReplacedByLeaves(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsWood(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsReplaceableOreGen(Object world, int x, int y, int z, Object target) {
 		return false;
 	}
 
+	@Override
 	public float superGetExplosionResistance(Object entity, Object world, int x, int y, int z, double explosionX, double explosionY, double explosionZ) {
 		return 0.0F;
 	}
 
+	@Override
 	public void superOnBlockExploded(Object world, int x, int y, int z, Object explosion) {
 	}
 
+	@Override
 	public boolean superCanConnectRedstone(Object iBlockAccess, int x, int y, int z, int side) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanPlaceTorchOnTop(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanRenderInPass(int pass) {
 		return false;
 	}
 
+	@Override
 	public Object superGetPickBlock(Object movingObjectPosition, Object world, int x, int y, int z) {
 		return null;
 	}
 
+	@Override
 	public boolean superIsFoliage(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superAddHitEffects(Object world, Object movingObjectPosition, Object effectRenderer) {
 		return false;
 	}
 
+	@Override
 	public boolean superAddDestroyEffects(Object world, int x, int y, int z, int meta, Object effectRenderer) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanSustainPlant(Object world, int x, int y, int z, Object forgeDirection, Object iPlantable) {
 		return false;
 	}
 
+	@Override
 	public void superOnPlantGrow(Object world, int x, int y, int z, int sourceX, int sourceY, int sourceZ) {
 	}
 
+	@Override
 	public boolean superIsFertile(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public int superGetLightOpacity(Object world, int x, int y, int z) {
 		return -1;
 	}
 
+	@Override
 	public boolean superCanEntityDestroy(Object world, int x, int y, int z, Object entity) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanDragonDestroy(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsBeaconBase(Object world, int x, int y, int z, int beaconX, int beaconY, int beaconZ) {
 		return false;
 	}
 
+	@Override
 	public boolean superRotateBlock(Object world, int x, int y, int z, Object forgeDirection) {
 		return false;
 	}
 
+	@Override
 	public Object[] superGetValidRotations(Object world, int x, int y, int z) {
 		return null;
 	}
 
+	@Override
 	public float superGetEnchantPowerBonus(Object world, int x, int y, int z) {
 		return 0.0F;
 	}
 
+	@Override
 	public boolean superRecolourBlock(Object world, int x, int y, int z, Object forgeDirection, int colour) {
 		return false;
 	}
 
+	@Override
 	public void superOnNeighborChange(Object world, int x, int y, int z, int tileX, int tileY, int tileZ) {
 	}
 
+	@Override
 	public boolean superWeakTileChanges() {
 		return false;
 	}
 
+	@Override
 	public float superGetFilledPercentage(Object world, int x, int y, int z) {
 		return 0.0F;
 	}
 
+	@Override
 	public String superGetUnlocalizedName2() {
 		return null;
 	}
 
+	@Override
 	public void superOnSetBlockIDWithMetaData(Object world, int par2, int par3, int par4, int par5) {
 	}
 
+	@Override
 	public boolean superIsLadder(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public int superGetEnchantPower(Object world, int x, int y, int z) {
 		return -1;
 	}
 	// 190~
+	@Override
 	public boolean superIsNormalCube(Object iBlockState) {
 		return false;
 	}
 
+	@Override
 	public Object superGetRenderType(Object iBlockState) {
 		return null;
 	}
 
+	@Override
 	public boolean superIsOpaqueCube(Object iBlockState) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanProvidePower(Object iBlockState) {
 		return false;
 	}
 
+	@Override
 	public Object superGetMobilityFlag(Object iBlockState) {
 		return null;
 	}
 
+	@Override
 	public boolean superHasComparatorInputOverride(Object iBlockState) {
 		return false;
 	}
 
+	@Override
 	public float superGetAmbientOcclusionLightValue(Object iBlockState) {
 		return 0.0F;
 	}
 
+	@Override
 	public boolean superAddHitEffects(Object iBlockState, Object world, Object rayTraceResult, Object effectRenderer) {
 		return false;
 	}
 
+	@Override
 	public float superGetBlockHardness(Object iBlockState, Object world, Object blockPos) {
 		return 0.0F;
 	}
 
+	@Override
 	public int superGetPackedLightmapCoords(Object iBlockStatem, Object iBlockAccess, Object blockPos) {
 		return -1;
 	}
 
+	@Override
 	public boolean superShouldSideBeRendered(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing) {
 		return false;
 	}
 
+	@Override
 	public float superGetPlayerRelativeBlockHardness(Object iBlockState, Object entityPlayer, Object world, Object blockPos) {
 		return 0.0F;
 	}
 
+	@Override
 	public boolean superIsFullBlock(Object iBlockState) {
 		return false;
 	}
 
+	@Override
 	public int superGetLightOpacity(Object iBlockState) {
 		return -1;
 	}
 
+	@Override
 	public boolean superIsTranslucent(Object iBlockState) {
 		return false;
 	}
 
+	@Override
 	public int superGetLightValue(Object iBlockState) {
 		return -1;
 	}
 
+	@Override
 	public boolean superGetUseNeighborBrightness(Object iBlockState) {
 		return false;
 	}
 
+	@Override
 	public Object superGetMaterial(Object iBlockState) {
 		return null;
 	}
 
+	@Override
 	public Object superGetSelectedBoundingBox(Object iBlockState, Object world, Object blockPos) {
 		return null;
 	}
 
+	@Override
 	public Object superCollisionRayTrace(Object iBlockState, Object world, Object blockPos, Object vec3, Object vec31) {
 		return null;
 	}
 
+	@Override
 	public boolean superOnBlockActivated(Object world, Object blockPos, Object iBlockState, Object entityPlayer, Object enumHand, Object itemStack, Object enumFacing, float hitX, float hitY, float hitZ) {
 		return false;
 	}
 
+	@Override
 	public void superHarvestBlock(Object world, Object entityPlayer, Object blockPos, Object iBlockState, Object tileEntity, Object itemStack) {
 	}
 
+	@Override
 	public Object superGetItem(Object world, Object blockPos, Object iBlockState) {
 		return null;
 	}
 
+	@Override
 	public int superGetComparatorInputOverride(Object iBlockState, Object world, Object blockPos) {
 		return -1;
 	}
 
+	@Override
 	public int superGetLightValue(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return -1;
 	}
 
+	@Override
 	public boolean superIsLadder(Object iBlockState, Object iBlockAccess, Object blockPos, Object entityLivingBase) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsNormalCube(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsSideSolid(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsAir(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return false;
 	}
 
+	@Override
 	public boolean superRemovedByPlayer(Object iBlockState, Object world, Object blockPos, Object entityPlayer, boolean willHarvest) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanCreatureSpawn(Object iBlockState, Object iBlockAccess, Object blockPos, Object spawnPlacementType) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsBed(Object iBlockState, Object iBlockAccess, Object blockPos, Object entity) {
 		return false;
 	}
 
+	@Override
 	public Object superGetBedSpawnPosition(Object iBlockState, Object iBlockAccess, Object blockPos, Object entityPlayer) {
 		return null;
 	}
 
+	@Override
 	public Object superGetBedDirection(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return null;
 	}
 
+	@Override
 	public void superBeginLeavesDecay(Object iBlockState, Object world, Object blockPos) {
 	}
 
+	@Override
 	public boolean superCanSustainLeaves(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsLeaves(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanBeReplacedByLeaves(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsReplaceableOreGen(Object iBlockState, Object iBlockAccess, Object blockPos, Object predicate) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanConnectRedstone(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanPlaceTorchOnTop(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return false;
 	}
 
+	@Override
 	public Object superGetPickBlock(Object iBlockState, Object movingObjectPosition, Object world, Object blockPos, Object entityPlayer) {
 		return null;
 	}
 
+	@Override
 	public boolean superCanSustainPlant(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing, Object iPlantable) {
 		return false;
 	}
 
+	@Override
 	public void superOnPlantGrow(Object iBlockState, Object world, Object blockPos, Object blockPos1) {
 	}
 
+	@Override
 	public int superGetLightOpacity(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return -1;
 	}
 
+	@Override
 	public boolean superCanEntityDestroy(Object iBlockState, Object iBlockAccess, Object blockPos, Object entity) {
 		return false;
 	}
 
+	@Override
 	public int superGetExpDrop(Object iBlockState, Object iBlockAccess, Object blockPos, int fortune) {
 		return -1;
 	}
 
+	@Override
 	public boolean superShouldCheckWeakPower(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsFullCube(Object iBlockState) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsFullyOpaque(Object iBlockState) {
 		return false;
 	}
 
+	@Override
 	public Object superWithRotation(Object iBlockState, Object rotation) {
 		return null;
 	}
 
+	@Override
 	public Object superWithMirror(Object iBlockState, Object mirror) {
 		return null;
 	}
 
+	@Override
 	public Object superGetBoundingBox(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return null;
 	}
 
+	@Override
 	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity) {
 	}
 
+	@Override
 	public Object superRayTrace(Object blockPos, Object vec3d, Object vec3d1, Object axisAlignedBB) {
 		return null;
 	}
 
+	@Override
 	public boolean superCanSpawnInBlock() {
 		return false;
 	}
 
-	public Object superGetStepSound() {
+	@Override
+	public Object superGetSoundType() {
 		return null;
 	}
 
+	@Override
 	public String superToString() {
-		return null;
+		return super.toString();
 	}
 
+	@Override
 	public boolean superDoesSideBlockRendering(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing) {
 		return false;
 	}
 
+	@Override
 	public boolean superAddLandingEffects(Object iBlockState, Object worldServer, Object blockPos, Object iBlockState1, Object entityLivingBase, int numberOfParticles) {
 		return false;
 	}
 
+	@Override
 	public Object superIsEntityInsideMaterial(Object iBlockAccess, Object blockPos, Object iBlockState, Object entity, double yToTest, Object material, boolean testingHead) {
 		return null;
 	}
 
+	@Override
 	public Object superIsAABBInsideMaterial(Object world, Object blockPos, Object axisAlignedBB, Object material) {
 		return null;
+	}
+
+	@Override
+	public void superEventReceived(Object world, int par2, int par3, int par4, Object par5) {
+	}
+
+	@Override
+	public boolean superNeighborChanged(Object world, int par2, int par3, int par4, int par5, int par6) {
+		return false;
 	}
 	// Modchu_Block のコピー↑ 
 

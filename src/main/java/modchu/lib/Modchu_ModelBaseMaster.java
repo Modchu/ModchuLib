@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import modchu.model.multimodel.base.MultiModelCustom;
+
 public abstract class Modchu_ModelBaseMaster implements Modchu_IEntityCapsBase, Modchu_IModelBaseMaster {
 	public Modchu_IModelBase base;
 	public static final float PI = (float)Math.PI;

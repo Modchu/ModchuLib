@@ -1601,23 +1601,23 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 
 	@Override
 	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
-		if (master != null) master.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
+		if (master != null) master.setPositionAndRotationDirect(par1, par3, par5, par7, par8, par9);
 		else super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
+	public void superSetPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9) {
 		super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
 	}
 
 	@Override
 	protected void updateAITick() {
-		if (master != null) master.updateAITick();
+		if (master != null) master.handleJumpWater();
 		else super.updateAITick();
 	}
 
 	@Override
-	public void superUpdateAITick() {
+	public void superHandleJumpWater() {
 		super.updateAITick();
 	}
 
@@ -2107,12 +2107,12 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 
 	@Override
 	public void moveFlying(float par1, float par2, float par3) {
-		if (master != null) master.moveFlying(par1, par2, par3);
+		if (master != null) master.moveRelative(par1, par2, par3);
 		else super.moveFlying(par1, par2, par3);
 	}
 
 	@Override
-	public void superMoveFlying(float par1, float par2, float par3) {
+	public void superMoveRelative(float par1, float par2, float par3) {
 		super.moveFlying(par1, par2, par3);
 	}
 
@@ -2300,8 +2300,9 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	}
 
 	@Override
-	public void superWriteToNBT(Object nBTTagCompound) {
+	public Object superWriteToNBT(Object nBTTagCompound) {
 		super.writeToNBT((NBTTagCompound) nBTTagCompound);
+		return nBTTagCompound;
 	}
 
 	@Override
@@ -2715,11 +2716,11 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 
 	@Override
 	public boolean canAttackWithItem() {
-		return master != null ? master.canAttackWithItem() : super.canAttackWithItem();
+		return master != null ? master.canBeAttackedWithItem() : super.canAttackWithItem();
 	}
 
 	@Override
-	public boolean superCanAttackWithItem() {
+	public boolean superCanBeAttackedWithItem() {
 		return super.canAttackWithItem();
 	}
 
@@ -3012,7 +3013,7 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+	public void superSetPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 	}
 
 	@Override
@@ -3716,11 +3717,11 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	}
 
 	@Override
-	public void superSetBossVisibleTo(Object entityPlayerMP) {
+	public void superAddTrackingPlayer(Object entityPlayerMP) {
 	}
 
 	@Override
-	public void superSetBossNonVisibleTo(Object entityPlayerMP) {
+	public void superRemoveTrackingPlayer(Object entityPlayerMP) {
 	}
 
 	@Override
@@ -3734,7 +3735,7 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	}
 
 	@Override
-	public boolean superFunc_184213_bq() {
+	public boolean superIgnoreItemEntityData() {
 		return false;
 	}
 
@@ -3934,7 +3935,7 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	}
 
 	@Override
-	public boolean superTeleportTo_(double x, double y, double z) {
+	public boolean superAttemptTeleport(double x, double y, double z) {
 		return false;
 	}
 

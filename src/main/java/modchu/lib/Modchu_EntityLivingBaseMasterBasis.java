@@ -205,8 +205,8 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public void moveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
-		base.superMoveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
+	public void moveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
+		base.superMoveRelative(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
 	@Override
@@ -315,8 +315,8 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public void writeToNBT(Object nBTTagCompound) {
-		base.superWriteToNBT(nBTTagCompound);
+	public Object writeToNBT(Object nBTTagCompound) {
+		return base.superWriteToNBT(nBTTagCompound);
 	}
 
 	@Override
@@ -405,8 +405,8 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
-		base.superSetPositionAndRotation2(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
+	public void setPositionAndRotationDirect(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
+		base.superSetPositionAndRotationDirect(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
 	}
 
 	@Override
@@ -570,8 +570,8 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public boolean canAttackWithItem() {
-		return base.superCanAttackWithItem();
+	public boolean canBeAttackedWithItem() {
+		return base.superCanBeAttackedWithItem();
 	}
 
 	@Override
@@ -870,8 +870,8 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public void setPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
-		base.superSetPositionAndRotation2(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
+	public void setPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+		base.superSetPositionAndRotationDirect(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
 	}
 
 	@Override
@@ -1290,8 +1290,8 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public void updateAITick() {
-		base.superUpdateAITick();
+	public void handleJumpWater() {
+		base.superHandleJumpWater();
 	}
 
 	@Override
@@ -1845,13 +1845,13 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public void setBossVisibleTo(Object entityPlayerMP) {
-		base.superSetBossVisibleTo(entityPlayerMP);
+	public void addTrackingPlayer(Object entityPlayerMP) {
+		base.superAddTrackingPlayer(entityPlayerMP);
 	}
 
 	@Override
-	public void setBossNonVisibleTo(Object entityPlayerMP) {
-		base.superSetBossNonVisibleTo(entityPlayerMP);
+	public void removeTrackingPlayer(Object entityPlayerMP) {
+		base.superRemoveTrackingPlayer(entityPlayerMP);
 	}
 
 	@Override
@@ -1865,8 +1865,8 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public boolean func_184213_bq() {
-		return base.superFunc_184213_bq();
+	public boolean ignoreItemEntityData() {
+		return base.superIgnoreItemEntityData();
 	}
 
 	@Override
@@ -2075,8 +2075,8 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public boolean teleportTo_(double x, double y, double z) {
-		return base.superTeleportTo_(x, y, z);
+	public boolean attemptTeleport(double x, double y, double z) {
+		return base.superAttemptTeleport(x, y, z);
 	}
 
 	@Override
@@ -2137,6 +2137,11 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	@Override
 	public void dropLoot() {
 		base.superDropLoot();
+	}
+
+	@Override
+	public String thisToString() {
+		return getClass().getName() + "@" + Integer.toHexString(super.hashCode());
 	}
 
 }

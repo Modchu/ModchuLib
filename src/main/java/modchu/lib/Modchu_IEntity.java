@@ -54,7 +54,7 @@ public interface Modchu_IEntity {
 	public boolean superIsInsideOfMaterial(Object material);
 	public float superGetEyeHeight();
 	public boolean superIsNotColliding();
-	public void superMoveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_);
+	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_);
 	public int superGetBrightnessForRender(float p_70070_1_);
 	public float superGetBrightness(float p_70013_1_);
 	public void superSetWorld(Object world);
@@ -76,7 +76,7 @@ public interface Modchu_IEntity {
 	public boolean superIsInRangeToRenderDist(double p_70112_1_);
 	public boolean superWriteToNBTAtomically(Object nBTTagCompound);
 	public boolean superWriteToNBTOptional(Object nBTTagCompound);
-	public void superWriteToNBT(Object nBTTagCompound);
+	public Object superWriteToNBT(Object nBTTagCompound);
 	public void superReadFromNBT(Object nBTTagCompound);
 	public boolean superShouldSetPosAfterLoading();
 	public void superOnChunkLoad();
@@ -95,7 +95,7 @@ public interface Modchu_IEntity {
 	public double superGetYOffset();
 	public double superGetMountedYOffset();
 	public boolean superStartRiding(Object entity);
-	public void superSetPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_);
+	public void superSetPositionAndRotationDirect(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_);
 	public float superGetCollisionBorderSize();
 	public Object superGetLookVec();
 	public void superSetPortal(Object blockPos);
@@ -129,7 +129,7 @@ public interface Modchu_IEntity {
 	public boolean superIsEntityEqual(Object entity);
 	public float superGetRotationYawHead();
 	public void superSetRotationYawHead(float p_70034_1_);
-	public boolean superCanAttackWithItem();
+	public boolean superCanBeAttackedWithItem();
 	public boolean superHitByEntity(Object entity);
 	public String superToString();
 	public boolean superIsEntityInvulnerable();
@@ -197,7 +197,7 @@ public interface Modchu_IEntity {
 	public Object superGetLook(float p_70676_1_);
 	public Object superGetPositionEyes(float p_174824_1_);
 	public Object superRayTrace(double p_174822_1_, float p_174822_3_);
-	public void superSetPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_);
+	public void superSetPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_);
 	public Object[] superGetInventory();
 	public boolean superIsEntityInvulnerable(Object damageSource);
 	public void superCopyDataFromOld(Object entity);
@@ -271,11 +271,11 @@ public interface Modchu_IEntity {
 	public Object superGetCapability(Object capability, Object enumFacing);
 	public void superDeserializeNBT(Object nBTTagCompound);
 	public Object superSerializeNBT();
-	public void superSetBossVisibleTo(Object entityPlayerMP);
-	public void superSetBossNonVisibleTo(Object entityPlayerMP);
+	public void superAddTrackingPlayer(Object entityPlayerMP);
+	public void superRemoveTrackingPlayer(Object entityPlayerMP);
 	public float superGetRotatedYaw(Object rotation);
 	public float superGetMirroredYaw(Object mirror);
-	public boolean superFunc_184213_bq();
+	public boolean superIgnoreItemEntityData();
 	public boolean superSetPositionNonDirty();
 	public Object superGetControllingPassenger();
 	public Object superGetPassengers();

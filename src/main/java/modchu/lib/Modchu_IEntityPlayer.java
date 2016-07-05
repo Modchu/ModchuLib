@@ -31,9 +31,9 @@ public interface Modchu_IEntityPlayer {
 	public void supersetScore(int par1);
 	public void superaddScore(int par1);
 	public void superaddToPlayerScore(Object entity, int par2);
-	public Object superdropOneItem(boolean par1);
+	public Object superdropItem(boolean par1);
 	public Object superdropPlayerItem(Object itemStack);
-	public Object superdropPlayerItemWithRandomChoice(Object itemStack, boolean par2);
+	public Object superdropItem(Object itemStack, boolean par2);
 	public void superdropItemAndGetStack(Object entityItem);
 	public float supergetCurrentPlayerStrVsBlock(Object block, boolean par2);
 	public float supergetCurrentPlayerStrVsBlock(Object block, boolean par2, int meta);
@@ -189,8 +189,8 @@ public interface Modchu_IEntityPlayer {
 	public void superupdateAITasks();
 	public void supercollideWithNearbyEntities();
 	public void supercollideWithEntity(Object entity);
-	public void supersetPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9);
-	public void superupdateAITick();
+	public void supersetPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9);
+	public void superhandleJumpWater();
 	public void supersetJumping(boolean par1);
 	public void superonItemPickup(Object entity, int par2);
 	public boolean supercanEntityBeSeen(Object entity);
@@ -229,7 +229,7 @@ public interface Modchu_IEntityPlayer {
 	public boolean superhandleWaterMovement();
 	public boolean superisInsideOfMaterial(Object material);
 	public boolean superhandleLavaMovement();
-	public void supermoveFlying(float par1, float par2, float par3);
+	public void supermoveRelative(float par1, float par2, float par3);
 	public int supergetBrightnessForRender(float par1);
 	public float supergetBrightness(float par1);
 	public void supersetWorld(Object world);
@@ -278,7 +278,7 @@ public interface Modchu_IEntityPlayer {
 	public void superonStruckByLightning(Object entityLightningBolt);
 	public Object[] supergetParts();
 	public boolean superisEntityEqual(Object entity);
-	public boolean supercanAttackWithItem();
+	public boolean supercanBeAttackedWithItem();
 	public boolean superhitByEntity(Object entity);
 	//public String supertoString();
 	public boolean superisEntityInvulnerable();

@@ -163,11 +163,6 @@ public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaste
 	}
 
 	@Override
-	public Object getEntityTexture(Object entity, int i) {
-		return base.superGetEntityTexture(entity, i);
-	}
-
-	@Override
 	public boolean bindEntityTexture(Object entity) {
 		return base.superBindEntityTexture(entity);
 	}
@@ -258,11 +253,6 @@ public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaste
 	}
 
 	@Override
-	public float renderSwingProgress(Object entityLivingBase, float par2) {
-		return base.superRenderSwingProgress(entityLivingBase, par2);
-	}
-
-	@Override
 	public void renderArrowsStuckInEntity(Object entityLivingBase, float par2) {
 		base.superRenderArrowsStuckInEntity(entityLivingBase, par2);
 	}
@@ -293,11 +283,6 @@ public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaste
 	}
 
 	@Override
-	public void func_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
-		base.superFunc_147906_a(entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
-	}
-
-	@Override
 	public void renderFirstPersonLeftArm(Object entityplayer, int i) {
 		base.superFunc_177139_c(entityplayer);
 	}
@@ -315,6 +300,36 @@ public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaste
 	@Override
 	public void renderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
 		base.superRenderEntityName(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_10_);
+	}
+
+	@Override
+	public float prepareScale(Object entityLivingBase, float partialTicks) {
+		return base.superPrepareScale(entityLivingBase, partialTicks);
+	}
+
+	@Override
+	public void doRenderLiving(Object entityLivingBase, double par2, double par4, double par6, float par8, float par9) {
+		base.superDoRenderLiving(entityLivingBase, par2, par4, par6, par8, par9);
+	}
+
+	@Override
+	public void func_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+		base.superFunc_177069_a(entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, p_177069_9_, p_177069_10_);
+	}
+
+	@Override
+	public int getTeamColor(Object entity) {
+		return base.superGetTeamColor(entity);
+	}
+
+	@Override
+	public boolean isMultipass() {
+		return base.superIsMultipass();
+	}
+
+	@Override
+	public void renderMultipass(Object entity, double p_188300_2_, double p_188300_4_, double p_188300_6_, float p_188300_8_, float p_188300_9_) {
+		base.superRenderMultipass(entity, p_188300_2_, p_188300_4_, p_188300_6_, p_188300_8_, p_188300_9_);
 	}
 
 }

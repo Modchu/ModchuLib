@@ -167,8 +167,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public Object dropOneItem(boolean par1) {
-		return base.superdropOneItem(par1);
+	public Object dropItem(boolean par1) {
+		return base.superdropItem(par1);
 	}
 
 	@Override
@@ -177,8 +177,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public Object dropPlayerItemWithRandomChoice(Object itemStack, boolean par2) {
-		return base.superdropPlayerItemWithRandomChoice(itemStack, par2);
+	public Object dropItem(Object itemStack, boolean par2) {
+		return base.superdropItem(itemStack, par2);
 	}
 
 	@Override
@@ -997,13 +997,13 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
-		base.supersetPositionAndRotation2(par1, par3, par5, par7, par8, par9);
+	public void setPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9) {
+		base.supersetPositionAndRotationDirect(par1, par3, par5, par7, par8, par9);
 	}
 
 	@Override
-	public void updateAITick() {
-		base.superupdateAITick();
+	public void handleJumpWater() {
+		base.superhandleJumpWater();
 	}
 
 	@Override
@@ -1192,8 +1192,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void moveFlying(float par1, float par2, float par3) {
-		base.supermoveFlying(par1, par2, par3);
+	public void moveRelative(float par1, float par2, float par3) {
+		base.supermoveRelative(par1, par2, par3);
 	}
 
 	@Override
@@ -1447,8 +1447,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public boolean canAttackWithItem() {
-		return base.supercanAttackWithItem();
+	public boolean canBeAttackedWithItem() {
+		return base.supercanBeAttackedWithItem();
 	}
 
 	@Override

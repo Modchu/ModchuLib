@@ -915,12 +915,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object entityGetDataWatcher(Object dataWatcherOrEntity) {
-		return master != null ? master.entityGetDataWatcher(dataWatcherOrEntity) : super.entityGetDataWatcher(dataWatcherOrEntity);
+	protected Object entityGetDataWatcher(Object dataManagerOrEntity) {
+		return master != null ? master.entityGetDataWatcher(dataManagerOrEntity) : super.entityGetDataWatcher(dataManagerOrEntity);
 	}
 
-	public Object superEntityGetDataWatcher(Object dataWatcherOrEntity) {
-		return super.entityGetDataWatcher(dataWatcherOrEntity);
+	public Object superEntityGetDataWatcher(Object dataManagerOrEntity) {
+		return super.entityGetDataWatcher(dataManagerOrEntity);
 	}
 
 	@Override
@@ -934,59 +934,59 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object dataWatcherGetWatchedObject(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return master != null ? master.dataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt) : super.dataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt);
+	protected Object dataManagerGetWatchedObject(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return master != null ? master.dataManagerGetWatchedObject(dataManagerOrEntity, dataParameterOrInt) : super.dataManagerGetWatchedObject(dataManagerOrEntity, dataParameterOrInt);
 	}
 
-	public Object superDataWatcherGetWatchedObject(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return super.dataWatcherGetWatchedObject(dataWatcherOrEntity, dataParameterOrInt);
-	}
-
-	@Override
-	protected void dataWatcherAddObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
-		if (master != null) master.dataWatcherAddObject(dataWatcherOrEntity, dataParameterOrInt, o);
-		else super.dataWatcherAddObject(dataWatcherOrEntity, dataParameterOrInt, o);
-	}
-
-	public void superDataWatcherAddObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
-		super.dataWatcherAddObject(dataWatcherOrEntity, dataParameterOrInt, o);
+	public Object superDataWatcherGetWatchedObject(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return super.dataManagerGetWatchedObject(dataManagerOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	protected Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return master != null ? master.dataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, dataParameterOrInt) : super.dataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, dataParameterOrInt);
+	protected void dataManagerAddObject(Object dataManagerOrEntity, Object dataParameterOrInt, Object o) {
+		if (master != null) master.dataManagerAddObject(dataManagerOrEntity, dataParameterOrInt, o);
+		else super.dataManagerAddObject(dataManagerOrEntity, dataParameterOrInt, o);
 	}
 
-	public Object superDataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return super.dataWatcherGetWatchableObjectItemStack(dataWatcherOrEntity, dataParameterOrInt);
-	}
-
-	@Override
-	protected String dataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return master != null ? master.dataWatcherGetWatchableObjectString(dataWatcherOrEntity, dataParameterOrInt) : super.dataWatcherGetWatchableObjectString(dataWatcherOrEntity, dataParameterOrInt);
-	}
-
-	public String superDataWatcherGetWatchableObjectString(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return super.dataWatcherGetWatchableObjectString(dataWatcherOrEntity, dataParameterOrInt);
+	public void superDataWatcherAddObject(Object dataManagerOrEntity, Object dataParameterOrInt, Object o) {
+		super.dataManagerAddObject(dataManagerOrEntity, dataParameterOrInt, o);
 	}
 
 	@Override
-	protected byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return master != null ? master.dataWatcherGetWatchableObjectByte(dataWatcherOrEntity, dataParameterOrInt) : super.dataWatcherGetWatchableObjectByte(dataWatcherOrEntity, dataParameterOrInt);
+	protected Object dataManagerGetWatchableObjectItemStack(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return master != null ? master.dataManagerGetWatchableObjectItemStack(dataManagerOrEntity, dataParameterOrInt) : super.dataManagerGetWatchableObjectItemStack(dataManagerOrEntity, dataParameterOrInt);
 	}
 
-	public byte superDataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, Object dataParameterOrInt) {
-		return super.dataWatcherGetWatchableObjectByte(dataWatcherOrEntity, dataParameterOrInt);
+	public Object superDataWatcherGetWatchableObjectItemStack(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return super.dataManagerGetWatchableObjectItemStack(dataManagerOrEntity, dataParameterOrInt);
 	}
 
 	@Override
-	protected void dataWatcherUpdateObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
-		if (master != null) master.dataWatcherUpdateObject(dataWatcherOrEntity, dataParameterOrInt, o);
-		else super.dataWatcherUpdateObject(dataWatcherOrEntity, dataParameterOrInt, o);
+	protected String dataManagerGetWatchableObjectString(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return master != null ? master.dataManagerGetWatchableObjectString(dataManagerOrEntity, dataParameterOrInt) : super.dataManagerGetWatchableObjectString(dataManagerOrEntity, dataParameterOrInt);
 	}
 
-	public void superDataWatcherUpdateObject(Object dataWatcherOrEntity, Object dataParameterOrInt, Object o) {
-		super.dataWatcherUpdateObject(dataWatcherOrEntity, dataParameterOrInt, o);
+	public String superDataWatcherGetWatchableObjectString(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return super.dataManagerGetWatchableObjectString(dataManagerOrEntity, dataParameterOrInt);
+	}
+
+	@Override
+	protected byte dataManagerGetWatchableObjectByte(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return master != null ? master.dataManagerGetWatchableObjectByte(dataManagerOrEntity, dataParameterOrInt) : super.dataManagerGetWatchableObjectByte(dataManagerOrEntity, dataParameterOrInt);
+	}
+
+	public byte superDataWatcherGetWatchableObjectByte(Object dataManagerOrEntity, Object dataParameterOrInt) {
+		return super.dataManagerGetWatchableObjectByte(dataManagerOrEntity, dataParameterOrInt);
+	}
+
+	@Override
+	protected void dataManagerUpdateObject(Object dataManagerOrEntity, Object dataParameterOrInt, Object o) {
+		if (master != null) master.dataManagerUpdateObject(dataManagerOrEntity, dataParameterOrInt, o);
+		else super.dataManagerUpdateObject(dataManagerOrEntity, dataParameterOrInt, o);
+	}
+
+	public void superDataWatcherUpdateObject(Object dataManagerOrEntity, Object dataParameterOrInt, Object o) {
+		super.dataManagerUpdateObject(dataManagerOrEntity, dataParameterOrInt, o);
 	}
 
 	@Override
@@ -2900,363 +2900,363 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object biomeGenBaseOcean() {
-		return master != null ? master.biomeGenBaseOcean() : super.biomeGenBaseOcean();
+	protected Object biomeOcean() {
+		return master != null ? master.biomeOcean() : super.biomeOcean();
 	}
 
-	public Object superBiomeGenBaseOcean() {
-		return super.biomeGenBaseOcean();
-	}
-
-	@Override
-	protected Object biomeGenBasePlains() {
-		return master != null ? master.biomeGenBasePlains() : super.biomeGenBasePlains();
-	}
-
-	public Object superBiomeGenBasePlains() {
-		return super.biomeGenBasePlains();
+	public Object superBiomeOcean() {
+		return super.biomeOcean();
 	}
 
 	@Override
-	protected Object biomeGenBaseDesert() {
-		return master != null ? master.biomeGenBaseDesert() : super.biomeGenBaseDesert();
+	protected Object biomePlains() {
+		return master != null ? master.biomePlains() : super.biomePlains();
 	}
 
-	public Object superBiomeGenBaseDesert() {
-		return super.biomeGenBaseDesert();
-	}
-
-	@Override
-	protected Object biomeGenBaseExtremeHills() {
-		return master != null ? master.biomeGenBaseExtremeHills() : super.biomeGenBaseExtremeHills();
-	}
-
-	public Object superBiomeGenBaseExtremeHills() {
-		return super.biomeGenBaseExtremeHills();
+	public Object superBiomePlains() {
+		return super.biomePlains();
 	}
 
 	@Override
-	protected Object biomeGenBaseForest() {
-		return master != null ? master.biomeGenBaseForest() : super.biomeGenBaseForest();
+	protected Object biomeDesert() {
+		return master != null ? master.biomeDesert() : super.biomeDesert();
 	}
 
-	public Object superBiomeGenBaseForest() {
-		return super.biomeGenBaseForest();
-	}
-
-	@Override
-	protected Object biomeGenBaseTaiga() {
-		return master != null ? master.biomeGenBaseTaiga() : super.biomeGenBaseTaiga();
-	}
-
-	public Object superBiomeGenBaseTaiga() {
-		return super.biomeGenBaseTaiga();
+	public Object superBiomeDesert() {
+		return super.biomeDesert();
 	}
 
 	@Override
-	protected Object biomeGenBaseSwampland() {
-		return master != null ? master.biomeGenBaseSwampland() : super.biomeGenBaseSwampland();
+	protected Object biomeExtremeHills() {
+		return master != null ? master.biomeExtremeHills() : super.biomeExtremeHills();
 	}
 
-	public Object superBiomeGenBaseSwampland() {
-		return super.biomeGenBaseSwampland();
-	}
-
-	@Override
-	protected Object biomeGenBaseRiver() {
-		return master != null ? master.biomeGenBaseRiver() : super.biomeGenBaseRiver();
-	}
-
-	public Object superBiomeGenBaseRiver() {
-		return super.biomeGenBaseRiver();
+	public Object superBiomeExtremeHills() {
+		return super.biomeExtremeHills();
 	}
 
 	@Override
-	protected Object biomeGenBaseHell() {
-		return master != null ? master.biomeGenBaseHell() : super.biomeGenBaseHell();
+	protected Object biomeForest() {
+		return master != null ? master.biomeForest() : super.biomeForest();
 	}
 
-	public Object superBiomeGenBaseHell() {
-		return super.biomeGenBaseHell();
-	}
-
-	@Override
-	protected Object biomeGenBaseSky() {
-		return master != null ? master.biomeGenBaseSky() : super.biomeGenBaseSky();
-	}
-
-	public Object superBiomeGenBaseSky() {
-		return super.biomeGenBaseSky();
+	public Object superBiomeForest() {
+		return super.biomeForest();
 	}
 
 	@Override
-	protected Object biomeGenBaseFrozenOcean() {
-		return master != null ? master.biomeGenBaseFrozenOcean() : super.biomeGenBaseFrozenOcean();
+	protected Object biomeTaiga() {
+		return master != null ? master.biomeTaiga() : super.biomeTaiga();
 	}
 
-	public Object superBiomeGenBaseFrozenOcean() {
-		return super.biomeGenBaseFrozenOcean();
-	}
-
-	@Override
-	protected Object biomeGenBaseFrozenRiver() {
-		return master != null ? master.biomeGenBaseFrozenRiver() : super.biomeGenBaseFrozenRiver();
-	}
-
-	public Object superBiomeGenBaseFrozenRiver() {
-		return super.biomeGenBaseFrozenRiver();
+	public Object superBiomeTaiga() {
+		return super.biomeTaiga();
 	}
 
 	@Override
-	protected Object biomeGenBaseIcePlains() {
-		return master != null ? master.biomeGenBaseIcePlains() : super.biomeGenBaseIcePlains();
+	protected Object biomeSwampland() {
+		return master != null ? master.biomeSwampland() : super.biomeSwampland();
 	}
 
-	public Object superBiomeGenBaseIcePlains() {
-		return super.biomeGenBaseIcePlains();
-	}
-
-	@Override
-	protected Object biomeGenBaseIceMountains() {
-		return master != null ? master.biomeGenBaseIceMountains() : super.biomeGenBaseIceMountains();
-	}
-
-	public Object superBiomeGenBaseIceMountains() {
-		return super.biomeGenBaseIceMountains();
+	public Object superBiomeSwampland() {
+		return super.biomeSwampland();
 	}
 
 	@Override
-	protected Object biomeGenBaseMushroomIsland() {
-		return master != null ? master.biomeGenBaseMushroomIsland() : super.biomeGenBaseMushroomIsland();
+	protected Object biomeRiver() {
+		return master != null ? master.biomeRiver() : super.biomeRiver();
 	}
 
-	public Object superBiomeGenBaseMushroomIsland() {
-		return super.biomeGenBaseMushroomIsland();
-	}
-
-	@Override
-	protected Object biomeGenBaseMushroomIslandShore() {
-		return master != null ? master.biomeGenBaseMushroomIslandShore() : super.biomeGenBaseMushroomIslandShore();
-	}
-
-	public Object superBiomeGenBaseMushroomIslandShore() {
-		return super.biomeGenBaseMushroomIslandShore();
+	public Object superBiomeRiver() {
+		return super.biomeRiver();
 	}
 
 	@Override
-	protected Object biomeGenBaseBeach() {
-		return master != null ? master.biomeGenBaseBeach() : super.biomeGenBaseBeach();
+	protected Object biomeHell() {
+		return master != null ? master.biomeHell() : super.biomeHell();
 	}
 
-	public Object superBiomeGenBaseBeach() {
-		return super.biomeGenBaseBeach();
-	}
-
-	@Override
-	protected Object biomeGenBaseDesertHills() {
-		return master != null ? master.biomeGenBaseDesertHills() : super.biomeGenBaseDesertHills();
-	}
-
-	public Object superBiomeGenBaseDesertHills() {
-		return super.biomeGenBaseDesertHills();
+	public Object superBiomeHell() {
+		return super.biomeHell();
 	}
 
 	@Override
-	protected Object biomeGenBaseForestHills() {
-		return master != null ? master.biomeGenBaseForestHills() : super.biomeGenBaseForestHills();
+	protected Object biomeSky() {
+		return master != null ? master.biomeSky() : super.biomeSky();
 	}
 
-	public Object superBiomeGenBaseForestHills() {
-		return super.biomeGenBaseForestHills();
-	}
-
-	@Override
-	protected Object biomeGenBaseTaigaHills() {
-		return master != null ? master.biomeGenBaseTaigaHills() : super.biomeGenBaseTaigaHills();
-	}
-
-	public Object superBiomeGenBaseTaigaHills() {
-		return super.biomeGenBaseTaigaHills();
+	public Object superBiomeSky() {
+		return super.biomeSky();
 	}
 
 	@Override
-	protected Object biomeGenBaseExtremeHillsEdge() {
-		return master != null ? master.biomeGenBaseExtremeHillsEdge() : super.biomeGenBaseExtremeHillsEdge();
+	protected Object biomeFrozenOcean() {
+		return master != null ? master.biomeFrozenOcean() : super.biomeFrozenOcean();
 	}
 
-	public Object superBiomeGenBaseExtremeHillsEdge() {
-		return super.biomeGenBaseExtremeHillsEdge();
-	}
-
-	@Override
-	protected Object biomeGenBaseJungle() {
-		return master != null ? master.biomeGenBaseJungle() : super.biomeGenBaseJungle();
-	}
-
-	public Object superBiomeGenBaseJungle() {
-		return super.biomeGenBaseJungle();
+	public Object superBiomeFrozenOcean() {
+		return super.biomeFrozenOcean();
 	}
 
 	@Override
-	protected Object biomeGenBaseJungleHills() {
-		return master != null ? master.biomeGenBaseJungleHills() : super.biomeGenBaseJungleHills();
+	protected Object biomeFrozenRiver() {
+		return master != null ? master.biomeFrozenRiver() : super.biomeFrozenRiver();
 	}
 
-	public Object superBiomeGenBaseJungleHills() {
-		return super.biomeGenBaseJungleHills();
-	}
-
-	@Override
-	protected Object biomeGenBaseJungleEdge() {
-		return master != null ? master.biomeGenBaseJungleEdge() : super.biomeGenBaseJungleEdge();
-	}
-
-	public Object superBiomeGenBaseJungleEdge() {
-		return super.biomeGenBaseJungleEdge();
+	public Object superBiomeFrozenRiver() {
+		return super.biomeFrozenRiver();
 	}
 
 	@Override
-	protected Object biomeGenBaseDeepOcean() {
-		return master != null ? master.biomeGenBaseDeepOcean() : super.biomeGenBaseDeepOcean();
+	protected Object biomeIcePlains() {
+		return master != null ? master.biomeIcePlains() : super.biomeIcePlains();
 	}
 
-	public Object superBiomeGenBaseDeepOcean() {
-		return super.biomeGenBaseDeepOcean();
-	}
-
-	@Override
-	protected Object biomeGenBaseStoneBeach() {
-		return master != null ? master.biomeGenBaseStoneBeach() : super.biomeGenBaseStoneBeach();
-	}
-
-	public Object superBiomeGenBaseStoneBeach() {
-		return super.biomeGenBaseStoneBeach();
+	public Object superBiomeIcePlains() {
+		return super.biomeIcePlains();
 	}
 
 	@Override
-	protected Object biomeGenBaseStoneColdBeach() {
-		return master != null ? master.biomeGenBaseStoneColdBeach() : super.biomeGenBaseStoneColdBeach();
+	protected Object biomeIceMountains() {
+		return master != null ? master.biomeIceMountains() : super.biomeIceMountains();
 	}
 
-	public Object superBiomeGenBaseStoneColdBeach() {
-		return super.biomeGenBaseStoneColdBeach();
-	}
-
-	@Override
-	protected Object biomeGenBaseBirchForest() {
-		return master != null ? master.biomeGenBaseBirchForest() : super.biomeGenBaseBirchForest();
-	}
-
-	public Object superBiomeGenBaseBirchForest() {
-		return super.biomeGenBaseBirchForest();
+	public Object superBiomeIceMountains() {
+		return super.biomeIceMountains();
 	}
 
 	@Override
-	protected Object biomeGenBaseBirchForestHills() {
-		return master != null ? master.biomeGenBaseBirchForestHills() : super.biomeGenBaseBirchForestHills();
+	protected Object biomeMushroomIsland() {
+		return master != null ? master.biomeMushroomIsland() : super.biomeMushroomIsland();
 	}
 
-	public Object superBiomeGenBaseBirchForestHills() {
-		return super.biomeGenBaseBirchForestHills();
-	}
-
-	@Override
-	protected Object biomeGenBaseRoofedForest() {
-		return master != null ? master.biomeGenBaseRoofedForest() : super.biomeGenBaseRoofedForest();
-	}
-
-	public Object superBiomeGenBaseRoofedForest() {
-		return super.biomeGenBaseRoofedForest();
+	public Object superBiomeMushroomIsland() {
+		return super.biomeMushroomIsland();
 	}
 
 	@Override
-	protected Object biomeGenBaseColdTaiga() {
-		return master != null ? master.biomeGenBaseColdTaiga() : super.biomeGenBaseColdTaiga();
+	protected Object biomeMushroomIslandShore() {
+		return master != null ? master.biomeMushroomIslandShore() : super.biomeMushroomIslandShore();
 	}
 
-	public Object superBiomeGenBaseColdTaiga() {
-		return super.biomeGenBaseColdTaiga();
-	}
-
-	@Override
-	protected Object biomeGenBaseColdTaigaHills() {
-		return master != null ? master.biomeGenBaseColdTaigaHills() : super.biomeGenBaseColdTaigaHills();
-	}
-
-	public Object superBiomeGenBaseColdTaigaHills() {
-		return super.biomeGenBaseColdTaigaHills();
+	public Object superBiomeMushroomIslandShore() {
+		return super.biomeMushroomIslandShore();
 	}
 
 	@Override
-	protected Object biomeGenBaseMegaTaiga() {
-		return master != null ? master.biomeGenBaseMegaTaiga() : super.biomeGenBaseMegaTaiga();
+	protected Object biomeBeach() {
+		return master != null ? master.biomeBeach() : super.biomeBeach();
 	}
 
-	public Object superBiomeGenBaseMegaTaiga() {
-		return super.biomeGenBaseMegaTaiga();
-	}
-
-	@Override
-	protected Object biomeGenBaseMegaTaigaHills() {
-		return master != null ? master.biomeGenBaseMegaTaigaHills() : super.biomeGenBaseMegaTaigaHills();
-	}
-
-	public Object superBiomeGenBaseMegaTaigaHills() {
-		return super.biomeGenBaseMegaTaigaHills();
+	public Object superBiomeBeach() {
+		return super.biomeBeach();
 	}
 
 	@Override
-	protected Object biomeGenBaseExtremeHillsPlus() {
-		return master != null ? master.biomeGenBaseExtremeHillsPlus() : super.biomeGenBaseExtremeHillsPlus();
+	protected Object biomeDesertHills() {
+		return master != null ? master.biomeDesertHills() : super.biomeDesertHills();
 	}
 
-	public Object superBiomeGenBaseExtremeHillsPlus() {
-		return super.biomeGenBaseExtremeHillsPlus();
-	}
-
-	@Override
-	protected Object biomeGenBaseSavanna() {
-		return master != null ? master.biomeGenBaseSavanna() : super.biomeGenBaseSavanna();
-	}
-
-	public Object superBiomeGenBaseSavanna() {
-		return super.biomeGenBaseSavanna();
+	public Object superBiomeDesertHills() {
+		return super.biomeDesertHills();
 	}
 
 	@Override
-	protected Object biomeGenBaseSavannaPlateau() {
-		return master != null ? master.biomeGenBaseSavannaPlateau() : super.biomeGenBaseSavannaPlateau();
+	protected Object biomeForestHills() {
+		return master != null ? master.biomeForestHills() : super.biomeForestHills();
 	}
 
-	public Object superBiomeGenBaseSavannaPlateau() {
-		return super.biomeGenBaseSavannaPlateau();
-	}
-
-	@Override
-	protected Object biomeGenBaseMesa() {
-		return master != null ? master.biomeGenBaseMesa() : super.biomeGenBaseMesa();
-	}
-
-	public Object superBiomeGenBaseMesa() {
-		return super.biomeGenBaseMesa();
+	public Object superBiomeForestHills() {
+		return super.biomeForestHills();
 	}
 
 	@Override
-	protected Object biomeGenBaseMesaPlateau_F() {
-		return master != null ? master.biomeGenBaseMesaPlateau_F() : super.biomeGenBaseMesaPlateau_F();
+	protected Object biomeTaigaHills() {
+		return master != null ? master.biomeTaigaHills() : super.biomeTaigaHills();
 	}
 
-	public Object superBiomeGenBaseMesaPlateau_F() {
-		return super.biomeGenBaseMesaPlateau_F();
+	public Object superBiomeTaigaHills() {
+		return super.biomeTaigaHills();
 	}
 
 	@Override
-	protected Object biomeGenBaseMesaPlateau() {
-		return master != null ? master.biomeGenBaseMesaPlateau() : super.biomeGenBaseMesaPlateau();
+	protected Object biomeExtremeHillsEdge() {
+		return master != null ? master.biomeExtremeHillsEdge() : super.biomeExtremeHillsEdge();
 	}
 
-	public Object superBiomeGenBaseMesaPlateau() {
-		return super.biomeGenBaseMesaPlateau();
+	public Object superBiomeExtremeHillsEdge() {
+		return super.biomeExtremeHillsEdge();
+	}
+
+	@Override
+	protected Object biomeJungle() {
+		return master != null ? master.biomeJungle() : super.biomeJungle();
+	}
+
+	public Object superBiomeJungle() {
+		return super.biomeJungle();
+	}
+
+	@Override
+	protected Object biomeJungleHills() {
+		return master != null ? master.biomeJungleHills() : super.biomeJungleHills();
+	}
+
+	public Object superBiomeJungleHills() {
+		return super.biomeJungleHills();
+	}
+
+	@Override
+	protected Object biomeJungleEdge() {
+		return master != null ? master.biomeJungleEdge() : super.biomeJungleEdge();
+	}
+
+	public Object superBiomeJungleEdge() {
+		return super.biomeJungleEdge();
+	}
+
+	@Override
+	protected Object biomeDeepOcean() {
+		return master != null ? master.biomeDeepOcean() : super.biomeDeepOcean();
+	}
+
+	public Object superBiomeDeepOcean() {
+		return super.biomeDeepOcean();
+	}
+
+	@Override
+	protected Object biomeStoneBeach() {
+		return master != null ? master.biomeStoneBeach() : super.biomeStoneBeach();
+	}
+
+	public Object superBiomeStoneBeach() {
+		return super.biomeStoneBeach();
+	}
+
+	@Override
+	protected Object biomeStoneColdBeach() {
+		return master != null ? master.biomeStoneColdBeach() : super.biomeStoneColdBeach();
+	}
+
+	public Object superBiomeStoneColdBeach() {
+		return super.biomeStoneColdBeach();
+	}
+
+	@Override
+	protected Object biomeBirchForest() {
+		return master != null ? master.biomeBirchForest() : super.biomeBirchForest();
+	}
+
+	public Object superBiomeBirchForest() {
+		return super.biomeBirchForest();
+	}
+
+	@Override
+	protected Object biomeBirchForestHills() {
+		return master != null ? master.biomeBirchForestHills() : super.biomeBirchForestHills();
+	}
+
+	public Object superBiomeBirchForestHills() {
+		return super.biomeBirchForestHills();
+	}
+
+	@Override
+	protected Object biomeRoofedForest() {
+		return master != null ? master.biomeRoofedForest() : super.biomeRoofedForest();
+	}
+
+	public Object superBiomeRoofedForest() {
+		return super.biomeRoofedForest();
+	}
+
+	@Override
+	protected Object biomeColdTaiga() {
+		return master != null ? master.biomeColdTaiga() : super.biomeColdTaiga();
+	}
+
+	public Object superBiomeColdTaiga() {
+		return super.biomeColdTaiga();
+	}
+
+	@Override
+	protected Object biomeColdTaigaHills() {
+		return master != null ? master.biomeColdTaigaHills() : super.biomeColdTaigaHills();
+	}
+
+	public Object superBiomeColdTaigaHills() {
+		return super.biomeColdTaigaHills();
+	}
+
+	@Override
+	protected Object biomeMegaTaiga() {
+		return master != null ? master.biomeMegaTaiga() : super.biomeMegaTaiga();
+	}
+
+	public Object superBiomeMegaTaiga() {
+		return super.biomeMegaTaiga();
+	}
+
+	@Override
+	protected Object biomeMegaTaigaHills() {
+		return master != null ? master.biomeMegaTaigaHills() : super.biomeMegaTaigaHills();
+	}
+
+	public Object superBiomeMegaTaigaHills() {
+		return super.biomeMegaTaigaHills();
+	}
+
+	@Override
+	protected Object biomeExtremeHillsPlus() {
+		return master != null ? master.biomeExtremeHillsPlus() : super.biomeExtremeHillsPlus();
+	}
+
+	public Object superBiomeExtremeHillsPlus() {
+		return super.biomeExtremeHillsPlus();
+	}
+
+	@Override
+	protected Object biomeSavanna() {
+		return master != null ? master.biomeSavanna() : super.biomeSavanna();
+	}
+
+	public Object superBiomeSavanna() {
+		return super.biomeSavanna();
+	}
+
+	@Override
+	protected Object biomeSavannaPlateau() {
+		return master != null ? master.biomeSavannaPlateau() : super.biomeSavannaPlateau();
+	}
+
+	public Object superBiomeSavannaPlateau() {
+		return super.biomeSavannaPlateau();
+	}
+
+	@Override
+	protected Object biomeMesa() {
+		return master != null ? master.biomeMesa() : super.biomeMesa();
+	}
+
+	public Object superBiomeMesa() {
+		return super.biomeMesa();
+	}
+
+	@Override
+	protected Object biomeMesaPlateau_F() {
+		return master != null ? master.biomeMesaPlateau_F() : super.biomeMesaPlateau_F();
+	}
+
+	public Object superBiomeMesaPlateau_F() {
+		return super.biomeMesaPlateau_F();
+	}
+
+	@Override
+	protected Object biomeMesaPlateau() {
+		return master != null ? master.biomeMesaPlateau() : super.biomeMesaPlateau();
+	}
+
+	public Object superBiomeMesaPlateau() {
+		return super.biomeMesaPlateau();
 	}
 
 	@Override
@@ -4673,21 +4673,21 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected int biomeGenBaseGetBiomeGrassColor(Object biomeGenBase) {
-		return master != null ? master.biomeGenBaseGetBiomeGrassColor(biomeGenBase) : super.biomeGenBaseGetBiomeGrassColor(biomeGenBase);
+	protected int biomeGetBiomeGrassColor(Object biome) {
+		return master != null ? master.biomeGetBiomeGrassColor(biome) : super.biomeGetBiomeGrassColor(biome);
 	}
 
-	public int superBiomeGenBaseGetBiomeGrassColor(Object biomeGenBase) {
-		return super.biomeGenBaseGetBiomeGrassColor(biomeGenBase);
+	public int superBiomeGetBiomeGrassColor(Object biome) {
+		return super.biomeGetBiomeGrassColor(biome);
 	}
 
 	@Override
-	protected int biomeGenBaseGetBiomeGrassColor(Object biomeGenBase, int x, int y, int z) {
-		return master != null ? master.biomeGenBaseGetBiomeGrassColor(biomeGenBase, x, y, z) : super.biomeGenBaseGetBiomeGrassColor(biomeGenBase, x, y, z);
+	protected int biomeGetBiomeGrassColor(Object biome, int x, int y, int z) {
+		return master != null ? master.biomeGetBiomeGrassColor(biome, x, y, z) : super.biomeGetBiomeGrassColor(biome, x, y, z);
 	}
 
-	public int superBiomeGenBaseGetBiomeGrassColor(Object biomeGenBase, int x, int y, int z) {
-		return super.biomeGenBaseGetBiomeGrassColor(biomeGenBase, x, y, z);
+	public int superBiomeGetBiomeGrassColor(Object biome, int x, int y, int z) {
+		return super.biomeGetBiomeGrassColor(biome, x, y, z);
 	}
 
 	@Override

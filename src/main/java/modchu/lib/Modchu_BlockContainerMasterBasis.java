@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerMaster {
 	public Modchu_IBlockContainer base;
@@ -19,8 +18,8 @@ public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerM
 	}
 
 	@Override
-	public Object setStepSound(Object stepSound) {
-		return base.superSetStepSound(stepSound);
+	public Object setSoundType(Object stepSound) {
+		return base.superSetSoundType(stepSound);
 	}
 
 	@Override
@@ -159,8 +158,8 @@ public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerM
 	}
 
 	@Override
-	public void onNeighborBlockChange(Object world, int par2, int par3, int par4, Object par5) {
-		base.superOnNeighborBlockChange(world, par2, par3, par4, par5);
+	public void neighborChanged(Object world, int par2, int par3, int par4, Object par5) {
+		base.superNeighborChanged(world, par2, par3, par4, par5);
 	}
 
 	@Override
@@ -254,7 +253,7 @@ public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerM
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(Object world, int par2, int par3, int par4, Object entity) {
+	public void onEntityWalk(Object world, int par2, int par3, int par4, Object entity) {
 		base.superOnEntityWalking(world, par2, par3, par4, entity);
 	}
 
@@ -364,8 +363,8 @@ public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerM
 	}
 
 	@Override
-	public boolean onBlockEventReceived(Object world, int par2, int par3, int par4, int par5, int par6) {
-		return base.superOnBlockEventReceived(world, par2, par3, par4, par5, par6);
+	public boolean eventReceived(Object world, int par2, int par3, int par4, int par5, int par6) {
+		return base.superEventReceived(world, par2, par3, par4, par5, par6);
 	}
 
 	@Override
@@ -864,8 +863,8 @@ public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerM
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(Object world, Object blockPos, Object entity) {
-		base.superOnEntityCollidedWithBlock(world, blockPos, entity);
+	public void onEntityWalk(Object world, Object blockPos, Object entity) {
+		base.superOnEntityWalk(world, blockPos, entity);
 	}
 
 	@Override
@@ -949,8 +948,8 @@ public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerM
 	}
 
 	@Override
-	public void onNeighborBlockChange(Object world, Object blockPos, Object iBlockState, Object block) {
-		base.superOnNeighborBlockChange(world, blockPos, iBlockState, block);
+	public void neighborChanged(Object world, Object blockPos, Object iBlockState, Object block) {
+		base.superNeighborChanged(world, blockPos, iBlockState, block);
 	}
 
 	@Override
@@ -1044,8 +1043,8 @@ public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerM
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(Object world, Object blockPos, Object iBlockState, Object entity) {
-		base.superOnEntityCollidedWithBlock(world, blockPos, iBlockState, entity);
+	public void onEntityWalk(Object world, Object blockPos, Object iBlockState, Object entity) {
+		base.superOnEntityWalk(world, blockPos, iBlockState, entity);
 	}
 
 	@Override
@@ -1069,8 +1068,8 @@ public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerM
 	}
 
 	@Override
-	public boolean onBlockEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
-		return base.superOnBlockEventReceived(world, blockPos, iBlockState, eventID, eventParam);
+	public boolean eventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
+		return base.superEventReceived(world, blockPos, iBlockState, eventID, eventParam);
 	}
 
 	@Override
@@ -1734,8 +1733,8 @@ public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerM
 	}
 
 	@Override
-	public Object getStepSound() {
-		return base.superGetStepSound();
+	public Object getSoundType() {
+		return base.superGetSoundType();
 	}
 
 	@Override

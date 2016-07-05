@@ -6,7 +6,7 @@ import java.util.Random;
 
 public interface Modchu_IBlockMaster {
 	public void initializeBlock();
-	public Object setStepSound(Object stepSound);
+	public Object setSoundType(Object stepSound);
 	public Object setLightOpacity(int par1);
 	public Object setLightLevel(float par1);
 	public Object setResistance(float par1);
@@ -34,7 +34,7 @@ public interface Modchu_IBlockMaster {
 	public void updateTick(Object world, int par2, int par3, int par4, Random par5Random);
 	public void randomDisplayTick(Object world, int par2, int par3, int par4, Random par5Random);
 	public void onBlockDestroyedByPlayer(Object world, int par2, int par3, int par4, int par5);
-	public void onNeighborBlockChange(Object world, int par2, int par3, int par4, Object par5);
+	public void neighborChanged(Object world, int par2, int par3, int par4, Object par5);
 	public int tickRate(Object world);
 	public void onBlockAdded(Object world, int par2, int par3, int par4);
 	public void breakBlock(Object world, int par2, int par3, int par4, Object par5, int par6);
@@ -53,7 +53,7 @@ public interface Modchu_IBlockMaster {
 	public boolean canPlaceBlockOnSide(Object world, int par2, int par3, int par4, int par5);
 	public boolean canPlaceBlockAt(Object world, int par2, int par3, int par4);
 	public boolean onBlockActivated(Object world, int par2, int par3, int par4, Object entityPlayer, int par6, float par7, float par8, float par9);
-	public void onEntityCollidedWithBlock(Object world, int par2, int par3, int par4, Object entity);
+	public void onEntityWalk(Object world, int par2, int par3, int par4, Object entity);
 	public int onBlockPlaced(Object world, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9);
 	public void onBlockClicked(Object world, int par2, int par3, int par4, Object entityPlayer);
 	public void velocityToAddToEntity(Object world, int par2, int par3, int par4, Object entity, Object vec3);
@@ -75,7 +75,7 @@ public interface Modchu_IBlockMaster {
 	public Object setUnlocalizedName(String par1Str);
 	public String getLocalizedName();
 	public String getUnlocalizedName();
-	public boolean onBlockEventReceived(Object world, int par2, int par3, int par4, int par5, int par6);
+	public boolean eventReceived(Object world, int par2, int par3, int par4, int par5, int par6);
 	public boolean getEnableStats();
 	public Object disableStats();
 	public int getMobilityFlag();
@@ -177,7 +177,7 @@ public interface Modchu_IBlockMaster {
 	public void onBlockAdded(Object world, Object blockPos, Object iBlockState);
 	public float getPlayerRelativeBlockHardness(Object entityPlayer, Object world, Object blockPos);
 	public void dropBlockAsItemWithChance(Object world, Object blockPos, Object iBlockState, float par6, int par7);
-	public void onEntityCollidedWithBlock(Object world, Object blockPos, Object entity);
+	public void onEntityWalk(Object world, Object blockPos, Object entity);
 	public boolean isFullBlock();
 	public int getLightOpacity();
 	public boolean isTranslucent();
@@ -194,7 +194,7 @@ public interface Modchu_IBlockMaster {
 	public boolean isReplaceable(Object iBlockAccess, Object blockPos);
 	public Object getSelectedBoundingBox(Object world, Object blockPos);
 	public void randomTick(Object world, Object blockPos, Object iBlockState, Random random);
-	public void onNeighborBlockChange(Object world, Object blockPos, Object iBlockState, Object block);
+	public void neighborChanged(Object world, Object blockPos, Object iBlockState, Object block);
 	public void breakBlock(Object world, Object blockPos, Object iBlockState);
 	public Object getItemDropped(Object iBlockState, Random rand, int fortune);
 	public void dropXpOnBlockBreak(Object world, Object blockPos, int amount);
@@ -213,12 +213,12 @@ public interface Modchu_IBlockMaster {
 	public int getRenderColor(Object iBlockState);
 	public int colorMultiplier(Object iBlockAccess, Object blockPos, int renderPass);
 	public int getWeakPower(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing);
-	public void onEntityCollidedWithBlock(Object world, Object blockPos, Object iBlockState, Object entity);
+	public void onEntityWalk(Object world, Object blockPos, Object iBlockState, Object entity);
 	public int getStrongPower(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing);
 	public void harvestBlock(Object world, Object entityPlayer, Object blockPos, Object iBlockState, Object tileEntity);
 	public Object createStackedBlock(Object iBlockState);
 	public void onBlockPlacedBy(Object world, Object blockPos, Object iBlockState, Object entityLivingBase, Object itemStack);
-	public boolean onBlockEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam);
+	public boolean eventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam);
 	public void onFallenUpon(Object world, Object blockPos, Object entity, float fallDistance);
 	public void onLanded(Object world, Object entity);
 	public Object getItem(Object world, Object blockPos);
@@ -351,7 +351,7 @@ public interface Modchu_IBlockMaster {
 	public void addCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity);
 	public Object rayTrace(Object blockPos, Object vec3d, Object vec3d1, Object axisAlignedBB);
 	public boolean canSpawnInBlock();
-	public Object getStepSound();
+	public Object getSoundType();
 	public String toString();
 	public boolean doesSideBlockRendering(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing);
 	public boolean addLandingEffects(Object iBlockState, Object worldServer, Object blockPos, Object iBlockState1, Object entityLivingBase, int numberOfParticles);

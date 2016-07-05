@@ -17,7 +17,6 @@ import modchu.lib.Modchu_Reflect;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.command.CommandResultStats;
 import net.minecraft.command.CommandResultStats.Type;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.DataWatcher;
@@ -32,8 +31,6 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.event.HoverEvent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -54,13 +51,13 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_IEntityLivingBase {
+public abstract class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_IEntityLivingBase {
 	public Modchu_IEntityLivingBaseMaster master;
 	public String entityName;
 	public static ConcurrentHashMap<String, UUID> entityUniqueIDMap = new ConcurrentHashMap();
 	protected UUID entityUniqueID;
 	protected int maxHealth;
-	private boolean initFlag;
+	protected boolean initFlag;
 
 	public Modchu_EntityLivingBase(World world) {
 		super(world);
@@ -890,12 +887,12 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 
 	@Override
 	protected void updateAITick() {
-		if (master != null) master.updateAITick();
+		if (master != null) master.handleJumpWater();
 		else super.updateAITick();
 	}
 
 	@Override
-	public void superUpdateAITick() {
+	public void superHandleJumpWater() {
 		super.updateAITick();
 	}
 
@@ -1175,6 +1172,7 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 		return (ItemStack) (master != null ? master.getItemStackFromSlot(slotIn) : null);
 	}
 
+	@Override
 	public ItemStack superGetCurrentArmor(int slotIn) {
 		return null;
 	}
@@ -1184,6 +1182,7 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 		return master != null ? master.isServerWorld() : super.isServerWorld();
 	}
 
+	@Override
 	public boolean superIsServerWorld() {
 		return super.isServerWorld();
 	}
@@ -1260,6 +1259,7 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 		return null;
 	}
 	// 188~
+	@Override
 	public void superFunc_180433_a(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
 	}
 
@@ -1299,6 +1299,7 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 		return false;
 	}
 
+	@Override
 	public void superFunc_145781_i(int p_145781_1_) {
 	}
 
@@ -1310,6 +1311,7 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 		return false;
 	}
 
+	@Override
 	public boolean superCanUseCommand(int permLevel, String commandName) {
 		return false;
 	}
@@ -1318,13 +1320,16 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 		return null;
 	}
 
+	@Override
 	public Object superFunc_174819_aU() {
 		return null;
 	}
 
+	@Override
 	public void superFunc_174834_g(Object nBTTagCompound) {
 	}
 
+	@Override
 	public boolean superFunc_174825_a(Object entityPlayer, Object vec3) {
 		return false;
 	}
@@ -1336,39 +1341,49 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 	public void superFunc_174815_a(Object entityLivingBase, Object entity) {
 	}
 
+	@Override
 	public Object superGetTeleportDirection() {
 		return null;
 	}
 
+	@Override
 	public void superAddRandomDrop() {
 	}
 
+	@Override
 	public boolean superCanDropLoot() {
 		return false;
 	}
 
+	@Override
 	public void superUpdatePotionMetadata() {
 	}
 
+	@Override
 	public void superResetPotionEffectMetadata() {
 	}
 
+	@Override
 	public float superGetJumpUpwardsMotion() {
 		return 0.0F;
 	}
 
+	@Override
 	public void superHandleJumpLava() {
 	}
 
 	public void superFunc_181013_g(float p_181013_1_) {
 	}
 
+	@Override
 	public void superSendEnterCombat() {
 	}
 
+	@Override
 	public void superSendEndCombat() {
 	}
 
+	@Override
 	public void superMarkPotionsDirty() {
 	}
 
@@ -1376,9 +1391,11 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 		return null;
 	}
 	// 190~
+	@Override
 	public void superDropLoot() {
 	}
 
+	@Override
 	public void superSetNoAI(boolean par1) {
 	}
 
@@ -1386,93 +1403,119 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 		return false;
 	}
 
+	@Override
 	public Object superGetFallSound(int damageValue) {
 		return null;
 	}
 
+	@Override
 	public int superGetItemInUseCount() {
 		return -1;
 	}
 
+	@Override
 	public void superUpdateItemUse(Object itemStack, int p_184584_2_) {
 	}
 
+	@Override
 	public void superOnItemUseFinish() {
 	}
 
+	@Override
 	public void superSwingArm(Object enumHand) {
 	}
 
+	@Override
 	public Object superGetItemStackFromSlot(Object entityEquipmentSlot) {
 		return null;
 	}
 
+	@Override
 	public void superFrostWalk(Object blockPos) {
 	}
 
+	@Override
 	public void superPlayEquipSound(Object itemStack) {
 	}
 
+	@Override
 	public Object superRemoveActivePotionEffect(Object potion) {
 		return null;
 	}
 
+	@Override
 	public void superRemovePotionEffect(Object potion) {
 	}
 
+	@Override
 	public void superPlayHurtSound(Object damageSource) {
 	}
 
+	@Override
 	public void superDamageShield(float p_184590_1_) {
 	}
 
+	@Override
 	public Object superGetHeldItemOffhand() {
 		return null;
 	}
 
+	@Override
 	public Object superGetHeldItem(Object enumHand) {
 		return null;
 	}
 
+	@Override
 	public void superSetHeldItem(Object enumHand, Object itemStack) {
 	}
 
+	@Override
 	public boolean superIsHandActive() {
 		return false;
 	}
 
+	@Override
 	public Object superGetActiveHand() {
 		return null;
 	}
 
+	@Override
 	public void superUpdateActiveHand() {
 	}
 
+	@Override
 	public void superSetActiveHand(Object enumHand) {
 	}
 
+	@Override
 	public Object superGetActiveItemStack() {
 		return null;
 	}
 
+	@Override
 	public int superGetItemInUseMaxCount() {
 		return -1;
 	}
 
+	@Override
 	public void superStopActiveHand() {
 	}
 
+	@Override
 	public void superResetActiveHand() {
 	}
 
+	@Override
 	public boolean superIsActiveItemStackBlocking() {
 		return false;
 	}
 
+	@Override
 	public boolean superIsElytraFlying() {
 		return false;
 	}
 
+	@Override
 	public int superGetTicksElytraFlying() {
 		return -1;
 	}
@@ -1481,10 +1524,12 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 		return false;
 	}
 
+	@Override
 	public boolean superCanBeHitWithPotion() {
 		return false;
 	}
 
+	@Override
 	public void superDropLoot(boolean p_184610_1_, int p_184610_2_, Object damageSource) {
 	}
 
@@ -1493,72 +1538,96 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 	}
 	// Override用
 
+	@Override
 	public Object superGetCollisionBoundingBox() {
 		return null;
 	}
 
+	@Override
 	public void superSetPortal(Object blockPos) {
 	}
 
+	@Override
 	public void superHandleStatusUpdate(byte p_70103_1_) {
 	}
 
+	@Override
 	public Object superGetLastPortalVec() {
 		return null;
 	}
 
+	@Override
 	public void superOnDataWatcherUpdate(int p_145781_1_) {
 	}
 
+	@Override
 	public void superUpdateFallState(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
 	}
 
-	public void superSetPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+	@Override
+	public void superSetPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 	}
 
+	@Override
 	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
 		return false;
 	}
 
+	@Override
 	public Object superGetHoverEvent() {
 		return null;
 	}
 
+	@Override
 	public boolean superIsSpectatedByPlayer(Object entityPlayerMP) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
 		return false;
 	}
 
+	@Override
 	public Object superGetCommandStats() {
 		return null;
 	}
 
+	@Override
 	public Object superGetNBTTagCompound() {
 		return null;
 	}
 
+	@Override
 	public void superClientUpdateEntityNBT(Object nBTTagCompound) {
 	}
 
+	@Override
 	public boolean superInteractAt(Object entityPlayer, Object vec3) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsImmuneToExplosions() {
 		return false;
 	}
 
+	@Override
 	public void superApplyEnchantments(Object entityLivingBase, Object entity) {
 	}
 
+	@Override
 	public void superSetRenderYawOffset(float offset) {
 	}
 
+	@Override
 	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object itemStack, Object enumHand) {
 		return null;
+	}
+
+	@Override
+	public boolean superAttemptTeleport(double x, double y, double z) {
+		return false;
 	}
 	// TODO Modchu_Entity のコピー↓（からのエラー対処有り）
 	@Override
@@ -1905,12 +1974,12 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 
 	@Override
 	public void moveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
-		if (master != null) master.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
+		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_);
 		else super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
 	@Override
-	public void superMoveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
+	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
 		super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
@@ -2139,8 +2208,9 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 	}
 
 	@Override
-	public void superWriteToNBT(Object nBTTagCompound) {
+	public Object superWriteToNBT(Object nBTTagCompound) {
 		super.writeToNBT((NBTTagCompound) nBTTagCompound);
+		return nBTTagCompound;
 	}
 
 	@Override
@@ -2605,11 +2675,11 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 
 	@Override
 	public boolean canAttackWithItem() {
-		return master != null ? master.canAttackWithItem() : super.canAttackWithItem();
+		return master != null ? master.canBeAttackedWithItem() : super.canAttackWithItem();
 	}
 
 	@Override
-	public boolean superCanAttackWithItem() {
+	public boolean superCanBeAttackedWithItem() {
 		return super.canAttackWithItem();
 	}
 
@@ -3323,7 +3393,7 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
+	public void superSetPositionAndRotationDirect(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
 	}
 
 	@Override
@@ -3592,11 +3662,11 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 	}
 
 	@Override
-	public void superSetBossVisibleTo(Object entityPlayerMP) {
+	public void superAddTrackingPlayer(Object entityPlayerMP) {
 	}
 
 	@Override
-	public void superSetBossNonVisibleTo(Object entityPlayerMP) {
+	public void superRemoveTrackingPlayer(Object entityPlayerMP) {
 	}
 
 	@Override
@@ -3610,7 +3680,7 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 	}
 
 	@Override
-	public boolean superFunc_184213_bq() {
+	public boolean superIgnoreItemEntityData() {
 		return false;
 	}
 

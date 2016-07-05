@@ -99,14 +99,17 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getFreeVariable(s) : null;
 	}
 
+	@Override
 	public Object superGetFreeVariable(String s) {
 		return null;
 	}
 
+	@Override
 	public void setFreeVariable(String s, Object o) {
 		if (master != null) master.setFreeVariable(s, o);
 	}
 
+	@Override
 	public void superSetFreeVariable(String s, Object o) {
 	}
 
@@ -121,6 +124,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.resetHeight();
 	}
 
+	@Override
 	public void superResetHeight() {
 		super.resetHeight();
 	}
@@ -130,17 +134,19 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.attackEntityFrom(damageSource, par2) : super.attackEntityFrom(damageSource, par2);
 	}
 
+	@Override
 	public boolean superAttackEntityFrom(Object damageSource, float par2) {
 		return super.attackEntityFrom((DamageSource) damageSource, (int) par2);
 	}
 
 	@Override
 	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
-		if (master != null) master.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
+		if (master != null) master.setPositionAndRotationDirect(par1, par3, par5, par7, par8, par9);
 		else super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
 	}
 
-	public void superSetPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
+	@Override
+	public void superSetPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9) {
 		super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
 	}
 
@@ -150,6 +156,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onUpdate();
 	}
 
+	@Override
 	public void superOnUpdate() {
 		super.onUpdate();
 	}
@@ -159,6 +166,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getShadowSize() : super.getShadowSize();
 	}
 
+	@Override
 	public float superGetShadowSize() {
 		return super.getShadowSize();
 	}
@@ -169,6 +177,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onLivingUpdate();
 	}
 
+	@Override
 	public void superOnLivingUpdate() {
 		super.onLivingUpdate();
 	}
@@ -179,6 +188,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setCurrentItemOrArmor(par1, itemStack);
 	}
 
+	@Override
 	public void superSetCurrentItemOrArmor(int par1, Object itemStack) {
 		super.setCurrentItemOrArmor(par1, (ItemStack) itemStack);
 	}
@@ -188,6 +198,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canCommandSenderUseCommand(par1, par2Str) : super.canCommandSenderUseCommand(par1, par2Str);
 	}
 
+	@Override
 	public boolean superCanCommandSenderUseCommand(int par1, String par2Str) {
 		return super.canCommandSenderUseCommand(par1, par2Str);
 	}
@@ -197,6 +208,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (ChunkCoordinates) (master != null ? master.getPlayerCoordinates() : super.getPlayerCoordinates());
 	}
 
+	@Override
 	public ChunkCoordinates superGetPlayerCoordinates() {
 		return super.getPlayerCoordinates();
 	}
@@ -207,6 +219,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.entityInit();
 	}
 
+	@Override
 	public void superEntityInit() {
 		super.entityInit();
 	}
@@ -216,6 +229,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (ItemStack) (master != null ? master.getItemInUse() : super.getItemInUse());
 	}
 
+	@Override
 	public ItemStack superGetItemInUse() {
 		return super.getItemInUse();
 	}
@@ -225,6 +239,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getItemInUseCount() : super.getItemInUseCount();
 	}
 
+	@Override
 	public int superGetItemInUseCount() {
 		return super.getItemInUseCount();
 	}
@@ -234,6 +249,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isUsingItem() : super.isUsingItem();
 	}
 
+	@Override
 	public boolean superIsUsingItem() {
 		return super.isUsingItem();
 	}
@@ -243,6 +259,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getItemInUseDuration() : super.getItemInUseDuration();
 	}
 
+	@Override
 	public int superGetItemInUseDuration() {
 		return super.getItemInUseDuration();
 	}
@@ -253,6 +270,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.stopUsingItem();
 	}
 
+	@Override
 	public void superStopUsingItem() {
 		super.stopUsingItem();
 	}
@@ -263,6 +281,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.clearItemInUse();
 	}
 
+	@Override
 	public void superClearItemInUse() {
 		super.clearItemInUse();
 	}
@@ -272,6 +291,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isBlocking() : super.isBlocking();
 	}
 
+	@Override
 	public boolean superIsBlocking() {
 		return super.isBlocking();
 	}
@@ -281,6 +301,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getMaxInPortalTime() : super.getMaxInPortalTime();
 	}
 
+	@Override
 	public int superGetMaxInPortalTime() {
 		return super.getMaxInPortalTime();
 	}
@@ -290,6 +311,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getPortalCooldown() : super.getPortalCooldown();
 	}
 
+	@Override
 	public int superGetPortalCooldown() {
 		return super.getPortalCooldown();
 	}
@@ -310,6 +332,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.updateItemUse(itemStack, par2);
 	}
 
+	@Override
 	public void superUpdateItemUse(Object itemStack, int par2) {
 		super.updateItemUse((ItemStack) itemStack, par2);
 	}
@@ -320,6 +343,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onItemUseFinish();
 	}
 
+	@Override
 	public void superOnItemUseFinish() {
 		super.onItemUseFinish();
 	}
@@ -330,6 +354,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.handleHealthUpdate(par1);
 	}
 
+	@Override
 	public void superHandleStatusUpdate(byte par1) {
 		super.handleHealthUpdate(par1);
 	}
@@ -339,6 +364,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isMovementBlocked() : super.isMovementBlocked();
 	}
 
+	@Override
 	public boolean superIsMovementBlocked() {
 		return super.isMovementBlocked();
 	}
@@ -349,6 +375,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.closeScreen();
 	}
 
+	@Override
 	public void superCloseScreen() {
 		super.closeScreen();
 	}
@@ -359,6 +386,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.mountEntity(entity);
 	}
 
+	@Override
 	public boolean superStartRiding(Object entity) {
 		super.mountEntity((Entity) entity);
 		return true;
@@ -370,6 +398,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.updateRidden();
 	}
 
+	@Override
 	public void superUpdateRidden() {
 		super.updateRidden();
 	}
@@ -380,6 +409,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.preparePlayerToSpawn();
 	}
 
+	@Override
 	public void superPreparePlayerToSpawn() {
 		super.preparePlayerToSpawn();
 	}
@@ -390,6 +420,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.updateEntityActionState();
 	}
 
+	@Override
 	public void superUpdateEntityActionState() {
 		super.updateEntityActionState();
 	}
@@ -399,6 +430,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getScore() : super.getScore();
 	}
 
+	@Override
 	public int superGetScore() {
 		return super.getScore();
 	}
@@ -409,6 +441,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setScore(par1);
 	}
 
+	@Override
 	public void superSetScore(int par1) {
 		super.setScore(par1);
 	}
@@ -419,6 +452,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.addScore(par1);
 	}
 
+	@Override
 	public void superAddScore(int par1) {
 		super.addScore(par1);
 	}
@@ -429,6 +463,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onDeath(damageSource);
 	}
 
+	@Override
 	public void superOnDeath(Object damageSource) {
 		super.onDeath((DamageSource) damageSource);
 	}
@@ -439,16 +474,18 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.addToPlayerScore(entity, par2);
 	}
 
+	@Override
 	public void superAddToPlayerScore(Object entity, int par2) {
 		super.addToPlayerScore((Entity) entity, par2);
 	}
 
 	@Override
 	public EntityItem dropOneItem(boolean par1) {
-		return (EntityItem) (master != null ? master.dropOneItem(par1) : super.dropOneItem(par1));
+		return (EntityItem) (master != null ? master.dropItem(par1) : super.dropOneItem(par1));
 	}
 
-	public EntityItem superDropOneItem(boolean par1) {
+	@Override
+	public EntityItem superDropItem(boolean par1) {
 		return super.dropOneItem(par1);
 	}
 
@@ -457,16 +494,18 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EntityItem) (master != null ? master.dropPlayerItem(itemStack) : super.dropPlayerItem(itemStack));
 	}
 
+	@Override
 	public EntityItem superDropPlayerItem(Object itemStack) {
 		return super.dropPlayerItem((ItemStack) itemStack);
 	}
 
 	@Override
 	public EntityItem dropPlayerItemWithRandomChoice(ItemStack itemStack, boolean par2) {
-		return (EntityItem) (master != null ? master.dropPlayerItemWithRandomChoice(itemStack, par2) : super.dropPlayerItemWithRandomChoice(itemStack, par2));
+		return (EntityItem) (master != null ? master.dropItem(itemStack, par2) : super.dropPlayerItemWithRandomChoice(itemStack, par2));
 	}
 
-	public EntityItem superDropPlayerItemWithRandomChoice(Object itemStack, boolean par2) {
+	@Override
+	public EntityItem superDropItem(Object itemStack, boolean par2) {
 		return super.dropPlayerItemWithRandomChoice((ItemStack) itemStack, par2);
 	}
 
@@ -476,6 +515,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.joinEntityItemWithWorld(entityItem);
 	}
 
+	@Override
 	public Object superDropItemAndGetStack(Object entityItem) {
 		super.joinEntityItemWithWorld((EntityItem) entityItem);
 		return ((EntityItem) entityItem).getEntityItem();
@@ -486,6 +526,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getCurrentPlayerStrVsBlock(block, par2) : super.getCurrentPlayerStrVsBlock(block, par2);
 	}
 
+	@Override
 	public float superGetCurrentPlayerStrVsBlock(Object block, boolean par2) {
 		return super.getCurrentPlayerStrVsBlock((Block) block, par2);
 	}
@@ -495,6 +536,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canHarvestBlock(block) : super.canHarvestBlock(block);
 	}
 
+	@Override
 	public boolean superCanHarvestBlock(Object block) {
 		return super.canHarvestBlock((Block) block);
 	}
@@ -505,6 +547,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.readEntityFromNBT(nBTTagCompound);
 	}
 
+	@Override
 	public void superReadEntityFromNBT(Object nBTTagCompound) {
 		super.readEntityFromNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -515,6 +558,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.writeEntityToNBT(nBTTagCompound);
 	}
 
+	@Override
 	public void superWriteEntityToNBT(Object nBTTagCompound) {
 		super.writeEntityToNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -525,6 +569,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIChest(iInventory);
 	}
 
+	@Override
 	public void superDisplayGUIChest(Object iInventory) {
 		super.displayGUIChest((IInventory) iInventory);
 	}
@@ -535,6 +580,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIHopper(tileEntityHopper);
 	}
 
+	@Override
 	public void superDisplayGUIHopper(Object tileEntityHopper) {
 		super.displayGUIHopper((TileEntityHopper) tileEntityHopper);
 	}
@@ -545,6 +591,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIHopperMinecart(entityMinecartHopper);
 	}
 
+	@Override
 	public void superDisplayGUIHopperMinecart(Object entityMinecartHopper) {
 		super.displayGUIHopperMinecart((EntityMinecartHopper) entityMinecartHopper);
 	}
@@ -555,6 +602,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIEnchantment(par1, par2, par3, par4Str);
 	}
 
+	@Override
 	public void superDisplayGUIEnchantment(int par1, int par2, int par3, String par4Str) {
 		super.displayGUIEnchantment(par1, par2, par3, par4Str);
 	}
@@ -565,6 +613,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIAnvil(par1, par2, par3);
 	}
 
+	@Override
 	public void superDisplayGUIAnvil(int par1, int par2, int par3) {
 		super.displayGUIAnvil(par1, par2, par3);
 	}
@@ -575,6 +624,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIWorkbench(par1, par2, par3);
 	}
 
+	@Override
 	public void superDisplayGUIWorkbench(int par1, int par2, int par3) {
 		super.displayGUIWorkbench(par1, par2, par3);
 	}
@@ -584,6 +634,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getEyeHeight() : super.getEyeHeight();
 	}
 
+	@Override
 	public float superGetEyeHeight() {
 		return super.getEyeHeight();
 	}
@@ -593,6 +644,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getTotalArmorValue() : super.getTotalArmorValue();
 	}
 
+	@Override
 	public int superGetTotalArmorValue() {
 		return super.getTotalArmorValue();
 	}
@@ -603,6 +655,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.damageEntity(damageSource, par2);
 	}
 
+	@Override
 	public void superDamageEntity(Object damageSource, float par2) {
 		super.damageEntity((DamageSource) damageSource, (int) par2);
 	}
@@ -613,6 +666,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIFurnace(tileEntityFurnace);
 	}
 
+	@Override
 	public void superDisplayGUIFurnace(Object tileEntityFurnace) {
 		super.displayGUIFurnace((TileEntityFurnace) tileEntityFurnace);
 	}
@@ -623,6 +677,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIDispenser(tileEntityDispenser);
 	}
 
+	@Override
 	public void superDisplayGUIDispenser(Object tileEntityDispenser) {
 		super.displayGUIDispenser((TileEntityDispenser) tileEntityDispenser);
 	}
@@ -633,6 +688,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIEditSign(tileEntity);
 	}
 
+	@Override
 	public void superDisplayGUIEditSign(Object tileEntity) {
 		super.displayGUIEditSign((TileEntity) tileEntity);
 	}
@@ -643,6 +699,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIBrewingStand(tileEntityBrewingStand);
 	}
 
+	@Override
 	public void superDisplayGUIBrewingStand(Object tileEntityBrewingStand) {
 		super.displayGUIBrewingStand((TileEntityBrewingStand) tileEntityBrewingStand);
 	}
@@ -653,6 +710,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIBeacon(tileEntityBeacon);
 	}
 
+	@Override
 	public void superDisplayGUIBeacon(Object tileEntityBeacon) {
 		super.displayGUIBeacon((TileEntityBeacon) tileEntityBeacon);
 	}
@@ -663,6 +721,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIMerchant(iMerchant, par2Str);
 	}
 
+	@Override
 	public void superDisplayGUIMerchant(Object iMerchant, String par2Str) {
 		super.displayGUIMerchant((IMerchant) iMerchant, par2Str);
 	}
@@ -673,6 +732,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.displayGUIBook(itemStack);
 	}
 
+	@Override
 	public void superOpenBook(Object itemStack) {
 		super.displayGUIBook((ItemStack) itemStack);
 	}
@@ -682,6 +742,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.interactWith(entity) : super.interactWith(entity);
 	}
 
+	@Override
 	public boolean superInteractWith(Object entity) {
 		return super.interactWith((Entity) entity);
 	}
@@ -691,6 +752,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (ItemStack) (master != null ? master.getHeldItemMainhand() : super.getCurrentEquippedItem());
 	}
 
+	@Override
 	public ItemStack superGetHeldItemMainhand() {
 		return super.getCurrentEquippedItem();
 	}
@@ -701,6 +763,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.destroyCurrentEquippedItem();
 	}
 
+	@Override
 	public void superDestroyCurrentEquippedItem() {
 		super.destroyCurrentEquippedItem();
 	}
@@ -710,6 +773,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getYOffset() : super.getYOffset();
 	}
 
+	@Override
 	public double superGetYOffset() {
 		return super.getYOffset();
 	}
@@ -720,6 +784,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.attackTargetEntityWithCurrentItem(entity);
 	}
 
+	@Override
 	public void superAttackTargetEntityWithCurrentItem(Object entity) {
 		super.attackTargetEntityWithCurrentItem((Entity) entity);
 	}
@@ -730,6 +795,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onCriticalHit(entity);
 	}
 
+	@Override
 	public void superOnCriticalHit(Object entity) {
 		super.onCriticalHit((Entity) entity);
 	}
@@ -740,6 +806,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onEnchantmentCritical(entity);
 	}
 
+	@Override
 	public void superOnEnchantmentCritical(Object entity) {
 		super.onEnchantmentCritical((Entity) entity);
 	}
@@ -750,6 +817,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.respawnPlayer();
 	}
 
+	@Override
 	public void superRespawnPlayer() {
 		super.respawnPlayer();
 	}
@@ -760,6 +828,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setDead();
 	}
 
+	@Override
 	public void superSetDead() {
 		super.setDead();
 	}
@@ -769,6 +838,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isEntityInsideOpaqueBlock() : super.isEntityInsideOpaqueBlock();
 	}
 
+	@Override
 	public boolean superIsEntityInsideOpaqueBlock() {
 		return super.isEntityInsideOpaqueBlock();
 	}
@@ -778,6 +848,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EnumStatus) (master != null ? master.sleepInBedAt(par1, par2, par3) : super.sleepInBedAt(par1, par2, par3));
 	}
 
+	@Override
 	public EnumStatus superSleepInBedAt(int par1, int par2, int par3) {
 		return super.sleepInBedAt(par1, par2, par3);
 	}
@@ -788,6 +859,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.wakeUpPlayer(par1, par2, par3);
 	}
 
+	@Override
 	public void superWakeUpPlayer(boolean par1, boolean par2, boolean par3) {
 		super.wakeUpPlayer(par1, par2, par3);
 	}
@@ -797,6 +869,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getBedOrientationInDegrees() : super.getBedOrientationInDegrees();
 	}
 
+	@Override
 	public float superGetBedOrientationInDegrees() {
 		return super.getBedOrientationInDegrees();
 	}
@@ -806,6 +879,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isPlayerSleeping() : super.isPlayerSleeping();
 	}
 
+	@Override
 	public boolean superIsPlayerSleeping() {
 		return super.isPlayerSleeping();
 	}
@@ -815,6 +889,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isPlayerFullyAsleep() : super.isPlayerFullyAsleep();
 	}
 
+	@Override
 	public boolean superIsPlayerFullyAsleep() {
 		return super.isPlayerFullyAsleep();
 	}
@@ -824,6 +899,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getSleepTimer() : super.getSleepTimer();
 	}
 
+	@Override
 	public int superGetSleepTimer() {
 		return super.getSleepTimer();
 	}
@@ -833,6 +909,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getHideCape(par1) : super.getHideCape(par1);
 	}
 
+	@Override
 	public boolean superGetHideCape(int par1) {
 		return super.getHideCape(par1);
 	}
@@ -843,6 +920,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setHideCape(par1, par2);
 	}
 
+	@Override
 	public void superSetHideCape(int par1, boolean par2) {
 		super.setHideCape(par1, par2);
 	}
@@ -853,6 +931,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.addChatMessage(par1Str);
 	}
 
+	@Override
 	public void superAddChatMessage(String par1Str) {
 		super.addChatMessage(par1Str);
 	}
@@ -862,6 +941,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (ChunkCoordinates) (master != null ? master.getBedLocation() : super.getBedLocation());
 	}
 
+	@Override
 	public ChunkCoordinates superGetBedLocation() {
 		return super.getBedLocation();
 	}
@@ -871,6 +951,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isSpawnForced() : super.isSpawnForced();
 	}
 
+	@Override
 	public boolean superIsSpawnForced() {
 		return super.isSpawnForced();
 	}
@@ -881,6 +962,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setSpawnChunk(chunkCoordinates, par2);
 	}
 
+	@Override
 	public void superSetSpawnChunk(Object chunkCoordinates, boolean par2) {
 		super.setSpawnChunk((ChunkCoordinates) chunkCoordinates, par2);
 	}
@@ -891,6 +973,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.triggerAchievement(statBase);
 	}
 
+	@Override
 	public void superAddStat(Object statBase) {
 		super.triggerAchievement((StatBase) statBase);
 	}
@@ -901,6 +984,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.addStat(statBase, par2);
 	}
 
+	@Override
 	public void superAddStat(Object statBase, int par2) {
 		super.addStat((StatBase) statBase, par2);
 	}
@@ -911,6 +995,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.jump();
 	}
 
+	@Override
 	public void superJump() {
 		super.jump();
 	}
@@ -921,6 +1006,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.moveEntityWithHeading(par1, par2);
 	}
 
+	@Override
 	public void superMoveEntityWithHeading(float par1, float par2) {
 		super.moveEntityWithHeading(par1, par2);
 	}
@@ -930,6 +1016,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getAIMoveSpeed() : super.getAIMoveSpeed();
 	}
 
+	@Override
 	public float superGetAIMoveSpeed() {
 		return super.getAIMoveSpeed();
 	}
@@ -940,6 +1027,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.addMovementStat(par1, par3, par5);
 	}
 
+	@Override
 	public void superAddMovementStat(double par1, double par3, double par5) {
 		super.addMovementStat(par1, par3, par5);
 	}
@@ -950,6 +1038,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.fall(par1);
 	}
 
+	@Override
 	public void superFall(float par1) {
 		super.fall(par1);
 	}
@@ -960,6 +1049,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onKillEntity(EntityLiving);
 	}
 
+	@Override
 	public void superOnKillEntity(Object EntityLiving) {
 		super.onKillEntity((EntityLiving) EntityLiving);
 	}
@@ -970,6 +1060,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setInWeb();
 	}
 
+	@Override
 	public void superSetInWeb() {
 		super.setInWeb();
 	}
@@ -979,6 +1070,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (Icon) (master != null ? master.getItemIcon(itemStack, par2) : super.getItemIcon(itemStack, par2));
 	}
 
+	@Override
 	public Icon superGetItemIcon(Object itemStack, int par2) {
 		return super.getItemIcon((ItemStack) itemStack, par2);
 	}
@@ -988,6 +1080,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (ItemStack) (master != null ? master.getCurrentArmor(par1) : super.getCurrentArmor(par1));
 	}
 
+	@Override
 	public ItemStack superGetCurrentArmor(int par1) {
 		return super.getCurrentArmor(par1);
 	}
@@ -998,6 +1091,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.addExperience(par1);
 	}
 
+	@Override
 	public void superAddExperience(int par1) {
 		super.addExperience(par1);
 	}
@@ -1008,6 +1102,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.addExperienceLevel(par1);
 	}
 
+	@Override
 	public void superAddExperienceLevel(int par1) {
 		super.addExperienceLevel(par1);
 	}
@@ -1017,6 +1112,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.xpBarCap() : super.xpBarCap();
 	}
 
+	@Override
 	public int superXpBarCap() {
 		return super.xpBarCap();
 	}
@@ -1027,6 +1123,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.addExhaustion(par1);
 	}
 
+	@Override
 	public void superAddExhaustion(float par1) {
 		super.addExhaustion(par1);
 	}
@@ -1036,6 +1133,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (FoodStats) (master != null ? master.getFoodStats() : super.getFoodStats());
 	}
 
+	@Override
 	public FoodStats superGetFoodStats() {
 		return super.getFoodStats();
 	}
@@ -1045,6 +1143,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canEat(par1) : super.canEat(par1);
 	}
 
+	@Override
 	public boolean superCanEat(boolean par1) {
 		return super.canEat(par1);
 	}
@@ -1054,6 +1153,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.shouldHeal() : super.shouldHeal();
 	}
 
+	@Override
 	public boolean superShouldHeal() {
 		return super.shouldHeal();
 	}
@@ -1064,6 +1164,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setItemInUse(itemStack, par2);
 	}
 
+	@Override
 	public void superSetItemInUse(Object itemStack, int par2) {
 		super.setItemInUse((ItemStack) itemStack, par2);
 	}
@@ -1073,6 +1174,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canPlayerEdit(par1, par2, par3, par4, itemStack) : super.canPlayerEdit(par1, par2, par3, par4, itemStack);
 	}
 
+	@Override
 	public boolean superCanPlayerEdit(int par1, int par2, int par3, int par4, Object itemStack) {
 		return super.canPlayerEdit(par1, par2, par3, par4, (ItemStack) itemStack);
 	}
@@ -1082,6 +1184,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getExperiencePoints(entityPlayer) : super.getExperiencePoints(entityPlayer);
 	}
 
+	@Override
 	public int superGetExperiencePoints(Object entityPlayer) {
 		return super.getExperiencePoints((EntityPlayer) entityPlayer);
 	}
@@ -1091,6 +1194,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isPlayer() : super.isPlayer();
 	}
 
+	@Override
 	public boolean superIsPlayer() {
 		return super.isPlayer();
 	}
@@ -1100,6 +1204,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getEntityName() : super.getEntityName();
 	}
 
+	@Override
 	public String superGetEntityName() {
 		return super.getEntityName();
 	}
@@ -1110,6 +1215,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.clonePlayer(entityPlayer, par2);
 	}
 
+	@Override
 	public void superClonePlayer(Object entityPlayer, boolean par2) {
 		super.clonePlayer((EntityPlayer) entityPlayer, par2);
 	}
@@ -1119,6 +1225,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canTriggerWalking() : super.canTriggerWalking();
 	}
 
+	@Override
 	public boolean superCanTriggerWalking() {
 		return super.canTriggerWalking();
 	}
@@ -1129,6 +1236,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.sendPlayerAbilities();
 	}
 
+	@Override
 	public void superSendPlayerAbilities() {
 		super.sendPlayerAbilities();
 	}
@@ -1139,6 +1247,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setGameType(enumGameType);
 	}
 
+	@Override
 	public void superSetGameType(Object enumGameType) {
 		super.setGameType((EnumGameType) enumGameType);
 	}
@@ -1148,6 +1257,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getName() : super.getCommandSenderName();
 	}
 
+	@Override
 	public String superGetName() {
 		return super.getCommandSenderName();
 	}
@@ -1157,6 +1267,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (InventoryEnderChest) (master != null ? master.getInventoryEnderChest() : super.getInventoryEnderChest());
 	}
 
+	@Override
 	public InventoryEnderChest superGetInventoryEnderChest() {
 		return super.getInventoryEnderChest();
 	}
@@ -1166,6 +1277,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (ItemStack) (master != null ? master.getCurrentItemOrArmor(par1) : super.getCurrentItemOrArmor(par1));
 	}
 
+	@Override
 	public ItemStack superGetCurrentItemOrArmor(int par1) {
 		return super.getCurrentItemOrArmor(par1);
 	}
@@ -1175,6 +1287,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (ItemStack) (master != null ? master.getHeldItem() : super.getHeldItem());
 	}
 
+	@Override
 	public ItemStack superGetHeldItem() {
 		return super.getHeldItem();
 	}
@@ -1184,6 +1297,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (ItemStack[]) (master != null ? master.getLastActiveItems() : super.getLastActiveItems());
 	}
 
+	@Override
 	public ItemStack[] superGetLastActiveItems() {
 		return super.getLastActiveItems();
 	}
@@ -1193,6 +1307,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getHideCape() : super.getHideCape();
 	}
 
+	@Override
 	public boolean superGetHideCape() {
 		return super.getHideCape();
 	}
@@ -1202,6 +1317,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (Scoreboard) (master != null ? master.getWorldScoreboard() : super.getWorldScoreboard());
 	}
 
+	@Override
 	public Scoreboard superGetWorldScoreboard() {
 		return super.getWorldScoreboard();
 	}
@@ -1211,6 +1327,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getTranslatedEntityName() : super.getTranslatedEntityName();
 	}
 
+	@Override
 	public String superGetTranslatedEntityName() {
 		return super.getTranslatedEntityName();
 	}
@@ -1221,6 +1338,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.updateFallState(par1, par3);
 	}
 
+	@Override
 	public void superUpdateFallState(double par1, boolean par3) {
 		super.updateFallState(par1, par3);
 	}
@@ -1230,6 +1348,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canBreatheUnderwater() : super.canBreatheUnderwater();
 	}
 
+	@Override
 	public boolean superCanBreatheUnderwater() {
 		return super.canBreatheUnderwater();
 	}
@@ -1240,6 +1359,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onEntityUpdate();
 	}
 
+	@Override
 	public void superOnEntityUpdate() {
 		super.onEntityUpdate();
 	}
@@ -1249,6 +1369,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isChild() : super.isChild();
 	}
 
+	@Override
 	public boolean superIsChild() {
 		return super.isChild();
 	}
@@ -1259,6 +1380,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onDeathUpdate();
 	}
 
+	@Override
 	public void superOnDeathUpdate() {
 		super.onDeathUpdate();
 	}
@@ -1268,6 +1390,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.decreaseAirSupply(par1) : super.decreaseAirSupply(par1);
 	}
 
+	@Override
 	public int superDecreaseAirSupply(int par1) {
 		return super.decreaseAirSupply(par1);
 	}
@@ -1277,6 +1400,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getRNG() : super.getRNG();
 	}
 
+	@Override
 	public Random superGetRNG() {
 		return super.getRNG();
 	}
@@ -1286,6 +1410,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EntityLiving) (master != null ? master.getAITarget() : super.getAITarget());
 	}
 
+	@Override
 	public EntityLiving superGetAITarget() {
 		return super.getAITarget();
 	}
@@ -1296,6 +1421,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setRevengeTarget(EntityLiving);
 	}
 
+	@Override
 	public void superSetRevengeTarget(Object EntityLiving) {
 		super.setRevengeTarget((EntityLiving) EntityLiving);
 	}
@@ -1305,6 +1431,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EntityLiving) (master != null ? master.getLastAttacker() : super.getLastAttackingEntity());
 	}
 
+	@Override
 	public EntityLiving superGetLastAttacker() {
 		return super.getLastAttackingEntity();
 	}
@@ -1315,6 +1442,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setLastAttackingEntity(entity);
 	}
 
+	@Override
 	public void superSetLastAttacker(Object entity) {
 		super.setLastAttackingEntity((Entity) entity);
 	}
@@ -1324,6 +1452,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getAge() : super.getAge();
 	}
 
+	@Override
 	public int superGetAge() {
 		return super.getAge();
 	}
@@ -1334,6 +1463,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.updatePotionEffects();
 	}
 
+	@Override
 	public void superUpdatePotionEffects() {
 		super.updatePotionEffects();
 	}
@@ -1344,6 +1474,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.clearActivePotions();
 	}
 
+	@Override
 	public void superClearActivePotions() {
 		super.clearActivePotions();
 	}
@@ -1353,6 +1484,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (Collection) (master != null ? master.getActivePotionEffects() : super.getActivePotionEffects());
 	}
 
+	@Override
 	public Collection superGetActivePotionEffects() {
 		return super.getActivePotionEffects();
 	}
@@ -1362,6 +1494,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isPotionActive(par1) : super.isPotionActive(par1);
 	}
 
+	@Override
 	public boolean superIsPotionActive(int par1) {
 		return super.isPotionActive(par1);
 	}
@@ -1371,6 +1504,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isPotionActive(potion) : super.isPotionActive(potion);
 	}
 
+	@Override
 	public boolean superIsPotionActive(Object potion) {
 		return super.isPotionActive((Potion) potion);
 	}
@@ -1380,6 +1514,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (PotionEffect) (master != null ? master.getActivePotionEffect(potion) : super.getActivePotionEffect(potion));
 	}
 
+	@Override
 	public PotionEffect superGetActivePotionEffect(Object potion) {
 		return super.getActivePotionEffect((Potion) potion);
 	}
@@ -1390,6 +1525,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.addPotionEffect(potionEffect);
 	}
 
+	@Override
 	public void superAddPotionEffect(Object potionEffect) {
 		super.addPotionEffect((PotionEffect) potionEffect);
 	}
@@ -1399,6 +1535,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isPotionApplicable(potionEffect) : super.isPotionApplicable(potionEffect);
 	}
 
+	@Override
 	public boolean superIsPotionApplicable(Object potionEffect) {
 		return super.isPotionApplicable((PotionEffect) potionEffect);
 	}
@@ -1408,6 +1545,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isEntityUndead() : super.isEntityUndead();
 	}
 
+	@Override
 	public boolean superIsEntityUndead() {
 		return super.isEntityUndead();
 	}
@@ -1418,6 +1556,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.removePotionEffectClient(par1);
 	}
 
+	@Override
 	public void superRemovePotionEffectClient(int par1) {
 		super.removePotionEffectClient(par1);
 	}
@@ -1428,6 +1567,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.removePotionEffect(par1);
 	}
 
+	@Override
 	public void superRemovePotionEffect(int par1) {
 		super.removePotionEffect(par1);
 	}
@@ -1438,6 +1578,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onNewPotionEffect(potionEffect);
 	}
 
+	@Override
 	public void superOnNewPotionEffect(Object potionEffect) {
 		super.onNewPotionEffect((PotionEffect) potionEffect);
 	}
@@ -1448,6 +1589,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onChangedPotionEffect(potionEffect);
 	}
 
+	@Override
 	public void superOnChangedPotionEffect(Object potionEffect, boolean par2) {
 		super.onChangedPotionEffect((PotionEffect) potionEffect);
 	}
@@ -1458,6 +1600,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onFinishedPotionEffect(potionEffect);
 	}
 
+	@Override
 	public void superOnFinishedPotionEffect(Object potionEffect) {
 		super.onFinishedPotionEffect((PotionEffect) potionEffect);
 	}
@@ -1468,6 +1611,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.heal(par1);
 	}
 
+	@Override
 	public void superHeal(float par1) {
 		super.heal((int) par1);
 	}
@@ -1478,6 +1622,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setEntityHealth(par1);
 	}
 
+	@Override
 	public void superSetHealth(float par1) {
 		super.setEntityHealth((int) par1);
 	}
@@ -1488,6 +1633,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.renderBrokenItemStack(itemStack);
 	}
 
+	@Override
 	public void superRenderBrokenItemStack(Object itemStack) {
 		super.renderBrokenItemStack((ItemStack) itemStack);
 	}
@@ -1498,6 +1644,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.dropEquipment(par1, par2);
 	}
 
+	@Override
 	public void superDropEquipment(boolean par1, int par2) {
 		super.dropEquipment(par1, par2);
 	}
@@ -1508,6 +1655,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.knockBack(entity, par2, par3, par5);
 	}
 
+	@Override
 	public void superKnockBack(Object entity, float par2, double par3, double par5) {
 		super.knockBack((Entity) entity, (int) par2, par3, par5);
 	}
@@ -1517,6 +1665,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (String) (master != null ? master.getHurtSound() : super.getHurtSound());
 	}
 
+	@Override
 	public String superGetHurtSound() {
 		return super.getHurtSound();
 	}
@@ -1526,6 +1675,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (String) (master != null ? master.getDeathSound() : super.getDeathSound());
 	}
 
+	@Override
 	public String superGetDeathSound() {
 		return super.getDeathSound();
 	}
@@ -1536,6 +1686,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.dropRareDrop(par1);
 	}
 
+	@Override
 	public void superDropRareDrop(int par1) {
 		super.dropRareDrop(par1);
 	}
@@ -1546,6 +1697,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.dropFewItems(par1, par2);
 	}
 
+	@Override
 	public void superDropFewItems(boolean par1, int par2) {
 		super.dropFewItems(par1, par2);
 	}
@@ -1555,6 +1707,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isOnLadder() : super.isOnLadder();
 	}
 
+	@Override
 	public boolean superIsOnLadder() {
 		return super.isOnLadder();
 	}
@@ -1564,6 +1717,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isEntityAlive() : super.isEntityAlive();
 	}
 
+	@Override
 	public boolean superIsEntityAlive() {
 		return super.isEntityAlive();
 	}
@@ -1574,6 +1728,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.performHurtAnimation();
 	}
 
+	@Override
 	public void superPerformHurtAnimation() {
 		super.performHurtAnimation();
 	}
@@ -1583,6 +1738,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (Integer) (master != null ? master.applyArmorCalculations(damageSource, par2) : super.applyArmorCalculations(damageSource, par2));
 	}
 
+	@Override
 	public Object superApplyArmorCalculations(Object damageSource, float par2) {
 		return super.applyArmorCalculations((DamageSource) damageSource, (int) par2);
 	}
@@ -1592,6 +1748,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (Integer) (master != null ? master.applyPotionDamageCalculations(damageSource, par2) : super.applyPotionDamageCalculations(damageSource, par2));
 	}
 
+	@Override
 	public Object superApplyPotionDamageCalculations(Object damageSource, float par2) {
 		return super.applyPotionDamageCalculations((DamageSource) damageSource, (int) par2);
 	}
@@ -1601,6 +1758,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EntityLiving) (master != null ? master.getAttackingEntity() : super.func_94060_bK());
 	}
 
+	@Override
 	public EntityLiving superGetAttackingEntity() {
 		return super.func_94060_bK();
 	}
@@ -1611,6 +1769,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.swingItem();
 	}
 
+	@Override
 	public void superSwingArm() {
 		super.swingItem();
 	}
@@ -1621,6 +1780,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.kill();
 	}
 
+	@Override
 	public void superKill() {
 		super.kill();
 	}
@@ -1631,6 +1791,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.updateArmSwingProgress();
 	}
 
+	@Override
 	public void superUpdateArmSwingProgress() {
 		super.updateArmSwingProgress();
 	}
@@ -1640,6 +1801,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EnumCreatureAttribute) (master != null ? master.getCreatureAttribute() : super.getCreatureAttribute());
 	}
 
+	@Override
 	public EnumCreatureAttribute superGetCreatureAttribute() {
 		return super.getCreatureAttribute();
 	}
@@ -1650,6 +1812,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setSprinting(par1);
 	}
 
+	@Override
 	public void superSetSprinting(boolean par1) {
 		super.setSprinting(par1);
 	}
@@ -1659,6 +1822,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getSoundVolume() : super.getSoundVolume();
 	}
 
+	@Override
 	public float superGetSoundVolume() {
 		return super.getSoundVolume();
 	}
@@ -1668,6 +1832,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getSoundPitch() : super.getSoundPitch();
 	}
 
+	@Override
 	public float superGetSoundPitch() {
 		return super.getSoundPitch();
 	}
@@ -1678,6 +1843,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setPositionAndUpdate(par1, par3, par5);
 	}
 
+	@Override
 	public void superSetPositionAndUpdate(double par1, double par3, double par5) {
 		super.setPositionAndUpdate(par1, par3, par5);
 	}
@@ -1687,6 +1853,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isAIEnabled() : super.isAIEnabled();
 	}
 
+	@Override
 	public boolean superIsAIEnabled() {
 		return super.isAIEnabled();
 	}
@@ -1697,6 +1864,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setAIMoveSpeed(par1);
 	}
 
+	@Override
 	public void superSetAIMoveSpeed(float par1) {
 		super.setAIMoveSpeed(par1);
 	}
@@ -1706,6 +1874,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.attackEntityAsMob(entity) : super.attackEntityAsMob(entity);
 	}
 
+	@Override
 	public boolean superAttackEntityAsMob(Object entity) {
 		return super.attackEntityAsMob((Entity) entity);
 	}
@@ -1716,6 +1885,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.updateAITasks();
 	}
 
+	@Override
 	public void superUpdateAITasks() {
 		super.updateAITasks();
 	}
@@ -1726,17 +1896,19 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.collideWithEntity(entity);
 	}
 
+	@Override
 	public void superCollideWithEntity(Object entity) {
 		super.collideWithEntity((Entity) entity);
 	}
 
 	@Override
 	protected void updateAITick() {
-		if (master != null) master.updateAITick();
+		if (master != null) master.handleJumpWater();
 		else super.updateAITick();
 	}
 
-	public void superUpdateAITick() {
+	@Override
+	public void superHandleJumpWater() {
 		super.updateAITick();
 	}
 
@@ -1746,6 +1918,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setJumping(par1);
 	}
 
+	@Override
 	public void superSetJumping(boolean par1) {
 		super.setJumping(par1);
 	}
@@ -1756,6 +1929,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onItemPickup(entity, par2);
 	}
 
+	@Override
 	public void superOnItemPickup(Object entity, int par2) {
 		super.onItemPickup((Entity) entity, par2);
 	}
@@ -1765,6 +1939,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canEntityBeSeen(entity) : super.canEntityBeSeen(entity);
 	}
 
+	@Override
 	public boolean superCanEntityBeSeen(Object entity) {
 		return super.canEntityBeSeen((Entity) entity);
 	}
@@ -1774,6 +1949,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (Vec3) (master != null ? master.getLookVec() : super.getLookVec());
 	}
 
+	@Override
 	public Vec3 superGetLookVec() {
 		return super.getLookVec();
 	}
@@ -1783,6 +1959,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (Vec3) (master != null ? master.getLook(par1) : super.getLook(par1));
 	}
 
+	@Override
 	public Vec3 superGetLook(float par1) {
 		return super.getLook(par1);
 	}
@@ -1792,6 +1969,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getSwingProgress(par1) : super.getSwingProgress(par1);
 	}
 
+	@Override
 	public float superGetSwingProgress(float par1) {
 		return super.getSwingProgress(par1);
 	}
@@ -1801,6 +1979,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (Vec3) (master != null ? master.getPosition(par1) : super.getPosition(par1));
 	}
 
+	@Override
 	public Vec3 superGetPosition(float par1) {
 		return super.getPosition(par1);
 	}
@@ -1810,6 +1989,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (MovingObjectPosition) (master != null ? master.rayTrace(par1, par3) : super.rayTrace(par1, par3));
 	}
 
+	@Override
 	public MovingObjectPosition superRayTrace(double par1, float par3) {
 		return super.rayTrace(par1, par3);
 	}
@@ -1819,6 +1999,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isClientWorld() : super.isClientWorld();
 	}
 
+	@Override
 	public boolean superIsClientWorld() {
 		return super.isClientWorld();
 	}
@@ -1828,6 +2009,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canBeCollidedWith() : super.canBeCollidedWith();
 	}
 
+	@Override
 	public boolean superCanBeCollidedWith() {
 		return super.canBeCollidedWith();
 	}
@@ -1837,6 +2019,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canBePushed() : super.canBePushed();
 	}
 
+	@Override
 	public boolean superCanBePushed() {
 		return super.canBePushed();
 	}
@@ -1847,6 +2030,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setBeenAttacked();
 	}
 
+	@Override
 	public void superSetBeenAttacked() {
 		super.setBeenAttacked();
 	}
@@ -1856,6 +2040,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getRotationYawHead() : super.getRotationYawHead();
 	}
 
+	@Override
 	public float superGetRotationYawHead() {
 		return super.getRotationYawHead();
 	}
@@ -1866,6 +2051,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setRotationYawHead(par1);
 	}
 
+	@Override
 	public void superSetRotationYawHead(float par1) {
 		super.setRotationYawHead(par1);
 	}
@@ -1875,6 +2061,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (DataWatcher) (master != null ? master.getDataManager() : super.getDataWatcher());
 	}
 
+	@Override
 	public DataWatcher superGetDataManager() {
 		return super.getDataWatcher();
 	}
@@ -1884,6 +2071,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.equals(par1Obj) : super.equals(par1Obj);
 	}
 
+	@Override
 	public boolean superEquals(Object par1Obj) {
 		return super.equals(par1Obj);
 	}
@@ -1893,6 +2081,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.hashCode() : super.hashCode();
 	}
 
+	@Override
 	public int superHashCode() {
 		return super.hashCode();
 	}
@@ -1903,6 +2092,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setSize(par1, par2);
 	}
 
+	@Override
 	public void superSetSize(float par1, float par2) {
 		super.setSize(par1, par2);
 	}
@@ -1913,6 +2103,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setRotation(par1, par2);
 	}
 
+	@Override
 	public void superSetRotation(float par1, float par2) {
 		super.setRotation(par1, par2);
 	}
@@ -1923,6 +2114,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setPosition(par1, par3, par5);
 	}
 
+	@Override
 	public void superSetPosition(double par1, double par3, double par5) {
 		super.setPosition(par1, par3, par5);
 	}
@@ -1933,6 +2125,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setAngles(par1, par2);
 	}
 
+	@Override
 	public void superSetAngles(float par1, float par2) {
 		super.setAngles(par1, par2);
 	}
@@ -1943,6 +2136,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setOnFireFromLava();
 	}
 
+	@Override
 	public void superSetOnFireFromLava() {
 		super.setOnFireFromLava();
 	}
@@ -1953,6 +2147,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setFire(par1);
 	}
 
+	@Override
 	public void superSetFire(int par1) {
 		super.setFire(par1);
 	}
@@ -1963,6 +2158,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.extinguish();
 	}
 
+	@Override
 	public void superExtinguish() {
 		super.extinguish();
 	}
@@ -1972,6 +2168,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isOffsetPositionInLiquid(par1, par3, par5) : super.isOffsetPositionInLiquid(par1, par3, par5);
 	}
 
+	@Override
 	public boolean superIsOffsetPositionInLiquid(double par1, double par3, double par5) {
 		return super.isOffsetPositionInLiquid(par1, par3, par5);
 	}
@@ -1982,6 +2179,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.moveEntity(par1, par3, par5);
 	}
 
+	@Override
 	public void superMoveEntity(double par1, double par3, double par5) {
 		super.moveEntity(par1, par3, par5);
 	}
@@ -1992,6 +2190,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.doBlockCollisions();
 	}
 
+	@Override
 	public void superDoBlockCollisions() {
 		super.doBlockCollisions();
 	}
@@ -2011,6 +2210,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (AxisAlignedBB) (master != null ? master.getCollisionBoundingBox() : super.getBoundingBox());
 	}
 
+	@Override
 	public AxisAlignedBB superGetCollisionBoundingBox() {
 		return super.getBoundingBox();
 	}
@@ -2021,6 +2221,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.dealFireDamage(par1);
 	}
 
+	@Override
 	public void superDealFireDamage(int par1) {
 		super.dealFireDamage(par1);
 	}
@@ -2030,6 +2231,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isWet() : super.isWet();
 	}
 
+	@Override
 	public boolean superIsWet() {
 		return super.isWet();
 	}
@@ -2039,6 +2241,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isInWater() : super.isInWater();
 	}
 
+	@Override
 	public boolean superIsInWater() {
 		return super.isInWater();
 	}
@@ -2048,6 +2251,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.handleWaterMovement() : super.handleWaterMovement();
 	}
 
+	@Override
 	public boolean superHandleWaterMovement() {
 		return super.handleWaterMovement();
 	}
@@ -2057,6 +2261,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isInsideOfMaterial(material) : super.isInsideOfMaterial(material);
 	}
 
+	@Override
 	public boolean superIsInsideOfMaterial(Object material) {
 		return super.isInsideOfMaterial((Material) material);
 	}
@@ -2066,17 +2271,19 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.handleLavaMovement() : super.handleLavaMovement();
 	}
 
+	@Override
 	public boolean superHandleLavaMovement() {
 		return super.handleLavaMovement();
 	}
 
 	@Override
 	public void moveFlying(float par1, float par2, float par3) {
-		if (master != null) master.moveFlying(par1, par2, par3);
+		if (master != null) master.moveRelative(par1, par2, par3);
 		else super.moveFlying(par1, par2, par3);
 	}
 
-	public void superMoveFlying(float par1, float par2, float par3) {
+	@Override
+	public void superMoveRelative(float par1, float par2, float par3) {
 		super.moveFlying(par1, par2, par3);
 	}
 
@@ -2085,6 +2292,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getBrightnessForRender(par1) : super.getBrightnessForRender(par1);
 	}
 
+	@Override
 	public int superGetBrightnessForRender(float par1) {
 		return super.getBrightnessForRender(par1);
 	}
@@ -2094,6 +2302,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getBrightness(par1) : super.getBrightness(par1);
 	}
 
+	@Override
 	public float superGetBrightness(float par1) {
 		return super.getBrightness(par1);
 	}
@@ -2104,6 +2313,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setWorld(world);
 	}
 
+	@Override
 	public void superSetWorld(Object world) {
 		super.setWorld((World) world);
 	}
@@ -2114,6 +2324,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setPositionAndRotation(par1, par3, par5, par7, par8);
 	}
 
+	@Override
 	public void superSetPositionAndRotation(double par1, double par3, double par5, float par7, float par8) {
 		super.setPositionAndRotation(par1, par3, par5, par7, par8);
 	}
@@ -2124,6 +2335,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setLocationAndAngles(par1, par3, par5, par7, par8);
 	}
 
+	@Override
 	public void superSetLocationAndAngles(double par1, double par3, double par5, float par7, float par8) {
 		super.setLocationAndAngles(par1, par3, par5, par7, par8);
 	}
@@ -2133,6 +2345,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getDistanceToEntity(entity) : super.getDistanceToEntity(entity);
 	}
 
+	@Override
 	public float superGetDistanceToEntity(Object entity) {
 		return super.getDistanceToEntity((Entity) entity);
 	}
@@ -2142,6 +2355,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getDistanceSq(par1, par3, par5) : super.getDistanceSq(par1, par3, par5);
 	}
 
+	@Override
 	public double superGetDistanceSq(double par1, double par3, double par5) {
 		return super.getDistanceSq(par1, par3, par5);
 	}
@@ -2151,6 +2365,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getDistance(par1, par3, par5) : super.getDistance(par1, par3, par5);
 	}
 
+	@Override
 	public double superGetDistance(double par1, double par3, double par5) {
 		return super.getDistance(par1, par3, par5);
 	}
@@ -2160,6 +2375,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getDistanceSqToEntity(entity) : super.getDistanceSqToEntity(entity);
 	}
 
+	@Override
 	public double superGetDistanceSqToEntity(Object entity) {
 		return super.getDistanceSqToEntity((Entity) entity);
 	}
@@ -2170,6 +2386,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onCollideWithPlayer(entityPlayer);
 	}
 
+	@Override
 	public void superOnCollideWithPlayer(Object entityPlayer) {
 		super.onCollideWithPlayer((EntityPlayer) entityPlayer);
 	}
@@ -2180,6 +2397,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.applyEntityCollision(entity);
 	}
 
+	@Override
 	public void superApplyEntityCollision(Object entity) {
 		super.applyEntityCollision((Entity) entity);
 	}
@@ -2190,6 +2408,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.addVelocity(par1, par3, par5);
 	}
 
+	@Override
 	public void superAddVelocity(double par1, double par3, double par5) {
 		super.addVelocity(par1, par3, par5);
 	}
@@ -2199,6 +2418,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isInRangeToRenderVec3D(vec3) : super.isInRangeToRenderVec3D(vec3);
 	}
 
+	@Override
 	public boolean superIsInRangeToRenderVec3D(Object vec3) {
 		return super.isInRangeToRenderVec3D((Vec3) vec3);
 	}
@@ -2208,6 +2428,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isInRangeToRenderDist(par1) : super.isInRangeToRenderDist(par1);
 	}
 
+	@Override
 	public boolean superIsInRangeToRenderDist(double par1) {
 		return super.isInRangeToRenderDist(par1);
 	}
@@ -2218,8 +2439,10 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.writeToNBT(nBTTagCompound);
 	}
 
-	public void superWriteToNBT(Object nBTTagCompound) {
+	@Override
+	public Object superWriteToNBT(Object nBTTagCompound) {
 		super.writeToNBT((NBTTagCompound) nBTTagCompound);
+		return nBTTagCompound;
 	}
 
 	@Override
@@ -2228,6 +2451,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.readFromNBT(nBTTagCompound);
 	}
 
+	@Override
 	public void superReadFromNBT(Object nBTTagCompound) {
 		super.readFromNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -2237,6 +2461,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (NBTTagList) (master != null ? master.newDoubleNBTList(par1ArrayOfDouble) : super.newDoubleNBTList(par1ArrayOfDouble));
 	}
 
+	@Override
 	public NBTTagList superNewDoubleNBTList(double... par1ArrayOfDouble) {
 		return super.newDoubleNBTList(par1ArrayOfDouble);
 	}
@@ -2246,6 +2471,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (NBTTagList) (master != null ? master.newFloatNBTList(par1ArrayOfFloat) : super.newFloatNBTList(par1ArrayOfFloat));
 	}
 
+	@Override
 	public NBTTagList superNewFloatNBTList(float... par1ArrayOfFloat) {
 		return super.newFloatNBTList(par1ArrayOfFloat);
 	}
@@ -2273,6 +2499,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EntityItem) (master != null ? master.entityDropItem(itemStack, par2) : super.entityDropItem(itemStack, par2));
 	}
 
+	@Override
 	public EntityItem superEntityDropItem(Object itemStack, float par2) {
 		return super.entityDropItem((ItemStack) itemStack, par2);
 	}
@@ -2282,6 +2509,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (AxisAlignedBB) (master != null ? master.getCollisionBox(entity) : super.getCollisionBox(entity));
 	}
 
+	@Override
 	public AxisAlignedBB superGetCollisionBox(Object entity) {
 		return super.getCollisionBox((Entity) entity);
 	}
@@ -2292,6 +2520,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.updateRiderPosition();
 	}
 
+	@Override
 	public void superUpdatePassenger() {
 		super.updateRiderPosition();
 	}
@@ -2301,6 +2530,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getMountedYOffset() : super.getMountedYOffset();
 	}
 
+	@Override
 	public double superGetMountedYOffset() {
 		return super.getMountedYOffset();
 	}
@@ -2310,6 +2540,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getCollisionBorderSize() : super.getCollisionBorderSize();
 	}
 
+	@Override
 	public float superGetCollisionBorderSize() {
 		return super.getCollisionBorderSize();
 	}
@@ -2320,6 +2551,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setInPortal();
 	}
 
+	@Override
 	public void superSetPortal(Object bockPos) {
 		super.setInPortal();
 	}
@@ -2330,6 +2562,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setVelocity(par1, par3, par5);
 	}
 
+	@Override
 	public void superSetVelocity(double par1, double par3, double par5) {
 		super.setVelocity(par1, par3, par5);
 	}
@@ -2339,6 +2572,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isBurning() : super.isBurning();
 	}
 
+	@Override
 	public boolean superIsBurning() {
 		return super.isBurning();
 	}
@@ -2348,6 +2582,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isRiding() : super.isRiding();
 	}
 
+	@Override
 	public boolean superIsRiding() {
 		return super.isRiding();
 	}
@@ -2357,6 +2592,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isSneaking() : super.isSneaking();
 	}
 
+	@Override
 	public boolean superIsSneaking() {
 		return super.isSneaking();
 	}
@@ -2367,6 +2603,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setSneaking(par1);
 	}
 
+	@Override
 	public void superSetSneaking(boolean par1) {
 		super.setSneaking(par1);
 	}
@@ -2376,6 +2613,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isSprinting() : super.isSprinting();
 	}
 
+	@Override
 	public boolean superIsSprinting() {
 		return super.isSprinting();
 	}
@@ -2385,6 +2623,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isInvisible() : super.isInvisible();
 	}
 
+	@Override
 	public boolean superIsInvisible() {
 		return super.isInvisible();
 	}
@@ -2395,6 +2634,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setInvisible(par1);
 	}
 
+	@Override
 	public void superSetInvisible(boolean par1) {
 		super.setInvisible(par1);
 	}
@@ -2404,6 +2644,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isEating() : super.isEating();
 	}
 
+	@Override
 	public boolean superIsEating() {
 		return super.isEating();
 	}
@@ -2414,6 +2655,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setEating(par1);
 	}
 
+	@Override
 	public void superSetEating(boolean par1) {
 		super.setEating(par1);
 	}
@@ -2423,6 +2665,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getFlag(par1) : super.getFlag(par1);
 	}
 
+	@Override
 	public boolean superGetFlag(int par1) {
 		return super.getFlag(par1);
 	}
@@ -2433,6 +2676,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setFlag(par1, par2);
 	}
 
+	@Override
 	public void superSetFlag(int par1, boolean par2) {
 		super.setFlag(par1, par2);
 	}
@@ -2442,6 +2686,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getAir() : super.getAir();
 	}
 
+	@Override
 	public int superGetAir() {
 		return super.getAir();
 	}
@@ -2452,6 +2697,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setAir(par1);
 	}
 
+	@Override
 	public void superSetAir(int par1) {
 		super.setAir(par1);
 	}
@@ -2462,6 +2708,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.onStruckByLightning(entityLightningBolt);
 	}
 
+	@Override
 	public void superOnStruckByLightning(Object entityLightningBolt) {
 		super.onStruckByLightning((EntityLightningBolt) entityLightningBolt);
 	}
@@ -2471,6 +2718,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.pushOutOfBlocks(par1, par3, par5) : super.pushOutOfBlocks(par1, par3, par5);
 	}
 
+	@Override
 	public boolean superPushOutOfBlocks(double par1, double par3, double par5) {
 		return super.pushOutOfBlocks(par1, par3, par5);
 	}
@@ -2480,6 +2728,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (Entity[]) (master != null ? master.getParts() : super.getParts());
 	}
 
+	@Override
 	public Entity[] superGetParts() {
 		return super.getParts();
 	}
@@ -2489,16 +2738,18 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isEntityEqual(entity) : super.isEntityEqual(entity);
 	}
 
+	@Override
 	public boolean superIsEntityEqual(Object entity) {
 		return super.isEntityEqual((Entity) entity);
 	}
 
 	@Override
 	public boolean canAttackWithItem() {
-		return master != null ? master.canAttackWithItem() : super.canAttackWithItem();
+		return master != null ? master.canBeAttackedWithItem() : super.canAttackWithItem();
 	}
 
-	public boolean superCanAttackWithItem() {
+	@Override
+	public boolean superCanBeAttackedWithItem() {
 		return super.canAttackWithItem();
 	}
 
@@ -2507,6 +2758,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.toString() : super.toString();
 	}
 
+	@Override
 	public String superToString() {
 		return super.toString();
 	}
@@ -2516,6 +2768,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isEntityInvulnerable() : super.isEntityInvulnerable();
 	}
 
+	@Override
 	public boolean superIsEntityInvulnerable() {
 		return super.isEntityInvulnerable();
 	}
@@ -2526,6 +2779,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.copyDataFrom(entity, par2);
 	}
 
+	@Override
 	public void superCopyDataFrom(Object entity, boolean par2) {
 		super.copyDataFrom((Entity) entity, par2);
 	}
@@ -2536,6 +2790,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.travelToDimension(par1);
 	}
 
+	@Override
 	public Object superChangeDimension(int par1) {
 		super.travelToDimension(par1);
 		return this;
@@ -2546,6 +2801,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (Integer) (master != null ? master.getLastPortalVec() : super.getTeleportDirection());
 	}
 
+	@Override
 	public Object superGetLastPortalVec() {
 		return super.getTeleportDirection();
 	}
@@ -2555,6 +2811,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.doesEntityNotTriggerPressurePlate() : super.doesEntityNotTriggerPressurePlate();
 	}
 
+	@Override
 	public boolean superDoesEntityNotTriggerPressurePlate() {
 		return super.doesEntityNotTriggerPressurePlate();
 	}
@@ -2564,6 +2821,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canRenderOnFire() : super.canRenderOnFire();
 	}
 
+	@Override
 	public boolean superCanRenderOnFire() {
 		return super.canRenderOnFire();
 	}
@@ -2574,6 +2832,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.updateCloak();
 	}
 
+	@Override
 	public void superUpdateCloak() {
 		super.updateCloak();
 	}
@@ -2584,6 +2843,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.sendChatToPlayer(par1Str);
 	}
 
+	@Override
 	public void superSendChatToPlayer(String par1Str) {
 		super.sendChatToPlayer(par1Str);
 	}
@@ -2593,6 +2853,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getMaxHealth() : super.getMaxHealth();
 	}
 
+	@Override
 	public int superGetMaxHealth() {
 		return super.getMaxHealth();
 	}
@@ -2602,6 +2863,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canAttackPlayer(entityPlayer) : super.func_96122_a(entityPlayer);
 	}
 
+	@Override
 	public boolean superCanAttackPlayer(Object entityPlayer) {
 		return super.func_96122_a((EntityPlayer) entityPlayer);
 	}
@@ -2612,6 +2874,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.alertWolves(entityLiving, par2);
 	}
 
+	@Override
 	public void superAlertWolves(Object entityLiving, boolean par2) {
 		super.alertWolves((EntityLiving) entityLiving, par2);
 	}
@@ -2622,6 +2885,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.damageArmor(par1);
 	}
 
+	@Override
 	public void superDamageArmor(int par1) {
 		super.damageArmor(par1);
 	}
@@ -2631,6 +2895,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getArmorVisibility() : super.func_82243_bO();
 	}
 
+	@Override
 	public float superGetArmorVisibility() {
 		return super.func_82243_bO();
 	}
@@ -2640,6 +2905,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.func_71066_bF() : super.func_71066_bF();
 	}
 
+	@Override
 	public boolean superFunc_71066_bF() {
 		return super.func_71066_bF();
 	}
@@ -2650,6 +2916,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.addRandomArmor();
 	}
 
+	@Override
 	public void superAddRandomDrop() {
 		super.addRandomArmor();
 	}
@@ -2660,6 +2927,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.func_82162_bC();
 	}
 
+	@Override
 	public void superFunc_82162_bC() {
 		super.func_82162_bC();
 	}
@@ -2669,6 +2937,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canCurrentToolHarvestBlock(par1, par2, par3) : super.canCurrentToolHarvestBlock(par1, par2, par3);
 	}
 
+	@Override
 	public boolean superCanCurrentToolHarvestBlock(int par1, int par2, int par3) {
 		return super.canCurrentToolHarvestBlock(par1, par2, par3);
 	}
@@ -2678,6 +2947,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.func_94062_bN() : super.func_94062_bN();
 	}
 
+	@Override
 	public boolean superFunc_94062_bN() {
 		return super.func_94062_bN();
 	}
@@ -2687,6 +2957,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getAlwaysRenderNameTagForRender() : super.func_94059_bO();
 	}
 
+	@Override
 	public boolean superGetAlwaysRenderNameTagForRender() {
 		return super.func_94059_bO();
 	}
@@ -2696,6 +2967,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canPickUpLoot() : super.canPickUpLoot();
 	}
 
+	@Override
 	public boolean superCanPickUpLoot() {
 		return super.canPickUpLoot();
 	}
@@ -2705,6 +2977,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (StringTranslate) (master != null ? master.getTranslator() : super.getTranslator());
 	}
 
+	@Override
 	public StringTranslate superGetTranslator() {
 		return super.getTranslator();
 	}
@@ -2714,6 +2987,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.translateString(par1Str, par2ArrayOfObj) : super.translateString(par1Str, par2ArrayOfObj);
 	}
 
+	@Override
 	public String superTranslateString(String par1Str, Object... par2ArrayOfObj) {
 		return super.translateString(par1Str, par2ArrayOfObj);
 	}
@@ -2723,6 +2997,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isInvisibleToPlayer(entityPlayer) : super.func_98034_c(entityPlayer);
 	}
 
+	@Override
 	public boolean superIsInvisibleToPlayer(Object entityPlayer) {
 		return super.func_98034_c((EntityPlayer) entityPlayer);
 	}
@@ -2732,6 +3007,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isPushedByWater() : super.func_96092_aw();
 	}
 
+	@Override
 	public boolean superIsPushedByWater() {
 		return super.func_96092_aw();
 	}
@@ -2741,6 +3017,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (ScorePlayerTeam) (master != null ? master.getTeam() : super.getTeam());
 	}
 
+	@Override
 	public ScorePlayerTeam superGetTeam() {
 		return super.getTeam();
 	}
@@ -2750,6 +3027,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.func_96121_ay() : super.func_96121_ay();
 	}
 
+	@Override
 	public int superFunc_96121_ay() {
 		return super.func_96121_ay();
 	}
@@ -2759,6 +3037,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EntityLookHelper) (master != null ? master.getLookHelper() : super.getLookHelper());
 	}
 
+	@Override
 	public EntityLookHelper superGetLookHelper() {
 		return super.getLookHelper();
 	}
@@ -2768,6 +3047,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EntityMoveHelper) (master != null ? master.getMoveHelper() : super.getMoveHelper());
 	}
 
+	@Override
 	public EntityMoveHelper superGetMoveHelper() {
 		return super.getMoveHelper();
 	}
@@ -2777,6 +3057,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EntityJumpHelper) (master != null ? master.getJumpHelper() : super.getJumpHelper());
 	}
 
+	@Override
 	public EntityJumpHelper superGetJumpHelper() {
 		return super.getJumpHelper();
 	}
@@ -2786,6 +3067,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (PathNavigate) (master != null ? master.getNavigator() : super.getNavigator());
 	}
 
+	@Override
 	public PathNavigate superGetNavigator() {
 		return super.getNavigator();
 	}
@@ -2795,6 +3077,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EntitySenses) (master != null ? master.getEntitySenses() : super.getEntitySenses());
 	}
 
+	@Override
 	public EntitySenses superGetEntitySenses() {
 		return super.getEntitySenses();
 	}
@@ -2804,6 +3087,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (EntityLiving) (master != null ? master.getAttackTarget() : super.getAttackTarget());
 	}
 
+	@Override
 	public EntityLiving superGetAttackTarget() {
 		return super.getAttackTarget();
 	}
@@ -2814,6 +3098,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setAttackTarget(entityLiving);
 	}
 
+	@Override
 	public void superSetAttackTarget(Object entityLiving) {
 		super.setAttackTarget((EntityLiving) entityLiving);
 	}
@@ -2823,6 +3108,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canAttackClass(par1Class) : super.canAttackClass(par1Class);
 	}
 
+	@Override
 	public boolean superCanAttackClass(Class par1Class) {
 		return super.canAttackClass(par1Class);
 	}
@@ -2833,6 +3119,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.eatGrassBonus();
 	}
 
+	@Override
 	public void superEatGrassBonus() {
 		super.eatGrassBonus();
 	}
@@ -2842,6 +3129,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isWithinHomeDistanceCurrentPosition() : super.isWithinHomeDistanceCurrentPosition();
 	}
 
+	@Override
 	public boolean superIsWithinHomeDistanceCurrentPosition() {
 		return super.isWithinHomeDistanceCurrentPosition();
 	}
@@ -2851,6 +3139,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isWithinHomeDistance(par1, par2, par3) : super.isWithinHomeDistance(par1, par2, par3);
 	}
 
+	@Override
 	public boolean superIsWithinHomeDistance(int par1, int par2, int par3) {
 		return super.isWithinHomeDistance(par1, par2, par3);
 	}
@@ -2861,6 +3150,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setHomeArea(par1, par2, par3, par4);
 	}
 
+	@Override
 	public void superSetHomeArea(int par1, int par2, int par3, int par4) {
 		super.setHomeArea(par1, par2, par3, par4);
 	}
@@ -2870,6 +3160,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (ChunkCoordinates) (master != null ? master.getHomePosition() : super.getHomePosition());
 	}
 
+	@Override
 	public ChunkCoordinates superGetHomePosition() {
 		return super.getHomePosition();
 	}
@@ -2879,6 +3170,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getMaximumHomeDistance() : super.getMaximumHomeDistance();
 	}
 
+	@Override
 	public float superGetMaximumHomeDistance() {
 		return super.getMaximumHomeDistance();
 	}
@@ -2889,6 +3181,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.detachHome();
 	}
 
+	@Override
 	public void superDetachHome() {
 		super.detachHome();
 	}
@@ -2898,6 +3191,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.hasHome() : super.hasHome();
 	}
 
+	@Override
 	public boolean superHasHome() {
 		return super.hasHome();
 	}
@@ -2907,6 +3201,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getTexture() : super.getTexture();
 	}
 
+	@Override
 	public String superGetTexture() {
 		return super.getTexture();
 	}
@@ -2916,6 +3211,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getTalkInterval() : super.getTalkInterval();
 	}
 
+	@Override
 	public int superGetTalkInterval() {
 		return super.getTalkInterval();
 	}
@@ -2926,6 +3222,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.playLivingSound();
 	}
 
+	@Override
 	public void superPlayLivingSound() {
 		super.playLivingSound();
 	}
@@ -2936,6 +3233,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.spawnExplosionParticle();
 	}
 
+	@Override
 	public void superSpawnExplosionParticle() {
 		super.spawnExplosionParticle();
 	}
@@ -2945,6 +3243,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getHealthInt() : super.getHealth();
 	}
 
+	@Override
 	public int superGetHealthInt() {
 		return super.getHealth();
 	}
@@ -2954,6 +3253,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return (String) (master != null ? master.getAmbientSound() : super.getLivingSound());
 	}
 
+	@Override
 	public String superGetAmbientSound() {
 		return super.getLivingSound();
 	}
@@ -2963,6 +3263,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getDropItemId() : super.getDropItemId();
 	}
 
+	@Override
 	public int superGetDropItemId() {
 		return super.getDropItemId();
 	}
@@ -2973,6 +3274,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setMoveForward(par1);
 	}
 
+	@Override
 	public void superSetMoveForward(float par1) {
 		super.setMoveForward(par1);
 	}
@@ -2983,6 +3285,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.func_85033_bc();
 	}
 
+	@Override
 	public void superCollideWithNearbyEntities() {
 		super.func_85033_bc();
 	}
@@ -2992,6 +3295,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canDespawn() : super.canDespawn();
 	}
 
+	@Override
 	public boolean superCanDespawn() {
 		return super.canDespawn();
 	}
@@ -3002,6 +3306,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.despawnEntity();
 	}
 
+	@Override
 	public void superDespawnEntity() {
 		super.despawnEntity();
 	}
@@ -3011,6 +3316,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getVerticalFaceSpeed() : super.getVerticalFaceSpeed();
 	}
 
+	@Override
 	public int superGetVerticalFaceSpeed() {
 		return super.getVerticalFaceSpeed();
 	}
@@ -3021,6 +3327,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.faceEntity(entity, par2, par3);
 	}
 
+	@Override
 	public void superFaceEntity(Object entity, float par2, float par3) {
 		super.faceEntity((Entity) entity, par2, par3);
 	}
@@ -3030,6 +3337,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getCanSpawnHere() : super.getCanSpawnHere();
 	}
 
+	@Override
 	public boolean superGetCanSpawnHere() {
 		return super.getCanSpawnHere();
 	}
@@ -3039,6 +3347,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getRenderSizeModifier() : super.getRenderSizeModifier();
 	}
 
+	@Override
 	public float superGetRenderSizeModifier() {
 		return super.getRenderSizeModifier();
 	}
@@ -3048,6 +3357,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getMaxSpawnedInChunk() : super.getMaxSpawnedInChunk();
 	}
 
+	@Override
 	public int superGetMaxSpawnedInChunk() {
 		return super.getMaxSpawnedInChunk();
 	}
@@ -3057,6 +3367,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getSpeedModifier() : super.getSpeedModifier();
 	}
 
+	@Override
 	public float superGetSpeedModifier() {
 		return super.getSpeedModifier();
 	}
@@ -3066,6 +3377,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.getMaxFallHeight() : super.func_82143_as();
 	}
 
+	@Override
 	public int superGetMaxFallHeight() {
 		return super.func_82143_as();
 	}
@@ -3076,6 +3388,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.initCreature();
 	}
 
+	@Override
 	public void superInitCreature() {
 		super.initCreature();
 	}
@@ -3085,6 +3398,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.canBeSteered() : super.canBeSteered();
 	}
 
+	@Override
 	public boolean superCanBeSteered() {
 		return super.canBeSteered();
 	}
@@ -3095,6 +3409,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.func_94058_c(par1Str);
 	}
 
+	@Override
 	public void superFunc_94058_c(String par1Str) {
 		super.func_94058_c(par1Str);
 	}
@@ -3104,6 +3419,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.func_94057_bL() : super.func_94057_bL();
 	}
 
+	@Override
 	public String superFunc_94057_bL() {
 		return super.func_94057_bL();
 	}
@@ -3113,6 +3429,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.func_94056_bM() : super.func_94056_bM();
 	}
 
+	@Override
 	public boolean superFunc_94056_bM() {
 		return super.func_94056_bM();
 	}
@@ -3123,6 +3440,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.func_94061_f(par1);
 	}
 
+	@Override
 	public void superSetNoAI(boolean par1) {
 		super.func_94061_f(par1);
 	}
@@ -3133,6 +3451,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.func_96120_a(par1, par2);
 	}
 
+	@Override
 	public void superFunc_96120_a(int par1, float par2) {
 		super.func_96120_a(par1, par2);
 	}
@@ -3143,6 +3462,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.setCanPickUpLoot(par1);
 	}
 
+	@Override
 	public void superSetCanPickUpLoot(boolean par1) {
 		super.setCanPickUpLoot(par1);
 	}
@@ -3152,6 +3472,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.isNoDespawnRequired() : super.func_104002_bU();
 	}
 
+	@Override
 	public boolean superIsNoDespawnRequired() {
 		return super.func_104002_bU();
 	}
@@ -3161,6 +3482,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.addNotRiddenEntityID(nBTTagCompound) : super.addNotRiddenEntityID(nBTTagCompound);
 	}
 
+	@Override
 	public boolean superAddNotRiddenEntityID(Object nBTTagCompound) {
 		return super.addNotRiddenEntityID((NBTTagCompound) nBTTagCompound);
 	}
@@ -3170,6 +3492,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.addEntityID(nBTTagCompound) : super.addEntityID(nBTTagCompound);
 	}
 
+	@Override
 	public boolean superAddEntityID(Object nBTTagCompound) {
 		return super.addEntityID((NBTTagCompound) nBTTagCompound);
 	}
@@ -3179,6 +3502,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.processInteract(entityPlayer) : super.interact(entityPlayer);
 	}
 
+	@Override
 	public boolean superProcessInteract(Object entityPlayer) {
 		return super.interact((EntityPlayer) entityPlayer);
 	}
@@ -3189,6 +3513,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.unmountEntity(entity);
 	}
 
+	@Override
 	public void superUnmountEntity(Object entity) {
 		super.unmountEntity((Entity) entity);
 	}
@@ -3198,6 +3523,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.hitByEntity(entity) : super.func_85031_j(entity);
 	}
 
+	@Override
 	public boolean superHitByEntity(Object entity) {
 		return super.func_85031_j((Entity) entity);
 	}
@@ -3208,6 +3534,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.func_82149_j(entity);
 	}
 
+	@Override
 	public void superCopyLocationAndAnglesFrom(Object entity) {
 		super.func_82149_j((Entity) entity);
 	}
@@ -3217,6 +3544,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.func_82146_a(explosion, world, par3, par4, par5, block) : super.func_82146_a(explosion, world, par3, par4, par5, block);
 	}
 
+	@Override
 	public float superFunc_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block) {
 		return super.func_82146_a((Explosion) explosion, (World) world, par3, par4, par5, (Block) block);
 	}
@@ -3226,6 +3554,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		return master != null ? master.func_96091_a(explosion, world, par3, par4, par5, par6, par7) : super.func_96091_a(explosion, world, par3, par4, par5, par6, par7);
 	}
 
+	@Override
 	public boolean superFunc_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
 		return super.func_96091_a((Explosion) explosion, (World) world, par3, par4, par5, par6, par7);
 	}
@@ -3236,6 +3565,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		else super.func_85029_a(crashReportCategory);
 	}
 
+	@Override
 	public void superAddEntityCrashInfo(Object crashReportCategory) {
 		super.func_85029_a((CrashReportCategory) crashReportCategory);
 	}
@@ -3322,7 +3652,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+	public void superSetPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 	}
 
 	@Override
@@ -3370,12 +3700,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public float superGetToolDigEfficiency(Object block) {
+	public float superGetDigSpeed(Object block) {
 		return 0.0F;
 	}
 
 	@Override
-	public float superGetBreakSpeed(Object iBlockState, Object blockPos) {
+	public float superGetDigSpeed(Object iBlockState, Object blockPos) {
 		return 0.0F;
 	}
 
@@ -4176,7 +4506,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean superTeleportTo_(double x, double y, double z) {
+	public boolean superAttemptTeleport(double x, double y, double z) {
 		return false;
 	}
 
@@ -4410,11 +4740,11 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superSetBossVisibleTo(Object entityPlayerMP) {
+	public void superAddTrackingPlayer(Object entityPlayerMP) {
 	}
 
 	@Override
-	public void superSetBossNonVisibleTo(Object entityPlayerMP) {
+	public void superRemoveTrackingPlayer(Object entityPlayerMP) {
 	}
 
 	@Override
@@ -4428,7 +4758,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean superFunc_184213_bq() {
+	public boolean superIgnoreItemEntityData() {
 		return false;
 	}
 

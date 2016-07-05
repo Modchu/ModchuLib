@@ -159,202 +159,202 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object biomeGenBaseBeach() {
+	public Object biomeBeach() {
 		return BiomeGenBase.beach;
 	}
 
 	@Override
-	public Object biomeGenBaseBirchForest() {
+	public Object biomeBirchForest() {
 		return BiomeGenBase.forest;
 	}
 
 	@Override
-	public Object biomeGenBaseBirchForestHills() {
+	public Object biomeBirchForestHills() {
 		return BiomeGenBase.forestHills;
 	}
 
 	@Override
-	public Object biomeGenBaseColdTaiga() {
+	public Object biomeColdTaiga() {
 		return BiomeGenBase.taiga;
 	}
 
 	@Override
-	public Object biomeGenBaseColdTaigaHills() {
+	public Object biomeColdTaigaHills() {
 		return BiomeGenBase.taigaHills;
 	}
 
 	@Override
-	public Object biomeGenBaseDeepOcean() {
+	public Object biomeDeepOcean() {
 		return BiomeGenBase.ocean;
 	}
 
 	@Override
-	public Object biomeGenBaseDesert() {
+	public Object biomeDesert() {
 		return BiomeGenBase.desert;
 	}
 
 	@Override
-	public Object biomeGenBaseDesertHills() {
+	public Object biomeDesertHills() {
 		return BiomeGenBase.desertHills;
 	}
 
 	@Override
-	public Object biomeGenBaseExtremeHills() {
+	public Object biomeExtremeHills() {
 		return BiomeGenBase.extremeHills;
 	}
 
 	@Override
-	public Object biomeGenBaseExtremeHillsEdge() {
+	public Object biomeExtremeHillsEdge() {
 		return BiomeGenBase.extremeHillsEdge;
 	}
 
 	@Override
-	public Object biomeGenBaseExtremeHillsPlus() {
+	public Object biomeExtremeHillsPlus() {
 		return BiomeGenBase.extremeHills;
 	}
 
 	@Override
-	public Object biomeGenBaseForest() {
+	public Object biomeForest() {
 		return BiomeGenBase.forest;
 	}
 
 	@Override
-	public Object biomeGenBaseForestHills() {
+	public Object biomeForestHills() {
 		return BiomeGenBase.forestHills;
 	}
 
 	@Override
-	public Object biomeGenBaseFrozenOcean() {
+	public Object biomeFrozenOcean() {
 		return BiomeGenBase.frozenOcean;
 	}
 
 	@Override
-	public Object biomeGenBaseFrozenRiver() {
+	public Object biomeFrozenRiver() {
 		return BiomeGenBase.frozenRiver;
 	}
 
 	@Override
-	public Object biomeGenBaseHell() {
+	public Object biomeHell() {
 		return BiomeGenBase.hell;
 	}
 
 	@Override
-	public Object biomeGenBaseIceMountains() {
+	public Object biomeIceMountains() {
 		return BiomeGenBase.iceMountains;
 	}
 
 	@Override
-	public Object biomeGenBaseIcePlains() {
+	public Object biomeIcePlains() {
 		return BiomeGenBase.icePlains;
 	}
 
 	@Override
-	public Object biomeGenBaseJungle() {
+	public Object biomeJungle() {
 		return BiomeGenBase.jungle;
 	}
 
 	@Override
-	public Object biomeGenBaseJungleEdge() {
+	public Object biomeJungleEdge() {
 		return BiomeGenBase.jungle;
 	}
 
 	@Override
-	public Object biomeGenBaseJungleHills() {
+	public Object biomeJungleHills() {
 		return BiomeGenBase.jungleHills;
 	}
 
 	@Override
-	public Object biomeGenBaseMegaTaiga() {
+	public Object biomeMegaTaiga() {
 		return BiomeGenBase.taiga;
 	}
 
 	@Override
-	public Object biomeGenBaseMegaTaigaHills() {
+	public Object biomeMegaTaigaHills() {
 		return BiomeGenBase.taigaHills;
 	}
 
 	@Override
-	public Object biomeGenBaseMesa() {
+	public Object biomeMesa() {
 		return null;
 	}
 
 	@Override
-	public Object biomeGenBaseMesaPlateau() {
+	public Object biomeMesaPlateau() {
 		return null;
 	}
 
 	@Override
-	public Object biomeGenBaseMesaPlateau_F() {
+	public Object biomeMesaPlateau_F() {
 		return null;
 	}
 
 	@Override
-	public Object biomeGenBaseMushroomIsland() {
+	public Object biomeMushroomIsland() {
 		return BiomeGenBase.mushroomIsland;
 	}
 
 	@Override
-	public Object biomeGenBaseMushroomIslandShore() {
+	public Object biomeMushroomIslandShore() {
 		return BiomeGenBase.mushroomIslandShore;
 	}
 
 	@Override
-	public Object biomeGenBaseOcean() {
+	public Object biomeOcean() {
 		return BiomeGenBase.ocean;
 	}
 
 	@Override
-	public Object biomeGenBasePlains() {
+	public Object biomePlains() {
 		return BiomeGenBase.plains;
 	}
 
 	@Override
-	public Object biomeGenBaseRiver() {
+	public Object biomeRiver() {
 		return BiomeGenBase.river;
 	}
 
 	@Override
-	public Object biomeGenBaseRoofedForest() {
+	public Object biomeRoofedForest() {
 		return BiomeGenBase.forest;
 	}
 
 	@Override
-	public Object biomeGenBaseSavanna() {
+	public Object biomeSavanna() {
 		return null;
 	}
 
 	@Override
-	public Object biomeGenBaseSavannaPlateau() {
+	public Object biomeSavannaPlateau() {
 		return null;
 	}
 
 	@Override
-	public Object biomeGenBaseSky() {
+	public Object biomeSky() {
 		return BiomeGenBase.sky;
 	}
 
 	@Override
-	public Object biomeGenBaseStoneBeach() {
+	public Object biomeStoneBeach() {
 		return BiomeGenBase.beach;
 	}
 
 	@Override
-	public Object biomeGenBaseStoneColdBeach() {
+	public Object biomeStoneColdBeach() {
 		return BiomeGenBase.beach;
 	}
 
 	@Override
-	public Object biomeGenBaseSwampland() {
+	public Object biomeSwampland() {
 		return BiomeGenBase.swampland;
 	}
 
 	@Override
-	public Object biomeGenBaseTaiga() {
+	public Object biomeTaiga() {
 		return BiomeGenBase.taiga;
 	}
 
 	@Override
-	public Object biomeGenBaseTaigaHills() {
+	public Object biomeTaigaHills() {
 		return BiomeGenBase.taigaHills;
 	}
 
@@ -521,25 +521,25 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void dataWatcherAddObject(Object dataWatcherOrEntity, Object i, Object o) {
-		((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).addObject((Integer) i, o);
+	public void dataManagerAddObject(Object dataManagerOrEntity, Object i, Object o) {
+		((DataWatcher) entityGetDataWatcher(dataManagerOrEntity)).addObject((Integer) i, o);
 	}
 
 	@Override
-	public byte dataWatcherGetWatchableObjectByte(Object dataWatcherOrEntity, Object i) {
-		return ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).getWatchableObjectByte((Integer) i);
+	public byte dataManagerGetWatchableObjectByte(Object dataManagerOrEntity, Object i) {
+		return ((DataWatcher) entityGetDataWatcher(dataManagerOrEntity)).getWatchableObjectByte((Integer) i);
 	}
 
 	@Override
-	public Object dataWatcherGetWatchableObjectItemStack(Object dataWatcherOrEntity, Object i) {
-		return ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity)).getWatchableObjectItemStack((Integer) i);
+	public Object dataManagerGetWatchableObjectItemStack(Object dataManagerOrEntity, Object i) {
+		return ((DataWatcher) entityGetDataWatcher(dataManagerOrEntity)).getWatchableObjectItemStack((Integer) i);
 	}
 
 	@Override
-	public void dataWatcherUpdateObject(Object dataWatcherOrEntity, Object i, Object o) {
-		DataWatcher dataWatcher = ((DataWatcher) entityGetDataWatcher(dataWatcherOrEntity));
-		if (dataWatcherGetWatchedObject(dataWatcherOrEntity, i) != null) dataWatcher.updateObject((Integer) i, o);
-		else dataWatcher.addObject((Integer) i, o);
+	public void dataManagerUpdateObject(Object dataManagerOrEntity, Object i, Object o) {
+		DataWatcher dataManager = ((DataWatcher) entityGetDataWatcher(dataManagerOrEntity));
+		if (dataManagerGetWatchedObject(dataManagerOrEntity, i) != null) dataManager.updateObject((Integer) i, o);
+		else dataManager.addObject((Integer) i, o);
 	}
 
 	@Override
@@ -1573,8 +1573,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 			base.initOldVersionItemMap = true;
 		}
 		if (!base.oldVersionItemMap.containsKey(s)) {
-			Modchu_Main.setRuntimeException("oldVersionItemMap s="+s+" is null !!");
-			return null;
+			String s1 = s.toLowerCase();
+			if (!base.oldVersionItemMap.containsKey(s1)) {
+				Modchu_Main.setRuntimeException("oldVersionItemMap s="+s+" is null !!");
+				return null;
+			}
+			return base.oldVersionItemMap.get(s1);
 		}
 		return base.oldVersionItemMap.get(s);
 	}
@@ -1938,8 +1942,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 			base.initOldVersionBlockMap = true;
 		}
 		if (!base.oldVersionBlockMap.containsKey(s)) {
-			Modchu_Main.setRuntimeException("oldVersionBlockMap s="+s+" is null !!");
-			return null;
+			String s1 = s.toLowerCase();
+			if (!base.oldVersionBlockMap.containsKey(s1)) {
+				Modchu_Main.setRuntimeException("oldVersionBlockMap s="+s+" is null !!");
+				return null;
+			}
+			return base.oldVersionBlockMap.get(s1);
 		}
 		return base.oldVersionBlockMap.get(s);
 	}
@@ -3367,8 +3375,8 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public int biomeGenBaseGetBiomeGrassColor(Object biomeGenBase, int x, int y, int z) {
-		return ((BiomeGenBase) biomeGenBase).getBiomeGrassColor();
+	public int biomeGetBiomeGrassColor(Object biome, int x, int y, int z) {
+		return ((BiomeGenBase) biome).getBiomeGrassColor();
 	}
 
 	@Override
@@ -4568,8 +4576,8 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object entityGetDataWatcher(Object dataWatcherOrEntity) {
-		return dataWatcherOrEntity instanceof DataWatcher ? dataWatcherOrEntity : ((Entity) dataWatcherOrEntity).getDataWatcher();
+	public Object entityGetDataWatcher(Object dataManagerOrEntity) {
+		return dataManagerOrEntity instanceof DataWatcher ? dataManagerOrEntity : ((Entity) dataManagerOrEntity).getDataWatcher();
 	}
 
 	@Override

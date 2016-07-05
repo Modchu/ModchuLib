@@ -40,7 +40,7 @@ public interface Modchu_IItem {
 	public boolean superHasEffect(Object itemStack);
 	public Object superGetRarity(Object itemStack);
 	public boolean superIsItemTool(Object itemStack);
-	public Object superGetMovingObjectPositionFromPlayer(Object world, Object entityPlayer, boolean par3);
+	public Object superRayTrace(Object world, Object entityPlayer, boolean par3);
 	public int superGetItemEnchantability();
 	public Object superSetCreativeTab(Object creativeTabs);
 	public Object superGetCreativeTab();
@@ -127,6 +127,17 @@ public interface Modchu_IItem {
 	public boolean superOnBlockDestroyed(Object itemStack, Object world, Object block, int p_150894_4_, int p_150894_5_, int p_150894_6_, Object entityLivingBase);
 	public float superGetDigSpeed(Object itemStack, Object block, int metadata);
 	public boolean superDoesSneakBypassUse(Object world, int x, int y, int z, Object entityPlayer);
+	// ~152
+	public int superGetDamageVsEntity(Object entity);
+	public String superGetLocalizedName(Object itemStack);
+	public String superFunc_77653_i(Object itemStack);
+	public boolean superFunc_82788_x();
+	public boolean superIsValidArmor(Object itemStack, int armorType);
+	public int superGetItemDamageFromStack(Object itemStack);
+	public int superGetItemDamageFromStackForDisplay(Object itemStack);
+	public int superGetItemMaxDamageFromStack(Object itemStack);
+	public boolean superIsItemStackDamaged(Object itemStack);
+	public void superSetItemDamageForStack(Object itemStack, int damage);
 	// 190~
 	public Object superOnItemUse(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumHand, Object enumFacing, float f, float f1, float f2);
 	public Object superOnItemRightClick(Object itemStack, Object world, Object entityPlayer, Object enumHand);

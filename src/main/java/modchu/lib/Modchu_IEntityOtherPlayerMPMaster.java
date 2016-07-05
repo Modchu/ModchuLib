@@ -81,11 +81,11 @@ public interface Modchu_IEntityOtherPlayerMPMaster extends Modchu_IEntityLivingB
 	public int getScore();
 	public void setScore(int p_85040_1_);
 	public void addScore(int p_85039_1_);
-	public Object dropOneItem(boolean p_71040_1_);
-	public Object dropPlayerItemWithRandomChoice(Object itemStack, boolean unused);
+	public Object dropItem(boolean p_71040_1_);
+	public Object dropItem(Object itemStack, boolean unused);
 	public Object dropItemAndGetStack(Object entityItem);
 	public float getDigSpeed(Object block);
-	public float getBreakSpeed(Object iBlockState, Object blockPos);
+	public float getDigSpeed(Object iBlockState, Object blockPos);
 	public boolean canHarvestBlock(Object block);
 	public void openEditSign(Object tileEntitySign);
 	public void displayGuiEditCommandCart(Object commandBlockLogic);

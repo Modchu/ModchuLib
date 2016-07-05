@@ -102,12 +102,12 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc180_189.Modchu_E
 
 	@Override
 	public void func_180426_a(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
-		if (master != null) master.setPositionAndRotation2(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
+		if (master != null) master.setPositionAndRotationDirect(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
 		else super.func_180426_a(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+	public void superSetPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 		super.func_180426_a(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
 	}
 
@@ -222,6 +222,7 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc180_189.Modchu_E
 		return super.func_174825_a((EntityPlayer) entityPlayer, (Vec3) vec3d);
 	}
 
+	@Override
 	public void superSetPortal(Object blockPos) {
 		super.setInPortal();
 	}

@@ -3,8 +3,19 @@ package modchu.lib;
 import java.util.List;
 
 public interface Modchu_IItemMaster {
+	// ~152
+	public int getDamageVsEntity(Object entity);
+	public String getLocalizedName(Object itemStack);
+	public String func_77653_i(Object itemStack);
+	public boolean func_82788_x();
+	public boolean isValidArmor(Object itemStack, int armorType);
+	public int getItemDamageFromStack(Object itemStack);
+	public int getItemDamageFromStackForDisplay(Object itemStack);
+	public int getItemMaxDamageFromStack(Object itemStack);
+	public boolean isItemStackDamaged(Object itemStack);
+	public void setItemDamageForStack(Object itemStack, int damage);
 
-	// 180
+	// 180~
 	public boolean onItemUseFirst(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ);
 	public boolean onBlockStartBreak(Object itemStack, Object blockPos, Object entityPlayer);
 	public void renderHelmetOverlay(Object itemStack, Object entityPlayer, Object scaledResolution, float partialTicks);
@@ -13,7 +24,7 @@ public interface Modchu_IItemMaster {
 	public float getDigSpeed(Object itemStack, Object iBlockState);
 	public boolean doesSneakBypassUse(Object world, Object blockPos, Object entityPlayer);
 
-	// 172
+	// 172~
 	public Object setMaxStackSize(int par1);
 	public int getSpriteNumber();
 	public Object getIconFromDamage(int par1);
@@ -61,7 +72,7 @@ public interface Modchu_IItemMaster {
 	public boolean hasEffect(Object itemStack);
 	public Object getRarity(Object itemStack);
 	public boolean isItemTool(Object itemStack);
-	public Object getMovingObjectPositionFromPlayer(Object world, Object entityPlayer, boolean par3);
+	public Object rayTrace(Object world, Object entityPlayer, boolean par3);
 	public int getItemEnchantability();
 	public boolean requiresMultipleRenderPasses();
 	public Object getIconFromDamageForRenderPass(int par1, int par2);

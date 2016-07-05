@@ -78,6 +78,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		if (master != null) master.sendChatToPlayer(chatMessageComponent);
 	}
 
+	@Override
 	public void supersendChatToPlayer(Object chatMessageComponent) {
 	}
 
@@ -86,6 +87,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canCommandSenderUseCommand(i, s) : false;
 	}
 
+	@Override
 	public boolean supercanCommandSenderUseCommand(int i, String s) {
 		return false;
 	}
@@ -95,6 +97,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (ChunkCoordinates) (master != null ? master.getPlayerCoordinates() : null);
 	}
 
+	@Override
 	public ChunkCoordinates supergetPlayerCoordinates() {
 		return null;
 	}
@@ -105,6 +108,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else superapplyEntityAttributes();
 	}
 
+	@Override
 	public void superapplyEntityAttributes() {
 		Map attributesByName = Modchu_AS.getMap("BaseAttributeMap", "attributesByName", getAttributeMap());
 		if (!attributesByName.containsKey(SharedMonsterAttributes.maxHealth.getAttributeUnlocalizedName())
@@ -118,6 +122,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else superentityInit();
 	}
 
+	@Override
 	public void superentityInit() {
 		Map watchedObjects = Modchu_AS.getMap("DataWatcher", "watchedObjects", dataWatcher);
 		if (!watchedObjects.containsKey(7)) super.entityInit();
@@ -128,6 +133,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (ItemStack) (master != null ? master.getItemInUse() : super.getItemInUse());
 	}
 
+	@Override
 	public ItemStack supergetItemInUse() {
 		return super.getItemInUse();
 	}
@@ -137,6 +143,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getItemInUseCount() : super.getItemInUseCount();
 	}
 
+	@Override
 	public int supergetItemInUseCount() {
 		return super.getItemInUseCount();
 	}
@@ -146,6 +153,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isHandActive() : super.isUsingItem();
 	}
 
+	@Override
 	public boolean superisHandActive() {
 		return super.isUsingItem();
 	}
@@ -155,6 +163,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getItemInUseDuration() : super.getItemInUseDuration();
 	}
 
+	@Override
 	public int supergetItemInUseDuration() {
 		return super.getItemInUseDuration();
 	}
@@ -165,6 +174,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.stopUsingItem();
 	}
 
+	@Override
 	public void superstopUsingItem() {
 		super.stopUsingItem();
 	}
@@ -175,6 +185,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.clearItemInUse();
 	}
 
+	@Override
 	public void superclearItemInUse() {
 		super.clearItemInUse();
 	}
@@ -184,6 +195,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isBlocking() : super.isBlocking();
 	}
 
+	@Override
 	public boolean superisBlocking() {
 		return super.isBlocking();
 	}
@@ -194,6 +206,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onUpdate();
 	}
 
+	@Override
 	public void superonUpdate() {
 		super.onUpdate();
 	}
@@ -203,6 +216,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getMaxInPortalTime() : super.getMaxInPortalTime();
 	}
 
+	@Override
 	public int supergetMaxInPortalTime() {
 		return super.getMaxInPortalTime();
 	}
@@ -212,6 +226,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getPortalCooldown() : super.getPortalCooldown();
 	}
 
+	@Override
 	public int supergetPortalCooldown() {
 		return super.getPortalCooldown();
 	}
@@ -222,6 +237,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.playSound(par1Str, par2, par3);
 	}
 
+	@Override
 	public void superplaySound(String par1Str, float par2, float par3) {
 		super.playSound(par1Str, par2, par3);
 	}
@@ -232,6 +248,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.updateItemUse(itemStack, par2);
 	}
 
+	@Override
 	public void superupdateItemUse(Object itemStack, int par2) {
 		super.updateItemUse((ItemStack) itemStack, par2);
 	}
@@ -242,6 +259,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onItemUseFinish();
 	}
 
+	@Override
 	public void superonItemUseFinish() {
 		super.onItemUseFinish();
 	}
@@ -252,6 +270,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.handleHealthUpdate(par1);
 	}
 
+	@Override
 	public void superhandleStatusUpdate(byte par1) {
 		super.handleHealthUpdate(par1);
 	}
@@ -261,6 +280,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isMovementBlocked() : super.isMovementBlocked();
 	}
 
+	@Override
 	public boolean superisMovementBlocked() {
 		return super.isMovementBlocked();
 	}
@@ -271,6 +291,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.closeScreen();
 	}
 
+	@Override
 	public void supercloseScreen() {
 		super.closeScreen();
 	}
@@ -281,6 +302,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.mountEntity(entity);
 	}
 
+	@Override
 	public boolean superstartRiding(Object entity) {
 		super.mountEntity((Entity) entity);
 		return true;
@@ -292,6 +314,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.updateRidden();
 	}
 
+	@Override
 	public void superupdateRidden() {
 		super.updateRidden();
 	}
@@ -302,6 +325,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.preparePlayerToSpawn();
 	}
 
+	@Override
 	public void superpreparePlayerToSpawn() {
 		super.preparePlayerToSpawn();
 	}
@@ -312,6 +336,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.updateEntityActionState();
 	}
 
+	@Override
 	public void superupdateEntityActionState() {
 		super.updateEntityActionState();
 	}
@@ -322,6 +347,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onLivingUpdate();
 	}
 
+	@Override
 	public void superonLivingUpdate() {
 		super.onLivingUpdate();
 	}
@@ -331,6 +357,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getScore() : super.getScore();
 	}
 
+	@Override
 	public int supergetScore() {
 		return super.getScore();
 	}
@@ -341,6 +368,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setScore(par1);
 	}
 
+	@Override
 	public void supersetScore(int par1) {
 		super.setScore(par1);
 	}
@@ -351,6 +379,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.addScore(par1);
 	}
 
+	@Override
 	public void superaddScore(int par1) {
 		super.addScore(par1);
 	}
@@ -361,6 +390,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onDeath(damageSource);
 	}
 
+	@Override
 	public void superonDeath(Object damageSource) {
 		super.onDeath((DamageSource) damageSource);
 	}
@@ -371,16 +401,18 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.addToPlayerScore(entity, par2);
 	}
 
+	@Override
 	public void superaddToPlayerScore(Object entity, int par2) {
 		super.addToPlayerScore((Entity) entity, par2);
 	}
 
 	@Override
 	public EntityItem dropOneItem(boolean par1) {
-		return (EntityItem) (master != null ? master.dropOneItem(par1) : super.dropOneItem(par1));
+		return (EntityItem) (master != null ? master.dropItem(par1) : super.dropOneItem(par1));
 	}
 
-	public EntityItem superdropOneItem(boolean par1) {
+	@Override
+	public EntityItem superdropItem(boolean par1) {
 		return super.dropOneItem(par1);
 	}
 
@@ -389,16 +421,18 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (EntityItem) (master != null ? master.dropPlayerItem(itemStack) : super.dropPlayerItem(itemStack));
 	}
 
+	@Override
 	public EntityItem superdropPlayerItem(Object itemStack) {
 		return super.dropPlayerItem((ItemStack) itemStack);
 	}
 
 	@Override
 	public EntityItem dropPlayerItemWithRandomChoice(ItemStack itemStack, boolean par2) {
-		return (EntityItem) (master != null ? master.dropPlayerItemWithRandomChoice(itemStack, par2) : super.dropPlayerItemWithRandomChoice(itemStack, par2));
+		return (EntityItem) (master != null ? master.dropItem(itemStack, par2) : super.dropPlayerItemWithRandomChoice(itemStack, par2));
 	}
 
-	public EntityItem superdropPlayerItemWithRandomChoice(Object itemStack, boolean par2) {
+	@Override
+	public EntityItem superdropItem(Object itemStack, boolean par2) {
 		return super.dropPlayerItemWithRandomChoice((ItemStack) itemStack, par2);
 	}
 
@@ -408,6 +442,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.joinEntityItemWithWorld(entityItem);
 	}
 
+	@Override
 	public void superdropItemAndGetStack(Object entityItem) {
 		super.joinEntityItemWithWorld((EntityItem) entityItem);
 	}
@@ -417,6 +452,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getCurrentPlayerStrVsBlock(block, par2) : super.getCurrentPlayerStrVsBlock(block, par2);
 	}
 
+	@Override
 	public float supergetCurrentPlayerStrVsBlock(Object block, boolean par2) {
 		return super.getCurrentPlayerStrVsBlock((Block) block, par2);
 	}
@@ -426,6 +462,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getCurrentPlayerStrVsBlock(block, par2, meta) : super.getCurrentPlayerStrVsBlock(block, par2, meta);
 	}
 
+	@Override
 	public float supergetCurrentPlayerStrVsBlock(Object block, boolean par2, int meta) {
 		return super.getCurrentPlayerStrVsBlock((Block) block, par2, meta);
 	}
@@ -435,6 +472,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canHarvestBlock(block) : super.canHarvestBlock(block);
 	}
 
+	@Override
 	public boolean supercanHarvestBlock(Object block) {
 		return super.canHarvestBlock((Block) block);
 	}
@@ -445,6 +483,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.readEntityFromNBT(nBTTagCompound);
 	}
 
+	@Override
 	public void superreadEntityFromNBT(Object nBTTagCompound) {
 		super.readEntityFromNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -455,6 +494,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.writeEntityToNBT(nBTTagCompound);
 	}
 
+	@Override
 	public void superwriteEntityToNBT(Object nBTTagCompound) {
 		super.writeEntityToNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -465,6 +505,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIChest(iInventory);
 	}
 
+	@Override
 	public void superdisplayGUIChest(Object iInventory) {
 		super.displayGUIChest((IInventory) iInventory);
 	}
@@ -475,6 +516,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIHopper(tileEntityHopper);
 	}
 
+	@Override
 	public void superdisplayGUIHopper(Object tileEntityHopper) {
 		super.displayGUIHopper((TileEntityHopper) tileEntityHopper);
 	}
@@ -485,6 +527,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIHopperMinecart(entityMinecartHopper);
 	}
 
+	@Override
 	public void superdisplayGUIHopperMinecart(Object entityMinecartHopper) {
 		super.displayGUIHopperMinecart((EntityMinecartHopper) entityMinecartHopper);
 	}
@@ -495,6 +538,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIHorse(entityHorse, iInventory);
 	}
 
+	@Override
 	public void superopenGuiHorseInventory(Object entityHorse, Object iInventory) {
 		super.displayGUIHorse((EntityHorse) entityHorse, (IInventory) iInventory);
 	}
@@ -505,6 +549,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIEnchantment(par1, par2, par3, par4Str);
 	}
 
+	@Override
 	public void superdisplayGUIEnchantment(int par1, int par2, int par3, String par4Str) {
 		super.displayGUIEnchantment(par1, par2, par3, par4Str);
 	}
@@ -515,6 +560,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIAnvil(par1, par2, par3);
 	}
 
+	@Override
 	public void superdisplayGUIAnvil(int par1, int par2, int par3) {
 		super.displayGUIAnvil(par1, par2, par3);
 	}
@@ -525,6 +571,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIWorkbench(par1, par2, par3);
 	}
 
+	@Override
 	public void superdisplayGUIWorkbench(int par1, int par2, int par3) {
 		super.displayGUIWorkbench(par1, par2, par3);
 	}
@@ -534,6 +581,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getEyeHeight() : super.getEyeHeight();
 	}
 
+	@Override
 	public float supergetEyeHeight() {
 		return super.getEyeHeight();
 	}
@@ -544,6 +592,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.resetHeight();
 	}
 
+	@Override
 	public void superresetHeight() {
 		super.resetHeight();
 	}
@@ -553,6 +602,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.attackEntityFrom(damageSource, par2) : super.attackEntityFrom(damageSource, par2);
 	}
 
+	@Override
 	public boolean superattackEntityFrom(Object damageSource, float par2) {
 		return super.attackEntityFrom((DamageSource) damageSource, par2);
 	}
@@ -562,6 +612,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canAttackPlayer(entityPlayer) : super.canAttackPlayer(entityPlayer);
 	}
 
+	@Override
 	public boolean supercanAttackPlayer(Object entityPlayer) {
 		return super.canAttackPlayer((EntityPlayer) entityPlayer);
 	}
@@ -572,6 +623,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.damageArmor(par1);
 	}
 
+	@Override
 	public void superdamageArmor(float par1) {
 		super.damageArmor(par1);
 	}
@@ -581,6 +633,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getTotalArmorValue() : super.getTotalArmorValue();
 	}
 
+	@Override
 	public int supergetTotalArmorValue() {
 		return super.getTotalArmorValue();
 	}
@@ -590,6 +643,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getArmorVisibility() : super.getArmorVisibility();
 	}
 
+	@Override
 	public float supergetArmorVisibility() {
 		return super.getArmorVisibility();
 	}
@@ -600,6 +654,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.damageEntity(damageSource, par2);
 	}
 
+	@Override
 	public void superdamageEntity(Object damageSource, float par2) {
 		super.damageEntity((DamageSource) damageSource, par2);
 	}
@@ -610,6 +665,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIFurnace(tileEntityFurnace);
 	}
 
+	@Override
 	public void superdisplayGUIFurnace(Object tileEntityFurnace) {
 		super.displayGUIFurnace((TileEntityFurnace) tileEntityFurnace);
 	}
@@ -620,6 +676,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIDispenser(tileEntityDispenser);
 	}
 
+	@Override
 	public void superdisplayGUIDispenser(Object tileEntityDispenser) {
 		super.displayGUIDispenser((TileEntityDispenser) tileEntityDispenser);
 	}
@@ -630,6 +687,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIEditSign(tileEntity);
 	}
 
+	@Override
 	public void superdisplayGUIEditSign(Object tileEntity) {
 		super.displayGUIEditSign((TileEntity) tileEntity);
 	}
@@ -640,6 +698,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIBrewingStand(tileEntityBrewingStand);
 	}
 
+	@Override
 	public void superdisplayGUIBrewingStand(Object tileEntityBrewingStand) {
 		super.displayGUIBrewingStand((TileEntityBrewingStand) tileEntityBrewingStand);
 	}
@@ -650,6 +709,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIBeacon(tileEntityBeacon);
 	}
 
+	@Override
 	public void superdisplayGUIBeacon(Object tileEntityBeacon) {
 		super.displayGUIBeacon((TileEntityBeacon) tileEntityBeacon);
 	}
@@ -660,6 +720,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIMerchant(iMerchant, par2Str);
 	}
 
+	@Override
 	public void superdisplayGUIMerchant(Object iMerchant, String par2Str) {
 		super.displayGUIMerchant((IMerchant) iMerchant, par2Str);
 	}
@@ -670,6 +731,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.displayGUIBook(itemStack);
 	}
 
+	@Override
 	public void superopenBook(Object itemStack) {
 		super.displayGUIBook((ItemStack) itemStack);
 	}
@@ -679,6 +741,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.interactWith(entity) : super.interactWith(entity);
 	}
 
+	@Override
 	public boolean superinteractWith(Object entity) {
 		return super.interactWith((Entity) entity);
 	}
@@ -688,6 +751,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (ItemStack) (master != null ? master.getHeldItemMainhand() : super.getCurrentEquippedItem());
 	}
 
+	@Override
 	public ItemStack supergetHeldItemMainhand() {
 		return super.getCurrentEquippedItem();
 	}
@@ -698,6 +762,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.destroyCurrentEquippedItem();
 	}
 
+	@Override
 	public void superdestroyCurrentEquippedItem() {
 		super.destroyCurrentEquippedItem();
 	}
@@ -707,6 +772,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getYOffset() : super.getYOffset();
 	}
 
+	@Override
 	public double supergetYOffset() {
 		return super.getYOffset();
 	}
@@ -717,6 +783,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.attackTargetEntityWithCurrentItem(entity);
 	}
 
+	@Override
 	public void superattackTargetEntityWithCurrentItem(Object entity) {
 		super.attackTargetEntityWithCurrentItem((Entity) entity);
 	}
@@ -727,6 +794,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onCriticalHit(entity);
 	}
 
+	@Override
 	public void superonCriticalHit(Object entity) {
 		super.onCriticalHit((Entity) entity);
 	}
@@ -737,6 +805,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onEnchantmentCritical(entity);
 	}
 
+	@Override
 	public void superonEnchantmentCritical(Object entity) {
 		super.onEnchantmentCritical((Entity) entity);
 	}
@@ -747,6 +816,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.respawnPlayer();
 	}
 
+	@Override
 	public void superrespawnPlayer() {
 		super.respawnPlayer();
 	}
@@ -757,6 +827,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setDead();
 	}
 
+	@Override
 	public void supersetDead() {
 		super.setDead();
 	}
@@ -766,6 +837,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isEntityInsideOpaqueBlock() : super.isEntityInsideOpaqueBlock();
 	}
 
+	@Override
 	public boolean superisEntityInsideOpaqueBlock() {
 		return super.isEntityInsideOpaqueBlock();
 	}
@@ -775,6 +847,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (EnumStatus) (master != null ? master.sleepInBedAt(par1, par2, par3) : super.sleepInBedAt(par1, par2, par3));
 	}
 
+	@Override
 	public EnumStatus supersleepInBedAt(int par1, int par2, int par3) {
 		return super.sleepInBedAt(par1, par2, par3);
 	}
@@ -785,6 +858,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.wakeUpPlayer(par1, par2, par3);
 	}
 
+	@Override
 	public void superwakeUpPlayer(boolean par1, boolean par2, boolean par3) {
 		super.wakeUpPlayer(par1, par2, par3);
 	}
@@ -794,6 +868,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getBedOrientationInDegrees() : super.getBedOrientationInDegrees();
 	}
 
+	@Override
 	public float supergetBedOrientationInDegrees() {
 		return super.getBedOrientationInDegrees();
 	}
@@ -803,6 +878,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isPlayerSleeping() : super.isPlayerSleeping();
 	}
 
+	@Override
 	public boolean superisPlayerSleeping() {
 		return super.isPlayerSleeping();
 	}
@@ -812,6 +888,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isPlayerFullyAsleep() : super.isPlayerFullyAsleep();
 	}
 
+	@Override
 	public boolean superisPlayerFullyAsleep() {
 		return super.isPlayerFullyAsleep();
 	}
@@ -821,6 +898,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getSleepTimer() : super.getSleepTimer();
 	}
 
+	@Override
 	public int supergetSleepTimer() {
 		return super.getSleepTimer();
 	}
@@ -830,6 +908,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getHideCape(par1) : super.getHideCape(par1);
 	}
 
+	@Override
 	public boolean supergetHideCape(int par1) {
 		return super.getHideCape(par1);
 	}
@@ -840,6 +919,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setHideCape(par1, par2);
 	}
 
+	@Override
 	public void supersetHideCape(int par1, boolean par2) {
 		super.setHideCape(par1, par2);
 	}
@@ -850,6 +930,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.addChatMessage(par1Str);
 	}
 
+	@Override
 	public void superaddChatMessage(String par1Str) {
 		super.addChatMessage(par1Str);
 	}
@@ -859,6 +940,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (ChunkCoordinates) (master != null ? master.getBedLocation() : super.getBedLocation());
 	}
 
+	@Override
 	public ChunkCoordinates supergetBedLocation() {
 		return super.getBedLocation();
 	}
@@ -868,6 +950,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isSpawnForced() : super.isSpawnForced();
 	}
 
+	@Override
 	public boolean superisSpawnForced() {
 		return super.isSpawnForced();
 	}
@@ -877,6 +960,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (ChunkCoordinates) (master != null ? master.getBedLocation(dimension) : super.getBedLocation(dimension));
 	}
 
+	@Override
 	public ChunkCoordinates supergetBedLocation(int dimension) {
 		return super.getBedLocation(dimension);
 	}
@@ -886,6 +970,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isSpawnForced(dimension) : super.isSpawnForced(dimension);
 	}
 
+	@Override
 	public boolean superisSpawnForced(int dimension) {
 		return super.isSpawnForced(dimension);
 	}
@@ -896,6 +981,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setSpawnChunk(chunkCoordinates, par2);
 	}
 
+	@Override
 	public void supersetSpawnChunk(Object chunkCoordinates, boolean par2) {
 		super.setSpawnChunk((ChunkCoordinates) chunkCoordinates, par2);
 	}
@@ -906,6 +992,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setSpawnChunk(chunkCoordinates, forced, dimension);
 	}
 
+	@Override
 	public void supersetSpawnChunk(Object chunkCoordinates, boolean forced, int dimension) {
 		super.setSpawnChunk((ChunkCoordinates) chunkCoordinates, forced, dimension);
 	}
@@ -916,6 +1003,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.triggerAchievement(statBase);
 	}
 
+	@Override
 	public void superaddStat(Object statBase) {
 		super.triggerAchievement((StatBase) statBase);
 	}
@@ -926,6 +1014,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.addStat(statBase, par2);
 	}
 
+	@Override
 	public void superaddStat(Object statBase, int par2) {
 		super.addStat((StatBase) statBase, par2);
 	}
@@ -936,6 +1025,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.jump();
 	}
 
+	@Override
 	public void superjump() {
 		super.jump();
 	}
@@ -946,6 +1036,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.moveEntityWithHeading(par1, par2);
 	}
 
+	@Override
 	public void supermoveEntityWithHeading(float par1, float par2) {
 		super.moveEntityWithHeading(par1, par2);
 	}
@@ -955,6 +1046,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getAIMoveSpeed() : super.getAIMoveSpeed();
 	}
 
+	@Override
 	public float supergetAIMoveSpeed() {
 		return super.getAIMoveSpeed();
 	}
@@ -965,6 +1057,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.addMovementStat(par1, par3, par5);
 	}
 
+	@Override
 	public void superaddMovementStat(double par1, double par3, double par5) {
 		super.addMovementStat(par1, par3, par5);
 	}
@@ -975,6 +1068,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.fall(par1);
 	}
 
+	@Override
 	public void superfall(float par1) {
 		super.fall(par1);
 	}
@@ -985,6 +1079,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onKillEntity(entityLivingBase);
 	}
 
+	@Override
 	public void superonKillEntity(Object entityLivingBase) {
 		super.onKillEntity((EntityLivingBase) entityLivingBase);
 	}
@@ -995,6 +1090,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setInWeb();
 	}
 
+	@Override
 	public void supersetInWeb() {
 		super.setInWeb();
 	}
@@ -1004,6 +1100,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (Icon) (master != null ? master.getItemIcon(itemStack, par2) : super.getItemIcon(itemStack, par2));
 	}
 
+	@Override
 	public Icon supergetItemIcon(Object itemStack, int par2) {
 		return super.getItemIcon((ItemStack) itemStack, par2);
 	}
@@ -1013,6 +1110,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (ItemStack) (master != null ? master.getCurrentArmor(par1) : super.getCurrentArmor(par1));
 	}
 
+	@Override
 	public ItemStack supergetCurrentArmor(int par1) {
 		return super.getCurrentArmor(par1);
 	}
@@ -1023,6 +1121,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.addExperience(par1);
 	}
 
+	@Override
 	public void superaddExperience(int par1) {
 		super.addExperience(par1);
 	}
@@ -1033,6 +1132,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.addExperienceLevel(par1);
 	}
 
+	@Override
 	public void superaddExperienceLevel(int par1) {
 		super.addExperienceLevel(par1);
 	}
@@ -1042,6 +1142,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.xpBarCap() : super.xpBarCap();
 	}
 
+	@Override
 	public int superxpBarCap() {
 		return super.xpBarCap();
 	}
@@ -1052,6 +1153,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.addExhaustion(par1);
 	}
 
+	@Override
 	public void superaddExhaustion(float par1) {
 		super.addExhaustion(par1);
 	}
@@ -1061,6 +1163,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (FoodStats) (master != null ? master.getFoodStats() : super.getFoodStats());
 	}
 
+	@Override
 	public FoodStats supergetFoodStats() {
 		return super.getFoodStats();
 	}
@@ -1070,6 +1173,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canEat(par1) : super.canEat(par1);
 	}
 
+	@Override
 	public boolean supercanEat(boolean par1) {
 		return super.canEat(par1);
 	}
@@ -1079,6 +1183,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.shouldHeal() : super.shouldHeal();
 	}
 
+	@Override
 	public boolean supershouldHeal() {
 		return super.shouldHeal();
 	}
@@ -1089,6 +1194,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setItemInUse(itemStack, par2);
 	}
 
+	@Override
 	public void supersetItemInUse(Object itemStack, int par2) {
 		super.setItemInUse((ItemStack) itemStack, par2);
 	}
@@ -1098,6 +1204,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isCurrentToolAdventureModeExempt(par1, par2, par3) : super.isCurrentToolAdventureModeExempt(par1, par2, par3);
 	}
 
+	@Override
 	public boolean superisCurrentToolAdventureModeExempt(int par1, int par2, int par3) {
 		return super.isCurrentToolAdventureModeExempt(par1, par2, par3);
 	}
@@ -1107,6 +1214,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canPlayerEdit(par1, par2, par3, par4, itemStack) : super.canPlayerEdit(par1, par2, par3, par4, itemStack);
 	}
 
+	@Override
 	public boolean supercanPlayerEdit(int par1, int par2, int par3, int par4, Object itemStack) {
 		return super.canPlayerEdit(par1, par2, par3, par4, (ItemStack) itemStack);
 	}
@@ -1116,6 +1224,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getExperiencePoints(entityPlayer) : super.getExperiencePoints(entityPlayer);
 	}
 
+	@Override
 	public int supergetExperiencePoints(Object entityPlayer) {
 		return super.getExperiencePoints((EntityPlayer) entityPlayer);
 	}
@@ -1125,6 +1234,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isPlayer() : super.isPlayer();
 	}
 
+	@Override
 	public boolean superisPlayer() {
 		return super.isPlayer();
 	}
@@ -1134,6 +1244,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getEntityName() : super.getEntityName();
 	}
 
+	@Override
 	public String supergetEntityName() {
 		return super.getEntityName();
 	}
@@ -1143,6 +1254,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getAlwaysRenderNameTagForRender() : super.getAlwaysRenderNameTagForRender();
 	}
 
+	@Override
 	public boolean supergetAlwaysRenderNameTagForRender() {
 		return super.getAlwaysRenderNameTagForRender();
 	}
@@ -1153,6 +1265,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.clonePlayer(entityPlayer, par2);
 	}
 
+	@Override
 	public void superclonePlayer(Object entityPlayer, boolean par2) {
 		super.clonePlayer((EntityPlayer) entityPlayer, par2);
 	}
@@ -1162,6 +1275,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canTriggerWalking() : super.canTriggerWalking();
 	}
 
+	@Override
 	public boolean supercanTriggerWalking() {
 		return super.canTriggerWalking();
 	}
@@ -1172,6 +1286,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.sendPlayerAbilities();
 	}
 
+	@Override
 	public void supersendPlayerAbilities() {
 		super.sendPlayerAbilities();
 	}
@@ -1182,6 +1297,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setGameType(enumGameType);
 	}
 
+	@Override
 	public void supersetGameType(Object enumGameType) {
 		super.setGameType((EnumGameType) enumGameType);
 	}
@@ -1200,6 +1316,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (World) (master != null ? master.getEntityWorld() : super.getEntityWorld());
 	}
 
+	@Override
 	public World supergetEntityWorld() {
 		return super.getEntityWorld();
 	}
@@ -1209,6 +1326,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (InventoryEnderChest) (master != null ? master.getInventoryEnderChest() : super.getInventoryEnderChest());
 	}
 
+	@Override
 	public InventoryEnderChest supergetInventoryEnderChest() {
 		return super.getInventoryEnderChest();
 	}
@@ -1218,6 +1336,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (ItemStack) (master != null ? master.getCurrentItemOrArmor(par1) : super.getCurrentItemOrArmor(par1));
 	}
 
+	@Override
 	public ItemStack supergetCurrentItemOrArmor(int par1) {
 		return super.getCurrentItemOrArmor(par1);
 	}
@@ -1227,6 +1346,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (ItemStack) (master != null ? master.getHeldItem() : super.getHeldItem());
 	}
 
+	@Override
 	public ItemStack supergetHeldItem() {
 		return super.getHeldItem();
 	}
@@ -1237,6 +1357,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setCurrentItemOrArmor(par1, itemStack);
 	}
 
+	@Override
 	public void supersetCurrentItemOrArmor(int par1, Object itemStack) {
 		super.setCurrentItemOrArmor(par1, (ItemStack) itemStack);
 	}
@@ -1246,6 +1367,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isInvisibleToPlayer(entityPlayer) : super.isInvisibleToPlayer(entityPlayer);
 	}
 
+	@Override
 	public boolean superisInvisibleToPlayer(Object entityPlayer) {
 		return super.isInvisibleToPlayer((EntityPlayer) entityPlayer);
 	}
@@ -1255,6 +1377,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (ItemStack[]) (master != null ? master.getLastActiveItems() : super.getLastActiveItems());
 	}
 
+	@Override
 	public ItemStack[] supergetLastActiveItems() {
 		return super.getLastActiveItems();
 	}
@@ -1264,6 +1387,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getHideCape() : super.getHideCape();
 	}
 
+	@Override
 	public boolean supergetHideCape() {
 		return super.getHideCape();
 	}
@@ -1273,6 +1397,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isPushedByWater() : super.isPushedByWater();
 	}
 
+	@Override
 	public boolean superisPushedByWater() {
 		return super.isPushedByWater();
 	}
@@ -1282,6 +1407,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (Scoreboard) (master != null ? master.getWorldScoreboard() : super.getWorldScoreboard());
 	}
 
+	@Override
 	public Scoreboard supergetWorldScoreboard() {
 		return super.getWorldScoreboard();
 	}
@@ -1291,6 +1417,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (Team) (master != null ? master.getTeam() : super.getTeam());
 	}
 
+	@Override
 	public Team supergetTeam() {
 		return super.getTeam();
 	}
@@ -1300,6 +1427,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getTranslatedEntityName() : super.getTranslatedEntityName();
 	}
 
+	@Override
 	public String supergetTranslatedEntityName() {
 		return super.getTranslatedEntityName();
 	}
@@ -1310,6 +1438,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setAbsorptionAmount(par1);
 	}
 
+	@Override
 	public void supersetAbsorptionAmount(float par1) {
 		super.setAbsorptionAmount(par1);
 	}
@@ -1319,6 +1448,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getAbsorptionAmount() : super.getAbsorptionAmount();
 	}
 
+	@Override
 	public float supergetAbsorptionAmount() {
 		return super.getAbsorptionAmount();
 	}
@@ -1329,6 +1459,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.openGui(mod, modGuiId, world, x, y, z);
 	}
 
+	@Override
 	public void superopenGui(Object mod, int modGuiId, Object world, int x, int y, int z) {
 		super.openGui(mod, modGuiId, (World) world, x, y, z);
 	}
@@ -1338,6 +1469,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getDefaultEyeHeight() : super.getDefaultEyeHeight();
 	}
 
+	@Override
 	public float supergetDefaultEyeHeight() {
 		return super.getDefaultEyeHeight();
 	}
@@ -1347,6 +1479,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getDisplayName() : super.getDisplayName();
 	}
 
+	@Override
 	public String supergetDisplayName() {
 		return super.getDisplayName();
 	}
@@ -1357,6 +1490,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.refreshDisplayName();
 	}
 
+	@Override
 	public void superrefreshDisplayName() {
 		super.refreshDisplayName();
 	}
@@ -1367,6 +1501,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.updateFallState(par1, par3);
 	}
 
+	@Override
 	public void superupdateFallState(double par1, boolean par3) {
 		super.updateFallState(par1, par3);
 	}
@@ -1376,6 +1511,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canBreatheUnderwater() : super.canBreatheUnderwater();
 	}
 
+	@Override
 	public boolean supercanBreatheUnderwater() {
 		return super.canBreatheUnderwater();
 	}
@@ -1386,6 +1522,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onEntityUpdate();
 	}
 
+	@Override
 	public void superonEntityUpdate() {
 		super.onEntityUpdate();
 	}
@@ -1395,6 +1532,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isChild() : super.isChild();
 	}
 
+	@Override
 	public boolean superisChild() {
 		return super.isChild();
 	}
@@ -1405,6 +1543,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onDeathUpdate();
 	}
 
+	@Override
 	public void superonDeathUpdate() {
 		super.onDeathUpdate();
 	}
@@ -1414,6 +1553,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.decreaseAirSupply(par1) : super.decreaseAirSupply(par1);
 	}
 
+	@Override
 	public int superdecreaseAirSupply(int par1) {
 		return super.decreaseAirSupply(par1);
 	}
@@ -1423,6 +1563,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getRNG() : super.getRNG();
 	}
 
+	@Override
 	public Random supergetRNG() {
 		return super.getRNG();
 	}
@@ -1432,6 +1573,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (EntityLivingBase) (master != null ? master.getAITarget() : super.getAITarget());
 	}
 
+	@Override
 	public EntityLivingBase supergetAITarget() {
 		return super.getAITarget();
 	}
@@ -1441,6 +1583,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.func_142015_aE() : super.func_142015_aE();
 	}
 
+	@Override
 	public int superfunc_142015_aE() {
 		return super.func_142015_aE();
 	}
@@ -1451,6 +1594,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setRevengeTarget(entityLivingBase);
 	}
 
+	@Override
 	public void supersetRevengeTarget(Object entityLivingBase) {
 		super.setRevengeTarget((EntityLivingBase) entityLivingBase);
 	}
@@ -1460,6 +1604,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (EntityLivingBase) (master != null ? master.getLastAttacker() : super.getLastAttacker());
 	}
 
+	@Override
 	public EntityLivingBase supergetLastAttacker() {
 		return super.getLastAttacker();
 	}
@@ -1469,6 +1614,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getLastAttackerTime() : super.getLastAttackerTime();
 	}
 
+	@Override
 	public int supergetLastAttackerTime() {
 		return super.getLastAttackerTime();
 	}
@@ -1479,6 +1625,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setLastAttacker(entity);
 	}
 
+	@Override
 	public void supersetLastAttacker(Object entity) {
 		super.setLastAttacker((Entity) entity);
 	}
@@ -1488,6 +1635,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getAge() : super.getAge();
 	}
 
+	@Override
 	public int supergetAge() {
 		return super.getAge();
 	}
@@ -1498,6 +1646,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.updatePotionEffects();
 	}
 
+	@Override
 	public void superupdatePotionEffects() {
 		super.updatePotionEffects();
 	}
@@ -1508,6 +1657,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.clearActivePotions();
 	}
 
+	@Override
 	public void superclearActivePotions() {
 		super.clearActivePotions();
 	}
@@ -1517,6 +1667,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (Collection) (master != null ? master.getActivePotionEffects() : super.getActivePotionEffects());
 	}
 
+	@Override
 	public Collection supergetActivePotionEffects() {
 		return super.getActivePotionEffects();
 	}
@@ -1526,6 +1677,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isPotionActive(par1) : super.isPotionActive(par1);
 	}
 
+	@Override
 	public boolean superisPotionActive(int par1) {
 		return super.isPotionActive(par1);
 	}
@@ -1535,6 +1687,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isPotionActive(potion) : super.isPotionActive(potion);
 	}
 
+	@Override
 	public boolean superisPotionActive(Object potion) {
 		return super.isPotionActive((Potion) potion);
 	}
@@ -1544,6 +1697,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (PotionEffect) (master != null ? master.getActivePotionEffect(potion) : super.getActivePotionEffect(potion));
 	}
 
+	@Override
 	public PotionEffect supergetActivePotionEffect(Object potion) {
 		return super.getActivePotionEffect((Potion) potion);
 	}
@@ -1554,6 +1708,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.addPotionEffect(potionEffect);
 	}
 
+	@Override
 	public void superaddPotionEffect(Object potionEffect) {
 		super.addPotionEffect((PotionEffect) potionEffect);
 	}
@@ -1563,6 +1718,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isPotionApplicable(potionEffect) : super.isPotionApplicable(potionEffect);
 	}
 
+	@Override
 	public boolean superisPotionApplicable(Object potionEffect) {
 		return super.isPotionApplicable((PotionEffect) potionEffect);
 	}
@@ -1572,6 +1728,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isEntityUndead() : super.isEntityUndead();
 	}
 
+	@Override
 	public boolean superisEntityUndead() {
 		return super.isEntityUndead();
 	}
@@ -1582,6 +1739,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.removePotionEffectClient(par1);
 	}
 
+	@Override
 	public void superremovePotionEffectClient(int par1) {
 		super.removePotionEffectClient(par1);
 	}
@@ -1592,6 +1750,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.removePotionEffect(par1);
 	}
 
+	@Override
 	public void superremovePotionEffect(int par1) {
 		super.removePotionEffect(par1);
 	}
@@ -1602,6 +1761,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onNewPotionEffect(potionEffect);
 	}
 
+	@Override
 	public void superonNewPotionEffect(Object potionEffect) {
 		super.onNewPotionEffect((PotionEffect) potionEffect);
 	}
@@ -1612,6 +1772,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onChangedPotionEffect(potionEffect, par2);
 	}
 
+	@Override
 	public void superonChangedPotionEffect(Object potionEffect, boolean par2) {
 		super.onChangedPotionEffect((PotionEffect) potionEffect, par2);
 	}
@@ -1622,6 +1783,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onFinishedPotionEffect(potionEffect);
 	}
 
+	@Override
 	public void superonFinishedPotionEffect(Object potionEffect) {
 		super.onFinishedPotionEffect((PotionEffect) potionEffect);
 	}
@@ -1632,6 +1794,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.heal(par1);
 	}
 
+	@Override
 	public void superheal(float par1) {
 		super.heal(par1);
 	}
@@ -1642,6 +1805,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setHealth(par1);
 	}
 
+	@Override
 	public void supersetHealth(float par1) {
 		super.setHealth(par1);
 	}
@@ -1652,6 +1816,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.renderBrokenItemStack(itemStack);
 	}
 
+	@Override
 	public void superrenderBrokenItemStack(Object itemStack) {
 		super.renderBrokenItemStack((ItemStack) itemStack);
 	}
@@ -1662,6 +1827,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.dropEquipment(par1, par2);
 	}
 
+	@Override
 	public void superdropEquipment(boolean par1, int par2) {
 		super.dropEquipment(par1, par2);
 	}
@@ -1672,6 +1838,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.knockBack(entity, par2, par3, par5);
 	}
 
+	@Override
 	public void superknockBack(Object entity, float par2, double par3, double par5) {
 		super.knockBack((Entity) entity, par2, par3, par5);
 	}
@@ -1681,6 +1848,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getHurtSound() : super.getHurtSound();
 	}
 
+	@Override
 	public String supergetHurtSound() {
 		return super.getHurtSound();
 	}
@@ -1690,6 +1858,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getDeathSound() : super.getDeathSound();
 	}
 
+	@Override
 	public String supergetDeathSound() {
 		return super.getDeathSound();
 	}
@@ -1700,6 +1869,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.dropRareDrop(par1);
 	}
 
+	@Override
 	public void superdropRareDrop(int par1) {
 		super.dropRareDrop(par1);
 	}
@@ -1710,6 +1880,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.dropFewItems(par1, par2);
 	}
 
+	@Override
 	public void superdropFewItems(boolean par1, int par2) {
 		super.dropFewItems(par1, par2);
 	}
@@ -1719,6 +1890,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isOnLadder() : super.isOnLadder();
 	}
 
+	@Override
 	public boolean superisOnLadder() {
 		return super.isOnLadder();
 	}
@@ -1728,6 +1900,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isEntityAlive() : super.isEntityAlive();
 	}
 
+	@Override
 	public boolean superisEntityAlive() {
 		return super.isEntityAlive();
 	}
@@ -1738,6 +1911,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.performHurtAnimation();
 	}
 
+	@Override
 	public void superperformHurtAnimation() {
 		super.performHurtAnimation();
 	}
@@ -1747,6 +1921,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (Float) (master != null ? master.applyArmorCalculations(damageSource, par2) : super.applyArmorCalculations(damageSource, par2));
 	}
 
+	@Override
 	public Object superapplyArmorCalculations(Object damageSource, float par2) {
 		return super.applyArmorCalculations((DamageSource) damageSource, par2);
 	}
@@ -1756,6 +1931,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (Float) (master != null ? master.applyPotionDamageCalculations(damageSource, par2) : super.applyPotionDamageCalculations(damageSource, par2));
 	}
 
+	@Override
 	public Object superapplyPotionDamageCalculations(Object damageSource, float par2) {
 		return super.applyPotionDamageCalculations((DamageSource) damageSource, par2);
 	}
@@ -1765,6 +1941,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (CombatTracker) (master != null ? master.func_110142_aN() : super.func_110142_aN());
 	}
 
+	@Override
 	public CombatTracker superfunc_110142_aN() {
 		return super.func_110142_aN();
 	}
@@ -1774,6 +1951,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (EntityLivingBase) (master != null ? master.getAttackingEntity() : super.func_94060_bK());
 	}
 
+	@Override
 	public EntityLivingBase supergetAttackingEntity() {
 		return super.func_94060_bK();
 	}
@@ -1784,6 +1962,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.swingItem();
 	}
 
+	@Override
 	public void superswingArm() {
 		super.swingItem();
 	}
@@ -1794,6 +1973,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.kill();
 	}
 
+	@Override
 	public void superkill() {
 		super.kill();
 	}
@@ -1804,6 +1984,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.updateArmSwingProgress();
 	}
 
+	@Override
 	public void superupdateArmSwingProgress() {
 		super.updateArmSwingProgress();
 	}
@@ -1813,6 +1994,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (AttributeInstance) (master != null ? master.getEntityAttribute(attribute) : super.getEntityAttribute(attribute));
 	}
 
+	@Override
 	public AttributeInstance supergetEntityAttribute(Object attribute) {
 		return super.getEntityAttribute((Attribute) attribute);
 	}
@@ -1822,6 +2004,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (BaseAttributeMap) (master != null ? master.getAttributeMap() : super.getAttributeMap());
 	}
 
+	@Override
 	public BaseAttributeMap supergetAttributeMap() {
 		return super.getAttributeMap();
 	}
@@ -1831,6 +2014,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (EnumCreatureAttribute) (master != null ? master.getCreatureAttribute() : super.getCreatureAttribute());
 	}
 
+	@Override
 	public EnumCreatureAttribute supergetCreatureAttribute() {
 		return super.getCreatureAttribute();
 	}
@@ -1841,6 +2025,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setSprinting(par1);
 	}
 
+	@Override
 	public void supersetSprinting(boolean par1) {
 		super.setSprinting(par1);
 	}
@@ -1850,6 +2035,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getSoundVolume() : super.getSoundVolume();
 	}
 
+	@Override
 	public float supergetSoundVolume() {
 		return super.getSoundVolume();
 	}
@@ -1859,6 +2045,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getSoundPitch() : super.getSoundPitch();
 	}
 
+	@Override
 	public float supergetSoundPitch() {
 		return super.getSoundPitch();
 	}
@@ -1869,6 +2056,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setPositionAndUpdate(par1, par3, par5);
 	}
 
+	@Override
 	public void supersetPositionAndUpdate(double par1, double par3, double par5) {
 		super.setPositionAndUpdate(par1, par3, par5);
 	}
@@ -1879,6 +2067,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.dismountEntity(entity);
 	}
 
+	@Override
 	public void superdismountEntity(Object entity) {
 		super.dismountEntity((Entity) entity);
 	}
@@ -1888,6 +2077,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isAIEnabled() : super.isAIEnabled();
 	}
 
+	@Override
 	public boolean superisAIEnabled() {
 		return super.isAIEnabled();
 	}
@@ -1898,6 +2088,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setAIMoveSpeed(par1);
 	}
 
+	@Override
 	public void supersetAIMoveSpeed(float par1) {
 		super.setAIMoveSpeed(par1);
 	}
@@ -1907,6 +2098,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.attackEntityAsMob(entity) : super.attackEntityAsMob(entity);
 	}
 
+	@Override
 	public boolean superattackEntityAsMob(Object entity) {
 		return super.attackEntityAsMob((Entity) entity);
 	}
@@ -1916,6 +2108,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.updateDistance(par1, par2) : super.func_110146_f(par1, par2);
 	}
 
+	@Override
 	public float superupdateDistance(float par1, float par2) {
 		return super.func_110146_f(par1, par2);
 	}
@@ -1926,6 +2119,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.updateAITasks();
 	}
 
+	@Override
 	public void superupdateAITasks() {
 		super.updateAITasks();
 	}
@@ -1936,6 +2130,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.collideWithNearbyEntities();
 	}
 
+	@Override
 	public void supercollideWithNearbyEntities() {
 		super.collideWithNearbyEntities();
 	}
@@ -1946,27 +2141,30 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.collideWithEntity(entity);
 	}
 
+	@Override
 	public void supercollideWithEntity(Object entity) {
 		super.collideWithEntity((Entity) entity);
 	}
 
 	@Override
 	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
-		if (master != null) master.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
+		if (master != null) master.setPositionAndRotationDirect(par1, par3, par5, par7, par8, par9);
 		else super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
 	}
 
-	public void supersetPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
+	@Override
+	public void supersetPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9) {
 		super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
 	}
 
 	@Override
 	protected void updateAITick() {
-		if (master != null) master.updateAITick();
+		if (master != null) master.handleJumpWater();
 		else super.updateAITick();
 	}
 
-	public void superupdateAITick() {
+	@Override
+	public void superhandleJumpWater() {
 		super.updateAITick();
 	}
 
@@ -1976,6 +2174,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setJumping(par1);
 	}
 
+	@Override
 	public void supersetJumping(boolean par1) {
 		super.setJumping(par1);
 	}
@@ -1986,6 +2185,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onItemPickup(entity, par2);
 	}
 
+	@Override
 	public void superonItemPickup(Object entity, int par2) {
 		super.onItemPickup((Entity) entity, par2);
 	}
@@ -1995,6 +2195,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canEntityBeSeen(entity) : super.canEntityBeSeen(entity);
 	}
 
+	@Override
 	public boolean supercanEntityBeSeen(Object entity) {
 		return super.canEntityBeSeen((Entity) entity);
 	}
@@ -2004,6 +2205,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (Vec3) (master != null ? master.getLookVec() : super.getLookVec());
 	}
 
+	@Override
 	public Vec3 supergetLookVec() {
 		return super.getLookVec();
 	}
@@ -2013,6 +2215,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (Vec3) (master != null ? master.getLook(par1) : super.getLook(par1));
 	}
 
+	@Override
 	public Vec3 supergetLook(float par1) {
 		return super.getLook(par1);
 	}
@@ -2022,6 +2225,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getSwingProgress(par1) : super.getSwingProgress(par1);
 	}
 
+	@Override
 	public float supergetSwingProgress(float par1) {
 		return super.getSwingProgress(par1);
 	}
@@ -2031,6 +2235,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (Vec3) (master != null ? master.getPosition(par1) : super.getPosition(par1));
 	}
 
+	@Override
 	public Vec3 supergetPosition(float par1) {
 		return super.getPosition(par1);
 	}
@@ -2040,6 +2245,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (MovingObjectPosition) (master != null ? master.rayTrace(par1, par3) : super.rayTrace(par1, par3));
 	}
 
+	@Override
 	public MovingObjectPosition superrayTrace(double par1, float par3) {
 		return super.rayTrace(par1, par3);
 	}
@@ -2049,6 +2255,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isClientWorld() : super.isClientWorld();
 	}
 
+	@Override
 	public boolean superisClientWorld() {
 		return super.isClientWorld();
 	}
@@ -2058,6 +2265,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canBeCollidedWith() : super.canBeCollidedWith();
 	}
 
+	@Override
 	public boolean supercanBeCollidedWith() {
 		return super.canBeCollidedWith();
 	}
@@ -2067,6 +2275,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canBePushed() : super.canBePushed();
 	}
 
+	@Override
 	public boolean supercanBePushed() {
 		return super.canBePushed();
 	}
@@ -2077,6 +2286,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setBeenAttacked();
 	}
 
+	@Override
 	public void supersetBeenAttacked() {
 		super.setBeenAttacked();
 	}
@@ -2086,6 +2296,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getRotationYawHead() : super.getRotationYawHead();
 	}
 
+	@Override
 	public float supergetRotationYawHead() {
 		return super.getRotationYawHead();
 	}
@@ -2096,6 +2307,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setRotationYawHead(par1);
 	}
 
+	@Override
 	public void supersetRotationYawHead(float par1) {
 		super.setRotationYawHead(par1);
 	}
@@ -2105,6 +2317,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isOnSameTeam(entityLivingBase) : super.isOnSameTeam(entityLivingBase);
 	}
 
+	@Override
 	public boolean superisOnSameTeam(Object entityLivingBase) {
 		return super.isOnSameTeam((EntityLivingBase) entityLivingBase);
 	}
@@ -2114,6 +2327,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isOnTeam(team) : super.isOnTeam(team);
 	}
 
+	@Override
 	public boolean superisOnTeam(Object team) {
 		return super.isOnTeam((Team) team);
 	}
@@ -2124,6 +2338,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.curePotionEffects(itemStack);
 	}
 
+	@Override
 	public void supercurePotionEffects(Object itemStack) {
 		super.curePotionEffects((ItemStack) itemStack);
 	}
@@ -2133,6 +2348,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.shouldRiderFaceForward(entityPlayer) : super.shouldRiderFaceForward(entityPlayer);
 	}
 
+	@Override
 	public boolean supershouldRiderFaceForward(Object entityPlayer) {
 		return super.shouldRiderFaceForward((EntityPlayer) entityPlayer);
 	}
@@ -2142,6 +2358,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (DataWatcher) (master != null ? master.getDataManager() : super.getDataWatcher());
 	}
 
+	@Override
 	public DataWatcher supergetDataManager() {
 		return super.getDataWatcher();
 	}
@@ -2170,6 +2387,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setSize(par1, par2);
 	}
 
+	@Override
 	public void supersetSize(float par1, float par2) {
 		super.setSize(par1, par2);
 	}
@@ -2180,6 +2398,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setRotation(par1, par2);
 	}
 
+	@Override
 	public void supersetRotation(float par1, float par2) {
 		super.setRotation(par1, par2);
 	}
@@ -2190,6 +2409,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setPosition(par1, par3, par5);
 	}
 
+	@Override
 	public void supersetPosition(double par1, double par3, double par5) {
 		super.setPosition(par1, par3, par5);
 	}
@@ -2200,6 +2420,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setAngles(par1, par2);
 	}
 
+	@Override
 	public void supersetAngles(float par1, float par2) {
 		super.setAngles(par1, par2);
 	}
@@ -2210,6 +2431,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setOnFireFromLava();
 	}
 
+	@Override
 	public void supersetOnFireFromLava() {
 		super.setOnFireFromLava();
 	}
@@ -2220,6 +2442,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setFire(par1);
 	}
 
+	@Override
 	public void supersetFire(int par1) {
 		super.setFire(par1);
 	}
@@ -2230,6 +2453,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.extinguish();
 	}
 
+	@Override
 	public void superextinguish() {
 		super.extinguish();
 	}
@@ -2239,6 +2463,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isOffsetPositionInLiquid(par1, par3, par5) : super.isOffsetPositionInLiquid(par1, par3, par5);
 	}
 
+	@Override
 	public boolean superisOffsetPositionInLiquid(double par1, double par3, double par5) {
 		return super.isOffsetPositionInLiquid(par1, par3, par5);
 	}
@@ -2249,6 +2474,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.moveEntity(par1, par3, par5);
 	}
 
+	@Override
 	public void supermoveEntity(double par1, double par3, double par5) {
 		super.moveEntity(par1, par3, par5);
 	}
@@ -2259,6 +2485,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.doBlockCollisions();
 	}
 
+	@Override
 	public void superdoBlockCollisions() {
 		super.doBlockCollisions();
 	}
@@ -2269,6 +2496,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.playStepSound(par1, par2, par3, par4);
 	}
 
+	@Override
 	public void superplayStepSound(int par1, int par2, int par3, int par4) {
 		super.playStepSound(par1, par2, par3, par4);
 	}
@@ -2278,6 +2506,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (AxisAlignedBB) (master != null ? master.getCollisionBoundingBox() : super.getBoundingBox());
 	}
 
+	@Override
 	public AxisAlignedBB supergetCollisionBoundingBox() {
 		return super.getBoundingBox();
 	}
@@ -2288,6 +2517,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.dealFireDamage(par1);
 	}
 
+	@Override
 	public void superdealFireDamage(int par1) {
 		super.dealFireDamage(par1);
 	}
@@ -2297,6 +2527,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isWet() : super.isWet();
 	}
 
+	@Override
 	public boolean superisWet() {
 		return super.isWet();
 	}
@@ -2306,6 +2537,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isInWater() : super.isInWater();
 	}
 
+	@Override
 	public boolean superisInWater() {
 		return super.isInWater();
 	}
@@ -2315,6 +2547,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.handleWaterMovement() : super.handleWaterMovement();
 	}
 
+	@Override
 	public boolean superhandleWaterMovement() {
 		return super.handleWaterMovement();
 	}
@@ -2324,6 +2557,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isInsideOfMaterial(material) : super.isInsideOfMaterial(material);
 	}
 
+	@Override
 	public boolean superisInsideOfMaterial(Object material) {
 		return super.isInsideOfMaterial((Material) material);
 	}
@@ -2333,17 +2567,19 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.handleLavaMovement() : super.handleLavaMovement();
 	}
 
+	@Override
 	public boolean superhandleLavaMovement() {
 		return super.handleLavaMovement();
 	}
 
 	@Override
 	public void moveFlying(float par1, float par2, float par3) {
-		if (master != null) master.moveFlying(par1, par2, par3);
+		if (master != null) master.moveRelative(par1, par2, par3);
 		else super.moveFlying(par1, par2, par3);
 	}
 
-	public void supermoveFlying(float par1, float par2, float par3) {
+	@Override
+	public void supermoveRelative(float par1, float par2, float par3) {
 		super.moveFlying(par1, par2, par3);
 	}
 
@@ -2352,6 +2588,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getBrightnessForRender(par1) : super.getBrightnessForRender(par1);
 	}
 
+	@Override
 	public int supergetBrightnessForRender(float par1) {
 		return super.getBrightnessForRender(par1);
 	}
@@ -2361,6 +2598,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getBrightness(par1) : super.getBrightness(par1);
 	}
 
+	@Override
 	public float supergetBrightness(float par1) {
 		return super.getBrightness(par1);
 	}
@@ -2371,6 +2609,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setWorld(world);
 	}
 
+	@Override
 	public void supersetWorld(Object world) {
 		super.setWorld((World) world);
 	}
@@ -2381,6 +2620,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setPositionAndRotation(par1, par3, par5, par7, par8);
 	}
 
+	@Override
 	public void supersetPositionAndRotation(double par1, double par3, double par5, float par7, float par8) {
 		super.setPositionAndRotation(par1, par3, par5, par7, par8);
 	}
@@ -2391,6 +2631,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setLocationAndAngles(par1, par3, par5, par7, par8);
 	}
 
+	@Override
 	public void supersetLocationAndAngles(double par1, double par3, double par5, float par7, float par8) {
 		super.setLocationAndAngles(par1, par3, par5, par7, par8);
 	}
@@ -2400,6 +2641,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getDistanceToEntity(entity) : super.getDistanceToEntity(entity);
 	}
 
+	@Override
 	public float supergetDistanceToEntity(Object entity) {
 		return super.getDistanceToEntity((Entity) entity);
 	}
@@ -2409,6 +2651,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getDistanceSq(par1, par3, par5) : super.getDistanceSq(par1, par3, par5);
 	}
 
+	@Override
 	public double supergetDistanceSq(double par1, double par3, double par5) {
 		return super.getDistanceSq(par1, par3, par5);
 	}
@@ -2418,6 +2661,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getDistance(par1, par3, par5) : super.getDistance(par1, par3, par5);
 	}
 
+	@Override
 	public double supergetDistance(double par1, double par3, double par5) {
 		return super.getDistance(par1, par3, par5);
 	}
@@ -2427,6 +2671,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getDistanceSqToEntity(entity) : super.getDistanceSqToEntity(entity);
 	}
 
+	@Override
 	public double supergetDistanceSqToEntity(Object entity) {
 		return super.getDistanceSqToEntity((Entity) entity);
 	}
@@ -2437,6 +2682,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onCollideWithPlayer(entityPlayer);
 	}
 
+	@Override
 	public void superonCollideWithPlayer(Object entityPlayer) {
 		super.onCollideWithPlayer((EntityPlayer) entityPlayer);
 	}
@@ -2447,6 +2693,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.applyEntityCollision(entity);
 	}
 
+	@Override
 	public void superapplyEntityCollision(Object entity) {
 		super.applyEntityCollision((Entity) entity);
 	}
@@ -2457,6 +2704,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.addVelocity(par1, par3, par5);
 	}
 
+	@Override
 	public void superaddVelocity(double par1, double par3, double par5) {
 		super.addVelocity(par1, par3, par5);
 	}
@@ -2466,6 +2714,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isInRangeToRenderVec3D(vec3) : super.isInRangeToRenderVec3D(vec3);
 	}
 
+	@Override
 	public boolean superisInRangeToRenderVec3D(Object vec3) {
 		return super.isInRangeToRenderVec3D((Vec3) vec3);
 	}
@@ -2475,6 +2724,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isInRangeToRenderDist(par1) : super.isInRangeToRenderDist(par1);
 	}
 
+	@Override
 	public boolean superisInRangeToRenderDist(double par1) {
 		return super.isInRangeToRenderDist(par1);
 	}
@@ -2484,6 +2734,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.writeToNBTAtomically(nBTTagCompound) : super.writeMountToNBT(nBTTagCompound);
 	}
 
+	@Override
 	public boolean superwriteToNBTAtomically(Object nBTTagCompound) {
 		return super.writeMountToNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -2493,6 +2744,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.writeToNBTOptional(nBTTagCompound) : super.writeToNBTOptional(nBTTagCompound);
 	}
 
+	@Override
 	public boolean superwriteToNBTOptional(Object nBTTagCompound) {
 		return super.writeToNBTOptional((NBTTagCompound) nBTTagCompound);
 	}
@@ -2503,6 +2755,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.writeToNBT(nBTTagCompound);
 	}
 
+	@Override
 	public void superwriteToNBT(Object nBTTagCompound) {
 		super.writeToNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -2513,6 +2766,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.readFromNBT(nBTTagCompound);
 	}
 
+	@Override
 	public void superreadFromNBT(Object nBTTagCompound) {
 		super.readFromNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -2522,6 +2776,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.shouldSetPosAfterLoading() : super.shouldSetPosAfterLoading();
 	}
 
+	@Override
 	public boolean supershouldSetPosAfterLoading() {
 		return super.shouldSetPosAfterLoading();
 	}
@@ -2532,6 +2787,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onChunkLoad();
 	}
 
+	@Override
 	public void superonChunkLoad() {
 		super.onChunkLoad();
 	}
@@ -2541,6 +2797,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (NBTTagList) (master != null ? master.newDoubleNBTList(par1ArrayOfDouble) : super.newDoubleNBTList(par1ArrayOfDouble));
 	}
 
+	@Override
 	public NBTTagList supernewDoubleNBTList(double... par1ArrayOfDouble) {
 		return super.newDoubleNBTList(par1ArrayOfDouble);
 	}
@@ -2550,6 +2807,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (NBTTagList) (master != null ? master.newFloatNBTList(par1ArrayOfFloat) : super.newFloatNBTList(par1ArrayOfFloat));
 	}
 
+	@Override
 	public NBTTagList supernewFloatNBTList(float... par1ArrayOfFloat) {
 		return super.newFloatNBTList(par1ArrayOfFloat);
 	}
@@ -2559,6 +2817,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getShadowSize() : super.getShadowSize();
 	}
 
+	@Override
 	public float supergetShadowSize() {
 		return super.getShadowSize();
 	}
@@ -2568,6 +2827,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (EntityItem) (master != null ? master.dropItem(par1, par2) : super.dropItem(par1, par2));
 	}
 
+	@Override
 	public EntityItem superdropItem(int par1, int par2) {
 		return super.dropItem(par1, par2);
 	}
@@ -2577,6 +2837,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (EntityItem) (master != null ? master.dropItemWithOffset(par1, par2, par3) : super.dropItemWithOffset(par1, par2, par3));
 	}
 
+	@Override
 	public EntityItem superdropItemWithOffset(int par1, int par2, float par3) {
 		return super.dropItemWithOffset(par1, par2, par3);
 	}
@@ -2586,6 +2847,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (EntityItem) (master != null ? master.entityDropItem(itemStack, par2) : super.entityDropItem(itemStack, par2));
 	}
 
+	@Override
 	public EntityItem superentityDropItem(Object itemStack, float par2) {
 		return super.entityDropItem((ItemStack) itemStack, par2);
 	}
@@ -2595,6 +2857,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.processInitialInteract(entityPlayer) : super.interactFirst(entityPlayer);
 	}
 
+	@Override
 	public boolean superprocessInitialInteract(Object entityPlayer) {
 		return super.interactFirst((EntityPlayer) entityPlayer);
 	}
@@ -2604,6 +2867,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (AxisAlignedBB) (master != null ? master.getCollisionBox(entity) : super.getCollisionBox(entity));
 	}
 
+	@Override
 	public AxisAlignedBB supergetCollisionBox(Object entity) {
 		return super.getCollisionBox((Entity) entity);
 	}
@@ -2614,6 +2878,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.updateRiderPosition();
 	}
 
+	@Override
 	public void superupdatePassenger() {
 		super.updateRiderPosition();
 	}
@@ -2623,6 +2888,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getMountedYOffset() : super.getMountedYOffset();
 	}
 
+	@Override
 	public double supergetMountedYOffset() {
 		return super.getMountedYOffset();
 	}
@@ -2632,6 +2898,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getCollisionBorderSize() : super.getCollisionBorderSize();
 	}
 
+	@Override
 	public float supergetCollisionBorderSize() {
 		return super.getCollisionBorderSize();
 	}
@@ -2642,6 +2909,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setInPortal();
 	}
 
+	@Override
 	public void supersetPortal(Object bockPos) {
 		super.setInPortal();
 	}
@@ -2652,6 +2920,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setVelocity(par1, par3, par5);
 	}
 
+	@Override
 	public void supersetVelocity(double par1, double par3, double par5) {
 		super.setVelocity(par1, par3, par5);
 	}
@@ -2661,6 +2930,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isBurning() : super.isBurning();
 	}
 
+	@Override
 	public boolean superisBurning() {
 		return super.isBurning();
 	}
@@ -2670,6 +2940,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isRiding() : super.isRiding();
 	}
 
+	@Override
 	public boolean superisRiding() {
 		return super.isRiding();
 	}
@@ -2679,6 +2950,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isSneaking() : super.isSneaking();
 	}
 
+	@Override
 	public boolean superisSneaking() {
 		return super.isSneaking();
 	}
@@ -2689,6 +2961,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setSneaking(par1);
 	}
 
+	@Override
 	public void supersetSneaking(boolean par1) {
 		super.setSneaking(par1);
 	}
@@ -2698,6 +2971,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isSprinting() : super.isSprinting();
 	}
 
+	@Override
 	public boolean superisSprinting() {
 		return super.isSprinting();
 	}
@@ -2707,6 +2981,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isInvisible() : super.isInvisible();
 	}
 
+	@Override
 	public boolean superisInvisible() {
 		return super.isInvisible();
 	}
@@ -2717,6 +2992,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setInvisible(par1);
 	}
 
+	@Override
 	public void supersetInvisible(boolean par1) {
 		super.setInvisible(par1);
 	}
@@ -2726,6 +3002,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isEating() : super.isEating();
 	}
 
+	@Override
 	public boolean superisEating() {
 		return super.isEating();
 	}
@@ -2736,6 +3013,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setEating(par1);
 	}
 
+	@Override
 	public void supersetEating(boolean par1) {
 		super.setEating(par1);
 	}
@@ -2745,6 +3023,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getFlag(par1) : super.getFlag(par1);
 	}
 
+	@Override
 	public boolean supergetFlag(int par1) {
 		return super.getFlag(par1);
 	}
@@ -2755,6 +3034,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setFlag(par1, par2);
 	}
 
+	@Override
 	public void supersetFlag(int par1, boolean par2) {
 		super.setFlag(par1, par2);
 	}
@@ -2764,6 +3044,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getAir() : super.getAir();
 	}
 
+	@Override
 	public int supergetAir() {
 		return super.getAir();
 	}
@@ -2774,6 +3055,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.setAir(par1);
 	}
 
+	@Override
 	public void supersetAir(int par1) {
 		super.setAir(par1);
 	}
@@ -2784,6 +3066,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.onStruckByLightning(entityLightningBolt);
 	}
 
+	@Override
 	public void superonStruckByLightning(Object entityLightningBolt) {
 		super.onStruckByLightning((EntityLightningBolt) entityLightningBolt);
 	}
@@ -2793,6 +3076,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.pushOutOfBlocks(par1, par3, par5) : super.pushOutOfBlocks(par1, par3, par5);
 	}
 
+	@Override
 	public boolean superpushOutOfBlocks(double par1, double par3, double par5) {
 		return super.pushOutOfBlocks(par1, par3, par5);
 	}
@@ -2802,6 +3086,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (Entity[]) (master != null ? master.getParts() : super.getParts());
 	}
 
+	@Override
 	public Entity[] supergetParts() {
 		return super.getParts();
 	}
@@ -2811,16 +3096,18 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isEntityEqual(entity) : super.isEntityEqual(entity);
 	}
 
+	@Override
 	public boolean superisEntityEqual(Object entity) {
 		return super.isEntityEqual((Entity) entity);
 	}
 
 	@Override
 	public boolean canAttackWithItem() {
-		return master != null ? master.canAttackWithItem() : super.canAttackWithItem();
+		return master != null ? master.canBeAttackedWithItem() : super.canAttackWithItem();
 	}
 
-	public boolean supercanAttackWithItem() {
+	@Override
+	public boolean supercanBeAttackedWithItem() {
 		return super.canAttackWithItem();
 	}
 
@@ -2829,6 +3116,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.hitByEntity(entity) : super.hitByEntity(entity);
 	}
 
+	@Override
 	public boolean superhitByEntity(Object entity) {
 		return super.hitByEntity((Entity) entity);
 	}
@@ -2847,6 +3135,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isEntityInvulnerable() : super.isEntityInvulnerable();
 	}
 
+	@Override
 	public boolean superisEntityInvulnerable() {
 		return super.isEntityInvulnerable();
 	}
@@ -2857,6 +3146,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.copyLocationAndAnglesFrom(entity);
 	}
 
+	@Override
 	public void supercopyLocationAndAnglesFrom(Object entity) {
 		super.copyLocationAndAnglesFrom((Entity) entity);
 	}
@@ -2867,6 +3157,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.copyDataFrom(entity, par2);
 	}
 
+	@Override
 	public void supercopyDataFrom(Object entity, boolean par2) {
 		super.copyDataFrom((Entity) entity, par2);
 	}
@@ -2877,6 +3168,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.travelToDimension(par1);
 	}
 
+	@Override
 	public void superchangeDimension(int par1) {
 		super.travelToDimension(par1);
 	}
@@ -2886,6 +3178,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getBlockExplosionResistance(explosion, world, par3, par4, par5, block) : super.getBlockExplosionResistance(explosion, world, par3, par4, par5, block);
 	}
 
+	@Override
 	public float supergetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block) {
 		return super.getBlockExplosionResistance((Explosion) explosion, (World) world, par3, par4, par5, (Block) block);
 	}
@@ -2895,6 +3188,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.shouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7) : super.shouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7);
 	}
 
+	@Override
 	public boolean supershouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
 		return super.shouldExplodeBlock((Explosion) explosion, (World) world, par3, par4, par5, par6, par7);
 	}
@@ -2904,6 +3198,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getMaxSafePointTries() : super.getMaxSafePointTries();
 	}
 
+	@Override
 	public int supergetMaxSafePointTries() {
 		return super.getMaxSafePointTries();
 	}
@@ -2913,6 +3208,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (Integer) (master != null ? master.getLastPortalVec() : super.getTeleportDirection());
 	}
 
+	@Override
 	public Object supergetLastPortalVec() {
 		return super.getTeleportDirection();
 	}
@@ -2922,6 +3218,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.doesEntityNotTriggerPressurePlate() : super.doesEntityNotTriggerPressurePlate();
 	}
 
+	@Override
 	public boolean superdoesEntityNotTriggerPressurePlate() {
 		return super.doesEntityNotTriggerPressurePlate();
 	}
@@ -2932,6 +3229,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		else super.addEntityCrashInfo(crashReportCategory);
 	}
 
+	@Override
 	public void superaddEntityCrashInfo(Object crashReportCategory) {
 		super.addEntityCrashInfo((CrashReportCategory) crashReportCategory);
 	}
@@ -2941,6 +3239,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canRenderOnFire() : super.canRenderOnFire();
 	}
 
+	@Override
 	public boolean supercanRenderOnFire() {
 		return super.canRenderOnFire();
 	}
@@ -2950,6 +3249,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getUniqueID() : super.getUniqueID();
 	}
 
+	@Override
 	public UUID supergetUniqueID() {
 		return super.getUniqueID();
 	}
@@ -2959,6 +3259,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (NBTTagCompound) (master != null ? master.getEntityData() : super.getEntityData());
 	}
 
+	@Override
 	public NBTTagCompound supergetEntityData() {
 		return super.getEntityData();
 	}
@@ -2968,6 +3269,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.shouldRiderSit() : super.shouldRiderSit();
 	}
 
+	@Override
 	public boolean supershouldRiderSit() {
 		return super.shouldRiderSit();
 	}
@@ -2977,6 +3279,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (ItemStack) (master != null ? master.getPickedResult(movingObjectPosition) : super.getPickedResult(movingObjectPosition));
 	}
 
+	@Override
 	public ItemStack supergetPickedResult(Object movingObjectPosition) {
 		return super.getPickedResult((MovingObjectPosition) movingObjectPosition);
 	}
@@ -2986,6 +3289,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.getPersistentID() : super.getPersistentID();
 	}
 
+	@Override
 	public UUID supergetPersistentID() {
 		return super.getPersistentID();
 	}
@@ -2995,6 +3299,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.shouldRenderInPass(pass) : super.shouldRenderInPass(pass);
 	}
 
+	@Override
 	public boolean supershouldRenderInPass(int pass) {
 		return super.shouldRenderInPass(pass);
 	}
@@ -3004,6 +3309,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.isCreatureType(enumCreatureType, forSpawnCount) : super.isCreatureType(enumCreatureType, forSpawnCount);
 	}
 
+	@Override
 	public boolean superisCreatureType(Object enumCreatureType, boolean forSpawnCount) {
 		return super.isCreatureType((EnumCreatureType) enumCreatureType, forSpawnCount);
 	}
@@ -3013,6 +3319,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.registerExtendedProperties(identifier, iExtendedEntityProperties) : super.registerExtendedProperties(identifier, iExtendedEntityProperties);
 	}
 
+	@Override
 	public String superregisterExtendedProperties(String identifier, Object iExtendedEntityProperties) {
 		return super.registerExtendedProperties(identifier, (IExtendedEntityProperties) iExtendedEntityProperties);
 	}
@@ -3022,6 +3329,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return (IExtendedEntityProperties) (master != null ? master.getExtendedProperties(identifier) : super.getExtendedProperties(identifier));
 	}
 
+	@Override
 	public IExtendedEntityProperties supergetExtendedProperties(String identifier) {
 		return super.getExtendedProperties(identifier);
 	}
@@ -3031,6 +3339,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.canRiderInteract() : super.canRiderInteract();
 	}
 
+	@Override
 	public boolean supercanRiderInteract() {
 		return super.canRiderInteract();
 	}
@@ -3040,6 +3349,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 		return master != null ? master.shouldDismountInWater(entity) : super.shouldDismountInWater(entity);
 	}
 
+	@Override
 	public boolean supershouldDismountInWater(Object entity) {
 		return super.shouldDismountInWater((Entity) entity);
 	}

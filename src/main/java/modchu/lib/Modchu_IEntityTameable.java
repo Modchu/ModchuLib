@@ -39,7 +39,7 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityLiving {
 	public void superSetGrowingAge(int par1);
 	public void superSetScaleForAge(boolean par1);
 	public boolean superHasPath();
-	public void superFunc_142017_o(float par1);
+	public void superOnLeashDistance(float par1);
 	public void superClearLeashed(boolean par1, boolean par2);
 	public boolean superCanBeLeashedTo();
 	public boolean superGetLeashed();
@@ -65,14 +65,14 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityLiving {
 	public float superGetBlockPathWeight(Object blockPos);
 	public void superConsumeItemFromStack(Object entityPlayer, Object itemStack);
 	public Object superGetPlayerInLove();
-	public void superFunc_175501_a(int p_175501_1_, boolean p_175501_2_);
+	public void superAgeUp(int p_175501_1_, boolean p_175501_2_);
 	public void superOnGrowingAdult();
 	public boolean superIsWithinHomeDistanceFromPosition(Object blockPos);
 	public void superSetHomePosAndDistance(Object blockPos, int distance);
 	public Object superGetNewNavigator(Object world);
 	public Object superGetDropItem();
 	public void superUpdateEquipmentIfNeeded(Object entityItem);
-	public boolean superFunc_175448_a(Object itemStack);
+	public boolean superCanEquipItem(Object itemStack);
 	public void superSetEquipmentBasedOnDifficulty(Object difficultyInstance);
 	public void superSetEnchantmentBasedOnDifficulty(Object difficultyInstance);
 	public boolean superIsAIDisabled();
@@ -86,7 +86,7 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityLiving {
 	public Object superCreateBodyHelper();
 	public Object superGetLootTable();
 	public void superSetMoveStrafing(float p_184646_1_);
-	public int superFunc_184649_cE();
+	public int superGetHorizontalFaceSpeed();
 	public Object superGetPrimaryHand();
 	public void superSetLeftHanded(boolean p_184641_1_);
 	public boolean superIsLeftHanded();

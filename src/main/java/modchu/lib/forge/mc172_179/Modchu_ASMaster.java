@@ -453,8 +453,8 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 	}
 
 	@Override
-	public int biomeGenBaseGetBiomeGrassColor(Object biomeGenBase, int x, int y, int z) {
-		return ((BiomeGenBase) biomeGenBase).getBiomeGrassColor(x, y, z);
+	public int biomeGetBiomeGrassColor(Object biome, int x, int y, int z) {
+		return ((BiomeGenBase) biome).getBiomeGrassColor(x, y, z);
 	}
 
 	@Override
@@ -658,8 +658,11 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public Object getItem(String s) {
-		if (s != null) ;else return null;
-		return Item.itemRegistry.getObject(s);
+		if (s != null); else return null;
+		Object o = Item.itemRegistry.getObject(s);
+		if (o != null) return o;
+		o = Item.itemRegistry.getObject(s.toLowerCase());
+		return o;
 	}
 
 	@Override
@@ -1014,7 +1017,9 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 		if (blockRegistry != null) ;else return null;
 		Object block = blockRegistry.getObject(s);
 		//Modchu_Debug.mDebug("getBlock s="+s+" block="+block);
-		return block != null ? block : null;
+		if (block != null) return block;
+		block = blockRegistry.getObject(Modchu_Main.newResourceLocation(s.toLowerCase()));
+		return block;
 	}
 
 	@Override
@@ -1094,6 +1099,11 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 	@Override
 	public Object newResourceLocation(String s) {
 		return new ResourceLocation(s);
+	}
+
+	@Override
+	public Object minecraftServerGetServer() {
+		return MinecraftServer.getServer();
 	}
 	// ビルド時にバージョン別変化有り ↓
 	@Override

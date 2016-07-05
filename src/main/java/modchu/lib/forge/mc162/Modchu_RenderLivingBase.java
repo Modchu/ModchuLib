@@ -26,7 +26,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	public Modchu_RenderLivingBase(HashMap<String, Object> map) {
 		super((ModelBase)(map.containsKey("Object") ? map.get("Object") : null), (Float) (map.containsKey("Float") ? map.get("Float") : 1.0F));
 		renderManager = (RenderManager) Modchu_AS.get(Modchu_AS.renderManagerInstance);
-		Modchu_Debug.lDebug("Modchu_RenderLivingBase init renderManager="+renderManager);
+		Modchu_Debug.lDebug("Modchu_RendererLivingEntity init renderManager="+renderManager);
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		//Modchu_Debug.lDebug("Modchu_RenderLivingBase init instance="+instance);
@@ -52,9 +52,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 
 	@Override
 	public void superDoRenderLiving(Object entityLiving, double d, double d1, double d2, float d3, float d4) {
-		//Modchu_Debug.mDebug("Modchu_RenderLivingBase superDoRenderLiving s entityLiving="+entityLiving);
 		super.doRenderLiving((EntityLivingBase) entityLiving, d, d1, d2, d3, d4);
-		//Modchu_Debug.mDebug("Modchu_RenderLivingBase superDoRenderLiving e entityLiving="+entityLiving);
 	}
 
 	@Override
@@ -90,6 +88,14 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	public void func_177105_a(EntityLiving entityLiving, float p_177105_2_) {
+	}
+
+	protected boolean canRenderName(EntityLiving entityLiving) {
+		return false;
+	}
+
+	protected boolean canRenderName(Entity entity) {
+		return false;
 	}
 
 	public boolean shouldRender(Entity entity, ICamera iCamera, double p_177071_3_, double p_177071_5_, double p_177071_7_) {
@@ -145,6 +151,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	public void transformHeldFull3DItemLayer() {
 	}
 
+	@Override
 	public void superTransformHeldFull3DItemLayer() {
 	}
 
@@ -152,6 +159,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 		return false;
 	}
 
+	@Override
 	public boolean superSetScoreTeamColor(Object entityLivingBase) {
 		return false;
 	}
@@ -159,6 +167,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	protected void unsetScoreTeamColor() {
 	}
 
+	@Override
 	public void superUnsetScoreTeamColor() {
 	}
 
@@ -188,11 +197,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	protected float getSwingProgress(EntityLivingBase entityLivingBase, float p_77040_2_) {
-		return 0.0F;
-	}
-
-	@Override
-	public float superGetSwingProgress(Object entityLivingBase, float p_77040_2_) {
 		return 0.0F;
 	}
 
@@ -230,7 +234,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 */
 	@Override
 	public boolean superBindEntityTexture(Object entity) {
-		return false;
+		return true;
 	}
 
 	protected void renderLivingLabel(Entity entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
@@ -240,8 +244,9 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	public void superRenderLivingLabel(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 	}
 
+	@Override
 	public Object superGetRenderManager() {
-		return null;
+		return renderManager;
 	}
 
 	@Override
@@ -409,11 +414,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	@Override
-	public Object superGetEntityTexture(Object entity, int i) {
-		return null;
-	}
-
-	@Override
 	public int superSetArmorModel(Object object, Object entity, int i, float f, int j) {
 		return -1;
 	}
@@ -445,11 +445,11 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 
 	@Override
 	protected float renderSwingProgress(EntityLivingBase entityLivingBase, float par2) {
-		return master != null ? master.renderSwingProgress(entityLivingBase, par2) : super.renderSwingProgress(entityLivingBase, par2);
+		return master != null ? master.getSwingProgress(entityLivingBase, par2) : super.renderSwingProgress(entityLivingBase, par2);
 	}
 
 	@Override
-	public float superRenderSwingProgress(Object entityLivingBase, float par2) {
+	public float superGetSwingProgress(Object entityLivingBase, float par2) {
 		return super.renderSwingProgress((EntityLivingBase) entityLivingBase, par2);
 	}
 
@@ -530,17 +530,13 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	public void superUpdateIcons(Object iIconRegister) {
 		super.updateIcons((IconRegister) iIconRegister);
 	}
-
-	@Override
-	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
-	}
 	// ~164
 	@Override
 	protected void renderLivingLabel(EntityLivingBase entityLivingBase, String par2Str, double par3, double par5, double par7, int par9) {
 		if (master != null) master.renderLivingLabel(entityLivingBase, par2Str, par3, par5, par7, par9);
 		else super.renderLivingLabel(entityLivingBase, par2Str, par3, par5, par7, par9);
 	}
-
+	// ~152
 	@Override
 	public void superLoadTexture(String par1Str) {
 	}
@@ -552,6 +548,38 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	// 190~
 	@Override
 	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
+	}
+
+	@Override
+	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+	}
+
+	@Override
+	public int superGetTeamColor(Object entity) {
+		return -1;
+	}
+
+	@Override
+	public boolean superIsMultipass() {
+		return false;
+	}
+
+	@Override
+	public void superRenderMultipass(Object entity, double p_188300_2_, double p_188300_4_, double p_188300_6_, float p_188300_8_, float p_188300_9_) {
+	}
+
+	public int setArmorModel(Object entity, int i, float f) {
+		return -1;
+	}
+
+	@Override
+	public int superSetArmorModel(Object entity, int i, float f) {
+		return -1;
+	}
+
+	@Override
+	public float superPrepareScale(Object entityLivingBase, float partialTicks) {
+		return 0.0F;
 	}
 
 }

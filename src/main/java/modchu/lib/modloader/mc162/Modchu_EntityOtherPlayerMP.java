@@ -140,12 +140,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
-		if (master != null) master.setPositionAndRotation2(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
+		if (master != null) master.setPositionAndRotationDirect(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
 		else super.setPositionAndRotation2(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
+	public void superSetPositionAndRotationDirect(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
 		super.setPositionAndRotation2(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
 	}
 
@@ -595,21 +595,21 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public EntityItem dropOneItem(boolean p_71040_1_) {
-		return (EntityItem) (master != null ? master.dropOneItem(p_71040_1_) : super.dropOneItem(p_71040_1_));
+		return (EntityItem) (master != null ? master.dropItem(p_71040_1_) : super.dropOneItem(p_71040_1_));
 	}
 
 	@Override
-	public EntityItem superDropOneItem(boolean p_71040_1_) {
+	public EntityItem superDropItem(boolean p_71040_1_) {
 		return super.dropOneItem(p_71040_1_);
 	}
 
 	@Override
 	public EntityItem dropPlayerItemWithRandomChoice(ItemStack itemStack, boolean p_71019_2_) {
-		return (EntityItem) (master != null ? master.dropPlayerItemWithRandomChoice(itemStack, p_71019_2_) : super.dropPlayerItemWithRandomChoice(itemStack, p_71019_2_));
+		return (EntityItem) (master != null ? master.dropItem(itemStack, p_71019_2_) : super.dropPlayerItemWithRandomChoice(itemStack, p_71019_2_));
 	}
 
 	@Override
-	public EntityItem superDropPlayerItemWithRandomChoice(Object itemStack, boolean p_71019_2_) {
+	public EntityItem superDropItem(Object itemStack, boolean p_71019_2_) {
 		return super.dropPlayerItemWithRandomChoice((ItemStack) itemStack, p_71019_2_);
 	}
 
@@ -2267,12 +2267,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	protected void updateAITick() {
-		if (master != null) master.updateAITick();
+		if (master != null) master.handleJumpWater();
 		else super.updateAITick();
 	}
 
 	@Override
-	public void superUpdateAITick() {
+	public void superHandleJumpWater() {
 		super.updateAITick();
 	}
 
@@ -2694,12 +2694,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void moveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
-		if (master != null) master.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
+		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_);
 		else super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
 	@Override
-	public void superMoveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
+	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
 		super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
@@ -2875,8 +2875,9 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superWriteToNBT(Object nBTTagCompound) {
+	public Object superWriteToNBT(Object nBTTagCompound) {
 		super.writeToNBT((NBTTagCompound) nBTTagCompound);
+		return nBTTagCompound;
 	}
 
 	@Override
@@ -3210,11 +3211,11 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public boolean canAttackWithItem() {
-		return master != null ? master.canAttackWithItem() : super.canAttackWithItem();
+		return master != null ? master.canBeAttackedWithItem() : super.canAttackWithItem();
 	}
 
 	@Override
-	public boolean superCanAttackWithItem() {
+	public boolean superCanBeAttackedWithItem() {
 		return super.canAttackWithItem();
 	}
 
@@ -3459,7 +3460,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+	public void superSetPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 	}
 
 	@Override
@@ -3488,12 +3489,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public float superGetToolDigEfficiency(Object block) {
+	public float superGetDigSpeed(Object block) {
 		return 0.0F;
 	}
 
 	@Override
-	public float superGetBreakSpeed(Object iBlockState, Object blockPos) {
+	public float superGetDigSpeed(Object iBlockState, Object blockPos) {
 		return 0.0F;
 	}
 
@@ -4076,6 +4077,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	public void superSetNoAI(boolean par1) {
 	}
 
+	@Override
 	public boolean superIsNoDespawnRequired() {
 		return false;
 	}
@@ -4216,7 +4218,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean superTeleportTo_(double x, double y, double z) {
+	public boolean superAttemptTeleport(double x, double y, double z) {
 		return false;
 	}
 
@@ -4450,11 +4452,11 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superSetBossVisibleTo(Object entityPlayerMP) {
+	public void superAddTrackingPlayer(Object entityPlayerMP) {
 	}
 
 	@Override
-	public void superSetBossNonVisibleTo(Object entityPlayerMP) {
+	public void superRemoveTrackingPlayer(Object entityPlayerMP) {
 	}
 
 	@Override
@@ -4468,7 +4470,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean superFunc_184213_bq() {
+	public boolean superIgnoreItemEntityData() {
 		return false;
 	}
 
@@ -4678,102 +4680,129 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	public void superSetAlwaysRenderNameTag(boolean p_174805_1_) {
 	}
 
+	@Override
 	public Object superGetLivingSound() {
 		return null;
 	}
 
+	@Override
 	public boolean superCanPickUpLoot() {
 		return false;
 	}
 
+	@Override
 	public Object superGetMoveHelper() {
 		return null;
 	}
 
+	@Override
 	public Object superGetJumpHelper() {
 		return null;
 	}
 
+	@Override
 	public Object superGetNavigator() {
 		return null;
 	}
 
+	@Override
 	public Object superGetEntitySenses() {
 		return null;
 	}
 
+	@Override
 	public Object superGetAttackTarget() {
 		return null;
 	}
 
+	@Override
 	public void superSetAttackTarget(Object entityLiving) {
 	}
 
+	@Override
 	public boolean superCanAttackClass(Class par1Class) {
 		return false;
 	}
 
+	@Override
 	public void superEatGrassBonus() {
 	}
 
+	@Override
 	public boolean superIsWithinHomeDistanceCurrentPosition() {
 		return false;
 	}
 
+	@Override
 	public Object superGetLookHelper() {
 		return null;
 	}
 
+	@Override
 	public void superPlayLivingSound() {
 	}
 
+	@Override
 	public void superSpawnExplosionParticle() {
 	}
 
+	@Override
 	public int superGetDropItemId() {
 		return -1;
 	}
 
+	@Override
 	public void superSetMoveForward(float par1) {
 	}
 
+	@Override
 	public boolean superCanDespawn() {
 		return false;
 	}
 
+	@Override
 	public void superDespawnEntity() {
 	}
 
+	@Override
 	public int superGetVerticalFaceSpeed() {
 		return -1;
 	}
 
+	@Override
 	public void superFaceEntity(Object entity, float par2, float par3) {
 	}
 
+	@Override
 	public boolean superGetCanSpawnHere() {
 		return false;
 	}
 
+	@Override
 	public float superGetRenderSizeModifier() {
 		return 0.0F;
 	}
 
+	@Override
 	public int superGetMaxSpawnedInChunk() {
 		return -1;
 	}
 
+	@Override
 	public int superGetTalkInterval() {
 		return -1;
 	}
 
+	@Override
 	public boolean superCanBeSteered() {
 		return false;
 	}
 
+	@Override
 	public void superSetCanPickUpLoot(boolean par1) {
 	}
 
+	@Override
 	public boolean superProcessInteract(Object entityPlayer) {
 		return false;
 	}

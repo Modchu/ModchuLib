@@ -41,6 +41,6 @@ public interface Modchu_IPlayerControllerMaster {
 	public boolean onPlayerDestroyBlock(Object blockPos);
 	public Object processRightClickBlock(Object entityPlayerSP, Object worldClient, Object itemStack, Object blockPos, Object enumFacing, Object vec3, Object enumHand);
 	public Object processRightClick(Object entityPlayer, Object world, Object itemStack, Object enumHand);
-	public Object interactWithEntitySendPacket(Object entityPlayer, Object entity, Object itemStack, Object enumHand);
+	public Object interactWithEntity(Object entityPlayer, Object entity, Object itemStack, Object enumHand);
 
 }

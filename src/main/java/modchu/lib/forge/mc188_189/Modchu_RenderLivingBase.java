@@ -36,6 +36,21 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	@Override
+	public int setArmorModel(Object entity, int i, float f) {
+		return master != null ? master.setArmorModel(entity, i, f) : -1;
+	}
+
+	@Override
+	public int superSetArmorModel(Object entity, int i, float f) {
+		return -1;
+	}
+
+	@Override
+	public float superPrepareScale(Object entityLivingBase, float partialTicks) {
+		return 0.0F;
+	}
+
+	@Override
 	protected void preRenderCallback(EntityLivingBase entityliving, float f) {
 		if (master != null) master.preRenderCallback(entityliving, f);
 	}
@@ -473,11 +488,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	@Override
-	public Object superGetEntityTexture(Object entity, int i) {
-		return null;
-	}
-
-	@Override
 	public int superSetArmorModel(Object object, Object entity, int i, float f, int j) {
 		return -1;
 	}
@@ -510,11 +520,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	@Override
-	public float superRenderSwingProgress(Object entityLivingBase, float par2) {
-		return super.getSwingProgress((EntityLivingBase) entityLivingBase, par2);
-	}
-
-	@Override
 	public void superRenderArrowsStuckInEntity(Object entityLivingBase, float par2) {
 	}
 
@@ -538,10 +543,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	@Override
 	public void superUpdateIcons(Object iIconRegister) {
 	}
-
-	@Override
-	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
-	}
 	// ~152
 	@Override
 	public void superLoadTexture(String par1Str) {
@@ -555,6 +556,24 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	@Override
 	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
 		super.renderOffsetLivingLabel((Entity) entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, 0.0F, p_177069_10_);
+	}
+	// ~180
+	@Override
+	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+	}
+	// 190~
+	@Override
+	public int superGetTeamColor(Object entity) {
+		return -1;
+	}
+
+	@Override
+	public boolean superIsMultipass() {
+		return false;
+	}
+
+	@Override
+	public void superRenderMultipass(Object entity, double p_188300_2_, double p_188300_4_, double p_188300_6_, float p_188300_8_, float p_188300_9_) {
 	}
 
 }

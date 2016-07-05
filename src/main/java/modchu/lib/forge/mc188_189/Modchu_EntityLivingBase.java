@@ -17,7 +17,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class Modchu_EntityLivingBase extends modchu.lib.forge.mc180_189.Modchu_EntityLivingBase {
+public abstract class Modchu_EntityLivingBase extends modchu.lib.forge.mc180_189.Modchu_EntityLivingBase {
 
 	public Modchu_EntityLivingBase(World world) {
 		super(world);
@@ -32,6 +32,7 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc180_189.Modchu_E
 		return (AxisAlignedBB) (master != null ? master.getCollisionBoundingBox() : super.getCollisionBoundingBox());
 	}
 
+	@Override
 	public AxisAlignedBB superGetCollisionBoundingBox() {
 		return super.getCollisionBoundingBox();
 	}
@@ -42,6 +43,7 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc180_189.Modchu_E
 		else super.setPortal(blockPos);
 	}
 
+	@Override
 	public void superSetPortal(Object blockPos) {
 		super.setPortal((BlockPos) blockPos);
 	}
@@ -139,12 +141,12 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc180_189.Modchu_E
 
 	@Override
 	public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean p_180426_10_) {
-		if (master != null) master.setPositionAndRotation2(x, y, z, yaw, pitch, posRotationIncrements, p_180426_10_);
+		if (master != null) master.setPositionAndRotationDirect(x, y, z, yaw, pitch, posRotationIncrements, p_180426_10_);
 		else super.setPositionAndRotation2(x, y, z, yaw, pitch, posRotationIncrements, p_180426_10_);
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean p_180426_10_) {
+	public void superSetPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean p_180426_10_) {
 		super.setPositionAndRotation2(x, y, z, yaw, pitch, posRotationIncrements, p_180426_10_);
 	}
 

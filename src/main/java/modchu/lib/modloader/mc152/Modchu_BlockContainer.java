@@ -465,7 +465,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public void onEntityWalking(World world, int par2, int par3, int par4, Entity entity) {
-		if (master != null) master.onEntityCollidedWithBlock(world, par2, par3, par4, entity);
+		if (master != null) master.onEntityWalk(world, par2, par3, par4, entity);
 		else super.onEntityWalking(world, par2, par3, par4, entity);
 	}
 
@@ -564,12 +564,12 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, int par2, int par3, int par4, Entity entity) {
-		if (master != null) master.onEntityCollidedWithBlock(world, par2, par3, par4, entity);
+		if (master != null) master.onEntityWalk(world, par2, par3, par4, entity);
 		else super.onEntityCollidedWithBlock(world, par2, par3, par4, entity);
 	}
 
 	@Override
-	public void superOnEntityCollidedWithBlock(Object world, int par2, int par3, int par4, Object entity) {
+	public void superOnEntityWalk(Object world, int par2, int par3, int par4, Object entity) {
 		super.onEntityCollidedWithBlock((World) world, par2, par3, par4, (Entity) entity);
 	}
 
@@ -689,11 +689,11 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public boolean onBlockEventReceived(World world, int par2, int par3, int par4, int par5, int par6) {
-		return master != null ? master.onBlockEventReceived(world, par2, par3, par4, par5, par6) : super.onBlockEventReceived(world, par2, par3, par4, par5, par6);
+		return master != null ? master.eventReceived(world, par2, par3, par4, par5, par6) : super.onBlockEventReceived(world, par2, par3, par4, par5, par6);
 	}
 
 	@Override
-	public boolean superOnBlockEventReceived(Object world, int par2, int par3, int par4, int par5, int par6) {
+	public boolean superEventReceived(Object world, int par2, int par3, int par4, int par5, int par6) {
 		return super.onBlockEventReceived((World) world, par2, par3, par4, par5, par6);
 	}
 
@@ -998,11 +998,11 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public Block setStepSound(StepSound stepSound) {
-		return (Block) (master != null ? master.setStepSound(stepSound) : super.setStepSound(stepSound));
+		return (Block) (master != null ? master.setSoundType(stepSound) : super.setStepSound(stepSound));
 	}
 
 	@Override
-	public Block superSetStepSound(Object stepSound) {
+	public Block superSetSoundType(Object stepSound) {
 		return super.setStepSound((StepSound) stepSound);
 	}
 
@@ -1112,12 +1112,12 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public void onNeighborBlockChange(World world, int par2, int par3, int par4, int par5) {
-		if (master != null) master.onNeighborBlockChange(world, par2, par3, par4, par5);
+		if (master != null) master.neighborChanged(world, par2, par3, par4, par5);
 		else super.onNeighborBlockChange(world, par2, par3, par4, par5);
 	}
 
 	@Override
-	public void superOnNeighborBlockChange(Object world, int par2, int par3, int par4, Object par5) {
+	public void superNeighborChanged(Object world, int par2, int par3, int par4, Object par5) {
 		super.onNeighborBlockChange((World) world, par2, par3, par4, (Integer) par5);
 	}
 
@@ -1598,7 +1598,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public void superOnEntityCollidedWithBlock(Object world, Object blockPos, Object entity) {
+	public void superOnEntityWalk(Object world, Object blockPos, Object entity) {
 	}
 
 	@Override
@@ -1671,7 +1671,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public void superOnNeighborBlockChange(Object world, Object blockPos, Object iBlockState, Object block) {
+	public void superNeighborChanged(Object world, Object blockPos, Object iBlockState, Object block) {
 	}
 
 	@Override
@@ -1760,7 +1760,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public void superOnEntityCollidedWithBlock(Object world, Object blockPos, Object iBlockState, Object entity) {
+	public void superOnEntityWalk(Object world, Object blockPos, Object iBlockState, Object entity) {
 	}
 
 	@Override
@@ -1782,7 +1782,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public boolean superOnBlockEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
+	public boolean superEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
 		return false;
 	}
 
@@ -2434,7 +2434,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public Object superGetStepSound() {
+	public Object superGetSoundType() {
 		return null;
 	}
 
@@ -2461,6 +2461,15 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	@Override
 	public Object superIsAABBInsideMaterial(Object world, Object blockPos, Object axisAlignedBB, Object material) {
 		return null;
+	}
+
+	@Override
+	public void superEventReceived(Object world, int par2, int par3, int par4, Object par5) {
+	}
+
+	@Override
+	public boolean superNeighborChanged(Object world, int par2, int par3, int par4, int par5, int par6) {
+		return false;
 	}
 	// Modchu_Block のコピー↑ 
 

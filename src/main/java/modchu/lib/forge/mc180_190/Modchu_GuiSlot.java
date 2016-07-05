@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
-import modchu.lib.Modchu_IGuiMaster;
 import modchu.lib.Modchu_IGuiSlot;
 import modchu.lib.Modchu_IGuiSlotMaster;
 import modchu.lib.Modchu_Main;
@@ -32,6 +31,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.setDimensions(p_148122_1_, p_148122_2_, p_148122_3_, p_148122_4_);
 	}
 
+	@Override
 	public void superSetDimensions(int p_148122_1_, int p_148122_2_, int p_148122_3_, int p_148122_4_) {
 		super.setDimensions(p_148122_1_, p_148122_2_, p_148122_3_, p_148122_4_);
 	}
@@ -42,6 +42,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.setShowSelectionBox(p_148130_1_);
 	}
 
+	@Override
 	public void superSetShowSelectionBox(boolean p_148130_1_) {
 		super.setShowSelectionBox(p_148130_1_);
 	}
@@ -52,6 +53,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.setHasListHeader(p_148133_1_, p_148133_2_);
 	}
 
+	@Override
 	public void superSetHasListHeader(boolean p_148133_1_, int p_148133_2_) {
 		super.setHasListHeader(p_148133_1_, p_148133_2_);
 	}
@@ -61,17 +63,19 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getContentHeight() : super.getContentHeight();
 	}
 
+	@Override
 	public int superGetContentHeight() {
 		return super.getContentHeight();
 	}
 
 	@Override
 	protected void func_178040_a(int p_178040_1_, int p_178040_2_, int p_178040_3_) {
-		if (master != null) master.func_178040_a(p_178040_1_, p_178040_2_, p_178040_3_);
+		if (master != null) master.updateItemPos(p_178040_1_, p_178040_2_, p_178040_3_);
 		else super.func_178040_a(p_178040_1_, p_178040_2_, p_178040_3_);
 	}
 
-	public void superFunc_178040_a(int p_178040_1_, int p_178040_2_, int p_178040_3_) {
+	@Override
+	public void superUpdateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_) {
 		super.func_178040_a(p_178040_1_, p_178040_2_, p_178040_3_);
 	}
 
@@ -81,27 +85,30 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.drawListHeader(p_148129_1_, p_148129_2_, tessellator);
 	}
 
+	@Override
 	public void superDrawListHeader(int p_148129_1_, int p_148129_2_, Object tessellator) {
 		super.drawListHeader(p_148129_1_, p_148129_2_, (Tessellator) tessellator);
 	}
 
 	@Override
 	protected void func_148132_a(int p_148132_1_, int p_148132_2_) {
-		if (master != null) master.func_148132_a(p_148132_1_, p_148132_2_);
+		if (master != null) master.clickedHeader(p_148132_1_, p_148132_2_);
 		else super.func_148132_a(p_148132_1_, p_148132_2_);
 	}
 
-	public void superFunc_148132_a(int p_148132_1_, int p_148132_2_) {
+	@Override
+	public void superClickedHeader(int p_148132_1_, int p_148132_2_) {
 		super.func_148132_a(p_148132_1_, p_148132_2_);
 	}
 
 	@Override
 	protected void func_148142_b(int p_148142_1_, int p_148142_2_) {
-		if (master != null) master.func_148142_b(p_148142_1_, p_148142_2_);
+		if (master != null) master.renderDecorations(p_148142_1_, p_148142_2_);
 		else super.func_148142_b(p_148142_1_, p_148142_2_);
 	}
 
-	public void superFunc_148142_b(int p_148142_1_, int p_148142_2_) {
+	@Override
+	public void superRenderDecorations(int p_148142_1_, int p_148142_2_) {
 		super.func_148142_b(p_148142_1_, p_148142_2_);
 	}
 
@@ -110,6 +117,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getSlotIndexFromScreenCoords(p_148124_1_, p_148124_2_) : super.getSlotIndexFromScreenCoords(p_148124_1_, p_148124_2_);
 	}
 
+	@Override
 	public int superGetSlotIndexFromScreenCoords(int p_148124_1_, int p_148124_2_) {
 		return super.getSlotIndexFromScreenCoords(p_148124_1_, p_148124_2_);
 	}
@@ -120,6 +128,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.registerScrollButtons(p_148134_1_, p_148134_2_);
 	}
 
+	@Override
 	public void superRegisterScrollButtons(int p_148134_1_, int p_148134_2_) {
 		super.registerScrollButtons(p_148134_1_, p_148134_2_);
 	}
@@ -130,16 +139,18 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.bindAmountScrolled();
 	}
 
+	@Override
 	public void superBindAmountScrolled() {
 		super.bindAmountScrolled();
 	}
 
 	@Override
 	public int func_148135_f() {
-		return master != null ? master.func_148135_f() : super.func_148135_f();
+		return master != null ? master.getMaxScroll() : super.func_148135_f();
 	}
 
-	public int superFunc_148135_f() {
+	@Override
+	public int superGetMaxScroll() {
 		return super.func_148135_f();
 	}
 
@@ -148,6 +159,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getAmountScrolled() : super.getAmountScrolled();
 	}
 
+	@Override
 	public int superGetAmountScrolled() {
 		return super.getAmountScrolled();
 	}
@@ -157,6 +169,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.isMouseYWithinSlotBounds(p_148141_1_) : super.isMouseYWithinSlotBounds(p_148141_1_);
 	}
 
+	@Override
 	public boolean superIsMouseYWithinSlotBounds(int p_148141_1_) {
 		return super.isMouseYWithinSlotBounds(p_148141_1_);
 	}
@@ -167,6 +180,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.scrollBy(p_148145_1_);
 	}
 
+	@Override
 	public void superScrollBy(int p_148145_1_) {
 		super.scrollBy(p_148145_1_);
 	}
@@ -177,6 +191,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.actionPerformed(guiButton);
 	}
 
+	@Override
 	public void superActionPerformed(Object guiButton) {
 		super.actionPerformed((GuiButton) guiButton);
 	}
@@ -187,6 +202,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.drawScreen(mouseXIn, mouseYIn, p_148128_3_);
 	}
 
+	@Override
 	public void superDrawScreen(int mouseXIn, int mouseYIn, float p_148128_3_) {
 		super.drawScreen(mouseXIn, mouseYIn, p_148128_3_);
 	}
@@ -197,6 +213,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.handleMouseInput();
 	}
 
+	@Override
 	public void superHandleMouseInput() {
 		super.handleMouseInput();
 	}
@@ -207,6 +224,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.setEnabled(p_148143_1_);
 	}
 
+	@Override
 	public void superSetEnabled(boolean p_148143_1_) {
 		super.setEnabled(p_148143_1_);
 	}
@@ -216,6 +234,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getEnabled() : super.getEnabled();
 	}
 
+	@Override
 	public boolean superGetEnabled() {
 		return super.getEnabled();
 	}
@@ -225,6 +244,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getListWidth() : super.getListWidth();
 	}
 
+	@Override
 	public int superGetListWidth() {
 		return super.getListWidth();
 	}
@@ -235,6 +255,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.drawSelectionBox(p_148120_1_, p_148120_2_, p_148120_3_, p_148120_4_);
 	}
 
+	@Override
 	public void superDrawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_) {
 		super.drawSelectionBox(p_148120_1_, p_148120_2_, p_148120_3_, p_148120_4_);
 	}
@@ -244,6 +265,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getScrollBarX() : super.getScrollBarX();
 	}
 
+	@Override
 	public int superGetScrollBarX() {
 		return super.getScrollBarX();
 	}
@@ -254,6 +276,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.overlayBackground(p_148136_1_, p_148136_2_, p_148136_3_, p_148136_4_);
 	}
 
+	@Override
 	public void superOverlayBackground(int p_148136_1_, int p_148136_2_, int p_148136_3_, int p_148136_4_) {
 		super.overlayBackground(p_148136_1_, p_148136_2_, p_148136_3_, p_148136_4_);
 	}
@@ -264,6 +287,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.setSlotXBoundsFromLeft(p_148140_1_);
 	}
 
+	@Override
 	public void superSetSlotXBoundsFromLeft(int p_148140_1_) {
 		super.setSlotXBoundsFromLeft(p_148140_1_);
 	}
@@ -273,6 +297,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getSlotHeight() : super.getSlotHeight();
 	}
 
+	@Override
 	public int superGetSlotHeight() {
 		return super.getSlotHeight();
 	}
@@ -283,6 +308,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		else super.drawContainerBackground(tessellator);
 	}
 
+	@Override
 	public void superDrawContainerBackground(Object tessellator) {
 		super.drawContainerBackground((Tessellator) tessellator);
 	}
@@ -292,6 +318,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getGuiSlotSize(guiNumber) : 0;
 	}
 
+	@Override
 	public int superGetGuiSlotSize(int guiNumber) {
 		return 0;
 	}
@@ -301,6 +328,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getGuiSlotContentHeight(guiNumber) : 0;
 	}
 
+	@Override
 	public int superGetGuiSlotContentHeight(int guiNumber) {
 		return 0;
 	}
@@ -310,6 +338,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		if (master != null) master.guiSlotElementClicked(guiNumber, i, flag);
 	}
 
+	@Override
 	public void superGuiSlotElementClicked(int guiNumber, int i, boolean flag) {
 	}
 
@@ -318,6 +347,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		if (master != null) master.outOfRangeClick(guiNumber, mouse_x, mouse_y, flag);
 	}
 
+	@Override
 	public void superOutOfRangeClick(int guiNumber, int mouse_x, int mouse_y, boolean flag) {
 	}
 
@@ -326,6 +356,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.guiSlotIsSelected(guiNumber, i) : false;
 	}
 
+	@Override
 	public boolean superGuiSlotIsSelected(int guiNumber, int i) {
 		return false;
 	}
@@ -335,6 +366,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		if (master != null) master.guiSlotDrawSlot(guiNumber, i, posX, slotPosY, k, l, tessellator);
 	}
 
+	@Override
 	public void superGuiSlotDrawSlot(int guiNumber, int i, int posX, int slotPosY, int k, int l, Object tessellator) {
 	}
 
@@ -343,6 +375,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getSlotScrollBarX(guiNumber) : 0;
 	}
 
+	@Override
 	public int superGetSlotScrollBarX(int guiNumber) {
 		return 0;
 	}
@@ -352,6 +385,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getSlotScrollBarSizeX(guiNumber) : 0;
 	}
 
+	@Override
 	public int superGetSlotScrollBarSizeX(int guiNumber) {
 		return 0;
 	}
@@ -361,6 +395,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getTop(guiNumber) : 0;
 	}
 
+	@Override
 	public int superGetTop(int guiNumber) {
 		return 0;
 	}
@@ -370,6 +405,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getBottom(guiNumber) : 0;
 	}
 
+	@Override
 	public int superGetBottom(int guiNumber) {
 		return 0;
 	}
@@ -379,6 +415,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getLimitSelectedDisplayCount(guiNumber) : 0;
 	}
 
+	@Override
 	public int superGetLimitSelectedDisplayCount(int guiNumber) {
 		return 0;
 	}
@@ -388,6 +425,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.getSize() : 0;
 	}
 
+	@Override
 	public int superGetSize() {
 		return 0;
 	}
@@ -397,6 +435,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		if (master != null) master.elementClicked(slotIndex, isDoubleClick, mouseX, mouseY);
 	}
 
+	@Override
 	public void superElementClicked(int slotIndex, boolean isDoubleClick, int mouseX, int mouseY) {
 	}
 
@@ -405,6 +444,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		return master != null ? master.isSelected(slotIndex) : false;
 	}
 
+	@Override
 	public boolean superIsSelected(int slotIndex) {
 		return false;
 	}
@@ -414,6 +454,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		if (master != null) master.drawBackground();
 	}
 
+	@Override
 	public void superDrawBackground() {
 	}
 
@@ -422,6 +463,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 		if (master != null) master.drawSlot(entryID, p_180791_2_, p_180791_3_, p_180791_4_, p_180791_5_, p_180791_6_);
 	}
 
+	@Override
 	public void superDrawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_) {
 	}
 

@@ -102,8 +102,9 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 	}
 
 	@Override
-	public void superWriteToNBT(Object nBTTagCompound) {
+	public Object superWriteToNBT(Object nBTTagCompound) {
 		super.writeToNBT((NBTTagCompound) nBTTagCompound);
+		return nBTTagCompound;
 	}
 
 	@Override
@@ -236,6 +237,7 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		else super.markDirty();
 	}
 
+	@Override
 	public void superMarkDirty() {
 		super.markDirty();
 	}
@@ -245,6 +247,7 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		return (Packet) (master != null ? master.getDescriptionPacket() : super.getDescriptionPacket());
 	}
 
+	@Override
 	public Packet superGetDescriptionPacket() {
 		return super.getDescriptionPacket();
 	}
@@ -255,6 +258,7 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		else super.addInfoToCrashReport(crashReportCategory);
 	}
 
+	@Override
 	public void superAddInfoToCrashReport(Object crashReportCategory) {
 		super.addInfoToCrashReport((CrashReportCategory) crashReportCategory);
 	}
@@ -265,16 +269,20 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		else super.onDataPacket(networkManager, s35PacketUpdateTileEntity);
 	}
 
+	@Override
 	public void superOnDataPacket(Object networkManager, Object s35PacketUpdateTileEntity) {
 		super.onDataPacket((NetworkManager) networkManager, (S35PacketUpdateTileEntity) s35PacketUpdateTileEntity);
 	}
 	// ~164
+	@Override
 	public void superOnInventoryChanged() {
 	}
 
+	@Override
 	public void superFunc_85027_a(Object crashReportCategory) {
 	}
 
+	@Override
 	public boolean superShouldRefresh(int oldID, int newID, int oldMeta, int newMeta, Object world, int x, int y, int z) {
 		return false;
 	}
@@ -299,6 +307,7 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		return false;
 	}
 
+	@Override
 	public boolean superShouldRefresh(Object block, Object block1, int oldMeta, int newMeta, Object world, int x, int y, int z) {
 		return false;
 	}
@@ -308,6 +317,7 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		return (BlockPos) (master != null ? master.getPos() : super.getPos());
 	}
 
+	@Override
 	public BlockPos superGetPos() {
 		return super.getPos();
 	}
@@ -318,6 +328,7 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		else super.setPos(blockPos);
 	}
 
+	@Override
 	public void superSetPos(Object blockPos) {
 		super.setPos((BlockPos) blockPos);
 	}
@@ -327,6 +338,7 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		return master != null ? master.shouldRefresh(world, blockPos, iBlockState, iBlockState1) : super.shouldRefresh(world, blockPos, iBlockState, iBlockState1);
 	}
 
+	@Override
 	public boolean superShouldRefresh(Object world, Object blockPos, Object iBlockState, Object iBlockState1) {
 		return super.shouldRefresh((World) world, (BlockPos) blockPos, (IBlockState) iBlockState, (IBlockState) iBlockState1);
 	}
@@ -336,6 +348,7 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		return master != null ? master.canRenderBreaking() : super.canRenderBreaking();
 	}
 
+	@Override
 	public boolean superCanRenderBreaking() {
 		return super.canRenderBreaking();
 	}
@@ -345,6 +358,7 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		return (NBTTagCompound) (master != null ? master.getTileData() : super.getTileData());
 	}
 
+	@Override
 	public NBTTagCompound superGetTileData() {
 		return super.getTileData();
 	}
@@ -354,6 +368,7 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		return master != null ? master.restrictNBTCopy() : super.restrictNBTCopy();
 	}
 
+	@Override
 	public boolean superRestrictNBTCopy() {
 		return super.restrictNBTCopy();
 	}
@@ -363,25 +378,47 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		return false;
 	}
 
+	@Override
 	public void superOnLoad() {
 	}
 
+	@Override
 	public boolean superHasFastRenderer() {
 		return false;
 	}
 
+	@Override
 	public boolean superHasCapability(Object capability, Object enumFacing) {
 		return false;
 	}
 
+	@Override
 	public Object superGetCapability(Object capability, Object enumFacing) {
 		return null;
 	}
 
+	@Override
 	public void superDeserializeNBT(Object nBTTagCompound) {
 	}
 
+	@Override
 	public Object superSerializeNBT() {
 		return null;
 	}
+
+	@Override
+	public boolean superOnlyOpsCanSetNbt() {
+		return false;
+	}
+
+	@Override
+	public Object superGetUpdatePacket() {
+		return null;
+	}
+
+	@Override
+	public Object superGetUpdateTag() {
+		return null;
+	}
+
 }

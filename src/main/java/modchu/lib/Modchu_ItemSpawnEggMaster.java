@@ -89,7 +89,7 @@ public class Modchu_ItemSpawnEggMaster extends Modchu_ItemMasterBasis {
 			Object actionResult = flag ? Modchu_Reflect.newInstance("ActionResult", new Class[]{ Modchu_Reflect.loadClass("EnumActionResult"), Object.class }, new Object[]{ Modchu_AS.getEnum("EnumActionResult", "SUCCESS"), itemStack }) : itemStack;
 			return actionResult;
 		}
-		Object movingObjectPosition = getMovingObjectPositionFromPlayer(world, entityPlayer, true);
+		Object movingObjectPosition = rayTrace(world, entityPlayer, true);
 		if (movingObjectPosition != null) {
 			if (Modchu_AS.getEnum(Modchu_AS.movingObjectPositionTypeOfHit, movingObjectPosition) == Modchu_AS.getEnum(Modchu_AS.movingObjectPositionMovingObjectTypeBLOCK, movingObjectPosition)) {
 				int i = Modchu_AS.getInt(Modchu_AS.movingObjectPositionBlockPosGetX, movingObjectPosition);

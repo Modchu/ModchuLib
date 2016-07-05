@@ -14,7 +14,7 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public int getMaxHealthInt();
 	public int getHealthInt();
 	public void setHealthInt(int i);
-	public Object dropOneItem(boolean par1);
+	public Object dropItem(boolean par1);
 	public Object dropItemAndGetStack(Object entityItem);
 	public void sendChatMessage(String par1Str);
 	public void swingArm();
@@ -69,7 +69,7 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public void setScore(int par1);
 	public void addScore(int par1);
 	public Object dropPlayerItem(Object itemStack);
-	public Object dropPlayerItemWithRandomChoice(Object itemStack, boolean par2);
+	public Object dropItem(Object itemStack, boolean par2);
 	public float getCurrentPlayerStrVsBlock(Object block, boolean par2);
 	public float getCurrentPlayerStrVsBlock(Object block, boolean par2, int meta);
 	public boolean canHarvestBlock(Object block);
@@ -179,7 +179,7 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public float getFovModifier();
 	public Object dropItem(Object itemStack, boolean dropAround, boolean traceItem);
 	public float getDigSpeed(Object block);
-	public float getBreakSpeed(Object iBlockState, Object blockPos);
+	public float getDigSpeed(Object iBlockState, Object blockPos);
 	public Object trySleep(Object blockPos);
 	public void setSpawnPoint(Object blockPos, boolean forced);
 	public void takeStat(Object statBase);
@@ -248,5 +248,6 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public boolean isNoDespawnRequired();
 	public void setCanPickUpLoot(boolean par1);
 	public boolean interact(Object entityPlayer);
+	public String getCachedUniqueIdString();
 
 }

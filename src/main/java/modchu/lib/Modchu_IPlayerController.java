@@ -39,7 +39,7 @@ public interface Modchu_IPlayerController {
 	public Object superProcessRightClickBlock(Object entityPlayerSP, Object world, Object itemStack, Object blockPos, Object enumFacing, Object vec3, Object enumHand);
 	public Object superSendUseItem(Object entityPlayer, Object world, Object itemStack, Object enumHand);
 	public Object superWindowClick(int par1, int par2, int par3, Object clickType, Object entityPlayer);
-	public Object superInteractWithEntitySendPacket(Object entityPlayer, Object entity, Object itemStack, Object enumHand);
+	public Object superInteractWithEntity(Object entityPlayer, Object entity, Object itemStack, Object enumHand);
 	public Object superProcessRightClick(Object entityPlayer, Object world, Object itemStack, Object enumHand);
 
 }

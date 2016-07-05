@@ -60,7 +60,7 @@ public interface Modchu_IEntityLivingBase extends Modchu_IEntity {
 	public boolean superIsBlocking();
 	public void superJump();
 	public void superUpdateAITasks();
-	public void superUpdateAITick();
+	public void superHandleJumpWater();
 	public void superUpdateEntityActionState();
 	public void superUpdateArmSwingProgress();
 	public float superGetSwingProgress(float par1);
@@ -173,7 +173,7 @@ public interface Modchu_IEntityLivingBase extends Modchu_IEntity {
 	public boolean superIsActiveItemStackBlocking();
 	public boolean superIsElytraFlying();
 	public int superGetTicksElytraFlying();
-	public boolean superTeleportTo_(double x, double y, double z);
+	public boolean superAttemptTeleport(double x, double y, double z);
 	public boolean superCanBeHitWithPotion();
 	public void superAddRandomDrop();
 	public void superDropLoot(boolean p_184610_1_, int p_184610_2_, Object damageSource);

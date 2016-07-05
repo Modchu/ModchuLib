@@ -21,10 +21,11 @@ import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IPacketMaster;
+import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Packet;
 import modchu.lib.Modchu_PacketManager;
 import modchu.lib.Modchu_Reflect;
-import modchu.lib.forge.mc172_190.Modchu_Message;
+import modchu.lib.forge.mc172_202.Modchu_Message;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -43,7 +44,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 			Modchu_Debug.mDebug("Modchu_PacketMaster registerPacket channelName == null !!");
 			return;
 		}
-		Object networkRegistryINSTANCE = Modchu_Reflect.getFieldObject("cpw.mods.fml.common.network.NetworkRegistry", "INSTANCE");
+		Object networkRegistryINSTANCE = Modchu_Reflect.getFieldObject("NetworkRegistry", "INSTANCE");
 		if (networkRegistryINSTANCE != null) ;else {
 			Modchu_Debug.mDebug("Modchu_PacketMaster registerPacket networkRegistryINSTANCE == null !!");
 			return;
@@ -130,10 +131,37 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 
 	@Override
 	public void sendToAll(Object message, String channelName) {
-		if (!channelsMap.containsKey(channelName)) return;
+		boolean debug = false;
+		if (debug) Modchu_Debug.lDebug("Modchu_PacketMaster sendToAll");
+		if (!channelsMap.containsKey(channelName)) {
+			Modchu_Debug.lDebug("Modchu_PacketMaster sendToAll channelName !containsKey return. channelName="+channelName);
+			return;
+		}
+/*
+		Modchu_Message modchu_message = message instanceof Modchu_Message ? (Modchu_Message) message : null;
+		if (debug) Modchu_Debug.lDebug("Modchu_PacketMaster sendToAll modchu_message="+modchu_message);
+		if (modchu_message != null); else return;
+		Object[] worlds = Modchu_AS.getObjectArray(Modchu_AS.FMLCommonHandlerInstanceGetMinecraftServerInstanceWorldServers);
+		if (debug) Modchu_Debug.lDebug("Modchu_PacketMaster sendToAll worlds="+worlds);
+		if (worlds != null) {
+			for (Object world : worlds) {
+				List list = Modchu_AS.getList(Modchu_AS.worldPlayerEntities, world);
+				if (debug) Modchu_Debug.lDebug("Modchu_PacketMaster sendToAll list="+list);
+				if (list != null
+						&& !list.isEmpty()) {
+					for (Object entityPlayer : list) {
+						Modchu_Message modchu_message2 = modchu_message.copy(modchu_message);
+						if (debug) Modchu_Debug.lDebug("Modchu_PacketMaster sendToAll sendTo entityPlayer="+entityPlayer);
+						sendTo(modchu_message2, entityPlayer, channelName);
+					}
+				}
+			}
+		}
+*/
 		EnumMap<Side, FMLEmbeddedChannel> channels = channelsMap.get(channelName);
 		((FMLEmbeddedChannel)channels.get(Side.SERVER)).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
 		((FMLEmbeddedChannel)channels.get(Side.SERVER)).writeAndFlush(message);
+
 	}
 
 	@Override
@@ -176,7 +204,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		if (o != null
 				&& o.length > 0) ;else return null;
 		o = Modchu_Packet.sendStateProcessing(o);
-		ByteBuf buf = Unpooled.buffer();
+		ByteBuf buf = newPacketBuffer(Unpooled.buffer());
 		ByteBufOutputStream byteBufOutputStream = new ByteBufOutputStream(buf);
 		try {
 			for (Object o1 : o) {
@@ -190,6 +218,8 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 					else if ((o1 instanceof Long)) byteBufOutputStream.writeLong(((Long) o1).longValue());
 					else if ((o1 instanceof NBTTagCompound)) CompressedStreamTools.write((NBTTagCompound) o1, byteBufOutputStream);
 					else if ((o1 instanceof Boolean)) byteBufOutputStream.writeByte((Boolean)o1 ? (byte) 1 : (byte) 0);
+				} else {
+					byteBufOutputStream.writeUTF("");
 				}
 			}
 		} catch (Exception e) {
@@ -220,12 +250,17 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 
 	@Override
 	public Object[] sendStateProcessing(Object... o) {
+		boolean debug = false;
 		if (o != null
 				&& o.length > 0) ;else return null;
 		Object[] o2 = new Object[o.length * 2 + 1];
 		for (int i = 0; i < o.length; i++) {
-			Modchu_Debug.mDebug("o["+i+"]="+o[i]);
+			if (debug) Modchu_Debug.mDebug("Modchu_PacketMaster sendStateProcessing o["+i+"]="+o[i]);
 			o2[i * 2 + 1] = o[i];
+			if (debug) {
+				Modchu_Debug.mDebug("Modchu_PacketMaster sendStateProcessing o2["+(i * 2 + 1)+"]="+o2[i * 2 + 1]);
+				Modchu_Debug.mDebug("Modchu_PacketMaster sendStateProcessing o["+i+"].getClass()="+(o[i] != null ? o[i].getClass() : null));
+			}
 			if (o[i] instanceof Integer) o2[i * 2] = Modchu_Packet.packet_Integer;
 			else if (o[i] instanceof Float) o2[i * 2] = Modchu_Packet.packet_Float;
 			else if (o[i] instanceof Double) o2[i * 2] = Modchu_Packet.packet_Double;
@@ -234,9 +269,15 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 			else if (o[i] instanceof Enum) o2[i * 2] = Modchu_Packet.packet_Enum;
 			else if (o[i] instanceof NBTTagCompound) o2[i * 2] = Modchu_Packet.packet_NBTTagCompound;
 			else if (o[i] instanceof Boolean) o2[i * 2] = Modchu_Packet.packet_Boolean;
-			else o2[i * 2] = Modchu_Packet.packet_Byte;
+			else if (o[i] instanceof Byte) o2[i * 2] = Modchu_Packet.packet_Byte;
+			else {
+				if (debug) Modchu_Debug.mDebug("Modchu_PacketMaster sendStateProcessing else packet_String o["+i+"]="+o[i]);
+				o2[i * 2] = Modchu_Packet.packet_String;
+				if (o2[i * 2 + 1] != null); else o2[i * 2 + 1] = "null";
+			}
 		}
 		o2[o2.length - 1] = Modchu_Packet.packet_end;
+		if (debug) Modchu_Debug.mDebug("Modchu_PacketMaster sendStateProcessing o2["+(o2.length - 1)+"]="+o2[o2.length - 1]);
 		return o2;
 	}
 
@@ -245,7 +286,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		ByteBufInputStream byteBufInput = (ByteBufInputStream) input;
 		LinkedList list = new LinkedList();
 		int i = 0;
-		boolean returnFlag = true;
+		boolean breakFlag = false;
 		try {
 			do {
 				byte by = Modchu_PacketManager.readByte(byteBufInput);
@@ -262,18 +303,26 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 					o = Modchu_PacketManager.readLong(byteBufInput);
 				} else if (by == Modchu_Packet.packet_String) {
 					o = Modchu_PacketManager.readString(byteBufInput);
+					if (o.equals("null")) {
+						o = "";
+					}
 				} else if (by == Modchu_Packet.packet_Boolean) {
 					byte by1 = Modchu_PacketManager.readByte(byteBufInput);
 					o = by1 == 0 ? false : true;
 				} else if (by == Modchu_Packet.packet_end) {
-					returnFlag = false;
+					breakFlag = true;
 				}
 				if (o != null) {
-					Modchu_Debug.mDebug("Modchu_PacketMaster receivePacketData i="+i+" o="+o);
+					if (o instanceof Byte
+							&& (Byte) o == Modchu_Packet.packet_end) {
+						break;
+					}
+					Modchu_Debug.mDebug("Modchu_PacketMaster receivePacketData i="+i+" o="+o+" o.getClass()="+o.getClass());
 					list.add(o);
 				}
+				if (breakFlag) break;
 				i++;
-			} while(returnFlag);
+			} while(i < 128);
 		} catch (EOFException e) {
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -289,4 +338,10 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		}
 		return list;
 	}
+
+	private ByteBuf newPacketBuffer(ByteBuf byteBuf) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return version > 179 ? (ByteBuf) Modchu_Reflect.newInstance("net.minecraft.network.PacketBuffer", new Class[]{ ByteBuf.class }, new Object[]{ byteBuf }) : byteBuf;
+	}
+
 }

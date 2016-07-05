@@ -192,7 +192,7 @@ public class Modchu_PlayerControllerMasterBasis implements Modchu_IPlayerControl
 	}
 
 	@Override
-	public Object interactWithEntitySendPacket(Object entityPlayer, Object entity, Object itemStack, Object enumHand) {
-		return base.superInteractWithEntitySendPacket(entityPlayer, entity, itemStack, enumHand);
+	public Object interactWithEntity(Object entityPlayer, Object entity, Object itemStack, Object enumHand) {
+		return base.superInteractWithEntity(entityPlayer, entity, itemStack, enumHand);
 	}
 }

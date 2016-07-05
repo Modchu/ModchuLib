@@ -410,11 +410,11 @@ public class Modchu_Item extends Item implements Modchu_IItem {
 
 	@Override
 	protected MovingObjectPosition getMovingObjectPositionFromPlayer(World world, EntityPlayer entityPlayer, boolean par3) {
-		return (MovingObjectPosition) (master != null ? master.getMovingObjectPositionFromPlayer(world, entityPlayer, par3) : super.getMovingObjectPositionFromPlayer(world, entityPlayer, par3));
+		return (MovingObjectPosition) (master != null ? master.rayTrace(world, entityPlayer, par3) : super.getMovingObjectPositionFromPlayer(world, entityPlayer, par3));
 	}
 
 	@Override
-	public MovingObjectPosition superGetMovingObjectPositionFromPlayer(Object world, Object entityPlayer, boolean par3) {
+	public MovingObjectPosition superRayTrace(Object world, Object entityPlayer, boolean par3) {
 		return super.getMovingObjectPositionFromPlayer((World) world, (EntityPlayer) entityPlayer, par3);
 	}
 
@@ -466,6 +466,61 @@ public class Modchu_Item extends Item implements Modchu_IItem {
 	@Override
 	public Multimap superGetItemAttributeModifiers() {
 		return null;
+	}
+	// ~152
+	public boolean isValidArmor(ItemStack itemStack, int armorType) {
+		return master != null ? master.isValidArmor(itemStack, armorType) : super.isValidArmor(itemStack, armorType);
+	}
+
+	@Override
+	public boolean superIsValidArmor(Object itemStack, int armorType) {
+		return super.isValidArmor((ItemStack) itemStack, armorType);
+	}
+
+	public int getItemDamageFromStack(ItemStack itemStack) {
+		return master != null ? master.getItemDamageFromStack(itemStack) : super.getItemDamageFromStack(itemStack);
+	}
+
+	@Override
+	public int superGetItemDamageFromStack(Object itemStack) {
+		return super.getItemDamageFromStack((ItemStack) itemStack);
+	}
+
+	public int getItemDamageFromStackForDisplay(ItemStack itemStack) {
+		return master != null ? master.getItemDamageFromStackForDisplay(itemStack) : super.getItemDamageFromStackForDisplay(itemStack);
+	}
+
+	@Override
+	public int superGetItemDamageFromStackForDisplay(Object itemStack) {
+		return super.getItemDamageFromStackForDisplay((ItemStack) itemStack);
+	}
+
+	public int getItemMaxDamageFromStack(ItemStack itemStack) {
+		return master != null ? master.getItemMaxDamageFromStack(itemStack) : super.getItemMaxDamageFromStack(itemStack);
+	}
+
+	@Override
+	public int superGetItemMaxDamageFromStack(Object itemStack) {
+		return super.getItemMaxDamageFromStack((ItemStack) itemStack);
+	}
+
+	public boolean isItemStackDamaged(ItemStack itemStack) {
+		return master != null ? master.isItemStackDamaged(itemStack) : super.isItemStackDamaged(itemStack);
+	}
+
+	@Override
+	public boolean superIsItemStackDamaged(Object itemStack) {
+		return super.isItemStackDamaged((ItemStack) itemStack);
+	}
+
+	public void setItemDamageForStack(ItemStack itemStack, int damage) {
+		if (master != null) master.setItemDamageForStack(itemStack, damage);
+		else super.setItemDamageForStack(itemStack, damage);
+	}
+
+	@Override
+	public void superSetItemDamageForStack(Object itemStack, int damage) {
+		super.setItemDamageForStack((ItemStack) itemStack, damage);
 	}
 	// ~164
 	@Override
@@ -1200,68 +1255,122 @@ public class Modchu_Item extends Item implements Modchu_IItem {
 		return superOnEaten(itemStack, world, entityPlayer);
 	}
 	// 190~
+	@Override
 	public Object superOnItemUse(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumHand, Object enumFacing, float f, float f1, float f2) {
 		return null;
 	}
 
+	@Override
 	public Object superOnItemRightClick(Object itemStack, Object world, Object entityPlayer, Object enumHand) {
 		return null;
 	}
 
+	@Override
 	public boolean superItemInteractionForEntity(Object itemStack, Object entityPlayer, Object entityLivingBase, Object enumHand) {
 		return false;
 	}
 
+	@Override
 	public Multimap<String, Object> superGetItemAttributeModifiers(Object entityEquipmentSlot) {
 		return null;
 	}
 
+	@Override
 	public Object superOnItemUseFirst(Object itemStack, Object entityPlayer, Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, Object enumHand) {
 		return null;
 	}
 
+	@Override
 	public Object superGetArmorModel(Object entityLivingBase, Object itemStack, Object entityEquipmentSlot, Object modelBiped) {
 		return null;
 	}
 
+	@Override
 	public Multimap superGetAttributeModifiers(Object entityEquipmentSlot, Object itemStack) {
 		return null;
 	}
 
+	@Override
 	public boolean superDoesSneakBypassUse(Object itemStack, Object iBlockAccess, Object blockPos, Object entityPlayer) {
 		return false;
 	}
 
+	@Override
 	public Object superGetPropertyGetter(Object resourceLocation) {
 		return null;
 	}
 
+	@Override
 	public boolean superUpdateItemStackNBT(Object nBTTagCompound) {
 		return false;
 	}
 
+	@Override
 	public boolean superHasCustomProperties() {
 		return false;
 	}
 
+	@Override
 	public String superGetHighlightTip(Object itemStack, String displayName) {
 		return null;
 	}
 
+	@Override
 	public int superGetItemEnchantability(Object itemStack) {
 		return -1;
 	}
 
+	@Override
 	public boolean superIsBeaconPayment(Object itemStack) {
 		return false;
 	}
 
+	@Override
 	public boolean superShouldCauseReequipAnimation(Object itemStack, Object itemStack1, boolean slotChanged) {
 		return false;
 	}
 
+	@Override
 	public Object superInitCapabilities(Object itemStack, Object nBTTagCompound) {
 		return null;
 	}
+
+	@Override
+	public int getDamageVsEntity(Entity entity) {
+		return master != null ? master.getDamageVsEntity(entity) : super.getDamageVsEntity(entity);
+	}
+
+	@Override
+	public int superGetDamageVsEntity(Object entity) {
+		return super.getDamageVsEntity((Entity) entity);
+	}
+
+	public String getLocalizedName(ItemStack itemStack) {
+		return master != null ? master.getLocalizedName(itemStack) : super.getLocalizedName(itemStack);
+	}
+
+	@Override
+	public String superGetLocalizedName(Object itemStack) {
+		return super.getLocalizedName((ItemStack) itemStack);
+	}
+
+	public String func_77653_i(ItemStack itemStack) {
+		return master != null ? master.func_77653_i(itemStack) : super.func_77653_i(itemStack);
+	}
+
+	@Override
+	public String superFunc_77653_i(Object itemStack) {
+		return super.func_77653_i((ItemStack) itemStack);
+	}
+
+	public boolean func_82788_x() {
+		return master != null ? master.func_82788_x() : super.func_82788_x();
+	}
+
+	@Override
+	public boolean superFunc_82788_x() {
+		return super.func_82788_x();
+	}
+
 
 }

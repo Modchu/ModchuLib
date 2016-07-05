@@ -16,14 +16,14 @@ public interface Modchu_IGuiSlot {
 	public void superSetShowSelectionBox(boolean p_148130_1_);
 	public void superSetHasListHeader(boolean p_148133_1_, int p_148133_2_);
 	public int superGetContentHeight();
-	public void superFunc_178040_a(int p_178040_1_, int p_178040_2_, int p_178040_3_);
+	public void superUpdateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_);
 	public void superDrawListHeader(int p_148129_1_, int p_148129_2_, Object tessellator);
-	public void superFunc_148132_a(int p_148132_1_, int p_148132_2_);
-	public void superFunc_148142_b(int p_148142_1_, int p_148142_2_);
+	public void superClickedHeader(int p_148132_1_, int p_148132_2_);
+	public void superRenderDecorations(int p_148142_1_, int p_148142_2_);
 	public int superGetSlotIndexFromScreenCoords(int p_148124_1_, int p_148124_2_);
 	public void superRegisterScrollButtons(int p_148134_1_, int p_148134_2_);
 	public void superBindAmountScrolled();
-	public int superFunc_148135_f();
+	public int superGetMaxScroll();
 	public int superGetAmountScrolled();
 	public boolean superIsMouseYWithinSlotBounds(int p_148141_1_);
 	public void superScrollBy(int p_148145_1_);

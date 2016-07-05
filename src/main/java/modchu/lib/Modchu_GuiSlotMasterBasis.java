@@ -30,8 +30,8 @@ public class Modchu_GuiSlotMasterBasis implements Modchu_IGuiSlotMaster {
 	}
 
 	@Override
-	public void func_178040_a(int p_178040_1_, int p_178040_2_, int p_178040_3_) {
-		base.superFunc_178040_a(p_178040_1_, p_178040_2_, p_178040_3_);
+	public void updateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_) {
+		base.superUpdateItemPos(p_178040_1_, p_178040_2_, p_178040_3_);
 	}
 
 	@Override
@@ -40,13 +40,13 @@ public class Modchu_GuiSlotMasterBasis implements Modchu_IGuiSlotMaster {
 	}
 
 	@Override
-	public void func_148132_a(int p_148132_1_, int p_148132_2_) {
-		base.superFunc_148132_a(p_148132_1_, p_148132_2_);
+	public void clickedHeader(int p_148132_1_, int p_148132_2_) {
+		base.superClickedHeader(p_148132_1_, p_148132_2_);
 	}
 
 	@Override
-	public void func_148142_b(int p_148142_1_, int p_148142_2_) {
-		base.superFunc_148142_b(p_148142_1_, p_148142_2_);
+	public void renderDecorations(int p_148142_1_, int p_148142_2_) {
+		base.superRenderDecorations(p_148142_1_, p_148142_2_);
 	}
 
 	@Override
@@ -65,8 +65,8 @@ public class Modchu_GuiSlotMasterBasis implements Modchu_IGuiSlotMaster {
 	}
 
 	@Override
-	public int func_148135_f() {
-		return base.superFunc_148135_f();
+	public int getMaxScroll() {
+		return base.superGetMaxScroll();
 	}
 
 	@Override

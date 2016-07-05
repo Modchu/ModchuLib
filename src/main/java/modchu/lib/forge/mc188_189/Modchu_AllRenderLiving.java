@@ -64,10 +64,12 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		}
 	}
 
+	@Override
 	public void superDoRenderLiving(Object entity, double d, double d1, double d2, float d3, float d4) {
 		super.doRender((EntityLiving) entity, d, d1, d2, d3, d4);
 	}
 
+	@Override
 	public void superDoRender(Object entity, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender((EntityLiving)entity, par2, par4, par6, par8, par9);
 	}
@@ -148,12 +150,6 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		return super.getColorMultiplier((EntityLivingBase) entityLivingBase, p_77030_2_, p_77030_3_);
 	}
 
-	public void passSpecialRender(EntityLiving entityLivingBase, double p_77033_2_, double p_77033_4_, double p_77033_6_) {
-		Modchu_RenderLiving render = renderMapGet(entityLivingBase);
-		if (render != null) render.passSpecialRender(entityLivingBase, p_77033_2_, p_77033_4_, p_77033_6_);
-		else super.renderName(entityLivingBase, p_77033_2_, p_77033_4_, p_77033_6_);
-	}
-
 	@Override
 	public void superPassSpecialRender(Object entityLivingBase, double p_77033_2_, double p_77033_4_, double p_77033_6_) {
 		super.renderName((EntityLiving) entityLivingBase, p_77033_2_, p_77033_4_, p_77033_6_);
@@ -181,9 +177,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	}
 	// 180
 	public boolean shouldRenderLiving(EntityLiving entityLiving, ICamera iCamera, double d, double d1, double d2) {
-		Modchu_RenderLiving render = renderMapGet(entityLiving);
-		if (render != null) render.shouldRenderLiving(entityLiving, iCamera, d, d1, d2);
-		return super.shouldRender(entityLiving, iCamera, d, d1, d2);
+		return true;
 	}
 	// 180~
 	@Override
@@ -266,6 +260,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		super.transformHeldFull3DItemLayer();
 	}
 
+	@Override
 	public void superTransformHeldFull3DItemLayer() {
 		super.transformHeldFull3DItemLayer();
 	}
@@ -282,6 +277,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		return render != null ? render.setScoreTeamColor(entityLivingBase) : super.setScoreTeamColor(entityLivingBase);
 	}
 
+	@Override
 	public boolean superSetScoreTeamColor(Object entityLivingBase) {
 		return super.setScoreTeamColor((EntityLivingBase) entityLivingBase);
 	}

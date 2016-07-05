@@ -34,7 +34,6 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.IPlantable;
 
 public class Modchu_Block extends Block implements Modchu_IBlock {
@@ -331,11 +330,11 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public Block setStepSound(Block.SoundType stepSound) {
-		return (Block) (master != null ? master.setStepSound(stepSound) : super.setStepSound(stepSound));
+		return (Block) (master != null ? master.setSoundType(stepSound) : super.setStepSound(stepSound));
 	}
 
 	@Override
-	public Block superSetStepSound(Object stepSound) {
+	public Block superSetSoundType(Object stepSound) {
 		return super.setStepSound((Block.SoundType) stepSound);
 	}
 
@@ -613,12 +612,12 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos blockPos, Entity entity) {
-		if (master != null) master.onEntityCollidedWithBlock(world, blockPos, entity);
+		if (master != null) master.onEntityWalk(world, blockPos, entity);
 		else super.onEntityCollidedWithBlock(world, blockPos, entity);
 	}
 
 	@Override
-	public void superOnEntityCollidedWithBlock(Object world, Object blockPos, Object entity) {
+	public void superOnEntityWalk(Object world, Object blockPos, Object entity) {
 		super.onEntityCollidedWithBlock((World) world, (BlockPos) blockPos, (Entity) entity);
 	}
 
@@ -785,12 +784,12 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public void onNeighborBlockChange(World world, BlockPos blockPos, IBlockState iBlockState, Block block) {
-		if (master != null) master.onNeighborBlockChange(world, blockPos, iBlockState, block);
+		if (master != null) master.neighborChanged(world, blockPos, iBlockState, block);
 		else super.onNeighborBlockChange(world, blockPos, iBlockState, block);
 	}
 
 	@Override
-	public void superOnNeighborBlockChange(Object world, Object blockPos, Object iBlockState, Object block) {
+	public void superNeighborChanged(Object world, Object blockPos, Object iBlockState, Object block) {
 		super.onNeighborBlockChange((World) world, (BlockPos) blockPos, (IBlockState) iBlockState, (Block) block);
 	}
 
@@ -971,12 +970,12 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos blockPos, IBlockState iBlockState, Entity entity) {
-		if (master != null) master.onEntityCollidedWithBlock(world, blockPos, iBlockState, entity);
+		if (master != null) master.onEntityWalk(world, blockPos, iBlockState, entity);
 		else super.onEntityCollidedWithBlock(world, blockPos, iBlockState, entity);
 	}
 
 	@Override
-	public void superOnEntityCollidedWithBlock(Object world, Object blockPos, Object iBlockState, Object entity) {
+	public void superOnEntityWalk(Object world, Object blockPos, Object iBlockState, Object entity) {
 		super.onEntityCollidedWithBlock((World) world, (BlockPos) blockPos, (IBlockState) iBlockState, (Entity) entity);
 	}
 
@@ -1023,11 +1022,11 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public boolean onBlockEventReceived(World world, BlockPos blockPos, IBlockState iBlockState, int eventID, int eventParam) {
-		return master != null ? master.onBlockEventReceived(world, blockPos, iBlockState, eventID, eventParam) : super.onBlockEventReceived(world, blockPos, iBlockState, eventID, eventParam);
+		return master != null ? master.eventReceived(world, blockPos, iBlockState, eventID, eventParam) : super.onBlockEventReceived(world, blockPos, iBlockState, eventID, eventParam);
 	}
 
 	@Override
-	public boolean superOnBlockEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
+	public boolean superEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
 		return super.onBlockEventReceived((World) world, (BlockPos) blockPos, (IBlockState) iBlockState, eventID, eventParam);
 	}
 
@@ -1903,7 +1902,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public void superOnNeighborBlockChange(Object world, int par2, int par3, int par4, Object par5) {
+	public void superNeighborChanged(Object world, int par2, int par3, int par4, Object par5) {
 	}
 
 	@Override
@@ -2008,7 +2007,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public void superOnEntityCollidedWithBlock(Object world, int par2, int par3, int par4, Object entity) {
+	public void superOnEntityWalk(Object world, int par2, int par3, int par4, Object entity) {
 	}
 
 	@Override
@@ -2030,7 +2029,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public boolean superOnBlockEventReceived(Object world, int par2, int par3, int par4, int par5, int par6) {
+	public boolean superEventReceived(Object world, int par2, int par3, int par4, int par5, int par6) {
 		return false;
 	}
 
@@ -2307,17 +2306,21 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 		return null;
 	}
 
+	@Override
 	public String superGetUnlocalizedName2() {
 		return null;
 	}
 
+	@Override
 	public void superOnSetBlockIDWithMetaData(Object world, int par2, int par3, int par4, int par5) {
 	}
 
+	@Override
 	public boolean superIsLadder(Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public int superGetEnchantPower(Object world, int x, int y, int z) {
 		return -1;
 	}
@@ -2607,7 +2610,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public Object superGetStepSound() {
+	public Object superGetSoundType() {
 		return null;
 	}
 
@@ -2633,6 +2636,15 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public Object superIsAABBInsideMaterial(Object world, Object blockPos, Object axisAlignedBB, Object material) {
+		return false;
+	}
+
+	@Override
+	public void superEventReceived(Object world, int par2, int par3, int par4, Object par5) {
+	}
+
+	@Override
+	public boolean superNeighborChanged(Object world, int par2, int par3, int par4, int par5, int par6) {
 		return false;
 	}
 

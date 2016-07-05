@@ -483,12 +483,12 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void moveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
-		if (master != null) master.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
+		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_);
 		else super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
 	@Override
-	public void superMoveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
+	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
 		super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
@@ -717,8 +717,9 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public void superWriteToNBT(Object nBTTagCompound) {
+	public Object superWriteToNBT(Object nBTTagCompound) {
 		super.writeToNBT((NBTTagCompound) nBTTagCompound);
+		return nBTTagCompound;
 	}
 
 	@Override
@@ -909,12 +910,12 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
-		if (master != null) master.setPositionAndRotation2(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
+		if (master != null) master.setPositionAndRotationDirect(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
 		else super.setPositionAndRotation2(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
+	public void superSetPositionAndRotationDirect(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
 		super.setPositionAndRotation2(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
 	}
 
@@ -1265,11 +1266,11 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public boolean canAttackWithItem() {
-		return master != null ? master.canAttackWithItem() : super.canAttackWithItem();
+		return master != null ? master.canBeAttackedWithItem() : super.canAttackWithItem();
 	}
 
 	@Override
-	public boolean superCanAttackWithItem() {
+	public boolean superCanBeAttackedWithItem() {
 		return super.canAttackWithItem();
 	}
 
@@ -1679,7 +1680,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+	public void superSetPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 	}
 
 	@Override
@@ -1829,156 +1830,199 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public void superApplyEnchantments(Object entityLivingBase, Object entity) {
 	}
 	// 190~
+	@Override
 	public void superSetItemStackToSlot(int p_70062_1_, Object itemStack) {
 	}
 
+	@Override
 	public void superSetCommandStats(Object entity) {
 	}
 
+	@Override
 	public boolean superProcessInitialInteract(Object entityPlayer, Object itemStack, Object enumHand) {
 		return false;
 	}
 
+	@Override
 	public Object superGetTags() {
 		return null;
 	}
 
+	@Override
 	public boolean superAddTag(String tag) {
 		return false;
 	}
 
+	@Override
 	public boolean superRemoveTag(String tag) {
 		return false;
 	}
 
+	@Override
 	public boolean superEquals(Object p_equals_1_) {
 		return false;
 	}
 
+	@Override
 	public int superHashCode() {
 		return -1;
 	}
 
+	@Override
 	public void superSetDropItemsWhenDead(boolean p_184174_1_) {
 	}
 
+	@Override
 	public void superDecrementTimeUntilPortal() {
 	}
 
+	@Override
 	public void superResetPositionToBB() {
 	}
 
+	@Override
 	public void superUpdatePassenger(Object entity) {
 	}
 
+	@Override
 	public void superApplyOrientationToEntity(Object entity) {
 	}
 
+	@Override
 	public boolean superStartRiding(Object entity, boolean force) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanBeRidden(Object entity) {
 		return false;
 	}
 
+	@Override
 	public void superRemovePassengers() {
 	}
 
+	@Override
 	public void superDismountRidingEntity() {
 	}
 
+	@Override
 	public void superAddPassenger(Object entity) {
 	}
 
+	@Override
 	public void superRemovePassenger(Object entity) {
 	}
 
+	@Override
 	public boolean superCanFitPassenger(Object entity) {
 		return false;
 	}
 
+	@Override
 	public Object superGetHeldEquipment() {
 		return null;
 	}
 
+	@Override
 	public Object superGetArmorInventoryList() {
 		return null;
 	}
 
+	@Override
 	public Object superGetEquipmentAndArmor() {
 		return null;
 	}
 
+	@Override
 	public void superSetItemStackToSlot(Object entityEquipmentSlot, Object itemStack) {
 	}
 
+	@Override
 	public boolean superIsBeingRidden() {
 		return false;
 	}
 
+	@Override
 	public boolean superIsGlowing() {
 		return false;
 	}
 
+	@Override
 	public void superSetGlowing(boolean p_184195_1_) {
 	}
 
+	@Override
 	public Object superGetTeam() {
 		return null;
 	}
 
+	@Override
 	public boolean superIsOnSameTeam(Object entity) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsOnScoreboardTeam(Object team) {
 		return false;
 	}
 
+	@Override
 	public void superSetRenderYawOffset(float offset) {
 	}
 
+	@Override
 	public void superSetEntityInvulnerable(boolean isInvulnerable) {
 	}
 
+	@Override
 	public boolean superIsNonBoss() {
 		return false;
 	}
 
+	@Override
 	public void superSetUniqueId(UUID uniqueIdIn) {
 	}
 
+	@Override
 	public void superNotifyDataManagerChange(Object dataParameter) {
 	}
 
+	@Override
 	public Object superGetAdjustedHorizontalFacing() {
 		return null;
 	}
 
+	@Override
 	public Object superGetRenderBoundingBox() {
 		return null;
 	}
 
+	@Override
 	public Object superGetServer() {
 		return null;
 	}
 
+	@Override
 	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object itemStack, Object enumHand) {
 		return null;
 	}
 
+	@Override
 	public boolean superHasCapability(Object capability, Object enumFacing) {
 		return false;
 	}
 
+	@Override
 	public Object superGetCapability(Object capability, Object enumFacing) {
 		return null;
 	}
 
+	@Override
 	public void superDeserializeNBT(Object nBTTagCompound) {
 	}
 
+	@Override
 	public Object superSerializeNBT() {
 		return null;
 	}
@@ -1989,10 +2033,12 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public void superSetBossNonVisibleTo(Object entityPlayerMP) {
 	}
 
+	@Override
 	public float superGetRotatedYaw(Object rotation) {
 		return 0.0F;
 	}
 
+	@Override
 	public float superGetMirroredYaw(Object mirror) {
 		return 0.0F;
 	}
@@ -2001,54 +2047,67 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 		return false;
 	}
 
+	@Override
 	public boolean superSetPositionNonDirty() {
 		return false;
 	}
 
+	@Override
 	public Object superGetControllingPassenger() {
 		return null;
 	}
 
+	@Override
 	public Object superGetPassengers() {
 		return null;
 	}
 
+	@Override
 	public boolean superIsPassenger(Object entity) {
 		return false;
 	}
 
+	@Override
 	public Object superGetRecursivePassengers() {
 		return null;
 	}
 
+	@Override
 	public Object superGetLowestRidingEntity() {
 		return null;
 	}
 
+	@Override
 	public boolean superIsRidingSameEntity(Object entity) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsRidingOrBeingRiddenBy(Object entity) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanPassengerSteer() {
 		return false;
 	}
 
+	@Override
 	public Object superGetRidingEntity() {
 		return null;
 	}
 
+	@Override
 	public Object superGetPushReaction() {
 		return null;
 	}
 
+	@Override
 	public Object superGetSoundCategory() {
 		return null;
 	}
 
+	@Override
 	public Object superGetRecursivePassengersByType(Class entityClass) {
 		return null;
 	}
@@ -2096,6 +2155,19 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	@Override
 	public Object superGetTeleportDirection() {
 		return super.getTeleportDirection();
+	}
+
+	@Override
+	public void superAddTrackingPlayer(Object entityPlayerMP) {
+	}
+
+	@Override
+	public void superRemoveTrackingPlayer(Object entityPlayerMP) {
+	}
+
+	@Override
+	public boolean superIgnoreItemEntityData() {
+		return false;
 	}
 
 }

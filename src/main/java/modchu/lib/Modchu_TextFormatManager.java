@@ -88,21 +88,26 @@ public class Modchu_TextFormatManager {
 	}
 
 	private static void settingInsideList_r(List list, List<String> list1, int index) {
+		List tempList = null;
 		for (int i1 = index; i1 < list1.size(); i1++) {
 			String s = list1.get(i1);
 			index++;
 			if (s.equals("(")) {
-				ArrayList tempList = new ArrayList();
-				settingInsideList_r(tempList, list1, index);
-				if (tempList != null
-						&& !tempList.isEmpty()) list.add(tempList);
+				tempList = new ArrayList();
 				continue;
 			}
-			if (s.equals(")")) return;
+			if (s.equals(")")
+					| s.indexOf("&") > -1
+					| s.indexOf("|") > -1) {
+				list.add(new ArrayList(tempList));
+				tempList.clear();
+				continue;
+			}
 			if (s != null
-					&& !s.isEmpty()) list.add(s);
+					&& !s.isEmpty()) {
+				if (tempList != null) tempList.add(s);
+			}
 		}
-		
 	}
 
 	private static void settingList(List<String> list, List<String> list1, String s, Modchu_TextFormatData data) {

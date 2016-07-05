@@ -5,7 +5,7 @@ public interface Modchu_ITileEntityMaster {
 	public void setWorldObj(Object world);
 	public boolean hasWorldObj();
 	public void readFromNBT(Object nBTTagCompound);
-	public void writeToNBT(Object nBTTagCompound);
+	public Object writeToNBT(Object nBTTagCompound);
 	public void updateEntity();
 	public int getBlockMetadata();
 	public void onInventoryChanged();
@@ -37,12 +37,15 @@ public interface Modchu_ITileEntityMaster {
 	public Object getTileData();
 	public boolean restrictNBTCopy();
 	// 190~
-	public boolean func_183000_F();
+	public boolean onlyOpsCanSetNbt();
 	public void onLoad();
 	public boolean hasFastRenderer();
 	public boolean hasCapability(Object capability, Object enumFacing);
 	public Object getCapability(Object capability, Object enumFacing);
 	public void deserializeNBT(Object nBTTagCompound);
 	public Object serializeNBT();
+	// 194~
+	public Object getUpdatePacket();
+	public Object getUpdateTag();
 
 }

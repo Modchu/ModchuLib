@@ -30,6 +30,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 	public Modchu_PacketMaster(HashMap<String, Object> map) {
 	}
 
+	@Override
 	public void registerPacket(Object instance, String channelName) {
 		boolean debug = false;
 		if (debug) Modchu_Debug.lDebug("Modchu_PacketMaster registerPacket instance="+instance+" channelName="+channelName);
@@ -40,6 +41,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		if (debug) Modchu_Debug.lDebug("Modchu_PacketMaster registerPacket end.");
 	}
 
+	@Override
 	public void onPacketData(Object... o) {
 		boolean debug = false;
 		if (debug) Modchu_Debug.lDebug("Modchu_PacketMaster onPacketData o="+o);
@@ -91,6 +93,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		if (debug) Modchu_Debug.lDebug("Modchu_PacketMaster onPacketData end.");
 	}
 
+	@Override
 	public void sendToAll(Object[] o, String channelName) {
 		sendToAll(o, channelName, Modchu_AS.get(Modchu_AS.minecraftTheWorld));
 	}
@@ -100,6 +103,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		sendToAll((Object[]) o, channelName, Modchu_AS.get(Modchu_AS.minecraftTheWorld));
 	}
 
+	@Override
 	public void sendToAll(Object[] o, String channelName, Object world) {
 		Modchu_Debug.mDebug("Modchu_PacketMaster sendToAll channelName="+channelName);
 		if (o != null
@@ -123,10 +127,11 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 
 	private void sendToWorld(Object[] o, String channelName, Object world) {
 		for (Object entityplayer : Modchu_AS.getList(Modchu_AS.playerEntities, world)) {
-			sendTo(newPacket(o, channelName), (EntityPlayerMP) entityplayer, channelName);
+			sendTo(newPacket(o, channelName), entityplayer, channelName);
 		}
 	}
 
+	@Override
 	public void sendTo(Object o, Object player, String channelName) {
 		sendPacketToPlayer((Packet) (o instanceof Packet ? o : newPacket((Object[]) o, channelName)), player);
 	}
@@ -143,6 +148,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		}
 	}
 
+	@Override
 	public void sendToServer(Object o, String channelName) {
 		PacketDispatcher.sendPacketToServer((Packet) (o instanceof Packet ? (Packet) o : newPacket((Object[]) o, channelName)));
 	}
@@ -152,6 +158,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		PacketDispatcher.sendPacketToServer((Packet) (newPacket(o, channelName)));
 	}
 
+	@Override
 	public InputStream getPacketInputStream(Object packet) {
 		if (packet instanceof InputStream) return (InputStream) packet;
 		byte[] data = Modchu_CastHelper.ByteArray(Modchu_Reflect.getFieldObject(packet.getClass(), "data", packet));
@@ -224,6 +231,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		return o2;
 	}
 
+	@Override
 	public Object newPacket(Object[] o, String channelName) {
 		return new Packet250CustomPayload(modchuChannelName, (byte[]) getBytes(addChannelName(o, channelName)));
 	}
@@ -268,6 +276,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		return o2;
 	}
 
+	@Override
 	public LinkedList receivePacketData(InputStream input) {
 		boolean debug = false;
 		LinkedList list = new LinkedList();

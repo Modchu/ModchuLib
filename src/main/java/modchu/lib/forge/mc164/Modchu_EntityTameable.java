@@ -19,7 +19,6 @@ import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -38,7 +37,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -65,6 +63,7 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	public static ConcurrentHashMap<String, UUID> entityUniqueIDMap = new ConcurrentHashMap();
 	protected UUID entityUniqueID;
 	private boolean onSpawnWithEggFlag = false;
+	private boolean entityInitFlag;
 	public static final int maxSpwanCount = 1;
 	public int spwanCount = 0;
 	public float maxHealth;
@@ -73,6 +72,8 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		super(world);
 		entityUniqueID = UUID.randomUUID();
 		ignoreFrustumCheck = true;
+		//String ss = "Modchu_EntityTameable init debug";
+		//Modchu_Main.setRuntimeException(ss);
 	}
 
 	public Modchu_EntityTameable(HashMap<String, Object> map) {
@@ -470,12 +471,12 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 
 	@Override
 	protected void func_142017_o(float par1) {
-		if (master != null) master.func_142017_o(par1);
+		if (master != null) master.onLeashDistance(par1);
 		else super.func_142017_o(par1);
 	}
 
 	@Override
-	public void superFunc_142017_o(float par1) {
+	public void superOnLeashDistance(float par1) {
 		super.func_142017_o(par1);
 	}
 
@@ -680,6 +681,7 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		return super.getHomePosition();
 	}
 
+	@Override
 	public EntityLivingBase func_130012_q() {
 		return (EntityLivingBase) (master != null ? master.func_130012_q() : super.func_130012_q());
 	}
@@ -705,6 +707,7 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		return master != null ? master.isWithinHomeDistanceCurrentPosition() : super.func_110173_bK();
 	}
 
+	@Override
 	public boolean func_110176_b(int par1, int par2, int par3) {
 		return master != null ? master.func_110176_b(par1, par2, par3) : super.func_110176_b(par1, par2, par3);
 	}
@@ -720,10 +723,12 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		else super.func_110159_bB();
 	}
 
+	@Override
 	public int getDropItemId() {
 		return master != null ? master.getDropItemId() : super.getDropItemId();
 	}
 
+	@Override
 	public boolean superInteractFirst(Object entityPlayer) {
 		return super.interactFirst((EntityPlayer) entityPlayer);
 	}
@@ -731,56 +736,6 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	@Override
 	public float superGetBlockPathWeight(Object blockPos) {
 		return 0.0F;
-	}
-
-	@Override
-	public void superAttackEntity(Object entity, float par2) {
-		super.attackEntity((Entity) entity, par2);
-	}
-
-	@Override
-	public float superGetBlockPathWeight(int par1, int par2, int par3) {
-		return super.getBlockPathWeight(par1, par2, par3);
-	}
-
-	@Override
-	public Object superFindPlayerToAttack() {
-		return super.findPlayerToAttack();
-	}
-
-	@Override
-	public boolean superIsMovementCeased() {
-		return super.isMovementCeased();
-	}
-
-	@Override
-	public void superUpdateWanderPath() {
-		super.updateWanderPath();
-	}
-
-	@Override
-	public void superSetPathToEntity(Object pathEntity) {
-		super.setPathToEntity((PathEntity) pathEntity);
-	}
-
-	@Override
-	public Object superGetEntityToAttack() {
-		return super.getEntityToAttack();
-	}
-
-	@Override
-	public void superSetTarget(Object entity) {
-		super.setTarget((Entity) entity);
-	}
-
-	@Override
-	public void superEnchantEquipment() {
-		super.enchantEquipment();
-	}
-
-	@Override
-	public boolean superHasCustomNameTag() {
-		return super.hasCustomNameTag();
 	}
 
 	@Override
@@ -793,6 +748,7 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		return (Entity) (master != null ? master.getOwner() : null);
 	}
 
+	@Override
 	public void superCopyDataFrom(Object entity) {
 		super.copyDataFrom((Entity) entity, true);
 	}
@@ -829,7 +785,7 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 
 	@Override
 	public void superSetAttackTarget(Object entityLiving) {
-		super.setAttackTarget((EntityLiving) entityLiving);
+		super.setAttackTarget((EntityLivingBase) entityLiving);
 	}
 
 	@Override
@@ -840,11 +796,6 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	@Override
 	public void superEatGrassBonus() {
 		super.eatGrassBonus();
-	}
-
-	@Override
-	public void superSetHomeArea(int par1, int par2, int par3, int par4) {
-		super.setHomeArea(par1, par2, par3, par4);
 	}
 
 	@Override
@@ -983,11 +934,6 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	}
 
 	@Override
-	public void superAddRandomArmor() {
-		super.addRandomArmor();
-	}
-
-	@Override
 	public boolean superIsNoDespawnRequired() {
 		return super.isNoDespawnRequired();
 	}
@@ -1078,33 +1024,13 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
+	public void superSetPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 		super.setPositionAndRotation2(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_);
 	}
 
 	@Override
 	public boolean superIsEntityInvulnerable(Object damageSource) {
 		return super.isEntityInvulnerable();
-	}
-
-	@Override
-	public void superSetCustomNameTag(String p_96094_1_) {
-		super.setCustomNameTag(p_96094_1_);
-	}
-
-	@Override
-	public String superGetCustomNameTag() {
-		return super.getCustomNameTag();
-	}
-
-	@Override
-	public void superSetAlwaysRenderNameTag(boolean p_174805_1_) {
-		super.setAlwaysRenderNameTag(p_174805_1_);
-	}
-
-	@Override
-	public boolean superGetAlwaysRenderNameTag() {
-		return super.getAlwaysRenderNameTag();
 	}
 
 	@Override
@@ -1146,11 +1072,208 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	public Object superGetOwner() {
 		return null;
 	}
-	// ~162
-	public boolean whiteListCheck(EntityLiving entityLiving) {
-		return false;
+
+	@Override
+	public void attackEntity(Entity entity, float par2) {
+		if (master != null) master.attackEntity(entity, par2);
+		else super.attackEntity(entity, par2);
 	}
 
+	@Override
+	public void superAttackEntity(Object entity, float par2) {
+		super.attackEntity((Entity) entity, par2);
+	}
+
+	@Override
+	public float getBlockPathWeight(int par1, int par2, int par3) {
+		return master != null ? master.getBlockPathWeight(par1, par2, par3) : super.getBlockPathWeight(par1, par2, par3);
+	}
+
+	@Override
+	public float superGetBlockPathWeight(int par1, int par2, int par3) {
+		return super.getBlockPathWeight(par1, par2, par3);
+	}
+
+	@Override
+	public Entity findPlayerToAttack() {
+		return (Entity) (master != null ? master.findPlayerToAttack() : super.findPlayerToAttack());
+	}
+
+	@Override
+	public Entity superFindPlayerToAttack() {
+		return super.findPlayerToAttack();
+	}
+
+	@Override
+	public boolean isMovementCeased() {
+		return master != null ? master.isMovementCeased() : super.isMovementCeased();
+	}
+
+	@Override
+	public boolean superIsMovementCeased() {
+		return super.isMovementCeased();
+	}
+
+	@Override
+	public void updateWanderPath() {
+		//Modchu_Debug.mDebug("Modchu_EntityTameable updateWanderPath");
+		if (master != null) master.updateWanderPath();
+		else super.updateWanderPath();
+	}
+
+	@Override
+	public void superUpdateWanderPath() {
+		super.updateWanderPath();
+	}
+
+	@Override
+	public void setPathToEntity(PathEntity pathEntity) {
+		if (master != null) master.setPathToEntity(pathEntity);
+		else super.setPathToEntity(pathEntity);
+	}
+
+	@Override
+	public void superSetPathToEntity(Object pathEntity) {
+		super.setPathToEntity((PathEntity) pathEntity);
+	}
+
+	@Override
+	public Entity getEntityToAttack() {
+		return (Entity) (master != null ? master.getEntityToAttack() : super.getEntityToAttack());
+	}
+
+	@Override
+	public Entity superGetEntityToAttack() {
+		return super.getEntityToAttack();
+	}
+
+	@Override
+	public void setTarget(Entity entity) {
+		if (master != null) master.setTarget(entity);
+		else super.setTarget(entity);
+	}
+
+	@Override
+	public void superSetTarget(Object entity) {
+		super.setTarget((Entity) entity);
+	}
+
+	@Override
+	public void setHomeArea(int par1, int par2, int par3, int par4) {
+		if (master != null) master.setHomeArea(par1, par2, par3, par4);
+		else super.setHomeArea(par1, par2, par3, par4);
+	}
+
+	@Override
+	public void superSetHomeArea(int par1, int par2, int par3, int par4) {
+		super.setHomeArea(par1, par2, par3, par4);
+	}
+
+	@Override
+	public float func_110174_bM() {
+		return master != null ? master.getMaximumHomeDistance() : super.func_110174_bM();
+	}
+
+	@Override
+	public float superGetMaximumHomeDistance() {
+		return super.func_110174_bM();
+	}
+
+	@Override
+	public ItemStack func_130225_q(int par1) {
+		return (ItemStack) (master != null ? master.func_130225_q(par1) : super.func_130225_q(par1));
+	}
+
+	@Override
+	public ItemStack superGetCurrentArmor(int par1) {
+		return super.func_130225_q(par1);
+	}
+
+	@Override
+	public void addRandomArmor() {
+		if (master != null) master.addRandomArmor();
+		else super.addRandomArmor();
+	}
+
+	@Override
+	public void superAddRandomArmor() {
+		super.addRandomArmor();
+	}
+
+	@Override
+	public void enchantEquipment() {
+		if (master != null) master.enchantEquipment();
+		else super.enchantEquipment();
+	}
+
+	@Override
+	public void superEnchantEquipment() {
+		super.enchantEquipment();
+	}
+
+	@Override
+	public void func_110163_bv() {
+		if (master != null) master.enablePersistence();
+		else super.func_110163_bv();
+	}
+
+	@Override
+	public void superEnablePersistence() {
+		super.func_110163_bv();
+	}
+
+	@Override
+	public void setCustomNameTag(String par1Str) {
+		if (master != null) master.setCustomNameTag(par1Str);
+		else super.setCustomNameTag(par1Str);
+	}
+
+	@Override
+	public void superSetCustomNameTag(String par1Str) {
+		super.setCustomNameTag(par1Str);
+	}
+
+	@Override
+	public String getCustomNameTag() {
+		return master != null ? master.getCustomNameTag() : super.getCustomNameTag();
+	}
+
+	@Override
+	public String superGetCustomNameTag() {
+		return super.getCustomNameTag();
+	}
+
+	@Override
+	public boolean hasCustomNameTag() {
+		return master != null ? master.hasCustomNameTag() : super.hasCustomNameTag();
+	}
+
+	@Override
+	public boolean superHasCustomNameTag() {
+		return super.hasCustomNameTag();
+	}
+
+	@Override
+	public void setAlwaysRenderNameTag(boolean par1) {
+		if (master != null) master.setAlwaysRenderNameTag(par1);
+		else super.setAlwaysRenderNameTag(par1);
+	}
+
+	@Override
+	public void superSetAlwaysRenderNameTag(boolean par1) {
+		super.setAlwaysRenderNameTag(par1);
+	}
+
+	@Override
+	public boolean getAlwaysRenderNameTag() {
+		return master != null ? master.getAlwaysRenderNameTag() : super.getAlwaysRenderNameTag();
+	}
+
+	@Override
+	public boolean superGetAlwaysRenderNameTag() {
+		return super.getAlwaysRenderNameTag();
+	}
+	// ~162
 	@Override
 	public int superGetHealthInt() {
 		return (Integer) superGetHealth();
@@ -1176,130 +1299,162 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		return null;
 	}
 
+	@Override
 	public void superSetupTamedAI() {
 	}
 
+	@Override
 	public boolean superIsOwner(Object entityLivingBase) {
 		return false;
 	}
 
+	@Override
 	public void superConsumeItemFromStack(Object entityPlayer, Object itemStack) {
 	}
 
+	@Override
 	public void superSetInLove(Object entityPlayer) {
 	}
 
+	@Override
 	public Object superGetPlayerInLove() {
 		return null;
 	}
 
-	public void superFunc_175501_a(int p_175501_1_, boolean p_175501_2_) {
+	@Override
+	public void superAgeUp(int p_175501_1_, boolean p_175501_2_) {
 	}
 
+	@Override
 	public void superOnGrowingAdult() {
 	}
 
+	@Override
 	public boolean superIsWithinHomeDistanceFromPosition(Object blockPos) {
 		return false;
 	}
 
+	@Override
 	public void superSetHomePosAndDistance(Object blockPos, int distance) {
 	}
 
+	@Override
 	public void superUpdateLeashedState() {
 	}
 
+	@Override
 	public Object superGetNewNavigator(Object world) {
 		return null;
 	}
 
+	@Override
 	public Object superGetDropItem() {
 		return null;
 	}
 
+	@Override
 	public void superUpdateEquipmentIfNeeded(Object entityItem) {
 	}
 
-	public boolean superFunc_175448_a(Object itemStack) {
+	@Override
+	public boolean superCanEquipItem(Object itemStack) {
 		return false;
 	}
 
+	@Override
 	public void superSetEquipmentBasedOnDifficulty(Object difficultyInstance) {
 	}
 
+	@Override
 	public void superSetEnchantmentBasedOnDifficulty(Object difficultyInstance) {
 	}
 
-	public void superEnablePersistence() {
-	}
-
+	@Override
 	public boolean superIsAIDisabled() {
 		return false;
 	}
 
+	@Override
 	public String superGetCommandSenderName() {
 		return null;
 	}
 
+	@Override
 	public float superGetExplosionResistance(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block) {
 		return 0.0F;
 	}
 
+	@Override
 	public String superFunc_152113_b() {
 		return null;
 	}
 
+	@Override
 	public void superFunc_152115_b(String par1Str) {
 	}
 
+	@Override
 	public String superFunc_146067_o(int p_146067_1_) {
 		return null;
 	}
 
+	@Override
 	public boolean superProcessInteract(Object entityPlayer, Object enumHand, Object itemStack) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanBeLeashedTo(Object entityPlayer) {
 		return false;
 	}
 
+	@Override
 	public float superGetPathPriority(Object pathNodeType) {
 		return 0.0F;
 	}
 
+	@Override
 	public void superInitEntityAI() {
 	}
 
+	@Override
 	public void superSetPathPriority(Object pathNodeType, float p_184644_2_) {
 	}
 
+	@Override
 	public Object superCreateBodyHelper() {
 		return null;
 	}
 
+	@Override
 	public Object superGetLootTable() {
 		return null;
 	}
 
+	@Override
 	public void superSetMoveStrafing(float p_184646_1_) {
 	}
 
-	public int superFunc_184649_cE() {
+	@Override
+	public int superGetHorizontalFaceSpeed() {
 		return -1;
 	}
 
+	@Override
 	public Object superGetPrimaryHand() {
 		return null;
 	}
 
+	@Override
 	public void superSetLeftHanded(boolean p_184641_1_) {
 	}
 
+	@Override
 	public boolean superIsLeftHanded() {
 		return false;
 	}
 	// 190~
+	@Override
 	public Object superOnInitialSpawn(Object difficultyInstance, Object iEntityLivingData) {
 		return null;
 	}
@@ -2051,6 +2206,9 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 
 	@Override
 	protected void updateAITasks() {
+		//Modchu_Debug.mDebug("Modchu_EntityTameable updateAITasks getNavigator()="+getNavigator());
+		//Modchu_Debug.mDebug("Modchu_EntityTameable updateAITasks getNavigator().noPath()="+getNavigator().noPath());
+		//Modchu_Debug.mDebug("Modchu_EntityTameable updateAITasks getNavigator().canNavigate()="+Modchu_AS.getBoolean("PathNavigate", "canNavigate", getNavigator()));
 		if (master != null) master.updateAITasks();
 		else super.updateAITasks();
 	}
@@ -2084,17 +2242,18 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 
 	@Override
 	protected void updateAITick() {
-		if (master != null) master.updateAITick();
+		if (master != null) master.handleJumpWater();
 		else super.updateAITick();
 	}
 
 	@Override
-	public void superUpdateAITick() {
+	public void superHandleJumpWater() {
 		super.updateAITick();
 	}
 
 	@Override
 	protected void updateEntityActionState() {
+		//Modchu_Debug.mDebug("Modchu_EntityTameable updateEntityActionState");
 		if (master != null) master.updateEntityActionState();
 		else super.updateEntityActionState();
 	}
@@ -2290,11 +2449,6 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	}
 
 	@Override
-	public float superGetMaximumHomeDistance() {
-		return 0.0F;
-	}
-
-	@Override
 	public boolean superIsBlocking() {
 		return false;
 	}
@@ -2353,6 +2507,7 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		super.damageEntity((DamageSource) damageSource, (Float) par2);
 	}
 
+	@Override
 	public void superFunc_180433_a(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
 	}
 
@@ -2380,6 +2535,7 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	public void superFunc_180426_a(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 	}
 
+	@Override
 	public boolean superIsServerWorld() {
 		return false;
 	}
@@ -2397,6 +2553,7 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		return false;
 	}
 
+	@Override
 	public void superFunc_145781_i(int p_145781_1_) {
 	}
 
@@ -2408,6 +2565,7 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		return false;
 	}
 
+	@Override
 	public boolean superCanUseCommand(int permLevel, String commandName) {
 		return false;
 	}
@@ -2416,13 +2574,16 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		return null;
 	}
 
+	@Override
 	public Object superFunc_174819_aU() {
 		return null;
 	}
 
+	@Override
 	public void superFunc_174834_g(Object nBTTagCompound) {
 	}
 
+	@Override
 	public boolean superFunc_174825_a(Object entityPlayer, Object vec3) {
 		return false;
 	}
@@ -2434,32 +2595,40 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	public void superFunc_174815_a(Object entityLivingBase, Object entity) {
 	}
 
+	@Override
 	public boolean superCanDropLoot() {
 		return false;
 	}
 
+	@Override
 	public void superUpdatePotionMetadata() {
 	}
 
+	@Override
 	public void superResetPotionEffectMetadata() {
 	}
 
+	@Override
 	public float superGetJumpUpwardsMotion() {
 		return 0.0F;
 	}
 
+	@Override
 	public void superHandleJumpLava() {
 	}
 
 	public void superFunc_181013_g(float p_181013_1_) {
 	}
 
+	@Override
 	public void superSendEnterCombat() {
 	}
 
+	@Override
 	public void superSendEndCombat() {
 	}
 
+	@Override
 	public void superMarkPotionsDirty() {
 	}
 
@@ -2467,104 +2636,133 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		return null;
 	}
 	// 190~
+	@Override
 	public void superDropLoot() {
 	}
 
+	@Override
 	public void superSetNoAI(boolean par1) {
 	}
 
+	@Override
 	public Object superGetFallSound(int damageValue) {
 		return null;
 	}
 
+	@Override
 	public int superGetItemInUseCount() {
 		return -1;
 	}
 
+	@Override
 	public void superUpdateItemUse(Object itemStack, int p_184584_2_) {
 	}
 
+	@Override
 	public void superOnItemUseFinish() {
 	}
 
+	@Override
 	public void superSwingArm(Object enumHand) {
 	}
 
+	@Override
 	public Object superGetItemStackFromSlot(Object entityEquipmentSlot) {
 		return null;
 	}
 
+	@Override
 	public void superFrostWalk(Object blockPos) {
 	}
 
+	@Override
 	public void superPlayEquipSound(Object itemStack) {
 	}
 
+	@Override
 	public Object superRemoveActivePotionEffect(Object potion) {
 		return null;
 	}
 
+	@Override
 	public void superPlayHurtSound(Object damageSource) {
 	}
 
+	@Override
 	public void superDamageShield(float p_184590_1_) {
 	}
 
+	@Override
 	public Object superGetHeldItemOffhand() {
 		return null;
 	}
 
+	@Override
 	public void superSetHeldItem(Object enumHand, Object itemStack) {
 	}
 
+	@Override
 	public boolean superIsHandActive() {
 		return false;
 	}
 
+	@Override
 	public Object superGetActiveHand() {
 		return null;
 	}
 
+	@Override
 	public void superUpdateActiveHand() {
 	}
 
+	@Override
 	public void superSetActiveHand(Object enumHand) {
 	}
 
+	@Override
 	public Object superGetActiveItemStack() {
 		return null;
 	}
 
+	@Override
 	public int superGetItemInUseMaxCount() {
 		return -1;
 	}
 
+	@Override
 	public void superStopActiveHand() {
 	}
 
+	@Override
 	public void superResetActiveHand() {
 	}
 
+	@Override
 	public boolean superIsActiveItemStackBlocking() {
 		return false;
 	}
 
+	@Override
 	public boolean superIsElytraFlying() {
 		return false;
 	}
 
+	@Override
 	public int superGetTicksElytraFlying() {
 		return -1;
 	}
 
-	public boolean superTeleportTo_(double x, double y, double z) {
+	@Override
+	public boolean superAttemptTeleport(double x, double y, double z) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanBeHitWithPotion() {
 		return false;
 	}
 
+	@Override
 	public void superDropLoot(boolean p_184610_1_, int p_184610_2_, Object damageSource) {
 	}
 	// TODO Modchu_Entity のコピー↓（からのエラー対処有り）
@@ -2591,12 +2789,18 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	@Override
 	protected void entityInit() {
 		if (master != null) master.entityInit();
-		else super.entityInit();
+		else if (!entityInitFlag) {
+			entityInitFlag = true;
+			super.entityInit();
+		}
 	}
 
 	@Override
 	public void superEntityInit() {
-		super.entityInit();
+		if (!entityInitFlag) {
+			entityInitFlag = true;
+			super.entityInit();
+		}
 	}
 
 	@Override
@@ -2912,12 +3116,12 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 
 	@Override
 	public void moveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
-		if (master != null) master.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
+		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_);
 		else super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
 	@Override
-	public void superMoveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
+	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
 		super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
@@ -3136,8 +3340,9 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	}
 
 	@Override
-	public void superWriteToNBT(Object nBTTagCompound) {
+	public Object superWriteToNBT(Object nBTTagCompound) {
 		super.writeToNBT((NBTTagCompound) nBTTagCompound);
+		return nBTTagCompound;
 	}
 
 	@Override
@@ -3303,12 +3508,12 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 
 	@Override
 	public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
-		if (master != null) master.setPositionAndRotation2(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
+		if (master != null) master.setPositionAndRotationDirect(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
 		else super.setPositionAndRotation2(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
 	}
 
 	@Override
-	public void superSetPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
+	public void superSetPositionAndRotationDirect(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_) {
 		super.setPositionAndRotation2(p_70056_1_, p_70056_3_, p_70056_5_, p_70056_7_, p_70056_8_, p_70056_9_);
 	}
 
@@ -3623,11 +3828,11 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 
 	@Override
 	public boolean canAttackWithItem() {
-		return master != null ? master.canAttackWithItem() : super.canAttackWithItem();
+		return master != null ? master.canBeAttackedWithItem() : super.canAttackWithItem();
 	}
 
 	@Override
-	public boolean superCanAttackWithItem() {
+	public boolean superCanBeAttackedWithItem() {
 		return super.canAttackWithItem();
 	}
 
@@ -4206,210 +4411,267 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 	public void superApplyEnchantments(Object entityLivingBase, Object entity) {
 	}
 	// 190~
+	@Override
 	public void superSetItemStackToSlot(int p_70062_1_, Object itemStack) {
 	}
 
+	@Override
 	public void superSetCommandStats(Object entity) {
 	}
 
+	@Override
 	public boolean superProcessInitialInteract(Object entityPlayer, Object itemStack, Object enumHand) {
 		return false;
 	}
 
+	@Override
 	public Object superGetTags() {
 		return null;
 	}
 
+	@Override
 	public boolean superAddTag(String tag) {
 		return false;
 	}
 
+	@Override
 	public boolean superRemoveTag(String tag) {
 		return false;
 	}
 
+	@Override
 	public void superSetDropItemsWhenDead(boolean p_184174_1_) {
 	}
 
+	@Override
 	public void superDecrementTimeUntilPortal() {
 	}
 
+	@Override
 	public void superResetPositionToBB() {
 	}
 
+	@Override
 	public void superUpdatePassenger(Object entity) {
 	}
 
+	@Override
 	public void superApplyOrientationToEntity(Object entity) {
 	}
 
+	@Override
 	public boolean superStartRiding(Object entity, boolean force) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanBeRidden(Object entity) {
 		return false;
 	}
 
+	@Override
 	public void superRemovePassengers() {
 	}
 
+	@Override
 	public void superDismountRidingEntity() {
 	}
 
+	@Override
 	public void superAddPassenger(Object entity) {
 	}
 
+	@Override
 	public void superRemovePassenger(Object entity) {
 	}
 
+	@Override
 	public boolean superCanFitPassenger(Object entity) {
 		return false;
 	}
 
+	@Override
 	public Object superGetHeldEquipment() {
 		return null;
 	}
 
+	@Override
 	public Object superGetArmorInventoryList() {
 		return null;
 	}
 
+	@Override
 	public Object superGetEquipmentAndArmor() {
 		return null;
 	}
 
+	@Override
 	public void superSetItemStackToSlot(Object entityEquipmentSlot, Object itemStack) {
 	}
 
+	@Override
 	public boolean superIsBeingRidden() {
 		return false;
 	}
 
+	@Override
 	public boolean superIsGlowing() {
 		return false;
 	}
 
+	@Override
 	public void superSetGlowing(boolean p_184195_1_) {
 	}
 
+	@Override
 	public boolean superIsOnScoreboardTeam(Object team) {
 		return false;
 	}
 
+	@Override
 	public void superSetRenderYawOffset(float offset) {
 	}
 
+	@Override
 	public void superSetEntityInvulnerable(boolean isInvulnerable) {
 	}
 
+	@Override
 	public boolean superIsNonBoss() {
 		return false;
 	}
 
+	@Override
 	public void superSetUniqueId(UUID uniqueIdIn) {
 	}
 
+	@Override
 	public void superNotifyDataManagerChange(Object dataParameter) {
 	}
 
+	@Override
 	public Object superGetAdjustedHorizontalFacing() {
 		return null;
 	}
 
+	@Override
 	public Object superGetRenderBoundingBox() {
 		return null;
 	}
 
+	@Override
 	public Object superGetServer() {
 		return null;
 	}
 
+	@Override
 	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object itemStack, Object enumHand) {
 		return null;
 	}
 
+	@Override
 	public boolean superHasCapability(Object capability, Object enumFacing) {
 		return false;
 	}
 
+	@Override
 	public Object superGetCapability(Object capability, Object enumFacing) {
 		return null;
 	}
 
+	@Override
 	public void superDeserializeNBT(Object nBTTagCompound) {
 	}
 
+	@Override
 	public Object superSerializeNBT() {
 		return null;
 	}
 
-	public void superSetBossVisibleTo(Object entityPlayerMP) {
+	@Override
+	public void superAddTrackingPlayer(Object entityPlayerMP) {
 	}
 
-	public void superSetBossNonVisibleTo(Object entityPlayerMP) {
+	@Override
+	public void superRemoveTrackingPlayer(Object entityPlayerMP) {
 	}
 
+	@Override
 	public float superGetRotatedYaw(Object rotation) {
 		return 0.0F;
 	}
 
+	@Override
 	public float superGetMirroredYaw(Object mirror) {
 		return 0.0F;
 	}
 
-	public boolean superFunc_184213_bq() {
+	@Override
+	public boolean superIgnoreItemEntityData() {
 		return false;
 	}
 
+	@Override
 	public boolean superSetPositionNonDirty() {
 		return false;
 	}
 
+	@Override
 	public Object superGetControllingPassenger() {
 		return null;
 	}
 
+	@Override
 	public Object superGetPassengers() {
 		return null;
 	}
 
+	@Override
 	public boolean superIsPassenger(Object entity) {
 		return false;
 	}
 
+	@Override
 	public Object superGetRecursivePassengers() {
 		return null;
 	}
 
+	@Override
 	public Object superGetLowestRidingEntity() {
 		return null;
 	}
 
+	@Override
 	public boolean superIsRidingSameEntity(Object entity) {
 		return false;
 	}
 
+	@Override
 	public boolean superIsRidingOrBeingRiddenBy(Object entity) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanPassengerSteer() {
 		return false;
 	}
 
+	@Override
 	public Object superGetRidingEntity() {
 		return null;
 	}
 
+	@Override
 	public Object superGetPushReaction() {
 		return null;
 	}
 
+	@Override
 	public Object superGetSoundCategory() {
 		return null;
 	}
 
+	@Override
 	public Object superGetRecursivePassengersByType(Class entityClass) {
 		return null;
 	}
@@ -4444,8 +4706,4 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 		return super.allowLeashing();
 	}
 
-	@Override
-	public Object superGetCurrentArmor(int par1) {
-		return super.getCurrentItemOrArmor(par1);
-	}
 }

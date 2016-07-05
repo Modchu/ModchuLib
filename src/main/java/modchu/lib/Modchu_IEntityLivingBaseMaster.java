@@ -54,7 +54,7 @@ public interface Modchu_IEntityLivingBaseMaster extends Modchu_IEntityMaster {
 	public boolean isBlocking();
 	public void jump();
 	public void updateAITasks();
-	public void updateAITick();
+	public void handleJumpWater();
 	public void updateEntityActionState();
 	public void updateArmSwingProgress();
 	public float getSwingProgress(float par1);
@@ -161,7 +161,7 @@ public interface Modchu_IEntityLivingBaseMaster extends Modchu_IEntityMaster {
 	public boolean isActiveItemStackBlocking();
 	public boolean isElytraFlying();
 	public int getTicksElytraFlying();
-	public boolean teleportTo_(double x, double y, double z);
+	public boolean attemptTeleport(double x, double y, double z);
 	public boolean canBeHitWithPotion();
 
 }

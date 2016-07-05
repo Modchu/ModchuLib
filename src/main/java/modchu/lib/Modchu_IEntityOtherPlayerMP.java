@@ -78,11 +78,11 @@ public interface Modchu_IEntityOtherPlayerMP extends Modchu_IEntityLivingBase {
 	public int superGetScore();
 	public void superSetScore(int p_85040_1_);
 	public void superAddScore(int p_85039_1_);
-	public Object superDropOneItem(boolean p_71040_1_);
-	public Object superDropPlayerItemWithRandomChoice(Object itemStack, boolean unused);
+	public Object superDropItem(boolean p_71040_1_);
+	public Object superDropItem(Object itemStack, boolean unused);
 	public Object superDropItemAndGetStack(Object entityItem);
-	public float superGetToolDigEfficiency(Object block);
-	public float superGetBreakSpeed(Object iBlockState, Object blockPos);
+	public float superGetDigSpeed(Object block);
+	public float superGetDigSpeed(Object iBlockState, Object blockPos);
 	public boolean superCanHarvestBlock(Object block);
 	public void superDamageEntity(Object damageSource, float damageAmount);
 	public void superOpenEditSign(Object tileEntitySign);

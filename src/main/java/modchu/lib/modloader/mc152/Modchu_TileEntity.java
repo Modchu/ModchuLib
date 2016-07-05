@@ -101,8 +101,9 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 	}
 
 	@Override
-	public void superWriteToNBT(Object nBTTagCompound) {
+	public Object superWriteToNBT(Object nBTTagCompound) {
 		super.writeToNBT((NBTTagCompound) nBTTagCompound);
+		return nBTTagCompound;
 	}
 
 	@Override
@@ -319,6 +320,21 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 	}
 
 	public Object superSerializeNBT() {
+		return null;
+	}
+
+	@Override
+	public boolean superOnlyOpsCanSetNbt() {
+		return false;
+	}
+
+	@Override
+	public Object superGetUpdatePacket() {
+		return null;
+	}
+
+	@Override
+	public Object superGetUpdateTag() {
 		return null;
 	}
 

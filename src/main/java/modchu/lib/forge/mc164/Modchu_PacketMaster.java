@@ -18,6 +18,7 @@ import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IPacketMaster;
+import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Packet;
 import modchu.lib.Modchu_PacketManager;
 import modchu.lib.Modchu_Reflect;
@@ -67,12 +68,12 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 	}
 
 	public void sendToAll(Object[] o, String channelName) {
-		sendToAll(o, channelName, Modchu_AS.get(Modchu_AS.minecraftTheWorld));
+		sendToAll(o, channelName, getWorld());
 	}
 
 	@Override
 	public void sendToAll(Object o, String channelName) {
-		sendToAll((Object[]) o, channelName, Modchu_AS.get(Modchu_AS.minecraftTheWorld));
+		sendToAll((Object[]) o, channelName, getWorld());
 	}
 
 	public void sendToAll(Object[] o, String channelName, Object world) {
@@ -297,4 +298,9 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 	public Object getPacketHander(String channelName) {
 		return null;
 	}
+
+	private Object getWorld() {
+		return Modchu_Main.isServer ? Modchu_AS.get(Modchu_AS.minecraftServerGetServerWorldServers) : Modchu_AS.get(Modchu_AS.minecraftTheWorld);
+	}
+
 }

@@ -109,10 +109,6 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 	public boolean superIsStaticEntity() {
 		return false;
 	}
-
-	@Override
-	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
-	}
 	// 180~
 	@Override
 	public boolean superShouldRender(Object entity, Object iCamera, double camX, double camY, double camZ) {
@@ -140,14 +136,27 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 	public Object superGetRenderManager() {
 		return renderManager;
 	}
-
-	@Override
-	public Object superGetEntityTexture(Object entity, int i) {
-		return null;
-	}
 	// 190~
 	@Override
 	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
+	}
+
+	@Override
+	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+	}
+
+	@Override
+	public int superGetTeamColor(Object entity) {
+		return -1;
+	}
+
+	@Override
+	public boolean superIsMultipass() {
+		return false;
+	}
+
+	@Override
+	public void superRenderMultipass(Object entity, double p_188300_2_, double p_188300_4_, double p_188300_6_, float p_188300_8_, float p_188300_9_) {
 	}
 
 }

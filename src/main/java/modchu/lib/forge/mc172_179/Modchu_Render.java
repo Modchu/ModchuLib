@@ -49,11 +49,6 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 	}
 
 	@Override
-	public Object superGetEntityTexture(Object entity, int i) {
-		return null;
-	}
-
-	@Override
 	protected void bindEntityTexture(Entity entity) {
 		if (master != null) master.bindEntityTexture(entity);
 		else super.bindEntityTexture(entity);
@@ -131,12 +126,12 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 
 	@Override
 	protected void func_147906_a(Entity entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
-		if (master != null) master.func_147906_a(entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
+		if (master != null) master.renderLivingLabel(entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
 		else super.func_147906_a(entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
 	}
 
 	@Override
-	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
+	public void superRenderLivingLabel(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 		super.func_147906_a((Entity) entity, p_147906_2_, p_147906_3_, p_147906_5_, p_147906_7_, p_147906_9_);
 	}
 	// 180~
@@ -159,10 +154,6 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 	}
 
 	@Override
-	public void superRenderLivingLabel(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
-	}
-
-	@Override
 	public Object superGetRenderManager() {
 		return renderManager;
 	}
@@ -178,6 +169,24 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 	// 190~
 	@Override
 	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
+	}
+
+	@Override
+	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+	}
+
+	@Override
+	public int superGetTeamColor(Object entity) {
+		return -1;
+	}
+
+	@Override
+	public boolean superIsMultipass() {
+		return false;
+	}
+
+	@Override
+	public void superRenderMultipass(Object entity, double p_188300_2_, double p_188300_4_, double p_188300_6_, float p_188300_8_, float p_188300_9_) {
 	}
 
 }

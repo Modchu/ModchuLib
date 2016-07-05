@@ -42,7 +42,7 @@ public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster
 	public void setTarget(Object entity);
 	public boolean isWithinHomeDistanceFromPosition(Object blockPos);
 	public void updateLeashedState();
-	public void func_142017_o(float par1);
+	public void onLeashDistance(float par1);
 	public Object getDropItem();
 	public Object func_130225_q(int par1);
 	public void enchantEquipment();
@@ -76,12 +76,12 @@ public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster
 	public void setupTamedAI();
 	public boolean isOwner(Object entityLivingBase);
 	public void consumeItemFromStack(Object entityPlayer, Object itemStack);
-	public void func_175501_a(int p_175501_1_, boolean p_175501_2_);
+	public void ageUp(int p_175501_1_, boolean p_175501_2_);
 	public void onGrowingAdult();
 	public void setHomePosAndDistance(Object blockPos, int distance);
 	public Object getNewNavigator(Object world);
 	public void updateEquipmentIfNeeded(Object entityItem);
-	public boolean func_175448_a(Object itemStack);
+	public boolean canEquipItem(Object itemStack);
 	public void setEquipmentBasedOnDifficulty(Object difficultyInstance);
 	public void setEnchantmentBasedOnDifficulty(Object difficultyInstance);
 	public boolean isAIDisabled();
@@ -94,7 +94,7 @@ public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster
 	public Object createBodyHelper();
 	public Object getLootTable();
 	public void setMoveStrafing(float p_184646_1_);
-	public int func_184649_cE();
+	public int getHorizontalFaceSpeed();
 	public Object getPrimaryHand();
 	public void setLeftHanded(boolean p_184641_1_);
 	public boolean isLeftHanded();

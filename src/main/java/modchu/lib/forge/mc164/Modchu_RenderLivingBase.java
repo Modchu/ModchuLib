@@ -200,11 +200,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 		return 0.0F;
 	}
 
-	@Override
-	public float superGetSwingProgress(Object entityLivingBase, float p_77040_2_) {
-		return 0.0F;
-	}
-
 	protected void renderLayers(EntityLivingBase entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
 	}
 
@@ -419,11 +414,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	@Override
-	public Object superGetEntityTexture(Object entity, int i) {
-		return null;
-	}
-
-	@Override
 	public int superSetArmorModel(Object object, Object entity, int i, float f, int j) {
 		return -1;
 	}
@@ -455,11 +445,11 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 
 	@Override
 	protected float renderSwingProgress(EntityLivingBase entityLivingBase, float par2) {
-		return master != null ? master.renderSwingProgress(entityLivingBase, par2) : super.renderSwingProgress(entityLivingBase, par2);
+		return master != null ? master.getSwingProgress(entityLivingBase, par2) : super.renderSwingProgress(entityLivingBase, par2);
 	}
 
 	@Override
-	public float superRenderSwingProgress(Object entityLivingBase, float par2) {
+	public float superGetSwingProgress(Object entityLivingBase, float par2) {
 		return super.renderSwingProgress((EntityLivingBase) entityLivingBase, par2);
 	}
 
@@ -540,10 +530,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	public void superUpdateIcons(Object iIconRegister) {
 		super.updateIcons((IconRegister) iIconRegister);
 	}
-
-	@Override
-	public void superFunc_147906_a(Object entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
-	}
 	// ~164
 	@Override
 	protected void renderLivingLabel(EntityLivingBase entityLivingBase, String par2Str, double par3, double par5, double par7, int par9) {
@@ -562,6 +548,38 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	// 190~
 	@Override
 	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
+	}
+
+	@Override
+	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
+	}
+
+	@Override
+	public int superGetTeamColor(Object entity) {
+		return -1;
+	}
+
+	@Override
+	public boolean superIsMultipass() {
+		return false;
+	}
+
+	@Override
+	public void superRenderMultipass(Object entity, double p_188300_2_, double p_188300_4_, double p_188300_6_, float p_188300_8_, float p_188300_9_) {
+	}
+
+	public int setArmorModel(Object entity, int i, float f) {
+		return -1;
+	}
+
+	@Override
+	public int superSetArmorModel(Object entity, int i, float f) {
+		return -1;
+	}
+
+	@Override
+	public float superPrepareScale(Object entityLivingBase, float partialTicks) {
+		return 0.0F;
 	}
 
 }
