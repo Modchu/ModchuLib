@@ -147,8 +147,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSettings;
-import net.minecraft.world.WorldSettings.GameType;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -934,7 +932,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_
 	@Override
 	public void tessellatorSetNormal(Object tessellator, float f, float f2, float f3) {
 	}
-
+/*
 	@Override
 	public Enum worldSettingsGameTypeADVENTURE() {
 		return WorldSettings.GameType.ADVENTURE;
@@ -954,7 +952,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_
 	public Enum worldSettingsGameTypeSURVIVAL() {
 		return WorldSettings.GameType.SURVIVAL;
 	}
-
+*/
 	@Override
 	public Object textureManagerGetResourceLocation(Object textureManager, int i) {
 		// TODO
@@ -3660,13 +3658,13 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_
 				| itemStackOrBlockOrItem instanceof BlockSapling
 				| itemStackOrBlockOrItem instanceof BlockTallGrass;
 	}
-
+/*
 	@Override
 	public void playerControllerSetGameType(Object enumGameType) {
 		if (Modchu_Main.isServer) return;
 		Minecraft.getMinecraft().playerController.setGameType((GameType) enumGameType);
 	}
-
+*/
 	@Override
 	public void printChatMessage(String s) {
 		if (Modchu_Main.isServer) return;

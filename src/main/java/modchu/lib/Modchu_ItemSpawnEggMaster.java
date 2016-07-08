@@ -122,8 +122,13 @@ public class Modchu_ItemSpawnEggMaster extends Modchu_ItemMasterBasis {
 	}
 
 	protected Object spawnCreature(Object world, int par1, double par2, double par4, double par6) {
-		//Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster spawnCreature par1="+par1);
-		//Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster spawnCreature spawnNameMap="+spawnNameMap);
+		boolean debug = false;
+		if (debug) {
+			boolean isRemote = Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, world);
+			Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster spawnCreature isRemote="+isRemote);
+			Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster spawnCreature par1="+par1);
+			Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster spawnCreature spawnNameMap="+spawnNameMap);
+		}
 		String spawName = spawnNameMap.get(par1);
 		return Modchu_SpawnManager.instance.spawnCreature(spawName, world, par2, par4, par6);
 	}

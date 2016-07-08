@@ -512,6 +512,12 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_ASMaster 
 	public Object biomeSavannaPlateau() {
 		return Biomes.SAVANNA_PLATEAU;
 	}
+
+	@Override
+	public Enum worldGetWorldInfoGetGameType() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().theWorld.getWorldInfo().getGameType();
+	}
 	// 200~分離
 	@Override
 	public Enum worldSettingsGameTypeADVENTURE() {

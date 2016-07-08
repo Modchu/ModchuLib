@@ -11270,7 +11270,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected void playerControllerSetGameType(Object enumGameType) {
 		if (Modchu_Main.isServer) return;
-		Modchu_Reflect.invokeMethod("PlayerControllerMP", "func_78746_a", "setGameType", new Class[]{ Modchu_Reflect.loadClass("EnumGameType") }, minecraftPlayerController(), new Object[]{ enumGameType });
+		int version = Modchu_Main.getMinecraftVersion();
+		Modchu_Reflect.invokeMethod("PlayerControllerMP", "func_78746_a", "setGameType", new Class[]{ Modchu_Reflect.loadClass(version > 169 ? "GameType" : "EnumGameType") }, minecraftPlayerController(), new Object[]{ enumGameType });
 	}
 
 	protected Object positionTextureVertexSetTexturePosition(Object positionTextureVertex, float f, float f1) {

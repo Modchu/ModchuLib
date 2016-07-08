@@ -21,7 +21,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.RegistryNamespacedDefaultedByKey;
-import net.minecraft.world.WorldSettings;
 import net.minecraft.world.biome.Biome;
 
 public class Modchu_ASMaster extends modchu.lib.forge.mc190_194.Modchu_ASMaster {

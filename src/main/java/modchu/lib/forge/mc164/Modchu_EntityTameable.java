@@ -121,7 +121,11 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 
 	protected void init(HashMap<String, Object> map) {
 		if (map != null
-				&& !map.isEmpty()); else {
+				&& !map.isEmpty()) {
+			if (map.containsKey("spawnX")) posX = (Double) map.get("spawnX");
+			if (map.containsKey("spawnY")) posY = (Double) map.get("spawnY");
+			if (map.containsKey("spawnZ")) posZ = (Double) map.get("spawnZ");
+		} else {
 			if (worldObj != null); else return;
 			Class c = Modchu_Main.getSpownEntityClass(worldObj, posX, posY, posZ);
 			map = new HashMap();
@@ -132,9 +136,9 @@ public class Modchu_EntityTameable extends EntityTameable implements Modchu_IEnt
 			map.put("Object", worldObj);
 		} else {
 			worldObj = (World) map.get("Object");
-			return;
 		}
 		Modchu_Debug.mDebug("Modchu_EntityTameable init 1 this="+this+" isRemote="+worldObj.isRemote);
+		Modchu_Debug.mDebug("Modchu_EntityTameable init 2 posX="+posX+" posY="+posY+" posZ="+posZ);
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		master = instance instanceof Modchu_IEntityTameableMaster ? (Modchu_IEntityTameableMaster) instance : null;

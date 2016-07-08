@@ -22,11 +22,12 @@ public class Modchu_SpawnManager {
 	}
 
 	public Object spawnCreature(String spawModchuClassName, HashMap<String, Object> spawnableMap, Object world, double par2, double par4, double par6) {
-		boolean debug = false;
+		boolean debug = true;
 		Object entity = null;
 		try {
+			boolean isRemote = Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, world);
 			spawnableMap.put("Object", world);
-			if (debug) Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature 1");
+			if (debug) Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature 1 isRemote="+isRemote);
 			spawnableMap.put("spawnX", par2);
 			spawnableMap.put("spawnY", par4);
 			spawnableMap.put("spawnZ", par6);

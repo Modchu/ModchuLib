@@ -148,7 +148,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSettings;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -1887,7 +1886,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	public boolean keyBindingIsPressed(Object keyBinding) {
 		return keyBinding != null ? ((KeyBinding) keyBinding).isPressed() : null;
 	}
-
+	// TODO tes
 	@Override
 	public float mathHelperCos(float f) {
 		return MathHelper.cos(f);
@@ -2464,12 +2463,6 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	public Object worldGetWorldInfo() {
 		if (Modchu_Main.isServer) return null;
 		return Minecraft.getMinecraft().theWorld.getWorldInfo();
-	}
-
-	@Override
-	public Enum worldGetWorldInfoGetGameType() {
-		if (Modchu_Main.isServer) return null;
-		return Minecraft.getMinecraft().theWorld.getWorldInfo().getGameType();
 	}
 
 	@Override
