@@ -21,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.RegistryNamespacedDefaultedByKey;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class Modchu_ASMaster extends modchu.lib.forge.mc190_194.Modchu_ASMaster {
@@ -510,6 +511,11 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc190_194.Modchu_ASMaster 
 	@Override
 	public Object biomeSavannaPlateau() {
 		return Biomes.savannaPlateau;
+	}
+	// ビルド時問題で分離
+	@Override
+	public Object worldGetBiomeGenForCoords(Object worldOrInt, Object blockPosOrInt) {
+		return ((World) entityWorldObj(worldOrInt)).getBiomeGenForCoords((BlockPos) blockPosOrInt);
 	}
 
 }

@@ -53,7 +53,6 @@ public interface Modchu_IRenderLivingBase extends Modchu_IRender {
 	public void superSetRenderPassModel(Object modelBase);
 	public void superRenderArrowsStuckInEntity(Object entityLivingBase, float par2);
 	public void superFunc_82408_c(Object entityLivingBase, int par2, float par3);
-	public void superFunc_96449_a(Object entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10);
 	public float superPrepareScale(Object entityLivingBase, float partialTicks);
 
 }

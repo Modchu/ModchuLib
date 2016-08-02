@@ -238,10 +238,11 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nBTTagCompound) {
-		//Modchu_Debug.mDebug("readEntityFromNBT entityName="+entityName);
+		Modchu_Debug.mDebug("readEntityFromNBT entityName="+entityName);
 		String s = nBTTagCompound.getString("entityName");
-		//Modchu_Debug.mDebug("readEntityFromNBT isRemote="+worldObj.isRemote+" s="+s);
+		Modchu_Debug.mDebug("readEntityFromNBT isRemote="+worldObj.isRemote+" s="+s);
 		init(s);
+		Modchu_Debug.mDebug("readEntityFromNBT master.getClass()="+(master != null ? master.getClass() : null));
 		if (master != null) master.readEntityFromNBT(nBTTagCompound);
 		else super.readEntityFromNBT(nBTTagCompound);
 	}

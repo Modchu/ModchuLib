@@ -533,10 +533,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	@Override
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
-	}
-
-	@Override
 	public int superGetTeamColor(Object entity) {
 		return -1;
 	}

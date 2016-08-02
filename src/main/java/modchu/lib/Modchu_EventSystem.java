@@ -1,5 +1,6 @@
 package modchu.lib;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
@@ -58,8 +59,8 @@ public class Modchu_EventSystem {
 	}
 
 	public static Object[] eventObjectLoad(ArrayList list, ArrayList list2, String s, String s1, Class[] cla, Object[] oa) {
-		//boolean debug = false;
-		boolean debug = s.equals("addRenderer");
+		boolean debug = false;
+		//boolean debug = s.equals("addRenderer");
 		if (list != null
 				&& !list.isEmpty()); else {
 			if (debug) {
@@ -81,7 +82,11 @@ public class Modchu_EventSystem {
 			if (modInstance != null) {
 				Method medhod = Modchu_Reflect.getMethod(modInstance.getClass(), s, cla, -1);
 				if (medhod != null) {
-					o[i] = Modchu_Reflect.invoke(medhod, modInstance, oa, -1);
+					try {
+						o[i] = Modchu_Reflect.invoke(medhod, modInstance, oa, -1);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					b = true;
 					if (debug) {
 						Modchu_Debug.mDebug("eventObjectLoad true modInstance.getClass()="+modInstance.getClass());

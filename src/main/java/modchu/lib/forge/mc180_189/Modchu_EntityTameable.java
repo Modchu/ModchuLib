@@ -402,6 +402,11 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
+	public boolean superInteract(Object entityPlayer) {
+		return super.interact((EntityPlayer) entityPlayer);
+	}
+
+	@Override
 	public boolean isInLove() {
 		return master != null ? master.isInLove() : super.isInLove();
 	}
@@ -650,6 +655,11 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	@Override
 	public boolean isNoDespawnRequired() {
 		return master != null ? master.isNoDespawnRequired() : super.isNoDespawnRequired();
+	}
+
+	@Override
+	public boolean superIsNoDespawnRequired() {
+		return super.isNoDespawnRequired();
 	}
 
 	@Override
@@ -1226,21 +1236,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
-	public boolean superIsNoDespawnRequired() {
-		return super.isNoDespawnRequired();
-	}
-
-	@Override
-	public void superRemovePotionEffect(Object potion) {
-		super.removePotionEffectClient(((Potion) potion).getId());
-	}
-
-	@Override
-	public Object superGetHeldItem(Object enumHand) {
-		return super.getHeldItem();
-	}
-
-	@Override
 	public void setCurrentItemOrArmor(int p_70062_1_, ItemStack itemStack) {
 		if (master != null) master.setCurrentItemOrArmor(p_70062_1_, itemStack);
 		else super.setCurrentItemOrArmor(p_70062_1_, itemStack);
@@ -1251,11 +1246,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
-	public ItemStack[] superGetInventory() {
-		return super.getInventory();
-	}
-
-	@Override
 	public boolean superIsInRangeToRender3d(Object vec3) {
 		return true;
 	}
@@ -1263,21 +1253,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	@Override
 	public boolean superAttackEntityFrom(Object damageSource, int par2) {
 		return super.attackEntityFrom((DamageSource) damageSource, par2);
-	}
-
-	@Override
-	public boolean superInteract(Object entityPlayer) {
-		return super.interact((EntityPlayer) entityPlayer);
-	}
-
-	@Override
-	public Object superGetTeam() {
-		return super.getTeam();
-	}
-
-	@Override
-	public boolean superIsOnSameTeam(Object entity) {
-		return super.isOnSameTeam((EntityLivingBase) entity);
 	}
 
 	@Override
@@ -1546,6 +1521,11 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	@Override
 	public void superRemovePotionEffectClient(int par1) {
 		super.removePotionEffectClient(par1);
+	}
+
+	@Override
+	public void superRemovePotionEffect(Object potion) {
+		super.removePotionEffectClient(((Potion) potion).getId());
 	}
 
 	@Override
@@ -1821,6 +1801,11 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
+	public Object superGetHeldItem(Object enumHand) {
+		return super.getHeldItem();
+	}
+
+	@Override
 	public ItemStack superGetHeldItemMainhand() {
 		return null;
 	}
@@ -2061,8 +2046,18 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
+	public Object superGetTeam() {
+		return super.getTeam();
+	}
+
+	@Override
 	public boolean isOnSameTeam(EntityLivingBase entityLivingBase) {
 		return master != null ? master.isOnSameTeam(entityLivingBase) : super.isOnSameTeam(entityLivingBase);
+	}
+
+	@Override
+	public boolean superIsOnSameTeam(Object entity) {
+		return super.isOnSameTeam((EntityLivingBase) entity);
 	}
 
 	@Override
@@ -3846,6 +3841,11 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	@Override
 	public ItemStack[] getInventory() {
 		return (ItemStack[]) (master != null ? master.getInventory() : null);
+	}
+
+	@Override
+	public ItemStack[] superGetInventory() {
+		return super.getInventory();
 	}
 
 	@Override

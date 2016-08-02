@@ -529,10 +529,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	@Override
-	public void superFunc_96449_a(Object entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10) {
-	}
-
-	@Override
 	public boolean superIsStaticEntity() {
 		return false;
 	}
@@ -556,11 +552,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	// 190~
 	@Override
 	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
-		super.func_177069_a((Entity) entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, 0.0F, p_177069_10_);
-	}
-
-	@Override
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 		super.func_177069_a((Entity) entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, 0.0F, p_177069_10_);
 	}
 

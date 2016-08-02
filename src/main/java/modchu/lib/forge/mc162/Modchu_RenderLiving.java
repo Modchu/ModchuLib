@@ -233,13 +233,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	public void setLightmap(EntityLiving entityLiving, float partialTicks) {
 	}
-	// 180
-	public void func_177069_a(Entity entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
-	}
-
-	@Override
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
-	}
 	// 164~
 	@Override
 	protected void renderLivingLabel(EntityLivingBase entityLivingBase, String str, double x, double y, double z, int maxDistance) {
@@ -271,13 +264,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	@Override
 	public void superRenderLeash(Object entityLiving, double p_110827_2_, double p_110827_4_, double p_110827_6_, float p_110827_8_, float p_110827_9_) {
 		super.func_110827_b((EntityLiving) entityLiving, p_110827_2_, p_110827_4_, p_110827_6_, p_110827_8_, p_110827_9_);
-	}
-	// ~189
-	public void renderOffsetLivingLabel(Entity entity, double x, double y, double z, String str, float p_177069_9_, double p_177069_10_) {
-	}
-
-	@Override
-	public void superRenderOffsetLivingLabel(Object entity, double x, double y, double z, String str, float p_177069_9_, double p_177069_10_) {
 	}
 	// ~180
 	@Override
@@ -399,25 +385,24 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public void superFunc_96449_a(Object entityLivingBase, double p_96449_2_, double p_96449_4_, double p_96449_6_, String p_96449_8_, float p_96449_9_, double p_96449_10_) {
+	public void superRenderOffsetLivingLabel(Object entityLivingBase, double p_96449_2_, double p_96449_4_, double p_96449_6_, String p_96449_8_, float p_96449_9_, double p_96449_10_) {
 		super.func_96449_a((EntityLivingBase) entityLivingBase, p_96449_2_, p_96449_4_, p_96449_6_, p_96449_8_, p_96449_9_, p_96449_10_);
 	}
 	// ~164
 	@Override
 	public void doRenderLiving(EntityLivingBase entityLivingBase, double par2, double par4, double par6, float par8, float par9) {
-		if (master != null) master.doRenderLiving(entityLivingBase, par2, par4, par6, par8, par9);
-		else super.doRenderLiving(entityLivingBase, par2, par4, par6, par8, par9);
+		super.doRenderLiving((EntityLivingBase) entityLivingBase, par2, par4, par6, par8, par9);
 	}
 
 	@Override
-	public void superDoRenderLiving(Object entityLivingBase, double par2, double par4, double par6, float par8, float par9) {
-		super.doRenderLiving((EntityLivingBase) entityLivingBase, par2, par4, par6, par8, par9);
+	public void superDoRenderLiving(Object entityLiving, double par2, double par4, double par6, float par8, float par9) {
+		super.doRenderLiving((EntityLiving) entityLiving, par2, par4, par6, par8, par9);
 	}
 
 	@Override
 	public void doRenderLiving(EntityLiving entityLiving, double par2, double par4, double par6, float par8, float par9) {
 		if (master != null) master.doRenderLiving(entityLiving, par2, par4, par6, par8, par9);
-		else super.doRenderLiving(entityLiving, par2, par4, par6, par8, par9);
+		else super.doRenderLiving((EntityLivingBase) entityLiving, par2, par4, par6, par8, par9);
 	}
 
 	@Override

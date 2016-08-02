@@ -226,10 +226,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	// 180
 	public void func_177069_a(Entity entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
 	}
-
-	@Override
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
-	}
 	// 164~
 	@Override
 	public boolean func_110813_b(EntityLiving entityLiving) {
@@ -371,11 +367,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	public void func_96449_a(EntityLivingBase entityLivingBase, double p_96449_2_, double p_96449_4_, double p_96449_6_, String p_96449_8_, float p_96449_9_, double p_96449_10_) {
 		if (master != null) master.func_96449_a(entityLivingBase, p_96449_2_, p_96449_4_, p_96449_6_, p_96449_8_, p_96449_9_, p_96449_10_);
 		else super.func_96449_a(entityLivingBase, p_96449_2_, p_96449_4_, p_96449_6_, p_96449_8_, p_96449_9_, p_96449_10_);
-	}
-
-	@Override
-	public void superFunc_96449_a(Object entityLivingBase, double p_96449_2_, double p_96449_4_, double p_96449_6_, String p_96449_8_, float p_96449_9_, double p_96449_10_) {
-		super.func_96449_a((EntityLivingBase) entityLivingBase, p_96449_2_, p_96449_4_, p_96449_6_, p_96449_8_, p_96449_9_, p_96449_10_);
 	}
 	// ~164
 	public void doRenderLiving(EntityLivingBase entityLivingBase, double par2, double par4, double par6, float par8, float par9) {

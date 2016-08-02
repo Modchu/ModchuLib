@@ -181,11 +181,6 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 	}
 
 	@Override
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
-		super.func_177069_a((Entity) entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, 0.0F, p_177069_10_);
-	}
-
-	@Override
 	public int superGetTeamColor(Object entity) {
 		return -1;
 	}

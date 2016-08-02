@@ -773,11 +773,6 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_
 	}
 
 	@Override
-	public Object worldGetBiomeGenForCoords(Object worldOrInt, Object blockPosOrInt) {
-		return ((World) entityWorldObj(worldOrInt)).getBiomeGenForCoords((BlockPos) blockPosOrInt);
-	}
-
-	@Override
 	public void entityTameableSetOwner(Object entityTameable, Object uUIDOrString) {
 		((EntityTameable) entityTameable).setOwnerId((UUID) uUIDOrString);
 	}

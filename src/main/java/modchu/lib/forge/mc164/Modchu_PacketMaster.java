@@ -98,7 +98,10 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 	}
 
 	private void sendToWorld(Object[] o, String channelName, Object world) {
+		Modchu_Debug.mDebug("Modchu_PacketMaster sendToWorld world="+world);
+		Modchu_Debug.mDebug("Modchu_PacketMaster sendToWorld playerEntities="+Modchu_AS.getList(Modchu_AS.playerEntities, world));
 		for (Object entityplayer : Modchu_AS.getList(Modchu_AS.playerEntities, world)) {
+			Modchu_Debug.mDebug("Modchu_PacketMaster sendToWorld entityplayer="+entityplayer);
 			sendTo(newPacket(o, channelName), entityplayer, channelName);
 		}
 	}

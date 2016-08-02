@@ -174,13 +174,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 		else super.doRender(entityLiving, x, y, z, entityYaw, partialTicks);
 	}
 	// 180
-	public void func_177069_a(Entity entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
-	}
-
-	@Override
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
-	}
-
 	public void renderLivingLabel(Entity entity, String str, double x, double y, double z, int maxDistance) {
 		if (master != null) master.renderLivingLabel(entity, str, x, y, z, maxDistance);
 		else super.renderLivingLabel(entity, str, x, y, z, maxDistance);
@@ -230,9 +223,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	@Override
 	public float superPrepareScale(Object entityLivingBase, float partialTicks) {
 		return 0.0F;
-	}
-
-	public void setLightmap(EntityLiving entityLiving, float partialTicks) {
 	}
 	// 164~
 	public boolean canRenderName(Entity entity) {
@@ -345,12 +335,6 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	public void superFunc_82408_c(Object entityLivingBase, int p_82408_2_, float p_82408_3_) {
 	}
 
-	public void func_96449_a(EntityLivingBase entityLivingBase, double p_96449_2_, double p_96449_4_, double p_96449_6_, String p_96449_8_, float p_96449_9_, double p_96449_10_) {
-	}
-
-	@Override
-	public void superFunc_96449_a(Object entityLivingBase, double p_96449_2_, double p_96449_4_, double p_96449_6_, String p_96449_8_, float p_96449_9_, double p_96449_10_) {
-	}
 	// ~164
 	public void doRenderLiving(EntityLivingBase entityLivingBase, double par2, double par4, double par6, float par8, float par9) {
 	}

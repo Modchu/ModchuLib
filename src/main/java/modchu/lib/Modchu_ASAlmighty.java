@@ -7843,7 +7843,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLastDamage(Object entityLivingBase) {
-		return Modchu_CastHelper.Float(Modchu_Reflect.getFieldObject("EntityLivingBase", "field_110153_bc", "lastDamage", entityLivingBase), 0.0F, false);
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Float(Modchu_Reflect.getFieldObject("EntityLivingBase", version > 159 ? "field_110153_bc" : "field_70707_bp", "lastDamage", entityLivingBase), 0.0F, false);
 	}
 
 	protected int entityLivingBaseRecentlyHit() {
@@ -7939,7 +7940,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected UUID entityGetUniqueID(Object entity) {
-		return Modchu_CastHelper.UUID(Modchu_Reflect.invokeMethod("Entity", "func_110124_au", "getUniqueID", entity));
+		int version = Modchu_Main.getMinecraftVersion();
+		return version > 159 ? Modchu_CastHelper.UUID(Modchu_Reflect.invokeMethod("Entity", "func_110124_au", "getUniqueID", entity)) : null;
 	}
 
 	protected Object entityLivingBaseGetHeldItem() {
@@ -12058,19 +12060,19 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Enum worldSettingsGameTypeNOT_SET() {
-		return Modchu_CastHelper.Enum(Modchu_Reflect.invokeMethod("WorldSettings.GameType", "NOT_SET"));
+		return Modchu_CastHelper.Enum(Modchu_Reflect.getFieldObject("WorldSettings$GameType", "NOT_SET"));
 	}
 
 	protected Enum worldSettingsGameTypeSURVIVAL() {
-		return Modchu_CastHelper.Enum(Modchu_Reflect.invokeMethod("WorldSettings.GameType", "SURVIVAL"));
+		return Modchu_CastHelper.Enum(Modchu_Reflect.getFieldObject("WorldSettings$GameType", "SURVIVAL"));
 	}
 
 	protected Enum worldSettingsGameTypeCREATIVE() {
-		return Modchu_CastHelper.Enum(Modchu_Reflect.invokeMethod("WorldSettings.GameType", "CREATIVE"));
+		return Modchu_CastHelper.Enum(Modchu_Reflect.getFieldObject("WorldSettings$GameType", "CREATIVE"));
 	}
 
 	protected Enum worldSettingsGameTypeADVENTURE() {
-		return Modchu_CastHelper.Enum(Modchu_Reflect.invokeMethod("WorldSettings.GameType", "ADVENTURE"));
+		return Modchu_CastHelper.Enum(Modchu_Reflect.getFieldObject("WorldSettings$GameType", "ADVENTURE"));
 	}
 
 	protected boolean worldIsAirBlock(int i, int j, int k) {
@@ -12143,21 +12145,47 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected List playerEntities(Object worldOrEntity) {
-		if (Modchu_Main.getMinecraftVersion() < 170) 	return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("World", "field_73010_i", "playerEntities", entityWorldObj(worldOrEntity)));
 		Object minecraftServerInstance = null;
+		List list = null;
+		if (Modchu_Main.getMinecraftVersion() < 170) 	{
+			Object world = entityWorldObj(worldOrEntity);
+			if (!Modchu_Main.isServer) {
+				list = Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("World", "field_73010_i", "playerEntities", world));
+			} else {
+				minecraftServerInstance = minecraftServerGetServer();
+				Object[] worlds = Modchu_AS.getObjectArray(Modchu_AS.minecraftServerGetServerWorldServers, minecraftServerInstance);
+				for (Object world1 : worlds) {
+					if (!world.equals(world1)) continue;
+					list = Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("World", "field_73010_i", "playerEntities", world1));
+				}
+			}
+			return list;
+		}
 		if (Modchu_Main.isServer) {
 			Object fMLCommonHandlerInstance = Modchu_Reflect.invokeMethod("cpw.mods.fml.common.FMLCommonHandler", "instance");
 			if (fMLCommonHandlerInstance != null) minecraftServerInstance = Modchu_Reflect.invokeMethod(fMLCommonHandlerInstance.getClass(), "getMinecraftServerInstance", fMLCommonHandlerInstance);
 		}
-		if (isIntegratedServerRunning()) {
-			minecraftServerInstance = getIntegratedServer();
-		}
+		else if (isIntegratedServerRunning()) minecraftServerInstance = getIntegratedServer();
 		if (minecraftServerInstance != null) {
-			Object configurationManager = Modchu_Reflect.invokeMethod(minecraftServerInstance.getClass(), "func_71203_ab", "getConfigurationManager", minecraftServerInstance);
-			return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject(configurationManager.getClass(), "field_72404_b", "playerEntityList", configurationManager));
+			//Modchu_Debug.Debug("Modchu_ASAlmighty playerEntities minecraftServerInstance="+minecraftServerInstance);
+			Object configurationManager = Modchu_Reflect.invokeMethod(minecraftServerInstance.getClass(), "func_71203_ab", "getConfigurationManager", minecraftServerInstance, -1);
+			//Modchu_Debug.Debug("Modchu_ASAlmighty playerEntities configurationManager="+configurationManager);
+			if (configurationManager != null) {
+				list = Modchu_CastHelper.List(Modchu_Reflect.getFieldObject(configurationManager.getClass(), "field_72404_b", "playerEntityList", configurationManager));
+				//Modchu_Debug.Debug("Modchu_ASAlmighty playerEntities playerEntityList return. list="+list);
+			} else {
+				Object getPlayerList = Modchu_Reflect.invokeMethod(minecraftServerInstance.getClass(), "func_184103_al", "getPlayerList", minecraftServerInstance);
+				//Modchu_Debug.Debug("Modchu_ASAlmighty playerEntities getPlayerList="+getPlayerList);
+				if (getPlayerList != null) {
+					//Modchu_Debug.Debug("Modchu_ASAlmighty playerEntities getPlayerList="+getPlayerList);
+					list = Modchu_CastHelper.List(Modchu_Reflect.invokeMethod(getPlayerList.getClass(), "func_181057_v", "getPlayerList", getPlayerList));
+					//Modchu_Debug.Debug("Modchu_ASAlmighty playerEntities getPlayerList return. list="+list);
+				}
+			}
+		} else {
+			Modchu_Debug.Debug1("Modchu_ASAlmighty playerEntities minecraftServerInstance == null !!");
 		}
-		Modchu_Debug.Debug1("Modchu_ASAlmighty playerEntities return null !!");
-		return null;
+		return list;
 	}
 
 	protected List worldPlayerEntities() {

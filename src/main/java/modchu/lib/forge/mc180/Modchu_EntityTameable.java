@@ -40,6 +40,17 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 	}
 
 	@Override
+	public void setInPortal() {
+		if (master != null) master.setInPortal();
+		else super.setInPortal();
+	}
+
+	public void setPortal(BlockPos bockPos) {
+		if (master != null) master.setPortal(bockPos);
+		else super.setInPortal();
+	}
+
+	@Override
 	public boolean func_142018_a(EntityLivingBase entityLivingBase, EntityLivingBase entityLivingBase1) {
 		return master != null ? master.shouldAttackEntity(entityLivingBase, entityLivingBase1) : super.func_142018_a(entityLivingBase, entityLivingBase1);
 	}
@@ -490,15 +501,6 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 		super.func_174815_a((EntityLivingBase) entityLivingBase, (Entity) entity);
 	}
 
-	public void setPortal(BlockPos bockPos) {
-		if (master != null) master.setPortal(bockPos);
-		else super.setInPortal();
-	}
-
-	public void superSetInPortal(Object bockPos) {
-		super.setInPortal();
-	}
-
 	@Override
 	public void handleHealthUpdate(byte par1) {
 		if (master != null) master.handleStatusUpdate(par1);
@@ -514,258 +516,14 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 		return null;
 	}
 
-	public EntityItem dropItemWithOffset(Object par1, int par2, float par3) {
-		return (EntityItem) (master != null ? master.dropItemWithOffset(par1, par2, par3) : super.dropItemWithOffset((Item) par1, par2, par3));
-	}
-
-	@Override
-	public boolean superInteractFirst(Object entityPlayer) {
-		return super.interactFirst((EntityPlayer) entityPlayer);
-	}
-
-	@Override
-	public void superSetupTamedAI() {
-		super.setupTamedAI();
-	}
-
-	@Override
-	public Object superGetOwner() {
-		return super.getOwner();
-	}
-
-	@Override
-	public boolean superIsOwner(Object entityLivingBase) {
-		return super.isOwner((EntityLivingBase) entityLivingBase);
-	}
-
-	@Override
-	public void superSetInLove(Object entityPlayer) {
-		super.setInLove((EntityPlayer) entityPlayer);
-	}
-
 	@Override
 	public void superAgeUp(int p_175501_1_, boolean p_175501_2_) {
 		super.func_175501_a(p_175501_1_, p_175501_2_);
 	}
 
 	@Override
-	public void superUpdateLeashedState() {
-		super.updateLeashedState();
-	}
-
-	@Override
-	public Object superGetDropItem() {
-		return super.getDropItem();
-	}
-
-	@Override
 	public boolean superCanEquipItem(Object itemStack) {
 		return super.func_175448_a((ItemStack) itemStack);
-	}
-
-	@Override
-	public void superEnablePersistence() {
-		super.enablePersistence();
-	}
-
-	@Override
-	public float superGetExplosionResistance(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block) {
-		return super.getExplosionResistance((Explosion) explosion, (World) world, (BlockPos) Modchu_AS.get(Modchu_AS.newBlockPos, p_145772_3_, p_145772_4_, p_145772_5_), (IBlockState) block);
-	}
-
-	@Override
-	public Object superGetLookHelper() {
-		return super.getLookHelper();
-	}
-
-	@Override
-	public Object superGetMoveHelper() {
-		return super.getMoveHelper();
-	}
-
-	@Override
-	public Object superGetJumpHelper() {
-		return super.getJumpHelper();
-	}
-
-	@Override
-	public Object superGetNavigator() {
-		return super.getNavigator();
-	}
-
-	@Override
-	public Object superGetEntitySenses() {
-		return super.getEntitySenses();
-	}
-
-	@Override
-	public Object superGetAttackTarget() {
-		return super.getAttackTarget();
-	}
-
-	@Override
-	public void superSetAttackTarget(Object entityLiving) {
-		super.setAttackTarget((EntityLivingBase) entityLiving);
-	}
-
-	@Override
-	public boolean superCanAttackClass(Class par1Class) {
-		return super.canAttackClass(par1Class);
-	}
-
-	@Override
-	public void superEatGrassBonus() {
-		super.eatGrassBonus();
-	}
-
-	@Override
-	public boolean superIsWithinHomeDistanceCurrentPosition() {
-		return super.isWithinHomeDistanceCurrentPosition();
-	}
-
-	@Override
-	public float superGetMaximumHomeDistance() {
-		return super.getMaximumHomeDistance();
-	}
-
-	@Override
-	public void superDetachHome() {
-		super.detachHome();
-	}
-
-	@Override
-	public boolean superHasHome() {
-		return super.hasHome();
-	}
-
-	@Override
-	public int superGetTalkInterval() {
-		return super.getTalkInterval();
-	}
-
-	@Override
-	public void superPlayLivingSound() {
-		super.playLivingSound();
-	}
-
-	@Override
-	public void superSpawnExplosionParticle() {
-		super.spawnExplosionParticle();
-	}
-
-	@Override
-	public void superDamageArmor(int par1) {
-		super.damageArmor(par1);
-	}
-
-	@Override
-	public Object superApplyArmorCalculations(Object damageSource, int par2) {
-		return super.applyArmorCalculations((DamageSource) damageSource, par2);
-	}
-
-	@Override
-	public Object superApplyPotionDamageCalculations(Object damageSource, int par2) {
-		return super.applyPotionDamageCalculations((DamageSource) damageSource, par2);
-	}
-
-	@Override
-	public void superDamageEntity(Object damageSource, int par2) {
-		super.damageEntity((DamageSource) damageSource, par2);
-	}
-
-	@Override
-	public void superKnockBack(Object entity, int par2, double par3, double par5) {
-		super.knockBack((Entity) entity, par2, par3, par5);
-	}
-
-	@Override
-	public void superSetMoveForward(float par1) {
-		super.setMoveForward(par1);
-	}
-
-	@Override
-	public boolean superCanDespawn() {
-		return super.canDespawn();
-	}
-
-	@Override
-	public void superDespawnEntity() {
-		super.despawnEntity();
-	}
-
-	@Override
-	public int superGetVerticalFaceSpeed() {
-		return super.getVerticalFaceSpeed();
-	}
-
-	@Override
-	public void superFaceEntity(Object entity, float par2, float par3) {
-		super.faceEntity((Entity) entity, par2, par3);
-	}
-
-	@Override
-	public boolean superGetCanSpawnHere() {
-		return super.getCanSpawnHere();
-	}
-
-	@Override
-	public float superGetRenderSizeModifier() {
-		return super.getRenderSizeModifier();
-	}
-
-	@Override
-	public int superGetMaxSpawnedInChunk() {
-		return super.getMaxSpawnedInChunk();
-	}
-
-	@Override
-	public void superOnChangedPotionEffect(Object potionEffect) {
-		super.onChangedPotionEffect((PotionEffect) potionEffect, true);
-	}
-
-	@Override
-	public boolean superCanBeSteered() {
-		return super.canBeSteered();
-	}
-
-	@Override
-	public boolean superCanPickUpLoot() {
-		return super.canPickUpLoot();
-	}
-
-	@Override
-	public void superSetCanPickUpLoot(boolean par1) {
-		super.setCanPickUpLoot(par1);
-	}
-
-	@Override
-	public ItemStack superGetCurrentArmor(int slotIn) {
-		return super.getCurrentArmor(slotIn);
-	}
-
-	@Override
-	public void superUpdateAITasks() {
-		super.updateAITasks();
-	}
-
-	@Override
-	public Object superGetPosition(float par1) {
-		return super.getPosition();
-	}
-
-	@Override
-	public void superPlayStepSound(int par1, int par2, int par3, Object par4) {
-		super.playStepSound((BlockPos) Modchu_AS.get(Modchu_AS.newBlockPos, par1, par2, par3), (Block) par4);
-	}
-
-	@Override
-	public void setInPortal() {
-		if (master != null) master.setInPortal();
-		else super.setInPortal();
-	}
-
-	public void superSetInPortal() {
-		super.setInPortal();
 	}
 
 	@Override
@@ -809,50 +567,8 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 	}
 
 	@Override
-	public boolean superIsNoDespawnRequired() {
-		return super.isNoDespawnRequired();
-	}
-
-	@Override
-	public void superRemovePotionEffect(Object potion) {
-		super.removePotionEffectClient(((Potion) potion).getId());
-	}
-
-	@Override
-	public Object superGetHeldItem(Object enumHand) {
-		return super.getHeldItem();
-	}
-
-	@Override
-	public void entityInit() {
-		if (master != null) master.entityInit();
-		else super.entityInit();
-	}
-
-	@Override
-	public void superEntityInit() {
-		super.entityInit();
-	}
-
-	@Override
-	public void setCurrentItemOrArmor(int p_70062_1_, ItemStack itemStack) {
-		if (master != null) master.setCurrentItemOrArmor(p_70062_1_, itemStack);
-		else super.setCurrentItemOrArmor(p_70062_1_, itemStack);
-	}
-
-	@Override
-	public ItemStack[] superGetInventory() {
-		return super.getInventory();
-	}
-
-	@Override
 	public boolean superIsInRangeToRender3d(Object vec3) {
 		return true;
-	}
-
-	@Override
-	public void superFall(float p_70069_1_) {
-		super.fall(p_70069_1_, 1.0F);
 	}
 
 	@Override
@@ -863,21 +579,6 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 	@Override
 	public boolean superAttackEntityFrom(Object damageSource, int par2) {
 		return super.attackEntityFrom((DamageSource) damageSource, par2);
-	}
-
-	@Override
-	public boolean superInteract(Object entityPlayer) {
-		return super.interact((EntityPlayer) entityPlayer);
-	}
-
-	@Override
-	public Object superGetTeam() {
-		return super.getTeam();
-	}
-
-	@Override
-	public boolean superIsOnSameTeam(Object entity) {
-		return super.isOnSameTeam((EntityLivingBase) entity);
 	}
 
 	@Override

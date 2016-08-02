@@ -168,10 +168,6 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 	public void superRenderEntityName(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, double p_177069_10_) {
 		super.renderOffsetLivingLabel((Entity) entity, p_177069_2_, p_177069_4_, p_177069_6_, p_177069_8_, 0.0F, p_177069_10_);
 	}
-	// ~180
-	@Override
-	public void superFunc_177069_a(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
-	}
 	// 190~
 	@Override
 	public int superGetTeamColor(Object entity) {
