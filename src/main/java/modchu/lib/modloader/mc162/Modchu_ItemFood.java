@@ -169,13 +169,13 @@ public class Modchu_ItemFood extends ItemFood implements Modchu_IItemFood {
 	}
 
 	@Override
-	public boolean itemInteractionForEntity(ItemStack itemStack, EntityPlayer entityPlayer, EntityLivingBase entityLivingBase) {
-		return master != null ? master.itemInteractionForEntity(itemStack, entityPlayer, entityLivingBase) : super.itemInteractionForEntity(itemStack, entityPlayer, entityLivingBase);
+	public boolean func_111207_a(ItemStack itemStack, EntityPlayer entityPlayer, EntityLivingBase entityLivingBase) {
+		return master != null ? master.itemInteractionForEntity(itemStack, entityPlayer, entityLivingBase) : super.func_111207_a(itemStack, entityPlayer, entityLivingBase);
 	}
 
 	@Override
 	public boolean superItemInteractionForEntity(Object itemStack, Object entityPlayer, Object entityLivingBase) {
-		return super.itemInteractionForEntity((ItemStack) itemStack, (EntityPlayer) entityPlayer, (EntityLivingBase) entityLivingBase);
+		return super.func_111207_a((ItemStack) itemStack, (EntityPlayer) entityPlayer, (EntityLivingBase) entityLivingBase);
 	}
 
 	@Override
@@ -220,13 +220,13 @@ public class Modchu_ItemFood extends ItemFood implements Modchu_IItemFood {
 	}
 
 	@Override
-	public String getUnlocalizedNameInefficiently(ItemStack itemStack) {
-		return master != null ? master.getUnlocalizedNameInefficiently(itemStack) : super.getUnlocalizedNameInefficiently(itemStack);
+	public String getLocalizedName(ItemStack itemStack) {
+		return master != null ? master.getUnlocalizedNameInefficiently(itemStack) : super.getLocalizedName(itemStack);
 	}
 
 	@Override
 	public String superGetUnlocalizedNameInefficiently(Object itemStack) {
-		return super.getUnlocalizedNameInefficiently((ItemStack) itemStack);
+		return super.getLocalizedName((ItemStack) itemStack);
 	}
 
 	@Override
@@ -484,13 +484,13 @@ public class Modchu_ItemFood extends ItemFood implements Modchu_IItemFood {
 	}
 
 	@Override
-	public Multimap getItemAttributeModifiers() {
-		return (Multimap) (master != null ? master.getItemAttributeModifiers() : super.getItemAttributeModifiers());
+	public Multimap func_111205_h() {
+		return (Multimap) (master != null ? master.getItemAttributeModifiers() : super.func_111205_h());
 	}
 
 	@Override
 	public Multimap superGetItemAttributeModifiers() {
-		return (super.getItemAttributeModifiers());
+		return (super.func_111205_h());
 	}
 	// ~162
 	@Override
@@ -1211,23 +1211,23 @@ public class Modchu_ItemFood extends ItemFood implements Modchu_IItemFood {
 	}
 
 	@Override
-	public Item setTextureName(String par1Str) {
-		return (Item) (master != null ? master.setTextureName(par1Str) : super.setTextureName(par1Str));
+	public Item func_111206_d(String par1Str) {
+		return (Item) (master != null ? master.setTextureName(par1Str) : super.func_111206_d(par1Str));
 	}
 
 	@Override
 	public Item superSetTextureName(String par1Str) {
-		return super.setTextureName(par1Str);
+		return super.func_111206_d(par1Str);
 	}
 
 	@Override
-	protected String getIconString() {
-		return master != null ? master.getIconString() : super.getIconString();
+	protected String func_111208_A() {
+		return master != null ? master.getIconString() : super.func_111208_A();
 	}
 
 	@Override
 	public String superGetIconString() {
-		return super.getIconString();
+		return super.func_111208_A();
 	}
 
 	// 180~

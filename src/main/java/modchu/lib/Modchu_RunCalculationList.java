@@ -170,9 +170,18 @@ public class Modchu_RunCalculationList implements Modchu_ITextCalculationDataFor
 				&& !s.isEmpty()); else return null;
 		for (HashMap<String, Object> map1 : map) {
 			if (map1.containsKey(s)) {
+				//debug = s.equals("motionY");
 				Object o = map1.get(s);
 				if (debug) Modchu_Debug.mDebug("Modchu_RunCalculationList	getMapsObject	get o="+Modchu_Main.objectToString(o));
-				return o;
+				if (o != null) {
+					if (s.indexOf("debaf") > -1) {
+						int i2 = s.length() > 5 ? Modchu_CastHelper.Int(s.substring(5)) : 0;
+						//Modchu_Debug.mDebug("Modchu_RunCalculationList	getMapsObject i2="+i2);
+						if (i2 < 4) Modchu_Debug.dDebug("debaf1="+Modchu_Debug.debaf1+" debaf2="+Modchu_Debug.debaf2+" debaf3="+Modchu_Debug.debaf3);
+						else Modchu_Debug.dDebug("debaf4="+Modchu_Debug.debaf4+" debaf5="+Modchu_Debug.debaf5+" debaf6="+Modchu_Debug.debaf6, 1);
+					}
+					return o;
+				}
 			} else {
 				//if (debug) Modchu_Debug.mDebug(Modchu_RunCalculationList	getMapsObject	!map1.containsKey s="+s);
 			}

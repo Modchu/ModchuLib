@@ -24,32 +24,32 @@ public class Modchu_ResourcePack implements ResourcePack {
 	}
 
 	@Override
-	public InputStream getInputStream(ResourceLocation resourceLocation) {
+	public InputStream func_110590_a(ResourceLocation resourceLocation) {
 		return master != null ? master.getInputStream(resourceLocation) : null;
 	}
 
 	@Override
-	public boolean resourceExists(ResourceLocation resourceLocation) {
+	public boolean func_110589_b(ResourceLocation resourceLocation) {
 		return master != null ? master.resourceExists(resourceLocation) : false;
 	}
 
 	@Override
-	public Set getResourceDomains() {
+	public Set func_110587_b() {
 		return (Set) (master != null ? master.getResourceDomains() : null);
 	}
 
 	@Override
-	public MetadataSection getPackMetadata(MetadataSerializer metadataSerializer, String s) {
+	public MetadataSection func_135058_a(MetadataSerializer metadataSerializer, String s) {
 		return (MetadataSection) (master != null ? master.getPackMetadata(metadataSerializer, s) : null);
 	}
 
 	@Override
-	public BufferedImage getPackImage() {
+	public BufferedImage func_110586_a() {
 		return (BufferedImage) (master != null ? master.getPackImage() : null);
 	}
 
 	@Override
-	public String getPackName() {
+	public String func_130077_b() {
 		return master != null ? master.getPackName() : null;
 	}
 

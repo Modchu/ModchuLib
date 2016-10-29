@@ -9888,8 +9888,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object itemSetTextureName(Object item, String s) {
-		boolean flag = Modchu_Main.getMinecraftVersion() > 159;
-		return Modchu_Reflect.invokeMethod("Item", flag ? "func_111206_d" : "func_77655_b", flag ? "setTextureName" : "setUnlocalizedName", new Class[]{ String.class }, item, new Object[]{ s });
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_Reflect.invokeMethod("Item", version > 159 ? "func_111206_d" : "func_77655_b", version > 159 ? version == 162 ? "func_111206_d" : "setTextureName" : "setUnlocalizedName", new Class[]{ String.class }, item, new Object[]{ s });
 	}
 
 	protected Object itemSetUnlocalizedName(Object item, String s) {
@@ -9901,7 +9901,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected String itemIconString(Object item) {
-		return Modchu_Main.getMinecraftVersion() > 159 ? Modchu_CastHelper.String(Modchu_Reflect.getFieldObject("Item", "field_111218_cA", "iconString", item)) : Modchu_Main.lastIndexProcessing(itemGetUnlocalizedName(item), "item.");
+		int version = Modchu_Main.getMinecraftVersion();
+		return version > 159 ? Modchu_CastHelper.String(Modchu_Reflect.getFieldObject("Item", "field_111218_cA", version > 162 ? "iconString" : "field_111218_cA", item)) : Modchu_Main.lastIndexProcessing(itemGetUnlocalizedName(item), "item.");
 	}
 
 	protected void setItemIconString(Object item, String s) {
@@ -10556,7 +10557,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected String minecraftLaunchedVersion(Object minecraft) {
-		return Modchu_CastHelper.String(Modchu_Reflect.getFieldObject("Minecraft", "field_110447_Z", "launchedVersion", minecraft));
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.String(Modchu_Reflect.getFieldObject("Minecraft", "field_110447_Z", version > 162 ? "launchedVersion" : "field_110447_Z", minecraft));
 	}
 
 	protected void minecraftUpdateFramebufferSize() {
@@ -10564,8 +10566,9 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void minecraftUpdateFramebufferSize(Object minecraft) {
+		int version = Modchu_Main.getMinecraftVersion();
 		if (Modchu_Main.isServer
-				| Modchu_Main.getMinecraftVersion() < 170) return;
+				| version < 170) return;
 		Modchu_Reflect.invokeMethod("Minecraft", "func_147119_ah", "updateFramebufferSize", minecraft);
 	}
 

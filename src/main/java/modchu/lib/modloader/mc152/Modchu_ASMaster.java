@@ -2676,7 +2676,10 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void renderBindTexture(Object render, Object resourceLocation) {
-		Modchu_Reflect.invokeMethod("Render", "func_76985_a", "loadTexture", new Class[]{ String.class }, render, new Object[]{ resourceLocation });
+		try {
+			Modchu_Reflect.invokeMethod("Render", "func_76985_a", "loadTexture", new Class[]{ String.class }, render, new Object[]{ resourceLocation });
+		} catch(Exception e) {
+		}
 	}
 
 	@Override

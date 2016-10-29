@@ -317,28 +317,46 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 
 	@Override
 	public List<File> getModFile(List<File> list, ConcurrentHashMap<String, Class> map, String search) {
+		boolean debug = false;
 		getModFile(Modchu_Main.modsDir, list, map, search, false);
 		getModFile(new File(Modchu_Main.modsDir, Modchu_Version.getMinecraftVersionString()), list, map, search, true);
+		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase getModFile Modchu_Main.isDev="+Modchu_Main.isDev);
+		if (Modchu_Main.isDev) {
+			String classpath = System.getProperty("java.class.path");
+			if (classpath != null) {
+				if (debug) Modchu_Debug.mDebug("Modchu_Main checkDev classpath="+classpath);
+				String[] s0 = classpath.split(";");
+				if (debug) Modchu_Debug.mDebug("Modchu_Main checkDev s0="+s0);
+				List<String> list1 = new LinkedList();
+				for (String s2 : s0) {
+					if (debug) Modchu_Debug.mDebug("Modchu_Main checkDev s2="+s2);
+					if (!list1.contains(s2)) list1.add(s2);
+				}
+				for (String s3 : list1) {
+					getModFile(new File(s3), list, map, search, true);
+				}
+			}
+		}
 		return list;
 	}
 
 	@Override
-	public List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search, boolean subDirCheck) {
-		boolean debug = false;
+	public List<File> getModFile(File file, List<File> list, ConcurrentHashMap<String, Class> map, String search, boolean subDirCheck) {
+		boolean debug = true;
 		if (debug) Modchu_Debug.Debug1("Modchu_FileManagerBase getModFile search="+search);
 		if (list != null); else list = new ArrayList();
 		try {
-			if (dir.isDirectory()) {
+			if (file.isDirectory()) {
 				//Modchu_Debug.Debug("Modchu_FileManagerBase getModFile-get:"+dir.list().length);
-				for (File t : dir.listFiles()) {
+				for (File t : file.listFiles()) {
 					String name = t.getName();
 					if (t.isDirectory()) {
 						if (subDirCheck) {
 							if (name.indexOf(search) > -1) {
-								if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile list.add directory="+name);
+								if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile list.add name="+name);
 								list.add(t);
 							} else {
-								if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile list not add directory="+name);
+								if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile list not add name="+name);
 							}
 							list = getModFile(t, list, map, search, subDirCheck);
 						}
@@ -354,7 +372,17 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 				}
 				if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile files list.size()="+list.size());
 			} else {
-				if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile !dir.isDirectory() dir="+dir);
+				if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile !dir.isDirectory() file="+file);
+				String name = file.getName();
+				if (name.endsWith(".zip")
+						| name.endsWith(".jar")) {
+					if (addTexturesZip(file, map, search)) {
+						list.add(file);
+						if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile !dir.isDirectory() name="+name);
+					} else {
+						if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase getModFile !dir.isDirectory() addTexturesZip not list.add.");
+					}
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -94,27 +94,27 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void setMovementSpeed(double d) {
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(d);
+		func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(d);
 	}
 
 	@Override
 	public void setFollowRange(double d) {
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(d);
+		func_110148_a(SharedMonsterAttributes.field_111265_b).func_111128_a(d);
 	}
 
 	@Override
 	public void setKnockbackResistance(double d) {
-		getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(d);
+		func_110148_a(SharedMonsterAttributes.field_111266_c).func_111128_a(d);
 	}
 
 	@Override
 	public void setAttackDamage(double d) {
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(d);
+		func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(d);
 	}
 
 	@Override
 	public void setMaxHealth(double d) {
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(d);
+		func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(d);
 	}
 
 	@Override
@@ -251,23 +251,23 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public ResourceLocation getLocationSkin() {
-		return (ResourceLocation) (master != null ? master.getLocationSkin() : super.getLocationSkin());
+	public ResourceLocation func_110306_p() {
+		return (ResourceLocation) (master != null ? master.getLocationSkin() : super.func_110306_p());
 	}
 
 	@Override
 	public ResourceLocation superGetLocationSkin() {
-		return super.getLocationSkin();
+		return super.func_110306_p();
 	}
 
 	@Override
-	public ResourceLocation getLocationCape() {
-		return (ResourceLocation) (master != null ? master.getLocationCape() : super.getLocationCape());
+	public ResourceLocation func_110303_q() {
+		return (ResourceLocation) (master != null ? master.getLocationCape() : super.func_110303_q());
 	}
 
 	@Override
 	public ResourceLocation superGetLocationCape() {
-		return super.getLocationCape();
+		return super.func_110303_q();
 	}
 
 	public void func_152121_a(Object type, ResourceLocation resourceLocation) {
@@ -278,14 +278,14 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	protected void applyEntityAttributes() {
+	protected void func_110147_ax() {
 		if (master != null) master.applyEntityAttributes();
-		else super.applyEntityAttributes();
+		else super.func_110147_ax();
 	}
 
 	@Override
 	public void superApplyEntityAttributes() {
-		super.applyEntityAttributes();
+		super.func_110147_ax();
 	}
 
 	@Override
@@ -724,14 +724,14 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void displayGUIHorse(EntityHorse entityHorse, IInventory iInventory) {
+	public void func_110298_a(EntityHorse entityHorse, IInventory iInventory) {
 		if (master != null) master.openGuiHorseInventory(entityHorse, iInventory);
-		else super.displayGUIHorse(entityHorse, iInventory);
+		else super.func_110298_a(entityHorse, iInventory);
 	}
 
 	@Override
 	public void superOpenGuiHorseInventory(Object entityHorse, Object iInventory) {
-		super.displayGUIHorse((EntityHorse) entityHorse, (IInventory) iInventory);
+		super.func_110298_a((EntityHorse) entityHorse, (IInventory) iInventory);
 	}
 
 	@Override
@@ -778,13 +778,13 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean canAttackPlayer(EntityPlayer entityPlayer) {
-		return master != null ? master.canAttackPlayer(entityPlayer) : super.canAttackPlayer(entityPlayer);
+	public boolean func_96122_a(EntityPlayer entityPlayer) {
+		return master != null ? master.canAttackPlayer(entityPlayer) : super.func_96122_a(entityPlayer);
 	}
 
 	@Override
 	public boolean superCanAttackPlayer(Object entityPlayer) {
-		return super.canAttackPlayer((EntityPlayer) entityPlayer);
+		return super.func_96122_a((EntityPlayer) entityPlayer);
 	}
 
 	@Override
@@ -809,13 +809,13 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public float getArmorVisibility() {
-		return master != null ? master.getArmorVisibility() : super.getArmorVisibility();
+	public float func_82243_bO() {
+		return master != null ? master.getArmorVisibility() : super.func_82243_bO();
 	}
 
 	@Override
 	public float superGetArmorVisibility() {
-		return super.getArmorVisibility();
+		return super.func_82243_bO();
 	}
 
 	@Override
@@ -1439,13 +1439,13 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public World getEntityWorld() {
-		return (World) (master != null ? master.getEntityWorld() : super.getEntityWorld());
+	public World func_130014_f_() {
+		return (World) (master != null ? master.getEntityWorld() : super.func_130014_f_());
 	}
 
 	@Override
 	public World superGetEntityWorld() {
-		return super.getEntityWorld();
+		return super.func_130014_f_();
 	}
 
 	@Override
@@ -1478,13 +1478,13 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean isInvisibleToPlayer(EntityPlayer entityPlayer) {
-		return master != null ? master.isInvisibleToPlayer(entityPlayer) : super.isInvisibleToPlayer(entityPlayer);
+	public boolean func_98034_c(EntityPlayer entityPlayer) {
+		return master != null ? master.isInvisibleToPlayer(entityPlayer) : super.func_98034_c(entityPlayer);
 	}
 
 	@Override
 	public boolean superIsInvisibleToPlayer(Object entityPlayer) {
-		return super.isInvisibleToPlayer((EntityPlayer) entityPlayer);
+		return super.func_98034_c((EntityPlayer) entityPlayer);
 	}
 
 	@Override
@@ -1508,13 +1508,13 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean isPushedByWater() {
-		return master != null ? master.isPushedByWater() : super.isPushedByWater();
+	public boolean func_96092_aw() {
+		return master != null ? master.isPushedByWater() : super.func_96092_aw();
 	}
 
 	@Override
 	public boolean superIsPushedByWater() {
-		return super.isPushedByWater();
+		return super.func_96092_aw();
 	}
 
 	@Override
@@ -1547,24 +1547,24 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void setAbsorptionAmount(float p_110149_1_) {
+	public void func_110149_m(float p_110149_1_) {
 		if (master != null) master.setAbsorptionAmount(p_110149_1_);
-		else super.setAbsorptionAmount(p_110149_1_);
+		else super.func_110149_m(p_110149_1_);
 	}
 
 	@Override
 	public void superSetAbsorptionAmount(float p_110149_1_) {
-		super.setAbsorptionAmount(p_110149_1_);
+		super.func_110149_m(p_110149_1_);
 	}
 
 	@Override
-	public float getAbsorptionAmount() {
-		return master != null ? master.getAbsorptionAmount() : super.getAbsorptionAmount();
+	public float func_110139_bj() {
+		return master != null ? master.getAbsorptionAmount() : super.func_110139_bj();
 	}
 
 	@Override
 	public float superGetAbsorptionAmount() {
-		return super.getAbsorptionAmount();
+		return super.func_110139_bj();
 	}
 
 	public void openGui(Object mod, int modGuiId, World world, int x, int y, int z) {
@@ -1740,34 +1740,34 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public EntityLivingBase getLastAttacker() {
-		return (EntityLivingBase) (master != null ? master.getLastAttacker() : super.getLastAttacker());
+	public EntityLivingBase func_110144_aD() {
+		return (EntityLivingBase) (master != null ? master.getLastAttacker() : super.func_110144_aD());
 	}
 
 	@Override
 	public EntityLivingBase superGetLastAttacker() {
-		return super.getLastAttacker();
+		return super.func_110144_aD();
 	}
 
 	@Override
-	public int getLastAttackerTime() {
-		return master != null ? master.getLastAttackerTime() : super.getLastAttackerTime();
+	public int func_142013_aG() {
+		return master != null ? master.getLastAttackerTime() : super.func_142013_aG();
 	}
 
 	@Override
 	public int superGetLastAttackerTime() {
-		return super.getLastAttackerTime();
+		return super.func_142013_aG();
 	}
 
 	@Override
-	public void setLastAttacker(Entity entity) {
+	public void func_130011_c(Entity entity) {
 		if (master != null) master.setLastAttacker(entity);
-		else super.setLastAttacker(entity);
+		else super.func_130011_c(entity);
 	}
 
 	@Override
 	public void superSetLastAttacker(Object entity) {
-		super.setLastAttacker((Entity) entity);
+		super.func_130011_c((Entity) entity);
 	}
 
 	@Override
@@ -1940,14 +1940,14 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void setHealth(float p_70606_1_) {
+	public void setEntityHealth(float p_70606_1_) {
 		if (master != null) master.setHealth(p_70606_1_);
-		else super.setHealth(p_70606_1_);
+		else super.setEntityHealth(p_70606_1_);
 	}
 
 	@Override
 	public void superSetHealth(float p_70606_1_) {
-		super.setHealth(p_70606_1_);
+		super.setEntityHealth(p_70606_1_);
 	}
 
 	@Override
@@ -2119,13 +2119,13 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public BaseAttributeMap getAttributeMap() {
-		return (BaseAttributeMap) (master != null ? master.getAttributeMap() : super.getAttributeMap());
+	public BaseAttributeMap func_110140_aT() {
+		return (BaseAttributeMap) (master != null ? master.getAttributeMap() : super.func_110140_aT());
 	}
 
 	@Override
 	public BaseAttributeMap superGetAttributeMap() {
-		return super.getAttributeMap();
+		return super.func_110140_aT();
 	}
 
 	@Override
@@ -2181,14 +2181,14 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void dismountEntity(Entity entity) {
+	public void func_110145_l(Entity entity) {
 		if (master != null) master.dismountEntity(entity);
-		else super.dismountEntity(entity);
+		else super.func_110145_l(entity);
 	}
 
 	@Override
 	public void superDismountEntity(Object entity) {
-		super.dismountEntity((Entity) entity);
+		super.func_110145_l((Entity) entity);
 	}
 
 	@Override
@@ -2411,23 +2411,23 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean isOnSameTeam(EntityLivingBase entityLivingBase) {
-		return master != null ? master.isOnSameTeam(entityLivingBase) : super.isOnSameTeam(entityLivingBase);
+	public boolean func_142014_c(EntityLivingBase entityLivingBase) {
+		return master != null ? master.isOnSameTeam(entityLivingBase) : super.func_142014_c(entityLivingBase);
 	}
 
 	@Override
 	public boolean superIsOnSameTeam(Object entityLivingBase) {
-		return super.isOnSameTeam((EntityLivingBase) entityLivingBase);
+		return super.func_142014_c((EntityLivingBase) entityLivingBase);
 	}
 
 	@Override
-	public boolean isOnTeam(Team team) {
-		return master != null ? master.isOnTeam(team) : super.isOnTeam(team);
+	public boolean func_142012_a(Team team) {
+		return master != null ? master.isOnTeam(team) : super.func_142012_a(team);
 	}
 
 	@Override
 	public boolean superIsOnTeam(Object team) {
-		return super.isOnTeam((Team) team);
+		return super.func_142012_a((Team) team);
 	}
 
 	public void curePotionEffects(ItemStack itemStack) {
@@ -2849,23 +2849,23 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean writeMountToNBT(NBTTagCompound nBTTagCompound) {
-		return master != null ? master.writeToNBTAtomically(nBTTagCompound) : super.writeMountToNBT(nBTTagCompound);
+	public boolean addNotRiddenEntityID(NBTTagCompound nBTTagCompound) {
+		return master != null ? master.writeToNBTAtomically(nBTTagCompound) : super.addNotRiddenEntityID(nBTTagCompound);
 	}
 
 	@Override
 	public boolean superWriteToNBTAtomically(Object nBTTagCompound) {
-		return super.writeMountToNBT((NBTTagCompound) nBTTagCompound);
+		return super.addNotRiddenEntityID((NBTTagCompound) nBTTagCompound);
 	}
 
 	@Override
-	public boolean writeToNBTOptional(NBTTagCompound nBTTagCompound) {
-		return master != null ? master.writeToNBTOptional(nBTTagCompound) : super.writeToNBTOptional(nBTTagCompound);
+	public boolean addEntityID(NBTTagCompound nBTTagCompound) {
+		return master != null ? master.writeToNBTOptional(nBTTagCompound) : super.addEntityID(nBTTagCompound);
 	}
 
 	@Override
 	public boolean superWriteToNBTOptional(Object nBTTagCompound) {
-		return super.writeToNBTOptional((NBTTagCompound) nBTTagCompound);
+		return super.addEntityID((NBTTagCompound) nBTTagCompound);
 	}
 
 	@Override
@@ -2892,24 +2892,24 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	protected boolean shouldSetPosAfterLoading() {
-		return master != null ? master.shouldSetPosAfterLoading() : super.shouldSetPosAfterLoading();
+	protected boolean func_142008_O() {
+		return master != null ? master.shouldSetPosAfterLoading() : super.func_142008_O();
 	}
 
 	@Override
 	public boolean superShouldSetPosAfterLoading() {
-		return super.shouldSetPosAfterLoading();
+		return super.func_142008_O();
 	}
 
 	@Override
-	public void onChunkLoad() {
+	public void func_110123_P() {
 		if (master != null) master.onChunkLoad();
-		else super.onChunkLoad();
+		else super.func_110123_P();
 	}
 
 	@Override
 	public void superOnChunkLoad() {
-		super.onChunkLoad();
+		super.func_110123_P();
 	}
 
 	@Override
@@ -2961,13 +2961,13 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean interactFirst(EntityPlayer entityPlayer) {
-		return master != null ? master.processInitialInteract(entityPlayer) : super.interactFirst(entityPlayer);
+	public boolean func_130002_c(EntityPlayer entityPlayer) {
+		return master != null ? master.processInitialInteract(entityPlayer) : super.func_130002_c(entityPlayer);
 	}
 
 	@Override
 	public boolean superProcessInitialInteract(Object entityPlayer) {
-		return super.interactFirst((EntityPlayer) entityPlayer);
+		return super.func_130002_c((EntityPlayer) entityPlayer);
 	}
 
 	@Override
@@ -3220,13 +3220,13 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean hitByEntity(Entity entity) {
-		return master != null ? master.hitByEntity(entity) : super.hitByEntity(entity);
+	public boolean func_85031_j(Entity entity) {
+		return master != null ? master.hitByEntity(entity) : super.func_85031_j(entity);
 	}
 
 	@Override
 	public boolean superHitByEntity(Object entity) {
-		return super.hitByEntity((Entity) entity);
+		return super.func_85031_j((Entity) entity);
 	}
 
 	@Override
@@ -3302,13 +3302,13 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public int getMaxSafePointTries() {
-		return master != null ? master.getMaxSafePointTries() : super.getMaxSafePointTries();
+	public int func_82143_as() {
+		return master != null ? master.getMaxSafePointTries() : super.func_82143_as();
 	}
 
 	@Override
 	public int superGetMaxSafePointTries() {
-		return super.getMaxSafePointTries();
+		return super.func_82143_as();
 	}
 
 	@Override
@@ -3332,14 +3332,14 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void addEntityCrashInfo(CrashReportCategory crashReportCategory) {
+	public void func_85029_a(CrashReportCategory crashReportCategory) {
 		if (master != null) master.addEntityCrashInfo(crashReportCategory);
-		else super.addEntityCrashInfo(crashReportCategory);
+		else super.func_85029_a(crashReportCategory);
 	}
 
 	@Override
 	public void superAddEntityCrashInfo(Object crashReportCategory) {
-		super.addEntityCrashInfo((CrashReportCategory) crashReportCategory);
+		super.func_85029_a((CrashReportCategory) crashReportCategory);
 	}
 
 	@Override
@@ -3353,13 +3353,13 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public UUID getUniqueID() {
-		return master != null ? master.getUniqueID() : super.getUniqueID();
+	public UUID func_110124_au() {
+		return master != null ? master.getUniqueID() : super.func_110124_au();
 	}
 
 	@Override
 	public UUID superGetUniqueID() {
-		return super.getUniqueID();
+		return super.func_110124_au();
 	}
 
 	public void func_145781_i(int p_145781_1_) {
@@ -3779,7 +3779,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public int superGetMaxHealth() {
-		return (int) getMaxHealth();
+		return (int) func_110138_aP();
 	}
 
 	@Override
@@ -3860,7 +3860,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public int superGetHealthInt() {
-		return (int) super.getHealth();
+		return (int) super.func_110143_aJ();
 	}
 
 	@Override
@@ -3907,7 +3907,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void superUnmountEntity(Object entity) {
-		dismountEntity((Entity) entity);
+		func_110145_l((Entity) entity);
 	}
 
 	@Override
@@ -4014,7 +4014,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public Object superGetHealth() {
-		return super.getHealth();
+		return super.func_110143_aJ();
 	}
 
 	@Override
@@ -4034,7 +4034,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void superSetHealth(Object par1) {
-		super.setHealth((Float) par1);
+		super.setEntityHealth((Float) par1);
 	}
 
 	@Override
@@ -4651,7 +4651,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public boolean superInteract(Object entityPlayer) {
-		return super.interactFirst((EntityPlayer) entityPlayer);
+		return super.func_130002_c((EntityPlayer) entityPlayer);
 	}
 
 	@Override

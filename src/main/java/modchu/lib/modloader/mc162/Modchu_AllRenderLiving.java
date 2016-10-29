@@ -64,7 +64,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	}
 
 	@Override
-	public void doRenderLiving(EntityLivingBase entity, double d, double d1, double d2, float d3, float d4) {
+	public void func_130000_a(EntityLivingBase entity, double d, double d1, double d2, float d3, float d4) {
 		doRender(entity, d, d1, d2, d3, d4);
 	}
 
@@ -88,9 +88,9 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation func_110775_a(Entity entity) {
 		Modchu_RenderLiving render = renderMapGet(entity);
-		if (render != null) return render.getEntityTexture(entity);
+		if (render != null) return render.func_110775_a(entity);
 		return null;
 	}
 

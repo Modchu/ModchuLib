@@ -1985,10 +1985,12 @@ public class Modchu_EntityLivingBase extends EntityLiving implements Modchu_IEnt
 	@Override
 	protected void entityInit() {
 		if (master != null) master.entityInit();
+		else super.entityInit();
 	}
 
 	@Override
 	public void superEntityInit() {
+		super.entityInit();
 	}
 
 	@Override

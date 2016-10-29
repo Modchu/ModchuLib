@@ -22,11 +22,11 @@ public class Modchu_SimpleTexture extends SimpleTexture implements Modchu_ISimpl
 	}
 
 	@Override
-	public void loadTexture(ResourceManager resourceManager) {
+	public void func_110551_a(ResourceManager resourceManager) {
 		if (master != null) master.loadTexture(resourceManager);
 		else
 		try {
-			super.loadTexture(resourceManager);
+			super.func_110551_a(resourceManager);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,19 +34,19 @@ public class Modchu_SimpleTexture extends SimpleTexture implements Modchu_ISimpl
 
 	public void superLoadTexture(Object resourceManager) {
 		try {
-			super.loadTexture((ResourceManager) resourceManager);
+			super.func_110551_a((ResourceManager) resourceManager);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public int getGlTextureId() {
-		return master != null ? master.getGlTextureId() : super.getGlTextureId();
+	public int func_110552_b() {
+		return master != null ? master.getGlTextureId() : super.func_110552_b();
 	}
 
 	public int superGetGlTextureId() {
-		return super.getGlTextureId();
+		return super.func_110552_b();
 	}
 
 }

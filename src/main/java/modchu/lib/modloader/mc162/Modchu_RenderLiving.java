@@ -64,7 +64,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(Entity entity) {
+	public ResourceLocation func_110775_a(Entity entity) {
 		return (ResourceLocation) (master != null ? master.getEntityTexture(entity) : null);
 	}
 
@@ -552,26 +552,26 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 	}
 	// 162~
 	@Override
-	public void bindEntityTexture(Entity entity) {
+	public void func_110777_b(Entity entity) {
 		if (master != null) master.bindEntityTexture(entity);
-		else super.bindEntityTexture(entity);
+		else super.func_110777_b(entity);
 	}
 
 	@Override
 	public boolean superBindEntityTexture(Object entity) {
-		super.bindEntityTexture((Entity) entity);
+		super.func_110777_b((Entity) entity);
 		return true;
 	}
 
 	@Override
-	public void bindTexture(ResourceLocation resourceLocation) {
+	public void func_110776_a(ResourceLocation resourceLocation) {
 		if (master != null) master.bindTexture(resourceLocation);
-		else super.bindTexture(resourceLocation);
+		else super.func_110776_a(resourceLocation);
 	}
 
 	@Override
 	public void superBindTexture(Object resourceLocation) {
-		super.bindTexture((ResourceLocation) resourceLocation);
+		super.func_110776_a((ResourceLocation) resourceLocation);
 	}
 
 	@Override

@@ -185,14 +185,14 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	@Override
-	public void setParticleIcon(Icon icon) {
+	public void func_110125_a(Icon icon) {
 		if (master != null) master.setParticleIcon(icon);
-		else super.setParticleIcon(icon);
+		else super.func_110125_a(icon);
 	}
 
 	@Override
 	public void superSetParticleIcon(Object icon) {
-		super.setParticleIcon((Icon) icon);
+		super.func_110125_a((Icon) icon);
 	}
 
 	@Override
@@ -733,23 +733,23 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	@Override
-	public boolean writeMountToNBT(NBTTagCompound nBTTagCompound) {
-		return master != null ? master.writeMountToNBT(nBTTagCompound) : super.writeMountToNBT(nBTTagCompound);
+	public boolean addNotRiddenEntityID(NBTTagCompound nBTTagCompound) {
+		return master != null ? master.writeMountToNBT(nBTTagCompound) : super.addNotRiddenEntityID(nBTTagCompound);
 	}
 
 	@Override
 	public boolean superWriteMountToNBT(Object nBTTagCompound) {
-		return super.writeMountToNBT((NBTTagCompound) nBTTagCompound);
+		return super.addNotRiddenEntityID((NBTTagCompound) nBTTagCompound);
 	}
 
 	@Override
-	public boolean writeToNBTOptional(NBTTagCompound nBTTagCompound) {
-		return master != null ? master.writeToNBTOptional(nBTTagCompound) : super.writeToNBTOptional(nBTTagCompound);
+	public boolean addEntityID(NBTTagCompound nBTTagCompound) {
+		return master != null ? master.writeToNBTOptional(nBTTagCompound) : super.addEntityID(nBTTagCompound);
 	}
 
 	@Override
 	public boolean superWriteToNBTOptional(Object nBTTagCompound) {
-		return super.writeToNBTOptional((NBTTagCompound) nBTTagCompound);
+		return super.addEntityID((NBTTagCompound) nBTTagCompound);
 	}
 
 	@Override
@@ -775,24 +775,24 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	@Override
-	protected boolean shouldSetPosAfterLoading() {
-		return master != null ? master.shouldSetPosAfterLoading() : super.shouldSetPosAfterLoading();
+	protected boolean func_142008_O() {
+		return master != null ? master.shouldSetPosAfterLoading() : super.func_142008_O();
 	}
 
 	@Override
 	public boolean superShouldSetPosAfterLoading() {
-		return super.shouldSetPosAfterLoading();
+		return super.func_142008_O();
 	}
 
 	@Override
-	public void onChunkLoad() {
+	public void func_110123_P() {
 		if (master != null) master.onChunkLoad();
-		else super.onChunkLoad();
+		else super.func_110123_P();
 	}
 
 	@Override
 	public void superOnChunkLoad() {
-		super.onChunkLoad();
+		super.func_110123_P();
 	}
 
 	@Override
@@ -856,13 +856,13 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	@Override
-	public boolean interactFirst(EntityPlayer entityPlayer) {
-		return master != null ? master.interactFirst(entityPlayer) : super.interactFirst(entityPlayer);
+	public boolean func_130002_c(EntityPlayer entityPlayer) {
+		return master != null ? master.interactFirst(entityPlayer) : super.func_130002_c(entityPlayer);
 	}
 
 	@Override
 	public boolean superInteractFirst(Object entityPlayer) {
-		return super.interactFirst((EntityPlayer) entityPlayer);
+		return super.func_130002_c((EntityPlayer) entityPlayer);
 	}
 
 	@Override
@@ -1107,13 +1107,13 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	@Override
-	public boolean isInvisibleToPlayer(EntityPlayer entityPlayer) {
-		return master != null ? master.isInvisibleToPlayer(entityPlayer) : super.isInvisibleToPlayer(entityPlayer);
+	public boolean func_98034_c(EntityPlayer entityPlayer) {
+		return master != null ? master.isInvisibleToPlayer(entityPlayer) : super.func_98034_c(entityPlayer);
 	}
 
 	@Override
 	public boolean superIsInvisibleToPlayer(Object entityPlayer) {
-		return super.isInvisibleToPlayer((EntityPlayer) entityPlayer);
+		return super.func_98034_c((EntityPlayer) entityPlayer);
 	}
 
 	@Override
@@ -1265,13 +1265,13 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	@Override
-	public boolean hitByEntity(Entity entity) {
-		return master != null ? master.hitByEntity(entity) : super.hitByEntity(entity);
+	public boolean func_85031_j(Entity entity) {
+		return master != null ? master.hitByEntity(entity) : super.func_85031_j(entity);
 	}
 
 	@Override
 	public boolean superHitByEntity(Object entity) {
-		return super.hitByEntity((Entity) entity);
+		return super.func_85031_j((Entity) entity);
 	}
 
 	@Override
@@ -1318,13 +1318,13 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	@Override
-	public int getMaxSafePointTries() {
-		return master != null ? master.getMaxFallHeight() : super.getMaxSafePointTries();
+	public int func_82143_as() {
+		return master != null ? master.getMaxFallHeight() : super.func_82143_as();
 	}
 
 	@Override
 	public int superGetMaxFallHeight() {
-		return super.getMaxSafePointTries();
+		return super.func_82143_as();
 	}
 
 	@Override
@@ -1348,14 +1348,14 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	@Override
-	public void addEntityCrashInfo(CrashReportCategory crashReportCategory) {
+	public void func_85029_a(CrashReportCategory crashReportCategory) {
 		if (master != null) master.addEntityCrashInfo(crashReportCategory);
-		else super.addEntityCrashInfo(crashReportCategory);
+		else super.func_85029_a(crashReportCategory);
 	}
 
 	@Override
 	public void superAddEntityCrashInfo(Object crashReportCategory) {
-		super.addEntityCrashInfo((CrashReportCategory) crashReportCategory);
+		super.func_85029_a((CrashReportCategory) crashReportCategory);
 	}
 
 	@Override
@@ -1369,23 +1369,23 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	@Override
-	public UUID getUniqueID() {
-		return master != null ? master.getUniqueID() : super.getUniqueID();
+	public UUID func_110124_au() {
+		return master != null ? master.getUniqueID() : super.func_110124_au();
 	}
 
 	@Override
 	public UUID superGetUniqueID() {
-		return super.getUniqueID();
+		return super.func_110124_au();
 	}
 
 	@Override
-	public boolean isPushedByWater() {
-		return master != null ? master.isPushedByWater() : super.isPushedByWater();
+	public boolean func_96092_aw() {
+		return master != null ? master.isPushedByWater() : super.func_96092_aw();
 	}
 
 	@Override
 	public boolean superIsPushedByWater() {
-		return super.isPushedByWater();
+		return super.func_96092_aw();
 	}
 
 	@Override
@@ -1461,23 +1461,23 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	@Override
-	public float getBlockExplosionResistance(Explosion explosion, World world, int par3, int par4, int par5, Block block) {
-		return master != null ? master.getBlockExplosionResistance(explosion, world, par3, par4, par5, block) : super.getBlockExplosionResistance(explosion, world, par3, par4, par5, block);
+	public float func_82146_a(Explosion explosion, World world, int par3, int par4, int par5, Block block) {
+		return master != null ? master.getBlockExplosionResistance(explosion, world, par3, par4, par5, block) : super.func_82146_a(explosion, world, par3, par4, par5, block);
 	}
 
 	@Override
 	public float superGetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block) {
-		return super.getBlockExplosionResistance((Explosion) explosion, (World) world, par3, par4, par5, (Block) block);
+		return super.func_82146_a((Explosion) explosion, (World) world, par3, par4, par5, (Block) block);
 	}
 
 	@Override
-	public boolean shouldExplodeBlock(Explosion explosion, World world, int par3, int par4, int par5, int par6, float par7) {
-		return master != null ? master.shouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7) : super.shouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7);
+	public boolean func_96091_a(Explosion explosion, World world, int par3, int par4, int par5, int par6, float par7) {
+		return master != null ? master.shouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7) : super.func_96091_a(explosion, world, par3, par4, par5, par6, par7);
 	}
 
 	@Override
 	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
-		return super.shouldExplodeBlock((Explosion) explosion, (World) world, par3, par4, par5, par6, par7);
+		return super.func_96091_a((Explosion) explosion, (World) world, par3, par4, par5, par6, par7);
 	}
 
 	@Override

@@ -29,12 +29,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object abstractClientPlayerGetTextureCape(Object entity) {
-		return ((AbstractClientPlayer) entity).getTextureCape();
+		return ((AbstractClientPlayer) entity).func_110309_l();
 	}
 
 	@Override
 	public Object abstractClientPlayerGetTextureSkin(Object entity) {
-		return ((AbstractClientPlayer) entity).getTextureSkin();
+		return ((AbstractClientPlayer) entity).func_110310_o();
 	}
 
 	@Override
@@ -586,7 +586,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public float entityLivingBaseGetHealth(Object entity) {
-		return ((EntityLivingBase) entity).getHealth();
+		return ((EntityLivingBase) entity).func_110143_aJ();
 	}
 
 	@Override
@@ -596,7 +596,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public float entityLivingBaseGetMaxHealth(Object entity) {
-		return ((EntityLivingBase) entity).getMaxHealth();
+		return ((EntityLivingBase) entity).func_110138_aP();
 	}
 
 	@Override
@@ -632,7 +632,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public float entityLivingBaseLimbSwingAmount(Object entity) {
-		return ((EntityLivingBase) entity).limbSwingAmount;
+		return ((EntityLivingBase) entity).limbYaw;
 	}
 
 	@Override
@@ -667,7 +667,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public float entityLivingBasePrevLimbSwingAmount(Object entity) {
-		return ((EntityLivingBase) entity).prevLimbSwingAmount;
+		return ((EntityLivingBase) entity).prevLimbYaw;
 	}
 
 	@Override
@@ -692,7 +692,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void entityLivingBaseSetHealth(Object entity, float f) {
-		((EntityLivingBase) entity).setHealth(f);
+		((EntityLivingBase) entity).setEntityHealth(f);
 	}
 
 	@Override
@@ -1436,11 +1436,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 					Item.netherQuartz,
 					Item.minecartTnt,
 					Item.minecartHopper,
-					Item.horseArmorIron,
-					Item.horseArmorGold,
-					Item.horseArmorDiamond,
-					Item.leash,
-					Item.nameTag,
+					Item.field_111215_ce,
+					Item.field_111216_cf,
+					Item.field_111213_cg,
+					Item.field_111214_ch,
+					Item.field_111212_ci,
 					Item.record13,
 					Item.recordCat,
 					Item.recordBlocks,
@@ -1811,11 +1811,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 					Block.stairsNetherQuartz,
 					Block.railActivator,
 					Block.dropper,
-					Block.stainedClay,
-					Block.hay,
-					Block.carpet,
-					Block.hardenedClay,
-					Block.coalBlock,
+					Block.field_111039_cA,
+					Block.field_111038_cB,
+					Block.field_111031_cC,
+					Block.field_111032_cD,
+					Block.field_111034_cE,
 					null,//Block.packed_ice,
 					null,//Block.acacia_stairs,
 					null,//Block.dark_oak_stairs,
@@ -1900,7 +1900,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object guiOptionsBackground() {
-		return Gui.optionsBackground;
+		return Gui.field_110325_k;
 	}
 
 	@Override
@@ -1968,7 +1968,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public boolean isMac() {
-		return Minecraft.isRunningOnMac;
+		return Minecraft.field_142025_a;
 	}
 
 	@Override
@@ -2019,7 +2019,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public boolean itemItemInteractionForEntity(Object item, Object itemstack, Object entityplayer, Object entityLivingBase, Object enumHand) {
-		return ((Item) item).itemInteractionForEntity((ItemStack) itemstack, (EntityPlayer) entityplayer, (EntityLivingBase) entityLivingBase);
+		return ((Item) item).func_111207_a((ItemStack) itemstack, (EntityPlayer) entityplayer, (EntityLivingBase) entityLivingBase);
 	}
 
 	@Override
@@ -2191,7 +2191,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object minecraftGatSession() {
 		if (Modchu_Main.isServer) return null;
-		return Minecraft.getMinecraft().getSession();
+		return Minecraft.getMinecraft().func_110432_I();
 	}
 
 	@Override
@@ -2202,14 +2202,14 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public long minecraftGetSystemTime() {
-		if (Modchu_Main.isServer) return MinecraftServer.getServer().getSystemTimeMillis();
+		if (Modchu_Main.isServer) return MinecraftServer.getServer().func_130071_aq();
 		return Minecraft.getMinecraft().getSystemTime();
 	}
 
 	@Override
 	public Object minecraftGetTextureManager() {
 		if (Modchu_Main.isServer) return null;
-		return Minecraft.getMinecraft().getTextureManager();
+		return Minecraft.getMinecraft().func_110434_K();
 	}
 
 	@Override
@@ -2670,7 +2670,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	public InputStream resourceManagerInputStream(Object o) {
 		if (Modchu_Main.isServer) return null;
 		try {
-			return Minecraft.getMinecraft().getResourceManager().getResource((ResourceLocation) o).getInputStream();
+			return Minecraft.getMinecraft().func_110442_L().func_110536_a((ResourceLocation) o).func_110527_b();
 		} catch (Exception e) {
 		}
 		return null;
@@ -2992,17 +2992,17 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void textureManagerBindTexture(Object textureManager, Object o) {
-		if (o != null) ((TextureManager) textureManager).bindTexture((ResourceLocation) o);
+		if (o != null) ((TextureManager) textureManager).func_110577_a((ResourceLocation) o);
 	}
 
 	@Override
 	public Object textureManagerGetTexture(Object textureManager, Object o) {
-		return o != null ? ((TextureManager) textureManager).getTexture((ResourceLocation) o) : null;
+		return o != null ? ((TextureManager) textureManager).func_110581_b((ResourceLocation) o) : null;
 	}
 
 	@Override
 	public Object textureManagerGetResourceLocation(Object textureManager, int i) {
-		return ((TextureManager) textureManager).getResourceLocation(i);
+		return ((TextureManager) textureManager).func_130087_a(i);
 	}
 
 	@Override
@@ -3017,12 +3017,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public int textureUtilUploadTextureImage(int i, Object bufferedimage) {
-		return TextureUtil.uploadTextureImage(i, (BufferedImage) bufferedimage);
+		return TextureUtil.func_110987_a(i, (BufferedImage) bufferedimage);
 	}
 
 	@Override
 	public boolean threadDownloadImageDataIsTextureUploaded(Object threadDownloadImageData) {
-		return ((ThreadDownloadImageData) threadDownloadImageData).isTextureUploaded();
+		return ((ThreadDownloadImageData) threadDownloadImageData).func_110557_a();
 	}
 
 	@Override
@@ -3200,7 +3200,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public boolean entityHorseIsTame(Object entityHorse) {
-		return entityHorse instanceof EntityHorse ? ((EntityHorse) entityHorse).isTame() : false;
+		return entityHorse instanceof EntityHorse ? ((EntityHorse) entityHorse).func_110248_bS() : false;
 	}
 
 	@Override
@@ -3435,7 +3435,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void setEntityLivingBasePrevLimbSwingAmount(Object entity, float f) {
-		((EntityLivingBase) entity).prevLimbSwingAmount = f;
+		((EntityLivingBase) entity).prevLimbYaw = f;
 	}
 
 	@Override
@@ -3450,7 +3450,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void setEntityLivingBaseLimbSwingAmount(Object entity, float f) {
-		((EntityLivingBase) entity).limbSwingAmount = f;
+		((EntityLivingBase) entity).limbYaw = f;
 	}
 
 	@Override
@@ -3515,7 +3515,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public int threadDownloadImageDataGetGlTextureId(Object threadDownloadImageData) {
-		return ((ThreadDownloadImageData) threadDownloadImageData).getGlTextureId();
+		return ((ThreadDownloadImageData) threadDownloadImageData).func_110552_b();
 	}
 
 	@Override
@@ -3695,18 +3695,18 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void renderEngineDeleteTexture(Object renderEngine, Object resourceLocation) {
-		TextureObject textureObject = ((TextureManager) renderEngine).getTexture((ResourceLocation) resourceLocation);
-		if (textureObject != null) GL11.glDeleteTextures(textureObject.getGlTextureId());
+		TextureObject textureObject = ((TextureManager) renderEngine).func_110581_b((ResourceLocation) resourceLocation);
+		if (textureObject != null) GL11.glDeleteTextures(textureObject.func_110552_b());
 	}
 
 	@Override
 	public String resourceLocationGetResourceDomain(Object resourceLocation) {
-		return ((ResourceLocation) resourceLocation).getResourceDomain();
+		return ((ResourceLocation) resourceLocation).func_110624_b();
 	}
 
 	@Override
 	public String resourceLocationGetResourcePath(Object resourceLocation) {
-		return ((ResourceLocation) resourceLocation).getResourcePath();
+		return ((ResourceLocation) resourceLocation).func_110623_a();
 	}
 
 	@Override
@@ -3831,7 +3831,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void entitySetCustomNameTag(Object entity, String s) {
-		((EntityLiving) entity).setCustomNameTag(s);
+		((EntityLiving) entity).func_94058_c(s);
 	}
 
 	@Override
@@ -4031,12 +4031,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Multimap itemStackGetAttributeModifiers(Object itemStack) {
-		return ((ItemStack) itemStack).getAttributeModifiers();
+		return ((ItemStack) itemStack).func_111283_C();
 	}
 
 	@Override
 	public Object sharedMonsterAttributesAttackDamage() {
-		return SharedMonsterAttributes.attackDamage;
+		return SharedMonsterAttributes.field_111264_e;
 	}
 
 	@Override
@@ -4046,7 +4046,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public double attributeModifierGetAmount(Object attributeModifier) {
-		return ((AttributeModifier) attributeModifier).getAmount();
+		return ((AttributeModifier) attributeModifier).func_111164_d();
 	}
 
 	@Override
@@ -4223,7 +4223,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object abstractClientPlayerLocationSkin(Object entity) {
-		return ((AbstractClientPlayer) entity).getLocationSkin();
+		return ((AbstractClientPlayer) entity).func_110306_p();
 	}
 
 	@Override
@@ -4398,13 +4398,13 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object minecraftTextureManager() {
-		return ((Minecraft) minecraftGetMinecraft()).getTextureManager();
+		return ((Minecraft) minecraftGetMinecraft()).func_110434_K();
 	}
 
 	@Override
 	public Object resourceManagerGetResource(Object resourceManager, Object o) {
 		try {
-			return ((ResourceManager) resourceManager).getResource((ResourceLocation) o);
+			return ((ResourceManager) resourceManager).func_110536_a((ResourceLocation) o);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -4413,12 +4413,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object minecraftGetResourceManager() {
-		return ((Minecraft) minecraftGetMinecraft()).getResourceManager();
+		return ((Minecraft) minecraftGetMinecraft()).func_110442_L();
 	}
 
 	@Override
 	public InputStream resourceGetInputStream(Object resource) {
-		return ((Resource) resource).getInputStream();
+		return ((Resource) resource).func_110527_b();
 	}
 
 	@Override

@@ -40,7 +40,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	@Override
-	public void doRenderLiving(EntityLivingBase entity, double d, double d1, double d2, float d3, float d4) {
+	public void func_130000_a(EntityLivingBase entity, double d, double d1, double d2, float d3, float d4) {
 		doRender(entity, d, d1, d2, d3, d4);
 	}
 
@@ -52,7 +52,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 
 	@Override
 	public void superDoRenderLiving(Object entityLiving, double d, double d1, double d2, float d3, float d4) {
-		super.doRenderLiving((EntityLiving) entityLiving, d, d1, d2, d3, d4);
+		super.func_130000_a((EntityLiving) entityLiving, d, d1, d2, d3, d4);
 	}
 
 	public void superDoRender(Object entity, double d, double d1, double d2, float d3, float d4) {
@@ -60,7 +60,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation func_110775_a(Entity entity) {
 		//if (master != null) Modchu_Debug.mdDebug("Modchu_RenderLivingBase getEntityTexture "+((ResourceLocation) master.getEntityTexture(entity)));
 		return master != null ? (ResourceLocation) master.getEntityTexture(entity) : null;
 	}
@@ -356,14 +356,14 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	}
 
 	@Override
-	public void bindTexture(ResourceLocation resourceLocation) {
+	public void func_110776_a(ResourceLocation resourceLocation) {
 		if (master != null) master.bindTexture(resourceLocation);
-		else super.bindTexture(resourceLocation);
+		else super.func_110776_a(resourceLocation);
 	}
 
 	@Override
 	public void superBindTexture(Object resourceLocation) {
-		super.bindTexture((ResourceLocation) resourceLocation);
+		super.func_110776_a((ResourceLocation) resourceLocation);
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation func_110775_a(Entity entity) {
 		//Modchu_Render render = renderMapGet(entity);
 		//if (render != null) return render.getEntityTexture(entity);
 		return null;
@@ -58,15 +58,15 @@ public class Modchu_AllRender extends Render implements Modchu_IAllRender {
 	}
 
 	@Override
-	protected void bindEntityTexture(Entity entity) {
+	protected void func_110777_b(Entity entity) {
 		//Modchu_Render render = renderMapGet(entity);
 		//if (render != null) render.bindEntityTexture(entity);
 		//else 
-			super.bindEntityTexture(entity);
+			super.func_110777_b(entity);
 	}
 
 	public boolean superBindEntityTexture(Object entity) {
-		super.bindEntityTexture((Entity) entity);
+		super.func_110777_b((Entity) entity);
 		return true;
 	}
 

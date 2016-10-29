@@ -778,14 +778,14 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public void onBlockPreDestroy(World world, int par2, int par3, int par4, int par5) {
+	public void onSetBlockIDWithMetaData(World world, int par2, int par3, int par4, int par5) {
 		if (master != null) master.onBlockPreDestroy(world, par2, par3, par4, par5);
-		else super.onBlockPreDestroy(world, par2, par3, par4, par5);
+		else super.onSetBlockIDWithMetaData(world, par2, par3, par4, par5);
 	}
 
 	@Override
 	public void superOnBlockPreDestroy(Object world, int par2, int par3, int par4, int par5) {
-		super.onBlockPreDestroy((World) world, par2, par3, par4, par5);
+		super.onSetBlockIDWithMetaData((World) world, par2, par3, par4, par5);
 	}
 
 	@Override
@@ -840,13 +840,13 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	protected String getTextureName() {
-		return master != null ? master.getTextureName() : super.getTextureName();
+	protected String func_111023_E() {
+		return master != null ? master.getTextureName() : super.func_111023_E();
 	}
 
 	@Override
 	public String superGetTextureName() {
-		return super.getTextureName();
+		return super.func_111023_E();
 	}
 
 	@Override
@@ -900,13 +900,13 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public Block setTextureName(String par1Str) {
-		return (Block) (master != null ? master.setBlockTextureName(par1Str) : super.setTextureName(par1Str));
+	public Block func_111022_d(String par1Str) {
+		return (Block) (master != null ? master.setBlockTextureName(par1Str) : super.func_111022_d(par1Str));
 	}
 
 	@Override
 	public Block superSetBlockTextureName(String par1Str) {
-		return super.setTextureName(par1Str);
+		return super.func_111022_d(par1Str);
 	}
 
 	@Override

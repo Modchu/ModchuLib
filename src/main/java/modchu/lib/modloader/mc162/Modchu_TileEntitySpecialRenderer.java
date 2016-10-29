@@ -64,14 +64,14 @@ public class Modchu_TileEntitySpecialRenderer extends TileEntitySpecialRenderer 
 	}
 
 	@Override
-	protected void bindTexture(ResourceLocation resourceLocation) {
+	protected void func_110628_a(ResourceLocation resourceLocation) {
 		if (master != null) master.bindTexture(resourceLocation);
-		else super.bindTexture(resourceLocation);
+		else super.func_110628_a(resourceLocation);
 	}
 
 	@Override
 	public void superBindTexture(Object resourceLocation) {
-		super.bindTexture((ResourceLocation) resourceLocation);
+		super.func_110628_a((ResourceLocation) resourceLocation);
 	}
 
 	protected void bindTextureByName(String par1Str) {

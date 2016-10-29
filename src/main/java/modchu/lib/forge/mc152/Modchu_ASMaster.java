@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_ASBasis;
 import modchu.lib.Modchu_CastHelper;
+import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
 import net.minecraft.block.Block;
@@ -2743,6 +2745,21 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public boolean renderManagerRenderEntityWithPosYaw(Object entity, double d, double d2, double d3, float f, float f2) {
+		Modchu_Debug.mDebug("Modchu_ASMaster renderManagerRenderEntityWithPosYaw entity="+entity);
+		Modchu_Debug.mDebug("Modchu_ASMaster renderManagerRenderEntityWithPosYaw renderEngine="+RenderManager.instance.renderEngine);
+		Modchu_Debug.mDebug("Modchu_ASMaster renderManagerRenderEntityWithPosYaw minecraftTextureManager="+minecraftTextureManager());
+		Modchu_Debug.mDebug("Modchu_ASMaster renderManagerRenderEntityWithPosYaw Minecraft.getMinecraft().gameSettings="+Minecraft.getMinecraft().gameSettings);
+		if (RenderManager.instance.renderEngine != null); else {
+			RenderEngine renderEngine = (RenderEngine) minecraftTextureManager();
+			//boolean b = Modchu_AS.set("RenderEngine", "options", renderEngine, Minecraft.getMinecraft().gameSettings);
+			//Modchu_Debug.mDebug("Modchu_ASMaster renderManagerRenderEntityWithPosYaw b="+b);
+			//Modchu_Debug.mDebug("Modchu_ASMaster renderManagerRenderEntityWithPosYaw options="+Modchu_AS.get("RenderEngine", "options", renderEngine));
+			RenderManager.instance.options = Minecraft.getMinecraft().gameSettings;
+			RenderManager.instance.renderEngine = renderEngine;
+			Render render = RenderManager.instance.getEntityRenderObject((Entity) entity);
+			render.renderManager = RenderManager.instance;
+			render.renderManager.options = Minecraft.getMinecraft().gameSettings;
+		}
 		RenderManager.instance.renderEntityWithPosYaw((Entity) entity, d, d2, d3, f, f2);
 		return true;
 	}

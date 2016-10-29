@@ -18,7 +18,7 @@ public class Modchu_SimpleBlockRenderingHandler implements ISimpleBlockRendering
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		master = instance instanceof Modchu_ISimpleBlockRenderingHandlerMaster ? (Modchu_ISimpleBlockRenderingHandlerMaster) instance : null;
-		Modchu_Debug.mDebug("Modchu_SimpleBlockRenderingHandler init master="+master);
+		//Modchu_Debug.mDebug("Modchu_SimpleBlockRenderingHandler init master="+master);
 	}
 
 	@Override
@@ -31,6 +31,7 @@ public class Modchu_SimpleBlockRenderingHandler implements ISimpleBlockRendering
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess iBlockAccess, int x, int y, int z, Block block, int modelId, RenderBlocks renderBlocks) {
+		//Modchu_Debug.mDebug("Modchu_SimpleBlockRenderingHandler renderWorldBlock");
 		return master != null ? master.renderWorldBlock(iBlockAccess, x, y, z, block, modelId, renderBlocks) : false;
 	}
 
@@ -49,6 +50,7 @@ public class Modchu_SimpleBlockRenderingHandler implements ISimpleBlockRendering
 
 	@Override
 	public int getRenderId() {
+		//Modchu_Debug.mDebug("Modchu_SimpleBlockRenderingHandler getRenderId()="+(master != null ? master.getRenderId() : -1));
 		return master != null ? master.getRenderId() : -1;
 	}
 
