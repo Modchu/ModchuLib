@@ -190,11 +190,11 @@ public interface Modchu_IBlockMaster {
 	public Object getActualState(Object iBlockState, Object iBlockAccess, Object blockPos);
 	public boolean isBlockNormalCube();
 	public boolean isNormalCube();
-	public boolean isVisuallyOpaque();
+	public boolean isVisuallyOpaque(Object iBlockState);
 	public boolean isReplaceable(Object iBlockAccess, Object blockPos);
 	public Object getSelectedBoundingBox(Object world, Object blockPos);
 	public void randomTick(Object world, Object blockPos, Object iBlockState, Random random);
-	public void neighborChanged(Object world, Object blockPos, Object iBlockState, Object block);
+	public void neighborChanged(Object world, Object blockPos, Object iBlockState, Object block, Object blockPos1);
 	public void breakBlock(Object world, Object blockPos, Object iBlockState);
 	public Object getItemDropped(Object iBlockState, Random rand, int fortune);
 	public void dropXpOnBlockBreak(Object world, Object blockPos, int amount);

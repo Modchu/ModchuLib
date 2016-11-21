@@ -573,12 +573,12 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 
 	@Override
 	public boolean superIsEntityInvulnerable() {
-		return super.isEntityInvulnerable(DamageSource.fall);
+		return superIsEntityInvulnerable(DamageSource.fall);
 	}
 
 	@Override
 	public boolean superAttackEntityFrom(Object damageSource, int par2) {
-		return super.attackEntityFrom((DamageSource) damageSource, par2);
+		return superAttackEntityFrom((DamageSource) damageSource, par2);
 	}
 
 	@Override

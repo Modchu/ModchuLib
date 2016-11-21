@@ -370,8 +370,8 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public void superGetSubBlocks(Object par1, Object creativeTabs, List par3List) {
-		super.getSubBlocks((Item) par1, (CreativeTabs) creativeTabs, par3List);
+	public void superGetSubBlocks(Object par1, Object creativeTabs, Object par3List) {
+		super.getSubBlocks((Item) par1, (CreativeTabs) creativeTabs, (List<ItemStack>) par3List);
 	}
 
 	@Override
@@ -1750,7 +1750,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public boolean superIsVisuallyOpaque() {
+	public boolean superIsVisuallyOpaque(Object iBlockState) {
 		return false;
 	}
 
@@ -1769,7 +1769,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public void superNeighborChanged(Object world, Object blockPos, Object iBlockState, Object block) {
+	public void superNeighborChanged(Object world, Object blockPos, Object iBlockState, Object block, Object blockPos1) {
 	}
 
 	@Override

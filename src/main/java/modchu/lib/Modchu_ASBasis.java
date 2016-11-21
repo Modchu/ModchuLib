@@ -962,7 +962,7 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public Object[] entityPlayerArmorInventory(Object entityplayerORInventory) {
+	public Object entityPlayerArmorInventory(Object entityplayerORInventory) {
 		return base.superEntityPlayerArmorInventory(entityplayerORInventory);
 	}
 
@@ -1072,7 +1072,7 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public Object[] entityPlayerMainInventory(Object entityplayerORInventory) {
+	public Object entityPlayerMainInventory(Object entityplayerORInventory) {
 		return base.superEntityPlayerMainInventory(entityplayerORInventory);
 	}
 

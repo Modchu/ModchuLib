@@ -29,7 +29,7 @@ public interface Modchu_IEntityMaster {
 	public void extinguish();
 	public void kill();
 	public boolean isOffsetPositionInLiquid(double p_70038_1_, double p_70038_3_, double p_70038_5_);
-	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_);
+	public void moveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_);
 	public Object getSwimSound();
 	public void doBlockCollisions();
 	public void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object block);

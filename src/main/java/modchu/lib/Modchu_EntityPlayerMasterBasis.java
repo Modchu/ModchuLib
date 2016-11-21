@@ -1142,8 +1142,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void moveEntity(double par1, double par3, double par5) {
-		base.supermoveEntity(par1, par3, par5);
+	public void moveEntity(Object moverType, double par1, double par3, double par5) {
+		base.supermoveEntity(moverType, par1, par3, par5);
 	}
 
 	@Override

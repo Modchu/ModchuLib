@@ -6,12 +6,15 @@ import java.util.List;
 
 public class Modchu_TextCalculationFormula implements Modchu_ITextCalculationDataFormat {
 	public static HashMap<String, Modchu_TextCalculationFormula> calculationFormulaMap = new HashMap();
+	public static List<String> allCalculationStringList;
 	public static List<String> calculationStringList;
 	public static List<String> calculationTrigonometricFunctionStringList;
+	public static List<String> calculationOperatorStringList;
 	protected final String dataString;
 	protected int dataInt;
 
 	static {
+		allCalculationStringList = new ArrayList();
 		calculationStringList = new ArrayList();
 		String[] s1 = new String[]{
 				"*",
@@ -21,18 +24,29 @@ public class Modchu_TextCalculationFormula implements Modchu_ITextCalculationDat
 				"%"
 		};
 		calculationStringList.addAll(Modchu_Main.stringArrayToArrayList(s1));
+		allCalculationStringList.addAll(calculationStringList);
 		calculationTrigonometricFunctionStringList = new ArrayList();
 		String[] s2 = new String[]{
 				"cos",
 				"sin"
 		};
 		calculationTrigonometricFunctionStringList.addAll(Modchu_Main.stringArrayToArrayList(s2));
+		allCalculationStringList.addAll(calculationTrigonometricFunctionStringList);
+		calculationOperatorStringList = new ArrayList();
+		calculationOperatorStringList.addAll(Modchu_Main.stringArrayToArrayList(Modchu_Main.getConditionalExpressionCharacterStringArray()));
+		allCalculationStringList.addAll(calculationOperatorStringList);
 	}
 
 	public Modchu_TextCalculationFormula(String s) {
 		dataString = s;
 		dataInt = isCalculationString() ? calculationStringList.indexOf(s) :
-			isTrigonometricFunction() ? calculationTrigonometricFunctionStringList.indexOf(s) + 100 : 0;
+			isTrigonometricFunction() ? calculationTrigonometricFunctionStringList.indexOf(s) + 100 :
+				isOperator() ? calculationOperatorStringList.indexOf(s) + 1000 :
+				0;
+	}
+
+	@Override
+	public void init() {
 	}
 
 	public String getDataString() {
@@ -49,6 +63,10 @@ public class Modchu_TextCalculationFormula implements Modchu_ITextCalculationDat
 
 	public boolean isTrigonometricFunction() {
 		return calculationTrigonometricFunctionStringList.contains(dataString);
+	}
+
+	public boolean isOperator() {
+		return calculationOperatorStringList.contains(dataString);
 	}
 
 	public static boolean isTrigonometricFunction(String s) {
@@ -110,21 +128,20 @@ public class Modchu_TextCalculationFormula implements Modchu_ITextCalculationDat
 		if (isTrigonometricFunction()) {
 			o3 = calculationTrigonometricFunction(Modchu_CastHelper.Float(o3, 0.0F, false));
 		}
-		if (o != null) {
-			switch(by) {
-			case Modchu_RunCalculationList.type_Integer:
-			case Modchu_RunCalculationList.type_Byte:
-				o3 = calculationInt(Modchu_CastHelper.Int(o, 0, false), o3 != null ? Modchu_CastHelper.Int(o3, 0, false) : 0);
-				return by == Modchu_RunCalculationList.type_Byte ? (Byte)o3 : o3;
-			case Modchu_RunCalculationList.type_Float:
-				return calculationFloat(Modchu_CastHelper.Float(o, 0.0F, false), Modchu_CastHelper.Float(o3, 0.0F, false));
-			case Modchu_RunCalculationList.type_Double:
-				return calculationDouble(Modchu_CastHelper.Double(o, 0.0D, false), Modchu_CastHelper.Double(o3, 0.0D, false));
-			case Modchu_RunCalculationList.type_Long:
-				return calculationLong(Modchu_CastHelper.Long(o, 0L), Modchu_CastHelper.Long(o3, 0L));
-			case Modchu_RunCalculationList.type_Boolean:
-				return calculationBoolean(Modchu_CastHelper.Boolean(o), Modchu_CastHelper.Boolean(o3));
-			}
+		if (o != null); else o = Modchu_RunCalculationList.getTypeDefaultValue(by);
+		switch(by) {
+		case Modchu_RunCalculationList.type_Integer:
+		case Modchu_RunCalculationList.type_Byte:
+			o3 = calculationInt(Modchu_CastHelper.Int(o, 0, false), o3 != null ? Modchu_CastHelper.Int(o3, 0, false) : 0);
+			return by == Modchu_RunCalculationList.type_Byte ? (Byte)o3 : o3;
+		case Modchu_RunCalculationList.type_Float:
+			return calculationFloat(Modchu_CastHelper.Float(o, 0.0F, false), Modchu_CastHelper.Float(o3, 0.0F, false));
+		case Modchu_RunCalculationList.type_Double:
+			return calculationDouble(Modchu_CastHelper.Double(o, 0.0D, false), Modchu_CastHelper.Double(o3, 0.0D, false));
+		case Modchu_RunCalculationList.type_Long:
+			return calculationLong(Modchu_CastHelper.Long(o, 0L), Modchu_CastHelper.Long(o3, 0L));
+		case Modchu_RunCalculationList.type_Boolean:
+			return calculationBoolean(o, o3, by, map);
 		}
 		return o3;
 	}
@@ -259,23 +276,195 @@ public class Modchu_TextCalculationFormula implements Modchu_ITextCalculationDat
 		return l2;
 	}
 
-	protected boolean calculationBoolean(boolean b, boolean b1) {
-		return b && b1;
+	protected boolean calculationBoolean(Object o, Object o1, byte type, HashMap<String, Object>... map) {
+		boolean debug = Modchu_TextCalculation.tempDebug;
+		int dataInt = getDataInt();
+		boolean b = false;
+		if (debug) {
+			Modchu_Debug.mDebug("Modchu_TextCalculationFormula calculationBoolean dataInt="+dataInt);
+			Modchu_Debug.mDebug("Modchu_TextCalculationFormula calculationBoolean o1="+o1);
+		}
+		// TODO
+		if (o1 instanceof List) {
+			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculationFormula calculationBoolean o1 instanceof List");
+			List list2 = (List) o1;
+			Object o2 = list2.get(0);
+			Object o3 = list2.get(1);
+			o = o2 instanceof Modchu_RunCalculationList ? ((Modchu_RunCalculationList) o2).runCalculation(null, (byte)-1, map) :
+					o2 instanceof Modchu_TextCalculationData ? ((Modchu_TextCalculationData) o2).calculationObject(null, ((Modchu_TextCalculationData) o2).getSubData(), (byte)-1, map) : null;
+			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculationFormula calculationBoolean o="+o);
+			o1 = o3 instanceof Modchu_RunCalculationList ? ((Modchu_RunCalculationList) o3).runCalculation(null, (byte)-1, map) :
+				o3 instanceof Modchu_TextCalculationData ? ((Modchu_TextCalculationData) o3).calculationObject(null, ((Modchu_TextCalculationData) o3).getSubData(), (byte)-1, map) : null;
+			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculationFormula calculationBoolean o1="+o1);
+		}
+		if (o != null
+				&& o1 != null); else {
+			return b;
+		}
+		switch (dataInt) {
+		case 1000:
+			//"==",
+			b = o == o1;
+			break;
+		case 1001:
+			//"||",
+		case 1002:
+			//"|",
+		case 1003:
+			//"&&",
+			if (o instanceof Boolean
+					&& o1 instanceof Boolean) {
+				b = dataInt == 1
+						| dataInt == 2 ? (Boolean) o
+						| (Boolean) o1 :
+							(Boolean) o
+							&& (Boolean) o1;
+				break;
+			} else {
+				if (debug) {
+					if (!(o instanceof Boolean)) Modchu_Debug.mDebug("Modchu_TextCalculationFormula	calculationBoolean !o1 instanceof Boolean");
+					if (!(o1 instanceof Boolean)) Modchu_Debug.mDebug("Modchu_TextCalculationFormula	calculationBoolean !o2 instanceof Boolean");
+				}
+			}
+		case 1004:
+			//"!=",
+			b = o != o1;
+			break;
+		case 1005:
+			//">=",
+		case 1006:
+			//"<=",
+		case 1007:
+			//"<",
+		case 1008:
+			//">",
+			if (o instanceof Integer
+					&& o1 instanceof Integer) {
+				b = dataInt == 1005 ? (Integer) o >= (Integer) o1 :
+					dataInt == 1006 ? (Integer) o <= (Integer) o1 :
+						dataInt == 1007 ? (Integer) o < (Integer) o1 :
+							(Integer) o > (Integer) o1;
+				break;
+			}
+			else if (o instanceof Float
+					&& o1 instanceof Float) {
+				b = dataInt == 1005 ? (Float) o >= (Float) o1 :
+					dataInt == 1006 ? (Float) o <= (Float) o1 :
+						dataInt == 1007 ? (Float) o < (Float) o1 :
+							(Float) o > (Float) o1;
+				break;
+			}
+			else if (o instanceof Double
+					&& o1 instanceof Double) {
+				b = dataInt == 1005 ? (Double) o >= (Double) o1 :
+					dataInt == 1006 ? (Double) o <= (Double) o1 :
+						dataInt == 1007 ? (Double) o < (Double) o1 :
+							(Double) o > (Double) o1;
+				break;
+			}
+			else if (o instanceof Byte
+					&& o1 instanceof Byte) {
+				b = dataInt == 1005 ? (Byte) o >= (Byte) o1 :
+					dataInt == 1006 ? (Byte) o <= (Byte) o1 :
+						dataInt == 1007 ? (Byte) o < (Byte) o1 :
+							(Byte) o > (Byte) o1;
+				break;
+			}
+			else if (o instanceof Long
+					&& o1 instanceof Long) {
+				b = dataInt == 1005 ? (Long) o >= (Long) o1 :
+					dataInt == 1006 ? (Long) o <= (Long) o1 :
+						dataInt == 1007 ? (Long) o < (Long) o1 :
+							(Long) o > (Long) o1;
+				break;
+			}
+			else if (o instanceof Short
+					&& o1 instanceof Short) {
+				b = dataInt == 1005 ? (Short) o >= (Short) o1 :
+					dataInt == 1006 ? (Short) o <= (Short) o1 :
+						dataInt == 1007 ? (Short) o < (Short) o1 :
+							(Short) o > (Short) o1;
+				break;
+			}
+			else if (o instanceof Float
+					&& o1 instanceof Double) {
+				b = dataInt == 1005 ? (Float) o >= (Double) o1 :
+					dataInt == 1006 ? (Float) o <= (Double) o1 :
+						dataInt == 1007 ? (Float) o < (Double) o1 :
+							(Float) o > (Double) o1;
+				break;
+			}
+			else if (o instanceof Double
+					&& o1 instanceof Float) {
+				b = dataInt == 1005 ? (Double) o >= (Float) o1 :
+					dataInt == 1006 ? (Double) o <= (Float) o1 :
+						dataInt == 1007 ? (Double) o < (Float) o1 :
+							(Double) o > (Float) o1;
+				break;
+			}
+			else if (o instanceof Integer
+					&& o1 instanceof Float) {
+				b = dataInt == 1005 ? (Integer) o >= (Float) o1 :
+					dataInt == 1006 ? (Integer) o <= (Float) o1 :
+						dataInt == 1007 ? (Integer) o < (Float) o1 :
+							(Integer) o > (Float) o1;
+				break;
+			}
+			else if (o instanceof Float
+					&& o1 instanceof Integer) {
+				b = dataInt == 1005 ? (Float) o >= (Integer) o1 :
+					dataInt == 1006 ? (Float) o <= (Integer) o1 :
+						dataInt == 1007 ? (Float) o < (Integer) o1 :
+							(Float) o > (Integer) o1;
+				break;
+			}
+			else if (o instanceof Double
+					&& o1 instanceof Integer) {
+				b = dataInt == 1005 ? (Double) o >= (Integer) o1 :
+					dataInt == 1006 ? (Double) o <= (Integer) o1 :
+						dataInt == 1007 ? (Double) o < (Integer) o1 :
+							(Double) o > (Integer) o1;
+				break;
+			}
+			else if (o instanceof Integer
+					&& o1 instanceof Double) {
+				b = dataInt == 1005 ? (Integer) o >= (Double) o1 :
+					dataInt == 1006 ? (Integer) o <= (Double) o1 :
+						dataInt == 1007 ? (Integer) o < (Double) o1 :
+							(Integer) o > (Double) o1;
+				break;
+			}
+		}
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculationFormula calculationBoolean o "+calculationOperatorStringList.get(dataInt - 1000)+" o1 b="+b);
+		return b;
 	}
 
 	@Override
 	public boolean isOneValue() {
-		return isTrigonometricFunction();
+		return isTrigonometricFunction()
+				| isOperator();
 	}
 
 	@Override
 	public String dataToString(Object data, boolean b) {
-		StringBuilder sb = new StringBuilder().append(getDataString());
-		if (data != null) {
-			if (data instanceof Modchu_ITextCalculationDataFormat) {
-				sb.append(((Modchu_ITextCalculationDataFormat) data).dataToString(null, b));
-			} else {
-				sb.append(data.toString());
+		StringBuilder sb = new StringBuilder();
+		if (isOperator()) {
+			List list2 = (List) data;
+			Object o2 = list2.size() > 0 ? list2.get(0) : null;
+			Object o3 = list2.size() > 1 ? list2.get(1) : null;
+			sb.append(o2 instanceof Modchu_RunCalculationList ? ((Modchu_RunCalculationList) o2).dataToString(null, b) :
+					o2 instanceof Modchu_TextCalculationData ? ((Modchu_TextCalculationData) o2).dataToString(((Modchu_TextCalculationData) o2).getSubData(), b) : null);
+			sb.append(getDataString());
+			sb.append(o3 instanceof Modchu_RunCalculationList ? ((Modchu_RunCalculationList) o3).dataToString(null, b) :
+				o3 instanceof Modchu_TextCalculationData ? ((Modchu_TextCalculationData) o3).dataToString(((Modchu_TextCalculationData) o3).getSubData(), b) : null);
+		} else {
+			sb.append(getDataString());
+			if (data != null) {
+				if (data instanceof Modchu_ITextCalculationDataFormat) {
+					sb.append(((Modchu_ITextCalculationDataFormat) data).dataToString(null, b));
+				} else {
+					sb.append(data.toString());
+				}
 			}
 		}
 		return sb.toString();

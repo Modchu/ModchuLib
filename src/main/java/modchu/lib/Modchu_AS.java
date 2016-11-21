@@ -1795,11 +1795,11 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object[] entityPlayerArmorInventory(Object entityplayerORInventory) {
+	protected Object entityPlayerArmorInventory(Object entityplayerORInventory) {
 		return master != null ? master.entityPlayerArmorInventory(entityplayerORInventory) : super.entityPlayerArmorInventory(entityplayerORInventory);
 	}
 
-	public Object[] superEntityPlayerArmorInventory(Object entityplayerORInventory) {
+	public Object superEntityPlayerArmorInventory(Object entityplayerORInventory) {
 		return super.entityPlayerArmorInventory(entityplayerORInventory);
 	}
 
@@ -2004,11 +2004,11 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object[] entityPlayerMainInventory(Object entityplayerORInventory) {
+	protected Object entityPlayerMainInventory(Object entityplayerORInventory) {
 		return master != null ? master.entityPlayerMainInventory(entityplayerORInventory) : super.entityPlayerMainInventory(entityplayerORInventory);
 	}
 
-	public Object[] superEntityPlayerMainInventory(Object entityplayerORInventory) {
+	public Object superEntityPlayerMainInventory(Object entityplayerORInventory) {
 		return super.entityPlayerMainInventory(entityplayerORInventory);
 	}
 

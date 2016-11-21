@@ -219,7 +219,7 @@ public interface Modchu_IEntityPlayer {
 	public void supersetFire(int par1);
 	public void superextinguish();
 	public boolean superisOffsetPositionInLiquid(double par1, double par3, double par5);
-	public void supermoveEntity(double par1, double par3, double par5);
+	public void supermoveEntity(Object moverType, double par1, double par3, double par5);
 	public void superdoBlockCollisions();
 	public void superplayStepSound(int par1, int par2, int par3, int par4);
 	public Object supergetCollisionBoundingBox();
@@ -332,7 +332,7 @@ public interface Modchu_IEntityPlayer {
 	public void superfunc_146098_a(Object tileEntityBrewingStand);
 	public void superfunc_146101_a(Object tileEntityFurnace);
 	public void superaddChatMessage(Object iChatComponent);
-	public void superaddChatComponentMessage(Object iChatComponent);
+	public void superaddChatComponentMessage(Object iChatComponent, boolean p_146105_2_);
 	public String supergetSplashSound();
 	public String supergetSwimSound();
 	public float supergetBreakSpeed(Object block, boolean p_146096_2_, int meta);

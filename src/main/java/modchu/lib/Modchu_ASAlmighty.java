@@ -8263,11 +8263,11 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Double(Modchu_Reflect.getFieldObject("Entity", "field_73387_d", "motionZ", entity));
 	}
 
-	protected Object[] entityPlayerArmorInventory() {
+	protected Object entityPlayerArmorInventory() {
 		return entityPlayerArmorInventory(entityPlayerInventory());
 	}
 
-	protected Object[] entityPlayerArmorInventory(Object entityplayerORInventory) {
+	protected Object entityPlayerArmorInventory(Object entityplayerORInventory) {
 		if (Modchu_Reflect.loadClass("InventoryPlayer").isInstance(entityplayerORInventory)); else {
 			entityplayerORInventory = entityPlayerArmorInventory(entityplayerORInventory);
 		}
@@ -8462,15 +8462,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (capabilities != null) Modchu_CastHelper.Boolean(Modchu_Reflect.setFieldObject(capabilities.getClass(), "field_75098_d", "isCreativeMode", capabilities, b));
 	}
 
-	protected Object[] entityPlayerMainInventory() {
+	protected Object entityPlayerMainInventory() {
 		return entityPlayerMainInventory(minecraftThePlayer());
 	}
 
-	protected Object[] entityPlayerMainInventory(Object entityplayerORInventory) {
+	protected Object entityPlayerMainInventory(Object entityplayerORInventory) {
 		if (Modchu_Reflect.loadClass("InventoryPlayer").isInstance(entityplayerORInventory)); else {
 			entityplayerORInventory = entityPlayerInventory(entityplayerORInventory);
 		}
-		return (Object[]) Modchu_Reflect.getFieldObject("InventoryPlayer", "field_70462_a", "mainInventory", entityplayerORInventory);
+		return Modchu_Reflect.getFieldObject("InventoryPlayer", "field_70462_a", "mainInventory", entityplayerORInventory);
 	}
 
 	protected void entityPlayerPreparePlayerToSpawn(Object entityplayer) {

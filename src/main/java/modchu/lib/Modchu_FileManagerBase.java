@@ -633,8 +633,9 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		if ((Modchu_Main.getMinecraftVersion() > 159
 				| !Modchu_Main.isForge)
 				&& cn.indexOf(":/") < 0) cn = cn.replace("\\", ".").replace("/", ".");
-		if (cn.startsWith(".minecraft.")
-				| cn.startsWith("/minecraft/")) cn = cn.substring(11);
+		if (Modchu_Main.getMinecraftVersion() > 159
+				&& (cn.startsWith(".minecraft.")
+				| cn.startsWith("/minecraft/"))) cn = cn.substring(11);
 		if (cn.startsWith(".")
 				| cn.startsWith("/")
 				| cn.startsWith("\\")) cn = cn.substring(1);

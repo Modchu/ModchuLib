@@ -7,15 +7,23 @@ import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntityOtherPlayerMP;
 import modchu.lib.Modchu_Main;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.WorldSettings.GameType;
 
-public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc190_202.Modchu_EntityOtherPlayerMP implements Modchu_IEntityOtherPlayerMP {
+public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc190_210.Modchu_EntityOtherPlayerMP implements Modchu_IEntityOtherPlayerMP {
 
 	public Modchu_EntityOtherPlayerMP(HashMap<String, Object> map) {
 		super(map);
@@ -204,6 +212,64 @@ public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc190_202.Modch
 	@Override
 	public void superSetGameType(Object gameType) {
 		super.setGameType((GameType) gameType);
+	}
+	// 210~分離
+	@Override
+	public void openGuiHorseInventory(EntityHorse entityHorse, IInventory iInventory) {
+		if (master != null) master.openGuiHorseInventory(entityHorse, iInventory);
+		else super.openGuiHorseInventory(entityHorse, iInventory);
+	}
+
+	@Override
+	public EnumActionResult interact(Entity entity, ItemStack itemStack, EnumHand enumHand) {
+		return (EnumActionResult) (master != null ? master.interact(entity, itemStack, enumHand) : super.interact(entity, itemStack, enumHand));
+	}
+
+	@Override
+	public Object superInteract(Object entity, Object itemStack, Object enumHand) {
+		return super.interact((Entity) entity, (ItemStack) itemStack, (EnumHand) enumHand);
+	}
+
+	@Override
+	public void addChatComponentMessage(ITextComponent iTextComponent) {
+		if (master != null) master.addChatComponentMessage(iTextComponent, false);
+		else super.addChatComponentMessage(iTextComponent);
+	}
+
+	@Override
+	public void superAddChatComponentMessage(Object iTextComponent, boolean p_146105_2_) {
+		super.addChatComponentMessage((ITextComponent) iTextComponent);
+	}
+
+	@Override
+	public void moveEntity(double x, double y, double z) {
+		if (master != null) master.moveEntity(null, x, y, z);
+		else super.moveEntity(x, y, z);
+	}
+
+	@Override
+	public void superMoveEntity(Object moverType, double x, double y, double z) {
+		super.moveEntity(x, y, z);
+	}
+
+	@Override
+	public boolean processInitialInteract(EntityPlayer entityPlayer, ItemStack itemStack, EnumHand enumHand) {
+		return master != null ? master.processInitialInteract(entityPlayer, itemStack, enumHand) : super.processInitialInteract(entityPlayer, itemStack, enumHand);
+	}
+
+	@Override
+	public boolean superProcessInitialInteract(Object entityPlayer, Object itemStack, Object enumHand) {
+		return super.processInitialInteract((EntityPlayer) entityPlayer, (ItemStack) itemStack, (EnumHand) enumHand);
+	}
+
+	@Override
+	public EnumActionResult applyPlayerInteraction(EntityPlayer entityPlayer, Vec3d vec3d, ItemStack itemStack, EnumHand enumHand) {
+		return (EnumActionResult) (master != null ? master.applyPlayerInteraction(entityPlayer, vec3d, itemStack, enumHand) : super.applyPlayerInteraction(entityPlayer, vec3d, itemStack, enumHand));
+	}
+
+	@Override
+	public EnumActionResult superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object itemStack, Object enumHand) {
+		return super.applyPlayerInteraction((EntityPlayer) entityPlayer, (Vec3d) vec3d, (ItemStack) itemStack, (EnumHand) enumHand);
 	}
 
 }

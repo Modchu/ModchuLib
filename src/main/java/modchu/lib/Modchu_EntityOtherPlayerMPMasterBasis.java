@@ -428,8 +428,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public void addChatComponentMessage(Object iChatComponent) {
-		base.superAddChatComponentMessage(iChatComponent);
+	public void addChatComponentMessage(Object iChatComponent, boolean p_146105_2_) {
+		base.superAddChatComponentMessage(iChatComponent, p_146105_2_);
 	}
 
 	@Override
@@ -1203,8 +1203,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public void moveEntity(double x, double y, double z) {
-		base.superMoveEntity(x, y, z);
+	public void moveEntity(Object moverType, double x, double y, double z) {
+		base.superMoveEntity(moverType, x, y, z);
 	}
 
 	@Override

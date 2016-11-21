@@ -37,7 +37,7 @@ public interface Modchu_IEntity {
 	public void superExtinguish();
 	public void superKill();
 	public boolean superIsOffsetPositionInLiquid(double p_70038_1_, double p_70038_3_, double p_70038_5_);
-	public void superMoveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_);
+	public void superMoveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_);
 	public Object superGetSwimSound();
 	public void superDoBlockCollisions();
 	public void superFunc_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object block);

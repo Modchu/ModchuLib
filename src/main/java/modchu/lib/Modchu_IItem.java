@@ -93,7 +93,7 @@ public interface Modchu_IItem {
 	public float superGetStrVsBlock(Object itemStack, Object block);
 	public boolean superOnBlockDestroyed(Object itemStack, Object world, Object block, Object blockPos, Object entityLivingBase);
 	public boolean superCanHarvestBlock(Object block);
-	public void superGetSubItems(Object item, Object creativeTabs, List p_150895_3_);
+	public void superGetSubItems(Object item, Object creativeTabs, Object p_150895_3_);
 	public Object superGetAttributeModifiers(Object itemStack);
 	public float superGetDigSpeed(Object itemStack, Object iBlockState);
 	public void superOnUsingTick(Object itemStack, Object entityPlayer, int count);

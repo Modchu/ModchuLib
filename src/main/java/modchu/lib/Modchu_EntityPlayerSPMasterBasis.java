@@ -1297,8 +1297,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void moveEntity(double par1, double par3, double par5) {
-		base.superMoveEntity(par1, par3, par5);
+	public void moveEntity(Object moverType, double par1, double par3, double par5) {
+		base.superMoveEntity(moverType, par1, par3, par5);
 	}
 
 	@Override
@@ -1757,8 +1757,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void addChatComponentMessage(Object iChatComponent) {
-		base.superAddChatComponentMessage(iChatComponent);
+	public void addChatComponentMessage(Object iChatComponent, boolean p_146105_2_) {
+		base.superAddChatComponentMessage(iChatComponent, p_146105_2_);
 	}
 
 	@Override

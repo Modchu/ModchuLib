@@ -350,8 +350,8 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public void superGetSubBlocks(Object par1, Object creativeTabs, List par3List) {
-		super.getSubBlocks((Item) par1, (CreativeTabs) creativeTabs, par3List);
+	public void superGetSubBlocks(Object par1, Object creativeTabs, Object par3List) {
+		super.getSubBlocks((Item) par1, (CreativeTabs) creativeTabs, (List<ItemStack>) par3List);
 	}
 
 	@Override
@@ -1729,7 +1729,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public boolean superIsVisuallyOpaque() {
+	public boolean superIsVisuallyOpaque(Object iBlockState) {
 		return false;
 	}
 
@@ -2528,7 +2528,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public void superNeighborChanged(Object iBlockState, Object world, Object blockPos, Object block) {
+	public void superNeighborChanged(Object iBlockState, Object world, Object blockPos, Object block, Object blockPos1) {
 	}
 
 	@Override

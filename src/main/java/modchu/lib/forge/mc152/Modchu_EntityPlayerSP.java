@@ -318,13 +318,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return master != null ? master.func_71066_bF() : super.func_71066_bF();
 	}	@Override	public boolean superFunc_71066_bF() {
 		return super.func_71066_bF();
-	}	@Override
-	public void moveEntity(double par1, double par3, double par5) {
-		if (master != null) master.moveEntity(par1, par3, par5);
-		else super.moveEntity(par1, par3, par5);
-	}	@Override	public void superMoveEntity(double par1, double par3, double par5) {
-		super.moveEntity(par1, par3, par5);
-	}	@Override
+	}	@Override	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {		if (master != null) master.moveEntity(null, p_70091_1_, p_70091_3_, p_70091_5_);		else super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);	}	@Override	public void superMoveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {		super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);	}	@Override
 	public void updateEntityActionState() {
 		if (master != null) master.updateEntityActionState();
 		else super.updateEntityActionState();
@@ -2190,8 +2184,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public void superAddChatMessage(Object iChatComponent) {
 	}	@Override
-	public void superAddChatComponentMessage(Object iChatComponent) {
-	}	@Override
+	public void superAddChatComponentMessage(Object iChatComponent, boolean p_146105_2_) {	}	@Override
 	public String superGetSplashSound() {
 		return null;
 	}	@Override

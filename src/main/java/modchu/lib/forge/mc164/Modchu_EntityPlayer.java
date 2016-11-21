@@ -2470,12 +2470,12 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public void moveEntity(double par1, double par3, double par5) {
-		if (master != null) master.moveEntity(par1, par3, par5);
+		if (master != null) master.moveEntity(null, par1, par3, par5);
 		else super.moveEntity(par1, par3, par5);
 	}
 
 	@Override
-	public void supermoveEntity(double par1, double par3, double par5) {
+	public void supermoveEntity(Object moverType, double par1, double par3, double par5) {
 		super.moveEntity(par1, par3, par5);
 	}
 
@@ -3437,7 +3437,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 	}
 
 	@Override
-	public void superaddChatComponentMessage(Object iChatComponent) {
+	public void superaddChatComponentMessage(Object iChatComponent, boolean p_146105_2_) {
 	}
 
 	@Override

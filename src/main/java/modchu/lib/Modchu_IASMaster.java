@@ -198,7 +198,7 @@ public interface Modchu_IASMaster {
 	public double entityMotionX(Object entity);
 	public double entityMotionY(Object entity);
 	public double entityMotionZ(Object entity);
-	public Object[] entityPlayerArmorInventory(Object entityplayerORInventory);
+	public Object entityPlayerArmorInventory(Object entityplayerORInventory);
 	public float entityPlayerCameraYaw(Object entity);
 	public float entityPlayerCurrentXP(Object entityplayer);
 	public double entityPlayerChasingPosZ(Object entityplayer);
@@ -220,7 +220,7 @@ public interface Modchu_IASMaster {
 	public void entityPlayerInventorySetInventorySlotContents(Object entityplayer, int i, Object itemstack);
 	public boolean entityPlayerIsPlayerSleeping(Object entityplayer);
 	public boolean entityPlayerCapabilitiesIsCreativeMode(Object entityplayer);
-	public Object[] entityPlayerMainInventory(Object entityplayerORInventory);
+	public Object entityPlayerMainInventory(Object entityplayerORInventory);
 	public void entityPlayerPreparePlayerToSpawn(Object entityplayer);
 	public Object entityClientPlayerMPSendQueue(Object entityClientPlayerMP);
 	public void entityLivingBaseSwingItem(Object entityLivingBase);

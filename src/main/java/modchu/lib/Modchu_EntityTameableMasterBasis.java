@@ -1131,8 +1131,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void moveEntity(double par1, double par3, double par5) {
-		base.superMoveEntity(par1, par3, par5);
+	public void moveEntity(Object moverType, double par1, double par3, double par5) {
+		base.superMoveEntity(moverType, par1, par3, par5);
 	}
 
 	@Override

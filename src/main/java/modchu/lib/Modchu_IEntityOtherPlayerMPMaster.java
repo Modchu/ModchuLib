@@ -106,7 +106,7 @@ public interface Modchu_IEntityOtherPlayerMPMaster extends Modchu_IEntityLivingB
 	public float getBedOrientationInDegrees();
 	public boolean isPlayerFullyAsleep();
 	public int getSleepTimer();
-	public void addChatComponentMessage(Object iChatComponent);
+	public void addChatComponentMessage(Object iChatComponent, boolean p_146105_2_);
 	public Object getBedLocation();
 	public boolean isSpawnForced();
 	public void setSpawnPoint(Object blockPos, boolean forced);

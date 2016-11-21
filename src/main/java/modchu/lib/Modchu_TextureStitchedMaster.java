@@ -111,6 +111,8 @@ public class Modchu_TextureStitchedMaster extends Modchu_TextureStitchedMasterBa
 		if (s.startsWith("/")) s = s.substring(1);
 		int i1 = s.indexOf("mods/");
 		if (i1 > -1) s = s.substring(5);
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version < 160) return s;
 		String domain = "minecraft";
 		i1 = s.indexOf("textures/");
 		if (i1 > -1) domain = s.substring(0, i1 - 1);

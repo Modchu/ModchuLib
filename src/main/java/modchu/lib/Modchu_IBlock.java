@@ -84,7 +84,7 @@ public interface Modchu_IBlock {
 	public void superOnFallenUpon(Object world, int par2, int par3, int par4, Object entity, float par6);
 	public Object superGetItem(Object world, int par2, int par3, int par4);
 	public int superGetDamageValue(Object world, int par2, int par3, int par4);
-	public void superGetSubBlocks(Object par1, Object creativeTabs, List par3List);
+	public void superGetSubBlocks(Object par1, Object creativeTabs, Object par3List);
 	public Object superSetCreativeTab(Object creativeTabs);
 	public void superOnBlockHarvested(Object world, int par2, int par3, int par4, int par5, Object entityPlayer);
 	public Object superGetCreativeTabToDisplayOn();
@@ -190,11 +190,11 @@ public interface Modchu_IBlock {
 	public int superGetMetaFromState(Object iBlockState);
 	public Object superGetActualState(Object iBlockState, Object iBlockAccess, Object blockPos);
 	public boolean superIsNormalCube();
-	public boolean superIsVisuallyOpaque();
+	public boolean superIsVisuallyOpaque(Object iBlockState);
 	public boolean superIsReplaceable(Object world, Object blockPos);
 	public Object superGetSelectedBoundingBox(Object world, Object blockPos);
 	public void superRandomTick(Object world, Object blockPos, Object iBlockState, Random random);
-	public void superNeighborChanged(Object iBlockState, Object world, Object blockPos, Object block);
+	public void superNeighborChanged(Object iBlockState, Object world, Object blockPos, Object block, Object blockPos1);
 	public void superBreakBlock(Object world, Object blockPos, Object iBlockState);
 	public Object superGetItemDropped(Object iBlockState, Random rand, int fortune);
 	public void superDropXpOnBlockBreak(Object world, Object blockPos, int amount);

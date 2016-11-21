@@ -928,8 +928,8 @@ public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerM
 	}
 
 	@Override
-	public boolean isVisuallyOpaque() {
-		return base.superIsVisuallyOpaque();
+	public boolean isVisuallyOpaque(Object iBlockState) {
+		return base.superIsVisuallyOpaque(iBlockState);
 	}
 
 	@Override
@@ -948,8 +948,8 @@ public class Modchu_BlockContainerMasterBasis implements Modchu_IBlockContainerM
 	}
 
 	@Override
-	public void neighborChanged(Object world, Object blockPos, Object iBlockState, Object block) {
-		base.superNeighborChanged(world, blockPos, iBlockState, block);
+	public void neighborChanged(Object world, Object blockPos, Object iBlockState, Object block, Object blockPos1) {
+		base.superNeighborChanged(world, blockPos, iBlockState, block, blockPos1);
 	}
 
 	@Override

@@ -973,7 +973,7 @@ public class Modchu_Item extends Item implements Modchu_IItem {
 	}
 
 	@Override
-	public void superGetSubItems(Object item, Object creativeTabs, List p_150895_3_) {
+	public void superGetSubItems(Object item, Object creativeTabs, Object p_150895_3_) {
 	}
 
 	public Object getAttributeModifiers(ItemStack itemStack) {

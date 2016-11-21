@@ -1,71 +1,22 @@
 package modchu.lib.forge.mc190;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.Modchu_AS;
-import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntityLivingBase;
-import modchu.lib.Modchu_IEntityTameableMaster;
 import modchu.lib.Modchu_Main;
-import modchu.lib.Modchu_Reflect;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.EnumPushReaction;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.command.CommandResultStats;
-import net.minecraft.command.CommandResultStats.Type;
-import net.minecraft.crash.CrashReportCategory;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
-import net.minecraft.entity.ai.attributes.IAttribute;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.scoreboard.Team;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.CombatTracker;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumHandSide;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.event.HoverEvent;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
 
-public class Modchu_EntityLivingBase extends modchu.lib.forge.mc190_202.Modchu_EntityLivingBase implements Modchu_IEntityLivingBase {
+public class Modchu_EntityLivingBase extends modchu.lib.forge.mc190_210.Modchu_EntityLivingBase implements Modchu_IEntityLivingBase {
 
 	public Modchu_EntityLivingBase(World world) {
 		super(world);
@@ -209,6 +160,37 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc190_202.Modchu_E
 	@Override
 	public void superOnChunkLoad() {
 		super.onChunkLoad();
+	}
+	// 210~分離
+	@Override
+	public void moveEntity(double par1, double par3, double par5) {
+		if (master != null) master.moveEntity(null, par1, par3, par5);
+		else super.moveEntity(par1, par3, par5);
+	}
+
+	@Override
+	public void superMoveEntity(Object moverType, double par1, double par3, double par5) {
+		super.moveEntity(par1, par3, par5);
+	}
+
+	@Override
+	public boolean processInitialInteract(EntityPlayer entityPlayer, ItemStack itemStack, EnumHand enumHand) {
+		return master != null ? master.processInitialInteract(entityPlayer, itemStack, enumHand) : super.processInitialInteract(entityPlayer, itemStack, enumHand);
+	}
+
+	@Override
+	public boolean superProcessInitialInteract(Object entityPlayer, Object itemStack, Object enumHand) {
+		return super.processInitialInteract((EntityPlayer) entityPlayer, (ItemStack) itemStack, (EnumHand) enumHand);
+	}
+
+	@Override
+	public EnumActionResult applyPlayerInteraction(EntityPlayer entityPlayer, Vec3d vec3d, ItemStack itemStack, EnumHand enumHand) {
+		return (EnumActionResult) (master != null ? master.applyPlayerInteraction(entityPlayer, vec3d, itemStack, enumHand) : super.applyPlayerInteraction(entityPlayer, vec3d, itemStack, enumHand));
+	}
+
+	@Override
+	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object itemStack, Object enumHand) {
+		return super.applyPlayerInteraction((EntityPlayer) entityPlayer, (Vec3d) vec3d, (ItemStack) itemStack, (EnumHand) enumHand);
 	}
 
 }

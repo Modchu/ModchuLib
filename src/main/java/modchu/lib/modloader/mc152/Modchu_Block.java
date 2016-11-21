@@ -1085,7 +1085,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public void onNeighborBlockChange(World world, int par2, int par3, int par4, int par5) {
-		if (master != null) master.neighborChanged(world, par2, par3, par4, par5);
+		if (master != null) master.neighborChanged(world, par2, par3, par4, (Integer) par5);
 		else super.onNeighborBlockChange(world, par2, par3, par4, par5);
 	}
 
@@ -1417,8 +1417,8 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public void superGetSubBlocks(Object par1, Object creativeTabs, List par3List) {
-		super.getSubBlocks((Integer) par1, (CreativeTabs) creativeTabs, par3List);
+	public void superGetSubBlocks(Object par1, Object creativeTabs, Object par3List) {
+		super.getSubBlocks((Integer) par1, (CreativeTabs) creativeTabs, (List) par3List);
 	}
 
 	public void addCreativeItems(ArrayList itemList) {
@@ -1625,7 +1625,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public boolean superIsVisuallyOpaque() {
+	public boolean superIsVisuallyOpaque(Object iBlockState) {
 		return false;
 	}
 
@@ -1644,7 +1644,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public void superNeighborChanged(Object world, Object blockPos, Object iBlockState, Object block) {
+	public void superNeighborChanged(Object world, Object blockPos, Object iBlockState, Object block, Object blockPos1) {
 	}
 
 	@Override

@@ -125,8 +125,8 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {
-		base.superMoveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
+	public void moveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
+		base.superMoveEntity(moverType, p_70091_1_, p_70091_3_, p_70091_5_);
 	}
 
 	@Override

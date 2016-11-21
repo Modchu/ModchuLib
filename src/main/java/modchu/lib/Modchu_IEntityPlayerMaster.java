@@ -232,7 +232,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public void setFire(int par1);
 	public void extinguish();
 	public boolean isOffsetPositionInLiquid(double par1, double par3, double par5);
-	public void moveEntity(double par1, double par3, double par5);
+	public void moveEntity(Object moverType, double par1, double par3, double par5);
 	public void doBlockCollisions();
 	public void playStepSound(int par1, int par2, int par3, int par4);
 	public Object getCollisionBoundingBox();

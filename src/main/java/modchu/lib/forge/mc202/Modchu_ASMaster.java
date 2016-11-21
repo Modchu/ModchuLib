@@ -29,7 +29,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_ASMaster 
 	public Modchu_ASMaster(HashMap<String, Object> map) {
 		super(map);
 	}
-
+	// 202~210共通コピペ　↓
 	@Override
 	public Object getBlock(String s) {
 		if (s != null); else return null;
@@ -40,25 +40,6 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_ASMaster 
 		if (block != null) return block;
 		block = blockRegistry.getObject(Modchu_Main.newResourceLocation(s.toUpperCase()));
 		return block;
-	}
-
-	@Override
-	public int getVacancyGlobalEntityID() {
-		Map map = EntityList.ID_TO_CLASS;
-		int ID = -1;
-		if (map != null) {
-			for(int i = 64; i < 3000; i++) {
-				//Modchu_Debug.mDebug("getVacancyGlobalEntityID i"+i+" !map.containsKey(i) = "+(!map.containsKey(i)));
-				if (!map.containsKey(i)) {
-					ID = i;
-					//Modchu_Debug.mDebug("getVacancyGlobalEntityID !map.containsKey ID="+ID);
-					break;
-				}
-			}
-		} else {
-			Modchu_Debug.lDebug("getVacancyGlobalEntityID IDtoClassMapping map == null !!");
-		}
-		return ID;
 	}
 
 	@Override
@@ -82,11 +63,6 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_ASMaster 
 	}
 
 	@Override
-	public Map entityListIDtoClassMapping() {
-		return EntityList.ID_TO_CLASS;
-	}
-
-	@Override
 	public Object entityClientPlayerMPSendQueue(Object entityClientPlayerMP) {
 		return ((EntityPlayerMP) entityClientPlayerMP).connection;
 	}
@@ -98,16 +74,6 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_ASMaster 
 		if (o != null) return o;
 		o = Item.REGISTRY.getObject((ResourceLocation) Modchu_Main.newResourceLocation(s.toUpperCase()));
 		return o;
-	}
-
-	@Override
-	public Map entityListStringToClassMapping() {
-		return EntityList.NAME_TO_CLASS;
-	}
-
-	@Override
-	public Map entityListClassToStringMapping() {
-		return EntityList.CLASS_TO_NAME;
 	}
 
 	@Override
@@ -538,5 +504,5 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_ASMaster 
 	public Enum worldSettingsGameTypeSURVIVAL() {
 		return GameType.SURVIVAL;
 	}
-
+	// 202~210共通コピペ　↑
 }

@@ -281,12 +281,12 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {
-		if (master != null) master.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
+		if (master != null) master.moveEntity(null, p_70091_1_, p_70091_3_, p_70091_5_);
 		else super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
 	}
 
 	@Override
-	public void superMoveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {
+	public void superMoveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
 		super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
 	}
 

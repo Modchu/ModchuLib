@@ -9,7 +9,6 @@ import modchu.lib.Modchu_Main;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerElytra;
-import net.minecraft.entity.EntityLivingBase;
 
 public class Modchu_LayerElytra extends LayerElytra implements Modchu_ILayerElytra {
 	public Modchu_ILayerElytraMaster master;
@@ -21,6 +20,10 @@ public class Modchu_LayerElytra extends LayerElytra implements Modchu_ILayerElyt
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		Modchu_Debug.mDebug("Modchu_LayerElytra init instance="+instance);
 		master = instance instanceof Modchu_ILayerElytraMaster ? (Modchu_ILayerElytraMaster) instance : null;
+	}
+
+	public Modchu_LayerElytra(RenderPlayer renderPlayer) {
+		super(renderPlayer);
 	}
 
 	@Override
@@ -43,6 +46,5 @@ public class Modchu_LayerElytra extends LayerElytra implements Modchu_ILayerElyt
 	public boolean superShouldCombineTextures() {
 		return super.shouldCombineTextures();
 	}
-
 
 }

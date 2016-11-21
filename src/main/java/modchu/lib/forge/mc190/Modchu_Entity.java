@@ -8,12 +8,17 @@ import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntity;
 import modchu.lib.Modchu_IEntityMaster;
 import modchu.lib.Modchu_Main;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class Modchu_Entity extends modchu.lib.forge.mc190_202.Modchu_Entity implements Modchu_IEntity {
+public class Modchu_Entity extends modchu.lib.forge.mc190_210.Modchu_Entity implements Modchu_IEntity {
 	public Modchu_IEntityMaster master;
 	private ConcurrentHashMap<String, DataParameter> dataParameterMap = new ConcurrentHashMap();
 	public float maxHealth;
@@ -139,6 +144,37 @@ public class Modchu_Entity extends modchu.lib.forge.mc190_202.Modchu_Entity impl
 	@Override
 	public void superOnChunkLoad() {
 		super.onChunkLoad();
+	}
+	// 210~分離
+	@Override
+	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {
+		if (master != null) master.moveEntity(null, p_70091_1_, p_70091_3_, p_70091_5_);
+		else super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
+	}
+
+	@Override
+	public void superMoveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
+		super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
+	}
+
+	@Override
+	public boolean processInitialInteract(EntityPlayer entityPlayer, ItemStack itemStack, EnumHand enumHand) {
+		return master != null ? master.processInitialInteract(entityPlayer, itemStack, enumHand) : super.processInitialInteract(entityPlayer, itemStack, enumHand);
+	}
+
+	@Override
+	public boolean superProcessInitialInteract(Object entityPlayer, Object itemStack, Object enumHand) {
+		return super.processInitialInteract((EntityPlayer) entityPlayer, (ItemStack) itemStack, (EnumHand) enumHand);
+	}
+
+	@Override
+	public EnumActionResult applyPlayerInteraction(EntityPlayer entityPlayer, Vec3d vec3d, ItemStack itemStack, EnumHand enumHand) {
+		return (EnumActionResult) (master != null ? master.applyPlayerInteraction(entityPlayer, vec3d, itemStack, enumHand) : super.applyPlayerInteraction(entityPlayer, vec3d, itemStack, enumHand));
+	}
+
+	@Override
+	public EnumActionResult superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object itemStack, Object enumHand) {
+		return super.applyPlayerInteraction((EntityPlayer) entityPlayer, (Vec3d) vec3d, (ItemStack) itemStack, (EnumHand) enumHand);
 	}
 
 }
