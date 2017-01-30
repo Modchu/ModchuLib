@@ -112,12 +112,12 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public void rotateCorpse(EntityLiving entityLiving, float p_77043_2_, float p_77043_3_, float partialTicks) {
-		if (master != null) master.rotateCorpse(entityLiving, p_77043_2_, p_77043_3_, partialTicks);
+		if (master != null) master.applyRotations(entityLiving, p_77043_2_, p_77043_3_, partialTicks);
 		else super.rotateCorpse(entityLiving, p_77043_2_, p_77043_3_, partialTicks);
 	}
 
 	@Override
-	public void superRotateCorpse(Object entityLiving, float p_77043_2_, float p_77043_3_, float partialTicks) {
+	public void superApplyRotations(Object entityLiving, float p_77043_2_, float p_77043_3_, float partialTicks) {
 		super.rotateCorpse((EntityLiving) entityLiving, p_77043_2_, p_77043_3_, partialTicks);
 	}
 

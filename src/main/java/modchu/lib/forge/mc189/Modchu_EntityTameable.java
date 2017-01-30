@@ -196,7 +196,7 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 	}
 
 	@Override
-	public Object superGetNewNavigator(Object world) {
+	public Object superCreateNavigator(Object world) {
 		return super.getNewNavigator((World) world);
 	}
 
@@ -447,11 +447,11 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 
 	@Override
 	public boolean canCommandSenderUseCommand(int permLevel, String commandName) {
-		return master != null ? master.canCommandSenderUseCommand(permLevel, commandName) : super.canCommandSenderUseCommand(permLevel, commandName);
+		return master != null ? master.canUseCommand(permLevel, commandName) : super.canCommandSenderUseCommand(permLevel, commandName);
 	}
 
 	@Override
-	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+	public boolean superCanUseCommand(int permLevel, String commandName) {
 		return super.canCommandSenderUseCommand(permLevel, commandName);
 	}
 

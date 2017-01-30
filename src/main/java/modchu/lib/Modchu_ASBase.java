@@ -275,8 +275,8 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int FMLCommonHandlerInstanceGetMinecraftServerInstance = FMLCommonHandlerInstanceGetMinecraftServerInstance_int;
 	public static int FMLCommonHandlerInstanceGetMinecraftServerInstanceWorldServers = FMLCommonHandlerInstanceGetMinecraftServerInstanceWorldServers_int;
 	public static int minecraftGetMinecraft = minecraftGetMinecraft_int;
-	public static int minecraftThePlayer = minecraftThePlayer_int;
-	public static int minecraftTheWorld = minecraftTheWorld_int;
+	public static int minecraftPlayer = minecraftPlayer_int;
+	public static int minecraftWorld = minecraftWorld_int;
 	public static int minecraftMcDataDir = minecraftMcDataDir_int;
 	public static int minecraftFontRenderer = minecraftFontRenderer_int;
 	public static int minecraftGetSession = minecraftGetSession_int;
@@ -325,8 +325,7 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int itemStackIsItemEnchanted = itemStackIsItemEnchanted_int;
 	public static int mathHelperSin = mathHelperSin_int;
 	public static int mathHelperCos = mathHelperCos_int;
-	public static int mathHelperSqrt_float = mathHelperSqrt_float_int;
-	public static int mathHelperFloor_double = mathHelperFloor_double_int;
+	public static int mathHelperSqrt = mathHelperSqrt_int;
 	public static int modelRendererGetTextureOffsetMap = modelRendererGetTextureOffsetMap_int;
 	public static int textureOffsetTextureOffsetX = textureOffsetTextureOffsetX_int;
 	public static int textureOffsetTextureOffsetY = textureOffsetTextureOffsetY_int;
@@ -597,7 +596,6 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int enumCreatureTypeWaterCreature = enumCreatureTypeWaterCreature_int;
 	public static int itemIsFull3D = itemIsFull3D_int;
 	public static int itemItemInteractionForEntity = itemItemInteractionForEntity_int;
-	public static int mathHelperSqrt_double = mathHelperSqrt_double_int;
 	public static int modelRendererAddBox = modelRendererAddBox_int;
 	public static int modelRendererPostRender = modelRendererPostRender_int;
 	public static int modelRendererRender = modelRendererRender_int;
@@ -679,7 +677,7 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int worldGetPlayerEntityByName = worldGetPlayerEntityByName_int;
 	public static int entityTameableGetOwnerName = entityTameableGetOwnerName_int;
 	public static int entityAnimalBreeding = entityAnimalBreeding_int;
-	public static int worldSpawnEntityInWorld = worldSpawnEntityInWorld_int;
+	public static int worldSpawnEntity = worldSpawnEntity_int;
 	public static int biomeOcean = biomeOcean_int;
 	public static int biomePlains = biomePlains_int;
 	public static int biomeDesert = biomeDesert_int;
@@ -826,11 +824,11 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int abstractClientPlayerLocationCape = abstractClientPlayerLocationCape_int;
 	public static int worldAddEntityToWorld = worldAddEntityToWorld_int;
 	public static int itemStackGetMaxDamage = itemStackGetMaxDamage_int;
-	public static int mathHelperFloor_float = mathHelperFloor_float_int;
-	public static int mathHelperFloor_double_long = mathHelperFloor_double_long_int;
+	public static int mathHelperFloor = mathHelperFloor_int;
+	public static int mathHelperLfloor = mathHelperLfloor_int;
 	public static int mathHelperAbs = mathHelperAbs_int;
 	public static int mathHelperAbs_max = mathHelperAbs_max_int;
-	public static int mathHelperBucketInt = mathHelperBucketInt_int;
+	public static int mathHelperIntFloorDiv = mathHelperIntFloorDiv_int;
 	public static int mathHelperStringNullOrLengthZero = mathHelperStringNullOrLengthZero_int;
 	public static int mathHelperGetRandomIntegerInRange = mathHelperGetRandomIntegerInRange_int;
 	public static int threadDownloadImageDataGetGlTextureId = threadDownloadImageDataGetGlTextureId_int;
@@ -1027,5 +1025,6 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int newDataParameter = newDataParameter_int;
 	public static int newSoundEvent = newSoundEvent_int;
 	public static int newResourceLocation = newResourceLocation_int;
+	public static int mathHelperClamp = mathHelperClamp_int;
 
 }

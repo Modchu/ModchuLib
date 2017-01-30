@@ -1,27 +1,26 @@
 package modchu.lib.forge.mc210;
 
 import java.util.HashMap;
-import java.util.Map;
 
-import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Main;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityZombieVillager;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Biomes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -30,132 +29,31 @@ import net.minecraft.util.registry.RegistryNamespacedDefaultedByKey;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
+import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
-public class Modchu_ASMaster extends modchu.lib.forge.mc190_210.Modchu_ASMaster {
+public class Modchu_ASMaster extends modchu.lib.forge.mc190_212.Modchu_ASMaster {
 
 	public Modchu_ASMaster(HashMap<String, Object> map) {
 		super(map);
 	}
-
-	@Override
-	public Object entityLivingGetCurrentArmor(Object entityLiving, int i) {
-		return ((NonNullList<ItemStack>) ((EntityLiving) entityLiving).getArmorInventoryList()).get(i);
-	}
-	// 210~分離
-	@Override
-	public Object worldGetBiomeGenForCoords(Object worldOrInt, Object blockPosOrInt) {
-		return ((World) entityWorldObj(worldOrInt)).getBiome((BlockPos) blockPosOrInt);
-	}
-
-	@Override
-	public Object entityPlayerArmorInventory(Object entityplayerORInventory) {
-		if (entityplayerORInventory instanceof InventoryPlayer) ;else {
-			entityplayerORInventory = entityPlayerInventory(entityplayerORInventory);
-		}
-		return ((InventoryPlayer) entityplayerORInventory).armorInventory;
-	}
-
-	@Override
-	public Object entityPlayerMainInventory(Object entityplayerORInventory) {
-		if (entityplayerORInventory instanceof InventoryPlayer); else {
-			entityplayerORInventory = entityPlayerInventory(entityplayerORInventory);
-		}
-		return ((InventoryPlayer) entityplayerORInventory).mainInventory;
-	}
-
-	@Override
-	public Object itemStackCopyItemStack(Object itemstack) {
-		return itemstack == null ? null : ((ItemStack) itemstack).copy();
-	}
-
+	// 212~分離
 	@Override
 	public int itemStackStackSize(Object itemstack) {
 		return ((ItemStack) itemstack).func_190916_E();
 	}
 
 	@Override
-	public void setEntityPlayerArmorInventory(Object entityplayerORInventory, Object armorInventory) {
-		ItemStack[] itemStacks = ((ItemStack[]) armorInventory);
-		if (entityplayerORInventory instanceof InventoryPlayer) {
-			for (int i = 0; i < ((InventoryPlayer) entityplayerORInventory).armorInventory.size(); i++) {
-				if (i > itemStacks.length) break;
-				((InventoryPlayer) entityplayerORInventory).armorInventory.set(i, itemStacks[i]);
-			}
-		} else {
-			for (int i = 0; i < ((EntityPlayer) entityplayerORInventory).inventory.armorInventory.size(); i++) {
-				if (i > itemStacks.length) break;
-				((EntityPlayer) entityplayerORInventory).inventory.armorInventory.set(i, itemStacks[i]);
-			}
-		}
-	}
-
-	@Override
-	public void setEntityPlayerMainInventory(Object entityplayerORInventory, Object mainInventory) {
-		ItemStack[] itemStacks = ((ItemStack[]) mainInventory);
-		if (entityplayerORInventory instanceof InventoryPlayer) {
-			for (int i = 0; i < ((InventoryPlayer) entityplayerORInventory).mainInventory.size(); i++) {
-				if (i > itemStacks.length) break;
-				((InventoryPlayer) entityplayerORInventory).mainInventory.set(i, itemStacks[i]);
-			}
-		} else {
-			for (int i = 0; i < ((EntityPlayer) entityplayerORInventory).inventory.mainInventory.size(); i++) {
-				if (i > itemStacks.length) break;
-				((EntityPlayer) entityplayerORInventory).inventory.mainInventory.set(i, itemStacks[i]);
-			}
-		}
-	}
-
-	@Override
 	public void setItemStackStackSize(Object itemstack, int i) {
 		((ItemStack) itemstack).func_190920_e(i);
 	}
-
-	@Override
-	public void itemOnItemRightClick(Object item, Object itemStack, Object world, Object entityplayer, Object enumHand) {
-		((Item) item).onItemRightClick((World) world, (EntityPlayer) entityplayer, (EnumHand) enumHand);
-	}
-
-	@Override
-	public boolean entityZombieIsVillager(Object entityZombie) {
-		return entityZombie instanceof EntityZombieVillager;
-	}
-
-	@Override
-	public int getVacancyGlobalEntityID() {
-		int ID = -1;
-		FMLControlledNamespacedRegistry<EntityEntry> entityRegistry = net.minecraftforge.fml.common.registry.GameData.getEntityRegistry();
-		if (entityRegistry != null) {
-			for(int i = 64; i < 256; i++) {
-				//Modchu_Debug.mDebug("getVacancyGlobalEntityID i="+i+" EntityList.field_191308_b.getObjectById(i)="+EntityList.field_191308_b.getObjectById(i));
-				if (entityRegistry.getObjectById(i) != null); else {
-					ID = i;
-					//Modchu_Debug.mDebug("getVacancyGlobalEntityID ID="+ID);
-					break;
-				}
-			}
-		} else {
-			Modchu_Debug.lDebug("getVacancyGlobalEntityID EntityList.field_191308_b == null !!");
-		}
-		return ID;
-	}
-
-	@Override
-	public Map entityListIDtoClassMapping() {
-		return null;
-	}
-
-	@Override
-	public Map entityListStringToClassMapping() {
-		return null;
-	}
-
-	@Override
-	public Map entityListClassToStringMapping() {
-		return null;
-	}
 	// 202~210共通コピペ　↓
+	@Override
+	public Object entityLivingGetCurrentArmor(Object entityLiving, int i) {
+		NonNullList<ItemStack> inventoryArmor = (NonNullList<ItemStack>) Modchu_AS.get("EntityLiving", "inventoryArmor", entityLiving);
+		return inventoryArmor.get(i);
+	}
+
 	@Override
 	public Object getBlock(String s) {
 		if (s != null); else return null;
@@ -166,6 +64,19 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc190_210.Modchu_ASMaster 
 		if (block != null) return block;
 		block = blockRegistry.getObject(Modchu_Main.newResourceLocation(s.toUpperCase()));
 		return block;
+	}
+
+	@Override
+	public int getVacancyGlobalEntityID() {
+		int ID = -1;
+		for(int i = 64; i < 3000; i++) {
+			if (EntityList.getClassFromID(i) != null); else {
+				ID = i;
+				//Modchu_Debug.mDebug("getVacancyGlobalEntityID ID="+ID);
+				break;
+			}
+		}
+		return ID;
 	}
 
 	@Override
@@ -631,5 +542,174 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc190_210.Modchu_ASMaster 
 		return GameType.SURVIVAL;
 	}
 	// 202~210共通コピペ　↑
+	// 190~210共通コピペ　↓
+	@Override
+	public Object[] FMLCommonHandlerInstanceGetMinecraftServerInstanceWorldServers() {
+		return FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
+	}
+
+	@Override
+	public void setMinecraftPlayer(Object entityPlayer) {
+		if (Modchu_Main.isServer) return;
+		Minecraft.getMinecraft().thePlayer = (EntityPlayerSP) entityPlayer;
+	}
+	// ビルド時にバージョン別変化有り ↓
+	@Override
+	public Object minecraftPlayer() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().thePlayer;
+	}
+
+	@Override
+	public Object damageSourceAnvil() {
+		return DamageSource.anvil;
+	}
+
+	@Override
+	public Object damageSourceCactus() {
+		return DamageSource.cactus;
+	}
+
+	@Override
+	public Object damageSourceDrown() {
+		return DamageSource.drown;
+	}
+
+	@Override
+	public Object damageSourceFall() {
+		return DamageSource.fall;
+	}
+
+	@Override
+	public Object damageSourceFallingBlock() {
+		return DamageSource.fallingBlock;
+	}
+
+	@Override
+	public Object damageSourceGeneric() {
+		return DamageSource.generic;
+	}
+
+	@Override
+	public Object damageSourceInFire() {
+		return DamageSource.inFire;
+	}
+
+	@Override
+	public Object damageSourceInWall() {
+		return DamageSource.inWall;
+	}
+
+	@Override
+	public Object damageSourceLava() {
+		return DamageSource.lava;
+	}
+
+	@Override
+	public Object damageSourceMagic() {
+		return DamageSource.magic;
+	}
+
+	@Override
+	public Object damageSourceOnFire() {
+		return DamageSource.onFire;
+	}
+
+	@Override
+	public Object damageSourceOutOfWorld() {
+		return DamageSource.outOfWorld;
+	}
+
+	@Override
+	public Object damageSourceStarve() {
+		return DamageSource.starve;
+	}
+
+	@Override
+	public Object damageSourceWither() {
+		return DamageSource.wither;
+	}
+
+	@Override
+	public Object entityWorld(Object worldOrEntity) {
+		return worldOrEntity instanceof World ? worldOrEntity : worldOrEntity instanceof Entity ? ((Entity) worldOrEntity).worldObj : null;
+	}
+
+	@Override
+	public int mathHelperFloor_double(double d) {
+		return MathHelper.floor_double(d);
+	}
+
+	@Override
+	public float mathHelperSqrt_float(float f) {
+		return MathHelper.sqrt_float(f);
+	}
+
+	@Override
+	public Object minecraftWorld() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().theWorld;
+	}
+
+	@Override
+	public Object worldGetWorldInfo() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().theWorld.getWorldInfo();
+	}
+
+	@Override
+	public float mathHelperFloor_float(float f) {
+		return MathHelper.floor_float(f);
+	}
+
+	@Override
+	public long mathHelperLfloor(double d) {
+		return MathHelper.floor_double_long(d);
+	}
+
+	@Override
+	public double mathHelperAbs_max(double d, double d1) {
+		return MathHelper.abs_max(d, d1);
+	}
+
+	@Override
+	public int mathHelperIntFloorDiv(int i, int j) {
+		return MathHelper.bucketInt(i, j);
+	}
+
+	@Override
+	public double mathHelperSqrt_double(double d) {
+		return MathHelper.sqrt_double(d);
+	}
+
+	@Override
+	public boolean worldSpawnEntity(Object worldOrEntity, Object entity) {
+		return ((World) entityWorld(worldOrEntity)).spawnEntityInWorld((Entity) entity);
+	}
+
+	public Object getWorldInfo(Object entityOrWorldOrWorldInfo) {
+		if (entityOrWorldOrWorldInfo instanceof WorldInfo) return entityOrWorldOrWorldInfo;
+		if (entityOrWorldOrWorldInfo instanceof World) return ((World) entityOrWorldOrWorldInfo).getWorldInfo();
+		if (entityOrWorldOrWorldInfo instanceof Entity) return ((Entity) entityOrWorldOrWorldInfo).worldObj.getWorldInfo();
+		return null;
+	}
+
+	@Override
+	public long worldInfoGetWorldTotalTime(Object entityOrWorldOrWorldInfo) {
+		Object worldInfo = entityOrWorldOrWorldInfo instanceof WorldInfo ? entityOrWorldOrWorldInfo : getWorldInfo(entityOrWorldOrWorldInfo);
+		return ((WorldInfo) entityOrWorldOrWorldInfo).getWorldTotalTime();
+	}
+
+	@Override
+	public long worldInfoGetWorldTime(Object entityOrWorldOrWorldInfo) {
+		Object worldInfo = entityOrWorldOrWorldInfo instanceof WorldInfo ? entityOrWorldOrWorldInfo : getWorldInfo(entityOrWorldOrWorldInfo);
+		return ((WorldInfo) entityOrWorldOrWorldInfo).getWorldTime();
+	}
+
+	@Override
+	public String iAttributeGetAttributeUnlocalizedName(Object iAttribute) {
+		return ((IAttribute) iAttribute).getAttributeUnlocalizedName();
+	}
+	// 190~210共通コピペ　↑
 
 }

@@ -88,7 +88,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 	}
 
 	@Override
-	public boolean supercanCommandSenderUseCommand(int i, String s) {
+	public boolean supercanUseCommand(int i, String s) {
 		return false;
 	}
 
@@ -931,7 +931,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 	}
 
 	@Override
-	public void superaddChatMessage(String par1Str) {
+	public void supersendMessage(String par1Str) {
 		super.addChatMessage(par1Str);
 	}
 
@@ -2421,7 +2421,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 	}
 
 	@Override
-	public void supersetAngles(float par1, float par2) {
+	public void superturn(float par1, float par2) {
 		super.setAngles(par1, par2);
 	}
 
@@ -2475,7 +2475,7 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 	}
 
 	@Override
-	public void supermoveEntity(Object moverType, double par1, double par3, double par5) {
+	public void supermove(Object moverType, double par1, double par3, double par5) {
 		super.moveEntity(par1, par3, par5);
 	}
 
@@ -3587,11 +3587,6 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 	@Override
 	public String supergetClientBrand() {
 		return null;
-	}
-
-	@Override
-	public boolean supercanUseCommand(int permLevel, String commandName) {
-		return false;
 	}
 
 	@Override

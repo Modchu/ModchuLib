@@ -1447,8 +1447,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public Object entityWorldObj(Object worldOrEntity) {
-		return base.superEntityWorldObj(worldOrEntity);
+	public Object entityWorld(Object worldOrEntity) {
+		return base.superEntityWorld(worldOrEntity);
 	}
 
 	@Override
@@ -2682,8 +2682,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public long mathHelperFloor_double_long(double d) {
-		return base.superMathHelperFloor_double_long(d);
+	public long mathHelperLfloor(double d) {
+		return base.superMathHelperLfloor(d);
 	}
 
 	@Override
@@ -2697,7 +2697,7 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public int mathHelperBucketInt(int i, int j) {
+	public int mathHelperIntFloorDiv(int i, int j) {
 		return base.superMathHelperBucketInt(i, j);
 	}
 
@@ -2872,13 +2872,13 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public Object minecraftThePlayer() {
-		return base.superMinecraftThePlayer();
+	public Object minecraftPlayer() {
+		return base.superMinecraftPlayer();
 	}
 
 	@Override
-	public Object minecraftTheWorld() {
-		return base.superMinecraftTheWorld();
+	public Object minecraftWorld() {
+		return base.superMinecraftWorld();
 	}
 
 	@Override
@@ -3932,8 +3932,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public void setMinecraftThePlayer(Object entityPlayer) {
-		base.superSetMinecraftThePlayer(entityPlayer);
+	public void setMinecraftPlayer(Object entityPlayer) {
+		base.superSetMinecraftPlayer(entityPlayer);
 	}
 
 	@Override
@@ -4412,8 +4412,8 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public boolean worldSpawnEntityInWorld(Object worldOrEntity, Object entity) {
-		return base.superWorldSpawnEntityInWorld(worldOrEntity, entity);
+	public boolean worldSpawnEntity(Object worldOrEntity, Object entity) {
+		return base.superWorldSpawnEntity(worldOrEntity, entity);
 	}
 
 	@Override

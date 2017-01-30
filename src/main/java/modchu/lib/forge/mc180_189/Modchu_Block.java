@@ -743,11 +743,11 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public boolean isVisuallyOpaque() {
-		return master != null ? master.isVisuallyOpaque(null) : super.isVisuallyOpaque();
+		return master != null ? master.causesSuffocation(null) : super.isVisuallyOpaque();
 	}
 
 	@Override
-	public boolean superIsVisuallyOpaque(Object iBlockState) {
+	public boolean superCausesSuffocation(Object iBlockState) {
 		return super.isVisuallyOpaque();
 	}
 
@@ -908,11 +908,11 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos blockPos, EnumFacing enumFacing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entityLivingBase) {
-		return (IBlockState) (master != null ? master.onBlockPlaced(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase) : super.onBlockPlaced(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase));
+		return (IBlockState) (master != null ? master.getStateForPlacement(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase) : super.onBlockPlaced(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase));
 	}
 
 	@Override
-	public IBlockState superOnBlockPlaced(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase) {
+	public IBlockState superGetStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase) {
 		return super.onBlockPlaced((World) world, (BlockPos) blockPos, (EnumFacing) enumFacing, hitX, hitY, hitZ, meta, (EntityLivingBase) entityLivingBase);
 	}
 
@@ -1001,11 +1001,11 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	protected ItemStack createStackedBlock(IBlockState iBlockState) {
-		return (ItemStack) (master != null ? master.createStackedBlock(iBlockState) : super.createStackedBlock(iBlockState));
+		return (ItemStack) (master != null ? master.getSilkTouchDrop(iBlockState) : super.createStackedBlock(iBlockState));
 	}
 
 	@Override
-	public ItemStack superCreateStackedBlock(Object iBlockState) {
+	public ItemStack superGetSilkTouchDrop(Object iBlockState) {
 		return super.createStackedBlock((IBlockState) iBlockState);
 	}
 
@@ -2597,6 +2597,10 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity) {
+	}
+
+	@Override
+	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity, boolean p_185477_7_) {
 	}
 
 	@Override

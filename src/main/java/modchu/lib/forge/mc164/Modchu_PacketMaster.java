@@ -303,7 +303,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 	}
 
 	private Object getWorld() {
-		return Modchu_Main.isServer ? Modchu_AS.get(Modchu_AS.minecraftServerGetServerWorldServers) : Modchu_AS.get(Modchu_AS.minecraftTheWorld);
+		return Modchu_Main.isServer ? Modchu_AS.get(Modchu_AS.minecraftServerGetServerWorldServers) : Modchu_AS.get(Modchu_AS.minecraftWorld);
 	}
 
 }

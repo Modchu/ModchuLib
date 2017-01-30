@@ -1675,12 +1675,12 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 
 	@Override
 	public void setAngles(float p_70082_1_, float p_70082_2_) {
-		if (master != null) master.setAngles(p_70082_1_, p_70082_2_);
+		if (master != null) master.turn(p_70082_1_, p_70082_2_);
 		else super.setAngles(p_70082_1_, p_70082_2_);
 	}
 
 	@Override
-	public void superSetAngles(float p_70082_1_, float p_70082_2_) {
+	public void superTurn(float p_70082_1_, float p_70082_2_) {
 		super.setAngles(p_70082_1_, p_70082_2_);
 	}
 
@@ -1772,12 +1772,12 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 
 	@Override
 	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {
-		if (master != null) master.moveEntity(null, p_70091_1_, p_70091_3_, p_70091_5_);
+		if (master != null) master.move(null, p_70091_1_, p_70091_3_, p_70091_5_);
 		else super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
 	}
 
 	@Override
-	public void superMoveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
+	public void superMove(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
 		super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
 	}
 
@@ -3229,12 +3229,7 @@ public class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_
 	}
 
 	@Override
-	public void superAddChatMessage(Object iChatComponent) {
-	}
-
-	@Override
-	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
-		return false;
+	public void superSendMessage(Object iChatComponent) {
 	}
 
 	@Override

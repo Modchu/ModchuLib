@@ -71,7 +71,7 @@ public interface Modchu_IItemMaster {
 	public String getItemStackDisplayName(Object itemStack);
 	public boolean hasEffect(Object itemStack);
 	public Object getRarity(Object itemStack);
-	public boolean isItemTool(Object itemStack);
+	public boolean isEnchantable(Object itemStack);
 	public Object rayTrace(Object world, Object entityPlayer, boolean par3);
 	public int getItemEnchantability();
 	public boolean requiresMultipleRenderPasses();

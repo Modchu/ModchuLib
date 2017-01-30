@@ -929,8 +929,8 @@ public class Modchu_BlockMasterBasis implements Modchu_IBlockMaster {
 	}
 
 	@Override
-	public boolean isVisuallyOpaque(Object iBlockState) {
-		return base.superIsVisuallyOpaque(iBlockState);
+	public boolean causesSuffocation(Object iBlockState) {
+		return base.superCausesSuffocation(iBlockState);
 	}
 
 	@Override
@@ -1009,8 +1009,8 @@ public class Modchu_BlockMasterBasis implements Modchu_IBlockMaster {
 	}
 
 	@Override
-	public Object onBlockPlaced(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase) {
-		return base.superOnBlockPlaced(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase);
+	public Object getStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase) {
+		return base.superGetStateForPlacement(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase);
 	}
 
 	@Override
@@ -1059,8 +1059,8 @@ public class Modchu_BlockMasterBasis implements Modchu_IBlockMaster {
 	}
 
 	@Override
-	public Object createStackedBlock(Object iBlockState) {
-		return base.superCreateStackedBlock(iBlockState);
+	public Object getSilkTouchDrop(Object iBlockState) {
+		return base.superGetSilkTouchDrop(iBlockState);
 	}
 
 	@Override
@@ -1711,6 +1711,11 @@ public class Modchu_BlockMasterBasis implements Modchu_IBlockMaster {
 	@Override
 	public void addCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity) {
 		base.superAddCollisionBoxToList(iBlockState, world, blockPos, axisAlignedBB, p_185477_5_, entity);
+	}
+
+	@Override
+	public void addCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, List list, Object entity, boolean p_185477_7_) {
+		base.superAddCollisionBoxToList(iBlockState, world, blockPos, axisAlignedBB, list, entity, p_185477_7_);
 	}
 
 	@Override

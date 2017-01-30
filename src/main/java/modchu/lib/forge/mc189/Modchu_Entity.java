@@ -135,11 +135,11 @@ public class Modchu_Entity extends modchu.lib.forge.mc180_189.Modchu_Entity impl
 
 	@Override
 	public boolean canCommandSenderUseCommand(int permLevel, String commandName) {
-		return master != null ? master.canCommandSenderUseCommand(permLevel, commandName) : super.canCommandSenderUseCommand(permLevel, commandName);
+		return master != null ? master.canUseCommand(permLevel, commandName) : super.canCommandSenderUseCommand(permLevel, commandName);
 	}
 
 	@Override
-	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+	public boolean superCanUseCommand(int permLevel, String commandName) {
 		return super.canCommandSenderUseCommand(permLevel, commandName);
 	}
 

@@ -38,7 +38,7 @@ public interface Modchu_IParticleMaster {
 	public void extinguish();
 	public void kill();
 	public boolean isOffsetPositionInLiquid(double par1, double par3, double par5);
-	public void moveEntity(double par1, double par3, double par5);
+	public void move(double par1, double par3, double par5);
 	public void doBlockCollisions();
 	public void playStepSound(int par1, int par2, int par3, int par4);
 	public void playSound(String par1Str, float par2, float par3);
@@ -184,7 +184,7 @@ public interface Modchu_IParticleMaster {
 	public void setExpired();
 	public void resetPositionToBB();
 	public boolean isAlive();
-	public Object getEntityBoundingBox();
-	public void setEntityBoundingBox(Object axisAlignedBB);
+	public Object getBoundingBox();
+	public void setBoundingBox(Object axisAlignedBB);
 
 }

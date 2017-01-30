@@ -212,12 +212,12 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 
 	@Override
 	public void moveEntity(double par1, double par3, double par5) {
-		if (master != null) master.moveEntity(par1, par3, par5);
+		if (master != null) master.move(par1, par3, par5);
 		else super.moveEntity(par1, par3, par5);
 	}
 
 	@Override
-	public void superMoveEntity(double par1, double par3, double par5) {
+	public void superMove(double par1, double par3, double par5) {
 		super.moveEntity(par1, par3, par5);
 	}
 
@@ -292,20 +292,20 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 
 	@Override
 	public AxisAlignedBB getEntityBoundingBox() {
-		return (AxisAlignedBB) (master != null ? master.getEntityBoundingBox() : super.getEntityBoundingBox());
+		return (AxisAlignedBB) (master != null ? master.getBoundingBox() : super.getEntityBoundingBox());
 	}
 
-	public AxisAlignedBB superGetEntityBoundingBox() {
+	public AxisAlignedBB superGetBoundingBox() {
 		return super.getEntityBoundingBox();
 	}
 
 	@Override
 	public void setEntityBoundingBox(AxisAlignedBB axisAlignedBB) {
-		if (master != null) master.setEntityBoundingBox(axisAlignedBB);
+		if (master != null) master.setBoundingBox(axisAlignedBB);
 		else super.setEntityBoundingBox(axisAlignedBB);
 	}
 
-	public void superSetEntityBoundingBox(Object axisAlignedBB) {
+	public void superSetBoundingBox(Object axisAlignedBB) {
 		super.setEntityBoundingBox((AxisAlignedBB) axisAlignedBB);
 	}
 	// ~164

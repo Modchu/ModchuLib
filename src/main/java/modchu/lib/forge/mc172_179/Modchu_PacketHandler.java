@@ -12,8 +12,8 @@ import io.netty.handler.codec.MessageToMessageCodec;
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Packet;
-import modchu.lib.forge.mc172_210.Modchu_AbstractPacket;
-import modchu.lib.forge.mc172_210.Modchu_Message;
+import modchu.lib.forge.mc172_212.Modchu_AbstractPacket;
+import modchu.lib.forge.mc172_212.Modchu_Message;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
@@ -43,7 +43,7 @@ public class Modchu_PacketHandler extends MessageToMessageCodec<FMLProxyPacket, 
 		EntityPlayer player = null;
 		switch (FMLCommonHandler.instance().getSide().ordinal()) {
 		case 1:
-			player = (EntityPlayer) Modchu_AS.get(Modchu_AS.minecraftThePlayer);
+			player = (EntityPlayer) Modchu_AS.get(Modchu_AS.minecraftPlayer);
 			break;
 		case 2:
 			INetHandler netHandler = (INetHandler)ctx.channel().attr(NetworkRegistry.NET_HANDLER).get();

@@ -15,13 +15,13 @@ public class Modchu_TileEntityMasterBasis implements Modchu_ITileEntityMaster {
 	}
 
 	@Override
-	public void setWorldObj(Object world) {
-		base.superSetWorldObj(world);
+	public void setWorld(Object world) {
+		base.superSetWorld(world);
 	}
 
 	@Override
-	public boolean hasWorldObj() {
-		return base.superHasWorldObj();
+	public boolean hasWorld() {
+		return base.superHasWorld();
 	}
 
 	@Override

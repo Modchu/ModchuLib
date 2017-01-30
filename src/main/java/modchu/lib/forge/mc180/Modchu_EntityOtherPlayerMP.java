@@ -239,11 +239,11 @@ public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc180_189.Modch
 
 	@Override
 	public boolean canUseCommand(int permLevel, String commandName) {
-		return master != null ? master.canCommandSenderUseCommand(permLevel, commandName) : super.canUseCommand(permLevel, commandName);
+		return master != null ? master.canUseCommand(permLevel, commandName) : super.canUseCommand(permLevel, commandName);
 	}
 
 	@Override
-	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+	public boolean superCanUseCommand(int permLevel, String commandName) {
 		return super.canUseCommand(permLevel, commandName);
 	}
 

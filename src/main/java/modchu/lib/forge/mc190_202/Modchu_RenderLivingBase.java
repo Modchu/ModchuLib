@@ -23,7 +23,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class Modchu_RenderLivingBase extends modchu.lib.forge.mc190_210.Modchu_RenderLivingBase {
+public class Modchu_RenderLivingBase extends modchu.lib.forge.mc190_212.Modchu_RenderLivingBase {
 
 	public Modchu_RenderLivingBase(HashMap<String, Object> map) {
 		super(map);
@@ -37,6 +37,11 @@ public class Modchu_RenderLivingBase extends modchu.lib.forge.mc190_210.Modchu_R
 	@Override
 	public boolean superRemoveLayer(Object layerRenderer) {
 		return super.removeLayer((LayerRenderer) layerRenderer);
+	}
+
+	@Override
+	public void superApplyRotations(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_) {
+		super.rotateCorpse((EntityLivingBase) entityLivingBase, p_77043_2_, p_77043_3_, p_77043_4_);
 	}
 
 }

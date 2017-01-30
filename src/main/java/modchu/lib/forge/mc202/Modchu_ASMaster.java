@@ -7,28 +7,42 @@ import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Main;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
 import net.minecraft.item.Item;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.RegistryNamespacedDefaultedByKey;
 import net.minecraft.world.GameType;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_ASMaster {
 
 	public Modchu_ASMaster(HashMap<String, Object> map) {
 		super(map);
 	}
+
+	@Override
+	public Object worldGetBiomeGenForCoords(Object worldOrInt, Object blockPosOrInt) {
+		//return ((World) entityWorld(worldOrInt)).getBiomeGenForCoords((BlockPos) blockPosOrInt);
+		return ((World) entityWorld(worldOrInt)).getBiome((BlockPos) blockPosOrInt);
+	}
+
 	// 202~210共通コピペ　↓
 	@Override
 	public Object getBlock(String s) {
@@ -505,4 +519,173 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_ASMaster 
 		return GameType.SURVIVAL;
 	}
 	// 202~210共通コピペ　↑
+	// 190~210共通コピペ　↓
+	@Override
+	public Object[] FMLCommonHandlerInstanceGetMinecraftServerInstanceWorldServers() {
+		return FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
+	}
+
+	@Override
+	public void setMinecraftPlayer(Object entityPlayer) {
+		if (Modchu_Main.isServer) return;
+		Minecraft.getMinecraft().thePlayer = (EntityPlayerSP) entityPlayer;
+	}
+	// ビルド時にバージョン別変化有り ↓
+	@Override
+	public Object minecraftPlayer() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().thePlayer;
+	}
+
+	@Override
+	public Object damageSourceAnvil() {
+		return DamageSource.anvil;
+	}
+
+	@Override
+	public Object damageSourceCactus() {
+		return DamageSource.cactus;
+	}
+
+	@Override
+	public Object damageSourceDrown() {
+		return DamageSource.drown;
+	}
+
+	@Override
+	public Object damageSourceFall() {
+		return DamageSource.fall;
+	}
+
+	@Override
+	public Object damageSourceFallingBlock() {
+		return DamageSource.fallingBlock;
+	}
+
+	@Override
+	public Object damageSourceGeneric() {
+		return DamageSource.generic;
+	}
+
+	@Override
+	public Object damageSourceInFire() {
+		return DamageSource.inFire;
+	}
+
+	@Override
+	public Object damageSourceInWall() {
+		return DamageSource.inWall;
+	}
+
+	@Override
+	public Object damageSourceLava() {
+		return DamageSource.lava;
+	}
+
+	@Override
+	public Object damageSourceMagic() {
+		return DamageSource.magic;
+	}
+
+	@Override
+	public Object damageSourceOnFire() {
+		return DamageSource.onFire;
+	}
+
+	@Override
+	public Object damageSourceOutOfWorld() {
+		return DamageSource.outOfWorld;
+	}
+
+	@Override
+	public Object damageSourceStarve() {
+		return DamageSource.starve;
+	}
+
+	@Override
+	public Object damageSourceWither() {
+		return DamageSource.wither;
+	}
+
+	@Override
+	public Object entityWorld(Object worldOrEntity) {
+		return worldOrEntity instanceof World ? worldOrEntity : worldOrEntity instanceof Entity ? ((Entity) worldOrEntity).worldObj : null;
+	}
+
+	@Override
+	public int mathHelperFloor_double(double d) {
+		return MathHelper.floor_double(d);
+	}
+
+	@Override
+	public float mathHelperSqrt_float(float f) {
+		return MathHelper.sqrt_float(f);
+	}
+
+	@Override
+	public Object minecraftWorld() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().theWorld;
+	}
+
+	@Override
+	public Object worldGetWorldInfo() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().theWorld.getWorldInfo();
+	}
+
+	@Override
+	public float mathHelperFloor_float(float f) {
+		return MathHelper.floor_float(f);
+	}
+
+	@Override
+	public long mathHelperLfloor(double d) {
+		return MathHelper.floor_double_long(d);
+	}
+
+	@Override
+	public double mathHelperAbs_max(double d, double d1) {
+		return MathHelper.abs_max(d, d1);
+	}
+
+	@Override
+	public int mathHelperIntFloorDiv(int i, int j) {
+		return MathHelper.bucketInt(i, j);
+	}
+
+	@Override
+	public double mathHelperSqrt_double(double d) {
+		return MathHelper.sqrt_double(d);
+	}
+
+	@Override
+	public boolean worldSpawnEntity(Object worldOrEntity, Object entity) {
+		return ((World) entityWorld(worldOrEntity)).spawnEntityInWorld((Entity) entity);
+	}
+
+	public Object getWorldInfo(Object entityOrWorldOrWorldInfo) {
+		if (entityOrWorldOrWorldInfo instanceof WorldInfo) return entityOrWorldOrWorldInfo;
+		if (entityOrWorldOrWorldInfo instanceof World) return ((World) entityOrWorldOrWorldInfo).getWorldInfo();
+		if (entityOrWorldOrWorldInfo instanceof Entity) return ((Entity) entityOrWorldOrWorldInfo).worldObj.getWorldInfo();
+		return null;
+	}
+
+	@Override
+	public long worldInfoGetWorldTotalTime(Object entityOrWorldOrWorldInfo) {
+		Object worldInfo = entityOrWorldOrWorldInfo instanceof WorldInfo ? entityOrWorldOrWorldInfo : getWorldInfo(entityOrWorldOrWorldInfo);
+		return ((WorldInfo) entityOrWorldOrWorldInfo).getWorldTotalTime();
+	}
+
+	@Override
+	public long worldInfoGetWorldTime(Object entityOrWorldOrWorldInfo) {
+		Object worldInfo = entityOrWorldOrWorldInfo instanceof WorldInfo ? entityOrWorldOrWorldInfo : getWorldInfo(entityOrWorldOrWorldInfo);
+		return ((WorldInfo) entityOrWorldOrWorldInfo).getWorldTime();
+	}
+
+	@Override
+	public String iAttributeGetAttributeUnlocalizedName(Object iAttribute) {
+		return ((IAttribute) iAttribute).getAttributeUnlocalizedName();
+	}
+	// 190~210共通コピペ　↑
 }

@@ -292,9 +292,9 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		return super.getStatFileWriter();
 	}	@Override
 	public void addChatComponentMessage(ITextComponent ITextComponent) {
-		if (master != null) master.addChatComponentMessage(ITextComponent, false);
+		if (master != null) master.sendStatusMessage(ITextComponent, false);
 		else super.addChatComponentMessage(ITextComponent);
-	}	@Override	public void superAddChatComponentMessage(Object ITextComponent, boolean p_146105_2_) {
+	}	@Override	public void superSendStatusMessage(Object ITextComponent, boolean p_146105_2_) {
 		super.addChatComponentMessage((ITextComponent) ITextComponent);
 	}	@Override
 	public void setSprinting(boolean sprinting) {
@@ -310,13 +310,13 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		super.setXPStats(currentXP, maxXP, level);
 	}	@Override
 	public void addChatMessage(ITextComponent ITextComponent) {
-		if (master != null) master.addChatMessage(ITextComponent);
+		if (master != null) master.sendMessage(ITextComponent);
 		else super.addChatMessage(ITextComponent);
-	}	@Override	public void superAddChatMessage(Object ITextComponent) {
+	}	@Override	public void superSendMessage(Object ITextComponent) {
 		super.addChatMessage((ITextComponent) ITextComponent);
 	}	@Override
 	public boolean canCommandSenderUseCommand(int permLevel, String commandName) {
-		return master != null ? master.canCommandSenderUseCommand(permLevel, commandName) : super.canCommandSenderUseCommand(permLevel, commandName);
+		return master != null ? master.canUseCommand(permLevel, commandName) : super.canCommandSenderUseCommand(permLevel, commandName);
 	}	@Override
 	public BlockPos getPosition() {
 		return (BlockPos) (master != null ? master.getPosition() : super.getPosition());
@@ -1380,9 +1380,9 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		super.setPosition(x, y, z);
 	}	@Override
 	public void setAngles(float yaw, float pitch) {
-		if (master != null) master.setAngles(yaw, pitch);
+		if (master != null) master.turn(yaw, pitch);
 		else super.setAngles(yaw, pitch);
-	}	@Override	public void superSetAngles(float yaw, float pitch) {
+	}	@Override	public void superTurn(float yaw, float pitch) {
 		super.setAngles(yaw, pitch);
 	}	@Override
 	protected void setOnFireFromLava() {
@@ -1409,9 +1409,9 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		return super.isOffsetPositionInLiquid(x, y, z);
 	}	@Override
 	public void moveEntity(double x, double y, double z) {
-		if (master != null) master.moveEntity(null, x, y, z);
+		if (master != null) master.move(null, x, y, z);
 		else super.moveEntity(x, y, z);
-	}	@Override	public void superMoveEntity(Object moverType, double x, double y, double z) {
+	}	@Override	public void superMove(Object moverType, double x, double y, double z) {
 		super.moveEntity(x, y, z);
 	}	@Override
 	protected void doBlockCollisions() {
@@ -2001,11 +2001,11 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 	}	@Override
 	public void superDisplayGUIMerchant(Object iMerchant, String par2Str) {
 	}	@Override
-	public void superAddChatMessage(String par1Str) {
+	public void superSendMessage(String par1Str) {
 	}	@Override
 	public void superSendChatToPlayer(Object chatMessageComponent) {
 	}	@Override
-	public boolean superCanCommandSenderUseCommand(int par1, String par2Str) {
+	public boolean superCanUseCommand(int par1, String par2Str) {
 		return false;
 	}	@Override
 	public Object superGetPlayerCoordinates() {

@@ -20,7 +20,7 @@ public interface Modchu_IEntityMaster {
 	public void setSize(float p_70105_1_, float p_70105_2_);
 	public void setRotation(float p_70101_1_, float p_70101_2_);
 	public void setPosition(double p_70107_1_, double p_70107_3_, double p_70107_5_);
-	public void setAngles(float p_70082_1_, float p_70082_2_);
+	public void turn(float p_70082_1_, float p_70082_2_);
 	public void onUpdate();
 	public void onEntityUpdate();
 	public int getMaxInPortalTime();
@@ -29,7 +29,7 @@ public interface Modchu_IEntityMaster {
 	public void extinguish();
 	public void kill();
 	public boolean isOffsetPositionInLiquid(double p_70038_1_, double p_70038_3_, double p_70038_5_);
-	public void moveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_);
+	public void move(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_);
 	public Object getSwimSound();
 	public void doBlockCollisions();
 	public void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object block);
@@ -206,8 +206,8 @@ public interface Modchu_IEntityMaster {
 	public boolean isOutsideBorder();
 	public void setOutsideBorder(boolean p_174821_1_);
 	public boolean replaceItemInInventory(int p_174820_1_, Object itemStack);
-	public void addChatMessage(Object iTextComponent);
-	public boolean canCommandSenderUseCommand(int permLevel, String commandName);
+	public void sendMessage(Object iTextComponent);
+	public boolean canUseCommand(int permLevel, String commandName);
 	public Object getPosition();
 	public Object getPositionVector();
 	public Object getEntityWorld();

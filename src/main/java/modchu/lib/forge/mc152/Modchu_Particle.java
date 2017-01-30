@@ -370,11 +370,11 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 
 	@Override
 	public void moveEntity(double par1, double par3, double par5) {
-		if (master != null) master.moveEntity(par1, par3, par5);
+		if (master != null) master.move(par1, par3, par5);
 		else super.moveEntity(par1, par3, par5);
 	}
 
-	public void superMoveEntity(double par1, double par3, double par5) {
+	public void superMove(double par1, double par3, double par5) {
 		super.moveEntity(par1, par3, par5);
 	}
 
@@ -1381,7 +1381,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
 		return super.func_96091_a((Explosion) explosion, (World) world, par3, par4, par5, par6, par7);
 	}
-	
+
 	@Override
 	public void superPlayStepSound(int par1, int par2, int par3, Object par4) {
 	}
@@ -1581,6 +1581,15 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	public void superSetEntityBoundingBox(Object axisAlignedBB) {
+	}
+
+	@Override
+	public Object superGetBoundingBox() {
+		return super.getBoundingBox();
+	}
+
+	@Override
+	public void superSetBoundingBox(Object axisAlignedBB) {
 	}
 
 }

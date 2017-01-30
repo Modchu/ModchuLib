@@ -25,7 +25,11 @@ public class Modchu_SimpleTextureMaster extends Modchu_SimpleTextureMasterBasis 
 		//Modchu_Debug.mDebug("Modchu_SimpleTextureMaster loadTexture resourceManager="+resourceManager);
 		try {
 			getBufferedImage();
-			int i = Modchu_AS.getInt(Modchu_AS.textureUtilUploadTextureImage, getGlTextureId(), bufferedImage);
+			if (bufferedImage != null) {
+				int i = Modchu_AS.getInt(Modchu_AS.textureUtilUploadTextureImage, getGlTextureId(), bufferedImage);
+			} else {
+				super.loadTexture(resourceManager);
+			}
 			//Modchu_Debug.mDebug("Modchu_SimpleTextureMaster loadTexture TextureUtil uploadTextureImageAllocate return i="+i);
 		} catch (Exception e) {
 			e.printStackTrace();

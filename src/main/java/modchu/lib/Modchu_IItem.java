@@ -39,7 +39,7 @@ public interface Modchu_IItem {
 	public String superGetItemStackDisplayName(Object itemStack);
 	public boolean superHasEffect(Object itemStack);
 	public Object superGetRarity(Object itemStack);
-	public boolean superIsItemTool(Object itemStack);
+	public boolean superIsEnchantable(Object itemStack);
 	public Object superRayTrace(Object world, Object entityPlayer, boolean par3);
 	public int superGetItemEnchantability();
 	public Object superSetCreativeTab(Object creativeTabs);

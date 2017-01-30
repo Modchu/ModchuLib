@@ -75,23 +75,23 @@ public abstract class Modchu_ModelBaseMaster implements Modchu_IEntityCapsBase, 
 	}
 
 	public static final float mh_sqrt_float(float f) {
-		return Modchu_AS.getFloat(Modchu_AS.mathHelperSqrt_float, f);
+		return Modchu_AS.getFloat(Modchu_AS.mathHelperSqrt, f);
 	}
 
 	public static final float mh_sqrt_double(double d) {
-		return Modchu_AS.getFloat(Modchu_AS.mathHelperSqrt_double, d);
+		return Modchu_AS.getFloat(Modchu_AS.mathHelperSqrt, d);
 	}
 
 	public static final int mh_floor_float(float f) {
-		return Modchu_AS.getInt(Modchu_AS.mathHelperFloor_float, f);
+		return Modchu_AS.getInt(Modchu_AS.mathHelperFloor, f);
 	}
 
 	public static final int mh_floor_double(double d) {
-		return Modchu_AS.getInt(Modchu_AS.mathHelperFloor_double, d);
+		return Modchu_AS.getInt(Modchu_AS.mathHelperFloor, d);
 	}
 
 	public static final long mh_floor_double_long(double d) {
-		return Modchu_AS.getLong(Modchu_AS.mathHelperFloor_double_long, d);
+		return Modchu_AS.getLong(Modchu_AS.mathHelperLfloor, d);
 	}
 
 	public static final float mh_abs(float f) {
@@ -103,7 +103,7 @@ public abstract class Modchu_ModelBaseMaster implements Modchu_IEntityCapsBase, 
 	}
 
 	public static final int mh_bucketInt(int i, int j) {
-		return Modchu_AS.getInt(Modchu_AS.mathHelperBucketInt, i, j);
+		return Modchu_AS.getInt(Modchu_AS.mathHelperIntFloorDiv, i, j);
 	}
 
 	public static final boolean mh_stringNullOrLengthZero(String s) {

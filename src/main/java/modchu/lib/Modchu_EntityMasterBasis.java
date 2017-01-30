@@ -66,8 +66,8 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	}
 
 	@Override
-	public void setAngles(float p_70082_1_, float p_70082_2_) {
-		base.superSetAngles(p_70082_1_, p_70082_2_);
+	public void turn(float p_70082_1_, float p_70082_2_) {
+		base.superTurn(p_70082_1_, p_70082_2_);
 	}
 
 	@Override
@@ -111,8 +111,8 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	}
 
 	@Override
-	public void moveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
-		base.superMoveEntity(moverType, p_70091_1_, p_70091_3_, p_70091_5_);
+	public void move(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
+		base.superMove(moverType, p_70091_1_, p_70091_3_, p_70091_5_);
 	}
 
 	@Override
@@ -951,13 +951,13 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	}
 
 	@Override
-	public void addChatMessage(Object iChatComponent) {
-		base.superAddChatMessage(iChatComponent);
+	public void sendMessage(Object iChatComponent) {
+		base.superSendMessage(iChatComponent);
 	}
 
 	@Override
-	public boolean canCommandSenderUseCommand(int permLevel, String commandName) {
-		return base.superCanCommandSenderUseCommand(permLevel, commandName);
+	public boolean canUseCommand(int permLevel, String commandName) {
+		return base.superCanUseCommand(permLevel, commandName);
 	}
 
 	@Override

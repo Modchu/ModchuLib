@@ -18,7 +18,7 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 
 	@Override
 	public boolean canCommandSenderUseCommand(int i, String s) {
-		return base.supercanCommandSenderUseCommand(i, s);
+		return base.supercanUseCommand(i, s);
 	}
 
 	@Override
@@ -413,7 +413,7 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 
 	@Override
 	public void addChatMessage(String par1Str) {
-		base.superaddChatMessage(par1Str);
+		base.supersendMessage(par1Str);
 	}
 
 	@Override
@@ -1118,7 +1118,7 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 
 	@Override
 	public void setAngles(float par1, float par2) {
-		base.supersetAngles(par1, par2);
+		base.superturn(par1, par2);
 	}
 
 	@Override
@@ -1143,7 +1143,7 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 
 	@Override
 	public void moveEntity(Object moverType, double par1, double par3, double par5) {
-		base.supermoveEntity(moverType, par1, par3, par5);
+		base.supermove(moverType, par1, par3, par5);
 	}
 
 	@Override

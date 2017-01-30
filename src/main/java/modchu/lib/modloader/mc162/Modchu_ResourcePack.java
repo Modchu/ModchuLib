@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Set;
 
+import modchu.lib.Modchu_IResourcePack;
 import modchu.lib.Modchu_IResourcePackMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.src.MetadataSection;
@@ -12,7 +13,7 @@ import net.minecraft.src.MetadataSerializer;
 import net.minecraft.src.ResourceLocation;
 import net.minecraft.src.ResourcePack;
 
-public class Modchu_ResourcePack implements ResourcePack {
+public class Modchu_ResourcePack implements ResourcePack, Modchu_IResourcePack {
 	public Modchu_IResourcePackMaster master;
 
 	public Modchu_ResourcePack(HashMap<String, Object> map) {
@@ -29,8 +30,18 @@ public class Modchu_ResourcePack implements ResourcePack {
 	}
 
 	@Override
+	public InputStream superGetInputStream(Object resourceLocation) {
+		return null;
+	}
+
+	@Override
 	public boolean func_110589_b(ResourceLocation resourceLocation) {
 		return master != null ? master.resourceExists(resourceLocation) : false;
+	}
+
+	@Override
+	public boolean superResourceExists(Object resourceLocation) {
+		return false;
 	}
 
 	@Override
@@ -39,8 +50,18 @@ public class Modchu_ResourcePack implements ResourcePack {
 	}
 
 	@Override
+	public Set superGetResourceDomains() {
+		return null;
+	}
+
+	@Override
 	public MetadataSection func_135058_a(MetadataSerializer metadataSerializer, String s) {
 		return (MetadataSection) (master != null ? master.getPackMetadata(metadataSerializer, s) : null);
+	}
+
+	@Override
+	public Object superGetPackMetadata(Object metadataSerializer, String s) {
+		return null;
 	}
 
 	@Override
@@ -49,9 +70,18 @@ public class Modchu_ResourcePack implements ResourcePack {
 	}
 
 	@Override
+	public BufferedImage superGetPackImage() {
+		return null;
+	}
+
+	@Override
 	public String func_130077_b() {
 		return master != null ? master.getPackName() : null;
 	}
 
+	@Override
+	public String superGetPackName() {
+		return null;
+	}
 
 }

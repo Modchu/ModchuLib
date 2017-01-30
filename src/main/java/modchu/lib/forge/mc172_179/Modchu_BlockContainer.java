@@ -63,6 +63,16 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
+	public boolean superIsInvalidNeighbor(Object world, Object blockPos, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public boolean superHasInvalidNeighbor(Object world, Object blockPos) {
+		return false;
+	}
+
+	@Override
 	public Block setLightOpacity(int par1) {
 		return (Block) (master != null ? master.setLightOpacity(par1) : super.setLightOpacity(par1));
 	}
@@ -1686,8 +1696,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	public void superDropBlockAsItemWithChance(Object world, Object blockPos, Object iBlockState, float par6, int par7) {
 	}
 
-	@Override
-	public void superOnEntityWalk(Object world, Object blockPos, Object entity) {
+	public void superOnEntityCollidedWithBlock(Object world, Object blockPos, Object entity) {
 	}
 
 	@Override
@@ -1750,7 +1759,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public boolean superIsVisuallyOpaque(Object iBlockState) {
+	public boolean superCausesSuffocation(Object iBlockState) {
 		return false;
 	}
 
@@ -1768,8 +1777,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	public void superRandomTick(Object world, Object blockPos, Object iBlockState, Random random) {
 	}
 
-	@Override
-	public void superNeighborChanged(Object world, Object blockPos, Object iBlockState, Object block, Object blockPos1) {
+	public void superOnNeighborBlockChange(Object world, Object blockPos, Object iBlockState, Object block) {
 	}
 
 	@Override
@@ -1825,7 +1833,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public Object superOnBlockPlaced(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase) {
+	public Object superGetStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase) {
 		return null;
 	}
 
@@ -1870,7 +1878,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public Object superCreateStackedBlock(Object iBlockState) {
+	public Object superGetSilkTouchDrop(Object iBlockState) {
 		return null;
 	}
 
@@ -1878,8 +1886,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	public void superOnBlockPlacedBy(Object world, Object blockPos, Object iBlockState, Object entityLivingBase, Object itemStack) {
 	}
 
-	@Override
-	public boolean superEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
+	public boolean superOnBlockEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
 		return false;
 	}
 
@@ -2508,6 +2515,10 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
+	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity, boolean p_185477_7_) {
+	}
+
+	@Override
 	public Object superRayTrace(Object blockPos, Object vec3d, Object vec3d1, Object axisAlignedBB) {
 		return null;
 	}
@@ -2517,8 +2528,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 		return false;
 	}
 
-	@Override
-	public Object superGetSoundType() {
+	public Object superGetStepSound() {
 		return null;
 	}
 
@@ -2548,13 +2558,21 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public boolean superIsInvalidNeighbor(Object world, Object blockPos, Object enumFacing) {
+	public void superOnEntityWalk(Object world, Object blockPos, Object entity) {
+	}
+
+	@Override
+	public void superNeighborChanged(Object iBlockState, Object world, Object blockPos, Object block, Object blockPos1) {
+	}
+
+	@Override
+	public boolean superEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
 		return false;
 	}
 
 	@Override
-	public boolean superHasInvalidNeighbor(Object world, Object blockPos) {
-		return false;
+	public Object superGetSoundType() {
+		return null;
 	}
 
 	@Override

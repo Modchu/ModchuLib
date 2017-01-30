@@ -30,7 +30,7 @@ public interface Modchu_IInventoryPlayerMaster {
 	public void onInventoryChanged();
 	public void setItemStack(Object itemStack);
 	public Object getItemStack();
-	public boolean isUseableByPlayer(Object entityPlayer);
+	public boolean isUsableByPlayer(Object entityPlayer);
 	public boolean hasItemStack(Object itemStack);
 	public void openChest();
 	public void closeChest();

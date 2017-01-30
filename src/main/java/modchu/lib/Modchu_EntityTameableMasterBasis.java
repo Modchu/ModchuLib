@@ -1101,8 +1101,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void setAngles(float par1, float par2) {
-		base.superSetAngles(par1, par2);
+	public void turn(float par1, float par2) {
+		base.superTurn(par1, par2);
 	}
 
 	@Override
@@ -1131,8 +1131,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void moveEntity(Object moverType, double par1, double par3, double par5) {
-		base.superMoveEntity(moverType, par1, par3, par5);
+	public void move(Object moverType, double par1, double par3, double par5) {
+		base.superMove(moverType, par1, par3, par5);
 	}
 
 	@Override
@@ -2021,13 +2021,13 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void addChatMessage(Object iChatComponent) {
-		base.superAddChatMessage(iChatComponent);
+	public void sendMessage(Object iChatComponent) {
+		base.superSendMessage(iChatComponent);
 	}
 
 	@Override
-	public boolean canCommandSenderUseCommand(int permLevel, String commandName) {
-		return base.superCanCommandSenderUseCommand(permLevel, commandName);
+	public boolean canUseCommand(int permLevel, String commandName) {
+		return base.superCanUseCommand(permLevel, commandName);
 	}
 
 	@Override
@@ -2101,11 +2101,6 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public boolean canUseCommand(int permLevel, String commandName) {
-		return base.superCanUseCommand(permLevel, commandName);
-	}
-
-	@Override
 	public void setupTamedAI() {
 		base.superSetupTamedAI();
 	}
@@ -2136,8 +2131,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public Object getNewNavigator(Object world) {
-		return base.superGetNewNavigator(world);
+	public Object createNavigator(Object world) {
+		return base.superCreateNavigator(world);
 	}
 
 	@Override

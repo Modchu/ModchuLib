@@ -2,8 +2,9 @@ package modchu.lib.forge.mc190;
 
 import modchu.lib.Modchu_ITileEntity;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
-public class Modchu_TileEntity extends modchu.lib.forge.mc190_210.Modchu_TileEntity implements Modchu_ITileEntity {
+public class Modchu_TileEntity extends modchu.lib.forge.mc190_212.Modchu_TileEntity implements Modchu_ITileEntity {
 
 	public Modchu_TileEntity() {
 	}
@@ -46,5 +47,27 @@ public class Modchu_TileEntity extends modchu.lib.forge.mc190_210.Modchu_TileEnt
 	public boolean superOnlyOpsCanSetNbt() {
 		return super.func_183000_F();
 	}
+	// 190~210共通コピペ　↓
+	@Override
+	public void setWorldObj(World world) {
+		if (master != null) master.setWorld(world);
+		else super.setWorldObj(world);
+	}
+
+	@Override
+	public void superSetWorld(Object world) {
+		super.setWorldObj((World) world);
+	}
+
+	@Override
+	public boolean hasWorldObj() {
+		return master != null ? master.hasWorld() : super.hasWorldObj();
+	}
+
+	@Override
+	public boolean superHasWorld() {
+		return super.hasWorldObj();
+	}
+	// 190~210共通コピペ　↑
 
 }

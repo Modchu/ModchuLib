@@ -768,7 +768,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object entityWorldObj(Object worldOrEntity) {
+	public Object entityWorld(Object worldOrEntity) {
 		return worldOrEntity instanceof World ? worldOrEntity : worldOrEntity instanceof Entity ? ((Entity) worldOrEntity).worldObj : null;
 	}
 
@@ -1086,7 +1086,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void minecraftSetDimensionAndSpawnPlayer() {
-		Object thePlayer = minecraftThePlayer();
+		Object thePlayer = minecraftPlayer();
 		minecraftSetDimensionAndSpawnPlayer(((Entity) thePlayer).dimension);
 	}
 
@@ -1097,7 +1097,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object minecraftTheWorld() {
+	public Object minecraftWorld() {
 		if (Modchu_Main.isServer) return MinecraftServer.getServer().worldServers[0];
 		return Minecraft.getMinecraft().theWorld;
 	}
@@ -1646,7 +1646,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object worldGetPlayerEntityByName(Object worldOrEntity, String s) {
-		return ((World) entityWorldObj(worldOrEntity)).getPlayerEntityByName(s);
+		return ((World) entityWorld(worldOrEntity)).getPlayerEntityByName(s);
 	}
 
 	@Override
@@ -1663,42 +1663,42 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public boolean worldIsDaytime(Object worldOrEntity) {
-		return ((World) entityWorldObj(worldOrEntity)).isDaytime();
+		return ((World) entityWorld(worldOrEntity)).isDaytime();
 	}
 
 	@Override
 	public boolean worldIsRemote(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.isRemote : false;
 	}
 
 	@Override
 	public List worldLoadedEntityList(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.loadedEntityList : null;
 	}
 
 	@Override
 	public List worldPlayerEntities(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.playerEntities : null;
 	}
 
 	@Override
 	public List worldWeatherEffects(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.weatherEffects : null;
 	}
 
 	@Override
 	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, Object soundEventOrString, float f, float f1) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		if (world != null) world.playSoundAtEntity((Entity) entity, (String) soundEventOrString, f, f1);
 	}
 
 	@Override
 	public void worldSetEntityState(Object worldOrEntity, Object entity, byte by) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		if (world != null) world.setEntityState((Entity) entity, by);
 	}
 
@@ -1855,7 +1855,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public long mathHelperFloor_double_long(double d) {
+	public long mathHelperLfloor(double d) {
 		return MathHelper.floor_double_long(d);
 	}
 
@@ -1870,7 +1870,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public int mathHelperBucketInt(int i, int j) {
+	public int mathHelperIntFloorDiv(int i, int j) {
 		return MathHelper.bucketInt(i, j);
 	}
 
@@ -2078,7 +2078,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object worldGetEntityByID(Object worldOrEntity, int i) {
-		return ((World) entityWorldObj(worldOrEntity)).getEntityByID(i);
+		return ((World) entityWorld(worldOrEntity)).getEntityByID(i);
 	}
 
 	@Override
@@ -2088,7 +2088,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public List worldGetEntitiesWithinAABBExcludingEntity(Object worldOrEntity, Object entity, Object axisAlignedBB) {
-		return ((World) entityWorldObj(worldOrEntity)).getEntitiesWithinAABBExcludingEntity((Entity) entity, (AxisAlignedBB) axisAlignedBB);
+		return ((World) entityWorld(worldOrEntity)).getEntitiesWithinAABBExcludingEntity((Entity) entity, (AxisAlignedBB) axisAlignedBB);
 	}
 
 	@Override
@@ -2204,17 +2204,17 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public List worldGetEntitiesWithinAABB(Object worldOrEntity, Class c, Object axisAlignedBB) {
-		return ((World) entityWorldObj(worldOrEntity)).getEntitiesWithinAABB(c, (AxisAlignedBB) axisAlignedBB);
+		return ((World) entityWorld(worldOrEntity)).getEntitiesWithinAABB(c, (AxisAlignedBB) axisAlignedBB);
 	}
 
 	@Override
-	public boolean worldSpawnEntityInWorld(Object worldOrEntity, Object entity) {
-		return ((World) entityWorldObj(worldOrEntity)).spawnEntityInWorld((Entity) entity);
+	public boolean worldSpawnEntity(Object worldOrEntity, Object entity) {
+		return ((World) entityWorld(worldOrEntity)).spawnEntityInWorld((Entity) entity);
 	}
 
 	@Override
 	public Object worldGetClosestPlayerToEntity(Object worldOrEntity, Object entity, double d) {
-		return ((World) entityWorldObj(worldOrEntity)).getClosestPlayerToEntity((Entity) entity, d);
+		return ((World) entityWorld(worldOrEntity)).getClosestPlayerToEntity((Entity) entity, d);
 	}
 
 	@Override
@@ -2340,7 +2340,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public int worldGetMoonPhase(Object entityOrWorld) {
-		Object world = entityOrWorld instanceof World ? entityOrWorld : entityWorldObj(entityOrWorld);
+		Object world = entityOrWorld instanceof World ? entityOrWorld : entityWorld(entityOrWorld);
 		return ((World) world).getMoonPhase();
 	}
 
@@ -2391,7 +2391,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public int blockDoublePlantColorMultiplier(Object blockDoublePlant, int x, int y, int z) {
-		return blockDoublePlantColorMultiplier(blockDoublePlant, minecraftTheWorld(), x, y, z);
+		return blockDoublePlantColorMultiplier(blockDoublePlant, minecraftWorld(), x, y, z);
 	}
 
 	@Override

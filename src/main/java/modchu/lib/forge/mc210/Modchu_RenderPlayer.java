@@ -1,42 +1,49 @@
 package modchu.lib.forge.mc210;
 
 import java.util.HashMap;
-import java.util.List;
 
-import modchu.lib.Modchu_AS;
-import modchu.lib.Modchu_Debug;
-import modchu.lib.Modchu_IRenderLiving;
-import modchu.lib.Modchu_IRenderLivingMaster;
+import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_Main;
-import modchu.lib.Modchu_Reflect;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.culling.ICamera;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.layers.LayerArmorBase;
-import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
-import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
 
-public class Modchu_RenderPlayer extends modchu.lib.forge.mc190_210.Modchu_RenderPlayer {
+public class Modchu_RenderPlayer extends modchu.lib.forge.mc190_212.Modchu_RenderPlayer {
 
 	public Modchu_RenderPlayer(HashMap<String, Object> map) {
 		super(map);
 	}
-
-	public boolean removeLayer(LayerRenderer layerRenderer) {
-		return master != null ? master.removeLayer(layerRenderer) : layerRenderers.remove(layerRenderer);
-	}
-
+	// 210~分離
 	@Override
 	public boolean superRemoveLayer(Object layerRenderer) {
 		return layerRenderers.remove((LayerRenderer) layerRenderer);
 	}
+	// 212~分離
+	@Override
+	public void rotateCorpse(AbstractClientPlayer var1, float var2, float var3, float var4) {
+		String modchuLibEventName = "modchu_RenderPlayerRotatePlayer";
+		boolean isCanceled = false;
+		if (Modchu_Main.modchuLibEvent(modchuLibEventName)) {
+			boolean flag = true;
+			Object[] o = Modchu_Main.modchuLibEvent(modchuLibEventName, new Object[]{ var1, var2, var3, var4 });
+			isCanceled = o != null
+					&& o.length > 0 ? Modchu_CastHelper.Boolean(o[0]) : false;
+			if (o != null
+					&& o.length > 1) {
+				var1 = (AbstractClientPlayer) o[1];
+				if (o.length > 2) var2 = Modchu_CastHelper.Float(o[2]);
+				if (o.length > 3) var3 = Modchu_CastHelper.Float(o[3]);
+				if (o.length > 4) var4 = Modchu_CastHelper.Float(o[4]);
+			}
+		}
+		if (!isCanceled) {
+			if (master != null) master.applyRotations(var1, var2, var3, var4);
+		}
+	}
 
+	@Override
+	public void superApplyRotations(Object par1EntityLivingBase, float par2, float par3, float par4) {
+		super.rotateCorpse((AbstractClientPlayer) par1EntityLivingBase, par2, par3, par4);
+	}
 
 }

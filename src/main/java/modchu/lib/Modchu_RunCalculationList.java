@@ -149,8 +149,8 @@ public class Modchu_RunCalculationList implements Modchu_ITextCalculationDataFor
 		}
 		if (o != null) {
 			if (debug) Modchu_Debug.mDebug("Modchu_RunCalculationList	runCalculation	"+o+" + "+o1);
-			if (!initFlag) formula.init();
 			formula = Modchu_TextCalculationFormula.calculationFormulaMap.get("+");
+			if (!initFlag) formula.init();
 			o = formula.calculationObject(o, o1, by, map);
 			if (debug) Modchu_Debug.mDebug("Modchu_RunCalculationList	runCalculation	="+o);
 		} else {

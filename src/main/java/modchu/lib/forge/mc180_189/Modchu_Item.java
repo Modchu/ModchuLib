@@ -412,11 +412,11 @@ public class Modchu_Item extends Item implements Modchu_IItem {
 
 	@Override
 	public boolean isItemTool(ItemStack itemStack) {
-		return master != null ? master.isItemTool(itemStack) : super.isItemTool(itemStack);
+		return master != null ? master.isEnchantable(itemStack) : super.isItemTool(itemStack);
 	}
 
 	@Override
-	public boolean superIsItemTool(Object itemStack) {
+	public boolean superIsEnchantable(Object itemStack) {
 		return super.isItemTool((ItemStack) itemStack);
 	}
 

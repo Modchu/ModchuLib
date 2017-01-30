@@ -1722,7 +1722,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public boolean superIsVisuallyOpaque(Object iBlockState) {
+	public boolean superCausesSuffocation(Object iBlockState) {
 		return false;
 	}
 
@@ -1797,7 +1797,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public Object superOnBlockPlaced(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase) {
+	public Object superGetStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase) {
 		return null;
 	}
 
@@ -1843,7 +1843,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public Object superCreateStackedBlock(Object iBlockState) {
+	public Object superGetSilkTouchDrop(Object iBlockState) {
 		return null;
 	}
 
@@ -2482,6 +2482,10 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity) {
+	}
+
+	@Override
+	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity, boolean p_185477_7_) {
 	}
 
 	@Override

@@ -106,7 +106,7 @@ public interface Modchu_IEntityOtherPlayerMPMaster extends Modchu_IEntityLivingB
 	public float getBedOrientationInDegrees();
 	public boolean isPlayerFullyAsleep();
 	public int getSleepTimer();
-	public void addChatComponentMessage(Object iChatComponent, boolean p_146105_2_);
+	public void sendStatusMessage(Object iChatComponent, boolean p_146105_2_);
 	public Object getBedLocation();
 	public boolean isSpawnForced();
 	public void setSpawnPoint(Object blockPos, boolean forced);
@@ -149,7 +149,7 @@ public interface Modchu_IEntityOtherPlayerMPMaster extends Modchu_IEntityLivingB
 	public void setCommandStats(Object entity);
 	// 190~
 	public void openBook(Object itemStack, Object enumHand);
-	public Object interact(Object entity, Object itemStack, Object enumHand);
+	public Object interactOn(Object entity, Object itemStack, Object enumHand);
 	public boolean isCreative();
 	public boolean isPlayerInfoSet();
 	public Object getLocationElytra();

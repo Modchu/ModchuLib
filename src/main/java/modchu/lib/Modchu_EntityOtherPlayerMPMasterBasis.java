@@ -38,8 +38,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public void addChatMessage(Object iChatComponent) {
-		base.superAddChatMessage(iChatComponent);
+	public void sendMessage(Object iChatComponent) {
+		base.superSendMessage(iChatComponent);
 	}
 
 	@Override
@@ -428,8 +428,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public void addChatComponentMessage(Object iChatComponent, boolean p_146105_2_) {
-		base.superAddChatComponentMessage(iChatComponent, p_146105_2_);
+	public void sendStatusMessage(Object iChatComponent, boolean p_146105_2_) {
+		base.superSendStatusMessage(iChatComponent, p_146105_2_);
 	}
 
 	@Override
@@ -1178,8 +1178,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public void setAngles(float yaw, float pitch) {
-		base.superSetAngles(yaw, pitch);
+	public void turn(float yaw, float pitch) {
+		base.superTurn(yaw, pitch);
 	}
 
 	@Override
@@ -1203,8 +1203,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public void moveEntity(Object moverType, double x, double y, double z) {
-		base.superMoveEntity(moverType, x, y, z);
+	public void move(Object moverType, double x, double y, double z) {
+		base.superMove(moverType, x, y, z);
 	}
 
 	@Override
@@ -1783,8 +1783,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public boolean canCommandSenderUseCommand(int p_70003_1_, String p_70003_2_) {
-		return base.superCanCommandSenderUseCommand(p_70003_1_, p_70003_2_);
+	public boolean canUseCommand(int p_70003_1_, String p_70003_2_) {
+		return base.superCanUseCommand(p_70003_1_, p_70003_2_);
 	}
 
 	@Override
@@ -2345,11 +2345,6 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public boolean canUseCommand(int permLevel, String commandName) {
-		return base.superCanUseCommand(permLevel, commandName);
-	}
-
-	@Override
 	public void setRenderYawOffset(float p_181013_1_) {
 		base.superSetRenderYawOffset(p_181013_1_);
 	}
@@ -2785,8 +2780,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public Object interact(Object entity, Object itemStack, Object enumHand) {
-		return base.superInteract(entity, itemStack, enumHand);
+	public Object interactOn(Object entity, Object itemStack, Object enumHand) {
+		return base.superInteractOn(entity, itemStack, enumHand);
 	}
 
 	@Override

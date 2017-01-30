@@ -1311,11 +1311,6 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 		return false;
 	}
 
-	@Override
-	public boolean superCanUseCommand(int permLevel, String commandName) {
-		return false;
-	}
-
 	public Object superFunc_174807_aT() {
 		return null;
 	}
@@ -1584,7 +1579,7 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 	}
 
 	@Override
-	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+	public boolean superCanUseCommand(int permLevel, String commandName) {
 		return false;
 	}
 
@@ -1764,12 +1759,12 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 
 	@Override
 	public void setAngles(float p_70082_1_, float p_70082_2_) {
-		if (master != null) master.setAngles(p_70082_1_, p_70082_2_);
+		if (master != null) master.turn(p_70082_1_, p_70082_2_);
 		else super.setAngles(p_70082_1_, p_70082_2_);
 	}
 
 	@Override
-	public void superSetAngles(float p_70082_1_, float p_70082_2_) {
+	public void superTurn(float p_70082_1_, float p_70082_2_) {
 		super.setAngles(p_70082_1_, p_70082_2_);
 	}
 
@@ -1861,12 +1856,12 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 
 	@Override
 	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {
-		if (master != null) master.moveEntity(null, p_70091_1_, p_70091_3_, p_70091_5_);
+		if (master != null) master.move(null, p_70091_1_, p_70091_3_, p_70091_5_);
 		else super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
 	}
 
 	@Override
-	public void superMoveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
+	public void superMove(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
 		super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
 	}
 
@@ -3269,12 +3264,12 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 
 	@Override
 	public void addChatMessage(IChatComponent iChatComponent) {
-		if (master != null) master.addChatMessage(iChatComponent);
+		if (master != null) master.sendMessage(iChatComponent);
 		else super.addChatMessage(iChatComponent);
 	}
 
 	@Override
-	public void superAddChatMessage(Object iChatComponent) {
+	public void superSendMessage(Object iChatComponent) {
 		super.addChatMessage((IChatComponent) iChatComponent);
 	}
 

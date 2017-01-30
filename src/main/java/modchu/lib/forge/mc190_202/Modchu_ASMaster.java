@@ -2,40 +2,20 @@ package modchu.lib.forge.mc190_202;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_Main;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Biomes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.RegistryNamespacedDefaultedByKey;
 import net.minecraft.world.World;
 
-public class Modchu_ASMaster extends modchu.lib.forge.mc190_210.Modchu_ASMaster {
+public class Modchu_ASMaster extends modchu.lib.forge.mc190_212.Modchu_ASMaster {
 
 	public Modchu_ASMaster(HashMap<String, Object> map) {
 		super(map);
 	}
 	// 210~分離
-	@Override
-	public Object worldGetBiomeGenForCoords(Object worldOrInt, Object blockPosOrInt) {
-		return ((World) entityWorldObj(worldOrInt)).getBiomeGenForCoords((BlockPos) blockPosOrInt);
-	}
-
 	@Override
 	public Object[] entityPlayerArmorInventory(Object entityplayerORInventory) {
 		if (entityplayerORInventory instanceof InventoryPlayer) ;else {

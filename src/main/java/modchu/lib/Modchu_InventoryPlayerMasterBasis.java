@@ -155,8 +155,8 @@ public class Modchu_InventoryPlayerMasterBasis implements Modchu_IInventoryPlaye
 	}
 
 	@Override
-	public boolean isUseableByPlayer(Object entityPlayer) {
-		return base.superIsUseableByPlayer(entityPlayer);
+	public boolean isUsableByPlayer(Object entityPlayer) {
+		return base.superIsUsableByPlayer(entityPlayer);
 	}
 
 	@Override

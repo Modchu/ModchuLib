@@ -318,7 +318,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return master != null ? master.func_71066_bF() : super.func_71066_bF();
 	}	@Override	public boolean superFunc_71066_bF() {
 		return super.func_71066_bF();
-	}	@Override	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {		if (master != null) master.moveEntity(null, p_70091_1_, p_70091_3_, p_70091_5_);		else super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);	}	@Override	public void superMoveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {		super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);	}	@Override
+	}	@Override	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {		if (master != null) master.move(null, p_70091_1_, p_70091_3_, p_70091_5_);		else super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);	}	@Override	public void superMove(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {		super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);	}	@Override
 	public void updateEntityActionState() {
 		if (master != null) master.updateEntityActionState();
 		else super.updateEntityActionState();
@@ -443,9 +443,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		return super.isSneaking();
 	}	@Override
 	public void addChatMessage(String par1Str) {
-		if (master != null) master.addChatMessage(par1Str);
+		if (master != null) master.sendMessage(par1Str);
 		else super.addChatMessage(par1Str);
-	}	@Override	public void superAddChatMessage(String par1Str) {
+	}	@Override	public void superSendMessage(String par1Str) {
 		super.addChatMessage(par1Str);
 	}	@Override
 	public void setSprinting(boolean par1) {
@@ -467,8 +467,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.sendChatToPlayer(par1Str);
 	}	@Override
 	public boolean canCommandSenderUseCommand(int par1, String par2Str) {
-		return master != null ? master.canCommandSenderUseCommand(par1, par2Str) : super.canCommandSenderUseCommand(par1, par2Str);
-	}	@Override	public boolean superCanCommandSenderUseCommand(int par1, String par2Str) {
+		return master != null ? master.canUseCommand(par1, par2Str) : super.canCommandSenderUseCommand(par1, par2Str);
+	}	@Override	public boolean superCanUseCommand(int par1, String par2Str) {
 		return super.canCommandSenderUseCommand(par1, par2Str);
 	}	@Override
 	public ChunkCoordinates getPlayerCoordinates() {
@@ -1586,9 +1586,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.setPosition(par1, par3, par5);
 	}	@Override
 	public void setAngles(float par1, float par2) {
-		if (master != null) master.setAngles(par1, par2);
+		if (master != null) master.turn(par1, par2);
 		else super.setAngles(par1, par2);
-	}	@Override	public void superSetAngles(float par1, float par2) {
+	}	@Override	public void superTurn(float par1, float par2) {
 		super.setAngles(par1, par2);
 	}	@Override
 	protected void setOnFireFromLava() {
@@ -2182,9 +2182,9 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 	}	@Override
 	public void superFunc_146101_a(Object tileEntityFurnace) {
 	}	@Override
-	public void superAddChatMessage(Object iChatComponent) {
+	public void superSendMessage(Object iChatComponent) {
 	}	@Override
-	public void superAddChatComponentMessage(Object iChatComponent, boolean p_146105_2_) {	}	@Override
+	public void superSendStatusMessage(Object iChatComponent, boolean p_146105_2_) {	}	@Override
 	public String superGetSplashSound() {
 		return null;
 	}	@Override

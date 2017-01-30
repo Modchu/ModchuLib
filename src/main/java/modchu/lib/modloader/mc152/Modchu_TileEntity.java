@@ -54,22 +54,22 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 
 	@Override
 	public void setWorldObj(World world) {
-		if (master != null) master.setWorldObj(world);
+		if (master != null) master.setWorld(world);
 		else super.setWorldObj(world);
 	}
 
 	@Override
-	public void superSetWorldObj(Object world) {
+	public void superSetWorld(Object world) {
 		super.setWorldObj((World) world);
 	}
 
 	@Override
 	public boolean func_70309_m() {
-		return master != null ? master.hasWorldObj() : super.func_70309_m();
+		return master != null ? master.hasWorld() : super.func_70309_m();
 	}
 
 	@Override
-	public boolean superHasWorldObj() {
+	public boolean superHasWorld() {
 		return super.func_70309_m();
 	}
 

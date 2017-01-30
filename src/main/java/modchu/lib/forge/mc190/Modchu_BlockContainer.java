@@ -10,9 +10,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -20,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class Modchu_BlockContainer extends modchu.lib.forge.mc190_210.Modchu_BlockContainer implements Modchu_IBlockContainer {
+public class Modchu_BlockContainer extends modchu.lib.forge.mc190_212.Modchu_BlockContainer implements Modchu_IBlockContainer {
 
 	public Modchu_BlockContainer(HashMap<String, Object> map) {
 		super(map);
@@ -116,11 +118,11 @@ public class Modchu_BlockContainer extends modchu.lib.forge.mc190_210.Modchu_Blo
 
 	@Override
 	public boolean isVisuallyOpaque() {
-		return master != null ? master.isVisuallyOpaque(null) : super.isVisuallyOpaque();
+		return master != null ? master.causesSuffocation(null) : super.isVisuallyOpaque();
 	}
 
 	@Override
-	public boolean superIsVisuallyOpaque(Object iBlockState) {
+	public boolean superCausesSuffocation(Object iBlockState) {
 		return super.isVisuallyOpaque();
 	}
 
@@ -143,5 +145,52 @@ public class Modchu_BlockContainer extends modchu.lib.forge.mc190_210.Modchu_Blo
 	public boolean superOnBlockActivated(Object world, Object blockPos, Object iBlockState, Object entityPlayer, Object enumHand, Object itemStack, Object enumFacing, float hitX, float hitY, float hitZ) {
 		return super.onBlockActivated((World) world, (BlockPos) blockPos, (IBlockState) iBlockState, (EntityPlayer) entityPlayer, (EnumHand) enumHand, (ItemStack) itemStack, (EnumFacing) enumFacing, hitX, hitY, hitZ);
 	}
+
+	@Override
+	public boolean canRenderInLayer(BlockRenderLayer enumWorldBlockLayer) {
+		return master != null ? master.canRenderInLayer(enumWorldBlockLayer) : super.canRenderInLayer(enumWorldBlockLayer);
+	}
+
+	@Override
+	public boolean superCanRenderInLayer(Object enumWorldBlockLayer) {
+		return super.canRenderInLayer((BlockRenderLayer) enumWorldBlockLayer);
+	}
+	// 190~210共通コピペ　↓
+	@Override
+	public void addCollisionBoxToList(IBlockState iBlockState, World world, BlockPos blockPos, AxisAlignedBB axisAlignedBB, List<AxisAlignedBB> p_185477_5_, Entity entity) {
+		if (master != null) master.addCollisionBoxToList(iBlockState, world, blockPos, axisAlignedBB, p_185477_5_, entity);
+		else super.addCollisionBoxToList(iBlockState, world, blockPos, axisAlignedBB, p_185477_5_, entity);
+	}
+
+	@Override
+	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity) {
+		super.addCollisionBoxToList((IBlockState) iBlockState, (World) world, (BlockPos) blockPos, (AxisAlignedBB) axisAlignedBB, (List) p_185477_5_, (Entity) entity);
+	}
+
+	@Override
+	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity, boolean p_185477_7_) {
+		super.addCollisionBoxToList((IBlockState) iBlockState, (World) world, (BlockPos) blockPos, (AxisAlignedBB) axisAlignedBB, (List) p_185477_5_, (Entity) entity);
+	}
+
+	@Override
+	public IBlockState onBlockPlaced(World world, BlockPos blockPos, EnumFacing enumFacing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entityLivingBase) {
+		return (IBlockState) (master != null ? master.getStateForPlacement(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase) : super.onBlockPlaced(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase));
+	}
+
+	@Override
+	public IBlockState superGetStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase) {
+		return super.onBlockPlaced((World) world, (BlockPos) blockPos, (EnumFacing) enumFacing, hitX, hitY, hitZ, meta, (EntityLivingBase) entityLivingBase);
+	}
+
+	@Override
+	protected ItemStack createStackedBlock(IBlockState iBlockState) {
+		return (ItemStack) (master != null ? master.getSilkTouchDrop(iBlockState) : super.createStackedBlock(iBlockState));
+	}
+
+	@Override
+	public ItemStack superGetSilkTouchDrop(Object iBlockState) {
+		return super.createStackedBlock((IBlockState) iBlockState);
+	}
+	// 190~210共通コピペ　↑
 
 }

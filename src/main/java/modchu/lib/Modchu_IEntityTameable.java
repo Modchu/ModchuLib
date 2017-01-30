@@ -69,7 +69,7 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityLiving {
 	public void superOnGrowingAdult();
 	public boolean superIsWithinHomeDistanceFromPosition(Object blockPos);
 	public void superSetHomePosAndDistance(Object blockPos, int distance);
-	public Object superGetNewNavigator(Object world);
+	public Object superCreateNavigator(Object world);
 	public Object superGetDropItem();
 	public void superUpdateEquipmentIfNeeded(Object entityItem);
 	public boolean superCanEquipItem(Object itemStack);

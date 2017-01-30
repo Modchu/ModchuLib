@@ -120,7 +120,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	}
 
 	@Override
-	public void superRotateCorpse(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_) {
+	public void superApplyRotations(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_) {
 		super.rotateCorpse((EntityLiving) entityLivingBase, p_77043_2_, p_77043_3_, p_77043_4_);
 	}
 

@@ -12,6 +12,6 @@ public interface Modchu_IRenderPlayerMaster extends Modchu_IRenderLivingBaseMast
 	public void transformHeldFull3DItemLayer();
 	public void renderOffsetLivingLabel(Object abstractClientPlayer, double p_96449_2_, double p_96449_4_, double p_96449_6_, String p_96449_8_, float p_96449_9_, double p_96449_10_);
 	public void func_177139_c(Object abstractClientPlayer);
-	public void rotateCorpse(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_);
+	public void applyRotations(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_);
 
 }

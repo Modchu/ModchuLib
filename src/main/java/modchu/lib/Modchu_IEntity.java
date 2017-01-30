@@ -28,7 +28,7 @@ public interface Modchu_IEntity {
 	public void superSetSize(float p_70105_1_, float p_70105_2_);
 	public void superSetRotation(float p_70101_1_, float p_70101_2_);
 	public void superSetPosition(double p_70107_1_, double p_70107_3_, double p_70107_5_);
-	public void superSetAngles(float p_70082_1_, float p_70082_2_);
+	public void superTurn(float p_70082_1_, float p_70082_2_);
 	public void superOnUpdate();
 	public void superOnEntityUpdate();
 	public int superGetMaxInPortalTime();
@@ -37,7 +37,7 @@ public interface Modchu_IEntity {
 	public void superExtinguish();
 	public void superKill();
 	public boolean superIsOffsetPositionInLiquid(double p_70038_1_, double p_70038_3_, double p_70038_5_);
-	public void superMoveEntity(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_);
+	public void superMove(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_);
 	public Object superGetSwimSound();
 	public void superDoBlockCollisions();
 	public void superFunc_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object block);
@@ -214,8 +214,8 @@ public interface Modchu_IEntity {
 	public boolean superIsOutsideBorder();
 	public void superSetOutsideBorder(boolean p_174821_1_);
 	public boolean superReplaceItemInInventory(int p_174820_1_, Object itemStack);
-	public void superAddChatMessage(Object iTextComponent);
-	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName);
+	public void superSendMessage(Object iTextComponent);
+	public boolean superCanUseCommand(int permLevel, String commandName);
 	public Object superGetPosition();
 	public Object superGetPositionVector();
 	public Object superGetEntityWorld();

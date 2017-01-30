@@ -2711,12 +2711,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object entityWorldObj(Object worldOrEntity) {
-		return master != null ? master.entityWorldObj(worldOrEntity) : super.entityWorldObj(worldOrEntity);
+	protected Object entityWorld(Object worldOrEntity) {
+		return master != null ? master.entityWorld(worldOrEntity) : super.entityWorld(worldOrEntity);
 	}
 
-	public Object superEntityWorldObj(Object worldOrEntity) {
-		return super.entityWorldObj(worldOrEntity);
+	public Object superEntityWorld(Object worldOrEntity) {
+		return super.entityWorld(worldOrEntity);
 	}
 
 	@Override
@@ -4931,21 +4931,21 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected int mathHelperFloor_double(double d) {
-		return master != null ? master.mathHelperFloor_double(d) : super.mathHelperFloor_double(d);
+	protected int mathHelperFloor(double d) {
+		return master != null ? master.mathHelperFloor_double(d) : super.mathHelperFloor(d);
 	}
 
 	public int superMathHelperFloor_double(double d) {
-		return super.mathHelperFloor_double(d);
+		return super.mathHelperFloor(d);
 	}
 
 	@Override
-	protected float mathHelperFloor_float(float f) {
-		return master != null ? master.mathHelperFloor_float(f) : super.mathHelperFloor_float(f);
+	protected float mathHelperFloor(float f) {
+		return master != null ? master.mathHelperFloor_float(f) : super.mathHelperFloor(f);
 	}
 
 	public float superMathHelperFloor_float(float f) {
-		return super.mathHelperFloor_float(f);
+		return super.mathHelperFloor(f);
 	}
 
 	@Override
@@ -4958,12 +4958,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected long mathHelperFloor_double_long(double d) {
-		return master != null ? master.mathHelperFloor_double_long(d) : super.mathHelperFloor_double_long(d);
+	protected long mathHelperLfloor(double d) {
+		return master != null ? master.mathHelperLfloor(d) : super.mathHelperLfloor(d);
 	}
 
-	public long superMathHelperFloor_double_long(double d) {
-		return super.mathHelperFloor_double_long(d);
+	public long superMathHelperLfloor(double d) {
+		return super.mathHelperLfloor(d);
 	}
 
 	@Override
@@ -4985,12 +4985,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected int mathHelperBucketInt(int i, int j) {
-		return master != null ? master.mathHelperBucketInt(i, j) : super.mathHelperBucketInt(i, j);
+	protected int mathHelperIntFloorDiv(int i, int j) {
+		return master != null ? master.mathHelperIntFloorDiv(i, j) : super.mathHelperIntFloorDiv(i, j);
 	}
 
 	public int superMathHelperBucketInt(int i, int j) {
-		return super.mathHelperBucketInt(i, j);
+		return super.mathHelperIntFloorDiv(i, j);
 	}
 
 	@Override
@@ -5012,21 +5012,21 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected float mathHelperSqrt_float(float f) {
-		return master != null ? master.mathHelperSqrt_float(f) : super.mathHelperSqrt_float(f);
+	protected float mathHelperSqrt(float f) {
+		return master != null ? master.mathHelperSqrt_float(f) : super.mathHelperSqrt(f);
 	}
 
 	public float superMathHelperSqrt_float(float f) {
-		return super.mathHelperSqrt_float(f);
+		return super.mathHelperSqrt(f);
 	}
 
 	@Override
-	protected double mathHelperSqrt_double(double d) {
-		return master != null ? master.mathHelperSqrt_double(d) : super.mathHelperSqrt_double(d);
+	protected double mathHelperSqrt(double d) {
+		return master != null ? master.mathHelperSqrt_double(d) : super.mathHelperSqrt(d);
 	}
 
 	public double superMathHelperSqrt_double(double d) {
-		return super.mathHelperSqrt_double(d);
+		return super.mathHelperSqrt(d);
 	}
 
 	@Override
@@ -5306,21 +5306,21 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected Object minecraftThePlayer() {
-		return master != null ? master.minecraftThePlayer() : super.minecraftThePlayer();
+	protected Object minecraftPlayer() {
+		return master != null ? master.minecraftPlayer() : super.minecraftPlayer();
 	}
 
-	public Object superMinecraftThePlayer() {
-		return super.minecraftThePlayer();
+	public Object superMinecraftPlayer() {
+		return super.minecraftPlayer();
 	}
 
 	@Override
-	protected Object minecraftTheWorld() {
-		return master != null ? master.minecraftTheWorld() : super.minecraftTheWorld();
+	protected Object minecraftWorld() {
+		return master != null ? master.minecraftWorld() : super.minecraftWorld();
 	}
 
-	public Object superMinecraftTheWorld() {
-		return super.minecraftTheWorld();
+	public Object superMinecraftWorld() {
+		return super.minecraftWorld();
 	}
 
 	@Override
@@ -7327,13 +7327,13 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected void setMinecraftThePlayer(Object entityPlayer) {
-		if (master != null) master.setMinecraftThePlayer(entityPlayer);
-		else super.setMinecraftThePlayer(entityPlayer);
+	protected void setMinecraftPlayer(Object entityPlayer) {
+		if (master != null) master.setMinecraftPlayer(entityPlayer);
+		else super.setMinecraftPlayer(entityPlayer);
 	}
 
-	public void superSetMinecraftThePlayer(Object entityPlayer) {
-		super.setMinecraftThePlayer(entityPlayer);
+	public void superSetMinecraftPlayer(Object entityPlayer) {
+		super.setMinecraftPlayer(entityPlayer);
 	}
 
 	@Override
@@ -8233,12 +8233,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected boolean worldSpawnEntityInWorld(Object worldOrEntity, Object entity) {
-		return master != null ? master.worldSpawnEntityInWorld(worldOrEntity, entity) : super.worldSpawnEntityInWorld(worldOrEntity, entity);
+	protected boolean worldSpawnEntity(Object worldOrEntity, Object entity) {
+		return master != null ? master.worldSpawnEntity(worldOrEntity, entity) : super.worldSpawnEntity(worldOrEntity, entity);
 	}
 
-	public boolean superWorldSpawnEntityInWorld(Object worldOrEntity, Object entity) {
-		return super.worldSpawnEntityInWorld(worldOrEntity, entity);
+	public boolean superWorldSpawnEntity(Object worldOrEntity, Object entity) {
+		return super.worldSpawnEntity(worldOrEntity, entity);
 	}
 
 	@Override

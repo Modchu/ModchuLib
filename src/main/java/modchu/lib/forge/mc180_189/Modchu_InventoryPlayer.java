@@ -214,11 +214,11 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
-		return master != null ? master.isUseableByPlayer(entityPlayer) : super.isUseableByPlayer(entityPlayer);
+		return master != null ? master.isUsableByPlayer(entityPlayer) : super.isUseableByPlayer(entityPlayer);
 	}
 
 	@Override
-	public boolean superIsUseableByPlayer(Object entityPlayer) {
+	public boolean superIsUsableByPlayer(Object entityPlayer) {
 		return super.isUseableByPlayer((EntityPlayer) entityPlayer);
 	}
 

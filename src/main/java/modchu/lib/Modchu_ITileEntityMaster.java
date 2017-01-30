@@ -2,8 +2,8 @@ package modchu.lib;
 
 public interface Modchu_ITileEntityMaster {
 	public Object getWorld();
-	public void setWorldObj(Object world);
-	public boolean hasWorldObj();
+	public void setWorld(Object world);
+	public boolean hasWorld();
 	public void readFromNBT(Object nBTTagCompound);
 	public Object writeToNBT(Object nBTTagCompound);
 	public void updateEntity();

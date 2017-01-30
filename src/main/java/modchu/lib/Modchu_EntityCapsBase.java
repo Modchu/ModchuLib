@@ -123,24 +123,24 @@ public class Modchu_EntityCapsBase implements Modchu_IEntityCapsBase {
 */
 		case caps_PosBlockMeta:
 			return owner != null ? Modchu_AS.get(Modchu_AS.worldGetBlockStateGetBlockMetadata, owner, 
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosX, owner) + (Double)pArg[0]),
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosY, owner) + (Double)pArg[1]),
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosZ, owner) + (Double)pArg[2])) : -1;
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosX, owner) + (Double)pArg[0]),
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosY, owner) + (Double)pArg[1]),
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosZ, owner) + (Double)pArg[2])) : -1;
 		case caps_PosBlockAir:
 			return owner != null ? Modchu_AS.get(Modchu_AS.worldIsAirBlock, owner,
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosX, owner) + (Double)pArg[0]),
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosY, owner) + (Double)pArg[1]),
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosZ, owner) + (Double)pArg[2])) : false;
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosX, owner) + (Double)pArg[0]),
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosY, owner) + (Double)pArg[1]),
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosZ, owner) + (Double)pArg[2])) : false;
 		case caps_PosBlockLight:
 			return owner != null ? Modchu_AS.get(Modchu_AS.worldGetBlockLightValue, owner,
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosX, owner) + (Double)pArg[0]),
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosY, owner) + (Double)pArg[1]),
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosZ, owner) + (Double)pArg[2])) : -1;
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosX, owner) + (Double)pArg[0]),
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosY, owner) + (Double)pArg[1]),
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosZ, owner) + (Double)pArg[2])) : -1;
 		case caps_PosBlockPower:
 			return owner != null ? Modchu_AS.get(Modchu_AS.worldGetStrongPower, owner,
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosX, owner) + (Double)pArg[0]),
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosY, owner) + (Double)pArg[1]),
-					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosZ, owner) + (Double)pArg[2])) : -1;
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosX, owner) + (Double)pArg[0]),
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosY, owner) + (Double)pArg[1]),
+					Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosZ, owner) + (Double)pArg[2])) : -1;
 		case caps_boundingBox:
 			if (owner != null) {
 				return null;

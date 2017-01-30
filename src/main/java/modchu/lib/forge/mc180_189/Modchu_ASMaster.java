@@ -250,7 +250,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 	}
 
 	@Override
-	public void setMinecraftThePlayer(Object entityPlayer) {
+	public void setMinecraftPlayer(Object entityPlayer) {
 		if (Modchu_Main.isServer) return;
 		Minecraft.getMinecraft().thePlayer = (EntityPlayerSP) entityPlayer;
 	}
@@ -272,27 +272,27 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public boolean worldCanBlockSeeTheSky(Object worldOrEntity, double d, double d2, double d3) {
-		return ((World) entityWorldObj(worldOrEntity)).canSeeSky(new BlockPos(d, d2, d3));
+		return ((World) entityWorld(worldOrEntity)).canSeeSky(new BlockPos(d, d2, d3));
 	}
 
 	@Override
 	public boolean worldCanBlockSeeTheSky(Object worldOrEntity, int i, int i2, int i3) {
-		return ((World) entityWorldObj(worldOrEntity)).canSeeSky(new BlockPos(i, i2, i3));
+		return ((World) entityWorld(worldOrEntity)).canSeeSky(new BlockPos(i, i2, i3));
 	}
 
 	@Override
 	public boolean worldIsAirBlock(Object worldOrEntity, int i, int j, int k) {
-		return ((World) entityWorldObj(worldOrEntity)).isAirBlock(new BlockPos(i, j, k));
+		return ((World) entityWorld(worldOrEntity)).isAirBlock(new BlockPos(i, j, k));
 	}
 
 	@Override
 	public boolean worldIsBlockNormalCubeDefault(Object worldOrEntity, int i, int j, int k, boolean b) {
-		return ((World) entityWorldObj(worldOrEntity)).isBlockNormalCube(new BlockPos(i, j, k), b);
+		return ((World) entityWorld(worldOrEntity)).isBlockNormalCube(new BlockPos(i, j, k), b);
 	}
 
 	@Override
 	public void worldSpawnParticle(Object worldOrEntity, Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		if (world != null) {
 			Object type = getEnumParticleTypes(stingOrEnumParticleTypes);
 			if (type != null) world.spawnParticle((EnumParticleTypes) type, d, d1, d2, d3, d4, d5);
@@ -468,7 +468,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public Object worldGetBlockState(Object worldOrEntity, Object blockPos) {
-		return ((World) entityWorldObj(worldOrEntity)).getBlockState((BlockPos) blockPos);
+		return ((World) entityWorld(worldOrEntity)).getBlockState((BlockPos) blockPos);
 	}
 
 	@Override
@@ -481,7 +481,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public int worldGetStrongPower(Object worldOrEntity, int x, int y, int z) {
-		return ((World) entityWorldObj(worldOrEntity)).getStrongPower(new BlockPos(x, y, z));
+		return ((World) entityWorld(worldOrEntity)).getStrongPower(new BlockPos(x, y, z));
 	}
 
 	@Override
@@ -607,7 +607,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public Object worldGetBiomeGenForCoords(Object worldOrInt, Object blockPosOrInt) {
-		return ((World) entityWorldObj(worldOrInt)).getBiomeGenForCoords((BlockPos) blockPosOrInt);
+		return ((World) entityWorld(worldOrInt)).getBiomeGenForCoords((BlockPos) blockPosOrInt);
 	}
 
 	@Override
@@ -993,7 +993,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 	}
 	// ビルド時にバージョン別変化有り ↓
 	@Override
-	public Object minecraftThePlayer() {
+	public Object minecraftPlayer() {
 		if (Modchu_Main.isServer) return null;
 		return Minecraft.getMinecraft().thePlayer;
 	}

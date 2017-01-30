@@ -342,8 +342,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void addChatMessage(String par1Str) {
-		base.superAddChatMessage(par1Str);
+	public void sendMessage(String par1Str) {
+		base.superSendMessage(par1Str);
 	}
 
 	@Override
@@ -362,8 +362,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public boolean canCommandSenderUseCommand(int par1, String par2Str) {
-		return base.superCanCommandSenderUseCommand(par1, par2Str);
+	public boolean canUseCommand(int par1, String par2Str) {
+		return base.superCanUseCommand(par1, par2Str);
 	}
 
 	@Override
@@ -1272,8 +1272,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void setAngles(float par1, float par2) {
-		base.superSetAngles(par1, par2);
+	public void turn(float par1, float par2) {
+		base.superTurn(par1, par2);
 	}
 
 	@Override
@@ -1297,8 +1297,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void moveEntity(Object moverType, double par1, double par3, double par5) {
-		base.superMoveEntity(moverType, par1, par3, par5);
+	public void move(Object moverType, double par1, double par3, double par5) {
+		base.superMove(moverType, par1, par3, par5);
 	}
 
 	@Override
@@ -1752,13 +1752,13 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void addChatMessage(Object iChatComponent) {
-		base.superAddChatMessage(iChatComponent);
+	public void sendMessage(Object iChatComponent) {
+		base.superSendMessage(iChatComponent);
 	}
 
 	@Override
-	public void addChatComponentMessage(Object iChatComponent, boolean p_146105_2_) {
-		base.superAddChatComponentMessage(iChatComponent, p_146105_2_);
+	public void sendStatusMessage(Object iChatComponent, boolean p_146105_2_) {
+		base.superSendStatusMessage(iChatComponent, p_146105_2_);
 	}
 
 	@Override
@@ -2499,11 +2499,6 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	@Override
 	public void setInPortal() {
 		base.superSetInPortal();
-	}
-
-	@Override
-	public boolean canUseCommand(int permLevel, String commandName) {
-		return base.superCanCommandSenderUseCommand(permLevel, commandName);
 	}
 
 	@Override

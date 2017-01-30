@@ -19,8 +19,8 @@ public class Modchu_TextCalculation {
 	public static boolean tempDebug;
 
 	public Modchu_TextCalculation() {
-		debugSetting = !Modchu_Main.isRelease();
-		//debugRun = !Modchu_Main.isRelease();
+		//debugSetting = !Modchu_Main.isRelease();
+		debugRun = !Modchu_Main.isRelease();
 		//debugCE = !Modchu_Main.isRelease();
 		//debugCERun = !Modchu_Main.isRelease();
 		for (String s : Modchu_TextCalculationFormula.allCalculationStringList) {
@@ -64,29 +64,7 @@ public class Modchu_TextCalculation {
 		Modchu_RunCalculationList runCalculationList = calculationListToTextCalculationData(list);
 		calculationMap.put(s, runCalculationList);
 		if (debug) {
-			Modchu_Debug.mDebug("Modchu_TextCalculation	getTextCalculationList	calculationListToString(runCalculationList)="+calculationListToString(runCalculationList));
-			Modchu_Debug.mDebug("Modchu_TextCalculation	getTextCalculationList	list.size()="+list.size());
-			List<Modchu_TextCalculationData> list1 = runCalculationList.getList();
-			Modchu_Debug.mDebug("Modchu_TextCalculation	getTextCalculationList	runCalculationList.getList().size()="+list1.size());
-			for (Modchu_TextCalculationData data : list1) {
-				Modchu_Debug.mDebug("Modchu_TextCalculation	data="+data);
-				Modchu_Debug.mDebug("Modchu_TextCalculation	data.getData()="+data.getData());
-				Modchu_Debug.mDebug("Modchu_TextCalculation	data.getSubData()="+data.getSubData());
-				if (data.getData() instanceof Modchu_RunCalculationList) {
-					Modchu_RunCalculationList runCalculationList1 = (Modchu_RunCalculationList) data.getData();
-					List<Modchu_TextCalculationData> list2 = runCalculationList1.getList();
-					Modchu_Debug.mDebug("Modchu_TextCalculation	getTextCalculationList	list2.size()="+list2.size());
-					for (Modchu_TextCalculationData data1 : list2) {
-						Modchu_Debug.mDebug("Modchu_TextCalculation	data1="+data1);
-						Modchu_Debug.mDebug("Modchu_TextCalculation	data1.getData()="+data1.getData());
-						Modchu_Debug.mDebug("Modchu_TextCalculation	data1.getSubData()="+data1.getSubData());
-						if (data1.getData() instanceof Modchu_RunCalculationList) {
-							
-						}
-					}
-				}
-			}
-			Modchu_Debug.mDebug("Modchu_TextCalculation	getTextCalculationList	------------------- end.");
+			debugData("Modchu_TextCalculation	getTextCalculationList	", "runCalculationList", runCalculationList);
 			if (!Modchu_Main.isRelease()) Modchu_Debug.setClipboardLog();
 		}
 		return runCalculationList;
@@ -122,9 +100,8 @@ public class Modchu_TextCalculation {
 		List tempList = getCalculationDataStringList(s);
 		if (tempList != null
 				&& !tempList.isEmpty()) {
-			boolean isOperatorStringFlag = false;
 			for (int i = 0; i < maxLoop; i++) {
-				isOperatorStringFlag = settingCalculationData_r(list, tempList, isOperatorStringFlag);
+				settingCalculationData_r(list, tempList);
 				if (tempList.isEmpty()) {
 					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	getCalculationDataList	tempList.isEmpty() break.");
 					break;
@@ -171,6 +148,8 @@ public class Modchu_TextCalculation {
 		list1.remove(0);
 		List<String> list2 = Modchu_Main.copyList(Modchu_TextCalculationFormula.allCalculationStringList);
 		list2.add(0, "(");
+		list2.add("newClass[]");
+		list2.add("newObject[]");
 		int i0 = list2.size() - 1;
 		Object[] o0 = Modchu_Main.getIndexOf(s, list2);
 		int i1 = -1;
@@ -190,20 +169,26 @@ public class Modchu_TextCalculation {
 				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	list.add s3="+s3);
 				list.add(s3);
 			}
-			String s4 = s.substring(i1, i1 + s1.length());
 			String s5 = s.substring(i1 + s1.length());
 			boolean flag = i == 0;
+			boolean flag1 = i >= list2.size() - 2;
+			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	flag1="+flag1+" i="+i+" list2.size() - 2="+(list2.size() - 2));
 			List list3 = null;
-			if (flag) {
+			if (flag
+					| flag1) {
+				if (flag1) {
+					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	list.add s1="+s1);
+					list.add(s1);
+				}
 				list3 = new ArrayList();
 				List list4 = new ArrayList();
-				Object[] o1 = Modchu_Main.getInsideParenthesesData(s);
-				String s6 = Modchu_CastHelper.String(o1[0]);
-				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	s6="+s6);
-				if (s6 != null
-						&& !s6.isEmpty()) {
+				Object[] o1 = flag ? Modchu_Main.getInsideParenthesesData(s) : Modchu_Main.getInsideParenthesesData(s, "{", "}");
+				String s7 = Modchu_CastHelper.String(o1[0]);
+				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	s7="+s7);
+				if (s7 != null
+						&& !s7.isEmpty()) {
 					int i2 = Modchu_CastHelper.Int(o1[2]);
-					list3.add(s6);
+					list3.add(s7);
 					for (int i3 = 0; i3 < maxLoop; i3++) {
 						calculationDataStringList_r(list4, list3);
 						if (list3.isEmpty()) {
@@ -216,17 +201,25 @@ public class Modchu_TextCalculation {
 					s5 = s.substring(i2 + 1);
 				}
 			} else {
-				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	!flag s3="+s3+" s4="+s4+" s5="+s5);
-				if (s4 != null
-						&& !s4.isEmpty()) {
-					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	!flag list.add s4="+s4);
-					list.add(s4);
+				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	!flag s3="+s3+" s1="+s1+" s5="+s5);
+				if (s1 != null
+						&& !s1.isEmpty()) {
+					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	!flag list.add s1="+s1);
+					list.add(s1);
 				}
 			}
 			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	s5="+s5);
+			if (s5.startsWith(",")) {
+				s5 = s5.substring(1);
+			}
+			int i3 = s5.lastIndexOf(",");
+			if (i3 > -1
+					&& i3 == s5.length() - 1) {
+				s5 = s5.substring(0, i3);
+			}
 			if (s5 != null
 					&& !s5.isEmpty()) {
-				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	list1.add s5="+s5);
+				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	list1.add s5="+s5+" s5.startsWith(\",\")="+s5.startsWith(",")+" s5.startsWith(\"\\,\")="+s5.startsWith("\\,"));
 				list1.add(s5);
 				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	calculationDataStringList_r	list1="+Modchu_Main.listToString(list1));
 			}
@@ -246,7 +239,7 @@ public class Modchu_TextCalculation {
 		return;
 	}
 
-	protected boolean settingCalculationData_r(List list, List list1, boolean isOperatorStringFlag) {
+	protected void settingCalculationData_r(List list, List list1) {
 		boolean debug = debugSetting;
 		Object o2 = list1.get(0);
 		if (debug) {
@@ -254,80 +247,108 @@ public class Modchu_TextCalculation {
 			Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	o2="+Modchu_Main.objectToString(o2));
 		}
 		list1.remove(0);
+		Modchu_TextCalculationData data = list.size() > 0 ? (Modchu_TextCalculationData) list.get(list.size() - 1) : null;
+		boolean flag1 = data != null
+				&& (data.isReflect()
+				| (data.getMaxSubDataListSize() > 0
+						| data.getSubData() != null
+						&& data.getSubData() instanceof List
+						&& ((List) data.getSubData()).size() < data.getMaxSubDataListSize()));
+		if (debug) {
+			debugData("Modchu_TextCalculation	settingCalculationData_r	o2 instanceof String	isOperatorStringFlag | isReflect	", "list", list);
+			debugData("Modchu_TextCalculation	settingCalculationData_r	o2 instanceof String	isOperatorStringFlag | isReflect	", "data", data);
+		}
 		if (o2 instanceof List) {
 			List list2 = (List) o2;
 			List list3 = new ArrayList();
 			for (int i = 0; i < maxLoop; i++) {
-				settingCalculationData_r(list3, list2, isOperatorStringFlag);
+				settingCalculationData_r(list3, list2);
 				if (list2.isEmpty()) {
 					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	list2.isEmpty() break.");
 					break;
 				}
 			}
 			if (!list3.isEmpty()) {
-				if (isOperatorStringFlag) {
-					Modchu_TextCalculationData data = (Modchu_TextCalculationData) list.get(list.size() - 1);
+				if (flag1) {
+					if (list.size() < 1) {
+						String ss = "Modchu_TextCalculation	settingCalculationData_r	o2 instanceof List	list.size() < 1 error !!";
+						if (debug) Modchu_Debug.mDebug(ss);
+						Modchu_Main.setRuntimeException(ss);
+						return;
+					}
 					List list4 = (List) data.getSubData();
 					list4.add(list3);
 					data.setSubData(list4);
 					if (debug) {
-						Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	list4.add list3="+list3);
-						Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	data.setSubData list4="+list4);
+						Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	o2 instanceof List	isOperatorStringFlag | isReflect		list4.add list3="+dataToString(list3, false));
+						Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	o2 instanceof List	isOperatorStringFlag | isReflect		data.setSubData list4="+dataToString(list4, false));
 					}
-			} else {
+				} else {
 					list.add(list3);
-					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	list.add list3="+list3);
+					if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	o2 instanceof List	list.add list3="+list3);
 				}
 			}
 		} else if (o2 instanceof String) {
 			String s = (String) o2;
+			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	s="+s);
 			boolean flag = false;
-			for (String tempS : Modchu_TextCalculationFormula.calculationOperatorStringList) {
-				if (s.startsWith(tempS)) {
-					flag = true;
-					Modchu_TextCalculationFormula formula = Modchu_TextCalculationFormula.calculationFormulaMap.get(tempS);
-					if (formula != null) {
-						Modchu_TextCalculationData data = new Modchu_TextCalculationData(formula);
-						Object o3 = list.get(list.size() - 1);
-						List list2 = new ArrayList();
-						list2.add(o3);
-						data.setSubData(list2);
-						list.remove(list.size() - 1);
-						list.add(data);
-						if (debug) {
-							Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r_s_ListString	s="+s);
-							Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r_s_ListString	list2.add o3="+o3);
-							Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r_s_ListString	data="+data);
-							Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r_s_ListString	list2="+list2);
-							Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r_s_ListString	list="+list);
+			if (s.startsWith("field")
+					| s.startsWith("method")) {
+				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	field | method s="+s);
+				data = new Modchu_TextCalculationData(s);
+				data.setReflect(true);
+				data.setMaxSubDataListSize(6);
+				list.add(data);
+			}
+			else if (s.indexOf("[]") > -1) {
+				// TODO last
+				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	\"[]\" s="+s);
+				data = new Modchu_TextCalculationData(s);
+				data.setMaxSubDataListSize(1);
+				List list2 = new ArrayList();
+				data.setSubData(list2);
+				list.add(data);
+			} else {
+				for (String tempS : Modchu_TextCalculationFormula.calculationOperatorStringList) {
+					if (s.startsWith(tempS)) {
+						flag = true;
+						Modchu_TextCalculationFormula formula = Modchu_TextCalculationFormula.calculationFormulaMap.get(tempS);
+						if (formula != null) {
+							Modchu_TextCalculationData data1 = new Modchu_TextCalculationData(formula);
+							Object o3 = list.get(list.size() - 1);
+							List list2 = new ArrayList();
+							list2.add(o3);
+							data1.setSubData(list2);
+							data1.setOperatorStringFlag(true);
+							list.remove(list.size() - 1);
+							list.add(data1);
+							if (debug) {
+								Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r_s_ListString	s="+s);
+								Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r_s_ListString	list2.add o3="+o3);
+								Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r_s_ListString	data="+data1);
+								Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r_s_ListString	list2="+list2);
+								Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r_s_ListString	list="+list);
+							}
+							break;
 						}
-						isOperatorStringFlag = true;
-						break;
 					}
 				}
-			}
-			if (!flag) {
-				if (isOperatorStringFlag) {
-					Modchu_TextCalculationData data = (Modchu_TextCalculationData) list.get(list.size() - 1);
-					List list3 = new ArrayList();
-					settingCalculationData_r_s(list3, list1, s);
-					Object o1 = list3 != null
-							&& !list3.isEmpty() ? list3.get(0) : null;
-					if (debug) {
-						Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	o2 instanceof String	isOperatorStringFlag	list="+list);
-						Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	o2 instanceof String	isOperatorStringFlag	data="+data);
-						Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	o2 instanceof String	isOperatorStringFlag	data.dataToString(false)="+data.dataToString(false));
-						Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	o2 instanceof String	isOperatorStringFlag	data.getSubData()="+data.getSubData());
-						Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	o2 instanceof String	isOperatorStringFlag	o1="+Modchu_Main.objectToString(o1));
+				if (!flag) {
+					if (flag1) {
+						List list3 = new ArrayList();
+						settingCalculationData_r_s(list3, list1, s);
+						Object o1 = list3 != null
+								&& !list3.isEmpty() ? list3.get(0) : null;
+						if (debug) debugData("Modchu_TextCalculation	settingCalculationData_r	o2 instanceof String	isOperatorStringFlag | isReflect	", "o1", o1);
+						if (o1 != null) {
+							Object o3 = data.getSubData();
+							List list2 = o3 != null ? (List) o3 : new ArrayList();
+							list2.add(o1);
+							data.setSubData(list2);
+						}
+					} else {
+						settingCalculationData_r_s(list, list1, s);
 					}
-					if (o1 != null) {
-						List list2 = (List) data.getSubData();
-						list2.add(o1);
-						data.setSubData(list2);
-						isOperatorStringFlag = false;
-					}
-				} else {
-					settingCalculationData_r_s(list, list1, s);
 				}
 			}
 		}
@@ -335,7 +356,7 @@ public class Modchu_TextCalculation {
 			Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	o2="+Modchu_Main.objectToString(o2));
 			Modchu_Debug.mDebug("Modchu_TextCalculation	settingCalculationData_r	---------------- end.");
 		}
-		return isOperatorStringFlag;
+		return;
 	}
 
 	protected void settingCalculationData_r_s(List list, List list1, String s) {
@@ -680,40 +701,47 @@ public class Modchu_TextCalculation {
 			List list2 = new ArrayList();
 			if (o instanceof List) {
 				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d	o instanceof List");
-				setTextConditionalExpressionList_r_d(list2, (List) o, false);
-				if (debug) {
-					Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d	o instanceof List list2="+list2);
-					Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d	o instanceof List list2.get(0)="+list2.get(0));
-					Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d	o instanceof List list2.get(0).getData()="+((Modchu_TextCalculationData) list2.get(0)).getData());
-				}
-				Modchu_RunCalculationList runCalculationList = new Modchu_RunCalculationList(list2);
-				if (init
-						&& count == 0) runCalculationList.setIsIf(true);
-				if (!init) {
-					switch(count) {
-					case 0:
-						tempData = data;
-						break;
-					case 1:
-						break;
-					case 2:
-						data = tempData1;
-						if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d instanceof List	tempData1="+tempData1);
-						List tempList1 = new ArrayList();
-						tempList1.add(tempData);
-						Modchu_RunCalculationList runCalculationList2 = new Modchu_RunCalculationList(tempList1);
-						tempList = new ArrayList();
-						tempList.add(runCalculationList2);
-						tempList.add(runCalculationList);
-						if (debug) {
-							Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d instanceof List	tempList1="+tempList1);
-							Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d instanceof List	tempData.getData()="+tempData.getData());
-							Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d instanceof List	runCalculationList.get(0).getData()="+runCalculationList.getList().get(0).getData());
-						}
-						break;
-					}
+				if (tempReflect) {
+					Object o1 = tempData.getSubData();
+					List tempList1 = o1 != null ? (List) o1 : new ArrayList();
+					tempList1.add(o);
+					tempData.setSubData(tempList1);
 				} else {
-					data = new Modchu_TextCalculationData(runCalculationList);
+					setTextConditionalExpressionList_r_d(list2, (List) o, false);
+					if (debug) {
+						Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d	o instanceof List list2="+list2);
+						Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d	o instanceof List list2.get(0)="+list2.get(0));
+						Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d	o instanceof List list2.get(0).getData()="+((Modchu_TextCalculationData) list2.get(0)).getData());
+					}
+					Modchu_RunCalculationList runCalculationList = new Modchu_RunCalculationList(list2);
+					if (init
+							&& count == 0) runCalculationList.setIsIf(true);
+					if (!init) {
+						switch(count) {
+						case 0:
+							tempData = data;
+							break;
+						case 1:
+							break;
+						case 2:
+							data = tempData1;
+							if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d instanceof List	tempData1="+tempData1);
+							List tempList1 = new ArrayList();
+							tempList1.add(tempData);
+							Modchu_RunCalculationList runCalculationList2 = new Modchu_RunCalculationList(tempList1);
+							tempList = new ArrayList();
+							tempList.add(runCalculationList2);
+							tempList.add(runCalculationList);
+							if (debug) {
+								Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d instanceof List	tempList1="+tempList1);
+								Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d instanceof List	tempData.getData()="+tempData.getData());
+								Modchu_Debug.mDebug("Modchu_TextCalculation	setTextConditionalExpressionList_r_d instanceof List	runCalculationList.get(0).getData()="+runCalculationList.getList().get(0).getData());
+							}
+							break;
+						}
+					} else {
+						data = new Modchu_TextCalculationData(runCalculationList);
+					}
 				}
 			}
 			else if (o instanceof String) {
@@ -788,7 +816,7 @@ public class Modchu_TextCalculation {
 	public Object runCalculation(Object o, Modchu_RunCalculationList runCalculationList, byte by, HashMap<String, Object>... map) {
 		boolean debug = (debugRun && !runCalculationList.isIf())
 				| (debugCERun && runCalculationList.isIf());
-		Modchu_Debug.mDebug("Modchu_TextCalculation	runCalculation runCalculationList.isIf()="+runCalculationList.isIf());
+		Modchu_Debug.mDebug("Modchu_TextCalculation	runCalculation runCalculationList.isIf()="+runCalculationList.isIf()+" debug="+debug);
 		Object temp = Modchu_Debug.getFreeVariable("debugRunCalculationInit");
 		boolean initDebug = false;
 		if (temp != null) {
@@ -839,6 +867,48 @@ public class Modchu_TextCalculation {
 			//Modchu_TextCalculation.instance.debugRun = false;
 		}
 		return o2;
+	}
+
+	public void debugData(String s, Object o) {
+		debugData(null, s, o);
+	}
+
+	public void debugData(String s, String s1, Object o) {
+		if (s != null); else s = "Modchu_TextCalculation	debugData	";
+		String s2 = s + " " + s1;
+		Modchu_Debug.mDebug(s2+"="+o);
+		if (o instanceof Modchu_RunCalculationList) {
+			Modchu_RunCalculationList runCalculationList = (Modchu_RunCalculationList) o;
+			Modchu_Debug.mDebug(s2+"runCalculationList.getList()="+runCalculationList.getList());
+		}
+		Modchu_Debug.mDebug(s+" dataToString("+s1+", false)="+dataToString(o, false));
+		if (o instanceof Modchu_TextCalculationData) Modchu_Debug.mDebug(s2+".getSubData()="+((Modchu_TextCalculationData) o).getSubData());
+	}
+
+	public String dataToString(List list, boolean b) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < list.size(); i++) {
+			Object o = list.get(i);
+			sb.append(dataToString(o, b));
+			if (i != list.size() - 1) sb.append(", ");
+		}
+		return sb.toString();
+	}
+
+	public String dataToString(Object o, boolean b) {
+		if (o != null); else return null;
+		StringBuilder sb = new StringBuilder();
+		Object subData = o instanceof Modchu_TextCalculationData ? ((Modchu_TextCalculationData) o).getSubData() : null;
+		if (o instanceof List) {
+			sb.append(dataToString((List) o, b));
+		} else if (o instanceof Modchu_ITextCalculationDataFormat) {
+			sb.append(((Modchu_ITextCalculationDataFormat) o).dataToString(subData, b));
+		} else {
+			sb.append(o.toString());
+			//Modchu_Debug.mDebug("Modchu_TextCalculation	dataToString	o="+o);
+			if (subData != null) sb.append(dataToString(subData, false));
+		}
+		return sb.toString();
 	}
 
 }

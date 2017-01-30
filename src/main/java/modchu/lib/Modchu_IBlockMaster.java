@@ -190,7 +190,7 @@ public interface Modchu_IBlockMaster {
 	public Object getActualState(Object iBlockState, Object iBlockAccess, Object blockPos);
 	public boolean isBlockNormalCube();
 	public boolean isNormalCube();
-	public boolean isVisuallyOpaque(Object iBlockState);
+	public boolean causesSuffocation(Object iBlockState);
 	public boolean isReplaceable(Object iBlockAccess, Object blockPos);
 	public Object getSelectedBoundingBox(Object world, Object blockPos);
 	public void randomTick(Object world, Object blockPos, Object iBlockState, Random random);
@@ -206,7 +206,7 @@ public interface Modchu_IBlockMaster {
 	public Object getBlockLayer();
 	public boolean canPlaceBlockAt(Object world, Object blockPos);
 	public boolean onBlockActivated(Object world, Object blockPos, Object iBlockState, Object entityPlayer, Object enumFacing, float hitX, float hitY, float hitZ);
-	public Object onBlockPlaced(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase);
+	public Object getStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase);
 	public void onBlockClicked(Object world, Object blockPos, Object entityPlayer);
 	public Object modifyAcceleration(Object world, Object blockPos, Object entity, Object vec3);
 	public void setBlockBoundsBasedOnState(Object iBlockAccess, Object blockPos);
@@ -216,7 +216,7 @@ public interface Modchu_IBlockMaster {
 	public void onEntityWalk(Object world, Object blockPos, Object iBlockState, Object entity);
 	public int getStrongPower(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing);
 	public void harvestBlock(Object world, Object entityPlayer, Object blockPos, Object iBlockState, Object tileEntity);
-	public Object createStackedBlock(Object iBlockState);
+	public Object getSilkTouchDrop(Object iBlockState);
 	public void onBlockPlacedBy(Object world, Object blockPos, Object iBlockState, Object entityLivingBase, Object itemStack);
 	public boolean eventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam);
 	public void onFallenUpon(Object world, Object blockPos, Object entity, float fallDistance);
@@ -357,5 +357,6 @@ public interface Modchu_IBlockMaster {
 	public boolean addLandingEffects(Object iBlockState, Object worldServer, Object blockPos, Object iBlockState1, Object entityLivingBase, int numberOfParticles);
 	public Object isEntityInsideMaterial(Object iBlockAccess, Object blockPos, Object iBlockState, Object entity, double yToTest, Object material, boolean testingHead);
 	public Object isAABBInsideMaterial(Object world, Object blockPos, Object axisAlignedBB, Object material);
+	public void addCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, List list, Object entity, boolean p_185477_7_);
 
 }

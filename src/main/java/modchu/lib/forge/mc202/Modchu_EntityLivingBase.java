@@ -7,9 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
-public class Modchu_EntityLivingBase extends modchu.lib.forge.mc202_210.Modchu_EntityLivingBase {
+public class Modchu_EntityLivingBase extends modchu.lib.forge.mc202_212.Modchu_EntityLivingBase {
 
 	public Modchu_EntityLivingBase(World world) {
 		super(world);
@@ -21,12 +22,12 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc202_210.Modchu_E
 	// 210~分離
 	@Override
 	public void moveEntity(double par1, double par3, double par5) {
-		if (master != null) master.moveEntity(null, par1, par3, par5);
+		if (master != null) master.move(null, par1, par3, par5);
 		else super.moveEntity(par1, par3, par5);
 	}
 
 	@Override
-	public void superMoveEntity(Object moverType, double par1, double par3, double par5) {
+	public void superMove(Object moverType, double par1, double par3, double par5) {
 		super.moveEntity(par1, par3, par5);
 	}
 
@@ -48,6 +49,16 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc202_210.Modchu_E
 	@Override
 	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object itemStack, Object enumHand) {
 		return super.applyPlayerInteraction((EntityPlayer) entityPlayer, (Vec3d) vec3d, (ItemStack) itemStack, (EnumHand) enumHand);
+	}
+
+	@Override
+	public void superTurn(float p_70082_1_, float p_70082_2_) {
+		super.setAngles(p_70082_1_, p_70082_2_);
+	}
+
+	@Override
+	public void superSendMessage(Object iTextComponent) {
+		super.addChatMessage((ITextComponent) iTextComponent);
 	}
 
 }

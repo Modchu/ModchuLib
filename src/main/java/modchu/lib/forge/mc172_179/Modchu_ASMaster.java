@@ -406,7 +406,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 	}
 
 	@Override
-	public void setMinecraftThePlayer(Object entityPlayer) {
+	public void setMinecraftPlayer(Object entityPlayer) {
 		if (Modchu_Main.isServer) return;
 		Minecraft.getMinecraft().thePlayer = (EntityClientPlayerMP) entityPlayer;
 	}
@@ -428,27 +428,27 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public boolean worldCanBlockSeeTheSky(Object worldOrEntity, double d, double d2, double d3) {
-		return ((World) entityWorldObj(worldOrEntity)).canBlockSeeTheSky((int) d, (int) d2, (int) d3);
+		return ((World) entityWorld(worldOrEntity)).canBlockSeeTheSky((int) d, (int) d2, (int) d3);
 	}
 
 	@Override
 	public boolean worldCanBlockSeeTheSky(Object worldOrEntity, int i, int i2, int i3) {
-		return ((World) entityWorldObj(worldOrEntity)).canBlockSeeTheSky(i, i2, i3);
+		return ((World) entityWorld(worldOrEntity)).canBlockSeeTheSky(i, i2, i3);
 	}
 
 	@Override
 	public boolean worldIsAirBlock(Object worldOrEntity, int i, int j, int k) {
-		return ((World) entityWorldObj(worldOrEntity)).isAirBlock(i, j, k);
+		return ((World) entityWorld(worldOrEntity)).isAirBlock(i, j, k);
 	}
 
 	@Override
 	public boolean worldIsBlockNormalCubeDefault(Object worldOrEntity, int i, int j, int k, boolean b) {
-		return ((World) entityWorldObj(worldOrEntity)).isBlockNormalCubeDefault(i, j, k, b);
+		return ((World) entityWorld(worldOrEntity)).isBlockNormalCubeDefault(i, j, k, b);
 	}
 
 	@Override
 	public void worldSpawnParticle(Object worldOrEntity, Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		if (world != null) world.spawnParticle((String)stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5);
 	}
 
@@ -512,7 +512,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public int worldGetStrongPower(Object worldOrEntity, int x, int y, int z) {
-		return ((World) entityWorldObj(worldOrEntity)).getBlockPowerInput(x, y, z);
+		return ((World) entityWorld(worldOrEntity)).getBlockPowerInput(x, y, z);
 	}
 
 	@Override
@@ -620,7 +620,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public Object worldGetBiomeGenForCoords(Object worldOrEntity, int i, int i1) {
-		return ((World) entityWorldObj(worldOrEntity)).getBiomeGenForCoords(i, i1);
+		return ((World) entityWorld(worldOrEntity)).getBiomeGenForCoords(i, i1);
 	}
 
 	@Override
@@ -788,7 +788,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public Object worldGetPathEntityToEntity(Object worldOrEntity, Object entity, Object entity2, float f, boolean b, boolean b1, boolean b2, boolean b3) {
-		return ((World) entityWorldObj(worldOrEntity)).getPathEntityToEntity((Entity) entity, (Entity) entity2, f, b, b1, b2, b3);
+		return ((World) entityWorld(worldOrEntity)).getPathEntityToEntity((Entity) entity, (Entity) entity2, f, b, b1, b2, b3);
 	}
 
 	@Override
@@ -807,7 +807,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public int blockDoublePlantGetMixedBrightnessForBlock(Object blockDoublePlant, int x, int y, int z) {
-		return ((BlockDoublePlant) blockDoublePlant).getMixedBrightnessForBlock((IBlockAccess) minecraftTheWorld(), x, y, z);
+		return ((BlockDoublePlant) blockDoublePlant).getMixedBrightnessForBlock((IBlockAccess) minecraftWorld(), x, y, z);
 	}
 
 	@Override
@@ -956,7 +956,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public int worldGetBlockStateGetBlockMetadata(Object worldOrEntity, int x, int y, int z) {
-		return ((World) entityWorldObj(worldOrEntity)).getBlockMetadata(x, y, z);
+		return ((World) entityWorld(worldOrEntity)).getBlockMetadata(x, y, z);
 	}
 
 	@Override
@@ -986,7 +986,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 
 	@Override
 	public int worldGetBlockLightValue(Object worldOrEntity, int x, int y, int z) {
-		return ((World) entityWorldObj(worldOrEntity)).getBlockLightValue(x, y, z);
+		return ((World) entityWorld(worldOrEntity)).getBlockLightValue(x, y, z);
 	}
 
 	@Override
@@ -1107,7 +1107,7 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 	}
 	// ビルド時にバージョン別変化有り ↓
 	@Override
-	public Object minecraftThePlayer() {
+	public Object minecraftPlayer() {
 		if (Modchu_Main.isServer) return null;
 		return Minecraft.getMinecraft().thePlayer;
 	}

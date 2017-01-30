@@ -648,7 +648,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	// ビルド時問題で分離
 	@Override
 	public Object worldGetBiomeGenForCoords(Object worldOrInt, Object blockPosOrInt) {
-		return ((World) entityWorldObj(worldOrInt)).getBiomeGenForCoords((BlockPos) blockPosOrInt);
+		return ((World) entityWorld(worldOrInt)).getBiomeGenForCoords((BlockPos) blockPosOrInt);
 	}
 	// TODO 210~分離　190 194共通コピペ　↓
 	@Override
@@ -860,11 +860,6 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	}
 
 	@Override
-	public Object[] FMLCommonHandlerInstanceGetMinecraftServerInstanceWorldServers() {
-		return FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
-	}
-
-	@Override
 	public void guiIngameDrawString(String s, int i, int j, int k) {
 		if (Modchu_Main.isServer) return;
 		Minecraft mc = Minecraft.getMinecraft();
@@ -907,12 +902,6 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	}
 
 	@Override
-	public void setMinecraftThePlayer(Object entityPlayer) {
-		if (Modchu_Main.isServer) return;
-		Minecraft.getMinecraft().thePlayer = (EntityPlayerSP) entityPlayer;
-	}
-
-	@Override
 	public Object tessellatorInstance() {
 		return Tessellator.getInstance();
 	}
@@ -929,27 +918,27 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public boolean worldCanBlockSeeTheSky(Object worldOrEntity, double d, double d2, double d3) {
-		return ((World) entityWorldObj(worldOrEntity)).canSeeSky(new BlockPos(d, d2, d3));
+		return ((World) entityWorld(worldOrEntity)).canSeeSky(new BlockPos(d, d2, d3));
 	}
 
 	@Override
 	public boolean worldCanBlockSeeTheSky(Object worldOrEntity, int i, int i2, int i3) {
-		return ((World) entityWorldObj(worldOrEntity)).canSeeSky(new BlockPos(i, i2, i3));
+		return ((World) entityWorld(worldOrEntity)).canSeeSky(new BlockPos(i, i2, i3));
 	}
 
 	@Override
 	public boolean worldIsAirBlock(Object worldOrEntity, int i, int j, int k) {
-		return ((World) entityWorldObj(worldOrEntity)).isAirBlock(new BlockPos(i, j, k));
+		return ((World) entityWorld(worldOrEntity)).isAirBlock(new BlockPos(i, j, k));
 	}
 
 	@Override
 	public boolean worldIsBlockNormalCubeDefault(Object worldOrEntity, int i, int j, int k, boolean b) {
-		return ((World) entityWorldObj(worldOrEntity)).isBlockNormalCube(new BlockPos(i, j, k), b);
+		return ((World) entityWorld(worldOrEntity)).isBlockNormalCube(new BlockPos(i, j, k), b);
 	}
 
 	@Override
 	public void worldSpawnParticle(Object worldOrEntity, Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		if (world != null) {
 			Object type = getEnumParticleTypes(stingOrEnumParticleTypes);
 			if (type != null) world.spawnParticle((EnumParticleTypes) type, d, d1, d2, d3, d4, d5);
@@ -1137,7 +1126,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public Object worldGetBlockState(Object worldOrEntity, Object blockPos) {
-		return ((World) entityWorldObj(worldOrEntity)).getBlockState((BlockPos) blockPos);
+		return ((World) entityWorld(worldOrEntity)).getBlockState((BlockPos) blockPos);
 	}
 
 	@Override
@@ -1150,7 +1139,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public int worldGetStrongPower(Object worldOrEntity, int x, int y, int z) {
-		return ((World) entityWorldObj(worldOrEntity)).getStrongPower(new BlockPos(x, y, z));
+		return ((World) entityWorld(worldOrEntity)).getStrongPower(new BlockPos(x, y, z));
 	}
 
 	@Override
@@ -1552,7 +1541,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	}
 /*
  * サーバー読み込みで問題になる。
- * 
+ *
 	@Override
 	public Enum itemCameraTransformsTransformTypeNONE() {
 		return ItemCameraTransforms.TransformType.NONE;
@@ -1633,12 +1622,6 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 		}
 	}
 	// ビルド時にバージョン別変化有り ↓
-	@Override
-	public Object minecraftThePlayer() {
-		if (Modchu_Main.isServer) return null;
-		return Minecraft.getMinecraft().thePlayer;
-	}
-
 	@Override
 	public String potionHelperSugarEffect() {
 		return null;
@@ -1756,83 +1739,13 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	}
 
 	@Override
-	public Object damageSourceAnvil() {
-		return DamageSource.anvil;
-	}
-
-	@Override
-	public Object damageSourceCactus() {
-		return DamageSource.cactus;
-	}
-
-	@Override
-	public Object damageSourceDrown() {
-		return DamageSource.drown;
-	}
-
-	@Override
-	public Object damageSourceFall() {
-		return DamageSource.fall;
-	}
-
-	@Override
-	public Object damageSourceFallingBlock() {
-		return DamageSource.fallingBlock;
-	}
-
-	@Override
-	public Object damageSourceGeneric() {
-		return DamageSource.generic;
-	}
-
-	@Override
 	public Object damageSourceGetEntity(Object damageSource) {
 		return ((DamageSource) damageSource).getEntity();
 	}
 
 	@Override
-	public Object damageSourceInFire() {
-		return DamageSource.inFire;
-	}
-
-	@Override
-	public Object damageSourceInWall() {
-		return DamageSource.inWall;
-	}
-
-	@Override
 	public boolean damageSourceIsFireDamage(Object damageSource) {
 		return ((DamageSource) damageSource).isFireDamage();
-	}
-
-	@Override
-	public Object damageSourceLava() {
-		return DamageSource.lava;
-	}
-
-	@Override
-	public Object damageSourceMagic() {
-		return DamageSource.magic;
-	}
-
-	@Override
-	public Object damageSourceOnFire() {
-		return DamageSource.onFire;
-	}
-
-	@Override
-	public Object damageSourceOutOfWorld() {
-		return DamageSource.outOfWorld;
-	}
-
-	@Override
-	public Object damageSourceStarve() {
-		return DamageSource.starve;
-	}
-
-	@Override
-	public Object damageSourceWither() {
-		return DamageSource.wither;
 	}
 
 	@Override
@@ -2179,11 +2092,6 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	}
 
 	@Override
-	public Object entityWorldObj(Object worldOrEntity) {
-		return worldOrEntity instanceof World ? worldOrEntity : worldOrEntity instanceof Entity ? ((Entity) worldOrEntity).worldObj : null;
-	}
-
-	@Override
 	public Enum enumCreatureAttributeARTHROPOD() {
 		return EnumCreatureAttribute.ARTHROPOD;
 	}
@@ -2402,18 +2310,8 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	}
 
 	@Override
-	public int mathHelperFloor_double(double d) {
-		return MathHelper.floor_double(d);
-	}
-
-	@Override
 	public float mathHelperSin(float f) {
 		return MathHelper.sin(f);
-	}
-
-	@Override
-	public float mathHelperSqrt_float(float f) {
-		return MathHelper.sqrt_float(f);
 	}
 
 	@Override
@@ -2490,7 +2388,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public void minecraftSetDimensionAndSpawnPlayer() {
-		Object thePlayer = minecraftThePlayer();
+		Object thePlayer = minecraftPlayer();
 		minecraftSetDimensionAndSpawnPlayer(((Entity) thePlayer).dimension);
 	}
 
@@ -2498,12 +2396,6 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	public void minecraftSetDimensionAndSpawnPlayer(int i) {
 		if (Modchu_Main.isServer) return;
 		Minecraft.getMinecraft().setDimensionAndSpawnPlayer(i);
-	}
-
-	@Override
-	public Object minecraftTheWorld() {
-		if (Modchu_Main.isServer) return null;
-		return Minecraft.getMinecraft().theWorld;
 	}
 
 	@Override
@@ -2965,13 +2857,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public Object worldGetPlayerEntityByName(Object worldOrEntity, String s) {
-		return ((World) entityWorldObj(worldOrEntity)).getPlayerEntityByName(s);
-	}
-
-	@Override
-	public Object worldGetWorldInfo() {
-		if (Modchu_Main.isServer) return null;
-		return Minecraft.getMinecraft().theWorld.getWorldInfo();
+		return ((World) entityWorld(worldOrEntity)).getPlayerEntityByName(s);
 	}
 
 	@Override
@@ -2982,30 +2868,30 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public boolean worldIsDaytime(Object worldOrEntity) {
-		return ((World) entityWorldObj(worldOrEntity)).isDaytime();
+		return ((World) entityWorld(worldOrEntity)).isDaytime();
 	}
 
 	@Override
 	public boolean worldIsRemote(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.isRemote : false;
 	}
 
 	@Override
 	public List worldLoadedEntityList(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.loadedEntityList : null;
 	}
 
 	@Override
 	public List worldPlayerEntities(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.playerEntities : null;
 	}
 
 	@Override
 	public List worldWeatherEffects(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.weatherEffects : null;
 	}
 
@@ -3015,7 +2901,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entityPlayer, double x, double y, double z, Object soundEvent, Object soundCategory, float f, float f1) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		//Modchu_Debug.mDebug("Modchu_ASMaster worldPlaySoundAtEntity world="+world+" soundEvent="+soundEvent+" soundCategory="+soundCategory);
 		//Modchu_Debug.mDebug("Modchu_ASMaster worldPlaySoundAtEntity soundEvent.getSoundName()="+((SoundEvent) soundEvent).getSoundName());
 		if (world != null) world.playSound((EntityPlayer) entityPlayer, x, y, z, (SoundEvent) soundEvent, (SoundCategory) soundCategory, f, f1);
@@ -3023,7 +2909,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public void worldSetEntityState(Object worldOrEntity, Object entity, byte by) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		if (world != null) world.setEntityState((Entity) entity, by);
 	}
 
@@ -3179,28 +3065,8 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	}
 
 	@Override
-	public float mathHelperFloor_float(float f) {
-		return MathHelper.floor_float(f);
-	}
-
-	@Override
-	public long mathHelperFloor_double_long(double d) {
-		return MathHelper.floor_double_long(d);
-	}
-
-	@Override
 	public float mathHelperAbs(float f) {
 		return MathHelper.abs(f);
-	}
-
-	@Override
-	public double mathHelperAbs_max(double d, double d1) {
-		return MathHelper.abs_max(d, d1);
-	}
-
-	@Override
-	public int mathHelperBucketInt(int i, int j) {
-		return MathHelper.bucketInt(i, j);
 	}
 
 	@Override
@@ -3346,11 +3212,6 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	}
 
 	@Override
-	public double mathHelperSqrt_double(double d) {
-		return MathHelper.sqrt_double(d);
-	}
-
-	@Override
 	public boolean itemStackHasDisplayName(Object itemstack) {
 		return ((ItemStack) itemstack).hasDisplayName();
 	}
@@ -3397,7 +3258,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public Object worldGetEntityByID(Object worldOrEntity, int i) {
-		return ((World) entityWorldObj(worldOrEntity)).getEntityByID(i);
+		return ((World) entityWorld(worldOrEntity)).getEntityByID(i);
 	}
 
 	@Override
@@ -3407,7 +3268,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public List worldGetEntitiesWithinAABBExcludingEntity(Object worldOrEntity, Object entity, Object axisAlignedBB) {
-		return ((World) entityWorldObj(worldOrEntity)).getEntitiesWithinAABBExcludingEntity((Entity) entity, (AxisAlignedBB) axisAlignedBB);
+		return ((World) entityWorld(worldOrEntity)).getEntitiesWithinAABBExcludingEntity((Entity) entity, (AxisAlignedBB) axisAlignedBB);
 	}
 
 	@Override
@@ -3523,17 +3384,12 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public List worldGetEntitiesWithinAABB(Object worldOrEntity, Class c, Object axisAlignedBB) {
-		return ((World) entityWorldObj(worldOrEntity)).getEntitiesWithinAABB(c, (AxisAlignedBB) axisAlignedBB);
-	}
-
-	@Override
-	public boolean worldSpawnEntityInWorld(Object worldOrEntity, Object entity) {
-		return ((World) entityWorldObj(worldOrEntity)).spawnEntityInWorld((Entity) entity);
+		return ((World) entityWorld(worldOrEntity)).getEntitiesWithinAABB(c, (AxisAlignedBB) axisAlignedBB);
 	}
 
 	@Override
 	public Object worldGetClosestPlayerToEntity(Object worldOrEntity, Object entity, double d) {
-		return ((World) entityWorldObj(worldOrEntity)).getClosestPlayerToEntity((Entity) entity, d);
+		return ((World) entityWorld(worldOrEntity)).getClosestPlayerToEntity((Entity) entity, d);
 	}
 
 	@Override
@@ -3639,27 +3495,8 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	}
 
 	@Override
-	public long worldInfoGetWorldTotalTime(Object entityOrWorldOrWorldInfo) {
-		Object worldInfo = entityOrWorldOrWorldInfo instanceof WorldInfo ? entityOrWorldOrWorldInfo : getWorldInfo(entityOrWorldOrWorldInfo);
-		return ((WorldInfo) entityOrWorldOrWorldInfo).getWorldTotalTime();
-	}
-
-	public Object getWorldInfo(Object entityOrWorldOrWorldInfo) {
-		if (entityOrWorldOrWorldInfo instanceof WorldInfo) return entityOrWorldOrWorldInfo;
-		if (entityOrWorldOrWorldInfo instanceof World) return ((World) entityOrWorldOrWorldInfo).getWorldInfo();
-		if (entityOrWorldOrWorldInfo instanceof Entity) return ((Entity) entityOrWorldOrWorldInfo).worldObj.getWorldInfo();
-		return null;
-	}
-
-	@Override
-	public long worldInfoGetWorldTime(Object entityOrWorldOrWorldInfo) {
-		Object worldInfo = entityOrWorldOrWorldInfo instanceof WorldInfo ? entityOrWorldOrWorldInfo : getWorldInfo(entityOrWorldOrWorldInfo);
-		return ((WorldInfo) entityOrWorldOrWorldInfo).getWorldTime();
-	}
-
-	@Override
 	public int worldGetMoonPhase(Object entityOrWorld) {
-		Object world = entityOrWorld instanceof World ? entityOrWorld : entityWorldObj(entityOrWorld);
+		Object world = entityOrWorld instanceof World ? entityOrWorld : entityWorld(entityOrWorld);
 		return ((World) world).getMoonPhase();
 	}
 
@@ -3710,7 +3547,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public int blockDoublePlantColorMultiplier(Object blockDoublePlant, int x, int y, int z) {
-		return blockDoublePlantColorMultiplier(blockDoublePlant, minecraftTheWorld(), x, y, z);
+		return blockDoublePlantColorMultiplier(blockDoublePlant, minecraftWorld(), x, y, z);
 	}
 
 	@Override
@@ -4182,11 +4019,6 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 	}
 
 	@Override
-	public String iAttributeGetAttributeUnlocalizedName(Object iAttribute) {
-		return ((IAttribute) iAttribute).getAttributeUnlocalizedName();
-	}
-
-	@Override
 	public void setMinecraftLoadingScreen(Object loadingScreenRenderer) {
 		if (Modchu_Main.isServer) return;
 		Minecraft.getMinecraft().loadingScreen = (LoadingScreenRenderer) loadingScreenRenderer;
@@ -4285,7 +4117,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public Object newSoundEvent(Object resourceLocationOrString) {
-		resourceLocationOrString = resourceLocationOrString instanceof ResourceLocation ? resourceLocationOrString : new ResourceLocation((String) resourceLocationOrString); 
+		resourceLocationOrString = resourceLocationOrString instanceof ResourceLocation ? resourceLocationOrString : new ResourceLocation((String) resourceLocationOrString);
 		return new SoundEvent((ResourceLocation) resourceLocationOrString);
 	}
 
@@ -4314,5 +4146,174 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 		return GameType.SURVIVAL;
 	}
 	// TODO 210~分離　190 194共通コピペ　↑
+	// 190~210共通コピペ　↓
+	@Override
+	public Object[] FMLCommonHandlerInstanceGetMinecraftServerInstanceWorldServers() {
+		return FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
+	}
+
+	@Override
+	public void setMinecraftPlayer(Object entityPlayer) {
+		if (Modchu_Main.isServer) return;
+		Minecraft.getMinecraft().thePlayer = (EntityPlayerSP) entityPlayer;
+	}
+	// ビルド時にバージョン別変化有り ↓
+	@Override
+	public Object minecraftPlayer() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().thePlayer;
+	}
+
+	@Override
+	public Object damageSourceAnvil() {
+		return DamageSource.anvil;
+	}
+
+	@Override
+	public Object damageSourceCactus() {
+		return DamageSource.cactus;
+	}
+
+	@Override
+	public Object damageSourceDrown() {
+		return DamageSource.drown;
+	}
+
+	@Override
+	public Object damageSourceFall() {
+		return DamageSource.fall;
+	}
+
+	@Override
+	public Object damageSourceFallingBlock() {
+		return DamageSource.fallingBlock;
+	}
+
+	@Override
+	public Object damageSourceGeneric() {
+		return DamageSource.generic;
+	}
+
+	@Override
+	public Object damageSourceInFire() {
+		return DamageSource.inFire;
+	}
+
+	@Override
+	public Object damageSourceInWall() {
+		return DamageSource.inWall;
+	}
+
+	@Override
+	public Object damageSourceLava() {
+		return DamageSource.lava;
+	}
+
+	@Override
+	public Object damageSourceMagic() {
+		return DamageSource.magic;
+	}
+
+	@Override
+	public Object damageSourceOnFire() {
+		return DamageSource.onFire;
+	}
+
+	@Override
+	public Object damageSourceOutOfWorld() {
+		return DamageSource.outOfWorld;
+	}
+
+	@Override
+	public Object damageSourceStarve() {
+		return DamageSource.starve;
+	}
+
+	@Override
+	public Object damageSourceWither() {
+		return DamageSource.wither;
+	}
+
+	@Override
+	public Object entityWorld(Object worldOrEntity) {
+		return worldOrEntity instanceof World ? worldOrEntity : worldOrEntity instanceof Entity ? ((Entity) worldOrEntity).worldObj : null;
+	}
+
+	@Override
+	public int mathHelperFloor_double(double d) {
+		return MathHelper.floor_double(d);
+	}
+
+	@Override
+	public float mathHelperSqrt_float(float f) {
+		return MathHelper.sqrt_float(f);
+	}
+
+	@Override
+	public Object minecraftWorld() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().theWorld;
+	}
+
+	@Override
+	public Object worldGetWorldInfo() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().theWorld.getWorldInfo();
+	}
+
+	@Override
+	public float mathHelperFloor_float(float f) {
+		return MathHelper.floor_float(f);
+	}
+
+	@Override
+	public long mathHelperLfloor(double d) {
+		return MathHelper.floor_double_long(d);
+	}
+
+	@Override
+	public double mathHelperAbs_max(double d, double d1) {
+		return MathHelper.abs_max(d, d1);
+	}
+
+	@Override
+	public int mathHelperIntFloorDiv(int i, int j) {
+		return MathHelper.bucketInt(i, j);
+	}
+
+	@Override
+	public double mathHelperSqrt_double(double d) {
+		return MathHelper.sqrt_double(d);
+	}
+
+	@Override
+	public boolean worldSpawnEntity(Object worldOrEntity, Object entity) {
+		return ((World) entityWorld(worldOrEntity)).spawnEntityInWorld((Entity) entity);
+	}
+
+	public Object getWorldInfo(Object entityOrWorldOrWorldInfo) {
+		if (entityOrWorldOrWorldInfo instanceof WorldInfo) return entityOrWorldOrWorldInfo;
+		if (entityOrWorldOrWorldInfo instanceof World) return ((World) entityOrWorldOrWorldInfo).getWorldInfo();
+		if (entityOrWorldOrWorldInfo instanceof Entity) return ((Entity) entityOrWorldOrWorldInfo).worldObj.getWorldInfo();
+		return null;
+	}
+
+	@Override
+	public long worldInfoGetWorldTotalTime(Object entityOrWorldOrWorldInfo) {
+		Object worldInfo = entityOrWorldOrWorldInfo instanceof WorldInfo ? entityOrWorldOrWorldInfo : getWorldInfo(entityOrWorldOrWorldInfo);
+		return ((WorldInfo) entityOrWorldOrWorldInfo).getWorldTotalTime();
+	}
+
+	@Override
+	public long worldInfoGetWorldTime(Object entityOrWorldOrWorldInfo) {
+		Object worldInfo = entityOrWorldOrWorldInfo instanceof WorldInfo ? entityOrWorldOrWorldInfo : getWorldInfo(entityOrWorldOrWorldInfo);
+		return ((WorldInfo) entityOrWorldOrWorldInfo).getWorldTime();
+	}
+
+	@Override
+	public String iAttributeGetAttributeUnlocalizedName(Object iAttribute) {
+		return ((IAttribute) iAttribute).getAttributeUnlocalizedName();
+	}
+	// 190~210共通コピペ　↑
 
 }

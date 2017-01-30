@@ -38,7 +38,7 @@ public interface Modchu_IParticle {
 	public void superExtinguish();
 	public void superKill();
 	public boolean superIsOffsetPositionInLiquid(double par1, double par3, double par5);
-	public void superMoveEntity(double par1, double par3, double par5);
+	public void superMove(double par1, double par3, double par5);
 	public void superDoBlockCollisions();
 	public void superPlayStepSound(int par1, int par2, int par3, int par4);
 	public void superPlayStepSound(int par1, int par2, int par3, Object par4);
@@ -184,7 +184,7 @@ public interface Modchu_IParticle {
 	public void superSetExpired();
 	public void superResetPositionToBB();
 	public boolean superIsAlive();
-	public Object superGetEntityBoundingBox();
-	public void superSetEntityBoundingBox(Object axisAlignedBB);
+	public Object superGetBoundingBox();
+	public void superSetBoundingBox(Object axisAlignedBB);
 
 }

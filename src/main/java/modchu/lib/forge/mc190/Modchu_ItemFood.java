@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class Modchu_ItemFood extends modchu.lib.forge.mc190_210.Modchu_ItemFood {
+public class Modchu_ItemFood extends modchu.lib.forge.mc190_212.Modchu_ItemFood {
 
 	public Modchu_ItemFood(HashMap<String, Object> map) {
 		super(map);
@@ -75,6 +75,21 @@ public class Modchu_ItemFood extends modchu.lib.forge.mc190_210.Modchu_ItemFood 
 	@Override
 	public Object superOnItemRightClick(Object itemStack, Object world, Object entityPlayer, Object enumHand) {
 		return super.onItemRightClick((ItemStack) itemStack, (World) world, (EntityPlayer) entityPlayer, (EnumHand) enumHand);
+	}
+
+	@Override
+	public int getHarvestLevel(ItemStack itemStack, String toolClass) {
+		return master != null ? master.getHarvestLevel(itemStack, toolClass) : super.getHarvestLevel(itemStack, toolClass);
+	}
+
+	@Override
+	public int superGetHarvestLevel(Object itemStack, String toolClass) {
+		return super.getHarvestLevel((ItemStack) itemStack, toolClass);
+	}
+
+	@Override
+	public boolean superIsEnchantable(Object itemStack) {
+		return super.isItemTool((ItemStack) itemStack);
 	}
 
 }

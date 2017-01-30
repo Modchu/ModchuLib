@@ -4,40 +4,40 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 public class Modchu_IResourcePackMasterBasis implements Modchu_IResourcePackMaster {
-	public Object base;
+	public Modchu_IResourcePack base;
 
 	public Modchu_IResourcePackMasterBasis(HashMap<String, Object> map) {
-		base = map.get("base");
+		base = (Modchu_IResourcePack) map.get("base");
 	}
 
 	@Override
 	public InputStream getInputStream(Object resourceLocation) {
-		return null;
+		return base.superGetInputStream(resourceLocation);
 	}
 
 	@Override
 	public boolean resourceExists(Object resourceLocation) {
-		return false;
+		return base.superResourceExists(resourceLocation);
 	}
 
 	@Override
 	public Object getResourceDomains() {
-		return null;
+		return base.superGetResourceDomains();
 	}
 
 	@Override
 	public Object getPackMetadata(Object metadataSerializer, String s) {
-		return null;
+		return base.superGetPackMetadata(metadataSerializer, s);
 	}
 
 	@Override
 	public Object getPackImage() {
-		return null;
+		return base.superGetPackImage();
 	}
 
 	@Override
 	public String getPackName() {
-		return null;
+		return base.superGetPackName();
 	}
 
 }

@@ -46,7 +46,7 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public void displayGUIMerchant(Object iMerchant, String par2Str);
 	public void onCriticalHit(Object entity);
 	public void onEnchantmentCritical(Object entity);
-	public void addChatMessage(String par1Str);
+	public void sendMessage(String par1Str);
 	public void setXPStats(float par1, int par2, int par3);
 	public void sendChatToPlayer(Object chatMessageComponent);
 	public Object getPlayerCoordinates();
@@ -148,7 +148,7 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public void func_146102_a(Object tileEntityDispenser);
 	public void func_146098_a(Object tileEntityBrewingStand);
 	public void func_146101_a(Object tileEntityFurnace);
-	public void addChatComponentMessage(Object iChatComponent, boolean p_146105_2_);
+	public void sendStatusMessage(Object iChatComponent, boolean p_146105_2_);
 	public float getBreakSpeed(Object block, boolean p_146096_2_, int meta);
 	public float getBreakSpeed(Object block, boolean p_146096_2_, int meta, int x, int y, int z);
 	public Object func_146097_a(Object itemStack, boolean p_146097_2_, boolean p_146097_3_);

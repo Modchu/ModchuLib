@@ -171,8 +171,8 @@ public class Modchu_ParticleMasterBasis implements Modchu_IParticleMaster {
 	}
 
 	@Override
-	public void moveEntity(double par1, double par3, double par5) {
-		base.superMoveEntity(par1, par3, par5);
+	public void move(double par1, double par3, double par5) {
+		base.superMove(par1, par3, par5);
 	}
 
 	@Override
@@ -881,13 +881,13 @@ public class Modchu_ParticleMasterBasis implements Modchu_IParticleMaster {
 	}
 
 	@Override
-	public Object getEntityBoundingBox() {
-		return base.superGetEntityBoundingBox();
+	public Object getBoundingBox() {
+		return base.superGetBoundingBox();
 	}
 
 	@Override
-	public void setEntityBoundingBox(Object axisAlignedBB) {
-		base.superSetEntityBoundingBox(axisAlignedBB);
+	public void setBoundingBox(Object axisAlignedBB) {
+		base.superSetBoundingBox(axisAlignedBB);
 	}
 
 }

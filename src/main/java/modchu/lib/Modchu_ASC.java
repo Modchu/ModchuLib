@@ -11,8 +11,8 @@ public interface Modchu_ASC {
 	public static final int FMLCommonHandlerInstanceGetMinecraftServerInstance_int = 3332;
 	public static final int FMLCommonHandlerInstanceGetMinecraftServerInstanceWorldServers_int = 3333;
 	public static final int minecraftGetMinecraft_int = 4;
-	public static final int minecraftThePlayer_int = 5;
-	public static final int minecraftTheWorld_int = 7;
+	public static final int minecraftPlayer_int = 5;
+	public static final int minecraftWorld_int = 7;
 	public static final int minecraftMcDataDir_int = 8;
 	public static final int minecraftFontRenderer_int = 800;
 	public static final int minecraftGetSession_int = 8120;
@@ -61,7 +61,7 @@ public interface Modchu_ASC {
 	public static final int itemStackIsItemEnchanted_int = 45;
 	public static final int mathHelperSin_int = 46;
 	public static final int mathHelperCos_int = 47;
-	public static final int mathHelperSqrt_float_int = 48;
+	public static final int mathHelperSqrt_int = 48;
 	public static final int mathHelperFloor_double_int = 49;
 	public static final int modelRendererGetTextureOffsetMap_int = 50;
 	public static final int textureOffsetTextureOffsetX_int = 51;
@@ -416,7 +416,7 @@ public interface Modchu_ASC {
 	public static final int worldGetPlayerEntityByName_int = 16120;
 	public static final int entityTameableGetOwnerName_int = 16121;
 	public static final int entityAnimalBreeding_int = 16122;
-	public static final int worldSpawnEntityInWorld_int = 16123;
+	public static final int worldSpawnEntity_int = 16123;
 	public static final int biomeOcean_int = 16124;
 	public static final int biomePlains_int = 16125;
 	public static final int biomeDesert_int = 16126;
@@ -562,11 +562,11 @@ public interface Modchu_ASC {
 	public static final int abstractClientPlayerLocationCape_int = 16266;
 	public static final int worldAddEntityToWorld_int = 16267;
 	public static final int itemStackGetMaxDamage_int = 16268;
-	public static final int mathHelperFloor_float_int = 16269;
-	public static final int mathHelperFloor_double_long_int = 16270;
+	public static final int mathHelperFloor_int = 16269;
+	public static final int mathHelperLfloor_int = 16270;
 	public static final int mathHelperAbs_int = 16271;
 	public static final int mathHelperAbs_max_int = 16272;
-	public static final int mathHelperBucketInt_int = 16273;
+	public static final int mathHelperIntFloorDiv_int = 16273;
 	public static final int mathHelperStringNullOrLengthZero_int = 16274;
 	public static final int mathHelperGetRandomIntegerInRange_int = 16275;
 	public static final int threadDownloadImageDataGetGlTextureId_int = 16276;
@@ -763,5 +763,6 @@ public interface Modchu_ASC {
 	public static final int newDataParameter_int = 16467;
 	public static final int newSoundEvent_int = 16468;
 	public static final int newResourceLocation_int = 16469;
+	public static final int mathHelperClamp_int = 16470;
 
 }

@@ -183,7 +183,7 @@ public class Modchu_HelperBase {
 		int x = Modchu_AS.getInt(Modchu_AS.tileEntityXCoord, tileEntity);
 		int y = Modchu_AS.getInt(Modchu_AS.tileEntityYCoord, tileEntity);
 		int z = Modchu_AS.getInt(Modchu_AS.tileEntityZCoord, tileEntity);
-		int i = (y == Modchu_AS.getDouble(Modchu_AS.mathHelperFloor_double, Modchu_AS.getDouble(Modchu_AS.entityPosY, entityLiving))
+		int i = (y == Modchu_AS.getDouble(Modchu_AS.mathHelperFloor, Modchu_AS.getDouble(Modchu_AS.entityPosY, entityLiving))
 				&& flag) ? 2 : 1;
 		switch (Modchu_AS.getInt(Modchu_AS.worldGetBlockStateGetBlockMetadata, entityLiving, x, y, z)) {
 		case 3:

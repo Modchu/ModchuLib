@@ -6,7 +6,7 @@ public interface Modchu_IAllRenderLiving {
 	public void superDoRender(Object entity, double par2, double par4, double par6, float par8, float par9);
 	public void superRenderModel(Object entityLivingBase, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_);
 	public void superRenderLivingAt(Object entityLivingBase, double p_77039_2_, double p_77039_4_, double p_77039_6_);
-	public void superRotateCorpse(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_);
+	public void superApplyRotations(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_);
 	public float superHandleRotationFloat(Object entityLivingBase, float p_77044_2_);
 	public float superGetDeathMaxRotation(Object entityLivingBase);
 	public int superGetColorMultiplier(Object entityLivingBase, float p_77030_2_, float p_77030_3_);

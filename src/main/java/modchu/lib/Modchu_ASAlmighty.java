@@ -188,8 +188,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == FMLCommonHandlerInstanceGetMinecraftServerInstance) return FMLCommonHandlerInstanceGetMinecraftServerInstance();
 		if (pIndex == FMLCommonHandlerInstanceGetMinecraftServerInstanceWorldServers) return FMLCommonHandlerInstanceGetMinecraftServerInstanceWorldServers();
 		if (pIndex == minecraftGetMinecraft) return minecraftGetMinecraft();
-		if (pIndex == minecraftThePlayer) return minecraftThePlayer();
-		if (pIndex == minecraftTheWorld) return minecraftTheWorld();
+		if (pIndex == minecraftPlayer) return minecraftPlayer();
+		if (pIndex == minecraftWorld) return minecraftWorld();
 		if (pIndex == minecraftDisplayGuiScreen) return minecraftDisplayGuiScreen();
 		if (pIndex == minecraftGetIntegratedServer) return minecraftGetIntegratedServer();
 		if (pIndex == minecraftMcDataDir) return minecraftMcDataDir();
@@ -382,16 +382,21 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == itemStackIsItemEnchanted) return pArg != null && pArg.length > 0 ? itemStackIsItemEnchanted(pArg[0]) : null;
 		if (pIndex == mathHelperSin) return pArg != null && pArg.length > 0 ? mathHelperSin((Float) pArg[0]) : null;
 		if (pIndex == mathHelperCos) return pArg != null && pArg.length > 0 ? mathHelperCos((Float) pArg[0]) : null;
-		if (pIndex == mathHelperSqrt_float) return pArg != null && pArg.length > 0 ? mathHelperSqrt_float((Float) pArg[0]) : null;
-		if (pIndex == mathHelperSqrt_double) return pArg != null && pArg.length > 0 ? mathHelperSqrt_double((Double) pArg[0]) : null;
-		if (pIndex == mathHelperFloor_double) return pArg != null && pArg.length > 0 ? mathHelperFloor_double((Double) pArg[0]) : null;
-		if (pIndex == mathHelperFloor_float) return pArg != null && pArg.length > 0 ? mathHelperFloor_float((Float) pArg[0]) : null;
+		if (pIndex == mathHelperSqrt
+				| pIndex == mathHelperSqrt_double_int) {
+			return pArg != null && pArg.length > 0 ? mathHelperSqrt(pArg[0]) : null;
+		}
+		if (pIndex == mathHelperFloor
+				| pIndex == mathHelperFloor_double_int) {
+			return pArg != null && pArg.length > 0 ? mathHelperFloor(pArg[0]) : null;
+		}
 		if (pIndex == mathHelperWrapAngleTo180_float) return pArg != null && pArg.length > 0 ? mathHelperWrapAngleTo180_float((Float) pArg[0]) : null;
-		if (pIndex == mathHelperFloor_double_long) return pArg != null && pArg.length > 0 ? mathHelperFloor_double_long((Double) pArg[0]) : null;
+		if (pIndex == mathHelperLfloor) return pArg != null && pArg.length > 0 ? mathHelperLfloor((Double) pArg[0]) : null;
 		if (pIndex == mathHelperAbs) return pArg != null && pArg.length > 0 ? mathHelperAbs((Float) pArg[0]) : null;
 		if (pIndex == mathHelperAbs_max) return pArg != null && pArg.length > 1 ? mathHelperAbs_max((Double) pArg[0], (Double) pArg[1]) : null;
-		if (pIndex == mathHelperBucketInt) return pArg != null && pArg.length > 1 ? mathHelperBucketInt((Integer) pArg[0], (Integer) pArg[1]) : null;
+		if (pIndex == mathHelperIntFloorDiv) return pArg != null && pArg.length > 1 ? mathHelperIntFloorDiv((Integer) pArg[0], (Integer) pArg[1]) : null;
 		if (pIndex == mathHelperStringNullOrLengthZero) return pArg != null && pArg.length > 0 ? mathHelperStringNullOrLengthZero((String) pArg[0]) : null;
+		if (pIndex == mathHelperClamp) return pArg != null && pArg.length > 2 ? mathHelperClamp(pArg[0], pArg[1], pArg[2]) : null;
 		if (pIndex == modelRendererGetTextureOffsetMap) return pArg != null && pArg.length > 0 ? modelRendererGetTextureOffsetMap(pArg[0]) : null;
 		if (pIndex == modelRendererCubeList) return pArg != null && pArg.length > 0 ? modelRendererCubeList(pArg[0]) : null;
 		if (pIndex == modelRendererChildModels) return pArg != null && pArg.length > 0 ? modelRendererChildModels(pArg[0]) : null;
@@ -710,7 +715,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		if (pIndex == entityBoundingBoxMaxY) return pArg != null && pArg.length > 0 ? entityBoundingBoxMaxY(pArg[0]) : entityBoundingBoxMaxY();
 		if (pIndex == entityBoundingBoxMaxZ) return pArg != null && pArg.length > 0 ? entityBoundingBoxMaxZ(pArg[0]) : entityBoundingBoxMaxZ();
 		if (pIndex == entityIsSneaking) return pArg != null && pArg.length > 0 ? entityIsSneaking(pArg[0]) : entityIsSneaking();
-		if (pIndex == entityWorldObj) return pArg != null && pArg.length > 0 ? entityWorldObj(pArg[0]) : entityWorldObj();
+		if (pIndex == entityWorldObj) return pArg != null && pArg.length > 0 ? entityWorld(pArg[0]) : entityWorld();
 		if (pIndex == entityPlayerPrevChasingPosX) return pArg != null && pArg.length > 0 ? entityPlayerPrevChasingPosX(pArg[0]) : entityPlayerPrevChasingPosX();
 		if (pIndex == entityPlayerPrevChasingPosY) return pArg != null && pArg.length > 0 ? entityPlayerPrevChasingPosY(pArg[0]) : entityPlayerPrevChasingPosY();
 		if (pIndex == entityPlayerPrevChasingPosZ) return pArg != null && pArg.length > 0 ? entityPlayerPrevChasingPosZ(pArg[0]) : entityPlayerPrevChasingPosZ();
@@ -1561,15 +1566,15 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return null;
 		}
-		if (pIndex == worldSpawnEntityInWorld) {
+		if (pIndex == worldSpawnEntity) {
 			if (pArg != null
 			&& pArg.length > 0
 			&& pArg[0] != null) {
 				if (pArg.length > 1
 						&& pArg[1] != null) {
-					return worldSpawnEntityInWorld(pArg[0], pArg[1]);
+					return worldSpawnEntity(pArg[0], pArg[1]);
 				} else {
-					return worldSpawnEntityInWorld(pArg[0]);
+					return worldSpawnEntity(pArg[0]);
 				}
 			}
 			return null;
@@ -2282,8 +2287,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return false;
 		}
-		if (pIndex == minecraftThePlayer) {
-			setMinecraftThePlayer(pArg[0]);
+		if (pIndex == minecraftPlayer) {
+			setMinecraftPlayer(pArg[0]);
 			return true;
 		}
 		if (pIndex == minecraftFontRenderer) {
@@ -6948,7 +6953,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object abstractClientPlayerGetTextureCape() {
-		return abstractClientPlayerGetTextureCape(minecraftThePlayer());
+		return abstractClientPlayerGetTextureCape(minecraftPlayer());
 	}
 
 	protected Object abstractClientPlayerGetTextureCape(Object entity) {
@@ -6956,7 +6961,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object abstractClientPlayerGetTextureSkin() {
-		return abstractClientPlayerGetTextureSkin(minecraftThePlayer());
+		return abstractClientPlayerGetTextureSkin(minecraftPlayer());
 	}
 
 	protected Object abstractClientPlayerGetTextureSkin(Object entity) {
@@ -6964,7 +6969,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object abstractClientPlayerLocationSkin() {
-		return abstractClientPlayerLocationSkin(minecraftThePlayer());
+		return abstractClientPlayerLocationSkin(minecraftPlayer());
 	}
 
 	protected Object abstractClientPlayerLocationSkin(Object entity) {
@@ -6972,7 +6977,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setAbstractClientPlayerLocationSkin(Object o) {
-		setAbstractClientPlayerLocationSkin(minecraftThePlayer(), o);
+		setAbstractClientPlayerLocationSkin(minecraftPlayer(), o);
 	}
 
 	protected void setAbstractClientPlayerLocationSkin(Object entity, Object o) {
@@ -6980,7 +6985,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void abstractClientPlayerLocationCape(Object o) {
-		abstractClientPlayerLocationCape(minecraftThePlayer(), o);
+		abstractClientPlayerLocationCape(minecraftPlayer(), o);
 	}
 
 	protected void abstractClientPlayerLocationCape(Object entity, Object o) {
@@ -6988,7 +6993,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected String abstractClientPlayerGetSkinType() {
-		return abstractClientPlayerGetSkinType(minecraftThePlayer());
+		return abstractClientPlayerGetSkinType(minecraftPlayer());
 	}
 
 	protected String abstractClientPlayerGetSkinType(Object abstractClientPlayer) {
@@ -7306,7 +7311,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityLivingCurrentTarget() {
-		return entityLivingCurrentTarget(minecraftThePlayer());
+		return entityLivingCurrentTarget(minecraftPlayer());
 	}
 
 	protected Object entityLivingCurrentTarget(Object entityLivingBase) {
@@ -7314,7 +7319,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityAnimalInLove() {
-		return entityAnimalInLove(minecraftThePlayer());
+		return entityAnimalInLove(minecraftPlayer());
 	}
 
 	protected Object entityAnimalInLove(Object entityLivingBase) {
@@ -7322,7 +7327,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityAnimalInLove(int i) {
-		setEntityAnimalInLove(minecraftThePlayer(), i);
+		setEntityAnimalInLove(minecraftPlayer(), i);
 	}
 
 	protected void setEntityAnimalInLove(Object entityLivingBase, int i) {
@@ -7330,7 +7335,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityLivingBaseGetEquipmentInSlot(Object entityEquipmentSlotOrInt) {
-		return entityLivingBaseGetEquipmentInSlot(minecraftThePlayer(), entityEquipmentSlotOrInt);
+		return entityLivingBaseGetEquipmentInSlot(minecraftPlayer(), entityEquipmentSlotOrInt);
 	}
 
 	protected Object entityLivingBaseGetEquipmentInSlot(Object entityLivingBase, Object entityEquipmentSlotOrInt) {
@@ -7343,7 +7348,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityAttackEntityFrom(Object damageSource, float f) {
-		return entityAttackEntityFrom(minecraftThePlayer(), damageSource, f);
+		return entityAttackEntityFrom(minecraftPlayer(), damageSource, f);
 	}
 
 	protected boolean entityAttackEntityFrom(Object entity, Object damageSource, float f) {
@@ -7351,7 +7356,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityLivingBaseEntityAge() {
-		return entityLivingBaseEntityAge(minecraftThePlayer());
+		return entityLivingBaseEntityAge(minecraftPlayer());
 	}
 
 	protected int entityLivingBaseEntityAge(Object entity) {
@@ -7359,7 +7364,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityLivingBaseGetLook(float f) {
-		return entityLivingBaseGetLook(minecraftThePlayer(), f);
+		return entityLivingBaseGetLook(minecraftPlayer(), f);
 	}
 
 	protected Object entityLivingBaseGetLook(Object entityLivingBase, float f) {
@@ -7367,7 +7372,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseEntityAge(int i) {
-		setEntityLivingBaseEntityAge(minecraftThePlayer(), i);
+		setEntityLivingBaseEntityAge(minecraftPlayer(), i);
 	}
 
 	protected void setEntityLivingBaseEntityAge(Object entity, int i) {
@@ -7375,7 +7380,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityBoundingBox() {
-		return entityBoundingBox(minecraftThePlayer());
+		return entityBoundingBox(minecraftPlayer());
 	}
 
 	protected Object entityBoundingBox(Object entity) {
@@ -7383,7 +7388,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityBoundingBoxMaxX() {
-		return entityBoundingBoxMaxY(minecraftThePlayer());
+		return entityBoundingBoxMaxY(minecraftPlayer());
 	}
 
 	protected double entityBoundingBoxMaxX(Object entityOrBoundingBox) {
@@ -7392,7 +7397,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityBoundingBoxMaxY() {
-		return entityBoundingBoxMaxY(minecraftThePlayer());
+		return entityBoundingBoxMaxY(minecraftPlayer());
 	}
 
 	protected double entityBoundingBoxMaxY(Object entityOrBoundingBox) {
@@ -7401,7 +7406,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityBoundingBoxMaxZ() {
-		return entityBoundingBoxMaxY(minecraftThePlayer());
+		return entityBoundingBoxMaxY(minecraftPlayer());
 	}
 
 	protected double entityBoundingBoxMaxZ(Object entityOrBoundingBox) {
@@ -7410,7 +7415,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityBoundingBoxMinX() {
-		return entityBoundingBoxMinY(minecraftThePlayer());
+		return entityBoundingBoxMinY(minecraftPlayer());
 	}
 
 	protected double entityBoundingBoxMinX(Object entity) {
@@ -7419,7 +7424,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityBoundingBoxMinY() {
-		return entityBoundingBoxMinY(minecraftThePlayer());
+		return entityBoundingBoxMinY(minecraftPlayer());
 	}
 
 	protected double entityBoundingBoxMinY(Object entity) {
@@ -7428,7 +7433,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityBoundingBoxMinZ() {
-		return entityBoundingBoxMinY(minecraftThePlayer());
+		return entityBoundingBoxMinY(minecraftPlayer());
 	}
 
 	protected double entityBoundingBoxMinZ(Object entity) {
@@ -7437,7 +7442,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected String entityCloakUrl() {
-		return entityCloakUrl(minecraftThePlayer());
+		return entityCloakUrl(minecraftPlayer());
 	}
 
 	protected String entityCloakUrl(Object entity) {
@@ -7445,7 +7450,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityDimension() {
-		return entityDimension(minecraftThePlayer());
+		return entityDimension(minecraftPlayer());
 	}
 
 	protected int entityDimension(Object entity) {
@@ -7453,7 +7458,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityDimension(int i) {
-		setEntityDimension(minecraftThePlayer(), i);
+		setEntityDimension(minecraftPlayer(), i);
 	}
 
 	protected void setEntityDimension(Object entity, int i) {
@@ -7461,7 +7466,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityDistanceWalkedModified() {
-		return entityDistanceWalkedModified(minecraftThePlayer());
+		return entityDistanceWalkedModified(minecraftPlayer());
 	}
 
 	protected float entityDistanceWalkedModified(Object entity) {
@@ -7469,7 +7474,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityEntityID() {
-		return entityEntityID(minecraftThePlayer());
+		return entityEntityID(minecraftPlayer());
 	}
 
 	protected int entityEntityID(Object entity) {
@@ -7477,7 +7482,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityGetBrightness(float f) {
-		return entityGetBrightness(minecraftThePlayer(), f);
+		return entityGetBrightness(minecraftPlayer(), f);
 	}
 
 	protected float entityGetBrightness(Object entity, float f) {
@@ -7485,7 +7490,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityGetBrightnessForRender(float f) {
-		return entityGetBrightnessForRender(minecraftThePlayer(), f);
+		return entityGetBrightnessForRender(minecraftPlayer(), f);
 	}
 
 	protected int entityGetBrightnessForRender(Object entity, float f) {
@@ -7493,7 +7498,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityGetDataWatcher() {
-		return entityGetDataWatcher(minecraftThePlayer());
+		return entityGetDataWatcher(minecraftPlayer());
 	}
 
 	protected Object entityGetDataWatcher(Object dataManagerOrEntity) {
@@ -7501,7 +7506,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entitySetCustomNameTag(String s) {
-		entitySetCustomNameTag(minecraftThePlayer(), s);
+		entitySetCustomNameTag(minecraftPlayer(), s);
 	}
 
 	protected void entitySetCustomNameTag(Object entity, String s) {
@@ -7509,7 +7514,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object dataManagerGetWatchedObject(int i) {
-		return dataManagerGetWatchedObject(minecraftThePlayer(), i);
+		return dataManagerGetWatchedObject(minecraftPlayer(), i);
 	}
 
 	protected Object dataManagerGetWatchedObject(Object dataManagerOrEntity, Object dataParameterOrInt) {
@@ -7519,7 +7524,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void dataManagerAddObject(int i, Object o) {
-		dataManagerAddObject(minecraftThePlayer(), i, o);
+		dataManagerAddObject(minecraftPlayer(), i, o);
 	}
 
 	protected void dataManagerAddObject(Object dataManagerOrEntity, Object dataParameterOrInt, Object o) {
@@ -7528,7 +7533,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object dataManagerGetWatchableObjectItemStack(Object dataParameterOrInt) {
-		return dataManagerGetWatchableObjectItemStack(minecraftThePlayer(), dataParameterOrInt);
+		return dataManagerGetWatchableObjectItemStack(minecraftPlayer(), dataParameterOrInt);
 	}
 
 	protected Object dataManagerGetWatchableObjectItemStack(Object dataManagerOrEntity, Object dataParameterOrInt) {
@@ -7536,7 +7541,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected String dataManagerGetWatchableObjectString(Object dataParameterOrInt) {
-		return dataManagerGetWatchableObjectString(minecraftThePlayer(), dataParameterOrInt);
+		return dataManagerGetWatchableObjectString(minecraftPlayer(), dataParameterOrInt);
 	}
 
 	protected String dataManagerGetWatchableObjectString(Object dataManagerOrEntity, Object dataParameterOrInt) {
@@ -7544,7 +7549,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected byte dataManagerGetWatchableObjectByte(Object dataParameterOrInt) {
-		return dataManagerGetWatchableObjectByte(minecraftThePlayer(), dataParameterOrInt);
+		return dataManagerGetWatchableObjectByte(minecraftPlayer(), dataParameterOrInt);
 	}
 
 	protected byte dataManagerGetWatchableObjectByte(Object dataManagerOrEntity, Object dataParameterOrInt) {
@@ -7552,7 +7557,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void dataManagerUpdateObject(Object dataParameterOrInt, Object o) {
-		dataManagerUpdateObject(minecraftThePlayer(), dataParameterOrInt, o);
+		dataManagerUpdateObject(minecraftPlayer(), dataParameterOrInt, o);
 	}
 
 	protected void dataManagerUpdateObject(Object dataManagerOrEntity, Object dataParameterOrInt, Object o) {
@@ -7565,7 +7570,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityGetEyeHeight() {
-		return entityGetEyeHeight(minecraftThePlayer());
+		return entityGetEyeHeight(minecraftPlayer());
 	}
 
 	protected float entityGetEyeHeight(Object entityplayer) {
@@ -7573,7 +7578,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityHeight() {
-		return entityHeight(minecraftThePlayer());
+		return entityHeight(minecraftPlayer());
 	}
 
 	protected float entityHeight(Object entity) {
@@ -7581,7 +7586,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityIsInvisible() {
-		return entityIsInvisible(minecraftThePlayer());
+		return entityIsInvisible(minecraftPlayer());
 	}
 
 	protected boolean entityIsInvisible(Object entity) {
@@ -7589,7 +7594,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityIsInWeb() {
-		return entityIsInWeb(minecraftThePlayer());
+		return entityIsInWeb(minecraftPlayer());
 	}
 
 	protected boolean entityIsInWeb(Object entity) {
@@ -7597,7 +7602,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityIsInWater() {
-		return entityIsInWater(minecraftThePlayer());
+		return entityIsInWater(minecraftPlayer());
 	}
 
 	protected boolean entityIsInWater(Object entity) {
@@ -7605,7 +7610,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityIsRiding() {
-		return entityIsRiding(minecraftThePlayer());
+		return entityIsRiding(minecraftPlayer());
 	}
 
 	protected boolean entityIsRiding(Object entity) {
@@ -7613,7 +7618,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityIsSneaking() {
-		return entityIsSneaking(minecraftThePlayer());
+		return entityIsSneaking(minecraftPlayer());
 	}
 
 	protected boolean entityIsSneaking(Object entity) {
@@ -7621,7 +7626,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityIsWet() {
-		return entityIsWet(minecraftThePlayer());
+		return entityIsWet(minecraftPlayer());
 	}
 
 	protected boolean entityIsWet(Object entity) {
@@ -7629,7 +7634,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityIsBurning() {
-		return entityIsBurning(minecraftThePlayer());
+		return entityIsBurning(minecraftPlayer());
 	}
 
 	protected boolean entityIsBurning(Object entity) {
@@ -7637,7 +7642,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityIsSprinting() {
-		return entityIsSprinting(minecraftThePlayer());
+		return entityIsSprinting(minecraftPlayer());
 	}
 
 	protected boolean entityIsSprinting(Object entity) {
@@ -7649,7 +7654,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityStartRiding(Object entity) {
-		return entityStartRiding(minecraftThePlayer(), entity);
+		return entityStartRiding(minecraftPlayer(), entity);
 	}
 
 	protected boolean entityStartRiding(Object entity, Object entity2) {
@@ -7666,7 +7671,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingBaseSetPositionAndUpdate(double x, double y, double z) {
-		entityLivingBaseSetPositionAndUpdate(minecraftThePlayer(), x, y, z);
+		entityLivingBaseSetPositionAndUpdate(minecraftPlayer(), x, y, z);
 	}
 
 	protected void entityLivingBaseSetPositionAndUpdate(Object entity, double x, double y, double z) {
@@ -7695,7 +7700,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entitySetLocationAndAngles(double x, double y, double z, float f, float f1) {
-		entitySetLocationAndAngles(minecraftThePlayer(), x, y, z, f, f1);
+		entitySetLocationAndAngles(minecraftPlayer(), x, y, z, f, f1);
 	}
 
 	protected void entitySetLocationAndAngles(Object entity, double x, double y, double z, float f, float f1) {
@@ -7703,7 +7708,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entitySetPositionAndRotation(double x, double y, double z, float f, float f1) {
-		entitySetPositionAndRotation(minecraftThePlayer(), x, y, z, f, f1);
+		entitySetPositionAndRotation(minecraftPlayer(), x, y, z, f, f1);
 	}
 
 	protected void entitySetPositionAndRotation(Object entity, double x, double y, double z, float f, float f1) {
@@ -7711,7 +7716,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityAnimalBreeding() {
-		return entityAnimalBreeding(minecraftThePlayer());
+		return entityAnimalBreeding(minecraftPlayer());
 	}
 
 	protected int entityAnimalBreeding(Object entityAnimal) {
@@ -7719,7 +7724,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityAnimalBreeding(int i) {
-		setEntityAnimalBreeding(minecraftThePlayer(), i);
+		setEntityAnimalBreeding(minecraftPlayer(), i);
 	}
 
 	protected void setEntityAnimalBreeding(Object entityAnimal, int i) {
@@ -7727,7 +7732,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityCreatureHasAttacked() {
-		return entityCreatureHasAttacked(minecraftThePlayer());
+		return entityCreatureHasAttacked(minecraftPlayer());
 	}
 
 	protected boolean entityCreatureHasAttacked(Object entity) {
@@ -7735,7 +7740,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityCreatureHasAttacked(boolean b) {
-		setEntityCreatureHasAttacked(minecraftThePlayer(), b);
+		setEntityCreatureHasAttacked(minecraftPlayer(), b);
 	}
 
 	protected void setEntityCreatureHasAttacked(Object entity, boolean b) {
@@ -7743,7 +7748,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityGetDistanceToEntity(Object entity) {
-		return entityGetDistanceToEntity(minecraftThePlayer(), entity);
+		return entityGetDistanceToEntity(minecraftPlayer(), entity);
 	}
 
 	protected float entityGetDistanceToEntity(Object entity, Object entity2) {
@@ -7751,7 +7756,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityIsEntityAlive() {
-		return entityIsEntityAlive(minecraftThePlayer());
+		return entityIsEntityAlive(minecraftPlayer());
 	}
 
 	protected boolean entityIsEntityAlive(Object entity) {
@@ -7759,7 +7764,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityCreatureEntityToAttack() {
-		return entityCreatureEntityToAttack(minecraftThePlayer());
+		return entityCreatureEntityToAttack(minecraftPlayer());
 	}
 
 	protected Object entityCreatureEntityToAttack(Object entity) {
@@ -7767,7 +7772,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityLivingNumTicksToChaseTarget() {
-		return entityLivingNumTicksToChaseTarget(minecraftThePlayer());
+		return entityLivingNumTicksToChaseTarget(minecraftPlayer());
 	}
 
 	protected int entityLivingNumTicksToChaseTarget(Object entityLiving) {
@@ -7775,7 +7780,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingNumTicksToChaseTarget(int i) {
-		setEntityLivingNumTicksToChaseTarget(minecraftThePlayer(), i);
+		setEntityLivingNumTicksToChaseTarget(minecraftPlayer(), i);
 	}
 
 	protected void setEntityLivingNumTicksToChaseTarget(Object entityLiving, int i) {
@@ -7783,7 +7788,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityCreatureGetEntityToAttack() {
-		return entityCreatureGetEntityToAttack(minecraftThePlayer());
+		return entityCreatureGetEntityToAttack(minecraftPlayer());
 	}
 
 	protected Object entityCreatureGetEntityToAttack(Object entity) {
@@ -7791,7 +7796,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityCreatureEntityToAttack(Object entity) {
-		setEntityCreatureEntityToAttack(minecraftThePlayer(), entity);
+		setEntityCreatureEntityToAttack(minecraftPlayer(), entity);
 	}
 
 	protected void setEntityCreatureEntityToAttack(Object entity, Object entity2) {
@@ -7799,7 +7804,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityClientPlayerMPFunc_142020_c(String s) {
-		entityClientPlayerMPFunc_142020_c(minecraftThePlayer(), s);
+		entityClientPlayerMPFunc_142020_c(minecraftPlayer(), s);
 	}
 
 	protected void entityClientPlayerMPFunc_142020_c(Object entityClientPlayerMP, String s) {
@@ -7807,7 +7812,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected String entityClientPlayerMPFunc_142021_k() {
-		return entityClientPlayerMPFunc_142021_k(minecraftThePlayer());
+		return entityClientPlayerMPFunc_142021_k(minecraftPlayer());
 	}
 
 	protected String entityClientPlayerMPFunc_142021_k(Object entityClientPlayerMP) {
@@ -7815,7 +7820,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityCreatureSetPathToEntity(Object entityPath) {
-		entityCreatureSetPathToEntity(minecraftThePlayer(), entityPath);
+		entityCreatureSetPathToEntity(minecraftPlayer(), entityPath);
 	}
 
 	protected void entityCreatureSetPathToEntity(Object entityCreature, Object entityPath) {
@@ -7823,7 +7828,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseGetSoundVolume() {
-		return entityLivingBaseGetSoundVolume(minecraftThePlayer());
+		return entityLivingBaseGetSoundVolume(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseGetSoundVolume(Object entityLivingBase) {
@@ -7831,7 +7836,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseGetSoundPitch() {
-		return entityLivingBaseGetSoundPitch(minecraftThePlayer());
+		return entityLivingBaseGetSoundPitch(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseGetSoundPitch(Object entityLivingBase) {
@@ -7839,7 +7844,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLastDamage() {
-		return entityLastDamage(minecraftThePlayer());
+		return entityLastDamage(minecraftPlayer());
 	}
 
 	protected float entityLastDamage(Object entityLivingBase) {
@@ -7848,7 +7853,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityLivingBaseRecentlyHit() {
-		return entityLivingBaseRecentlyHit(minecraftThePlayer());
+		return entityLivingBaseRecentlyHit(minecraftPlayer());
 	}
 
 	protected int entityLivingBaseRecentlyHit(Object entityLivingBase) {
@@ -7856,7 +7861,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseRecentlyHit(int i) {
-		setEntityLivingBaseRecentlyHit(minecraftThePlayer(), i);
+		setEntityLivingBaseRecentlyHit(minecraftPlayer(), i);
 	}
 
 	protected void setEntityLivingBaseRecentlyHit(Object entityLivingBase, int i) {
@@ -7864,7 +7869,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityLivingBaseAttackingPlayer() {
-		return entityLivingBaseAttackingPlayer(minecraftThePlayer());
+		return entityLivingBaseAttackingPlayer(minecraftPlayer());
 	}
 
 	protected int entityLivingBaseAttackingPlayer(Object entityLivingBase) {
@@ -7872,7 +7877,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseAttackingPlayer(Object entityLivingBase) {
-		setEntityLivingBaseAttackingPlayer(minecraftThePlayer(), entityLivingBase);
+		setEntityLivingBaseAttackingPlayer(minecraftPlayer(), entityLivingBase);
 	}
 
 	protected void setEntityLivingBaseAttackingPlayer(Object entityLivingBase, Object entityLivingBase2) {
@@ -7880,7 +7885,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityLivingBaseDeathTime() {
-		return entityLivingBaseDeathTime(minecraftThePlayer());
+		return entityLivingBaseDeathTime(minecraftPlayer());
 	}
 
 	protected int entityLivingBaseDeathTime(Object entityLivingBase) {
@@ -7888,7 +7893,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityLivingBaseIsSwingInProgress() {
-		return entityLivingBaseIsSwingInProgress(minecraftThePlayer());
+		return entityLivingBaseIsSwingInProgress(minecraftPlayer());
 	}
 
 	protected boolean entityLivingBaseIsSwingInProgress(Object entityLivingBase) {
@@ -7896,7 +7901,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseIsSwingInProgress(boolean b) {
-		setEntityLivingBaseIsSwingInProgress(minecraftThePlayer(), b);
+		setEntityLivingBaseIsSwingInProgress(minecraftPlayer(), b);
 	}
 
 	protected void setEntityLivingBaseIsSwingInProgress(Object entityLivingBase, boolean b) {
@@ -7904,7 +7909,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityLivingBaseMaxHurtResistantTime() {
-		return entityLivingBaseMaxHurtResistantTime(minecraftThePlayer());
+		return entityLivingBaseMaxHurtResistantTime(minecraftPlayer());
 	}
 
 	protected int entityLivingBaseMaxHurtResistantTime(Object entityLivingBase) {
@@ -7912,7 +7917,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseMaxHurtResistantTime(int i) {
-		setEntityLivingBaseMaxHurtResistantTime(minecraftThePlayer(), i);
+		setEntityLivingBaseMaxHurtResistantTime(minecraftPlayer(), i);
 	}
 
 	protected void setEntityLivingBaseMaxHurtResistantTime(Object entityLivingBase, int i) {
@@ -7920,7 +7925,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityHurtResistantTime() {
-		return entityHurtResistantTime(minecraftThePlayer());
+		return entityHurtResistantTime(minecraftPlayer());
 	}
 
 	protected int entityHurtResistantTime(Object entity) {
@@ -7928,7 +7933,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityHurtResistantTime(int i) {
-		setEntityHurtResistantTime(minecraftThePlayer(), i);
+		setEntityHurtResistantTime(minecraftPlayer(), i);
 	}
 
 	protected void setEntityHurtResistantTime(Object entity, int i) {
@@ -7936,7 +7941,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected UUID entityGetUniqueID() {
-		return entityGetUniqueID(minecraftThePlayer());
+		return entityGetUniqueID(minecraftPlayer());
 	}
 
 	protected UUID entityGetUniqueID(Object entity) {
@@ -7945,7 +7950,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityLivingBaseGetHeldItem() {
-		return entityLivingBaseGetHeldItem(minecraftThePlayer());
+		return entityLivingBaseGetHeldItem(minecraftPlayer());
 	}
 
 	protected Object entityLivingBaseGetHeldItem(Object entityLivingBase) {
@@ -7957,7 +7962,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseGetHealth() {
-		return entityLivingBaseGetHealth(minecraftThePlayer());
+		return entityLivingBaseGetHealth(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseGetHealth(Object entity) {
@@ -7966,7 +7971,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseGetMaxHealth() {
-		return entityLivingBaseGetMaxHealth(minecraftThePlayer());
+		return entityLivingBaseGetMaxHealth(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseGetMaxHealth(Object entity) {
@@ -7975,7 +7980,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingBaseDamageEntity(Object damageSource, float f) {
-		entityLivingBaseDamageEntity(minecraftThePlayer(), damageSource, f);
+		entityLivingBaseDamageEntity(minecraftPlayer(), damageSource, f);
 	}
 
 	protected void entityLivingBaseDamageEntity(Object entity, Object damageSource, float f) {
@@ -7988,7 +7993,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingBaseHeal(float f) {
-		entityLivingBaseHeal(minecraftThePlayer(), f);
+		entityLivingBaseHeal(minecraftPlayer(), f);
 	}
 
 	protected void entityLivingBaseHeal(Object entityLivingBase, float f) {
@@ -7996,7 +8001,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingBaseSetRevengeTarget(Object entity) {
-		entityLivingBaseSetRevengeTarget(minecraftThePlayer(), entity);
+		entityLivingBaseSetRevengeTarget(minecraftPlayer(), entity);
 	}
 
 	protected void entityLivingBaseSetRevengeTarget(Object entity, Object entity2) {
@@ -8004,7 +8009,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseGetSwingProgress(float f) {
-		return entityLivingBaseGetSwingProgress(minecraftThePlayer(), f);
+		return entityLivingBaseGetSwingProgress(minecraftPlayer(), f);
 	}
 
 	protected float entityLivingBaseGetSwingProgress(Object entity, float f) {
@@ -8012,7 +8017,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseHealth() {
-		return entityLivingBaseHealth(minecraftThePlayer());
+		return entityLivingBaseHealth(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseHealth(Object entity) {
@@ -8024,7 +8029,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityLivingBaseIsJumping() {
-		return entityLivingBaseIsJumping(minecraftThePlayer());
+		return entityLivingBaseIsJumping(minecraftPlayer());
 	}
 
 	protected boolean entityLivingBaseIsJumping(Object entity) {
@@ -8032,7 +8037,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseLimbSwing() {
-		return entityLivingBaseLimbSwing(minecraftThePlayer());
+		return entityLivingBaseLimbSwing(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseLimbSwing(Object entity) {
@@ -8040,7 +8045,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseLimbSwing(float f) {
-		setEntityLivingBaseLimbSwing(minecraftThePlayer(), f);
+		setEntityLivingBaseLimbSwing(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBaseLimbSwing(Object entity, float f) {
@@ -8048,7 +8053,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseLimbSwingAmount() {
-		return entityLivingBaseLimbSwingAmount(minecraftThePlayer());
+		return entityLivingBaseLimbSwingAmount(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseLimbSwingAmount(Object entity) {
@@ -8056,7 +8061,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseLimbSwingAmount(float f) {
-		setEntityLivingBaseLimbSwingAmount(minecraftThePlayer(), f);
+		setEntityLivingBaseLimbSwingAmount(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBaseLimbSwingAmount(Object entity, float f) {
@@ -8064,7 +8069,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseMoveForward() {
-		return entityLivingBaseMoveForward(minecraftThePlayer());
+		return entityLivingBaseMoveForward(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseMoveForward(Object entityplayer) {
@@ -8072,7 +8077,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseMoveForward(float f) {
-		setEntityLivingBaseMoveForward(minecraftThePlayer(), f);
+		setEntityLivingBaseMoveForward(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBaseMoveForward(Object entityplayer, float f) {
@@ -8080,7 +8085,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseMoveStrafing() {
-		return entityLivingBaseMoveStrafing(minecraftThePlayer());
+		return entityLivingBaseMoveStrafing(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseMoveStrafing(Object entityplayer) {
@@ -8088,7 +8093,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseMoveStrafing(float f) {
-		setEntityLivingBaseMoveStrafing(minecraftThePlayer(), f);
+		setEntityLivingBaseMoveStrafing(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBaseMoveStrafing(Object entityplayer, float f) {
@@ -8096,7 +8101,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBasePrevLimbSwingAmount() {
-		return entityLivingBasePrevLimbSwingAmount(minecraftThePlayer());
+		return entityLivingBasePrevLimbSwingAmount(minecraftPlayer());
 	}
 
 	protected float entityLivingBasePrevLimbSwingAmount(Object entity) {
@@ -8104,7 +8109,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBasePrevLimbSwingAmount(float f) {
-		setEntityLivingBasePrevLimbSwingAmount(minecraftThePlayer(), f);
+		setEntityLivingBasePrevLimbSwingAmount(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBasePrevLimbSwingAmount(Object entity, float f) {
@@ -8112,7 +8117,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBasePrevRenderYawOffset() {
-		return entityLivingBasePrevRenderYawOffset(minecraftThePlayer());
+		return entityLivingBasePrevRenderYawOffset(minecraftPlayer());
 	}
 
 	protected float entityLivingBasePrevRenderYawOffset(Object entity) {
@@ -8120,7 +8125,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBasePrevRenderYawOffset(float f) {
-		setEntityLivingBasePrevRenderYawOffset(minecraftThePlayer(), f);
+		setEntityLivingBasePrevRenderYawOffset(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBasePrevRenderYawOffset(Object entity, float f) {
@@ -8128,7 +8133,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBasePrevRotationYawHead() {
-		return entityLivingBasePrevRotationYawHead(minecraftThePlayer());
+		return entityLivingBasePrevRotationYawHead(minecraftPlayer());
 	}
 
 	protected float entityLivingBasePrevRotationYawHead(Object entity) {
@@ -8136,7 +8141,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBasePrevRotationYawHead(float f) {
-		setEntityLivingBasePrevRotationYawHead(minecraftThePlayer(), f);
+		setEntityLivingBasePrevRotationYawHead(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBasePrevRotationYawHead(Object entity, float f) {
@@ -8144,7 +8149,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseRenderYawOffset() {
-		return entityLivingBaseRenderYawOffset(minecraftThePlayer());
+		return entityLivingBaseRenderYawOffset(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseRenderYawOffset(Object entity) {
@@ -8152,7 +8157,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseRenderYawOffset(float f) {
-		setEntityLivingBaseRenderYawOffset(minecraftThePlayer(), f);
+		setEntityLivingBaseRenderYawOffset(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBaseRenderYawOffset(Object entity, float f) {
@@ -8160,7 +8165,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseRotationYawHead() {
-		return entityLivingBaseRotationYawHead(minecraftThePlayer());
+		return entityLivingBaseRotationYawHead(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseRotationYawHead(Object entity) {
@@ -8168,7 +8173,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseRotationYawHead(float f) {
-		setEntityLivingBaseRotationYawHead(minecraftThePlayer(), f);
+		setEntityLivingBaseRotationYawHead(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBaseRotationYawHead(Object entity, float f) {
@@ -8176,7 +8181,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingBaseSetHealth(float f) {
-		entityLivingBaseSetHealth(minecraftThePlayer(), f);
+		entityLivingBaseSetHealth(minecraftPlayer(), f);
 	}
 
 	protected void entityLivingBaseSetHealth(Object entity, float f) {
@@ -8185,7 +8190,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityLivingGetHealth() {
-		return entityLivingGetHealth(minecraftThePlayer());
+		return entityLivingGetHealth(minecraftPlayer());
 	}
 
 	protected int entityLivingGetHealth(Object entity) {
@@ -8197,7 +8202,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityLivingGetMaxHealth() {
-		return entityLivingGetMaxHealth(minecraftThePlayer());
+		return entityLivingGetMaxHealth(minecraftPlayer());
 	}
 
 	protected int entityLivingGetMaxHealth(Object entity) {
@@ -8213,7 +8218,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityTameableSetOwner(Object entityTameable) {
-		entityTameableSetOwner(entityTameable, getUserName(minecraftThePlayer()));
+		entityTameableSetOwner(entityTameable, getUserName(minecraftPlayer()));
 	}
 
 	protected void entityTameableSetOwner(Object entityTameable, Object uUIDOrString) {
@@ -8227,7 +8232,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingSetHealth(int i) {
-		entityLivingSetHealth(minecraftThePlayer(), i);
+		entityLivingSetHealth(minecraftPlayer(), i);
 	}
 
 	protected void entityLivingSetHealth(Object entity, int i) {
@@ -8240,7 +8245,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityMotionX() {
-		return entityMotionX(minecraftThePlayer());
+		return entityMotionX(minecraftPlayer());
 	}
 
 	protected double entityMotionX(Object entity) {
@@ -8248,7 +8253,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityMotionY() {
-		return entityMotionY(minecraftThePlayer());
+		return entityMotionY(minecraftPlayer());
 	}
 
 	protected double entityMotionY(Object entity) {
@@ -8256,7 +8261,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityMotionZ() {
-		return entityMotionZ(minecraftThePlayer());
+		return entityMotionZ(minecraftPlayer());
 	}
 
 	protected double entityMotionZ(Object entity) {
@@ -8275,7 +8280,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityPlayerCameraYaw() {
-		return entityPlayerCameraYaw(minecraftThePlayer());
+		return entityPlayerCameraYaw(minecraftPlayer());
 	}
 
 	protected float entityPlayerCameraYaw(Object entity) {
@@ -8283,7 +8288,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityPlayerCurrentXP() {
-		return entityPlayerCurrentXP(minecraftThePlayer());
+		return entityPlayerCurrentXP(minecraftPlayer());
 	}
 
 	protected float entityPlayerCurrentXP(Object entityplayer) {
@@ -8291,7 +8296,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPlayerChasingPosZ() {
-		return entityPlayerChasingPosZ(minecraftThePlayer());
+		return entityPlayerChasingPosZ(minecraftPlayer());
 	}
 
 	protected double entityPlayerChasingPosZ(Object entityplayer) {
@@ -8299,7 +8304,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPlayerPrevChasingPosX() {
-		return entityPlayerPrevChasingPosX(minecraftThePlayer());
+		return entityPlayerPrevChasingPosX(minecraftPlayer());
 	}
 
 	protected double entityPlayerPrevChasingPosX(Object entityplayer) {
@@ -8307,7 +8312,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPlayerChasingPosX() {
-		return entityPlayerChasingPosX(minecraftThePlayer());
+		return entityPlayerChasingPosX(minecraftPlayer());
 	}
 
 	protected double entityPlayerChasingPosX(Object entityplayer) {
@@ -8315,7 +8320,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPlayerChasingPosY() {
-		return entityPlayerChasingPosY(minecraftThePlayer());
+		return entityPlayerChasingPosY(minecraftPlayer());
 	}
 
 	protected double entityPlayerChasingPosY(Object entityplayer) {
@@ -8323,7 +8328,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPlayerPrevChasingPosY() {
-		return entityPlayerPrevChasingPosY(minecraftThePlayer());
+		return entityPlayerPrevChasingPosY(minecraftPlayer());
 	}
 
 	protected double entityPlayerPrevChasingPosY(Object entityplayer) {
@@ -8331,7 +8336,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPlayerPrevChasingPosZ() {
-		return entityPlayerPrevChasingPosZ(minecraftThePlayer());
+		return entityPlayerPrevChasingPosZ(minecraftPlayer());
 	}
 
 	protected double entityPlayerPrevChasingPosZ(Object entityplayer) {
@@ -8339,7 +8344,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerFoodStats() {
-		return entityPlayerFoodStats(minecraftThePlayer());
+		return entityPlayerFoodStats(minecraftPlayer());
 	}
 
 	protected Object entityPlayerFoodStats(Object entityplayer) {
@@ -8347,7 +8352,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityplayerGetCurrentEquippedItem() {
-		return entityplayerGetCurrentEquippedItem(minecraftThePlayer());
+		return entityplayerGetCurrentEquippedItem(minecraftPlayer());
 	}
 
 	protected Object entityplayerGetCurrentEquippedItem(Object entityplayer) {
@@ -8355,7 +8360,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerGetFoodStats() {
-		return entityPlayerGetFoodStats(minecraftThePlayer());
+		return entityPlayerGetFoodStats(minecraftPlayer());
 	}
 
 	protected Object entityPlayerGetFoodStats(Object entityplayer) {
@@ -8363,7 +8368,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityPlayerGetHideCape() {
-		return entityPlayerGetHideCape(minecraftThePlayer());
+		return entityPlayerGetHideCape(minecraftPlayer());
 	}
 
 	protected boolean entityPlayerGetHideCape(Object entityplayer) {
@@ -8371,7 +8376,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityPlayerGetItemInUseCount() {
-		return entityPlayerGetItemInUseCount(minecraftThePlayer());
+		return entityPlayerGetItemInUseCount(minecraftPlayer());
 	}
 
 	protected int entityPlayerGetItemInUseCount(Object entityplayer) {
@@ -8379,7 +8384,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerInventory() {
-		return entityPlayerInventory(minecraftThePlayer());
+		return entityPlayerInventory(minecraftPlayer());
 	}
 
 	protected Object entityPlayerInventory(Object entityplayer) {
@@ -8387,7 +8392,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerInventoryGetCurrentItem() {
-		return entityPlayerInventoryGetCurrentItem(minecraftThePlayer());
+		return entityPlayerInventoryGetCurrentItem(minecraftPlayer());
 	}
 
 	protected Object entityPlayerInventoryGetCurrentItem(Object entityplayer) {
@@ -8396,7 +8401,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerInventoryCurrentItem() {
-		return entityPlayerInventoryCurrentItem(minecraftThePlayer());
+		return entityPlayerInventoryCurrentItem(minecraftPlayer());
 	}
 
 	protected int entityPlayerInventoryCurrentItem(Object entityplayer) {
@@ -8405,7 +8410,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerInventoryCurrentItem(int i) {
-		setEntityPlayerInventoryCurrentItem(minecraftThePlayer(), i);
+		setEntityPlayerInventoryCurrentItem(minecraftPlayer(), i);
 	}
 
 	protected void setEntityPlayerInventoryCurrentItem(Object entityplayer, int i) {
@@ -8414,7 +8419,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerInventoryGetStackInSlot(int i) {
-		return entityPlayerInventoryGetStackInSlot(minecraftThePlayer(), i);
+		return entityPlayerInventoryGetStackInSlot(minecraftPlayer(), i);
 	}
 
 	protected Object entityPlayerInventoryGetStackInSlot(Object entityplayer, int i) {
@@ -8422,7 +8427,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerInventoryPlayerArmorItemInSlot(int i) {
-		return entityPlayerInventoryPlayerArmorItemInSlot(minecraftThePlayer(), i);
+		return entityPlayerInventoryPlayerArmorItemInSlot(minecraftPlayer(), i);
 	}
 
 	protected Object entityPlayerInventoryPlayerArmorItemInSlot(Object entityplayerORInventory, int i) {
@@ -8437,7 +8442,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityPlayerIsPlayerSleeping() {
-		return entityPlayerIsPlayerSleeping(minecraftThePlayer());
+		return entityPlayerIsPlayerSleeping(minecraftPlayer());
 	}
 
 	protected boolean entityPlayerIsPlayerSleeping(Object entityplayer) {
@@ -8445,7 +8450,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityPlayerCapabilitiesIsCreativeMode() {
-		return entityPlayerCapabilitiesIsCreativeMode(minecraftThePlayer());
+		return entityPlayerCapabilitiesIsCreativeMode(minecraftPlayer());
 	}
 
 	protected boolean entityPlayerCapabilitiesIsCreativeMode(Object entityplayer) {
@@ -8454,7 +8459,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerCapabilitiesIsCreativeMode(boolean b) {
-		setEntityPlayerCapabilitiesIsCreativeMode(minecraftThePlayer(), b);
+		setEntityPlayerCapabilitiesIsCreativeMode(minecraftPlayer(), b);
 	}
 
 	protected void setEntityPlayerCapabilitiesIsCreativeMode(Object entityplayer, boolean b) {
@@ -8463,7 +8468,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerMainInventory() {
-		return entityPlayerMainInventory(minecraftThePlayer());
+		return entityPlayerMainInventory(minecraftPlayer());
 	}
 
 	protected Object entityPlayerMainInventory(Object entityplayerORInventory) {
@@ -8478,7 +8483,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityClientPlayerMPSendQueue() {
-		return entityClientPlayerMPSendQueue(minecraftThePlayer());
+		return entityClientPlayerMPSendQueue(minecraftPlayer());
 	}
 
 	protected Object entityClientPlayerMPSendQueue(Object entityClientPlayerMP) {
@@ -8486,7 +8491,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingBaseSwingItem() {
-		entityLivingBaseSwingItem(minecraftThePlayer());
+		entityLivingBaseSwingItem(minecraftPlayer());
 	}
 
 	protected void entityLivingBaseSwingItem(Object entityLivingBase) {
@@ -8498,7 +8503,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityPlayerPlayerLevel() {
-		return entityPlayerPlayerLevel(minecraftThePlayer());
+		return entityPlayerPlayerLevel(minecraftPlayer());
 	}
 
 	protected int entityPlayerPlayerLevel(Object entityplayer) {
@@ -8507,7 +8512,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityPlayerPrevCameraYaw() {
-		return entityPlayerPrevCameraYaw(minecraftThePlayer());
+		return entityPlayerPrevCameraYaw(minecraftPlayer());
 	}
 
 	protected float entityPlayerPrevCameraYaw(Object entity) {
@@ -8515,7 +8520,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityPlayerScore() {
-		return entityPlayerScore(minecraftThePlayer());
+		return entityPlayerScore(minecraftPlayer());
 	}
 
 	protected int entityPlayerScore(Object entityplayer) {
@@ -8523,7 +8528,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityPlayerSPFunc_6420_o() {
-		entityPlayerSPFunc_6420_o(minecraftThePlayer());
+		entityPlayerSPFunc_6420_o(minecraftPlayer());
 	}
 
 	protected void entityPlayerSPFunc_6420_o(Object entityplayer) {
@@ -8531,7 +8536,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityPlayerTotalXP() {
-		return entityPlayerTotalXP(minecraftThePlayer());
+		return entityPlayerTotalXP(minecraftPlayer());
 	}
 
 	protected int entityPlayerTotalXP(Object entityplayer) {
@@ -8539,7 +8544,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityPlayerSetItemInUse(Object itemstack, int i) {
-		entityPlayerSetItemInUse(minecraftThePlayer(), itemstack, i);
+		entityPlayerSetItemInUse(minecraftPlayer(), itemstack, i);
 	}
 
 	protected void entityPlayerSetItemInUse(Object entityplayer, Object itemstack, int i) {
@@ -8547,7 +8552,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityPlayerDestroyCurrentEquippedItem() {
-		entityPlayerDestroyCurrentEquippedItem(minecraftThePlayer());
+		entityPlayerDestroyCurrentEquippedItem(minecraftPlayer());
 	}
 
 	protected void entityPlayerDestroyCurrentEquippedItem(Object entityplayer) {
@@ -8555,7 +8560,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityPlayerCanPlayerEdit(int x, int y, int z, int i, Object itemStack) {
-		return entityPlayerCanPlayerEdit(minecraftThePlayer(), x, y, z, i, itemStack);
+		return entityPlayerCanPlayerEdit(minecraftPlayer(), x, y, z, i, itemStack);
 	}
 
 	protected boolean entityPlayerCanPlayerEdit(Object entityplayer, int x, int y, int z, int i, Object itemStack) {
@@ -8566,7 +8571,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerMPPlayerNetServerHandler() {
-		return entityPlayerMPPlayerNetServerHandler(minecraftThePlayer());
+		return entityPlayerMPPlayerNetServerHandler(minecraftPlayer());
 	}
 
 	protected Object entityPlayerMPPlayerNetServerHandler(Object entityplayerMP) {
@@ -8574,7 +8579,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerMPPlayerNetServerHandler(Object netServerHandler) {
-		setEntityPlayerMPPlayerNetServerHandler(minecraftThePlayer(), netServerHandler);
+		setEntityPlayerMPPlayerNetServerHandler(minecraftPlayer(), netServerHandler);
 	}
 
 	protected void setEntityPlayerMPPlayerNetServerHandler(Object entityplayerMP, Object netServerHandler) {
@@ -8582,7 +8587,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerFishEntity() {
-		return entityPlayerFishEntity(minecraftThePlayer());
+		return entityPlayerFishEntity(minecraftPlayer());
 	}
 
 	protected Object entityPlayerFishEntity(Object entityplayer) {
@@ -8590,7 +8595,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerFishEntity(Object entityFishHook) {
-		setEntityPlayerFishEntity(minecraftThePlayer(), entityFishHook);
+		setEntityPlayerFishEntity(minecraftPlayer(), entityFishHook);
 	}
 
 	protected void setEntityPlayerFishEntity(Object entityplayer, Object entityFishHook) {
@@ -8606,7 +8611,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPosX() {
-		return entityPosX(minecraftThePlayer());
+		return entityPosX(minecraftPlayer());
 	}
 
 	protected double entityPosX(Object entity) {
@@ -8614,7 +8619,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPosY() {
-		return entityPosY(minecraftThePlayer());
+		return entityPosY(minecraftPlayer());
 	}
 
 	protected double entityPosY(Object entity) {
@@ -8622,7 +8627,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPosZ() {
-		return entityPosZ(minecraftThePlayer());
+		return entityPosZ(minecraftPlayer());
 	}
 
 	protected double entityPosZ(Object entity) {
@@ -8630,7 +8635,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityPrevDistanceWalkedModified() {
-		return entityPrevDistanceWalkedModified(minecraftThePlayer());
+		return entityPrevDistanceWalkedModified(minecraftPlayer());
 	}
 
 	protected float entityPrevDistanceWalkedModified(Object entity) {
@@ -8638,7 +8643,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPrevPosX() {
-		return entityPrevPosX(minecraftThePlayer());
+		return entityPrevPosX(minecraftPlayer());
 	}
 
 	protected double entityPrevPosX(Object entity) {
@@ -8646,7 +8651,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPrevPosX(double d) {
-		setEntityPrevPosX(minecraftThePlayer(), d);
+		setEntityPrevPosX(minecraftPlayer(), d);
 	}
 
 	protected void setEntityPrevPosX(Object entity, double d) {
@@ -8654,7 +8659,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPrevPosY() {
-		return entityPrevPosY(minecraftThePlayer());
+		return entityPrevPosY(minecraftPlayer());
 	}
 
 	protected double entityPrevPosY(Object entity) {
@@ -8662,7 +8667,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPrevPosY(double d) {
-		setEntityPrevPosY(minecraftThePlayer(), d);
+		setEntityPrevPosY(minecraftPlayer(), d);
 	}
 
 	protected void setEntityPrevPosY(Object entity, double d) {
@@ -8670,7 +8675,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double entityPrevPosZ() {
-		return entityPrevPosZ(minecraftThePlayer());
+		return entityPrevPosZ(minecraftPlayer());
 	}
 
 	protected double entityPrevPosZ(Object entity) {
@@ -8678,7 +8683,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPrevPosZ(double d) {
-		setEntityPrevPosZ(minecraftThePlayer(), d);
+		setEntityPrevPosZ(minecraftPlayer(), d);
 	}
 
 	protected void setEntityPrevPosZ(Object entity, double d) {
@@ -8686,7 +8691,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityPrevRotationPitch() {
-		return entityPrevRotationPitch(minecraftThePlayer());
+		return entityPrevRotationPitch(minecraftPlayer());
 	}
 
 	protected float entityPrevRotationPitch(Object entity) {
@@ -8694,7 +8699,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPrevRotationPitch(float f) {
-		setEntityPrevRotationPitch(minecraftThePlayer(), f);
+		setEntityPrevRotationPitch(minecraftPlayer(), f);
 	}
 
 	protected void setEntityPrevRotationPitch(Object entity, float f) {
@@ -8702,7 +8707,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityPrevRotationYaw() {
-		return entityPrevRotationYaw(minecraftThePlayer());
+		return entityPrevRotationYaw(minecraftPlayer());
 	}
 
 	protected float entityPrevRotationYaw(Object entity) {
@@ -8710,7 +8715,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPrevRotationYaw(float f) {
-		setEntityPrevRotationYaw(minecraftThePlayer(), f);
+		setEntityPrevRotationYaw(minecraftPlayer(), f);
 	}
 
 	protected void setEntityPrevRotationYaw(Object entity, float f) {
@@ -8718,7 +8723,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityRidingEntity() {
-		return entityRidingEntity(minecraftThePlayer());
+		return entityRidingEntity(minecraftPlayer());
 	}
 
 	protected Object entityRidingEntity(Object entity) {
@@ -8726,7 +8731,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityGetBoundingBox() {
-		return entityGetCollisionBoundingBox(minecraftThePlayer());
+		return entityGetCollisionBoundingBox(minecraftPlayer());
 	}
 
 	protected Object entityGetCollisionBoundingBox(Object entity) {
@@ -8734,7 +8739,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityCanBeCollidedWith() {
-		return entityCanBeCollidedWith(minecraftThePlayer());
+		return entityCanBeCollidedWith(minecraftPlayer());
 	}
 
 	protected boolean entityCanBeCollidedWith(Object entity) {
@@ -8742,7 +8747,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityGetCollisionBorderSize() {
-		return entityGetCollisionBorderSize(minecraftThePlayer());
+		return entityGetCollisionBorderSize(minecraftPlayer());
 	}
 
 	protected float entityGetCollisionBorderSize(Object entity) {
@@ -8750,7 +8755,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityRidingEntity(Object entity) {
-		setEntityRidingEntity(minecraftThePlayer(), entity);
+		setEntityRidingEntity(minecraftPlayer(), entity);
 	}
 
 	protected void setEntityRidingEntity(Object entity, Object entity2) {
@@ -8758,7 +8763,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityRiddenByEntity() {
-		return entityRiddenByEntity(minecraftThePlayer());
+		return entityRiddenByEntity(minecraftPlayer());
 	}
 
 	protected Object entityRiddenByEntity(Object entity) {
@@ -8766,7 +8771,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityRiddenByEntity(Object entity) {
-		setEntityRiddenByEntity(minecraftThePlayer(), entity);
+		setEntityRiddenByEntity(minecraftPlayer(), entity);
 	}
 
 	protected void setEntityRiddenByEntity(Object entity, Object entity2) {
@@ -8779,7 +8784,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityIsDead() {
-		return entityIsDead(minecraftThePlayer());
+		return entityIsDead(minecraftPlayer());
 	}
 
 	protected boolean entityIsDead(Object entity) {
@@ -8801,7 +8806,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityIsDead(boolean b) {
-		setEntityIsDead(minecraftThePlayer(), b);
+		setEntityIsDead(minecraftPlayer(), b);
 	}
 
 	protected void setEntityIsDead(Object entity, boolean b) {
@@ -8809,7 +8814,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityRotationPitch() {
-		return entityRotationPitch(minecraftThePlayer());
+		return entityRotationPitch(minecraftPlayer());
 	}
 
 	protected float entityRotationPitch(Object entity) {
@@ -8817,7 +8822,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityRotationPitch(float f) {
-		setEntityRotationPitch(minecraftThePlayer(), f);
+		setEntityRotationPitch(minecraftPlayer(), f);
 	}
 
 	protected void setEntityRotationPitch(Object entity, float f) {
@@ -8825,7 +8830,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityRotationYaw() {
-		return entityRotationYaw(minecraftThePlayer());
+		return entityRotationYaw(minecraftPlayer());
 	}
 
 	protected float entityRotationYaw(Object entity) {
@@ -8833,7 +8838,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityRotationYaw(float f) {
-		setEntityRotationYaw(minecraftThePlayer(), f);
+		setEntityRotationYaw(minecraftPlayer(), f);
 	}
 
 	protected void setEntityRotationYaw(Object entity, float f) {
@@ -8841,7 +8846,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entitySetDead() {
-		entitySetDead(minecraftThePlayer());
+		entitySetDead(minecraftPlayer());
 	}
 
 	protected void entitySetDead(Object entity) {
@@ -8849,7 +8854,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entitySetFire(int i) {
-		entitySetFire(minecraftThePlayer(), i);
+		entitySetFire(minecraftPlayer(), i);
 	}
 
 	protected void entitySetFire(Object entity, int i) {
@@ -8857,7 +8862,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entitySetPosition(double x, double y, double z) {
-		entitySetPosition(minecraftThePlayer(), x, y, z);
+		entitySetPosition(minecraftPlayer(), x, y, z);
 	}
 
 	protected void entitySetPosition(Object entity, double x, double y, double z) {
@@ -8865,7 +8870,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entitySetVelocity(double x, double y, double z) {
-		entitySetVelocity(minecraftThePlayer(), x, y, z);
+		entitySetVelocity(minecraftPlayer(), x, y, z);
 	}
 
 	protected void entitySetVelocity(Object entity, double x, double y, double z) {
@@ -8873,7 +8878,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entitySetSneaking(boolean b) {
-		entitySetSneaking(minecraftThePlayer(), b);
+		entitySetSneaking(minecraftPlayer(), b);
 	}
 
 	protected void entitySetSneaking(Object entity, boolean b) {
@@ -8881,7 +8886,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entitySetSize(float f1, float f2) {
-		entitySetSize(minecraftThePlayer(), f1, f2);
+		entitySetSize(minecraftPlayer(), f1, f2);
 	}
 
 	protected void entitySetSize(Object entity, float f1, float f2) {
@@ -8889,7 +8894,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityPlaySound(Object soundEventOrString, float f1, float f2) {
-		entityPlaySound(minecraftThePlayer(), soundEventOrString, f1, f2);
+		entityPlaySound(minecraftPlayer(), soundEventOrString, f1, f2);
 	}
 
 	protected void entityPlaySound(Object entity, Object soundEventOrString, float f1, float f2) {
@@ -8898,7 +8903,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityTicksExisted() {
-		return entityTicksExisted(minecraftThePlayer());
+		return entityTicksExisted(minecraftPlayer());
 	}
 
 	protected int entityTicksExisted(Object entity) {
@@ -8906,7 +8911,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityTicksExisted(int i) {
-		setEntityTicksExisted(minecraftThePlayer(), i);
+		setEntityTicksExisted(minecraftPlayer(), i);
 	}
 
 	protected void setEntityTicksExisted(Object entity, int i) {
@@ -8914,7 +8919,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityLivingBaseAttackTime() {
-		return entityLivingBaseAttackTime(minecraftThePlayer());
+		return entityLivingBaseAttackTime(minecraftPlayer());
 	}
 
 	protected int entityLivingBaseAttackTime(Object entity) {
@@ -8922,7 +8927,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseAttackTime(int i) {
-		setEntityLivingBaseAttackTime(minecraftThePlayer(), i);
+		setEntityLivingBaseAttackTime(minecraftPlayer(), i);
 	}
 
 	protected void setEntityLivingBaseAttackTime(Object entity, int i) {
@@ -8930,7 +8935,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityLivingGetNavigator() {
-		return entityLivingGetNavigator(minecraftThePlayer());
+		return entityLivingGetNavigator(minecraftPlayer());
 	}
 
 	protected Object entityLivingGetNavigator(Object entityLivingOrPathNavigate) {
@@ -8938,7 +8943,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingNavigatorClearPathEntity() {
-		entityLivingNavigatorClearPathEntity(minecraftThePlayer());
+		entityLivingNavigatorClearPathEntity(minecraftPlayer());
 	}
 
 	protected void entityLivingNavigatorClearPathEntity(Object entityLivingOrPathNavigate) {
@@ -8951,7 +8956,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityLivingBaseIsPotionActive(Object potionOrPotionId) {
-		return entityLivingBaseIsPotionActive(minecraftThePlayer(), potionOrPotionId);
+		return entityLivingBaseIsPotionActive(minecraftPlayer(), potionOrPotionId);
 	}
 
 	protected boolean entityLivingBaseIsPotionActive(Object entityLivingBase, Object potionOrPotionId) {
@@ -8959,7 +8964,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityOnGround() {
-		return entityOnGround(minecraftThePlayer());
+		return entityOnGround(minecraftPlayer());
 	}
 
 	protected boolean entityOnGround(Object entity) {
@@ -8967,7 +8972,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingBaseSetBeenAttacked() {
-		entityLivingBaseSetBeenAttacked(minecraftThePlayer());
+		entityLivingBaseSetBeenAttacked(minecraftPlayer());
 	}
 
 	protected void entityLivingBaseSetBeenAttacked(Object entityLivingBase) {
@@ -8975,7 +8980,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingBaseOnDeath(Object damageSource) {
-		entityLivingBaseOnDeath(minecraftThePlayer(), damageSource);
+		entityLivingBaseOnDeath(minecraftPlayer(), damageSource);
 	}
 
 	protected void entityLivingBaseOnDeath(Object entityLivingBase, Object damageSource) {
@@ -8991,7 +8996,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityLivingBaseHurtTime() {
-		return entityLivingBaseHurtTime(minecraftThePlayer());
+		return entityLivingBaseHurtTime(minecraftPlayer());
 	}
 
 	protected int entityLivingBaseHurtTime(Object entityLivingBase) {
@@ -8999,7 +9004,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseHurtTime(int i) {
-		setEntityLivingBaseHurtTime(minecraftThePlayer(), i);
+		setEntityLivingBaseHurtTime(minecraftPlayer(), i);
 	}
 
 	protected void setEntityLivingBaseHurtTime(Object entityLivingBase, int i) {
@@ -9007,7 +9012,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int entityLivingBaseMaxHurtTime() {
-		return entityLivingBaseMaxHurtTime(minecraftThePlayer());
+		return entityLivingBaseMaxHurtTime(minecraftPlayer());
 	}
 
 	protected int entityLivingBaseMaxHurtTime(Object entityLivingBase) {
@@ -9015,7 +9020,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseMaxHurtTime(int i) {
-		setEntityLivingBaseMaxHurtTime(minecraftThePlayer(), i);
+		setEntityLivingBaseMaxHurtTime(minecraftPlayer(), i);
 	}
 
 	protected void setEntityLivingBaseMaxHurtTime(Object entityLivingBase, int i) {
@@ -9023,7 +9028,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBaseAttackedAtYaw() {
-		return entityLivingBaseAttackedAtYaw(minecraftThePlayer());
+		return entityLivingBaseAttackedAtYaw(minecraftPlayer());
 	}
 
 	protected float entityLivingBaseAttackedAtYaw(Object entityLivingBase) {
@@ -9031,7 +9036,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseAttackedAtYaw(float f) {
-		setEntityLivingBaseAttackedAtYaw(minecraftThePlayer(), f);
+		setEntityLivingBaseAttackedAtYaw(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBaseAttackedAtYaw(Object entityLivingBase, float f) {
@@ -9039,7 +9044,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityLivingBasePrevHealth() {
-		return entityLivingBasePrevHealth(minecraftThePlayer());
+		return entityLivingBasePrevHealth(minecraftPlayer());
 	}
 
 	protected float entityLivingBasePrevHealth(Object entityLivingBase) {
@@ -9047,7 +9052,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBasePrevHealth(float f) {
-		setEntityLivingBasePrevHealth(minecraftThePlayer(), f);
+		setEntityLivingBasePrevHealth(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBasePrevHealth(Object entityLivingBase, float f) {
@@ -9055,7 +9060,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean entityLivingBaseIsChild() {
-		return entityLivingBaseIsChild(minecraftThePlayer());
+		return entityLivingBaseIsChild(minecraftPlayer());
 	}
 
 	protected boolean entityLivingBaseIsChild(Object entityLivingBase) {
@@ -9063,7 +9068,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void entityLivingBaseKnockBack(Object entityLivingBase, float f, double d, double d1) {
-		entityLivingBaseKnockBack(minecraftThePlayer(), entityLivingBase, f, d, d1);
+		entityLivingBaseKnockBack(minecraftPlayer(), entityLivingBase, f, d, d1);
 	}
 
 	protected void entityLivingBaseKnockBack(Object entityLivingBase, Object entityLivingBase2, float f, double d, double d1) {
@@ -9071,7 +9076,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityLivingBaseGetAITarget() {
-		return entityLivingBaseGetAITarget(minecraftThePlayer());
+		return entityLivingBaseGetAITarget(minecraftPlayer());
 	}
 
 	protected Object entityLivingBaseGetAITarget(Object entityLivingBase) {
@@ -9087,23 +9092,24 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected float entityWidth() {
-		return entityWidth(minecraftThePlayer());
+		return entityWidth(minecraftPlayer());
 	}
 
 	protected float entityWidth(Object entity) {
 		return Modchu_CastHelper.Float(Modchu_Reflect.getFieldObject("Entity", "field_70130_N", "width", entity));
 	}
 
-	protected Object entityWorldObj() {
-		return entityWorldObj(minecraftThePlayer());
+	protected Object entityWorld() {
+		return entityWorld(minecraftPlayer());
 	}
 
-	protected Object entityWorldObj(Object worldOrEntity) {
-		return Modchu_Reflect.loadClass("World").isInstance(worldOrEntity) ? worldOrEntity : Modchu_Reflect.getFieldObject("Entity", "field_70170_p", "worldObj", worldOrEntity);
+	protected Object entityWorld(Object worldOrEntity) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_Reflect.loadClass("World").isInstance(worldOrEntity) ? worldOrEntity : Modchu_Reflect.getFieldObject("Entity", "field_70170_p", version > 210 ? "world" : "worldObj", worldOrEntity);
 	}
 
 	protected float entityYOffset() {
-		return entityYOffset(minecraftThePlayer());
+		return entityYOffset(minecraftPlayer());
 	}
 
 	protected float entityYOffset(Object entity) {
@@ -9511,7 +9517,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected String getUserName() {
-		return getUserName(minecraftThePlayer());
+		return getUserName(minecraftPlayer());
 	}
 
 	protected String getUserName(Object entityplayer) {
@@ -9889,7 +9895,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected Object itemSetTextureName(Object item, String s) {
 		int version = Modchu_Main.getMinecraftVersion();
-		return Modchu_Reflect.invokeMethod("Item", version > 159 ? "func_111206_d" : "func_77655_b", version > 159 ? version == 162 ? "func_111206_d" : "setTextureName" : "setUnlocalizedName", new Class[]{ String.class }, item, new Object[]{ s });
+		return Modchu_Reflect.invokeMethod("Item", version > 159 ? "func_111206_d" : "func_77655_b", version > 159 ? version == 162 && !Modchu_Main.isForge ? "func_111206_d" : "setTextureName" : "setUnlocalizedName", new Class[]{ String.class }, item, new Object[]{ s });
 	}
 
 	protected Object itemSetUnlocalizedName(Object item, String s) {
@@ -9902,7 +9908,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected String itemIconString(Object item) {
 		int version = Modchu_Main.getMinecraftVersion();
-		return version > 159 ? Modchu_CastHelper.String(Modchu_Reflect.getFieldObject("Item", "field_111218_cA", version > 162 ? "iconString" : "field_111218_cA", item)) : Modchu_Main.lastIndexProcessing(itemGetUnlocalizedName(item), "item.");
+		return version > 159 ? Modchu_CastHelper.String(Modchu_Reflect.getFieldObject("Item", "field_111218_cA", version > 162 | Modchu_Main.isForge ? "iconString" : "field_111218_cA", item)) : Modchu_Main.lastIndexProcessing(itemGetUnlocalizedName(item), "item.");
 	}
 
 	protected void setItemIconString(Object item, String s) {
@@ -10104,7 +10110,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int blockDoublePlantGetMixedBrightnessForBlock(Object blockDoublePlant, int x, int y, int z) {
-		return blockDoublePlantGetMixedBrightnessForBlock(blockDoublePlant, minecraftTheWorld(), x, y, z);
+		return blockDoublePlantGetMixedBrightnessForBlock(blockDoublePlant, minecraftWorld(), x, y, z);
 	}
 
 	protected int blockDoublePlantGetMixedBrightnessForBlock(Object blockDoublePlant, Object iBlockAccess, int x, int y, int z) {
@@ -10112,7 +10118,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int blockDoublePlantColorMultiplier(Object blockDoublePlant, int x, int y, int z) {
-		return blockDoublePlantColorMultiplier(blockDoublePlant, minecraftTheWorld(), x, y, z);
+		return blockDoublePlantColorMultiplier(blockDoublePlant, minecraftWorld(), x, y, z);
 	}
 
 	protected int blockDoublePlantColorMultiplier(Object blockDoublePlant, Object world, int x, int y, int z) {
@@ -10233,20 +10239,39 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Float(Modchu_Reflect.invokeMethod("MathHelper", "func_76134_b", "cos", new Class[]{ float.class }, null, new Object[]{ f }));
 	}
 
-	protected int mathHelperFloor_double(double d) {
+	protected int mathHelperFloor(double d) {
 		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("MathHelper", "func_76128_c", "floor_double", new Class[]{ double.class }, null, new Object[]{ d }));
 	}
 
-	protected float mathHelperFloor_float(float f) {
-		return Modchu_CastHelper.Float(Modchu_Reflect.invokeMethod("MathHelper", "func_76141_d", "floor_float", new Class[]{ float.class }, null, new Object[]{ f }));
+	protected Object mathHelperFloor(Object o) {
+		if (o instanceof Float) {
+			float f = (Float) o;
+			return mathHelperFloor(f);
+		}
+		if (o instanceof Double) {
+			double d = (Double) o;
+			return mathHelperFloor(d);
+		}
+		return null;
+	}
+
+	protected float mathHelperDouble(double d) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Float(Modchu_Reflect.invokeMethod("MathHelper", "func_76128_c", version > 210 ? "floor" : "floor_double", new Class[]{ double.class }, null, new Object[]{ d }));
+	}
+
+	protected float mathHelperFloor(float f) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Float(Modchu_Reflect.invokeMethod("MathHelper", version > 210 ? "func_76128_c" : "func_76141_d", version > 210 ? "floor" : "floor_float", new Class[]{ float.class }, null, new Object[]{ f }));
 	}
 
 	protected float mathHelperWrapAngleTo180_float(float f) {
 		return Modchu_CastHelper.Float(Modchu_Reflect.invokeMethod("MathHelper", "func_76142_g", "wrapAngleTo180_float", new Class[]{ float.class }, null, new Object[]{ f }));
 	}
 
-	protected long mathHelperFloor_double_long(double d) {
-		return Modchu_CastHelper.Long(Modchu_Reflect.invokeMethod("MathHelper", "func_76124_d", "floor_double_long", new Class[]{ double.class }, null, new Object[]{ d }));
+	protected long mathHelperLfloor(double d) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Long(Modchu_Reflect.invokeMethod("MathHelper", "func_76124_d", version > 210 ? "lfloor" : "floor_double_long", new Class[]{ double.class }, null, new Object[]{ d }));
 	}
 
 	protected float mathHelperAbs(float f) {
@@ -10254,11 +10279,56 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected double mathHelperAbs_max(double d, double d1) {
-		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("MathHelper", "func_76132_a", "abs_max", new Class[]{ double.class, double.class }, null, new Object[]{ d, d1 }));
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("MathHelper", "func_76132_a", version > 210 ? "absMax" : "abs_max", new Class[]{ double.class, double.class }, null, new Object[]{ d, d1 }));
 	}
 
-	protected int mathHelperBucketInt(int i, int j) {
-		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("MathHelper", "func_76137_a", "bucketInt", new Class[]{ int.class, int.class }, null, new Object[]{ i, j }));
+	protected int mathHelperIntFloorDiv(int i, int j) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("MathHelper", "func_76137_a", version > 210 ? "intFloorDiv" : "bucketInt", new Class[]{ int.class, int.class }, null, new Object[]{ i, j }));
+	}
+
+	protected Object mathHelperClamp(Object o, Object o1, Object o2) {
+		if (o instanceof Float
+				&& o1 instanceof Float
+				&& o2 instanceof Float) {
+			float f = (Float) o;
+			float f1 = (Float) o1;
+			float f2 = (Float) o2;
+			return mathHelperClamp(f, f1, f2);
+		}
+		if (o instanceof Double
+					&& o1 instanceof Double
+					&& o2 instanceof Double) {
+			double d = (Double) o;
+			double d1 = (Double) o1;
+			double d2 = (Double) o2;
+			return mathHelperClamp(d, d1, d2);
+		}
+		if (o instanceof Integer
+						&& o1 instanceof Integer
+						&& o2 instanceof Integer) {
+			int i = (Integer) o;
+			int i1 = (Integer) o1;
+			int i2 = (Integer) o2;
+			return mathHelperClamp(i, i1, i2);
+		}
+		return null;
+	}
+
+	protected double mathHelperClamp(double d, double d1, double d2) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Float(Modchu_Reflect.invokeMethod("MathHelper", "func_151237_a", version > 210 ? "clamp" : "clamp_double", new Class[]{ double.class, double.class, double.class }, null, new Object[]{ d, d1, d2 }));
+	}
+
+	protected float mathHelperClamp(float f, float f1, float f2) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Float(Modchu_Reflect.invokeMethod("MathHelper", "func_76131_a", version > 210 ? "clamp" : "clamp_float", new Class[]{ float.class, float.class, float.class }, null, new Object[]{ f, f1, f2 }));
+	}
+
+	protected int mathHelperClamp(int i, int j, int k) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("MathHelper", "func_76125_a", version > 210 ? "clamp" : "clamp_int", new Class[]{ int.class, int.class, int.class }, null, new Object[]{ i, j, k }));
 	}
 
 	protected boolean mathHelperStringNullOrLengthZero(String s) {
@@ -10269,12 +10339,26 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_CastHelper.Float(Modchu_Reflect.invokeMethod("MathHelper", "func_76126_a", "sin", new Class[]{ float.class }, null, new Object[]{ f }));
 	}
 
-	protected float mathHelperSqrt_float(float f) {
-		return Modchu_CastHelper.Float(Modchu_Reflect.invokeMethod("MathHelper", "func_76129_c", "sqrt_float", new Class[]{ float.class }, null, new Object[]{ f }));
+	protected Object mathHelperSqrt(Object o) {
+		if (o instanceof Float) {
+			float f = (Float) o;
+			return mathHelperSqrt(f);
+		}
+		if (o instanceof Double) {
+			double d = (Double) o;
+			return mathHelperSqrt(d);
+		}
+		return 0.0F;
 	}
 
-	protected double mathHelperSqrt_double(double d) {
-		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("MathHelper", "func_76133_a", "sqrt_double", new Class[]{ double.class }, null, new Object[]{ d }));
+	protected float mathHelperSqrt(float f) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Float(Modchu_Reflect.invokeMethod("MathHelper", "func_76129_c", version > 210 ? "sqrt" : "sqrt_float", new Class[]{ float.class }, null, new Object[]{ f }));
+	}
+
+	protected double mathHelperSqrt(double d) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Double(Modchu_Reflect.invokeMethod("MathHelper", "func_76133_a", version > 210 ? "sqrt" : "sqrt_double", new Class[]{ double.class }, null, new Object[]{ d }));
 	}
 
 	protected Object minecraftCurrentScreen() {
@@ -10490,7 +10574,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected void minecraftSetDimensionAndSpawnPlayer() {
 		if (Modchu_Main.isServer) return;
-		Object thePlayer = minecraftThePlayer();
+		Object thePlayer = minecraftPlayer();
 		minecraftSetDimensionAndSpawnPlayer(Modchu_CastHelper.Int(Modchu_Reflect.getFieldObject("Entity", "field_71093_bK", "dimension", thePlayer)));
 	}
 
@@ -10509,7 +10593,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_Reflect.getFieldObject("Minecraft", "field_71446_o", "renderEngine", minecraftGetMinecraft());
 	}
 
-	protected Object minecraftThePlayer() {
+	protected Object minecraftPlayer() {
 		if (Modchu_Main.isServer) return null;
 /*
 		Modchu_Debug.Debug("getThePlayer mc="+(mc != null));
@@ -10521,7 +10605,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_Reflect.getFieldObject("Minecraft", "field_71439_g", "thePlayer", minecraftGetMinecraft());
 	}
 
-	protected Object minecraftTheWorld() {
+	protected Object minecraftWorld() {
 		if (Modchu_Main.isServer) return null;
 		return Modchu_Reflect.getFieldObject("Minecraft", "field_71441_e", "theWorld", minecraftGetMinecraft());
 	}
@@ -11219,12 +11303,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	protected void playerControllerMPSetPlayerCapabilities() {
 		if (Modchu_Main.isServer) return;
 		Object playerController = minecraftPlayerController();
-		playerControllerMPSetPlayerCapabilities(playerController, minecraftThePlayer());
+		playerControllerMPSetPlayerCapabilities(playerController, minecraftPlayer());
 	}
 
 	protected void playerControllerMPSetPlayerCapabilities(Object playerController) {
 		if (Modchu_Main.isServer) return;
-		playerControllerMPSetPlayerCapabilities(playerController, minecraftThePlayer());
+		playerControllerMPSetPlayerCapabilities(playerController, minecraftPlayer());
 	}
 
 	protected void playerControllerMPSetPlayerCapabilities(Object playerController, Object entityplayer) {
@@ -11235,12 +11319,12 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected void playerControllerFunc_6473_b() {
 		if (Modchu_Main.isServer) return;
-		playerControllerFunc_6473_b(minecraftPlayerController(), minecraftThePlayer());
+		playerControllerFunc_6473_b(minecraftPlayerController(), minecraftPlayer());
 	}
 
 	protected void playerControllerFunc_6473_b(Object playerController) {
 		if (Modchu_Main.isServer) return;
-		playerControllerFunc_6473_b(playerController, minecraftThePlayer());
+		playerControllerFunc_6473_b(playerController, minecraftPlayer());
 	}
 
 	protected void playerControllerFunc_6473_b(Object playerController, Object entityplayer) {
@@ -11255,17 +11339,17 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected Object playerControllerMPCreatePlayer(Object playerController) {
 		if (Modchu_Main.isServer) return null;
-		return Modchu_Reflect.invokeMethod("PlayerControllerMP", "func_4087_b", "createPlayer", new Class[]{ Modchu_Reflect.loadClass("World") }, playerController, new Object[]{ minecraftTheWorld() });
+		return Modchu_Reflect.invokeMethod("PlayerControllerMP", "func_4087_b", "createPlayer", new Class[]{ Modchu_Reflect.loadClass("World") }, playerController, new Object[]{ minecraftWorld() });
 	}
 
 	protected void playerControllerMPFlipPlayer() {
 		if (Modchu_Main.isServer) return;
-		playerControllerMPFlipPlayer(minecraftPlayerController(), minecraftThePlayer());
+		playerControllerMPFlipPlayer(minecraftPlayerController(), minecraftPlayer());
 	}
 
 	protected void playerControllerMPFlipPlayer(Object playerController) {
 		if (Modchu_Main.isServer) return;
-		playerControllerMPFlipPlayer(playerController, minecraftThePlayer());
+		playerControllerMPFlipPlayer(playerController, minecraftPlayer());
 	}
 
 	protected void playerControllerMPFlipPlayer(Object playerController, Object entityplayer) {
@@ -11377,7 +11461,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void rendererLivingEntityPassSpecialRender(Object rendererLivingEntity, double d, double d1, double d2) {
-		rendererLivingEntityPassSpecialRender(rendererLivingEntity, minecraftThePlayer(), d, d1, d2);
+		rendererLivingEntityPassSpecialRender(rendererLivingEntity, minecraftPlayer(), d, d1, d2);
 	}
 
 	protected void rendererLivingEntityPassSpecialRender(Object rendererLivingEntity, Object entity, double d, double d1, double d2) {
@@ -11441,7 +11525,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object renderManagerGetEntityRenderObject() {
-		return renderManagerGetEntityRenderObject(minecraftThePlayer());
+		return renderManagerGetEntityRenderObject(minecraftPlayer());
 	}
 
 	protected Object renderManagerGetEntityRenderObject(Object entity) {
@@ -11528,7 +11612,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityEntityID(int i) {
-		setEntityEntityID(minecraftThePlayer(), i);
+		setEntityEntityID(minecraftPlayer(), i);
 	}
 
 	protected void setEntityEntityID(Object entity, int i) {
@@ -11536,7 +11620,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityFoodStats(Object entityGetFoodStats) {
-		setEntityFoodStats(minecraftThePlayer(), entityGetFoodStats);
+		setEntityFoodStats(minecraftPlayer(), entityGetFoodStats);
 	}
 
 	protected void setEntityFoodStats(Object entityplayer, Object entityGetFoodStats) {
@@ -11544,7 +11628,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseDeathTime(int i) {
-		setEntityLivingBaseDeathTime(minecraftThePlayer(), i);
+		setEntityLivingBaseDeathTime(minecraftPlayer(), i);
 	}
 
 	protected void setEntityLivingBaseDeathTime(Object entityLivingBase, int i) {
@@ -11552,7 +11636,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseHealth(float f) {
-		setEntityLivingBaseHealth(minecraftThePlayer(), f);
+		setEntityLivingBaseHealth(minecraftPlayer(), f);
 	}
 
 	protected void setEntityLivingBaseHealth(Object entity, float f) {
@@ -11560,7 +11644,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityMotionX(double d) {
-		setEntityMotionX(minecraftThePlayer(), d);
+		setEntityMotionX(minecraftPlayer(), d);
 	}
 
 	protected void setEntityMotionX(Object entity, double d) {
@@ -11568,7 +11652,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityMotionY(double d) {
-		setEntityMotionY(minecraftThePlayer(), d);
+		setEntityMotionY(minecraftPlayer(), d);
 	}
 
 	protected void setEntityMotionY(Object entity, double d) {
@@ -11576,7 +11660,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityMotionZ(double d) {
-		setEntityMotionZ(minecraftThePlayer(), d);
+		setEntityMotionZ(minecraftPlayer(), d);
 	}
 
 	protected void setEntityMotionZ(Object entity, double d) {
@@ -11584,7 +11668,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerArmorInventory(Object armorInventory) {
-		setEntityPlayerArmorInventory(minecraftThePlayer(), armorInventory);
+		setEntityPlayerArmorInventory(minecraftPlayer(), armorInventory);
 	}
 
 	protected void setEntityPlayerArmorInventory(Object entityplayer, Object armorInventory) {
@@ -11592,7 +11676,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerCurrentXP(int i) {
-		setEntityPlayerPlayerLevel(minecraftThePlayer(), i);
+		setEntityPlayerPlayerLevel(minecraftPlayer(), i);
 	}
 
 	protected void setEntityPlayerCurrentXP(Object entityplayer, float f) {
@@ -11600,7 +11684,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerInventory(Object inventory) {
-		setEntityPlayerInventory(minecraftThePlayer(), inventory);
+		setEntityPlayerInventory(minecraftPlayer(), inventory);
 	}
 
 	protected void setEntityPlayerInventory(Object entityplayer, Object inventory) {
@@ -11608,7 +11692,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerMainInventory(Object mainInventory) {
-		setEntityPlayerMainInventory(minecraftThePlayer(), mainInventory);
+		setEntityPlayerMainInventory(minecraftPlayer(), mainInventory);
 	}
 
 	protected void setEntityPlayerMainInventory(Object entityplayer, Object mainInventory) {
@@ -11616,7 +11700,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerPlayerLevel(int i) {
-		setEntityPlayerPlayerLevel(minecraftThePlayer(), i);
+		setEntityPlayerPlayerLevel(minecraftPlayer(), i);
 	}
 
 	protected void setEntityPlayerPlayerLevel(Object entityplayer, int i) {
@@ -11625,7 +11709,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerScore(int i) {
-		setEntityPlayerScore(minecraftThePlayer(), i);
+		setEntityPlayerScore(minecraftPlayer(), i);
 	}
 
 	protected void setEntityPlayerScore(Object entityplayer, int i) {
@@ -11633,13 +11717,13 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerSPMovementInput() {
-		Object thePlayer = minecraftThePlayer();
+		Object thePlayer = minecraftPlayer();
 		Object gameSettings = minecraftGameSettings();
 		setEntityPlayerSPMovementInput(thePlayer, Modchu_Reflect.newInstance("MovementInputFromOptions", new Class[]{ gameSettings.getClass() }, new Object[]{ gameSettings }));
 	}
 
 	protected void setEntityPlayerSPMovementInput(Object movementInput) {
-		setEntityPlayerSPMovementInput(minecraftThePlayer(), movementInput);
+		setEntityPlayerSPMovementInput(minecraftPlayer(), movementInput);
 	}
 
 	protected void setEntityPlayerSPMovementInput(Object entityplayer, Object movementInput) {
@@ -11647,7 +11731,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPlayerTotalXP(int i) {
-		setEntityPlayerPlayerLevel(minecraftThePlayer(), i);
+		setEntityPlayerPlayerLevel(minecraftPlayer(), i);
 	}
 
 	protected void setEntityPlayerTotalXP(Object entityplayer, int i) {
@@ -11655,7 +11739,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPosX(double d) {
-		setEntityPosX(minecraftThePlayer(), d);
+		setEntityPosX(minecraftPlayer(), d);
 	}
 
 	protected void setEntityPosX(Object entity, double d) {
@@ -11663,7 +11747,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPosY(double d) {
-		setEntityPosY(minecraftThePlayer(), d);
+		setEntityPosY(minecraftPlayer(), d);
 	}
 
 	protected void setEntityPosY(Object entity, double d) {
@@ -11671,7 +11755,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityPosZ(double d) {
-		setEntityPosZ(minecraftThePlayer(), d);
+		setEntityPosZ(minecraftPlayer(), d);
 	}
 
 	protected void setEntityPosZ(Object entity, double d) {
@@ -11683,7 +11767,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityYOffset(float f) {
-		setEntityYOffset(minecraftThePlayer(), f);
+		setEntityYOffset(minecraftPlayer(), f);
 	}
 
 	protected void setEntityYOffset(Object entity, float f) {
@@ -11756,14 +11840,14 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setMinecraftRenderViewEntity() {
-		setMinecraftRenderViewEntity(minecraftThePlayer());
+		setMinecraftRenderViewEntity(minecraftPlayer());
 	}
 
 	protected void setMinecraftRenderViewEntity(Object entity) {
 		Modchu_Reflect.setFieldObject("Minecraft", "field_71451_h", "renderViewEntity", minecraftGetMinecraft(), new Object[]{ entity });
 	}
 
-	protected void setMinecraftThePlayer(Object entityPlayer) {
+	protected void setMinecraftPlayer(Object entityPlayer) {
 		if (Modchu_Main.isServer) return;
 		Modchu_Reflect.setFieldObject("Minecraft", "field_71439_g", "thePlayer", minecraftGetMinecraft(), entityPlayer);
 	}
@@ -12014,31 +12098,31 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean worldCanBlockSeeTheSky(double d, double d2, double d3) {
-		return worldCanBlockSeeTheSky(minecraftThePlayer(), d, d2, d3);
+		return worldCanBlockSeeTheSky(minecraftPlayer(), d, d2, d3);
 	}
 
 	protected boolean worldCanBlockSeeTheSky(int i, int i2, int i3) {
-		return worldCanBlockSeeTheSky(minecraftThePlayer(), i, i2, i3);
+		return worldCanBlockSeeTheSky(minecraftPlayer(), i, i2, i3);
 	}
 
 	protected boolean worldCanBlockSeeTheSky(Object worldOrEntity, double d, double d2, double d3) {
-		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_72937_j", "canBlockSeeTheSky", new Class[]{ int.class, int.class, int.class }, entityWorldObj(worldOrEntity), new Object[]{ (int) d, (int) d2, (int) d3 }));
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_72937_j", "canBlockSeeTheSky", new Class[]{ int.class, int.class, int.class }, entityWorld(worldOrEntity), new Object[]{ (int) d, (int) d2, (int) d3 }));
 	}
 
 	protected boolean worldCanBlockSeeTheSky(Object worldOrEntity, int i, int i2, int i3) {
-		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_72937_j", "canBlockSeeTheSky", new Class[]{ int.class, int.class, int.class }, entityWorldObj(worldOrEntity), new Object[]{ (int) i, (int) i2, (int) i3 }));
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_72937_j", "canBlockSeeTheSky", new Class[]{ int.class, int.class, int.class }, entityWorld(worldOrEntity), new Object[]{ (int) i, (int) i2, (int) i3 }));
 	}
 
 	protected List worldGetEntitiesWithinAABBExcludingEntity(Object entity, Object axisAlignedBB) {
-		return worldGetEntitiesWithinAABBExcludingEntity(minecraftTheWorld(), entity, axisAlignedBB);
+		return worldGetEntitiesWithinAABBExcludingEntity(minecraftWorld(), entity, axisAlignedBB);
 	}
 
 	protected List worldGetEntitiesWithinAABBExcludingEntity(Object worldOrEntity, Object entity, Object axisAlignedBB) {
-		return Modchu_CastHelper.List(Modchu_Reflect.invokeMethod("World", "func_72839_b", "getEntitiesWithinAABBExcludingEntity", new Class[]{ Modchu_Reflect.loadClass("Entity"), Modchu_Reflect.loadClass("AxisAlignedBB") }, entityWorldObj(worldOrEntity), new Object[]{ entity, axisAlignedBB }));
+		return Modchu_CastHelper.List(Modchu_Reflect.invokeMethod("World", "func_72839_b", "getEntitiesWithinAABBExcludingEntity", new Class[]{ Modchu_Reflect.loadClass("Entity"), Modchu_Reflect.loadClass("AxisAlignedBB") }, entityWorld(worldOrEntity), new Object[]{ entity, axisAlignedBB }));
 	}
 
 	protected Object worldGetWorldInfo() {
-		return Modchu_Reflect.invokeMethod(minecraftTheWorld().getClass(), "func_72912_H", "getWorldInfo", minecraftTheWorld());
+		return Modchu_Reflect.invokeMethod(minecraftWorld().getClass(), "func_72912_H", "getWorldInfo", minecraftWorld());
 	}
 
 	protected Object worldGetWorldInfo(Object world) {
@@ -12050,7 +12134,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object worldGetBlock(int i, int i2, int i3) {
-		return worldGetBlock(minecraftTheWorld(), i, i2, i3);
+		return worldGetBlock(minecraftWorld(), i, i2, i3);
 	}
 
 	protected Object worldGetBlock(Object world, int i, int i2, int i3) {
@@ -12079,41 +12163,41 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected boolean worldIsAirBlock(int i, int j, int k) {
-		return worldIsAirBlock(minecraftThePlayer(), i, j, k);
+		return worldIsAirBlock(minecraftPlayer(), i, j, k);
 	}
 
 	protected boolean worldIsAirBlock(Object worldOrEntity, int i, int j, int k) {
-		Object worldObj = entityWorldObj(worldOrEntity);
+		Object worldObj = entityWorld(worldOrEntity);
 		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", Modchu_Main.getMinecraftVersion() > 169 ? "func_147437_c" : "func_72799_c", "isAirBlock", new Class[]{ int.class, int.class, int.class }, worldObj, new Object[]{ i, j, k }));
 	}
 
 	protected boolean worldIsBlockNormalCubeDefault(int i, int j, int k, boolean b) {
-		return worldIsBlockNormalCubeDefault(minecraftThePlayer(), i, j, k, b);
+		return worldIsBlockNormalCubeDefault(minecraftPlayer(), i, j, k, b);
 	}
 
 	protected boolean worldIsBlockNormalCubeDefault(Object worldOrEntity, int i, int j, int k, boolean b) {
-		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_72887_b", "isBlockNormalCubeDefault", new Class[]{ int.class, int.class, int.class, boolean.class }, entityWorldObj(worldOrEntity), new Object[]{ i, j, k, b }));
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_72887_b", "isBlockNormalCubeDefault", new Class[]{ int.class, int.class, int.class, boolean.class }, entityWorld(worldOrEntity), new Object[]{ i, j, k, b }));
 	}
 
 	protected boolean worldIsDaytime() {
-		return worldIsDaytime(minecraftThePlayer());
+		return worldIsDaytime(minecraftPlayer());
 	}
 
 	protected boolean worldIsDaytime(Object worldOrEntity) {
-		Object worldObj = entityWorldObj(worldOrEntity);
+		Object worldObj = entityWorld(worldOrEntity);
 		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_72935_r", "isDaytime", worldObj));
 	}
 
 	protected boolean worldIsRemote() {
-		return worldIsRemote(minecraftThePlayer());
+		return worldIsRemote(minecraftPlayer());
 	}
 
 	protected boolean worldIsRemote(Object worldOrEntity) {
-		return Modchu_CastHelper.Boolean(Modchu_Reflect.getFieldObject("World", "field_72995_K", "isRemote", entityWorldObj(worldOrEntity)));
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.getFieldObject("World", "field_72995_K", "isRemote", entityWorld(worldOrEntity)));
 	}
 
 	protected long worldInfoGetWorldTotalTime() {
-		return worldInfoGetWorldTotalTime(worldGetWorldInfo(minecraftTheWorld()));
+		return worldInfoGetWorldTotalTime(worldGetWorldInfo(minecraftWorld()));
 	}
 
 	protected long worldInfoGetWorldTotalTime(Object entityOrWorldInfo) {
@@ -12121,7 +12205,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected long worldInfoGetWorldTime() {
-		return worldInfoGetWorldTime(worldGetWorldInfo(minecraftTheWorld()));
+		return worldInfoGetWorldTime(worldGetWorldInfo(minecraftWorld()));
 	}
 
 	protected long worldInfoGetWorldTime(Object entityOrWorldInfo) {
@@ -12129,29 +12213,29 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected int worldGetMoonPhase() {
-		return worldGetMoonPhase(minecraftTheWorld());
+		return worldGetMoonPhase(minecraftWorld());
 	}
 
 	protected int worldGetMoonPhase(Object entityOrWorld) {
-		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_72853_d", "GetMoonPhase", entityWorldObj(entityOrWorld)));
+		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_72853_d", "GetMoonPhase", entityWorld(entityOrWorld)));
 	}
 
 	protected Object getWorldInfo(Object entityOrWorldOrWorldInfo) {
 		if (Modchu_Reflect.loadClass("WorldInfo").isInstance(entityOrWorldOrWorldInfo)) return entityOrWorldOrWorldInfo;
 		if (Modchu_Reflect.loadClass("World").isInstance(entityOrWorldOrWorldInfo)) return worldGetWorldInfo(entityOrWorldOrWorldInfo);
-		if (Modchu_Reflect.loadClass("Entity").isInstance(entityOrWorldOrWorldInfo)) return worldGetWorldInfo(entityWorldObj(entityOrWorldOrWorldInfo));
+		if (Modchu_Reflect.loadClass("Entity").isInstance(entityOrWorldOrWorldInfo)) return worldGetWorldInfo(entityWorld(entityOrWorldOrWorldInfo));
 		return null;
 	}
 
 	protected List playerEntities() {
-		return playerEntities(minecraftTheWorld());
+		return playerEntities(minecraftWorld());
 	}
 
 	protected List playerEntities(Object worldOrEntity) {
 		Object minecraftServerInstance = null;
 		List list = null;
 		if (Modchu_Main.getMinecraftVersion() < 170) 	{
-			Object world = entityWorldObj(worldOrEntity);
+			Object world = entityWorld(worldOrEntity);
 			if (!Modchu_Main.isServer) {
 				list = Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("World", "field_73010_i", "playerEntities", world));
 			} else {
@@ -12181,7 +12265,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 				//Modchu_Debug.Debug("Modchu_ASAlmighty playerEntities getPlayerList="+getPlayerList);
 				if (getPlayerList != null) {
 					//Modchu_Debug.Debug("Modchu_ASAlmighty playerEntities getPlayerList="+getPlayerList);
-					list = Modchu_CastHelper.List(Modchu_Reflect.invokeMethod(getPlayerList.getClass(), "func_181057_v", "getPlayerList", getPlayerList));
+					int version = Modchu_Main.getMinecraftVersion();
+					list = Modchu_CastHelper.List(Modchu_Reflect.invokeMethod(getPlayerList.getClass(), "func_181057_v", version > 210 ? "getPlayers" : "getPlayerList", getPlayerList));
 					//Modchu_Debug.Debug("Modchu_ASAlmighty playerEntities getPlayerList return. list="+list);
 				}
 			}
@@ -12192,23 +12277,23 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected List worldPlayerEntities() {
-		return worldPlayerEntities(minecraftTheWorld());
+		return worldPlayerEntities(minecraftWorld());
 	}
 
 	protected List worldPlayerEntities(Object worldOrEntity) {
-		return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("World", "field_73010_i", "playerEntities", entityWorldObj(worldOrEntity)));
+		return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("World", "field_73010_i", "playerEntities", entityWorld(worldOrEntity)));
 	}
 
 	protected List worldWeatherEffects() {
-		return worldWeatherEffects(minecraftTheWorld());
+		return worldWeatherEffects(minecraftWorld());
 	}
 
 	protected List worldWeatherEffects(Object worldOrEntity) {
-		return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("World", "field_73007_j", "weatherEffects", entityWorldObj(worldOrEntity)));
+		return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("World", "field_73007_j", "weatherEffects", entityWorld(worldOrEntity)));
 	}
 
 	protected void worldSetEntityDead() {
-		worldSetEntityDead(minecraftThePlayer());
+		worldSetEntityDead(minecraftPlayer());
 	}
 
 	protected void worldSetEntityDead(Object entity) {
@@ -12216,11 +12301,11 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void worldSetEntityDead(Object worldOrEntity, Object entity) {
-		Modchu_Reflect.invokeMethod("World", "func_607_d", "setEntityDead", new Class[]{ Modchu_Reflect.loadClass("Entity") }, entityWorldObj(worldOrEntity), new Object[]{ entity });
+		Modchu_Reflect.invokeMethod("World", "func_607_d", "setEntityDead", new Class[]{ Modchu_Reflect.loadClass("Entity") }, entityWorld(worldOrEntity), new Object[]{ entity });
 	}
 
 	protected void worldSpawnPlayerWithLoadedChunks() {
-		worldSpawnPlayerWithLoadedChunks(minecraftThePlayer());
+		worldSpawnPlayerWithLoadedChunks(minecraftPlayer());
 	}
 
 	protected void worldSpawnPlayerWithLoadedChunks(Object entity) {
@@ -12228,23 +12313,23 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Random worldRand() {
-		return worldRand(minecraftTheWorld());
+		return worldRand(minecraftWorld());
 	}
 
 	protected Random worldRand(Object worldOrEntity) {
-		return (Random) (Modchu_Reflect.getFieldObject("World", "field_73012_v", "rand", entityWorldObj(worldOrEntity)));
+		return (Random) (Modchu_Reflect.getFieldObject("World", "field_73012_v", "rand", entityWorld(worldOrEntity)));
 	}
 
 	protected void worldSpawnPlayerWithLoadedChunks(Object worldOrEntity, Object entity) {
-		Modchu_Reflect.invokeMethod("World", "func_608_a", "spawnPlayerWithLoadedChunks", new Class[]{ Modchu_Reflect.loadClass("EntityPlayer") }, entityWorldObj(worldOrEntity), new Object[]{ entity });
+		Modchu_Reflect.invokeMethod("World", "func_608_a", "spawnPlayerWithLoadedChunks", new Class[]{ Modchu_Reflect.loadClass("EntityPlayer") }, entityWorld(worldOrEntity), new Object[]{ entity });
 	}
 
 	protected void worldSpawnParticle(Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
-		worldSpawnParticle(minecraftTheWorld(), stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5);
+		worldSpawnParticle(minecraftWorld(), stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5);
 	}
 
 	protected void worldSpawnParticle(Object worldOrEntity, Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
-		Modchu_Reflect.invokeMethod("World", "func_72869_a", "spawnParticle", new Class[]{ String.class, double.class, double.class, double.class, double.class, double.class, double.class }, entityWorldObj(worldOrEntity), new Object[]{ stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5 });
+		Modchu_Reflect.invokeMethod("World", "func_72869_a", "spawnParticle", new Class[]{ String.class, double.class, double.class, double.class, double.class, double.class, double.class }, entityWorld(worldOrEntity), new Object[]{ stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5 });
 	}
 
 	protected void worldPlaySoundAtEntity(Object entity, Object soundEventOrString, float f, float f1) {
@@ -12252,18 +12337,18 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, Object soundEventOrString, float f, float f1) {
-		Modchu_Reflect.invokeMethod("World", "func_72956_a", "playSoundAtEntity", new Class[]{ Modchu_Reflect.loadClass("Entity"), String.class, float.class, float.class }, entityWorldObj(worldOrEntity), new Object[]{ entity, soundEventOrString, f, f1 });
+		Modchu_Reflect.invokeMethod("World", "func_72956_a", "playSoundAtEntity", new Class[]{ Modchu_Reflect.loadClass("Entity"), String.class, float.class, float.class }, entityWorld(worldOrEntity), new Object[]{ entity, soundEventOrString, f, f1 });
 	}
 
 	protected void worldPlaySoundAtEntity(Object worldOrEntity, Object entityPlayer, double x, double y, double z, Object soundEvent, Object soundCategory, float f, float f1) {
-		Modchu_Reflect.invokeMethod("World", "func_72956_a", "playSoundAtEntity", new Class[]{ Modchu_Reflect.loadClass("EntityPlayer"), double.class, double.class, double.class, Modchu_Reflect.loadClass("SoundEvent"), Modchu_Reflect.loadClass("SoundCategory"), float.class, float.class }, entityWorldObj(worldOrEntity), new Object[]{ entityPlayer, x, y, z, soundEvent, soundCategory, f, f1 });
+		Modchu_Reflect.invokeMethod("World", "func_72956_a", "playSoundAtEntity", new Class[]{ Modchu_Reflect.loadClass("EntityPlayer"), double.class, double.class, double.class, Modchu_Reflect.loadClass("SoundEvent"), Modchu_Reflect.loadClass("SoundCategory"), float.class, float.class }, entityWorld(worldOrEntity), new Object[]{ entityPlayer, x, y, z, soundEvent, soundCategory, f, f1 });
 	}
 
 	protected boolean worldIsBlockModifiable(Object worldOrEntity, Object entityPlayer, int x, int y, int z) {
 		if (Modchu_Main.getMinecraftVersion() > 179) {
-			return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_175660_a", "isBlockModifiable", new Class[]{ Modchu_Reflect.loadClass("EntityPlayer"), Modchu_Reflect.loadClass("BlockPos") }, entityWorldObj(worldOrEntity), new Object[]{ entityPlayer, Modchu_Reflect.newInstance("net.minecraft.util.BlockPos", new Class[]{ int.class, int.class, int.class  }, new Object[]{ x, y, z }) }));
+			return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_175660_a", "isBlockModifiable", new Class[]{ Modchu_Reflect.loadClass("EntityPlayer"), Modchu_Reflect.loadClass("BlockPos") }, entityWorld(worldOrEntity), new Object[]{ entityPlayer, Modchu_Reflect.newInstance("net.minecraft.util.BlockPos", new Class[]{ int.class, int.class, int.class  }, new Object[]{ x, y, z }) }));
 		}
-		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_72962_a", "canMineBlock", new Class[]{ Modchu_Reflect.loadClass("Entity"), int.class, int.class, int.class }, entityWorldObj(worldOrEntity), new Object[]{ entityPlayer, x, y, z }));
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_72962_a", "canMineBlock", new Class[]{ Modchu_Reflect.loadClass("Entity"), int.class, int.class, int.class }, entityWorld(worldOrEntity), new Object[]{ entityPlayer, x, y, z }));
 	}
 
 	protected void worldSetEntityState(Object entity, byte by) {
@@ -12271,7 +12356,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void worldSetEntityState(Object worldOrEntity, Object entity, byte by) {
-		Modchu_Reflect.invokeMethod("World", "func_72960_a", "setEntityState", new Class[]{ Modchu_Reflect.loadClass("Entity"), byte.class }, entityWorldObj(worldOrEntity), new Object[]{ entity, by });
+		Modchu_Reflect.invokeMethod("World", "func_72960_a", "setEntityState", new Class[]{ Modchu_Reflect.loadClass("Entity"), byte.class }, entityWorld(worldOrEntity), new Object[]{ entity, by });
 	}
 
 	protected Object worldGetPathEntityToEntity(Object entity, Object entity2, float f, boolean b, boolean b1, boolean b2, boolean b3) {
@@ -12279,19 +12364,19 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object worldGetPathEntityToEntity(Object worldOrEntity, Object entity, Object entity2, float f, boolean b, boolean b1, boolean b2, boolean b3) {
-		return Modchu_Reflect.invokeMethod("World", "func_72865_a", "getPathEntityToEntity", new Class[]{ Modchu_Reflect.loadClass("Entity"), Modchu_Reflect.loadClass("Entity"), float.class, boolean.class, boolean.class, boolean.class, boolean.class }, entityWorldObj(worldOrEntity), new Object[]{ entity, entity2, f, b, b1, b2, b3 });
+		return Modchu_Reflect.invokeMethod("World", "func_72865_a", "getPathEntityToEntity", new Class[]{ Modchu_Reflect.loadClass("Entity"), Modchu_Reflect.loadClass("Entity"), float.class, boolean.class, boolean.class, boolean.class, boolean.class }, entityWorld(worldOrEntity), new Object[]{ entity, entity2, f, b, b1, b2, b3 });
 	}
 
 	protected List worldGetEntitiesWithinAABB(Object worldOrEntity, Class c, Object axisAlignedBB) {
-		return Modchu_CastHelper.List(Modchu_Reflect.invokeMethod("World", "func_72872_a", "getEntitiesWithinAABB", new Class[]{ Class.class, Modchu_Reflect.loadClass("AxisAlignedBB") }, entityWorldObj(worldOrEntity), new Object[]{ c, axisAlignedBB }));
+		return Modchu_CastHelper.List(Modchu_Reflect.invokeMethod("World", "func_72872_a", "getEntitiesWithinAABB", new Class[]{ Class.class, Modchu_Reflect.loadClass("AxisAlignedBB") }, entityWorld(worldOrEntity), new Object[]{ c, axisAlignedBB }));
 	}
 
 	protected List worldLoadedEntityList() {
-		return worldLoadedEntityList(minecraftTheWorld());
+		return worldLoadedEntityList(minecraftWorld());
 	}
 
 	protected List worldLoadedEntityList(Object worldOrEntity) {
-		return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("World", "field_72996_f", "loadedEntityList", entityWorldObj(worldOrEntity)));
+		return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("World", "field_72996_f", "loadedEntityList", entityWorld(worldOrEntity)));
 	}
 
 	protected Object worldGetClosestPlayerToEntity(Object entity, double d) {
@@ -12299,55 +12384,57 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object worldGetClosestPlayerToEntity(Object worldOrEntity, Object entity, double d) {
-		return Modchu_Reflect.invokeMethod("World", "func_72890_a", "getClosestPlayerToEntity", new Class[]{ Modchu_Reflect.loadClass("Entity"), double.class }, entityWorldObj(worldOrEntity), new Object[]{ entity, d });
+		return Modchu_Reflect.invokeMethod("World", "func_72890_a", "getClosestPlayerToEntity", new Class[]{ Modchu_Reflect.loadClass("Entity"), double.class }, entityWorld(worldOrEntity), new Object[]{ entity, d });
 	}
 
 	protected Object worldGetPlayerEntityByName(String s) {
-		return worldGetPlayerEntityByName(minecraftThePlayer(), s);
+		return worldGetPlayerEntityByName(minecraftPlayer(), s);
 	}
 
 	protected Object worldGetPlayerEntityByName(Object worldOrEntity, String s) {
-		return Modchu_Reflect.invokeMethod("World", "func_72924_a", "getPlayerEntityByName", new Class[]{ String.class }, entityWorldObj(worldOrEntity), new Object[]{ s });
+		return Modchu_Reflect.invokeMethod("World", "func_72924_a", "getPlayerEntityByName", new Class[]{ String.class }, entityWorld(worldOrEntity), new Object[]{ s });
 	}
 
 	protected Object worldGetBiomeGenForCoords(Object blockPosOrInt) {
-		return worldGetBiomeGenForCoords(minecraftTheWorld(), blockPosOrInt);
+		return worldGetBiomeGenForCoords(minecraftWorld(), blockPosOrInt);
 	}
 
 	protected Object worldGetBiomeGenForCoords(Object worldOrInt, Object blockPosOrInt) {
 		if (Modchu_Reflect.loadClass("World").isInstance(worldOrInt)
 				&& Modchu_Reflect.loadClass("BlockPos").isInstance(blockPosOrInt)) {
-			return Modchu_Reflect.invokeMethod("World", "func_180494_b", "getBiomeGenForCoords", new Class[]{ Modchu_Reflect.loadClass("BlockPos") }, entityWorldObj(worldOrInt), new Object[]{ blockPosOrInt });
+			int version = Modchu_Main.getMinecraftVersion();
+			return Modchu_Reflect.invokeMethod("World", "func_180494_b", version > 199 ? "getBiome" : "getBiomeGenForCoords", new Class[]{ Modchu_Reflect.loadClass("BlockPos") }, entityWorld(worldOrInt), new Object[]{ blockPosOrInt });
 		}
 		return worldGetBiomeGenForCoords((Integer) worldOrInt, (Integer) blockPosOrInt);
 	}
 
 	protected Object worldGetBiomeGenForCoords(int i, int i1) {
-		return worldGetBiomeGenForCoords(minecraftThePlayer(), i, i1);
+		return worldGetBiomeGenForCoords(minecraftPlayer(), i, i1);
 	}
 
 	protected Object worldGetBiomeGenForCoords(Object worldOrEntity, int i, int i1) {
-		return Modchu_Reflect.invokeMethod("World", "func_72807_a", "getBiomeGenForCoords", new Class[]{ int.class, int.class }, entityWorldObj(worldOrEntity), new Object[]{ i, i1 });
+		return Modchu_Reflect.invokeMethod("World", "func_72807_a", "getBiomeGenForCoords", new Class[]{ int.class, int.class }, entityWorld(worldOrEntity), new Object[]{ i, i1 });
 	}
 
-	protected boolean worldSpawnEntityInWorld(Object entity) {
-		return worldSpawnEntityInWorld(minecraftThePlayer(), entity);
+	protected boolean worldSpawnEntity(Object entity) {
+		return worldSpawnEntity(minecraftPlayer(), entity);
 	}
 
-	protected boolean worldSpawnEntityInWorld(Object worldOrEntity, Object entity) {
-		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_72838_d", "spawnEntityInWorld", new Class[]{ Modchu_Reflect.loadClass("Entity") }, entityWorldObj(worldOrEntity), new Object[]{ entity }));
+	protected boolean worldSpawnEntity(Object worldOrEntity, Object entity) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod("World", "func_72838_d", version > 210 ? "spawnEntity" : "spawnEntityInWorld", new Class[]{ Modchu_Reflect.loadClass("Entity") }, entityWorld(worldOrEntity), new Object[]{ entity }));
 	}
 
 	protected void worldClientAddEntityToWorld(int i, Object entity) {
-		worldClientAddEntityToWorld(minecraftTheWorld(), i, entity);
+		worldClientAddEntityToWorld(minecraftWorld(), i, entity);
 	}
 
 	protected void worldClientAddEntityToWorld(Object worldClient, int i, Object entity) {
-		Modchu_Reflect.invokeMethod("WorldClient", "func_73027_a", "addEntityToWorld", new Class[]{ int.class, Modchu_Reflect.loadClass("Entity") }, entityWorldObj(worldClient), new Object[]{ i, entity });
+		Modchu_Reflect.invokeMethod("WorldClient", "func_73027_a", "addEntityToWorld", new Class[]{ int.class, Modchu_Reflect.loadClass("Entity") }, entityWorld(worldClient), new Object[]{ i, entity });
 	}
 
 	protected int worldGetBlockStateGetBlockMetadata(int x, int y, int z) {
-		return worldGetBlockStateGetBlockMetadata(minecraftTheWorld(), x, y, z);
+		return worldGetBlockStateGetBlockMetadata(minecraftWorld(), x, y, z);
 	}
 
 	protected int worldGetBlockStateGetBlockMetadata(Object worldOrEntity, int x, int y, int z) {
@@ -12357,11 +12444,11 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			if (block != null); else return 0;
 			return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("Block", "func_176201_c", "getMetaFromState", new Class[]{ iBlockState.getClass() }, block, new Object[]{ iBlockState }));
 		}
-		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_72805_g", "getBlockMetadata", new Class[]{ int.class, int.class, int.class }, entityWorldObj(worldOrEntity), new Object[]{ x, y, z }));
+		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_72805_g", "getBlockMetadata", new Class[]{ int.class, int.class, int.class }, entityWorld(worldOrEntity), new Object[]{ x, y, z }));
 	}
 
 	protected int worldGetBlockLightValue(int x, int y, int z) {
-		return worldGetBlockLightValue(minecraftTheWorld(), x, y, z);
+		return worldGetBlockLightValue(minecraftWorld(), x, y, z);
 	}
 
 	protected int worldGetBlockLightValue(Object worldOrEntity, int x, int y, int z) {
@@ -12371,16 +12458,16 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			if (block != null); else return 0;
 			return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("Block", "func_149750_m", "getLightValue", block));
 		}
-		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_72957_l", "getBlockLightValue", new Class[]{ int.class, int.class, int.class }, entityWorldObj(worldOrEntity), new Object[]{ x, y, z }));
+		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_72957_l", "getBlockLightValue", new Class[]{ int.class, int.class, int.class }, entityWorld(worldOrEntity), new Object[]{ x, y, z }));
 	}
 
 	protected int worldGetStrongPower(int x, int y, int z) {
-		return worldGetStrongPower(minecraftTheWorld(), x, y, z);
+		return worldGetStrongPower(minecraftWorld(), x, y, z);
 	}
 
 	protected int worldGetStrongPower(Object worldOrEntity, int x, int y, int z) {
-		if (Modchu_Main.getMinecraftVersion() > 179) return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_175627_a", "getStrongPower", new Class[]{ Modchu_Reflect.loadClass("BlockPos") }, entityWorldObj(worldOrEntity), new Object[]{ newBlockPos(x, y, z) }));
-		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_94577_B", "getBlockPowerInput", new Class[]{ int.class, int.class, int.class }, entityWorldObj(worldOrEntity), new Object[]{ x, y, z }));
+		if (Modchu_Main.getMinecraftVersion() > 179) return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_175627_a", "getStrongPower", new Class[]{ Modchu_Reflect.loadClass("BlockPos") }, entityWorld(worldOrEntity), new Object[]{ newBlockPos(x, y, z) }));
+		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_94577_B", "getBlockPowerInput", new Class[]{ int.class, int.class, int.class }, entityWorld(worldOrEntity), new Object[]{ x, y, z }));
 	}
 
 	protected int tileEntityXCoord(Object tileEntity) {
@@ -12416,19 +12503,19 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object worldGetBlockState(Object blockPos) {
-		return worldGetBlockState(minecraftTheWorld(), blockPos);
+		return worldGetBlockState(minecraftWorld(), blockPos);
 	}
 
 	protected Object worldGetBlockState(Object worldOrEntity, Object blockPos) {
-		return Modchu_Reflect.invokeMethod("World", "func_177435_g", "getBlockState", new Class[]{ blockPos.getClass() }, entityWorldObj(worldOrEntity), new Object[]{ blockPos });
+		return Modchu_Reflect.invokeMethod("World", "func_177435_g", "getBlockState", new Class[]{ blockPos.getClass() }, entityWorld(worldOrEntity), new Object[]{ blockPos });
 	}
 
 	protected Object worldGetEntityByID(int i) {
-		return worldGetEntityByID(minecraftTheWorld(), i);
+		return worldGetEntityByID(minecraftWorld(), i);
 	}
 
 	protected Object worldGetEntityByID(Object worldOrEntity, int i) {
-		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_72545_a", "getEntityByID", new Class[]{ int.class }, entityWorldObj(worldOrEntity), new Object[]{ i }));
+		return Modchu_CastHelper.Int(Modchu_Reflect.invokeMethod("World", "func_72545_a", "getEntityByID", new Class[]{ int.class }, entityWorld(worldOrEntity), new Object[]{ i }));
 	}
 
 	private Object[] instanceCut(Object[] pArg) {

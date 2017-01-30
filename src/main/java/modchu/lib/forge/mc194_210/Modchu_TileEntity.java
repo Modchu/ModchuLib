@@ -1,60 +1,39 @@
 package modchu.lib.forge.mc194_210;
 
-import modchu.lib.Modchu_ITileEntity;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import java.util.HashMap;
 
-public class Modchu_TileEntity extends modchu.lib.forge.mc190_210.Modchu_TileEntity implements Modchu_ITileEntity {
+import net.minecraft.world.World;
+
+public class Modchu_TileEntity extends modchu.lib.forge.mc194_212.Modchu_TileEntity {
 
 	public Modchu_TileEntity() {
 		super();
 	}
 
+	public Modchu_TileEntity(HashMap<String, Object> map) {
+		super(map);
+	}
+	// 190~210共通コピペ　↓
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nBTTagCompound) {
-		if (masterClassName != null
-				&& !masterClassName.isEmpty()) {
-			try {
-				nBTTagCompound.setString("masterClassName", masterClassName);
-				return (NBTTagCompound) (master != null ? master.writeToNBT(nBTTagCompound) : super.writeToNBT(nBTTagCompound));
-			} catch (Throwable throwable) {
-			}
-		}
-		//Modchu_Debug.mDebug("writeToNBT masterClassName="+masterClassName);
-		return null;
+	public void setWorldObj(World world) {
+		if (master != null) master.setWorld(world);
+		else super.setWorldObj(world);
 	}
 
 	@Override
-	public Object superWriteToNBT(Object nBTTagCompound) {
-		return super.writeToNBT((NBTTagCompound) nBTTagCompound);
-	}
-	// 194~
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		return (SPacketUpdateTileEntity) (master != null ? master.getUpdatePacket() : super.getUpdatePacket());
+	public void superSetWorld(Object world) {
+		super.setWorldObj((World) world);
 	}
 
 	@Override
-	public SPacketUpdateTileEntity superGetUpdatePacket() {
-		return super.getUpdatePacket();
-	}
-
-	public NBTTagCompound getUpdateTag() {
-		return (NBTTagCompound) (master != null ? master.getUpdateTag() : super.getUpdateTag());
+	public boolean hasWorldObj() {
+		return master != null ? master.hasWorld() : super.hasWorldObj();
 	}
 
 	@Override
-	public NBTTagCompound superGetUpdateTag() {
-		return super.getUpdateTag();
+	public boolean superHasWorld() {
+		return super.hasWorldObj();
 	}
-	// 190~
-	@Override
-	public boolean onlyOpsCanSetNbt() {
-		return master != null ? master.onlyOpsCanSetNbt() : super.onlyOpsCanSetNbt();
-	}
-
-	public boolean superOnlyOpsCanSetNbt() {
-		return super.onlyOpsCanSetNbt();
-	}
+	// 190~210共通コピペ　↑
 
 }

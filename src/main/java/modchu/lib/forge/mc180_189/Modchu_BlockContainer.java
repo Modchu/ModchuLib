@@ -12,6 +12,7 @@ import modchu.lib.Modchu_IBlockContainerMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.Block.EnumOffsetType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockState;
@@ -77,6 +78,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 		return false;
 	}
 	// TODO 以下 Modchu_Block内コードのコピペ
+
 	@Override
 	public Block setLightOpacity(int par1) {
 		return (Block) (master != null ? master.setLightOpacity(par1) : super.setLightOpacity(par1));
@@ -773,11 +775,11 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public boolean isVisuallyOpaque() {
-		return master != null ? master.isVisuallyOpaque(null) : super.isVisuallyOpaque();
+		return master != null ? master.causesSuffocation(null) : super.isVisuallyOpaque();
 	}
 
 	@Override
-	public boolean superIsVisuallyOpaque(Object iBlockState) {
+	public boolean superCausesSuffocation(Object iBlockState) {
 		return super.isVisuallyOpaque();
 	}
 
@@ -814,12 +816,12 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public void onNeighborBlockChange(World world, BlockPos blockPos, IBlockState iBlockState, Block block) {
-		if (master != null) master.neighborChanged(iBlockState, world, blockPos, block, null);
+		if (master != null) master.neighborChanged(world, blockPos, iBlockState, block, null);
 		else super.onNeighborBlockChange(world, blockPos, iBlockState, block);
 	}
 
 	@Override
-	public void superNeighborChanged(Object iBlockState, Object world, Object blockPos, Object block, Object blockPos1) {
+	public void superNeighborChanged(Object world, Object blockPos, Object iBlockState, Object block, Object blockPos1) {
 		super.onNeighborBlockChange((World) world, (BlockPos) blockPos, (IBlockState) iBlockState, (Block) block);
 	}
 
@@ -938,11 +940,11 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos blockPos, EnumFacing enumFacing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase entityLivingBase) {
-		return (IBlockState) (master != null ? master.onBlockPlaced(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase) : super.onBlockPlaced(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase));
+		return (IBlockState) (master != null ? master.getStateForPlacement(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase) : super.onBlockPlaced(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase));
 	}
 
 	@Override
-	public IBlockState superOnBlockPlaced(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase) {
+	public IBlockState superGetStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase) {
 		return super.onBlockPlaced((World) world, (BlockPos) blockPos, (EnumFacing) enumFacing, hitX, hitY, hitZ, meta, (EntityLivingBase) entityLivingBase);
 	}
 
@@ -998,10 +1000,6 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 		return super.colorMultiplier((IBlockAccess) iBlockAccess, (BlockPos) blockPos, renderPass);
 	}
 
-	public int getWeakPower(IBlockAccess iBlockAccess, BlockPos blockPos, IBlockState iBlockState, EnumFacing enumFacing) {
-		return -1;
-	}
-
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos blockPos, IBlockState iBlockState, Entity entity) {
 		if (master != null) master.onEntityWalk(world, blockPos, iBlockState, entity);
@@ -1035,11 +1033,11 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	protected ItemStack createStackedBlock(IBlockState iBlockState) {
-		return (ItemStack) (master != null ? master.createStackedBlock(iBlockState) : super.createStackedBlock(iBlockState));
+		return (ItemStack) (master != null ? master.getSilkTouchDrop(iBlockState) : super.createStackedBlock(iBlockState));
 	}
 
 	@Override
-	public ItemStack superCreateStackedBlock(Object iBlockState) {
+	public ItemStack superGetSilkTouchDrop(Object iBlockState) {
 		return super.createStackedBlock((IBlockState) iBlockState);
 	}
 
@@ -1056,11 +1054,11 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public boolean onBlockEventReceived(World world, BlockPos blockPos, IBlockState iBlockState, int eventID, int eventParam) {
-		return master != null ? master.eventReceived(iBlockState, world, blockPos, eventID, eventParam) : super.onBlockEventReceived(world, blockPos, iBlockState, eventID, eventParam);
+		return master != null ? master.eventReceived(world, blockPos, iBlockState, eventID, eventParam) : super.onBlockEventReceived(world, blockPos, iBlockState, eventID, eventParam);
 	}
 
 	@Override
-	public boolean superEventReceived(Object iBlockState, Object world, Object blockPos, int eventID, int eventParam) {
+	public boolean superEventReceived(Object world, Object blockPos, Object iBlockState, int eventID, int eventParam) {
 		return super.onBlockEventReceived((World) world, (BlockPos) blockPos, (IBlockState) iBlockState, eventID, eventParam);
 	}
 
@@ -2571,7 +2569,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public Object superGetPickBlock(Object iBlockState, Object movingObjectPosition, Object world, Object blockPos, Object entityPlayer) {
-		return super.getPickBlock((MovingObjectPosition) movingObjectPosition, (World) world, (BlockPos) blockPos);
+		return null;
 	}
 
 	@Override
@@ -2631,6 +2629,10 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity) {
+	}
+
+	@Override
+	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity, boolean p_185477_7_) {
 	}
 
 	@Override

@@ -996,7 +996,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object entityWorldObj(Object worldOrEntity) {
+	public Object entityWorld(Object worldOrEntity) {
 		return worldOrEntity instanceof World ? worldOrEntity : worldOrEntity instanceof Entity ? ((Entity) worldOrEntity).worldObj : null;
 	}
 
@@ -2232,7 +2232,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void minecraftSetDimensionAndSpawnPlayer() {
-		Object thePlayer = minecraftThePlayer();
+		Object thePlayer = minecraftPlayer();
 		minecraftSetDimensionAndSpawnPlayer(((Entity) thePlayer).dimension);
 	}
 
@@ -2243,13 +2243,13 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object minecraftThePlayer() {
+	public Object minecraftPlayer() {
 		if (Modchu_Main.isServer) return null;
 		return Minecraft.getMinecraft().thePlayer;
 	}
 
 	@Override
-	public Object minecraftTheWorld() {
+	public Object minecraftWorld() {
 		if (Modchu_Main.isServer) return MinecraftServer.getServer().worldServers[0];
 		return Minecraft.getMinecraft().theWorld;
 	}
@@ -2435,7 +2435,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object playerControllerMPCreatePlayer(Object playerController) {
-		return ((PlayerControllerMP) playerController).func_78754_a((World) minecraftTheWorld());
+		return ((PlayerControllerMP) playerController).func_78754_a((World) minecraftWorld());
 	}
 
 	@Override
@@ -2890,7 +2890,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public void setMinecraftThePlayer(Object entityPlayer) {
+	public void setMinecraftPlayer(Object entityPlayer) {
 		if (Modchu_Main.isServer) return;
 		Minecraft.getMinecraft().thePlayer = (EntityClientPlayerMP) entityPlayer;
 	}
@@ -3057,22 +3057,22 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public boolean worldCanBlockSeeTheSky(Object worldOrEntity, double d, double d2, double d3) {
-		return ((World) entityWorldObj(worldOrEntity)).canBlockSeeTheSky((int) d, (int) d2, (int) d3);
+		return ((World) entityWorld(worldOrEntity)).canBlockSeeTheSky((int) d, (int) d2, (int) d3);
 	}
 
 	@Override
 	public boolean worldCanBlockSeeTheSky(Object worldOrEntity, int i, int i2, int i3) {
-		return ((World) entityWorldObj(worldOrEntity)).canBlockSeeTheSky(i, i2, i3);
+		return ((World) entityWorld(worldOrEntity)).canBlockSeeTheSky(i, i2, i3);
 	}
 
 	@Override
 	public Object worldGetPathEntityToEntity(Object worldOrEntity, Object entity, Object entity2, float f, boolean b, boolean b1, boolean b2, boolean b3) {
-		return ((World) entityWorldObj(worldOrEntity)).getPathEntityToEntity((Entity) entity, (Entity) entity2, f, b, b1, b2, b3);
+		return ((World) entityWorld(worldOrEntity)).getPathEntityToEntity((Entity) entity, (Entity) entity2, f, b, b1, b2, b3);
 	}
 
 	@Override
 	public Object worldGetPlayerEntityByName(Object worldOrEntity, String s) {
-		return ((World) entityWorldObj(worldOrEntity)).getPlayerEntityByName(s);
+		return ((World) entityWorld(worldOrEntity)).getPlayerEntityByName(s);
 	}
 
 	@Override
@@ -3089,52 +3089,52 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public boolean worldIsAirBlock(Object worldOrEntity, int i, int j, int k) {
-		return ((World) entityWorldObj(worldOrEntity)).isAirBlock(i, j, k);
+		return ((World) entityWorld(worldOrEntity)).isAirBlock(i, j, k);
 	}
 
 	@Override
 	public boolean worldIsBlockNormalCubeDefault(Object worldOrEntity, int i, int j, int k, boolean b) {
-		return ((World) entityWorldObj(worldOrEntity)).isBlockNormalCubeDefault(i, j, k, b);
+		return ((World) entityWorld(worldOrEntity)).isBlockNormalCubeDefault(i, j, k, b);
 	}
 
 	@Override
 	public boolean worldIsDaytime(Object worldOrEntity) {
-		return ((World) entityWorldObj(worldOrEntity)).isDaytime();
+		return ((World) entityWorld(worldOrEntity)).isDaytime();
 	}
 
 	@Override
 	public boolean worldIsRemote(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.isRemote : false;
 	}
 
 	@Override
 	public List worldLoadedEntityList(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.loadedEntityList : null;
 	}
 
 	@Override
 	public List worldPlayerEntities(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.playerEntities : null;
 	}
 
 	@Override
 	public List worldWeatherEffects(Object worldOrEntity) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		return world != null ? world.weatherEffects : null;
 	}
 
 	@Override
 	public void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, Object soundEventOrString, float f, float f1) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		if (world != null) world.playSoundAtEntity((Entity) entity, (String) soundEventOrString, f, f1);
 	}
 
 	@Override
 	public void worldSetEntityState(Object worldOrEntity, Object entity, byte by) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		if (world != null) world.setEntityState((Entity) entity, by);
 	}
 
@@ -3160,7 +3160,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void worldSpawnParticle(Object worldOrEntity, Object stingOrEnumParticleTypes, double d, double d1, double d2, double d3, double d4, double d5) {
-		World world = ((World) entityWorldObj(worldOrEntity));
+		World world = ((World) entityWorld(worldOrEntity));
 		if (world != null) world.spawnParticle((String)stingOrEnumParticleTypes, d, d1, d2, d3, d4, d5);
 	}
 
@@ -3757,7 +3757,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public long mathHelperFloor_double_long(double d) {
+	public long mathHelperLfloor(double d) {
 		return MathHelper.floor_double_long(d);
 	}
 
@@ -3772,7 +3772,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public int mathHelperBucketInt(int i, int j) {
+	public int mathHelperIntFloorDiv(int i, int j) {
 		return MathHelper.bucketInt(i, j);
 	}
 
@@ -3916,7 +3916,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public int worldGetBlockStateGetBlockMetadata(Object worldOrEntity, int x, int y, int z) {
-		return ((World) entityWorldObj(worldOrEntity)).getBlockMetadata(x, y, z);
+		return ((World) entityWorld(worldOrEntity)).getBlockMetadata(x, y, z);
 	}
 
 	@Override
@@ -3946,7 +3946,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public int worldGetStrongPower(Object worldOrEntity, int x, int y, int z) {
-		return ((World) entityWorldObj(worldOrEntity)).getBlockPowerInput(x, y, z);
+		return ((World) entityWorld(worldOrEntity)).getBlockPowerInput(x, y, z);
 	}
 
 	@Override
@@ -3971,7 +3971,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object worldGetEntityByID(Object worldOrEntity, int i) {
-		return ((World) entityWorldObj(worldOrEntity)).getEntityByID(i);
+		return ((World) entityWorld(worldOrEntity)).getEntityByID(i);
 	}
 
 	@Override
@@ -3986,7 +3986,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public List worldGetEntitiesWithinAABBExcludingEntity(Object worldOrEntity, Object entity, Object axisAlignedBB) {
-		return ((World) entityWorldObj(worldOrEntity)).getEntitiesWithinAABBExcludingEntity((Entity) entity, (AxisAlignedBB) axisAlignedBB);
+		return ((World) entityWorld(worldOrEntity)).getEntitiesWithinAABBExcludingEntity((Entity) entity, (AxisAlignedBB) axisAlignedBB);
 	}
 
 	@Override
@@ -4267,12 +4267,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object worldGetBiomeGenForCoords(Object worldOrEntity, int i, int i1) {
-		return ((World) entityWorldObj(worldOrEntity)).getBiomeGenForCoords(i, i1);
+		return ((World) entityWorld(worldOrEntity)).getBiomeGenForCoords(i, i1);
 	}
 
 	@Override
 	public List worldGetEntitiesWithinAABB(Object worldOrEntity, Class c, Object axisAlignedBB) {
-		return ((World) entityWorldObj(worldOrEntity)).getEntitiesWithinAABB(c, (AxisAlignedBB) axisAlignedBB);
+		return ((World) entityWorld(worldOrEntity)).getEntitiesWithinAABB(c, (AxisAlignedBB) axisAlignedBB);
 	}
 
 	@Override
@@ -4281,13 +4281,13 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public boolean worldSpawnEntityInWorld(Object worldOrEntity, Object entity) {
-		return ((World) entityWorldObj(worldOrEntity)).spawnEntityInWorld((Entity) entity);
+	public boolean worldSpawnEntity(Object worldOrEntity, Object entity) {
+		return ((World) entityWorld(worldOrEntity)).spawnEntityInWorld((Entity) entity);
 	}
 
 	@Override
 	public Object worldGetClosestPlayerToEntity(Object worldOrEntity, Object entity, double d) {
-		return ((World) entityWorldObj(worldOrEntity)).getClosestPlayerToEntity((Entity) entity, d);
+		return ((World) entityWorld(worldOrEntity)).getClosestPlayerToEntity((Entity) entity, d);
 	}
 
 	@Override

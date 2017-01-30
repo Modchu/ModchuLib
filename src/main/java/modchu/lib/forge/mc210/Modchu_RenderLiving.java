@@ -23,20 +23,26 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class Modchu_RenderLiving extends modchu.lib.forge.mc190_210.Modchu_RenderLiving {
+public class Modchu_RenderLiving extends modchu.lib.forge.mc190_212.Modchu_RenderLiving {
 
 	public Modchu_RenderLiving(HashMap<String, Object> map) {
 		super(map);
 	}
-
-	public boolean removeLayer(LayerRenderer layerRenderer) {
-		return master != null ? master.removeLayer(layerRenderer) : layerRenderers.remove(layerRenderer);
-	}
-
+	// 210~分離
 	@Override
 	public boolean superRemoveLayer(Object layerRenderer) {
 		return layerRenderers.remove((LayerRenderer) layerRenderer);
 	}
+	// 212~分離
+	@Override
+	public void rotateCorpse(EntityLivingBase entityLivingBase, float p_77043_2_, float p_77043_3_, float partialTicks) {
+		if (master != null) master.applyRotations(entityLivingBase, p_77043_2_, p_77043_3_, partialTicks);
+		else super.rotateCorpse(entityLivingBase, p_77043_2_, p_77043_3_, partialTicks);
+	}
 
+	@Override
+	public void superApplyRotations(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float partialTicks) {
+		super.rotateCorpse((EntityLivingBase) entityLivingBase, p_77043_2_, p_77043_3_, partialTicks);
+	}
 
 }

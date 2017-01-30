@@ -295,7 +295,7 @@ public interface Modchu_IASMaster {
 	public void entityBatSetIsBatHanging(Object entityBat, boolean b);
 	public void entitySetEating(Object entity, boolean b);
 	public float entityWidth(Object entity);
-	public Object entityWorldObj(Object worldOrEntity);
+	public Object entityWorld(Object worldOrEntity);
 	public float entityYOffset(Object entity);
 	public Enum enumActionBlock();
 	public Enum enumActionBow();
@@ -542,10 +542,10 @@ public interface Modchu_IASMaster {
 	public int mathHelperFloor_double(double d);
 	public float mathHelperFloor_float(float f);
 	public float mathHelperWrapAngleTo180_float(float f);
-	public long mathHelperFloor_double_long(double d);
+	public long mathHelperLfloor(double d);
 	public float mathHelperAbs(float f);
 	public double mathHelperAbs_max(double d, double d1);
-	public int mathHelperBucketInt(int i, int j);
+	public int mathHelperIntFloorDiv(int i, int j);
 	public boolean mathHelperStringNullOrLengthZero(String s);
 	public float mathHelperSin(float f);
 	public float mathHelperSqrt_float(float f);
@@ -580,8 +580,8 @@ public interface Modchu_IASMaster {
 	public void minecraftSetDimensionAndSpawnPlayer(int i);
 	public long minecraftSystemTime();
 	public Object minecraftTextureManager();
-	public Object minecraftThePlayer();
-	public Object minecraftTheWorld();
+	public Object minecraftPlayer();
+	public Object minecraftWorld();
 	public Object minecraftDisplayGuiScreen();
 	public Object minecraftGetIntegratedServer();
 	public Object minecraftServerGetServer();
@@ -792,7 +792,7 @@ public interface Modchu_IASMaster {
 	public void setMinecraftDisplayGuiScreen(Object guiScreen);
 	public void setMinecraftPlayerController(Object playerController);
 	public void setMinecraftRenderViewEntity(Object entity);
-	public void setMinecraftThePlayer(Object entityPlayer);
+	public void setMinecraftPlayer(Object entityPlayer);
 	public void setRender(Object model, Object render);
 	public void setRenderMainModel(Object render, Object model);
 	public void setRenderManagerItemRenderer(Object itemRenderer);
@@ -889,7 +889,7 @@ public interface Modchu_IASMaster {
 	public Object worldGetPlayerEntityByName(Object worldOrEntity, String s);
 	public Object worldGetBiomeGenForCoords(Object worldOrInt, Object blockPosOrInt);
 	public Object worldGetBiomeGenForCoords(Object worldOrEntity, int i, int i1);
-	public boolean worldSpawnEntityInWorld(Object worldOrEntity, Object entity);
+	public boolean worldSpawnEntity(Object worldOrEntity, Object entity);
 	public void worldClientAddEntityToWorld(Object worldClient, int i, Object entity);
 	public int worldGetBlockStateGetBlockMetadata(Object worldOrEntity, int x, int y, int z);
 	public int worldGetBlockLightValue(Object worldOrEntity, int x, int y, int z);

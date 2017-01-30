@@ -71,7 +71,7 @@ public class Modchu_SpawnManager {
 						Modchu_AS.set("EntityLiving", "onSpawnWithEgg", new Class[]{ Modchu_Reflect.loadClass(version > 169 ? "IEntityLivingData" : "EntityLivingData") }, entity, new Object[]{ null });
 					}
 				}
-				Modchu_AS.getBoolean(Modchu_AS.worldSpawnEntityInWorld, world, entity);
+				Modchu_AS.getBoolean(Modchu_AS.worldSpawnEntity, world, entity);
 				if (flag) Modchu_AS.set("EntityLiving", "playLivingSound", entity);
 			}
 		} catch (Exception e) {

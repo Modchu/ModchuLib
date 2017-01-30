@@ -221,8 +221,8 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFoodMaster {
 	}
 
 	@Override
-	public boolean isItemTool(Object itemStack) {
-		return base.superIsItemTool(itemStack);
+	public boolean isEnchantable(Object itemStack) {
+		return base.superIsEnchantable(itemStack);
 	}
 
 	@Override

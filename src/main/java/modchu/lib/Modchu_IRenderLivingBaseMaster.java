@@ -33,7 +33,7 @@ public interface Modchu_IRenderLivingBaseMaster extends Modchu_IRenderMaster {
 	public boolean shouldRender(Object entity, Object iCamera, double camX, double camY, double camZ);
 	public void transformHeldFull3DItemLayer();
 	public void renderLivingAt(Object entityLivingBase, double p_77039_2_, double p_77039_4_, double p_77039_6_);
-	public void rotateCorpse(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_);
+	public void applyRotations(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_);
 	public void renderOffsetLivingLabel(Object entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_);
 	public void setRenderPassModel(Object modelBase);
 	public void renderArrowsStuckInEntity(Object entityLivingBase, float par2);

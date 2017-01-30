@@ -92,12 +92,12 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 	}
 
 	public void sendToAll(Object[] o, String channelName) {
-		sendToAll(o, channelName, Modchu_AS.get(Modchu_AS.minecraftTheWorld));
+		sendToAll(o, channelName, Modchu_AS.get(Modchu_AS.minecraftWorld));
 	}
 
 	@Override
 	public void sendToAll(Object o, String channelName) {
-		sendToAll((Object[]) o, channelName, Modchu_AS.get(Modchu_AS.minecraftTheWorld));
+		sendToAll((Object[]) o, channelName, Modchu_AS.get(Modchu_AS.minecraftWorld));
 	}
 
 	public void sendToAll(Object[] o, String channelName, Object world) {

@@ -183,8 +183,8 @@ public class Modchu_RendererLivingEntityMasterBasis implements Modchu_IRenderLiv
 	}
 
 	@Override
-	public void rotateCorpse(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_) {
-		base.superRotateCorpse(entityLivingBase, p_77043_2_, p_77043_3_, p_77043_4_);
+	public void applyRotations(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float p_77043_4_) {
+		base.superApplyRotations(entityLivingBase, p_77043_2_, p_77043_3_, p_77043_4_);
 	}
 
 	@Override

@@ -79,7 +79,7 @@ public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster
 	public void ageUp(int p_175501_1_, boolean p_175501_2_);
 	public void onGrowingAdult();
 	public void setHomePosAndDistance(Object blockPos, int distance);
-	public Object getNewNavigator(Object world);
+	public Object createNavigator(Object world);
 	public void updateEquipmentIfNeeded(Object entityItem);
 	public boolean canEquipItem(Object itemStack);
 	public void setEquipmentBasedOnDifficulty(Object difficultyInstance);

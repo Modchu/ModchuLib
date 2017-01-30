@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public interface Modchu_IEntityPlayer {
 	public void supersendChatToPlayer(Object chatMessageComponent);
-	public boolean supercanCommandSenderUseCommand(int i, String s);
+	public boolean supercanUseCommand(int i, String s);
 	public Object supergetPlayerCoordinates();
 	public void superapplyEntityAttributes();
 	public void superentityInit();
@@ -76,7 +76,7 @@ public interface Modchu_IEntityPlayer {
 	public int supergetSleepTimer();
 	public boolean supergetHideCape(int par1);
 	public void supersetHideCape(int par1, boolean par2);
-	public void superaddChatMessage(String par1Str);
+	public void supersendMessage(String par1Str);
 	public Object supergetBedLocation();
 	public boolean superisSpawnForced();
 	public Object supergetBedLocation(int dimension);
@@ -214,12 +214,12 @@ public interface Modchu_IEntityPlayer {
 	//public int superhashCode();
 	public void supersetRotation(float par1, float par2);
 	public void supersetPosition(double par1, double par3, double par5);
-	public void supersetAngles(float par1, float par2);
+	public void superturn(float par1, float par2);
 	public void supersetOnFireFromLava();
 	public void supersetFire(int par1);
 	public void superextinguish();
 	public boolean superisOffsetPositionInLiquid(double par1, double par3, double par5);
-	public void supermoveEntity(Object moverType, double par1, double par3, double par5);
+	public void supermove(Object moverType, double par1, double par3, double par5);
 	public void superdoBlockCollisions();
 	public void superplayStepSound(int par1, int par2, int par3, int par4);
 	public Object supergetCollisionBoundingBox();
@@ -365,7 +365,6 @@ public interface Modchu_IEntityPlayer {
 	public void supersendHorseInventory();
 	public void supersetClientBrand(String brand);
 	public String supergetClientBrand();
-	public boolean supercanUseCommand(int permLevel, String commandName);
 	public Object supergetPosition();
 	public boolean superisServerWorld();
 	public void superopenEditSign(Object tileEntitySign);

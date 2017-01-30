@@ -410,12 +410,12 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 
 	@Override
 	public void moveEntity(double par1, double par3, double par5) {
-		if (master != null) master.moveEntity(par1, par3, par5);
+		if (master != null) master.move(par1, par3, par5);
 		else super.moveEntity(par1, par3, par5);
 	}
 
 	@Override
-	public void superMoveEntity(double par1, double par3, double par5) {
+	public void superMove(double par1, double par3, double par5) {
 		super.moveEntity(par1, par3, par5);
 	}
 
@@ -1671,12 +1671,12 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	}
 
 	@Override
-	public Object superGetEntityBoundingBox() {
-		return null;
+	public Object superGetBoundingBox() {
+		return super.getBoundingBox();
 	}
 
 	@Override
-	public void superSetEntityBoundingBox(Object axisAlignedBB) {
+	public void superSetBoundingBox(Object axisAlignedBB) {
 	}
 
 }
