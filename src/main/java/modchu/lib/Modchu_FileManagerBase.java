@@ -44,6 +44,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	protected List<ZipFile> modZipFileList;
 	protected List<ZipFile> modsZipFileList;
 	protected boolean getResourceBufferedReaderJarReaderFlag = false;
+	//protected Map<ZipInputStream, Map<String, ZipEntry>> zipZipEntryMapData;
 	protected static boolean initFlag;
 	public static HashMap<Object, List<String>> listData = new HashMap();
 	public static final int TYPE_FILE_OR_DIR = 1;
@@ -421,14 +422,10 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			} while(true);
 			int version = Modchu_Main.getMinecraftVersion();
 
-			if (//Modchu_Main.isDev
-					//&&
-					classCheck
-					&& check
-					&& version > 210) {
+			if (check
+					&& version > 179) {
 				String name = file.getName();
-				//if (name.lastIndexOf("dev.jar") > -1)
-					addModResourcePack(file);
+				if (checkDevJar(file)) addModResourcePack(file);
 			}
 
 		} catch (Exception e) {
@@ -441,6 +438,56 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			}
 		}
 		return b;
+	}
+
+	protected boolean checkDevJar(File file) {
+		if (file != null); else return false;
+		boolean debug = true;
+		String name = file.getName();
+		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase checkDevJar name="+name);
+		if (name.toLowerCase().lastIndexOf(".jar") < 0) return false;
+		ZipFile zipFile = null;
+		try {
+			zipFile = new ZipFile(file);
+			HashMap<String, InputStream> map = loadZipFileToInputStreamHashMap(zipFile);
+			InputStream inputStream = map.get("META-INF/MANIFEST.MF");
+			if (debug) {
+				Modchu_Debug.mDebug("Modchu_FileManagerBase checkDevJar MANIFEST.MF map="+map);
+				Modchu_Debug.mDebug("Modchu_FileManagerBase checkDevJar MANIFEST.MF inputStream="+inputStream);
+			}
+			if (inputStream != null); else return false;
+			LinkedList<String> list = inputStreamToLinkedList(inputStream);
+			if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase checkDevJar MANIFEST.MF list="+list);
+			if (list != null
+					&& !list.isEmpty()) {
+				for (String s : list) {
+					if (s != null
+							&& !s.isEmpty()); else continue;
+					String[] s0 = s.split(":");
+					if (s0 != null
+							&& s0.length > 1
+							&& s0[0] != null
+							&& !s0[0].isEmpty()
+							&& s0[1] != null
+							&& !s0[1].isEmpty()
+							&& s0[0].toLowerCase().startsWith("modchudev")
+							&& s0[1].replace(" ", "").replace("	", "").equalsIgnoreCase("true")) {
+						return true;
+					}
+				}
+			}
+			//return true;
+		} catch (Error e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (zipFile != null) zipFile.close();
+			} catch (Exception e) {
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -609,6 +656,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		if (!modTextureStitchedClassList.contains(c)) modTextureStitchedClassList.add(c);
 	}
 
+	@Override
 	public List<Class> getModTextureStitchedClassList() {
 		return modTextureStitchedClassList;
 	}
@@ -1204,21 +1252,21 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	@Override
 	public ArrayList<String> loadFileToArrayList(File file) {
 		// File読み込みArrayListで返す
-		if (listData.containsKey(file)) return (ArrayList<String>) listData.get(file.getAbsolutePath());
+		if (listData.containsKey(file.getAbsolutePath())) return (ArrayList<String>) listData.get(file.getAbsolutePath());
 		return (ArrayList<String>) loadFileToList(file, new ArrayList());
 	}
 
 	@Override
 	public LinkedList<String> loadFileToLinkedList(File file) {
 		// File読み込みLinkedListで返す
-		if (listData.containsKey(file)) return (LinkedList<String>) listData.get(file.getAbsolutePath());
+		if (listData.containsKey(file.getAbsolutePath())) return (LinkedList<String>) listData.get(file.getAbsolutePath());
 		return (LinkedList<String>) loadFileToList(file, new LinkedList());
 	}
 
 	@Override
 	public List<String> loadFileToList(File file, List list) {
 		// File読み込みListで返す
-		if (listData.containsKey(file)) return listData.get(file.getAbsolutePath());
+		if (listData.containsKey(file.getAbsolutePath())) return listData.get(file.getAbsolutePath());
 		try {
 			list = bufferedReaderToList(new BufferedReader(new FileReader(file)), list);
 			listData.put(file.getAbsolutePath(), list);
@@ -1245,10 +1293,11 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	@Override
 	public List<String> bufferedReaderToList(BufferedReader breader, List list) {
 		// BufferedReader読み込みListで返す
+		if (list != null); else list = new LinkedList();
 		try {
 			String rl;
 			while ((rl = breader.readLine()) != null) {
-				//Modchu_Debug.lDebug("bufferedReaderToList list.add rl="+rl);
+				//Modchu_Debug.lDebug("Modchu_FileManagerBase bufferedReaderToList list.add rl="+rl);
 				list.add(rl);
 			}
 		} catch (Exception e) {
@@ -1260,7 +1309,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 			} catch (Exception e) {
 			}
 		}
-		Modchu_Debug.lDebug("bufferedReaderToList list.add list.size()="+list.size());
+		Modchu_Debug.lDebug("Modchu_FileManagerBase bufferedReaderToList list.add list.size()="+list.size());
 		return list;
 	}
 
@@ -1278,25 +1327,67 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 
 	@Override
 	public List<String> inputStreamToList(InputStream is, List list) {
-		if (list != null); else list = new LinkedList();
-		BufferedReader breader = null;
+		return bufferedReaderToList(new BufferedReader(new InputStreamReader(is)), list);
+	}
+
+	@Override
+	public HashMap<String, ZipEntry> loadZipFileToZipEntryHashMap(File file) {
+		// file読み込みHashMapで返す
+		return (HashMap<String, ZipEntry>) loadZipFileToZipEntryMap(file, new HashMap());
+	}
+
+	@Override
+	public Map<String, ZipEntry> loadZipFileToZipEntryMap(File file, Map<String, ZipEntry> map) {
+		// File読み込みMapで返す
+		//if (zipZipEntryMapData.containsKey(file.getAbsolutePath())) return zipZipEntryMapData.get(file.getAbsolutePath());
+		FileInputStream fileinputstream = null;
+		ZipInputStream zipInputStream = null;
 		try {
-			breader = new BufferedReader(new InputStreamReader(is));
-			String rl;
-			while ((rl = breader.readLine()) != null) {
-				list.add(rl);
-			}
-			return list;
+			fileinputstream = new FileInputStream(file);
+			zipInputStream = new ZipInputStream(fileinputstream);
+			ZipEntry zipentry;
+			do {
+				zipentry = zipInputStream.getNextEntry();
+				if (zipentry == null) break;
+				map.put(zipentry.getName(), zipentry);
+			} while(true);
+		} catch (Error e) {
+			e.printStackTrace();
 		} catch (Exception e) {
-			Modchu_Debug.lDebug("Modchu_FileManagerBase inputStreamToList " + breader + " load Exception.", 2, e);
-			//e.printStackTrace();
+			e.printStackTrace();
 		} finally {
 			try {
-				if (breader != null) breader.close();
+				if (zipInputStream != null) zipInputStream.close();
+				if (fileinputstream != null) fileinputstream.close();
 			} catch (Exception e) {
 			}
 		}
-		return null;
+		return map;
+	}
+
+	@Override
+	public HashMap<String, InputStream> loadZipFileToInputStreamHashMap(ZipFile zipFile) {
+		// ZipFile読み込みHashMap<String, InputStream>で返す
+		return (HashMap<String, InputStream>) loadZipFileToInputStreamMap(zipFile, new HashMap());
+	}
+
+	@Override
+	public Map<String, InputStream> loadZipFileToInputStreamMap(ZipFile zipFile, Map<String, InputStream> map) {
+		// ZipFile読み込みMap<String, InputStream>で返す
+		//if (zipZipEntryInputStreamData.containsKey(file.getAbsolutePath())) return zipZipInputStreamMapData.get(file.getAbsolutePath());
+		try {
+			for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements();) {
+				ZipEntry entry = e.nextElement();
+				if (entry.isDirectory()) continue;
+				InputStream inputStream = zipFile.getInputStream(entry);
+				map.put(entry.getName(), inputStream);
+			}
+		} catch (Error e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
 	}
 
 	@Override
@@ -1467,6 +1558,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return list;
 	}
 
+	@Override
 	public List<ZipFile> getModZipFileList(List<File> list) {
 		boolean debug = false;
 		if (list != null
@@ -1490,15 +1582,18 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return list1;
 	}
 
+	@Override
 	public List<ZipFile> getModZipFileList() {
 		if (modZipFileList != null) return modZipFileList;
 		return getModZipFileList(Modchu_Main.modFileList);
 	}
 
+	@Override
 	public void setModZipFileList(List<ZipFile> list) {
 		modZipFileList = list;
 	}
 
+	@Override
 	public List<ZipFile> getModsZipFileList() {
 		boolean debug = false;
 		if (modsZipFileList != null) return modsZipFileList;
@@ -1521,8 +1616,51 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		return list1;
 	}
 
+	@Override
 	public void setModsZipFileList(List<ZipFile> list) {
 		modsZipFileList = list;
+	}
+
+	@Override
+	public List<File> getDirFileList(List<File> list) {
+		boolean debug = true;
+		if (Modchu_Main.modDirList != null
+				&& !Modchu_Main.modDirList.isEmpty()) return Modchu_Main.modDirList;
+		if (list != null); else list = new LinkedList();
+		File modsDir = Modchu_Main.modsDir;
+		for (File file : modsDir.listFiles()) {
+			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getDirFileList file.getAbsolutePath()="+file.getAbsolutePath());
+			if (file.isDirectory()
+					&& !Modchu_Main.ngVersionName(file.getName())) {
+				list.add(file);
+				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getDirFileList list.add.");
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public String getCurrentDir(String s) {
+		if (s != null
+				&& !s.isEmpty()); else return null;
+		int i1 = s.indexOf("\\.\\");
+		if (i1 > -1) {
+			String s1 = s.substring(0, i1 + 1);
+			return s1;
+		}
+		return null;
+	}
+
+	@Override
+	public String getRelativePath(String s) {
+		if (s != null
+				&& !s.isEmpty()); else return null;
+		int i1 = s.indexOf("\\.\\");
+		if (i1 > -1) {
+			String s1 = s.substring(i1 + 3);
+			return s1;
+		}
+		return null;
 	}
 
 }

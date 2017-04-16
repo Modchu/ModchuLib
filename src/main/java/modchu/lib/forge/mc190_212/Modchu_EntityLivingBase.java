@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_EntityDataManagerMaster2;
 import modchu.lib.Modchu_IEntityLivingBase;
 import modchu.lib.Modchu_IEntityLivingBaseMaster;
 import modchu.lib.Modchu_IEntityTameableMaster;
@@ -48,7 +49,6 @@ import net.minecraft.scoreboard.Team;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.CombatTracker;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
@@ -70,10 +70,11 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 	public Modchu_IEntityLivingBaseMaster master;
 	public String entityName;
 	public static ConcurrentHashMap<String, UUID> entityUniqueIDMap = new ConcurrentHashMap();
-	protected ConcurrentHashMap<String, DataParameter> dataParameterMap = new ConcurrentHashMap();
 	protected UUID entityUniqueID;
 	protected int maxHealth;
 	protected boolean initFlag;
+	public int ridingEntity2;
+	private int dataWatcherWatchableObjectIdCount = 11;
 
 	public Modchu_EntityLivingBase(World world) {
 		super(world);
@@ -90,8 +91,52 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 	}
 
 	@Override
-	public ConcurrentHashMap getDataParameterMap() {
-		return dataParameterMap;
+	public int getDataWatcherWatchableObjectIdCount() {
+		return dataWatcherWatchableObjectIdCount;
+	}
+
+	@Override
+	public void setDataWatcherWatchableObjectIdCount(int i) {
+		dataWatcherWatchableObjectIdCount = i;
+	}
+
+	@Override
+	public Entity getRidingEntity2() {
+		return (Entity) (master != null ? master.getRidingEntity2() : superGetRidingEntity2());
+	}
+
+	@Override
+	public Entity superGetRidingEntity2() {
+		// TODO Riding2
+		if (ridingEntity2 != 0) {
+			World worldObj = (World) Modchu_AS.get(Modchu_AS.entityWorldObj, this);
+			return worldObj.getEntityByID(ridingEntity2);
+		}
+		return null;
+	}
+
+	@Override
+	public boolean isRiding2() {
+		// TODO Riding2
+		return master != null ? master.isRiding2() : superIsRiding2();
+	}
+
+	@Override
+	public boolean superIsRiding2() {
+		// TODO Riding2
+		return ridingEntity2 != 0;
+	}
+
+	@Override
+	public void dismountRidingEntity2() {
+		// TODO Riding2
+		if (master != null) master.dismountRidingEntity2();
+		else superDismountRidingEntity2();
+	}
+
+	@Override
+	public void superDismountRidingEntity2() {
+		ridingEntity2 = 0;
 	}
 
 	@Override
@@ -155,6 +200,10 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 	}
 
 	protected void init(HashMap<String, Object> map) {
+		int version = Modchu_Main.getMinecraftVersion();
+		Modchu_AS.set("Entity", version > 190
+				| (version == 190
+				&& Modchu_Main.isRelease()) ? "dataManager" : "dataWatcher", this, (EntityDataManager) Modchu_Main.newModchuCharacteristicObject("Modchu_EntityDataManager", Modchu_EntityDataManagerMaster2.class, this, Modchu_AS.get("Entity", version > 190 ? "dataManager" : "dataWatcher", this)));
 		World worldObj = (World) Modchu_AS.get(Modchu_AS.entityWorldObj, this);
 		boolean isRemote = Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this);
 		Modchu_Debug.mDebug("Modchu_EntityLivingBase init isRemote="+isRemote+" map="+map);
@@ -1935,16 +1984,6 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 	@Override
 	public boolean superHitByEntity(Object entity) {
 		return super.hitByEntity((Entity) entity);
-	}
-
-	@Override
-	public String toString() {
-		return master != null ? master.toString() : super.toString();
-	}
-
-	@Override
-	public String superToString() {
-		return super.toString();
 	}
 
 	@Override

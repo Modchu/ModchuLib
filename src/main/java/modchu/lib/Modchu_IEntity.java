@@ -10,10 +10,17 @@ public interface Modchu_IEntity {
 	public void superSetFreeVariable(String s, Object o);
 	public void superInit();
 	public void superSetMaxHealth(Object floatOrInt);
-	public void entityDataManagerRegister(Class c, Class[] c1, int i, Object o);
-	public Object getDataWatcherGetWatchableObject(int i);
-	public void setDataWatcherGetWatchableObject(int i, Object o);
-	public ConcurrentHashMap getDataParameterMap();
+	public void entityDataManagerRegister(Class[] c1, int i, Object o);
+	public Object getDataWatcherWatchableObject(int i);
+	public void setDataWatcherWatchableObject(int i, Object o);
+	public Object getRidingEntity2();
+	public Object superGetRidingEntity2();
+	public boolean isRiding2();
+	public boolean superIsRiding2();
+	public void dismountRidingEntity2();
+	public void superDismountRidingEntity2();
+	public int getDataWatcherWatchableObjectIdCount();
+	public void setDataWatcherWatchableObjectIdCount(int i);
 
 	public int superGetEntityId();
 	public void superSetEntityId(int p_145769_1_);
@@ -131,7 +138,6 @@ public interface Modchu_IEntity {
 	public void superSetRotationYawHead(float p_70034_1_);
 	public boolean superCanBeAttackedWithItem();
 	public boolean superHitByEntity(Object entity);
-	public String superToString();
 	public boolean superIsEntityInvulnerable();
 	public void superCopyLocationAndAnglesFrom(Object entity);
 	public void superCopyDataFrom(Object entity, boolean p_82141_2_);

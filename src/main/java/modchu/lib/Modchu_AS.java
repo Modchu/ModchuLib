@@ -3569,6 +3569,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected int getVacancyGlobalEntityID() {
+		Modchu_Debug.mDebug("Modchu_AS getVacancyGlobalEntityID() master="+master);
 		return master != null ? master.getVacancyGlobalEntityID() : super.getVacancyGlobalEntityID();
 	}
 
@@ -8627,6 +8628,33 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	public Object superNewResourceLocation(String s) {
 		return super.newResourceLocation(s);
+	}
+
+	@Override
+	public Object itemSetRegistryName(Object item, Object resourceLocation) {
+		return master != null ? master.itemSetRegistryName(item, resourceLocation) : null;
+	}
+
+	public Object superItemSetRegistryName(Object item, Object resourceLocation) {
+		return super.itemSetRegistryName(item, resourceLocation);
+	}
+
+	@Override
+	public Object itemSetRegistryName(Object item, String s) {
+		return master != null ? master.itemSetRegistryName(item, s) : null;
+	}
+
+	public Object superItemSetRegistryName(Object item, String s) {
+		return super.itemSetRegistryName(item, s);
+	}
+
+	@Override
+	public Object itemSetRegistryName(Object item, String s, String s1) {
+		return master != null ? master.itemSetRegistryName(item, s, s1) : null;
+	}
+
+	public Object superItemSetRegistryName(Object item, String s, String s1) {
+		return super.itemSetRegistryName(item, s, s1);
 	}
 
 }

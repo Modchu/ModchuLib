@@ -8,7 +8,7 @@ package modchu.lib.forge.mc180_189;import java.util.Collection;import java.ut
 		master = instance != null
 				&& instance instanceof Modchu_IEntityPlayerSPMaster ? (Modchu_IEntityPlayerSPMaster) instance : null;
 		if (master != null); else Modchu_Debug.lDebug("Modchu_EntityPlayerSP init master == null !!");
-	}	@Override	public void init() {
+	}	@Override	public Object getRidingEntity2() {		return superGetRidingEntity();	}	@Override	public Object superGetRidingEntity2() {		return superGetRidingEntity();	}	@Override	public boolean isRiding2() {		return isRiding();	}	@Override	public boolean superIsRiding2() {		return superIsRiding();	}	@Override	public void dismountRidingEntity2() {		superDismountRidingEntity();	}	@Override	public void superDismountRidingEntity2() {		superDismountRidingEntity();	}	@Override	public void init() {
 		if (master != null) master.init();
 	}	@Override
 	public void wakeUpPlayer(boolean flag, boolean flag1, boolean flag2) {

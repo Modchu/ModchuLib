@@ -3,7 +3,9 @@ package modchu.lib.forge.mc189;
 import java.util.HashMap;
 
 import modchu.lib.Modchu_AS;
+import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntityTameable;
+import modchu.lib.Modchu_Main;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandResultStats;
@@ -50,6 +52,23 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 	@Override
 	public void onUpdate() {
 		if (worldObj != null); else return;
+		//Modchu_Debug.mDebug("Modchu_EntityTameable onUpdate master="+master);
+		//Modchu_Debug.mDebug("Modchu_EntityTameable onUpdate worldObj.isRemote="+worldObj.isRemote);
+		if (!initFlag) {
+			//((Modchu_IEntityDataManager) dataManager).initIdCountSetting();
+			if (worldObj.isRemote) {
+				int version = Modchu_Main.getMinecraftVersion();
+				dataWatcherWatchableObjectIdFirst = 18;
+				int i = dataWatcherWatchableObjectIdFirst;
+				entityDataManagerRegister(new Class[]{ String.class }, i, "");
+				i++;
+				setDataWatcherWatchableObjectIdCount(i);
+				Modchu_Debug.mDebug("Modchu_EntityTameable onUpdate worldObj.isRemote i="+i);
+				initFlag = true;
+			}
+			init(tempInitMap);
+		}
+		if (debugDead) setDead();
 		if (!worldObj.isRemote) {
 			Object attributeMap = getAttributeMap();
 			if (ticksExisted % 20 == 0) {

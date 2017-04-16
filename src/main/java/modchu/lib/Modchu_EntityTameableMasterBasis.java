@@ -25,11 +25,6 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public String toString() {
-		return base.superToString();
-	}
-
-	@Override
 	public void applyEntityAttributes() {
 		base.superApplyEntityAttributes();
 	}
@@ -1618,7 +1613,7 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	@Override
 	public void doBlockCollisions() {
 		base.superDoBlockCollisions();
-		
+
 	}
 
 	@Override
@@ -2758,6 +2753,26 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	@Override
 	public String thisToString() {
 		return getClass().getName() + "@" + Integer.toHexString(super.hashCode());
+	}
+
+	@Override
+	public boolean isOnLivingUpdateCancel() {
+		return base.superIsOnLivingUpdateCancel();
+	}
+
+	@Override
+	public Object getRidingEntity2() {
+		return base.superGetRidingEntity2();
+	}
+
+	@Override
+	public boolean isRiding2() {
+		return base.superIsRiding2();
+	}
+
+	@Override
+	public void dismountRidingEntity2() {
+		base.superDismountRidingEntity2();
 	}
 
 }

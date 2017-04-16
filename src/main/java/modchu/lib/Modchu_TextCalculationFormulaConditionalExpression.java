@@ -19,17 +19,18 @@ public class Modchu_TextCalculationFormulaConditionalExpression extends Modchu_T
 
 	public int getExpressionCharacterInt(String s) {
 		if (s != null
-				&& !s.isEmpty()); else return -1; 
+				&& !s.isEmpty()); else return -1;
 		return conditionalExpressionStringList.indexOf(s);
 	}
 
 	@Override
-	public Object calculationObject(Object o, Object o1, byte type, HashMap<String, Object>... map) {
-		return calculationBoolean(o, o1, type, map);
+	public Object calculationObject(Object o, Object o1, byte ty, HashMap<String, Object>... map) {
+		return calculationBoolean(o, o1, ty, map);
 	}
 
-	protected boolean calculationBoolean(Object o, Object o1, byte type, HashMap<String, Object>... map) {
+	protected boolean calculationBoolean(Object o, Object o1, byte by, HashMap<String, Object>... map) {
 		boolean debug = Modchu_TextCalculation.tempDebug;
+		init(o, o1, by, map);
 		int dataInt = getDataInt();
 		boolean b = false;
 		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculationFormulaConditionalExpression calculationBoolean o1="+o1);
@@ -194,6 +195,15 @@ public class Modchu_TextCalculationFormulaConditionalExpression extends Modchu_T
 		boolean debug = Modchu_TextCalculation.tempDebug;
 		String s = getDataString();
 		List list = (List) data;
+		if (list != null
+				&& !list.isEmpty()); else {
+			String ss = "Modchu_TextCalculationFormulaConditionalExpression	dataToString	list == null error !!";
+			if (debug) {
+				Modchu_Debug.mDebug(ss);
+				Modchu_Main.setRuntimeException(ss);
+			}
+			return null;
+		}
 		Object o = list.get(0);
 		Object o1 = list.get(1);
 		String s1 = ((Modchu_RunCalculationList) o).dataToString(null, false);

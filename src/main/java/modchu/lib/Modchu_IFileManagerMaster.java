@@ -62,5 +62,12 @@ public interface Modchu_IFileManagerMaster {
 	public void setModZipFileList(List<ZipFile> list);
 	public List<ZipFile> getModsZipFileList();
 	public void setModsZipFileList(List<ZipFile> list);
+	public Map<String, ZipEntry> loadZipFileToZipEntryMap(File file, Map<String, ZipEntry> map);
+	public HashMap<String, ZipEntry> loadZipFileToZipEntryHashMap(File file);
+	public Map<String, InputStream> loadZipFileToInputStreamMap(ZipFile zipFile, Map<String, InputStream> map);
+	public HashMap<String, InputStream> loadZipFileToInputStreamHashMap(ZipFile zipFile);
+	public List<File> getDirFileList(List<File> list);
+	public String getCurrentDir(String s);
+	public String getRelativePath(String s);
 
 }

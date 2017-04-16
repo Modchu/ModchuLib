@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_IEntityDataManager;
 import modchu.lib.Modchu_IEntityTameable;
 import modchu.lib.Modchu_Main;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -31,36 +32,18 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc190_212.Modchu_Ent
 	}
 
 	@Override
-	public void entityDataManagerRegister(Class c, Class[] c1, int i, Object o) {
-		//Modchu_Debug.mDebug("Modchu_EntityTameable entityDataManagerRegister 1 c="+c+" c1="+c1+" i="+i+" o="+o);
-		DataParameter dataParameter = (DataParameter) Modchu_AS.get(Modchu_AS.newDataParameter, getClass(), c1, i);
-		//Modchu_Debug.mDebug("Modchu_EntityTameable entityDataManagerRegister 2 dataParameter="+dataParameter);
-		if (dataParameter != null) {
-			dataManager.register(dataParameter, o);
-			String key= c.getName() + i;
-			dataParameterMap.put(key, dataParameter);
-			//Modchu_Debug.mDebug("Modchu_EntityTameable entityDataManagerRegister register ok. key="+key);
-		} else {
-			String ss = "Modchu_EntityTameable entityDataManagerRegister dataParameter == null error !! c="+c+" c1="+c1+" i="+i+" o="+o;
-			Modchu_Debug.mDebug(ss);
-			Modchu_Main.setRuntimeException(ss);
-		}
+	public void entityDataManagerRegister(Class[] c1, int i, Object o) {
+		((Modchu_IEntityDataManager) dataManager).entityDataManagerRegister(c1, i, o);
 	}
 
 	@Override
-	public Object getDataWatcherGetWatchableObject(int i) {
-		String key= master.getClass().getName() + i;
-		DataParameter dataParameter = dataParameterMap.get(key);
-		//Modchu_Debug.mDebug("Modchu_EntityTameable getDataWatcherGetWatchableObject key="+key);
-		return dataManager.get(dataParameter);
+	public Object getDataWatcherWatchableObject(int i) {
+		return ((Modchu_IEntityDataManager) dataManager).getDataWatcherWatchableObject(i);
 	}
 
 	@Override
-	public void setDataWatcherGetWatchableObject(int i, Object o) {
-		String key= master.getClass().getName() + i;
-		DataParameter dataParameter = dataParameterMap.get(key);
-		//Modchu_Debug.mDebug("Modchu_EntityTameable setDataWatcherGetWatchableObject key="+key);
-		dataManager.set(dataParameter, o);
+	public void setDataWatcherWatchableObject(int i, Object o) {
+		((Modchu_IEntityDataManager) dataManager).setDataWatcherWatchableObject(i, o);
 	}
 
 	@Override

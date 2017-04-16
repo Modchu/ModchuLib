@@ -4,9 +4,15 @@ import java.util.Random;
 import java.util.UUID;
 
 public interface Modchu_IEntityPlayerSP {
-
 	public void init();
 	public void setPositionCorrection(double par1, double par3, double par5);
+	public Object getRidingEntity2();
+	public Object superGetRidingEntity2();
+	public boolean superIsRiding2();
+	public boolean isRiding2();
+	public void superDismountRidingEntity2();
+	public void dismountRidingEntity2();
+
 	public Object supergetCreatureAttribute();
 	public void supersetSize(float f, float f1);
 	public boolean superpushOutOfBlocks(double d, double d1, double d2);

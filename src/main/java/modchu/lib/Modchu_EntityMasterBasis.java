@@ -1359,4 +1359,19 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 		return getClass().getName() + "@" + Integer.toHexString(super.hashCode());
 	}
 
+	@Override
+	public Object getRidingEntity2() {
+		return base.superGetRidingEntity2();
+	}
+
+	@Override
+	public boolean isRiding2() {
+		return base.superIsRiding2();
+	}
+
+	@Override
+	public void dismountRidingEntity2() {
+		base.superDismountRidingEntity2();
+	}
+
 }

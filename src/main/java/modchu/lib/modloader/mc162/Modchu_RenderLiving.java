@@ -240,6 +240,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public void superRenderLivingLabel(Object entity, String str, double x, double y, double z, int maxDistance) {
+		super.renderLivingLabel((EntityLivingBase) entity, str, x, y, z, maxDistance);
 	}
 
 	@Override

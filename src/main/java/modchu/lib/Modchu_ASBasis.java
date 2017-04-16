@@ -4641,4 +4641,19 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 		return base.superNewResourceLocation(s);
 	}
 
+	@Override
+	public Object itemSetRegistryName(Object item, Object resourceLocation) {
+		return base.superItemSetRegistryName(item, resourceLocation);
+	}
+
+	@Override
+	public Object itemSetRegistryName(Object item, String s) {
+		return base.superItemSetRegistryName(item, s);
+	}
+
+	@Override
+	public Object itemSetRegistryName(Object item, String s, String s1) {
+		return base.superItemSetRegistryName(item, s, s1);
+	}
+
 }

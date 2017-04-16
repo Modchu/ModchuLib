@@ -1027,7 +1027,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 /*
  * サーバー読み込みで問題になる。
- * 
+ *
 	@Override
 	public Enum itemCameraTransformsTransformTypeNONE() {
 		return ItemCameraTransforms.TransformType.NONE;
@@ -1371,7 +1371,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	public boolean entityStartRiding(Object entity, Object entity2, boolean b) {
 		if (entity2 != null) return ((Entity) entity).startRiding((Entity) entity2, b);
 		else ((Entity) entity).dismountRidingEntity();
-		return false;
+		return true;
 	}
 
 	@Override
@@ -3184,7 +3184,13 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void textureManagerBindTexture(Object textureManager, Object o) {
-		if (o != null) ((TextureManager) textureManager).bindTexture((ResourceLocation) o);
+		if (o != null) {
+			try {
+				((TextureManager) textureManager).bindTexture((ResourceLocation) o);
+			} catch(Exception e) {
+				Modchu_Debug.lDebug1("Modchu_ASMaster textureManagerBindTexture Exception !! o="+o);
+			}
+		}
 	}
 
 	@Override
@@ -3513,13 +3519,28 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object newSoundEvent(Object resourceLocationOrString) {
-		resourceLocationOrString = resourceLocationOrString instanceof ResourceLocation ? resourceLocationOrString : new ResourceLocation((String) resourceLocationOrString); 
+		resourceLocationOrString = resourceLocationOrString instanceof ResourceLocation ? resourceLocationOrString : new ResourceLocation((String) resourceLocationOrString);
 		return new SoundEvent((ResourceLocation) resourceLocationOrString);
 	}
 
 	@Override
 	public Object newResourceLocation(String s) {
 		return new ResourceLocation(s);
+	}
+
+	@Override
+	public Object itemSetRegistryName(Object item, Object resourceLocation) {
+		return ((Item) item).setRegistryName((ResourceLocation) resourceLocation);
+	}
+
+	@Override
+	public Object itemSetRegistryName(Object item, String s) {
+		return ((Item) item).setRegistryName(s);
+	}
+
+	@Override
+	public Object itemSetRegistryName(Object item, String s, String s1) {
+		return ((Item) item).setRegistryName(s, s1);
 	}
 
 }

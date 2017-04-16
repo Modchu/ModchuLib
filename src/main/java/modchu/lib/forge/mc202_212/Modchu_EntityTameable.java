@@ -1,16 +1,22 @@
 package modchu.lib.forge.mc202_212;
 
 import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.lang3.ObjectUtils;
 
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
-import modchu.lib.Modchu_IEntityTameable;
+import modchu.lib.Modchu_IEntityDataManager;
 import modchu.lib.Modchu_Main;
+import modchu.lib.forge.mc190_212.Modchu_EntityDataManager;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.network.datasync.EntityDataManager.DataEntry;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.world.World;
 
@@ -25,36 +31,34 @@ public abstract class Modchu_EntityTameable extends modchu.lib.forge.mc190_212.M
 	}
 
 	@Override
-	public void entityDataManagerRegister(Class c, Class[] c1, int i, Object o) {
-		//Modchu_Debug.mDebug("Modchu_EntityTameable entityDataManagerRegister 1 c="+c+" c1="+c1+" i="+i+" o="+o);
-		DataParameter dataParameter = (DataParameter) Modchu_AS.get(Modchu_AS.newDataParameter, getClass(), c1, i);
-		//Modchu_Debug.mDebug("Modchu_EntityTameable entityDataManagerRegister 2 dataParameter="+dataParameter);
-		if (dataParameter != null) {
-			dataManager.register(dataParameter, o);
-			String key= c.getName() + i;
-			dataParameterMap.put(key, dataParameter);
-			//Modchu_Debug.mDebug("Modchu_EntityTameable entityDataManagerRegister register ok. key="+key);
-		} else {
-			String ss = "Modchu_EntityTameable entityDataManagerRegister dataParameter == null error !! c="+c+" c1="+c1+" i="+i+" o="+o;
-			Modchu_Debug.mDebug(ss);
-			Modchu_Main.setRuntimeException(ss);
+	public void entityDataManagerRegister(Class[] c1, int i, Object o) {
+		((Modchu_IEntityDataManager) dataManager).entityDataManagerRegister(c1, i, o);
+	}
+
+	@Override
+	public Object getDataWatcherWatchableObject(int i) {
+		Object o = ((Modchu_IEntityDataManager) dataManager).getDataWatcherWatchableObject(i);
+		boolean debug = false;
+		World worldObj = (World) Modchu_AS.get(Modchu_AS.entityWorldObj, this);
+		if (debug
+				&& initFlag
+				&& worldObj.isRemote) {
+			if (debugDataWatcherMap != null); else debugDataWatcherMap = debugDataWatcherEntityMap.get(getEntityId());
+			if (debugDataWatcherMap != null) {
+				Object o1 = debugDataWatcherMap.get(i);
+				if (!o.equals(o1)) {
+					Modchu_Debug.mDebug("getDataWatcherWatchableObject !o.equals(o1) error !! i="+i+" o="+o+" o1="+o1);
+				}
+			}
 		}
+		return o;
 	}
 
 	@Override
-	public Object getDataWatcherGetWatchableObject(int i) {
-		String key= master.getClass().getName() + i;
-		DataParameter dataParameter = dataParameterMap.get(key);
-		//Modchu_Debug.mDebug("Modchu_EntityTameable getDataWatcherGetWatchableObject key="+key);
-		return dataManager.get(dataParameter);
-	}
-
-	@Override
-	public void setDataWatcherGetWatchableObject(int i, Object o) {
-		String key= master.getClass().getName() + i;
-		DataParameter dataParameter = dataParameterMap.get(key);
-		//Modchu_Debug.mDebug("Modchu_EntityTameable setDataWatcherGetWatchableObject key="+key);
-		dataManager.set(dataParameter, o);
+	public void setDataWatcherWatchableObject(int i, Object o) {
+		((Modchu_IEntityDataManager) dataManager).setDataWatcherWatchableObject(i, o);
+		World worldObj = (World) Modchu_AS.get(Modchu_AS.entityWorldObj, this);
+		if (!worldObj.isRemote) debugDataWatcherMap.put(i, o);
 	}
 
 	@Override

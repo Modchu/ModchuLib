@@ -764,5 +764,6 @@ public interface Modchu_ASC {
 	public static final int newSoundEvent_int = 16468;
 	public static final int newResourceLocation_int = 16469;
 	public static final int mathHelperClamp_int = 16470;
+	public static final int itemSetRegistryName_int = 16471;
 
 }

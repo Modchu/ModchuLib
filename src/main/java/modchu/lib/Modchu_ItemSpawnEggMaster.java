@@ -9,17 +9,19 @@ public class Modchu_ItemSpawnEggMaster extends Modchu_ItemMasterBasis {
 	public final int secondaryColor;
 	public HashMap<Integer, String> spawnNameMap = new HashMap();
 	public Object theIcon;
+	//public static int damageCount = -1;
 
 	public Modchu_ItemSpawnEggMaster(HashMap<String, Object> map) {
 		super(map);
+		//damageCount++;
 		setHasSubtypes(true);
 		primaryColor = (Integer) map.get("Integer1");
 		secondaryColor = (Integer) map.get("Integer2");
 	}
 
-	public void setSpawn(int i, String s) {
-		Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster setSpawn i="+i+" s="+s);
-		spawnNameMap.put(i, s);
+	public void setSpawn(String s) {
+		//Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster setSpawn damageCount="+damageCount+" s="+s);
+		spawnNameMap.put(0, s);
 	}
 
 	@Override
@@ -122,7 +124,7 @@ public class Modchu_ItemSpawnEggMaster extends Modchu_ItemMasterBasis {
 	}
 
 	protected Object spawnCreature(Object world, int par1, double par2, double par4, double par6) {
-		boolean debug = false;
+		boolean debug = true;
 		if (debug) {
 			boolean isRemote = Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, world);
 			Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster spawnCreature isRemote="+isRemote);
@@ -130,6 +132,7 @@ public class Modchu_ItemSpawnEggMaster extends Modchu_ItemMasterBasis {
 			Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster spawnCreature spawnNameMap="+spawnNameMap);
 		}
 		String spawName = spawnNameMap.get(par1);
+		if (debug) Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster spawnCreature spawName="+spawName);
 		return Modchu_SpawnManager.instance.spawnCreature(spawName, world, par2, par4, par6);
 	}
 

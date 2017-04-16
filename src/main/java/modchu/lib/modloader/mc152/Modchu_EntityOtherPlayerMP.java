@@ -7,6 +7,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.Modchu_AS;
+import modchu.lib.Modchu_DataWatcherMaster2;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntityOtherPlayerMP;
 import modchu.lib.Modchu_IEntityOtherPlayerMPMaster;
@@ -71,27 +72,62 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 		master = instance != null
 				&& instance instanceof Modchu_IEntityOtherPlayerMPMaster ? (Modchu_IEntityOtherPlayerMPMaster) instance : null;
 		if (master != null); else Modchu_Debug.lDebug("Modchu_EntityOtherPlayerMP init master == null !!");
+		dataWatcher = (DataWatcher) Modchu_Main.newModchuCharacteristicObject("Modchu_DataWatcher", Modchu_DataWatcherMaster2.class, this, dataWatcher);
 	}
 
 	@Override
-	public void entityDataManagerRegister(Class c, Class[] c1, int i, Object o) {
+	public Object getRidingEntity2() {
+		return superGetRidingEntity();
+	}
+
+	@Override
+	public Object superGetRidingEntity2() {
+		return superGetRidingEntity();
+	}
+
+	@Override
+	public boolean isRiding2() {
+		return isRiding();
+	}
+
+	@Override
+	public boolean superIsRiding2() {
+		return superIsRiding();
+	}
+
+	@Override
+	public void dismountRidingEntity2() {
+		superDismountRidingEntity();
+	}
+
+	@Override
+	public void superDismountRidingEntity2() {
+		superDismountRidingEntity();
+	}
+
+	@Override
+	public int getDataWatcherWatchableObjectIdCount() {
+		return 13;
+	}
+
+	@Override
+	public void setDataWatcherWatchableObjectIdCount(int i) {
+	}
+
+	@Override
+	public void entityDataManagerRegister(Class[] c1, int i, Object o) {
 		dataWatcher.addObject(i, o);
 	}
 
 	@Override
-	public Object getDataWatcherGetWatchableObject(int i) {
+	public Object getDataWatcherWatchableObject(int i) {
 		Object watchedObject = Modchu_AS.get("DataWatcher", "getWatchedObject", new Class[]{ int.class }, dataWatcher, new Object[]{ i });
 		return watchedObject != null ? Modchu_AS.get("WatchableObject", "getObject", watchedObject) : null;
 	}
 
 	@Override
-	public void setDataWatcherGetWatchableObject(int i, Object o) {
+	public void setDataWatcherWatchableObject(int i, Object o) {
 		dataWatcher.updateObject(i, o);
-	}
-
-	@Override
-	public ConcurrentHashMap getDataParameterMap() {
-		return null;
 	}
 
 	@Override
@@ -2751,16 +2787,6 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	@Override
 	public boolean superCanBeAttackedWithItem() {
 		return super.canAttackWithItem();
-	}
-
-	@Override
-	public String toString() {
-		return master != null ? master.toString() : super.toString();
-	}
-
-	@Override
-	public String superToString() {
-		return super.toString();
 	}
 
 	@Override

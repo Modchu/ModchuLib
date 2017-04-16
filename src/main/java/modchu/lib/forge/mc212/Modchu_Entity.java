@@ -2,6 +2,8 @@ package modchu.lib.forge.mc212;
 
 import java.util.HashMap;
 
+import modchu.lib.Modchu_AS;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;

@@ -3,6 +3,8 @@ package modchu.lib;
 import java.util.UUID;
 
 public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster {
+	public boolean isOnLivingUpdateCancel();
+
 	public void attackEntity(Object entity, float f);
 	public Object createChild(Object entityanimal);
 	public Object findPlayerToAttack();

@@ -60,7 +60,7 @@ public abstract class Modchu_AllRenderLiving extends RenderLiving implements Mod
 		//Modchu_Debug.mDebug1("Modchu_AllRenderLiving doRender render="+render);
 		if (render != null) render.doRender(entity, d, d1, d2, d3, d4);
 		else {
-			Modchu_Debug.mDebug("Modchu_AllRenderLiving doRender render == null !! entity="+entity+" entity.getClass()="+(entity != null ? entity.getClass() : null));
+			Modchu_Debug.mDebug1("Modchu_AllRenderLiving doRender render == null !! entity="+entity+" entity.getClass()="+(entity != null ? entity.getClass() : null));
 		}
 	}
 

@@ -2,9 +2,8 @@ package modchu.lib.forge.mc210_212;
 
 import java.util.HashMap;
 
-import net.minecraft.entity.MoverType;
+import modchu.lib.Modchu_Debug;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.Vec3d;
@@ -22,6 +21,7 @@ public abstract class Modchu_EntityTameable extends modchu.lib.forge.mc202_212.M
 
 	@Override
 	public boolean processInteract(EntityPlayer entityPlayer, EnumHand enumHand) {
+		Modchu_Debug.mDebug("Modchu_EntityTameable processInteract");
 		return master != null ? master.processInteract(entityPlayer, enumHand, null) : super.processInteract(entityPlayer, enumHand);
 	}
 

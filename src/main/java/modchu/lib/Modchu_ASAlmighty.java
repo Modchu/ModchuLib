@@ -32,45 +32,53 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		minecraftGetMinecraft();
 	}
 	// TODO
-	public static Object get(String s, String s1) {
-		return instance.getB(null, s, s1, null, null, (Object[])null);
+	public static Object get(int i, String s1) {
+		return instance.getB(i, new Object[]{ s1 });
 	}
 
-	public static Object get(String s, String s1, Object pArg) {
-		return instance.getB(null, s, s1, null, pArg, (Object[])null);
+	public static Object get(int i, String s1, String s2) {
+		return instance.getB(i, new Object[]{ s1, s2 });
 	}
 
-	public static Object get(String s, String s1, Object[] pArg) {
-		return instance.getB(null, s, s1, null, null, pArg);
+	public static Object get(Object o, String s1) {
+		return instance.getB(null, o, s1, null, null, (Object[])null);
 	}
 
-	public static Object get(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getB(null, s, s1, c, null, pArg);
+	public static Object get(Object o, String s1, Object pArg) {
+		return instance.getB(null, o, s1, null, pArg, (Object[])null);
 	}
 
-	public static Object get(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getB(null, s, s1, c, o, pArg);
+	public static Object get(Object o, String s1, Object[] pArg) {
+		return instance.getB(null, o, s1, null, null, pArg);
 	}
 
-	public static Object get(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return instance.getB(accessSupport, s, s1, pArg);
+	public static Object get(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getB(null, o, s1, c, null, pArg);
 	}
 
-	public static Object get(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return instance.getB(accessSupport, s, s1, pArg);
+	public static Object get(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getB(null, o, s1, c, o1, pArg);
 	}
 
-	public static Object get(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getB(accessSupport, s, s1, c, null, pArg);
+	public static Object get(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return instance.getB(accessSupport, o, s1, pArg);
 	}
 
-	public static Object get(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getB(accessSupport, s, s1, c, o, pArg);
+	public static Object get(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return instance.getB(accessSupport, o, s1, pArg);
+	}
+
+	public static Object get(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getB(accessSupport, o, s1, c, null, pArg);
+	}
+
+	public static Object get(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getB(accessSupport, o, s1, c, o1, pArg);
 	}
 
 	@Override
-	public Object getB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return getB(null, s, s1, c, o, pArg);
+	public Object getB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return getB(null, o, s1, c, o1, pArg);
 	}
 
 	public static boolean set(int pIndex, Object... pArg) {
@@ -81,87 +89,95 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return instance.setB(accessSupport, pIndex, pArg);
 	}
 
-	public static boolean set(String s, String s1) {
-		return instance.setB(null, s, s1, null, null, (Object[])null);
+	public static boolean set(int i, String s1) {
+		return instance.setB(null, i, new Object[]{ s1 });
 	}
 
-	public static boolean set(String s, String s1, Object pArg) {
-		return instance.setB(null, s, s1, null, pArg, (Object[])null);
+	public static boolean set(Object o, String s1) {
+		return instance.setB(null, o, s1, null, null, (Object[])null);
 	}
 
-	public static boolean set(String s, String s1, Object pArg, Object... pArg1) {
+	public static boolean set(Object o, String s1, Object pArg) {
+		return instance.setB(null, o, s1, null, pArg, (Object[])null);
+	}
+
+	public static boolean set(Object o, String s1, Object pArg, Object... pArg1) {
 /*
 		if (pArg1 != null
 				&& pArg1.length > 0) {
 			Modchu_Debug.mDebug("Modchu_ASAlmighty set pArg1[0]="+pArg1[0]);
 		}
 */
-		return instance.setB(null, s, s1, null, pArg, pArg1);
+		return instance.setB(null, o, s1, null, pArg, pArg1);
 	}
 
-	public static boolean set(String s, String s1, Object[] pArg) {
-		return instance.setB(null, s, s1, null, null, pArg);
+	public static boolean set(Class c, String s1, Object pArg, Object... pArg1) {
+		return instance.setB(null, c, s1, null, pArg, pArg1);
 	}
 
-	public static boolean set(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.setB(null, s, s1, c, null, pArg);
+	public static boolean set(Object o, String s1, Object[] pArg) {
+		return instance.setB(null, o, s1, null, null, pArg);
 	}
 
-	public static boolean set(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.setB(null, s, s1, c, o, pArg);
+	public static boolean set(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.setB(null, o, s1, c, null, pArg);
 	}
 
-	public static boolean set(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return instance.setB(accessSupport, s, s1, null, pArg, (Object[])null);
+	public static boolean set(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.setB(null, o, s1, c, o1, pArg);
 	}
 
-	public static boolean set(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return instance.setB(accessSupport, s, s1, null, null, pArg);
+	public static boolean set(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return instance.setB(accessSupport, o, s1, null, pArg, (Object[])null);
 	}
 
-	public static boolean set(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return instance.setB(accessSupport, s, s1, c, null, pArg);
+	public static boolean set(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return instance.setB(accessSupport, o, s1, null, null, pArg);
 	}
 
-	public static boolean set(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.setB(accessSupport, s, s1, c, o, pArg);
+	public static boolean set(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.setB(accessSupport, o, s1, c, null, pArg);
 	}
 
-	@Override
-	public Object getB(String s, String s1, Object pArg) {
-		return getB(null, s, s1, pArg);
-	}
-
-	public Object getB(String s, String s1, Object[] pArg) {
-		return getB(null, s, s1, pArg);
+	public static boolean set(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.setB(accessSupport, o, s1, c, o1, pArg);
 	}
 
 	@Override
-	public Object getB(String s, String s1, Class[] c, Object[] pArg) {
-		return getB(null, s, s1, c, null, pArg);
+	public Object getB(Object o, String s1, Object pArg) {
+		return getB(null, o, s1, pArg);
+	}
+
+	public Object getB(Object o, String s1, Object[] pArg) {
+		return getB(null, o, s1, pArg);
 	}
 
 	@Override
-	public Object getB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return getB(accessSupport, s, s1, null, pArg, (Object[]) null);
-	}
-
-	public Object getB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return getB(accessSupport, s, s1, null, null, pArg);
+	public Object getB(Object o, String s1, Class[] c, Object[] pArg) {
+		return getB(null, o, s1, c, null, pArg);
 	}
 
 	@Override
-	public Object getB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return getB(accessSupport, s, s1, c, null, pArg);
+	public Object getB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return getB(accessSupport, o, s1, null, pArg, (Object[]) null);
+	}
+
+	public Object getB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return getB(accessSupport, o, s1, null, null, pArg);
 	}
 
 	@Override
-	public Object getB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
+	public Object getB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return getB(accessSupport, o, s1, c, null, pArg);
+	}
+
+	@Override
+	public Object getB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
 		if (accessSupport != null) {
-			Object o1 = accessSupport.getB(s, s1, c, o, pArg);
-			if (o1 != null) return o1;
+			Object o2 = accessSupport.getB(o, s1, c, o1, pArg);
+			if (o2 != null) return o2;
 		}
-		return Modchu_Reflect.getUnownReflection(s, s1, c, o, pArg, -1);
+		return Modchu_Reflect.getUnownReflection(o, s1, c, o1, pArg, -1);
 	}
 
 	public static Object get(int pIndex, Object... pArg) {
@@ -276,6 +292,23 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 					return itemStackGetAttributeModifiers(pArg[0], pArg[1]);
 				} else {
 					return itemStackGetAttributeModifiers(pArg[0]);
+				}
+			}
+			return null;
+		}
+		if (pIndex == itemSetRegistryName) {
+			if (pArg != null
+			&& pArg.length > 0
+			&& pArg[0] != null) {
+				if (pArg.length > 1
+						&& pArg[0] != null
+						&& pArg[1] != null) {
+					if (pArg.length > 2
+							&& pArg[2] != null) {
+						return itemSetRegistryName(pArg[0], (String) pArg[1], (String) pArg[1]);
+					} else {
+						return pArg[1] instanceof String ? itemSetRegistryName(pArg[0], (String) pArg[1]) : itemSetRegistryName(pArg[0], pArg[1]);
+					}
 				}
 			}
 			return null;
@@ -1557,8 +1590,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			if (pArg != null
 			&& pArg.length > 0
 			&& pArg[0] != null) {
-				if (pArg.length > 1
-						&& pArg[1] != null) {
+				if (pArg.length > 1) {
 					return worldGetPlayerEntityByName(pArg[0], (String) pArg[1]);
 				} else {
 					return worldGetPlayerEntityByName((String) pArg[0]);
@@ -1844,27 +1876,27 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	@Override
-	public boolean setB(String s, String s1, Class[] c, Object[] pArg) {
-		return setB(null, s, s1, c, null, pArg);
+	public boolean setB(Object o, String s1, Class[] c, Object[] pArg) {
+		return setB(null, o, s1, c, null, pArg);
 	}
 
 	@Override
-	public boolean setB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return setB(null, s, s1, c, o, pArg);
+	public boolean setB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return setB(null, o, s1, c, o1, pArg);
 	}
 
 	@Override
-	public boolean setB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return setB(null, s, s1, c, null, pArg);
+	public boolean setB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return setB(null, o, s1, c, null, pArg);
 	}
 
 	@Override
-	public boolean setB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
+	public boolean setB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c1, Object o1, Object[] pArg) {
 		if (accessSupport != null) {
-			boolean b = accessSupport.setB(s, s1, c, o, pArg);
+			boolean b = accessSupport.setB(o, s1, c1, o1, pArg);
 			if (b) return b;
 		}
-		return Modchu_Reflect.setUnownReflection(s, s1, c, o, pArg, -1);
+		return Modchu_Reflect.setUnownReflection(o, s1, c1, o1, pArg, -1);
 	}
 
 	public boolean setB(int pIndex, Object[] pArg) {
@@ -4914,1629 +4946,1629 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	@Override
-	public boolean setB(String s, String s1, Object pArg) {
-		return setB(null, s, s1, pArg);
+	public boolean setB(Object o, String s1, Object pArg) {
+		return setB(null, o, s1, pArg);
 	}
 
-	public boolean setB(String s, String s1, Object[] pArg) {
-		return setB(null, s, s1, null, null, pArg);
-	}
-
-	@Override
-	public boolean setB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return setB(accessSupport, s, s1, null, pArg, (Object[])null);
-	}
-
-	public boolean setB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return setB(accessSupport, s, s1, null, null, pArg);
+	public boolean setB(Object o, String s1, Object[] pArg) {
+		return setB(null, o, s1, null, null, pArg);
 	}
 
 	@Override
-	public boolean getBooleanB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Boolean(getB(null, s, s1, c, null, pArg));
+	public boolean setB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return setB(accessSupport, o, s1, null, pArg, (Object[])null);
+	}
+
+	public boolean setB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return setB(accessSupport, o, s1, null, null, pArg);
 	}
 
 	@Override
-	public boolean getBooleanB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Boolean(getB(accessSupport, s, s1, c, null, pArg));
+	public boolean getBooleanB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Boolean(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public float getFloatB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Float(getB(null, s, s1, c, null, pArg));
+	public boolean getBooleanB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Boolean(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public float getFloatB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Float(getB(accessSupport, s, s1, c, null, pArg));
+	public float getFloatB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Float(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public double getDoubleB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Double(getB(null, s, s1, c, null, pArg));
+	public float getFloatB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Float(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public double getDoubleB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Double(getB(accessSupport, s, s1, c, null, pArg));
+	public double getDoubleB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Double(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public int getIntB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Int(getB(null, s, s1, c, null, pArg));
+	public double getDoubleB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Double(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public int getIntB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Int(getB(accessSupport, s, s1, c, null, pArg));
+	public int getIntB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Int(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public long getLongB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Long(getB(null, s, s1, c, null, pArg));
+	public int getIntB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Int(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public long getLongB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Long(getB(accessSupport, s, s1, c, null, pArg));
+	public long getLongB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Long(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public byte getByteB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Byte(getB(null, s, s1, c, null, pArg));
+	public long getLongB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Long(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public byte getByteB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Byte(getB(accessSupport, s, s1, c, null, pArg));
+	public byte getByteB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Byte(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public String getStringB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.String(getB(null, s, s1, c, null, pArg));
+	public byte getByteB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Byte(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public String getStringB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.String(getB(accessSupport, s, s1, c, null, pArg));
+	public String getStringB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.String(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public List getListB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.List(getB(null, s, s1, c, null, pArg));
+	public String getStringB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.String(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public List getListB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.List(getB(accessSupport, s, s1, c, null, pArg));
+	public List getListB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.List(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public ArrayList getArrayListB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.ArrayList(getB(null, s, s1, c, null, pArg));
+	public List getListB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.List(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public ArrayList getArrayListB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.ArrayList(getB(accessSupport, s, s1, c, null, pArg));
+	public ArrayList getArrayListB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.ArrayList(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public LinkedList getLinkedListB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.LinkedList(getB(null, s, s1, c, null, pArg));
+	public ArrayList getArrayListB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.ArrayList(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public LinkedList getLinkedListB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.LinkedList(getB(accessSupport, s, s1, c, null, pArg));
+	public LinkedList getLinkedListB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.LinkedList(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public Enum getEnumB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Enum(getB(null, s, s1, c, null, pArg));
+	public LinkedList getLinkedListB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.LinkedList(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public Enum getEnumB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Enum(getB(accessSupport, s, s1, c, null, pArg));
+	public Enum getEnumB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Enum(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public ConcurrentHashMap getConcurrentHashMapB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.ConcurrentHashMap(getB(null, s, s1, c, null, pArg));
+	public Enum getEnumB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Enum(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public ConcurrentHashMap getConcurrentHashMapB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.ConcurrentHashMap(getB(accessSupport, s, s1, c, null, pArg));
+	public ConcurrentHashMap getConcurrentHashMapB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public HashMap getHashMapB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.HashMap(getB(null, s, s1, c, null, pArg));
+	public ConcurrentHashMap getConcurrentHashMapB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public HashMap getHashMapB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.HashMap(getB(accessSupport, s, s1, c, null, pArg));
+	public HashMap getHashMapB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.HashMap(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public Map getMapB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Map(getB(null, s, s1, c, null, pArg));
+	public HashMap getHashMapB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.HashMap(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public Map getMapB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Map(getB(accessSupport, s, s1, c, null, pArg));
+	public Map getMapB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Map(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public File getFileB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.File(getB(null, s, s1, c, null, pArg));
+	public Map getMapB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Map(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public File getFileB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.File(getB(accessSupport, s, s1, c, null, pArg));
+	public File getFileB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.File(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public IntBuffer getIntBufferB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.IntBuffer(getB(null, s, s1, c, null, pArg));
+	public File getFileB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.File(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public IntBuffer getIntBufferB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.IntBuffer(getB(accessSupport, s, s1, c, null, pArg));
+	public IntBuffer getIntBufferB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.IntBuffer(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public InputStream getInputStreamB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.InputStream(getB(null, s, s1, c, null, pArg));
+	public IntBuffer getIntBufferB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.IntBuffer(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public InputStream getInputStreamB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.InputStream(getB(accessSupport, s, s1, c, null, pArg));
+	public InputStream getInputStreamB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.InputStream(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public int[] getIntArrayB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.IntArray(getB(null, s, s1, c, null, pArg));
+	public InputStream getInputStreamB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.InputStream(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public int[] getIntArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.IntArray(getB(accessSupport, s, s1, c, null, pArg));
+	public int[] getIntArrayB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.IntArray(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public float[] getFloatArrayB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.FloatArray(getB(null, s, s1, c, null, pArg));
+	public int[] getIntArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.IntArray(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public float[] getFloatArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.FloatArray(getB(accessSupport, s, s1, c, null, pArg));
+	public float[] getFloatArrayB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.FloatArray(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public double[] getDoubleArrayB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.DoubleArray(getB(null, s, s1, c, null, pArg));
+	public float[] getFloatArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.FloatArray(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public double[] getDoubleArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.DoubleArray(getB(accessSupport, s, s1, c, null, pArg));
+	public double[] getDoubleArrayB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.DoubleArray(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public byte[] getByteArrayB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.ByteArray(getB(null, s, s1, c, null, pArg));
+	public double[] getDoubleArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.DoubleArray(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public byte[] getByteArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.ByteArray(getB(accessSupport, s, s1, c, null, pArg));
+	public byte[] getByteArrayB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.ByteArray(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public String[] getStringArrayB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.StringArray(getB(null, s, s1, c, null, pArg));
+	public byte[] getByteArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.ByteArray(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public String[] getStringArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.StringArray(getB(accessSupport, s, s1, c, null, pArg));
+	public String[] getStringArrayB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.StringArray(getB(null, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public Object[] getObjectArrayB(String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.ObjectArray(getB(null, s, s1, c, null, pArg));
+	public String[] getStringArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.StringArray(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
 	@Override
-	public Object[] getObjectArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.ObjectArray(getB(accessSupport, s, s1, c, null, pArg));
+	public Object[] getObjectArrayB(Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.ObjectArray(getB(null, o, s1, c, null, pArg));
 	}
 
-	public static boolean getBoolean(String s, String s1) {
-		return instance.getBooleanB(null, s, s1, (Object[])null);
+	@Override
+	public Object[] getObjectArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.ObjectArray(getB(accessSupport, o, s1, c, null, pArg));
 	}
 
-	public static boolean getBoolean(String s, String s1, Object pArg) {
-		return instance.getBooleanB(null, s, s1, pArg);
+	public static boolean getBoolean(Object o, String s1) {
+		return instance.getBooleanB(null, o, s1, (Object[])null);
 	}
 
-	public static boolean getBoolean(String s, String s1, Object[] pArg) {
-		return instance.getBooleanB(null, s, s1, pArg);
+	public static boolean getBoolean(Object o, String s1, Object pArg) {
+		return instance.getBooleanB(null, o, s1, pArg);
 	}
 
-	public static boolean getBoolean(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getBooleanB(null, s, s1, c, null, pArg);
+	public static boolean getBoolean(Object o, String s1, Object[] pArg) {
+		return instance.getBooleanB(null, o, s1, pArg);
 	}
 
-	public static boolean getBoolean(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getBooleanB(null, s, s1, c, o, pArg);
+	public static boolean getBoolean(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getBooleanB(null, o, s1, c, null, pArg);
 	}
 
-	public static boolean getBoolean(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Boolean(instance.getB(accessSupport, s, s1, pArg));
+	public static boolean getBoolean(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getBooleanB(null, o, s1, c, o1, pArg);
 	}
 
-	public static boolean getBoolean(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Boolean(instance.getB(accessSupport, s, s1, pArg));
+	public static boolean getBoolean(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Boolean(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public boolean getBooleanB(String s, String s1, Object pArg) {
-		return getBooleanB(null, s, s1, pArg);
+	public static boolean getBoolean(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Boolean(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public boolean getBooleanB(String s, String s1, Object[] pArg) {
-		return getBooleanB(null, s, s1, pArg);
+	public boolean getBooleanB(Object o, String s1, Object pArg) {
+		return getBooleanB(null, o, s1, pArg);
 	}
 
-	public boolean getBooleanB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Boolean(getB(accessSupport, s, s1, pArg));
+	public boolean getBooleanB(Object o, String s1, Object[] pArg) {
+		return getBooleanB(null, o, s1, pArg);
 	}
 
-	public boolean getBooleanB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Boolean(getB(accessSupport, s, s1, pArg));
+	public boolean getBooleanB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Boolean(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static int getInt(String s, String s1) {
-		return instance.getIntB(null, s, s1, (Object[])null);
+	public boolean getBooleanB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Boolean(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static int getInt(String s, String s1, Object pArg) {
-		return instance.getIntB(null, s, s1, pArg);
+	public static int getInt(Object o, String s1) {
+		return instance.getIntB(null, o, s1, (Object[])null);
 	}
 
-	public static int getInt(String s, String s1, Object[] pArg) {
-		return instance.getIntB(null, s, s1, pArg);
+	public static int getInt(Object o, String s1, Object pArg) {
+		return instance.getIntB(null, o, s1, pArg);
 	}
 
-	public static int getInt(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getIntB(null, s, s1, c, null, pArg);
+	public static int getInt(Object o, String s1, Object[] pArg) {
+		return instance.getIntB(null, o, s1, pArg);
 	}
 
-	public static int getInt(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getIntB(null, s, s1, c, o, pArg);
+	public static int getInt(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getIntB(null, o, s1, c, null, pArg);
 	}
 
-	public static int getInt(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Int(instance.getB(accessSupport, s, s1, pArg));
+	public static int getInt(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getIntB(null, o, s1, c, o1, pArg);
 	}
 
-	public static int getInt(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Int(instance.getB(accessSupport, s, s1, pArg));
+	public static int getInt(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Int(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static int getInt(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object[] pArg) {
-		return Modchu_CastHelper.Int(instance.getB(accessSupport, s, s1, c, null, pArg));
+	public static int getInt(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Int(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static int getInt(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Int(instance.getB(accessSupport, s, s1, c, o, pArg));
+	public static int getInt(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object[] pArg) {
+		return Modchu_CastHelper.Int(instance.getB(accessSupport, o, s1, c, null, pArg));
 	}
 
-	public int getIntB(String s, String s1, Object pArg) {
-		return getIntB(null, s, s1, pArg);
+	public static int getInt(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Int(instance.getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
-	public int getIntB(String s, String s1, Object[] pArg) {
-		return getIntB(null, s, s1, pArg);
+	public int getIntB(Object o, String s1, Object pArg) {
+		return getIntB(null, o, s1, pArg);
 	}
 
-	public int getIntB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Int(getB(accessSupport, s, s1, pArg));
+	public int getIntB(Object o, String s1, Object[] pArg) {
+		return getIntB(null, o, s1, pArg);
 	}
 
-	public int getIntB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Int(getB(accessSupport, s, s1, pArg));
+	public int getIntB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Int(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static long getLong(String s, String s1) {
-		return instance.getLongB(null, s, s1, (Object[])null);
+	public int getIntB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Int(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static long getLong(String s, String s1, Object pArg) {
-		return instance.getLongB(null, s, s1, pArg);
+	public static long getLong(Object o, String s1) {
+		return instance.getLongB(null, o, s1, (Object[])null);
 	}
 
-	public static long getLong(String s, String s1, Object[] pArg) {
-		return instance.getLongB(null, s, s1, pArg);
+	public static long getLong(Object o, String s1, Object pArg) {
+		return instance.getLongB(null, o, s1, pArg);
 	}
 
-	public static long getLong(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getLongB(null, s, s1, c, o, pArg);
+	public static long getLong(Object o, String s1, Object[] pArg) {
+		return instance.getLongB(null, o, s1, pArg);
 	}
 
-	public static long getLong(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Long(instance.getB(accessSupport, s, s1, pArg));
+	public static long getLong(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getLongB(null, o, s1, c, o1, pArg);
 	}
 
-	public static long getLong(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Long(instance.getB(accessSupport, s, s1, pArg));
+	public static long getLong(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Long(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public long getLongB(String s, String s1, Object pArg) {
-		return getLongB(null, s, s1, pArg);
+	public static long getLong(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Long(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public long getLongB(String s, String s1, Object[] pArg) {
-		return getLongB(null, s, s1, pArg);
+	public long getLongB(Object o, String s1, Object pArg) {
+		return getLongB(null, o, s1, pArg);
 	}
 
-	public long getLongB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Long(getB(accessSupport, s, s1, pArg));
+	public long getLongB(Object o, String s1, Object[] pArg) {
+		return getLongB(null, o, s1, pArg);
 	}
 
-	public long getLongB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Long(getB(accessSupport, s, s1, pArg));
+	public long getLongB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Long(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static byte getByte(String s, String s1) {
-		return instance.getByteB(null, s, s1, (Object[])null);
+	public long getLongB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Long(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static byte getByte(String s, String s1, Object pArg) {
-		return instance.getByteB(null, s, s1, pArg);
+	public static byte getByte(Object o, String s1) {
+		return instance.getByteB(null, o, s1, (Object[])null);
 	}
 
-	public static byte getByte(String s, String s1, Object[] pArg) {
-		return instance.getByteB(null, s, s1, pArg);
+	public static byte getByte(Object o, String s1, Object pArg) {
+		return instance.getByteB(null, o, s1, pArg);
 	}
 
-	public static byte getByte(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getByteB(null, s, s1, c, null, pArg);
+	public static byte getByte(Object o, String s1, Object[] pArg) {
+		return instance.getByteB(null, o, s1, pArg);
 	}
 
-	public static byte getByte(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getByteB(null, s, s1, c, o, pArg);
+	public static byte getByte(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getByteB(null, o, s1, c, null, pArg);
 	}
 
-	public static byte getByte(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Byte(instance.getB(accessSupport, s, s1, pArg));
+	public static byte getByte(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getByteB(null, o, s1, c, o1, pArg);
 	}
 
-	public static byte getByte(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Byte(instance.getB(accessSupport, s, s1, pArg));
+	public static byte getByte(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Byte(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public byte getByteB(String s, String s1, Object pArg) {
-		return getByteB(null, s, s1, pArg);
+	public static byte getByte(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Byte(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public byte getByteB(String s, String s1, Object[] pArg) {
-		return getByteB(null, s, s1, pArg);
+	public byte getByteB(Object o, String s1, Object pArg) {
+		return getByteB(null, o, s1, pArg);
 	}
 
-	public byte getByteB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Byte(getB(accessSupport, s, s1, pArg));
+	public byte getByteB(Object o, String s1, Object[] pArg) {
+		return getByteB(null, o, s1, pArg);
 	}
 
-	public byte getByteB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Byte(getB(accessSupport, s, s1, pArg));
+	public byte getByteB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Byte(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static short getShort(String s, String s1) {
-		return instance.getShortB(null, s, s1, (Object[])null);
+	public byte getByteB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Byte(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static short getShort(String s, String s1, Object pArg) {
-		return instance.getShortB(null, s, s1, pArg);
+	public static short getShort(Object o, String s1) {
+		return instance.getShortB(null, o, s1, (Object[])null);
 	}
 
-	public static short getShort(String s, String s1, Object[] pArg) {
-		return instance.getShortB(null, s, s1, pArg);
+	public static short getShort(Object o, String s1, Object pArg) {
+		return instance.getShortB(null, o, s1, pArg);
 	}
 
-	public static short getShort(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getShortB(null, s, s1, c, o, pArg);
+	public static short getShort(Object o, String s1, Object[] pArg) {
+		return instance.getShortB(null, o, s1, pArg);
 	}
 
-	public static short getShort(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Short(instance.getB(accessSupport, s, s1, pArg));
+	public static short getShort(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getShortB(null, o, s1, c, o1, pArg);
 	}
 
-	public static short getShort(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Short(instance.getB(accessSupport, s, s1, pArg));
+	public static short getShort(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Short(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public short getShortB(String s, String s1, Object pArg) {
-		return getShortB(null, s, s1, pArg);
+	public static short getShort(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Short(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public short getShortB(String s, String s1, Object[] pArg) {
-		return getShortB(null, s, s1, pArg);
+	public short getShortB(Object o, String s1, Object pArg) {
+		return getShortB(null, o, s1, pArg);
 	}
 
-	public short getShortB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Short(getB(accessSupport, s, s1, pArg));
+	public short getShortB(Object o, String s1, Object[] pArg) {
+		return getShortB(null, o, s1, pArg);
 	}
 
-	public short getShortB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Short(getB(accessSupport, s, s1, pArg));
+	public short getShortB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Short(getB(accessSupport, o, s1, pArg));
 	}
 
-	public short getShortB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Short(getB(accessSupport, s, s1, c, o, pArg));
+	public short getShortB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Short(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static float getFloat(String s, String s1) {
-		return instance.getFloatB(null, s, s1, (Object[])null);
+	public short getShortB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Short(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
-	public static float getFloat(String s, String s1, Object pArg) {
-		return instance.getFloatB(null, s, s1, pArg);
+	public static float getFloat(Object o, String s1) {
+		return instance.getFloatB(null, o, s1, (Object[])null);
 	}
 
-	public static float getFloat(String s, String s1, Object[] pArg) {
-		return instance.getFloatB(null, s, s1, pArg);
+	public static float getFloat(Object o, String s1, Object pArg) {
+		return instance.getFloatB(null, o, s1, pArg);
 	}
 
-	public static float getFloat(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getFloatB(null, s, s1, c, null, pArg);
+	public static float getFloat(Object o, String s1, Object[] pArg) {
+		return instance.getFloatB(null, o, s1, pArg);
 	}
 
-	public static float getFloat(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getFloatB(null, s, s1, c, o, pArg);
+	public static float getFloat(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getFloatB(null, o, s1, c, null, pArg);
 	}
 
-	public static float getFloat(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Float(instance.getB(accessSupport, s, s1, pArg));
+	public static float getFloat(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getFloatB(null, o, s1, c, o1, pArg);
 	}
 
-	public static float getFloat(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Float(instance.getB(accessSupport, s, s1, pArg));
+	public static float getFloat(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Float(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public float getFloatB(String s, String s1, Object pArg) {
-		return getFloatB(null, s, s1, pArg);
+	public static float getFloat(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Float(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public float getFloatB(String s, String s1, Object[] pArg) {
-		return getFloatB(null, s, s1, pArg);
+	public float getFloatB(Object o, String s1, Object pArg) {
+		return getFloatB(null, o, s1, pArg);
 	}
 
-	public float getFloatB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Float(getB(accessSupport, s, s1, pArg));
+	public float getFloatB(Object o, String s1, Object[] pArg) {
+		return getFloatB(null, o, s1, pArg);
 	}
 
-	public float getFloatB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Float(getB(accessSupport, s, s1, pArg));
+	public float getFloatB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Float(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static double getDouble(String s, String s1) {
-		return instance.getDoubleB(null, s, s1, (Object[])null);
+	public float getFloatB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Float(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static double getDouble(String s, String s1, Object pArg) {
-		return instance.getDoubleB(null, s, s1, pArg);
+	public static double getDouble(Object o, String s1) {
+		return instance.getDoubleB(null, o, s1, (Object[])null);
 	}
 
-	public static double getDouble(String s, String s1, Object[] pArg) {
-		return instance.getDoubleB(null, s, s1, pArg);
+	public static double getDouble(Object o, String s1, Object pArg) {
+		return instance.getDoubleB(null, o, s1, pArg);
 	}
 
-	public static double getDouble(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getDoubleB(null, s, s1, c, null, pArg);
+	public static double getDouble(Object o, String s1, Object[] pArg) {
+		return instance.getDoubleB(null, o, s1, pArg);
 	}
 
-	public static double getDouble(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getDoubleB(null, s, s1, c, o, pArg);
+	public static double getDouble(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getDoubleB(null, o, s1, c, null, pArg);
 	}
 
-	public static double getDouble(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Float(instance.getB(accessSupport, s, s1, pArg));
+	public static double getDouble(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getDoubleB(null, o, s1, c, o1, pArg);
 	}
 
-	public static double getDouble(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Float(instance.getB(accessSupport, s, s1, pArg));
+	public static double getDouble(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Float(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public double getDoubleB(String s, String s1, Object pArg) {
-		return getFloatB(null, s, s1, pArg);
+	public static double getDouble(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Float(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public double getDoubleB(String s, String s1, Object[] pArg) {
-		return getFloatB(null, s, s1, pArg);
+	public double getDoubleB(Object o, String s1, Object pArg) {
+		return getFloatB(null, o, s1, pArg);
 	}
 
-	public double getDoubleB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Double(getB(accessSupport, s, s1, pArg));
+	public double getDoubleB(Object o, String s1, Object[] pArg) {
+		return getFloatB(null, o, s1, pArg);
 	}
 
-	public double getDoubleB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Double(getB(accessSupport, s, s1, pArg));
+	public double getDoubleB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Double(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static String getString(String s, String s1) {
-		return instance.getStringB(null, s, s1, (Object[])null);
+	public double getDoubleB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Double(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static String getString(String s, String s1, Object pArg) {
-		return instance.getStringB(null, s, s1, pArg);
+	public static String getString(Object o, String s1) {
+		return instance.getStringB(null, o, s1, (Object[])null);
 	}
 
-	public static String getString(String s, String s1, Object[] pArg) {
-		return instance.getStringB(null, s, s1, pArg);
+	public static String getString(Object o, String s1, Object pArg) {
+		return instance.getStringB(null, o, s1, pArg);
 	}
 
-	public static String getString(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getStringB(null, s, s1, c, null, pArg);
+	public static String getString(Object o, String s1, Object[] pArg) {
+		return instance.getStringB(null, o, s1, pArg);
 	}
 
-	public static String getString(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getStringB(null, s, s1, c, o, pArg);
+	public static String getString(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getStringB(null, o, s1, c, null, pArg);
 	}
 
-	public static String getString(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.String(instance.getB(accessSupport, s, s1, pArg));
+	public static String getString(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getStringB(null, o, s1, c, o1, pArg);
 	}
 
-	public static String getString(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.String(instance.getB(accessSupport, s, s1, pArg));
+	public static String getString(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.String(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public String getStringB(String s, String s1, Object pArg) {
-		return getStringB(null, s, s1, pArg);
+	public static String getString(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.String(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public String getStringB(String s, String s1, Object[] pArg) {
-		return getStringB(null, s, s1, pArg);
+	public String getStringB(Object o, String s1, Object pArg) {
+		return getStringB(null, o, s1, pArg);
 	}
 
-	public String getStringB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.String(getB(accessSupport, s, s1, pArg));
+	public String getStringB(Object o, String s1, Object[] pArg) {
+		return getStringB(null, o, s1, pArg);
 	}
 
-	public String getStringB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.String(getB(accessSupport, s, s1, pArg));
+	public String getStringB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.String(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static List getList(String s, String s1) {
-		return instance.getListB(null, s, s1, (Object[])null);
+	public String getStringB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.String(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static List getList(String s, String s1, Object pArg) {
-		return instance.getListB(null, s, s1, pArg);
+	public static List getList(Object o, String s1) {
+		return instance.getListB(null, o, s1, (Object[])null);
 	}
 
-	public static List getList(String s, String s1, Object[] pArg) {
-		return instance.getListB(null, s, s1, pArg);
+	public static List getList(Object o, String s1, Object pArg) {
+		return instance.getListB(null, o, s1, pArg);
 	}
 
-	public static List getList(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getListB(null, s, s1, c, null, pArg);
+	public static List getList(Object o, String s1, Object[] pArg) {
+		return instance.getListB(null, o, s1, pArg);
 	}
 
-	public static List getList(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getListB(null, s, s1, c, o, pArg);
+	public static List getList(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getListB(null, o, s1, c, null, pArg);
 	}
 
-	public static List getList(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.List(instance.getB(accessSupport, s, s1, pArg));
+	public static List getList(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getListB(null, o, s1, c, o1, pArg);
 	}
 
-	public static List getList(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.List(instance.getB(accessSupport, s, s1, pArg));
+	public static List getList(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.List(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public List getListB(String s, String s1, Object pArg) {
-		return getListB(null, s, s1, pArg);
+	public static List getList(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.List(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public List getListB(String s, String s1, Object[] pArg) {
-		return getListB(null, s, s1, pArg);
+	public List getListB(Object o, String s1, Object pArg) {
+		return getListB(null, o, s1, pArg);
 	}
 
-	public List getListB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.List(getB(accessSupport, s, s1, pArg));
+	public List getListB(Object o, String s1, Object[] pArg) {
+		return getListB(null, o, s1, pArg);
 	}
 
-	public List getListB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.List(getB(accessSupport, s, s1, pArg));
+	public List getListB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.List(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static ArrayList getArrayList(String s, String s1) {
-		return instance.getArrayListB(null, s, s1, (Object[])null);
+	public List getListB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.List(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static ArrayList getArrayList(String s, String s1, Object pArg) {
-		return instance.getArrayListB(null, s, s1, pArg);
+	public static ArrayList getArrayList(Object o, String s1) {
+		return instance.getArrayListB(null, o, s1, (Object[])null);
 	}
 
-	public static ArrayList getArrayList(String s, String s1, Object[] pArg) {
-		return instance.getArrayListB(null, s, s1, pArg);
+	public static ArrayList getArrayList(Object o, String s1, Object pArg) {
+		return instance.getArrayListB(null, o, s1, pArg);
 	}
 
-	public static ArrayList getArrayList(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getArrayListB(null, s, s1, c, null, pArg);
+	public static ArrayList getArrayList(Object o, String s1, Object[] pArg) {
+		return instance.getArrayListB(null, o, s1, pArg);
 	}
 
-	public static ArrayList getArrayList(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getArrayListB(null, s, s1, c, o, pArg);
+	public static ArrayList getArrayList(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getArrayListB(null, o, s1, c, null, pArg);
 	}
 
-	public static ArrayList getArrayList(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.ArrayList(instance.getB(accessSupport, s, s1, pArg));
+	public static ArrayList getArrayList(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getArrayListB(null, o, s1, c, o1, pArg);
 	}
 
-	public static ArrayList getArrayList(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.ArrayList(instance.getB(accessSupport, s, s1, pArg));
+	public static ArrayList getArrayList(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.ArrayList(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public ArrayList getArrayListB(String s, String s1, Object pArg) {
-		return getArrayListB(null, s, s1, pArg);
+	public static ArrayList getArrayList(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.ArrayList(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public ArrayList getArrayListB(String s, String s1, Object[] pArg) {
-		return getArrayListB(null, s, s1, pArg);
+	public ArrayList getArrayListB(Object o, String s1, Object pArg) {
+		return getArrayListB(null, o, s1, pArg);
 	}
 
-	public ArrayList getArrayListB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.ArrayList(getB(accessSupport, s, s1, pArg));
+	public ArrayList getArrayListB(Object o, String s1, Object[] pArg) {
+		return getArrayListB(null, o, s1, pArg);
 	}
 
-	public ArrayList getArrayListB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.ArrayList(getB(accessSupport, s, s1, pArg));
+	public ArrayList getArrayListB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.ArrayList(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static LinkedList getLinkedList(String s, String s1) {
-		return instance.getLinkedListB(null, s, s1, (Object[])null);
+	public ArrayList getArrayListB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.ArrayList(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static LinkedList getLinkedList(String s, String s1, Object pArg) {
-		return instance.getLinkedListB(null, s, s1, pArg);
+	public static LinkedList getLinkedList(Object o, String s1) {
+		return instance.getLinkedListB(null, o, s1, (Object[])null);
 	}
 
-	public static LinkedList getLinkedList(String s, String s1, Object[] pArg) {
-		return instance.getLinkedListB(null, s, s1, pArg);
+	public static LinkedList getLinkedList(Object o, String s1, Object pArg) {
+		return instance.getLinkedListB(null, o, s1, pArg);
 	}
 
-	public static LinkedList getLinkedList(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getLinkedListB(null, s, s1, c, null, pArg);
+	public static LinkedList getLinkedList(Object o, String s1, Object[] pArg) {
+		return instance.getLinkedListB(null, o, s1, pArg);
 	}
 
-	public static LinkedList getLinkedList(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getLinkedListB(null, s, s1, c, o, pArg);
+	public static LinkedList getLinkedList(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getLinkedListB(null, o, s1, c, null, pArg);
 	}
 
-	public static LinkedList getLinkedList(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.LinkedList(instance.getB(accessSupport, s, s1, pArg));
+	public static LinkedList getLinkedList(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getLinkedListB(null, o, s1, c, o1, pArg);
 	}
 
-	public static LinkedList getLinkedList(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.LinkedList(instance.getB(accessSupport, s, s1, pArg));
+	public static LinkedList getLinkedList(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.LinkedList(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public LinkedList getLinkedListB(String s, String s1, Object pArg) {
-		return getLinkedListB(null, s, s1, pArg);
+	public static LinkedList getLinkedList(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.LinkedList(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public LinkedList getLinkedListB(String s, String s1, Object[] pArg) {
-		return getLinkedListB(null, s, s1, pArg);
+	public LinkedList getLinkedListB(Object o, String s1, Object pArg) {
+		return getLinkedListB(null, o, s1, pArg);
 	}
 
-	public LinkedList getLinkedListB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.LinkedList(getB(accessSupport, s, s1, pArg));
+	public LinkedList getLinkedListB(Object o, String s1, Object[] pArg) {
+		return getLinkedListB(null, o, s1, pArg);
 	}
 
-	public LinkedList getLinkedListB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.LinkedList(getB(accessSupport, s, s1, pArg));
+	public LinkedList getLinkedListB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.LinkedList(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static ConcurrentHashMap getConcurrentHashMap(String s, String s1) {
-		return instance.getConcurrentHashMapB(null, s, s1, (Object[])null);
+	public LinkedList getLinkedListB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.LinkedList(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static ConcurrentHashMap getConcurrentHashMap(String s, String s1, Object pArg) {
-		return instance.getConcurrentHashMapB(null, s, s1, pArg);
+	public static ConcurrentHashMap getConcurrentHashMap(Object o, String s1) {
+		return instance.getConcurrentHashMapB(null, o, s1, (Object[])null);
 	}
 
-	public static ConcurrentHashMap getConcurrentHashMap(String s, String s1, Object[] pArg) {
-		return instance.getConcurrentHashMapB(null, s, s1, pArg);
+	public static ConcurrentHashMap getConcurrentHashMap(Object o, String s1, Object pArg) {
+		return instance.getConcurrentHashMapB(null, o, s1, pArg);
 	}
 
-	public static ConcurrentHashMap getConcurrentHashMap(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getConcurrentHashMapB(null, s, s1, c, null, pArg);
+	public static ConcurrentHashMap getConcurrentHashMap(Object o, String s1, Object[] pArg) {
+		return instance.getConcurrentHashMapB(null, o, s1, pArg);
 	}
 
-	public static ConcurrentHashMap getConcurrentHashMap(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getConcurrentHashMapB(null, s, s1, c, o, pArg);
+	public static ConcurrentHashMap getConcurrentHashMap(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getConcurrentHashMapB(null, o, s1, c, null, pArg);
 	}
 
-	public static ConcurrentHashMap getConcurrentHashMap(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.ConcurrentHashMap(instance.getB(accessSupport, s, s1, pArg));
+	public static ConcurrentHashMap getConcurrentHashMap(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getConcurrentHashMapB(null, o, s1, c, o1, pArg);
 	}
 
-	public static ConcurrentHashMap getConcurrentHashMap(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.ConcurrentHashMap(instance.getB(accessSupport, s, s1, pArg));
+	public static ConcurrentHashMap getConcurrentHashMap(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public ConcurrentHashMap getConcurrentHashMapB(String s, String s1) {
-		return getConcurrentHashMapB(null, s, s1, (Object[])null);
+	public static ConcurrentHashMap getConcurrentHashMap(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public ConcurrentHashMap getConcurrentHashMapB(String s, String s1, Object pArg) {
-		return getConcurrentHashMapB(null, s, s1, pArg);
+	public ConcurrentHashMap getConcurrentHashMapB(Object o, String s1) {
+		return getConcurrentHashMapB(null, o, s1, (Object[])null);
 	}
 
-	public ConcurrentHashMap getConcurrentHashMapB(String s, String s1, Object[] pArg) {
-		return getConcurrentHashMapB(null, s, s1, pArg);
+	public ConcurrentHashMap getConcurrentHashMapB(Object o, String s1, Object pArg) {
+		return getConcurrentHashMapB(null, o, s1, pArg);
 	}
 
-	public ConcurrentHashMap getConcurrentHashMapB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.ConcurrentHashMap(getB(accessSupport, s, s1, pArg));
+	public ConcurrentHashMap getConcurrentHashMapB(Object o, String s1, Object[] pArg) {
+		return getConcurrentHashMapB(null, o, s1, pArg);
 	}
 
-	public ConcurrentHashMap getConcurrentHashMapB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.ConcurrentHashMap(getB(accessSupport, s, s1, pArg));
+	public ConcurrentHashMap getConcurrentHashMapB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static HashMap getHashMap(String s, String s1) {
-		return instance.getHashMapB(null, s, s1, (Object[])null);
+	public ConcurrentHashMap getConcurrentHashMapB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static HashMap getHashMap(String s, String s1, Object pArg) {
-		return instance.getHashMapB(null, s, s1, pArg);
+	public static HashMap getHashMap(Object o, String s1) {
+		return instance.getHashMapB(null, o, s1, (Object[])null);
 	}
 
-	public static HashMap getHashMap(String s, String s1, Object[] pArg) {
-		return instance.getHashMapB(null, s, s1, pArg);
+	public static HashMap getHashMap(Object o, String s1, Object pArg) {
+		return instance.getHashMapB(null, o, s1, pArg);
 	}
 
-	public static HashMap getHashMap(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getHashMapB(null, s, s1, c, null, pArg);
+	public static HashMap getHashMap(Object o, String s1, Object[] pArg) {
+		return instance.getHashMapB(null, o, s1, pArg);
 	}
 
-	public static HashMap getHashMap(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getHashMapB(null, s, s1, c, o, pArg);
+	public static HashMap getHashMap(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getHashMapB(null, o, s1, c, null, pArg);
 	}
 
-	public static HashMap getHashMap(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.HashMap(instance.getB(accessSupport, s, s1, pArg));
+	public static HashMap getHashMap(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getHashMapB(null, o, s1, c, o1, pArg);
 	}
 
-	public static HashMap getHashMap(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.HashMap(instance.getB(accessSupport, s, s1, pArg));
+	public static HashMap getHashMap(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.HashMap(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public HashMap getHashMapB(String s, String s1, Object pArg) {
-		return getHashMapB(null, s, s1, pArg);
+	public static HashMap getHashMap(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.HashMap(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public HashMap getHashMapB(String s, String s1, Object[] pArg) {
-		return getHashMapB(null, s, s1, pArg);
+	public HashMap getHashMapB(Object o, String s1, Object pArg) {
+		return getHashMapB(null, o, s1, pArg);
 	}
 
-	public HashMap getHashMapB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.HashMap(getB(accessSupport, s, s1, pArg));
+	public HashMap getHashMapB(Object o, String s1, Object[] pArg) {
+		return getHashMapB(null, o, s1, pArg);
 	}
 
-	public HashMap getHashMapB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.HashMap(getB(accessSupport, s, s1, pArg));
+	public HashMap getHashMapB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.HashMap(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static Map getMap(String s, String s1) {
-		return instance.getMapB(null, s, s1, (Object[])null);
+	public HashMap getHashMapB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.HashMap(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static Map getMap(String s, String s1, Object pArg) {
-		return instance.getMapB(null, s, s1, pArg);
+	public static Map getMap(Object o, String s1) {
+		return instance.getMapB(null, o, s1, (Object[])null);
 	}
 
-	public static Map getMap(String s, String s1, Object[] pArg) {
-		return instance.getMapB(null, s, s1, pArg);
+	public static Map getMap(Object o, String s1, Object pArg) {
+		return instance.getMapB(null, o, s1, pArg);
 	}
 
-	public static Map getMap(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getMapB(null, s, s1, c, null, pArg);
+	public static Map getMap(Object o, String s1, Object[] pArg) {
+		return instance.getMapB(null, o, s1, pArg);
 	}
 
-	public static Map getMap(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getMapB(null, s, s1, c, o, pArg);
+	public static Map getMap(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getMapB(null, o, s1, c, null, pArg);
 	}
 
-	public static Map getMap(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Map(instance.getB(accessSupport, s, s1, pArg));
+	public static Map getMap(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getMapB(null, o, s1, c, o1, pArg);
 	}
 
-	public static Map getMap(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Map(instance.getB(accessSupport, s, s1, pArg));
+	public static Map getMap(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Map(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public Map getMapB(String s, String s1, Object pArg) {
-		return getMapB(null, s, s1, pArg);
+	public static Map getMap(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Map(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public Map getMapB(String s, String s1, Object[] pArg) {
-		return getMapB(null, s, s1, pArg);
+	public Map getMapB(Object o, String s1, Object pArg) {
+		return getMapB(null, o, s1, pArg);
 	}
 
-	public Map getMapB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Map(getB(accessSupport, s, s1, pArg));
+	public Map getMapB(Object o, String s1, Object[] pArg) {
+		return getMapB(null, o, s1, pArg);
 	}
 
-	public Map getMapB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Map(getB(accessSupport, s, s1, pArg));
+	public Map getMapB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Map(getB(accessSupport, o, s1, pArg));
+	}
+
+	public Map getMapB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Map(getB(accessSupport, o, s1, pArg));
 	}
 /*
-	public static Collection getCollection(String s, String s1) {
-		return instance.getCollectionB(null, s, s1, (Object[])null);
+	public static Collection getCollection(Object o, String s1) {
+		return instance.getCollectionB(null, o, s1, (Object[])null);
 	}
 
-	public static Collection getCollection(String s, String s1, Object pArg) {
-		return instance.getCollectionB(null, s, s1, pArg);
+	public static Collection getCollection(Object o, String s1, Object pArg) {
+		return instance.getCollectionB(null, o, s1, pArg);
 	}
 
-	public static Collection getCollection(String s, String s1, Object[] pArg) {
-		return instance.getCollectionB(null, s, s1, pArg);
+	public static Collection getCollection(Object o, String s1, Object[] pArg) {
+		return instance.getCollectionB(null, o, s1, pArg);
 	}
 
-	public static Collection getCollection(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Collection(instance.getB(accessSupport, s, s1, pArg));
+	public static Collection getCollection(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Collection(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static Collection getCollection(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Collection(instance.getB(accessSupport, s, s1, pArg));
+	public static Collection getCollection(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Collection(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public Collection getCollectionB(String s, String s1, Object pArg) {
-		return getCollectionB((Modchu_ASBase)null, s, s1, pArg);
+	public Collection getCollectionB(Object o, String s1, Object pArg) {
+		return getCollectionB((Modchu_ASBase)null, o, s1, pArg);
 	}
 
-	public Collection getCollectionB(String s, String s1, Object[] pArg) {
-		return getCollectionB((Modchu_ASBase)null, s, s1, pArg);
+	public Collection getCollectionB(Object o, String s1, Object[] pArg) {
+		return getCollectionB((Modchu_ASBase)null, o, s1, pArg);
 	}
 
-	public Collection getCollectionB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Collection(getB(accessSupport, s, s1, pArg));
+	public Collection getCollectionB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Collection(getB(accessSupport, o, s1, pArg));
 	}
 
-	public Collection getCollectionB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Collection(getB(accessSupport, s, s1, pArg));
+	public Collection getCollectionB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Collection(getB(accessSupport, o, s1, pArg));
 	}
 */
-	public static Enum getEnum(String s, String s1) {
-		return instance.getEnumB(null, s, s1, (Object[])null);
+	public static Enum getEnum(Object o, String s1) {
+		return instance.getEnumB(null, o, s1, (Object[])null);
 	}
 
-	public static Enum getEnum(String s, String s1, Object pArg) {
-		return instance.getEnumB(null, s, s1, pArg);
+	public static Enum getEnum(Object o, String s1, Object pArg) {
+		return instance.getEnumB(null, o, s1, pArg);
 	}
 
-	public static Enum getEnum(String s, String s1, Object[] pArg) {
-		return instance.getEnumB(null, s, s1, pArg);
+	public static Enum getEnum(Object o, String s1, Object[] pArg) {
+		return instance.getEnumB(null, o, s1, pArg);
 	}
 
-	public static Enum getEnum(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getEnumB(null, s, s1, c, null, pArg);
+	public static Enum getEnum(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getEnumB(null, o, s1, c, null, pArg);
 	}
 
-	public static Enum getEnum(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getEnumB(null, s, s1, c, o, pArg);
+	public static Enum getEnum(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getEnumB(null, o, s1, c, o1, pArg);
 	}
 
-	public static Enum getEnum(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Enum(instance.getB(accessSupport, s, s1, pArg));
+	public static Enum getEnum(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Enum(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static Enum getEnum(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Enum(instance.getB(accessSupport, s, s1, pArg));
+	public static Enum getEnum(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Enum(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public Enum getEnumB(String s, String s1, Object pArg) {
-		return getEnumB(null, s, s1, pArg);
+	public Enum getEnumB(Object o, String s1, Object pArg) {
+		return getEnumB(null, o, s1, pArg);
 	}
 
-	public Enum getEnumB(String s, String s1, Object[] pArg) {
-		return getEnumB(null, s, s1, pArg);
+	public Enum getEnumB(Object o, String s1, Object[] pArg) {
+		return getEnumB(null, o, s1, pArg);
 	}
 
-	public Enum getEnumB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.Enum(getB(accessSupport, s, s1, pArg));
+	public Enum getEnumB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.Enum(getB(accessSupport, o, s1, pArg));
 	}
 
-	public Enum getEnumB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.Enum(getB(accessSupport, s, s1, pArg));
+	public Enum getEnumB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.Enum(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static File getFile(String s, String s1) {
-		return instance.getFileB(null, s, s1, (Object[])null);
+	public static File getFile(Object o, String s1) {
+		return instance.getFileB(null, o, s1, (Object[])null);
 	}
 
-	public static File getFile(String s, String s1, Object pArg) {
-		return instance.getFileB(null, s, s1, pArg);
+	public static File getFile(Object o, String s1, Object pArg) {
+		return instance.getFileB(null, o, s1, pArg);
 	}
 
-	public static File getFile(String s, String s1, Object[] pArg) {
-		return instance.getFileB(null, s, s1, pArg);
+	public static File getFile(Object o, String s1, Object[] pArg) {
+		return instance.getFileB(null, o, s1, pArg);
 	}
 
-	public static File getFile(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getFileB(null, s, s1, c, null, pArg);
+	public static File getFile(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getFileB(null, o, s1, c, null, pArg);
 	}
 
-	public static File getFile(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getFileB(null, s, s1, c, o, pArg);
+	public static File getFile(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getFileB(null, o, s1, c, o1, pArg);
 	}
 
-	public static File getFile(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.File(instance.getB(accessSupport, s, s1, pArg));
+	public static File getFile(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.File(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static File getFile(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.File(instance.getB(accessSupport, s, s1, pArg));
+	public static File getFile(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.File(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public File getFileB(String s, String s1, Object pArg) {
-		return getFileB(null, s, s1, pArg);
+	public File getFileB(Object o, String s1, Object pArg) {
+		return getFileB(null, o, s1, pArg);
 	}
 
-	public File getFileB(String s, String s1, Object[] pArg) {
-		return getFileB(null, s, s1, pArg);
+	public File getFileB(Object o, String s1, Object[] pArg) {
+		return getFileB(null, o, s1, pArg);
 	}
 
-	public File getFileB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.File(getB(accessSupport, s, s1, pArg));
+	public File getFileB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.File(getB(accessSupport, o, s1, pArg));
 	}
 
-	public File getFileB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.File(getB(accessSupport, s, s1, pArg));
+	public File getFileB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.File(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static IntBuffer getIntBuffer(String s, String s1) {
-		return instance.getIntBufferB(null, s, s1, (Object[])null);
+	public static IntBuffer getIntBuffer(Object o, String s1) {
+		return instance.getIntBufferB(null, o, s1, (Object[])null);
 	}
 
-	public static IntBuffer getIntBuffer(String s, String s1, Object pArg) {
-		return instance.getIntBufferB(null, s, s1, pArg);
+	public static IntBuffer getIntBuffer(Object o, String s1, Object pArg) {
+		return instance.getIntBufferB(null, o, s1, pArg);
 	}
 
-	public static IntBuffer getIntBuffer(String s, String s1, Object[] pArg) {
-		return instance.getIntBufferB(null, s, s1, pArg);
+	public static IntBuffer getIntBuffer(Object o, String s1, Object[] pArg) {
+		return instance.getIntBufferB(null, o, s1, pArg);
 	}
 
-	public static IntBuffer getIntBuffer(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getIntBufferB(null, s, s1, c, null, pArg);
+	public static IntBuffer getIntBuffer(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getIntBufferB(null, o, s1, c, null, pArg);
 	}
 
-	public static IntBuffer getIntBuffer(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getIntBufferB(null, s, s1, c, o, pArg);
+	public static IntBuffer getIntBuffer(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getIntBufferB(null, o, s1, c, o1, pArg);
 	}
 
-	public static IntBuffer getIntBuffer(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.IntBuffer(instance.getB(accessSupport, s, s1, pArg));
+	public static IntBuffer getIntBuffer(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.IntBuffer(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static IntBuffer getIntBuffer(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.IntBuffer(instance.getB(accessSupport, s, s1, pArg));
+	public static IntBuffer getIntBuffer(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.IntBuffer(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public IntBuffer getIntBufferB(String s, String s1, Object pArg) {
-		return getIntBufferB(null, s, s1, pArg);
+	public IntBuffer getIntBufferB(Object o, String s1, Object pArg) {
+		return getIntBufferB(null, o, s1, pArg);
 	}
 
-	public IntBuffer getIntBufferB(String s, String s1, Object[] pArg) {
-		return getIntBufferB(null, s, s1, pArg);
+	public IntBuffer getIntBufferB(Object o, String s1, Object[] pArg) {
+		return getIntBufferB(null, o, s1, pArg);
 	}
 
-	public IntBuffer getIntBufferB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.IntBuffer(getB(accessSupport, s, s1, pArg));
+	public IntBuffer getIntBufferB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.IntBuffer(getB(accessSupport, o, s1, pArg));
 	}
 
-	public IntBuffer getIntBufferB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.IntBuffer(getB(accessSupport, s, s1, pArg));
+	public IntBuffer getIntBufferB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.IntBuffer(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static UUID getUUID(String s, String s1) {
-		return instance.getUUIDB((Modchu_ASBase)null, s, s1, (Object[])null);
+	public static UUID getUUID(Object o, String s1) {
+		return instance.getUUIDB((Modchu_ASBase)null, o, s1, (Object[])null);
 	}
 
-	public static UUID getUUID(String s, String s1, Object pArg) {
-		return instance.getUUIDB((Modchu_ASBase)null, s, s1, pArg);
+	public static UUID getUUID(Object o, String s1, Object pArg) {
+		return instance.getUUIDB((Modchu_ASBase)null, o, s1, pArg);
 	}
 
-	public static UUID getUUID(String s, String s1, Object[] pArg) {
-		return instance.getUUIDB((Modchu_ASBase)null, s, s1, pArg);
+	public static UUID getUUID(Object o, String s1, Object[] pArg) {
+		return instance.getUUIDB((Modchu_ASBase)null, o, s1, pArg);
 	}
 
-	public static UUID getUUID(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getUUIDB((Modchu_ASBase)null, s, s1, c, null, pArg);
+	public static UUID getUUID(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getUUIDB((Modchu_ASBase)null, o, s1, c, null, pArg);
 	}
 
-	public static UUID getUUID(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getUUIDB((Modchu_ASBase)null, s, s1, c, o, pArg);
+	public static UUID getUUID(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getUUIDB((Modchu_ASBase)null, o, s1, c, o1, pArg);
 	}
 
-	public static UUID getUUID(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.UUID(instance.getB(accessSupport, s, s1, pArg));
+	public static UUID getUUID(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.UUID(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static UUID getUUID(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.UUID(instance.getB(accessSupport, s, s1, pArg));
+	public static UUID getUUID(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.UUID(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public UUID getUUIDB(String s, String s1, Object pArg) {
-		return getUUIDB((Modchu_ASBase)null, s, s1, pArg);
+	public UUID getUUIDB(Object o, String s1, Object pArg) {
+		return getUUIDB((Modchu_ASBase)null, o, s1, pArg);
 	}
 
-	public UUID getUUIDB(String s, String s1, Object[] pArg) {
-		return getUUIDB((Modchu_ASBase)null, s, s1, pArg);
+	public UUID getUUIDB(Object o, String s1, Object[] pArg) {
+		return getUUIDB((Modchu_ASBase)null, o, s1, pArg);
 	}
 
-	public UUID getUUIDB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.UUID(getB(accessSupport, s, s1, pArg));
+	public UUID getUUIDB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.UUID(getB(accessSupport, o, s1, pArg));
 	}
 
-	public UUID getUUIDB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.UUID(getB(accessSupport, s, s1, pArg));
+	public UUID getUUIDB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.UUID(getB(accessSupport, o, s1, pArg));
 	}
 
-	public UUID getUUIDB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.UUID(getB(accessSupport, s, s1, c, o, pArg));
+	public UUID getUUIDB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.UUID(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
-	public static int[] getIntArray(String s, String s1) {
-		return instance.getIntArrayB(null, s, s1, (Object[])null);
+	public static int[] getIntArray(Object o, String s1) {
+		return instance.getIntArrayB(null, o, s1, (Object[])null);
 	}
 
-	public static int[] getIntArray(String s, String s1, Object pArg) {
-		return instance.getIntArrayB(null, s, s1, pArg);
+	public static int[] getIntArray(Object o, String s1, Object pArg) {
+		return instance.getIntArrayB(null, o, s1, pArg);
 	}
 
-	public static int[] getIntArray(String s, String s1, Object[] pArg) {
-		return instance.getIntArrayB(null, s, s1, pArg);
+	public static int[] getIntArray(Object o, String s1, Object[] pArg) {
+		return instance.getIntArrayB(null, o, s1, pArg);
 	}
 
-	public static int[] getIntArray(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getIntArrayB(null, s, s1, c, null, pArg);
+	public static int[] getIntArray(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getIntArrayB(null, o, s1, c, null, pArg);
 	}
 
-	public static int[] getIntArray(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getIntArrayB(null, s, s1, c, o, pArg);
+	public static int[] getIntArray(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getIntArrayB(null, o, s1, c, o1, pArg);
 	}
 
-	public static int[] getIntArray(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.IntArray(instance.getB(accessSupport, s, s1, pArg));
+	public static int[] getIntArray(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.IntArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static int[] getIntArray(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.IntArray(instance.getB(accessSupport, s, s1, pArg));
+	public static int[] getIntArray(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.IntArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public int[] getIntArrayB(String s, String s1, Object pArg) {
-		return getIntArrayB(null, s, s1, pArg);
+	public int[] getIntArrayB(Object o, String s1, Object pArg) {
+		return getIntArrayB(null, o, s1, pArg);
 	}
 
-	public int[] getIntArrayB(String s, String s1, Object[] pArg) {
-		return getIntArrayB(null, s, s1, pArg);
+	public int[] getIntArrayB(Object o, String s1, Object[] pArg) {
+		return getIntArrayB(null, o, s1, pArg);
 	}
 
-	public int[] getIntArrayB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.IntArray(getB(accessSupport, s, s1, pArg));
+	public int[] getIntArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.IntArray(getB(accessSupport, o, s1, pArg));
 	}
 
-	public int[] getIntArrayB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.IntArray(getB(accessSupport, s, s1, pArg));
+	public int[] getIntArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.IntArray(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static InputStream getInputStream(String s, String s1) {
-		return instance.getInputStreamB(null, s, s1, (Object[])null);
+	public static InputStream getInputStream(Object o, String s1) {
+		return instance.getInputStreamB(null, o, s1, (Object[])null);
 	}
 
-	public static InputStream getInputStream(String s, String s1, Object pArg) {
-		return instance.getInputStreamB(null, s, s1, pArg);
+	public static InputStream getInputStream(Object o, String s1, Object pArg) {
+		return instance.getInputStreamB(null, o, s1, pArg);
 	}
 
-	public static InputStream getInputStream(String s, String s1, Object[] pArg) {
-		return instance.getInputStreamB(null, s, s1, pArg);
+	public static InputStream getInputStream(Object o, String s1, Object[] pArg) {
+		return instance.getInputStreamB(null, o, s1, pArg);
 	}
 
-	public static InputStream getInputStream(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getInputStreamB(null, s, s1, c, null, pArg);
+	public static InputStream getInputStream(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getInputStreamB(null, o, s1, c, null, pArg);
 	}
 
-	public static InputStream getInputStream(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getInputStreamB(null, s, s1, c, o, pArg);
+	public static InputStream getInputStream(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getInputStreamB(null, o, s1, c, o1, pArg);
 	}
 
-	public static InputStream getInputStream(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.InputStream(instance.getB(accessSupport, s, s1, pArg));
+	public static InputStream getInputStream(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.InputStream(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static InputStream getInputStream(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.InputStream(instance.getB(accessSupport, s, s1, pArg));
+	public static InputStream getInputStream(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.InputStream(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public InputStream getInputStreamB(String s, String s1, Object pArg) {
-		return getInputStreamB(null, s, s1, pArg);
+	public InputStream getInputStreamB(Object o, String s1, Object pArg) {
+		return getInputStreamB(null, o, s1, pArg);
 	}
 
-	public InputStream getInputStreamB(String s, String s1, Object[] pArg) {
-		return getInputStreamB(null, s, s1, pArg);
+	public InputStream getInputStreamB(Object o, String s1, Object[] pArg) {
+		return getInputStreamB(null, o, s1, pArg);
 	}
 
-	public InputStream getInputStreamB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.InputStream(getB(accessSupport, s, s1, pArg));
+	public InputStream getInputStreamB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.InputStream(getB(accessSupport, o, s1, pArg));
 	}
 
-	public InputStream getInputStreamB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.InputStream(getB(accessSupport, s, s1, pArg));
+	public InputStream getInputStreamB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.InputStream(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static float[] getFloatArray(String s, String s1) {
-		return instance.getFloatArrayB(null, s, s1, (Object[])null);
+	public static float[] getFloatArray(Object o, String s1) {
+		return instance.getFloatArrayB(null, o, s1, (Object[])null);
 	}
 
-	public static float[] getFloatArray(String s, String s1, Object pArg) {
-		return instance.getFloatArrayB(null, s, s1, pArg);
+	public static float[] getFloatArray(Object o, String s1, Object pArg) {
+		return instance.getFloatArrayB(null, o, s1, pArg);
 	}
 
-	public static float[] getFloatArray(String s, String s1, Object[] pArg) {
-		return instance.getFloatArrayB(null, s, s1, pArg);
+	public static float[] getFloatArray(Object o, String s1, Object[] pArg) {
+		return instance.getFloatArrayB(null, o, s1, pArg);
 	}
 
-	public static float[] getFloatArray(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getFloatArrayB(null, s, s1, c, null, pArg);
+	public static float[] getFloatArray(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getFloatArrayB(null, o, s1, c, null, pArg);
 	}
 
-	public static float[] getFloatArray(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getFloatArrayB(null, s, s1, c, o, pArg);
+	public static float[] getFloatArray(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getFloatArrayB(null, o, s1, c, o1, pArg);
 	}
 
-	public static float[] getFloatArray(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.FloatArray(instance.getB(accessSupport, s, s1, pArg));
+	public static float[] getFloatArray(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.FloatArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static float[] getFloatArray(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.FloatArray(instance.getB(accessSupport, s, s1, pArg));
+	public static float[] getFloatArray(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.FloatArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public float[] getFloatArrayB(String s, String s1, Object pArg) {
-		return getFloatArrayB(null, s, s1, pArg);
+	public float[] getFloatArrayB(Object o, String s1, Object pArg) {
+		return getFloatArrayB(null, o, s1, pArg);
 	}
 
-	public float[] getFloatArrayB(String s, String s1, Object[] pArg) {
-		return getFloatArrayB(null, s, s1, pArg);
+	public float[] getFloatArrayB(Object o, String s1, Object[] pArg) {
+		return getFloatArrayB(null, o, s1, pArg);
 	}
 
-	public float[] getFloatArrayB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.FloatArray(getB(accessSupport, s, s1, pArg));
+	public float[] getFloatArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.FloatArray(getB(accessSupport, o, s1, pArg));
 	}
 
-	public float[] getFloatArrayB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.FloatArray(getB(accessSupport, s, s1, pArg));
+	public float[] getFloatArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.FloatArray(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static double[] getDoubleArray(String s, String s1) {
-		return instance.getDoubleArrayB(null, s, s1, (Object[])null);
+	public static double[] getDoubleArray(Object o, String s1) {
+		return instance.getDoubleArrayB(null, o, s1, (Object[])null);
 	}
 
-	public static double[] getDoubleArray(String s, String s1, Object pArg) {
-		return instance.getDoubleArrayB(null, s, s1, pArg);
+	public static double[] getDoubleArray(Object o, String s1, Object pArg) {
+		return instance.getDoubleArrayB(null, o, s1, pArg);
 	}
 
-	public static double[] getDoubleArray(String s, String s1, Object[] pArg) {
-		return instance.getDoubleArrayB(null, s, s1, pArg);
+	public static double[] getDoubleArray(Object o, String s1, Object[] pArg) {
+		return instance.getDoubleArrayB(null, o, s1, pArg);
 	}
 
-	public static double[] getDoubleArray(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getDoubleArrayB(null, s, s1, c, null, pArg);
+	public static double[] getDoubleArray(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getDoubleArrayB(null, o, s1, c, null, pArg);
 	}
 
-	public static double[] getDoubleArray(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getDoubleArrayB(null, s, s1, c, o, pArg);
+	public static double[] getDoubleArray(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getDoubleArrayB(null, o, s1, c, o1, pArg);
 	}
 
-	public static double[] getDoubleArray(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.DoubleArray(instance.getB(accessSupport, s, s1, pArg));
+	public static double[] getDoubleArray(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.DoubleArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static double[] getDoubleArray(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.DoubleArray(instance.getB(accessSupport, s, s1, pArg));
+	public static double[] getDoubleArray(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.DoubleArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public double[] getDoubleArrayB(String s, String s1, Object pArg) {
-		return getDoubleArrayB(null, s, s1, pArg);
+	public double[] getDoubleArrayB(Object o, String s1, Object pArg) {
+		return getDoubleArrayB(null, o, s1, pArg);
 	}
 
-	public double[] getDoubleArrayB(String s, String s1, Object[] pArg) {
-		return getDoubleArrayB(null, s, s1, pArg);
+	public double[] getDoubleArrayB(Object o, String s1, Object[] pArg) {
+		return getDoubleArrayB(null, o, s1, pArg);
 	}
 
-	public double[] getDoubleArrayB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.DoubleArray(getB(accessSupport, s, s1, pArg));
+	public double[] getDoubleArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.DoubleArray(getB(accessSupport, o, s1, pArg));
 	}
 
-	public double[] getDoubleArrayB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.DoubleArray(getB(accessSupport, s, s1, pArg));
+	public double[] getDoubleArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.DoubleArray(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static byte[] getByteArray(String s, String s1) {
-		return instance.getByteArrayB(null, s, s1, (Object[])null);
+	public static byte[] getByteArray(Object o, String s1) {
+		return instance.getByteArrayB(null, o, s1, (Object[])null);
 	}
 
-	public static byte[] getByteArray(String s, String s1, Object pArg) {
-		return instance.getByteArrayB(null, s, s1, pArg);
+	public static byte[] getByteArray(Object o, String s1, Object pArg) {
+		return instance.getByteArrayB(null, o, s1, pArg);
 	}
 
-	public static byte[] getByteArray(String s, String s1, Object[] pArg) {
-		return instance.getByteArrayB(null, s, s1, pArg);
+	public static byte[] getByteArray(Object o, String s1, Object[] pArg) {
+		return instance.getByteArrayB(null, o, s1, pArg);
 	}
 
-	public static byte[] getByteArray(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getByteArrayB(null, s, s1, c, null, pArg);
+	public static byte[] getByteArray(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getByteArrayB(null, o, s1, c, null, pArg);
 	}
 
-	public static byte[] getByteArray(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getByteArrayB(null, s, s1, c, o, pArg);
+	public static byte[] getByteArray(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getByteArrayB(null, o, s1, c, o1, pArg);
 	}
 
-	public static byte[] getByteArray(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.ByteArray(instance.getB(accessSupport, s, s1, pArg));
+	public static byte[] getByteArray(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.ByteArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static byte[] getByteArray(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.ByteArray(instance.getB(accessSupport, s, s1, pArg));
+	public static byte[] getByteArray(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.ByteArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public byte[] getByteArrayB(String s, String s1, Object pArg) {
-		return getByteArrayB(null, s, s1, pArg);
+	public byte[] getByteArrayB(Object o, String s1, Object pArg) {
+		return getByteArrayB(null, o, s1, pArg);
 	}
 
-	public byte[] getByteArrayB(String s, String s1, Object[] pArg) {
-		return getByteArrayB(null, s, s1, pArg);
+	public byte[] getByteArrayB(Object o, String s1, Object[] pArg) {
+		return getByteArrayB(null, o, s1, pArg);
 	}
 
-	public byte[] getByteArrayB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.ByteArray(getB(accessSupport, s, s1, pArg));
+	public byte[] getByteArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.ByteArray(getB(accessSupport, o, s1, pArg));
 	}
 
-	public byte[] getByteArrayB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.ByteArray(getB(accessSupport, s, s1, pArg));
+	public byte[] getByteArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.ByteArray(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static String[] getStringArray(String s, String s1) {
-		return instance.getStringArrayB(null, s, s1, (Object[])null);
+	public static String[] getStringArray(Object o, String s1) {
+		return instance.getStringArrayB(null, o, s1, (Object[])null);
 	}
 
-	public static String[] getStringArray(String s, String s1, Object pArg) {
-		return instance.getStringArrayB(null, s, s1, pArg);
+	public static String[] getStringArray(Object o, String s1, Object pArg) {
+		return instance.getStringArrayB(null, o, s1, pArg);
 	}
 
-	public static String[] getStringArray(String s, String s1, Object[] pArg) {
-		return instance.getStringArrayB(null, s, s1, pArg);
+	public static String[] getStringArray(Object o, String s1, Object[] pArg) {
+		return instance.getStringArrayB(null, o, s1, pArg);
 	}
 
-	public static String[] getStringArray(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getStringArrayB(null, s, s1, c, null, pArg);
+	public static String[] getStringArray(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getStringArrayB(null, o, s1, c, null, pArg);
 	}
 
-	public static String[] getStringArray(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getStringArrayB(null, s, s1, c, o, pArg);
+	public static String[] getStringArray(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getStringArrayB(null, o, s1, c, o1, pArg);
 	}
 
-	public static String[] getStringArray(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.StringArray(instance.getB(accessSupport, s, s1, pArg));
+	public static String[] getStringArray(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.StringArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static String[] getStringArray(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.StringArray(instance.getB(accessSupport, s, s1, pArg));
+	public static String[] getStringArray(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.StringArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public String[] getStringArrayB(String s, String s1, Object pArg) {
-		return getStringArrayB(null, s, s1, pArg);
+	public String[] getStringArrayB(Object o, String s1, Object pArg) {
+		return getStringArrayB(null, o, s1, pArg);
 	}
 
-	public String[] getStringArrayB(String s, String s1, Object[] pArg) {
-		return getStringArrayB(null, s, s1, pArg);
+	public String[] getStringArrayB(Object o, String s1, Object[] pArg) {
+		return getStringArrayB(null, o, s1, pArg);
 	}
 
-	public String[] getStringArrayB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.StringArray(getB(accessSupport, s, s1, pArg));
+	public String[] getStringArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.StringArray(getB(accessSupport, o, s1, pArg));
 	}
 
-	public String[] getStringArrayB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.StringArray(getB(accessSupport, s, s1, pArg));
+	public String[] getStringArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.StringArray(getB(accessSupport, o, s1, pArg));
 	}
 
-	public static Object[] getObjectArray(String s, String s1) {
-		return instance.getObjectArrayB(null, s, s1, (Object[])null);
+	public static Object[] getObjectArray(Object o, String s1) {
+		return instance.getObjectArrayB(null, o, s1, (Object[])null);
 	}
 
-	public static Object[] getObjectArray(String s, String s1, Object pArg) {
-		return instance.getObjectArrayB(null, s, s1, pArg);
+	public static Object[] getObjectArray(Object o, String s1, Object pArg) {
+		return instance.getObjectArrayB(null, o, s1, pArg);
 	}
 
-	public static Object[] getObjectArray(String s, String s1, Object[] pArg) {
-		return instance.getObjectArrayB(null, s, s1, pArg);
+	public static Object[] getObjectArray(Object o, String s1, Object[] pArg) {
+		return instance.getObjectArrayB(null, o, s1, pArg);
 	}
 
-	public static Object[] getObjectArray(String s, String s1, Class[] c, Object[] pArg) {
-		return instance.getObjectArrayB(null, s, s1, c, null, pArg);
+	public static Object[] getObjectArray(Object o, String s1, Class[] c, Object[] pArg) {
+		return instance.getObjectArrayB(null, o, s1, c, null, pArg);
 	}
 
-	public static Object[] getObjectArray(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return instance.getObjectArrayB(null, s, s1, c, o, pArg);
+	public static Object[] getObjectArray(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return instance.getObjectArrayB(null, o, s1, c, o1, pArg);
 	}
 
-	public static Object[] getObjectArray(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.ObjectArray(instance.getB(accessSupport, s, s1, pArg));
+	public static Object[] getObjectArray(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.ObjectArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public static Object[] getObjectArray(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.ObjectArray(instance.getB(accessSupport, s, s1, pArg));
+	public static Object[] getObjectArray(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.ObjectArray(instance.getB(accessSupport, o, s1, pArg));
 	}
 
-	public Object[] getObjectArrayB(String s, String s1, Object pArg) {
-		return getObjectArrayB(null, s, s1, pArg);
+	public Object[] getObjectArrayB(Object o, String s1, Object pArg) {
+		return getObjectArrayB(null, o, s1, pArg);
 	}
 
-	public Object[] getObjectArrayB(String s, String s1, Object[] pArg) {
-		return getObjectArrayB(null, s, s1, pArg);
+	public Object[] getObjectArrayB(Object o, String s1, Object[] pArg) {
+		return getObjectArrayB(null, o, s1, pArg);
 	}
 
-	public Object[] getObjectArrayB(Modchu_ASBase accessSupport, String s, String s1, Object pArg) {
-		return Modchu_CastHelper.ObjectArray(getB(accessSupport, s, s1, pArg));
+	public Object[] getObjectArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object pArg) {
+		return Modchu_CastHelper.ObjectArray(getB(accessSupport, o, s1, pArg));
 	}
 
-	public Object[] getObjectArrayB(Modchu_ASBase accessSupport, String s, String s1, Object[] pArg) {
-		return Modchu_CastHelper.ObjectArray(getB(accessSupport, s, s1, pArg));
+	public Object[] getObjectArrayB(Modchu_ASBase accessSupport, Object o, String s1, Object[] pArg) {
+		return Modchu_CastHelper.ObjectArray(getB(accessSupport, o, s1, pArg));
 	}
 
 	@Override
-	public boolean getBooleanB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Boolean(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public boolean getBooleanB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Boolean(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public boolean getBooleanB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Boolean(getB(accessSupport, s, s1, c, o, pArg));
+	public boolean getBooleanB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Boolean(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public float getFloatB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Float(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public float getFloatB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Float(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public float getFloatB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Float(getB(accessSupport, s, s1, c, o, pArg));
+	public float getFloatB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Float(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public double getDoubleB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Double(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public double getDoubleB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Double(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public double getDoubleB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Double(getB(accessSupport, s, s1, c, o, pArg));
+	public double getDoubleB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Double(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public int getIntB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Int(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public int getIntB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Int(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public int getIntB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Int(getB(accessSupport, s, s1, c, o, pArg));
+	public int getIntB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Int(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public long getLongB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Long(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public long getLongB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Long(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public long getLongB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Long(getB(accessSupport, s, s1, c, o, pArg));
+	public long getLongB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Long(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public byte getByteB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Byte(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public byte getByteB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Byte(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public byte getByteB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Byte(getB(accessSupport, s, s1, c, o, pArg));
+	public byte getByteB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Byte(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public String getStringB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.String(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public String getStringB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.String(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public String getStringB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.String(getB(accessSupport, s, s1, c, o, pArg));
+	public String getStringB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.String(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public List getListB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.List(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public List getListB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.List(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public List getListB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.List(getB(accessSupport, s, s1, c, o, pArg));
+	public List getListB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.List(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public ArrayList getArrayListB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.ArrayList(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public ArrayList getArrayListB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.ArrayList(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public ArrayList getArrayListB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.ArrayList(getB(accessSupport, s, s1, c, o, pArg));
+	public ArrayList getArrayListB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.ArrayList(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public LinkedList getLinkedListB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.LinkedList(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public LinkedList getLinkedListB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.LinkedList(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public LinkedList getLinkedListB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.LinkedList(getB(accessSupport, s, s1, c, o, pArg));
+	public LinkedList getLinkedListB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.LinkedList(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public Enum getEnumB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Enum(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public Enum getEnumB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Enum(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public Enum getEnumB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Enum(getB(accessSupport, s, s1, c, o, pArg));
+	public Enum getEnumB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Enum(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public ConcurrentHashMap getConcurrentHashMapB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.ConcurrentHashMap(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public ConcurrentHashMap getConcurrentHashMapB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public ConcurrentHashMap getConcurrentHashMapB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.ConcurrentHashMap(getB(accessSupport, s, s1, c, o, pArg));
+	public ConcurrentHashMap getConcurrentHashMapB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.ConcurrentHashMap(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public HashMap getHashMapB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.HashMap(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public HashMap getHashMapB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.HashMap(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public HashMap getHashMapB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.HashMap(getB(accessSupport, s, s1, c, o, pArg));
+	public HashMap getHashMapB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.HashMap(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public Map getMapB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Map(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public Map getMapB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Map(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public Map getMapB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.Map(getB(accessSupport, s, s1, c, o, pArg));
+	public Map getMapB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.Map(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public File getFileB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.File(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public File getFileB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.File(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public File getFileB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.File(getB(accessSupport, s, s1, c, o, pArg));
+	public File getFileB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.File(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public IntBuffer getIntBufferB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.IntBuffer(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public IntBuffer getIntBufferB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.IntBuffer(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public IntBuffer getIntBufferB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.IntBuffer(getB(accessSupport, s, s1, c, o, pArg));
+	public IntBuffer getIntBufferB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.IntBuffer(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public InputStream getInputStreamB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.InputStream(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public InputStream getInputStreamB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.InputStream(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public InputStream getInputStreamB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.InputStream(getB(accessSupport, s, s1, c, o, pArg));
+	public InputStream getInputStreamB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.InputStream(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public int[] getIntArrayB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.IntArray(getB((Modchu_ASBase)null, s, s1, c, pArg));
+	public int[] getIntArrayB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.IntArray(getB((Modchu_ASBase)null, o, s1, c, pArg));
 	}
 
 	@Override
-	public int[] getIntArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.IntArray(getB(accessSupport, s, s1, c, o, pArg));
+	public int[] getIntArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.IntArray(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public float[] getFloatArrayB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.FloatArray(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public float[] getFloatArrayB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.FloatArray(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public float[] getFloatArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.FloatArray(getB(accessSupport, s, s1, c, o, pArg));
+	public float[] getFloatArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.FloatArray(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public double[] getDoubleArrayB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.DoubleArray(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public double[] getDoubleArrayB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.DoubleArray(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public double[] getDoubleArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.DoubleArray(getB(accessSupport, s, s1, c, o, pArg));
+	public double[] getDoubleArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.DoubleArray(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public byte[] getByteArrayB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.ByteArray(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public byte[] getByteArrayB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.ByteArray(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public byte[] getByteArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.ByteArray(getB(accessSupport, s, s1, c, o, pArg));
+	public byte[] getByteArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.ByteArray(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public String[] getStringArrayB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.StringArray(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public String[] getStringArrayB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.StringArray(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public String[] getStringArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.StringArray(getB(accessSupport, s, s1, c, o, pArg));
+	public String[] getStringArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.StringArray(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public Object[] getObjectArrayB(String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.ObjectArray(getB((Modchu_ASBase)null, s, s1, c, o, pArg));
+	public Object[] getObjectArrayB(Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.ObjectArray(getB((Modchu_ASBase)null, o, s1, c, o1, pArg));
 	}
 
 	@Override
-	public Object[] getObjectArrayB(Modchu_ASBase accessSupport, String s, String s1, Class[] c, Object o, Object[] pArg) {
-		return Modchu_CastHelper.ObjectArray(getB(accessSupport, s, s1, c, o, pArg));
+	public Object[] getObjectArrayB(Modchu_ASBase accessSupport, Object o, String s1, Class[] c, Object o1, Object[] pArg) {
+		return Modchu_CastHelper.ObjectArray(getB(accessSupport, o, s1, c, o1, pArg));
 	}
 
 	public static boolean getBoolean(int pIndex, Object... pArg) {
@@ -9902,6 +9934,24 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return Modchu_Reflect.invokeMethod("Item", "func_77655_b", "setUnlocalizedName", new Class[]{ String.class }, item, new Object[]{ s });
 	}
 
+	protected Object itemSetRegistryName(Object item, Object resourceLocation) {
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 189) return Modchu_Reflect.invokeMethod("IForgeRegistryEntry$Impl", "setRegistryName", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, item, new Object[]{ resourceLocation });
+		return item;
+	}
+
+	protected Object itemSetRegistryName(Object item, String s) {
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 189) return Modchu_Reflect.invokeMethod("IForgeRegistryEntry$Impl", "setRegistryName", new Class[]{ String.class }, item, new Object[]{ s });
+		return item;
+	}
+
+	protected Object itemSetRegistryName(Object item, String s, String s1) {
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 189) return Modchu_Reflect.invokeMethod("IForgeRegistryEntry$Impl", "setRegistryName", new Class[]{ String.class, String.class }, item, new Object[]{ s, s1 });
+		return item;
+	}
+
 	protected Object itemSetCreativeTab(Object item, Object creativeTabs) {
 		return Modchu_Reflect.invokeMethod("Item", "func_71849_a", "setCreativeTab", new Class[]{ Modchu_Reflect.loadClass("CreativeTabs") }, item, new Object[]{ creativeTabs });
 	}
@@ -12392,7 +12442,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object worldGetPlayerEntityByName(Object worldOrEntity, String s) {
-		return Modchu_Reflect.invokeMethod("World", "func_72924_a", "getPlayerEntityByName", new Class[]{ String.class }, entityWorld(worldOrEntity), new Object[]{ s });
+		return s != null ? Modchu_Reflect.invokeMethod("World", "func_72924_a", "getPlayerEntityByName", new Class[]{ String.class }, entityWorld(worldOrEntity), new Object[]{ s }) : null;
 	}
 
 	protected Object worldGetBiomeGenForCoords(Object blockPosOrInt) {

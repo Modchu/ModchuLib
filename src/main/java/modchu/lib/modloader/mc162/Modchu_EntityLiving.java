@@ -7,6 +7,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.Modchu_AS;
+import modchu.lib.Modchu_DataWatcherMaster2;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntityLiving;
 import modchu.lib.Modchu_IEntityLivingMaster;
@@ -69,6 +70,55 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 		this((World) map.get("Object"));
 		initFlag = false;
 		init(map);
+	}
+
+	@Override
+	public Object getRidingEntity2() {
+		return superGetRidingEntity();
+	}
+
+	@Override
+	public Object superGetRidingEntity2() {
+		return superGetRidingEntity();
+	}
+
+	@Override
+	public boolean isRiding2() {
+		return isRiding();
+	}
+
+	@Override
+	public boolean superIsRiding2() {
+		return superIsRiding();
+	}
+
+	@Override
+	public void dismountRidingEntity2() {
+		superDismountRidingEntity();
+	}
+
+	@Override
+	public void superDismountRidingEntity2() {
+		superDismountRidingEntity();
+	}
+
+	@Override
+	public int getDataWatcherWatchableObjectIdCount() {
+		return 9;
+	}
+
+	@Override
+	public void setDataWatcherWatchableObjectIdCount(int i) {
+	}
+
+	@Override
+	public boolean superIsOnLivingUpdateCancel() {
+		return false;
+	}
+
+	@Override
+	public boolean isOnLivingUpdateCancel() {
+		return false;
 	}
 
 	@Override
@@ -568,6 +618,7 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	}
 
 	protected void init(HashMap<String, Object> map) {
+		dataWatcher = (DataWatcher) Modchu_Main.newModchuCharacteristicObject("Modchu_DataWatcher", Modchu_DataWatcherMaster2.class, this, dataWatcher);
 		boolean isRemote = Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this);
 		Modchu_Debug.mDebug("Modchu_EntityLivingBase init isRemote="+isRemote+" map="+map);
 		if (posX == 0
@@ -1885,24 +1936,19 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	}
 	// TODO Modchu_Entity のコピー↓（からのエラー対処有り）
 	@Override
-	public void entityDataManagerRegister(Class c, Class[] c1, int i, Object o) {
+	public void entityDataManagerRegister(Class[] c1, int i, Object o) {
 		dataWatcher.addObject(i, o);
 	}
 
 	@Override
-	public Object getDataWatcherGetWatchableObject(int i) {
+	public Object getDataWatcherWatchableObject(int i) {
 		Object watchedObject = Modchu_AS.get("DataWatcher", "getWatchedObject", new Class[]{ int.class }, dataWatcher, new Object[]{ i });
 		return watchedObject != null ? Modchu_AS.get("net.minecraft.entity.DataWatcher$WatchableObject", "getObject", watchedObject) : null;
 	}
 
 	@Override
-	public void setDataWatcherGetWatchableObject(int i, Object o) {
+	public void setDataWatcherWatchableObject(int i, Object o) {
 		dataWatcher.updateObject(i, o);
-	}
-
-	@Override
-	public ConcurrentHashMap getDataParameterMap() {
-		return null;
 	}
 
 	@Override
@@ -3007,16 +3053,6 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	@Override
 	public boolean superHitByEntity(Object entity) {
 		return super.func_85031_j((Entity) entity);
-	}
-
-	@Override
-	public String toString() {
-		return master != null ? master.toString() : super.toString();
-	}
-
-	@Override
-	public String superToString() {
-		return super.toString();
 	}
 
 	@Override

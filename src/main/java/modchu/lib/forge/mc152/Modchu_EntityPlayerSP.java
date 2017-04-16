@@ -66,7 +66,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		master = instance != null
 				&& instance instanceof Modchu_IEntityPlayerSPMaster ? (Modchu_IEntityPlayerSPMaster) instance : null;
 		if (master != null); else Modchu_Debug.lDebug("Modchu_EntityPlayerSP init master == null !!");
-	}	@Override
+	}	@Override	public Object getRidingEntity2() {		return superGetRidingEntity();	}	@Override	public Object superGetRidingEntity2() {		return superGetRidingEntity();	}	@Override	public boolean isRiding2() {		return isRiding();	}	@Override	public boolean superIsRiding2() {		return superIsRiding();	}	@Override	public void dismountRidingEntity2() {		superDismountRidingEntity();	}	@Override	public void superDismountRidingEntity2() {		superDismountRidingEntity();	}	@Override
 	public void init() {
 		if (master != null) master.init();
 		initFlag = true;

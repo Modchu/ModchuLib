@@ -9,7 +9,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_EntityDataManagerMaster2;
 import modchu.lib.Modchu_IEntity;
+import modchu.lib.Modchu_IEntityDataManager;
 import modchu.lib.Modchu_IEntityMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.block.Block;
@@ -55,11 +57,13 @@ import net.minecraftforge.common.capabilities.Capability;
 
 public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public Modchu_IEntityMaster master;
-	protected ConcurrentHashMap<String, DataParameter> dataParameterMap = new ConcurrentHashMap();
 	public float maxHealth;
+	public int ridingEntity2;
+	private int dataWatcherWatchableObjectIdCount = 6;
 
 	public Modchu_Entity(World world) {
 		super(world);
+		init((HashMap) null);
 	}
 
 	public Modchu_Entity(HashMap<String, Object> map) {
@@ -68,8 +72,52 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public ConcurrentHashMap getDataParameterMap() {
-		return dataParameterMap;
+	public int getDataWatcherWatchableObjectIdCount() {
+		return dataWatcherWatchableObjectIdCount;
+	}
+
+	@Override
+	public void setDataWatcherWatchableObjectIdCount(int i) {
+		dataWatcherWatchableObjectIdCount = i;
+	}
+
+	@Override
+	public Entity getRidingEntity2() {
+		return (Entity) (master != null ? master.getRidingEntity2() : superGetRidingEntity2());
+	}
+
+	@Override
+	public Entity superGetRidingEntity2() {
+		// TODO Riding2
+		if (ridingEntity2 != 0) {
+			World worldObj = (World) Modchu_AS.get(Modchu_AS.entityWorldObj, this);
+			return worldObj.getEntityByID(ridingEntity2);
+		}
+		return null;
+	}
+
+	@Override
+	public boolean isRiding2() {
+		// TODO Riding2
+		return master != null ? master.isRiding2() : superIsRiding2();
+	}
+
+	@Override
+	public boolean superIsRiding2() {
+		// TODO Riding2
+		return ridingEntity2 != 0;
+	}
+
+	@Override
+	public void dismountRidingEntity2() {
+		// TODO Riding2
+		if (master != null) master.dismountRidingEntity2();
+		else superDismountRidingEntity2();
+	}
+
+	@Override
+	public void superDismountRidingEntity2() {
+		ridingEntity2 = 0;
 	}
 
 	@Override
@@ -92,6 +140,10 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	protected void init(HashMap<String, Object> map) {
+		int version = Modchu_Main.getMinecraftVersion();
+		Modchu_AS.set("Entity", version > 190
+				| (version == 190
+				&& Modchu_Main.isRelease()) ? "dataManager" : "dataWatcher", this, (EntityDataManager) Modchu_Main.newModchuCharacteristicObject("Modchu_EntityDataManager", Modchu_EntityDataManagerMaster2.class, this, Modchu_AS.get("Entity", version > 190 ? "dataManager" : "dataWatcher", this)));
 		if (map != null
 				&& !map.isEmpty()); else {
 			return;
@@ -1075,16 +1127,6 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 	@Override
 	public boolean superHitByEntity(Object entity) {
 		return super.hitByEntity((Entity) entity);
-	}
-
-	@Override
-	public String toString() {
-		return master != null ? master.toString() : super.toString();
-	}
-
-	@Override
-	public String superToString() {
-		return super.toString();
 	}
 
 	@Override

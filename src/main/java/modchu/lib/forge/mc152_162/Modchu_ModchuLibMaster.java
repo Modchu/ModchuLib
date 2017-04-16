@@ -18,6 +18,7 @@ public class Modchu_ModchuLibMaster implements Modchu_IBaseModMaster {
 	public Modchu_ModchuLibMaster instance;
 
 	public Modchu_ModchuLibMaster(HashMap<String, Object> map) {
+		if (!Modchu_Main.isModEnable) return;
 		instance = this;
 		base = map.get("Object");
 		Modchu_Debug.systemLogDebug("Modchu_ModchuLibMaster init base="+base);

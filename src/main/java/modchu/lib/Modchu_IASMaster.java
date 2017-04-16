@@ -934,5 +934,8 @@ public interface Modchu_IASMaster {
 	public Object newDataParameter(Class c, Class[] c1, int i);
 	public Object newSoundEvent(Object resourceLocationOrString);
 	public Object newResourceLocation(String s);
+	public Object itemSetRegistryName(Object item, Object resourceLocation);
+	public Object itemSetRegistryName(Object item, String s);
+	public Object itemSetRegistryName(Object item, String s, String s1);
 
 }

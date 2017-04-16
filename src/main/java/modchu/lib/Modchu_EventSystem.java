@@ -1,28 +1,14 @@
 package modchu.lib;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Modchu_EventSystem {
-	protected String name;
-	protected ArrayList eventObjectList = new ArrayList();
-	protected ArrayList<String> eventObjectLoadCheckList = new ArrayList(1024);
+public class Modchu_EventSystem extends Modchu_RegisterSystem {
+	protected List<String> eventObjectLoadCheckList = new ArrayList(1024);
 
 	public Modchu_EventSystem(String s) {
-		name = s;
-	}
-
-	public void register(Object o) {
-		///Modchu_Debug.mDebug("Modchu_EventSystem modchuLibEventRegister o="+o);
-		if (!getEventObjectList().contains(o)) {
-			//Modchu_Debug.mDebug("Modchu_EventSystem modchuLibEventRegister ok.");
-			getEventObjectList().add(o);
-		}
-	}
-
-	public void unRegister(Object o) {
-		if (getEventObjectList().contains(o)) getEventObjectList().remove(o);
+		super(s);
 	}
 
 	public boolean isEvent(String s) {
@@ -33,7 +19,7 @@ public class Modchu_EventSystem {
 		boolean debug = false;
 		//boolean debug = s.equals("entityCreatureOnDeathUpdate");
 		//if (debug) Modchu_Debug.mDebug("modchuLibEvent s="+s);
-		Object[] o1 = eventObjectLoad(getEventObjectList(), getEventObjectLoadCheckList(), s, s, new Class[]{ Object[].class }, new Object[]{ o });
+		Object[] o1 = eventObjectLoad(getObjectList(), getEventObjectLoadCheckList(), s, s, new Class[]{ Object[].class }, new Object[]{ o });
 		if (debug) Modchu_Debug.mDebug("modchuLibEvent o1="+o1);
 		if (o1 != null); else return null;
 		int temp = 0;
@@ -58,7 +44,7 @@ public class Modchu_EventSystem {
 		return flag ? Modchu_Main.objectArrayCatting(Modchu_CastHelper.ObjectArray(o1[i2]), 1) : Modchu_CastHelper.ObjectArray(o1[i2]);
 	}
 
-	public static Object[] eventObjectLoad(ArrayList list, ArrayList list2, String s, String s1, Class[] cla, Object[] oa) {
+	public static Object[] eventObjectLoad(List list, List list2, String s, String s1, Class[] cla, Object[] oa) {
 		boolean debug = false;
 		//boolean debug = s.equals("addRenderer");
 		if (list != null
@@ -105,19 +91,11 @@ public class Modchu_EventSystem {
 		return o;
 	}
 
-	public ArrayList getEventObjectList() {
-		return eventObjectList;
-	}
-
-	public void setEventObjectList(ArrayList list) {
-		eventObjectList = list;
-	}
-
-	public ArrayList<String> getEventObjectLoadCheckList() {
+	public List<String> getEventObjectLoadCheckList() {
 		return eventObjectLoadCheckList;
 	}
 
-	public void setEventObjectLoadCheckList(ArrayList<String> list) {
+	public void setEventObjectLoadCheckList(List<String> list) {
 		eventObjectLoadCheckList = list;
 	}
 

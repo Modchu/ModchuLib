@@ -273,4 +273,32 @@ public class Modchu_FileManager {
 		else base.setModsZipFileList(list);
 	}
 
+	public static Map<String, ZipEntry> loadZipFileToZipEntryMap(File file, Map<String, ZipEntry> map) {
+		return master != null ? master.loadZipFileToZipEntryMap(file, map) : base.loadZipFileToZipEntryMap(file, map);
+	}
+
+	public static HashMap<String, ZipEntry> loadZipFileToZipEntryHashMap(File file) {
+		return master != null ? master.loadZipFileToZipEntryHashMap(file) : base.loadZipFileToZipEntryHashMap(file);
+	}
+
+	public static Map<String, InputStream> loadZipFileToInputStreamMap(ZipFile zipFile, Map<String, InputStream> map) {
+		return master != null ? master.loadZipFileToInputStreamMap(zipFile, map) : base.loadZipFileToInputStreamMap(zipFile, map);
+	}
+
+	public static HashMap<String, InputStream> loadZipFileToInputStreamHashMap(ZipFile zipFile) {
+		return master != null ? master.loadZipFileToInputStreamHashMap(zipFile) : base.loadZipFileToInputStreamHashMap(zipFile);
+	}
+
+	public static List<File> getDirFileList(List<File> list) {
+		return master != null ? master.getDirFileList(list) : base.getDirFileList(list);
+	}
+
+	public static String getCurrentDir(String s) {
+		return master != null ? master.getCurrentDir(s) : base.getCurrentDir(s);
+	}
+
+	public static String getRelativePath(String s) {
+		return master != null ? master.getRelativePath(s) : base.getRelativePath(s);
+	}
+
 }

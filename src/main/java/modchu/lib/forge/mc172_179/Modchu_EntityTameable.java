@@ -1,13 +1,16 @@
 package modchu.lib.forge.mc172_179;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_CastHelper;
+import modchu.lib.Modchu_DataWatcherMaster2;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntityTameable;
 import modchu.lib.Modchu_IEntityTameableMaster;
@@ -48,7 +51,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.CombatTracker;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.IIcon;
@@ -62,15 +64,20 @@ import scala.collection.mutable.StringBuilder;
 
 public abstract class Modchu_EntityTameable extends EntityTameable implements Modchu_IEntityTameable {
 	public Modchu_IEntityTameableMaster master;
-	public String entityName;
+	protected boolean initFlag;
+	protected static boolean debugDead = false;
 	public static ConcurrentHashMap<String, UUID> entityUniqueIDMap = new ConcurrentHashMap();
-	private CombatTracker combatTracker;
-	private boolean entityInitFlag;
+	protected HashMap<String, Object> tempInitMap;
+	//protected CombatTracker combatTracker;
+	protected int dataWatcherWatchableObjectIdFirst;
+	private int dataWatcherWatchableObjectIdCount;
+	private List entityDataManagerBooleanToByteList;
 
 	public Modchu_EntityTameable(World world) {
 		super(world);
 		ignoreFrustumCheck = true;
 		//if (world.isRemote) Modchu_Main.setRuntimeException("debug Modchu_EntityTameable");
+		init((HashMap)null);
 	}
 
 	public Modchu_EntityTameable(HashMap<String, Object> map) {
@@ -84,32 +91,92 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 		}
 	}
 
+	@Override
+	public boolean isOnLivingUpdateCancel() {
+		return false;
+	}
+
+	@Override
+	public boolean superIsOnLivingUpdateCancel() {
+		return false;
+	}
+
+	@Override
+	public Object getRidingEntity2() {
+		return superGetRidingEntity();
+	}
+
+	@Override
+	public Object superGetRidingEntity2() {
+		return superGetRidingEntity();
+	}
+
+	@Override
+	public boolean isRiding2() {
+		return isRiding();
+	}
+
+	@Override
+	public boolean superIsRiding2() {
+		return superIsRiding();
+	}
+
+	@Override
+	public void dismountRidingEntity2() {
+		superDismountRidingEntity();
+	}
+
+	@Override
+	public void superDismountRidingEntity2() {
+		superDismountRidingEntity();
+	}
+
+	@Override
+	public int getDataWatcherWatchableObjectIdCount() {
+		return dataWatcherWatchableObjectIdCount;
+	}
+
+	@Override
+	public void setDataWatcherWatchableObjectIdCount(int i) {
+		dataWatcherWatchableObjectIdCount = i;
+	}
+
 	public String thisToString() {
 		return getClass().getName() + "@" + Integer.toHexString(java.lang.System.identityHashCode(this));
 	}
 
 	@Override
-	public void entityDataManagerRegister(Class c, Class[] c1, int i, Object o) {
+	public void entityDataManagerRegister(Class[] c1, int i, Object o) {
+		if (o instanceof Boolean) {
+			o = (Boolean) o ? (byte) 1 : (byte) 0;
+			if (entityDataManagerBooleanToByteList != null); else entityDataManagerBooleanToByteList = new ArrayList();
+			entityDataManagerBooleanToByteList.add(i);
+		}
 		dataWatcher.addObject(i, o);
 	}
 
 	@Override
-	public Object getDataWatcherGetWatchableObject(int i) {
+	public Object getDataWatcherWatchableObject(int i) {
 		Object watchedObject = Modchu_AS.get("DataWatcher", "getWatchedObject", new Class[]{ int.class }, dataWatcher, new Object[]{ i });
-		return watchedObject != null ? Modchu_AS.get("net.minecraft.entity.DataWatcher$WatchableObject", "getObject", watchedObject) : null;
+		if (watchedObject != null); else return null;
+		Object o = Modchu_AS.get("net.minecraft.entity.DataWatcher$WatchableObject", "getObject", watchedObject);
+		if (entityDataManagerBooleanToByteList != null
+				&& entityDataManagerBooleanToByteList.contains(i)) {
+			o = (Byte) o == (byte) 1 ? true : false;
+		}
+		return o;
 	}
 
 	@Override
-	public void setDataWatcherGetWatchableObject(int i, Object o) {
+	public void setDataWatcherWatchableObject(int i, Object o) {
 		//Map watchedObjects = Modchu_AS.getMap("DataWatcher", "watchedObjects", dataWatcher);
 		//if (watchedObjects.containsKey(i))
-			dataWatcher.updateObject(i, o);
+		if (entityDataManagerBooleanToByteList != null
+				&& entityDataManagerBooleanToByteList.contains(i)) {
+			o = (Boolean) o ? (byte) 1 : (byte) 0;
+		}
+		dataWatcher.updateObject(i, o);
 		//else dataWatcher.addObject(i, o);
-	}
-
-	@Override
-	public ConcurrentHashMap getDataParameterMap() {
-		return null;
 	}
 
 	@Override
@@ -140,7 +207,7 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	public Object getMaster() {
 		//Modchu_Debug.mDebug("getmasterEntity masterEntity="+masterEntity);
 		if (master != null); else {
-			init(entityName);
+			init(getMasterClassName());
 		}
 		return master;
 	}
@@ -155,13 +222,22 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	protected void init(HashMap<String, Object> map) {
+		boolean debug = false;
 		if (map != null
 				&& !map.isEmpty()); else {
 			if (master != null) return;
-			Modchu_Debug.mDebug("Modchu_EntityTameable init isRemote="+worldObj.isRemote);
+			//Modchu_Debug.mDebug("Modchu_EntityTameable init isRemote="+worldObj.isRemote);
+			//Class c = Modchu_Main.getSpownEntityClass(worldObj, posX, posY, posZ);
+			Class c = getMasterClass();
+			if (c != null); else {
+				// TODO
+				if (debug) {
+					Modchu_Debug.mDebug1("Modchu_EntityTameable init map == null debug1 return isRemote="+worldObj.isRemote);
 					//setDead();
 					//Modchu_Main.setRuntimeException("init debug");
-			Class c = Modchu_Main.getSpownEntityClass(worldObj, posX, posY, posZ);
+				}
+				return;
+			}
 			map = new HashMap();
 			map.put("Class", c);
 			map.put("Object", worldObj);
@@ -171,30 +247,53 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 				&& map.containsKey("Class")); else {
 			return;
 		}
+		if (!initFlag) {
+			if (tempInitMap != null); else {
+				tempInitMap = map;
+			}
+			return;
+		}
 		Class c = map.containsKey("Class") ? ((Class) map.get("Class")) : null;
 		if (c != null); else return;
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		master = instance instanceof Modchu_IEntityTameableMaster ? (Modchu_IEntityTameableMaster) instance : null;
-		entityName = c.getName();
-		Modchu_Debug.mDebug("init entityName="+(entityName != null ? entityName : "null !!"));
 		if (master != null); else {
-			Modchu_Debug.mDebug("Modchu_EntityTameable init 4 master == null !!");
+			if (debug) Modchu_Debug.mDebug("Modchu_EntityTameable init 4 master == null !!");
 			return;
 		}
+		setMasterClassName(c.getName());
 		master.entityInit();
 		String s0 = new StringBuilder(Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this) ? "1" : "0").append(entityUniqueID).toString();
 		if (s0 != null
 				&& entityUniqueIDMap.containsKey(s0)) {
-			Modchu_Debug.mDebug("init entityUniqueIDMap.containsKey isDead entityUniqueID="+entityUniqueID);
+			Modchu_Debug.mDebug("Modchu_EntityTameable init entityUniqueIDMap.containsKey isDead entityUniqueID="+entityUniqueID);
 			Modchu_AS.set(Modchu_AS.entityLivingBaseSetHealth, this, 0.0F);
 			deathTime = 20;
 			setDead();
 			return;
 		}
 		if (s0 != null) entityUniqueIDMap.put(s0, entityUniqueID);
-		Modchu_Debug.mDebug("init entityUniqueID="+entityUniqueID);
-		Modchu_Debug.mDebug("init masterEntity="+master);
+		Modchu_Debug.mDebug("initNBTAfter entityUniqueID="+entityUniqueID);
+		Modchu_Debug.mDebug("initNBTAfter masterEntity="+master);
+	}
+
+	private String getMasterClassName() {
+		String s = Modchu_CastHelper.String(getDataWatcherWatchableObject(dataWatcherWatchableObjectIdFirst));
+		//Modchu_Debug.mDebug("Modchu_EntityTameable getMasterClassName s="+s);
+		return s;
+	}
+
+	private void setMasterClassName(String s) {
+		Modchu_Debug.mDebug("Modchu_EntityTameable setMasterClassName s="+s);
+		setDataWatcherWatchableObject(dataWatcherWatchableObjectIdFirst, s);
+	}
+
+	private Class getMasterClass() {
+		String s = getMasterClassName();
+		Modchu_Debug.mDebug("Modchu_EntityTameable getMasterClass() s="+s);
+		return s != null
+				&& !s.isEmpty() ? Modchu_Reflect.loadClass(s, -1) : null;
 	}
 
 	public static void worldEventLoad(Object event) {
@@ -227,22 +326,23 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nBTTagCompound) {
+		String entityName = getMasterClassName();
 		if (entityName != null
 				&& !entityName.isEmpty()) {
 			nBTTagCompound.setString("entityName", entityName);
 			if (master != null) master.writeEntityToNBT(nBTTagCompound);
 			else super.writeEntityToNBT(nBTTagCompound);
 		}
-		//Modchu_Debug.mDebug("writeEntityToNBT entityName="+entityName);
+		//Modchu_Debug.mDebug("Modchu_EntityTameable writeEntityToNBT entityName="+entityName);
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nBTTagCompound) {
-		Modchu_Debug.mDebug("readEntityFromNBT entityName="+entityName);
+		//Modchu_Debug.mDebug("Modchu_EntityTameable readEntityFromNBT entityName="+entityName);
 		String s = nBTTagCompound.getString("entityName");
-		Modchu_Debug.mDebug("readEntityFromNBT isRemote="+worldObj.isRemote+" s="+s);
+		Modchu_Debug.mDebug("Modchu_EntityTameable readEntityFromNBT isRemote="+worldObj.isRemote+" entityName s="+s);
 		init(s);
-		Modchu_Debug.mDebug("readEntityFromNBT master.getClass()="+(master != null ? master.getClass() : null));
+		Modchu_Debug.mDebug("Modchu_EntityTameable readEntityFromNBT master.getClass()="+(master != null ? master.getClass() : null));
 		if (master != null) master.readEntityFromNBT(nBTTagCompound);
 		else super.readEntityFromNBT(nBTTagCompound);
 	}
@@ -322,15 +422,15 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void onLivingUpdate() {
-		//Modchu_Debug.mDebug("onLivingUpdate master="+master);
-		//Modchu_Debug.mDebug("onLivingUpdate entityName="+entityName);
-		//Modchu_Debug.mDebug("onLivingUpdate posX="+posX+" posY="+posY+" posZ="+posZ);
-		if (master != null
-				&& entityName != null); else {
-			Modchu_Debug.mDebug("onLivingUpdate this="+this);
-			Modchu_Debug.mDebug("onLivingUpdate master="+master);
-			Modchu_Debug.mDebug("onLivingUpdate entityName="+entityName);
-			init((HashMap)null);
+		//Modchu_Debug.mDebug("Modchu_EntityTameable onLivingUpdate master="+master);
+		//Modchu_Debug.mDebug("Modchu_EntityTameable onLivingUpdate entityName="+entityName);
+		//Modchu_Debug.mDebug("Modchu_EntityTameable onLivingUpdate posX="+posX+" posY="+posY+" posZ="+posZ);
+		if (master != null); else {
+			Modchu_Debug.mDebug("Modchu_EntityTameable onLivingUpdate this="+this);
+			Modchu_Debug.mDebug("Modchu_EntityTameable onLivingUpdate master="+master);
+			String entityName = getMasterClassName();
+			Modchu_Debug.mDebug("Modchu_EntityTameable onLivingUpdate entityName="+entityName);
+			init(entityName);
 			if (master != null); else {
 				setDead();
 			}
@@ -367,6 +467,11 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	@Override
 	public boolean interact(EntityPlayer entityPlayer) {
 		return master != null ? master.processInteract(entityPlayer) : super.interact(entityPlayer);
+	}
+
+	@Override
+	public boolean superInteract(Object entityPlayer) {
+		return super.interact((EntityPlayer) entityPlayer);
 	}
 
 	@Override
@@ -1006,11 +1111,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
-	public boolean superInteract(Object entityPlayer) {
-		return super.interact((EntityPlayer) entityPlayer);
-	}
-
-	@Override
 	public void superUpdateFallState(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
 		super.updateFallState(p_180433_1_, p_180433_3_);
 	}
@@ -1460,15 +1560,15 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	public boolean superIsLeftHanded() {
 		return false;
 	}
+
+	@Override
+	public Object superGetCombatTracker() {
+		return super.func_110142_aN();
+	}
 	// 190~
 	@Override
 	public int superGetRevengeTimer() {
 		return -1;
-	}
-
-	@Override
-	public Object superGetCombatTracker() {
-		return null;
 	}
 
 	@Override
@@ -2672,19 +2772,28 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	protected void entityInit() {
+		boolean debug = false;
+		World worldObj = (World) Modchu_AS.get(Modchu_AS.entityWorldObj, this);
+		if (debug) Modchu_Debug.mDebug("Modchu_EntityTameable entityInit isRemote="+worldObj.isRemote);
+		int version = Modchu_Main.getMinecraftVersion();
+		//Modchu_AS.set("Entity", version > 190 ? "dataManager" : "dataWatcher", this, (EntityDataManager) Modchu_Main.newModchuCharacteristicObject("Modchu_EntityDataManager", Modchu_EntityDataManagerMaster2.class, this, Modchu_AS.get("Entity", version > 190 ? "dataManager" : "dataWatcher", this)));
+		dataWatcher = (DataWatcher) Modchu_Main.newModchuCharacteristicObject("Modchu_DataWatcher", Modchu_DataWatcherMaster2.class, this, dataWatcher);
+		if (debug) Modchu_Debug.mDebug("Modchu_EntityTameable entityInit dataWatcher="+dataWatcher);
+		boolean b = Modchu_AS.set("Entity", "dataWatcher", this, dataWatcher);
+		if (debug) Modchu_Debug.mDebug("Modchu_EntityTameable entityInit b="+b);
+		super.entityInit();
+		dataWatcherWatchableObjectIdFirst = 18;
+		int i = dataWatcherWatchableObjectIdFirst;
+		entityDataManagerRegister(new Class[]{ String.class }, i, "");
+		i++;
+		setDataWatcherWatchableObjectIdCount(i);
+		initFlag = true;
 		if (master != null) master.entityInit();
-		else if (!entityInitFlag) {
-			entityInitFlag = true;
-			super.entityInit();
-		}
 	}
 
 	@Override
 	public void superEntityInit() {
-		if (!entityInitFlag) {
-			entityInitFlag = true;
-			super.entityInit();
-		}
+		super.entityInit();
 	}
 
 	@Override
@@ -3826,16 +3935,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
-	public String toString() {
-		return master != null ? master.toString() : super.toString();
-	}
-
-	@Override
-	public String superToString() {
-		return super.toString();
-	}
-
-	@Override
 	public boolean isEntityInvulnerable() {
 		return master != null ? master.isEntityInvulnerable() : super.isEntityInvulnerable();
 	}
@@ -3982,6 +4081,13 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void func_145781_i(int p_145781_1_) {
+/*
+		Modchu_Debug.mDebug("Modchu_EntityTameable func_145781_i worldObj.isRemote="+worldObj.isRemote);
+		Modchu_Debug.mDebug("Modchu_EntityTameable func_145781_i this="+this);
+		Modchu_Debug.mDebug("Modchu_EntityTameable func_145781_i master="+master);
+		Modchu_Debug.mDebug("Modchu_EntityTameable func_145781_i p_145781_1_="+p_145781_1_);
+		Modchu_Debug.mDebug("Modchu_EntityTameable func_145781_i getDataWatcherGetWatchableObject="+getDataWatcherGetWatchableObject(p_145781_1_));
+*/
 		if (master != null) master.onDataWatcherUpdate(p_145781_1_);
 		else super.func_145781_i(p_145781_1_);
 	}
@@ -4360,7 +4466,7 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public boolean superStartRiding(Object entity, boolean force) {
-		return false;
+		return superStartRiding(entity);
 	}
 
 	@Override
@@ -4374,6 +4480,7 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void superDismountRidingEntity() {
+		super.mountEntity(null);
 	}
 
 	@Override
@@ -4557,7 +4664,7 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public Object superGetRidingEntity() {
-		return null;
+		return ridingEntity;
 	}
 
 	@Override

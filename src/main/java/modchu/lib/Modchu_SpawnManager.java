@@ -12,6 +12,8 @@ public class Modchu_SpawnManager {
 	}
 
 	public Object spawnCreature(String s, Object world, double par2, double par4, double par6) {
+		boolean debug = true;
+		if (debug) Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature s="+s);
 		if (s != null
 				& !s.isEmpty()); else return null;
 		if (!spawnClassNameMap.containsKey(s)) return null;
@@ -31,12 +33,16 @@ public class Modchu_SpawnManager {
 			spawnableMap.put("spawnX", par2);
 			spawnableMap.put("spawnY", par4);
 			spawnableMap.put("spawnZ", par6);
+			if (debug) Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature spawnableMap="+spawnableMap);
 			entity = Modchu_Main.newModchuCharacteristicObject(spawModchuClassName, spawnableMap);
 			if (entity !=null); else {
 				Modchu_Main.setRuntimeException("Modchu_SpawnManager spawnCreature entity == null error !! spawModchuClassName="+spawModchuClassName+" spawnableMap="+spawnableMap);
 				return null;
 			}
-			if (debug) Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature 2 entity="+entity);
+			if (debug) {
+				Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature 2 entity="+entity);
+				Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature master="+Modchu_Main.getModchuCharacteristicObjectMaster(entity));
+			}
 			int version = Modchu_Main.getMinecraftVersion();
 			String s1 = version > 190 ? "Particle" : "EntityFX";
 			Class Particle = !Modchu_Main.isServer ? Modchu_Reflect.loadClass(s1) : null;

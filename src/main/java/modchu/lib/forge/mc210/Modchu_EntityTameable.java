@@ -18,35 +18,25 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc210_212.Modchu_Ent
 	}
 	// 212~分離
 	@Override
-	public void moveEntity(MoverType moverType, double par1, double par3, double par5) {
-		if (master != null) master.move(moverType, par1, par3, par5);
-		else super.moveEntity(moverType, par1, par3, par5);
+	public void moveEntity(MoverType moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
+		if (master != null) master.move(moverType, p_70091_1_, p_70091_3_, p_70091_5_);
+		else super.moveEntity(moverType, p_70091_1_, p_70091_3_, p_70091_5_);
 	}
 
 	@Override
-	public void superMove(Object moverType, double par1, double par3, double par5) {
-		super.moveEntity((MoverType) moverType, par1, par3, par5);
+	public void superMove(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
+		super.moveEntity((MoverType) moverType, p_70091_1_, p_70091_3_, p_70091_5_);
 	}
 	// 190~210共通コピペ　↓
 	@Override
-	public void setAngles(float par1, float par2) {
-		if (master != null) master.turn(par1, par2);
-		else super.setAngles(par1, par2);
+	public void setAngles(float p_70082_1_, float p_70082_2_) {
+		if (master != null) master.turn(p_70082_1_, p_70082_2_);
+		else super.setAngles(p_70082_1_, p_70082_2_);
 	}
 
 	@Override
-	public void superTurn(float par1, float par2) {
-		super.setAngles(par1, par2);
-	}
-
-	@Override
-	protected PathNavigate getNewNavigator(World world) {
-		return (PathNavigate) (master != null ? master.createNavigator(world) : super.getNewNavigator(world));
-	}
-
-	@Override
-	public PathNavigate superCreateNavigator(Object world) {
-		return super.getNewNavigator((World) world);
+	public void superTurn(float p_70082_1_, float p_70082_2_) {
+		super.setAngles(p_70082_1_, p_70082_2_);
 	}
 
 	@Override
@@ -56,8 +46,8 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc210_212.Modchu_Ent
 	}
 
 	@Override
-	public void superSendMessage(Object iTextComponent) {
-		super.addChatMessage((ITextComponent) iTextComponent);
+	public void superSendMessage(Object iChatComponent) {
+		super.addChatMessage((ITextComponent) iChatComponent);
 	}
 
 	@Override

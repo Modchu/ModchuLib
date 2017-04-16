@@ -13,8 +13,12 @@ public interface Modchu_IEntityMaster {
 	public int getEntityId();
 	public void setEntityId(int p_145769_1_);
 	public Object getDataManager();
+	public Object getRidingEntity2();
+	public boolean isRiding2();
+	public void dismountRidingEntity2();
 	//public boolean equals(Object p_equals_1_);
 	//public int hashCode();
+
 	public void preparePlayerToSpawn();
 	public void setDead();
 	public void setSize(float p_70105_1_, float p_70105_2_);

@@ -1,6 +1,9 @@
 package modchu.lib;
 
 public interface Modchu_IEntityLiving extends Modchu_IEntityLivingBase {
+	public boolean superIsOnLivingUpdateCancel();
+	public boolean isOnLivingUpdateCancel();
+
 	public Object superGetLookHelper();
 	public Object superGetMoveHelper();
 	public Object superGetJumpHelper();
