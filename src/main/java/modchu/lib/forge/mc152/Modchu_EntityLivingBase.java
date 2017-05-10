@@ -2,13 +2,16 @@ package modchu.lib.forge.mc152;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.Modchu_AS;
+import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_DataWatcherMaster2;
 import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_EntityHelper;
 import modchu.lib.Modchu_IEntityLiving;
 import modchu.lib.Modchu_IEntityLivingMaster;
 import modchu.lib.Modchu_IEntityTameableMaster;
@@ -48,10 +51,11 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 public class Modchu_EntityLivingBase extends EntityLiving implements Modchu_IEntityLiving {
 	public Modchu_IEntityLivingMaster master;
 	public String entityName;
-	public static ConcurrentHashMap<String, UUID> entityUniqueIDMap = new ConcurrentHashMap();
 	protected UUID entityUniqueID;
 	protected int maxHealth;
 	private boolean initFlag;
+	public int dataWatcherWatchableObjectIdFirst;
+	public int dataWatcherWatchableObjectIdCount = 11;
 
 	public Modchu_EntityLivingBase(World world) {
 		super(world);
@@ -67,6 +71,80 @@ public class Modchu_EntityLivingBase extends EntityLiving implements Modchu_IEnt
 		initFlag = false;
 		setEntityHealth(1);
 		init(map);
+	}
+
+	@Override
+	public boolean isDamageInvincible() {
+		return master != null ? master.isDamageInvincible() : superIsDamageInvincible();
+	}
+
+	@Override
+	public boolean superIsDamageInvincible() {
+		return getDamageInvincibleCount() > 0;
+	}
+
+	@Override
+	public int getDamageInvincibleCount() {
+		return master != null ? master.getDamageInvincibleCount() : 0;
+	}
+
+	@Override
+	public void setDamageInvincibleCount(int i) {
+		if (master != null) master.setDamageInvincibleCount(i);
+	}
+
+	@Override
+	public boolean isInitFlag() {
+		return initFlag;
+	}
+
+	@Override
+	public void setInitFlag(boolean b) {
+		initFlag = b;
+	}
+
+	@Override
+	public int getTempIsRiding() {
+		return master != null ? master.getTempIsRiding() : 0;
+	}
+
+	@Override
+	public void setTempIsRiding(int i) {
+		if (master != null) master.setTempIsRiding(i);
+	}
+
+	@Override
+	public int getDataWatcherWatchableObjectIdFirst() {
+		return dataWatcherWatchableObjectIdFirst;
+	}
+
+	@Override
+	public void setDataWatcherWatchableObjectIdFirst(int i) {
+		dataWatcherWatchableObjectIdFirst = i;
+	}
+
+	@Override
+	public void dataParameterMapSetting(HashMap<Integer, Object> map) {
+	}
+
+	@Override
+	public void sendDeathMessage(Object damageSource) {
+		if (master != null) master.sendDeathMessage(damageSource);
+		else superSendDeathMessage(damageSource);
+	}
+
+	@Override
+	public void superSendDeathMessage(Object damageSource) {
+	}
+
+	@Override
+	public boolean canSendDeathMessage() {
+		return master != null ? master.canSendDeathMessage() : superCanSendDeathMessage();
+	}
+
+	@Override
+	public boolean superCanSendDeathMessage() {
+		return false;
 	}
 
 	@Override
@@ -135,65 +213,51 @@ public class Modchu_EntityLivingBase extends EntityLiving implements Modchu_IEnt
 	}
 
 	public Object getMaster() {
-		//Modchu_Debug.mDebug("Modchu_EntityLivingBase getMaster master="+master);
-		if (master != null) ;else {
-			init(entityName);
+		//Modchu_Debug.mDebug("getmasterEntity master="+master);
+		if (master != null); else {
+			//Modchu_Debug.mDebug("getmasterEntity master="+master);
+			init(Modchu_EntityHelper.getInstance().getMasterClassName(this));
 		}
-		//Modchu_Debug.mDebug("Modchu_EntityLivingBase getMaster return master="+master);
 		return master;
 	}
 
 	protected void init(String s) {
-		Class c = Modchu_Reflect.loadClass(s);
-		if (c != null); else return;
+		if (s != null
+				&& !s.isEmpty()); else return;
+		Class c = Modchu_Reflect.loadClass(s, -1);
+		if (c != null); else {
+			Modchu_Debug.lDebug("Modchu_EntityLivingBase init c == null !! setDead() s="+s);
+			setDead();
+			return;
+		}
 		HashMap<String, Object> map = Modchu_Main.getNewModchuCharacteristicMap(c);
 		init(map);
 	}
 
 	protected void init(HashMap<String, Object> map) {
-		dataWatcher = (DataWatcher) Modchu_Main.newModchuCharacteristicObject("Modchu_DataWatcher", Modchu_DataWatcherMaster2.class, this, dataWatcher);
-		boolean isRemote = Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this);
-		Modchu_Debug.mDebug("Modchu_EntityLivingBase init isRemote="+isRemote+" map="+map);
-		if (posX == 0
-				&& posY== 0
-				&& posZ == 0) {
-			Modchu_Debug.mDebug("Modchu_EntityLivingBase init isRemote="+isRemote+" initFlag="+initFlag+" pos0 return");
-			return;
-		}
-		Modchu_Debug.mDebug("Modchu_EntityLivingBase init isRemote="+isRemote+" initFlag");
-		if (map != null
-				&& !map.isEmpty()); else {
-			Modchu_Debug.mDebug("Modchu_EntityLivingBase init isRemote="+isRemote+" map == null.");
-			Class c = Modchu_Main.getSpownEntityClass(worldObj, posX, posY, posZ);
-			map = new HashMap();
-			map.put("Class", c);
-			map.put("Object", worldObj);
-			Modchu_Debug.mDebug("Modchu_EntityLivingBase isRemote="+isRemote+" init c="+c+" worldObj="+worldObj);
-		}
-		if (map != null
-				&& !map.isEmpty()); else {
-			Modchu_Debug.mDebug("Modchu_EntityLivingBase init 2 isRemote="+isRemote+" map == null !!");
-			return;
-		}
-		Modchu_Debug.mDebug("Modchu_EntityLivingBase init 3 isRemote="+isRemote);
-		map.put("base", this);
-		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
-		master = instance instanceof Modchu_IEntityTameableMaster ? (Modchu_IEntityTameableMaster) instance : null;
-		entityName = ((Class) map.get("Class")).getName();
-		Modchu_Debug.mDebug("init isRemote="+isRemote+" entityName="+(entityName != null ? entityName : "null !!"));
-		String s0 = new StringBuilder(Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, this) ? "1" : "0").append(entityUniqueID).toString();
-		if (s0 != null
-				&& entityUniqueIDMap.containsKey(s0)) {
-			Modchu_Debug.mDebug("Modchu_EntityLivingBase init isRemote="+isRemote+" entityUniqueIDMap.containsKey isDead s0="+s0);
-			Modchu_AS.set(Modchu_AS.entityLivingBaseSetHealth, this, 0.0F);
-			deathTime = 20;
-			setDead();
-			return;
-		}
-		if (s0 != null) entityUniqueIDMap.put(s0, entityUniqueID);
-		initFlag = true;
-		Modchu_Debug.mDebug("Modchu_EntityLivingBase init isRemote="+isRemote+" entityUniqueID="+entityUniqueID);
-		Modchu_Debug.mDebug("Modchu_EntityLivingBase init masterEntity="+master);
+		if (master != null) return;
+		Object instance = Modchu_EntityHelper.getInstance().init(this, map);
+		if (instance != null
+				&& instance instanceof Modchu_IEntityTameableMaster) master = (Modchu_IEntityTameableMaster) instance;
+		return;
+	}
+
+	private String getMasterClassName() {
+		String s = Modchu_CastHelper.String(getDataWatcherWatchableObject(dataWatcherWatchableObjectIdFirst));
+		//Modchu_Debug.mDebug("Modchu_EntityLivingBase getMasterClassName s="+s);
+		return s;
+	}
+
+	private void setMasterClassName(String s) {
+		Modchu_Debug.mDebug("Modchu_EntityLivingBase setMasterClassName s="+s);
+		setDataWatcherWatchableObject(dataWatcherWatchableObjectIdFirst, s);
+	}
+
+	private Class getMasterClass() {
+		String s = getMasterClassName();
+		Modchu_Debug.mDebug("Modchu_EntityLivingBase getMasterClass() s="+s);
+		return s != null
+				&& !s.isEmpty() ? Modchu_Reflect.loadClass(s, -1) : null;
 	}
 
 	@Override
@@ -224,7 +288,6 @@ public class Modchu_EntityLivingBase extends EntityLiving implements Modchu_IEnt
 	}
 
 	public static void worldEventLoad(Object event) {
-		if (entityUniqueIDMap != null) entityUniqueIDMap.clear();
 	}
 
 	@Override
@@ -1345,13 +1408,8 @@ public class Modchu_EntityLivingBase extends EntityLiving implements Modchu_IEnt
 
 	@Override
 	public void initCreature() {
-		if (master != null) master.initCreature();
+		if (master != null) master.onInitialSpawn(null, null);
 		else super.initCreature();
-	}
-
-	@Override
-	public void superInitCreature() {
-		super.initCreature();
 	}
 
 	@Override

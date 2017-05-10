@@ -1,6 +1,7 @@
 package modchu.lib.forge.mc172_179;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -34,6 +35,10 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public Modchu_IEntityMaster master;
+	public float maxHealth;
+	public boolean initFlag;
+	public int dataWatcherWatchableObjectIdFirst;
+	public int dataWatcherWatchableObjectIdCount = 6;
 
 	public Modchu_Entity(World world) {
 		super(world);
@@ -43,6 +48,40 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public Modchu_Entity(HashMap<String, Object> map) {
 		this((World) map.get("Object"));
 		init(map);
+	}
+
+	@Override
+	public boolean isInitFlag() {
+		return initFlag;
+	}
+
+	@Override
+	public void setInitFlag(boolean b) {
+		initFlag = b;
+	}
+
+	@Override
+	public int getTempIsRiding() {
+		return master != null ? master.getTempIsRiding() : 0;
+	}
+
+	@Override
+	public void setTempIsRiding(int i) {
+		if (master != null) master.setTempIsRiding(i);
+	}
+
+	@Override
+	public int getDataWatcherWatchableObjectIdFirst() {
+		return dataWatcherWatchableObjectIdFirst;
+	}
+
+	@Override
+	public void setDataWatcherWatchableObjectIdFirst(int i) {
+		dataWatcherWatchableObjectIdFirst = i;
+	}
+
+	@Override
+	public void dataParameterMapSetting(HashMap<Integer, Object> map) {
 	}
 
 	@Override

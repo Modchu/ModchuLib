@@ -62,7 +62,12 @@ import net.minecraft.src.World;
 
 public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements Modchu_IEntityOtherPlayerMP {
 	public Modchu_IEntityOtherPlayerMPMaster master;
-	public int maxHealth;
+	public String entityName;
+	protected UUID entityUniqueID;
+	protected int maxHealth;
+	public boolean initFlag;
+	public int dataWatcherWatchableObjectIdFirst;
+	public int dataWatcherWatchableObjectIdCount = 11;
 
 	public Modchu_EntityOtherPlayerMP(HashMap<String, Object> map) {
 		super((World)map.get("Object"), (String)map.get("String"));
@@ -73,6 +78,80 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 				&& instance instanceof Modchu_IEntityOtherPlayerMPMaster ? (Modchu_IEntityOtherPlayerMPMaster) instance : null;
 		if (master != null); else Modchu_Debug.lDebug("Modchu_EntityOtherPlayerMP init master == null !!");
 		dataWatcher = (DataWatcher) Modchu_Main.newModchuCharacteristicObject("Modchu_DataWatcher", Modchu_DataWatcherMaster2.class, this, dataWatcher);
+	}
+
+	@Override
+	public boolean isDamageInvincible() {
+		return master != null ? master.isDamageInvincible() : superIsDamageInvincible();
+	}
+
+	@Override
+	public boolean superIsDamageInvincible() {
+		return getDamageInvincibleCount() > 0;
+	}
+
+	@Override
+	public int getDamageInvincibleCount() {
+		return master != null ? master.getDamageInvincibleCount() : 0;
+	}
+
+	@Override
+	public void setDamageInvincibleCount(int i) {
+		if (master != null) master.setDamageInvincibleCount(i);
+	}
+
+	@Override
+	public boolean isInitFlag() {
+		return initFlag;
+	}
+
+	@Override
+	public void setInitFlag(boolean b) {
+		initFlag = b;
+	}
+
+	@Override
+	public int getTempIsRiding() {
+		return master != null ? master.getTempIsRiding() : 0;
+	}
+
+	@Override
+	public void setTempIsRiding(int i) {
+		if (master != null) master.setTempIsRiding(i);
+	}
+
+	@Override
+	public int getDataWatcherWatchableObjectIdFirst() {
+		return dataWatcherWatchableObjectIdFirst;
+	}
+
+	@Override
+	public void setDataWatcherWatchableObjectIdFirst(int i) {
+		dataWatcherWatchableObjectIdFirst = i;
+	}
+
+	@Override
+	public void dataParameterMapSetting(HashMap<Integer, Object> map) {
+	}
+
+	@Override
+	public void sendDeathMessage(Object damageSource) {
+		if (master != null) master.sendDeathMessage(damageSource);
+		else superSendDeathMessage(damageSource);
+	}
+
+	@Override
+	public void superSendDeathMessage(Object damageSource) {
+	}
+
+	@Override
+	public boolean canSendDeathMessage() {
+		return master != null ? master.canSendDeathMessage() : superCanSendDeathMessage();
+	}
+
+	@Override
+	public boolean superCanSendDeathMessage() {
+		return false;
 	}
 
 	@Override
@@ -3410,13 +3489,8 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void initCreature() {
-		if (master != null) master.initCreature();
+		if (master != null) master.onInitialSpawn(null, null);
 		else super.initCreature();
-	}
-
-	@Override
-	public void superInitCreature() {
-		super.initCreature();
 	}
 
 	@Override
@@ -4989,6 +5063,11 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	@Override
 	public Object superGetTeleportDirection() {
 		return super.getTeleportDirection();
+	}
+
+	@Override
+	public void superOnInitialSpawn(Object o, Object o1) {
+		super.initCreature();
 	}
 
 }

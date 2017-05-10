@@ -1,26 +1,34 @@
-package modchu.lib.forge.mc164_179;
+package modchu.lib.forge.mc164_212;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IEntityAIPanic;
-import modchu.lib.Modchu_IEntityAIPanicMaster;
-import modchu.lib.Modchu_IEntityAIRestrictOpenDoor;
-import modchu.lib.Modchu_IEntityAIRestrictOpenDoorMaster;
+import modchu.lib.Modchu_IEntityAIOpenDoor;
+import modchu.lib.Modchu_IEntityAIOpenDoorMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAIRestrictOpenDoor;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.EntityAIOpenDoor;
 
-public class Modchu_EntityAIPanic extends EntityAIPanic implements Modchu_IEntityAIPanic {
-	public Modchu_IEntityAIPanicMaster master;
+public class Modchu_EntityAIOpenDoor extends EntityAIOpenDoor implements Modchu_IEntityAIOpenDoor {
+	public Modchu_IEntityAIOpenDoorMaster master;
+	private boolean enabled;
 
-	public Modchu_EntityAIPanic(HashMap<String, Object> map) {
-		super((EntityCreature)map.get("Object"), (Double)map.get("Double"));
+	public Modchu_EntityAIOpenDoor(HashMap<String, Object> map) {
+		super((EntityLiving)map.get("Object"), (Boolean)map.get("Boolean"));
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
-		//Modchu_Debug.lDebug("Modchu_EntityAIPanic init instance="+instance);
+		//Modchu_Debug.lDebug("Modchu_EntityAIOpenDoor init instance="+instance);
 		master = instance != null
-				&& instance instanceof Modchu_IEntityAIPanicMaster ? (Modchu_IEntityAIPanicMaster) instance : null;
+				&& instance instanceof Modchu_IEntityAIOpenDoorMaster ? (Modchu_IEntityAIOpenDoorMaster) instance : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean b) {
+		enabled = b;
 	}
 
 	@Override

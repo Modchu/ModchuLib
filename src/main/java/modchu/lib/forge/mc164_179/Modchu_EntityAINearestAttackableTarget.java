@@ -16,6 +16,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 
 public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttackableTarget implements Modchu_IEntityAINearestAttackableTarget {
 	public Modchu_IEntityAINearestAttackableTargetMaster master;
+	private boolean enabled;
 
 	public Modchu_EntityAINearestAttackableTarget(HashMap<String, Object> map) {
 		super((EntityCreature)map.get("Object"), (Class)map.get("Class"), (Integer)map.get("Integer"), (Boolean)map.get("Boolean"), map.containsKey("Boolean1") ? (Boolean)map.get("Boolean1") : false, (IEntitySelector)(map.containsKey("Object1") ? map.get("Object1") : null));
@@ -24,6 +25,16 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		//Modchu_Debug.lDebug("Modchu_EntityAINearestAttackableTarget init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAINearestAttackableTargetMaster ? (Modchu_IEntityAINearestAttackableTargetMaster) instance : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean b) {
+		enabled = b;
 	}
 
 	@Override
@@ -56,11 +67,11 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 	@Override
 	public void startExecuting() {
 		if (master != null) master.startExecuting();
-		else super.startExecuting();
+		else superStartExecuting();
 	}
 
 	public void superStartExecuting() {
-		super.startExecuting();
+		if (isEnabled()) super.startExecuting();
 	}
 
 	@Override

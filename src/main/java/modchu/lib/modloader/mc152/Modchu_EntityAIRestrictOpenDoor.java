@@ -1,36 +1,43 @@
-package modchu.lib.forge.mc164_179;
+package modchu.lib.modloader.mc152;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IContainerPlayerMaster;
-import modchu.lib.Modchu_IEntityAIBase;
-import modchu.lib.Modchu_IEntityAIBaseMaster;
-import modchu.lib.Modchu_IEntityAIWander;
-import modchu.lib.Modchu_IEntityAIWanderMaster;
+import modchu.lib.Modchu_IEntityAIRestrictOpenDoor;
+import modchu.lib.Modchu_IEntityAIRestrictOpenDoorMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.EntityCreature;
+import net.minecraft.src.EntityAIRestrictOpenDoor;
+import net.minecraft.src.EntityCreature;
 
-public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEntityAIWander {
-	public Modchu_IEntityAIWanderMaster master;
+public class Modchu_EntityAIRestrictOpenDoor extends EntityAIRestrictOpenDoor implements Modchu_IEntityAIRestrictOpenDoor {
+	public Modchu_IEntityAIRestrictOpenDoorMaster master;
+	private boolean enabled;
 
-	public Modchu_EntityAIWander(HashMap<String, Object> map) {
-		super((EntityCreature)map.get("Object"), (Double)map.get("Double"));
+	public Modchu_EntityAIRestrictOpenDoor(HashMap<String, Object> map) {
+		super((EntityCreature)map.get("Object"));
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
-		//Modchu_Debug.lDebug("Modchu_EntityAIWander init instance="+instance);
+		//Modchu_Debug.lDebug("Modchu_EntityAIRestrictOpenDoor init instance="+instance);
 		master = instance != null
-				&& instance instanceof Modchu_IEntityAIWanderMaster ? (Modchu_IEntityAIWanderMaster) instance : null;
+				&& instance instanceof Modchu_IEntityAIRestrictOpenDoorMaster ? (Modchu_IEntityAIRestrictOpenDoorMaster) instance : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean b) {
+		enabled = b;
 	}
 
 	@Override
 	public boolean shouldExecute() {
-		return master != null ? master.shouldExecute() : super.shouldExecute();
+		return master != null ? master.shouldExecute() : false;
 	}
 
 	public boolean superShouldExecute() {
-		return super.shouldExecute();
+		return false;
 	}
 
 	@Override
@@ -54,11 +61,11 @@ public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEnt
 	@Override
 	public void startExecuting() {
 		if (master != null) master.startExecuting();
-		else super.startExecuting();
+		else superStartExecuting();
 	}
 
 	public void superStartExecuting() {
-		super.startExecuting();
+		if (isEnabled()) super.startExecuting();
 	}
 
 	@Override

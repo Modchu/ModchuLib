@@ -3,6 +3,13 @@ package modchu.lib;
 import java.util.Random;
 
 public interface Modchu_IEntityLivingBaseMaster extends Modchu_IEntityMaster {
+	public void sendDeathMessage(Object damageSource);
+	public boolean canSendDeathMessage();
+	public void updateRidden2();
+	public int getDamageInvincibleCount();
+	public void setDamageInvincibleCount(int i);
+	public boolean isDamageInvincible();
+
 	public int func_96121_ay();
 	public Random getRNG();
 	public Object getAITarget();
@@ -84,7 +91,6 @@ public interface Modchu_IEntityLivingBaseMaster extends Modchu_IEntityMaster {
 	public void dropEquipment(boolean par1, int par2);
 	public void onItemPickup(Object entity, int par2);
 	public void func_82162_bC();
-	public void initCreature();
 	public void swingArm();
 	public Object getAttackingEntity();
 	public void func_94058_c(String par1Str);

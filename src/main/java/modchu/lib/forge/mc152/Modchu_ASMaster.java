@@ -6,6 +6,7 @@ import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.Modchu_AS;
@@ -4561,6 +4562,29 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public void textureManagerBindTexture(Object textureManager, Object o) {
 		((RenderEngine) textureManager).bindTexture((String) o);
+	}
+
+	@Override
+	public UUID entityGetUniqueID(Object entity) {
+		Object o = Modchu_Reflect.invokeMethod(entity.getClass(), "getUniqueID", entity, -1);
+		return o != null
+				&& o instanceof UUID ? (UUID) o : super.entityGetUniqueID(entity);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving) {
+		return entityLivingOnInitialSpawn(entityLiving, null);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData) {
+		return entityLivingOnInitialSpawn(entityLiving, null, iEntityLivingData);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
+		((EntityLiving) entityLiving).initCreature();
+		return null;
 	}
 
 }

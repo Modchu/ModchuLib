@@ -1,23 +1,41 @@
-package modchu.lib.forge.mc164_179;
+package modchu.lib.forge.mc164_212;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IEntityAILookIdle;
-import modchu.lib.Modchu_IEntityAILookIdleMaster;
+import modchu.lib.Modchu_IContainerPlayerMaster;
+import modchu.lib.Modchu_IEntityAIBase;
+import modchu.lib.Modchu_IEntityAIBaseMaster;
+import modchu.lib.Modchu_IEntityAISit;
+import modchu.lib.Modchu_IEntityAISitMaster;
+import modchu.lib.Modchu_IEntityAISwimming;
+import modchu.lib.Modchu_IEntityAISwimmingMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAISit;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.passive.EntityTameable;
 
-public class Modchu_EntityAILookIdle extends EntityAILookIdle implements Modchu_IEntityAILookIdle {
-	public Modchu_IEntityAILookIdleMaster master;
+public class Modchu_EntityAISwimming extends EntityAISwimming implements Modchu_IEntityAISwimming {
+	public Modchu_IEntityAISwimmingMaster master;
+	private boolean enabled;
 
-	public Modchu_EntityAILookIdle(HashMap<String, Object> map) {
-		super((EntityLiving)map.get("Object"));
+	public Modchu_EntityAISwimming(HashMap<String, Object> map) {
+		super((EntityTameable) map.get("Object"));
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
-		//Modchu_Debug.lDebug("Modchu_EntityAILookIdle2 init instance="+instance);
+		//Modchu_Debug.lDebug("Modchu_EntityAISwimming init instance="+instance);
 		master = instance != null
-				&& instance instanceof Modchu_IEntityAILookIdleMaster ? (Modchu_IEntityAILookIdleMaster) instance : null;
+				&& instance instanceof Modchu_IEntityAISwimmingMaster ? (Modchu_IEntityAISwimmingMaster) instance : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean b) {
+		enabled = b;
 	}
 
 	@Override
@@ -50,11 +68,11 @@ public class Modchu_EntityAILookIdle extends EntityAILookIdle implements Modchu_
 	@Override
 	public void startExecuting() {
 		if (master != null) master.startExecuting();
-		else super.startExecuting();
+		else superStartExecuting();
 	}
 
 	public void superStartExecuting() {
-		super.startExecuting();
+		if (isEnabled()) super.startExecuting();
 	}
 
 	@Override

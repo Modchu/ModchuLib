@@ -7,6 +7,7 @@ import org.apache.commons.lang3.ObjectUtils;
 
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_EntityHelper;
 import modchu.lib.Modchu_IEntityDataManager;
 import modchu.lib.Modchu_Main;
 import modchu.lib.forge.mc190_212.Modchu_EntityDataManager;
@@ -28,37 +29,6 @@ public abstract class Modchu_EntityTameable extends modchu.lib.forge.mc190_212.M
 
 	public Modchu_EntityTameable(HashMap<String, Object> map) {
 		super(map);
-	}
-
-	@Override
-	public void entityDataManagerRegister(Class[] c1, int i, Object o) {
-		((Modchu_IEntityDataManager) dataManager).entityDataManagerRegister(c1, i, o);
-	}
-
-	@Override
-	public Object getDataWatcherWatchableObject(int i) {
-		Object o = ((Modchu_IEntityDataManager) dataManager).getDataWatcherWatchableObject(i);
-		boolean debug = false;
-		World worldObj = (World) Modchu_AS.get(Modchu_AS.entityWorldObj, this);
-		if (debug
-				&& initFlag
-				&& worldObj.isRemote) {
-			if (debugDataWatcherMap != null); else debugDataWatcherMap = debugDataWatcherEntityMap.get(getEntityId());
-			if (debugDataWatcherMap != null) {
-				Object o1 = debugDataWatcherMap.get(i);
-				if (!o.equals(o1)) {
-					Modchu_Debug.mDebug("getDataWatcherWatchableObject !o.equals(o1) error !! i="+i+" o="+o+" o1="+o1);
-				}
-			}
-		}
-		return o;
-	}
-
-	@Override
-	public void setDataWatcherWatchableObject(int i, Object o) {
-		((Modchu_IEntityDataManager) dataManager).setDataWatcherWatchableObject(i, o);
-		World worldObj = (World) Modchu_AS.get(Modchu_AS.entityWorldObj, this);
-		if (!worldObj.isRemote) debugDataWatcherMap.put(i, o);
 	}
 
 	@Override

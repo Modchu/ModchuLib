@@ -1,23 +1,37 @@
-package modchu.lib.forge.mc164_179;
+package modchu.lib.forge.mc162;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IEntityAISit;
-import modchu.lib.Modchu_IEntityAISitMaster;
+import modchu.lib.Modchu_IEntityAIPanic;
+import modchu.lib.Modchu_IEntityAIPanicMaster;
+import modchu.lib.Modchu_IEntityAIRestrictOpenDoor;
+import modchu.lib.Modchu_IEntityAIRestrictOpenDoorMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.ai.EntityAISit;
-import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAIRestrictOpenDoor;
 
-public class Modchu_EntityAISit extends EntityAISit implements Modchu_IEntityAISit {
-	public Modchu_IEntityAISitMaster master;
+public class Modchu_EntityAIPanic extends EntityAIPanic implements Modchu_IEntityAIPanic {
+	public Modchu_IEntityAIPanicMaster master;
+	private boolean enabled;
 
-	public Modchu_EntityAISit(HashMap<String, Object> map) {
-		super((EntityTameable)map.get("Object"));
+	public Modchu_EntityAIPanic(HashMap<String, Object> map) {
+		super((EntityCreature)map.get("Object"), (Double)map.get("Double"));
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
-		//Modchu_Debug.lDebug("Modchu_EntityAISit init instance="+instance);
+		//Modchu_Debug.lDebug("Modchu_EntityAIPanic init instance="+instance);
 		master = instance != null
-				&& instance instanceof Modchu_IEntityAISitMaster ? (Modchu_IEntityAISitMaster) instance : null;
+				&& instance instanceof Modchu_IEntityAIPanicMaster ? (Modchu_IEntityAIPanicMaster) instance : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean b) {
+		enabled = b;
 	}
 
 	@Override
@@ -50,11 +64,11 @@ public class Modchu_EntityAISit extends EntityAISit implements Modchu_IEntityAIS
 	@Override
 	public void startExecuting() {
 		if (master != null) master.startExecuting();
-		else super.startExecuting();
+		else superStartExecuting();
 	}
 
 	public void superStartExecuting() {
-		super.startExecuting();
+		if (isEnabled()) super.startExecuting();
 	}
 
 	@Override
@@ -94,16 +108,6 @@ public class Modchu_EntityAISit extends EntityAISit implements Modchu_IEntityAIS
 
 	public int superGetMutexBits() {
 		return super.getMutexBits();
-	}
-
-	@Override
-	public void setSitting(boolean par1) {
-		if (master != null) master.setSitting(par1);
-		else super.setSitting(par1);
-	}
-
-	public void superSetSitting(boolean par1) {
-		super.setSitting(par1);
 	}
 
 }

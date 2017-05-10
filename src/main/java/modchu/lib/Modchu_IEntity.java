@@ -1,5 +1,7 @@
 package modchu.lib;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,6 +23,13 @@ public interface Modchu_IEntity {
 	public void superDismountRidingEntity2();
 	public int getDataWatcherWatchableObjectIdCount();
 	public void setDataWatcherWatchableObjectIdCount(int i);
+	public void dataParameterMapSetting(HashMap<Integer, Object> dataParameterMap);
+	public boolean isInitFlag();
+	public void setInitFlag(boolean b);
+	public int getTempIsRiding();
+	public void setTempIsRiding(int i);
+	public int getDataWatcherWatchableObjectIdFirst();
+	public void setDataWatcherWatchableObjectIdFirst(int i);
 
 	public int superGetEntityId();
 	public void superSetEntityId(int p_145769_1_);

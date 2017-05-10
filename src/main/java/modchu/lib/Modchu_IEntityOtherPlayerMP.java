@@ -197,5 +197,6 @@ public interface Modchu_IEntityOtherPlayerMP extends Modchu_IEntityLivingBase {
 	public void superSetCanPickUpLoot(boolean par1);
 	public boolean superIsNoDespawnRequired();
 	public boolean superProcessInteract(Object entityPlayer);
+	public void superOnInitialSpawn(Object o, Object o1);
 
 }

@@ -404,6 +404,10 @@ public class Modchu_TextCalculationFormula implements Modchu_ITextCalculationDat
 			o3 = calculationTrigonometricFunction(Modchu_CastHelper.Float(o3, 0.0F, false));
 		}
 		if (o != null); else o = Modchu_RunCalculationList.getTypeDefaultValue(by);
+		if (by == Modchu_RunCalculationList.type_Object) {
+			Object o2 = o != null ? o : o1;
+			by = Modchu_RunCalculationList.getType(o2);
+		}
 		switch(by) {
 		case Modchu_RunCalculationList.type_Integer:
 		case Modchu_RunCalculationList.type_Byte:

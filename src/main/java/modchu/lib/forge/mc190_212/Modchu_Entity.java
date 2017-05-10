@@ -59,7 +59,9 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public Modchu_IEntityMaster master;
 	public float maxHealth;
 	public int ridingEntity2;
-	private int dataWatcherWatchableObjectIdCount = 6;
+	public boolean initFlag;
+	public int dataWatcherWatchableObjectIdFirst;
+	public int dataWatcherWatchableObjectIdCount = 6;
 
 	public Modchu_Entity(World world) {
 		super(world);
@@ -69,6 +71,56 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public Modchu_Entity(HashMap<String, Object> map) {
 		this((World) map.get("Object"));
 		init(map);
+	}
+
+	@Override
+	public boolean isInitFlag() {
+		return initFlag;
+	}
+
+	@Override
+	public void setInitFlag(boolean b) {
+		initFlag = b;
+	}
+
+	@Override
+	public int getTempIsRiding() {
+		return master != null ? master.getTempIsRiding() : 0;
+	}
+
+	@Override
+	public void setTempIsRiding(int i) {
+		if (master != null) master.setTempIsRiding(i);
+	}
+
+	@Override
+	public int getDataWatcherWatchableObjectIdFirst() {
+		return dataWatcherWatchableObjectIdFirst;
+	}
+
+	@Override
+	public void setDataWatcherWatchableObjectIdFirst(int i) {
+		dataWatcherWatchableObjectIdFirst = i;
+	}
+
+	@Override
+	public void dataParameterMapSetting(HashMap<Integer, Object> map) {
+		int i = 0;
+		map.put(i, Modchu_AS.get("Entity", "FLAGS", this));
+		i++;
+		map.put(i, Modchu_AS.get("Entity", "AIR", this));
+		i++;
+		map.put(i, Modchu_AS.get("Entity", "CUSTOM_NAME", this));
+		i++;
+		map.put(i, Modchu_AS.get("Entity", "CUSTOM_NAME_VISIBLE", this));
+		i++;
+		map.put(i, Modchu_AS.get("Entity", "SILENT", this));
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 194) {
+			i++;
+			map.put(i, Modchu_AS.get("Entity", "NO_GRAVITY", this));
+		}
+		//Modchu_Debug.mDebug("Modchu_Entity dataParameterMapSetting end.");
 	}
 
 	@Override

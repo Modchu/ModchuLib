@@ -50,43 +50,8 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 	}
 
 	@Override
-	public void onUpdate() {
-		if (worldObj != null); else return;
-		//Modchu_Debug.mDebug("Modchu_EntityTameable onUpdate master="+master);
-		//Modchu_Debug.mDebug("Modchu_EntityTameable onUpdate worldObj.isRemote="+worldObj.isRemote);
-		if (!initFlag) {
-			//((Modchu_IEntityDataManager) dataManager).initIdCountSetting();
-			if (worldObj.isRemote) {
-				int version = Modchu_Main.getMinecraftVersion();
-				dataWatcherWatchableObjectIdFirst = 18;
-				int i = dataWatcherWatchableObjectIdFirst;
-				entityDataManagerRegister(new Class[]{ String.class }, i, "");
-				i++;
-				setDataWatcherWatchableObjectIdCount(i);
-				Modchu_Debug.mDebug("Modchu_EntityTameable onUpdate worldObj.isRemote i="+i);
-				initFlag = true;
-			}
-			init(tempInitMap);
-		}
-		if (debugDead) setDead();
-		if (!worldObj.isRemote) {
-			Object attributeMap = getAttributeMap();
-			if (ticksExisted % 20 == 0) {
-				CombatTracker combatTracker = getCombatTracker2();
-				//Modchu_Debug.lDebug("Modchu_EntityTameable onUpdate combatTracker="+combatTracker);
-				combatTracker.reset();
-				ticksExisted++;
-			}
-		}
-		if (master != null) master.onUpdate();
-		else super.onUpdate();
-	}
-
-	@Override
 	public void superOnDeath(Object damageSource) {
-		if (!worldObj.isRemote && worldObj.getGameRules().getBoolean("showDeathMessages") && hasCustomName() && getOwner() instanceof EntityPlayerMP) {
-			((EntityPlayerMP) getOwner()).addChatMessage(getCombatTracker2().getDeathMessage());
-		}
+		sendDeathMessage(damageSource);
 
 		if (net.minecraftforge.common.ForgeHooks.onLivingDeath(this, (DamageSource) damageSource)) return;
 		Entity entity = ((DamageSource) damageSource).getEntity();
@@ -161,7 +126,7 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficultyInstance, IEntityLivingData iEntityLivingData) {
-		return (IEntityLivingData) (master != null ? master.onInitialSpawn(iEntityLivingData) : super.onInitialSpawn(difficultyInstance, iEntityLivingData));
+		return (IEntityLivingData) (master != null ? master.onInitialSpawn(null, iEntityLivingData) : super.onInitialSpawn(difficultyInstance, iEntityLivingData));
 	}
 
 	@Override

@@ -87,6 +87,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAITasks;
@@ -1104,6 +1105,21 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc172_189.Modchu_
 	@Override
 	public Object minecraftServerGetServer() {
 		return MinecraftServer.getServer();
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving) {
+		return entityLivingOnInitialSpawn(entityLiving, null);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData) {
+		return entityLivingOnInitialSpawn(entityLiving, null, iEntityLivingData);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
+		return ((EntityLiving) entityLiving).onSpawnWithEgg((IEntityLivingData) iEntityLivingData);
 	}
 	// ビルド時にバージョン別変化有り ↓
 	@Override

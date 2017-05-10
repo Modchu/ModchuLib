@@ -82,4 +82,16 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc188_189.Modchu_E
 		super.handleStatusUpdate(par1);
 	}
 
+	@Override
+	public int getDamageInvincibleCount() {
+		// TODO 自動生成されたメソッド・スタブ
+		return 0;
+	}
+
+	@Override
+	public void setDamageInvincibleCount(int i) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
 }

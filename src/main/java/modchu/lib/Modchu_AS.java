@@ -8657,4 +8657,31 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 		return super.itemSetRegistryName(item, s, s1);
 	}
 
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving) {
+		return master != null ? master.entityLivingOnInitialSpawn(entityLiving) : null;
+	}
+
+	public Object superEntityLivingOnInitialSpawn(Object entityLiving) {
+		return super.entityLivingOnInitialSpawn(entityLiving);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData) {
+		return master != null ? master.entityLivingOnInitialSpawn(entityLiving, iEntityLivingData) : null;
+	}
+
+	public Object superEntityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData) {
+		return super.entityLivingOnInitialSpawn(entityLiving, iEntityLivingData);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
+		return master != null ? master.entityLivingOnInitialSpawn(entityLiving, difficultyInstance, iEntityLivingData) : null;
+	}
+
+	public Object superEntityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
+		return super.entityLivingOnInitialSpawn(entityLiving, difficultyInstance, iEntityLivingData);
+	}
+
 }

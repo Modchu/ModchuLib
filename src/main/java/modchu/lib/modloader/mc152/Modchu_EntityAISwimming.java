@@ -1,23 +1,34 @@
-package modchu.lib.forge.mc164_179;
+package modchu.lib.modloader.mc152;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IEntityAIOpenDoor;
-import modchu.lib.Modchu_IEntityAIOpenDoorMaster;
+import modchu.lib.Modchu_IEntityAISwimming;
+import modchu.lib.Modchu_IEntityAISwimmingMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIOpenDoor;
+import net.minecraft.src.EntityAISwimming;
+import net.minecraft.src.EntityTameable;
 
-public class Modchu_EntityAIOpenDoor extends EntityAIOpenDoor implements Modchu_IEntityAIOpenDoor {
-	public Modchu_IEntityAIOpenDoorMaster master;
+public class Modchu_EntityAISwimming extends EntityAISwimming implements Modchu_IEntityAISwimming {
+	public Modchu_IEntityAISwimmingMaster master;
+	private boolean enabled;
 
-	public Modchu_EntityAIOpenDoor(HashMap<String, Object> map) {
-		super((EntityLiving)map.get("Object"), (Boolean)map.get("Boolean"));
+	public Modchu_EntityAISwimming(HashMap<String, Object> map) {
+		super((EntityTameable) map.get("Object"));
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
-		//Modchu_Debug.lDebug("Modchu_EntityAIOpenDoor init instance="+instance);
+		//Modchu_Debug.lDebug("Modchu_EntityAISwimming init instance="+instance);
 		master = instance != null
-				&& instance instanceof Modchu_IEntityAIOpenDoorMaster ? (Modchu_IEntityAIOpenDoorMaster) instance : null;
+				&& instance instanceof Modchu_IEntityAISwimmingMaster ? (Modchu_IEntityAISwimmingMaster) instance : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean b) {
+		enabled = b;
 	}
 
 	@Override
@@ -50,11 +61,11 @@ public class Modchu_EntityAIOpenDoor extends EntityAIOpenDoor implements Modchu_
 	@Override
 	public void startExecuting() {
 		if (master != null) master.startExecuting();
-		else super.startExecuting();
+		else superStartExecuting();
 	}
 
 	public void superStartExecuting() {
-		super.startExecuting();
+		if (isEnabled()) super.startExecuting();
 	}
 
 	@Override

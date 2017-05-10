@@ -1,23 +1,36 @@
-package modchu.lib.forge.mc164_179;
+package modchu.lib.forge.mc164_212;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IEntityAIWatchClosest;
-import modchu.lib.Modchu_IEntityAIWatchClosestMaster;
+import modchu.lib.Modchu_IEntityAIHurtByTarget;
+import modchu.lib.Modchu_IEntityAIHurtByTargetMaster;
 import modchu.lib.Modchu_Main;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 
-public class Modchu_EntityAIWatchClosest extends EntityAIWatchClosest implements Modchu_IEntityAIWatchClosest {
-	public Modchu_IEntityAIWatchClosestMaster master;
+public class Modchu_EntityAIHurtByTarget extends EntityAIHurtByTarget implements Modchu_IEntityAIHurtByTarget {
+	public Modchu_IEntityAIHurtByTargetMaster master;
+	private boolean enabled;
 
-	public Modchu_EntityAIWatchClosest(HashMap<String, Object> map) {
-		super((EntityLiving)map.get("Object"), (Class)map.get("Class"), (Float)map.get("Float"), map.containsKey("Float1") ? (Float)map.get("Float1") : 0.02F);
+	public Modchu_EntityAIHurtByTarget(HashMap<String, Object> map) {
+		super((EntityCreature) map.get("Object"), (Boolean)map.get("Boolean"));
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
-		//Modchu_Debug.lDebug("Modchu_EntityAIWatchClosest2 init instance="+instance);
+		//Modchu_Debug.lDebug("Modchu_EntityAIHurtByTarget init instance="+instance);
 		master = instance != null
-				&& instance instanceof Modchu_IEntityAIWatchClosestMaster ? (Modchu_IEntityAIWatchClosestMaster) instance : null;
+				&& instance instanceof Modchu_IEntityAIHurtByTargetMaster ? (Modchu_IEntityAIHurtByTargetMaster) instance : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean b) {
+		enabled = b;
 	}
 
 	@Override
@@ -50,11 +63,11 @@ public class Modchu_EntityAIWatchClosest extends EntityAIWatchClosest implements
 	@Override
 	public void startExecuting() {
 		if (master != null) master.startExecuting();
-		else super.startExecuting();
+		else superStartExecuting();
 	}
 
 	public void superStartExecuting() {
-		super.startExecuting();
+		if (isEnabled()) super.startExecuting();
 	}
 
 	@Override
@@ -94,6 +107,24 @@ public class Modchu_EntityAIWatchClosest extends EntityAIWatchClosest implements
 
 	public int superGetMutexBits() {
 		return super.getMutexBits();
+	}
+
+	@Override
+	protected double getTargetDistance() {
+		return master != null ? master.getTargetDistance() : super.getTargetDistance();
+	}
+
+	public double superGetTargetDistance() {
+		return super.getTargetDistance();
+	}
+
+	@Override
+	protected boolean isSuitableTarget(EntityLivingBase entityLivingBase, boolean par2) {
+		return master != null ? master.isSuitableTarget(entityLivingBase, par2) : super.isSuitableTarget(entityLivingBase, par2);
+	}
+
+	public boolean superIsSuitableTarget(Object entityLivingBase, boolean par2) {
+		return super.isSuitableTarget((EntityLivingBase) entityLivingBase, par2);
 	}
 
 }

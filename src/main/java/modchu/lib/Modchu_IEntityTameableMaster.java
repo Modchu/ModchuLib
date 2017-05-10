@@ -48,8 +48,6 @@ public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster
 	public Object getDropItem();
 	public Object func_130225_q(int par1);
 	public void enchantEquipment();
-	public Object onInitialSpawn(Object iEntityLivingData);
-	public Object onInitialSpawn(Object difficultyInstance, Object iEntityLivingData);
 	public void enablePersistence();
 	public boolean hasCustomNameTag();
 	public void setDropChance(Object entityEquipmentSlotOrInt, float par2);

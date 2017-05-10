@@ -8,9 +8,34 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingBaseMaster {
 	public Modchu_IEntityLivingBase base;
 	public ConcurrentHashMap<String, Object> freeVariableMap;
+	public static HashMap<Integer, HashMap> debugDataWatcherEntityMap = new HashMap();
+	public HashMap<Integer, Object> debugDataWatcherMap;
+	public int tempIsRiding;
+	public int damageInvincibleCount;
+	public int checkUUIDCount = 2;
 
 	public Modchu_EntityLivingBaseMasterBasis(HashMap<String, Object> map) {
 		base = (Modchu_IEntityTameable) map.get("base");
+	}
+
+	@Override
+	public int getTempIsRiding() {
+		return tempIsRiding;
+	}
+
+	@Override
+	public void setTempIsRiding(int i) {
+		tempIsRiding = i;
+	}
+
+	@Override
+	public int getDamageInvincibleCount() {
+		return damageInvincibleCount;
+	}
+
+	@Override
+	public void setDamageInvincibleCount(int i) {
+		damageInvincibleCount = i;
 	}
 
 	@Override
@@ -1440,11 +1465,6 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public void initCreature() {
-		base.superInitCreature();
-	}
-
-	@Override
 	public void swingArm() {
 		base.superSwingArm();
 	}
@@ -2152,6 +2172,62 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	@Override
 	public void dismountRidingEntity2() {
 		base.superDismountRidingEntity2();
+	}
+
+	@Override
+	public void sendDeathMessage(Object damageSource) {
+		base.superSendDeathMessage(damageSource);
+	}
+
+	@Override
+	public boolean canSendDeathMessage() {
+		return base.superCanSendDeathMessage();
+	}
+
+	@Override
+	public int getRidingEntityID() {
+		// TODO
+		Object o = base.getDataWatcherWatchableObject(16);
+		return o instanceof Integer ? (Integer) o : 0;
+	}
+
+	@Override
+	public void setRidingEntityId(int i) {
+		base.setDataWatcherWatchableObject(16, i);
+	}
+
+	@Override
+	public void updateRidden2() {
+		boolean debug = false;
+		Object entity = getRidingEntity2();
+		if (debug) {
+			Modchu_Debug.mDebug("Modchu_EntityLivingBaseMasterBasis updateRidden2 entity="+entity);
+			Modchu_Debug.mDebug("Modchu_EntityLivingBaseMasterBasis updateRidden2 isRiding2()="+isRiding2());
+		}
+		if (isRiding2()
+				&& Modchu_AS.getBoolean(Modchu_AS.entityIsDead, entity)) {
+			dismountRidingEntity2();
+		} else {
+			if (isRiding2()) {
+				double entityPosX = Modchu_AS.getDouble(Modchu_AS.entityPosX, entity);
+				double entityPosY = Modchu_AS.getDouble(Modchu_AS.entityPosY, entity);
+				double entityPosZ = Modchu_AS.getDouble(Modchu_AS.entityPosZ, entity);
+				setPosition(entityPosX, entityPosY + Modchu_AS.getDouble("Entity", "getMountedYOffset", entity) + getYOffset(), entityPosZ);
+				if (debug) {
+					double posX = Modchu_AS.getDouble(Modchu_AS.entityPosX, base);
+					double posY = Modchu_AS.getDouble(Modchu_AS.entityPosY, base);
+					double posZ = Modchu_AS.getDouble(Modchu_AS.entityPosZ, base);
+					Modchu_Debug.mDebug("Modchu_EntityLivingBaseMasterBasis updateRidden2 isRiding2");
+					Modchu_Debug.mdDebug("posX="+posX+" posY="+posY+" posZ="+posZ);
+					Modchu_Debug.mdDebug("entityPosX="+entityPosX+" entityPosY="+entityPosY+" entityPosZ="+entityPosZ, 1);
+				}
+			}
+		}
+	}
+
+	@Override
+	public boolean isDamageInvincible() {
+		return base.superIsDamageInvincible();
 	}
 
 }

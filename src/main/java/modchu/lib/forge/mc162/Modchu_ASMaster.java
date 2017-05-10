@@ -86,6 +86,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -4593,6 +4594,21 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object newResourceLocation(String s) {
 		return new ResourceLocation(s);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving) {
+		return entityLivingOnInitialSpawn(entityLiving, null);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData) {
+		return entityLivingOnInitialSpawn(entityLiving, null, iEntityLivingData);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
+		return ((EntityLiving) entityLiving).onSpawnWithEgg((EntityLivingData) iEntityLivingData);
 	}
 
 }

@@ -7,6 +7,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.MovingObjectPosition;
@@ -62,6 +64,11 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc172_179.Modchu_ASMaster 
 	@Override
 	public int movingObjectPositionBlockPosGetZ(Object movingObjectPosition) {
 		return ((MovingObjectPosition) movingObjectPosition).blockZ;
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
+		return ((EntityLiving) entityLiving).onSpawnWithEgg((IEntityLivingData) iEntityLivingData);
 	}
 
 }

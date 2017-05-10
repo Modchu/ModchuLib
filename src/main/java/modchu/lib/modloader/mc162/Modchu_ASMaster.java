@@ -16,6 +16,7 @@ import com.google.common.collect.Multimap;
 
 import modchu.lib.Modchu_ASBasis;
 import modchu.lib.Modchu_CastHelper;
+import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
 import net.minecraft.server.MinecraftServer;
@@ -3067,7 +3068,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object worldGetPathEntityToEntity(Object worldOrEntity, Object entity, Object entity2, float f, boolean b, boolean b1, boolean b2, boolean b3) {
-		return ((World) entityWorld(worldOrEntity)).getPathEntityToEntity((Entity) entity, (Entity) entity2, f, b, b1, b2, b3);
+		//Modchu_Debug.mDebug("Modchu_ASMaster worldGetPathEntityToEntity entity="+entity);
+		//Modchu_Debug.mDebug("Modchu_ASMaster worldGetPathEntityToEntity entity2="+entity2);
+		//Modchu_Debug.mDebug("Modchu_ASMaster worldGetPathEntityToEntity f="+f+" b="+b+" b1="+b1+" b2="+b2+" b3="+b3);
+		Object o = ((World) entityWorld(worldOrEntity)).getPathEntityToEntity((Entity) entity, (Entity) entity2, f, b, b1, b2, b3);
+		//Modchu_Debug.mDebug("Modchu_ASMaster worldGetPathEntityToEntity return o="+o);
+		return o;
 	}
 
 	@Override
@@ -4482,6 +4488,21 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object newResourceLocation(String s) {
 		return new ResourceLocation(s);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving) {
+		return ((EntityLiving) entityLiving).func_110161_a(null);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData) {
+		return ((EntityLiving) entityLiving).func_110161_a((EntityLivingData) iEntityLivingData);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
+		return ((EntityLiving) entityLiving).func_110161_a((EntityLivingData) iEntityLivingData);
 	}
 
 }

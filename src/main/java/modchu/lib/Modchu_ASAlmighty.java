@@ -1087,6 +1087,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[1] != null
 			&& pArg[2] != null
 			&& pArg[3] != null) {
+				if (pArg.length > 4
+						&& pArg[4] != null) {
+					return worldIsBlockNormalCubeDefault(pArg[0], (Integer) pArg[1], (Integer) pArg[2], (Integer) pArg[3], (Boolean) pArg[4]);
+				}
 				return worldIsBlockNormalCubeDefault((Integer) pArg[0], (Integer) pArg[1], (Integer) pArg[2], (Boolean) pArg[3]);
 			}
 			return null;
@@ -1868,6 +1872,21 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			&& pArg[1] != null
 			&& pArg[2] != null) {
 				return iBlockStateWithProperty(pArg[0], pArg[1], (Comparable) pArg[2]);
+			}
+			return null;
+		}
+		if (pIndex == entityLivingOnInitialSpawn) {
+			if (pArg != null
+					&& pArg.length > 0) {
+				if (pArg.length > 1) {
+					if (pArg.length > 2) {
+						return entityLivingOnInitialSpawn(pArg[0], pArg[1], pArg[2]);
+					} else {
+						return entityLivingOnInitialSpawn(pArg[0], pArg[1]);
+					}
+				} else {
+					return entityLivingOnInitialSpawn(pArg[0]);
+				}
 			}
 			return null;
 		}
@@ -8274,6 +8293,19 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	protected void entityLivingSetCurrentItemOrArmor(Object entityLiving, Object entityEquipmentSlotOrInt, Object itemStack) {
 		int version = Modchu_Main.getMinecraftVersion();
 		Modchu_Reflect.invokeMethod("EntityLivingBase", "func_70062_b", "setCurrentItemOrArmor", version > 189 ? new Class[]{ Modchu_Reflect.loadClass("EntityEquipmentSlot"), Modchu_Reflect.loadClass("ItemStack") } : new Class[]{ int.class, Modchu_Reflect.loadClass("ItemStack") }, entityLiving, new Object[]{ entityEquipmentSlotOrInt, itemStack });
+	}
+
+	protected Object entityLivingOnInitialSpawn(Object entityLiving) {
+		return Modchu_Reflect.invokeMethod("EntityLiving", "onSpawnWithEgg", entityLiving);
+	}
+
+	protected Object entityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData) {
+		int version = Modchu_Main.getMinecraftVersion();
+		return Modchu_Reflect.invokeMethod("EntityLiving", version > 189 ? "func_180482_a" : "func_110161_a", version > 189 ? "onInitialSpawn" : version > 162 ? "onSpawnWithEgg" : "func_110161_a", new Class[]{ Modchu_Reflect.loadClass(version > 189 ? "IEntityLivingData" : "EntityLivingData") }, entityLiving, new Object[]{ iEntityLivingData });
+	}
+
+	protected Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
+		return Modchu_Reflect.invokeMethod("EntityLiving", "onInitialSpawn", new Class[]{ Modchu_Reflect.loadClass("DifficultyInstance"), Modchu_Reflect.loadClass("IEntityLivingData") }, entityLiving, new Object[]{ difficultyInstance, iEntityLivingData });
 	}
 
 	protected double entityMotionX() {

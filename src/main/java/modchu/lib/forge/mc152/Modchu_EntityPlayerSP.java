@@ -1,64 +1,6 @@
-package modchu.lib.forge.mc152;import java.util.Collection;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.UUID;import modchu.lib.Modchu_Debug;
-import modchu.lib.Modchu_IEntityPlayerSP;
-import modchu.lib.Modchu_IEntityPlayerSPMaster;
-import modchu.lib.Modchu_Main;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.multiplayer.NetClientHandler;
-import net.minecraft.crash.CrashReportCategory;
-import net.minecraft.entity.DataWatcher;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.IMerchant;
-import net.minecraft.entity.ai.EntityJumpHelper;
-import net.minecraft.entity.ai.EntityLookHelper;
-import net.minecraft.entity.ai.EntityMoveHelper;
-import net.minecraft.entity.ai.EntitySenses;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityMinecartHopper;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EnumStatus;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryEnderChest;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.scoreboard.ScorePlayerTeam;
-import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.stats.StatBase;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityBeacon;
-import net.minecraft.tileentity.TileEntityBrewingStand;
-import net.minecraft.tileentity.TileEntityDispenser;
-import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.tileentity.TileEntityHopper;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.FoodStats;
-import net.minecraft.util.Icon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Session;
-import net.minecraft.util.StringTranslate;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.EnumGameType;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu_EntityPlayerSP extends EntityClientPlayerMP implements Modchu_IEntityPlayerSP {
+package modchu.lib.forge.mc152;import java.util.Collection;import java.util.HashMap;import java.util.List;import java.util.Random;import java.util.UUID;import modchu.lib.Modchu_AS;import modchu.lib.Modchu_Debug;import modchu.lib.Modchu_IEntityPlayerSP;import modchu.lib.Modchu_IEntityPlayerSPMaster;import modchu.lib.Modchu_Main;import net.minecraft.block.Block;import net.minecraft.block.material.Material;import net.minecraft.client.Minecraft;import net.minecraft.client.entity.EntityClientPlayerMP;import net.minecraft.client.multiplayer.NetClientHandler;import net.minecraft.crash.CrashReportCategory;import net.minecraft.entity.DataWatcher;import net.minecraft.entity.Entity;import net.minecraft.entity.EntityLiving;import net.minecraft.entity.EnumCreatureAttribute;import net.minecraft.entity.EnumCreatureType;import net.minecraft.entity.IMerchant;import net.minecraft.entity.ai.EntityJumpHelper;import net.minecraft.entity.ai.EntityLookHelper;import net.minecraft.entity.ai.EntityMoveHelper;import net.minecraft.entity.ai.EntitySenses;import net.minecraft.entity.effect.EntityLightningBolt;import net.minecraft.entity.item.EntityItem;import net.minecraft.entity.item.EntityMinecartHopper;import net.minecraft.entity.player.EntityPlayer;import net.minecraft.entity.player.EnumStatus;import net.minecraft.entity.player.InventoryPlayer;import net.minecraft.inventory.IInventory;import net.minecraft.inventory.InventoryEnderChest;import net.minecraft.item.ItemStack;import net.minecraft.nbt.NBTTagCompound;import net.minecraft.nbt.NBTTagList;import net.minecraft.pathfinding.PathNavigate;import net.minecraft.potion.Potion;import net.minecraft.potion.PotionEffect;import net.minecraft.scoreboard.ScorePlayerTeam;import net.minecraft.scoreboard.Scoreboard;import net.minecraft.stats.StatBase;import net.minecraft.tileentity.TileEntity;import net.minecraft.tileentity.TileEntityBeacon;import net.minecraft.tileentity.TileEntityBrewingStand;import net.minecraft.tileentity.TileEntityDispenser;import net.minecraft.tileentity.TileEntityFurnace;import net.minecraft.tileentity.TileEntityHopper;import net.minecraft.util.AxisAlignedBB;import net.minecraft.util.ChunkCoordinates;import net.minecraft.util.DamageSource;import net.minecraft.util.FoodStats;import net.minecraft.util.Icon;import net.minecraft.util.MovingObjectPosition;import net.minecraft.util.Session;import net.minecraft.util.StringTranslate;import net.minecraft.util.Vec3;import net.minecraft.world.EnumGameType;import net.minecraft.world.Explosion;import net.minecraft.world.World;import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu_EntityPlayerSP extends EntityClientPlayerMP implements Modchu_IEntityPlayerSP {
 	public Modchu_IEntityPlayerSPMaster master;
-	public boolean initFlag;	public Modchu_EntityPlayerSP(HashMap<String, Object> map) {
+	public boolean initFlag;	public HashMap<String, Object> tempInitMap;	public NBTTagCompound tempNBTTagCompound;	public int tempIsRiding;	public int dataWatcherWatchableObjectIdFirst;	public int dataWatcherWatchableObjectIdCount = 15;	public int checkUUIDCount;	public int damageInvincibleCount;	public Modchu_EntityPlayerSP(HashMap<String, Object> map) {
 		super((Minecraft)map.get("Object"), (World)map.get("Object1"), (Session)map.get("Object2"), (NetClientHandler)map.get("Object3"));
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
@@ -66,7 +8,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		master = instance != null
 				&& instance instanceof Modchu_IEntityPlayerSPMaster ? (Modchu_IEntityPlayerSPMaster) instance : null;
 		if (master != null); else Modchu_Debug.lDebug("Modchu_EntityPlayerSP init master == null !!");
-	}	@Override	public Object getRidingEntity2() {		return superGetRidingEntity();	}	@Override	public Object superGetRidingEntity2() {		return superGetRidingEntity();	}	@Override	public boolean isRiding2() {		return isRiding();	}	@Override	public boolean superIsRiding2() {		return superIsRiding();	}	@Override	public void dismountRidingEntity2() {		superDismountRidingEntity();	}	@Override	public void superDismountRidingEntity2() {		superDismountRidingEntity();	}	@Override
+	}	@Override	public boolean isDamageInvincible() {		return master != null ? master.isDamageInvincible() : superIsDamageInvincible();	}	@Override	public boolean superIsDamageInvincible() {		return getDamageInvincibleCount() > 0;	}	@Override	public void entityDataManagerRegister(Class[] c1, int i, Object o) {		dataWatcher.addObject(i, o);	}	@Override	public Object getDataWatcherWatchableObject(int i) {		Object watchedObject = Modchu_AS.get("DataWatcher", "getWatchedObject", new Class[]{ int.class }, dataWatcher, new Object[]{ i });		return watchedObject != null ? Modchu_AS.get("net.minecraft.entity.DataWatcher$WatchableObject", "getObject", watchedObject) : null;	}	@Override	public void setDataWatcherWatchableObject(int i, Object o) {		dataWatcher.updateObject(i, o);	}	@Override	public void setDataWatcherWatchableObject(int i, int i2) {		dataWatcher.updateObject(i, i2);	}	@Override	public int getDataWatcherWatchableObjectIdCount() {		return dataWatcherWatchableObjectIdCount;	}	@Override	public void setDataWatcherWatchableObjectIdCount(int i) {		dataWatcherWatchableObjectIdCount = i;	}	@Override	public int getDamageInvincibleCount() {		return master != null ? master.getDamageInvincibleCount() : 0;	}	@Override	public void setDamageInvincibleCount(int i) {		if (master != null) master.setDamageInvincibleCount(i);	}	@Override	public boolean isInitFlag() {		return initFlag;	}	@Override	public void setInitFlag(boolean b) {		initFlag = b;	}	@Override	public int getTempIsRiding() {		return master != null ? master.getTempIsRiding() : 0;	}	@Override	public void setTempIsRiding(int i) {		if (master != null) master.setTempIsRiding(i);	}	@Override	public int getDataWatcherWatchableObjectIdFirst() {		return dataWatcherWatchableObjectIdFirst;	}	@Override	public void setDataWatcherWatchableObjectIdFirst(int i) {		dataWatcherWatchableObjectIdFirst = i;	}	@Override	public void dataParameterMapSetting(HashMap<Integer, Object> map) {	}	@Override	public void sendDeathMessage(Object damageSource) {		if (master != null) master.sendDeathMessage(damageSource);		else superSendDeathMessage(damageSource);	}	@Override	public void superSendDeathMessage(Object damageSource) {	}	@Override	public boolean canSendDeathMessage() {		return master != null ? master.canSendDeathMessage() : superCanSendDeathMessage();	}	@Override	public boolean superCanSendDeathMessage() {		return false;	}	@Override	public Object getRidingEntity2() {		return superGetRidingEntity();	}	@Override	public Object superGetRidingEntity2() {		return superGetRidingEntity();	}	@Override	public boolean isRiding2() {		return isRiding();	}	@Override	public boolean superIsRiding2() {		return superIsRiding();	}	@Override	public void dismountRidingEntity2() {		superDismountRidingEntity();	}	@Override	public void superDismountRidingEntity2() {		superDismountRidingEntity();	}	@Override
 	public void init() {
 		if (master != null) master.init();
 		initFlag = true;
@@ -1503,7 +1445,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;public class Modchu
 		super.dropEquipment(par1, par2);
 	}	@Override
 	public void initCreature() {
-		if (master != null) master.initCreature();
+		if (master != null) master.onInitialSpawn(null, null);
 		else super.initCreature();
 	}	@Override	public void superInitCreature() {
 		super.initCreature();

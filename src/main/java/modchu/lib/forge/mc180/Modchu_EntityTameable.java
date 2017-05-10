@@ -155,7 +155,7 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 
 	@Override
 	public IEntityLivingData func_180482_a(DifficultyInstance difficultyInstance, IEntityLivingData iEntityLivingData) {
-		return (IEntityLivingData) (master != null ? master.onInitialSpawn(iEntityLivingData) : super.func_180482_a(difficultyInstance, iEntityLivingData));
+		return (IEntityLivingData) (master != null ? master.onInitialSpawn(null, iEntityLivingData) : super.func_180482_a(difficultyInstance, iEntityLivingData));
 	}
 
 	@Override

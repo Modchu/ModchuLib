@@ -4656,4 +4656,19 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 		return base.superItemSetRegistryName(item, s, s1);
 	}
 
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving) {
+		return base.superEntityLivingOnInitialSpawn(entityLiving);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData) {
+		return base.superEntityLivingOnInitialSpawn(entityLiving, iEntityLivingData);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
+		return base.superEntityLivingOnInitialSpawn(entityLiving, difficultyInstance, iEntityLivingData);
+	}
+
 }

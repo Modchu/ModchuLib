@@ -1,30 +1,34 @@
-package modchu.lib.forge.mc164_179;
+package modchu.lib.forge.mc152;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IContainerPlayerMaster;
-import modchu.lib.Modchu_IEntityAIBase;
-import modchu.lib.Modchu_IEntityAIBaseMaster;
-import modchu.lib.Modchu_IEntityAISit;
-import modchu.lib.Modchu_IEntityAISitMaster;
-import modchu.lib.Modchu_IEntityAISwimming;
-import modchu.lib.Modchu_IEntityAISwimmingMaster;
+import modchu.lib.Modchu_IEntityAIWatchClosest;
+import modchu.lib.Modchu_IEntityAIWatchClosestMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAISit;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 
-public class Modchu_EntityAISwimming extends EntityAISwimming implements Modchu_IEntityAISwimming {
-	public Modchu_IEntityAISwimmingMaster master;
+public class Modchu_EntityAIWatchClosest extends EntityAIWatchClosest implements Modchu_IEntityAIWatchClosest {
+	public Modchu_IEntityAIWatchClosestMaster master;
+	private boolean enabled;
 
-	public Modchu_EntityAISwimming(HashMap<String, Object> map) {
-		super((EntityTameable) map.get("Object"));
+	public Modchu_EntityAIWatchClosest(HashMap<String, Object> map) {
+		super((EntityLiving)map.get("Object"), (Class)map.get("Class"), (Float)map.get("Float"), map.containsKey("Float1") ? (Float)map.get("Float1") : 0.02F);
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
-		//Modchu_Debug.lDebug("Modchu_EntityAISwimming init instance="+instance);
+		//Modchu_Debug.lDebug("Modchu_EntityAIWatchClosest2 init instance="+instance);
 		master = instance != null
-				&& instance instanceof Modchu_IEntityAISwimmingMaster ? (Modchu_IEntityAISwimmingMaster) instance : null;
+				&& instance instanceof Modchu_IEntityAIWatchClosestMaster ? (Modchu_IEntityAIWatchClosestMaster) instance : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean b) {
+		enabled = b;
 	}
 
 	@Override
@@ -57,11 +61,11 @@ public class Modchu_EntityAISwimming extends EntityAISwimming implements Modchu_
 	@Override
 	public void startExecuting() {
 		if (master != null) master.startExecuting();
-		else super.startExecuting();
+		else superStartExecuting();
 	}
 
 	public void superStartExecuting() {
-		super.startExecuting();
+		if (isEnabled()) super.startExecuting();
 	}
 
 	@Override

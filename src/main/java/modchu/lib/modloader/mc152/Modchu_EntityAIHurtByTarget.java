@@ -1,16 +1,17 @@
-package modchu.lib.forge.mc164_179;
+package modchu.lib.modloader.mc152;
 
 import java.util.HashMap;
 
 import modchu.lib.Modchu_IEntityAIHurtByTarget;
 import modchu.lib.Modchu_IEntityAIHurtByTargetMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.src.EntityAIHurtByTarget;
+import net.minecraft.src.EntityCreature;
+import net.minecraft.src.EntityLiving;
 
 public class Modchu_EntityAIHurtByTarget extends EntityAIHurtByTarget implements Modchu_IEntityAIHurtByTarget {
 	public Modchu_IEntityAIHurtByTargetMaster master;
+	private boolean enabled;
 
 	public Modchu_EntityAIHurtByTarget(HashMap<String, Object> map) {
 		super((EntityCreature) map.get("Object"), (Boolean)map.get("Boolean"));
@@ -19,6 +20,16 @@ public class Modchu_EntityAIHurtByTarget extends EntityAIHurtByTarget implements
 		//Modchu_Debug.lDebug("Modchu_EntityAIHurtByTarget init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAIHurtByTargetMaster ? (Modchu_IEntityAIHurtByTargetMaster) instance : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean b) {
+		enabled = b;
 	}
 
 	@Override
@@ -51,11 +62,11 @@ public class Modchu_EntityAIHurtByTarget extends EntityAIHurtByTarget implements
 	@Override
 	public void startExecuting() {
 		if (master != null) master.startExecuting();
-		else super.startExecuting();
+		else superStartExecuting();
 	}
 
 	public void superStartExecuting() {
-		super.startExecuting();
+		if (isEnabled()) super.startExecuting();
 	}
 
 	@Override
@@ -97,22 +108,17 @@ public class Modchu_EntityAIHurtByTarget extends EntityAIHurtByTarget implements
 		return super.getMutexBits();
 	}
 
-	@Override
-	protected double getTargetDistance() {
-		return master != null ? master.getTargetDistance() : super.getTargetDistance();
-	}
-
 	public double superGetTargetDistance() {
-		return super.getTargetDistance();
+		return 0.0D;
 	}
 
 	@Override
-	protected boolean isSuitableTarget(EntityLivingBase entityLivingBase, boolean par2) {
+	protected boolean isSuitableTarget(EntityLiving entityLivingBase, boolean par2) {
 		return master != null ? master.isSuitableTarget(entityLivingBase, par2) : super.isSuitableTarget(entityLivingBase, par2);
 	}
 
 	public boolean superIsSuitableTarget(Object entityLivingBase, boolean par2) {
-		return super.isSuitableTarget((EntityLivingBase) entityLivingBase, par2);
+		return super.isSuitableTarget((EntityLiving) entityLivingBase, par2);
 	}
 
 }

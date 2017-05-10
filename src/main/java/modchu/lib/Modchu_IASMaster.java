@@ -937,5 +937,8 @@ public interface Modchu_IASMaster {
 	public Object itemSetRegistryName(Object item, Object resourceLocation);
 	public Object itemSetRegistryName(Object item, String s);
 	public Object itemSetRegistryName(Object item, String s, String s1);
+	public Object entityLivingOnInitialSpawn(Object entityLiving);
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData);
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData);
 
 }

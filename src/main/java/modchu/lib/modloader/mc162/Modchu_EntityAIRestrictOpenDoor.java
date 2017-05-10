@@ -1,23 +1,34 @@
-package modchu.lib.forge.mc164_179;
+package modchu.lib.modloader.mc162;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IEntityAILeapAtTarget;
-import modchu.lib.Modchu_IEntityAILeapAtTargetMaster;
+import modchu.lib.Modchu_IEntityAIRestrictOpenDoor;
+import modchu.lib.Modchu_IEntityAIRestrictOpenDoorMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.src.EntityAIRestrictOpenDoor;
+import net.minecraft.src.EntityCreature;
 
-public class Modchu_EntityAILeapAtTarget extends EntityAILeapAtTarget implements Modchu_IEntityAILeapAtTarget {
-	public Modchu_IEntityAILeapAtTargetMaster master;
+public class Modchu_EntityAIRestrictOpenDoor extends EntityAIRestrictOpenDoor implements Modchu_IEntityAIRestrictOpenDoor {
+	public Modchu_IEntityAIRestrictOpenDoorMaster master;
+	private boolean enabled;
 
-	public Modchu_EntityAILeapAtTarget(HashMap<String, Object> map) {
-		super((EntityLiving)map.get("Object"), (Float)map.get("Float"));
+	public Modchu_EntityAIRestrictOpenDoor(HashMap<String, Object> map) {
+		super((EntityCreature)map.get("Object"));
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
-		//Modchu_Debug.lDebug("Modchu_EntityAILeapAtTarget init instance="+instance);
+		//Modchu_Debug.lDebug("Modchu_EntityAIRestrictOpenDoor init instance="+instance);
 		master = instance != null
-				&& instance instanceof Modchu_IEntityAILeapAtTargetMaster ? (Modchu_IEntityAILeapAtTargetMaster) instance : null;
+				&& instance instanceof Modchu_IEntityAIRestrictOpenDoorMaster ? (Modchu_IEntityAIRestrictOpenDoorMaster) instance : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean b) {
+		enabled = b;
 	}
 
 	@Override
@@ -50,11 +61,11 @@ public class Modchu_EntityAILeapAtTarget extends EntityAILeapAtTarget implements
 	@Override
 	public void startExecuting() {
 		if (master != null) master.startExecuting();
-		else super.startExecuting();
+		else superStartExecuting();
 	}
 
 	public void superStartExecuting() {
-		super.startExecuting();
+		if (isEnabled()) super.startExecuting();
 	}
 
 	@Override

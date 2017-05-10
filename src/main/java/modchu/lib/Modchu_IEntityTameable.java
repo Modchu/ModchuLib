@@ -15,7 +15,6 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityLiving {
 	public void superEnablePersistence();
 	public void superEnchantEquipment();
 	public boolean superHasCustomNameTag();
-	public Object superOnInitialSpawn(Object iEntityLivingData);
 	public void superSetInLove(Object entityPlayer);
 	public float superGetExplosionResistance(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block);
 	public String superFunc_152113_b();

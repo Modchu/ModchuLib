@@ -1,23 +1,32 @@
-package modchu.lib.forge.mc164_179;
+package modchu.lib.modloader.mc152;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IEntityAIWatchClosest2;
-import modchu.lib.Modchu_IEntityAIWatchClosest2Master;
+import modchu.lib.Modchu_IEntityAIBase;
+import modchu.lib.Modchu_IEntityAIBaseMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIWatchClosest2;
+import net.minecraft.src.EntityAIBase;
 
-public class Modchu_EntityAIWatchClosest2 extends EntityAIWatchClosest2 implements Modchu_IEntityAIWatchClosest2 {
-	public Modchu_IEntityAIWatchClosest2Master master;
+public class Modchu_EntityAIBase extends EntityAIBase implements Modchu_IEntityAIBase {
+	public Modchu_IEntityAIBaseMaster master;
+	private boolean enabled;
 
-	public Modchu_EntityAIWatchClosest2(HashMap<String, Object> map) {
-		super((EntityLiving)map.get("Object"), (Class)map.get("Class"), (Float)map.get("Float"), (Float)map.get("Float1"));
+	public Modchu_EntityAIBase(HashMap<String, Object> map) {
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
-		//Modchu_Debug.lDebug("Modchu_EntityAIWatchClosest2 init instance="+instance);
+		//Modchu_Debug.lDebug("Modchu_EntityAIBase init instance="+instance);
 		master = instance != null
-				&& instance instanceof Modchu_IEntityAIWatchClosest2Master ? (Modchu_IEntityAIWatchClosest2Master) instance : null;
+				&& instance instanceof Modchu_IEntityAIBaseMaster ? (Modchu_IEntityAIBaseMaster) instance : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean b) {
+		enabled = b;
 	}
 
 	@Override
@@ -50,11 +59,11 @@ public class Modchu_EntityAIWatchClosest2 extends EntityAIWatchClosest2 implemen
 	@Override
 	public void startExecuting() {
 		if (master != null) master.startExecuting();
-		else super.startExecuting();
+		else superStartExecuting();
 	}
 
 	public void superStartExecuting() {
-		super.startExecuting();
+		if (isEnabled()) super.startExecuting();
 	}
 
 	@Override

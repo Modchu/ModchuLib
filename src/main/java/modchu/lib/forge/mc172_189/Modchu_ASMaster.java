@@ -3040,4 +3040,14 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 		return ((RenderManager) renderManagerInstance()).renderEntityWithPosYaw((Entity) entity, d, d2, d3, f, f2);
 	}
 
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving) {
+		return entityLivingOnInitialSpawn(entityLiving, null);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData) {
+		return entityLivingOnInitialSpawn(entityLiving, null, iEntityLivingData);
+	}
+
 }

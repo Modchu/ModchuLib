@@ -9,6 +9,14 @@ public interface Modchu_IEntityLivingBase extends Modchu_IEntity {
 	public void setFollowRange(double d);
 	public void setKnockbackResistance(double d);
 	public void setAttackDamage(double d);
+	public void sendDeathMessage(Object damageSource);
+	public void superSendDeathMessage(Object damageSource);
+	public boolean canSendDeathMessage();
+	public boolean superCanSendDeathMessage();
+	public int getDamageInvincibleCount();
+	public void setDamageInvincibleCount(int i);
+	public boolean isDamageInvincible();
+	public boolean superIsDamageInvincible();
 
 	public int superFunc_96121_ay();
 	public Random superGetRNG();
@@ -90,7 +98,6 @@ public interface Modchu_IEntityLivingBase extends Modchu_IEntity {
 	public void superDropEquipment(boolean par1, int par2);
 	public void superOnItemPickup(Object entity, int par2);
 	public void superFunc_82162_bC();
-	public void superInitCreature();
 	public void superSwingArm();
 	public Object superGetAttackingEntity();
 	public void superFunc_94058_c(String par1Str);

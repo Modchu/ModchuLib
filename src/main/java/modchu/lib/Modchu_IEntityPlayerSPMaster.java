@@ -249,5 +249,6 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public void setCanPickUpLoot(boolean par1);
 	public boolean interact(Object entityPlayer);
 	public String getCachedUniqueIdString();
+	public void onInitialSpawn(Object difficultyInstance, Object entityLivingData);
 
 }

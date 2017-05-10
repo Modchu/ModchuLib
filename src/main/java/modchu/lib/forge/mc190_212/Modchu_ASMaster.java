@@ -95,6 +95,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAITasks;
@@ -146,6 +147,7 @@ import net.minecraft.util.math.Rotations;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
@@ -3189,6 +3191,8 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 				((TextureManager) textureManager).bindTexture((ResourceLocation) o);
 			} catch(Exception e) {
 				Modchu_Debug.lDebug1("Modchu_ASMaster textureManagerBindTexture Exception !! o="+o);
+			} catch(Throwable e) {
+				Modchu_Debug.lDebug1("Modchu_ASMaster textureManagerBindTexture Throwable !! o="+o);
 			}
 		}
 	}
@@ -3541,6 +3545,21 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object itemSetRegistryName(Object item, String s, String s1) {
 		return ((Item) item).setRegistryName(s, s1);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving) {
+		return entityLivingOnInitialSpawn(entityLiving, null);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData) {
+		return entityLivingOnInitialSpawn(entityLiving, null, iEntityLivingData);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
+		return ((EntityLiving) entityLiving).onInitialSpawn((DifficultyInstance) difficultyInstance, (IEntityLivingData) iEntityLivingData);
 	}
 
 }

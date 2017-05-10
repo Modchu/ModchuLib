@@ -48,5 +48,6 @@ public interface Modchu_IEntityLivingMaster extends Modchu_IEntityLivingBaseMast
 	public Object getLeashedToEntity();
 	public void setLeashedToEntity(Object entity, boolean par2);
 	public boolean isWithinHomeDistanceCurrentPosition();
+	public Object onInitialSpawn(Object difficultyInstance, Object iEntityLivingData);
 
 }

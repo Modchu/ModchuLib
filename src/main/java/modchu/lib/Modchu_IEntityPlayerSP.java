@@ -1,5 +1,7 @@
 package modchu.lib;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -12,6 +14,26 @@ public interface Modchu_IEntityPlayerSP {
 	public boolean isRiding2();
 	public void superDismountRidingEntity2();
 	public void dismountRidingEntity2();
+	public void superSendDeathMessage(Object damageSource);
+	public boolean superCanSendDeathMessage();
+	public void sendDeathMessage(Object damageSource);
+	public boolean canSendDeathMessage();
+	public void entityDataManagerRegister(Class[] c1, int i, Object o);
+	public Object getDataWatcherWatchableObject(int i);
+	public void setDataWatcherWatchableObject(int i, int i2);
+	public void setDataWatcherWatchableObject(int i, Object o);
+	public int getDataWatcherWatchableObjectIdCount();
+	public void setDataWatcherWatchableObjectIdCount(int i);
+	public boolean isInitFlag();
+	public void setInitFlag(boolean b);
+	public int getTempIsRiding();
+	public void setTempIsRiding(int i);
+	public int getDataWatcherWatchableObjectIdFirst();
+	public void setDataWatcherWatchableObjectIdFirst(int i);
+	public void dataParameterMapSetting(HashMap<Integer, Object> map);
+	public int getDamageInvincibleCount();
+	public void setDamageInvincibleCount(int i);
+	public boolean superIsDamageInvincible();
 
 	public Object supergetCreatureAttribute();
 	public void supersetSize(float f, float f1);
@@ -671,5 +693,6 @@ public interface Modchu_IEntityPlayerSP {
 	public boolean superIsNotColliding();
 	public void superSetMaxHealth(Object floatOrInt);
 	public String superGetCachedUniqueIdString();
+	boolean isDamageInvincible();
 
 }

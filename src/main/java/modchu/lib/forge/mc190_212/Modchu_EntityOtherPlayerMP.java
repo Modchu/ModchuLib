@@ -88,7 +88,9 @@ import net.minecraftforge.common.capabilities.Capability;
 public abstract class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements Modchu_IEntityOtherPlayerMP {
 	public Modchu_IEntityOtherPlayerMPMaster master;
 	public int ridingEntity2;
-	private int dataWatcherWatchableObjectIdCount = 15;
+	public boolean initFlag;
+	public int dataWatcherWatchableObjectIdFirst;
+	public int dataWatcherWatchableObjectIdCount = 15;
 
 	public Modchu_EntityOtherPlayerMP(HashMap<String, Object> map) {
 		super((World)map.get("Object"), (GameProfile)map.get("Object1"));
@@ -102,6 +104,114 @@ public abstract class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP imp
 		master = instance != null
 				&& instance instanceof Modchu_IEntityOtherPlayerMPMaster ? (Modchu_IEntityOtherPlayerMPMaster) instance : null;
 		if (master != null); else Modchu_Debug.lDebug("Modchu_EntityOtherPlayerMP init master == null !!");
+	}
+
+	@Override
+	public boolean isDamageInvincible() {
+		return master != null ? master.isDamageInvincible() : superIsDamageInvincible();
+	}
+
+	@Override
+	public boolean superIsDamageInvincible() {
+		return getDamageInvincibleCount() > 0;
+	}
+
+	@Override
+	public int getDamageInvincibleCount() {
+		return master != null ? master.getDamageInvincibleCount() : 0;
+	}
+
+	@Override
+	public void setDamageInvincibleCount(int i) {
+		if (master != null) master.setDamageInvincibleCount(i);
+	}
+
+	@Override
+	public boolean isInitFlag() {
+		return initFlag;
+	}
+
+	@Override
+	public void setInitFlag(boolean b) {
+		initFlag = b;
+	}
+
+	@Override
+	public int getTempIsRiding() {
+		return master != null ? master.getTempIsRiding() : 0;
+	}
+
+	@Override
+	public void setTempIsRiding(int i) {
+		if (master != null) master.setTempIsRiding(i);
+	}
+
+	@Override
+	public int getDataWatcherWatchableObjectIdFirst() {
+		return dataWatcherWatchableObjectIdFirst;
+	}
+
+	@Override
+	public void setDataWatcherWatchableObjectIdFirst(int i) {
+		dataWatcherWatchableObjectIdFirst = i;
+	}
+
+	@Override
+	public void dataParameterMapSetting(HashMap<Integer, Object> map) {
+		int i = 0;
+		map.put(i, Modchu_AS.get("Entity", "FLAGS", this));
+		i++;
+		map.put(i, Modchu_AS.get("Entity", "AIR", this));
+		i++;
+		map.put(i, Modchu_AS.get("Entity", "CUSTOM_NAME", this));
+		i++;
+		map.put(i, Modchu_AS.get("Entity", "CUSTOM_NAME_VISIBLE", this));
+		i++;
+		map.put(i, Modchu_AS.get("Entity", "SILENT", this));
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 194) {
+			i++;
+			map.put(i, Modchu_AS.get("Entity", "NO_GRAVITY", this));
+		}
+		i++;
+		map.put(i, HAND_STATES);
+		i++;
+		map.put(i, Modchu_AS.get("EntityLivingBase", "HEALTH", this));
+		i++;
+		map.put(i, Modchu_AS.get("EntityLivingBase", "POTION_EFFECTS", this));
+		i++;
+		map.put(i, Modchu_AS.get("EntityLivingBase", "HIDE_PARTICLES", this));
+		i++;
+		map.put(i, Modchu_AS.get("EntityLivingBase", "ARROW_COUNT_IN_ENTITY", this));
+		i++;
+		map.put(i, Modchu_AS.get("EntityPlayer", "ABSORPTION", this));
+		i++;
+		map.put(i, Modchu_AS.get("EntityPlayer", "PLAYER_SCORE", this));
+		i++;
+		map.put(i, Modchu_AS.get("EntityPlayer", "PLAYER_MODEL_FLAG", this));
+		i++;
+		map.put(i, Modchu_AS.get("EntityPlayer", "MAIN_HAND", this));
+		//Modchu_Debug.mDebug("Modchu_EntityOtherPlayerMP dataParameterMapSetting end.");
+	}
+
+	@Override
+	public void sendDeathMessage(Object damageSource) {
+		if (master != null) master.sendDeathMessage(damageSource);
+		else superSendDeathMessage(damageSource);
+	}
+
+	@Override
+	public void superSendDeathMessage(Object damageSource) {
+	}
+
+	@Override
+	public boolean canSendDeathMessage() {
+		return master != null ? master.canSendDeathMessage() : superCanSendDeathMessage();
+	}
+
+	@Override
+	public boolean superCanSendDeathMessage() {
+		return false;
 	}
 
 	@Override
@@ -4830,10 +4940,6 @@ public abstract class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP imp
 	}
 
 	@Override
-	public void superInitCreature() {
-	}
-
-	@Override
 	public boolean superCanBeSteered() {
 		return false;
 	}
@@ -5387,6 +5493,10 @@ public abstract class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP imp
 	@Override
 	public boolean superProcessInteract(Object entityPlayer) {
 		return false;
+	}
+
+	@Override
+	public void superOnInitialSpawn(Object o, Object o1) {
 	}
 
 }

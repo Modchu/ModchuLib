@@ -1,7 +1,11 @@
 package modchu.lib.forge.mc179;
 
 import java.util.HashMap;
+
 import com.mojang.authlib.GameProfile;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
@@ -31,6 +35,11 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc172_179.Modchu_ASMaster 
 	@Override
 	public void entityTameableSetOwner(Object entityTameable, Object s) {
 		((EntityTameable) entityTameable).func_152115_b((String) s);
+	}
+
+	@Override
+	public Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
+		return ((EntityLiving) entityLiving).onSpawnWithEgg((IEntityLivingData) iEntityLivingData);
 	}
 
 }

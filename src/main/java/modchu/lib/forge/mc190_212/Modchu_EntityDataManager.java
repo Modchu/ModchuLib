@@ -18,6 +18,7 @@ import modchu.lib.Modchu_IEntity;
 import modchu.lib.Modchu_IEntityDataManager;
 import modchu.lib.Modchu_IEntityDataManagerMaster;
 import modchu.lib.Modchu_Main;
+import modchu.lib.Modchu_Reflect;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -43,8 +44,12 @@ public class Modchu_EntityDataManager extends EntityDataManager implements Modch
 		if (entityDataParameterMap != null); else entityDataParameterMap = new HashMap();
 		if (entityDataParameterMap.containsKey(baseEntity.getClass())) {
 			dataParameterMap = entityDataParameterMap.get(baseEntity.getClass());
+			Modchu_Debug.mDebug("Modchu_EntityDataManager init 0");
 		} else {
 			dataParameterMap = new HashMap();
+			if (baseEntity instanceof Modchu_IEntity) {
+				((Modchu_IEntity) baseEntity).dataParameterMapSetting(dataParameterMap);
+			}
 			entityDataParameterMap.put(baseEntity.getClass(), dataParameterMap);
 		}
 		idMap = new HashMap();
@@ -83,7 +88,6 @@ public class Modchu_EntityDataManager extends EntityDataManager implements Modch
 
 	@Override
 	public Object getDataParameterMap(int i) {
-		//i = getIdMap(i);
 		return dataParameterMap.containsKey(i) ? dataParameterMap.get(i) : null;
 	}
 

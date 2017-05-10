@@ -20,7 +20,7 @@ public class Modchu_TextCalculation {
 
 	public Modchu_TextCalculation() {
 		//debugSetting = !Modchu_Main.isRelease();
-		//debugRun = !Modchu_Main.isRelease();
+		debugRun = !Modchu_Main.isRelease();
 		//debugCE = !Modchu_Main.isRelease();
 		//debugCERun = !Modchu_Main.isRelease();
 		for (String s : Modchu_TextCalculationFormula.allCalculationStringList) {

@@ -5,9 +5,23 @@ import java.util.UUID;
 
 public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	public Modchu_IEntity base;
+	public static HashMap<Integer, HashMap> debugDataWatcherEntityMap = new HashMap();
+	public HashMap<Integer, Object> debugDataWatcherMap;
+	public int tempIsRiding;
+	public int checkUUIDCount = 2;
 
 	public Modchu_EntityMasterBasis(HashMap<String, Object> map) {
 		base = (Modchu_IEntity) map.get("base");
+	}
+
+	@Override
+	public int getTempIsRiding() {
+		return tempIsRiding;
+	}
+
+	@Override
+	public void setTempIsRiding(int i) {
+		tempIsRiding = i;
 	}
 
 	@Override
@@ -1372,6 +1386,18 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	@Override
 	public void dismountRidingEntity2() {
 		base.superDismountRidingEntity2();
+	}
+
+	@Override
+	public int getRidingEntityID() {
+		// TODO
+		Object o = base.getDataWatcherWatchableObject(16);
+		return o instanceof Integer ? (Integer) o : 0;
+	}
+
+	@Override
+	public void setRidingEntityId(int i) {
+		base.setDataWatcherWatchableObject(16, i);
 	}
 
 }
