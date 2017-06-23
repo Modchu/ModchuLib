@@ -524,8 +524,8 @@ public class Modchu_BlockMasterBasis implements Modchu_IBlockMaster {
 	}
 
 	@Override
-	public boolean removedByPlayer(Object world, Object entityPlayer, int x, int y, int z) {
-		return base.superRemovedByPlayer(world, entityPlayer, x, y, z);
+	public boolean removedByPlayer(Object world, Object entityPlayer, int x, int y, int z, boolean willHarvest) {
+		return base.superRemovedByPlayer(world, entityPlayer, x, y, z, willHarvest);
 	}
 
 	@Override
@@ -899,8 +899,8 @@ public class Modchu_BlockMasterBasis implements Modchu_IBlockMaster {
 	}
 
 	@Override
-	public Object getMapColor(Object iBlockState) {
-		return base.superGetMapColor(iBlockState);
+	public Object getMapColor(Object iBlockState, Object iBlockAccess, Object blockPos) {
+		return base.superGetMapColor(iBlockState, iBlockAccess, blockPos);
 	}
 
 	@Override
@@ -1689,8 +1689,8 @@ public class Modchu_BlockMasterBasis implements Modchu_IBlockMaster {
 	}
 
 	@Override
-	public boolean isFullyOpaque(Object iBlockState) {
-		return base.superIsFullyOpaque(iBlockState);
+	public boolean isTopSolid(Object iBlockState) {
+		return base.superIsTopSolid(iBlockState);
 	}
 
 	@Override
@@ -1751,6 +1751,78 @@ public class Modchu_BlockMasterBasis implements Modchu_IBlockMaster {
 	@Override
 	public Object isAABBInsideMaterial(Object world, Object blockPos, Object axisAlignedBB, Object material) {
 		return base.superIsAABBInsideMaterial(world, blockPos, axisAlignedBB, material);
+	}
+
+	@Override
+	public boolean getCanBlockGrass() {
+		return base.superGetCanBlockGrass();
+	}
+
+	@Override
+	public Object func_149735_b(int p_149735_1_, int p_149735_2_) {
+		return base.superFunc_149735_b(p_149735_1_, p_149735_2_);
+	}
+
+	@Override
+	public boolean getWeakChanges(Object iBlockAccess, int x, int y, int z) {
+		return base.superGetWeakChanges(iBlockAccess, x, y, z);
+	}
+
+	@Override
+	public Object getPickBlock(Object movingObjectPosition, Object world, int x, int y, int z, Object entityPlayer) {
+		return base.superGetPickBlock(movingObjectPosition, world, x, y, z, entityPlayer);
+	}
+
+	@Override
+	public Object getPickBlock(Object movingObjectPosition, Object world, Object blockPos, Object entityPlayer) {
+		return base.superGetPickBlock(movingObjectPosition, world, blockPos, entityPlayer);
+	}
+
+	@Override
+	public boolean addLandingEffects(Object worldServer, Object blockPos, Object iBlockState, Object entityLivingBase, int numberOfParticles) {
+		return base.superAddLandingEffects(worldServer, blockPos, iBlockState, entityLivingBase, numberOfParticles);
+	}
+
+	@Override
+	public void addInformation(Object itemStack, Object world, List tooltip, Object iTooltipFlag) {
+		base.superAddInformation(itemStack, world, tooltip, iTooltipFlag);
+
+	}
+
+	@Override
+	public void observedNeighborChange(Object iBlockState, Object world, Object blockPos, Object block, Object blockPos1) {
+		base.superObservedNeighborChange(iBlockState, world, blockPos, block, blockPos1);
+
+	}
+
+	@Override
+	public boolean canRenderInLayer(Object iBlockState, Object blockRenderLayer) {
+		return base.superCanRenderInLayer(iBlockState, blockRenderLayer);
+	}
+
+	@Override
+	public Object getSoundType(Object iBlockState, Object world, Object blockPos, Object entity) {
+		return base.superGetSoundType(iBlockState, world, blockPos, entity);
+	}
+
+	@Override
+	public float[] getBeaconColorMultiplier(Object iBlockState, Object world, Object blockPos, Object blockPos1) {
+		return base.superGetBeaconColorMultiplier(iBlockState, world, blockPos, blockPos1);
+	}
+
+	@Override
+	public Object getStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase, Object enumHand) {
+		return base.superGetStateForPlacement(world, blockPos, enumFacing, hitX, hitY, hitZ, meta, entityLivingBase, enumHand);
+	}
+
+	@Override
+	public boolean canBeConnectedTo(Object iBlockAccess, Object blockPos, Object enumFacing) {
+		return base.superCanBeConnectedTo(iBlockAccess, blockPos, enumFacing);
+	}
+
+	@Override
+	public Object getAiPathNodeType(Object iBlockState, Object iBlockAccess, Object blockPos) {
+		return base.superGetAiPathNodeType(iBlockState, iBlockAccess, blockPos);
 	}
 
 }

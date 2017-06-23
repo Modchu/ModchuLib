@@ -1171,7 +1171,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer entityPlayer, int x, int y, int z) {
-		return master != null ? master.removedByPlayer(world, entityPlayer, x, y, z) : super.removeBlockByPlayer(world, entityPlayer, x, y, z);
+		return master != null ? master.removedByPlayer(world, entityPlayer, x, y, z, false) : super.removeBlockByPlayer(world, entityPlayer, x, y, z);
 	}
 
 	@Override
@@ -1503,13 +1503,9 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 		return super.recolourBlock((World) world, x, y, z, (ForgeDirection) forgeDirection, colour);
 	}
 
-	public int getExpDrop(World world, int data, int enchantmentLevel) {
-		return master != null ? master.getExpDrop(world, data, enchantmentLevel) : 0;
-	}
-
 	@Override
 	public int superGetExpDrop(Object world, int data, int enchantmentLevel) {
-		return 0;
+		return -1;
 	}
 
 	@Override
@@ -1523,13 +1519,9 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 		super.onNeighborTileChange((World) world, x, y, z, tileX, tileY, tileZ);
 	}
 
-	public boolean shouldCheckWeakPower(World world, int x, int y, int z, int side) {
-		return master != null ? master.shouldCheckWeakPower(world, x, y, z, side) : superShouldCheckWeakPower(world, x, y, z, side);
-	}
-
 	@Override
 	public boolean superShouldCheckWeakPower(Object world, int x, int y, int z, int side) {
-		return !this.isNormalCube(((IBlockAccess) world).getBlockId(x, y, z));
+		return false;
 	}
 	// ~164
 	@Override
@@ -1729,7 +1721,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public Object superGetMapColor(Object iBlockState) {
+	public Object superGetMapColor(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return null;
 	}
 
@@ -2488,7 +2480,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public boolean superIsFullyOpaque(Object iBlockState) {
+	public boolean superIsTopSolid(Object iBlockState) {
 		return false;
 	}
 
@@ -2562,6 +2554,123 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	@Override
 	public boolean superNeighborChanged(Object world, int par2, int par3, int par4, int par5, int par6) {
 		return false;
+	}
+
+	@Override
+	public boolean superFunc_149730_j() {
+		return superIsFullBlock();
+	}
+
+	@Override
+	public boolean superGetCanBlockGrass() {
+		return false;
+	}
+
+	@Override
+	public Object superGetMapColor(int p_149728_1_) {
+		return null;
+	}
+
+	@Override
+	public boolean superIsBlockNormalCube() {
+		return false;
+	}
+
+	@Override
+	public Object superFunc_149735_b(int p_149735_1_, int p_149735_2_) {
+		return null;
+	}
+
+	@Override
+	public boolean superRemovedByPlayer(Object world, Object entityPlayer, int x, int y, int z, boolean willHarvest) {
+		return super.removeBlockByPlayer((World) world, (EntityPlayer) entityPlayer, x, y, z);
+	}
+
+	@Override
+	public Object superGetPickBlock(Object movingObjectPosition, Object world, int x, int y, int z, Object entityPlayer) {
+		return super.getPickBlock((MovingObjectPosition) movingObjectPosition, (World) world, x, y, z);
+	}
+
+	@Override
+	public boolean superGetWeakChanges(Object iBlockAccess, int x, int y, int z) {
+		return false;
+	}
+
+	@Override
+	public void superSetHarvestLevel(String toolClass, int level, int metadata) {
+	}
+
+	@Override
+	public String superGetHarvestTool(int metadata) {
+		return null;
+	}
+
+	@Override
+	public int superGetHarvestLevel(int metadata) {
+		return -1;
+	}
+
+	@Override
+	public boolean superIsToolEffective(String type, int metadata) {
+		return false;
+	}
+
+	@Override
+	public boolean superFunc_181623_g() {
+		return false;
+	}
+
+	@Override
+	public boolean superDoesSideBlockRendering(Object iBlockAccess, Object blockPos, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public Object superGetPickBlock(Object movingObjectPosition, Object world, Object blockPos, Object entityPlayer) {
+		return null;
+	}
+
+	@Override
+	public boolean superAddLandingEffects(Object worldServer, Object blockPos, Object iBlockState, Object entityLivingBase, int numberOfParticles) {
+		return false;
+	}
+
+	@Override
+	public void superAddInformation(Object itemStack, Object world, List tooltip, Object iTooltipFlag) {
+	}
+
+	@Override
+	public void superObservedNeighborChange(Object iBlockState, Object world, Object blockPos, Object block, Object blockPos1) {
+	}
+
+	@Override
+	public boolean superCanRenderInLayer(Object iBlockState, Object blockRenderLayer) {
+		return false;
+	}
+
+	@Override
+	public Object superGetSoundType(Object iBlockState, Object world, Object blockPos, Object entity) {
+		return null;
+	}
+
+	@Override
+	public float[] superGetBeaconColorMultiplier(Object iBlockState, Object world, Object blockPos, Object blockPos1) {
+		return null;
+	}
+
+	@Override
+	public Object superGetStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase, Object enumHand) {
+		return null;
+	}
+
+	@Override
+	public boolean superCanBeConnectedTo(Object iBlockAccess, Object blockPos, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public Object superGetAiPathNodeType(Object iBlockState, Object iBlockAccess, Object blockPos) {
+		return null;
 	}
 	// TODO Modchu_Block のコピー↑
 

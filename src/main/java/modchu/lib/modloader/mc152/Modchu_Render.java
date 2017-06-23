@@ -33,6 +33,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		if (master != null) master.doRender(entity, d0, d1, d2, f, f1);
 	}
 
+	@Override
 	public void superDoRender(Object entity, double d0, double d1, double d2, float f, float f1) {
 	}
 
@@ -42,6 +43,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		else super.setRenderManager(renderManager);
 	}
 
+	@Override
 	public void superSetRenderManager(Object renderManager) {
 		super.setRenderManager((RenderManager) renderManager);
 	}
@@ -52,6 +54,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		else super.doRenderShadowAndFire(entity, par2, par4, par6, par8, par9);
 	}
 
+	@Override
 	public void superDoRenderShadowAndFire(Object entity, double par2, double par4, double par6, float par8, float par9) {
 		super.doRenderShadowAndFire((Entity) entity, par2, par4, par6, par8, par9);
 	}
@@ -61,6 +64,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		return (FontRenderer) (master != null ? master.getFontRendererFromRenderManager() : super.getFontRendererFromRenderManager());
 	}
 
+	@Override
 	public FontRenderer superGetFontRendererFromRenderManager() {
 		return super.getFontRendererFromRenderManager();
 	}
@@ -71,6 +75,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		else super.updateIcons(iconRegister);
 	}
 
+	@Override
 	public void superUpdateIcons(Object iconRegister) {
 		super.updateIcons((IconRegister) iconRegister);
 	}
@@ -81,6 +86,7 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		else super.loadTexture(par1Str);
 	}
 
+	@Override
 	public void superLoadTexture(String par1Str) {
 		super.loadTexture(par1Str);
 	}
@@ -90,18 +96,22 @@ public class Modchu_Render extends Render implements Modchu_IRender {
 		return master != null ? master.loadDownloadableImageTexture(par1Str, par2Str) : super.loadDownloadableImageTexture(par1Str, par2Str);
 	}
 
+	@Override
 	public boolean superLoadDownloadableImageTexture(String par1Str, String par2Str) {
 		return super.loadDownloadableImageTexture(par1Str, par2Str);
 	}
 	// 162~
+	@Override
 	public Object superGetEntityTexture(Object entity) {
 		return null;
 	}
 
+	@Override
 	public boolean superBindEntityTexture(Object entity) {
 		return false;
 	}
 
+	@Override
 	public void superBindTexture(Object resourceLocation) {
 	}
 	// 172~179

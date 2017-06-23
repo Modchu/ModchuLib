@@ -523,7 +523,7 @@ public interface Modchu_IASMaster {
 	public double iIconGetMaxV(Object iIcon);
 	public String iAttributeGetAttributeUnlocalizedName(Object iAttribute);
 	public boolean keyBindingGetIsKeyPressed(Object keyBinding);
-	public List keybindArray();
+	public Object keybindArray();
 	public boolean entityRendererAnaglyphEnable();
 	public boolean keyBindingIsPressed(Object keyBinding);
 	public String keyBindingKeyCategory(Object keyBinding);

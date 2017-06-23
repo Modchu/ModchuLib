@@ -30,8 +30,8 @@ public class Modchu_InventoryPlayerMasterBasis implements Modchu_IInventoryPlaye
 	}
 
 	@Override
-	public int clearInventory(int par1, int par2) {
-		return base.superClearInventory(par1, par2);
+	public int clearInventory(Object itemOrInt, int par2) {
+		return base.superClearInventory(itemOrInt, par2);
 	}
 
 	@Override
@@ -252,6 +252,61 @@ public class Modchu_InventoryPlayerMasterBasis implements Modchu_IInventoryPlaye
 	@Override
 	public void clear() {
 		base.superClear();
+	}
+
+	@Override
+	public void func_146030_a(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_) {
+		base.superFunc_146030_a(item, p_146030_2_, p_146030_3_, p_146030_4_);
+	}
+
+	@Override
+	public float func_146023_a(Object block) {
+		return base.superFunc_146023_a(block);
+	}
+
+	@Override
+	public String getInventoryName() {
+		return base.superGetInventoryName();
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return base.superHasCustomInventoryName();
+	}
+
+	@Override
+	public boolean func_146025_b(Object block) {
+		return base.superFunc_146025_b(block);
+	}
+
+	@Override
+	public void setPickedItemStack(Object itemStack) {
+		base.superSetPickedItemStack(itemStack);
+	}
+
+	@Override
+	public void pickItem(int index) {
+		base.superPickItem(index);
+	}
+
+	@Override
+	public int getSlotFor(Object itemStack) {
+		return base.superGetSlotFor(itemStack);
+	}
+
+	@Override
+	public int getBestHotbarSlot() {
+		return base.superGetBestHotbarSlot();
+	}
+
+	@Override
+	public void deleteStack(Object itemStack) {
+		base.superDeleteStack(itemStack);
+	}
+
+	@Override
+	public boolean isUseableByPlayer(Object entityPlayer) {
+		return base.superIsUseableByPlayer(entityPlayer);
 	}
 
 }

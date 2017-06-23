@@ -345,6 +345,7 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		return false;
 	}
 	// 190~
+	@Override
 	public boolean superFunc_183000_F() {
 		return false;
 	}
@@ -390,6 +391,27 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 	@Override
 	public Object superGetUpdateTag() {
 		return null;
+	}
+
+	@Override
+	public void superSetWorldCreate(Object world) {
+	}
+
+	@Override
+	public Object superGetDisplayName() {
+		return null;
+	}
+
+	@Override
+	public void superRotate(Object rotation) {
+	}
+
+	@Override
+	public void superMirror(Object mirror) {
+	}
+
+	@Override
+	public void superHandleUpdateTag(Object nBTTagCompound) {
 	}
 
 }

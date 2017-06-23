@@ -23,6 +23,7 @@ public class Modchu_LayerHeldItem implements Modchu_ILayerHeldItem {
 		if (master != null) master.doRenderLayer(entityLiving, p_177141_2_, p_177141_3_, p_177141_4_, p_177141_5_, p_177141_6_, p_177141_7_, p_177141_8_);
 	}
 
+	@Override
 	public void superDoRenderLayer(Object entityLivingBase, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_, float p_177141_6_, float p_177141_7_, float p_177141_8_) {
 	}
 
@@ -30,6 +31,7 @@ public class Modchu_LayerHeldItem implements Modchu_ILayerHeldItem {
 		return master != null ? master.shouldCombineTextures() : false;
 	}
 
+	@Override
 	public boolean superShouldCombineTextures() {
 		return false;
 	}

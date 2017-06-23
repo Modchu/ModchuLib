@@ -2,11 +2,8 @@ package modchu.lib.forge.mc172_179;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-
 import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_EntityHelper;
@@ -49,6 +46,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.CombatTracker;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.IIcon;
@@ -930,38 +928,13 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
-	public Object superGetOwner() {
-		return super.getOwner();
-	}
-
-	@Override
 	public float superGetBlockPathWeight(Object blockPos) {
 		return 0.0F;
 	}
 
 	@Override
-	public void superUpdateLeashedState() {
-		super.updateLeashedState();
-	}
-
-	@Override
-	public Object superGetDropItem() {
-		return super.getDropItem();
-	}
-
-	@Override
 	public String superGetCommandSenderName() {
 		return super.getCommandSenderName();
-	}
-
-	@Override
-	public boolean superHasCustomNameTag() {
-		return super.hasCustomNameTag();
-	}
-
-	@Override
-	public String superFunc_146067_o(int p_146067_1_) {
-		return super.func_146067_o(p_146067_1_);
 	}
 
 	@Override
@@ -1012,11 +985,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	@Override
 	public void superEatGrassBonus() {
 		super.eatGrassBonus();
-	}
-
-	@Override
-	public boolean superIsWithinHomeDistanceCurrentPosition() {
-		return super.isWithinHomeDistanceCurrentPosition();
 	}
 
 	@Override
@@ -1135,11 +1103,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
-	public void superAddRandomArmor() {
-		super.addRandomArmor();
-	}
-
-	@Override
 	public void superFunc_145781_i(int p_145781_1_) {
 		super.func_145781_i(p_145781_1_);
 	}
@@ -1201,16 +1164,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
-	public Object superGetLook(float p_70676_1_) {
-		return super.getLook(p_70676_1_);
-	}
-
-	@Override
-	public Object superRayTrace(double p_174822_1_, float p_174822_3_) {
-		return super.rayTrace(p_174822_1_, p_174822_3_);
-	}
-
-	@Override
 	public void superSetPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 		super.setPositionAndRotation2(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_);
 	}
@@ -1218,36 +1171,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	@Override
 	public boolean superIsEntityInvulnerable(Object damageSource) {
 		return super.isEntityInvulnerable();
-	}
-
-	@Override
-	public void superSetCustomNameTag(String p_96094_1_) {
-		super.setCustomNameTag(p_96094_1_);
-	}
-
-	@Override
-	public String superGetCustomNameTag() {
-		return super.getCustomNameTag();
-	}
-
-	@Override
-	public void superSetAlwaysRenderNameTag(boolean p_174805_1_) {
-		super.setAlwaysRenderNameTag(p_174805_1_);
-	}
-
-	@Override
-	public boolean superGetAlwaysRenderNameTag() {
-		return super.getAlwaysRenderNameTag();
-	}
-
-	@Override
-	public void superSetPositionAndUpdate(double x, double y, double z) {
-		super.setPositionAndUpdate(x, y, z);
-	}
-
-	@Override
-	public boolean superGetAlwaysRenderNameTagForRender() {
-		return super.getAlwaysRenderNameTagForRender();
 	}
 
 	@Override
@@ -1502,21 +1425,17 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
-	public boolean superIsOwner(Object entityLivingBase) {
-		return false;
-	}
-
-	@Override
 	public void superConsumeItemFromStack(Object entityPlayer, Object itemStack) {
 	}
 
 	@Override
 	public void superSetInLove(Object entityPlayer) {
+		super.func_146082_f((EntityPlayer) entityPlayer);
 	}
 
 	@Override
 	public Object superGetPlayerInLove() {
-		return null;
+		return super.func_146083_cb();
 	}
 
 	@Override
@@ -1649,7 +1568,7 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public boolean superCanDropLoot() {
-		return false;
+		return super.func_146066_aG();
 	}
 
 	@Override
@@ -1667,14 +1586,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void superHandleJumpLava() {
-	}
-
-	@Override
-	public void superSendEnterCombat() {
-	}
-
-	@Override
-	public void superSendEndCombat() {
 	}
 
 	@Override
@@ -1764,11 +1675,11 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public EntityLivingBase getAITarget() {
-		return (EntityLivingBase) (master != null ? master.getAITarget() : super.getAITarget());
+		return (EntityLivingBase) (master != null ? master.getRevengeTarget() : super.getAITarget());
 	}
 
 	@Override
-	public EntityLivingBase superGetAITarget() {
+	public EntityLivingBase superGetRevengeTarget() {
 		return super.getAITarget();
 	}
 
@@ -1785,42 +1696,42 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public EntityLivingBase getLastAttacker() {
-		return (EntityLivingBase) (master != null ? master.getLastAttacker() : super.getLastAttacker());
+		return (EntityLivingBase) (master != null ? master.getLastAttackedEntity() : super.getLastAttacker());
 	}
 
 	@Override
-	public EntityLivingBase superGetLastAttacker() {
+	public EntityLivingBase superGetLastAttackedEntity() {
 		return super.getLastAttacker();
 	}
 
 	@Override
 	public int getLastAttackerTime() {
-		return master != null ? master.getLastAttackerTime() : super.getLastAttackerTime();
+		return master != null ? master.getLastAttackedEntityTime() : super.getLastAttackerTime();
 	}
 
 	@Override
-	public int superGetLastAttackerTime() {
+	public int superGetLastAttackedEntityTime() {
 		return super.getLastAttackerTime();
 	}
 
 	@Override
 	public void setLastAttacker(Entity entity) {
-		if (master != null) master.setLastAttacker(entity);
+		if (master != null) master.setLastAttackedEntity(entity);
 		else super.setLastAttacker(entity);
 	}
 
 	@Override
-	public void superSetLastAttacker(Object entity) {
+	public void superSetLastAttackedEntity(Object entity) {
 		super.setLastAttacker((Entity) entity);
 	}
 
 	@Override
 	public int getAge() {
-		return master != null ? master.getAge() : super.getAge();
+		return master != null ? master.getIdleTime() : super.getAge();
 	}
 
 	@Override
-	public int superGetAge() {
+	public int superGetIdleTime() {
 		return super.getAge();
 	}
 
@@ -2038,11 +1949,11 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	protected String getHurtSound() {
-		return (String) (master != null ? master.getHurtSound() : super.getHurtSound());
+		return (String) (master != null ? master.getHurtSound(null) : super.getHurtSound());
 	}
 
 	@Override
-	public String superGetHurtSound() {
+	public String superGetHurtSound(Object damageSource) {
 		return super.getHurtSound();
 	}
 
@@ -2264,12 +2175,12 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void moveEntityWithHeading(float par1, float par2) {
-		if (master != null) master.moveEntityWithHeading(par1, par2);
+		if (master != null) master.moveEntityWithHeading(par1, par2, 0.0F);
 		else super.moveEntityWithHeading(par1, par2);
 	}
 
 	@Override
-	public void superMoveEntityWithHeading(float par1, float par2) {
+	public void superMoveEntityWithHeading(float par1, float par2, float par3) {
 		super.moveEntityWithHeading(par1, par2);
 	}
 
@@ -2355,11 +2266,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	@Override
 	public void superHandleJumpWater() {
 		super.updateAITick();
-	}
-
-	@Override
-	public void superUpdateEntityActionState() {
-		super.updateEntityActionState();
 	}
 
 	@Override
@@ -2619,12 +2525,6 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	public void superFunc_180426_a(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
 	}
 
-	public void superFunc_152111_bt() {
-	}
-
-	public void superFunc_152112_bu() {
-	}
-
 	public void superFunc_175136_bO() {
 	}
 
@@ -2674,9 +2574,11 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	public void superAddRandomDrop() {
 	}
 
+	@Override
 	public void superFunc_181013_g(float p_181013_1_) {
 	}
 
+	@Override
 	public Object superFunc_181012_aH() {
 		return null;
 	}
@@ -2980,12 +2882,12 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	protected void kill() {
-		if (master != null) master.kill();
+		if (master != null) master.outOfWorld();
 		else super.kill();
 	}
 
 	@Override
-	public void superKill() {
+	public void superOutOfWorld() {
 		super.kill();
 	}
 
@@ -3178,12 +3080,12 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void moveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
-		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_);
+		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_, 0.0F);
 		else super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
 	@Override
-	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
+	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_, float f3) {
 		super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
@@ -3346,7 +3248,7 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void addToPlayerScore(Entity entity, int p_70084_2_) {
-		if (master != null) master.addToPlayerScore(entity, p_70084_2_);
+		if (master != null) master.addToPlayerScore(entity, p_70084_2_, null);
 		else super.addToPlayerScore(entity, p_70084_2_);
 	}
 
@@ -4277,7 +4179,7 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
-	public void superResetHeight() {
+	public void superDoWaterSplashEffect() {
 	}
 
 	@Override
@@ -4701,5 +4603,231 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 		return super.getTeleportDirection();
 	}
 	// Modchu_Entity のコピー↑
+
+	@Override
+	public int superGetBrightnessForRender() {
+		return -1;
+	}
+
+	@Override
+	public float superGetBrightness() {
+		return 0.0F;
+	}
+
+	@Override
+	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
+		superAddToPlayerScore(entity, p_70084_2_);
+	}
+
+	@Override
+	public EntityLivingBase getOwner() {
+		return (EntityLivingBase) (master != null ? master.getOwner() : super.getOwner());
+	}
+
+	@Override
+	public EntityLivingBase superGetOwner() {
+		return super.getOwner();
+	}
+
+	@Override
+	public EntityPlayer func_146083_cb() {
+		return (EntityPlayer) (master != null ? master.getPlayerInLove() : super.func_146083_cb());
+	}
+
+	@Override
+	public Object superFunc_146083_cb() {
+		return superGetPlayerInLove();
+	}
+
+	@Override
+	public void updateEntityActionState() {
+		if (master != null) master.updateEntityActionState();
+		else super.updateEntityActionState();
+	}
+
+	@Override
+	public void superUpdateEntityActionState() {
+		super.updateEntityActionState();
+	}
+
+	@Override
+	public boolean isWithinHomeDistanceCurrentPosition() {
+		return master != null ? master.isWithinHomeDistanceCurrentPosition() : super.isWithinHomeDistanceCurrentPosition();
+	}
+
+	@Override
+	public boolean superIsWithinHomeDistanceCurrentPosition() {
+		return super.isWithinHomeDistanceCurrentPosition();
+	}
+
+	@Override
+	public void updateLeashedState() {
+		if (master != null) master.updateLeashedState();
+		else super.updateLeashedState();
+	}
+
+	@Override
+	public void superUpdateLeashedState() {
+		super.updateLeashedState();
+	}
+
+	@Override
+	public Item getDropItem() {
+		return (Item) (master != null ? master.getDropItem() : super.getDropItem());
+	}
+
+	@Override
+	public Item superGetDropItem() {
+		return super.getDropItem();
+	}
+
+	@Override
+	public void addRandomArmor() {
+		if (master != null) master.addRandomArmor();
+		else super.addRandomArmor();
+	}
+
+	@Override
+	public void superAddRandomArmor() {
+		super.addRandomArmor();
+	}
+
+	@Override
+	public void setCustomNameTag(String p_94058_1_) {
+		if (master != null) master.setCustomNameTag(p_94058_1_);
+		else super.setCustomNameTag(p_94058_1_);
+	}
+
+	@Override
+	public void superSetCustomNameTag(String p_94058_1_) {
+		super.setCustomNameTag(p_94058_1_);
+	}
+
+	@Override
+	public String getCustomNameTag() {
+		return master != null ? master.getCustomNameTag() : super.getCustomNameTag();
+	}
+
+	@Override
+	public String superGetCustomNameTag() {
+		return super.getCustomNameTag();
+	}
+
+	@Override
+	public boolean hasCustomNameTag() {
+		return master != null ? master.hasCustomNameTag() : super.hasCustomNameTag();
+	}
+
+	@Override
+	public boolean superHasCustomNameTag() {
+		return super.hasCustomNameTag();
+	}
+
+	@Override
+	public void setAlwaysRenderNameTag(boolean p_94061_1_) {
+		if (master != null) master.setAlwaysRenderNameTag(p_94061_1_);
+		else super.setAlwaysRenderNameTag(p_94061_1_);
+	}
+
+	@Override
+	public void superSetAlwaysRenderNameTag(boolean p_94061_1_) {
+		super.setAlwaysRenderNameTag(p_94061_1_);
+	}
+
+	@Override
+	public boolean getAlwaysRenderNameTag() {
+		return master != null ? master.getAlwaysRenderNameTag() : super.getAlwaysRenderNameTag();
+	}
+
+	@Override
+	public boolean superGetAlwaysRenderNameTag() {
+		return super.getAlwaysRenderNameTag();
+	}
+
+	@Override
+	public boolean getAlwaysRenderNameTagForRender() {
+		return master != null ? master.getAlwaysRenderNameTagForRender() : super.getAlwaysRenderNameTagForRender();
+	}
+
+	@Override
+	public boolean superGetAlwaysRenderNameTagForRender() {
+		return super.getAlwaysRenderNameTagForRender();
+	}
+
+	@Override
+	public boolean func_146066_aG() {
+		return master != null ? master.canDropLoot() : super.func_146066_aG();
+	}
+
+	@Override
+	public boolean superFunc_146066_aG() {
+		return superCanDropLoot();
+	}
+
+	@Override
+	public String func_146067_o(int p_146067_1_) {
+		return master != null ? master.func_146067_o(p_146067_1_) : super.func_146067_o(p_146067_1_);
+	}
+
+	@Override
+	public String superFunc_146067_o(int p_146067_1_) {
+		return super.func_146067_o(p_146067_1_);
+	}
+
+	@Override
+	public CombatTracker func_110142_aN() {
+		return (CombatTracker) (master != null ? master.getCombatTracker() : super.func_110142_aN());
+	}
+
+	@Override
+	public Object superFunc_110142_aN() {
+		return superGetCombatTracker();
+	}
+
+	@Override
+	public void setPositionAndUpdate(double p_70634_1_, double p_70634_3_, double p_70634_5_) {
+		if (master != null) master.setPositionAndUpdate(p_70634_1_, p_70634_3_, p_70634_5_);
+		else super.setPositionAndUpdate(p_70634_1_, p_70634_3_, p_70634_5_);
+	}
+
+	@Override
+	public void superSetPositionAndUpdate(double p_70634_1_, double p_70634_3_, double p_70634_5_) {
+		super.setPositionAndUpdate(p_70634_1_, p_70634_3_, p_70634_5_);
+	}
+
+	@Override
+	public Vec3 getLook(float p_70676_1_) {
+		return (Vec3) (master != null ? master.getLook(p_70676_1_) : super.getLook(p_70676_1_));
+	}
+
+	@Override
+	public Vec3 superGetLook(float p_70676_1_) {
+		return super.getLook(p_70676_1_);
+	}
+
+	@Override
+	public MovingObjectPosition rayTrace(double p_70614_1_, float p_70614_3_) {
+		return (MovingObjectPosition) (master != null ? master.rayTrace(p_70614_1_, p_70614_3_) : super.rayTrace(p_70614_1_, p_70614_3_));
+	}
+
+	@Override
+	public MovingObjectPosition superRayTrace(double p_70614_1_, float p_70614_3_) {
+		return super.rayTrace(p_70614_1_, p_70614_3_);
+	}
+
+	@Override
+	public void superFunc_152111_bt() {
+		superSendEnterCombat();
+	}
+
+	@Override
+	public void superFunc_152112_bu() {
+		superSendEndCombat();
+	}
+
+	@Override
+	public Object superFunc_110172_bL() {
+		return superGetHomePosition();
+	}
 
 }

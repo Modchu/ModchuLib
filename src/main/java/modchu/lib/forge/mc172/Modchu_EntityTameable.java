@@ -1,64 +1,10 @@
 package modchu.lib.forge.mc172;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Random;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 
-import modchu.lib.Modchu_AS;
-import modchu.lib.Modchu_CastHelper;
-import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntityTameable;
-import modchu.lib.Modchu_IEntityTameableMaster;
-import modchu.lib.Modchu_Main;
-import modchu.lib.Modchu_Reflect;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.crash.CrashReportCategory;
-import net.minecraft.entity.DataWatcher;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAISit;
-import net.minecraft.entity.ai.EntityJumpHelper;
-import net.minecraft.entity.ai.EntityLookHelper;
-import net.minecraft.entity.ai.EntityMoveHelper;
-import net.minecraft.entity.ai.EntitySenses;
-import net.minecraft.entity.ai.attributes.BaseAttributeMap;
-import net.minecraft.entity.ai.attributes.IAttribute;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.pathfinding.PathEntity;
-import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.scoreboard.Team;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.CombatTracker;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
-import scala.collection.mutable.StringBuilder;
 
 public class Modchu_EntityTameable extends modchu.lib.forge.mc172_179.Modchu_EntityTameable implements Modchu_IEntityTameable {
 
@@ -89,6 +35,180 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc172_179.Modchu_Ent
 	@Override
 	public void superSetOwner(Object par1Str) {
 		super.setOwner((String) par1Str);
+	}
+
+	@Override
+	public void superSendEnterCombat() {
+	}
+
+	@Override
+	public void superSendEndCombat() {
+	}
+
+	@Override
+	public boolean superIsOwner(Object entityLivingBase) {
+		return false;
+	}
+
+	@Override
+	public boolean superFunc_152114_e(Object entityLivingBase) {
+		return false;
+	}
+
+	@Override
+	public Object superFunc_181014_aG() {
+		return null;
+	}
+
+	@Override
+	public void superSetAngles(float yaw, float pitch) {
+		super.setAngles(yaw, pitch);
+	}
+
+	@Override
+	public void superAddChatMessage(Object iTextComponent) {
+	}
+
+	@Override
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+		return false;
+	}
+
+	@Override
+	public String superGetCachedUniqueIdString() {
+		return null;
+	}
+
+	@Override
+	public void superFunc_175501_a(int p_175501_1_, boolean p_175501_2_) {
+	}
+
+	@Override
+	public Object superGetNewNavigator(Object world) {
+		return null;
+	}
+
+	@Override
+	public boolean superFunc_175448_a(Object itemStack) {
+		return false;
+	}
+
+	@Override
+	public Map superGetActivePotionMap() {
+		return null;
+	}
+
+	@Override
+	public void superBlockUsingShield(Object entityLivingBase) {
+	}
+
+	@Override
+	public Object superGetLastDamageSource() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasItemInSlot(Object entityEquipmentSlot) {
+		return false;
+	}
+
+	@Override
+	public float superGetWaterSlowDown() {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superAttackable() {
+		return false;
+	}
+
+	@Override
+	public void superSetPartying(Object blockPos, boolean p_191987_2_) {
+	}
+
+	@Override
+	public boolean superProcessInitialInteract(Object entityPlayer, Object enumHand) {
+		return false;
+	}
+
+	@Override
+	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand) {
+		return null;
+	}
+
+	@Override
+	public void superFunc_191955_a(Object iBlockState) {
+	}
+
+	@Override
+	public float superFunc_191954_d(float p_191954_1_) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_191957_ae() {
+		return false;
+	}
+
+	@Override
+	public boolean superHasNoGravity() {
+		return false;
+	}
+
+	@Override
+	public void superSetNoGravity(boolean noGravity) {
+	}
+
+	@Override
+	public boolean superFunc_191953_am() {
+		return false;
+	}
+
+	@Override
+	public Object superGetPitchYaw() {
+		return null;
+	}
+
+	@Override
+	public Object superGetForward() {
+		return null;
+	}
+
+	@Override
+	public boolean superGetIsInvulnerable() {
+		return false;
+	}
+
+	@Override
+	public boolean superCanTrample(Object world, Object block, Object blockPos, float fallDistance) {
+		return false;
+	}
+
+	@Override
+	public int superGetFireImmuneTicks() {
+		return -1;
+	}
+
+	@Override
+	public void superSetTamedBy(Object entityPlayer) {
+	}
+
+	@Override
+	public boolean superHoldingSpawnEggOfClass(Object itemStack, Class p_190669_2_) {
+		return false;
+	}
+
+	@Override
+	public double superFollowLeashSpeed() {
+		return 0.0D;
+	}
+
+	@Override
+	public void superFunc_191989_p(float p_191989_1_) {
+	}
+
+	@Override
+	public void superFunc_191986_a(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
 	}
 
 }

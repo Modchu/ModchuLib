@@ -293,6 +293,10 @@ public class Modchu_FileManager {
 		return master != null ? master.getDirFileList(list) : base.getDirFileList(list);
 	}
 
+	public static List<File> getDirFileList(File dir, List<File> list) {
+		return master != null ? master.getDirFileList(dir, list) : base.getDirFileList(dir, list);
+	}
+
 	public static String getCurrentDir(String s) {
 		return master != null ? master.getCurrentDir(s) : base.getCurrentDir(s);
 	}

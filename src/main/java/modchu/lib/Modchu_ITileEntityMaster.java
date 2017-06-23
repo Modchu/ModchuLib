@@ -48,4 +48,11 @@ public interface Modchu_ITileEntityMaster {
 	public Object getUpdatePacket();
 	public Object getUpdateTag();
 
+	// 220~
+	public void setWorldCreate(Object world);
+	public Object getDisplayName();
+	public void rotate(Object rotation);
+	public void mirror(Object mirror);
+	public void handleUpdateTag(Object nBTTagCompound);
+
 }

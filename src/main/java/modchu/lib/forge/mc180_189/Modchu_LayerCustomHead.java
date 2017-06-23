@@ -6,9 +6,7 @@ import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_ILayerCustomHead;
 import modchu.lib.Modchu_ILayerCustomHeadMaster;
 import modchu.lib.Modchu_Main;
-import modchu.lib.Modchu_Reflect;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.entity.EntityLivingBase;
 
@@ -30,6 +28,7 @@ public class Modchu_LayerCustomHead extends LayerCustomHead implements Modchu_IL
 		else super.doRenderLayer(entityLivingBase, f, f1, f2, f3, f4, f5, f6);
 	}
 
+	@Override
 	public void superDoRenderLayer(Object entityLivingBase, float f, float f1, float f2, float f3, float f4, float f5, float f6) {
 		super.doRenderLayer((EntityLivingBase) entityLivingBase, f, f1, f2, f3, f4, f5, f6);
 	}
@@ -39,6 +38,7 @@ public class Modchu_LayerCustomHead extends LayerCustomHead implements Modchu_IL
 		return master != null ? master.shouldCombineTextures() : super.shouldCombineTextures();
 	}
 
+	@Override
 	public boolean superShouldCombineTextures() {
 		return super.shouldCombineTextures();
 	}

@@ -1,6 +1,7 @@
 package modchu.lib.forge.mc180;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -13,6 +14,7 @@ import net.minecraft.event.HoverEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -113,7 +115,7 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc180_189.Modchu_E
 
 	@Override
 	public boolean func_174816_a(Explosion explosion, World world, BlockPos blockPos, IBlockState iBlockState, float p_174816_5_) {
-		return master != null ? master.verifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_) : super.func_174816_a(explosion, world, blockPos, iBlockState, p_174816_5_);
+		return master != null ? master.canExplosionDestroyBlock(explosion, world, blockPos, iBlockState, p_174816_5_) : super.func_174816_a(explosion, world, blockPos, iBlockState, p_174816_5_);
 	}
 
 	@Override
@@ -228,6 +230,162 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc180_189.Modchu_E
 	}
 
 	public void superSetInPortal(Object bockPos) {
+	}
+
+	@Override
+	public int getDamageInvincibleCount() {
+		return master != null ? master.getDamageInvincibleCount() : super.getDamageInvincibleCount();
+	}
+
+	@Override
+	public void setDamageInvincibleCount(int i) {
+		if (master != null) master.setDamageInvincibleCount(i);
+		else super.setDamageInvincibleCount(i);
+	}
+
+	@Override
+	public String superFunc_146067_o(int p_146067_1_) {
+		return null;
+	}
+
+	@Override
+	public Vec3 superFunc_181014_aG() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasCapability(Object capability, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public Object superGetCapability(Object capability, Object enumFacing) {
+		return null;
+	}
+
+	@Override
+	public void superDeserializeNBT(Object nBTTagCompound) {
+	}
+
+	@Override
+	public NBTTagCompound superSerializeNBT() {
+		return null;
+	}
+
+	@Override
+	public void superSetAngles(float yaw, float pitch) {
+		super.setAngles(yaw, pitch);
+	}
+
+	@Override
+	public void superAddChatMessage(Object iTextComponent) {
+		super.addChatMessage((IChatComponent) iTextComponent);
+	}
+
+	@Override
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+		return super.canUseCommand(permLevel, commandName);
+	}
+
+	@Override
+	public String superGetCachedUniqueIdString() {
+		return null;
+	}
+
+	@Override
+	public void superFunc_191955_a(Object iBlockState) {
+	}
+
+	@Override
+	public float superFunc_191954_d(float p_191954_1_) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_191957_ae() {
+		return false;
+	}
+
+	@Override
+	public boolean superHasNoGravity() {
+		return false;
+	}
+
+	@Override
+	public void superSetNoGravity(boolean noGravity) {
+	}
+
+	@Override
+	public boolean superFunc_191953_am() {
+		return false;
+	}
+
+	@Override
+	public Object superGetPitchYaw() {
+		return null;
+	}
+
+	@Override
+	public Object superGetForward() {
+		return null;
+	}
+
+	@Override
+	public boolean superGetIsInvulnerable() {
+		return false;
+	}
+
+	@Override
+	public boolean superCanTrample(Object world, Object block, Object blockPos, float fallDistance) {
+		return false;
+	}
+
+	@Override
+	public int superGetFireImmuneTicks() {
+		return -1;
+	}
+
+	@Override
+	public Map superGetActivePotionMap() {
+		return null;
+	}
+
+	@Override
+	public void superBlockUsingShield(Object entityLivingBase) {
+	}
+
+	@Override
+	public Object superGetLastDamageSource() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasItemInSlot(Object entityEquipmentSlot) {
+		return false;
+	}
+
+	@Override
+	public float superGetWaterSlowDown() {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superAttackable() {
+		return false;
+	}
+
+	@Override
+	public void superSetPartying(Object blockPos, boolean p_191987_2_) {
+	}
+
+	@Override
+	public boolean superProcessInitialInteract(Object entityPlayer, Object enumHand) {
+		return false;
+	}
+
+	@Override
+	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand) {
+		return null;
 	}
 
 }

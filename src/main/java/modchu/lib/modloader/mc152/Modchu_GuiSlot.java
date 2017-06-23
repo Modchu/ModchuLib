@@ -1,6 +1,7 @@
 package modchu.lib.modloader.mc152;
 
 import java.util.HashMap;
+import java.util.List;
 
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
@@ -170,7 +171,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 	}
 
 	@Override
-	public void superUpdateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_) {
+	public void superUpdateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_, float f) {
 	}
 
 	@Override
@@ -265,7 +266,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 	}
 
 	@Override
-	public void superDrawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_) {
+	public void superDrawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_, float f) {
 	}
 
 	@Override
@@ -432,7 +433,18 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 	}
 
 	@Override
-	public void superDrawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_) {
+	public void superDrawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_, float f) {
+	}
+
+	@Override
+	public void registerScrollButtons(List par1List, int par2, int par3) {
+		if (master != null) master.registerScrollButtons(par1List, par2, par3);
+		else super.registerScrollButtons(par1List, par2, par3);
+	}
+
+	@Override
+	public void superRegisterScrollButtons(List par1List, int par2, int par3) {
+		super.registerScrollButtons(par1List, par2, par3);
 	}
 
 }

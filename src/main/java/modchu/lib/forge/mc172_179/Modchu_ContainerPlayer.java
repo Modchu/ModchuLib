@@ -5,11 +5,9 @@ import java.util.List;
 
 import modchu.lib.Modchu_IContainerPlayer;
 import modchu.lib.Modchu_IContainerPlayerMaster;
-import modchu.lib.Modchu_IGuiContainerMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
@@ -34,6 +32,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		else super.onCraftMatrixChanged(iInventory);
 	}
 
+	@Override
 	public void superOnCraftMatrixChanged(Object iInventory) {
 		super.onCraftMatrixChanged((IInventory) iInventory);
 	}
@@ -44,6 +43,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		else super.onContainerClosed(entityPlayer);
 	}
 
+	@Override
 	public void superOnContainerClosed(Object entityPlayer) {
 		super.onContainerClosed((EntityPlayer) entityPlayer);
 	}
@@ -53,6 +53,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return master != null ? master.canInteractWith(entityPlayer) : super.canInteractWith(entityPlayer);
 	}
 
+	@Override
 	public boolean superCanInteractWith(Object entityPlayer) {
 		return super.canInteractWith((EntityPlayer) entityPlayer);
 	}
@@ -62,6 +63,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return (ItemStack) (master != null ? master.transferStackInSlot(entityPlayer, par2) : super.transferStackInSlot(entityPlayer, par2));
 	}
 
+	@Override
 	public ItemStack superTransferStackInSlot(Object entityPlayer, int par2) {
 		return super.transferStackInSlot((EntityPlayer) entityPlayer, par2);
 	}
@@ -71,6 +73,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return master != null ? master.func_94530_a(itemStack, slot) : super.func_94530_a(itemStack, slot);
 	}
 
+	@Override
 	public boolean superFunc_94530_a(Object itemStack, Object slot) {
 		return super.func_94530_a((ItemStack) itemStack, (Slot) slot);
 	}
@@ -80,6 +83,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return (Slot) (master != null ? master.addSlotToContainer(slot) : super.addSlotToContainer(slot));
 	}
 
+	@Override
 	public Slot superAddSlotToContainer(Object slot) {
 		return super.addSlotToContainer((Slot) slot);
 	}
@@ -90,6 +94,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		else super.addCraftingToCrafters(iCrafting);
 	}
 
+	@Override
 	public void superAddCraftingToCrafters(Object iCrafting) {
 		super.addCraftingToCrafters((ICrafting) iCrafting);
 	}
@@ -99,6 +104,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return master != null ? master.getInventory() : super.getInventory();
 	}
 
+	@Override
 	public List superGetInventory() {
 		return super.getInventory();
 	}
@@ -109,6 +115,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		else super.removeCraftingFromCrafters(iCrafting);
 	}
 
+	@Override
 	public void superRemoveCraftingFromCrafters(Object iCrafting) {
 		super.removeCraftingFromCrafters((ICrafting) iCrafting);
 	}
@@ -119,6 +126,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		else super.detectAndSendChanges();
 	}
 
+	@Override
 	public void superDetectAndSendChanges() {
 		super.detectAndSendChanges();
 	}
@@ -128,6 +136,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return master != null ? master.enchantItem(entityPlayer, par2) : super.enchantItem(entityPlayer, par2);
 	}
 
+	@Override
 	public boolean superEnchantItem(Object entityPlayer, int par2) {
 		return super.enchantItem((EntityPlayer) entityPlayer, par2);
 	}
@@ -137,6 +146,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return (Slot) (master != null ? master.getSlotFromInventory(iInventory, par2) : super.getSlotFromInventory(iInventory, par2));
 	}
 
+	@Override
 	public Slot superGetSlotFromInventory(Object iInventory, int par2) {
 		return super.getSlotFromInventory((IInventory) iInventory, par2);
 	}
@@ -146,6 +156,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return (Slot) (master != null ? master.getSlot(par1) : super.getSlot(par1));
 	}
 
+	@Override
 	public Slot superGetSlot(int par1) {
 		return super.getSlot(par1);
 	}
@@ -155,6 +166,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return (ItemStack) (master != null ? master.slotClick(par1, par2, par3, entityPlayer) : super.slotClick(par1, par2, par3, entityPlayer));
 	}
 
+	@Override
 	public ItemStack superSlotClick(int par1, int par2, int par3, Object entityPlayer) {
 		return super.slotClick(par1, par2, par3, (EntityPlayer) entityPlayer);
 	}
@@ -165,6 +177,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		else super.retrySlotClick(par1, par2, par3, entityPlayer);
 	}
 
+	@Override
 	public void superRetrySlotClick(int par1, int par2, boolean par3, Object entityPlayer) {
 		super.retrySlotClick(par1, par2, par3, (EntityPlayer) entityPlayer);
 	}
@@ -175,6 +188,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		else super.putStackInSlot(par1, itemStack);
 	}
 
+	@Override
 	public void superPutStackInSlot(int par1, Object itemStack) {
 		super.putStackInSlot(par1, (ItemStack) itemStack);
 	}
@@ -185,6 +199,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		else super.putStacksInSlots(itemStack);
 	}
 
+	@Override
 	public void superPutStacksInSlots(Object[] itemStack) {
 		super.putStacksInSlots((ItemStack[]) itemStack);
 	}
@@ -195,6 +210,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		else super.updateProgressBar(par1, par2);
 	}
 
+	@Override
 	public void superUpdateProgressBar(int par1, int par2) {
 		super.updateProgressBar(par1, par2);
 	}
@@ -204,6 +220,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return master != null ? master.getNextTransactionID(inventoryPlayer) : super.getNextTransactionID(inventoryPlayer);
 	}
 
+	@Override
 	public short superGetNextTransactionID(Object inventoryPlayer) {
 		return super.getNextTransactionID((InventoryPlayer) inventoryPlayer);
 	}
@@ -213,6 +230,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return master != null ? master.isPlayerNotUsingContainer(entityPlayer) : super.isPlayerNotUsingContainer(entityPlayer);
 	}
 
+	@Override
 	public boolean superIsPlayerNotUsingContainer(Object entityPlayer) {
 		return super.isPlayerNotUsingContainer((EntityPlayer) entityPlayer);
 	}
@@ -223,6 +241,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		else super.setPlayerIsPresent(entityPlayer, par2);
 	}
 
+	@Override
 	public void superSetPlayerIsPresent(Object entityPlayer, boolean par2) {
 		super.setPlayerIsPresent((EntityPlayer) entityPlayer, par2);
 	}
@@ -232,6 +251,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return master != null ? master.mergeItemStack(itemStack, par2, par3, par4) : super.mergeItemStack(itemStack, par2, par3, par4);
 	}
 
+	@Override
 	public boolean superMergeItemStack(Object itemStack, int par2, int par3, boolean par4) {
 		return super.mergeItemStack((ItemStack) itemStack, par2, par3, par4);
 	}
@@ -242,6 +262,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		else super.func_94533_d();
 	}
 
+	@Override
 	public void superFunc_94533_d() {
 		super.func_94533_d();
 	}
@@ -251,6 +272,7 @@ public class Modchu_ContainerPlayer extends ContainerPlayer implements Modchu_IC
 		return master != null ? master.canDragIntoSlot(slot) : super.canDragIntoSlot(slot);
 	}
 
+	@Override
 	public boolean superCanDragIntoSlot(Object slot) {
 		return super.canDragIntoSlot((Slot) slot);
 	}

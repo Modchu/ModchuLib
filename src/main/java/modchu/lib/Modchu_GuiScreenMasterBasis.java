@@ -168,8 +168,8 @@ public class Modchu_GuiScreenMasterBasis implements Modchu_IGuiScreenMaster {
 	}
 
 	@Override
-	public void drawCreativeTabHoveringText(String p_146279_1_, int p_146279_2_, int p_146279_3_) {
-		base.superDrawCreativeTabHoveringText(p_146279_1_, p_146279_2_, p_146279_3_);
+	public void drawHoveringText(String p_146279_1_, int p_146279_2_, int p_146279_3_) {
+		base.superDrawHoveringText(p_146279_1_, p_146279_2_, p_146279_3_);
 	}
 
 	@Override
@@ -225,6 +225,31 @@ public class Modchu_GuiScreenMasterBasis implements Modchu_IGuiScreenMaster {
 	@Override
 	public void drawTexturedModalRect(int xCoord, int yCoord, Object textureAtlasSprite, int p_175175_4_, int p_175175_5_) {
 		base.superDrawTexturedModalRect(xCoord, yCoord, textureAtlasSprite, p_175175_4_, p_175175_5_);
+	}
+
+	@Override
+	public void setGuiSize(int w, int h) {
+		base.superSetGuiSize(w, h);
+	}
+
+	@Override
+	public Object addButton(Object t) {
+		return base.superAddButton(t);
+	}
+
+	@Override
+	public List getItemToolTip(Object itemStack) {
+		return base.superGetItemToolTip(itemStack);
+	}
+
+	@Override
+	public void setFocused(boolean hasFocusedControlIn) {
+		base.superSetFocused(hasFocusedControlIn);
+	}
+
+	@Override
+	public boolean isFocused() {
+		return base.superIsFocused();
 	}
 
 }

@@ -115,8 +115,8 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	}
 
 	@Override
-	public void kill() {
-		base.superKill();
+	public void outOfWorld() {
+		base.superOutOfWorld();
 	}
 
 	@Override
@@ -205,8 +205,8 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	}
 
 	@Override
-	public void moveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
-		base.superMoveRelative(p_70060_1_, p_70060_2_, p_70060_3_);
+	public void moveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_, float p_70060_4_) {
+		base.superMoveRelative(p_70060_1_, p_70060_2_, p_70060_3_, p_70060_4_);
 	}
 
 	@Override
@@ -287,11 +287,6 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	@Override
 	public boolean canBePushed() {
 		return base.superCanBePushed();
-	}
-
-	@Override
-	public void addToPlayerScore(Object entity, int p_70084_2_) {
-		base.superAddToPlayerScore(entity, p_70084_2_);
 	}
 
 	@Override
@@ -815,8 +810,8 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	}
 
 	@Override
-	public void resetHeight() {
-		base.superResetHeight();
+	public void doWaterSplashEffect() {
+		base.superDoWaterSplashEffect();
 	}
 
 	@Override
@@ -895,7 +890,7 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	}
 
 	@Override
-	public boolean verifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
+	public boolean canExplosionDestroyBlock(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
 		return base.superVerifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_);
 	}
 
@@ -1398,6 +1393,88 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	@Override
 	public void setRidingEntityId(int i) {
 		base.setDataWatcherWatchableObject(16, i);
+	}
+
+	@Override
+	public int getBrightnessForRender() {
+		return base.superGetBrightnessForRender();
+	}
+
+	@Override
+	public float getBrightness() {
+		return base.superGetBrightness();
+	}
+
+	@Override
+	public void addToPlayerScore(Object entity, int p_191956_2_, Object damageSource) {
+		base.superAddToPlayerScore(entity, p_191956_2_, damageSource);
+	}
+
+	@Override
+	public Object getTeleportDirection() {
+		return base.superGetTeleportDirection();
+	}
+
+	@Override
+	public String getCachedUniqueIdString() {
+		return base.superGetCachedUniqueIdString();
+	}
+
+	@Override
+	public void func_191955_a(Object iBlockState) {
+		base.superFunc_191955_a(iBlockState);
+
+	}
+
+	@Override
+	public float func_191954_d(float p_191954_1_) {
+		return base.superFunc_191954_d(p_191954_1_);
+	}
+
+	@Override
+	public boolean func_191957_ae() {
+		return base.superFunc_191957_ae();
+	}
+
+	@Override
+	public boolean hasNoGravity() {
+		return base.superHasNoGravity();
+	}
+
+	@Override
+	public void setNoGravity(boolean noGravity) {
+		base.superSetNoGravity(noGravity);
+
+	}
+
+	@Override
+	public boolean func_191953_am() {
+		return base.superFunc_191953_am();
+	}
+
+	@Override
+	public Object getPitchYaw() {
+		return base.superGetPitchYaw();
+	}
+
+	@Override
+	public Object getForward() {
+		return base.superGetForward();
+	}
+
+	@Override
+	public boolean getIsInvulnerable() {
+		return base.superGetIsInvulnerable();
+	}
+
+	@Override
+	public boolean canTrample(Object world, Object block, Object blockPos, float fallDistance) {
+		return base.superCanTrample(world, block, blockPos, fallDistance);
+	}
+
+	@Override
+	public int getFireImmuneTicks() {
+		return base.superGetFireImmuneTicks();
 	}
 
 }

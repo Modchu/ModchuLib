@@ -15,8 +15,8 @@ public class Modchu_EntityAIPanicMasterBasis implements Modchu_IEntityAIPanicMas
 	}
 
 	@Override
-	public boolean continueExecuting() {
-		return base.superContinueExecuting();
+	public boolean shouldContinueExecuting() {
+		return base.superShouldContinueExecuting();
 	}
 
 	@Override

@@ -2,24 +2,15 @@ package modchu.lib.forge.mc189;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.locks.ReadWriteLock;
-
-import modchu.lib.Modchu_AS;
-import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IDataWatcher;
 import modchu.lib.Modchu_IDataWatcherMaster;
-import modchu.lib.Modchu_IEntityTameableMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Rotations;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatcher {
 	public Modchu_IDataWatcherMaster master;
@@ -44,7 +35,7 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 
 	@Override
 	public <T> void superAddObject(int id, T object) {
-		super.addObject(id, (T) object);
+		super.addObject(id, object);
 	}
 
 	@Override
@@ -136,7 +127,7 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 
 	@Override
 	public <T> void superUpdateObject(int id, T t) {
-		super.updateObject(id, (T) t);
+		super.updateObject(id, t);
 	}
 
 	@Override
@@ -162,7 +153,7 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 
 	@Override
 	public List<DataWatcher.WatchableObject> getChanged() {
-		return (List<DataWatcher.WatchableObject>) (master != null ? master.getChanged() : super.getChanged());
+		return master != null ? master.getChanged() : super.getChanged();
 	}
 
 	@Override
@@ -183,7 +174,7 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 
 	@Override
 	public List<DataWatcher.WatchableObject> getAllWatched() {
-		return (List<DataWatcher.WatchableObject>) (master != null ? master.getAllWatched() : super.getAllWatched());
+		return master != null ? master.getAllWatched() : super.getAllWatched();
 	}
 
 	@Override

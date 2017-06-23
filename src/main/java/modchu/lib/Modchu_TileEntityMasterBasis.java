@@ -219,4 +219,29 @@ public class Modchu_TileEntityMasterBasis implements Modchu_ITileEntityMaster {
 		return base.superGetUpdateTag();
 	}
 
+	@Override
+	public void setWorldCreate(Object world) {
+		base.superSetWorldCreate(world);
+	}
+
+	@Override
+	public Object getDisplayName() {
+		return base.superGetDisplayName();
+	}
+
+	@Override
+	public void rotate(Object rotation) {
+		base.superRotate(rotation);
+	}
+
+	@Override
+	public void mirror(Object mirror) {
+		base.superMirror(mirror);
+	}
+
+	@Override
+	public void handleUpdateTag(Object nBTTagCompound) {
+		base.superHandleUpdateTag(nBTTagCompound);
+	}
+
 }

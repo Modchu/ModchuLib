@@ -221,18 +221,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	public void superRenderName(Object entity, double x, double y, double z) {
 	}
 
-	protected void renderOffsetLivingLabel(Entity entity, double p_177069_2_, double p_177069_4_, double p_177069_6_, String p_177069_8_, float p_177069_9_, double p_177069_10_) {
-	}
-/*
-	protected boolean bindEntityTexture(Entity entity) {
-		return false;
-	}
-*/
-	@Override
-	public boolean superBindEntityTexture(Object entity) {
-		return true;
-	}
-
 	protected void renderLivingLabel(Entity entity, String p_147906_2_, double p_147906_3_, double p_147906_5_, double p_147906_7_, int p_147906_9_) {
 	}
 
@@ -516,16 +504,6 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	public boolean superIsStaticEntity() {
 		return false;
 	}
-
-	@Override
-	public void superSetRenderManager(Object renderManager) {
-		super.setRenderManager((RenderManager) renderManager);
-	}
-
-	@Override
-	public void superUpdateIcons(Object iIconRegister) {
-		super.updateIcons((IconRegister) iIconRegister);
-	}
 	// ~164
 	@Override
 	protected void renderLivingLabel(EntityLivingBase entityLivingBase, String par2Str, double par3, double par5, double par7, int par9) {
@@ -560,6 +538,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	public void superRenderMultipass(Object entity, double p_188300_2_, double p_188300_4_, double p_188300_6_, float p_188300_8_, float p_188300_9_) {
 	}
 
+	@Override
 	public int setArmorModel(Object entity, int i, float f) {
 		return -1;
 	}
@@ -572,6 +551,65 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	@Override
 	public float superPrepareScale(Object entityLivingBase, float partialTicks) {
 		return 0.0F;
+	}
+
+	@Override
+	public void superFunc_110777_b(Object entity) {
+		superBindEntityTexture(entity);
+	}
+
+	@Override
+	public void bindEntityTexture(Entity entity) {
+		if (master != null) master.bindEntityTexture(entity);
+		else super.bindEntityTexture(entity);
+	}
+
+	@Override
+	public boolean superBindEntityTexture(Object entity) {
+		super.bindEntityTexture((Entity) entity);
+		return true;
+	}
+
+	@Override
+	public void setRenderManager(RenderManager renderManager) {
+		if (master != null) master.setRenderManager(renderManager);
+		else super.setRenderManager(renderManager);
+	}
+
+	@Override
+	public void superSetRenderManager(Object renderManager) {
+		super.setRenderManager((RenderManager) renderManager);
+	}
+
+	@Override
+	public void updateIcons(IconRegister iconRegister) {
+		if (master != null) master.updateIcons(iconRegister);
+		else super.updateIcons(iconRegister);
+	}
+
+	@Override
+	public void superUpdateIcons(Object iconRegister) {
+		super.updateIcons((IconRegister) iconRegister);
+	}
+
+	@Override
+	public void superFunc_96449_a(Object entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10) {
+		super.func_96449_a((EntityLivingBase) entityLivingBase, par2, par4, par6, par8Str, par9, par10);
+	}
+
+	@Override
+	public void superRotateCorpse(Object entityLivingBase, float par2, float par3, float par4) {
+		super.rotateCorpse((EntityLivingBase) entityLivingBase, par2, par3, par4);
+	}
+
+	@Override
+	public float superRenderSwingProgress(Object entityLivingBase, float par2) {
+		return super.renderSwingProgress((EntityLivingBase) entityLivingBase, par2);
+	}
+
+	@Override
+	public boolean superFunc_110813_b(Object entityLivingBase) {
+		return super.func_110813_b((EntityLivingBase) entityLivingBase);
 	}
 
 }

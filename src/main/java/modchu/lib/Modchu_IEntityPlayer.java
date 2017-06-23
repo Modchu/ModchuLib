@@ -137,13 +137,13 @@ public interface Modchu_IEntityPlayer {
 	public void superonDeathUpdate();
 	public int superdecreaseAirSupply(int par1);
 	public Random supergetRNG();
-	public Object supergetAITarget();
+	public Object supergetRevengeTarget();
 	public int superfunc_142015_aE();
 	public void supersetRevengeTarget(Object entityLivingBase);
-	public Object supergetLastAttacker();
-	public int supergetLastAttackerTime();
-	public void supersetLastAttacker(Object entity);
-	public int supergetAge();
+	public Object supergetLastAttackedEntity();
+	public int supergetLastAttackedEntityTime();
+	public void supersetLastAttackedEntity(Object entity);
+	public int supergetIdleTime();
 	public void superupdatePotionEffects();
 	public void superclearActivePotions();
 	public Object supergetActivePotionEffects();
@@ -173,7 +173,7 @@ public interface Modchu_IEntityPlayer {
 	public Object superfunc_110142_aN();
 	public Object supergetAttackingEntity();
 	public void superswingArm();
-	public void superkill();
+	public void superoutOfWorld();
 	public void superupdateArmSwingProgress();
 	public Object supergetEntityAttribute(Object attribute);
 	public Object supergetAttributeMap();

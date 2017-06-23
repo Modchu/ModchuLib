@@ -29,7 +29,10 @@ public class Modchu_ClipboardManager {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Clipboard clip = kit.getSystemClipboard();
 		StringSelection ss = new StringSelection(s);
-		clip.setContents(ss, ss);
+		try {
+			clip.setContents(ss, ss);
+		} catch (Exception e) {
+		}
 	}
 
 	public static Image getClipboardImage() {
@@ -76,14 +79,17 @@ public class Modchu_ClipboardManager {
 			data = image;
 		}
 
+		@Override
 		public DataFlavor[] getTransferDataFlavors() {
 			return new DataFlavor[] { DataFlavor.imageFlavor };
 		}
 
+		@Override
 		public boolean isDataFlavorSupported(DataFlavor flavor) {
 			return DataFlavor.imageFlavor.equals(flavor);
 		}
 
+		@Override
 		public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
 			if (DataFlavor.imageFlavor.equals(flavor)) {
 				return data;
@@ -91,6 +97,7 @@ public class Modchu_ClipboardManager {
 			throw new UnsupportedFlavorException(flavor);
 		}
 
+		@Override
 		public void lostOwnership(Clipboard clipboard, Transferable contents) {
 			data = null;
 		}

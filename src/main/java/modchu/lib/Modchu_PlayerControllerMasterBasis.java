@@ -10,8 +10,8 @@ public class Modchu_PlayerControllerMasterBasis implements Modchu_IPlayerControl
 	}
 
 	@Override
-	public Object createClientPlayer(Object world) {
-		return base.superCreateClientPlayer(world, null);
+	public Object createClientPlayer(Object world, Object statisticsManager, Object recipeBook) {
+		return base.superCreateClientPlayer(world, statisticsManager, recipeBook);
 	}
 
 	@Override
@@ -147,7 +147,7 @@ public class Modchu_PlayerControllerMasterBasis implements Modchu_IPlayerControl
 	@Override
 	public void sendPacketDropItem(Object itemStack) {
 		base.superSendPacketDropItem(itemStack);
-		
+
 	}
 
 	@Override
@@ -195,4 +195,40 @@ public class Modchu_PlayerControllerMasterBasis implements Modchu_IPlayerControl
 	public Object interactWithEntity(Object entityPlayer, Object entity, Object itemStack, Object enumHand) {
 		return base.superInteractWithEntity(entityPlayer, entity, itemStack, enumHand);
 	}
+
+	@Override
+	public boolean func_178894_a(Object entityPlayer, Object entity, Object movingObjectPosition) {
+		return base.superFunc_178894_a(entityPlayer, entity, movingObjectPosition);
+	}
+
+	@Override
+	public boolean isSpectatorMode() {
+		return base.superIsSpectatorMode();
+	}
+
+	@Override
+	public Object getCurrentGameType() {
+		return base.superGetCurrentGameType();
+	}
+
+	@Override
+	public boolean func_181040_m() {
+		return base.superFunc_181040_m();
+	}
+
+	@Override
+	public Object interactWithEntity(Object entityPlayer, Object entity, Object rayTraceResult, Object itemStack, Object enumHand) {
+		return base.superInteractWithEntity(entityPlayer, entity, rayTraceResult, itemStack, enumHand);
+	}
+
+	@Override
+	public boolean getIsHittingBlock() {
+		return base.superGetIsHittingBlock();
+	}
+
+	@Override
+	public void pickItem(int index) {
+		base.superPickItem(index);
+	}
+
 }

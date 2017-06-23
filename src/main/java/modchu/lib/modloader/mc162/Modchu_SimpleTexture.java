@@ -32,6 +32,7 @@ public class Modchu_SimpleTexture extends SimpleTexture implements Modchu_ISimpl
 		}
 	}
 
+	@Override
 	public void superLoadTexture(Object resourceManager) {
 		try {
 			super.func_110551_a((ResourceManager) resourceManager);
@@ -45,6 +46,7 @@ public class Modchu_SimpleTexture extends SimpleTexture implements Modchu_ISimpl
 		return master != null ? master.getGlTextureId() : super.func_110552_b();
 	}
 
+	@Override
 	public int superGetGlTextureId() {
 		return super.func_110552_b();
 	}

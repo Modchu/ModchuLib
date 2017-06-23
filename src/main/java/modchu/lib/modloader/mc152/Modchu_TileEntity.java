@@ -6,13 +6,10 @@ import modchu.lib.Modchu_ITileEntity;
 import modchu.lib.Modchu_ITileEntityMaster;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
-import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.CrashReportCategory;
-import net.minecraft.src.INetworkManager;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.Packet;
-import net.minecraft.src.Packet132TileEntityData;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 
@@ -242,57 +239,72 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		super.func_85027_a((CrashReportCategory) crashReportCategory);
 	}
 
+	@Override
 	public void superMarkDirty() {
 	}
 
+	@Override
 	public void superAddInfoToCrashReport(Object crashReportCategory) {
 	}
 
+	@Override
 	public boolean superShouldRefresh(Object block, Object block1, int oldMeta, int newMeta, Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public Object superGetPos() {
 		return null;
 	}
 
+	@Override
 	public void superSetPos(Object blockPos) {
 	}
 
+	@Override
 	public boolean superShouldRefresh(Object world, Object blockPos, Object iBlockState, Object iBlockState1) {
 		return false;
 	}
 
+	@Override
 	public boolean superCanRenderBreaking() {
 		return false;
 	}
 
+	@Override
 	public Object superGetTileData() {
 		return null;
 	}
 
+	@Override
 	public boolean superRestrictNBTCopy() {
 		return false;
 	}
 
+	@Override
 	public boolean superCanUpdate() {
 		return false;
 	}
 
+	@Override
 	public void superOnDataPacket(Object iNetworkManager, Object packet132TileEntityData) {
 	}
 
+	@Override
 	public void superOnChunkUnload() {
 	}
 
+	@Override
 	public boolean superShouldRefresh(int oldID, int newID, int oldMeta, int newMeta, Object world, int x, int y, int z) {
 		return false;
 	}
 
+	@Override
 	public boolean superShouldRenderInPass(int pass) {
 		return false;
 	}
 
+	@Override
 	public Object superGetRenderBoundingBox() {
 		return null;
 	}
@@ -301,24 +313,30 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		return false;
 	}
 
+	@Override
 	public void superOnLoad() {
 	}
 
+	@Override
 	public boolean superHasFastRenderer() {
 		return false;
 	}
 
+	@Override
 	public boolean superHasCapability(Object capability, Object enumFacing) {
 		return false;
 	}
 
+	@Override
 	public Object superGetCapability(Object capability, Object enumFacing) {
 		return null;
 	}
 
+	@Override
 	public void superDeserializeNBT(Object nBTTagCompound) {
 	}
 
+	@Override
 	public Object superSerializeNBT() {
 		return null;
 	}
@@ -336,6 +354,27 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 	@Override
 	public Object superGetUpdateTag() {
 		return null;
+	}
+
+	@Override
+	public void superSetWorldCreate(Object world) {
+	}
+
+	@Override
+	public Object superGetDisplayName() {
+		return null;
+	}
+
+	@Override
+	public void superRotate(Object rotation) {
+	}
+
+	@Override
+	public void superMirror(Object mirror) {
+	}
+
+	@Override
+	public void superHandleUpdateTag(Object nBTTagCompound) {
 	}
 
 }

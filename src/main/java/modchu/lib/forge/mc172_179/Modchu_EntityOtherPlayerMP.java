@@ -66,7 +66,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings.GameType;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements Modchu_IEntityOtherPlayerMP {
+public abstract class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements Modchu_IEntityOtherPlayerMP {
 	public Modchu_IEntityOtherPlayerMPMaster master;
 	public boolean initFlag;
 	public int dataWatcherWatchableObjectIdFirst;
@@ -244,12 +244,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	protected void resetHeight() {
-		if (master != null) master.resetHeight();
+		if (master != null) master.doWaterSplashEffect();
 		else super.resetHeight();
 	}
 
 	@Override
-	public void superResetHeight() {
+	public void superDoWaterSplashEffect() {
 		super.resetHeight();
 	}
 
@@ -684,11 +684,11 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	protected String getHurtSound() {
-		return (String) (master != null ? master.getHurtSound() : super.getHurtSound());
+		return (String) (master != null ? master.getHurtSound(null) : super.getHurtSound());
 	}
 
 	@Override
-	public String superGetHurtSound() {
+	public String superGetHurtSound(Object damageSource) {
 		return super.getHurtSound();
 	}
 
@@ -704,7 +704,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void addToPlayerScore(Entity entity, int p_70084_2_) {
-		if (master != null) master.addToPlayerScore(entity, p_70084_2_);
+		if (master != null) master.addToPlayerScore(entity, p_70084_2_, null);
 		else super.addToPlayerScore(entity, p_70084_2_);
 	}
 
@@ -1319,12 +1319,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_) {
-		if (master != null) master.moveEntityWithHeading(p_70612_1_, p_70612_2_);
+		if (master != null) master.moveEntityWithHeading(p_70612_1_, p_70612_2_, 0.0F);
 		else super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
 	}
 
 	@Override
-	public void superMoveEntityWithHeading(float p_70612_1_, float p_70612_2_) {
+	public void superMoveEntityWithHeading(float p_70612_1_, float p_70612_2_, float f2) {
 		super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
 	}
 
@@ -1888,11 +1888,11 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public EntityLivingBase getAITarget() {
-		return (EntityLivingBase) (master != null ? master.getAITarget() : super.getAITarget());
+		return (EntityLivingBase) (master != null ? master.getRevengeTarget() : super.getAITarget());
 	}
 
 	@Override
-	public EntityLivingBase superGetAITarget() {
+	public EntityLivingBase superGetRevengeTarget() {
 		return super.getAITarget();
 	}
 
@@ -1919,42 +1919,42 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public EntityLivingBase getLastAttacker() {
-		return (EntityLivingBase) (master != null ? master.getLastAttacker() : super.getLastAttacker());
+		return (EntityLivingBase) (master != null ? master.getLastAttackedEntity() : super.getLastAttacker());
 	}
 
 	@Override
-	public EntityLivingBase superGetLastAttacker() {
+	public EntityLivingBase superGetLastAttackedEntity() {
 		return super.getLastAttacker();
 	}
 
 	@Override
 	public int getLastAttackerTime() {
-		return master != null ? master.getLastAttackerTime() : super.getLastAttackerTime();
+		return master != null ? master.getLastAttackedEntityTime() : super.getLastAttackerTime();
 	}
 
 	@Override
-	public int superGetLastAttackerTime() {
+	public int superGetLastAttackedEntityTime() {
 		return super.getLastAttackerTime();
 	}
 
 	@Override
 	public void setLastAttacker(Entity entity) {
-		if (master != null) master.setLastAttacker(entity);
+		if (master != null) master.setLastAttackedEntity(entity);
 		else super.setLastAttacker(entity);
 	}
 
 	@Override
-	public void superSetLastAttacker(Object entity) {
+	public void superSetLastAttackedEntity(Object entity) {
 		super.setLastAttacker((Entity) entity);
 	}
 
 	@Override
 	public int getAge() {
-		return master != null ? master.getAge() : super.getAge();
+		return master != null ? master.getIdleTime() : super.getAge();
 	}
 
 	@Override
-	public int superGetAge() {
+	public int superGetIdleTime() {
 		return super.getAge();
 	}
 
@@ -2267,12 +2267,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	protected void kill() {
-		if (master != null) master.kill();
+		if (master != null) master.outOfWorld();
 		else super.kill();
 	}
 
 	@Override
-	public void superKill() {
+	public void superOutOfWorld() {
 		super.kill();
 	}
 
@@ -2631,14 +2631,6 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superSendEnterCombat() {
-	}
-
-	@Override
-	public void superSendEndCombat() {
-	}
-
-	@Override
 	public int getEntityId() {
 		return master != null ? master.getEntityId() : super.getEntityId();
 	}
@@ -2882,12 +2874,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void moveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
-		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_);
+		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_, 0.0F);
 		else super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
 	@Override
-	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
+	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_, float f3) {
 		super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
@@ -3732,7 +3724,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superRemoveExperienceLevel(int levels) {
+	public void superOnEnchant(Object itemStack, int levels) {
 	}
 
 	@Override
@@ -5012,6 +5004,70 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void superOnInitialSpawn(Object o, Object o1) {
+	}
+
+	@Override
+	public int superGetBrightnessForRender() {
+		return -1;
+	}
+
+	@Override
+	public float superGetBrightness() {
+		return 0.0F;
+	}
+
+	@Override
+	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
+		superAddToPlayerScore(entity, p_70084_2_);
+	}
+
+	@Override
+	public void superFunc_110302_j() {
+		superSetupCustomSkin();
+	}
+
+	@Override
+	public Object superFunc_110309_l() {
+		return superGetTextureSkin();
+	}
+
+	@Override
+	public Object superFunc_110310_o() {
+		return superGetTextureCape();
+	}
+
+	@Override
+	public Object superFunc_110148_a(Object attribute) {
+		return superGetEntityAttribute(attribute);
+	}
+
+	@Override
+	public void superPlayStepSound(int par1, int par2, int par3, int par4) {
+	}
+
+	@Override
+	public Object superDropItem(int par1, int par2) {
+		return null;
+	}
+
+	@Override
+	public Object superDropItemWithOffset(int par1, int par2, float par3) {
+		return null;
+	}
+
+	@Override
+	public boolean superFunc_146066_aG() {
+		return super.func_146066_aG();
+	}
+
+	@Override
+	public void superFunc_152111_bt() {
+		superSendEnterCombat();
+	}
+
+	@Override
+	public void superFunc_152112_bu() {
+		superSendEndCombat();
 	}
 
 }

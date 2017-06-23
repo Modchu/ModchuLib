@@ -133,7 +133,7 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 
 	@Override
 	public List<DataWatcher.WatchableObject> getChanged() {
-		return (List<DataWatcher.WatchableObject>) (master != null ? master.getChanged() : super.getChanged());
+		return master != null ? master.getChanged() : super.getChanged();
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 
 	@Override
 	public List<DataWatcher.WatchableObject> getAllWatched() {
-		return (List<DataWatcher.WatchableObject>) (master != null ? master.getAllWatched() : super.getAllWatched());
+		return master != null ? master.getAllWatched() : super.getAllWatched();
 	}
 
 	@Override
@@ -193,6 +193,7 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 		return super.hasChanges();
 	}
 
+	@Override
 	public void func_151509_a(PacketBuffer packetBuffer) throws IOException {
 		if (master != null) master.func_151509_a(packetBuffer);
 		else super.func_151509_a(packetBuffer);

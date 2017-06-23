@@ -3,6 +3,7 @@ package modchu.lib.forge.mc164;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ import modchu.lib.Modchu_Main;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
+import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
@@ -23,6 +25,8 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IMerchant;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.AttributeInstance;
 import net.minecraft.entity.ai.attributes.BaseAttributeMap;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
@@ -48,6 +52,7 @@ import net.minecraft.tileentity.TileEntityDispenser;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.CombatTracker;
 import net.minecraft.util.DamageSource;
@@ -56,6 +61,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.EnumGameType;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
@@ -233,12 +239,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	protected void resetHeight() {
-		if (master != null) master.resetHeight();
+		if (master != null) master.doWaterSplashEffect();
 		else super.resetHeight();
 	}
 
 	@Override
-	public void superResetHeight() {
+	public void superDoWaterSplashEffect() {
 		super.resetHeight();
 	}
 
@@ -679,11 +685,11 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	protected String getHurtSound() {
-		return (String) (master != null ? master.getHurtSound() : super.getHurtSound());
+		return (String) (master != null ? master.getHurtSound(null) : super.getHurtSound());
 	}
 
 	@Override
-	public String superGetHurtSound() {
+	public String superGetHurtSound(Object damageSource) {
 		return super.getHurtSound();
 	}
 
@@ -699,7 +705,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void addToPlayerScore(Entity entity, int p_70084_2_) {
-		if (master != null) master.addToPlayerScore(entity, p_70084_2_);
+		if (master != null) master.addToPlayerScore(entity, p_70084_2_, null);
 		else super.addToPlayerScore(entity, p_70084_2_);
 	}
 
@@ -1278,12 +1284,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_) {
-		if (master != null) master.moveEntityWithHeading(p_70612_1_, p_70612_2_);
+		if (master != null) master.moveEntityWithHeading(p_70612_1_, p_70612_2_, 0.0F);
 		else super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
 	}
 
 	@Override
-	public void superMoveEntityWithHeading(float p_70612_1_, float p_70612_2_) {
+	public void superMoveEntityWithHeading(float p_70612_1_, float p_70612_2_, float f2) {
 		super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
 	}
 
@@ -1537,10 +1543,6 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	public void setGameType(Object gameType) {
-	}
-
-	@Override
-	public void superSetGameType(Object gameType) {
 	}
 
 	@Override
@@ -1839,11 +1841,11 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public EntityLivingBase getAITarget() {
-		return (EntityLivingBase) (master != null ? master.getAITarget() : super.getAITarget());
+		return (EntityLivingBase) (master != null ? master.getRevengeTarget() : super.getAITarget());
 	}
 
 	@Override
-	public EntityLivingBase superGetAITarget() {
+	public EntityLivingBase superGetRevengeTarget() {
 		return super.getAITarget();
 	}
 
@@ -1870,42 +1872,42 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public EntityLivingBase getLastAttacker() {
-		return (EntityLivingBase) (master != null ? master.getLastAttacker() : super.getLastAttacker());
+		return (EntityLivingBase) (master != null ? master.getLastAttackedEntity() : super.getLastAttacker());
 	}
 
 	@Override
-	public EntityLivingBase superGetLastAttacker() {
+	public EntityLivingBase superGetLastAttackedEntity() {
 		return super.getLastAttacker();
 	}
 
 	@Override
 	public int getLastAttackerTime() {
-		return master != null ? master.getLastAttackerTime() : super.getLastAttackerTime();
+		return master != null ? master.getLastAttackedEntityTime() : super.getLastAttackerTime();
 	}
 
 	@Override
-	public int superGetLastAttackerTime() {
+	public int superGetLastAttackedEntityTime() {
 		return super.getLastAttackerTime();
 	}
 
 	@Override
 	public void setLastAttacker(Entity entity) {
-		if (master != null) master.setLastAttacker(entity);
+		if (master != null) master.setLastAttackedEntity(entity);
 		else super.setLastAttacker(entity);
 	}
 
 	@Override
-	public void superSetLastAttacker(Object entity) {
+	public void superSetLastAttackedEntity(Object entity) {
 		super.setLastAttacker((Entity) entity);
 	}
 
 	@Override
 	public int getAge() {
-		return master != null ? master.getAge() : super.getAge();
+		return master != null ? master.getIdleTime() : super.getAge();
 	}
 
 	@Override
-	public int superGetAge() {
+	public int superGetIdleTime() {
 		return super.getAge();
 	}
 
@@ -2218,12 +2220,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	protected void kill() {
-		if (master != null) master.kill();
+		if (master != null) master.outOfWorld();
 		else super.kill();
 	}
 
 	@Override
-	public void superKill() {
+	public void superOutOfWorld() {
 		super.kill();
 	}
 
@@ -2239,11 +2241,6 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	public Object getEntityAttribute(Object iAttribute) {
-		return null;
-	}
-
-	@Override
-	public Object superGetEntityAttribute(Object iAttribute) {
 		return null;
 	}
 
@@ -2744,10 +2741,6 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	protected void func_145775_I() {
 	}
 
-	@Override
-	public void superDoBlockCollisions() {
-	}
-
 	protected void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Block block) {
 	}
 
@@ -2828,12 +2821,12 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void moveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
-		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_);
+		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_, 0.0F);
 		else super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
 	@Override
-	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
+	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_, float f3) {
 		super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
@@ -3669,7 +3662,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superRemoveExperienceLevel(int levels) {
+	public void superOnEnchant(Object itemStack, int levels) {
 	}
 
 	@Override
@@ -4069,90 +4062,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 	// ~164
 	@Override
-	public void superSendChatToPlayer(Object chatMessageComponent) {
-	}
-
-	@Override
-	public void superSetupCustomSkin() {
-	}
-
-	@Override
-	public Object superGetTextureSkin() {
-		return null;
-	}
-
-	@Override
-	public Object superGetTextureCape() {
-		return null;
-	}
-
-	@Override
-	public Object superDropPlayerItem(Object itemStack) {
-		return null;
-	}
-
-	@Override
-	public float superGetCurrentPlayerStrVsBlock(Object block, boolean par2, int meta) {
-		return 0.0F;
-	}
-
-	@Override
-	public void superDisplayGUIHopper(Object tileEntityHopper) {
-	}
-
-	@Override
-	public void superDisplayGUIFurnace(Object tileEntityFurnace) {
-	}
-
-	@Override
-	public void superDisplayGUIDispenser(Object tileEntityDispenser) {
-	}
-
-	@Override
-	public void superDisplayGUIEditSign(Object tileEntity) {
-	}
-
-	@Override
-	public void superDisplayGUIBrewingStand(Object tileEntityBrewingStand) {
-	}
-
-	@Override
-	public void superDisplayGUIBeacon(Object tileEntityBeacon) {
-	}
-
-	@Override
 	public void superAddChatMessage(String par1Str) {
-
-	}
-
-	@Override
-	public String superGetEntityName() {
-		return null;
-	}
-
-	@Override
-	public Object superGetCurrentItemOrArmor(int par1) {
-		return null;
-	}
-
-	@Override
-	public String superGetTranslatedEntityName() {
-		return null;
-	}
-
-	@Override
-	public boolean superIsInRangeToRenderVec3D(Object vec3) {
-		return false;
-	}
-
-	@Override
-	public float superGetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block) {
-		return 0.0F;
-	}
-
-	@Override
-	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
-		return false;
 	}
 
 	@Override
@@ -4953,6 +4863,522 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public void superOnInitialSpawn(Object o, Object o1) {
+	}
+
+	@Override
+	public int superGetBrightnessForRender() {
+		return -1;
+	}
+
+	@Override
+	public float superGetBrightness() {
+		return 0.0F;
+	}
+
+	@Override
+	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
+		superAddToPlayerScore(entity, p_70084_2_);
+	}
+
+	@Override
+	public void superFunc_110302_j() {
+		superSetupCustomSkin();
+	}
+
+	@Override
+	public Object superFunc_110309_l() {
+		return superGetTextureSkin();
+	}
+
+	@Override
+	public Object superFunc_110310_o() {
+		return superGetTextureCape();
+	}
+
+	@Override
+	public Object superFunc_110148_a(Object attribute) {
+		return superGetEntityAttribute(attribute);
+	}
+
+	@Override
+	public void sendChatToPlayer(ChatMessageComponent chatMessageComponent) {
+		if (master != null) master.sendChatToPlayer(chatMessageComponent);
+		else super.sendChatToPlayer(chatMessageComponent);
+	}
+
+	@Override
+	public void superSendChatToPlayer(Object chatMessageComponent) {
+		super.sendChatToPlayer((ChatMessageComponent) chatMessageComponent);
+	}
+
+	@Override
+	public void setupCustomSkin() {
+		if (master != null) master.setupCustomSkin();
+		else super.setupCustomSkin();
+	}
+
+	@Override
+	public void superSetupCustomSkin() {
+		super.setupCustomSkin();
+	}
+
+	@Override
+	public ThreadDownloadImageData getTextureSkin() {
+		return (ThreadDownloadImageData) (master != null ? master.getTextureSkin() : super.getTextureSkin());
+	}
+
+	@Override
+	public ThreadDownloadImageData superGetTextureSkin() {
+		return super.getTextureSkin();
+	}
+
+	@Override
+	public ThreadDownloadImageData getTextureCape() {
+		return (ThreadDownloadImageData) (master != null ? master.getTextureCape() : super.getTextureCape());
+	}
+
+	@Override
+	public ThreadDownloadImageData superGetTextureCape() {
+		return super.getTextureCape();
+	}
+
+	@Override
+	public EntityItem dropPlayerItem(ItemStack itemStack) {
+		return (EntityItem) (master != null ? master.dropPlayerItem(itemStack) : super.dropPlayerItem(itemStack));
+	}
+
+	@Override
+	public EntityItem superDropPlayerItem(Object itemStack) {
+		return super.dropPlayerItem((ItemStack) itemStack);
+	}
+
+	@Override
+	public float getCurrentPlayerStrVsBlock(Block block, boolean par2, int meta) {
+		return master != null ? master.getCurrentPlayerStrVsBlock(block, par2, meta) : super.getCurrentPlayerStrVsBlock(block, par2, meta);
+	}
+
+	@Override
+	public float superGetCurrentPlayerStrVsBlock(Object block, boolean par2, int meta) {
+		return super.getCurrentPlayerStrVsBlock((Block) block, par2, meta);
+	}
+
+	@Override
+	public void displayGUIHopper(TileEntityHopper tileEntityHopper) {
+		if (master != null) master.displayGUIHopper(tileEntityHopper);
+		else super.displayGUIHopper(tileEntityHopper);
+	}
+
+	@Override
+	public void superDisplayGUIHopper(Object tileEntityHopper) {
+		super.displayGUIHopper((TileEntityHopper) tileEntityHopper);
+	}
+
+	@Override
+	public void displayGUIFurnace(TileEntityFurnace tileEntityFurnace) {
+		if (master != null) master.displayGUIFurnace(tileEntityFurnace);
+		else super.displayGUIFurnace(tileEntityFurnace);
+	}
+
+	@Override
+	public void superDisplayGUIFurnace(Object tileEntityFurnace) {
+		super.displayGUIFurnace((TileEntityFurnace) tileEntityFurnace);
+	}
+
+	@Override
+	public void displayGUIDispenser(TileEntityDispenser tileEntityDispenser) {
+		if (master != null) master.displayGUIDispenser(tileEntityDispenser);
+		else super.displayGUIDispenser(tileEntityDispenser);
+	}
+
+	@Override
+	public void superDisplayGUIDispenser(Object tileEntityDispenser) {
+		super.displayGUIDispenser((TileEntityDispenser) tileEntityDispenser);
+	}
+
+	@Override
+	public void displayGUIEditSign(TileEntity tileEntity) {
+		if (master != null) master.displayGUIEditSign(tileEntity);
+		else super.displayGUIEditSign(tileEntity);
+	}
+
+	@Override
+	public void superDisplayGUIEditSign(Object tileEntity) {
+		super.displayGUIEditSign((TileEntity) tileEntity);
+	}
+
+	@Override
+	public void displayGUIBrewingStand(TileEntityBrewingStand tileEntityBrewingStand) {
+		if (master != null) master.displayGUIBrewingStand(tileEntityBrewingStand);
+		else super.displayGUIBrewingStand(tileEntityBrewingStand);
+	}
+
+	@Override
+	public void superDisplayGUIBrewingStand(Object tileEntityBrewingStand) {
+		super.displayGUIBrewingStand((TileEntityBrewingStand) tileEntityBrewingStand);
+	}
+
+	@Override
+	public void displayGUIBeacon(TileEntityBeacon tileEntityBeacon) {
+		if (master != null) master.displayGUIBeacon(tileEntityBeacon);
+		else super.displayGUIBeacon(tileEntityBeacon);
+	}
+
+	@Override
+	public void superDisplayGUIBeacon(Object tileEntityBeacon) {
+		super.displayGUIBeacon((TileEntityBeacon) tileEntityBeacon);
+	}
+
+	@Override
+	public String getEntityName() {
+		return master != null ? master.getEntityName() : super.getEntityName();
+	}
+
+	@Override
+	public String superGetEntityName() {
+		return super.getEntityName();
+	}
+
+	@Override
+	public void setGameType(EnumGameType enumGameType) {
+		if (master != null) master.setGameType(enumGameType);
+		else super.setGameType(enumGameType);
+	}
+
+	@Override
+	public void superSetGameType(Object enumGameType) {
+		super.setGameType((EnumGameType) enumGameType);
+	}
+
+	@Override
+	public ItemStack getCurrentItemOrArmor(int par1) {
+		return (ItemStack) (master != null ? master.getCurrentItemOrArmor(par1) : super.getCurrentItemOrArmor(par1));
+	}
+
+	@Override
+	public ItemStack superGetCurrentItemOrArmor(int par1) {
+		return super.getCurrentItemOrArmor(par1);
+	}
+
+	@Override
+	public String getTranslatedEntityName() {
+		return master != null ? master.getTranslatedEntityName() : super.getTranslatedEntityName();
+	}
+
+	@Override
+	public String superGetTranslatedEntityName() {
+		return super.getTranslatedEntityName();
+	}
+
+	@Override
+	public AttributeInstance getEntityAttribute(Attribute attribute) {
+		return (AttributeInstance) (master != null ? master.getEntityAttribute(attribute) : super.getEntityAttribute(attribute));
+	}
+
+	@Override
+	public AttributeInstance superGetEntityAttribute(Object attribute) {
+		return super.getEntityAttribute((Attribute) attribute);
+	}
+
+	@Override
+	public void doBlockCollisions() {
+		if (master != null) master.doBlockCollisions();
+		else super.doBlockCollisions();
+	}
+
+	@Override
+	public void superDoBlockCollisions() {
+		super.doBlockCollisions();
+	}
+
+	@Override
+	public void playStepSound(int par1, int par2, int par3, int par4) {
+		if (master != null) master.playStepSound(par1, par2, par3, par4);
+		else super.playStepSound(par1, par2, par3, par4);
+	}
+
+	@Override
+	public void superPlayStepSound(int par1, int par2, int par3, int par4) {
+		super.playStepSound(par1, par2, par3, par4);
+	}
+
+	@Override
+	public boolean isInRangeToRenderVec3D(Vec3 vec3) {
+		return master != null ? master.isInRangeToRenderVec3D(vec3) : super.isInRangeToRenderVec3D(vec3);
+	}
+
+	@Override
+	public boolean superIsInRangeToRenderVec3D(Object vec3) {
+		return super.isInRangeToRenderVec3D((Vec3) vec3);
+	}
+
+	@Override
+	public EntityItem dropItem(int par1, int par2) {
+		return (EntityItem) (master != null ? master.dropItem(par1, par2) : super.dropItem(par1, par2));
+	}
+
+	@Override
+	public EntityItem superDropItem(int par1, int par2) {
+		return super.dropItem(par1, par2);
+	}
+
+	@Override
+	public EntityItem dropItemWithOffset(int par1, int par2, float par3) {
+		return (EntityItem) (master != null ? master.dropItemWithOffset(par1, par2, par3) : super.dropItemWithOffset(par1, par2, par3));
+	}
+
+	@Override
+	public EntityItem superDropItemWithOffset(int par1, int par2, float par3) {
+		return super.dropItemWithOffset(par1, par2, par3);
+	}
+
+	@Override
+	public float getBlockExplosionResistance(Explosion explosion, World world, int par3, int par4, int par5, Block block) {
+		return master != null ? master.getBlockExplosionResistance(explosion, world, par3, par4, par5, block) : super.getBlockExplosionResistance(explosion, world, par3, par4, par5, block);
+	}
+
+	@Override
+	public float superGetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block) {
+		return super.getBlockExplosionResistance((Explosion) explosion, (World) world, par3, par4, par5, (Block) block);
+	}
+
+	@Override
+	public boolean shouldExplodeBlock(Explosion explosion, World world, int par3, int par4, int par5, int par6, float par7) {
+		return master != null ? master.shouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7) : super.shouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7);
+	}
+
+	@Override
+	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
+		return super.shouldExplodeBlock((Explosion) explosion, (World) world, par3, par4, par5, par6, par7);
+	}
+
+	@Override
+	public Object superFunc_181012_aH() {
+		return superGetTeleportDirection();
+	}
+
+	@Override
+	public void superFunc_181013_g(float p_181013_1_) {
+	}
+
+	@Override
+	public void superSetAngles(float yaw, float pitch) {
+		super.setAngles(yaw, pitch);
+	}
+
+	@Override
+	public void superAddChatMessage(Object iTextComponent) {
+		super.addChatMessage((String) iTextComponent);
+	}
+
+	@Override
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+		return super.canCommandSenderUseCommand(permLevel, commandName);
+	}
+
+	@Override
+	public boolean superFunc_146066_aG() {
+		return superCanDropLoot();
+	}
+
+	@Override
+	public void superFunc_152111_bt() {
+		superSendEnterCombat();
+	}
+
+	@Override
+	public void superFunc_152112_bu() {
+		superSendEndCombat();
+	}
+
+	@Override
+	public Object superFunc_181014_aG() {
+		return superGetLastPortalVec();
+	}
+
+	@Override
+	public String superGetCachedUniqueIdString() {
+		return null;
+	}
+
+	@Override
+	public boolean superFunc_152123_o() {
+		return superHasSkin();
+	}
+
+	@Override
+	public boolean superFunc_152122_n() {
+		return superHasPlayerInfo();
+	}
+
+	@Override
+	public Map superGetActivePotionMap() {
+		return null;
+	}
+
+	@Override
+	public void superBlockUsingShield(Object entityLivingBase) {
+	}
+
+	@Override
+	public Object superGetLastDamageSource() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasItemInSlot(Object entityEquipmentSlot) {
+		return false;
+	}
+
+	@Override
+	public float superGetWaterSlowDown() {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superAttackable() {
+		return false;
+	}
+
+	@Override
+	public void superSetPartying(Object blockPos, boolean p_191987_2_) {
+	}
+
+	@Override
+	public boolean superProcessInitialInteract(Object entityPlayer, Object enumHand) {
+		return false;
+	}
+
+	@Override
+	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand) {
+		return null;
+	}
+
+	@Override
+	public void superFunc_191955_a(Object iBlockState) {
+	}
+
+	@Override
+	public float superFunc_191954_d(float p_191954_1_) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_191957_ae() {
+		return false;
+	}
+
+	@Override
+	public boolean superHasNoGravity() {
+		return false;
+	}
+
+	@Override
+	public void superSetNoGravity(boolean noGravity) {
+	}
+
+	@Override
+	public boolean superFunc_191953_am() {
+		return false;
+	}
+
+	@Override
+	public Object superGetPitchYaw() {
+		return null;
+	}
+
+	@Override
+	public Object superGetForward() {
+		return null;
+	}
+
+	@Override
+	public boolean superGetIsInvulnerable() {
+		return false;
+	}
+
+	@Override
+	public boolean superCanTrample(Object world, Object block, Object blockPos, float fallDistance) {
+		return false;
+	}
+
+	@Override
+	public int superGetFireImmuneTicks() {
+		return -1;
+	}
+
+	@Override
+	public void superDestroyVanishingCursedItems() {
+	}
+
+	@Override
+	public void superOpenEditStructure(Object tileEntityStructure) {
+	}
+
+	@Override
+	public void superDisableShield(boolean p_190777_1_) {
+	}
+
+	@Override
+	public void superUnlockRecipes(List p_192021_1_) {
+	}
+
+	@Override
+	public void superUnlockRecipes(Object[] resourceLocation) {
+	}
+
+	@Override
+	public void superFunc_192022_b(List p_192022_1_) {
+	}
+
+	@Override
+	public boolean superAddItemStackToInventory(Object itemStack) {
+		return false;
+	}
+
+	@Override
+	public boolean superAddShoulderEntity(Object nBTTagCompound) {
+		return false;
+	}
+
+	@Override
+	public void superSpawnShoulderEntities() {
+	}
+
+	@Override
+	public Object superGetLeftShoulderEntity() {
+		return null;
+	}
+
+	@Override
+	public void superSetLeftShoulderEntity(Object nBTTagCompound) {
+	}
+
+	@Override
+	public Object superGetRightShoulderEntity() {
+		return null;
+	}
+
+	@Override
+	public void superSetRightShoulderEntity(Object nBTTagCompound) {
+	}
+
+	@Override
+	public boolean superCanUseCommandBlock() {
+		return false;
+	}
+
+	@Override
+	public boolean superHasSpawnDimension() {
+		return false;
+	}
+
+	@Override
+	public int superGetSpawnDimension() {
+		return -1;
+	}
+
+	@Override
+	public void superSetSpawnDimension(Object integer) {
 	}
 
 }

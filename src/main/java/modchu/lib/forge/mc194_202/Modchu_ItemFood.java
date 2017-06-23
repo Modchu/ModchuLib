@@ -42,13 +42,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-public class Modchu_ItemFood extends modchu.lib.forge.mc190_212.Modchu_ItemFood implements Modchu_IItemFood {
+public class Modchu_ItemFood extends modchu.lib.forge.mc190_220.Modchu_ItemFood implements Modchu_IItemFood {
 	public Modchu_IItemFoodMaster master;
 
 	public Modchu_ItemFood(HashMap<String, Object> map) {
 		super(map);
 	}
-	// 210~分離 Modchu_Itemのコピー
+
+	// 210~分離
 	@Override
 	protected RayTraceResult rayTrace(World world, EntityPlayer entityPlayer, boolean par3) {
 		return (RayTraceResult) (master != null ? master.rayTrace(world, entityPlayer, par3) : super.rayTrace(world, entityPlayer, par3));
@@ -118,6 +119,56 @@ public class Modchu_ItemFood extends modchu.lib.forge.mc190_212.Modchu_ItemFood 
 	@Override
 	public boolean superIsEnchantable(Object itemStack) {
 		return super.isItemTool((ItemStack) itemStack);
+	}
+
+	@Override
+	public void superAddInformation(Object itemStack, Object entityPlayer, List par3List, Object par4) {
+		super.addInformation((ItemStack) itemStack, (EntityPlayer) entityPlayer, par3List, (Boolean) par4);
+	}
+
+	@Override
+	public boolean superIsInCreativeTab(Object creativeTabs) {
+		return false;
+	}
+
+	@Override
+	public Object superGetNBTShareTag(Object itemStack) {
+		return null;
+	}
+
+	@Override
+	public int superGetRGBDurabilityForDisplay(Object itemStack) {
+		return -1;
+	}
+
+	@Override
+	public boolean superCanDestroyBlockInCreative(Object world, Object blockPos, Object itemStack, Object entityPlayer) {
+		return false;
+	}
+
+	@Override
+	public int superGetHarvestLevel(Object itemStack, String toolClass, Object entityPlayer, Object iBlockState) {
+		return -1;
+	}
+
+	@Override
+	public boolean superCanApplyAtEnchantingTable(Object itemStack, Object enchantment) {
+		return false;
+	}
+
+	@Override
+	public boolean superShouldCauseBlockBreakReset(Object itemStack, Object itemStack1) {
+		return false;
+	}
+
+	@Override
+	public Object superGetAnimationParameters(Object itemStack, Object world, Object entityLivingBase) {
+		return null;
+	}
+
+	@Override
+	public Object superGetDefaultInstance() {
+		return null;
 	}
 
 }

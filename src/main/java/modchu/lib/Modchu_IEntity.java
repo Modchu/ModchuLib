@@ -1,9 +1,7 @@
 package modchu.lib;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 public interface Modchu_IEntity {
 	public Object getFreeVariable(String s);
@@ -51,7 +49,7 @@ public interface Modchu_IEntity {
 	public void superSetOnFireFromLava();
 	public void superSetFire(int p_70015_1_);
 	public void superExtinguish();
-	public void superKill();
+	public void superOutOfWorld();
 	public boolean superIsOffsetPositionInLiquid(double p_70038_1_, double p_70038_3_, double p_70038_5_);
 	public void superMove(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_);
 	public Object superGetSwimSound();
@@ -70,7 +68,6 @@ public interface Modchu_IEntity {
 	public boolean superIsInsideOfMaterial(Object material);
 	public float superGetEyeHeight();
 	public boolean superIsNotColliding();
-	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_);
 	public int superGetBrightnessForRender(float p_70070_1_);
 	public float superGetBrightness(float p_70013_1_);
 	public void superSetWorld(Object world);
@@ -202,7 +199,7 @@ public interface Modchu_IEntity {
 	public void superSetSilent(boolean isSilent);
 	public void superUpdateFallState(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos);
 	public void superFall(float distance, float damageMultiplier);
-	public void superResetHeight();
+	public void superDoWaterSplashEffect();
 	public void superSpawnRunningParticles();
 	public void superCreateRunningParticles();
 	public boolean superIsInLava();
@@ -305,5 +302,23 @@ public interface Modchu_IEntity {
 	public Object superGetSoundCategory();
 	public Object superGetRecursivePassengersByType(Class entityClass);
 	public void superSetCurrentItemOrArmor(int p_70062_1_, Object itemStack);
+	public int superGetBrightnessForRender();
+	public float superGetBrightness();
+	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource);
+	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_, float p_191958_4_);
+	public void superFunc_181013_g(float p_181013_1_);
+	public Object superFunc_181012_aH();
+	public String superGetCachedUniqueIdString();
+	public void superFunc_191955_a(Object iBlockState);
+	public float superFunc_191954_d(float p_191954_1_);
+	public boolean superFunc_191957_ae();
+	public boolean superHasNoGravity();
+	public void superSetNoGravity(boolean noGravity);
+	public boolean superFunc_191953_am();
+	public Object superGetPitchYaw();
+	public Object superGetForward();
+	public boolean superGetIsInvulnerable();
+	public boolean superCanTrample(Object world, Object block, Object blockPos, float fallDistance);
+	public int superGetFireImmuneTicks();
 
 }

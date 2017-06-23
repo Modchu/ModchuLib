@@ -1,7 +1,7 @@
 package modchu.lib;
 
 public interface Modchu_IPlayerController {
-	public Object superCreateClientPlayer(Object world, Object statFileWriter);
+	public Object superCreateClientPlayer(Object world, Object statisticsManager, Object recipeBook);
 	public void superSetPlayerCapabilities(Object entityPlayer);
 	public boolean superIsSpectator();
 	public void superSetGameType(Object gameType);
@@ -41,5 +41,13 @@ public interface Modchu_IPlayerController {
 	public Object superWindowClick(int par1, int par2, int par3, Object clickType, Object entityPlayer);
 	public Object superInteractWithEntity(Object entityPlayer, Object entity, Object itemStack, Object enumHand);
 	public Object superProcessRightClick(Object entityPlayer, Object world, Object itemStack, Object enumHand);
+
+	public boolean superFunc_178894_a(Object entityPlayer, Object entity, Object movingObjectPosition);
+	public boolean superIsSpectatorMode();
+	public Object superGetCurrentGameType();
+	public boolean superFunc_181040_m();
+	public Object superInteractWithEntity(Object entityPlayer, Object entity, Object rayTraceResult, Object itemStack, Object enumHand);
+	public boolean superGetIsHittingBlock();
+	public void superPickItem(int index);
 
 }

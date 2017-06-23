@@ -15,8 +15,8 @@ public class Modchu_EntityAIOpenDoorMasterBasis implements Modchu_IEntityAIOpenD
 	}
 
 	@Override
-	public boolean continueExecuting() {
-		return base.superContinueExecuting();
+	public boolean shouldContinueExecuting() {
+		return base.superShouldContinueExecuting();
 	}
 
 	@Override

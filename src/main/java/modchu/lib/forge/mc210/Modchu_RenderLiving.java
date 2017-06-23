@@ -23,11 +23,12 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class Modchu_RenderLiving extends modchu.lib.forge.mc190_212.Modchu_RenderLiving {
+public class Modchu_RenderLiving extends modchu.lib.forge.mc190_220.Modchu_RenderLiving {
 
 	public Modchu_RenderLiving(HashMap<String, Object> map) {
 		super(map);
 	}
+
 	// 210~分離
 	@Override
 	public boolean superRemoveLayer(Object layerRenderer) {
@@ -43,6 +44,39 @@ public class Modchu_RenderLiving extends modchu.lib.forge.mc190_212.Modchu_Rende
 	@Override
 	public void superApplyRotations(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float partialTicks) {
 		super.rotateCorpse((EntityLivingBase) entityLivingBase, p_77043_2_, p_77043_3_, partialTicks);
+	}
+
+	@Override
+	public void superRotateCorpse(Object entityLivingBase, float p_77043_2_, float p_77043_3_, float partialTicks) {
+		super.rotateCorpse((EntityLivingBase) entityLivingBase, p_77043_2_, p_77043_3_, partialTicks);
+	}
+
+	@Override
+	public void superFunc_96449_a(Object entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10) {
+	}
+
+	@Override
+	public float superRenderSwingProgress(Object entityLivingBase, float par2) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_110813_b(Object entityLivingBase) {
+		return false;
+	}
+
+	@Override
+	public void superFunc_110777_b(Object entity) {
+		superBindEntityTexture(entity);
+	}
+
+	@Override
+	public void superSetLightmap(Object entityLiving) {
+	}
+
+	@Override
+	public boolean superIsVisible(Object entityLivingBase) {
+		return false;
 	}
 
 }

@@ -1,16 +1,18 @@
 package modchu.lib;
 
+import java.util.List;
+
 public interface Modchu_IGuiSlotMaster {
 	public void setDimensions(int p_148122_1_, int p_148122_2_, int p_148122_3_, int p_148122_4_);
 	public void setShowSelectionBox(boolean p_148130_1_);
 	public void setHasListHeader(boolean p_148133_1_, int p_148133_2_);
 	public int getContentHeight();
-	public void updateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_);
+	public void updateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_, float p_192639_4_);
 	public void drawListHeader(int p_148129_1_, int p_148129_2_, Object tessellator);
 	public void clickedHeader(int p_148132_1_, int p_148132_2_);
 	public void renderDecorations(int p_148142_1_, int p_148142_2_);
 	public int getSlotIndexFromScreenCoords(int p_148124_1_, int p_148124_2_);
-	public void registerScrollButtons(int p_148134_1_, int p_148134_2_);
+	public void registerScrollButtons(List par1List, int p_148134_1_, int p_148134_2_);
 	public void bindAmountScrolled();
 	public int getMaxScroll();
 	public int getAmountScrolled();
@@ -22,7 +24,7 @@ public interface Modchu_IGuiSlotMaster {
 	public void setEnabled(boolean p_148143_1_);
 	public boolean getEnabled();
 	public int getListWidth();
-	public void drawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_);
+	public void drawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_, float p_192638_5_);
 	public int getScrollBarX();
 	public void overlayBackground(int p_148136_1_, int p_148136_2_, int p_148136_3_, int p_148136_4_);
 	public void setSlotXBoundsFromLeft(int p_148140_1_);
@@ -43,7 +45,7 @@ public interface Modchu_IGuiSlotMaster {
 	public void elementClicked(int slotIndex, boolean isDoubleClick, int mouseX, int mouseY);
 	public boolean isSelected(int slotIndex);
 	public void drawBackground();
-	public void drawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_);
+	public void drawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_, float p_192637_7_);
 
 	// 179
 	public void drawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_, Object tessellator, int p_148126_6_, int p_148126_7_);

@@ -1,5 +1,7 @@
 package modchu.lib;
 
+import java.util.List;
+
 public interface Modchu_IGuiSlot {
 	public int getGuiSlotSize(int guiNumber);
 	public int getGuiSlotContentHeight(int guiNumber);
@@ -16,7 +18,7 @@ public interface Modchu_IGuiSlot {
 	public void superSetShowSelectionBox(boolean p_148130_1_);
 	public void superSetHasListHeader(boolean p_148133_1_, int p_148133_2_);
 	public int superGetContentHeight();
-	public void superUpdateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_);
+	public void superUpdateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_, float p_192639_4_);
 	public void superDrawListHeader(int p_148129_1_, int p_148129_2_, Object tessellator);
 	public void superClickedHeader(int p_148132_1_, int p_148132_2_);
 	public void superRenderDecorations(int p_148142_1_, int p_148142_2_);
@@ -33,7 +35,7 @@ public interface Modchu_IGuiSlot {
 	public void superSetEnabled(boolean p_148143_1_);
 	public boolean superGetEnabled();
 	public int superGetListWidth();
-	public void superDrawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_);
+	public void superDrawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_, float p_192638_5_);
 	public int superGetScrollBarX();
 	public void superOverlayBackground(int p_148136_1_, int p_148136_2_, int p_148136_3_, int p_148136_4_);
 	public void superSetSlotXBoundsFromLeft(int p_148140_1_);
@@ -54,7 +56,7 @@ public interface Modchu_IGuiSlot {
 	public void superElementClicked(int slotIndex, boolean isDoubleClick, int mouseX, int mouseY);
 	public boolean superIsSelected(int slotIndex);
 	public void superDrawBackground();
-	public void superDrawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_);
+	public void superDrawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_, float p_192637_7_);
 
 	// 179
 	public void superDrawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_, Object tessellator, int p_148126_6_, int p_148126_7_);
@@ -70,5 +72,8 @@ public interface Modchu_IGuiSlot {
 	public int superFunc_77210_c(int par1, int par2);
 	public int superFunc_77209_d();
 	public void superFunc_77208_b(int par1);
+
+	// 152
+	void superRegisterScrollButtons(List par1List, int par2, int par3);
 
 }

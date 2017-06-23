@@ -57,4 +57,9 @@ public class Modchu_ItemRendererMasterBasis implements Modchu_IItemRendererMaste
 		base.superRenderItemInFirstPerson(f);
 	}
 
+	@Override
+	public void renderItem(Object entityLivingBase, Object itemStack, Object transformType) {
+		base.superRenderItem(entityLivingBase, itemStack, transformType);
+	}
+
 }

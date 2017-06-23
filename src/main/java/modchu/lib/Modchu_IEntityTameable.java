@@ -1,9 +1,7 @@
 package modchu.lib;
 
-import java.util.Random;
-import java.util.UUID;
-
 public interface Modchu_IEntityTameable extends Modchu_IEntityLiving {
+	public Object superFunc_110172_bL();
 	public void superAttackEntity(Object entity, float par2);
 	public float superGetBlockPathWeight(int par1, int par2, int par3);
 	public Object superFindPlayerToAttack();
@@ -90,5 +88,18 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityLiving {
 	public void superSetLeftHanded(boolean p_184641_1_);
 	public boolean superIsLeftHanded();
 	public Object superOnInitialSpawn(Object difficultyInstance, Object iEntityLivingData);
+
+	public boolean superFunc_152114_e(Object entityLivingBase);
+	public Object superFunc_146083_cb();
+	public Object superFunc_110142_aN();
+	public void superFunc_175501_a(int p_175501_1_, boolean p_175501_2_);
+	public Object superGetNewNavigator(Object world);
+	public boolean superFunc_175448_a(Object itemStack);
+	public void superSetTamedBy(Object entityPlayer);
+	public boolean superHoldingSpawnEggOfClass(Object itemStack, Class p_190669_2_);
+	public double superFollowLeashSpeed();
+	public void superFunc_191989_p(float p_191989_1_);
+	public Object superGetHurtSound(Object damageSource);
+	public void superFunc_191986_a(float p_191986_1_, float p_191986_2_, float p_191986_3_);
 
 }

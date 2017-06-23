@@ -201,8 +201,8 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFoodMaster {
 	}
 
 	@Override
-	public void addInformation(Object itemStack, Object entityPlayer, List par3List, boolean par4) {
-		base.superAddInformation(itemStack, entityPlayer, par3List, par4);
+	public void addInformation(Object itemStack, Object worldOrEntityPlayer, List par3List, Object iTooltipFlagOrBoolean) {
+		base.superAddInformation(itemStack, worldOrEntityPlayer, par3List, iTooltipFlagOrBoolean);
 	}
 
 	@Override
@@ -458,7 +458,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFoodMaster {
 	@Override
 	public void getSubItems(Object item, Object creativeTabs, List p_150895_3_) {
 		base.superGetSubItems(item, creativeTabs, p_150895_3_);
-		
+
 	}
 
 	@Override
@@ -474,7 +474,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFoodMaster {
 	@Override
 	public void onUsingTick(Object itemStack, Object entityPlayer, int count) {
 		base.superOnUsingTick(itemStack, entityPlayer, count);
-		
+
 	}
 
 	@Override
@@ -495,7 +495,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFoodMaster {
 	@Override
 	public void onArmorTick(Object world, Object entityPlayer, Object itemStack) {
 		base.superOnArmorTick(world, entityPlayer, itemStack);
-		
+
 	}
 
 	@Override
@@ -511,7 +511,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFoodMaster {
 	@Override
 	public void setHarvestLevel(String toolClass, int level) {
 		base.superSetHarvestLevel(toolClass, level);
-		
+
 	}
 
 	@Override
@@ -563,7 +563,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFoodMaster {
 	@Override
 	public void getSubItems(int par1, Object creativeTabs, List par3List) {
 		base.superGetSubItems(par1, creativeTabs, par3List);
-		
+
 	}
 
 	@Override
@@ -574,7 +574,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFoodMaster {
 	@Override
 	public void onUsingItemTick(Object itemStack, Object entityPlayer, int count) {
 		base.superOnUsingItemTick(itemStack, entityPlayer, count);
-		
+
 	}
 
 	@Override
@@ -590,7 +590,7 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFoodMaster {
 	@Override
 	public void onArmorTickUpdate(Object world, Object entityPlayer, Object itemStack) {
 		base.superOnArmorTickUpdate(world, entityPlayer, itemStack);
-		
+
 	}
 
 	@Override
@@ -819,6 +819,51 @@ public class Modchu_ItemFoodBasis implements Modchu_IItemFoodMaster {
 	@Override
 	public void setItemDamageForStack(Object itemStack, int damage) {
 		base.superSetItemDamageForStack(itemStack, damage);
+	}
+
+	@Override
+	public boolean isInCreativeTab(Object creativeTabs) {
+		return base.superIsInCreativeTab(creativeTabs);
+	}
+
+	@Override
+	public Object getNBTShareTag(Object itemStack) {
+		return base.superGetNBTShareTag(itemStack);
+	}
+
+	@Override
+	public int getRGBDurabilityForDisplay(Object itemStack) {
+		return base.superGetRGBDurabilityForDisplay(itemStack);
+	}
+
+	@Override
+	public boolean canDestroyBlockInCreative(Object world, Object blockPos, Object itemStack, Object entityPlayer) {
+		return base.superCanDestroyBlockInCreative(world, blockPos, itemStack, entityPlayer);
+	}
+
+	@Override
+	public int getHarvestLevel(Object itemStack, String toolClass, Object entityPlayer, Object iBlockState) {
+		return base.superGetHarvestLevel(itemStack, toolClass, entityPlayer, iBlockState);
+	}
+
+	@Override
+	public boolean canApplyAtEnchantingTable(Object itemStack, Object enchantment) {
+		return base.superCanApplyAtEnchantingTable(itemStack, enchantment);
+	}
+
+	@Override
+	public boolean shouldCauseBlockBreakReset(Object itemStack, Object itemStack1) {
+		return base.superShouldCauseBlockBreakReset(itemStack, itemStack1);
+	}
+
+	@Override
+	public Object getAnimationParameters(Object itemStack, Object world, Object entityLivingBase) {
+		return base.superGetAnimationParameters(itemStack, world, entityLivingBase);
+	}
+
+	@Override
+	public Object getDefaultInstance() {
+		return base.superGetDefaultInstance();
 	}
 
 }

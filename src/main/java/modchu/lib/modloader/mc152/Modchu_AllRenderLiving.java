@@ -40,6 +40,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		if (render != null) render.func_110827_b(entityliving, par2, par4, par6, par8, par9);
 	}
 
+	@Override
 	public void superRenderLeashedToEntityRope(Object entityLiving, double par2, double par4, double par6, float par8, float par9) {
 	}
 
@@ -69,10 +70,12 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 		}
 	}
 
+	@Override
 	public void superDoRenderLiving(Object entityLiving, double d, double d1, double d2, float d3, float d4) {
 		super.doRender((EntityLiving) entityLiving, d, d1, d2, d3, d4);
 	}
 
+	@Override
 	public void superDoRender(Object entity, double par2, double par4, double par6, float par8, float par9) {
 		super.doRender((Entity)entity, par2, par4, par6, par8, par9);
 	}

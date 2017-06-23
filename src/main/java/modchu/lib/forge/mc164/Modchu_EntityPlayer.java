@@ -1570,11 +1570,11 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public EntityLivingBase getAITarget() {
-		return (EntityLivingBase) (master != null ? master.getAITarget() : super.getAITarget());
+		return (EntityLivingBase) (master != null ? master.getRevengeTarget() : super.getAITarget());
 	}
 
 	@Override
-	public EntityLivingBase supergetAITarget() {
+	public EntityLivingBase supergetRevengeTarget() {
 		return super.getAITarget();
 	}
 
@@ -1601,42 +1601,42 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public EntityLivingBase getLastAttacker() {
-		return (EntityLivingBase) (master != null ? master.getLastAttacker() : super.getLastAttacker());
+		return (EntityLivingBase) (master != null ? master.getLastAttackedEntity() : super.getLastAttacker());
 	}
 
 	@Override
-	public EntityLivingBase supergetLastAttacker() {
+	public EntityLivingBase supergetLastAttackedEntity() {
 		return super.getLastAttacker();
 	}
 
 	@Override
 	public int getLastAttackerTime() {
-		return master != null ? master.getLastAttackerTime() : super.getLastAttackerTime();
+		return master != null ? master.getLastAttackedEntityTime() : super.getLastAttackerTime();
 	}
 
 	@Override
-	public int supergetLastAttackerTime() {
+	public int supergetLastAttackedEntityTime() {
 		return super.getLastAttackerTime();
 	}
 
 	@Override
 	public void setLastAttacker(Entity entity) {
-		if (master != null) master.setLastAttacker(entity);
+		if (master != null) master.setLastAttackedEntity(entity);
 		else super.setLastAttacker(entity);
 	}
 
 	@Override
-	public void supersetLastAttacker(Object entity) {
+	public void supersetLastAttackedEntity(Object entity) {
 		super.setLastAttacker((Entity) entity);
 	}
 
 	@Override
 	public int getAge() {
-		return master != null ? master.getAge() : super.getAge();
+		return master != null ? master.getIdleTime() : super.getAge();
 	}
 
 	@Override
-	public int supergetAge() {
+	public int supergetIdleTime() {
 		return super.getAge();
 	}
 
@@ -1969,12 +1969,12 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	protected void kill() {
-		if (master != null) master.kill();
+		if (master != null) master.outOfWorld();
 		else super.kill();
 	}
 
 	@Override
-	public void superkill() {
+	public void superoutOfWorld() {
 		super.kill();
 	}
 

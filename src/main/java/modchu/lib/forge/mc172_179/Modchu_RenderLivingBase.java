@@ -394,7 +394,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 
 	@Override
 	public int setArmorModel(Object model, Object entityplayer, int i, float f, int i2) {
-		return -1;
+		return master != null ? master.setArmorModel(model, entityplayer, i, f, i2) : -1;
 	}
 
 	@Override
@@ -583,7 +583,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 
 	@Override
 	public int setArmorModel(Object entity, int i, float f) {
-		return -1;
+		return master != null ? master.setArmorModel(entity, i, f) : -1;
 	}
 
 	@Override
@@ -594,6 +594,31 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 	@Override
 	public float superPrepareScale(Object entityLivingBase, float partialTicks) {
 		return 0.0F;
+	}
+
+	@Override
+	public void superFunc_96449_a(Object entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10) {
+		super.func_96449_a((EntityLivingBase) entityLivingBase, par2, par4, par6, par8Str, par9, par10);
+	}
+
+	@Override
+	public void superRotateCorpse(Object entityLivingBase, float par2, float par3, float par4) {
+		super.rotateCorpse((EntityLivingBase) entityLivingBase, par2, par3, par4);
+	}
+
+	@Override
+	public float superRenderSwingProgress(Object entityLivingBase, float par2) {
+		return super.renderSwingProgress((EntityLivingBase) entityLivingBase, par2);
+	}
+
+	@Override
+	public boolean superFunc_110813_b(Object entityLivingBase) {
+		return super.func_110813_b((EntityLivingBase) entityLivingBase);
+	}
+
+	@Override
+	public void superFunc_110777_b(Object entity) {
+		superBindEntityTexture(entity);
 	}
 
 }

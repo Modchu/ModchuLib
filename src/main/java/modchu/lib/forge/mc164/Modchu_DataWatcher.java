@@ -9,10 +9,8 @@ import modchu.lib.Modchu_IDataWatcher;
 import modchu.lib.Modchu_IDataWatcherMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.entity.DataWatcher;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.WatchableObject;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet;
 
 public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatcher {
 	public Modchu_IDataWatcherMaster master;
@@ -135,7 +133,7 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 
 	@Override
 	public List<WatchableObject> getAllWatched() {
-		return (List<WatchableObject>) (master != null ? master.getAllWatched() : super.getAllWatched());
+		return master != null ? master.getAllWatched() : super.getAllWatched();
 	}
 
 	@Override
@@ -185,6 +183,7 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 		return super.unwatchAndReturnAllWatched();
 	}
 
+	@Override
 	public void writeWatchableObjects(DataOutput dataOutput) {
 		if (master != null) {
 			try {

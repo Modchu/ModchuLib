@@ -4,12 +4,9 @@ import java.util.HashMap;
 
 import modchu.lib.Modchu_IEntityAIPanic;
 import modchu.lib.Modchu_IEntityAIPanicMaster;
-import modchu.lib.Modchu_IEntityAIRestrictOpenDoor;
-import modchu.lib.Modchu_IEntityAIRestrictOpenDoorMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAIRestrictOpenDoor;
 
 public class Modchu_EntityAIPanic extends EntityAIPanic implements Modchu_IEntityAIPanic {
 	public Modchu_IEntityAIPanicMaster master;
@@ -39,16 +36,18 @@ public class Modchu_EntityAIPanic extends EntityAIPanic implements Modchu_IEntit
 		return master != null ? master.shouldExecute() : false;
 	}
 
+	@Override
 	public boolean superShouldExecute() {
 		return false;
 	}
 
 	@Override
 	public boolean continueExecuting() {
-		return master != null ? master.continueExecuting() : super.continueExecuting();
+		return master != null ? master.shouldContinueExecuting() : super.continueExecuting();
 	}
 
-	public boolean superContinueExecuting() {
+	@Override
+	public boolean superShouldContinueExecuting() {
 		return super.continueExecuting();
 	}
 
@@ -57,6 +56,7 @@ public class Modchu_EntityAIPanic extends EntityAIPanic implements Modchu_IEntit
 		return master != null ? master.isInterruptible() : super.isInterruptible();
 	}
 
+	@Override
 	public boolean superIsInterruptible() {
 		return super.isInterruptible();
 	}
@@ -67,6 +67,7 @@ public class Modchu_EntityAIPanic extends EntityAIPanic implements Modchu_IEntit
 		else superStartExecuting();
 	}
 
+	@Override
 	public void superStartExecuting() {
 		if (isEnabled()) super.startExecuting();
 	}
@@ -77,6 +78,7 @@ public class Modchu_EntityAIPanic extends EntityAIPanic implements Modchu_IEntit
 		else super.resetTask();
 	}
 
+	@Override
 	public void superResetTask() {
 		super.resetTask();
 	}
@@ -87,6 +89,7 @@ public class Modchu_EntityAIPanic extends EntityAIPanic implements Modchu_IEntit
 		else super.updateTask();
 	}
 
+	@Override
 	public void superUpdateTask() {
 		super.updateTask();
 	}
@@ -97,6 +100,7 @@ public class Modchu_EntityAIPanic extends EntityAIPanic implements Modchu_IEntit
 		else super.setMutexBits(par1);
 	}
 
+	@Override
 	public void superSetMutexBits(int par1) {
 		super.setMutexBits(par1);
 	}
@@ -106,6 +110,7 @@ public class Modchu_EntityAIPanic extends EntityAIPanic implements Modchu_IEntit
 		return master != null ? master.getMutexBits() : super.getMutexBits();
 	}
 
+	@Override
 	public int superGetMutexBits() {
 		return super.getMutexBits();
 	}

@@ -13,4 +13,9 @@ public interface Modchu_IRenderLiving extends Modchu_IRenderLivingBase {
 	public boolean superShouldRender(Object entityLiving, Object iCamera, double camX, double camY, double camZ);
 	public void superRenderLeash(Object entityLiving, double x, double y, double z, float entityYaw, float partialTicks);
 
+	// 220~
+	public void superSetLightmap(Object entityLiving);
+	public boolean superIsVisible(Object entityLivingBase);
+	public void superApplyRotations(Object entityLivingBase, float p_77043_2_, float rotationYaw, float partialTicks);
+
 }

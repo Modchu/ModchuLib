@@ -43,10 +43,11 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 
 	@Override
 	public boolean continueExecuting() {
-		return master != null ? master.continueExecuting() : super.continueExecuting();
+		return master != null ? master.shouldContinueExecuting() : super.continueExecuting();
 	}
 
-	public boolean superContinueExecuting() {
+	@Override
+	public boolean superShouldContinueExecuting() {
 		return super.continueExecuting();
 	}
 

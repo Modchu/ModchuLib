@@ -1,6 +1,7 @@
 package modchu.lib;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Modchu_GuiSlotMasterBasis implements Modchu_IGuiSlotMaster {
 	public Modchu_IGuiSlot base;
@@ -30,8 +31,8 @@ public class Modchu_GuiSlotMasterBasis implements Modchu_IGuiSlotMaster {
 	}
 
 	@Override
-	public void updateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_) {
-		base.superUpdateItemPos(p_178040_1_, p_178040_2_, p_178040_3_);
+	public void updateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_, float p_192639_4_) {
+		base.superUpdateItemPos(p_178040_1_, p_178040_2_, p_178040_3_, p_192639_4_);
 	}
 
 	@Override
@@ -55,8 +56,8 @@ public class Modchu_GuiSlotMasterBasis implements Modchu_IGuiSlotMaster {
 	}
 
 	@Override
-	public void registerScrollButtons(int p_148134_1_, int p_148134_2_) {
-		base.superRegisterScrollButtons(p_148134_1_, p_148134_2_);
+	public void registerScrollButtons(List par1List, int p_148134_1_, int p_148134_2_) {
+		base.superRegisterScrollButtons(par1List, p_148134_1_, p_148134_2_);
 	}
 
 	@Override
@@ -115,8 +116,8 @@ public class Modchu_GuiSlotMasterBasis implements Modchu_IGuiSlotMaster {
 	}
 
 	@Override
-	public void drawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_) {
-		base.superDrawSelectionBox(p_148120_1_, p_148120_2_, p_148120_3_, p_148120_4_);
+	public void drawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_, float p_192638_5_) {
+		base.superDrawSelectionBox(p_148120_1_, p_148120_2_, p_148120_3_, p_148120_4_, p_192638_5_);
 	}
 
 	@Override
@@ -220,8 +221,8 @@ public class Modchu_GuiSlotMasterBasis implements Modchu_IGuiSlotMaster {
 	}
 
 	@Override
-	public void drawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_) {
-		base.superDrawSlot(entryID, p_180791_2_, p_180791_3_, p_180791_4_, p_180791_5_, p_180791_6_);
+	public void drawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_, float p_192637_7_) {
+		base.superDrawSlot(entryID, p_180791_2_, p_180791_3_, p_180791_4_, p_180791_5_, p_180791_6_, p_192637_7_);
 	}
 
 	@Override

@@ -67,6 +67,7 @@ public interface Modchu_IFileManagerMaster {
 	public Map<String, InputStream> loadZipFileToInputStreamMap(ZipFile zipFile, Map<String, InputStream> map);
 	public HashMap<String, InputStream> loadZipFileToInputStreamHashMap(ZipFile zipFile);
 	public List<File> getDirFileList(List<File> list);
+	public List<File> getDirFileList(File dir, List<File> list);
 	public String getCurrentDir(String s);
 	public String getRelativePath(String s);
 

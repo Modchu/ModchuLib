@@ -77,6 +77,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 		super.doRender((EntityLivingBase) entityLiving, d, d1, d2, d3, d4);
 	}
 
+	@Override
 	public void superDoRender(Object entity, double d, double d1, double d2, float d3, float d4) {
 		super.doRender((EntityLivingBase) entity, d, d1, d2, d3, d4);
 	}
@@ -109,6 +110,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 		return entity2 != null ? entity2 : entity;
 	}
 	// 180~
+	@Override
 	public boolean superShouldRender(Object entityLiving, Object iCamera, double p_177104_3_, double p_177104_5_, double p_177104_7_) {
 		return super.shouldRender((EntityLiving) entityLiving, (ICamera) iCamera, p_177104_3_, p_177104_5_, p_177104_7_);
 	}
@@ -274,6 +276,8 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 
 	@Override
 	protected void renderLayers(EntityLivingBase entityLivingBase, float p_177093_2_, float p_177093_3_, float p_177093_4_, float p_177093_5_, float p_177093_6_, float p_177093_7_, float p_177093_8_) {
+		//Modchu_Debug.mDebug("renderLayers entityLivingBase="+entityLivingBase);
+		//Modchu_Debug.mDebug("renderLayers layerRenderers="+layerRenderers);
 		if (master != null) master.renderLayers(entityLivingBase, p_177093_2_, p_177093_3_, p_177093_4_, p_177093_5_, p_177093_6_, p_177093_7_, p_177093_8_);
 		else super.renderLayers(entityLivingBase, p_177093_2_, p_177093_3_, p_177093_4_, p_177093_5_, p_177093_6_, p_177093_7_, p_177093_8_);
 	}
@@ -461,15 +465,15 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 		if (layerRenderers != null
 				&& !layerRenderers.isEmpty()
 				&& c != null
-				&& layer != null); else return;
+				&& layer != null)
 		for (int i = 0; i < layerRenderers.size(); i++) {
 			Object o = layerRenderers.get(i);
 			if (c.isInstance(o)) {
-				layerRenderers.set(i, (LayerRenderer<AbstractClientPlayer>) layer);
+				layerRenderers.set(i, layer);
 				return;
 			}
 		}
-		layerRenderers.add((LayerRenderer<AbstractClientPlayer>) layer);
+		layerRenderers.add(layer);
 	}
 
 	@Override
@@ -479,7 +483,7 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 
 	@Override
 	public int setArmorModel(Object model, Object entityplayer, int i, float f, int i2) {
-		return -1;
+		return master != null ? master.setArmorModel(model, entityplayer, i, f, i2) : -1;
 	}
 
 	@Override
@@ -566,6 +570,30 @@ public class Modchu_RenderLivingBase extends RendererLivingEntity implements Mod
 
 	@Override
 	public void superRenderMultipass(Object entity, double p_188300_2_, double p_188300_4_, double p_188300_6_, float p_188300_8_, float p_188300_9_) {
+	}
+
+	@Override
+	public void superFunc_96449_a(Object entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10) {
+	}
+
+	@Override
+	public void superRotateCorpse(Object entityLivingBase, float par2, float par3, float par4) {
+		super.rotateCorpse((EntityLivingBase) entityLivingBase, par2, par3, par4);
+	}
+
+	@Override
+	public float superRenderSwingProgress(Object entityLivingBase, float par2) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_110813_b(Object entityLivingBase) {
+		return false;
+	}
+
+	@Override
+	public void superFunc_110777_b(Object entity) {
+		superBindEntityTexture((Entity) entity);
 	}
 
 }

@@ -2587,7 +2587,7 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 	}
 
 	@Override
-	public List keybindArray() {
+	public Object keybindArray() {
 		return base.superKeybindArray();
 	}
 

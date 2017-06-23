@@ -2,14 +2,11 @@ package modchu.lib.modloader.mc162;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_CastHelper;
-import modchu.lib.Modchu_DataWatcherMaster2;
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_EntityHelper;
 import modchu.lib.Modchu_IEntityLiving;
@@ -655,7 +652,6 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	@Override
 	public void superEnablePersistence() {
 	}
-	// TODO Modchu_EntityLivingBase のコピー↓（からのエラー対処有り）
 
 	@Override
 	public void setMovementSpeed(double d) {
@@ -821,11 +817,11 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 
 	@Override
 	public EntityLivingBase getAITarget() {
-		return (EntityLivingBase) (master != null ? master.getAITarget() : super.getAITarget());
+		return (EntityLivingBase) (master != null ? master.getRevengeTarget() : super.getAITarget());
 	}
 
 	@Override
-	public EntityLivingBase superGetAITarget() {
+	public EntityLivingBase superGetRevengeTarget() {
 		return super.getAITarget();
 	}
 
@@ -851,43 +847,38 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	}
 
 	@Override
-	public EntityLivingBase func_110144_aD() {
-		return (EntityLivingBase) (master != null ? master.getLastAttacker() : super.func_110144_aD());
-	}
-
-	@Override
-	public EntityLivingBase superGetLastAttacker() {
+	public EntityLivingBase superGetLastAttackedEntity() {
 		return super.func_110144_aD();
 	}
 
 	@Override
 	public int func_142013_aG() {
-		return master != null ? master.getLastAttackerTime() : super.func_142013_aG();
+		return master != null ? master.getLastAttackedEntityTime() : super.func_142013_aG();
 	}
 
 	@Override
-	public int superGetLastAttackerTime() {
+	public int superGetLastAttackedEntityTime() {
 		return super.func_142013_aG();
 	}
 
 	@Override
 	public void func_130011_c(Entity entity) {
-		if (master != null) master.setLastAttacker(entity);
+		if (master != null) master.setLastAttackedEntity(entity);
 		else super.func_130011_c(entity);
 	}
 
 	@Override
-	public void superSetLastAttacker(Object entity) {
+	public void superSetLastAttackedEntity(Object entity) {
 		super.func_130011_c((Entity) entity);
 	}
 
 	@Override
 	public int getAge() {
-		return master != null ? master.getAge() : super.getAge();
+		return master != null ? master.getIdleTime() : super.getAge();
 	}
 
 	@Override
-	public int superGetAge() {
+	public int superGetIdleTime() {
 		return super.getAge();
 	}
 
@@ -1105,11 +1096,11 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 
 	@Override
 	protected String getHurtSound() {
-		return (String) (master != null ? master.getHurtSound() : super.getHurtSound());
+		return (String) (master != null ? master.getHurtSound(null) : super.getHurtSound());
 	}
 
 	@Override
-	public String superGetHurtSound() {
+	public String superGetHurtSound(Object damageSource) {
 		return super.getHurtSound();
 	}
 
@@ -1373,12 +1364,12 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 
 	@Override
 	public void moveEntityWithHeading(float par1, float par2) {
-		if (master != null) master.moveEntityWithHeading(par1, par2);
+		if (master != null) master.moveEntityWithHeading(par1, par2, 0.0F);
 		else super.moveEntityWithHeading(par1, par2);
 	}
 
 	@Override
-	public void superMoveEntityWithHeading(float par1, float par2) {
+	public void superMoveEntityWithHeading(float par1, float par2, float par3) {
 		super.moveEntityWithHeading(par1, par2);
 	}
 
@@ -2000,7 +1991,7 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	@Override
 	public void superDropLoot(boolean p_184610_1_, int p_184610_2_, Object damageSource) {
 	}
-	// TODO Modchu_Entity のコピー↓（からのエラー対処有り）
+
 	@Override
 	public void entityDataManagerRegister(Class[] c1, int i, Object o) {
 		dataWatcher.addObject(i, o);
@@ -2224,12 +2215,12 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 
 	@Override
 	protected void kill() {
-		if (master != null) master.kill();
+		if (master != null) master.outOfWorld();
 		else super.kill();
 	}
 
 	@Override
-	public void superKill() {
+	public void superOutOfWorld() {
 		super.kill();
 	}
 
@@ -2378,12 +2369,12 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 
 	@Override
 	public void moveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
-		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_);
+		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_, 0.0F);
 		else super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
 	@Override
-	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
+	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_, float par3) {
 		super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
@@ -2555,7 +2546,7 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 
 	@Override
 	public void addToPlayerScore(Entity entity, int p_70084_2_) {
-		if (master != null) master.addToPlayerScore(entity, p_70084_2_);
+		if (master != null) master.addToPlayerScore(entity, p_70084_2_, null);
 		else super.addToPlayerScore(entity, p_70084_2_);
 	}
 
@@ -3516,7 +3507,7 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	}
 
 	@Override
-	public void superResetHeight() {
+	public void superDoWaterSplashEffect() {
 	}
 
 	@Override
@@ -3732,7 +3723,6 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 		return super.hashCode();
 	}
 	// 190~
-
 	@Override
 	public void superPlaySound(Object soundEvent, float p_85030_2_, float p_85030_3_) {
 	}
@@ -4030,7 +4020,167 @@ public class Modchu_EntityLiving extends EntityLiving implements Modchu_IEntityL
 	public Object superGetTeleportDirection() {
 		return super.getTeleportDirection();
 	}
-	// Modchu_Entity のコピー↑
-	// Modchu_EntityLivingBase のコピー↑
+
+	@Override
+	public int superGetBrightnessForRender() {
+		return -1;
+	}
+
+	@Override
+	public float superGetBrightness() {
+		return 0.0F;
+	}
+
+	@Override
+	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
+		superAddToPlayerScore(entity, p_70084_2_);
+	}
+
+	@Override
+	public Object superFunc_181014_aG() {
+		return superGetLastPortalVec();
+	}
+
+	@Override
+	public void superSetAngles(float yaw, float pitch) {
+		super.setAngles(yaw, pitch);
+	}
+
+	@Override
+	public void superAddChatMessage(Object iTextComponent) {
+	}
+
+	@Override
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+		return false;
+	}
+
+	@Override
+	public String superGetCachedUniqueIdString() {
+		return null;
+	}
+
+	@Override
+	public String superFunc_146067_o(int p_146067_1_) {
+		return null;
+	}
+
+	@Override
+	public boolean superFunc_146066_aG() {
+		return false;
+	}
+
+	@Override
+	public void superFunc_152111_bt() {
+	}
+
+	@Override
+	public void superFunc_152112_bu() {
+	}
+
+	@Override
+	public void superFunc_181013_g(float p_181013_1_) {
+	}
+
+	@Override
+	public Object superFunc_181012_aH() {
+		return null;
+	}
+
+	@Override
+	public Map superGetActivePotionMap() {
+		return null;
+	}
+
+	@Override
+	public void superBlockUsingShield(Object entityLivingBase) {
+	}
+
+	@Override
+	public Object superGetLastDamageSource() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasItemInSlot(Object entityEquipmentSlot) {
+		return false;
+	}
+
+	@Override
+	public float superGetWaterSlowDown() {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superAttackable() {
+		return false;
+	}
+
+	@Override
+	public void superSetPartying(Object blockPos, boolean p_191987_2_) {
+	}
+
+	@Override
+	public boolean superProcessInitialInteract(Object entityPlayer, Object enumHand) {
+		return false;
+	}
+
+	@Override
+	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand) {
+		return null;
+	}
+
+	@Override
+	public void superFunc_191955_a(Object iBlockState) {
+	}
+
+	@Override
+	public float superFunc_191954_d(float p_191954_1_) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_191957_ae() {
+		return false;
+	}
+
+	@Override
+	public boolean superHasNoGravity() {
+		return false;
+	}
+
+	@Override
+	public void superSetNoGravity(boolean noGravity) {
+	}
+
+	@Override
+	public boolean superFunc_191953_am() {
+		return false;
+	}
+
+	@Override
+	public Object superGetPitchYaw() {
+		return null;
+	}
+
+	@Override
+	public Object superGetForward() {
+		return null;
+	}
+
+	@Override
+	public boolean superGetIsInvulnerable() {
+		return false;
+	}
+
+	@Override
+	public boolean superCanTrample(Object world, Object block, Object blockPos, float fallDistance) {
+		return false;
+	}
+
+	@Override
+	public int superGetFireImmuneTicks() {
+		return -1;
+	}
 
 }

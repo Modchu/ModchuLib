@@ -5,6 +5,18 @@ import java.util.List;
 import java.util.Random;
 
 public interface Modchu_IBlock {
+	public boolean superFunc_149730_j();
+	public boolean superGetCanBlockGrass();
+	public Object superGetMapColor(int p_149728_1_);
+	public boolean superIsBlockNormalCube();
+	public Object superFunc_149735_b(int p_149735_1_, int p_149735_2_);
+	public boolean superRemovedByPlayer(Object world, Object entityPlayer, int x, int y, int z, boolean willHarvest);
+	public Object superGetPickBlock(Object movingObjectPosition, Object world, int x, int y, int z, Object entityPlayer);
+	public boolean superGetWeakChanges(Object iBlockAccess, int x, int y, int z);
+	public void superSetHarvestLevel(String toolClass, int level, int metadata);
+	public String superGetHarvestTool(int metadata);
+	public int superGetHarvestLevel(int metadata);
+	public boolean superIsToolEffective(String type, int metadata);
 	public void superInitializeBlock();
 	public Object superSetSoundType(Object stepSound);
 	public Object superSetLightOpacity(int par1);
@@ -185,7 +197,6 @@ public interface Modchu_IBlock {
 	public int superGetLightValue();
 	public boolean superGetUseNeighborBrightness();
 	public Object superGetMaterial();
-	public Object superGetMapColor(Object iBlockState);
 	public Object superGetStateFromMeta(int meta);
 	public int superGetMetaFromState(Object iBlockState);
 	public Object superGetActualState(Object iBlockState, Object iBlockAccess, Object blockPos);
@@ -342,7 +353,7 @@ public interface Modchu_IBlock {
 	public int superGetExpDrop(Object iBlockState, Object iBlockAccess, Object blockPos, int fortune);
 	public boolean superShouldCheckWeakPower(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing);
 	public boolean superIsFullCube(Object iBlockState);
-	public boolean superIsFullyOpaque(Object iBlockState);
+	public boolean superIsTopSolid(Object iBlockState);
 	public Object superWithRotation(Object iBlockState, Object rotation);
 	public Object superWithMirror(Object iBlockState, Object mirror);
 	public Object superGetBoundingBox(Object iBlockState, Object iBlockAccess, Object blockPos);
@@ -358,5 +369,18 @@ public interface Modchu_IBlock {
 	public void superEventReceived(Object world, int par2, int par3, int par4, Object par5);
 	public boolean superNeighborChanged(Object world, int par2, int par3, int par4, int par5, int par6);
 	public void superAddCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, Object p_185477_5_, Object entity, boolean p_185477_7_);
+	public Object superGetMapColor(Object iBlockState, Object iBlockAccess, Object blockPos);
+	public boolean superFunc_181623_g();
+	public boolean superDoesSideBlockRendering(Object iBlockAccess, Object blockPos, Object enumFacing);
+	public Object superGetPickBlock(Object movingObjectPosition, Object world, Object blockPos, Object entityPlayer);
+	public boolean superAddLandingEffects(Object worldServer, Object blockPos, Object iBlockState, Object entityLivingBase, int numberOfParticles);
+	public void superAddInformation(Object itemStack, Object world, List tooltip, Object iTooltipFlag);
+	public void superObservedNeighborChange(Object iBlockState, Object world, Object blockPos, Object block, Object blockPos1);
+	public boolean superCanRenderInLayer(Object iBlockState, Object blockRenderLayer);
+	public Object superGetSoundType(Object iBlockState, Object world, Object blockPos, Object entity);
+	public float[] superGetBeaconColorMultiplier(Object iBlockState, Object world, Object blockPos, Object blockPos1);
+	public Object superGetStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase, Object enumHand);
+	public boolean superCanBeConnectedTo(Object iBlockAccess, Object blockPos, Object enumFacing);
+	public Object superGetAiPathNodeType(Object iBlockState, Object iBlockAccess, Object blockPos);
 
 }

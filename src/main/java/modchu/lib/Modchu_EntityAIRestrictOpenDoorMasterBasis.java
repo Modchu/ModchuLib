@@ -15,8 +15,8 @@ public class Modchu_EntityAIRestrictOpenDoorMasterBasis implements Modchu_IEntit
 	}
 
 	@Override
-	public boolean continueExecuting() {
-		return base.superContinueExecuting();
+	public boolean shouldContinueExecuting() {
+		return base.superShouldContinueExecuting();
 	}
 
 	@Override

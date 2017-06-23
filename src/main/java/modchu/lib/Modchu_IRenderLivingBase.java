@@ -3,11 +3,16 @@ package modchu.lib;
 import java.util.List;
 
 public interface Modchu_IRenderLivingBase extends Modchu_IRender {
+	public void superFunc_96449_a(Object entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10);
+	public void superRotateCorpse(Object entityLivingBase, float par2, float par3, float par4);
+	public float superRenderSwingProgress(Object entityLivingBase, float par2);
+	public boolean superFunc_110813_b(Object entityLivingBase);
 	public int setArmorModel(Object entity, int i, float f);
 	public int setArmorModel(Object model, Object entityplayer, int i, float f, int i2);
 	public int superSetArmorModel(Object entity, int i, float f);
 	public int superSetArmorModel(Object model, Object entity, int i, float f, int j);
 
+	public void superFunc_110777_b(Object entity);
 	public void setLayer(Class c, Object layer);
 	public void superPreRenderCallback(Object entityLivingBase, float par2);
 	public void superDoRenderLiving(Object entity, double d, double d1, double d2, float f, float f1);

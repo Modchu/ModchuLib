@@ -44,22 +44,13 @@ public class Modchu_BlockContainer extends modchu.lib.forge.mc180_189.Modchu_Blo
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int i) {
-		return (TileEntity) (master != null ? master.createNewTileEntity(world, i) : null);
+	public int superGetWeakPower(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing) {
+		return super.isProvidingWeakPower((IBlockAccess) iBlockAccess, (BlockPos) blockPos, (IBlockState) iBlockState, (EnumFacing) enumFacing);
 	}
 
 	@Override
-	public Object superCreateNewTileEntity(Object world, int i) {
-		return null;
-	}
-
-	public TileEntity createNewTileEntity(World world) {
-		return null;
-	}
-
-	@Override
-	public Object superCreateNewTileEntity(Object world) {
-		return null;
+	public Object superGetPickBlock(Object iBlockState, Object movingObjectPosition, Object world, Object blockPos, Object entityPlayer) {
+		return super.getPickBlock((MovingObjectPosition) movingObjectPosition, (World) world, (BlockPos) blockPos);
 	}
 
 	@Override
@@ -73,18 +64,76 @@ public class Modchu_BlockContainer extends modchu.lib.forge.mc180_189.Modchu_Blo
 	}
 
 	@Override
-	public int superGetWeakPower(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing) {
-		return super.isProvidingWeakPower((IBlockAccess) iBlockAccess, (BlockPos) blockPos, (IBlockState) iBlockState, (EnumFacing) enumFacing);
+	public boolean superFunc_181623_g() {
+		return false;
+	}
+
+	@Override
+	public boolean superDoesSideBlockRendering(Object iBlockAccess, Object blockPos, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public int superGetStrongPower(Object iBlockAccess, Object blockPos, Object iBlockState, Object enumFacing) {
+		return -1;
 	}
 
 	@Override
 	public boolean superDoesSideBlockRendering(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing) {
-		return isOpaqueCube();
+		return false;
 	}
 
 	@Override
 	public boolean superAddLandingEffects(Object iBlockState, Object worldServer, Object blockPos, Object iBlockState1, Object entityLivingBase, int numberOfParticles) {
 		return false;
+	}
+
+	@Override
+	public boolean superAddLandingEffects(Object worldServer, Object blockPos, Object iBlockState, Object entityLivingBase, int numberOfParticles) {
+		return false;
+	}
+
+	@Override
+	public boolean superIsBlockNormalCube() {
+		return super.isNormalCube();
+	}
+
+	@Override
+	public void superAddInformation(Object itemStack, Object world, List tooltip, Object iTooltipFlag) {
+	}
+
+	@Override
+	public void superObservedNeighborChange(Object iBlockState, Object world, Object blockPos, Object block, Object blockPos1) {
+	}
+
+	@Override
+	public boolean superCanRenderInLayer(Object iBlockState, Object blockRenderLayer) {
+		return false;
+	}
+
+	@Override
+	public Object superGetSoundType(Object iBlockState, Object world, Object blockPos, Object entity) {
+		return null;
+	}
+
+	@Override
+	public float[] superGetBeaconColorMultiplier(Object iBlockState, Object world, Object blockPos, Object blockPos1) {
+		return null;
+	}
+
+	@Override
+	public Object superGetStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase, Object enumHand) {
+		return null;
+	}
+
+	@Override
+	public boolean superCanBeConnectedTo(Object iBlockAccess, Object blockPos, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public Object superGetAiPathNodeType(Object iBlockState, Object iBlockAccess, Object blockPos) {
+		return null;
 	}
 
 }

@@ -1,56 +1,15 @@
 package modchu.lib.forge.mc189;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Random;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 
-import modchu.lib.Modchu_AS;
-import modchu.lib.Modchu_Debug;
-import modchu.lib.Modchu_IEntityLivingBase;
-import modchu.lib.Modchu_IEntityLivingBaseMaster;
-import modchu.lib.Modchu_IEntityTameableMaster;
-import modchu.lib.Modchu_Main;
-import modchu.lib.Modchu_Reflect;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.command.CommandResultStats;
-import net.minecraft.command.CommandResultStats.Type;
-import net.minecraft.crash.CrashReportCategory;
-import net.minecraft.entity.DataWatcher;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.BaseAttributeMap;
-import net.minecraft.entity.ai.attributes.IAttribute;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.event.HoverEvent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.scoreboard.Team;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.CombatTracker;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
+import net.minecraftforge.common.capabilities.Capability;
 
 public class Modchu_EntityLivingBase extends modchu.lib.forge.mc188_189.Modchu_EntityLivingBase {
 
@@ -78,20 +37,192 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc188_189.Modchu_E
 		else super.handleStatusUpdate(par1);
 	}
 
+	@Override
 	public void superHandleStatusUpdate(byte par1) {
 		super.handleStatusUpdate(par1);
 	}
 
 	@Override
 	public int getDamageInvincibleCount() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 0;
+		return master != null ? master.getDamageInvincibleCount() : super.getDamageInvincibleCount();
 	}
 
 	@Override
 	public void setDamageInvincibleCount(int i) {
-		// TODO 自動生成されたメソッド・スタブ
+		if (master != null) master.setDamageInvincibleCount(i);
+		else super.setDamageInvincibleCount(i);
+	}
 
+	@Override
+	public String superFunc_146067_o(int p_146067_1_) {
+		return null;
+	}
+
+	@Override
+	public Vec3 func_181014_aG() {
+		return (Vec3) (master != null ? master.getLastPortalVec() : super.func_181014_aG());
+	}
+
+	@Override
+	public Vec3 superFunc_181014_aG() {
+		return super.func_181014_aG();
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing enumFacing) {
+		return master != null ? master.hasCapability(capability, enumFacing) : super.hasCapability(capability, enumFacing);
+	}
+
+	@Override
+	public boolean superHasCapability(Object capability, Object enumFacing) {
+		return super.hasCapability((Capability) capability, (EnumFacing) enumFacing);
+	}
+
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing enumFacing) {
+		return (T) (master != null ? master.getCapability(capability, enumFacing) : super.getCapability(capability, enumFacing));
+	}
+
+	@Override
+	public Object superGetCapability(Object capability, Object enumFacing) {
+		return super.getCapability((Capability) capability, (EnumFacing) enumFacing);
+	}
+
+	@Override
+	public void deserializeNBT(NBTTagCompound nBTTagCompound) {
+		if (master != null) master.deserializeNBT(nBTTagCompound);
+		else super.deserializeNBT(nBTTagCompound);
+	}
+
+	@Override
+	public void superDeserializeNBT(Object nBTTagCompound) {
+		super.deserializeNBT((NBTTagCompound) nBTTagCompound);
+	}
+
+	@Override
+	public NBTTagCompound serializeNBT() {
+		return (NBTTagCompound) (master != null ? master.serializeNBT() : super.serializeNBT());
+	}
+
+	@Override
+	public NBTTagCompound superSerializeNBT() {
+		return super.serializeNBT();
+	}
+
+	@Override
+	public void superSetAngles(float yaw, float pitch) {
+		super.setAngles(yaw, pitch);
+	}
+
+	@Override
+	public void superAddChatMessage(Object iTextComponent) {
+		super.addChatMessage((IChatComponent) iTextComponent);
+	}
+
+	@Override
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+		return super.canCommandSenderUseCommand(permLevel, commandName);
+	}
+
+	@Override
+	public String superGetCachedUniqueIdString() {
+		return null;
+	}
+
+	@Override
+	public Map superGetActivePotionMap() {
+		return null;
+	}
+
+	@Override
+	public void superBlockUsingShield(Object entityLivingBase) {
+	}
+
+	@Override
+	public Object superGetLastDamageSource() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasItemInSlot(Object entityEquipmentSlot) {
+		return false;
+	}
+
+	@Override
+	public float superGetWaterSlowDown() {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superAttackable() {
+		return false;
+	}
+
+	@Override
+	public void superSetPartying(Object blockPos, boolean p_191987_2_) {
+	}
+
+	@Override
+	public boolean superProcessInitialInteract(Object entityPlayer, Object enumHand) {
+		return false;
+	}
+
+	@Override
+	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand) {
+		return null;
+	}
+
+	@Override
+	public void superFunc_191955_a(Object iBlockState) {
+	}
+
+	@Override
+	public float superFunc_191954_d(float p_191954_1_) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_191957_ae() {
+		return false;
+	}
+
+	@Override
+	public boolean superHasNoGravity() {
+		return false;
+	}
+
+	@Override
+	public void superSetNoGravity(boolean noGravity) {
+	}
+
+	@Override
+	public boolean superFunc_191953_am() {
+		return false;
+	}
+
+	@Override
+	public Object superGetPitchYaw() {
+		return null;
+	}
+
+	@Override
+	public Object superGetForward() {
+		return null;
+	}
+
+	@Override
+	public boolean superGetIsInvulnerable() {
+		return false;
+	}
+
+	@Override
+	public boolean superCanTrample(Object world, Object block, Object blockPos, float fallDistance) {
+		return false;
+	}
+
+	@Override
+	public int superGetFireImmuneTicks() {
+		return -1;
 	}
 
 }

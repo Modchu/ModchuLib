@@ -7427,7 +7427,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setEntityLivingBaseEntityAge(Object entity, int i) {
-		if (Modchu_Main.getMinecraftVersion() > 159) Modchu_Reflect.setFieldObject("EntityLivingBase", "field_70708_bq", "entityAge", entity, i, 0);
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 159) Modchu_Reflect.setFieldObject("EntityLivingBase", version > 212 ? "field_75255_d" : "field_70708_bq", version > 212 ? "idleTime" : "entityAge", entity, i, 0);
 	}
 
 	protected Object entityBoundingBox() {
@@ -9675,7 +9676,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object guiScreenFontRenderer(Object guiScreen) {
-		return Modchu_Main.getMinecraftVersion() > 169 ? Modchu_Reflect.getFieldObject("GuiScreen", "field_146289_q", "fontRendererObj", guiScreen) :
+		int version = Modchu_Main.getMinecraftVersion();
+		return version > 169 ? Modchu_Reflect.getFieldObject("GuiScreen", "field_146289_q", version > 212 ? "fontRenderer" : "fontRendererObj", guiScreen) :
 			Modchu_Reflect.getFieldObject("GuiScreen", "field_73886_k", "fontRenderer", guiScreen);
 	}
 
@@ -10256,9 +10258,9 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 		return keyBinding != null ? Modchu_Main.getMinecraftVersion() > 169 ? Modchu_CastHelper.Boolean(Modchu_Reflect.invokeMethod(keyBinding.getClass(), "func_151470_d", "getIsKeyPressed", keyBinding)) : keyBindingPressed(keyBinding) : null;
 	}
 
-	protected List keybindArray() {
+	protected Object keybindArray() {
 		int version = Modchu_Main.getMinecraftVersion();
-		return Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("KeyBinding", "field_74516_a", version > 190 ? "KEYBIND_ARRAY" : "keybindArray"));
+		return version > 212 ? Modchu_Reflect.getFieldObject("KeyBinding", "field_74516_a", "KEYBIND_ARRAY") : Modchu_CastHelper.List(Modchu_Reflect.getFieldObject("KeyBinding", "field_74516_a", version > 190 ? "KEYBIND_ARRAY" : "keybindArray"));
 	}
 
 	protected boolean entityRendererAnaglyphEnable() {
@@ -11901,7 +11903,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void setGuiScreenFontRenderer(Object guiScreen, Object fontRenderer) {
-		if (Modchu_Main.getMinecraftVersion() > 169) Modchu_Reflect.setFieldObject("GuiScreen", "fontRendererObj", guiScreen, fontRenderer);
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 169) Modchu_Reflect.setFieldObject("GuiScreen", version > 212 ? "fontRenderer" : "fontRendererObj", guiScreen, fontRenderer);
 		else Modchu_Reflect.setFieldObject("GuiScreen", "field_73886_k", "fontRenderer", guiScreen, fontRenderer);
 	}
 
@@ -12419,11 +12422,21 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void worldPlaySoundAtEntity(Object worldOrEntity, Object entity, Object soundEventOrString, float f, float f1) {
-		Modchu_Reflect.invokeMethod("World", "func_72956_a", "playSoundAtEntity", new Class[]{ Modchu_Reflect.loadClass("Entity"), String.class, float.class, float.class }, entityWorld(worldOrEntity), new Object[]{ entity, soundEventOrString, f, f1 });
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 189) {
+			entityPlaySound(soundEventOrString, f, f1);
+		} else {
+			Modchu_Reflect.invokeMethod("World", "func_72956_a", "playSoundAtEntity", new Class[]{ Modchu_Reflect.loadClass("Entity"), String.class, float.class, float.class }, entityWorld(worldOrEntity), new Object[]{ entity, soundEventOrString, f, f1 });
+		}
 	}
 
 	protected void worldPlaySoundAtEntity(Object worldOrEntity, Object entityPlayer, double x, double y, double z, Object soundEvent, Object soundCategory, float f, float f1) {
-		Modchu_Reflect.invokeMethod("World", "func_72956_a", "playSoundAtEntity", new Class[]{ Modchu_Reflect.loadClass("EntityPlayer"), double.class, double.class, double.class, Modchu_Reflect.loadClass("SoundEvent"), Modchu_Reflect.loadClass("SoundCategory"), float.class, float.class }, entityWorld(worldOrEntity), new Object[]{ entityPlayer, x, y, z, soundEvent, soundCategory, f, f1 });
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 189) {
+			Modchu_AS.set("World", "playSound", new Class[]{ Modchu_Reflect.loadClass("EntityPlayer"), double.class, double.class, double.class, Modchu_Reflect.loadClass("SoundEvent"), Modchu_Reflect.loadClass("SoundCategory"), float.class, float.class }, entityWorld(worldOrEntity), new Object[]{ entityPlayer, x, y, z, soundEvent, soundCategory, f, f1 });
+		} else {
+			Modchu_Reflect.invokeMethod("World", "func_72956_a", "playSoundAtEntity", new Class[]{ Modchu_Reflect.loadClass("EntityPlayer"), double.class, double.class, double.class, Modchu_Reflect.loadClass("SoundEvent"), Modchu_Reflect.loadClass("SoundCategory"), float.class, float.class }, entityWorld(worldOrEntity), new Object[]{ entityPlayer, x, y, z, soundEvent, soundCategory, f, f1 });
+		}
 	}
 
 	protected boolean worldIsBlockModifiable(Object worldOrEntity, Object entityPlayer, int x, int y, int z) {

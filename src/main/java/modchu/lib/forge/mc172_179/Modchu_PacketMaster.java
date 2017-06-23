@@ -9,7 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
@@ -25,8 +24,7 @@ import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Packet;
 import modchu.lib.Modchu_PacketManager;
 import modchu.lib.Modchu_Reflect;
-import modchu.lib.forge.mc172_212.Modchu_Message;
-import net.minecraft.entity.player.EntityPlayerMP;
+import modchu.lib.forge.mc172_220.Modchu_Message;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -103,19 +101,19 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 
 	private void sendToWorld(Object[] o, String channelName, Object world) {
 		for (Object entityplayer : Modchu_AS.getList(Modchu_AS.playerEntities, world)) {
-			sendTo(newPacket(o, channelName), (EntityPlayerMP) entityplayer, channelName);
+			sendTo(newPacket(o, channelName), entityplayer, channelName);
 		}
 	}
 
 	@Override
 	public void sendTo(Object[] o, Object player, String channelName) {
 		Modchu_Debug.mDebug("Modchu_PacketMaster sendTo channelName="+channelName);
-		sendTo(newPacket(o, channelName), (EntityPlayerMP) player, channelName);
+		sendTo(newPacket(o, channelName), player, channelName);
 	}
 
 	@Override
 	public void sendToAllAround(Object[] o, String channelName, Object networkRegistryTargetPoint) {
-		sendToAllAround(newPacket(o, channelName), (TargetPoint) networkRegistryTargetPoint, channelName);
+		sendToAllAround(newPacket(o, channelName), networkRegistryTargetPoint, channelName);
 	}
 
 	@Override
@@ -159,8 +157,8 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		}
 */
 		EnumMap<Side, FMLEmbeddedChannel> channels = channelsMap.get(channelName);
-		((FMLEmbeddedChannel)channels.get(Side.SERVER)).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
-		((FMLEmbeddedChannel)channels.get(Side.SERVER)).writeAndFlush(message);
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
+		channels.get(Side.SERVER).writeAndFlush(message);
 
 	}
 
@@ -168,35 +166,35 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 	public void sendTo(Object message, Object entityPlayerMP, String channelName) {
 		if (!channelsMap.containsKey(channelName)) return;
 		EnumMap<Side, FMLEmbeddedChannel> channels = channelsMap.get(channelName);
-		((FMLEmbeddedChannel)channels.get(Side.SERVER)).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
-		((FMLEmbeddedChannel)channels.get(Side.SERVER)).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(entityPlayerMP);
-		((FMLEmbeddedChannel)channels.get(Side.SERVER)).writeAndFlush(message);
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(entityPlayerMP);
+		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 
 	@Override
 	public void sendToAllAround(Object message, Object networkRegistryTargetPoint, String channelName) {
 		if (!channelsMap.containsKey(channelName)) return;
 		EnumMap<Side, FMLEmbeddedChannel> channels = channelsMap.get(channelName);
-		((FMLEmbeddedChannel)channels.get(Side.SERVER)).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
-		((FMLEmbeddedChannel)channels.get(Side.SERVER)).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(networkRegistryTargetPoint);
-		((FMLEmbeddedChannel)channels.get(Side.SERVER)).writeAndFlush(message);
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(networkRegistryTargetPoint);
+		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 
 	@Override
 	public void sendToDimension(Object message, int dimensionId, String channelName) {
 		if (!channelsMap.containsKey(channelName)) return;
 		EnumMap<Side, FMLEmbeddedChannel> channels = channelsMap.get(channelName);
-		((FMLEmbeddedChannel)channels.get(Side.SERVER)).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.DIMENSION);
-		((FMLEmbeddedChannel)channels.get(Side.SERVER)).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(Integer.valueOf(dimensionId));
-		((FMLEmbeddedChannel)channels.get(Side.SERVER)).writeAndFlush(message);
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.DIMENSION);
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(Integer.valueOf(dimensionId));
+		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 
 	@Override
 	public void sendToServer(Object message, String channelName) {
 		if (!channelsMap.containsKey(channelName)) return;
 		EnumMap<Side, FMLEmbeddedChannel> channels = channelsMap.get(channelName);
-		((FMLEmbeddedChannel)channels.get(Side.CLIENT)).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
-		((FMLEmbeddedChannel)channels.get(Side.CLIENT)).writeAndFlush(message);
+		channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
+		channels.get(Side.CLIENT).writeAndFlush(message);
 	}
 
 	@Override

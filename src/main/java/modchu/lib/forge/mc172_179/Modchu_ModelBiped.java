@@ -30,6 +30,7 @@ public class Modchu_ModelBiped extends ModelBiped implements Modchu_IModelBiped 
 		else super.render(entity, par2, par3, par4, par5, par6, par7);
 	}
 
+	@Override
 	public void superRender(Object entity, float par2, float par3, float par4, float par5, float par6, float par7) {
 		super.render((Entity) entity, par2, par3, par4, par5, par6, par7);
 	}
@@ -40,6 +41,7 @@ public class Modchu_ModelBiped extends ModelBiped implements Modchu_IModelBiped 
 		else super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
 	}
 
+	@Override
 	public void superSetRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Object entity) {
 		super.setRotationAngles(par1, par2, par3, par4, par5, par6, (Entity) entity);
 	}
@@ -50,6 +52,7 @@ public class Modchu_ModelBiped extends ModelBiped implements Modchu_IModelBiped 
 		else super.setLivingAnimations(entityLivingBase, par2, par3, par4);
 	}
 
+	@Override
 	public void superSetLivingAnimations(Object entityLivingBase, float par2, float par3, float par4) {
 		super.setLivingAnimations((EntityLivingBase) entityLivingBase, par2, par3, par4);
 	}
@@ -59,6 +62,7 @@ public class Modchu_ModelBiped extends ModelBiped implements Modchu_IModelBiped 
 		return (ModelRenderer) (master != null ? master.getRandomModelBox(random) : super.getRandomModelBox(random));
 	}
 
+	@Override
 	public ModelRenderer superGetRandomModelBox(Object random) {
 		return super.getRandomModelBox((Random) random);
 	}
@@ -69,6 +73,7 @@ public class Modchu_ModelBiped extends ModelBiped implements Modchu_IModelBiped 
 		super.setTextureOffset(par1Str, par2, par3);
 	}
 
+	@Override
 	public void superSetTextureOffset(String par1Str, int par2, int par3) {
 		super.setTextureOffset(par1Str, par2, par3);
 	}
@@ -79,6 +84,7 @@ public class Modchu_ModelBiped extends ModelBiped implements Modchu_IModelBiped 
 		return super.getTextureOffset(par1Str);
 	}
 
+	@Override
 	public TextureOffset superGetTextureOffset(String par1Str) {
 		return super.getTextureOffset(par1Str);
 	}
@@ -87,6 +93,7 @@ public class Modchu_ModelBiped extends ModelBiped implements Modchu_IModelBiped 
 		return (ModelRenderer) master.getRightArm(entityCaps);
 	}
 
+	@Override
 	public ModelRenderer superGetRandomModelBox(Random random) {
 		return super.getRandomModelBox(random);
 	}
@@ -97,6 +104,7 @@ public class Modchu_ModelBiped extends ModelBiped implements Modchu_IModelBiped 
 		else super.renderEars(par1);
 	}
 
+	@Override
 	public void superRenderEars(float par1) {
 		super.renderEars(par1);
 	}
@@ -107,6 +115,7 @@ public class Modchu_ModelBiped extends ModelBiped implements Modchu_IModelBiped 
 		else super.renderCloak(par1);
 	}
 
+	@Override
 	public void superRenderCloak(float par1) {
 		super.renderCloak(par1);
 	}

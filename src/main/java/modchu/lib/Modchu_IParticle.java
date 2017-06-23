@@ -158,6 +158,11 @@ public interface Modchu_IParticle {
 	public boolean superShouldDismountInWater(Object entity);
 	// ~152
 	public void superSetParticleIcon(Object renderEngine, Object icon);
+	public String superGetTexture();
+	public boolean superAddNotRiddenEntityID(Object nBTTagCompound);
+	public boolean superAddEntityID(Object nBTTagCompound);
+	public void superUnmountEntity(Object entity);
+	public void superUpdateCloak();
 	// 172~
 	public int superGetEntityId();
 	public void superSetEntityId(int p_145769_1_);
@@ -178,7 +183,7 @@ public interface Modchu_IParticle {
 	public boolean superShouldExplodeBlock(Object explosion, Object world, Object blockPos, Object iBlockState, float par7);
 	public void superSetPortal(Object blockPos);
 	// 190~
-	public boolean superIsTransparent();
+	public boolean superShouldDisableDepth();
 	public void superSetMaxAge(int p_187114_1_);
 	public void superSetParticleTexture(Object textureAtlasSprite);
 	public void superSetExpired();
@@ -186,5 +191,56 @@ public interface Modchu_IParticle {
 	public boolean superIsAlive();
 	public Object superGetBoundingBox();
 	public void superSetBoundingBox(Object axisAlignedBB);
+
+	public float superGetAlpha();
+	public void superOnKillCommand();
+	public boolean superIsSilent();
+	public void superSetSilent(boolean isSilent);
+	public void superResetHeight();
+	public void superSpawnRunningParticles();
+	public void superCreateRunningParticles();
+	public boolean superIsInLava();
+	public void superMoveToBlockPosAndAngles(Object blockPos, float rotationYawIn, float rotationPitchIn);
+	public double superGetDistanceSq(Object blockPos);
+	public double superGetDistanceSqToCenter(Object blockPos);
+	public Object superGetLook(float partialTicks);
+	public Object superGetPositionEyes(float partialTicks);
+	public Object superRayTrace(double blockReachDistance, float partialTicks);
+	public void superFunc_181013_g(float p_181013_1_);
+	public Object superFunc_181012_aH();
+	public void superSetCustomNameTag(String name);
+	public String superGetCustomNameTag();
+	public boolean superHasCustomName();
+	public void superSetAlwaysRenderNameTag(boolean alwaysRenderNameTag);
+	public boolean superGetAlwaysRenderNameTag();
+	public void superSetPositionAndUpdate(double x, double y, double z);
+	public boolean superGetAlwaysRenderNameTagForRender();
+	public Object superGetHorizontalFacing();
+	public Object superGetHoverEvent();
+	public boolean superIsSpectatedByPlayer(Object entityPlayerMP);
+	public Object superGetEntityBoundingBox();
+	public void superSetEntityBoundingBox(Object axisAlignedBB);
+	public boolean superIsOutsideBorder();
+	public void superSetOutsideBorder(boolean outsideBorder);
+	public boolean superReplaceItemInInventory(int inventorySlot, Object itemStack);
+	public void superAddChatMessage(Object iChatComponent);
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName);
+	public Object superGetPosition();
+	public Object superGetPositionVector();
+	public Object superGetEntityWorld();
+	public Object superGetCommandSenderEntity();
+	public boolean superSendCommandFeedback();
+	public void superSetCommandStat(Object type, int amount);
+	public Object superGetCommandStats();
+	public void superFunc_174817_o(Object entity);
+	public Object superGetNBTTagCompound();
+	public void superClientUpdateEntityNBT(Object nBTTagCompound);
+	public boolean superInteractAt(Object entityPlayer, Object vec3);
+	public boolean superIsImmuneToExplosions();
+	public void superApplyEnchantments(Object entityLivingBase, Object entity);
+	public boolean superHasCapability(Object capability, Object enumFacing);
+	public Object superGetCapability(Object capability, Object enumFacing);
+	public void superDeserializeNBT(Object nBTTagCompound);
+	public Object superSerializeNBT();
 
 }

@@ -332,4 +332,74 @@ public class Modchu_RenderPlayerMasterBasis implements Modchu_IRenderPlayerMaste
 		base.superRenderMultipass(entity, p_188300_2_, p_188300_4_, p_188300_6_, p_188300_8_, p_188300_9_);
 	}
 
+	@Override
+	public void func_98191_a(Object entityPlayer) {
+		base.superFunc_98191_a(entityPlayer);
+	}
+
+	@Override
+	public void func_82439_b(Object entityPlayer, int par2, float par3) {
+		base.superFunc_82439_b(entityPlayer, par2, par3);
+	}
+
+	@Override
+	public void renderPlayer(Object entityPlayer, double par2, double par4, double par6, float par8, float par9) {
+		base.superRenderPlayer(entityPlayer, par2, par4, par6, par8, par9);
+	}
+
+	@Override
+	public void func_98190_a(Object entityLiving) {
+		base.superFunc_98190_a(entityLiving);
+	}
+
+	@Override
+	public void func_110777_b(Object entity) {
+		base.superFunc_110777_b(entity);
+	}
+
+	@Override
+	public void rotateCorpse(Object entityLivingBase, float par2, float par3, float par4) {
+		base.superRotateCorpse(entityLivingBase, par2, par3, par4);
+	}
+
+	@Override
+	public float renderSwingProgress(Object entityLivingBase, float par2) {
+		return base.superRenderSwingProgress(entityLivingBase, par2);
+	}
+
+	@Override
+	public boolean func_110813_b(Object entityLivingBase) {
+		return base.superFunc_110813_b(entityLivingBase);
+	}
+
+	@Override
+	public void func_130220_b(Object abstractClientPlayer, int par2, float par3) {
+		base.superFunc_130220_b(abstractClientPlayer, par2, par3);
+	}
+
+	@Override
+	public void func_130009_a(Object abstractClientPlayer, double par2, double par4, double par6, float par8, float par9) {
+		base.superFunc_130009_a(abstractClientPlayer, par2, par4, par6, par8, par9);
+	}
+
+	@Override
+	public Object func_110817_a(Object abstractClientPlayer) {
+		return base.superFunc_110817_a(abstractClientPlayer);
+	}
+
+	@Override
+	public void renderPlayerScale(Object abstractClientPlayer, float par2) {
+		base.superRenderPlayerScale(abstractClientPlayer, par2);
+	}
+
+	@Override
+	public void func_96450_a(Object abstractClientPlayer, double par2, double par4, double par6, String par8Str, float par9, double par10) {
+		base.superFunc_96450_a(abstractClientPlayer, par2, par4, par6, par8Str, par9, par10);
+	}
+
+	@Override
+	public boolean isVisible(Object abstractClientPlayer) {
+		return base.superIsVisible(abstractClientPlayer);
+	}
+
 }

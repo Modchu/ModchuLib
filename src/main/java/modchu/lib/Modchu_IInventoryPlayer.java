@@ -5,7 +5,7 @@ public interface Modchu_IInventoryPlayer {
 	public int superGetFirstEmptyStack();
 	public void superSetCurrentItem(int par1, int par2, boolean par3, boolean par4);
 	public void superChangeCurrentItem(int par1);
-	public int superClearInventory(int par1, int par2);
+	public int superClearInventory(Object itemOrInt, int par2);
 	public void superFunc_70439_a(Object item, int par2);
 	public void superDecrementAnimations();
 	public boolean superConsumeInventoryItem(int par1);
@@ -50,5 +50,18 @@ public interface Modchu_IInventoryPlayer {
 	public void superSetField(int id, int value);
 	public int superGetFieldCount();
 	public void superClear();
+	public void superFunc_146030_a(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_);
+	public float superFunc_146023_a(Object block);
+	public String superGetInventoryName();
+	public boolean superHasCustomInventoryName();
+	public boolean superFunc_146025_b(Object block);
+	public void superOpenInventory();
+	public void superCloseInventory();
+	public void superSetPickedItemStack(Object itemStack);
+	public void superPickItem(int index);
+	public int superGetSlotFor(Object itemStack);
+	public int superGetBestHotbarSlot();
+	public void superDeleteStack(Object itemStack);
+	public boolean superIsUseableByPlayer(Object entityPlayer);
 
 }

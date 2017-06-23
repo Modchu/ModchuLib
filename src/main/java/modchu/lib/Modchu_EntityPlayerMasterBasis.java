@@ -722,8 +722,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public Object getAITarget() {
-		return base.supergetAITarget();
+	public Object getRevengeTarget() {
+		return base.supergetRevengeTarget();
 	}
 
 	@Override
@@ -737,23 +737,23 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public Object getLastAttacker() {
-		return base.supergetLastAttacker();
+	public Object getLastAttackedEntity() {
+		return base.supergetLastAttackedEntity();
 	}
 
 	@Override
-	public int getLastAttackerTime() {
-		return base.supergetLastAttackerTime();
+	public int getLastAttackedEntityTime() {
+		return base.supergetLastAttackedEntityTime();
 	}
 
 	@Override
-	public void setLastAttacker(Object entity) {
-		base.supersetLastAttacker(entity);
+	public void setLastAttackedEntity(Object entity) {
+		base.supersetLastAttackedEntity(entity);
 	}
 
 	@Override
-	public int getAge() {
-		return base.supergetAge();
+	public int getIdleTime() {
+		return base.supergetIdleTime();
 	}
 
 	@Override
@@ -912,8 +912,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void kill() {
-		base.superkill();
+	public void outOfWorld() {
+		base.superoutOfWorld();
 	}
 
 	@Override

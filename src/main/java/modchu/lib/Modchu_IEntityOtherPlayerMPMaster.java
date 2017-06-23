@@ -1,8 +1,17 @@
 package modchu.lib;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface Modchu_IEntityOtherPlayerMPMaster extends Modchu_IEntityLivingBaseMaster {
+	public Object getEntityAttribute(Object attribute);
+	public float getBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block);
+	public String getTranslatedEntityName();
+	public void doBlockCollisions();
+	public Object dropItem(int par1, int par2);
+	public Object dropItemWithOffset(int par1, int par2, float par3);
+	public float func_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block);
+	public boolean func_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7);
 	public void sendChatToPlayer(String par1Str);
 	public int getMaxHealth();
 	public boolean canAttackPlayer(Object entityPlayer);
@@ -117,7 +126,7 @@ public interface Modchu_IEntityOtherPlayerMPMaster extends Modchu_IEntityLivingB
 	public Object getItemStackFromSlot(int slotIn);
 	public void addExperience(int amount);
 	public int getXPSeed();
-	public void removeExperienceLevel(int levels);
+	public void onEnchant(Object itemStack, int levels);
 	public void addExperienceLevel(int levels);
 	public int xpBarCap();
 	public void addExhaustion(float p_71020_1_);
@@ -198,5 +207,22 @@ public interface Modchu_IEntityOtherPlayerMPMaster extends Modchu_IEntityLivingB
 	public boolean isNoDespawnRequired();
 	public boolean processInteract(Object entityPlayer);
 	public void onInitialSpawn(Object o, Object o1);
+	public void destroyVanishingCursedItems();
+	public void openEditStructure(Object tileEntityStructure);
+	public void disableShield(boolean p_190777_1_);
+	public void unlockRecipes(List p_192021_1_);
+	public void unlockRecipes(Object[] resourceLocation);
+	public void func_192022_b(List p_192022_1_);
+	public boolean addItemStackToInventory(Object itemStack);
+	public boolean addShoulderEntity(Object nBTTagCompound);
+	public void spawnShoulderEntities();
+	public Object getLeftShoulderEntity();
+	public void setLeftShoulderEntity(Object nBTTagCompound);
+	public Object getRightShoulderEntity();
+	public void setRightShoulderEntity(Object nBTTagCompound);
+	public boolean canUseCommandBlock();
+	public boolean hasSpawnDimension();
+	public int getSpawnDimension();
+	public void setSpawnDimension(Object integer);
 
 }

@@ -47,6 +47,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (EntityFX) (master != null ? master.multiplyVelocity(par1) : super.multiplyVelocity(par1));
 	}
 
+	@Override
 	public EntityFX superMultiplyVelocity(float par1) {
 		return super.multiplyVelocity(par1);
 	}
@@ -56,6 +57,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (EntityFX) (master != null ? master.multipleParticleScaleBy(par1) : super.multipleParticleScaleBy(par1));
 	}
 
+	@Override
 	public EntityFX superMultipleParticleScaleBy(float par1) {
 		return super.multipleParticleScaleBy(par1);
 	}
@@ -66,6 +68,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setRBGColorF(par1, par2, par3);
 	}
 
+	@Override
 	public void superSetRBGColorF(float par1, float par2, float par3) {
 		super.setRBGColorF(par1, par2, par3);
 	}
@@ -76,6 +79,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setAlphaF(par1);
 	}
 
+	@Override
 	public void superSetAlphaF(float par1) {
 		super.setAlphaF(par1);
 	}
@@ -85,6 +89,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getRedColorF() : super.getRedColorF();
 	}
 
+	@Override
 	public float superGetRedColorF() {
 		return super.getRedColorF();
 	}
@@ -94,6 +99,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getGreenColorF() : super.getGreenColorF();
 	}
 
+	@Override
 	public float superGetGreenColorF() {
 		return super.getGreenColorF();
 	}
@@ -103,6 +109,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getBlueColorF() : super.getBlueColorF();
 	}
 
+	@Override
 	public float superGetBlueColorF() {
 		return super.getBlueColorF();
 	}
@@ -112,6 +119,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.canTriggerWalking() : super.canTriggerWalking();
 	}
 
+	@Override
 	public boolean superCanTriggerWalking() {
 		return super.canTriggerWalking();
 	}
@@ -122,6 +130,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.entityInit();
 	}
 
+	@Override
 	public void superEntityInit() {
 		super.entityInit();
 	}
@@ -132,6 +141,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.onUpdate();
 	}
 
+	@Override
 	public void superOnUpdate() {
 		super.onUpdate();
 	}
@@ -141,6 +151,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getFXLayer() : super.getFXLayer();
 	}
 
+	@Override
 	public int superGetFXLayer() {
 		return super.getFXLayer();
 	}
@@ -151,6 +162,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.writeEntityToNBT(nBTTagCompound);
 	}
 
+	@Override
 	public void superWriteEntityToNBT(Object nBTTagCompound) {
 		super.writeEntityToNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -161,6 +173,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.readEntityFromNBT(nBTTagCompound);
 	}
 
+	@Override
 	public void superReadEntityFromNBT(Object nBTTagCompound) {
 		super.readEntityFromNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -171,6 +184,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setParticleTextureIndex(par1);
 	}
 
+	@Override
 	public void superSetParticleTextureIndex(int par1) {
 		super.setParticleTextureIndex(par1);
 	}
@@ -181,6 +195,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.nextTextureIndexX();
 	}
 
+	@Override
 	public void superNextTextureIndexX() {
 		super.nextTextureIndexX();
 	}
@@ -190,6 +205,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.canBeAttackedWithItem() : super.canAttackWithItem();
 	}
 
+	@Override
 	public boolean superCanBeAttackedWithItem() {
 		return super.canAttackWithItem();
 	}
@@ -199,6 +215,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.toString() : super.toString();
 	}
 
+	@Override
 	public String superToString() {
 		return super.toString();
 	}
@@ -208,6 +225,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (DataWatcher) (master != null ? master.getDataWatcher() : super.getDataWatcher());
 	}
 
+	@Override
 	public DataWatcher superGetDataWatcher() {
 		return super.getDataWatcher();
 	}
@@ -217,6 +235,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.equals(par1Obj) : super.equals(par1Obj);
 	}
 
+	@Override
 	public boolean superEquals(Object par1Obj) {
 		return super.equals(par1Obj);
 	}
@@ -226,6 +245,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.hashCode() : super.hashCode();
 	}
 
+	@Override
 	public int superHashCode() {
 		return super.hashCode();
 	}
@@ -236,6 +256,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.preparePlayerToSpawn();
 	}
 
+	@Override
 	public void superPreparePlayerToSpawn() {
 		super.preparePlayerToSpawn();
 	}
@@ -246,6 +267,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setDead();
 	}
 
+	@Override
 	public void superSetDead() {
 		super.setDead();
 	}
@@ -256,6 +278,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setSize(par1, par2);
 	}
 
+	@Override
 	public void superSetSize(float par1, float par2) {
 		super.setSize(par1, par2);
 	}
@@ -266,6 +289,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setRotation(par1, par2);
 	}
 
+	@Override
 	public void superSetRotation(float par1, float par2) {
 		super.setRotation(par1, par2);
 	}
@@ -276,6 +300,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setPosition(par1, par3, par5);
 	}
 
+	@Override
 	public void superSetPosition(double par1, double par3, double par5) {
 		super.setPosition(par1, par3, par5);
 	}
@@ -286,6 +311,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setAngles(par1, par2);
 	}
 
+	@Override
 	public void superSetAngles(float par1, float par2) {
 		super.setAngles(par1, par2);
 	}
@@ -296,6 +322,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.onEntityUpdate();
 	}
 
+	@Override
 	public void superOnEntityUpdate() {
 		super.onEntityUpdate();
 	}
@@ -305,6 +332,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getMaxInPortalTime() : super.getMaxInPortalTime();
 	}
 
+	@Override
 	public int superGetMaxInPortalTime() {
 		return super.getMaxInPortalTime();
 	}
@@ -315,6 +343,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setOnFireFromLava();
 	}
 
+	@Override
 	public void superSetOnFireFromLava() {
 		super.setOnFireFromLava();
 	}
@@ -325,6 +354,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setFire(par1);
 	}
 
+	@Override
 	public void superSetFire(int par1) {
 		super.setFire(par1);
 	}
@@ -335,6 +365,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.extinguish();
 	}
 
+	@Override
 	public void superExtinguish() {
 		super.extinguish();
 	}
@@ -345,6 +376,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.kill();
 	}
 
+	@Override
 	public void superKill() {
 		super.kill();
 	}
@@ -354,6 +386,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isOffsetPositionInLiquid(par1, par3, par5) : super.isOffsetPositionInLiquid(par1, par3, par5);
 	}
 
+	@Override
 	public boolean superIsOffsetPositionInLiquid(double par1, double par3, double par5) {
 		return super.isOffsetPositionInLiquid(par1, par3, par5);
 	}
@@ -364,6 +397,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.moveEntity(par1, par3, par5);
 	}
 
+	@Override
 	public void superMove(double par1, double par3, double par5) {
 		super.moveEntity(par1, par3, par5);
 	}
@@ -374,6 +408,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.playSound(par1Str, par2, par3);
 	}
 
+	@Override
 	public void superPlaySound(String par1Str, float par2, float par3) {
 		super.playSound(par1Str, par2, par3);
 	}
@@ -383,6 +418,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (AxisAlignedBB) (master != null ? master.getCollisionBoundingBox() : super.getBoundingBox());
 	}
 
+	@Override
 	public AxisAlignedBB superGetCollisionBoundingBox() {
 		return super.getBoundingBox();
 	}
@@ -393,6 +429,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.dealFireDamage(par1);
 	}
 
+	@Override
 	public void superDealFireDamage(int par1) {
 		super.dealFireDamage(par1);
 	}
@@ -402,6 +439,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isWet() : super.isWet();
 	}
 
+	@Override
 	public boolean superIsWet() {
 		return super.isWet();
 	}
@@ -411,6 +449,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isInWater() : super.isInWater();
 	}
 
+	@Override
 	public boolean superIsInWater() {
 		return super.isInWater();
 	}
@@ -420,6 +459,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.handleWaterMovement() : super.handleWaterMovement();
 	}
 
+	@Override
 	public boolean superHandleWaterMovement() {
 		return super.handleWaterMovement();
 	}
@@ -429,6 +469,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isInsideOfMaterial(material) : super.isInsideOfMaterial(material);
 	}
 
+	@Override
 	public boolean superIsInsideOfMaterial(Object material) {
 		return super.isInsideOfMaterial((Material) material);
 	}
@@ -438,6 +479,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getEyeHeight() : super.getEyeHeight();
 	}
 
+	@Override
 	public float superGetEyeHeight() {
 		return super.getEyeHeight();
 	}
@@ -448,6 +490,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.moveFlying(par1, par2, par3);
 	}
 
+	@Override
 	public void superMoveRelative(float par1, float par2, float par3) {
 		super.moveFlying(par1, par2, par3);
 	}
@@ -457,6 +500,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getBrightnessForRender(par1) : super.getBrightnessForRender(par1);
 	}
 
+	@Override
 	public int superGetBrightnessForRender(float par1) {
 		return super.getBrightnessForRender(par1);
 	}
@@ -466,6 +510,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getBrightness(par1) : super.getBrightness(par1);
 	}
 
+	@Override
 	public float superGetBrightness(float par1) {
 		return super.getBrightness(par1);
 	}
@@ -476,6 +521,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setWorld(world);
 	}
 
+	@Override
 	public void superSetWorld(Object world) {
 		super.setWorld((World) world);
 	}
@@ -486,6 +532,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setPositionAndRotation(par1, par3, par5, par7, par8);
 	}
 
+	@Override
 	public void superSetPositionAndRotation(double par1, double par3, double par5, float par7, float par8) {
 		super.setPositionAndRotation(par1, par3, par5, par7, par8);
 	}
@@ -496,6 +543,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setLocationAndAngles(par1, par3, par5, par7, par8);
 	}
 
+	@Override
 	public void superSetLocationAndAngles(double par1, double par3, double par5, float par7, float par8) {
 		super.setLocationAndAngles(par1, par3, par5, par7, par8);
 	}
@@ -505,6 +553,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getDistanceToEntity(entity) : super.getDistanceToEntity(entity);
 	}
 
+	@Override
 	public float superGetDistanceToEntity(Object entity) {
 		return super.getDistanceToEntity((Entity) entity);
 	}
@@ -514,6 +563,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getDistanceSq(par1, par3, par5) : super.getDistanceSq(par1, par3, par5);
 	}
 
+	@Override
 	public double superGetDistanceSq(double par1, double par3, double par5) {
 		return super.getDistanceSq(par1, par3, par5);
 	}
@@ -523,6 +573,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getDistance(par1, par3, par5) : super.getDistance(par1, par3, par5);
 	}
 
+	@Override
 	public double superGetDistance(double par1, double par3, double par5) {
 		return super.getDistance(par1, par3, par5);
 	}
@@ -532,6 +583,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getDistanceSqToEntity(entity) : super.getDistanceSqToEntity(entity);
 	}
 
+	@Override
 	public double superGetDistanceSqToEntity(Object entity) {
 		return super.getDistanceSqToEntity((Entity) entity);
 	}
@@ -542,6 +594,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.onCollideWithPlayer(entityPlayer);
 	}
 
+	@Override
 	public void superOnCollideWithPlayer(Object entityPlayer) {
 		super.onCollideWithPlayer((EntityPlayer) entityPlayer);
 	}
@@ -552,6 +605,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.applyEntityCollision(entity);
 	}
 
+	@Override
 	public void superApplyEntityCollision(Object entity) {
 		super.applyEntityCollision((Entity) entity);
 	}
@@ -562,6 +616,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.addVelocity(par1, par3, par5);
 	}
 
+	@Override
 	public void superAddVelocity(double par1, double par3, double par5) {
 		super.addVelocity(par1, par3, par5);
 	}
@@ -572,6 +627,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setBeenAttacked();
 	}
 
+	@Override
 	public void superSetBeenAttacked() {
 		super.setBeenAttacked();
 	}
@@ -581,6 +637,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.attackEntityFrom(damageSource, par2) : super.attackEntityFrom(damageSource, par2);
 	}
 
+	@Override
 	public boolean superAttackEntityFrom(Object damageSource, float par2) {
 		return super.attackEntityFrom((DamageSource) damageSource, par2);
 	}
@@ -590,6 +647,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.canBeCollidedWith() : super.canBeCollidedWith();
 	}
 
+	@Override
 	public boolean superCanBeCollidedWith() {
 		return super.canBeCollidedWith();
 	}
@@ -599,6 +657,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.canBePushed() : super.canBePushed();
 	}
 
+	@Override
 	public boolean superCanBePushed() {
 		return super.canBePushed();
 	}
@@ -609,6 +668,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.addToPlayerScore(entity, par2);
 	}
 
+	@Override
 	public void superAddToPlayerScore(Object entity, int par2) {
 		super.addToPlayerScore((Entity) entity, par2);
 	}
@@ -618,6 +678,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isInRangeToRenderDist(par1) : super.isInRangeToRenderDist(par1);
 	}
 
+	@Override
 	public boolean superIsInRangeToRenderDist(double par1) {
 		return super.isInRangeToRenderDist(par1);
 	}
@@ -627,6 +688,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.writeMountToNBT(nBTTagCompound) : super.writeMountToNBT(nBTTagCompound);
 	}
 
+	@Override
 	public boolean superWriteMountToNBT(Object nBTTagCompound) {
 		return super.writeMountToNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -636,6 +698,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.writeToNBTOptional(nBTTagCompound) : super.writeToNBTOptional(nBTTagCompound);
 	}
 
+	@Override
 	public boolean superWriteToNBTOptional(Object nBTTagCompound) {
 		return super.writeToNBTOptional((NBTTagCompound) nBTTagCompound);
 	}
@@ -646,6 +709,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.writeToNBT(nBTTagCompound);
 	}
 
+	@Override
 	public void superWriteToNBT(Object nBTTagCompound) {
 		super.writeToNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -656,6 +720,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.readFromNBT(nBTTagCompound);
 	}
 
+	@Override
 	public void superReadFromNBT(Object nBTTagCompound) {
 		super.readFromNBT((NBTTagCompound) nBTTagCompound);
 	}
@@ -665,6 +730,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.shouldSetPosAfterLoading() : super.shouldSetPosAfterLoading();
 	}
 
+	@Override
 	public boolean superShouldSetPosAfterLoading() {
 		return super.shouldSetPosAfterLoading();
 	}
@@ -675,6 +741,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.onChunkLoad();
 	}
 
+	@Override
 	public void superOnChunkLoad() {
 		super.onChunkLoad();
 	}
@@ -684,6 +751,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (NBTTagList) (master != null ? master.newDoubleNBTList(par1ArrayOfDouble) : super.newDoubleNBTList(par1ArrayOfDouble));
 	}
 
+	@Override
 	public NBTTagList superNewDoubleNBTList(double... par1ArrayOfDouble) {
 		return super.newDoubleNBTList(par1ArrayOfDouble);
 	}
@@ -693,6 +761,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (NBTTagList) (master != null ? master.newFloatNBTList(par1ArrayOfFloat) : super.newFloatNBTList(par1ArrayOfFloat));
 	}
 
+	@Override
 	public NBTTagList superNewFloatNBTList(float... par1ArrayOfFloat) {
 		return super.newFloatNBTList(par1ArrayOfFloat);
 	}
@@ -702,6 +771,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (EntityItem) (master != null ? master.entityDropItem(itemStack, par2) : super.entityDropItem(itemStack, par2));
 	}
 
+	@Override
 	public EntityItem superEntityDropItem(Object itemStack, float par2) {
 		return super.entityDropItem((ItemStack) itemStack, par2);
 	}
@@ -711,6 +781,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isEntityAlive() : super.isEntityAlive();
 	}
 
+	@Override
 	public boolean superIsEntityAlive() {
 		return super.isEntityAlive();
 	}
@@ -720,6 +791,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isEntityInsideOpaqueBlock() : super.isEntityInsideOpaqueBlock();
 	}
 
+	@Override
 	public boolean superIsEntityInsideOpaqueBlock() {
 		return super.isEntityInsideOpaqueBlock();
 	}
@@ -729,6 +801,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.interactFirst(entityPlayer) : super.interactFirst(entityPlayer);
 	}
 
+	@Override
 	public boolean superInteractFirst(Object entityPlayer) {
 		return super.interactFirst((EntityPlayer) entityPlayer);
 	}
@@ -738,6 +811,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (AxisAlignedBB) (master != null ? master.getCollisionBox(entity) : super.getCollisionBox(entity));
 	}
 
+	@Override
 	public AxisAlignedBB superGetCollisionBox(Object entity) {
 		return super.getCollisionBox((Entity) entity);
 	}
@@ -748,6 +822,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.updateRidden();
 	}
 
+	@Override
 	public void superUpdateRidden() {
 		super.updateRidden();
 	}
@@ -758,6 +833,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.updateRiderPosition();
 	}
 
+	@Override
 	public void superUpdateRiderPosition() {
 		super.updateRiderPosition();
 	}
@@ -767,6 +843,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getYOffset() : super.getYOffset();
 	}
 
+	@Override
 	public double superGetYOffset() {
 		return super.getYOffset();
 	}
@@ -776,6 +853,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getMountedYOffset() : super.getMountedYOffset();
 	}
 
+	@Override
 	public double superGetMountedYOffset() {
 		return super.getMountedYOffset();
 	}
@@ -786,6 +864,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.mountEntity(entity);
 	}
 
+	@Override
 	public void superMountEntity(Object entity) {
 		super.mountEntity((Entity) entity);
 	}
@@ -795,6 +874,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getCollisionBorderSize() : super.getCollisionBorderSize();
 	}
 
+	@Override
 	public float superGetCollisionBorderSize() {
 		return super.getCollisionBorderSize();
 	}
@@ -804,6 +884,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (Vec3) (master != null ? master.getLookVec() : super.getLookVec());
 	}
 
+	@Override
 	public Vec3 superGetLookVec() {
 		return super.getLookVec();
 	}
@@ -814,6 +895,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setInPortal();
 	}
 
+	@Override
 	public void superSetPortal() {
 		super.setInPortal();
 	}
@@ -823,6 +905,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getPortalCooldown() : super.getPortalCooldown();
 	}
 
+	@Override
 	public int superGetPortalCooldown() {
 		return super.getPortalCooldown();
 	}
@@ -833,6 +916,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setVelocity(par1, par3, par5);
 	}
 
+	@Override
 	public void superSetVelocity(double par1, double par3, double par5) {
 		super.setVelocity(par1, par3, par5);
 	}
@@ -843,6 +927,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.handleHealthUpdate(par1);
 	}
 
+	@Override
 	public void superHandleStatusUpdate(byte par1) {
 		super.handleHealthUpdate(par1);
 	}
@@ -853,6 +938,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.performHurtAnimation();
 	}
 
+	@Override
 	public void superPerformHurtAnimation() {
 		super.performHurtAnimation();
 	}
@@ -863,6 +949,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setCurrentItemOrArmor(par1, itemStack);
 	}
 
+	@Override
 	public void superSetCurrentItemOrArmor(int par1, Object itemStack) {
 		super.setCurrentItemOrArmor(par1, (ItemStack) itemStack);
 	}
@@ -872,6 +959,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isBurning() : super.isBurning();
 	}
 
+	@Override
 	public boolean superIsBurning() {
 		return super.isBurning();
 	}
@@ -881,6 +969,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isRiding() : super.isRiding();
 	}
 
+	@Override
 	public boolean superIsRiding() {
 		return super.isRiding();
 	}
@@ -890,6 +979,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isSneaking() : super.isSneaking();
 	}
 
+	@Override
 	public boolean superIsSneaking() {
 		return super.isSneaking();
 	}
@@ -900,6 +990,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setSneaking(par1);
 	}
 
+	@Override
 	public void superSetSneaking(boolean par1) {
 		super.setSneaking(par1);
 	}
@@ -909,6 +1000,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isSprinting() : super.isSprinting();
 	}
 
+	@Override
 	public boolean superIsSprinting() {
 		return super.isSprinting();
 	}
@@ -919,6 +1011,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setSprinting(par1);
 	}
 
+	@Override
 	public void superSetSprinting(boolean par1) {
 		super.setSprinting(par1);
 	}
@@ -928,6 +1021,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isInvisible() : super.isInvisible();
 	}
 
+	@Override
 	public boolean superIsInvisible() {
 		return super.isInvisible();
 	}
@@ -937,6 +1031,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isInvisibleToPlayer(entityPlayer) : super.isInvisibleToPlayer(entityPlayer);
 	}
 
+	@Override
 	public boolean superIsInvisibleToPlayer(Object entityPlayer) {
 		return super.isInvisibleToPlayer((EntityPlayer) entityPlayer);
 	}
@@ -947,6 +1042,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setInvisible(par1);
 	}
 
+	@Override
 	public void superSetInvisible(boolean par1) {
 		super.setInvisible(par1);
 	}
@@ -956,6 +1052,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isEating() : super.isEating();
 	}
 
+	@Override
 	public boolean superIsEating() {
 		return super.isEating();
 	}
@@ -966,6 +1063,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setEating(par1);
 	}
 
+	@Override
 	public void superSetEating(boolean par1) {
 		super.setEating(par1);
 	}
@@ -975,6 +1073,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getFlag(par1) : super.getFlag(par1);
 	}
 
+	@Override
 	public boolean superGetFlag(int par1) {
 		return super.getFlag(par1);
 	}
@@ -985,6 +1084,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setFlag(par1, par2);
 	}
 
+	@Override
 	public void superSetFlag(int par1, boolean par2) {
 		super.setFlag(par1, par2);
 	}
@@ -994,6 +1094,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getAir() : super.getAir();
 	}
 
+	@Override
 	public int superGetAir() {
 		return super.getAir();
 	}
@@ -1004,6 +1105,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setAir(par1);
 	}
 
+	@Override
 	public void superSetAir(int par1) {
 		super.setAir(par1);
 	}
@@ -1014,6 +1116,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.onStruckByLightning(entityLightningBolt);
 	}
 
+	@Override
 	public void superOnStruckByLightning(Object entityLightningBolt) {
 		super.onStruckByLightning((EntityLightningBolt) entityLightningBolt);
 	}
@@ -1024,6 +1127,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.onKillEntity(entityLivingBase);
 	}
 
+	@Override
 	public void superOnKillEntity(Object entityLivingBase) {
 		super.onKillEntity((EntityLivingBase) entityLivingBase);
 	}
@@ -1034,6 +1138,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setInWeb();
 	}
 
+	@Override
 	public void superSetInWeb() {
 		super.setInWeb();
 	}
@@ -1043,6 +1148,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (Entity[]) (master != null ? master.getParts() : super.getParts());
 	}
 
+	@Override
 	public Entity[] superGetParts() {
 		return super.getParts();
 	}
@@ -1052,6 +1158,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isEntityEqual(entity) : super.isEntityEqual(entity);
 	}
 
+	@Override
 	public boolean superIsEntityEqual(Object entity) {
 		return super.isEntityEqual((Entity) entity);
 	}
@@ -1061,6 +1168,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getRotationYawHead() : super.getRotationYawHead();
 	}
 
+	@Override
 	public float superGetRotationYawHead() {
 		return super.getRotationYawHead();
 	}
@@ -1071,6 +1179,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setRotationYawHead(par1);
 	}
 
+	@Override
 	public void superSetRotationYawHead(float par1) {
 		super.setRotationYawHead(par1);
 	}
@@ -1080,6 +1189,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.hitByEntity(entity) : super.hitByEntity(entity);
 	}
 
+	@Override
 	public boolean superHitByEntity(Object entity) {
 		return super.hitByEntity((Entity) entity);
 	}
@@ -1090,6 +1200,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.copyLocationAndAnglesFrom(entity);
 	}
 
+	@Override
 	public void superCopyLocationAndAnglesFrom(Object entity) {
 		super.copyLocationAndAnglesFrom((Entity) entity);
 	}
@@ -1100,6 +1211,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.travelToDimension(par1);
 	}
 
+	@Override
 	public void superTravelToDimension(int par1) {
 		super.travelToDimension(par1);
 	}
@@ -1109,6 +1221,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (Integer) (master != null ? master.getTeleportDirection() : super.getTeleportDirection());
 	}
 
+	@Override
 	public Object superGetTeleportDirection() {
 		return super.getTeleportDirection();
 	}
@@ -1118,6 +1231,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.doesEntityNotTriggerPressurePlate() : super.doesEntityNotTriggerPressurePlate();
 	}
 
+	@Override
 	public boolean superDoesEntityNotTriggerPressurePlate() {
 		return super.doesEntityNotTriggerPressurePlate();
 	}
@@ -1128,6 +1242,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.addEntityCrashInfo(crashReportCategory);
 	}
 
+	@Override
 	public void superAddEntityCrashInfo(Object crashReportCategory) {
 		super.addEntityCrashInfo((CrashReportCategory) crashReportCategory);
 	}
@@ -1137,6 +1252,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.canRenderOnFire() : super.canRenderOnFire();
 	}
 
+	@Override
 	public boolean superCanRenderOnFire() {
 		return super.canRenderOnFire();
 	}
@@ -1146,6 +1262,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getUniqueID() : super.getUniqueID();
 	}
 
+	@Override
 	public UUID superGetUniqueID() {
 		return super.getUniqueID();
 	}
@@ -1155,6 +1272,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isPushedByWater() : super.isPushedByWater();
 	}
 
+	@Override
 	public boolean superIsPushedByWater() {
 		return super.isPushedByWater();
 	}
@@ -1164,6 +1282,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (NBTTagCompound) (master != null ? master.getEntityData() : super.getEntityData());
 	}
 
+	@Override
 	public NBTTagCompound superGetEntityData() {
 		return super.getEntityData();
 	}
@@ -1173,6 +1292,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.shouldRiderSit() : super.shouldRiderSit();
 	}
 
+	@Override
 	public boolean superShouldRiderSit() {
 		return super.shouldRiderSit();
 	}
@@ -1182,6 +1302,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (ItemStack) (master != null ? master.getPickedResult(movingObjectPosition) : super.getPickedResult(movingObjectPosition));
 	}
 
+	@Override
 	public ItemStack superGetPickedResult(Object movingObjectPosition) {
 		return super.getPickedResult((MovingObjectPosition) movingObjectPosition);
 	}
@@ -1191,6 +1312,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getPersistentID() : super.getPersistentID();
 	}
 
+	@Override
 	public UUID superGetPersistentID() {
 		return super.getPersistentID();
 	}
@@ -1200,6 +1322,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.shouldRenderInPass(pass) : super.shouldRenderInPass(pass);
 	}
 
+	@Override
 	public boolean superShouldRenderInPass(int pass) {
 		return super.shouldRenderInPass(pass);
 	}
@@ -1209,6 +1332,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isCreatureType(enumCreatureType, forSpawnCount) : super.isCreatureType(enumCreatureType, forSpawnCount);
 	}
 
+	@Override
 	public boolean superIsCreatureType(Object enumCreatureType, boolean forSpawnCount) {
 		return super.isCreatureType((EnumCreatureType) enumCreatureType, forSpawnCount);
 	}
@@ -1218,6 +1342,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.registerExtendedProperties(identifier, iExtendedEntityProperties) : super.registerExtendedProperties(identifier, iExtendedEntityProperties);
 	}
 
+	@Override
 	public String superRegisterExtendedProperties(String identifier, Object iExtendedEntityProperties) {
 		return super.registerExtendedProperties(identifier, (IExtendedEntityProperties) iExtendedEntityProperties);
 	}
@@ -1227,6 +1352,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (IExtendedEntityProperties) (master != null ? master.getExtendedProperties(identifier) : super.getExtendedProperties(identifier));
 	}
 
+	@Override
 	public IExtendedEntityProperties superGetExtendedProperties(String identifier) {
 		return super.getExtendedProperties(identifier);
 	}
@@ -1236,6 +1362,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.canRiderInteract() : super.canRiderInteract();
 	}
 
+	@Override
 	public boolean superCanRiderInteract() {
 		return super.canRiderInteract();
 	}
@@ -1245,6 +1372,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.shouldDismountInWater(entity) : super.shouldDismountInWater(entity);
 	}
 
+	@Override
 	public boolean superShouldDismountInWater(Object entity) {
 		return super.shouldDismountInWater((Entity) entity);
 	}
@@ -1254,6 +1382,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_) : super.isInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_);
 	}
 
+	@Override
 	public boolean superIsInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_) {
 		return super.isInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_);
 	}
@@ -1263,10 +1392,12 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (EntityItem) (master != null ? master.dropItem(par1, par2) : super.dropItem(par1, par2));
 	}
 
+	@Override
 	public Object superDropItem(Object par1, int par2) {
 		return super.dropItem((Item)par1, par2);
 	}
 	// ~164
+	@Override
 	public String superGetTranslatedEntityName() {
 		return super.getCommandSenderName();
 	}
@@ -1300,6 +1431,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getEntityId() : super.getEntityId();
 	}
 
+	@Override
 	public int superGetEntityId() {
 		return super.getEntityId();
 	}
@@ -1310,6 +1442,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setEntityId(p_145769_1_);
 	}
 
+	@Override
 	public void superSetEntityId(int p_145769_1_) {
 		super.setEntityId(p_145769_1_);
 	}
@@ -1319,6 +1452,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (String) (master != null ? master.getSwimSound() : super.getSwimSound());
 	}
 
+	@Override
 	public String superGetSwimSound() {
 		return super.getSwimSound();
 	}
@@ -1328,6 +1462,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (String) (master != null ? master.getSplashSound() : super.getSplashSound());
 	}
 
+	@Override
 	public String superGetSplashSound() {
 		return super.getSplashSound();
 	}
@@ -1337,6 +1472,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (IChatComponent) (master != null ? master.getDisplayName() : super.func_145748_c_());
 	}
 
+	@Override
 	public IChatComponent superGetDisplayName() {
 		return super.func_145748_c_();
 	}
@@ -1347,6 +1483,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.func_145781_i(p_145781_1_);
 	}
 
+	@Override
 	public void superOnDataWatcherUpdate(int p_145781_1_) {
 		super.func_145781_i(p_145781_1_);
 	}
@@ -1362,6 +1499,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setParticleIcon(icon);
 	}
 
+	@Override
 	public void superSetParticleIcon(Object icon) {
 		super.setParticleIcon((IIcon) icon);
 	}
@@ -1372,6 +1510,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.renderParticle(tessellator, par2, par3, par4, par5, par6, par7);
 	}
 
+	@Override
 	public void superRenderParticle(Object tessellator, float par2, float par3, float par4, float par5, float par6, float par7) {
 		super.renderParticle((Tessellator) tessellator, par2, par3, par4, par5, par6, par7);
 	}
@@ -1382,6 +1521,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.updateFallState(par1, par3);
 	}
 
+	@Override
 	public void superUpdateFallState(double par1, boolean par3) {
 		super.updateFallState(par1, par3);
 	}
@@ -1392,6 +1532,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.fall(par1);
 	}
 
+	@Override
 	public void superFall(float par1) {
 		super.fall(par1);
 	}
@@ -1401,6 +1542,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.handleLavaMovement() : super.handleLavaMovement();
 	}
 
+	@Override
 	public boolean superHandleLavaMovement() {
 		return super.handleLavaMovement();
 	}
@@ -1410,6 +1552,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getShadowSize() : super.getShadowSize();
 	}
 
+	@Override
 	public float superGetShadowSize() {
 		return super.getShadowSize();
 	}
@@ -1420,6 +1563,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
 	}
 
+	@Override
 	public void superSetPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9) {
 		super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9);
 	}
@@ -1429,6 +1573,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (ItemStack[]) (master != null ? master.getInventory() : super.getLastActiveItems());
 	}
 
+	@Override
 	public ItemStack[] superGetInventory() {
 		return super.getLastActiveItems();
 	}
@@ -1438,6 +1583,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isEntityInvulnerable() : super.isEntityInvulnerable();
 	}
 
+	@Override
 	public boolean superIsEntityInvulnerable() {
 		return super.isEntityInvulnerable();
 	}
@@ -1448,6 +1594,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.copyDataFrom(entity, par2);
 	}
 
+	@Override
 	public void superCopyDataFromOld(Object entity, boolean par2) {
 		super.copyDataFrom((Entity) entity, par2);
 	}
@@ -1457,6 +1604,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getMaxFallHeight() : super.getMaxSafePointTries();
 	}
 
+	@Override
 	public int superGetMaxFallHeight() {
 		return super.getMaxSafePointTries();
 	}
@@ -1467,6 +1615,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.func_145775_I();
 	}
 
+	@Override
 	public void superDoBlockCollisions() {
 		super.func_145775_I();
 	}
@@ -1477,6 +1626,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.func_145780_a(par1, par2, par3, par4);
 	}
 
+	@Override
 	public void superPlayStepSound(int par1, int par2, int par3, Object par4) {
 		super.func_145780_a(par1, par2, par3, (Block)par4);
 	}
@@ -1495,6 +1645,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.pushOutOfBlocks(par1, par3, par5) : super.func_145771_j(par1, par3, par5);
 	}
 
+	@Override
 	public boolean superPushOutOfBlocks(double par1, double par3, double par5) {
 		return super.func_145771_j(par1, par3, par5);
 	}
@@ -1504,6 +1655,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getName() : super.getCommandSenderName();
 	}
 
+	@Override
 	public String superGetName() {
 		return super.getCommandSenderName();
 	}
@@ -1513,6 +1665,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.getBlockExplosionResistance(explosion, world, par3, par4, par5, block) : super.func_145772_a(explosion, world, par3, par4, par5, block);
 	}
 
+	@Override
 	public float superGetBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block) {
 		return super.func_145772_a((Explosion) explosion, (World) world, par3, par4, par5, (Block) block);
 	}
@@ -1522,6 +1675,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.shouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7) : super.func_145774_a(explosion, world, par3, par4, par5, par6, par7);
 	}
 
+	@Override
 	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, Object par6, float par7) {
 		return super.func_145774_a((Explosion) explosion, (World) world, par3, par4, par5, (Block)par6, par7);
 	}
@@ -1580,31 +1734,38 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return false;
 	}
 
+	@Override
 	public void superSetMaxAge(int p_187114_1_) {
 	}
 
+	@Override
 	public void superSetParticleTexture(Object textureAtlasSprite) {
 	}
 
+	@Override
 	public void superSetExpired() {
 	}
 
+	@Override
 	public void superResetPositionToBB() {
 	}
 
+	@Override
 	public boolean superIsAlive() {
 		return false;
 	}
 
+	@Override
 	public Object superGetEntityBoundingBox() {
 		return null;
 	}
 
+	@Override
 	public void superSetEntityBoundingBox(Object axisAlignedBB) {
 	}
 
 	@Override
-	public boolean superIsTransparent() {
+	public boolean superShouldDisableDepth() {
 		return false;
 	}
 
@@ -1615,6 +1776,262 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 
 	@Override
 	public void superSetBoundingBox(Object axisAlignedBB) {
+	}
+
+	@Override
+	public String superGetTexture() {
+		return null;
+	}
+
+	@Override
+	public boolean superAddNotRiddenEntityID(Object nBTTagCompound) {
+		return false;
+	}
+
+	@Override
+	public boolean superAddEntityID(Object nBTTagCompound) {
+		return false;
+	}
+
+	@Override
+	public void superUnmountEntity(Object entity) {
+	}
+
+	@Override
+	public void superUpdateCloak() {
+	}
+
+	@Override
+	public float superGetAlpha() {
+		return 0.0F;
+	}
+
+	@Override
+	public void superOnKillCommand() {
+
+	}
+
+	@Override
+	public boolean superIsSilent() {
+		return false;
+	}
+
+	@Override
+	public void superSetSilent(boolean isSilent) {
+
+	}
+
+	@Override
+	public void superResetHeight() {
+
+	}
+
+	@Override
+	public void superSpawnRunningParticles() {
+
+	}
+
+	@Override
+	public void superCreateRunningParticles() {
+
+	}
+
+	@Override
+	public boolean superIsInLava() {
+		return false;
+	}
+
+	@Override
+	public void superMoveToBlockPosAndAngles(Object blockPos, float rotationYawIn, float rotationPitchIn) {
+
+	}
+
+	@Override
+	public double superGetDistanceSq(Object blockPos) {
+		return 0.0D;
+	}
+
+	@Override
+	public double superGetDistanceSqToCenter(Object blockPos) {
+		return 0.0D;
+	}
+
+	@Override
+	public Object superGetLook(float partialTicks) {
+		return null;
+	}
+
+	@Override
+	public Object superGetPositionEyes(float partialTicks) {
+		return null;
+	}
+
+	@Override
+	public Object superRayTrace(double blockReachDistance, float partialTicks) {
+		return null;
+	}
+
+	@Override
+	public void superFunc_181013_g(float p_181013_1_) {
+
+	}
+
+	@Override
+	public Object superFunc_181012_aH() {
+		return null;
+	}
+
+	@Override
+	public void superSetCustomNameTag(String name) {
+
+	}
+
+	@Override
+	public String superGetCustomNameTag() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasCustomName() {
+		return false;
+	}
+
+	@Override
+	public void superSetAlwaysRenderNameTag(boolean alwaysRenderNameTag) {
+
+	}
+
+	@Override
+	public boolean superGetAlwaysRenderNameTag() {
+		return false;
+	}
+
+	@Override
+	public void superSetPositionAndUpdate(double x, double y, double z) {
+
+	}
+
+	@Override
+	public boolean superGetAlwaysRenderNameTagForRender() {
+		return false;
+	}
+
+	@Override
+	public Object superGetHorizontalFacing() {
+		return null;
+	}
+
+	@Override
+	public Object superGetHoverEvent() {
+		return null;
+	}
+
+	@Override
+	public boolean superIsSpectatedByPlayer(Object entityPlayerMP) {
+		return false;
+	}
+
+	@Override
+	public boolean superIsOutsideBorder() {
+		return false;
+	}
+
+	@Override
+	public void superSetOutsideBorder(boolean outsideBorder) {
+	}
+
+	@Override
+	public boolean superReplaceItemInInventory(int inventorySlot, Object itemStack) {
+		return false;
+	}
+
+	@Override
+	public void superAddChatMessage(Object iChatComponent) {
+	}
+
+	@Override
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+		return false;
+	}
+
+	@Override
+	public Object superGetPosition() {
+		return null;
+	}
+
+	@Override
+	public Object superGetPositionVector() {
+		return null;
+	}
+
+	@Override
+	public Object superGetEntityWorld() {
+		return null;
+	}
+
+	@Override
+	public Object superGetCommandSenderEntity() {
+		return null;
+	}
+
+	@Override
+	public boolean superSendCommandFeedback() {
+		return false;
+	}
+
+	@Override
+	public void superSetCommandStat(Object type, int amount) {
+	}
+
+	@Override
+	public Object superGetCommandStats() {
+		return null;
+	}
+
+	@Override
+	public void superFunc_174817_o(Object entity) {
+	}
+
+	@Override
+	public Object superGetNBTTagCompound() {
+		return null;
+	}
+
+	@Override
+	public void superClientUpdateEntityNBT(Object nBTTagCompound) {
+	}
+
+	@Override
+	public boolean superInteractAt(Object entityPlayer, Object vec3) {
+		return false;
+	}
+
+	@Override
+	public boolean superIsImmuneToExplosions() {
+		return false;
+	}
+
+	@Override
+	public void superApplyEnchantments(Object entityLivingBase, Object entity) {
+	}
+
+	@Override
+	public boolean superHasCapability(Object capability, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public Object superGetCapability(Object capability, Object enumFacing) {
+		return null;
+	}
+
+	@Override
+	public void superDeserializeNBT(Object nBTTagCompound) {
+	}
+
+	@Override
+	public Object superSerializeNBT() {
+		return null;
 	}
 
 }

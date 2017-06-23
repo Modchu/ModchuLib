@@ -4,7 +4,7 @@ import modchu.lib.Modchu_ITileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class Modchu_TileEntity extends modchu.lib.forge.mc190_212.Modchu_TileEntity implements Modchu_ITileEntity {
+public class Modchu_TileEntity extends modchu.lib.forge.mc190_220.Modchu_TileEntity implements Modchu_ITileEntity {
 
 	public Modchu_TileEntity() {
 	}
@@ -44,6 +44,7 @@ public class Modchu_TileEntity extends modchu.lib.forge.mc190_212.Modchu_TileEnt
 		return master != null ? master.onlyOpsCanSetNbt() : super.func_183000_F();
 	}
 
+	@Override
 	public boolean superOnlyOpsCanSetNbt() {
 		return super.func_183000_F();
 	}
@@ -69,5 +70,31 @@ public class Modchu_TileEntity extends modchu.lib.forge.mc190_212.Modchu_TileEnt
 		return super.hasWorldObj();
 	}
 	// 190~210共通コピペ　↑
+
+	@Override
+	public boolean superFunc_183000_F() {
+		return super.func_183000_F();
+	}
+
+	@Override
+	public void superSetWorldCreate(Object world) {
+	}
+
+	@Override
+	public Object superGetDisplayName() {
+		return null;
+	}
+
+	@Override
+	public void superRotate(Object rotation) {
+	}
+
+	@Override
+	public void superMirror(Object mirror) {
+	}
+
+	@Override
+	public void superHandleUpdateTag(Object nBTTagCompound) {
+	}
 
 }

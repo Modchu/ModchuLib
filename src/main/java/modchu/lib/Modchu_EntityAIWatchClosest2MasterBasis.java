@@ -15,8 +15,8 @@ public class Modchu_EntityAIWatchClosest2MasterBasis implements Modchu_IEntityAI
 	}
 
 	@Override
-	public boolean continueExecuting() {
-		return base.superContinueExecuting();
+	public boolean shouldContinueExecuting() {
+		return base.superShouldContinueExecuting();
 	}
 
 	@Override

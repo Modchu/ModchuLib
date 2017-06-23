@@ -1,7 +1,6 @@
 package modchu.lib;
 
 public interface Modchu_IRender {
-
 	public void superDoRender(Object entity, double d0, double d1, double d2, float f, float f1);
 	public Object superGetEntityTexture(Object entity);
 	//public Object superGetEntityTexture(Object entity, int i);

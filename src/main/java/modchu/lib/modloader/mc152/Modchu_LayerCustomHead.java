@@ -23,6 +23,7 @@ public class Modchu_LayerCustomHead implements Modchu_ILayerCustomHead {
 		if (master != null) master.doRenderLayer(EntityLiving, f, f1, f2, f3, f4, f5, f6);
 	}
 
+	@Override
 	public void superDoRenderLayer(Object EntityLiving, float f, float f1, float f2, float f3, float f4, float f5, float f6) {
 	}
 
@@ -30,6 +31,7 @@ public class Modchu_LayerCustomHead implements Modchu_ILayerCustomHead {
 		return master != null ? master.shouldCombineTextures() : false;
 	}
 
+	@Override
 	public boolean superShouldCombineTextures() {
 		return false;
 	}

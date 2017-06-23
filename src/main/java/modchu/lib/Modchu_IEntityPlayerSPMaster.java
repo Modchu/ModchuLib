@@ -1,6 +1,8 @@
 package modchu.lib;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMaster {
 	public void init();
@@ -184,7 +186,6 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public void setSpawnPoint(Object blockPos, boolean forced);
 	public void takeStat(Object statBase);
 	public int getXPSeed();
-	public void removeExperienceLevel(int levels);
 	public boolean isAllowEdit();
 	public boolean canPlayerEdit(Object blockPos, Object enumFacing, Object itemStack);
 	public boolean canOpen(Object lockCode);
@@ -250,5 +251,37 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public boolean interact(Object entityPlayer);
 	public String getCachedUniqueIdString();
 	public void onInitialSpawn(Object difficultyInstance, Object entityLivingData);
+	public void onEnchant(Object itemStack, int levels);
+	public Map getActivePotionMap();
+	public void blockUsingShield(Object entityLivingBase);
+	public Object getLastDamageSource();
+	public boolean hasItemInSlot(Object entityEquipmentSlot);
+	public float getWaterSlowDown();
+	public boolean attackable();
+	public void setPartying(Object blockPos, boolean p_191987_2_);
+	public boolean processInitialInteract(Object entityPlayer, Object enumHand);
+	public Object applyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand);
+	public Object getRecipeBook();
+	public void func_193103_a(Object iRecipe);
+	public void openEditStructure(Object tileEntityStructure);
+	public boolean isAutoJumpEnabled();
+	public void updateAutoJump(float p_189810_1_, float p_189810_2_);
+	public void destroyVanishingCursedItems();
+	public void disableShield(boolean p_190777_1_);
+	public void unlockRecipes(List p_192021_1_);
+	public void unlockRecipes(Object[] resourceLocation);
+	public void func_192022_b(List p_192022_1_);
+	public boolean addItemStackToInventory(Object itemStack);
+	public boolean addShoulderEntity(Object nBTTagCompound);
+	public void spawnShoulderEntities();
+	public Object getLeftShoulderEntity();
+	public void setLeftShoulderEntity(Object nBTTagCompound);
+	public Object getRightShoulderEntity();
+	public void setRightShoulderEntity(Object nBTTagCompound);
+	public boolean canUseCommandBlock();
+	public boolean hasSpawnDimension();
+	public int getSpawnDimension();
+	public void setSpawnDimension(Object integer);
+	public void func_191956_a(Object entity, int p_191956_2_, Object damageSource);
 
 }

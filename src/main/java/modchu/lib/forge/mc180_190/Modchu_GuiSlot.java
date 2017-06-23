@@ -1,6 +1,7 @@
 package modchu.lib.forge.mc180_190;
 
 import java.util.HashMap;
+import java.util.List;
 
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
@@ -70,12 +71,12 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 
 	@Override
 	protected void func_178040_a(int p_178040_1_, int p_178040_2_, int p_178040_3_) {
-		if (master != null) master.updateItemPos(p_178040_1_, p_178040_2_, p_178040_3_);
+		if (master != null) master.updateItemPos(p_178040_1_, p_178040_2_, p_178040_3_, 0.0F);
 		else super.func_178040_a(p_178040_1_, p_178040_2_, p_178040_3_);
 	}
 
 	@Override
-	public void superUpdateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_) {
+	public void superUpdateItemPos(int p_178040_1_, int p_178040_2_, int p_178040_3_, float f) {
 		super.func_178040_a(p_178040_1_, p_178040_2_, p_178040_3_);
 	}
 
@@ -124,7 +125,7 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 
 	@Override
 	public void registerScrollButtons(int p_148134_1_, int p_148134_2_) {
-		if (master != null) master.registerScrollButtons(p_148134_1_, p_148134_2_);
+		if (master != null) master.registerScrollButtons(null, p_148134_1_, p_148134_2_);
 		else super.registerScrollButtons(p_148134_1_, p_148134_2_);
 	}
 
@@ -251,12 +252,12 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 
 	@Override
 	protected void drawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_) {
-		if (master != null) master.drawSelectionBox(p_148120_1_, p_148120_2_, p_148120_3_, p_148120_4_);
+		if (master != null) master.drawSelectionBox(p_148120_1_, p_148120_2_, p_148120_3_, p_148120_4_, 0.0F);
 		else super.drawSelectionBox(p_148120_1_, p_148120_2_, p_148120_3_, p_148120_4_);
 	}
 
 	@Override
-	public void superDrawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_) {
+	public void superDrawSelectionBox(int p_148120_1_, int p_148120_2_, int p_148120_3_, int p_148120_4_, float f) {
 		super.drawSelectionBox(p_148120_1_, p_148120_2_, p_148120_3_, p_148120_4_);
 	}
 
@@ -460,16 +461,16 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 
 	@Override
 	protected void drawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_) {
-		if (master != null) master.drawSlot(entryID, p_180791_2_, p_180791_3_, p_180791_4_, p_180791_5_, p_180791_6_);
+		if (master != null) master.drawSlot(entryID, p_180791_2_, p_180791_3_, p_180791_4_, p_180791_5_, p_180791_6_, 0.0F);
 	}
 
 	@Override
-	public void superDrawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_) {
+	public void superDrawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_, float f) {
 	}
 
 	@Override
 	public void superDrawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_, Object tessellator, int p_148126_6_, int p_148126_7_) {
-		superDrawSlot(p_148126_1_, p_148126_2_, p_148126_3_, p_148126_4_, p_148126_6_, p_148126_7_);
+		superDrawSlot(p_148126_1_, p_148126_2_, p_148126_3_, p_148126_4_, p_148126_6_);
 	}
 
 	@Override
@@ -512,6 +513,11 @@ public class Modchu_GuiSlot extends GuiSlot implements Modchu_IGuiSlot {
 
 	@Override
 	public void superFunc_77208_b(int par1) {
+	}
+
+	@Override
+	public void superRegisterScrollButtons(List par1List, int par2, int par3) {
+		superRegisterScrollButtons(par2, par3);
 	}
 
 }

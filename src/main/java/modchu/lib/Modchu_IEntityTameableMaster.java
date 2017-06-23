@@ -1,10 +1,9 @@
 package modchu.lib;
 
-import java.util.UUID;
-
 public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster {
 	public boolean isOnLivingUpdateCancel();
 
+	public Object func_110172_bL();
 	public void attackEntity(Object entity, float f);
 	public Object createChild(Object entityanimal);
 	public Object findPlayerToAttack();
@@ -99,5 +98,13 @@ public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster
 	public void setLeftHanded(boolean p_184641_1_);
 	public boolean isLeftHanded();
 	public Object getTeleportDirection();
+
+	public Object getNewNavigator(Object world);
+	public void setTamedBy(Object entityPlayer);
+	public boolean holdingSpawnEggOfClass(Object itemStack, Class p_190669_2_);
+	public double followLeashSpeed();
+	public void func_191989_p(float p_191989_1_);
+	public Object getHurtSound(Object damageSource);
+	public void func_191986_a(float p_191986_1_, float p_191986_2_, float p_191986_3_);
 
 }

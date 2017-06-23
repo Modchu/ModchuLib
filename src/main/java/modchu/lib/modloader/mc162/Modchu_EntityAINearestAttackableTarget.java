@@ -38,16 +38,18 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		return master != null ? master.shouldExecute() : false;
 	}
 
+	@Override
 	public boolean superShouldExecute() {
 		return false;
 	}
 
 	@Override
 	public boolean continueExecuting() {
-		return master != null ? master.continueExecuting() : super.continueExecuting();
+		return master != null ? master.shouldContinueExecuting() : super.continueExecuting();
 	}
 
-	public boolean superContinueExecuting() {
+	@Override
+	public boolean superShouldContinueExecuting() {
 		return super.continueExecuting();
 	}
 
@@ -56,6 +58,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		return master != null ? master.isInterruptible() : super.isInterruptible();
 	}
 
+	@Override
 	public boolean superIsInterruptible() {
 		return super.isInterruptible();
 	}
@@ -66,6 +69,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		else superStartExecuting();
 	}
 
+	@Override
 	public void superStartExecuting() {
 		if (isEnabled()) super.startExecuting();
 	}
@@ -76,6 +80,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		else super.resetTask();
 	}
 
+	@Override
 	public void superResetTask() {
 		super.resetTask();
 	}
@@ -86,6 +91,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		else super.updateTask();
 	}
 
+	@Override
 	public void superUpdateTask() {
 		super.updateTask();
 	}
@@ -96,6 +102,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		else super.setMutexBits(par1);
 	}
 
+	@Override
 	public void superSetMutexBits(int par1) {
 		super.setMutexBits(par1);
 	}
@@ -105,10 +112,12 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		return master != null ? master.getMutexBits() : super.getMutexBits();
 	}
 
+	@Override
 	public int superGetMutexBits() {
 		return super.getMutexBits();
 	}
 
+	@Override
 	public double superGetTargetDistance() {
 		return 0.0D;
 	}
@@ -118,6 +127,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		return master != null ? master.isSuitableTarget(entityLivingBase, par2) : super.isSuitableTarget(entityLivingBase, par2);
 	}
 
+	@Override
 	public boolean superIsSuitableTarget(Object entityLivingBase, boolean par2) {
 		return super.isSuitableTarget((EntityLivingBase) entityLivingBase, par2);
 	}

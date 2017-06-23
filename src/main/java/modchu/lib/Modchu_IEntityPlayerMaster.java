@@ -146,13 +146,13 @@ public interface Modchu_IEntityPlayerMaster {
 	public void onDeathUpdate();
 	public int decreaseAirSupply(int par1);
 	public Random getRNG();
-	public Object getAITarget();
+	public Object getRevengeTarget();
 	public int func_142015_aE();
 	public void setRevengeTarget(Object entityLivingBase);
-	public Object getLastAttacker();
-	public int getLastAttackerTime();
-	public void setLastAttacker(Object entity);
-	public int getAge();
+	public Object getLastAttackedEntity();
+	public int getLastAttackedEntityTime();
+	public void setLastAttackedEntity(Object entity);
+	public int getIdleTime();
 	public void updatePotionEffects();
 	public void clearActivePotions();
 	public Object getActivePotionEffects();
@@ -184,7 +184,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public Object func_110142_aN();
 	public Object getAttackingEntity();
 	public void swingArm();
-	public void kill();
+	public void outOfWorld();
 	public void updateArmSwingProgress();
 	public Object getEntityAttribute(Object attribute);
 	public Object getAttributeMap();

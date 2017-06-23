@@ -61,7 +61,7 @@ public class Modchu_ModchuLibMaster implements Modchu_IBaseModMaster {
 	@Override
 	public void addRenderer(Map map) {
 		String s = "addRenderer";
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ map });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ map });
 		Modchu_Main.addRenderer(map);
 	}
 
@@ -74,7 +74,7 @@ public class Modchu_ModchuLibMaster implements Modchu_IBaseModMaster {
 	public int addFuel(int i, int j) {
 		String s = "addFuel";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return 0;
-		Object[] o = Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ i, j } });
+		Object[] o = Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ i, j } });
 		int i1 = 0;
 		for (int i2 = 0; i1 == 0
 				&& i2 < o.length; i2++) {
@@ -87,14 +87,14 @@ public class Modchu_ModchuLibMaster implements Modchu_IBaseModMaster {
 	public void generateNether(Object world, Random random, int i, int j) {
 		String s = "generateNether";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ world, random, i, j } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ world, random, i, j } });
 	}
 
 	@Override
 	public void generateSurface(Object world, Random random, int i, int j) {
 		String s = "generateSurface";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ world, random, i, j } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ world, random, i, j } });
 	}
 
 	@Override
@@ -106,49 +106,49 @@ public class Modchu_ModchuLibMaster implements Modchu_IBaseModMaster {
 	public void onItemPickup(Object entityplayer, Object itemstack) {
 		String s = "onItemPickup";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ entityplayer, itemstack } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ entityplayer, itemstack } });
 	}
 
 	@Override
 	public void clientChat(String s1) {
 		String s = "clientChat";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ s1 } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ s1 } });
 	}
 
 	@Override
 	public void serverChat(Object netserverhandler, String s1) {
 		String s = "serverChat";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ netserverhandler, s1 } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ netserverhandler, s1 } });
 	}
 
 	@Override
 	public void clientCustomPayload(Object clientHandler, Object packet250custompayload) {
 		String s = "clientCustomPayload";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ clientHandler, packet250custompayload } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ clientHandler, packet250custompayload } });
 	}
 
 	@Override
 	public void serverCustomPayload(Object serverHandler, Object packet250custompayload) {
 		String s = "serverCustomPayload";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ serverHandler, packet250custompayload } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ serverHandler, packet250custompayload } });
 	}
 
 	@Override
 	public void renderInvBlock(Object renderblocks, Object block, int i, int j) {
 		String s = "renderInvBlock";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ renderblocks, block, i, j } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ renderblocks, block, i, j } });
 	}
 
 	@Override
 	public boolean renderWorldBlock(Object renderblocks, Object iblockaccess, int i, int j, int k, Object block, int l) {
 		String s = "renderWorldBlock";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return false;
-		Object[] o = Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ renderblocks, iblockaccess, i, j, k, block, l } });
+		Object[] o = Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ renderblocks, iblockaccess, i, j, k, block, l } });
 		boolean b = false;
 		for (Object o1 : o) {
 			b |= o1 != null ? Modchu_CastHelper.Boolean(o1) : false;
@@ -160,35 +160,35 @@ public class Modchu_ModchuLibMaster implements Modchu_IBaseModMaster {
 	public void clientConnect(Object netclienthandler) {
 		String s = "clientConnect";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ netclienthandler } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ netclienthandler } });
 	}
 
 	@Override
 	public void clientDisconnect(Object clientHandler) {
 		String s = "clientDisconnect";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ clientHandler } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ clientHandler } });
 	}
 
 	@Override
 	public void takenFromCrafting(Object entityplayer, Object itemstack, Object iinventory) {
 		String s = "takenFromCrafting";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ entityplayer, itemstack, iinventory } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ entityplayer, itemstack, iinventory } });
 	}
 
 	@Override
 	public void takenFromFurnace(Object entityplayer, Object itemstack) {
 		String s = "takenFromFurnace";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return;
-		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ entityplayer, itemstack } });
+		Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ entityplayer, itemstack } });
 	}
 
 	@Override
 	public Object getContainerGUI(Object player, int inventoryType, int x, int y, int z) {
 		String s = "getContainerGUI";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return null;
-		Object[] o = Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ player, inventoryType, x, y, z } });
+		Object[] o = Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ player, inventoryType, x, y, z } });
 		for (Object o1 : o) {
 			if (o1 != null) return o1;
 		}
@@ -199,7 +199,7 @@ public class Modchu_ModchuLibMaster implements Modchu_IBaseModMaster {
 	public Object spawnEntity(int id, Object world, double x, double y, double z) {
 		String s = "spawnEntity";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return null;
-		Object[] o = Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ id, world, x, y, z } });
+		Object[] o = Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ id, world, x, y, z } });
 		for (Object o1 : o) {
 			if (o1 != null) return o1;
 		}
@@ -210,7 +210,7 @@ public class Modchu_ModchuLibMaster implements Modchu_IBaseModMaster {
 	public Object getSpawnPacket(Object entity, int id) {
 		String s = "getSpawnPacket";
 		if (Modchu_Main.getEventObjectLoadCheckList().contains(s)) return null;
-		Object[] o = Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ entity, id } });
+		Object[] o = Modchu_EventSystem.eventObjectLoad(Modchu_Main.getEventObjectList(s), Modchu_Main.getEventObjectLoadCheckList(), s, s, new Class[]{ Object.class }, new Object[]{ new Object[]{ entity, id } });
 		for (Object o1 : o) {
 			if (o1 != null) return o1;
 		}

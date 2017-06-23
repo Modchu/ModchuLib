@@ -42,10 +42,11 @@ public class Modchu_EntityAILookIdle extends EntityAILookIdle implements Modchu_
 
 	@Override
 	public boolean continueExecuting() {
-		return master != null ? master.continueExecuting() : super.continueExecuting();
+		return master != null ? master.shouldContinueExecuting() : super.continueExecuting();
 	}
 
-	public boolean superContinueExecuting() {
+	@Override
+	public boolean superShouldContinueExecuting() {
 		return super.continueExecuting();
 	}
 

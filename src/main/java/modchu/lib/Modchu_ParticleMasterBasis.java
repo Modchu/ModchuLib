@@ -851,8 +851,8 @@ public class Modchu_ParticleMasterBasis implements Modchu_IParticleMaster {
 	}
 
 	@Override
-	public boolean isTransparent() {
-		return base.superIsTransparent();
+	public boolean shouldDisableDepth() {
+		return base.superShouldDisableDepth();
 	}
 
 	@Override
@@ -888,6 +888,299 @@ public class Modchu_ParticleMasterBasis implements Modchu_IParticleMaster {
 	@Override
 	public void setBoundingBox(Object axisAlignedBB) {
 		base.superSetBoundingBox(axisAlignedBB);
+	}
+
+	@Override
+	public String getTexture() {
+		return base.superGetTexture();
+	}
+
+	@Override
+	public boolean addNotRiddenEntityID(Object nBTTagCompound) {
+		return base.superAddNotRiddenEntityID(nBTTagCompound);
+	}
+
+	@Override
+	public boolean addEntityID(Object nBTTagCompound) {
+		return base.superAddEntityID(nBTTagCompound);
+	}
+
+	@Override
+	public void unmountEntity(Object entity) {
+		base.superUnmountEntity(entity);
+	}
+
+	@Override
+	public void updateCloak() {
+		base.superUpdateCloak();
+	}
+
+	@Override
+	public float getAlpha() {
+		return base.superGetAlpha();
+	}
+
+	@Override
+	public void onKillCommand() {
+		base.superOnKillCommand();
+
+	}
+
+	@Override
+	public boolean isSilent() {
+		return base.superIsSilent();
+	}
+
+	@Override
+	public void setSilent(boolean isSilent) {
+		base.superSetSilent(isSilent);
+
+	}
+
+	@Override
+	public void resetHeight() {
+		base.superResetHeight();
+
+	}
+
+	@Override
+	public void spawnRunningParticles() {
+		base.superSpawnRunningParticles();
+
+	}
+
+	@Override
+	public void createRunningParticles() {
+		base.superCreateRunningParticles();
+
+	}
+
+	@Override
+	public boolean isInLava() {
+		return base.superIsInLava();
+	}
+
+	@Override
+	public void moveToBlockPosAndAngles(Object blockPos, float rotationYawIn, float rotationPitchIn) {
+		base.superMoveToBlockPosAndAngles(blockPos, rotationYawIn, rotationPitchIn);
+
+	}
+
+	@Override
+	public double getDistanceSq(Object blockPos) {
+		return base.superGetDistanceSq(blockPos);
+	}
+
+	@Override
+	public double getDistanceSqToCenter(Object blockPos) {
+		return base.superGetDistanceSqToCenter(blockPos);
+	}
+
+	@Override
+	public Object getLook(float partialTicks) {
+		return base.superGetLook(partialTicks);
+	}
+
+	@Override
+	public Object getPositionEyes(float partialTicks) {
+		return base.superGetPositionEyes(partialTicks);
+	}
+
+	@Override
+	public Object rayTrace(double blockReachDistance, float partialTicks) {
+		return base.superRayTrace(blockReachDistance, partialTicks);
+	}
+
+	@Override
+	public void func_181013_g(float p_181013_1_) {
+		base.superFunc_181013_g(p_181013_1_);
+
+	}
+
+	@Override
+	public Object func_181012_aH() {
+		return base.superFunc_181012_aH();
+	}
+
+	@Override
+	public void setCustomNameTag(String name) {
+		base.superSetCustomNameTag(name);
+
+	}
+
+	@Override
+	public String getCustomNameTag() {
+		return base.superGetCustomNameTag();
+	}
+
+	@Override
+	public boolean hasCustomName() {
+		return base.superHasCustomName();
+	}
+
+	@Override
+	public void setAlwaysRenderNameTag(boolean alwaysRenderNameTag) {
+		base.superSetAlwaysRenderNameTag(alwaysRenderNameTag);
+
+	}
+
+	@Override
+	public boolean getAlwaysRenderNameTag() {
+		return base.superGetAlwaysRenderNameTag();
+	}
+
+	@Override
+	public void setPositionAndUpdate(double x, double y, double z) {
+		base.superSetPositionAndUpdate(x, y, z);
+
+	}
+
+	@Override
+	public boolean getAlwaysRenderNameTagForRender() {
+		return base.superGetAlwaysRenderNameTagForRender();
+	}
+
+	@Override
+	public Object getHorizontalFacing() {
+		return base.superGetHorizontalFacing();
+	}
+
+	@Override
+	public Object getHoverEvent() {
+		return base.superGetHoverEvent();
+	}
+
+	@Override
+	public boolean isSpectatedByPlayer(Object entityPlayerMP) {
+		return base.superIsSpectatedByPlayer(entityPlayerMP);
+	}
+
+	@Override
+	public Object getEntityBoundingBox() {
+		return base.superGetEntityBoundingBox();
+	}
+
+	@Override
+	public void setEntityBoundingBox(Object axisAlignedBB) {
+		base.superSetEntityBoundingBox(axisAlignedBB);
+
+	}
+
+	@Override
+	public boolean isOutsideBorder() {
+		return base.superIsOutsideBorder();
+	}
+
+	@Override
+	public void setOutsideBorder(boolean outsideBorder) {
+		base.superSetOutsideBorder(outsideBorder);
+
+	}
+
+	@Override
+	public boolean replaceItemInInventory(int inventorySlot, Object itemStack) {
+		return base.superReplaceItemInInventory(inventorySlot, itemStack);
+	}
+
+	@Override
+	public void addChatMessage(Object iChatComponent) {
+		base.superAddChatMessage(iChatComponent);
+
+	}
+
+	@Override
+	public boolean canCommandSenderUseCommand(int permLevel, String commandName) {
+		return base.superCanCommandSenderUseCommand(permLevel, commandName);
+	}
+
+	@Override
+	public Object getPosition() {
+		return base.superGetPosition();
+	}
+
+	@Override
+	public Object getPositionVector() {
+		return base.superGetPositionVector();
+	}
+
+	@Override
+	public Object getEntityWorld() {
+		return base.superGetEntityWorld();
+	}
+
+	@Override
+	public Object getCommandSenderEntity() {
+		return base.superGetCommandSenderEntity();
+	}
+
+	@Override
+	public boolean sendCommandFeedback() {
+		return base.superSendCommandFeedback();
+	}
+
+	@Override
+	public void setCommandStat(Object type, int amount) {
+		base.superSetCommandStat(type, amount);
+
+	}
+
+	@Override
+	public Object getCommandStats() {
+		return base.superGetCommandStats();
+	}
+
+	@Override
+	public void func_174817_o(Object entity) {
+		base.superFunc_174817_o(entity);
+
+	}
+
+	@Override
+	public Object getNBTTagCompound() {
+		return base.superGetNBTTagCompound();
+	}
+
+	@Override
+	public void clientUpdateEntityNBT(Object nBTTagCompound) {
+		base.superClientUpdateEntityNBT(nBTTagCompound);
+
+	}
+
+	@Override
+	public boolean interactAt(Object entityPlayer, Object vec3) {
+		return base.superInteractAt(entityPlayer, vec3);
+	}
+
+	@Override
+	public boolean isImmuneToExplosions() {
+		return base.superIsImmuneToExplosions();
+	}
+
+	@Override
+	public void applyEnchantments(Object entityLivingBase, Object entity) {
+		base.superApplyEnchantments(entityLivingBase, entity);
+
+	}
+
+	@Override
+	public boolean hasCapability(Object capability, Object enumFacing) {
+		return base.superHasCapability(capability, enumFacing);
+	}
+
+	@Override
+	public Object getCapability(Object capability, Object enumFacing) {
+		return base.superGetCapability(capability, enumFacing);
+	}
+
+	@Override
+	public void deserializeNBT(Object nBTTagCompound) {
+		base.superDeserializeNBT(nBTTagCompound);
+
+	}
+
+	@Override
+	public Object serializeNBT() {
+		return base.superSerializeNBT();
 	}
 
 }

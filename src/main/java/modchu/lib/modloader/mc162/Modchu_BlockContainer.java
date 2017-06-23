@@ -12,9 +12,12 @@ import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EffectRenderer;
 import net.minecraft.src.Entity;
+import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityLivingBase;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumCreatureType;
 import net.minecraft.src.Explosion;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Icon;
@@ -1183,7 +1186,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public Object superGetMapColor(Object iBlockState) {
+	public Object superGetMapColor(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return null;
 	}
 
@@ -2201,7 +2204,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public boolean superIsFullyOpaque(Object iBlockState) {
+	public boolean superIsTopSolid(Object iBlockState) {
 		return false;
 	}
 
@@ -2275,6 +2278,123 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	@Override
 	public boolean superNeighborChanged(Object world, int par2, int par3, int par4, int par5, int par6) {
 		return false;
+	}
+
+	@Override
+	public boolean superFunc_149730_j() {
+		return superIsFullBlock();
+	}
+
+	@Override
+	public boolean superGetCanBlockGrass() {
+		return false;
+	}
+
+	@Override
+	public Object superGetMapColor(int p_149728_1_) {
+		return null;
+	}
+
+	@Override
+	public boolean superIsBlockNormalCube() {
+		return false;
+	}
+
+	@Override
+	public Object superFunc_149735_b(int p_149735_1_, int p_149735_2_) {
+		return null;
+	}
+
+	@Override
+	public boolean superRemovedByPlayer(Object world, Object entityPlayer, int x, int y, int z, boolean willHarvest) {
+		return false;
+	}
+
+	@Override
+	public Object superGetPickBlock(Object movingObjectPosition, Object world, int x, int y, int z, Object entityPlayer) {
+		return null;
+	}
+
+	@Override
+	public boolean superGetWeakChanges(Object iBlockAccess, int x, int y, int z) {
+		return false;
+	}
+
+	@Override
+	public void superSetHarvestLevel(String toolClass, int level, int metadata) {
+	}
+
+	@Override
+	public String superGetHarvestTool(int metadata) {
+		return null;
+	}
+
+	@Override
+	public int superGetHarvestLevel(int metadata) {
+		return -1;
+	}
+
+	@Override
+	public boolean superIsToolEffective(String type, int metadata) {
+		return false;
+	}
+
+	@Override
+	public boolean superFunc_181623_g() {
+		return false;
+	}
+
+	@Override
+	public boolean superDoesSideBlockRendering(Object iBlockAccess, Object blockPos, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public Object superGetPickBlock(Object movingObjectPosition, Object world, Object blockPos, Object entityPlayer) {
+		return null;
+	}
+
+	@Override
+	public boolean superAddLandingEffects(Object worldServer, Object blockPos, Object iBlockState, Object entityLivingBase, int numberOfParticles) {
+		return false;
+	}
+
+	@Override
+	public void superAddInformation(Object itemStack, Object world, List tooltip, Object iTooltipFlag) {
+	}
+
+	@Override
+	public void superObservedNeighborChange(Object iBlockState, Object world, Object blockPos, Object block, Object blockPos1) {
+	}
+
+	@Override
+	public boolean superCanRenderInLayer(Object iBlockState, Object blockRenderLayer) {
+		return false;
+	}
+
+	@Override
+	public Object superGetSoundType(Object iBlockState, Object world, Object blockPos, Object entity) {
+		return null;
+	}
+
+	@Override
+	public float[] superGetBeaconColorMultiplier(Object iBlockState, Object world, Object blockPos, Object blockPos1) {
+		return null;
+	}
+
+	@Override
+	public Object superGetStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase, Object enumHand) {
+		return null;
+	}
+
+	@Override
+	public boolean superCanBeConnectedTo(Object iBlockAccess, Object blockPos, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public Object superGetAiPathNodeType(Object iBlockState, Object iBlockAccess, Object blockPos) {
+		return null;
 	}
 	// Modchu_Block のコピー↑
 

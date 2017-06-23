@@ -25,6 +25,7 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 		if (master != null) master.doRenderLayer(EntityLiving, f, f1, f2, f3, f4, f5, f6);
 	}
 
+	@Override
 	public void superDoRenderLayer(Object EntityLiving, float f, float f1, float f2, float f3, float f4, float f5, float f6) {
 	}
 
@@ -32,6 +33,7 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 		return master != null ? master.shouldCombineTextures() : false;
 	}
 
+	@Override
 	public boolean superShouldCombineTextures() {
 		return false;
 	}
@@ -40,6 +42,7 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 		return (ItemStack) (master != null ? master.getCurrentArmor(EntityLiving, i) : null);
 	}
 
+	@Override
 	public ItemStack superGetCurrentArmor(Object EntityLiving, int i) {
 		return null;
 	}
@@ -48,6 +51,7 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 		return (ModelBase) (master != null ? master.getModelFromSlot(i) : null);
 	}
 
+	@Override
 	public ModelBase superGetModelFromSlot(Object i) {
 		return null;
 	}
@@ -56,6 +60,7 @@ public class Modchu_LayerArmorBase implements Modchu_ILayerArmorBase {
 		if (master != null) master.initArmor();
 	}
 
+	@Override
 	public void superInitArmor() {
 	}
 

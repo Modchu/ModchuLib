@@ -1,7 +1,7 @@
 package modchu.lib;
 
+import java.util.Map;
 import java.util.Random;
-import java.util.UUID;
 
 public interface Modchu_IEntityLivingBase extends Modchu_IEntity {
 	public void setMovementSpeed(double d);
@@ -18,12 +18,16 @@ public interface Modchu_IEntityLivingBase extends Modchu_IEntity {
 	public boolean isDamageInvincible();
 	public boolean superIsDamageInvincible();
 
+	public boolean superFunc_146066_aG();
+	public String superFunc_146067_o(int p_146067_1_);
+	public void superFunc_152111_bt();
+	public void superFunc_152112_bu();
 	public int superFunc_96121_ay();
 	public Random superGetRNG();
-	public Object superGetAITarget();
+	public Object superGetRevengeTarget();
 	public Object superGetLastAttackingEntity();
 	public void superSetLastAttackingEntity(Object entity);
-	public int superGetAge();
+	public int superGetIdleTime();
 	public float superGetAIMoveSpeed();
 	public void superSetAIMoveSpeed(float par1);
 	public boolean superAttackEntityAsMob(Object entity);
@@ -49,13 +53,11 @@ public interface Modchu_IEntityLivingBase extends Modchu_IEntity {
 	public void superDamageEntity(Object damageSource, int par2);
 	public float superGetSoundVolume();
 	public Object superGetAmbientSound();
-	public Object superGetHurtSound();
 	public Object superGetDeathSound();
 	public void superKnockBack(Object entity, int par2, double par3, double par5);
 	public void superOnDeath(Object damageSource);
 	public void superDropRareDrop(int par1);
 	public void superDropFewItems(boolean par1, int par2);
-	public void superMoveEntityWithHeading(float par1, float par2);
 	public boolean superIsOnLadder();
 	public boolean superCanBreatheUnderwater();
 	public void superSetJumping(boolean par1);
@@ -115,9 +117,9 @@ public interface Modchu_IEntityLivingBase extends Modchu_IEntity {
 	public boolean superInteract(Object entityPlayer);
 	// 162~
 	public void superApplyEntityAttributes();
-	public Object superGetLastAttacker();
-	public int superGetLastAttackerTime();
-	public void superSetLastAttacker(Object entity);
+	public Object superGetLastAttackedEntity();
+	public int superGetLastAttackedEntityTime();
+	public void superSetLastAttackedEntity(Object entity);
 	public void superOnChangedPotionEffect(Object potionEffect, boolean par2);
 	public void superHeal(Object par1);
 	public void superSetHealth(Object par1);
@@ -185,5 +187,20 @@ public interface Modchu_IEntityLivingBase extends Modchu_IEntity {
 	public void superAddRandomDrop();
 	public void superDropLoot(boolean p_184610_1_, int p_184610_2_, Object damageSource);
 	public boolean superGetAlwaysRenderNameTag();
+	public void superMoveEntityWithHeading(float par1, float par2, float par3);
+	public Object superGetHurtSound(Object damageSource);
+	public Object superFunc_181014_aG();
+	public void superSetAngles(float yaw, float pitch);
+	public void superAddChatMessage(Object iTextComponent);
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName);
+	public Map superGetActivePotionMap();
+	public void superBlockUsingShield(Object entityLivingBase);
+	public Object superGetLastDamageSource();
+	public boolean superHasItemInSlot(Object entityEquipmentSlot);
+	public float superGetWaterSlowDown();
+	public boolean superAttackable();
+	public void superSetPartying(Object blockPos, boolean p_191987_2_);
+	public boolean superProcessInitialInteract(Object entityPlayer, Object enumHand);
+	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand);
 
 }

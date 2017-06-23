@@ -157,7 +157,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-public class Modchu_ASMaster extends modchu.lib.forge.mc190_212.Modchu_ASMaster {
+public class Modchu_ASMaster extends modchu.lib.forge.mc190_220.Modchu_ASMaster {
 
 	public Modchu_ASMaster(HashMap<String, Object> map) {
 		super(map);

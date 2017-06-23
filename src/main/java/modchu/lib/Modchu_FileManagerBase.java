@@ -1623,12 +1623,17 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 
 	@Override
 	public List<File> getDirFileList(List<File> list) {
+		return getDirFileList(Modchu_Main.modsDir, list);
+	}
+
+	@Override
+	public List<File> getDirFileList(File dir, List<File> list) {
 		boolean debug = true;
 		if (Modchu_Main.modDirList != null
 				&& !Modchu_Main.modDirList.isEmpty()) return Modchu_Main.modDirList;
 		if (list != null); else list = new LinkedList();
-		File modsDir = Modchu_Main.modsDir;
-		for (File file : modsDir.listFiles()) {
+		if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getDirFileList dir.getAbsolutePath()="+dir.getAbsolutePath());
+		for (File file : dir.listFiles()) {
 			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getDirFileList file.getAbsolutePath()="+file.getAbsolutePath());
 			if (file.isDirectory()
 					&& !Modchu_Main.ngVersionName(file.getName())) {

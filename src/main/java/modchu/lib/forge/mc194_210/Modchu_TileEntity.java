@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import net.minecraft.world.World;
 
-public class Modchu_TileEntity extends modchu.lib.forge.mc194_212.Modchu_TileEntity {
+public class Modchu_TileEntity extends modchu.lib.forge.mc194_220.Modchu_TileEntity {
 
 	public Modchu_TileEntity() {
 		super();
@@ -13,6 +13,7 @@ public class Modchu_TileEntity extends modchu.lib.forge.mc194_212.Modchu_TileEnt
 	public Modchu_TileEntity(HashMap<String, Object> map) {
 		super(map);
 	}
+
 	// 190~210共通コピペ　↓
 	@Override
 	public void setWorldObj(World world) {
@@ -35,5 +36,26 @@ public class Modchu_TileEntity extends modchu.lib.forge.mc194_212.Modchu_TileEnt
 		return super.hasWorldObj();
 	}
 	// 190~210共通コピペ　↑
+
+	@Override
+	public void superSetWorldCreate(Object world) {
+	}
+
+	@Override
+	public Object superGetDisplayName() {
+		return null;
+	}
+
+	@Override
+	public void superRotate(Object rotation) {
+	}
+
+	@Override
+	public void superMirror(Object mirror) {
+	}
+
+	@Override
+	public void superHandleUpdateTag(Object nBTTagCompound) {
+	}
 
 }

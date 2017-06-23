@@ -17,9 +17,10 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 		if (instance != null
 				&& instance instanceof Modchu_AS); else instance = new Modchu_AS();
 		Modchu_Debug.lDebug("Modchu_AS init Modchu_Main.isForge="+Modchu_Main.isForge);
-		String modchu_AS_ClassName = (Modchu_Main.isForge ? "modchu.lib.forge.mc" : "modchu.lib.modloader.mc")+Modchu_Main.getMinecraftVersion()+".Modchu_ASMaster";
-		Modchu_Debug.lDebug("Modchu_AS init modchu_AS_ClassName="+modchu_AS_ClassName);
-		Class Modchu_ASMaster = Modchu_Reflect.loadClass(modchu_AS_ClassName, 1, true);
+		//String modchu_AS_ClassName = (Modchu_Main.isForge ? "modchu.lib.forge.mc" : "modchu.lib.modloader.mc")+Modchu_Main.getMinecraftVersion()+".Modchu_ASMaster";
+		//Modchu_Debug.lDebug("Modchu_AS init modchu_AS_ClassName="+modchu_AS_ClassName);
+		//Class Modchu_ASMaster = Modchu_Reflect.loadClass(modchu_AS_ClassName, 1, true);
+		Class Modchu_ASMaster = Modchu_Main.getModchuCharacteristicClass("Modchu_ASMaster");
 		Modchu_Debug.lDebug("Modchu_AS init Modchu_ASMaster="+Modchu_ASMaster);
 		if (Modchu_ASMaster != null); else {
 			String ss = "Modchu_AS instanceCheck Modchu_ASMaster null error !!";
@@ -4782,11 +4783,11 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 	}
 
 	@Override
-	protected List keybindArray() {
+	protected Object keybindArray() {
 		return master != null ? master.keybindArray() : super.keybindArray();
 	}
 
-	public List superKeybindArray() {
+	public Object superKeybindArray() {
 		return super.keybindArray();
 	}
 

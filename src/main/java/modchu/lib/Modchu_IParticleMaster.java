@@ -154,6 +154,11 @@ public interface Modchu_IParticleMaster {
 	public boolean shouldDismountInWater(Object entity);
 	// ~152
 	public void setParticleIcon(Object renderEngine, Object icon);
+	public String getTexture();
+	public boolean addNotRiddenEntityID(Object nBTTagCompound);
+	public boolean addEntityID(Object nBTTagCompound);
+	public void unmountEntity(Object entity);
+	public void updateCloak();
 	// 172~
 	public void playStepSound(int par1, int par2, int par3, Object par4);
 	public boolean isInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_);
@@ -178,7 +183,7 @@ public interface Modchu_IParticleMaster {
 	public boolean shouldExplodeBlock(Object explosion, Object world, Object blockPos, Object iBlockState, float par7);
 	public void setPortal(Object blockPos);
 	// 190~
-	public boolean isTransparent();
+	public boolean shouldDisableDepth();
 	public void setMaxAge(int p_187114_1_);
 	public void setParticleTexture(Object textureAtlasSprite);
 	public void setExpired();
@@ -186,5 +191,56 @@ public interface Modchu_IParticleMaster {
 	public boolean isAlive();
 	public Object getBoundingBox();
 	public void setBoundingBox(Object axisAlignedBB);
+
+	public float getAlpha();
+	public void onKillCommand();
+	public boolean isSilent();
+	public void setSilent(boolean isSilent);
+	public void resetHeight();
+	public void spawnRunningParticles();
+	public void createRunningParticles();
+	public boolean isInLava();
+	public void moveToBlockPosAndAngles(Object blockPos, float rotationYawIn, float rotationPitchIn);
+	public double getDistanceSq(Object blockPos);
+	public double getDistanceSqToCenter(Object blockPos);
+	public Object getLook(float partialTicks);
+	public Object getPositionEyes(float partialTicks);
+	public Object rayTrace(double blockReachDistance, float partialTicks);
+	public void func_181013_g(float p_181013_1_);
+	public Object func_181012_aH();
+	public void setCustomNameTag(String name);
+	public String getCustomNameTag();
+	public boolean hasCustomName();
+	public void setAlwaysRenderNameTag(boolean alwaysRenderNameTag);
+	public boolean getAlwaysRenderNameTag();
+	public void setPositionAndUpdate(double x, double y, double z);
+	public boolean getAlwaysRenderNameTagForRender();
+	public Object getHorizontalFacing();
+	public Object getHoverEvent();
+	public boolean isSpectatedByPlayer(Object entityPlayerMP);
+	public Object getEntityBoundingBox();
+	public void setEntityBoundingBox(Object axisAlignedBB);
+	public boolean isOutsideBorder();
+	public void setOutsideBorder(boolean outsideBorder);
+	public boolean replaceItemInInventory(int inventorySlot, Object itemStack);
+	public void addChatMessage(Object iChatComponent);
+	public boolean canCommandSenderUseCommand(int permLevel, String commandName);
+	public Object getPosition();
+	public Object getPositionVector();
+	public Object getEntityWorld();
+	public Object getCommandSenderEntity();
+	public boolean sendCommandFeedback();
+	public void setCommandStat(Object type, int amount);
+	public Object getCommandStats();
+	public void func_174817_o(Object entity);
+	public Object getNBTTagCompound();
+	public void clientUpdateEntityNBT(Object nBTTagCompound);
+	public boolean interactAt(Object entityPlayer, Object vec3);
+	public boolean isImmuneToExplosions();
+	public void applyEnchantments(Object entityLivingBase, Object entity);
+	public boolean hasCapability(Object capability, Object enumFacing);
+	public Object getCapability(Object capability, Object enumFacing);
+	public void deserializeNBT(Object nBTTagCompound);
+	public Object serializeNBT();
 
 }

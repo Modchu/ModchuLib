@@ -36,7 +36,7 @@ public interface Modchu_IGuiScreen {
 	public void superUpdateScreen();
 	public void superActionPerformed(Object guibutton);
 	public void superRenderToolTip(Object itemStack, int p_146285_2_, int p_146285_3_);
-	public void superDrawCreativeTabHoveringText(String p_146279_1_, int p_146279_2_, int p_146279_3_);
+	public void superDrawHoveringText(String p_146279_1_, int p_146279_2_, int p_146279_3_);
 	public void superFunc_146283_a(List p_146283_1_, int p_146283_2_, int p_146283_3_);
 	public void superDrawHoveringText(List p_146283_1_, int p_146283_2_, int p_146283_3_, Object fontRenderer);
 	public void superDrawHoveringText(List textLines, int x, int y);
@@ -48,5 +48,10 @@ public interface Modchu_IGuiScreen {
 	public void superOnResize(Object minecraft, int p_175273_2_, int p_175273_3_);
 	public void superDrawTexturedModalRect(float xCoord, float yCoord, int minU, int minV, int maxU, int maxV);
 	public void superDrawTexturedModalRect(int xCoord, int yCoord, Object textureAtlasSprite, int p_175175_4_, int p_175175_5_);
+	public void superSetGuiSize(int w, int h);
+	public Object superAddButton(Object buttonIn);
+	public List<String> superGetItemToolTip(Object itemStack);
+	public void superSetFocused(boolean hasFocusedControlIn);
+	public boolean superIsFocused();
 
 }

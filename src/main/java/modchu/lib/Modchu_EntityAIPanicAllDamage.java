@@ -7,7 +7,8 @@ public class Modchu_EntityAIPanicAllDamage extends Modchu_EntityAIPanicMasterBas
 
 	public Modchu_EntityAIPanicAllDamage(HashMap<String, Object> map) {
 		super(map);
-		modchu_IEntityLiving = (Modchu_IEntityLiving) Modchu_AS.get("EntityAIPanic", "theEntityCreature", base);
+		int version = Modchu_Main.getMinecraftVersion();
+		modchu_IEntityLiving = (Modchu_IEntityLiving) Modchu_AS.get("EntityAIPanic", version > 212 ? "creature" : "theEntityCreature", base);
 	}
 
 	@Override
@@ -31,7 +32,7 @@ public class Modchu_EntityAIPanicAllDamage extends Modchu_EntityAIPanicMasterBas
 				}
 */
 				int version = Modchu_Main.getMinecraftVersion();
-				return version < 220 ? findRandomPosition() : Modchu_AS.set("EntityAIPanic", version > 220 ? "findRandomPosition" : "func_190863_f", base);
+				return version < 220 ? findRandomPosition() : Modchu_AS.set("EntityAIPanic", version > 212 ? "findRandomPosition" : "func_190863_f", base);
 			} else {
 				if (debug1) Modchu_Debug.mdDebug(null);
 			}

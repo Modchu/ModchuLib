@@ -34,12 +34,14 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 	public Modchu_PacketMaster(HashMap<String, Object> map) {
 	}
 
+	@Override
 	public void registerPacket(Object instance, String channelName) {
 		if (instance != null
 				&& channelName != null) ;else return;
 		packetModInstanceMap.put(channelName, instance);
 	}
 
+	@Override
 	public void onPacketData(Object... o) {
 		Object iNetworkManager = o[0];
 		Packet250CustomPayload packet = o[1] instanceof Packet250CustomPayload ? (Packet250CustomPayload) o[1] : null;
@@ -67,6 +69,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		}
 	}
 
+	@Override
 	public void sendToAll(Object[] o, String channelName) {
 		sendToAll(o, channelName, getWorld());
 	}
@@ -76,6 +79,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		sendToAll((Object[]) o, channelName, getWorld());
 	}
 
+	@Override
 	public void sendToAll(Object[] o, String channelName, Object world) {
 		Modchu_Debug.mDebug("Modchu_PacketMaster sendToAll channelName="+channelName);
 		if (o != null
@@ -106,6 +110,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		}
 	}
 
+	@Override
 	public void sendTo(Object o, Object player, String channelName) {
 		sendPacketToPlayer((Packet) (o instanceof Packet ? o : newPacket((Object[]) o, channelName)), player);
 	}
@@ -123,6 +128,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		}
 	}
 
+	@Override
 	public void sendToServer(Object o, String channelName) {
 		PacketDispatcher.sendPacketToServer((Packet) (o instanceof Packet ? (Packet) o : newPacket((Object[]) o, channelName)));
 	}
@@ -132,6 +138,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		PacketDispatcher.sendPacketToServer((Packet) (newPacket(o, channelName)));
 	}
 
+	@Override
 	public InputStream getPacketInputStream(Object packet) {
 		if (packet instanceof InputStream) return (InputStream) packet;
 		byte[] data = Modchu_CastHelper.ByteArray(Modchu_Reflect.getFieldObject(packet.getClass(), "data", packet));
@@ -185,6 +192,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		return o2;
 	}
 
+	@Override
 	public Object newPacket(Object[] o, String channelName) {
 		return new Packet250CustomPayload(modchuChannelName, (byte[]) getBytes(addChannelName(o, channelName)));
 	}
@@ -232,6 +240,7 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 		return o2;
 	}
 
+	@Override
 	public LinkedList receivePacketData(InputStream input) {
 		LinkedList list = new LinkedList();
 		int i = 0;

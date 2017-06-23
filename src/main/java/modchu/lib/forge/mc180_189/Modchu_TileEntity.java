@@ -1,6 +1,7 @@
 package modchu.lib.forge.mc180_189;
 
 import java.util.HashMap;
+
 import modchu.lib.Modchu_ITileEntity;
 import modchu.lib.Modchu_ITileEntityMaster;
 import modchu.lib.Modchu_Main;
@@ -17,7 +18,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity {
+public abstract class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity {
 	public Modchu_ITileEntityMaster master;
 	private String masterClassName;
 
@@ -373,39 +374,6 @@ public class Modchu_TileEntity extends TileEntity implements Modchu_ITileEntity 
 		return super.restrictNBTCopy();
 	}
 	// 190~
-
-	public boolean superFunc_183000_F() {
-		return false;
-	}
-
-	@Override
-	public void superOnLoad() {
-	}
-
-	@Override
-	public boolean superHasFastRenderer() {
-		return false;
-	}
-
-	@Override
-	public boolean superHasCapability(Object capability, Object enumFacing) {
-		return false;
-	}
-
-	@Override
-	public Object superGetCapability(Object capability, Object enumFacing) {
-		return null;
-	}
-
-	@Override
-	public void superDeserializeNBT(Object nBTTagCompound) {
-	}
-
-	@Override
-	public Object superSerializeNBT() {
-		return null;
-	}
-
 	@Override
 	public boolean superOnlyOpsCanSetNbt() {
 		return false;

@@ -14,6 +14,7 @@ import net.minecraft.event.HoverEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -105,7 +106,7 @@ public class Modchu_Entity extends modchu.lib.forge.mc180_189.Modchu_Entity impl
 
 	@Override
 	public boolean func_174816_a(Explosion explosion, World world, BlockPos blockPos, IBlockState iBlockState, float p_174816_5_) {
-		return master != null ? master.verifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_) : super.func_174816_a(explosion, world, blockPos, iBlockState, p_174816_5_);
+		return master != null ? master.canExplosionDestroyBlock(explosion, world, blockPos, iBlockState, p_174816_5_) : super.func_174816_a(explosion, world, blockPos, iBlockState, p_174816_5_);
 	}
 
 	@Override
@@ -217,6 +218,107 @@ public class Modchu_Entity extends modchu.lib.forge.mc180_189.Modchu_Entity impl
 	@Override
 	public Object superGetTeleportDirection() {
 		return super.getTeleportDirection();
+	}
+
+	@Override
+	public int superGetBrightnessForRender() {
+		return -1;
+	}
+
+	@Override
+	public float superGetBrightness() {
+		return 0.0F;
+	}
+
+	@Override
+	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
+		superAddToPlayerScore(entity, p_70084_2_);
+	}
+
+	@Override
+	public void superFunc_181013_g(float p_181013_1_) {
+	}
+
+	@Override
+	public EnumFacing superFunc_181012_aH() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasCapability(Object capability, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public Object superGetCapability(Object capability, Object enumFacing) {
+		return null;
+	}
+
+	@Override
+	public void superDeserializeNBT(Object nBTTagCompound) {
+	}
+
+	@Override
+	public NBTTagCompound superSerializeNBT() {
+		return null;
+	}
+
+	@Override
+	public String superGetCachedUniqueIdString() {
+		return null;
+	}
+
+	@Override
+	public void superFunc_191955_a(Object iBlockState) {
+	}
+
+	@Override
+	public float superFunc_191954_d(float p_191954_1_) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_191957_ae() {
+		return false;
+	}
+
+	@Override
+	public boolean superHasNoGravity() {
+		return false;
+	}
+
+	@Override
+	public void superSetNoGravity(boolean noGravity) {
+	}
+
+	@Override
+	public boolean superFunc_191953_am() {
+		return false;
+	}
+
+	@Override
+	public Object superGetPitchYaw() {
+		return null;
+	}
+
+	@Override
+	public Object superGetForward() {
+		return null;
+	}
+
+	@Override
+	public boolean superGetIsInvulnerable() {
+		return false;
+	}
+
+	@Override
+	public boolean superCanTrample(Object world, Object block, Object blockPos, float fallDistance) {
+		return false;
+	}
+
+	@Override
+	public int superGetFireImmuneTicks() {
+		return -1;
 	}
 
 }

@@ -34,16 +34,18 @@ public class Modchu_EntityAIBase extends EntityAIBase implements Modchu_IEntityA
 		return master != null ? master.shouldExecute() : false;
 	}
 
+	@Override
 	public boolean superShouldExecute() {
 		return false;
 	}
 
 	@Override
 	public boolean continueExecuting() {
-		return master != null ? master.continueExecuting() : super.continueExecuting();
+		return master != null ? master.shouldContinueExecuting() : super.continueExecuting();
 	}
 
-	public boolean superContinueExecuting() {
+	@Override
+	public boolean superShouldContinueExecuting() {
 		return super.continueExecuting();
 	}
 
@@ -52,6 +54,7 @@ public class Modchu_EntityAIBase extends EntityAIBase implements Modchu_IEntityA
 		return master != null ? master.isInterruptible() : super.isInterruptible();
 	}
 
+	@Override
 	public boolean superIsInterruptible() {
 		return super.isInterruptible();
 	}
@@ -62,6 +65,7 @@ public class Modchu_EntityAIBase extends EntityAIBase implements Modchu_IEntityA
 		else superStartExecuting();
 	}
 
+	@Override
 	public void superStartExecuting() {
 		if (isEnabled()) super.startExecuting();
 	}
@@ -72,6 +76,7 @@ public class Modchu_EntityAIBase extends EntityAIBase implements Modchu_IEntityA
 		else super.resetTask();
 	}
 
+	@Override
 	public void superResetTask() {
 		super.resetTask();
 	}
@@ -82,6 +87,7 @@ public class Modchu_EntityAIBase extends EntityAIBase implements Modchu_IEntityA
 		else super.updateTask();
 	}
 
+	@Override
 	public void superUpdateTask() {
 		super.updateTask();
 	}
@@ -92,6 +98,7 @@ public class Modchu_EntityAIBase extends EntityAIBase implements Modchu_IEntityA
 		else super.setMutexBits(par1);
 	}
 
+	@Override
 	public void superSetMutexBits(int par1) {
 		super.setMutexBits(par1);
 	}
@@ -101,6 +108,7 @@ public class Modchu_EntityAIBase extends EntityAIBase implements Modchu_IEntityA
 		return master != null ? master.getMutexBits() : super.getMutexBits();
 	}
 
+	@Override
 	public int superGetMutexBits() {
 		return super.getMutexBits();
 	}

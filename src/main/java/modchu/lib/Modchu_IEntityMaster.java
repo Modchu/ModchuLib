@@ -35,7 +35,7 @@ public interface Modchu_IEntityMaster {
 	public void setOnFireFromLava();
 	public void setFire(int p_70015_1_);
 	public void extinguish();
-	public void kill();
+	public void outOfWorld();
 	public boolean isOffsetPositionInLiquid(double p_70038_1_, double p_70038_3_, double p_70038_5_);
 	public void move(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_);
 	public Object getSwimSound();
@@ -54,7 +54,6 @@ public interface Modchu_IEntityMaster {
 	public boolean isInsideOfMaterial(Object material);
 	public float getEyeHeight();
 	public boolean handleLavaMovement();
-	public void moveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_);
 	public int getBrightnessForRender(float p_70070_1_);
 	public float getBrightness(float p_70013_1_);
 	public void setWorld(Object world);
@@ -71,7 +70,6 @@ public interface Modchu_IEntityMaster {
 	public boolean attackEntityFrom(Object damageSource, float p_70097_2_);
 	public boolean canBeCollidedWith();
 	public boolean canBePushed();
-	public void addToPlayerScore(Object entity, int p_70084_2_);
 	public boolean isInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_);
 	public boolean isInRangeToRenderDist(double p_70112_1_);
 	public boolean writeToNBTAtomically(Object nBTTagCompound);
@@ -187,7 +185,7 @@ public interface Modchu_IEntityMaster {
 	public void setSilent(boolean isSilent);
 	public void updateFallState(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos);
 	public void fall(float distance, float damageMultiplier);
-	public void resetHeight();
+	public void doWaterSplashEffect();
 	public void spawnRunningParticles();
 	public void createRunningParticles();
 	public boolean isInLava();
@@ -202,7 +200,7 @@ public interface Modchu_IEntityMaster {
 	public boolean isEntityInvulnerable(Object damageSource);
 	public void copyDataFromOld(Object entity);
 	public float getExplosionResistance(Object explosion, Object world, Object blockPos, Object iBlockState);
-	public boolean verifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_);
+	public boolean canExplosionDestroyBlock(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_);
 	public boolean hasCustomName();
 	public void setPositionAndUpdate(double x, double y, double z);
 	public boolean getAlwaysRenderNameTagForRender();
@@ -290,5 +288,22 @@ public interface Modchu_IEntityMaster {
 	public Object getCapability(Object capability, Object enumFacing);
 	public Object getRecursivePassengersByType(Class entityClass);
 	public void setCurrentItemOrArmor(int p_70062_1_, Object itemStack);
+	public int getBrightnessForRender();
+	public float getBrightness();
+	public void addToPlayerScore(Object entity, int p_191956_2_, Object damageSource);
+	public void moveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_, float p_191958_4_);
+	public Object getTeleportDirection();
+	public String getCachedUniqueIdString();
+	public void func_191955_a(Object iBlockState);
+	public float func_191954_d(float p_191954_1_);
+	public boolean func_191957_ae();
+	public boolean hasNoGravity();
+	public void setNoGravity(boolean noGravity);
+	public boolean func_191953_am();
+	public Object getPitchYaw();
+	public Object getForward();
+	public boolean getIsInvulnerable();
+	public boolean canTrample(Object world, Object block, Object blockPos, float fallDistance);
+	public int getFireImmuneTicks();
 
 }

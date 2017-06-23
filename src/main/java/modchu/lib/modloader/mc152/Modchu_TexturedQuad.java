@@ -37,6 +37,12 @@ public class Modchu_TexturedQuad extends TexturedQuad implements Modchu_ITexture
 		master.draw(f);
 	}
 
+	@Override
+	public void draw(Tessellator par1Tessellator, float f) {
+		master.draw(f);
+	}
+
+	@Override
 	public void setInvertNormal(boolean b) {
 		master.setInvertNormal(b);
 	}

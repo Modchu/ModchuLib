@@ -12,7 +12,6 @@ import modchu.lib.Modchu_IBlockContainerMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.Block.EnumOffsetType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockState;
@@ -36,9 +35,10 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.IPlantable;
 
-public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlockContainer {
+public abstract class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlockContainer {
 	public Modchu_IBlockContainerMaster master;
 
 	public Modchu_BlockContainer(HashMap<String, Object> map) {
@@ -77,8 +77,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	public boolean superHasInvalidNeighbor(Object world, Object blockPos) {
 		return false;
 	}
-	// TODO 以下 Modchu_Block内コードのコピペ
-
+	// TODO 以下 Modchu_Blockのコピペ
 	@Override
 	public Block setLightOpacity(int par1) {
 		return (Block) (master != null ? master.setLightOpacity(par1) : super.setLightOpacity(par1));
@@ -725,11 +724,11 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 
 	@Override
 	public MapColor getMapColor(IBlockState iBlockState) {
-		return (MapColor) (master != null ? master.getMapColor(iBlockState) : super.getMapColor(iBlockState));
+		return (MapColor) (master != null ? master.getMapColor(iBlockState, null, null) : super.getMapColor(iBlockState));
 	}
 
 	@Override
-	public MapColor superGetMapColor(Object iBlockState) {
+	public MapColor superGetMapColor(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return super.getMapColor((IBlockState) iBlockState);
 	}
 
@@ -1009,10 +1008,6 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	@Override
 	public void superOnEntityWalk(Object world, Object blockPos, Object iBlockState, Object entity) {
 		super.onEntityCollidedWithBlock((World) world, (BlockPos) blockPos, (IBlockState) iBlockState, (Entity) entity);
-	}
-
-	public int getStrongPower(IBlockAccess iBlockAccess, BlockPos blockPos, IBlockState iBlockState, EnumFacing enumFacing) {
-		return -1;
 	}
 
 	@Override
@@ -2363,11 +2358,6 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public int superGetWeakPower(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing) {
-		return -1;
-	}
-
-	@Override
 	public Object superGetRenderType(Object iBlockState) {
 		return super.getRenderType();
 	}
@@ -2608,7 +2598,7 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	}
 
 	@Override
-	public boolean superIsFullyOpaque(Object iBlockState) {
+	public boolean superIsTopSolid(Object iBlockState) {
 		return getMaterial().isOpaque() && isFullCube();
 	}
 
@@ -2682,6 +2672,70 @@ public class Modchu_BlockContainer extends BlockContainer implements Modchu_IBlo
 	@Override
 	public boolean superNeighborChanged(Object world, int par2, int par3, int par4, int par5, int par6) {
 		return false;
+	}
+
+	@Override
+	public boolean superFunc_149730_j() {
+		return superIsFullBlock();
+	}
+
+	@Override
+	public boolean superGetCanBlockGrass() {
+		return false;
+	}
+
+	@Override
+	public Object superGetMapColor(int p_149728_1_) {
+		return null;
+	}
+
+	@Override
+	public Object superFunc_149735_b(int p_149735_1_, int p_149735_2_) {
+		return null;
+	}
+
+	@Override
+	public boolean superRemovedByPlayer(Object world, Object entityPlayer, int x, int y, int z, boolean willHarvest) {
+		return super.removedByPlayer((World) world, new BlockPos(x, y, z), (EntityPlayer) entityPlayer, willHarvest);
+	}
+
+	@Override
+	public Object superGetPickBlock(Object movingObjectPosition, Object world, int x, int y, int z, Object entityPlayer) {
+		return super.getPickBlock((MovingObjectPosition) movingObjectPosition, (World) world, new BlockPos(x, y, z), (EntityPlayer) entityPlayer);
+	}
+
+	@Override
+	public boolean superGetWeakChanges(Object iBlockAccess, int x, int y, int z) {
+		return super.getWeakChanges((IBlockAccess) iBlockAccess, new BlockPos(x, y, z));
+	}
+
+	@Override
+	public void superSetHarvestLevel(String toolClass, int level, int metadata) {
+	}
+
+	@Override
+	public String superGetHarvestTool(int metadata) {
+		return null;
+	}
+
+	@Override
+	public int superGetHarvestLevel(int metadata) {
+		return -1;
+	}
+
+	@Override
+	public boolean superIsToolEffective(String type, int metadata) {
+		return false;
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition movingObjectPosition, World world, BlockPos blockPos, EntityPlayer entityPlayer) {
+		return (ItemStack) (master != null ? master.getPickBlock(movingObjectPosition, world, blockPos, entityPlayer) : super.getPickBlock(movingObjectPosition, world, blockPos, entityPlayer));
+	}
+
+	@Override
+	public ItemStack superGetPickBlock(Object movingObjectPosition, Object world, Object blockPos, Object entityPlayer) {
+		return super.getPickBlock((MovingObjectPosition) movingObjectPosition, (World) world, (BlockPos) blockPos, (EntityPlayer) entityPlayer);
 	}
 
 }

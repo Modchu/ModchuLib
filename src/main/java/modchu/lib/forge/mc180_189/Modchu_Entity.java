@@ -1,10 +1,7 @@
 package modchu.lib.forge.mc180_189;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_DataWatcherMaster2;
 import modchu.lib.Modchu_IEntity;
@@ -366,12 +363,12 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	protected void kill() {
-		if (master != null) master.kill();
+		if (master != null) master.outOfWorld();
 		else super.kill();
 	}
 
 	@Override
-	public void superKill() {
+	public void superOutOfWorld() {
 		super.kill();
 	}
 
@@ -500,12 +497,12 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void moveFlying(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
-		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_);
+		if (master != null) master.moveRelative(p_70060_1_, p_70060_2_, p_70060_3_, 0.0F);
 		else super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
 	@Override
-	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_) {
+	public void superMoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_, float f3) {
 		super.moveFlying(p_70060_1_, p_70060_2_, p_70060_3_);
 	}
 
@@ -678,7 +675,7 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void addToPlayerScore(Entity entity, int p_70084_2_) {
-		if (master != null) master.addToPlayerScore(entity, p_70084_2_);
+		if (master != null) master.addToPlayerScore(entity, p_70084_2_, null);
 		else super.addToPlayerScore(entity, p_70084_2_);
 	}
 
@@ -1462,12 +1459,12 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	protected void resetHeight() {
-		if (master != null) master.resetHeight();
+		if (master != null) master.doWaterSplashEffect();
 		else super.resetHeight();
 	}
 
 	@Override
-	public void superResetHeight() {
+	public void superDoWaterSplashEffect() {
 		super.resetHeight();
 	}
 

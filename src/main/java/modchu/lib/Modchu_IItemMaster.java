@@ -67,7 +67,7 @@ public interface Modchu_IItemMaster {
 	public Object setPotionEffect(String par1Str);
 	public String getPotionEffect(Object itemStack);
 	public boolean isPotionIngredient(Object itemStack);
-	public void addInformation(Object itemStack, Object entityPlayer, List par3List, boolean par4);
+	public void addInformation(Object itemStack, Object entityPlayer, List par3List, Object par4);
 	public String getItemStackDisplayName(Object itemStack);
 	public boolean hasEffect(Object itemStack);
 	public Object getRarity(Object itemStack);
@@ -162,4 +162,16 @@ public interface Modchu_IItemMaster {
 	public boolean isBeaconPayment(Object itemStack);
 	public boolean shouldCauseReequipAnimation(Object itemStack, Object itemStack1, boolean slotChanged);
 	public Object initCapabilities(Object itemStack, Object nBTTagCompound);
+
+	// 220~
+	public boolean isInCreativeTab(Object creativeTabs);
+	public Object getNBTShareTag(Object itemStack);
+	public int getRGBDurabilityForDisplay(Object itemStack);
+	public boolean canDestroyBlockInCreative(Object world, Object blockPos, Object itemStack, Object entityPlayer);
+	public int getHarvestLevel(Object itemStack, String toolClass, Object entityPlayer, Object iBlockState);
+	public boolean canApplyAtEnchantingTable(Object itemStack, Object enchantment);
+	public boolean shouldCauseBlockBreakReset(Object itemStack, Object itemStack1);
+	public Object getAnimationParameters(Object itemStack, Object world, Object entityLivingBase);
+	public Object getDefaultInstance();
+
 }

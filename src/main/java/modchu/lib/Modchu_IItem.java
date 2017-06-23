@@ -35,7 +35,6 @@ public interface Modchu_IItem {
 	public int superGetMaxItemUseDuration(Object itemStack);
 	public void superOnPlayerStoppedUsing(Object itemStack, Object world, Object entityPlayer, int par4);
 	public Object superSetPotionEffect(String par1Str);
-	public void superAddInformation(Object itemStack, Object entityPlayer, List par3List, boolean par4);
 	public String superGetItemStackDisplayName(Object itemStack);
 	public boolean superHasEffect(Object itemStack);
 	public Object superGetRarity(Object itemStack);
@@ -155,5 +154,17 @@ public interface Modchu_IItem {
 	public boolean superIsBeaconPayment(Object itemStack);
 	public boolean superShouldCauseReequipAnimation(Object itemStack, Object itemStack1, boolean slotChanged);
 	public Object superInitCapabilities(Object itemStack, Object nBTTagCompound);
+	public void superAddInformation(Object itemStack, Object world, List par3List, Object iTooltipFlag);
+
+	// 220~
+	public boolean superIsInCreativeTab(Object creativeTabs);
+	public Object superGetNBTShareTag(Object itemStack);
+	public int superGetRGBDurabilityForDisplay(Object itemStack);
+	public boolean superCanDestroyBlockInCreative(Object world, Object blockPos, Object itemStack, Object entityPlayer);
+	public int superGetHarvestLevel(Object itemStack, String toolClass, Object entityPlayer, Object iBlockState);
+	public boolean superCanApplyAtEnchantingTable(Object itemStack, Object enchantment);
+	public boolean superShouldCauseBlockBreakReset(Object itemStack, Object itemStack1);
+	public Object superGetAnimationParameters(Object itemStack, Object world, Object entityLivingBase);
+	public Object superGetDefaultInstance();
 
 }

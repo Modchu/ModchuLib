@@ -8,7 +8,7 @@ public interface Modchu_IPlayerControllerMaster {
 	public boolean onPlayerDamageBlock(Object blockPos, Object enumFacing);
 	public Object processRightClickBlock(Object entityPlayerSP, Object worldClient, Object itemStack, Object blockPos, Object enumFacing, Object vec3);
 
-	public Object createClientPlayer(Object world);
+	public Object createClientPlayer(Object world, Object statisticsManager, Object recipeBook);
 	public void setPlayerCapabilities(Object entityPlayer);
 	public boolean isSpectator();
 	public void setGameType(Enum enumGameType);
@@ -42,5 +42,13 @@ public interface Modchu_IPlayerControllerMaster {
 	public Object processRightClickBlock(Object entityPlayerSP, Object worldClient, Object itemStack, Object blockPos, Object enumFacing, Object vec3, Object enumHand);
 	public Object processRightClick(Object entityPlayer, Object world, Object itemStack, Object enumHand);
 	public Object interactWithEntity(Object entityPlayer, Object entity, Object itemStack, Object enumHand);
+
+	public boolean func_178894_a(Object entityPlayer, Object entity, Object movingObjectPosition);
+	public boolean isSpectatorMode();
+	public Object getCurrentGameType();
+	public boolean func_181040_m();
+	public Object interactWithEntity(Object entityPlayer, Object entity, Object rayTraceResult, Object itemStack, Object enumHand);
+	public boolean getIsHittingBlock();
+	public void pickItem(int index);
 
 }

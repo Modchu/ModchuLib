@@ -6,17 +6,12 @@ import java.util.HashMap;
 import java.util.Set;
 
 import modchu.lib.Modchu_IResourcePack;
-import modchu.lib.Modchu_AS;
-import modchu.lib.Modchu_IGuiHandlerMaster;
 import modchu.lib.Modchu_IResourcePackMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.client.resources.ResourcePack;
 import net.minecraft.client.resources.data.MetadataSection;
 import net.minecraft.client.resources.data.MetadataSerializer;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class Modchu_ResourcePack implements ResourcePack, Modchu_IResourcePack {
 	public Modchu_IResourcePackMaster master;

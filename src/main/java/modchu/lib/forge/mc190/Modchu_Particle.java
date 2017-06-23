@@ -234,10 +234,11 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	// 190~
 	@Override
 	public boolean func_187111_c() {
-		return master != null ? master.isTransparent() : super.func_187111_c();
+		return master != null ? master.shouldDisableDepth() : super.func_187111_c();
 	}
 
-	public boolean superIsTransparent() {
+	@Override
+	public boolean superShouldDisableDepth() {
 		return super.func_187111_c();
 	}
 
@@ -247,6 +248,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setMaxAge(p_187114_1_);
 	}
 
+	@Override
 	public void superSetMaxAge(int p_187114_1_) {
 		super.setMaxAge(p_187114_1_);
 	}
@@ -257,6 +259,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setParticleTexture(textureAtlasSprite);
 	}
 
+	@Override
 	public void superSetParticleTexture(Object textureAtlasSprite) {
 		super.setParticleTexture((TextureAtlasSprite) textureAtlasSprite);
 	}
@@ -267,6 +270,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setExpired();
 	}
 
+	@Override
 	public void superSetExpired() {
 		super.setExpired();
 	}
@@ -277,6 +281,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.resetPositionToBB();
 	}
 
+	@Override
 	public void superResetPositionToBB() {
 		super.resetPositionToBB();
 	}
@@ -286,6 +291,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return master != null ? master.isAlive() : super.isAlive();
 	}
 
+	@Override
 	public boolean superIsAlive() {
 		return super.isAlive();
 	}
@@ -295,6 +301,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return (AxisAlignedBB) (master != null ? master.getBoundingBox() : super.getEntityBoundingBox());
 	}
 
+	@Override
 	public AxisAlignedBB superGetBoundingBox() {
 		return super.getEntityBoundingBox();
 	}
@@ -305,6 +312,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		else super.setEntityBoundingBox(axisAlignedBB);
 	}
 
+	@Override
 	public void superSetBoundingBox(Object axisAlignedBB) {
 		super.setEntityBoundingBox((AxisAlignedBB) axisAlignedBB);
 	}
@@ -397,6 +405,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return null;
 	}
 
+	@Override
 	public Object[] superGetInventory() {
 		return null;
 	}
@@ -560,6 +569,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	public void superSetParticleIcon(Object textureAtlasSprite) {
 	}
 
+	@Override
 	public void renderParticle(VertexBuffer tessellator, Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
 	}
 
@@ -584,6 +594,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 	public void setPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9, boolean b) {
 	}
 
+	@Override
 	public void superSetPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9, boolean b) {
 	}
 
@@ -596,6 +607,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return false;
 	}
 
+	@Override
 	public void superSetPortal() {
 	}
 
@@ -1480,6 +1492,7 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return false;
 	}
 
+	@Override
 	public boolean superIsInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_) {
 		return false;
 	}
@@ -1490,6 +1503,281 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 
 	@Override
 	public Object superDropItem(Object par1, int par2) {
+		return null;
+	}
+
+	@Override
+	public Object superGetEntityBoundingBox() {
+		return super.getEntityBoundingBox();
+	}
+
+	@Override
+	public void superSetEntityBoundingBox(Object axisAlignedBB) {
+		super.setEntityBoundingBox((AxisAlignedBB) axisAlignedBB);
+	}
+
+	@Override
+	public String superGetTexture() {
+		return null;
+	}
+
+	@Override
+	public boolean superAddNotRiddenEntityID(Object nBTTagCompound) {
+		return false;
+	}
+
+	@Override
+	public boolean superAddEntityID(Object nBTTagCompound) {
+		return false;
+	}
+
+	@Override
+	public void superUnmountEntity(Object entity) {
+
+	}
+
+	@Override
+	public void superUpdateCloak() {
+
+	}
+
+	@Override
+	public float superGetAlpha() {
+		return 0.0F;
+	}
+
+	@Override
+	public void superOnKillCommand() {
+
+	}
+
+	@Override
+	public boolean superIsSilent() {
+		return false;
+	}
+
+	@Override
+	public void superSetSilent(boolean isSilent) {
+
+	}
+
+	@Override
+	public void superResetHeight() {
+
+	}
+
+	@Override
+	public void superSpawnRunningParticles() {
+
+	}
+
+	@Override
+	public void superCreateRunningParticles() {
+
+	}
+
+	@Override
+	public boolean superIsInLava() {
+		return false;
+	}
+
+	@Override
+	public void superMoveToBlockPosAndAngles(Object blockPos, float rotationYawIn, float rotationPitchIn) {
+
+	}
+
+	@Override
+	public double superGetDistanceSq(Object blockPos) {
+		return 0.0D;
+	}
+
+	@Override
+	public double superGetDistanceSqToCenter(Object blockPos) {
+		return 0.0D;
+	}
+
+	@Override
+	public Object superGetLook(float partialTicks) {
+		return null;
+	}
+
+	@Override
+	public Object superGetPositionEyes(float partialTicks) {
+		return null;
+	}
+
+	@Override
+	public Object superRayTrace(double blockReachDistance, float partialTicks) {
+		return null;
+	}
+
+	@Override
+	public void superFunc_181013_g(float p_181013_1_) {
+
+	}
+
+	@Override
+	public Object superFunc_181012_aH() {
+		return null;
+	}
+
+	@Override
+	public void superSetCustomNameTag(String name) {
+
+	}
+
+	@Override
+	public String superGetCustomNameTag() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasCustomName() {
+		return false;
+	}
+
+	@Override
+	public void superSetAlwaysRenderNameTag(boolean alwaysRenderNameTag) {
+
+	}
+
+	@Override
+	public boolean superGetAlwaysRenderNameTag() {
+		return false;
+	}
+
+	@Override
+	public void superSetPositionAndUpdate(double x, double y, double z) {
+
+	}
+
+	@Override
+	public boolean superGetAlwaysRenderNameTagForRender() {
+		return false;
+	}
+
+	@Override
+	public Object superGetHorizontalFacing() {
+		return null;
+	}
+
+	@Override
+	public Object superGetHoverEvent() {
+		return null;
+	}
+
+	@Override
+	public boolean superIsSpectatedByPlayer(Object entityPlayerMP) {
+		return false;
+	}
+
+	@Override
+	public boolean superIsOutsideBorder() {
+		return false;
+	}
+
+	@Override
+	public void superSetOutsideBorder(boolean outsideBorder) {
+
+	}
+
+	@Override
+	public boolean superReplaceItemInInventory(int inventorySlot, Object itemStack) {
+		return false;
+	}
+
+	@Override
+	public void superAddChatMessage(Object iChatComponent) {
+
+	}
+
+	@Override
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+		return false;
+	}
+
+	@Override
+	public Object superGetPosition() {
+		return null;
+	}
+
+	@Override
+	public Object superGetPositionVector() {
+		return null;
+	}
+
+	@Override
+	public Object superGetEntityWorld() {
+		return null;
+	}
+
+	@Override
+	public Object superGetCommandSenderEntity() {
+		return null;
+	}
+
+	@Override
+	public boolean superSendCommandFeedback() {
+		return false;
+	}
+
+	@Override
+	public void superSetCommandStat(Object type, int amount) {
+
+	}
+
+	@Override
+	public Object superGetCommandStats() {
+		return null;
+	}
+
+	@Override
+	public void superFunc_174817_o(Object entity) {
+
+	}
+
+	@Override
+	public Object superGetNBTTagCompound() {
+		return null;
+	}
+
+	@Override
+	public void superClientUpdateEntityNBT(Object nBTTagCompound) {
+
+	}
+
+	@Override
+	public boolean superInteractAt(Object entityPlayer, Object vec3) {
+		return false;
+	}
+
+	@Override
+	public boolean superIsImmuneToExplosions() {
+		return false;
+	}
+
+	@Override
+	public void superApplyEnchantments(Object entityLivingBase, Object entity) {
+
+	}
+
+	@Override
+	public boolean superHasCapability(Object capability, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public Object superGetCapability(Object capability, Object enumFacing) {
+		return null;
+	}
+
+	@Override
+	public void superDeserializeNBT(Object nBTTagCompound) {
+
+	}
+
+	@Override
+	public Object superSerializeNBT() {
 		return null;
 	}
 

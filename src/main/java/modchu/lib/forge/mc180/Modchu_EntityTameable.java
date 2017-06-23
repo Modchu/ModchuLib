@@ -1,8 +1,8 @@
 package modchu.lib.forge.mc180;
 
 import java.util.HashMap;
+import java.util.Map;
 
-import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_IEntityTameable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -18,12 +18,11 @@ import net.minecraft.event.HoverEvent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.CombatTracker;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.Explosion;
@@ -390,7 +389,7 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 
 	@Override
 	public boolean func_174816_a(Explosion explosion, World world, BlockPos blockPos, IBlockState iBlockState, float p_174816_5_) {
-		return master != null ? master.verifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_) : super.func_174816_a(explosion, world, blockPos, iBlockState, p_174816_5_);
+		return master != null ? master.canExplosionDestroyBlock(explosion, world, blockPos, iBlockState, p_174816_5_) : super.func_174816_a(explosion, world, blockPos, iBlockState, p_174816_5_);
 	}
 
 	@Override
@@ -573,7 +572,7 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 
 	@Override
 	public boolean superAttackEntityFrom(Object damageSource, int par2) {
-		return superAttackEntityFrom((DamageSource) damageSource, par2);
+		return superAttackEntityFrom(damageSource, par2);
 	}
 
 	@Override
@@ -596,6 +595,339 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 	// 188~
 	@Override
 	public void superAddRandomDrop() {
+	}
+
+	@Override
+	public int superGetBrightnessForRender() {
+		return -1;
+	}
+
+	@Override
+	public float superGetBrightness() {
+		return 0.0F;
+	}
+
+	@Override
+	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
+		superAddToPlayerScore(entity, p_70084_2_);
+	}
+
+	@Override
+	public Object superFunc_110172_bL() {
+		return superGetHomePosition();
+	}
+
+	@Override
+	public boolean superFunc_152114_e(Object entityLivingBase) {
+		return superIsOwner(entityLivingBase);
+	}
+
+	@Override
+	public Object superFunc_146083_cb() {
+		return superGetPlayerInLove();
+	}
+
+	@Override
+	public Object superFunc_110142_aN() {
+		return superGetCombatTracker();
+	}
+
+	@Override
+	public void superFunc_181013_g(float p_181013_1_) {
+		superSetRenderYawOffset(p_181013_1_);
+	}
+
+	@Override
+	public Object superFunc_181012_aH() {
+		return null;
+	}
+
+	@Override
+	public Vec3 superFunc_181014_aG() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasCapability(Object capability, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public Object superGetCapability(Object capability, Object enumFacing) {
+		return null;
+	}
+
+	@Override
+	public void superDeserializeNBT(Object nBTTagCompound) {
+	}
+
+	@Override
+	public NBTTagCompound superSerializeNBT() {
+		return null;
+	}
+
+	@Override
+	public void setupTamedAI() {
+		if (master != null) master.setupTamedAI();
+		else super.setupTamedAI();
+	}
+
+	@Override
+	public void superSetupTamedAI() {
+		super.setupTamedAI();
+	}
+
+	@Override
+	public EntityLivingBase getOwner() {
+		return (EntityLivingBase) (master != null ? master.getOwner() : super.getOwner());
+	}
+
+	@Override
+	public EntityLivingBase superGetOwner() {
+		return super.getOwnerEntity();
+	}
+
+	@Override
+	public boolean isOwner(EntityLivingBase entityLivingBase) {
+		return master != null ? master.isOwner(entityLivingBase) : super.isOwner(entityLivingBase);
+	}
+
+	@Override
+	public boolean superIsOwner(Object entityLivingBase) {
+		return super.isOwner((EntityLivingBase) entityLivingBase);
+	}
+
+	@Override
+	public void setInLove(EntityPlayer entityPlayer) {
+		if (master != null) master.setInLove(entityPlayer);
+		else super.setInLove(entityPlayer);
+	}
+
+	@Override
+	public void superSetInLove(Object entityPlayer) {
+		super.setInLove((EntityPlayer) entityPlayer);
+	}
+
+	@Override
+	public void func_175501_a(int p_175501_1_, boolean p_175501_2_) {
+		if (master != null) master.ageUp(p_175501_1_, p_175501_2_);
+		else super.func_175501_a(p_175501_1_, p_175501_2_);
+	}
+
+	@Override
+	public void superFunc_175501_a(int p_175501_1_, boolean p_175501_2_) {
+		super.func_175501_a(p_175501_1_, p_175501_2_);
+	}
+
+	@Override
+	public boolean isWithinHomeDistanceCurrentPosition() {
+		return master != null ? master.isWithinHomeDistanceCurrentPosition() : super.isWithinHomeDistanceCurrentPosition();
+	}
+
+	@Override
+	public boolean superIsWithinHomeDistanceCurrentPosition() {
+		return super.isWithinHomeDistanceCurrentPosition();
+	}
+
+	@Override
+	public float getMaximumHomeDistance() {
+		return master != null ? master.getMaximumHomeDistance() : super.getMaximumHomeDistance();
+	}
+
+	@Override
+	public float superGetMaximumHomeDistance() {
+		return super.getMaximumHomeDistance();
+	}
+
+	@Override
+	public void updateLeashedState() {
+		if (master != null) master.updateLeashedState();
+		else super.updateLeashedState();
+	}
+
+	@Override
+	public void superUpdateLeashedState() {
+		super.updateLeashedState();
+	}
+
+	@Override
+	public Item getDropItem() {
+		return (Item) (master != null ? master.getDropItem() : super.getDropItem());
+	}
+
+	@Override
+	public Item superGetDropItem() {
+		return super.getDropItem();
+	}
+
+	@Override
+	public boolean func_175448_a(ItemStack itemStack) {
+		return master != null ? master.canEquipItem(itemStack) : super.func_175448_a(itemStack);
+	}
+
+	@Override
+	public boolean superFunc_175448_a(Object itemStack) {
+		return super.func_175448_a((ItemStack) itemStack);
+	}
+
+	@Override
+	public void enablePersistence() {
+		if (master != null) master.enablePersistence();
+		else super.enablePersistence();
+	}
+
+	@Override
+	public void superEnablePersistence() {
+		super.enablePersistence();
+	}
+
+	@Override
+	public void setNoAI(boolean disable) {
+		if (master != null) master.setNoAI(disable);
+		else super.setNoAI(disable);
+	}
+
+	@Override
+	public Object superGetNewNavigator(Object world) {
+		return master != null ? master.getNewNavigator(world) : super.func_175447_b((World) world);
+	}
+
+	@Override
+	public void superSetAngles(float yaw, float pitch) {
+		super.setAngles(yaw, pitch);
+	}
+
+	@Override
+	public void superAddChatMessage(Object iTextComponent) {
+		super.addChatMessage((IChatComponent) iTextComponent);
+	}
+
+	@Override
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+		return super.canUseCommand(permLevel, commandName);
+	}
+
+	@Override
+	public String superGetCachedUniqueIdString() {
+		return null;
+	}
+
+	@Override
+	public Map superGetActivePotionMap() {
+		return null;
+	}
+
+	@Override
+	public void superBlockUsingShield(Object entityLivingBase) {
+	}
+
+	@Override
+	public Object superGetLastDamageSource() {
+		return null;
+	}
+
+	@Override
+	public boolean superHasItemInSlot(Object entityEquipmentSlot) {
+		return false;
+	}
+
+	@Override
+	public float superGetWaterSlowDown() {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superAttackable() {
+		return false;
+	}
+
+	@Override
+	public void superSetPartying(Object blockPos, boolean p_191987_2_) {
+	}
+
+	@Override
+	public boolean superProcessInitialInteract(Object entityPlayer, Object enumHand) {
+		return false;
+	}
+
+	@Override
+	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand) {
+		return null;
+	}
+
+	@Override
+	public void superFunc_191955_a(Object iBlockState) {
+	}
+
+	@Override
+	public float superFunc_191954_d(float p_191954_1_) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_191957_ae() {
+		return false;
+	}
+
+	@Override
+	public boolean superHasNoGravity() {
+		return false;
+	}
+
+	@Override
+	public void superSetNoGravity(boolean noGravity) {
+	}
+
+	@Override
+	public boolean superFunc_191953_am() {
+		return false;
+	}
+
+	@Override
+	public Object superGetPitchYaw() {
+		return null;
+	}
+
+	@Override
+	public Object superGetForward() {
+		return null;
+	}
+
+	@Override
+	public boolean superGetIsInvulnerable() {
+		return false;
+	}
+
+	@Override
+	public boolean superCanTrample(Object world, Object block, Object blockPos, float fallDistance) {
+		return false;
+	}
+
+	@Override
+	public int superGetFireImmuneTicks() {
+		return -1;
+	}
+
+	@Override
+	public void superSetTamedBy(Object entityPlayer) {
+	}
+
+	@Override
+	public boolean superHoldingSpawnEggOfClass(Object itemStack, Class p_190669_2_) {
+		return false;
+	}
+
+	@Override
+	public double superFollowLeashSpeed() {
+		return 0.0D;
+	}
+
+	@Override
+	public void superFunc_191989_p(float p_191989_1_) {
+	}
+
+	@Override
+	public void superFunc_191986_a(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
 	}
 
 }

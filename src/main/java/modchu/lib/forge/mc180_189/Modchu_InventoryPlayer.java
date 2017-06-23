@@ -259,6 +259,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		else super.setCurrentItem(item, p_146030_2_, p_146030_3_, p_146030_4_);
 	}
 
+	@Override
 	public void superSetCurrentItem(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_) {
 		super.setCurrentItem((Item) item, p_146030_2_, p_146030_3_, p_146030_4_);
 	}
@@ -268,6 +269,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		return master != null ? master.consumeInventoryItem(item) : super.consumeInventoryItem(item);
 	}
 
+	@Override
 	public boolean superConsumeInventoryItem(Object item) {
 		return super.consumeInventoryItem((Item) item);
 	}
@@ -277,6 +279,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		return master != null ? master.hasItem(item) : super.hasItem(item);
 	}
 
+	@Override
 	public boolean superHasItem(Object item) {
 		return super.hasItem((Item) item);
 	}
@@ -286,6 +289,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		return master != null ? master.getName() : super.getName();
 	}
 
+	@Override
 	public String superGetName() {
 		return super.getName();
 	}
@@ -295,6 +299,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		return master != null ? master.hasCustomName() : super.hasCustomName();
 	}
 
+	@Override
 	public boolean superHasCustomName() {
 		return super.hasCustomName();
 	}
@@ -304,6 +309,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		return (IChatComponent) (master != null ? master.getDisplayName() : super.getDisplayName());
 	}
 
+	@Override
 	public IChatComponent superGetDisplayName() {
 		return super.getDisplayName();
 	}
@@ -314,6 +320,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		else super.markDirty();
 	}
 
+	@Override
 	public void superMarkDirty() {
 		super.markDirty();
 	}
@@ -324,6 +331,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		else super.openInventory(entityPlayer);
 	}
 
+	@Override
 	public void superOpenInventory(Object entityPlayer) {
 		super.openInventory((EntityPlayer) entityPlayer);
 	}
@@ -334,6 +342,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		else super.closeInventory(entityPlayer);
 	}
 
+	@Override
 	public void superCloseInventory(Object entityPlayer) {
 		super.closeInventory((EntityPlayer) entityPlayer);
 	}
@@ -343,6 +352,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		return master != null ? master.getField(id) : super.getField(id);
 	}
 
+	@Override
 	public int superGetField(int id) {
 		return super.getField(id);
 	}
@@ -353,6 +363,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		else super.setField(id, value);
 	}
 
+	@Override
 	public void superSetField(int id, int value) {
 		super.setField(id, value);
 	}
@@ -362,6 +373,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		return master != null ? master.getFieldCount() : super.getFieldCount();
 	}
 
+	@Override
 	public int superGetFieldCount() {
 		return super.getFieldCount();
 	}
@@ -372,6 +384,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		else super.clear();
 	}
 
+	@Override
 	public void superClear() {
 		super.clear();
 	}
@@ -393,7 +406,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 	}
 
 	@Override
-	public int superClearInventory(int par1, int par2) {
+	public int superClearInventory(Object itemOrInt, int par2) {
 		return -1;
 	}
 
@@ -415,6 +428,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 		return false;
 	}
 
+	@Override
 	public float getStrVsBlock(Block block) {
 		return 0.0F;
 	}
@@ -457,6 +471,7 @@ public abstract class Modchu_InventoryPlayer extends InventoryPlayer implements 
 	public void func_70439_a(Item item, int par2) {
 	}
 
+	@Override
 	public void superFunc_70439_a(Object item, int par2) {
 	}
 }

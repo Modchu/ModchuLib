@@ -287,4 +287,24 @@ public class Modchu_RendererLivingEntityMasterBasis implements Modchu_IRenderLiv
 		return base.superSetArmorModel(model, entityplayer, i, f, i2);
 	}
 
+	@Override
+	public void func_110777_b(Object entity) {
+		base.superFunc_110777_b(entity);
+	}
+
+	@Override
+	public void rotateCorpse(Object entityLivingBase, float par2, float par3, float par4) {
+		base.superRotateCorpse(entityLivingBase, par2, par3, par4);
+	}
+
+	@Override
+	public float renderSwingProgress(Object entityLivingBase, float par2) {
+		return base.superRenderSwingProgress(entityLivingBase, par2);
+	}
+
+	@Override
+	public boolean func_110813_b(Object entityLivingBase) {
+		return base.superFunc_110813_b(entityLivingBase);
+	}
+
 }

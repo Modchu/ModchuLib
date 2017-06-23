@@ -15,8 +15,8 @@ public class Modchu_EntityAIWanderMasterBasis implements Modchu_IEntityAIWanderM
 	}
 
 	@Override
-	public boolean continueExecuting() {
-		return base.superContinueExecuting();
+	public boolean shouldContinueExecuting() {
+		return base.superShouldContinueExecuting();
 	}
 
 	@Override

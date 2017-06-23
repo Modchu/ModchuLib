@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class Modchu_ItemFood extends modchu.lib.forge.mc190_212.Modchu_ItemFood {
+public class Modchu_ItemFood extends modchu.lib.forge.mc190_220.Modchu_ItemFood {
 
 	public Modchu_ItemFood(HashMap<String, Object> map) {
 		super(map);
@@ -90,6 +90,64 @@ public class Modchu_ItemFood extends modchu.lib.forge.mc190_212.Modchu_ItemFood 
 	@Override
 	public boolean superIsEnchantable(Object itemStack) {
 		return super.isItemTool((ItemStack) itemStack);
+	}
+
+	// 190~212共通コピペ　↓
+	@Override
+	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List par3List, boolean par4) {
+		if (master != null) master.addInformation(itemStack, entityPlayer, par3List, par4);
+		else super.addInformation(itemStack, entityPlayer, par3List, par4);
+	}
+
+	@Override
+	public void superAddInformation(Object itemStack, Object entityPlayer, List par3List, Object par4) {
+		super.addInformation((ItemStack) itemStack, (EntityPlayer) entityPlayer, par3List, (Boolean) par4);
+	}
+	// 190~212共通コピペ　↑
+
+	@Override
+	public boolean superIsInCreativeTab(Object creativeTabs) {
+		return false;
+	}
+
+	@Override
+	public Object superGetNBTShareTag(Object itemStack) {
+		return null;
+	}
+
+	@Override
+	public int superGetRGBDurabilityForDisplay(Object itemStack) {
+		return -1;
+	}
+
+	@Override
+	public boolean superCanDestroyBlockInCreative(Object world, Object blockPos, Object itemStack, Object entityPlayer) {
+		return false;
+	}
+
+	@Override
+	public int superGetHarvestLevel(Object itemStack, String toolClass, Object entityPlayer, Object iBlockState) {
+		return -1;
+	}
+
+	@Override
+	public boolean superCanApplyAtEnchantingTable(Object itemStack, Object enchantment) {
+		return false;
+	}
+
+	@Override
+	public boolean superShouldCauseBlockBreakReset(Object itemStack, Object itemStack1) {
+		return false;
+	}
+
+	@Override
+	public Object superGetAnimationParameters(Object itemStack, Object world, Object entityLivingBase) {
+		return null;
+	}
+
+	@Override
+	public Object superGetDefaultInstance() {
+		return null;
 	}
 
 }

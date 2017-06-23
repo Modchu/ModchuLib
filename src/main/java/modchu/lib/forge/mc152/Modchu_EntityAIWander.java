@@ -2,13 +2,9 @@ package modchu.lib.forge.mc152;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IContainerPlayerMaster;
-import modchu.lib.Modchu_IEntityAIBase;
-import modchu.lib.Modchu_IEntityAIBaseMaster;
 import modchu.lib.Modchu_IEntityAIWander;
 import modchu.lib.Modchu_IEntityAIWanderMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.EntityCreature;
 
@@ -40,16 +36,18 @@ public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEnt
 		return master != null ? master.shouldExecute() : super.shouldExecute();
 	}
 
+	@Override
 	public boolean superShouldExecute() {
 		return super.shouldExecute();
 	}
 
 	@Override
 	public boolean continueExecuting() {
-		return master != null ? master.continueExecuting() : super.continueExecuting();
+		return master != null ? master.shouldContinueExecuting() : super.continueExecuting();
 	}
 
-	public boolean superContinueExecuting() {
+	@Override
+	public boolean superShouldContinueExecuting() {
 		return super.continueExecuting();
 	}
 
@@ -58,6 +56,7 @@ public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEnt
 		return master != null ? master.isInterruptible() : super.isInterruptible();
 	}
 
+	@Override
 	public boolean superIsInterruptible() {
 		return super.isInterruptible();
 	}
@@ -68,6 +67,7 @@ public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEnt
 		else superStartExecuting();
 	}
 
+	@Override
 	public void superStartExecuting() {
 		if (isEnabled()) super.startExecuting();
 	}
@@ -78,6 +78,7 @@ public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEnt
 		else super.resetTask();
 	}
 
+	@Override
 	public void superResetTask() {
 		super.resetTask();
 	}
@@ -88,6 +89,7 @@ public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEnt
 		else super.updateTask();
 	}
 
+	@Override
 	public void superUpdateTask() {
 		super.updateTask();
 	}
@@ -98,6 +100,7 @@ public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEnt
 		else super.setMutexBits(par1);
 	}
 
+	@Override
 	public void superSetMutexBits(int par1) {
 		super.setMutexBits(par1);
 	}
@@ -107,6 +110,7 @@ public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEnt
 		return master != null ? master.getMutexBits() : super.getMutexBits();
 	}
 
+	@Override
 	public int superGetMutexBits() {
 		return super.getMutexBits();
 	}

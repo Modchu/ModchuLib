@@ -48,4 +48,13 @@ public interface Modchu_ITileEntity {
 	public Object superGetUpdatePacket();
 	public Object superGetUpdateTag();
 
+	public boolean superFunc_183000_F();
+
+	// 220~
+	public void superSetWorldCreate(Object world);
+	public Object superGetDisplayName();
+	public void superRotate(Object rotation);
+	public void superMirror(Object mirror);
+	public void superHandleUpdateTag(Object nBTTagCompound);
+
 }

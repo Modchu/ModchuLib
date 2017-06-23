@@ -133,7 +133,7 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 
 	@Override
 	public List<WatchableObject> getAllWatched() {
-		return (List<WatchableObject>) (master != null ? master.getAllWatched() : super.getAllWatched());
+		return master != null ? master.getAllWatched() : super.getAllWatched();
 	}
 
 	@Override
@@ -183,6 +183,7 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 		return super.unwatchAndReturnAllWatched();
 	}
 
+	@Override
 	public void writeWatchableObjects(DataOutput dataOutput) throws IOException {
 		if (master != null) master.writeWatchableObjects(dataOutput);
 		else super.writeWatchableObjects(dataOutput);

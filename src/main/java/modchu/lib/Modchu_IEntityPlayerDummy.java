@@ -16,6 +16,6 @@ public interface Modchu_IEntityPlayerDummy {
 	public void superSetCurrentItemOrArmor(int i, Object itemStack);
 	public Object[] superGetInventory();
 	public Object superFunc_130225_q(int i);
-	public void superMoveEntityWithHeading(float f, float f1);
+	public void superMoveEntityWithHeading(float par1, float par2, float par3);
 
 }

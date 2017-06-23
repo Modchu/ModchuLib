@@ -95,4 +95,30 @@ public class Modchu_TileEntitySpecialRenderer extends TileEntitySpecialRenderer 
 	public void superRenderTileEntityAt(Object tileEntity, double d0, double d1, double d2, float f, int p_180535_9_) {
 	}
 
+	@Override
+	public void superRender(Object tileEntity, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+	}
+
+	@Override
+	public void superSetLightmapDisabled(boolean disabled) {
+	}
+
+	@Override
+	public Object superGetWorld() {
+		return null;
+	}
+
+	@Override
+	public boolean superIsGlobalRenderer(Object tileEntity) {
+		return false;
+	}
+
+	@Override
+	public void superRenderTileEntityFast(Object tileEntity, double x, double y, double z, float partialTicks, int destroyStage, float partial, Object bufferBuilder) {
+	}
+
+	@Override
+	public void superDrawNameplate(Object tileEntity, String str, double x, double y, double z, int maxDistance) {
+	}
+
 }

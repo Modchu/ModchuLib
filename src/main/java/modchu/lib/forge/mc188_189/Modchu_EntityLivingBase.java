@@ -1,6 +1,7 @@
 package modchu.lib.forge.mc188_189;
 
 import java.util.HashMap;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandResultStats;
@@ -196,7 +197,7 @@ public abstract class Modchu_EntityLivingBase extends modchu.lib.forge.mc180_189
 
 	@Override
 	public boolean verifyExplosion(Explosion explosion, World world, BlockPos blockPos, IBlockState iBlockState, float p_174816_5_) {
-		return master != null ? master.verifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_) : super.verifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_);
+		return master != null ? master.canExplosionDestroyBlock(explosion, world, blockPos, iBlockState, p_174816_5_) : super.verifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_);
 	}
 
 	@Override

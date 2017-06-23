@@ -9,6 +9,7 @@ import modchu.lib.Modchu_IBlock;
 import modchu.lib.Modchu_IBlockMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -31,7 +32,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class Modchu_Block extends Block implements Modchu_IBlock {
+public abstract class Modchu_Block extends Block implements Modchu_IBlock {
 	public Modchu_IBlockMaster master;
 
 	public Modchu_Block(HashMap<String, Object> map) {
@@ -1255,7 +1256,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 
 	@Override
 	public boolean removedByPlayer(World world, EntityPlayer entityPlayer, int x, int y, int z) {
-		return master != null ? master.removedByPlayer(world, entityPlayer, x, y, z) : super.removedByPlayer(world, entityPlayer, x, y, z);
+		return master != null ? master.removedByPlayer(world, entityPlayer, x, y, z, false) : super.removedByPlayer(world, entityPlayer, x, y, z);
 	}
 
 	@Override
@@ -1675,32 +1676,12 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public int superGetLightOpacity() {
-		return -1;
-	}
-
-	@Override
 	public boolean superIsTranslucent() {
 		return false;
 	}
 
 	@Override
-	public int superGetLightValue() {
-		return -1;
-	}
-
-	@Override
-	public boolean superGetUseNeighborBrightness() {
-		return false;
-	}
-
-	@Override
-	public Object superGetMaterial() {
-		return null;
-	}
-
-	@Override
-	public Object superGetMapColor(Object iBlockState) {
+	public Object superGetMapColor(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return null;
 	}
 
@@ -1717,15 +1698,6 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	@Override
 	public Object superGetActualState(Object iBlockState, Object iBlockAccess, Object blockPos) {
 		return null;
-	}
-
-	public boolean superIsBlockNormalCube() {
-		return false;
-	}
-
-	@Override
-	public boolean superIsNormalCube() {
-		return false;
 	}
 
 	@Override
@@ -2152,10 +2124,6 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public void superSetHarvestLevel(String toolClass, int level) {
-	}
-
-	@Override
 	public void superSetHarvestLevel(String toolClass, int level, Object iBlockState) {
 	}
 
@@ -2182,11 +2150,6 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	@Override
 	public boolean superCanRenderInLayer(Object enumWorldBlockLayer) {
 		return false;
-	}
-
-	@Override
-	public Object superCaptureDrops(boolean start) {
-		return null;
 	}
 
 	@Override
@@ -2461,7 +2424,7 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	}
 
 	@Override
-	public boolean superIsFullyOpaque(Object iBlockState) {
+	public boolean superIsTopSolid(Object iBlockState) {
 		return false;
 	}
 
@@ -2552,6 +2515,178 @@ public class Modchu_Block extends Block implements Modchu_IBlock {
 	@Override
 	public boolean superNeighborChanged(Object world, int par2, int par3, int par4, int par5, int par6) {
 		return false;
+	}
+
+	@Override
+	public boolean func_149730_j() {
+		return master != null ? master.isFullBlock() : super.func_149730_j();
+	}
+
+	@Override
+	public boolean superFunc_149730_j() {
+		return super.func_149730_j();
+	}
+
+	@Override
+	public int getLightOpacity() {
+		return master != null ? master.getLightOpacity() : super.getLightOpacity();
+	}
+
+	@Override
+	public int superGetLightOpacity() {
+		return super.getLightOpacity();
+	}
+
+	@Override
+	public boolean getCanBlockGrass() {
+		return master != null ? master.getCanBlockGrass() : super.getCanBlockGrass();
+	}
+
+	@Override
+	public boolean superGetCanBlockGrass() {
+		return super.getCanBlockGrass();
+	}
+
+	@Override
+	public int getLightValue() {
+		return master != null ? master.getLightValue() : super.getLightValue();
+	}
+
+	@Override
+	public int superGetLightValue() {
+		return super.getLightValue();
+	}
+
+	@Override
+	public boolean getUseNeighborBrightness() {
+		return master != null ? master.getUseNeighborBrightness() : super.getUseNeighborBrightness();
+	}
+
+	@Override
+	public boolean superGetUseNeighborBrightness() {
+		return super.getUseNeighborBrightness();
+	}
+
+	@Override
+	public Material getMaterial() {
+		return (Material) (master != null ? master.getMaterial() : super.getMaterial());
+	}
+
+	@Override
+	public Material superGetMaterial() {
+		return super.getMaterial();
+	}
+
+	@Override
+	public MapColor getMapColor(int p_149728_1_) {
+		return (MapColor) (master != null ? master.getMapColor(p_149728_1_, null, null) : super.getMapColor(p_149728_1_));
+	}
+
+	@Override
+	public MapColor superGetMapColor(int p_149728_1_) {
+		return super.getMapColor(p_149728_1_);
+	}
+
+	@Override
+	public boolean isBlockNormalCube() {
+		return master != null ? master.isBlockNormalCube() : super.isBlockNormalCube();
+	}
+
+	@Override
+	public boolean superIsBlockNormalCube() {
+		return super.isBlockNormalCube();
+	}
+
+	@Override
+	public boolean isNormalCube() {
+		return master != null ? master.isNormalCube() : super.isNormalCube();
+	}
+
+	@Override
+	public boolean superIsNormalCube() {
+		return super.isNormalCube();
+	}
+
+	@Override
+	public IIcon func_149735_b(int p_149735_1_, int p_149735_2_) {
+		return (IIcon) (master != null ? master.func_149735_b(p_149735_1_, p_149735_2_) : super.func_149735_b(p_149735_1_, p_149735_2_));
+	}
+
+	@Override
+	public IIcon superFunc_149735_b(int p_149735_1_, int p_149735_2_) {
+		return super.func_149735_b(p_149735_1_, p_149735_2_);
+	}
+
+	@Override
+	public boolean getWeakChanges(IBlockAccess iBlockAccess, int x, int y, int z) {
+		return master != null ? master.getWeakChanges(iBlockAccess, x, y, z) : super.getWeakChanges(iBlockAccess, x, y, z);
+	}
+
+	@Override
+	public boolean superGetWeakChanges(Object iBlockAccess, int x, int y, int z) {
+		return super.getWeakChanges((IBlockAccess) iBlockAccess, x, y, z);
+	}
+
+	@Override
+	public void setHarvestLevel(String toolClass, int level) {
+		if (master != null) master.setHarvestLevel(toolClass, level);
+		else super.setHarvestLevel(toolClass, level);
+	}
+
+	@Override
+	public void superSetHarvestLevel(String toolClass, int level) {
+		super.setHarvestLevel(toolClass, level);
+	}
+
+	@Override
+	public void setHarvestLevel(String toolClass, int level, int metadata) {
+		if (master != null) master.setHarvestLevel(toolClass, level, metadata);
+		else super.setHarvestLevel(toolClass, level, metadata);
+	}
+
+	@Override
+	public void superSetHarvestLevel(String toolClass, int level, int metadata) {
+		super.setHarvestLevel(toolClass, level, metadata);
+	}
+
+	@Override
+	public String getHarvestTool(int metadata) {
+		return master != null ? master.getHarvestTool(metadata) : super.getHarvestTool(metadata);
+	}
+
+	@Override
+	public String superGetHarvestTool(int metadata) {
+		return super.getHarvestTool(metadata);
+	}
+
+	@Override
+	public int getHarvestLevel(int metadata) {
+		return master != null ? master.getHarvestLevel(metadata) : super.getHarvestLevel(metadata);
+	}
+
+	@Override
+	public int superGetHarvestLevel(int metadata) {
+		return super.getHarvestLevel(metadata);
+	}
+
+	@Override
+	public boolean isToolEffective(String type, int metadata) {
+		return master != null ? master.isToolEffective(type, metadata) : super.isToolEffective(type, metadata);
+	}
+
+	@Override
+	public boolean superIsToolEffective(String type, int metadata) {
+		return super.isToolEffective(type, metadata);
+	}
+
+	@Override
+	public List<ItemStack> captureDrops(boolean start) {
+		return (List<ItemStack>) (master != null ? master.captureDrops(start) : super.captureDrops(start));
+	}
+
+	@Override
+	public List<ItemStack> superCaptureDrops(boolean start) {
+		return super.captureDrops(start);
 	}
 
 }

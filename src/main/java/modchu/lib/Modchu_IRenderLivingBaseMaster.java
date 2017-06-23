@@ -4,6 +4,10 @@ public interface Modchu_IRenderLivingBaseMaster extends Modchu_IRenderMaster {
 	public int setArmorModel(Object entity, int i, float f);
 	public int setArmorModel(Object model, Object entityplayer, int i, float f, int i2);
 
+	public void rotateCorpse(Object entityLivingBase, float par2, float par3, float par4);
+	public float renderSwingProgress(Object entityLivingBase, float par2);
+	public boolean func_110813_b(Object entityLivingBase);
+	public void func_110777_b(Object entity);
 	public void preRenderCallback(Object entityliving, float f);
 	public void renderEquippedItems(Object entityliving, float f);
 	public void renderScale(Object entity, float f);

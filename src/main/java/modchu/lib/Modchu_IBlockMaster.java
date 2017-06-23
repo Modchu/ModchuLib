@@ -107,7 +107,7 @@ public interface Modchu_IBlockMaster {
 	public boolean isBurning(Object world, int x, int y, int z);
 	public boolean isAir(Object world, int x, int y, int z);
 	public boolean canHarvestBlock(Object entityPlayer, int meta);
-	public boolean removedByPlayer(Object world, Object entityPlayer, int x, int y, int z);
+	public boolean removedByPlayer(Object world, Object entityPlayer, int x, int y, int z, boolean willHarvest);
 	public void addCreativeItems(ArrayList itemList);
 	public int getFlammability(Object iBlockAccess, int x, int y, int z, int metadata, Object forgeDirection);
 	public boolean isFlammable(Object iBlockAccess, int x, int y, int z, int metadata, Object forgeDirection);
@@ -184,7 +184,7 @@ public interface Modchu_IBlockMaster {
 	public int getLightValue();
 	public boolean getUseNeighborBrightness();
 	public Object getMaterial();
-	public Object getMapColor(Object iBlockState);
+	public Object getMapColor(Object iBlockState, Object iBlockAccess, Object blockPos);
 	public Object getStateFromMeta(int meta);
 	public int getMetaFromState(Object iBlockState);
 	public Object getActualState(Object iBlockState, Object iBlockAccess, Object blockPos);
@@ -344,7 +344,7 @@ public interface Modchu_IBlockMaster {
 	public int getExpDrop(Object iBlockState, Object iBlockAccess, Object blockPos, int fortune);
 	public boolean shouldCheckWeakPower(Object iBlockState, Object iBlockAccess, Object blockPos, Object enumFacing);
 	public boolean isFullCube(Object iBlockState);
-	public boolean isFullyOpaque(Object iBlockState);
+	public boolean isTopSolid(Object iBlockState);
 	public Object withRotation(Object iBlockState, Object rotation);
 	public Object withMirror(Object iBlockState, Object mirror);
 	public Object getBoundingBox(Object iBlockState, Object iBlockAccess, Object blockPos);
@@ -358,5 +358,19 @@ public interface Modchu_IBlockMaster {
 	public Object isEntityInsideMaterial(Object iBlockAccess, Object blockPos, Object iBlockState, Object entity, double yToTest, Object material, boolean testingHead);
 	public Object isAABBInsideMaterial(Object world, Object blockPos, Object axisAlignedBB, Object material);
 	public void addCollisionBoxToList(Object iBlockState, Object world, Object blockPos, Object axisAlignedBB, List list, Object entity, boolean p_185477_7_);
+	public boolean getCanBlockGrass();
+	public Object func_149735_b(int p_149735_1_, int p_149735_2_);
+	public boolean getWeakChanges(Object iBlockAccess, int x, int y, int z);
+	public Object getPickBlock(Object movingObjectPosition, Object world, int x, int y, int z, Object entityPlayer);
+	public Object getPickBlock(Object movingObjectPosition, Object world, Object blockPos, Object entityPlayer);
+	public boolean addLandingEffects(Object worldServer, Object blockPos, Object iBlockState, Object entityLivingBase, int numberOfParticles);
+	public void addInformation(Object itemStack, Object world, List tooltip, Object iTooltipFlag);
+	public void observedNeighborChange(Object iBlockState, Object world, Object blockPos, Object block, Object blockPos1);
+	public boolean canRenderInLayer(Object iBlockState, Object blockRenderLayer);
+	public Object getSoundType(Object iBlockState, Object world, Object blockPos, Object entity);
+	public float[] getBeaconColorMultiplier(Object iBlockState, Object world, Object blockPos, Object blockPos1);
+	public Object getStateForPlacement(Object world, Object blockPos, Object enumFacing, float hitX, float hitY, float hitZ, int meta, Object entityLivingBase, Object enumHand);
+	public boolean canBeConnectedTo(Object iBlockAccess, Object blockPos, Object enumFacing);
+	public Object getAiPathNodeType(Object iBlockState, Object iBlockAccess, Object blockPos);
 
 }

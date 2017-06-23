@@ -15,8 +15,8 @@ public class Modchu_EntityAIHurtByTargetMasterBasis implements Modchu_IEntityAIH
 	}
 
 	@Override
-	public boolean continueExecuting() {
-		return base.superContinueExecuting();
+	public boolean shouldContinueExecuting() {
+		return base.superShouldContinueExecuting();
 	}
 
 	@Override

@@ -2,16 +2,12 @@ package modchu.lib.forge.mc162;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IContainerPlayerMaster;
-import modchu.lib.Modchu_IEntityAIBase;
-import modchu.lib.Modchu_IEntityAIBaseMaster;
 import modchu.lib.Modchu_IEntityAINearestAttackableTarget;
 import modchu.lib.Modchu_IEntityAINearestAttackableTargetMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 
 public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttackableTarget implements Modchu_IEntityAINearestAttackableTarget {
@@ -42,16 +38,18 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		return master != null ? master.shouldExecute() : false;
 	}
 
+	@Override
 	public boolean superShouldExecute() {
 		return false;
 	}
 
 	@Override
 	public boolean continueExecuting() {
-		return master != null ? master.continueExecuting() : super.continueExecuting();
+		return master != null ? master.shouldContinueExecuting() : super.continueExecuting();
 	}
 
-	public boolean superContinueExecuting() {
+	@Override
+	public boolean superShouldContinueExecuting() {
 		return super.continueExecuting();
 	}
 
@@ -60,6 +58,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		return master != null ? master.isInterruptible() : super.isInterruptible();
 	}
 
+	@Override
 	public boolean superIsInterruptible() {
 		return super.isInterruptible();
 	}
@@ -70,6 +69,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		else superStartExecuting();
 	}
 
+	@Override
 	public void superStartExecuting() {
 		if (isEnabled()) super.startExecuting();
 	}
@@ -80,6 +80,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		else super.resetTask();
 	}
 
+	@Override
 	public void superResetTask() {
 		super.resetTask();
 	}
@@ -90,6 +91,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		else super.updateTask();
 	}
 
+	@Override
 	public void superUpdateTask() {
 		super.updateTask();
 	}
@@ -100,6 +102,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		else super.setMutexBits(par1);
 	}
 
+	@Override
 	public void superSetMutexBits(int par1) {
 		super.setMutexBits(par1);
 	}
@@ -109,6 +112,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		return master != null ? master.getMutexBits() : super.getMutexBits();
 	}
 
+	@Override
 	public int superGetMutexBits() {
 		return super.getMutexBits();
 	}
@@ -118,6 +122,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		return master != null ? master.getTargetDistance() : super.getTargetDistance();
 	}
 
+	@Override
 	public double superGetTargetDistance() {
 		return super.getTargetDistance();
 	}
@@ -127,6 +132,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		return master != null ? master.isSuitableTarget(entityLivingBase, par2) : super.isSuitableTarget(entityLivingBase, par2);
 	}
 
+	@Override
 	public boolean superIsSuitableTarget(Object entityLivingBase, boolean par2) {
 		return super.isSuitableTarget((EntityLivingBase) entityLivingBase, par2);
 	}

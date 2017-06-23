@@ -374,8 +374,8 @@ public class Modchu_ItemFood extends ItemFood implements Modchu_IItemFood {
 	}
 
 	@Override
-	public void superAddInformation(Object itemStack, Object entityPlayer, List par3List, boolean par4) {
-		super.addInformation((ItemStack) itemStack, (EntityPlayer) entityPlayer, par3List, par4);
+	public void superAddInformation(Object itemStack, Object entityPlayer, List par3List, Object par4) {
+		super.addInformation((ItemStack) itemStack, (EntityPlayer) entityPlayer, par3List, (Boolean) par4);
 	}
 
 	@Override
@@ -1467,6 +1467,51 @@ public class Modchu_ItemFood extends ItemFood implements Modchu_IItemFood {
 
 	@Override
 	public Object superInitCapabilities(Object itemStack, Object nBTTagCompound) {
+		return null;
+	}
+
+	@Override
+	public boolean superIsInCreativeTab(Object creativeTabs) {
+		return false;
+	}
+
+	@Override
+	public Object superGetNBTShareTag(Object itemStack) {
+		return null;
+	}
+
+	@Override
+	public int superGetRGBDurabilityForDisplay(Object itemStack) {
+		return -1;
+	}
+
+	@Override
+	public boolean superCanDestroyBlockInCreative(Object world, Object blockPos, Object itemStack, Object entityPlayer) {
+		return false;
+	}
+
+	@Override
+	public int superGetHarvestLevel(Object itemStack, String toolClass, Object entityPlayer, Object iBlockState) {
+		return -1;
+	}
+
+	@Override
+	public boolean superCanApplyAtEnchantingTable(Object itemStack, Object enchantment) {
+		return false;
+	}
+
+	@Override
+	public boolean superShouldCauseBlockBreakReset(Object itemStack, Object itemStack1) {
+		return false;
+	}
+
+	@Override
+	public Object superGetAnimationParameters(Object itemStack, Object world, Object entityLivingBase) {
+		return null;
+	}
+
+	@Override
+	public Object superGetDefaultInstance() {
 		return null;
 	}
 

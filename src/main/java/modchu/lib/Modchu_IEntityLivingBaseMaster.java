@@ -1,5 +1,6 @@
 package modchu.lib;
 
+import java.util.Map;
 import java.util.Random;
 
 public interface Modchu_IEntityLivingBaseMaster extends Modchu_IEntityMaster {
@@ -12,10 +13,10 @@ public interface Modchu_IEntityLivingBaseMaster extends Modchu_IEntityMaster {
 
 	public int func_96121_ay();
 	public Random getRNG();
-	public Object getAITarget();
+	public Object getRevengeTarget();
 	public Object getLastAttackingEntity();
 	public void setLastAttackingEntity(Object entity);
-	public int getAge();
+	public int getIdleTime();
 	public float getAIMoveSpeed();
 	public void setAIMoveSpeed(float par1);
 	public boolean attackEntityAsMob(Object entity);
@@ -42,13 +43,11 @@ public interface Modchu_IEntityLivingBaseMaster extends Modchu_IEntityMaster {
 	public void damageEntity(Object damageSource, int par2);
 	public float getSoundVolume();
 	public Object getAmbientSound();
-	public Object getHurtSound();
 	public Object getDeathSound();
 	public void knockBack(Object entity, int par2, double par3, double par5);
 	public void onDeath(Object damageSource);
 	public void dropRareDrop(int par1);
 	public void dropFewItems(boolean par1, int par2);
-	public void moveEntityWithHeading(float par1, float par2);
 	public boolean isOnLadder();
 	public boolean canBreatheUnderwater();
 	public void setJumping(boolean par1);
@@ -107,9 +106,9 @@ public interface Modchu_IEntityLivingBaseMaster extends Modchu_IEntityMaster {
 	// 162~
 	public void applyEntityAttributes();
 	public int getRevengeTimer();
-	public Object getLastAttacker();
-	public int getLastAttackerTime();
-	public void setLastAttacker(Object entity);
+	public Object getLastAttackedEntity();
+	public int getLastAttackedEntityTime();
+	public void setLastAttackedEntity(Object entity);
 	public void onChangedPotionEffect(Object potionEffect, boolean par2);
 	public void heal(float f);
 	public void setHealth(float par1);
@@ -169,5 +168,20 @@ public interface Modchu_IEntityLivingBaseMaster extends Modchu_IEntityMaster {
 	public int getTicksElytraFlying();
 	public boolean attemptTeleport(double x, double y, double z);
 	public boolean canBeHitWithPotion();
+	public void moveEntityWithHeading(float par1, float par2, float par3);
+	public Object getHurtSound(Object damageSource);
+	public String func_146067_o(int p_146067_1_);
+	public void setAngles(float yaw, float pitch);
+	public void addChatMessage(Object iTextComponent);
+	public boolean canCommandSenderUseCommand(int permLevel, String commandName);
+	public Map getActivePotionMap();
+	public void blockUsingShield(Object entityLivingBase);
+	public Object getLastDamageSource();
+	public boolean hasItemInSlot(Object entityEquipmentSlot);
+	public float getWaterSlowDown();
+	public boolean attackable();
+	public void setPartying(Object blockPos, boolean p_191987_2_);
+	public boolean processInitialInteract(Object entityPlayer, Object enumHand);
+	public Object applyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand);
 
 }

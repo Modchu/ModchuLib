@@ -7,6 +7,7 @@ public interface Modchu_IItemRendererMaster {
 	public boolean getFlipHorizontal();
 	public void renderItem(Object entityLivingBase, Object itemStack, int par3);
 	public void renderItem(Object entityLivingBase, Object itemStack, int par3, Object itemRenderType);
+	public void renderItem(Object entityLivingBase, Object itemStack, Object transformType);
 	public void renderOverlays(float par1);
 	public void updateEquippedItem();
 	public void resetEquippedProgress();

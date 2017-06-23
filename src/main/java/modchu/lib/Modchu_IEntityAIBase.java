@@ -5,7 +5,7 @@ public interface Modchu_IEntityAIBase {
 	public void setEnabled(boolean b);
 
 	public boolean superShouldExecute();
-	public boolean superContinueExecuting();
+	public boolean superShouldContinueExecuting();
 	public boolean superIsInterruptible();
 	public void superStartExecuting();
 	public void superResetTask();

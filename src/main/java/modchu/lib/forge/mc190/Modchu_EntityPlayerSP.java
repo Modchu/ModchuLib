@@ -1,4 +1,4 @@
-package modchu.lib.forge.mc190;import java.util.Collection;import java.util.HashMap;import java.util.List;import java.util.Random;import java.util.Set;import java.util.UUID;import com.mojang.authlib.GameProfile;import modchu.lib.Modchu_AS;import modchu.lib.Modchu_CastHelper;import modchu.lib.Modchu_Debug;import modchu.lib.Modchu_IEntityDataManager;import modchu.lib.Modchu_IEntityPlayerSP;import modchu.lib.Modchu_IEntityPlayerSPMaster;import modchu.lib.Modchu_Main;import net.minecraft.block.Block;import net.minecraft.block.material.EnumPushReaction;import net.minecraft.block.material.Material;import net.minecraft.block.state.IBlockState;import net.minecraft.client.Minecraft;import net.minecraft.client.entity.EntityPlayerSP;import net.minecraft.client.network.NetHandlerPlayClient;import net.minecraft.client.network.NetworkPlayerInfo;import net.minecraft.command.CommandResultStats;import net.minecraft.command.CommandResultStats.Type;import net.minecraft.crash.CrashReportCategory;import net.minecraft.entity.Entity;import net.minecraft.entity.EntityLivingBase;import net.minecraft.entity.EnumCreatureAttribute;import net.minecraft.entity.EnumCreatureType;import net.minecraft.entity.IMerchant;import net.minecraft.entity.SharedMonsterAttributes;import net.minecraft.entity.ai.attributes.AbstractAttributeMap;import net.minecraft.entity.ai.attributes.IAttribute;import net.minecraft.entity.ai.attributes.IAttributeInstance;import net.minecraft.entity.effect.EntityLightningBolt;import net.minecraft.entity.item.EntityItem;import net.minecraft.entity.passive.EntityHorse;import net.minecraft.entity.player.EntityPlayer;import net.minecraft.entity.player.EntityPlayerMP;import net.minecraft.entity.player.EnumPlayerModelParts;import net.minecraft.entity.player.InventoryPlayer;import net.minecraft.inventory.EntityEquipmentSlot;import net.minecraft.inventory.IInventory;import net.minecraft.inventory.InventoryEnderChest;import net.minecraft.item.Item;import net.minecraft.item.ItemStack;import net.minecraft.nbt.NBTTagCompound;import net.minecraft.nbt.NBTTagList;import net.minecraft.network.datasync.DataParameter;import net.minecraft.network.datasync.EntityDataManager;import net.minecraft.potion.Potion;import net.minecraft.potion.PotionEffect;import net.minecraft.scoreboard.Scoreboard;import net.minecraft.scoreboard.Team;import net.minecraft.server.MinecraftServer;import net.minecraft.stats.Achievement;import net.minecraft.stats.StatBase;import net.minecraft.stats.StatFileWriter;import net.minecraft.tileentity.CommandBlockBaseLogic;import net.minecraft.tileentity.TileEntityCommandBlock;import net.minecraft.tileentity.TileEntitySign;import net.minecraft.util.CombatTracker;import net.minecraft.util.CooldownTracker;import net.minecraft.util.DamageSource;import net.minecraft.util.EnumActionResult;import net.minecraft.util.EnumFacing;import net.minecraft.util.EnumHand;import net.minecraft.util.EnumHandSide;import net.minecraft.util.FoodStats;import net.minecraft.util.Mirror;import net.minecraft.util.ResourceLocation;import net.minecraft.util.Rotation;import net.minecraft.util.SoundCategory;import net.minecraft.util.SoundEvent;import net.minecraft.util.math.AxisAlignedBB;import net.minecraft.util.math.BlockPos;import net.minecraft.util.math.RayTraceResult;import net.minecraft.util.math.Vec3d;import net.minecraft.util.text.ITextComponent;import net.minecraft.util.text.event.HoverEvent;import net.minecraft.world.Explosion;import net.minecraft.world.IInteractionObject;import net.minecraft.world.LockCode;import net.minecraft.world.World;import net.minecraft.world.WorldSettings.GameType;import net.minecraftforge.common.capabilities.Capability;public class Modchu_EntityPlayerSP extends EntityPlayerSP implements Modchu_IEntityPlayerSP {
+package modchu.lib.forge.mc190;import java.util.Collection;import java.util.HashMap;import java.util.List;import java.util.Map;import java.util.Random;import java.util.Set;import java.util.UUID;import com.mojang.authlib.GameProfile;import modchu.lib.Modchu_AS;import modchu.lib.Modchu_CastHelper;import modchu.lib.Modchu_Debug;import modchu.lib.Modchu_IEntityDataManager;import modchu.lib.Modchu_IEntityPlayerSP;import modchu.lib.Modchu_IEntityPlayerSPMaster;import modchu.lib.Modchu_Main;import net.minecraft.block.Block;import net.minecraft.block.material.EnumPushReaction;import net.minecraft.block.material.Material;import net.minecraft.block.state.IBlockState;import net.minecraft.client.Minecraft;import net.minecraft.client.entity.EntityPlayerSP;import net.minecraft.client.network.NetHandlerPlayClient;import net.minecraft.client.network.NetworkPlayerInfo;import net.minecraft.command.CommandResultStats;import net.minecraft.command.CommandResultStats.Type;import net.minecraft.crash.CrashReportCategory;import net.minecraft.entity.Entity;import net.minecraft.entity.EntityLivingBase;import net.minecraft.entity.EnumCreatureAttribute;import net.minecraft.entity.EnumCreatureType;import net.minecraft.entity.IMerchant;import net.minecraft.entity.SharedMonsterAttributes;import net.minecraft.entity.ai.attributes.AbstractAttributeMap;import net.minecraft.entity.ai.attributes.IAttribute;import net.minecraft.entity.ai.attributes.IAttributeInstance;import net.minecraft.entity.effect.EntityLightningBolt;import net.minecraft.entity.item.EntityItem;import net.minecraft.entity.passive.EntityHorse;import net.minecraft.entity.player.EntityPlayer;import net.minecraft.entity.player.EntityPlayerMP;import net.minecraft.entity.player.EnumPlayerModelParts;import net.minecraft.entity.player.InventoryPlayer;import net.minecraft.inventory.EntityEquipmentSlot;import net.minecraft.inventory.IInventory;import net.minecraft.inventory.InventoryEnderChest;import net.minecraft.item.Item;import net.minecraft.item.ItemStack;import net.minecraft.nbt.NBTTagCompound;import net.minecraft.nbt.NBTTagList;import net.minecraft.network.datasync.DataParameter;import net.minecraft.network.datasync.EntityDataManager;import net.minecraft.potion.Potion;import net.minecraft.potion.PotionEffect;import net.minecraft.scoreboard.Scoreboard;import net.minecraft.scoreboard.Team;import net.minecraft.server.MinecraftServer;import net.minecraft.stats.Achievement;import net.minecraft.stats.StatBase;import net.minecraft.stats.StatFileWriter;import net.minecraft.tileentity.CommandBlockBaseLogic;import net.minecraft.tileentity.TileEntityCommandBlock;import net.minecraft.tileentity.TileEntitySign;import net.minecraft.util.CombatTracker;import net.minecraft.util.CooldownTracker;import net.minecraft.util.DamageSource;import net.minecraft.util.EnumActionResult;import net.minecraft.util.EnumFacing;import net.minecraft.util.EnumHand;import net.minecraft.util.EnumHandSide;import net.minecraft.util.FoodStats;import net.minecraft.util.Mirror;import net.minecraft.util.ResourceLocation;import net.minecraft.util.Rotation;import net.minecraft.util.SoundCategory;import net.minecraft.util.SoundEvent;import net.minecraft.util.math.AxisAlignedBB;import net.minecraft.util.math.BlockPos;import net.minecraft.util.math.RayTraceResult;import net.minecraft.util.math.Vec3d;import net.minecraft.util.text.ITextComponent;import net.minecraft.util.text.event.HoverEvent;import net.minecraft.world.Explosion;import net.minecraft.world.IInteractionObject;import net.minecraft.world.LockCode;import net.minecraft.world.World;import net.minecraft.world.WorldSettings.GameType;import net.minecraftforge.common.capabilities.Capability;public class Modchu_EntityPlayerSP extends EntityPlayerSP implements Modchu_IEntityPlayerSP {
 	public Modchu_IEntityPlayerSPMaster master;
 	public boolean initFlag;	public int ridingEntity2;	public int dataWatcherWatchableObjectIdFirst;	public int dataWatcherWatchableObjectIdCount = 15;	public Modchu_EntityPlayerSP(HashMap<String, Object> map) {
 		super((Minecraft)map.get("Object"), (World)map.get("Object1"), (NetHandlerPlayClient)map.get("Object2"), (StatFileWriter)map.get("Object3"));
@@ -26,11 +26,11 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		super.onLivingUpdate();
 	}	@Override
 	public void moveEntityWithHeading(float f, float f1) {
-		if (master != null) master.moveEntityWithHeading(f, f1);
+		if (master != null) master.moveEntityWithHeading(f, f1, 0.0F);
 		super.moveEntityWithHeading(f, f1);
 	}	@Override
 	public SoundEvent getHurtSound() {
-		if (master != null) return (SoundEvent) master.getHurtSound();
+		if (master != null) return (SoundEvent) master.getHurtSound(null);
 		return super.getHurtSound();
 	}	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
@@ -49,7 +49,7 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		return super.getMountedYOffset();
 	}	@Override
 	protected void resetHeight() {
-		if (master != null) master.resetHeight();
+		if (master != null) master.doWaterSplashEffect();
 	}	@Override
 	public double getYOffset() {
 		if (master != null) return master.getYOffset();
@@ -70,8 +70,8 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		//super.copyPlayer(entityplayer);
 	}	public void copyInventory(InventoryPlayer inventoryplayer) {
 		if (master != null) master.copyInventory(inventoryplayer);
-	}	@Override	public void publicResetHeight() {
-		if (master != null) master.resetHeight();
+	}	@Override	public void publicDoWaterSplashEffect() {
+		if (master != null) master.doWaterSplashEffect();
 	}	@Override	public void publicSetSize(float f, float f1) {
 		if (master != null) master.setSize(f, f1);
 	}	@Override
@@ -129,16 +129,16 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 	public void superonLivingUpdate() {
 		super.onLivingUpdate();
 	}	@Override
-	public void supermoveEntityWithHeading(float f, float f1) {
+	public void supermoveEntityWithHeading(float f, float f1, float f2) {
 		super.moveEntityWithHeading(f, f1);
 	}	@Override
-	public Object supergetHurtSound() {
+	public Object supergetHurtSound(Object damageSource) {
 		return super.getHurtSound();
 	}	@Override
 	public double supergetMountedYOffset() {
 		return super.getMountedYOffset();
 	}	@Override
-	public void superresetHeight() {
+	public void superdoWaterSplashEffect() {
 		super.resetHeight();
 	}	@Override
 	public double supergetYOffset() {
@@ -542,9 +542,9 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		return super.getDeathSound();
 	}	@Override
 	public void addToPlayerScore(Entity entity, int amount) {
-		if (master != null) master.addToPlayerScore(entity, amount);
+		if (master != null) master.addToPlayerScore(entity, amount, null);
 		else super.addToPlayerScore(entity, amount);
-	}	@Override	public void superAddToPlayerScore(Object entity, int amount) {
+	}	@Override	public void superaddToPlayerScore(Object entity, int amount, Object damageSource) {
 		super.addToPlayerScore((Entity) entity, amount);
 	}	@Override
 	public EntityItem dropPlayerItemWithRandomChoice(ItemStack itemStack, boolean unused) {
@@ -742,9 +742,9 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		return super.getXPSeed();
 	}	@Override
 	public void removeExperienceLevel(int levels) {
-		if (master != null) master.removeExperienceLevel(levels);
+		if (master != null) master.onEnchant(null, levels);
 		else super.removeExperienceLevel(levels);
-	}	@Override	public void superRemoveExperienceLevel(int levels) {
+	}	@Override	public void superonEnchant(Object itemStack, int levels) {
 		super.removeExperienceLevel(levels);
 	}	@Override
 	public void addExperienceLevel(int levels) {
@@ -995,8 +995,8 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		return super.getRNG();
 	}	@Override
 	public EntityLivingBase getAITarget() {
-		return (EntityLivingBase) (master != null ? master.getAITarget() : super.getAITarget());
-	}	@Override	public EntityLivingBase superGetAITarget() {
+		return (EntityLivingBase) (master != null ? master.getRevengeTarget() : super.getAITarget());
+	}	@Override	public EntityLivingBase superGetRevengeTarget() {
 		return super.getAITarget();
 	}	@Override
 	public int getRevengeTimer() {
@@ -1011,24 +1011,24 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		super.setRevengeTarget((EntityLivingBase) entityLivingBase);
 	}	@Override
 	public EntityLivingBase getLastAttacker() {
-		return (EntityLivingBase) (master != null ? master.getLastAttacker() : super.getLastAttacker());
-	}	@Override	public EntityLivingBase superGetLastAttacker() {
+		return (EntityLivingBase) (master != null ? master.getLastAttackedEntity() : super.getLastAttacker());
+	}	@Override	public EntityLivingBase superGetLastAttackedEntity() {
 		return super.getLastAttacker();
 	}	@Override
 	public int getLastAttackerTime() {
-		return master != null ? master.getLastAttackerTime() : super.getLastAttackerTime();
-	}	@Override	public int superGetLastAttackerTime() {
+		return master != null ? master.getLastAttackedEntityTime() : super.getLastAttackerTime();
+	}	@Override	public int superGetLastAttackedEntityTime() {
 		return super.getLastAttackerTime();
 	}	@Override
 	public void setLastAttacker(Entity entity) {
-		if (master != null) master.setLastAttacker(entity);
+		if (master != null) master.setLastAttackedEntity(entity);
 		else super.setLastAttacker(entity);
-	}	@Override	public void superSetLastAttacker(Object entity) {
+	}	@Override	public void superSetLastAttackedEntity(Object entity) {
 		super.setLastAttacker((Entity) entity);
 	}	@Override
 	public int getAge() {
-		return master != null ? master.getAge() : super.getAge();
-	}	@Override	public int superGetAge() {
+		return master != null ? master.getIdleTime() : super.getAge();
+	}	@Override	public int superGetIdleTime() {
 		return super.getAge();
 	}	@Override
 	protected void updatePotionEffects() {
@@ -1165,9 +1165,9 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		return super.getAttackingEntity();
 	}	@Override
 	protected void kill() {
-		if (master != null) master.kill();
+		if (master != null) master.outOfWorld();
 		else super.kill();
-	}	@Override	public void superKill() {
+	}	@Override	public void superOutOfWorld() {
 		super.kill();
 	}	@Override
 	protected void updateArmSwingProgress() {
@@ -1486,14 +1486,14 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		return super.isInLava();
 	}	@Override
 	public void moveFlying(float strafe, float forward, float friction) {
-		if (master != null) master.moveRelative(strafe, forward, friction);
+		if (master != null) master.moveRelative(strafe, forward, friction, 0.0F);
 		else super.moveFlying(strafe, forward, friction);
-	}	@Override	public void superMoveRelative(float strafe, float forward, float friction) {
+	}	@Override	public void supermoveRelative(float strafe, float forward, float friction, float f3) {
 		super.moveFlying(strafe, forward, friction);
 	}	@Override
 	public int getBrightnessForRender(float p_70070_1_) {
 		return master != null ? master.getBrightnessForRender(p_70070_1_) : super.getBrightnessForRender(p_70070_1_);
-	}	@Override	public int superGetBrightnessForRender(float p_70070_1_) {
+	}	@Override	public int supergetBrightnessForRender(float p_70070_1_) {
 		return super.getBrightnessForRender(p_70070_1_);
 	}	@Override
 	public float getBrightness(float p_70013_1_) {
@@ -1778,8 +1778,8 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 		return super.getExplosionResistance((Explosion) explosion, (World) world, (BlockPos) blockPos, (IBlockState) iBlockState);
 	}	@Override
 	public boolean verifyExplosion(Explosion explosion, World world, BlockPos blockPos, IBlockState iBlockState, float p_174816_5_) {
-		return master != null ? master.verifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_) : super.verifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_);
-	}	@Override	public boolean superVerifyExplosion(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
+		return master != null ? master.canExplosionDestroyBlock(explosion, world, blockPos, iBlockState, p_174816_5_) : super.verifyExplosion(explosion, world, blockPos, iBlockState, p_174816_5_);
+	}	@Override	public boolean superCanExplosionDestroyBlock(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
 		return super.verifyExplosion((Explosion) explosion, (World) world, (BlockPos) blockPos, (IBlockState) iBlockState, p_174816_5_);
 	}	@Override
 	public int getMaxFallHeight() {
@@ -2336,4 +2336,4 @@ package modchu.lib.forge.mc190;import java.util.Collection;import java.util.H
 	}	@Override
 	public boolean superFunc_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
 		return false;
-	}	// ~189	public void setClientBrand(String brand) {	}	@Override	public void superSetClientBrand(String brand) {	}	public String getClientBrand() {		return null;	}	public int getItemInUseDuration() {		return -1;	}	@Override	public int superGetItemInUseDuration() {		return -1;	}	public ItemStack getItemInUse() {		return null;	}	@Override	public ItemStack superGetItemInUse() {		return null;	}	public void stopUsingItem() {	}	@Override	public void superStopUsingItem() {	}	public void clearItemInUse() {	}	@Override	public void superClearItemInUse() {	}	public boolean isBlocking() {		return false;	}	@Override	public boolean superIsBlocking() {		return false;	}	public void destroyCurrentEquippedItem() {	}	@Override	public void superDestroyCurrentEquippedItem() {	}	public void setItemInUse(ItemStack itemStack, int duration) {	}	@Override	public void superSetItemInUse(Object itemStack, int duration) {	}	public ItemStack getHeldItem() {		return null;	}	@Override	public ItemStack superGetHeldItem() {		return super.getHeldItemMainhand();	}	public ItemStack[] getInventory() {		return null;	}	@Override	public ItemStack[] superGetInventory() {		return null;	}	public boolean isPotionActive(int p_82165_1_) {		return false;	}	@Override	public boolean superIsPotionActive(int p_82165_1_) {		return false;	}	public void removePotionEffectClient(int p_70618_1_) {	}	@Override	public void superRemovePotionEffectClient(int p_70618_1_) {	}	public void removePotionEffect(int p_82170_1_) {	}	@Override	public void superRemovePotionEffect(int p_82170_1_) {	}	public boolean isOnTeam(Team team) {		return false;	}	@Override	public boolean superIsOnTeam(Object team) {		return false;	}	public void updateRiderPosition() {	}	@Override	public void superUpdatePassenger() {	}	public boolean interactFirst(EntityPlayer entityPlayer) {		return false;	}	@Override	public boolean superProcessInitialInteract(Object entityPlayer) {		return false;	}	public boolean isEating() {		return false;	}	@Override	public boolean superIsEating() {		return false;	}	public void setEating(boolean eating) {	}	@Override	public void superSetEating(boolean eating) {	}	public void copyDataFromOld(Entity entity) {	}	@Override	public void superCopyDataFromOld(Object entity) {	}	public void onDataWatcherUpdate(int p_145781_1_) {	}	@Override	public void superOnDataWatcherUpdate(int p_145781_1_) {	}	public NBTTagCompound getNBTTagCompound() {		return null;	}	@Override	public NBTTagCompound superGetNBTTagCompound() {		return null;	}	public void clientUpdateEntityNBT(NBTTagCompound nBTTagCompound) {	}	@Override	public void superClientUpdateEntityNBT(Object nBTTagCompound) {	}	public boolean interactAt(EntityPlayer entityPlayer, Vec3d vec3) {		return false;	}	@Override	public boolean superInteractAt(Object entityPlayer, Object vec3) {		return false;	}	public String registerExtendedProperties(String identifier, Object iExtendedEntityProperties) {		return null;	}	@Override	public String superRegisterExtendedProperties(String identifier, Object iExtendedEntityProperties) {		return null;	}	public Object getExtendedProperties(String identifier) {		return null;	}	@Override	public Object superGetExtendedProperties(String identifier) {		return null;	}	@Override	public void superSwingArm() {	}	@Override	public void superOpenBook(Object itemStack) {	}	@Override	public boolean superInteractWith(Object entity) {		return false;	}	@Override	public Object superGetItemStackFromSlot(int par1) {		return null;	}	@Override	public void superDropLoot() {	}	@Override	public void superSetInPortal() {		super.setPortal((BlockPos) Modchu_AS.get(Modchu_AS.newBlockPos, posX, posY, posZ));	}	@Override	public void superPlayStepSound(int par1, int par2, int par3, Object par4) {	}	@Override	public boolean superIsInRangeToRender3d(Object vec3) {		return false;	}	@Override	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, Object par6, float par7) {		return false;	}	@Override	public Object superGetCurrentArmor(int slotIn) {		return null;	}	@Override	public void superSetCurrentItemOrArmor(int slotIn, Object itemStack) {	}	@Override	public void superSetItemStackToSlot(int p_70062_1_, Object itemStack) {	}	@Override	public void superUpdateRidden() {	}	@Override	public void superSetMaxHealth(Object floatOrInt) {		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(Modchu_CastHelper.Double(floatOrInt, 0.0D, false));	}	@Override	public boolean superattackEntityFrom(Object damageSource, Object p_70097_2_) {		return super.attackEntityFrom((DamageSource) damageSource, (Float) p_70097_2_);	}	@Override	public boolean superIsEntityInsideOpaqueBlock() {		return super.isEntityInsideOpaqueBlock();	}	@Override	public boolean superIsNotColliding() {		return false;	}	@Override	public String superGetCachedUniqueIdString() {		return null;	}	// 210~分離}
+	}	// ~189	public void setClientBrand(String brand) {	}	@Override	public void superSetClientBrand(String brand) {	}	public String getClientBrand() {		return null;	}	public int getItemInUseDuration() {		return -1;	}	@Override	public int superGetItemInUseDuration() {		return -1;	}	public ItemStack getItemInUse() {		return null;	}	@Override	public ItemStack superGetItemInUse() {		return null;	}	public void stopUsingItem() {	}	@Override	public void superStopUsingItem() {	}	public void clearItemInUse() {	}	@Override	public void superClearItemInUse() {	}	public boolean isBlocking() {		return false;	}	@Override	public boolean superIsBlocking() {		return false;	}	public void destroyCurrentEquippedItem() {	}	@Override	public void superDestroyCurrentEquippedItem() {	}	public void setItemInUse(ItemStack itemStack, int duration) {	}	@Override	public void superSetItemInUse(Object itemStack, int duration) {	}	public ItemStack getHeldItem() {		return null;	}	@Override	public ItemStack superGetHeldItem() {		return super.getHeldItemMainhand();	}	public ItemStack[] getInventory() {		return null;	}	@Override	public ItemStack[] superGetInventory() {		return null;	}	public boolean isPotionActive(int p_82165_1_) {		return false;	}	@Override	public boolean superIsPotionActive(int p_82165_1_) {		return false;	}	public void removePotionEffectClient(int p_70618_1_) {	}	@Override	public void superRemovePotionEffectClient(int p_70618_1_) {	}	public void removePotionEffect(int p_82170_1_) {	}	@Override	public void superRemovePotionEffect(int p_82170_1_) {	}	public boolean isOnTeam(Team team) {		return false;	}	@Override	public boolean superIsOnTeam(Object team) {		return false;	}	public void updateRiderPosition() {	}	@Override	public void superUpdatePassenger() {	}	public boolean interactFirst(EntityPlayer entityPlayer) {		return false;	}	@Override	public boolean superProcessInitialInteract(Object entityPlayer) {		return false;	}	public boolean isEating() {		return false;	}	@Override	public boolean superIsEating() {		return false;	}	public void setEating(boolean eating) {	}	@Override	public void superSetEating(boolean eating) {	}	public void copyDataFromOld(Entity entity) {	}	@Override	public void superCopyDataFromOld(Object entity) {	}	public void onDataWatcherUpdate(int p_145781_1_) {	}	@Override	public void superOnDataWatcherUpdate(int p_145781_1_) {	}	public NBTTagCompound getNBTTagCompound() {		return null;	}	@Override	public NBTTagCompound superGetNBTTagCompound() {		return null;	}	public void clientUpdateEntityNBT(NBTTagCompound nBTTagCompound) {	}	@Override	public void superClientUpdateEntityNBT(Object nBTTagCompound) {	}	public boolean interactAt(EntityPlayer entityPlayer, Vec3d vec3) {		return false;	}	@Override	public boolean superInteractAt(Object entityPlayer, Object vec3) {		return false;	}	public String registerExtendedProperties(String identifier, Object iExtendedEntityProperties) {		return null;	}	@Override	public String superRegisterExtendedProperties(String identifier, Object iExtendedEntityProperties) {		return null;	}	public Object getExtendedProperties(String identifier) {		return null;	}	@Override	public Object superGetExtendedProperties(String identifier) {		return null;	}	@Override	public void superSwingArm() {	}	@Override	public void superOpenBook(Object itemStack) {	}	@Override	public boolean superInteractWith(Object entity) {		return false;	}	@Override	public Object superGetItemStackFromSlot(int par1) {		return null;	}	@Override	public void superDropLoot() {	}	@Override	public void superSetInPortal() {		super.setPortal((BlockPos) Modchu_AS.get(Modchu_AS.newBlockPos, posX, posY, posZ));	}	@Override	public void superPlayStepSound(int par1, int par2, int par3, Object par4) {	}	@Override	public boolean superIsInRangeToRender3d(Object vec3) {		return false;	}	@Override	public boolean superShouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, Object par6, float par7) {		return false;	}	@Override	public Object superGetCurrentArmor(int slotIn) {		return null;	}	@Override	public void superSetCurrentItemOrArmor(int slotIn, Object itemStack) {	}	@Override	public void superSetItemStackToSlot(int p_70062_1_, Object itemStack) {	}	@Override	public void superUpdateRidden() {	}	@Override	public void superSetMaxHealth(Object floatOrInt) {		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(Modchu_CastHelper.Double(floatOrInt, 0.0D, false));	}	@Override	public boolean superattackEntityFrom(Object damageSource, Object p_70097_2_) {		return super.attackEntityFrom((DamageSource) damageSource, (Float) p_70097_2_);	}	@Override	public boolean superIsEntityInsideOpaqueBlock() {		return super.isEntityInsideOpaqueBlock();	}	@Override	public boolean superIsNotColliding() {		return false;	}	@Override	public String superGetCachedUniqueIdString() {		return null;	}	// 210~分離	@Override	public int supergetBrightnessForRender() {		return -1;	}	@Override	public float supergetBrightness() {		return 0.0F;	}	@Override	public void superFunc_181013_g(float p_181013_1_) {		superSetRenderYawOffset(p_181013_1_);	}	@Override	public Object superFunc_181012_aH() {		return superGetTeleportDirection();	}	@Override	public Object superGetTeleportDirection() {		return super.getTeleportDirection();	}	@Override	public void supersetAngles(float yaw, float pitch) {		super.setAngles(yaw, pitch);	}	@Override	public void superaddChatMessage(Object iTextComponent) {		super.addChatMessage((ITextComponent) iTextComponent);	}	@Override	public boolean supercanCommandSenderUseCommand(int permLevel, String commandName) {		return super.canCommandSenderUseCommand(permLevel, commandName);	}	@Override	public void superFunc_191955_a(Object iBlockState) {	}	@Override	public float superFunc_191954_d(float p_191954_1_) {		return 0.0F;	}	@Override	public boolean superFunc_191957_ae() {		return false;	}	@Override	public boolean superHasNoGravity() {		return false;	}	@Override	public void superSetNoGravity(boolean noGravity) {	}	@Override	public boolean superFunc_191953_am() {		return false;	}	@Override	public Object superGetPitchYaw() {		return null;	}	@Override	public Object superGetForward() {		return null;	}	@Override	public boolean superGetIsInvulnerable() {		return false;	}	@Override	public boolean superCanTrample(Object world, Object block, Object blockPos, float fallDistance) {		return false;	}	@Override	public int superGetFireImmuneTicks() {		return -1;	}	@Override	public Map superGetActivePotionMap() {		return null;	}	@Override	public void superBlockUsingShield(Object entityLivingBase) {	}	@Override	public Object superGetLastDamageSource() {		return null;	}	@Override	public boolean superHasItemInSlot(Object entityEquipmentSlot) {		return false;	}	@Override	public float superGetWaterSlowDown() {		return 0.0F;	}	@Override	public boolean superAttackable() {		return false;	}	@Override	public void superSetPartying(Object blockPos, boolean p_191987_2_) {	}	@Override	public boolean superProcessInitialInteract(Object entityPlayer, Object enumHand) {		return false;	}	@Override	public Object superApplyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand) {		return null;	}	@Override	public Object superGetRecipeBook() {		return null;	}	@Override	public void superFunc_193103_a(Object iRecipe) {	}	@Override	public void superOpenEditStructure(Object tileEntityStructure) {	}	@Override	public boolean superIsAutoJumpEnabled() {		return false;	}	@Override	public void superUpdateAutoJump(float p_189810_1_, float p_189810_2_) {	}	@Override	public void superDestroyVanishingCursedItems() {	}	@Override	public void superDisableShield(boolean p_190777_1_) {	}	@Override	public void superUnlockRecipes(List p_192021_1_) {	}	@Override	public void superUnlockRecipes(Object[] resourceLocation) {	}	@Override	public void superFunc_192022_b(List p_192022_1_) {	}	@Override	public boolean superAddItemStackToInventory(Object itemStack) {		return false;	}	@Override	public boolean superAddShoulderEntity(Object nBTTagCompound) {		return false;	}	@Override	public void superSpawnShoulderEntities() {	}	@Override	public Object superGetLeftShoulderEntity() {		return null;	}	@Override	public void superSetLeftShoulderEntity(Object nBTTagCompound) {	}	@Override	public Object superGetRightShoulderEntity() {		return null;	}	@Override	public void superSetRightShoulderEntity(Object nBTTagCompound) {	}	@Override	public boolean superCanUseCommandBlock() {		return false;	}	@Override	public boolean superHasSpawnDimension() {		return false;	}	@Override	public int superGetSpawnDimension() {		return -1;	}	@Override	public void superSetSpawnDimension(Object integer) {	}	@Override	public void superFunc_191956_a(Object entity, int p_191956_2_, Object damageSource) {	}}

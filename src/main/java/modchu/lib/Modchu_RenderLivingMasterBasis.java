@@ -34,4 +34,14 @@ public class Modchu_RenderLivingMasterBasis extends Modchu_RendererLivingEntityM
 		base.superRenderLeash(entityLiving, x, y, z, entityYaw, partialTicks);
 	}
 
+	@Override
+	public void setLightmap(Object entityLiving) {
+		base.superSetLightmap(entityLiving);
+	}
+
+	@Override
+	public boolean isVisible(Object entityLivingBase) {
+		return base.superIsVisible(entityLivingBase);
+	}
+
 }

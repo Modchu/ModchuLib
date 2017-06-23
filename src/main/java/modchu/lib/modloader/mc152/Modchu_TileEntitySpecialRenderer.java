@@ -26,6 +26,7 @@ public class Modchu_TileEntitySpecialRenderer extends TileEntitySpecialRenderer 
 		if (master != null) master.renderTileEntityAt(tileEntity, d0, d1, d2, f);
 	}
 
+	@Override
 	public void superRenderTileEntityAt(Object tileEntity, double d0, double d1, double d2, float f) {
 	}
 
@@ -35,6 +36,7 @@ public class Modchu_TileEntitySpecialRenderer extends TileEntitySpecialRenderer 
 		else super.bindTextureByName(par1Str);
 	}
 
+	@Override
 	public void superBindTextureByName(String par1Str) {
 		super.bindTextureByName(par1Str);
 	}
@@ -45,6 +47,7 @@ public class Modchu_TileEntitySpecialRenderer extends TileEntitySpecialRenderer 
 		else super.bindTextureByURL(par1Str, par2Str);
 	}
 
+	@Override
 	public void superBindTextureByURL(String par1Str, String par2Str) {
 		super.bindTextureByURL(par1Str, par2Str);
 	}
@@ -55,6 +58,7 @@ public class Modchu_TileEntitySpecialRenderer extends TileEntitySpecialRenderer 
 		else super.setTileEntityRenderer(tileEntityRenderer);
 	}
 
+	@Override
 	public void superSetRendererDispatcher(Object tileEntityRenderer) {
 		super.setTileEntityRenderer((TileEntityRenderer) tileEntityRenderer);
 	}
@@ -65,6 +69,7 @@ public class Modchu_TileEntitySpecialRenderer extends TileEntitySpecialRenderer 
 		else super.onWorldChange(world);
 	}
 
+	@Override
 	public void superOnWorldChange(Object world) {
 		super.onWorldChange((World) world);
 	}
@@ -74,6 +79,7 @@ public class Modchu_TileEntitySpecialRenderer extends TileEntitySpecialRenderer 
 		return (FontRenderer) (master != null ? master.getFontRenderer() : super.getFontRenderer());
 	}
 
+	@Override
 	public FontRenderer superGetFontRenderer() {
 		return super.getFontRenderer();
 	}
@@ -84,6 +90,32 @@ public class Modchu_TileEntitySpecialRenderer extends TileEntitySpecialRenderer 
 
 	@Override
 	public void superRenderTileEntityAt(Object tileEntity, double d0, double d1, double d2, float f, int p_180535_9_) {
+	}
+
+	@Override
+	public void superRender(Object tileEntity, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+	}
+
+	@Override
+	public void superSetLightmapDisabled(boolean disabled) {
+	}
+
+	@Override
+	public Object superGetWorld() {
+		return null;
+	}
+
+	@Override
+	public boolean superIsGlobalRenderer(Object tileEntity) {
+		return false;
+	}
+
+	@Override
+	public void superRenderTileEntityFast(Object tileEntity, double x, double y, double z, float partialTicks, int destroyStage, float partial, Object bufferBuilder) {
+	}
+
+	@Override
+	public void superDrawNameplate(Object tileEntity, String str, double x, double y, double z, int maxDistance) {
 	}
 
 }

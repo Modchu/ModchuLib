@@ -72,8 +72,8 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 	}
 
 	@Override
-	public int superClearInventory(int par1, int par2) {
-		return super.clearInventory(par1, par2);
+	public int superClearInventory(Object itemOrInt, int par2) {
+		return super.clearInventory((Integer) itemOrInt, par2);
 	}
 
 	@Override
@@ -387,54 +387,127 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		super.copyInventory((InventoryPlayer) inventoryPlayer);
 	}
 	// 190~
+	@Override
 	public void superSetCurrentItem(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_) {
 	}
 
+	@Override
 	public int superClearMatchingItems(Object item, int metadataIn, int removeCount, Object nBTTagCompound) {
 		return -1;
 	}
 
+	@Override
 	public boolean superConsumeInventoryItem(Object item) {
 		return false;
 	}
 
+	@Override
 	public boolean superHasItem(Object item) {
 		return false;
 	}
 
+	@Override
 	public String superGetName() {
 		return null;
 	}
 
+	@Override
 	public boolean superHasCustomName() {
 		return false;
 	}
 
+	@Override
 	public Object superGetDisplayName() {
 		return null;
 	}
 
+	@Override
 	public void superMarkDirty() {
 	}
 
+	@Override
 	public void superOpenInventory(Object entityPlayer) {
 	}
 
+	@Override
 	public void superCloseInventory(Object entityPlayer) {
 	}
 
+	@Override
 	public int superGetField(int id) {
 		return -1;
 	}
 
+	@Override
 	public void superSetField(int id, int value) {
 	}
 
+	@Override
 	public int superGetFieldCount() {
 		return -1;
 	}
 
+	@Override
 	public void superClear() {
+	}
+
+	@Override
+	public void superFunc_146030_a(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_) {
+	}
+
+	@Override
+	public float superFunc_146023_a(Object block) {
+		return 0.0F;
+	}
+
+	@Override
+	public String superGetInventoryName() {
+		return super.getInvName();
+	}
+
+	@Override
+	public boolean superHasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
+	public boolean superFunc_146025_b(Object block) {
+		return false;
+	}
+
+	@Override
+	public void superOpenInventory() {
+	}
+
+	@Override
+	public void superCloseInventory() {
+	}
+
+	@Override
+	public void superSetPickedItemStack(Object itemStack) {
+	}
+
+	@Override
+	public void superPickItem(int index) {
+	}
+
+	@Override
+	public int superGetSlotFor(Object itemStack) {
+		return -1;
+	}
+
+	@Override
+	public int superGetBestHotbarSlot() {
+		return -1;
+	}
+
+	@Override
+	public void superDeleteStack(Object itemStack) {
+	}
+
+	@Override
+	public boolean superIsUseableByPlayer(Object entityPlayer) {
+		return super.isUseableByPlayer((EntityPlayer) entityPlayer);
 	}
 
 }

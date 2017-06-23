@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.command.CommandResultStats;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
@@ -20,6 +21,8 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.event.HoverEvent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,6 +30,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -1730,31 +1734,29 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 		return false;
 	}
 
+	@Override
 	public void superSetMaxAge(int p_187114_1_) {
 	}
 
+	@Override
 	public void superSetParticleTexture(Object textureAtlasSprite) {
 	}
 
+	@Override
 	public void superSetExpired() {
 	}
 
+	@Override
 	public void superResetPositionToBB() {
 	}
 
+	@Override
 	public boolean superIsAlive() {
 		return false;
 	}
 
-	public Object superGetEntityBoundingBox() {
-		return null;
-	}
-
-	public void superSetEntityBoundingBox(Object axisAlignedBB) {
-	}
-
 	@Override
-	public boolean superIsTransparent() {
+	public boolean superShouldDisableDepth() {
 		return false;
 	}
 
@@ -1765,6 +1767,465 @@ public class Modchu_Particle extends EntityFX implements Modchu_IParticle {
 
 	@Override
 	public void superSetBoundingBox(Object axisAlignedBB) {
+	}
+
+	@Override
+	public String superGetTexture() {
+		return null;
+	}
+
+	@Override
+	public boolean superAddNotRiddenEntityID(Object nBTTagCompound) {
+		return false;
+	}
+
+	@Override
+	public boolean superAddEntityID(Object nBTTagCompound) {
+		return false;
+	}
+
+	@Override
+	public void superUnmountEntity(Object entity) {
+		super.mountEntity(null);
+	}
+
+	@Override
+	public void superUpdateCloak() {
+	}
+
+	@Override
+	public float superGetAlpha() {
+		return 0.0F;
+	}
+
+	@Override
+	public void onKillCommand() {
+		if (master != null) master.onKillCommand();
+		else super.onKillCommand();
+	}
+
+	@Override
+	public void superOnKillCommand() {
+		super.onKillCommand();
+	}
+
+	@Override
+	public boolean isSilent() {
+		return master != null ? master.isSilent() : super.isSilent();
+	}
+
+	@Override
+	public boolean superIsSilent() {
+		return super.isSilent();
+	}
+
+	@Override
+	public void setSilent(boolean isSilent) {
+		if (master != null) master.setSilent(isSilent);
+		else super.setSilent(isSilent);
+	}
+
+	@Override
+	public void superSetSilent(boolean isSilent) {
+		super.setSilent(isSilent);
+	}
+
+	@Override
+	public void resetHeight() {
+		if (master != null) master.resetHeight();
+		else super.resetHeight();
+	}
+
+	@Override
+	public void superResetHeight() {
+		super.resetHeight();
+	}
+
+	@Override
+	public void spawnRunningParticles() {
+		if (master != null) master.spawnRunningParticles();
+		else super.spawnRunningParticles();
+	}
+
+	@Override
+	public void superSpawnRunningParticles() {
+		super.spawnRunningParticles();
+	}
+
+	@Override
+	public void createRunningParticles() {
+		if (master != null) master.createRunningParticles();
+		else super.createRunningParticles();
+	}
+
+	@Override
+	public void superCreateRunningParticles() {
+		super.createRunningParticles();
+	}
+
+	@Override
+	public boolean isInLava() {
+		return master != null ? master.isInLava() : super.isInLava();
+	}
+
+	@Override
+	public boolean superIsInLava() {
+		return super.isInLava();
+	}
+
+	@Override
+	public void moveToBlockPosAndAngles(BlockPos blockPos, float rotationYawIn, float rotationPitchIn) {
+		if (master != null) master.moveToBlockPosAndAngles(blockPos, rotationYawIn, rotationPitchIn);
+		else super.moveToBlockPosAndAngles(blockPos, rotationYawIn, rotationPitchIn);
+	}
+
+	@Override
+	public void superMoveToBlockPosAndAngles(Object blockPos, float rotationYawIn, float rotationPitchIn) {
+		super.moveToBlockPosAndAngles((BlockPos) blockPos, rotationYawIn, rotationPitchIn);
+	}
+
+	@Override
+	public double getDistanceSq(BlockPos blockPos) {
+		return master != null ? master.getDistanceSq(blockPos) : super.getDistanceSq(blockPos);
+	}
+
+	@Override
+	public double superGetDistanceSq(Object blockPos) {
+		return super.getDistanceSq((BlockPos) blockPos);
+	}
+
+	@Override
+	public double getDistanceSqToCenter(BlockPos blockPos) {
+		return master != null ? master.getDistanceSqToCenter(blockPos) : super.getDistanceSqToCenter(blockPos);
+	}
+
+	@Override
+	public double superGetDistanceSqToCenter(Object blockPos) {
+		return super.getDistanceSqToCenter((BlockPos) blockPos);
+	}
+
+	@Override
+	public Vec3 getLook(float partialTicks) {
+		return (Vec3) (master != null ? master.getLook(partialTicks) : super.getLook(partialTicks));
+	}
+
+	@Override
+	public Vec3 superGetLook(float partialTicks) {
+		return super.getLook(partialTicks);
+	}
+
+	@Override
+	public Vec3 getPositionEyes(float partialTicks) {
+		return (Vec3) (master != null ? master.getPositionEyes(partialTicks) : super.getPositionEyes(partialTicks));
+	}
+
+	@Override
+	public Vec3 superGetPositionEyes(float partialTicks) {
+		return super.getPositionEyes(partialTicks);
+	}
+
+	@Override
+	public MovingObjectPosition rayTrace(double blockReachDistance, float partialTicks) {
+		return (MovingObjectPosition) (master != null ? master.rayTrace(blockReachDistance, partialTicks) : super.rayTrace(blockReachDistance, partialTicks));
+	}
+
+	@Override
+	public MovingObjectPosition superRayTrace(double blockReachDistance, float partialTicks) {
+		return super.rayTrace(blockReachDistance, partialTicks);
+	}
+
+	@Override
+	public void superFunc_181013_g(float p_181013_1_) {
+	}
+
+	@Override
+	public EnumFacing superFunc_181012_aH() {
+		return null;
+	}
+
+	@Override
+	public void setCustomNameTag(String name) {
+		if (master != null) master.setCustomNameTag(name);
+		else super.setCustomNameTag(name);
+	}
+
+	@Override
+	public void superSetCustomNameTag(String name) {
+		super.setCustomNameTag(name);
+	}
+
+	@Override
+	public String getCustomNameTag() {
+		return master != null ? master.getCustomNameTag() : super.getCustomNameTag();
+	}
+
+	@Override
+	public String superGetCustomNameTag() {
+		return super.getCustomNameTag();
+	}
+
+	@Override
+	public boolean hasCustomName() {
+		return master != null ? master.hasCustomName() : super.hasCustomName();
+	}
+
+	@Override
+	public boolean superHasCustomName() {
+		return super.hasCustomName();
+	}
+
+	@Override
+	public void setAlwaysRenderNameTag(boolean alwaysRenderNameTag) {
+		if (master != null) master.setAlwaysRenderNameTag(alwaysRenderNameTag);
+		else super.setAlwaysRenderNameTag(alwaysRenderNameTag);
+	}
+
+	@Override
+	public void superSetAlwaysRenderNameTag(boolean alwaysRenderNameTag) {
+		super.setAlwaysRenderNameTag(alwaysRenderNameTag);
+	}
+
+	@Override
+	public boolean getAlwaysRenderNameTag() {
+		return master != null ? master.getAlwaysRenderNameTag() : super.getAlwaysRenderNameTag();
+	}
+
+	@Override
+	public boolean superGetAlwaysRenderNameTag() {
+		return super.getAlwaysRenderNameTag();
+	}
+
+	@Override
+	public void setPositionAndUpdate(double x, double y, double z) {
+		if (master != null) master.setPositionAndUpdate(x, y, z);
+		else super.setPositionAndUpdate(x, y, z);
+	}
+
+	@Override
+	public void superSetPositionAndUpdate(double x, double y, double z) {
+		super.setPositionAndUpdate(x, y, z);
+	}
+
+	@Override
+	public boolean getAlwaysRenderNameTagForRender() {
+		return master != null ? master.getAlwaysRenderNameTagForRender() : super.getAlwaysRenderNameTagForRender();
+	}
+
+	@Override
+	public boolean superGetAlwaysRenderNameTagForRender() {
+		return super.getAlwaysRenderNameTagForRender();
+	}
+
+	@Override
+	public EnumFacing getHorizontalFacing() {
+		return (EnumFacing) (master != null ? master.getHorizontalFacing() : super.getHorizontalFacing());
+	}
+
+	@Override
+	public EnumFacing superGetHorizontalFacing() {
+		return super.getHorizontalFacing();
+	}
+
+	@Override
+	public HoverEvent superGetHoverEvent() {
+		return null;
+	}
+
+	@Override
+	public boolean superIsSpectatedByPlayer(Object entityPlayerMP) {
+		return super.func_174827_a((EntityPlayerMP) entityPlayerMP);
+	}
+
+	@Override
+	public AxisAlignedBB getEntityBoundingBox() {
+		return (AxisAlignedBB) (master != null ? master.getEntityBoundingBox() : super.getEntityBoundingBox());
+	}
+
+	@Override
+	public AxisAlignedBB superGetEntityBoundingBox() {
+		return super.getEntityBoundingBox();
+	}
+
+	@Override
+	public void setEntityBoundingBox(AxisAlignedBB axisAlignedBB) {
+		if (master != null) master.setEntityBoundingBox(axisAlignedBB);
+		else super.setEntityBoundingBox(axisAlignedBB);
+	}
+
+	@Override
+	public void superSetEntityBoundingBox(Object axisAlignedBB) {
+		super.setEntityBoundingBox((AxisAlignedBB) axisAlignedBB);
+	}
+
+	@Override
+	public boolean isOutsideBorder() {
+		return master != null ? master.isOutsideBorder() : super.isOutsideBorder();
+	}
+
+	@Override
+	public boolean superIsOutsideBorder() {
+		return super.isOutsideBorder();
+	}
+
+	@Override
+	public void setOutsideBorder(boolean outsideBorder) {
+		if (master != null) master.setOutsideBorder(outsideBorder);
+		else super.setOutsideBorder(outsideBorder);
+	}
+
+	@Override
+	public void superSetOutsideBorder(boolean outsideBorder) {
+		super.setOutsideBorder(outsideBorder);
+	}
+
+	@Override
+	public boolean replaceItemInInventory(int inventorySlot, ItemStack itemStack) {
+		return master != null ? master.replaceItemInInventory(inventorySlot, itemStack) : super.replaceItemInInventory(inventorySlot, itemStack);
+	}
+
+	@Override
+	public boolean superReplaceItemInInventory(int inventorySlot, Object itemStack) {
+		return super.replaceItemInInventory(inventorySlot, (ItemStack) itemStack);
+	}
+
+	@Override
+	public void addChatMessage(IChatComponent iChatComponent) {
+		if (master != null) master.addChatMessage(iChatComponent);
+		else super.addChatMessage(iChatComponent);
+	}
+
+	@Override
+	public void superAddChatMessage(Object iChatComponent) {
+		super.addChatMessage((IChatComponent) iChatComponent);
+	}
+
+	@Override
+	public boolean superCanCommandSenderUseCommand(int permLevel, String commandName) {
+		return false;
+	}
+
+	@Override
+	public BlockPos getPosition() {
+		return (BlockPos) (master != null ? master.getPosition() : super.getPosition());
+	}
+
+	@Override
+	public BlockPos superGetPosition() {
+		return super.getPosition();
+	}
+
+	@Override
+	public Vec3 getPositionVector() {
+		return (Vec3) (master != null ? master.getPositionVector() : super.getPositionVector());
+	}
+
+	@Override
+	public Vec3 superGetPositionVector() {
+		return super.getPositionVector();
+	}
+
+	@Override
+	public World getEntityWorld() {
+		return (World) (master != null ? master.getEntityWorld() : super.getEntityWorld());
+	}
+
+	@Override
+	public World superGetEntityWorld() {
+		return super.getEntityWorld();
+	}
+
+	@Override
+	public Entity getCommandSenderEntity() {
+		return (Entity) (master != null ? master.getCommandSenderEntity() : super.getCommandSenderEntity());
+	}
+
+	@Override
+	public Entity superGetCommandSenderEntity() {
+		return super.getCommandSenderEntity();
+	}
+
+	@Override
+	public boolean sendCommandFeedback() {
+		return master != null ? master.sendCommandFeedback() : super.sendCommandFeedback();
+	}
+
+	@Override
+	public boolean superSendCommandFeedback() {
+		return super.sendCommandFeedback();
+	}
+
+	@Override
+	public void superSetCommandStat(Object type, int amount) {
+	}
+
+	@Override
+	public CommandResultStats func_174807_aT() {
+		return (CommandResultStats) (master != null ? master.getCommandStats() : super.func_174807_aT());
+	}
+
+	@Override
+	public CommandResultStats superGetCommandStats() {
+		return super.func_174807_aT();
+	}
+
+	@Override
+	public void func_174817_o(Entity entity) {
+		if (master != null) master.func_174817_o(entity);
+		else super.func_174817_o(entity);
+	}
+
+	@Override
+	public void superFunc_174817_o(Object entity) {
+		super.func_174817_o((Entity) entity);
+	}
+
+	@Override
+	public NBTTagCompound superGetNBTTagCompound() {
+		return null;
+	}
+
+	@Override
+	public void superClientUpdateEntityNBT(Object nBTTagCompound) {
+	}
+
+	@Override
+	public boolean superInteractAt(Object entityPlayer, Object vec3) {
+		return false;
+	}
+
+	@Override
+	public boolean superIsImmuneToExplosions() {
+		return false;
+	}
+
+	@Override
+	public void func_174815_a(EntityLivingBase entityLivingBase, Entity entity) {
+		if (master != null) master.applyEnchantments(entityLivingBase, entity);
+		else super.func_174815_a(entityLivingBase, entity);
+	}
+
+	@Override
+	public void superApplyEnchantments(Object entityLivingBase, Object entity) {
+		super.func_174815_a((EntityLivingBase) entityLivingBase, (Entity) entity);
+	}
+
+	@Override
+	public boolean superHasCapability(Object capability, Object enumFacing) {
+		return false;
+	}
+
+	@Override
+	public Object superGetCapability(Object capability, Object enumFacing) {
+		return null;
+	}
+
+	@Override
+	public void superDeserializeNBT(Object nBTTagCompound) {
+	}
+
+	@Override
+	public NBTTagCompound superSerializeNBT() {
+		return null;
 	}
 
 }

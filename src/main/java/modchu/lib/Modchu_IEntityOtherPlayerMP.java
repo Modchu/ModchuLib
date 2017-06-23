@@ -1,10 +1,20 @@
 package modchu.lib;
 
 import java.util.Collection;
-import java.util.Random;
-import java.util.UUID;
+import java.util.List;
 
 public interface Modchu_IEntityOtherPlayerMP extends Modchu_IEntityLivingBase {
+	public void superFunc_110302_j();
+	public Object superFunc_110309_l();
+	public Object superFunc_110310_o();
+	public String superGetTranslatedEntityName();
+	public Object superFunc_110148_a(Object attribute);
+	public void superDoBlockCollisions();
+	public void superPlayStepSound(int par1, int par2, int par3, int par4);
+	public Object superDropItem(int par1, int par2);
+	public Object superDropItemWithOffset(int par1, int par2, float par3);
+	public float superFunc_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block);
+	public boolean superFunc_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7);
 	public void superSendChatToPlayer(String par1Str);
 	public int superGetMaxHealth();
 	public boolean superCanAttackPlayer(Object entityPlayer);
@@ -115,7 +125,6 @@ public interface Modchu_IEntityOtherPlayerMP extends Modchu_IEntityLivingBase {
 	public void superAddMovementStat(double p_71000_1_, double p_71000_3_, double p_71000_5_);
 	public void superAddExperience(int amount);
 	public int superGetXPSeed();
-	public void superRemoveExperienceLevel(int levels);
 	public void superAddExperienceLevel(int levels);
 	public int superXpBarCap();
 	public void superAddExhaustion(float p_71020_1_);
@@ -198,5 +207,25 @@ public interface Modchu_IEntityOtherPlayerMP extends Modchu_IEntityLivingBase {
 	public boolean superIsNoDespawnRequired();
 	public boolean superProcessInteract(Object entityPlayer);
 	public void superOnInitialSpawn(Object o, Object o1);
+	public void superOnEnchant(Object itemStack, int levels);
+	public boolean superFunc_152123_o();
+	public boolean superFunc_152122_n();
+	public void superDestroyVanishingCursedItems();
+	public void superOpenEditStructure(Object tileEntityStructure);
+	public void superDisableShield(boolean p_190777_1_);
+	public void superUnlockRecipes(List p_192021_1_);
+	public void superUnlockRecipes(Object[] resourceLocation);
+	public void superFunc_192022_b(List p_192022_1_);
+	public boolean superAddItemStackToInventory(Object itemStack);
+	public boolean superAddShoulderEntity(Object nBTTagCompound);
+	public void superSpawnShoulderEntities();
+	public Object superGetLeftShoulderEntity();
+	public void superSetLeftShoulderEntity(Object nBTTagCompound);
+	public Object superGetRightShoulderEntity();
+	public void superSetRightShoulderEntity(Object nBTTagCompound);
+	public boolean superCanUseCommandBlock();
+	public boolean superHasSpawnDimension();
+	public int superGetSpawnDimension();
+	public void superSetSpawnDimension(Object integer);
 
 }

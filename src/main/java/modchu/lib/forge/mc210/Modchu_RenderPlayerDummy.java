@@ -24,11 +24,12 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class Modchu_RenderPlayerDummy extends modchu.lib.forge.mc190_212.Modchu_RenderPlayerDummy {
+public class Modchu_RenderPlayerDummy extends modchu.lib.forge.mc190_220.Modchu_RenderPlayerDummy {
 
 	public Modchu_RenderPlayerDummy(HashMap<String, Object> map) {
 		super(map);
 	}
+
 	// 210~分離
 	public boolean removeLayer(LayerRenderer layerRenderer) {
 		return master != null ? master.removeLayer(layerRenderer) : layerRenderers.remove(layerRenderer);
@@ -47,7 +48,30 @@ public class Modchu_RenderPlayerDummy extends modchu.lib.forge.mc190_212.Modchu_
 
 	@Override
 	public void superApplyRotations(Object par1EntityLivingBase, float par2, float par3, float par4) {
-		super.rotateCorpse((AbstractClientPlayer) par1EntityLivingBase, par2, par3, par4);
+		super.rotateCorpse((EntityLivingBase) par1EntityLivingBase, par2, par3, par4);
+	}
+
+	@Override
+	public float superRenderSwingProgress(Object entityLivingBase, float par2) {
+		return 0.0F;
+	}
+
+	@Override
+	public boolean superFunc_110813_b(Object entityLivingBase) {
+		return false;
+	}
+
+	@Override
+	public void superFunc_110777_b(Object entity) {
+		superBindEntityTexture(entity);
+	}
+
+	@Override
+	public void superFunc_96449_a(Object entityLivingBase, double par2, double par4, double par6, String par8Str, float par9, double par10) {
+	}
+
+	@Override
+	public void superRotateCorpse(Object entityLivingBase, float par2, float par3, float par4) {
 	}
 
 }

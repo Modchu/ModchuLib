@@ -36,7 +36,7 @@ public interface Modchu_IGuiScreenMaster {
 	public void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6);
 	public void drawTexturedModelRectFromIcon(int par1, int par2, Object icon, int par4, int par5);
 	public void renderToolTip(Object itemStack, int p_146285_2_, int p_146285_3_);
-	public void drawCreativeTabHoveringText(String p_146279_1_, int p_146279_2_, int p_146279_3_);
+	public void drawHoveringText(String p_146279_1_, int p_146279_2_, int p_146279_3_);
 	public void func_146283_a(List p_146283_1_, int p_146283_2_, int p_146283_3_);
 	public void drawHoveringText(List p_146283_1_, int p_146283_2_, int p_146283_3_, Object fontRenderer);
 	public void drawHoveringText(List textLines, int x, int y);
@@ -48,5 +48,10 @@ public interface Modchu_IGuiScreenMaster {
 	public void onResize(Object minecraft, int p_175273_2_, int p_175273_3_);
 	public void drawTexturedModalRect(float xCoord, float yCoord, int minU, int minV, int maxU, int maxV);
 	public void drawTexturedModalRect(int xCoord, int yCoord, Object textureAtlasSprite, int p_175175_4_, int p_175175_5_);
+	public void setGuiSize(int w, int h);
+	public Object addButton(Object t);
+	public List<String> getItemToolTip(Object itemStack);
+	public void setFocused(boolean hasFocusedControlIn);
+	public boolean isFocused();
 
 }

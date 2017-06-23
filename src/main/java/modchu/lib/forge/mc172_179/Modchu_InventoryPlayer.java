@@ -289,11 +289,6 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return -1;
 	}
 
-	@Override
-	public int superClearInventory(int par1, int par2) {
-		return -1;
-	}
-
 	public boolean consumeInventoryItem(int par1) {
 		return false;
 	}
@@ -356,54 +351,195 @@ public class Modchu_InventoryPlayer extends InventoryPlayer implements Modchu_II
 		return false;
 	}
 
+	@Override
 	public void superSetCurrentItem(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_) {
 	}
 
+	@Override
 	public int superClearMatchingItems(Object item, int metadataIn, int removeCount, Object nBTTagCompound) {
 		return -1;
 	}
 
-	public boolean superConsumeInventoryItem(Object item) {
-		return false;
-	}
-
-	public boolean superHasItem(Object item) {
-		return false;
-	}
-
+	@Override
 	public String superGetName() {
 		return null;
 	}
 
+	@Override
 	public boolean superHasCustomName() {
 		return false;
 	}
 
+	@Override
 	public Object superGetDisplayName() {
 		return null;
 	}
 
-	public void superMarkDirty() {
-	}
-
+	@Override
 	public void superOpenInventory(Object entityPlayer) {
 	}
 
+	@Override
 	public void superCloseInventory(Object entityPlayer) {
 	}
 
+	@Override
 	public int superGetField(int id) {
 		return -1;
 	}
 
+	@Override
 	public void superSetField(int id, int value) {
 	}
 
+	@Override
 	public int superGetFieldCount() {
 		return -1;
 	}
 
+	@Override
 	public void superClear() {
+	}
+
+	@Override
+	public void func_146030_a(Item item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_) {
+		if (master != null) master.func_146030_a(item, p_146030_2_, p_146030_3_, p_146030_4_);
+		else super.func_146030_a(item, p_146030_2_, p_146030_3_, p_146030_4_);
+	}
+
+	@Override
+	public void superFunc_146030_a(Object item, int p_146030_2_, boolean p_146030_3_, boolean p_146030_4_) {
+		super.func_146030_a((Item) item, p_146030_2_, p_146030_3_, p_146030_4_);
+	}
+
+	@Override
+	public int clearInventory(Item item, int p_146027_2_) {
+		return master != null ? master.clearInventory(item, p_146027_2_) : super.clearInventory(item, p_146027_2_);
+	}
+
+	@Override
+	public int superClearInventory(Object item, int p_146027_2_) {
+		return super.clearInventory((Item) item, p_146027_2_);
+	}
+
+	@Override
+	public boolean consumeInventoryItem(Item item) {
+		return master != null ? master.consumeInventoryItem(item) : super.consumeInventoryItem(item);
+	}
+
+	@Override
+	public boolean superConsumeInventoryItem(Object item) {
+		return super.consumeInventoryItem((Item) item);
+	}
+
+	@Override
+	public boolean hasItem(Item item) {
+		return master != null ? master.hasItem(item) : super.hasItem(item);
+	}
+
+	@Override
+	public boolean superHasItem(Object item) {
+		return super.hasItem((Item) item);
+	}
+
+	@Override
+	public float func_146023_a(Block block) {
+		return master != null ? master.func_146023_a(block) : super.func_146023_a(block);
+	}
+
+	@Override
+	public float superFunc_146023_a(Object block) {
+		return super.func_146023_a((Block) block);
+	}
+
+	@Override
+	public String getInventoryName() {
+		return master != null ? master.getInventoryName() : super.getInventoryName();
+	}
+
+	@Override
+	public String superGetInventoryName() {
+		return super.getInventoryName();
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return master != null ? master.hasCustomInventoryName() : super.hasCustomInventoryName();
+	}
+
+	@Override
+	public boolean superHasCustomInventoryName() {
+		return super.hasCustomInventoryName();
+	}
+
+	@Override
+	public boolean func_146025_b(Block block) {
+		return master != null ? master.func_146025_b(block) : super.func_146025_b(block);
+	}
+
+	@Override
+	public boolean superFunc_146025_b(Object block) {
+		return super.func_146025_b((Block) block);
+	}
+
+	@Override
+	public void markDirty() {
+		if (master != null) master.markDirty();
+		else super.markDirty();
+	}
+
+	@Override
+	public void superMarkDirty() {
+		super.markDirty();
+	}
+
+	@Override
+	public void openInventory() {
+		if (master != null) master.openInventory(null);
+		else super.openInventory();
+	}
+
+	@Override
+	public void superOpenInventory() {
+		super.openInventory();
+	}
+
+	@Override
+	public void closeInventory() {
+		if (master != null) master.closeInventory(null);
+		else super.closeInventory();
+	}
+
+	@Override
+	public void superCloseInventory() {
+		super.closeInventory();
+	}
+
+	@Override
+	public void superSetPickedItemStack(Object itemStack) {
+	}
+
+	@Override
+	public void superPickItem(int index) {
+	}
+
+	@Override
+	public int superGetSlotFor(Object itemStack) {
+		return -1;
+	}
+
+	@Override
+	public int superGetBestHotbarSlot() {
+		return -1;
+	}
+
+	@Override
+	public void superDeleteStack(Object itemStack) {
+	}
+
+	@Override
+	public boolean superIsUseableByPlayer(Object entityPlayer) {
+		return false;
 	}
 
 }
