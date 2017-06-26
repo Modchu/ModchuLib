@@ -34,7 +34,7 @@ public interface Modchu_IEntityPlayerMaster {
 	public void setScore(int par1);
 	public void addScore(int par1);
 	public void onDeath(Object damageSource);
-	public void addToPlayerScore(Object entity, int par2);
+	public void awardKillScore(Object entity, int par2);
 	public Object dropItem(boolean par1);
 	public Object dropPlayerItem(Object itemStack);
 	public Object dropItem(Object itemStack, boolean par2);

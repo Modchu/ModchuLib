@@ -64,8 +64,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void moveEntityWithHeading(float f, float f1, float f2) {
-		base.supermoveEntityWithHeading(f, f1, f2);
+	public void travel(float f, float f1, float f2) {
+		base.supertravel(f, f1, f2);
 	}
 
 	@Override
@@ -544,8 +544,8 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void addToPlayerScore(Object entity, int par2, Object damageSource) {
-		base.superaddToPlayerScore(entity, par2, damageSource);
+	public void awardKillScore(Object entity, int par2, Object damageSource) {
+		base.superAwardKillScore(entity, par2, damageSource);
 	}
 
 	@Override
@@ -3364,17 +3364,17 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void func_191955_a(Object iBlockState) {
-		base.superFunc_191955_a(iBlockState);
+	public void onInsideBlock(Object iBlockState) {
+		base.superOnInsideBlock(iBlockState);
 	}
 
 	@Override
-	public float func_191954_d(float p_191954_1_) {
+	public float playFlySound(float p_191954_1_) {
 		return base.superFunc_191954_d(p_191954_1_);
 	}
 
 	@Override
-	public boolean func_191957_ae() {
+	public boolean makeFlySound() {
 		return base.superFunc_191957_ae();
 	}
 
@@ -3389,7 +3389,7 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public boolean func_191953_am() {
+	public boolean isOverWater() {
 		return base.superFunc_191953_am();
 	}
 
@@ -3469,7 +3469,7 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void func_193103_a(Object iRecipe) {
+	public void removeRecipeHighlight(Object iRecipe) {
 		base.superFunc_193103_a(iRecipe);
 	}
 
@@ -3509,7 +3509,7 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void func_192022_b(List p_192022_1_) {
+	public void resetRecipes(List p_192022_1_) {
 		base.superFunc_192022_b(p_192022_1_);
 	}
 
@@ -3566,11 +3566,6 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	@Override
 	public void setSpawnDimension(Object integer) {
 		base.superSetSpawnDimension(integer);
-	}
-
-	@Override
-	public void func_191956_a(Object entity, int p_191956_2_, Object damageSource) {
-		base.superFunc_191956_a(entity, p_191956_2_, damageSource);
 	}
 
 }

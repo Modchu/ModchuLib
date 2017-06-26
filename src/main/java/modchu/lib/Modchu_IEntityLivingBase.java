@@ -187,7 +187,7 @@ public interface Modchu_IEntityLivingBase extends Modchu_IEntity {
 	public void superAddRandomDrop();
 	public void superDropLoot(boolean p_184610_1_, int p_184610_2_, Object damageSource);
 	public boolean superGetAlwaysRenderNameTag();
-	public void superMoveEntityWithHeading(float par1, float par2, float par3);
+	public void superTravel(float par1, float par2, float par3);
 	public Object superGetHurtSound(Object damageSource);
 	public Object superFunc_181014_aG();
 	public void superSetAngles(float yaw, float pitch);

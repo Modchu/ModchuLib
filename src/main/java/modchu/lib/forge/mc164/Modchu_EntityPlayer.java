@@ -397,12 +397,12 @@ public class Modchu_EntityPlayer extends EntityPlayer implements Modchu_IEntityP
 
 	@Override
 	public void addToPlayerScore(Entity entity, int par2) {
-		if (master != null) master.addToPlayerScore(entity, par2);
+		if (master != null) master.awardKillScore(entity, par2);
 		else super.addToPlayerScore(entity, par2);
 	}
 
 	@Override
-	public void superaddToPlayerScore(Object entity, int par2) {
+	public void superAwardKillScore(Object entity, int par2) {
 		super.addToPlayerScore((Entity) entity, par2);
 	}
 

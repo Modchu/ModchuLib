@@ -255,7 +255,7 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public void addToPlayerScore(Object entity, int amount, Object damageSource) {
+	public void awardKillScore(Object entity, int amount, Object damageSource) {
 		base.superAddToPlayerScore(entity, amount, damageSource);
 	}
 
@@ -495,8 +495,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_, float p_70612_3_) {
-		base.superMoveEntityWithHeading(p_70612_1_, p_70612_2_, p_70612_3_);
+	public void travel(float p_70612_1_, float p_70612_2_, float p_70612_3_) {
+		base.superTravel(p_70612_1_, p_70612_2_, p_70612_3_);
 	}
 
 	@Override
@@ -3202,19 +3202,19 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public void func_191955_a(Object iBlockState) {
-		base.superFunc_191955_a(iBlockState);
+	public void onInsideBlock(Object iBlockState) {
+		base.superOnInsideBlock(iBlockState);
 
 	}
 
 	@Override
-	public float func_191954_d(float p_191954_1_) {
-		return base.superFunc_191954_d(p_191954_1_);
+	public float playFlySound(float p_191954_1_) {
+		return base.superPlayFlySound(p_191954_1_);
 	}
 
 	@Override
-	public boolean func_191957_ae() {
-		return base.superFunc_191957_ae();
+	public boolean makeFlySound() {
+		return base.superMakeFlySound();
 	}
 
 	@Override
@@ -3229,8 +3229,8 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public boolean func_191953_am() {
-		return base.superFunc_191953_am();
+	public boolean isOverWater() {
+		return base.superIsOverWater();
 	}
 
 	@Override

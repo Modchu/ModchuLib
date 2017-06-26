@@ -10,8 +10,8 @@ public class Modchu_PlayerControllerMasterBasis implements Modchu_IPlayerControl
 	}
 
 	@Override
-	public Object createClientPlayer(Object world, Object statisticsManager, Object recipeBook) {
-		return base.superCreateClientPlayer(world, statisticsManager, recipeBook);
+	public Object createPlayer(Object world, Object statisticsManager, Object recipeBook) {
+		return base.superCreatePlayer(world, statisticsManager, recipeBook);
 	}
 
 	@Override

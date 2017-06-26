@@ -2607,7 +2607,7 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
-		superAddToPlayerScore(entity, p_70084_2_);
+		superAwardKillScore(entity, p_70084_2_);
 	}
 
 	@Override

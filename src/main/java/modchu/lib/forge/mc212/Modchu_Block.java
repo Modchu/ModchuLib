@@ -99,4 +99,9 @@ public class Modchu_Block extends modchu.lib.forge.mc212_220.Modchu_Block implem
 		return null;
 	}
 
+	@Override
+	protected List<ItemStack> captureDrops(boolean start) {
+		return (List<ItemStack>) (master != null ? master.captureDrops(start) : super.captureDrops(start));
+	}
+
 }

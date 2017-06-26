@@ -1,7 +1,7 @@
 package modchu.lib;
 
 public interface Modchu_IPlayerController {
-	public Object superCreateClientPlayer(Object world, Object statisticsManager, Object recipeBook);
+	public Object superCreatePlayer(Object world, Object statisticsManager, Object recipeBook);
 	public void superSetPlayerCapabilities(Object entityPlayer);
 	public boolean superIsSpectator();
 	public void superSetGameType(Object gameType);

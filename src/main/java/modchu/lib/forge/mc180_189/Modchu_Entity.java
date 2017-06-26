@@ -675,12 +675,12 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public void addToPlayerScore(Entity entity, int p_70084_2_) {
-		if (master != null) master.addToPlayerScore(entity, p_70084_2_, null);
+		if (master != null) master.awardKillScore(entity, p_70084_2_, null);
 		else super.addToPlayerScore(entity, p_70084_2_);
 	}
 
 	@Override
-	public void superAddToPlayerScore(Object entity, int p_70084_2_) {
+	public void superAwardKillScore(Object entity, int p_70084_2_) {
 		super.addToPlayerScore((Entity) entity, p_70084_2_);
 	}
 

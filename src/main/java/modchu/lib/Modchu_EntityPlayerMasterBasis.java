@@ -162,8 +162,8 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void addToPlayerScore(Object entity, int par2) {
-		base.superaddToPlayerScore(entity, par2);
+	public void awardKillScore(Object entity, int par2) {
+		base.superAwardKillScore(entity, par2);
 	}
 
 	@Override

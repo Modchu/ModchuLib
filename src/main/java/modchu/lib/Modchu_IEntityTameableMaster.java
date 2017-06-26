@@ -30,7 +30,7 @@ public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster
 	public boolean shouldAttackEntity(Object entityLivingBase, Object entityLivingBase2);
 	public float getBlockPathWeight(int par1, int par2, int par3);
 	public void setInLove(Object entityPlayer);
-	public Object getPlayerInLove();
+	public Object getLoveCause();
 	public boolean canMateWith(Object entityAnimal);
 	public int getGrowingAge();
 	public void addGrowth(int par1);
@@ -103,8 +103,8 @@ public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster
 	public void setTamedBy(Object entityPlayer);
 	public boolean holdingSpawnEggOfClass(Object itemStack, Class p_190669_2_);
 	public double followLeashSpeed();
-	public void func_191989_p(float p_191989_1_);
+	public void setMoveForward(float p_191989_1_);
 	public Object getHurtSound(Object damageSource);
-	public void func_191986_a(float p_191986_1_, float p_191986_2_, float p_191986_3_);
+	public void travel(float p_191986_1_, float p_191986_2_, float p_191986_3_);
 
 }

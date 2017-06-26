@@ -172,12 +172,12 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc212_220.Modchu_ASMaster 
 
 	@Override
 	public float entityLivingBaseMoveForward(Object entityplayer) {
-		return ((EntityLivingBase) entityplayer).field_191988_bg;
+		return ((EntityLivingBase) entityplayer).moveForward;
 	}
 
 	@Override
 	public void setEntityLivingBaseMoveForward(Object entityplayer, float f) {
-		((EntityLivingBase) entityplayer).field_191988_bg = f;
+		((EntityLivingBase) entityplayer).moveForward = f;
 	}
 
 }

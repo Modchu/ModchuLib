@@ -3,13 +3,17 @@ package modchu.lib.forge.mc210_220;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.common.collect.BiMap;
+
 import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Main;
+import modchu.lib.Modchu_Reflect;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityZombieVillager;
@@ -31,7 +35,6 @@ import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry;
 
 public abstract class Modchu_ASMaster extends modchu.lib.forge.mc190_220.Modchu_ASMaster {
 
@@ -115,11 +118,23 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc190_220.Modchu_
 	@Override
 	public int getVacancyGlobalEntityID() {
 		int ID = -1;
-		FMLControlledNamespacedRegistry<EntityEntry> entityRegistry = net.minecraftforge.fml.common.registry.GameData.getEntityRegistry();
+		boolean oldFlag = false;
+		Class GameData = Modchu_Reflect.loadClass("net.minecraftforge.registries.GameData");
+		Object entityRegistry = null;
+		if (GameData != null); else {
+			GameData = Modchu_Reflect.loadClass("net.minecraftforge.fml.common.registry.GameData");
+			oldFlag = true;
+		}
+		entityRegistry = Modchu_Reflect.invokeMethod(GameData, "getEntityRegistry");
+
 		if (entityRegistry != null) {
+			BiMap ids = null;
+			if (!oldFlag) ids = (BiMap) Modchu_Reflect.getFieldObject("ForgeRegistry", "ids", entityRegistry);
 			for(int i = 64; i < 256; i++) {
 				//Modchu_Debug.mDebug("getVacancyGlobalEntityID i="+i+" EntityList.field_191308_b.getObjectById(i)="+EntityList.field_191308_b.getObjectById(i));
-				if (entityRegistry.getObjectById(i) != null); else {
+				Object o = oldFlag ? Modchu_Reflect.invokeMethod("net.minecraftforge.fml.common.registry.FMLControlledNamespacedRegistry", "getObjectById", new Class[]{ int.class }, entityRegistry, new Object[]{ i }) :
+					ids.get(i);
+				if (o != null); else {
 					ID = i;
 					//Modchu_Debug.mDebug("getVacancyGlobalEntityID ID="+ID);
 					break;

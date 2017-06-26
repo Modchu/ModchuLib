@@ -1636,11 +1636,6 @@ public abstract class Modchu_BlockContainer extends BlockContainer implements Mo
 	}
 
 	@Override
-	protected List<ItemStack> captureDrops(boolean start) {
-		return (List<ItemStack>) (master != null ? master.captureDrops(start) : super.captureDrops(start));
-	}
-
-	@Override
 	public List<ItemStack> superCaptureDrops(boolean start) {
 		return super.captureDrops(start);
 	}

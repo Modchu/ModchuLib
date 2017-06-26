@@ -690,9 +690,8 @@ public interface Modchu_IEntityPlayerSP {
 	public void superSetMaxHealth(Object floatOrInt);
 	public String superGetCachedUniqueIdString();
 	public boolean isDamageInvincible();
-	public void supermoveEntityWithHeading(float par1, float par2, float par3);
+	public void supertravel(float par1, float par2, float par3);
 	public Object supergetHurtSound(Object damageSource);
-	public void superaddToPlayerScore(Object entity, int p_70084_2_, Object damageSource);
 	public void superonEnchant(Object itemStack, int levels);
 	public void supermoveRelative(float p_70060_1_, float p_70060_2_, float p_70060_3_, float p_191958_4_);
 	public float supergetBrightness();
@@ -703,7 +702,7 @@ public interface Modchu_IEntityPlayerSP {
 	public void supersetAngles(float yaw, float pitch);
 	public void superaddChatMessage(Object iTextComponent);
 	public boolean supercanCommandSenderUseCommand(int permLevel, String commandName);
-	public void superFunc_191955_a(Object iBlockState);
+	public void superOnInsideBlock(Object iBlockState);
 	public float superFunc_191954_d(float p_191954_1_);
 	public boolean superFunc_191957_ae();
 	public boolean superHasNoGravity();
@@ -744,6 +743,6 @@ public interface Modchu_IEntityPlayerSP {
 	public boolean superHasSpawnDimension();
 	public int superGetSpawnDimension();
 	public void superSetSpawnDimension(Object integer);
-	public void superFunc_191956_a(Object entity, int p_191956_2_, Object damageSource);
+	public void superAwardKillScore(Object entity, int p_191956_2_, Object damageSource);
 
 }

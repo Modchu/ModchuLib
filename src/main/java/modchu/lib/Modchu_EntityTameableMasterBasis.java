@@ -414,8 +414,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public Object getPlayerInLove() {
-		return base.superGetPlayerInLove();
+	public Object getLoveCause() {
+		return base.superGetLoveCause();
 	}
 
 	@Override
@@ -1034,8 +1034,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void moveEntityWithHeading(float par1, float par2, float par3) {
-		base.superMoveEntityWithHeading(par1, par2, par3);
+	public void travel(float par1, float par2, float par3) {
+		base.superTravel(par1, par2, par3);
 	}
 
 	@Override
@@ -1359,7 +1359,7 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void addToPlayerScore(Object entity, int par2, Object damageSource) {
+	public void awardKillScore(Object entity, int par2, Object damageSource) {
 		base.superAddToPlayerScore(entity, par2, damageSource);
 	}
 
@@ -3028,18 +3028,18 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public void func_191955_a(Object iBlockState) {
-		base.superFunc_191955_a(iBlockState);
+	public void onInsideBlock(Object iBlockState) {
+		base.superOnInsideBlock(iBlockState);
 	}
 
 	@Override
-	public float func_191954_d(float p_191954_1_) {
-		return base.superFunc_191954_d(p_191954_1_);
+	public float playFlySound(float p_191954_1_) {
+		return base.superPlayFlySound(p_191954_1_);
 	}
 
 	@Override
-	public boolean func_191957_ae() {
-		return base.superFunc_191957_ae();
+	public boolean makeFlySound() {
+		return base.superMakeFlySound();
 	}
 
 	@Override
@@ -3053,8 +3053,8 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	}
 
 	@Override
-	public boolean func_191953_am() {
-		return base.superFunc_191953_am();
+	public boolean isOverWater() {
+		return base.superIsOverWater();
 	}
 
 	@Override
@@ -3140,16 +3140,6 @@ public class Modchu_EntityTameableMasterBasis implements Modchu_IEntityTameableM
 	@Override
 	public double followLeashSpeed() {
 		return base.superFollowLeashSpeed();
-	}
-
-	@Override
-	public void func_191989_p(float p_191989_1_) {
-		base.superFunc_191989_p(p_191989_1_);
-	}
-
-	@Override
-	public void func_191986_a(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
-		base.superFunc_191986_a(p_191986_1_, p_191986_2_, p_191986_3_);
 	}
 
 }

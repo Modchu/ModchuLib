@@ -138,4 +138,9 @@ public class Modchu_BlockContainer extends modchu.lib.forge.mc212_220.Modchu_Blo
 		return super.getAiPathNodeType((IBlockState) iBlockState, (IBlockAccess) iBlockAccess, (BlockPos) blockPos);
 	}
 
+	@Override
+	protected NonNullList<ItemStack> captureDrops(boolean start) {
+		return (NonNullList<ItemStack>) (master != null ? master.captureDrops(start) : super.captureDrops(start));
+	}
+
 }

@@ -265,4 +265,9 @@ public class Modchu_BlockContainer extends modchu.lib.forge.mc190_220.Modchu_Blo
 		return null;
 	}
 
+	@Override
+	protected List<ItemStack> captureDrops(boolean start) {
+		return (List<ItemStack>) (master != null ? master.captureDrops(start) : super.captureDrops(start));
+	}
+
 }

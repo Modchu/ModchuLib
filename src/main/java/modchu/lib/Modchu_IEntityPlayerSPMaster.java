@@ -262,7 +262,7 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public boolean processInitialInteract(Object entityPlayer, Object enumHand);
 	public Object applyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand);
 	public Object getRecipeBook();
-	public void func_193103_a(Object iRecipe);
+	public void removeRecipeHighlight(Object iRecipe);
 	public void openEditStructure(Object tileEntityStructure);
 	public boolean isAutoJumpEnabled();
 	public void updateAutoJump(float p_189810_1_, float p_189810_2_);
@@ -270,7 +270,7 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public void disableShield(boolean p_190777_1_);
 	public void unlockRecipes(List p_192021_1_);
 	public void unlockRecipes(Object[] resourceLocation);
-	public void func_192022_b(List p_192022_1_);
+	public void resetRecipes(List p_192022_1_);
 	public boolean addItemStackToInventory(Object itemStack);
 	public boolean addShoulderEntity(Object nBTTagCompound);
 	public void spawnShoulderEntities();
@@ -282,6 +282,6 @@ public interface Modchu_IEntityPlayerSPMaster extends Modchu_IEntityLivingBaseMa
 	public boolean hasSpawnDimension();
 	public int getSpawnDimension();
 	public void setSpawnDimension(Object integer);
-	public void func_191956_a(Object entity, int p_191956_2_, Object damageSource);
+	public void awardKillScore(Object entity, int p_191956_2_, Object damageSource);
 
 }

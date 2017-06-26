@@ -545,16 +545,16 @@ public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc180_189.Modch
 	}
 
 	@Override
-	public void superFunc_191955_a(Object iBlockState) {
+	public void superOnInsideBlock(Object iBlockState) {
 	}
 
 	@Override
-	public float superFunc_191954_d(float p_191954_1_) {
+	public float superPlayFlySound(float p_191954_1_) {
 		return 0.0F;
 	}
 
 	@Override
-	public boolean superFunc_191957_ae() {
+	public boolean superMakeFlySound() {
 		return false;
 	}
 
@@ -568,7 +568,7 @@ public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc180_189.Modch
 	}
 
 	@Override
-	public boolean superFunc_191953_am() {
+	public boolean superIsOverWater() {
 		return false;
 	}
 

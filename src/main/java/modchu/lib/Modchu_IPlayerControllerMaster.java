@@ -8,7 +8,7 @@ public interface Modchu_IPlayerControllerMaster {
 	public boolean onPlayerDamageBlock(Object blockPos, Object enumFacing);
 	public Object processRightClickBlock(Object entityPlayerSP, Object worldClient, Object itemStack, Object blockPos, Object enumFacing, Object vec3);
 
-	public Object createClientPlayer(Object world, Object statisticsManager, Object recipeBook);
+	public Object createPlayer(Object world, Object statisticsManager, Object recipeBook);
 	public void setPlayerCapabilities(Object entityPlayer);
 	public boolean isSpectator();
 	public void setGameType(Enum enumGameType);

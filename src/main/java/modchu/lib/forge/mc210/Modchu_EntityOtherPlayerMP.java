@@ -108,12 +108,12 @@ public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc210_220.Modch
 
 	@Override
 	public void addToPlayerScore(Entity entity, int amount) {
-		if (master != null) master.addToPlayerScore(entity, amount, null);
+		if (master != null) master.awardKillScore(entity, amount, null);
 		else super.addToPlayerScore(entity, amount);
 	}
 
 	@Override
-	public void superAddToPlayerScore(Object entity, int amount) {
+	public void superAwardKillScore(Object entity, int amount) {
 		super.addToPlayerScore((Entity) entity, amount);
 	}
 
@@ -129,12 +129,12 @@ public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc210_220.Modch
 
 	@Override
 	public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_) {
-		if (master != null) master.moveEntityWithHeading(p_70612_1_, p_70612_2_, 0.0F);
+		if (master != null) master.travel(p_70612_1_, p_70612_2_, 0.0F);
 		else super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
 	}
 
 	@Override
-	public void superMoveEntityWithHeading(float p_70612_1_, float p_70612_2_, float f2) {
+	public void superTravel(float p_70612_1_, float p_70612_2_, float f2) {
 		super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
 	}
 
@@ -203,7 +203,7 @@ public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc210_220.Modch
 
 	@Override
 	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
-		superAddToPlayerScore(entity, p_70084_2_);
+		superAwardKillScore(entity, p_70084_2_);
 	}
 
 	@Override
@@ -498,16 +498,16 @@ public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc210_220.Modch
 	}
 
 	@Override
-	public void superFunc_191955_a(Object iBlockState) {
+	public void superOnInsideBlock(Object iBlockState) {
 	}
 
 	@Override
-	public float superFunc_191954_d(float p_191954_1_) {
+	public float superPlayFlySound(float p_191954_1_) {
 		return 0.0F;
 	}
 
 	@Override
-	public boolean superFunc_191957_ae() {
+	public boolean superMakeFlySound() {
 		return false;
 	}
 
@@ -521,7 +521,7 @@ public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc210_220.Modch
 	}
 
 	@Override
-	public boolean superFunc_191953_am() {
+	public boolean superIsOverWater() {
 		return false;
 	}
 

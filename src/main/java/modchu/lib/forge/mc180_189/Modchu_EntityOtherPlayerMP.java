@@ -950,12 +950,12 @@ public abstract class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP imp
 
 	@Override
 	public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_) {
-		if (master != null) master.moveEntityWithHeading(p_70612_1_, p_70612_2_, 0.0F);
+		if (master != null) master.travel(p_70612_1_, p_70612_2_, 0.0F);
 		else super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
 	}
 
 	@Override
-	public void superMoveEntityWithHeading(float p_70612_1_, float p_70612_2_, float f2) {
+	public void superTravel(float p_70612_1_, float p_70612_2_, float f2) {
 		super.moveEntityWithHeading(p_70612_1_, p_70612_2_);
 	}
 
@@ -3160,12 +3160,12 @@ public abstract class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP imp
 
 	@Override
 	public void addToPlayerScore(Entity entity, int p_70084_2_) {
-		if (master != null) master.addToPlayerScore(entity, p_70084_2_, null);
+		if (master != null) master.awardKillScore(entity, p_70084_2_, null);
 		else super.addToPlayerScore(entity, p_70084_2_);
 	}
 
 	@Override
-	public void superAddToPlayerScore(Object entity, int p_70084_2_) {
+	public void superAwardKillScore(Object entity, int p_70084_2_) {
 		super.addToPlayerScore((Entity) entity, p_70084_2_);
 	}
 
@@ -4944,7 +4944,7 @@ public abstract class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP imp
 
 	@Override
 	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
-		superAddToPlayerScore(entity, p_70084_2_);
+		superAwardKillScore(entity, p_70084_2_);
 	}
 
 }

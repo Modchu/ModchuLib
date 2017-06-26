@@ -44,14 +44,14 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc212_220.Modchu_E
 	}
 
 	@Override
-	public void func_191986_a(float par1, float par2, float par3) {
-		if (master != null) master.moveEntityWithHeading(par1, par2, par3);
-		else super.func_191986_a(par1, par2, par3);
+	public void travel(float par1, float par2, float par3) {
+		if (master != null) master.travel(par1, par2, par3);
+		else super.travel(par1, par2, par3);
 	}
 
 	@Override
-	public void superMoveEntityWithHeading(float par1, float par2, float par3) {
-		super.func_191986_a(par1, par2, par3);
+	public void superTravel(float par1, float par2, float par3) {
+		super.travel(par1, par2, par3);
 	}
 
 	@Override
@@ -85,19 +85,19 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc212_220.Modchu_E
 	}
 
 	@Override
-	public void func_191956_a(Entity entity, int p_191956_2_, DamageSource damageSource) {
-		if (master != null) master.addToPlayerScore(entity, p_191956_2_, damageSource);
-		else super.func_191956_a(entity, p_191956_2_, damageSource);
+	public void awardKillScore(Entity entity, int p_191956_2_, DamageSource damageSource) {
+		if (master != null) master.awardKillScore(entity, p_191956_2_, damageSource);
+		else super.awardKillScore(entity, p_191956_2_, damageSource);
 	}
 
 	@Override
 	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
-		super.func_191956_a((Entity) entity, p_70084_2_, (DamageSource) damageSource);
+		super.awardKillScore((Entity) entity, p_70084_2_, (DamageSource) damageSource);
 	}
 
 	@Override
-	public void superAddToPlayerScore(Object entity, int p_70084_2_) {
-		super.func_191956_a((Entity) entity, p_70084_2_, null);
+	public void superAwardKillScore(Object entity, int p_70084_2_) {
+		super.awardKillScore((Entity) entity, p_70084_2_, null);
 	}
 
 	@Override
@@ -245,32 +245,32 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc212_220.Modchu_E
 	}
 
 	@Override
-	public void func_191955_a(IBlockState iBlockState) {
-		if (master != null) master.func_191955_a(iBlockState);
-		else super.func_191955_a(iBlockState);
+	public void onInsideBlock(IBlockState iBlockState) {
+		if (master != null) master.onInsideBlock(iBlockState);
+		else super.onInsideBlock(iBlockState);
 	}
 
 	@Override
-	public void superFunc_191955_a(Object iBlockState) {
-		super.func_191955_a((IBlockState) iBlockState);
+	public void superOnInsideBlock(Object iBlockState) {
+		super.onInsideBlock((IBlockState) iBlockState);
 	}
 
 	public float func_191954_d(float p_191954_1_) {
-		return master != null ? master.func_191954_d(p_191954_1_) : super.func_191954_d(p_191954_1_);
+		return master != null ? master.playFlySound(p_191954_1_) : super.playFlySound(p_191954_1_);
 	}
 
 	@Override
-	public float superFunc_191954_d(float p_191954_1_) {
-		return super.func_191954_d(p_191954_1_);
+	public float superPlayFlySound(float p_191954_1_) {
+		return super.playFlySound(p_191954_1_);
 	}
 
 	public boolean func_191957_ae() {
-		return master != null ? master.func_191957_ae() : super.func_191957_ae();
+		return master != null ? master.makeFlySound() : super.makeFlySound();
 	}
 
 	@Override
-	public boolean superFunc_191957_ae() {
-		return super.func_191957_ae();
+	public boolean superMakeFlySound() {
+		return super.makeFlySound();
 	}
 
 	public boolean hasNoGravity() {
@@ -293,12 +293,12 @@ public class Modchu_EntityLivingBase extends modchu.lib.forge.mc212_220.Modchu_E
 	}
 
 	public boolean func_191953_am() {
-		return master != null ? master.func_191953_am() : super.func_191953_am();
+		return master != null ? master.isOverWater() : super.isOverWater();
 	}
 
 	@Override
-	public boolean superFunc_191953_am() {
-		return super.func_191953_am();
+	public boolean superIsOverWater() {
+		return super.isOverWater();
 	}
 
 	public Vec2f getPitchYaw() {

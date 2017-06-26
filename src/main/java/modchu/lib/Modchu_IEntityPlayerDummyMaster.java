@@ -5,7 +5,7 @@ public interface Modchu_IEntityPlayerDummyMaster {
 	public void init();
 	public void preparePlayerToSpawn();
 	public boolean onLivingUpdate();
-	public void moveEntityWithHeading(float f, float f1, float f2);
+	public void travel(float f, float f1, float f2);
 	public Object getHurtSound(Object damageSource);
 	public Object getCreatureAttribute();
 	public float[] setSize(float f, float f1);

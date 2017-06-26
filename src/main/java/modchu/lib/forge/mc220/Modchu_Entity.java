@@ -53,19 +53,19 @@ public class Modchu_Entity extends modchu.lib.forge.mc212_220.Modchu_Entity {
 	}
 
 	@Override
-	public void func_191956_a(Entity entity, int p_191956_2_, DamageSource damageSource) {
-		if (master != null) master.addToPlayerScore(entity, p_191956_2_, damageSource);
-		else super.func_191956_a(entity, p_191956_2_, damageSource);
+	public void awardKillScore(Entity entity, int p_191956_2_, DamageSource damageSource) {
+		if (master != null) master.awardKillScore(entity, p_191956_2_, damageSource);
+		else super.awardKillScore(entity, p_191956_2_, damageSource);
 	}
 
 	@Override
 	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
-		super.func_191956_a((Entity) entity, p_70084_2_, (DamageSource) damageSource);
+		super.awardKillScore((Entity) entity, p_70084_2_, (DamageSource) damageSource);
 	}
 
 	@Override
-	public void superAddToPlayerScore(Object entity, int p_70084_2_) {
-		super.func_191956_a((Entity) entity, p_70084_2_, null);
+	public void superAwardKillScore(Object entity, int p_70084_2_) {
+		super.awardKillScore((Entity) entity, p_70084_2_, null);
 	}
 
 	@Override
@@ -112,34 +112,37 @@ public class Modchu_Entity extends modchu.lib.forge.mc212_220.Modchu_Entity {
 	}
 
 	@Override
-	public void func_191955_a(IBlockState iBlockState) {
-		if (master != null) master.func_191955_a(iBlockState);
-		else super.func_191955_a(iBlockState);
+	public void onInsideBlock(IBlockState iBlockState) {
+		if (master != null) master.onInsideBlock(iBlockState);
+		else super.onInsideBlock(iBlockState);
 	}
 
 	@Override
-	public void superFunc_191955_a(Object iBlockState) {
-		super.func_191955_a((IBlockState) iBlockState);
-	}
-
-	public float func_191954_d(float p_191954_1_) {
-		return master != null ? master.func_191954_d(p_191954_1_) : super.func_191954_d(p_191954_1_);
+	public void superOnInsideBlock(Object iBlockState) {
+		super.onInsideBlock((IBlockState) iBlockState);
 	}
 
 	@Override
-	public float superFunc_191954_d(float p_191954_1_) {
-		return super.func_191954_d(p_191954_1_);
-	}
-
-	public boolean func_191957_ae() {
-		return master != null ? master.func_191957_ae() : super.func_191957_ae();
+	public float playFlySound(float p_191954_1_) {
+		return master != null ? master.playFlySound(p_191954_1_) : super.playFlySound(p_191954_1_);
 	}
 
 	@Override
-	public boolean superFunc_191957_ae() {
-		return super.func_191957_ae();
+	public float superPlayFlySound(float p_191954_1_) {
+		return super.playFlySound(p_191954_1_);
 	}
 
+	@Override
+	public boolean makeFlySound() {
+		return master != null ? master.makeFlySound() : super.makeFlySound();
+	}
+
+	@Override
+	public boolean superMakeFlySound() {
+		return super.makeFlySound();
+	}
+
+	@Override
 	public boolean hasNoGravity() {
 		return master != null ? master.hasNoGravity() : super.hasNoGravity();
 	}
@@ -149,6 +152,7 @@ public class Modchu_Entity extends modchu.lib.forge.mc212_220.Modchu_Entity {
 		return super.hasNoGravity();
 	}
 
+	@Override
 	public void setNoGravity(boolean noGravity) {
 		if (master != null) master.setNoGravity(noGravity);
 		else super.setNoGravity(noGravity);
@@ -159,15 +163,17 @@ public class Modchu_Entity extends modchu.lib.forge.mc212_220.Modchu_Entity {
 		super.setNoGravity(noGravity);
 	}
 
-	public boolean func_191953_am() {
-		return master != null ? master.func_191953_am() : super.func_191953_am();
+	@Override
+	public boolean isOverWater() {
+		return master != null ? master.isOverWater() : super.isOverWater();
 	}
 
 	@Override
-	public boolean superFunc_191953_am() {
-		return super.func_191953_am();
+	public boolean superIsOverWater() {
+		return super.isOverWater();
 	}
 
+	@Override
 	public Vec2f getPitchYaw() {
 		return (Vec2f) (master != null ? master.getPitchYaw() : super.getPitchYaw());
 	}
@@ -177,6 +183,7 @@ public class Modchu_Entity extends modchu.lib.forge.mc212_220.Modchu_Entity {
 		return super.getPitchYaw();
 	}
 
+	@Override
 	public Vec3d getForward() {
 		return (Vec3d) (master != null ? master.getForward() : super.getForward());
 	}
@@ -186,6 +193,7 @@ public class Modchu_Entity extends modchu.lib.forge.mc212_220.Modchu_Entity {
 		return super.getForward();
 	}
 
+	@Override
 	public boolean getIsInvulnerable() {
 		return master != null ? master.getIsInvulnerable() : super.getIsInvulnerable();
 	}
@@ -195,6 +203,7 @@ public class Modchu_Entity extends modchu.lib.forge.mc212_220.Modchu_Entity {
 		return super.getIsInvulnerable();
 	}
 
+	@Override
 	public String getCachedUniqueIdString() {
 		return master != null ? master.getCachedUniqueIdString() : super.getCachedUniqueIdString();
 	}
@@ -204,6 +213,7 @@ public class Modchu_Entity extends modchu.lib.forge.mc212_220.Modchu_Entity {
 		return super.getCachedUniqueIdString();
 	}
 
+	@Override
 	public boolean canTrample(World world, Block block, BlockPos blockPos, float fallDistance) {
 		return master != null ? master.canTrample(world, block, blockPos, fallDistance) : super.canTrample(world, block, blockPos, fallDistance);
 	}
@@ -213,6 +223,7 @@ public class Modchu_Entity extends modchu.lib.forge.mc212_220.Modchu_Entity {
 		return super.canTrample((World) world, (Block) block, (BlockPos) blockPos, fallDistance);
 	}
 
+	@Override
 	public int getFireImmuneTicks() {
 		return master != null ? master.getFireImmuneTicks() : super.getFireImmuneTicks();
 	}

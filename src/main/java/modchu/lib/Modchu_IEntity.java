@@ -84,7 +84,7 @@ public interface Modchu_IEntity {
 	public boolean superAttackEntityFrom(Object damageSource, Object p_70097_2_);
 	public boolean superCanBeCollidedWith();
 	public boolean superCanBePushed();
-	public void superAddToPlayerScore(Object entity, int p_70084_2_);
+	public void superAwardKillScore(Object entity, int p_70084_2_);
 	public boolean superIsInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_);
 	public boolean superIsInRangeToRenderDist(double p_70112_1_);
 	public boolean superWriteToNBTAtomically(Object nBTTagCompound);
@@ -309,12 +309,12 @@ public interface Modchu_IEntity {
 	public void superFunc_181013_g(float p_181013_1_);
 	public Object superFunc_181012_aH();
 	public String superGetCachedUniqueIdString();
-	public void superFunc_191955_a(Object iBlockState);
-	public float superFunc_191954_d(float p_191954_1_);
-	public boolean superFunc_191957_ae();
+	public void superOnInsideBlock(Object iBlockState);
+	public float superPlayFlySound(float p_191954_1_);
+	public boolean superMakeFlySound();
 	public boolean superHasNoGravity();
 	public void superSetNoGravity(boolean noGravity);
-	public boolean superFunc_191953_am();
+	public boolean superIsOverWater();
 	public Object superGetPitchYaw();
 	public Object superGetForward();
 	public boolean superGetIsInvulnerable();

@@ -1434,7 +1434,7 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 	}
 
 	@Override
-	public Object superGetPlayerInLove() {
+	public Object superGetLoveCause() {
 		return super.func_146083_cb();
 	}
 
@@ -2175,12 +2175,12 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void moveEntityWithHeading(float par1, float par2) {
-		if (master != null) master.moveEntityWithHeading(par1, par2, 0.0F);
+		if (master != null) master.travel(par1, par2, 0.0F);
 		else super.moveEntityWithHeading(par1, par2);
 	}
 
 	@Override
-	public void superMoveEntityWithHeading(float par1, float par2, float par3) {
+	public void superTravel(float par1, float par2, float par3) {
 		super.moveEntityWithHeading(par1, par2);
 	}
 
@@ -3248,12 +3248,12 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void addToPlayerScore(Entity entity, int p_70084_2_) {
-		if (master != null) master.addToPlayerScore(entity, p_70084_2_, null);
+		if (master != null) master.awardKillScore(entity, p_70084_2_, null);
 		else super.addToPlayerScore(entity, p_70084_2_);
 	}
 
 	@Override
-	public void superAddToPlayerScore(Object entity, int p_70084_2_) {
+	public void superAwardKillScore(Object entity, int p_70084_2_) {
 		super.addToPlayerScore((Entity) entity, p_70084_2_);
 	}
 
@@ -4616,7 +4616,7 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
-		superAddToPlayerScore(entity, p_70084_2_);
+		superAwardKillScore(entity, p_70084_2_);
 	}
 
 	@Override
@@ -4631,12 +4631,12 @@ public abstract class Modchu_EntityTameable extends EntityTameable implements Mo
 
 	@Override
 	public EntityPlayer func_146083_cb() {
-		return (EntityPlayer) (master != null ? master.getPlayerInLove() : super.func_146083_cb());
+		return (EntityPlayer) (master != null ? master.getLoveCause() : super.func_146083_cb());
 	}
 
 	@Override
 	public Object superFunc_146083_cb() {
-		return superGetPlayerInLove();
+		return superGetLoveCause();
 	}
 
 	@Override

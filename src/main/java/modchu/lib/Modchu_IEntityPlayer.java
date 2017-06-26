@@ -30,7 +30,7 @@ public interface Modchu_IEntityPlayer {
 	public int supergetScore();
 	public void supersetScore(int par1);
 	public void superaddScore(int par1);
-	public void superaddToPlayerScore(Object entity, int par2);
+	public void superAwardKillScore(Object entity, int par2);
 	public Object superdropItem(boolean par1);
 	public Object superdropPlayerItem(Object itemStack);
 	public Object superdropItem(Object itemStack, boolean par2);

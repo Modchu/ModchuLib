@@ -290,11 +290,14 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 							getModFile(pname, pprefix, t, llist, false);
 						}
 					}
-					if (t.getName().indexOf(pprefix) != -1) {
-						if (t.getName().endsWith(".zip")) {
+					String name = t.getName();
+					if (name.indexOf(pprefix) != -1) {
+						name = name.toLowerCase();
+						if (name.endsWith(".zip")
+								| name.endsWith(".jar")) {
 							llist.add(t);
 							b = true;
-							Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile zip file:%s", t.getName());
+							Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile zip or jar file:%s", t.getName());
 						}
 					} else {
 						Modchu_Debug.tDebug("Modchu_FileManagerBase getModFile zip prefix else file:%s", t.getName());
@@ -421,13 +424,12 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 				}
 			} while(true);
 			int version = Modchu_Main.getMinecraftVersion();
-
 			if (check
 					&& version > 179) {
-				String name = file.getName();
-				if (checkDevJar(file)) addModResourcePack(file);
+				//String name = file.getName();
+				//if (checkDevJar(file))
+				addModResourcePack(file);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

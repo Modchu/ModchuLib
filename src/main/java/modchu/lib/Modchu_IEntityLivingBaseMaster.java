@@ -168,7 +168,7 @@ public interface Modchu_IEntityLivingBaseMaster extends Modchu_IEntityMaster {
 	public int getTicksElytraFlying();
 	public boolean attemptTeleport(double x, double y, double z);
 	public boolean canBeHitWithPotion();
-	public void moveEntityWithHeading(float par1, float par2, float par3);
+	public void travel(float par1, float par2, float par3);
 	public Object getHurtSound(Object damageSource);
 	public String func_146067_o(int p_146067_1_);
 	public void setAngles(float yaw, float pitch);

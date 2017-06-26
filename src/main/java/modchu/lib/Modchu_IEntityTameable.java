@@ -61,7 +61,7 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityLiving {
 	public boolean superIsOwner(Object entityLivingBase);
 	public float superGetBlockPathWeight(Object blockPos);
 	public void superConsumeItemFromStack(Object entityPlayer, Object itemStack);
-	public Object superGetPlayerInLove();
+	public Object superGetLoveCause();
 	public void superAgeUp(int p_175501_1_, boolean p_175501_2_);
 	public void superOnGrowingAdult();
 	public boolean superIsWithinHomeDistanceFromPosition(Object blockPos);
@@ -98,8 +98,8 @@ public interface Modchu_IEntityTameable extends Modchu_IEntityLiving {
 	public void superSetTamedBy(Object entityPlayer);
 	public boolean superHoldingSpawnEggOfClass(Object itemStack, Class p_190669_2_);
 	public double superFollowLeashSpeed();
-	public void superFunc_191989_p(float p_191989_1_);
+	public void superSetMoveForward(float p_191989_1_);
 	public Object superGetHurtSound(Object damageSource);
-	public void superFunc_191986_a(float p_191986_1_, float p_191986_2_, float p_191986_3_);
+	public void superTravel(float p_191986_1_, float p_191986_2_, float p_191986_3_);
 
 }

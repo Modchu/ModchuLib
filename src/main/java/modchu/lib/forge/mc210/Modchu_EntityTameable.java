@@ -83,12 +83,12 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc210_220.Modchu_Ent
 
 	@Override
 	public void moveEntityWithHeading(float par1, float par2) {
-		if (master != null) master.moveEntityWithHeading(par1, par2, 0.0F);
+		if (master != null) master.travel(par1, par2, 0.0F);
 		else super.moveEntityWithHeading(par1, par2);
 	}
 
 	@Override
-	public void superMoveEntityWithHeading(float par1, float par2, float par3) {
+	public void superTravel(float par1, float par2, float par3) {
 		super.moveEntityWithHeading(par1, par2);
 	}
 
@@ -114,22 +114,22 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc210_220.Modchu_Ent
 
 	@Override
 	public void addToPlayerScore(Entity entity, int par2) {
-		if (master != null) master.addToPlayerScore(entity, par2, null);
+		if (master != null) master.awardKillScore(entity, par2, null);
 		else super.addToPlayerScore(entity, par2);
 	}
 
 	@Override
-	public void superAddToPlayerScore(Object entity, int par2) {
+	public void superAwardKillScore(Object entity, int par2) {
 		super.addToPlayerScore((Entity) entity, par2);
 	}
 
 	@Override
 	public EntityPlayer getPlayerInLove() {
-		return (EntityPlayer) (master != null ? master.getPlayerInLove() : super.getPlayerInLove());
+		return (EntityPlayer) (master != null ? master.getLoveCause() : super.getPlayerInLove());
 	}
 
 	@Override
-	public EntityPlayer superGetPlayerInLove() {
+	public EntityPlayer superGetLoveCause() {
 		return super.getPlayerInLove();
 	}
 
@@ -157,7 +157,7 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc210_220.Modchu_Ent
 
 	@Override
 	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
-		superAddToPlayerScore(entity, p_70084_2_);
+		superAwardKillScore(entity, p_70084_2_);
 	}
 
 	@Override
@@ -187,7 +187,7 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc210_220.Modchu_Ent
 
 	@Override
 	public Object superFunc_146083_cb() {
-		return superGetPlayerInLove();
+		return superGetLoveCause();
 	}
 
 	@Override
@@ -338,11 +338,7 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc210_220.Modchu_Ent
 	}
 
 	@Override
-	public void superFunc_191989_p(float p_191989_1_) {
-	}
-
-	@Override
-	public void superFunc_191986_a(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
+	public void superSetMoveForward(float p_191989_1_) {
 	}
 
 	@Override
@@ -389,16 +385,16 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc210_220.Modchu_Ent
 	}
 
 	@Override
-	public void superFunc_191955_a(Object iBlockState) {
+	public void superOnInsideBlock(Object iBlockState) {
 	}
 
 	@Override
-	public float superFunc_191954_d(float p_191954_1_) {
+	public float superPlayFlySound(float p_191954_1_) {
 		return 0.0F;
 	}
 
 	@Override
-	public boolean superFunc_191957_ae() {
+	public boolean superMakeFlySound() {
 		return false;
 	}
 
@@ -412,7 +408,7 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc210_220.Modchu_Ent
 	}
 
 	@Override
-	public boolean superFunc_191953_am() {
+	public boolean superIsOverWater() {
 		return false;
 	}
 

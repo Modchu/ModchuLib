@@ -221,12 +221,12 @@ public class Modchu_Entity extends modchu.lib.forge.mc190_220.Modchu_Entity impl
 
 	@Override
 	public void addToPlayerScore(Entity entity, int p_70084_2_) {
-		if (master != null) master.addToPlayerScore(entity, p_70084_2_, null);
+		if (master != null) master.awardKillScore(entity, p_70084_2_, null);
 		else super.addToPlayerScore(entity, p_70084_2_);
 	}
 
 	@Override
-	public void superAddToPlayerScore(Object entity, int p_70084_2_) {
+	public void superAwardKillScore(Object entity, int p_70084_2_) {
 		super.addToPlayerScore((Entity) entity, p_70084_2_);
 	}
 
@@ -242,7 +242,7 @@ public class Modchu_Entity extends modchu.lib.forge.mc190_220.Modchu_Entity impl
 
 	@Override
 	public void superAddToPlayerScore(Object entity, int p_70084_2_, Object damageSource) {
-		superAddToPlayerScore(entity, p_70084_2_);
+		superAwardKillScore(entity, p_70084_2_);
 	}
 
 	@Override
@@ -283,16 +283,16 @@ public class Modchu_Entity extends modchu.lib.forge.mc190_220.Modchu_Entity impl
 	}
 
 	@Override
-	public void superFunc_191955_a(Object iBlockState) {
+	public void superOnInsideBlock(Object iBlockState) {
 	}
 
 	@Override
-	public float superFunc_191954_d(float p_191954_1_) {
+	public float superPlayFlySound(float p_191954_1_) {
 		return 0.0F;
 	}
 
 	@Override
-	public boolean superFunc_191957_ae() {
+	public boolean superMakeFlySound() {
 		return false;
 	}
 
@@ -306,7 +306,7 @@ public class Modchu_Entity extends modchu.lib.forge.mc190_220.Modchu_Entity impl
 	}
 
 	@Override
-	public boolean superFunc_191953_am() {
+	public boolean superIsOverWater() {
 		return false;
 	}
 
