@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface Modchu_ITextCalculationDataFormat {
-	public Object calculationObject(Object o, Map... map);
+	public Object calculationObject(Map... map);
 	public String dataToString(boolean b);
 	public List<String> dataToStringList(boolean b, boolean isDebug);
 	public boolean isOneValue();

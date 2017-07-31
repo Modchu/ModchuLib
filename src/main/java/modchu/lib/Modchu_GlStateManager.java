@@ -4,14 +4,14 @@ import java.nio.FloatBuffer;
 
 public class Modchu_GlStateManager {
 	public static Modchu_IGlStateManager master;
-	
+
 	public static void init() {
-		Modchu_Debug.mDebug("Modchu_GlStateManager init() strat.");
+		//Modchu_Debug.mDebug("Modchu_GlStateManager init() strat.");
 		Object instance = Modchu_Main.newModchuCharacteristicObject("Modchu_GlStateManager");
 		//Modchu_Debug.mDebug("Modchu_GlStateManager init instance="+instance);
 		master = instance instanceof Modchu_IGlStateManager ? (Modchu_IGlStateManager) instance : null;
-		Modchu_Debug.mDebug("Modchu_GlStateManager init() master="+master);
-		Modchu_Debug.mDebug("Modchu_GlStateManager init() end.");
+		//Modchu_Debug.mDebug("Modchu_GlStateManager init() master="+master);
+		//Modchu_Debug.mDebug("Modchu_GlStateManager init() end.");
 	}
 
 	public static void pushMatrix() {

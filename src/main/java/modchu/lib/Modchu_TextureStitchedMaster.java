@@ -29,16 +29,17 @@ public class Modchu_TextureStitchedMaster extends Modchu_TextureStitchedMasterBa
 			Modchu_Debug.lDebug("Modchu_TextureStitchedMaster loadTexture list == null return.");
 			return false;
 		}
-		if (Modchu_Main.modFileList != null
-				&& !Modchu_Main.modFileList.isEmpty()); else {
+		List<File> list = Modchu_FileManager.getDirFileList(Modchu_Main.modsDir);
+		if (list != null
+				&& !list.isEmpty()); else {
 			Modchu_Debug.lDebug("Modchu_TextureStitchedMaster loadTexture Modchu_Main.modFileList == null return.");
 			return false;
 		}
-		List<ZipFile> modZipFileList = Modchu_FileManager.getModZipFileList();
+		List<ZipFile> modsZipFileList = Modchu_FileManager.getModsZipFileList();
 		//String s = Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir).getPath();
 		String s1 = "mods/";
 		String s2 = ".png";
-		for (ZipFile zipFile : modZipFileList) {
+		for (ZipFile zipFile : modsZipFileList) {
 			try {
 				Enumeration enumeration = zipFile.entries();
 				LinkedList<String> nameList = new LinkedList();
@@ -100,7 +101,7 @@ public class Modchu_TextureStitchedMaster extends Modchu_TextureStitchedMasterBa
 				e.printStackTrace();
 			}
 		}
-		//Object texture = 
+		//Object texture =
 		//textures.add(texture);
 		return false;
 	}

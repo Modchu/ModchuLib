@@ -6,6 +6,7 @@ public class Modchu_ReflectData {
 	private Object reflectObject;
 	private Class[] reflectClassArray;
 	private Object[] reflectObjectArray;
+	private Modchu_TextCalculationData reflectObjectArrayData;
 	private int debugInt;
 
 	public Modchu_ReflectData() {
@@ -54,7 +55,6 @@ public class Modchu_ReflectData {
 	}
 
 	public void setClassNameOrClass(Object o) {
-
 		classNameOrClass = o;
 	}
 
@@ -88,6 +88,14 @@ public class Modchu_ReflectData {
 
 	public void setReflectObjectArray(Object[] o0) {
 		reflectObjectArray = o0;
+	}
+
+	public Modchu_TextCalculationData getReflectObjectArrayData() {
+		return reflectObjectArrayData;
+	}
+
+	public void setReflectObjectArrayData(Modchu_TextCalculationData data) {
+		reflectObjectArrayData = data;
 	}
 
 	public String dataToString() {

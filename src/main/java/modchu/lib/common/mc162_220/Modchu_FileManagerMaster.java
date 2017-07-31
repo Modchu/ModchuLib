@@ -3,11 +3,11 @@ package modchu.lib.common.mc162_220;
 import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ResourceInfo;
 
+import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_FileManagerBase;
 
 public class Modchu_FileManagerMaster extends Modchu_FileManagerBase {
@@ -17,18 +17,21 @@ public class Modchu_FileManagerMaster extends Modchu_FileManagerBase {
 	}
 
 	@Override
-	public boolean addResourcesMod(Class c, ConcurrentHashMap<String, Class> map, String search) {
+	public boolean addResourcesMod(Class c, String search) {
 		if (c != null); else return false;
+		boolean debug = false;
 		boolean b = false;
 		try {
 			for (ResourceInfo i : ClassPath.from(c.getClassLoader()).getResources()) {
 				String resourceName = i.getResourceName();
+				if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addResourcesMod resourceName="+resourceName);
 				File file = new File(resourceName);
 				if (file != null) {
 					if (file.isDirectory()) {
-						addTexturesDir(file, map, search);
+						addTexturesDir(file, search);
 					} else if (file.getName().endsWith(".class")) {
-						b = addModClass(map, file.getAbsolutePath(), search);
+						b = addModClass(file.getAbsolutePath(), search);
+						if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addResourcesMod class b="+b);
 					}
 				}
 			}

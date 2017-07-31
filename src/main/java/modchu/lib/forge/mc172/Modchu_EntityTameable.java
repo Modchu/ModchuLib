@@ -137,16 +137,16 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc172_179.Modchu_Ent
 	}
 
 	@Override
-	public void superFunc_191955_a(Object iBlockState) {
+	public void superOnInsideBlock(Object iBlockState) {
 	}
 
 	@Override
-	public float superFunc_191954_d(float p_191954_1_) {
+	public float superPlayFlySound(float p_191954_1_) {
 		return 0.0F;
 	}
 
 	@Override
-	public boolean superFunc_191957_ae() {
+	public boolean superMakeFlySound() {
 		return false;
 	}
 
@@ -160,7 +160,7 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc172_179.Modchu_Ent
 	}
 
 	@Override
-	public boolean superFunc_191953_am() {
+	public boolean superIsOverWater() {
 		return false;
 	}
 
@@ -204,11 +204,11 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc172_179.Modchu_Ent
 	}
 
 	@Override
-	public void superFunc_191989_p(float p_191989_1_) {
+	public void superSetMoveForward(float p_191989_1_) {
 	}
 
 	@Override
-	public void superFunc_191986_a(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
+	public void superTravel(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
 	}
 
 }

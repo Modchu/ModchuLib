@@ -11,6 +11,7 @@ public class Modchu_LMMManager {
 	public static boolean isLMR;
 
 	static {
+		boolean debug = false;
 		List list = Modchu_CastHelper.List(Modchu_Main.isForge ? Modchu_Reflect.invokeMethod("Loader", "getActiveModList", Modchu_Reflect.invokeMethod("Loader", "instance")) : Modchu_Reflect.invokeMethod("ModLoader", "getLoadedMods"));
 		String name = null;
 		if (list != null

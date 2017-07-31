@@ -14,15 +14,13 @@ import java.util.zip.ZipFile;
 
 public interface Modchu_IFileManagerMaster {
 
-	public List<File> getModFile(String pname, String pprefix);
+	public void loadModFile(String pname, String pprefix);
 	public List<File> getFileList(String pname);
-	public List<File> getModFile(List<File> list, ConcurrentHashMap<String, Class> map, String search);
-	public List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search, boolean subDirCheck);
-	public boolean addTexturesZip(File file, ConcurrentHashMap<String, Class> map, String search);
-	public void addTexturesJar(File file, ConcurrentHashMap<String, Class> map, String search);
-	public boolean addTexturesDir(File file, ConcurrentHashMap<String, Class> map, String search);
-	public boolean addResourcesMod(Class c, ConcurrentHashMap<String, Class> map, String search);
-	public boolean addModClass(ConcurrentHashMap map, String fname, String search);
+	public boolean addTexturesZip(File file, String search);
+	public void addTexturesJar(File file, String search);
+	public boolean addTexturesDir(File file, String search);
+	public boolean addResourcesMod(Class c, String search);
+	public boolean addModClass(String fname, String search);
 	public String classNameProcessing(String fname);
 	public ZipFile getZipFile(Class c);
 	public void copyZipResource(Class c, ZipFile zipFile, String s, File copydir);
@@ -57,8 +55,7 @@ public interface Modchu_IFileManagerMaster {
 	public String[] getSystemClassPaths();
 	public List<File> getClassPathFileList(String s);
 	public List<Class> getModTextureStitchedClassList();
-	public List<ZipFile> getModZipFileList();
-	public List<ZipFile> getModZipFileList(List<File> list);
+	public List<ZipFile> getModZipFileList(File dirFile);
 	public void setModZipFileList(List<ZipFile> list);
 	public List<ZipFile> getModsZipFileList();
 	public void setModsZipFileList(List<ZipFile> list);
@@ -66,9 +63,9 @@ public interface Modchu_IFileManagerMaster {
 	public HashMap<String, ZipEntry> loadZipFileToZipEntryHashMap(File file);
 	public Map<String, InputStream> loadZipFileToInputStreamMap(ZipFile zipFile, Map<String, InputStream> map);
 	public HashMap<String, InputStream> loadZipFileToInputStreamHashMap(ZipFile zipFile);
-	public List<File> getDirFileList(List<File> list);
-	public List<File> getDirFileList(File dir, List<File> list);
+	public List<File> getDirFileList(File dir);
 	public String getCurrentDir(String s);
 	public String getRelativePath(String s);
+	public Map<String, Class> getClassMap();
 
 }

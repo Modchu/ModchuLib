@@ -79,7 +79,7 @@ public class Modchu_CastHelper {
 	}
 
 	public static long Long(Object o) {
-		return Long(o, 0);
+		return Long(o, 0L);
 	}
 
 	public static long Long(Object o, long l) {

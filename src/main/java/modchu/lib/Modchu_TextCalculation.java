@@ -3,6 +3,7 @@ package modchu.lib;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Modchu_TextCalculation {
 	public static Modchu_TextCalculation instance = new Modchu_TextCalculation();
@@ -16,7 +17,7 @@ public class Modchu_TextCalculation {
 	public static boolean tempDebug = false;
 
 	public Modchu_TextCalculation() {
-		//debugSetting = !Modchu_Main.isRelease();
+		debugSetting = !Modchu_Main.isRelease();
 		//debugRun = !Modchu_Main.isRelease();
 		//debugCE = !Modchu_Main.isRelease();
 		//debugCERun = !Modchu_Main.isRelease();
@@ -28,8 +29,6 @@ public class Modchu_TextCalculation {
 
 	public Modchu_RunCalculationList getTextCalculationList(String s) {
 		if (s != null); else return null;
-		if (s.indexOf(" ") > -1) s = Modchu_RunCalculationList.replace(s, " ", "");
-		if (s.indexOf("\t") > -1) s = Modchu_RunCalculationList.replace(s, "\t", "");
 		if (s.startsWith("if")) return getTextConditionalExpressionList(s);
 		if (calculationMap != null); else calculationMap = new HashMap();
 		if (calculationMap.containsKey(s)) return calculationMap.get(s);
@@ -155,33 +154,15 @@ public class Modchu_TextCalculation {
 		}
 		List list1 = null;
 		if (ifFlag) {
-			Modchu_TextFormatData data = Modchu_TextFormatManager.getTextFormatManagerData(s);
-			List<String> stringList = data.getStringList(2);
-			List insideList = data.getStringList(3);
-			if (debug) {
-				Modchu_Debug.mDebug("Modchu_TextCalculation	getTextConditionalExpressionList_r	stringList="+Modchu_Main.listToString(stringList));
-				Modchu_Debug.mDebug("Modchu_TextCalculation	getTextConditionalExpressionList_r	insideList="+Modchu_Main.listToString(insideList));
-			}
-			if (insideList != null
-					&& !insideList.isEmpty()) {
-				Object o = insideList != null
-						&& !insideList.isEmpty() ? insideList.get(0) : null;
-				list1 = o != null
-						&& o instanceof List ? (List) o : null;
-			}
-			s = (String) list1.get(0);
+			s = Modchu_Main.getInsideParentheses(s);
 		}
-
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation	getTextConditionalExpressionList_r	2 s="+s);
 		Modchu_RunCalculationList runCalculationList = new Modchu_RunCalculationList(s);
 		if (ifFlag) runCalculationList.setIsIf(true);
 		return runCalculationList;
 	}
 
-	public Object runCalculation(Modchu_RunCalculationList runCalculationList, HashMap... map) {
-		return runCalculation(null, runCalculationList, map);
-	}
-
-	public Object runCalculation(Object o, Modchu_RunCalculationList runCalculationList, HashMap... map) {
+	public Object runCalculation(Modchu_RunCalculationList runCalculationList, Map... map) {
 		boolean debug = (debugRun && !runCalculationList.isIf())
 				| (debugCERun && runCalculationList.isIf());
 		//Modchu_Debug.mDebug("Modchu_TextCalculation	runCalculation runCalculationList.isIf()="+runCalculationList.isIf()+" debug="+debug);
@@ -228,15 +209,15 @@ public class Modchu_TextCalculation {
 			debugCount = 1;
 		}
 		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation map[0]="+(map != null && map.length > 0 ? map[0] : null)+"\n");
-		Object o2 = runCalculationList.calculationObject(o, map);
+		Object o = runCalculationList.calculationObject(map);
 		if (debug) {
-			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation 	runCalculation	end. o2="+o2);
+			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculation 	runCalculation	end. o="+o);
 			if (!Modchu_Main.isRelease()) {
 				Modchu_Debug.setClipboardLog();
 			}
 			//Modchu_TextCalculation.instance.debugRun = false;
 		}
-		return o2;
+		return o;
 	}
 
 	public void debugData(String s, Object o) {
@@ -279,19 +260,20 @@ public class Modchu_TextCalculation {
 		return sb.toString();
 	}
 
-	public Object runCalculationAther(Object o, HashMap<String, Object>... map) {
-		return runCalculationAther(o, null, map);
-	}
-
-	public Object runCalculationAther(Object o, Object o1, HashMap<String, Object>... map) {
+	public Object runCalculationAther(Object o, Map... map) {
 		if (o instanceof Modchu_ITextCalculationDataFormat) {
 			Modchu_ITextCalculationDataFormat iTextCalculationDataFormat = (Modchu_ITextCalculationDataFormat) o;
-			o = iTextCalculationDataFormat.calculationObject(o1, map);
-			if (o instanceof Modchu_TextCalculationData) {
-				Modchu_TextCalculationData data = (Modchu_TextCalculationData) o;
-				if (data.isTempRaw()) {
-					o = data.getTempRawData();
-				}
+			o = iTextCalculationDataFormat.calculationObject(map);
+			o = getTextCalculationDataTempRawData(o);
+		}
+		return o;
+	}
+
+	public Object getTextCalculationDataTempRawData(Object o) {
+		if (o instanceof Modchu_TextCalculationData) {
+			Modchu_TextCalculationData data = (Modchu_TextCalculationData) o;
+			if (data.isTempRaw()) {
+				o = data.getTempRawData();
 			}
 		}
 		return o;

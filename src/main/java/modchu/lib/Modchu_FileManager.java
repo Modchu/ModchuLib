@@ -40,41 +40,34 @@ public class Modchu_FileManager {
 		System.out.println("Modchu_FileManager init() master="+master);
 	}
 
-	public static List<File> getModFile(String pname, String pprefix) {
-		return master != null ? master.getModFile(pname, pprefix) : base.getModFile(pname, pprefix);
-	}
-
 	public static List<File> getFileList(String pname) {
 		return master != null ? master.getFileList(pname) : base.getFileList(pname);
 	}
 
-	public static List<File> getModFile(List<File> list, ConcurrentHashMap<String, Class> map, String search) {
-		return master != null ? master.getModFile(list, map, search) : base.getModFile(list, map, search);
+	public static void loadModFile(String pname, String pprefix) {
+		if (master != null) master.loadModFile(pname, pprefix);
+		else base.loadModFile(pname, pprefix);
 	}
 
-	public static List<File> getModFile(File dir, List<File> list, ConcurrentHashMap<String, Class> map, String search, boolean subDirCheck) {
-		return master != null ? master.getModFile(dir, list, map, search, subDirCheck) : base.getModFile(dir, list, map, search, subDirCheck);
+	public static boolean addTexturesZip(File file, String search) {
+		return master != null ? master.addTexturesZip(file, search) : base.addTexturesZip(file, search);
 	}
 
-	public static boolean addTexturesZip(File file, ConcurrentHashMap<String, Class> map, String search) {
-		return master != null ? master.addTexturesZip(file, map, search) : base.addTexturesZip(file, map, search);
+	public static void addTexturesJar(File file, String search) {
+		if (master != null) master.addTexturesJar(file, search);
+		else base.addTexturesJar(file, search);
 	}
 
-	public static void addTexturesJar(File file, ConcurrentHashMap<String, Class> map, String search) {
-		if (master != null) master.addTexturesJar(file, map, search);
-		else base.addTexturesJar(file, map, search);
+	public static boolean addTexturesDir(File file, String search) {
+		return master != null ? master.addTexturesDir(file, search) : base.addTexturesDir(file, search);
 	}
 
-	public static boolean addTexturesDir(File file, ConcurrentHashMap<String, Class> map, String search) {
-		return master != null ? master.addTexturesDir(file, map, search) : base.addTexturesDir(file, map, search);
+	public static boolean addResourcesMod(Class c, String search) {
+		return master != null ? master.addResourcesMod(c, search) : base.addResourcesMod(c, search);
 	}
 
-	public static boolean addResourcesMod(Class c, ConcurrentHashMap<String, Class> map, String search) {
-		return master != null ? master.addResourcesMod(c, map, search) : base.addResourcesMod(c, map, search);
-	}
-
-	public static boolean addModClass(ConcurrentHashMap map, String fname, String search) {
-		return master != null ? master.addModClass(map, fname, search) : base.addModClass(map, fname, search);
+	public static boolean addModClass(String fname, String search) {
+		return master != null ? master.addModClass(fname, search) : base.addModClass(fname, search);
 	}
 
 	public static String classNameProcessing(String fname) {
@@ -251,12 +244,8 @@ public class Modchu_FileManager {
 		return master != null ? master.getModTextureStitchedClassList() : base.getModTextureStitchedClassList();
 	}
 
-	public static List<ZipFile> getModZipFileList() {
-		return master != null ? master.getModZipFileList() : base.getModZipFileList();
-	}
-
-	public static List<ZipFile> getModZipFileList(List<File> list) {
-		return master != null ? master.getModZipFileList(list) : base.getModZipFileList(list);
+	public static List<ZipFile> getModZipFileList(File dirFile) {
+		return master != null ? master.getModZipFileList(dirFile) : base.getModZipFileList(dirFile);
 	}
 
 	public void setModZipFileList(List<ZipFile> list) {
@@ -289,12 +278,8 @@ public class Modchu_FileManager {
 		return master != null ? master.loadZipFileToInputStreamHashMap(zipFile) : base.loadZipFileToInputStreamHashMap(zipFile);
 	}
 
-	public static List<File> getDirFileList(List<File> list) {
-		return master != null ? master.getDirFileList(list) : base.getDirFileList(list);
-	}
-
-	public static List<File> getDirFileList(File dir, List<File> list) {
-		return master != null ? master.getDirFileList(dir, list) : base.getDirFileList(dir, list);
+	public static List<File> getDirFileList(File dir) {
+		return master != null ? master.getDirFileList(dir) : base.getDirFileList(dir);
 	}
 
 	public static String getCurrentDir(String s) {
@@ -303,6 +288,10 @@ public class Modchu_FileManager {
 
 	public static String getRelativePath(String s) {
 		return master != null ? master.getRelativePath(s) : base.getRelativePath(s);
+	}
+
+	public static Map<String, Class> getClassMap() {
+		return master != null ? master.getClassMap() : base.getClassMap();
 	}
 
 }

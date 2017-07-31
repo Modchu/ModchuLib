@@ -135,7 +135,7 @@ public class Modchu_Init {
 		Class minecraft = loadClass("net.minecraft.src.Minecraft", false);
 		if (minecraft != null) {
 			// 1.6.2開発環境確定
-			System.out.println("Modchu_Init checkIsRelease 1.6.2開発環境 return.");
+			//System.out.println("Modchu_Init checkIsRelease 1.6.2開発環境 return.");
 			Modchu_Main.isRelease = false;
 			return;
 		}
@@ -146,21 +146,21 @@ public class Modchu_Init {
 				Object o = getFieldObject(minecraft.getClass(), "lu", minecraft);
 				if (o != null) {
 					// 1.6.2通常環境確定
-					System.out.println("Modchu_Init checkIsRelease 1.6.2通常環境 o="+o);
+					//System.out.println("Modchu_Init checkIsRelease 1.6.2通常環境 o="+o);
 					Modchu_Main.isRelease = true;
 					return;
 				}
 				minecraft = null;
 			}
 		}
-		System.out.println("Modchu_Init checkIsRelease minecraft="+minecraft);
+		//System.out.println("Modchu_Init checkIsRelease minecraft="+minecraft);
 		if (minecraft == null) {
 			// Server環境確定
 			Class c = loadClass("net.minecraft.server.MinecraftServer", false);
 			if (c != null) {
 				Method method = getRawMethod(c, "getServer", null);
 				boolean b = method == null;
-				System.out.println("Modchu_Init checkIsRelease "+(b ? "通常" : "開発")+"環境 Server return.");
+				//System.out.println("Modchu_Init checkIsRelease "+(b ? "通常" : "開発")+"環境 Server return.");
 				Modchu_Main.isRelease = b;
 				return;
 			}
@@ -169,7 +169,7 @@ public class Modchu_Init {
 			return;
 		}
 		Object o = invokeMethod(minecraft, "func_71410_x");
-		System.out.println("Modchu_Init checkIsRelease 1 o="+o);
+		//System.out.println("Modchu_Init checkIsRelease 1 o="+o);
 		if (o != null
 				&& minecraft.isInstance(o)) {
 			// 通常環境確定
@@ -178,7 +178,7 @@ public class Modchu_Init {
 			return;
 		}
 		o = invokeMethod(minecraft, "x");
-		System.out.println("Modchu_Init checkIsRelease 2 o="+o);
+		//System.out.println("Modchu_Init checkIsRelease 2 o="+o);
 		if (o != null
 				&& minecraft.isInstance(o)) {
 			// 通常環境確定
@@ -186,7 +186,7 @@ public class Modchu_Init {
 			return;
 		}
 		o = invokeMethod(minecraft, "w");
-		System.out.println("Modchu_Init checkIsRelease 3 o="+o);
+		//System.out.println("Modchu_Init checkIsRelease 3 o="+o);
 		if (o != null
 				&& minecraft.isInstance(o)) {
 			// 通常環境確定
@@ -195,7 +195,7 @@ public class Modchu_Init {
 			return;
 		}
 		o = invokeMethod(minecraft, "getMinecraft");
-		System.out.println("Modchu_Init checkIsRelease 5 o="+o);
+		//System.out.println("Modchu_Init checkIsRelease 5 o="+o);
 		if (o != null
 				&& minecraft.isInstance(o)) {
 			System.out.println("Modchu_Init checkIsRelease 6 return.");

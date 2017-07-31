@@ -100,7 +100,7 @@ public class Modchu_SimpleTextureMaster extends Modchu_SimpleTextureMasterBasis 
 			//e2.printStackTrace();
 		}
 		if (bufferedImage != null) return bufferedImage;
-		for (File file : Modchu_Main.modDirList) {
+		for (File file : Modchu_FileManager.getDirFileList(Modchu_Main.modsDir)) {
 			bufferedImage = getBufferedImage(file, s);
 			if (bufferedImage != null) return bufferedImage;
 		}
