@@ -279,18 +279,16 @@ public class Modchu_LMMManager {
 			"Modchu_LmmTextureBox";
 	}
 
-	public static Object getLMMModel(Object owner, int i, int color) {
+	public static Object[] getLMMModel(Object owner, int color) {
+		Object[] models = null;
 		int version = Modchu_Main.getMinecraftVersion();
 		if (version < 170
 				| isLMMX
 				| isLMR) {
 			Object textureData = Modchu_Reflect.getFieldObject(owner.getClass(), "textureData", owner);
 			if (textureData != null) {
-				Object[] textureModel = Modchu_CastHelper.ObjectArray(Modchu_Reflect.getFieldObject(textureData.getClass(), "textureModel", textureData));
-				if (textureModel != null) {
-					return textureModel != null
-							&& i < textureModel.length ? textureModel[i] : null;
-				} else {
+				models = Modchu_CastHelper.ObjectArray(Modchu_Reflect.getFieldObject(textureData.getClass(), "textureModel", textureData));
+				if (models != null); else {
 					Modchu_Debug.mDebug("ModchuModel_ModelDataBase getModel textureModel == null !!");
 				}
 			} else {
@@ -301,13 +299,17 @@ public class Modchu_LMMManager {
 			if (multiModel != null) {
 				Object[] model = Modchu_CastHelper.ObjectArray(Modchu_Reflect.getFieldObject(multiModel.getClass(), "model", multiModel));
 				if (model != null) {
-					Object[] models = Modchu_CastHelper.ObjectArray(Modchu_Reflect.invokeMethod(model.getClass(), "getModelClass", new Class[]{ int.class }, model, new Object[]{ color }));
-					return models != null
-							&& i < models.length ? models[i] : null;
+					models = Modchu_CastHelper.ObjectArray(Modchu_Reflect.invokeMethod(model.getClass(), "getModelClass", new Class[]{ int.class }, model, new Object[]{ color }));
 				}
 			}
 		}
-		return null;
+		return models;
+	}
+
+	public static Object getLMMModel(Object owner, int i, int color) {
+		Object[] models = getLMMModel(owner, color);
+		return models != null
+				&& models.length > i ? models[i] : null;
 	}
 
 	public static int getMaidColor(Object owner) {
@@ -338,6 +340,42 @@ public class Modchu_LMMManager {
 		} else {
 			Object multiModel = Modchu_Reflect.getFieldObject(owner.getClass(), "multiModel", owner);
 			if (multiModel != null) Modchu_Reflect.setFieldObject(multiModel.getClass(), "color", multiModel, i);
+		}
+	}
+
+	public static Object[] getItems(Object owner) {
+		Object[] itemStack = Modchu_Reflect.newInstanceArray("ItemStack", 2);
+		//Modchu_Debug.mDebug("ModchuModel_ModelDataBase getItems() owner="+owner);
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 189) {
+			boolean flag = Modchu_AS.getEnum("EntityLivingBase", "getPrimaryHand", owner) == Modchu_AS.getEnum("EnumHandSide", "RIGHT");
+			String s1 = flag ? "getHeldItemMainhand" : "getHeldItemOffhand";
+			String s2 = flag ? "getHeldItemOffhand" : "getHeldItemMainhand";
+			itemStack[0] = Modchu_AS.get("EntityLivingBase", s1, owner);
+			itemStack[1] = Modchu_AS.get("EntityLivingBase", s2, owner);
+		} else {
+			itemStack[0] = Modchu_AS.get(Modchu_AS.entityLivingBaseGetHeldItem, owner);
+		}
+		//Modchu_Debug.mDebug("ModchuModel_ModelDataBase getItems itemStack[0]="+itemStack[0]);
+		return itemStack;
+	}
+
+	public static void setAimedBow(Object owner, Boolean b) {
+		//Modchu_Debug.mDebug("ModchuModel_ModelDataBase setAimedBow b="+b);
+		//Modchu_Debug.mDebug("ModchuModel_ModelDataBase setAimedBow getMaidColor(owner)="+getMaidColor(owner));
+		Class c = getModchuLmmModelClass();
+		Object[] models = getLMMModel(owner, getMaidColor(owner));
+		//Modchu_Debug.mDebug1("ModchuModel_ModelDataBase setAimedBow models="+models);
+		if (models != null) {
+			for (Object model : models) {
+				//Modchu_Debug.mDebug1("ModchuModel_ModelDataBase setAimedBow model="+model);
+				if (c.isInstance(model)) {
+					//Modchu_Debug.mDebug("ModchuModel_ModelDataBase setAimedBow c.isInstance b="+b);
+					Modchu_Reflect.invokeMethod(c, "setCapsValue", new Class[]{ int.class, Object[].class }, model, new Object[]{ Modchu_IEntityCapsBase.caps_aimedBow, new Object[]{ b } });
+				} else {
+					Modchu_Reflect.setFieldObject(model.getClass(), "aimedBow", model, b);
+				}
+			}
 		}
 	}
 

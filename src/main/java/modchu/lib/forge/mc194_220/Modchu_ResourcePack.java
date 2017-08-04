@@ -21,11 +21,11 @@ public class Modchu_ResourcePack implements IResourcePack, Modchu_IResourcePack 
 	public Modchu_ResourcePack(HashMap<String, Object> map) {
 		map.put("base", this);
 		Object instance = map.containsKey("instance") ? map.get("instance") : Modchu_Main.newModchuCharacteristicInstance(map);
-		Modchu_Debug.lDebug("Modchu_ResourcePack init instance="+instance);
+		//Modchu_Debug.lDebug("Modchu_ResourcePack init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IResourcePackMaster ? (Modchu_IResourcePackMaster) instance : null;
-		Modchu_Debug.lDebug("Modchu_ResourcePack init master="+master);
-		Modchu_Debug.lDebug("Modchu_ResourcePack init end.");
+		//Modchu_Debug.lDebug("Modchu_ResourcePack init master="+master);
+		//Modchu_Debug.lDebug("Modchu_ResourcePack init end.");
 	}
 
 	@Override
