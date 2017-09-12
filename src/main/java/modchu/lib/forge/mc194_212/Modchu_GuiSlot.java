@@ -3,7 +3,7 @@ package modchu.lib.forge.mc194_212;
 import java.util.HashMap;
 import java.util.List;
 
-public class Modchu_GuiSlot extends modchu.lib.forge.mc194_220.Modchu_GuiSlot {
+public class Modchu_GuiSlot extends modchu.lib.forge.mc194_221.Modchu_GuiSlot {
 
 	public Modchu_GuiSlot(HashMap<String, Object> map) {
 		super(map);

@@ -24,7 +24,7 @@ import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Packet;
 import modchu.lib.Modchu_PacketManager;
 import modchu.lib.Modchu_Reflect;
-import modchu.lib.forge.mc172_220.Modchu_Message;
+import modchu.lib.forge.mc172_221.Modchu_Message;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 

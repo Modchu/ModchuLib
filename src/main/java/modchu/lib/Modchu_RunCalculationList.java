@@ -23,11 +23,11 @@ public class Modchu_RunCalculationList implements Modchu_ITextCalculationDataFor
 	private boolean isElse;
 	private boolean isOneValue;
 
-	Modchu_RunCalculationList(String s) {
+	public Modchu_RunCalculationList(String s) {
 		initString = s;
 	}
 
-	Modchu_RunCalculationList(List<Modchu_ITextCalculationDataFormat> list1) {
+	public Modchu_RunCalculationList(List<Modchu_ITextCalculationDataFormat> list1) {
 		list = checkList(list1);
 	}
 

@@ -24,7 +24,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class Modchu_BlockContainer extends modchu.lib.forge.mc190_220.Modchu_BlockContainer implements Modchu_IBlockContainer {
+public class Modchu_BlockContainer extends modchu.lib.forge.mc190_221.Modchu_BlockContainer implements Modchu_IBlockContainer {
 
 	public Modchu_BlockContainer(HashMap<String, Object> map) {
 		super(map);

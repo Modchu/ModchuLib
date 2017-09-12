@@ -122,7 +122,7 @@ public class Modchu_FontRenderer {
 		} else {
 			inputStream = Modchu_Reflect.loadClass("RenderEngine").getResourceAsStream((String) locationFontTexture);
 		}
-		System.out.println("inputStream="+inputStream);
+		//System.out.println("Modchu_FontRenderer readFontTexture inputStream="+inputStream);
 		try {
 			//162~
 			//bufferedimage = ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource((ResourceLocation) locationFontTexture).getInputStream());
@@ -262,7 +262,7 @@ public class Modchu_FontRenderer {
 	}
 
 	public void bindTextureLocationFontTexture() {
-		Modchu_RenderEngine.instance.bindTexture(locationFontTexture);
+		Modchu_AS.set(Modchu_AS.renderEngineBindTexture, locationFontTexture);
 	}
 
 	private Object getUnicodePageLocation(int i) {
@@ -277,7 +277,7 @@ public class Modchu_FontRenderer {
 	 * Load one of the /font/glyph_XX.png into a new GL texture and store the texture ID in glyphTextureName array.
 	 */
 	private void loadGlyphTexture(int i) {
-		Modchu_RenderEngine.instance.bindTexture(getUnicodePageLocation(i));
+		Modchu_AS.set(Modchu_AS.renderEngineBindTexture, getUnicodePageLocation(i));
 	}
 
 	/**
@@ -338,6 +338,7 @@ public class Modchu_FontRenderer {
 	 */
 	public int drawString(String s, int x, int y, int color, boolean flag, float fontSize) {
 		//Modchu_GlStateManager.pushMatrix();
+		//GL11.glEnable(GL11.GL_ALPHA_TEST);
 		Modchu_GlStateManager.enableAlpha();
 		Modchu_GlStateManager.scale(fontSize, fontSize, fontSize);
 		resetStyles();

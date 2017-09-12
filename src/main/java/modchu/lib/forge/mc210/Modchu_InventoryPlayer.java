@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class Modchu_InventoryPlayer extends modchu.lib.forge.mc190_220.Modchu_InventoryPlayer {
+public class Modchu_InventoryPlayer extends modchu.lib.forge.mc190_221.Modchu_InventoryPlayer {
 
 	public Modchu_InventoryPlayer(HashMap<String, Object> map) {
 		super(map);

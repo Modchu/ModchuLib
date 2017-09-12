@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class Modchu_Entity extends modchu.lib.forge.mc212_220.Modchu_Entity {
+public class Modchu_Entity extends modchu.lib.forge.mc212_221.Modchu_Entity {
 
 	public Modchu_Entity(World world) {
 		super(world);

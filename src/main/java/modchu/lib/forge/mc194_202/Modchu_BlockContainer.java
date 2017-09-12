@@ -21,7 +21,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-public class Modchu_BlockContainer extends modchu.lib.forge.mc194_220.Modchu_BlockContainer {
+public class Modchu_BlockContainer extends modchu.lib.forge.mc194_221.Modchu_BlockContainer {
 
 	public Modchu_BlockContainer(HashMap<String, Object> map) {
 		super(map);

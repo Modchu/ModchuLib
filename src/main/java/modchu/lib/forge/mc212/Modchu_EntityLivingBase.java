@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class Modchu_EntityLivingBase extends modchu.lib.forge.mc212_220.Modchu_EntityLivingBase implements Modchu_IEntityLivingBase {
+public class Modchu_EntityLivingBase extends modchu.lib.forge.mc212_221.Modchu_EntityLivingBase implements Modchu_IEntityLivingBase {
 
 	public Modchu_EntityLivingBase(World world) {
 		super(world);

@@ -2,6 +2,7 @@ package modchu.lib.forge.mc189;
 
 import java.util.HashMap;
 
+import modchu.lib.Modchu_Debug;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.entity.EntityLiving;

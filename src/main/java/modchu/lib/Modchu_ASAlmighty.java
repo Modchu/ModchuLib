@@ -11994,11 +11994,22 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected void tessellatorAddVertex(Object tessellator, double d, double d2, double d3) {
-		Modchu_Reflect.invokeMethod("Tessellator", "func_78377_a", "addVertex", new Class[]{ double.class, double.class, double.class }, tessellator, new Object[]{ d, d2, d3 });
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 169) {
+			Modchu_Reflect.invokeMethod("WorldRenderer", "func_181662_b", "pos", new Class[]{ double.class, double.class, double.class }, worldRendererInstance(tessellator), new Object[]{ d, d2, d3 });
+		} else {
+			Modchu_Reflect.invokeMethod("Tessellator", "func_78377_a", "addVertex", new Class[]{ double.class, double.class, double.class }, tessellator, new Object[]{ d, d2, d3 });
+		}
 	}
 
 	protected void tessellatorAddVertex(Object tessellator, double d, double d2, double d3, int i, int i1, int i2, int i3) {
-		Modchu_Reflect.invokeMethod("Tessellator", "func_181669_b", new Class[]{ int.class, int.class, int.class }, Modchu_Reflect.invokeMethod("Tessellator", "func_78377_a", "addVertex", new Class[]{ double.class, double.class, double.class }, tessellator, new Object[]{ d, d2, d3 }), new Object[]{ i, i1, i2, i3 });
+		tessellatorAddVertex(tessellator, d, d2, d3);
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version > 169) {
+			Modchu_Reflect.invokeMethod("WorldRenderer", "func_181675_d", "endVertex", Modchu_Reflect.invokeMethod("WorldRenderer", "func_181666_a", "color", new Class[]{ int.class, int.class, int.class, int.class }, worldRendererInstance(tessellator), new Object[]{ i, i1, i2, i3 }));
+		} else {
+			Modchu_Reflect.invokeMethod("Tessellator", "func_181669_b", new Class[]{ int.class, int.class, int.class, int.class }, tessellator, new Object[]{ i, i1, i2, i3 });
+		}
 	}
 
 	protected void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5) {
@@ -12022,7 +12033,7 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object worldRendererInstance() {
-		return Modchu_Reflect.getFieldObject("Tessellator", "getWorldRenderer", "func_178180_c");
+		return Modchu_Reflect.invokeMethod("Tessellator", "func_178180_c", "getWorldRenderer", tessellatorInstance());
 	}
 
 	protected Object worldRendererInstance(Object tessellator) {

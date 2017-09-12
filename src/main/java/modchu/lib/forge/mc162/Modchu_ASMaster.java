@@ -10,12 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.lwjgl.opengl.GL11;
-
-import com.google.common.collect.Multimap;
-
 import modchu.lib.Modchu_ASBasis;
 import modchu.lib.Modchu_CastHelper;
+import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Reflect;
 import net.minecraft.block.Block;
@@ -84,6 +81,7 @@ import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLivingData;
@@ -92,6 +90,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAITasks;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityBat;
@@ -132,6 +131,12 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumGameType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+
+import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Multimap;
+
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Modchu_ASMaster extends Modchu_ASBasis {
 
@@ -374,6 +379,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object blockGetRenderType(Object block) {
 		return ((Block) block).getRenderType();
+	}
+
+	@Override
+	public void blockSetLightOpacity(Object block, int lightOpacity) {
+		((Block) block).setLightOpacity(lightOpacity);
 	}
 
 	@Override
@@ -1178,6 +1188,21 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
+	public Object FMLCommonHandlerInstance() {
+		return FMLCommonHandler.instance();
+	}
+
+	@Override
+	public Object FMLCommonHandlerInstanceGetMinecraftServerInstance() {
+		return FMLCommonHandler.instance().getMinecraftServerInstance();
+	}
+
+	@Override
+	public Object[] FMLCommonHandlerInstanceGetMinecraftServerInstanceWorldServers() {
+		return FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
+	}
+
+	@Override
 	public void fontRendererDrawString(Object fontRenderer, String s, int i, int j, int k) {
 		((FontRenderer) fontRenderer).drawString(s, i, j, k);
 	}
@@ -1964,6 +1989,25 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
+	public int getVacancyGlobalEntityID() {
+		Map map = EntityList.IDtoClassMapping;
+		int ID = -1;
+		if (map != null) {
+			for(int i = 64; i < 3000; i++) {
+				//Modchu_Debug.mDebug("getVacancyGlobalEntityID i"+i+" !map.containsKey(i) = "+(!map.containsKey(i)));
+				if (!map.containsKey(i)) {
+					ID = i;
+					//Modchu_Debug.mDebug("getVacancyGlobalEntityID !map.containsKey ID="+ID);
+					break;
+				}
+			}
+		} else {
+			Modchu_Debug.lDebug("getVacancyGlobalEntityID IDtoClassMapping map == null !!");
+		}
+		return ID;
+	}
+
+	@Override
 	public IntBuffer gLAllocationCreateDirectIntBuffer(int i) {
 		return GLAllocation.createDirectIntBuffer(i);
 	}
@@ -2142,6 +2186,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object itemSetCreativeTab(Object item, Object creativeTabs) {
 		return ((Item) item).setCreativeTab((CreativeTabs) creativeTabs);
+	}
+
+	@Override
+	public Object itemSetTextureName(Object item, String s) {
+		return ((Item) item).setTextureName(s);
 	}
 
 	@Override
@@ -2355,6 +2404,12 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
+	public Object minecraftTextureManager() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().renderEngine;
+	}
+
+	@Override
 	public Object minecraftPlayer() {
 		if (Modchu_Main.isServer) return null;
 		return Minecraft.getMinecraft().thePlayer;
@@ -2538,7 +2593,6 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void playerControllerMPSetPlayerCapabilities(Object playerController, Object entityplayer) {
-		((PlayerControllerMP) playerController).setPlayerCapabilities((EntityPlayer) entityplayer);
 	}
 
 	@Override
@@ -2547,7 +2601,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object playerControllerMPCreatePlayer(Object playerController) {
-		return ((PlayerControllerMP) playerController).func_78754_a((World) minecraftWorld());
+		return null;
 	}
 
 	@Override
@@ -2704,7 +2758,16 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void renderBindTexture(Object render, Object resourceLocation) {
-		Modchu_Reflect.invokeMethod("Render", "func_110776_a", "bindTexture", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, render, new Object[]{ resourceLocation });
+		if (render instanceof Render
+				&& resourceLocation instanceof ResourceLocation) {
+			//Modchu_Debug.mDebug("renderBindTexture render="+render+" resourceLocation="+resourceLocation);
+			Modchu_Reflect.invokeMethod("Render", "func_110776_a", "bindTexture", new Class[]{ Modchu_Reflect.loadClass("ResourceLocation") }, render, new Object[]{ resourceLocation });
+		}
+	}
+
+	@Override
+	public String[] renderBipedBipedArmorFilenamePrefix() {
+		return RenderBiped.bipedArmorFilenamePrefix;
 	}
 
 	@Override
@@ -2720,6 +2783,16 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public boolean renderBlocksRenderItemIn3d(Object renderBlocks, int i) {
 		return ((RenderBlocks) renderBlocks).renderItemIn3d(i);
+	}
+
+	@Override
+	public Object renderEngine() {
+		if (Modchu_Main.isServer) return null;
+		return Minecraft.getMinecraft().renderEngine;
+	}
+
+	@Override
+	public void renderEngineSetupTexture(Object bufferedimage, int i) {
 	}
 
 	@Override
@@ -2740,6 +2813,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object renderLoadDownloadableImageTexture(Object render, String s, String s1) {
 		return null;
+	}
+
+	@Override
+	public Map renderManagerEntityRenderMap() {
+		return RenderManager.instance.entityRenderMap;
 	}
 
 	@Override
@@ -2776,6 +2854,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object renderRenderManagerRenderEngine(Object render) {
 		return ((RenderManager) renderRenderManager(render)).renderEngine;
+	}
+
+	@Override
+	public InputStream resourceGetInputStream(Object resource) {
+		return ((Resource) resource).getInputStream();
 	}
 
 	@Override
@@ -3054,11 +3137,13 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, float f, float f1, float f2) {
+		((Tessellator) tessellator).setNormal(f, f1, f2);
 		((Tessellator) tessellator).addVertexWithUV(d, d2, d3, d4, d5);
 	}
 
 	@Override
 	public void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, int i, int i1, int i2, int i3) {
+		((Tessellator) tessellator).setColorRGBA(i, i1, i2, i3);
 		((Tessellator) tessellator).addVertexWithUV(d, d2, d3, d4, d5);
 	}
 
@@ -3109,7 +3194,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object textureManagerGetTexture(Object textureManager, Object o) {
-		return o != null ? ((TextureManager) textureManager).getTexture((ResourceLocation) o) : null;
+		return ((TextureManager) textureManager).getTexture((ResourceLocation) o);
 	}
 
 	@Override
@@ -3331,17 +3416,19 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object itemStackGetTagCompound(Object itemStack) {
-		return ((ItemStack) itemStack).getTagCompound();
+	public Object itemStackGetTagCompound(Object nBTTagCompoundOrItemStack) {
+		return nBTTagCompoundOrItemStack instanceof NBTTagCompound ? nBTTagCompoundOrItemStack : ((ItemStack) nBTTagCompoundOrItemStack).getTagCompound();
 	}
 
 	@Override
 	public boolean nbtTagCompoundHasKey(Object nBTTagCompoundOrItemStack, String s) {
+		nBTTagCompoundOrItemStack = nBTTagCompoundOrItemStack instanceof NBTTagCompound ? nBTTagCompoundOrItemStack : ((ItemStack) nBTTagCompoundOrItemStack).getTagCompound();
 		return ((NBTTagCompound) nBTTagCompoundOrItemStack).hasKey(s);
 	}
 
 	@Override
 	public String nbtTagCompoundGetString(Object nBTTagCompoundOrItemStack, String s) {
+		nBTTagCompoundOrItemStack = nBTTagCompoundOrItemStack instanceof NBTTagCompound ? nBTTagCompoundOrItemStack : ((ItemStack) nBTTagCompoundOrItemStack).getTagCompound();
 		return ((NBTTagCompound) nBTTagCompoundOrItemStack).getString(s);
 	}
 
@@ -3496,6 +3583,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
+	public Object itemSetPotionEffect(Object item, String s) {
+		return ((Item) item).setPotionEffect(s);
+	}
+
+	@Override
 	public int itemArmorGetColor(Object itemArmor, Object itemstack) {
 		return itemArmor instanceof ItemArmor ? ((ItemArmor) itemArmor).getColor((ItemStack) itemstack) : -1;
 	}
@@ -3626,6 +3718,41 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
+	public int itemStackGetMaxDamage(Object itemstack) {
+		return ((ItemStack) itemstack).getMaxDamage();
+	}
+
+	@Override
+	public float mathHelperFloor_float(float f) {
+		return MathHelper.floor_float(f);
+	}
+
+	@Override
+	public long mathHelperLfloor(double d) {
+		return MathHelper.floor_double_long(d);
+	}
+
+	@Override
+	public float mathHelperAbs(float f) {
+		return MathHelper.abs(f);
+	}
+
+	@Override
+	public double mathHelperAbs_max(double d, double d1) {
+		return MathHelper.abs_max(d, d1);
+	}
+
+	@Override
+	public int mathHelperIntFloorDiv(int i, int j) {
+		return MathHelper.bucketInt(i, j);
+	}
+
+	@Override
+	public boolean mathHelperStringNullOrLengthZero(String s) {
+		return MathHelper.stringNullOrLengthZero(s);
+	}
+
+	@Override
 	public int threadDownloadImageDataGetGlTextureId(Object threadDownloadImageData) {
 		return ((ThreadDownloadImageData) threadDownloadImageData).getGlTextureId();
 	}
@@ -3633,11 +3760,6 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object netClientHandlerGetNetManager(Object netClientHandler) {
 		return ((NetClientHandler) netClientHandler).getNetManager();
-	}
-
-	@Override
-	public int itemStackGetMaxDamage(Object itemstack) {
-		return ((ItemStack) itemstack).getMaxDamage();
 	}
 
 	@Override
@@ -3860,52 +3982,13 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void tessellatorAddVertex(Object tessellator, double d, double d2, double d3, int i, int i1, int i2, int i3) {
+		((Tessellator) tessellator).setColorRGBA(i, i1, i2, i3);
 		((Tessellator) tessellator).addVertex(d, d2, d3);
-	}
-
-	@Override
-	public float mathHelperFloor_float(float f) {
-		return MathHelper.floor_float(f);
-	}
-
-	@Override
-	public long mathHelperLfloor(double d) {
-		return MathHelper.floor_double_long(d);
-	}
-
-	@Override
-	public float mathHelperAbs(float f) {
-		return MathHelper.abs(f);
-	}
-
-	@Override
-	public double mathHelperAbs_max(double d, double d1) {
-		return MathHelper.abs_max(d, d1);
-	}
-
-	@Override
-	public int mathHelperIntFloorDiv(int i, int j) {
-		return MathHelper.bucketInt(i, j);
-	}
-
-	@Override
-	public boolean mathHelperStringNullOrLengthZero(String s) {
-		return MathHelper.stringNullOrLengthZero(s);
 	}
 
 	@Override
 	public double mathHelperSqrt_double(double d) {
 		return MathHelper.sqrt_double(d);
-	}
-
-	@Override
-	public void tileEntitySkullRendererRenderSkull(float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2) {
-		tileEntitySkullRendererRenderSkull(f, f1, f2, en, f3, i, gameProfile, i2, 0.0F);
-	}
-
-	@Override
-	public void tileEntitySkullRendererRenderSkull(float f, float f1, float f2, Enum en, float f3, int i, Object gameProfile, int i2, float f4) {
-		TileEntitySkullRenderer.skullRenderer.func_82393_a(f, f1, f2, i, f3, i2, Modchu_CastHelper.String(gameProfile));
 	}
 
 	@Override
@@ -3916,7 +3999,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 			int renderIndex = itemArmorRenderIndex(item);
 			String[] armorFilename = renderBipedBipedArmorFilenamePrefix();
 			String a1 = renderIndex < armorFilename.length ? armorFilename[renderIndex] : armorFilename[armorFilename.length - 1];
-			return RenderBiped.func_110858_a((ItemArmor)item, (Integer) i, s);
+			return RenderBiped.getArmorResource((Entity)entityPlayer, (ItemStack)itemStack, i, s);
 		}
 		return null;
 	}
@@ -4057,6 +4140,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
+	public Object containerInventorySlots(Object container) {
+		return ((Container) container).inventorySlots;
+	}
+
+	@Override
 	public int worldGetStrongPower(Object worldOrEntity, int x, int y, int z) {
 		return ((World) entityWorld(worldOrEntity)).getBlockPowerInput(x, y, z);
 	}
@@ -4084,6 +4172,21 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object worldGetEntityByID(Object worldOrEntity, int i) {
 		return ((World) entityWorld(worldOrEntity)).getEntityByID(i);
+	}
+
+	@Override
+	public Map entityListStringToClassMapping() {
+		return EntityList.stringToClassMapping;
+	}
+
+	@Override
+	public Map entityListClassToStringMapping() {
+		return EntityList.classToStringMapping;
+	}
+
+	@Override
+	public Map entityListIDtoClassMapping() {
+		return EntityList.IDtoClassMapping;
 	}
 
 	@Override
@@ -4153,7 +4256,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public String iAttributeGetAttributeUnlocalizedName(Object iAttribute) {
-		return null;
+		return ((Attribute) iAttribute).getAttributeUnlocalizedName();
 	}
 
 	@Override
@@ -4427,6 +4530,11 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
+	public Object entityLivingTasks(Object entityLiving) {
+		return ((EntityLiving) entityLiving).tasks;
+	}
+
+	@Override
 	public void entityAITasksAddTask(Object entityAITasks, int i, Object entityAIBase) {
 		((EntityAITasks) entityAITasks).addTask(i, (EntityAIBase) entityAIBase);
 	}
@@ -4509,15 +4617,10 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public Object minecraftTextureManager() {
-		return ((Minecraft) minecraftGetMinecraft()).getTextureManager();
-	}
-
-	@Override
 	public Object resourceManagerGetResource(Object resourceManager, Object o) {
 		try {
 			return ((ResourceManager) resourceManager).getResource((ResourceLocation) o);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -4526,11 +4629,6 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 	@Override
 	public Object minecraftGetResourceManager() {
 		return ((Minecraft) minecraftGetMinecraft()).getResourceManager();
-	}
-
-	@Override
-	public InputStream resourceGetInputStream(Object resource) {
-		return ((Resource) resource).getInputStream();
 	}
 
 	@Override
@@ -4583,12 +4681,6 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void guiSlotHandleMouseInput(Object guiSlot) {
-	}
-
-	@Override
-	public Object minecraftLoadingScreen() {
-		if (Modchu_Main.isServer) return null;
-		return Minecraft.getMinecraft().loadingScreen;
 	}
 
 	@Override

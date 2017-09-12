@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class Modchu_Item extends modchu.lib.forge.mc190_220.Modchu_Item {
+public class Modchu_Item extends modchu.lib.forge.mc190_221.Modchu_Item {
 
 	public Modchu_Item(HashMap<String, Object> map) {
 		super(map);

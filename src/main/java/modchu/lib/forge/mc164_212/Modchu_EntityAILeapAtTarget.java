@@ -2,7 +2,7 @@ package modchu.lib.forge.mc164_212;
 
 import java.util.HashMap;
 
-public class Modchu_EntityAILeapAtTarget extends modchu.lib.forge.mc164_220.Modchu_EntityAILeapAtTarget {
+public class Modchu_EntityAILeapAtTarget extends modchu.lib.forge.mc164_221.Modchu_EntityAILeapAtTarget {
 
 	public Modchu_EntityAILeapAtTarget(HashMap<String, Object> map) {
 		super(map);

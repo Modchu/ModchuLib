@@ -7471,6 +7471,12 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 		super.tessellatorAddVertex(tessellator, d, d2, d3);
 	}
 
+	@Override
+	protected void tessellatorAddVertex(Object tessellator, double d, double d2, double d3, int i, int i1, int i2, int i3) {
+		if (master != null) master.tessellatorAddVertex(tessellator, d, d2, d3, i, i1, i2, i3);
+		else super.tessellatorAddVertex(tessellator, d, d2, d3, i, i1, i2, i3);
+	}
+
 	public void superTessellatorAddVertex(Object tessellator, double d, double d2, double d3, int i, int i1, int i2, int i3) {
 		super.tessellatorAddVertex(tessellator, d, d2, d3, i, i1, i2, i3);
 	}

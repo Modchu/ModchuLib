@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-public abstract class Modchu_InventoryPlayer extends modchu.lib.forge.mc190_220.Modchu_InventoryPlayer {
+public abstract class Modchu_InventoryPlayer extends modchu.lib.forge.mc190_221.Modchu_InventoryPlayer {
 
 	public Modchu_InventoryPlayer(HashMap<String, Object> map) {
 		super(map);

@@ -3,6 +3,7 @@ package modchu.lib;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -44,30 +45,35 @@ public class Modchu_FileManager {
 		return master != null ? master.getFileList(pname) : base.getFileList(pname);
 	}
 
-	public static void loadModFile(String pname, String pprefix) {
-		if (master != null) master.loadModFile(pname, pprefix);
-		else base.loadModFile(pname, pprefix);
+	public static void loadModFile(String zipJarclassFileSearchName, String classFileSearchName, String addModResourcePackSearchName) {
+		if (master != null) master.loadModFile(zipJarclassFileSearchName, classFileSearchName, addModResourcePackSearchName, null);
+		else base.loadModFile(zipJarclassFileSearchName, classFileSearchName, addModResourcePackSearchName, null);
 	}
 
-	public static boolean addTexturesZip(File file, String search) {
-		return master != null ? master.addTexturesZip(file, search) : base.addTexturesZip(file, search);
+	public static void loadModFile(String zipJarclassFileSearchName, String classFileSearchName, String addModResourcePackSearchName, Method method) {
+		if (master != null) master.loadModFile(zipJarclassFileSearchName, classFileSearchName, addModResourcePackSearchName, method);
+		else base.loadModFile(zipJarclassFileSearchName, classFileSearchName, addModResourcePackSearchName, method);
 	}
 
-	public static void addTexturesJar(File file, String search) {
-		if (master != null) master.addTexturesJar(file, search);
-		else base.addTexturesJar(file, search);
+	public static boolean addTexturesZip(File file, File file1, String classFileSearchName, String addModResourcePackSearchName) {
+		return master != null ? master.addTexturesZip(file, file1, classFileSearchName, addModResourcePackSearchName) : base.addTexturesZip(file, file1, classFileSearchName, addModResourcePackSearchName);
 	}
 
-	public static boolean addTexturesDir(File file, String search) {
-		return master != null ? master.addTexturesDir(file, search) : base.addTexturesDir(file, search);
+	public static void addTexturesJar(File file, File file1, String classFileSearchName, String addModResourcePackSearchName) {
+		if (master != null) master.addTexturesJar(file, file1, classFileSearchName, addModResourcePackSearchName);
+		else base.addTexturesJar(file, file1, classFileSearchName, addModResourcePackSearchName);
 	}
 
-	public static boolean addResourcesMod(Class c, String search) {
-		return master != null ? master.addResourcesMod(c, search) : base.addResourcesMod(c, search);
+	public static boolean addTexturesDir(File file, String classFileSearchName, String addModResourcePackSearchName) {
+		return master != null ? master.addTexturesDir(file, classFileSearchName, addModResourcePackSearchName) : base.addTexturesDir(file, classFileSearchName, addModResourcePackSearchName);
 	}
 
-	public static boolean addModClass(String fname, String search) {
-		return master != null ? master.addModClass(fname, search) : base.addModClass(fname, search);
+	public static boolean addResourcesMod(Class c, String classFileSearchName, String addModResourcePackSearchName) {
+		return master != null ? master.addResourcesMod(c, classFileSearchName, addModResourcePackSearchName) : base.addResourcesMod(c, classFileSearchName, addModResourcePackSearchName);
+	}
+
+	public static boolean addModClass(File file, String fname, String classFileSearchName, String addModResourcePackSearchName) {
+		return master != null ? master.addModClass(file, fname, classFileSearchName, addModResourcePackSearchName) : base.addModClass(file, fname, classFileSearchName, addModResourcePackSearchName);
 	}
 
 	public static String classNameProcessing(String fname) {
@@ -292,6 +298,10 @@ public class Modchu_FileManager {
 
 	public static Map<String, Class> getClassMap() {
 		return master != null ? master.getClassMap() : base.getClassMap();
+	}
+
+	public static InputStream getModInputStream(Object o) {
+		return master != null ? master.getModInputStream(o) : base.getModInputStream(o);
 	}
 
 }

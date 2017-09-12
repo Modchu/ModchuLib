@@ -257,7 +257,7 @@ public class Modchu_TextCalculationFormula implements Modchu_ITextCalculationDat
 			}
 		}
 		Modchu_ReflectData reflectData = data.getReflectData();
-		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculationFormula calculationReflect reflectData="+reflectData.dataToString());
+		if (debug) Modchu_Debug.mDebug("Modchu_TextCalculationFormula calculationReflect reflectData="+(reflectData != null ? reflectData.dataToString() : null));
 		if (reflectData != null); else {
 			String ss ="Modchu_TextCalculationFormula calculationReflect reflectData == null error !!";
 			Modchu_Main.setRuntimeException(ss);

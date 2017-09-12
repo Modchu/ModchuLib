@@ -33,7 +33,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class Modchu_Particle extends modchu.lib.forge.mc194_220.Modchu_Particle {
+public class Modchu_Particle extends modchu.lib.forge.mc194_221.Modchu_Particle {
 
 	public Modchu_Particle(HashMap<String, Object> map) {
 		super(map);

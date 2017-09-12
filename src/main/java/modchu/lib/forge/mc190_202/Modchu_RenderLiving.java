@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 
-public class Modchu_RenderLiving extends modchu.lib.forge.mc190_220.Modchu_RenderLiving {
+public class Modchu_RenderLiving extends modchu.lib.forge.mc190_221.Modchu_RenderLiving {
 
 	public Modchu_RenderLiving(HashMap<String, Object> map) {
 		super(map);

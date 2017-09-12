@@ -22,7 +22,7 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	public Modchu_RenderLiving(HashMap<String, Object> map) {
 		super((ModelBase) (map != null && map.containsKey("Object") ? map.get("Object") : null), (Float) (map != null && map.containsKey("Float") ? map.get("Float") : 1.0F));
-		Modchu_Debug.lDebug("Modchu_RenderLiving init 1");
+		Modchu_Debug.lDebug("Modchu_RenderLiving init 1 this="+this);
 		renderManager = (RenderManager) Modchu_AS.get(Modchu_AS.renderManagerInstance);
 		Modchu_Debug.lDebug("Modchu_RenderLiving init renderManager="+renderManager);
 		map.put("base", this);
@@ -54,8 +54,9 @@ public class Modchu_RenderLiving extends RenderLiving implements Modchu_IRenderL
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
+		//Modchu_Debug.mDebug("Modchu_RenderLiving master="+master+" this="+this);
 		if (master != null) master.doRender(entity, x, y, z, entityYaw, partialTicks);
-		else super.doRender(entity, x, y, z, entityYaw, partialTicks);
+		//else super.doRender(entity, x, y, z, entityYaw, partialTicks);
 	}
 
 	@Override

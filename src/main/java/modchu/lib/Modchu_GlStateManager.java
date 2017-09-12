@@ -1,6 +1,10 @@
 package modchu.lib;
 
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+
+import org.lwjgl.util.vector.Quaternion;
 
 public class Modchu_GlStateManager {
 	public static Modchu_IGlStateManager master;
@@ -12,6 +16,239 @@ public class Modchu_GlStateManager {
 		master = instance instanceof Modchu_IGlStateManager ? (Modchu_IGlStateManager) instance : null;
 		//Modchu_Debug.mDebug("Modchu_GlStateManager init() master="+master);
 		//Modchu_Debug.mDebug("Modchu_GlStateManager init() end.");
+	}
+
+	public static void glLight(int light, int pname, FloatBuffer floatBuffer) {
+		if (master != null) master.glLight(light, pname, floatBuffer);
+	}
+
+	public static void glLightModel(int pname, FloatBuffer floatBuffer1) {
+		if (master != null) master.glLightModel(pname, floatBuffer1);
+	}
+
+	public static void glNormal3f(float nx, float ny, float nz) {
+		if (master != null) master.glNormal3f(nx, ny, nz);
+	}
+
+	public static void blendFunc(Object sourceFactor, Object destFactor) {
+		if (master != null) master.blendFunc(sourceFactor, destFactor);
+	}
+
+	public static void tryBlendFuncSeparate(Object sourceFactor, Object destFactor, Object sourceFactor1, Object destFactor1) {
+		if (master != null) master.tryBlendFuncSeparate(sourceFactor, destFactor, sourceFactor1, destFactor1);
+	}
+
+	public static void glBlendEquation(int blendEquation) {
+		if (master != null) master.glBlendEquation(blendEquation);
+	}
+
+	public static void enableOutlineMode(int p_187431_0_) {
+		if (master != null) master.enableOutlineMode(p_187431_0_);
+	}
+
+	public static void disableOutlineMode() {
+		if (master != null) master.disableOutlineMode();
+	}
+
+	public static void setFog(Object fogMode) {
+		if (master != null) master.setFog(fogMode);
+	}
+
+	private static void setFog(int param) {
+		if (master != null) master.setFog(param);
+	}
+
+	public static void glFog(int pname, FloatBuffer floatBuffer1) {
+		if (master != null) master.glFog(pname, floatBuffer1);
+	}
+
+	public static void glFogi(int pname, int param) {
+		if (master != null) master.glFogi(pname, param);
+	}
+
+	public static void cullFace(Object cullFace) {
+		if (master != null) master.cullFace(cullFace);
+	}
+
+	public static void glPolygonMode(int face, int mode) {
+		if (master != null) master.glPolygonMode(face, mode);
+	}
+
+	public static void colorLogicOp(Object logicOp) {
+		if (master != null) master.colorLogicOp(logicOp);
+	}
+
+	public static void texGen(Object texGen, int pname, FloatBuffer floatBuffer1) {
+		if (master != null) master.texGen(texGen, pname, floatBuffer1);
+	}
+
+	public static void setActiveTexture(int texture) {
+		if (master != null) master.setActiveTexture(texture);
+	}
+
+	public static void glTexEnv(int target, int parameterName, FloatBuffer floatBuffer1) {
+		if (master != null) master.glTexEnv(target, parameterName, floatBuffer1);
+	}
+
+	public static void glTexEnvi(int target, int parameterName, int parameter) {
+		if (master != null) master.glTexEnvi(target, parameterName, parameter);
+	}
+
+	public static void glTexEnvf(int target, int parameterName, float parameter) {
+		if (master != null) master.glTexEnvf(target, parameterName, parameter);
+	}
+
+	public static void glTexParameterf(int target, int parameterName, float parameter) {
+		if (master != null) master.glTexParameterf(target, parameterName, parameter);
+	}
+
+	public static void glTexParameteri(int target, int parameterName, int parameter) {
+		if (master != null) master.glTexParameteri(target, parameterName, parameter);
+	}
+
+	public int glGetTexLevelParameteri(int target, int level, int parameterName) {
+		return master != null ? master.glGetTexLevelParameteri(target, level, parameterName) : -1;
+	}
+
+	public static void glTexImage2D(int target, int level, int internalFormat, int width, int height, int border, int format, int type, IntBuffer pixels) {
+		if (master != null
+				&& pixels != null) master.glTexImage2D(target, level, internalFormat, width, height, border, format, type, pixels);
+	}
+
+	public static void glTexSubImage2D(int target, int level, int xOffset, int yOffset, int width, int height, int format, int type, IntBuffer pixels) {
+		if (master != null) master.glTexSubImage2D(target, level, xOffset, yOffset, width, height, format, type, pixels);
+	}
+
+	public static void glCopyTexSubImage2D(int target, int level, int xOffset, int yOffset, int x, int y, int width, int height) {
+		if (master != null) master.glCopyTexSubImage2D(target, level, xOffset, yOffset, x, y, width, height);
+	}
+
+	public static void glGetTexImage(int target, int level, int format, int type, IntBuffer pixels) {
+		if (master != null) master.glGetTexImage(target, level, format, type, pixels);
+	}
+
+	public static void getFloat(int pname, FloatBuffer floatBuffer1) {
+		if (master != null) master.getFloat(pname, floatBuffer1);
+	}
+
+	public static void multMatrix(FloatBuffer floatBuffer1) {
+		if (master != null) master.multMatrix(floatBuffer1);
+	}
+
+	public static void rotate(Quaternion quaternion) {
+		if (master != null) master.rotate(quaternion);
+	}
+
+	public FloatBuffer quatToGlMatrix(FloatBuffer floatBuffer1, Quaternion quaternion1) {
+		return (FloatBuffer) (master != null ? master.quatToGlMatrix(floatBuffer1, quaternion1) : null);
+	}
+
+	public static void glTexCoord2f(float sCoord, float tCoord) {
+		if (master != null) master.glTexCoord2f(sCoord, tCoord);
+	}
+
+	public static void glVertex3f(float x, float y, float z) {
+		if (master != null) master.glVertex3f(x, y, z);
+	}
+
+	public static void glNormalPointer(int type, int stride, ByteBuffer byteBuffer) {
+		if (master != null) master.glNormalPointer(type, stride, byteBuffer);
+	}
+
+	public static void glTexCoordPointer(int size, int type, int stride, int buffer_offset) {
+		if (master != null) master.glTexCoordPointer(size, type, stride, buffer_offset);
+	}
+
+	public static void glTexCoordPointer(int size, int type, int stride, ByteBuffer byteBuffer1) {
+		if (master != null) master.glTexCoordPointer(size, type, stride, byteBuffer1);
+	}
+
+	public static void glVertexPointer(int size, int type, int stride, int buffer_offset) {
+		if (master != null) master.glVertexPointer(size, type, stride, buffer_offset);
+	}
+
+	public static void glVertexPointer(int size, int type, int stride, ByteBuffer byteBuffer1) {
+		if (master != null) master.glVertexPointer(size, type, stride, byteBuffer1);
+	}
+
+	public static void glColorPointer(int size, int type, int stride, int buffer_offset) {
+		if (master != null) master.glColorPointer(size, type, stride, buffer_offset);
+	}
+
+	public static void glColorPointer(int size, int type, int stride, ByteBuffer byteBuffer1) {
+		if (master != null) master.glColorPointer(size, type, stride, byteBuffer1);
+	}
+
+	public static void glDisableClientState(int cap) {
+		if (master != null) master.glDisableClientState(cap);
+	}
+
+	public static void glEnableClientState(int cap) {
+		if (master != null) master.glEnableClientState(cap);
+	}
+
+	public static void glBegin(int mode) {
+		if (master != null) master.glBegin(mode);
+	}
+
+	public static void glEnd() {
+		if (master != null) master.glEnd();
+	}
+
+	public static void glDrawArrays(int mode, int first, int count) {
+		if (master != null) master.glDrawArrays(mode, first, count);
+	}
+
+	public static void glLineWidth(float width) {
+		if (master != null) master.glLineWidth(width);
+	}
+
+	public static void glDeleteLists(int list, int range) {
+		if (master != null) master.glDeleteLists(list, range);
+	}
+
+	public static void glNewList(int list, int mode) {
+		if (master != null) master.glNewList(list, mode);
+	}
+
+	public static void glEndList() {
+		if (master != null) master.glEndList();
+	}
+
+	public int glGenLists(int range) {
+		return master != null ? master.glGenLists(range) : -1;
+	}
+
+	public static void glPixelStorei(int parameterName, int param) {
+		if (master != null) master.glPixelStorei(parameterName, param);
+	}
+
+	public static void glReadPixels(int x, int y, int width, int height, int format, int type, IntBuffer pixels) {
+		if (master != null) master.glReadPixels(x, y, width, height, format, type, pixels);
+	}
+
+	public int glGetError() {
+		return master != null ? master.glGetError() : -1;
+	}
+
+	public String glGetString(int name) {
+		return master != null ? master.glGetString(name) : null;
+	}
+
+	public static void glGetInteger(int parameterName, IntBuffer parameters) {
+		if (master != null) master.glGetInteger(parameterName, parameters);
+	}
+
+	public int glGetInteger(int parameterName) {
+		return master != null ? master.glGetInteger(parameterName) : -1;
+	}
+
+	public static void enableBlendProfile(Object profile) {
+		if (master != null) master.enableBlendProfile(profile);
+	}
+
+	public static void disableBlendProfile(Object profile) {
+		if (master != null) master.disableBlendProfile(profile);
 	}
 
 	public static void pushMatrix() {
@@ -153,11 +390,12 @@ public class Modchu_GlStateManager {
 	public static void enableFog() {
 		master.enableFog();
 	}
-/*
-	public static void setFog(int p_179093_0_) {
-		master.setFog(p_179093_0_);
-	}
-*/
+
+	/*
+		public static void setFog(int p_179093_0_) {
+			master.setFog(p_179093_0_);
+		}
+	*/
 	public static void setFogDensity(float p_179095_0_) {
 		master.setFogDensity(p_179095_0_);
 	}
@@ -177,11 +415,12 @@ public class Modchu_GlStateManager {
 	public static void disableCull() {
 		master.disableCull();
 	}
-/*
-	public static void cullFace(int p_179107_0_) {
-		master.cullFace(p_179107_0_);
-	}
-*/
+
+	/*
+		public static void cullFace(int p_179107_0_) {
+			master.cullFace(p_179107_0_);
+		}
+	*/
 	public static void enablePolygonOffset() {
 		master.enablePolygonOffset();
 	}
@@ -219,7 +458,7 @@ public class Modchu_GlStateManager {
 	}
 
 	public static void texGen(Object glStateManagerTexGen, int p_179105_1_, Object floatBuffer) {
-		master.texGen(glStateManagerTexGen, p_179105_1_, (FloatBuffer) floatBuffer);
+		master.texGen(glStateManagerTexGen, p_179105_1_, floatBuffer);
 	}
 
 	public static void disableTexture2D() {
@@ -263,7 +502,7 @@ public class Modchu_GlStateManager {
 	}
 
 	public static void getFloat(int p_179111_0_, Object p_179111_1_) {
-		master.getFloat(p_179111_0_, (FloatBuffer) p_179111_1_);
+		master.getFloat(p_179111_0_, p_179111_1_);
 	}
 
 	public static void rotate(float p_179114_0_, float p_179114_1_, float p_179114_2_, float p_179114_3_) {
@@ -283,7 +522,7 @@ public class Modchu_GlStateManager {
 	}
 
 	public static void multMatrix(Object p_179110_0_) {
-		master.multMatrix((FloatBuffer) p_179110_0_);
+		master.multMatrix(p_179110_0_);
 	}
 
 	public static void color(float p_179124_0_, float p_179124_1_, float p_179124_2_) {

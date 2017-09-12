@@ -157,16 +157,23 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc180_189.Modchu_ASMaster 
 
 	@Override
 	public void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, float f, float f1, float f2) {
+		((Tessellator) tessellator).getWorldRenderer().setNormal(f, f1, f2);
 		((Tessellator) tessellator).getWorldRenderer().addVertexWithUV(d, d2, d3, d4, d5);
 	}
 
 	@Override
 	public void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, int i, int i1, int i2, int i3) {
+		((Tessellator) tessellator).getWorldRenderer().setColorRGBA(i, i1, i2, i3);
 		((Tessellator) tessellator).getWorldRenderer().addVertexWithUV(d, d2, d3, d4, d5);
 	}
 
 	@Override
 	public void tessellatorStartDrawing(Object tessellator, int i, Object vertexFormat) {
+		((Tessellator) tessellator).getWorldRenderer().startDrawing(i);
+	}
+
+	@Override
+	public void tessellatorStartDrawing(Object tessellator, int i) {
 		((Tessellator) tessellator).getWorldRenderer().startDrawing(i);
 	}
 
@@ -177,6 +184,7 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc180_189.Modchu_ASMaster 
 
 	@Override
 	public void tessellatorAddVertex(Object tessellator, double d, double d2, double d3, int i, int i1, int i2, int i3) {
+		((Tessellator) tessellator).getWorldRenderer().setColorRGBA(i, i1, i2, i3);
 		((Tessellator) tessellator).getWorldRenderer().addVertex(d, d2, d3);
 	}
 

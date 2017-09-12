@@ -1,5 +1,7 @@
 package modchu.lib;
 
+import java.nio.IntBuffer;
+
 public interface Modchu_IGlStateManager {
 	public void pushMatrix();
 	public void ortho(int i, int width, int j, int height, int k, int l);
@@ -70,5 +72,59 @@ public interface Modchu_IGlStateManager {
 	public void color(float p_179124_0_, float p_179124_1_, float p_179124_2_);
 	public void resetColor();
 	public void callList(int p_179148_0_);
+	public void glLight(int light, int pname, Object floatBuffer);
+	public void glLightModel(int pname, Object floatBuffer);
+	public void glNormal3f(float nx, float ny, float nz);
+	public void blendFunc(Object sourceFactor, Object destFactor);
+	public void tryBlendFuncSeparate(Object sourceFactor, Object destFactor, Object sourceFactor1, Object destFactor1);
+	public void glBlendEquation(int blendEquation);
+	public void enableOutlineMode(int p_187431_0_);
+	public void disableOutlineMode();
+	public void setFog(Object fogMode);
+	public void glFog(int pname, Object floatBuffer);
+	public void glFogi(int pname, int param);
+	public void cullFace(Object cullFace);
+	public void glPolygonMode(int face, int mode);
+	public void colorLogicOp(Object logicOp);
+	public void setActiveTexture(int texture);
+	public void glTexEnv(int target, int parameterName, Object floatBuffer);
+	public void glTexEnvi(int target, int parameterName, int parameter);
+	public void glTexEnvf(int target, int parameterName, float parameter);
+	public void glTexParameterf(int target, int parameterName, float parameter);
+	public void glTexParameteri(int target, int parameterName, int parameter);
+	public int glGetTexLevelParameteri(int target, int level, int parameterName);
+	public void glTexImage2D(int target, int level, int internalFormat, int width, int height, int border, int format, int type, Object nullable);
+	public void glTexSubImage2D(int target, int level, int xOffset, int yOffset, int width, int height, int format, int type, IntBuffer pixels);
+	public void glCopyTexSubImage2D(int target, int level, int xOffset, int yOffset, int x, int y, int width, int height);
+	public void glGetTexImage(int target, int level, int format, int type, IntBuffer pixels);
+	public void rotate(Object quaternion);
+	public Object quatToGlMatrix(Object floatBuffer, Object quaternion);
+	public void glTexCoord2f(float sCoord, float tCoord);
+	public void glVertex3f(float x, float y, float z);
+	public void glNormalPointer(int type, int stride, Object byteBuffer);
+	public void glTexCoordPointer(int size, int type, int stride, int buffer_offset);
+	public void glTexCoordPointer(int size, int type, int stride, Object byteBuffer);
+	public void glVertexPointer(int size, int type, int stride, int buffer_offset);
+	public void glVertexPointer(int size, int type, int stride, Object byteBuffer);
+	public void glColorPointer(int size, int type, int stride, int buffer_offset);
+	public void glColorPointer(int size, int type, int stride, Object byteBuffer);
+	public void glDisableClientState(int cap);
+	public void glEnableClientState(int cap);
+	public void glBegin(int mode);
+	public void glEnd();
+	public void glDrawArrays(int mode, int first, int count);
+	public void glLineWidth(float width);
+	public void glDeleteLists(int list, int range);
+	public void glNewList(int list, int mode);
+	public void glEndList();
+	public int glGenLists(int range);
+	public void glPixelStorei(int parameterName, int param);
+	public void glReadPixels(int x, int y, int width, int height, int format, int type, IntBuffer pixels);
+	public int glGetError();
+	public String glGetString(int name);
+	public void glGetInteger(int parameterName, IntBuffer parameters);
+	public int glGetInteger(int parameterName);
+	public void enableBlendProfile(Object profile);
+	public void disableBlendProfile(Object profile);
 
 }

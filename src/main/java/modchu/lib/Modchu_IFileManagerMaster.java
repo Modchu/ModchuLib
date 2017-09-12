@@ -3,6 +3,7 @@ package modchu.lib;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -14,13 +15,13 @@ import java.util.zip.ZipFile;
 
 public interface Modchu_IFileManagerMaster {
 
-	public void loadModFile(String pname, String pprefix);
+	public void loadModFile(String zipJarclassFileSearchName, String classFileSearchName, String addModResourcePackSearchName, Method method);
 	public List<File> getFileList(String pname);
-	public boolean addTexturesZip(File file, String search);
-	public void addTexturesJar(File file, String search);
-	public boolean addTexturesDir(File file, String search);
-	public boolean addResourcesMod(Class c, String search);
-	public boolean addModClass(String fname, String search);
+	public boolean addTexturesZip(File file, File file1, String classFileSearchName, String addModResourcePackSearchName);
+	public void addTexturesJar(File file, File file1, String classFileSearchName, String addModResourcePackSearchName);
+	public boolean addTexturesDir(File file, String classFileSearchName, String addModResourcePackSearchName);
+	public boolean addResourcesMod(Class c, String classFileSearchName, String addModResourcePackSearchName);
+	public boolean addModClass(File file, String fname, String classFileSearchName, String addModResourcePackSearchName);
 	public String classNameProcessing(String fname);
 	public ZipFile getZipFile(Class c);
 	public void copyZipResource(Class c, ZipFile zipFile, String s, File copydir);
@@ -67,5 +68,6 @@ public interface Modchu_IFileManagerMaster {
 	public String getCurrentDir(String s);
 	public String getRelativePath(String s);
 	public Map<String, Class> getClassMap();
+	public InputStream getModInputStream(Object o);
 
 }

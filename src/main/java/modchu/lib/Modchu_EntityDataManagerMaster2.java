@@ -139,7 +139,7 @@ public class Modchu_EntityDataManagerMaster2 extends Modchu_EntityDataManagerMas
 
 	@Override
 	public void register(Object dataParameter, Object o, int i) {
-		boolean debug = true;
+		boolean debug = false;
 		Map entries = Modchu_AS.getMap("EntityDataManager", "entries", base);
 		int id = Modchu_AS.getInt("DataParameter", "getId", dataParameter);
 		if (debug) {
@@ -188,20 +188,5 @@ public class Modchu_EntityDataManagerMaster2 extends Modchu_EntityDataManagerMas
 			Modchu_Debug.mDebug("Modchu_EntityDataManagerMaster2 register end.");
 		}
 	}
-/*
-	private Object[] getTempDataEntryMapFirst() {
-		boolean debug = false;
-		if (!tempDataEntryMap.isEmpty())
-		for (Entry<Integer, Object> en : tempDataEntryMap.entrySet()) {
-			int i1 = en.getKey();
-			Object dataentry = en.getValue();
-			Object dataParameter1 = Modchu_AS.get("EntityDataManager$DataEntry", "getKey", dataentry);
-			int id2 = i1;
-			Object o = Modchu_AS.get("EntityDataManager$DataEntry", "getValue", dataentry);
-			if (debug) Modchu_Debug.mDebug("Modchu_EntityDataManagerMaster2 getTempDataEntryMapFirst o="+o);
-			return new Object[]{ dataentry, i1, o };
-		}
-		return null;
-	}
-*/
+
 }

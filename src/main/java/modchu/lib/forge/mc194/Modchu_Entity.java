@@ -17,7 +17,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class Modchu_Entity extends modchu.lib.forge.mc190_220.Modchu_Entity {
+public class Modchu_Entity extends modchu.lib.forge.mc190_221.Modchu_Entity {
 
 	public Modchu_Entity(World world) {
 		super(world);

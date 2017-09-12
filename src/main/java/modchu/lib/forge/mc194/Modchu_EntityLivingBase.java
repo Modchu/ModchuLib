@@ -21,7 +21,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class Modchu_EntityLivingBase extends modchu.lib.forge.mc190_220.Modchu_EntityLivingBase implements Modchu_IEntityLivingBase {
+public class Modchu_EntityLivingBase extends modchu.lib.forge.mc190_221.Modchu_EntityLivingBase implements Modchu_IEntityLivingBase {
 
 	public Modchu_EntityLivingBase(World world) {
 		super(world);

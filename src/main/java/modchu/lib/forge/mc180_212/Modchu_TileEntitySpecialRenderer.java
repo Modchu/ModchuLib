@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import net.minecraft.tileentity.TileEntity;
 
-public class Modchu_TileEntitySpecialRenderer extends modchu.lib.forge.mc180_220.Modchu_TileEntitySpecialRenderer {
+public class Modchu_TileEntitySpecialRenderer extends modchu.lib.forge.mc180_221.Modchu_TileEntitySpecialRenderer {
 
 	public Modchu_TileEntitySpecialRenderer(HashMap<String, Object> map) {
 		super(map);

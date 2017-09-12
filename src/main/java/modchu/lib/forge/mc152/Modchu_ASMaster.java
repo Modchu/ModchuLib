@@ -3048,11 +3048,13 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, float f, float f1, float f2) {
+		((Tessellator) tessellator).setNormal(f, f1, f2);
 		((Tessellator) tessellator).addVertexWithUV(d, d2, d3, d4, d5);
 	}
 
 	@Override
 	public void tessellatorAddVertexWithUV(Object tessellator, double d, double d2, double d3, double d4, double d5, int i, int i1, int i2, int i3) {
+		((Tessellator) tessellator).setColorRGBA(i, i1, i2, i3);
 		((Tessellator) tessellator).addVertexWithUV(d, d2, d3, d4, d5);
 	}
 
@@ -3826,6 +3828,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void tessellatorAddVertex(Object tessellator, double d, double d2, double d3, int i, int i1, int i2, int i3) {
+		((Tessellator) tessellator).setColorRGBA(i, i1, i2, i3);
 		((Tessellator) tessellator).addVertex(d, d2, d3);
 	}
 
@@ -4477,6 +4480,7 @@ public class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public Object minecraftTextureManager() {
+		if (Modchu_Main.isServer) return null;
 		return ((Minecraft) minecraftGetMinecraft()).renderEngine;
 	}
 

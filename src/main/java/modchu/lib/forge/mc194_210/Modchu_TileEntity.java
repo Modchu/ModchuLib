@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import net.minecraft.world.World;
 
-public class Modchu_TileEntity extends modchu.lib.forge.mc194_220.Modchu_TileEntity {
+public class Modchu_TileEntity extends modchu.lib.forge.mc194_221.Modchu_TileEntity {
 
 	public Modchu_TileEntity() {
 		super();
