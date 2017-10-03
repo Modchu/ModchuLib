@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class Modchu_ItemFood extends modchu.lib.forge.mc190_221.Modchu_ItemFood {
+public class Modchu_ItemFood extends modchu.lib.forge.mc190_222.Modchu_ItemFood {
 
 	public Modchu_ItemFood(HashMap<String, Object> map) {
 		super(map);

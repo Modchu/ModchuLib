@@ -18,7 +18,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc210_221.Modchu_EntityOtherPlayerMP {
+public class Modchu_EntityOtherPlayerMP extends modchu.lib.forge.mc210_222.Modchu_EntityOtherPlayerMP {
 
 	public Modchu_EntityOtherPlayerMP(HashMap<String, Object> map) {
 		super(map);

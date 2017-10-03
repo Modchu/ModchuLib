@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class Modchu_ASMaster extends modchu.lib.forge.mc190_221.Modchu_ASMaster {
+public class Modchu_ASMaster extends modchu.lib.forge.mc190_222.Modchu_ASMaster {
 
 	public Modchu_ASMaster(HashMap<String, Object> map) {
 		super(map);

@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public class Modchu_ItemFood extends modchu.lib.forge.mc212_221.Modchu_ItemFood {
+public class Modchu_ItemFood extends modchu.lib.forge.mc212_222.Modchu_ItemFood {
 
 	public Modchu_ItemFood(HashMap<String, Object> map) {
 		super(map);

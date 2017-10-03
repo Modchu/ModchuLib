@@ -2,7 +2,7 @@ package modchu.lib.forge.mc164_212;
 
 import java.util.HashMap;
 
-public class Modchu_EntityAIHurtByTarget extends modchu.lib.forge.mc164_221.Modchu_EntityAIHurtByTarget {
+public class Modchu_EntityAIHurtByTarget extends modchu.lib.forge.mc164_222.Modchu_EntityAIHurtByTarget {
 
 	public Modchu_EntityAIHurtByTarget(HashMap<String, Object> map) {
 		super(map);

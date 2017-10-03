@@ -18,7 +18,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class Modchu_EntityTameable extends modchu.lib.forge.mc202_221.Modchu_EntityTameable {
+public class Modchu_EntityTameable extends modchu.lib.forge.mc202_222.Modchu_EntityTameable {
 
 	public Modchu_EntityTameable(World world) {
 		super(world);

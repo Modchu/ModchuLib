@@ -26,7 +26,7 @@ import net.minecraft.util.math.Rotations;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 
-public class Modchu_ASMaster extends modchu.lib.forge.mc212_221.Modchu_ASMaster {
+public class Modchu_ASMaster extends modchu.lib.forge.mc212_222.Modchu_ASMaster {
 
 	public Modchu_ASMaster(HashMap<String, Object> map) {
 		super(map);

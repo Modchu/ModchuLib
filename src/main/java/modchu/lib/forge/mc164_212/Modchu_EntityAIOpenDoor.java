@@ -2,7 +2,7 @@ package modchu.lib.forge.mc164_212;
 
 import java.util.HashMap;
 
-public class Modchu_EntityAIOpenDoor extends modchu.lib.forge.mc164_221.Modchu_EntityAIOpenDoor {
+public class Modchu_EntityAIOpenDoor extends modchu.lib.forge.mc164_222.Modchu_EntityAIOpenDoor {
 
 	public Modchu_EntityAIOpenDoor(HashMap<String, Object> map) {
 		super(map);

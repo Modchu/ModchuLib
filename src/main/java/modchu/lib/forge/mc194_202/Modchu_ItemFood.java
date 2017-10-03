@@ -42,7 +42,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-public class Modchu_ItemFood extends modchu.lib.forge.mc190_221.Modchu_ItemFood implements Modchu_IItemFood {
+public class Modchu_ItemFood extends modchu.lib.forge.mc190_222.Modchu_ItemFood implements Modchu_IItemFood {
 	public Modchu_IItemFoodMaster master;
 
 	public Modchu_ItemFood(HashMap<String, Object> map) {

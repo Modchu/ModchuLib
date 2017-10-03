@@ -21,7 +21,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class Modchu_Entity extends modchu.lib.forge.mc190_221.Modchu_Entity implements Modchu_IEntity {
+public class Modchu_Entity extends modchu.lib.forge.mc190_222.Modchu_Entity implements Modchu_IEntity {
 	public Modchu_IEntityMaster master;
 	private ConcurrentHashMap<String, DataParameter> dataParameterMap = new ConcurrentHashMap();
 	public float maxHealth;

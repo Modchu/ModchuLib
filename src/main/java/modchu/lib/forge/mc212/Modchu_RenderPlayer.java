@@ -9,7 +9,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class Modchu_RenderPlayer extends modchu.lib.forge.mc212_221.Modchu_RenderPlayer {
+public class Modchu_RenderPlayer extends modchu.lib.forge.mc212_222.Modchu_RenderPlayer {
 
 	public Modchu_RenderPlayer(HashMap<String, Object> map) {
 		super(map);

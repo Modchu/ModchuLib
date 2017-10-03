@@ -3,7 +3,7 @@ package modchu.lib.forge.mc180_190;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class Modchu_ModelRenderer extends modchu.lib.forge.mc172_221.Modchu_ModelRenderer {
+public class Modchu_ModelRenderer extends modchu.lib.forge.mc172_222.Modchu_ModelRenderer {
 
 	public Modchu_ModelRenderer(ModelBase modelBase) {
 		super(modelBase);

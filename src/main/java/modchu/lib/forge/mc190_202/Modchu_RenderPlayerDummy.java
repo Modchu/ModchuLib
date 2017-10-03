@@ -23,7 +23,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class Modchu_RenderPlayerDummy extends modchu.lib.forge.mc190_221.Modchu_RenderPlayerDummy {
+public class Modchu_RenderPlayerDummy extends modchu.lib.forge.mc190_222.Modchu_RenderPlayerDummy {
 
 	public Modchu_RenderPlayerDummy(HashMap<String, Object> map) {
 		super(map);

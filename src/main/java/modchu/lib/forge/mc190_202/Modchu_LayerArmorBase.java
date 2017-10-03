@@ -15,7 +15,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class Modchu_LayerArmorBase extends modchu.lib.forge.mc190_221.Modchu_LayerArmorBase {
+public class Modchu_LayerArmorBase extends modchu.lib.forge.mc190_222.Modchu_LayerArmorBase {
 
 	public Modchu_LayerArmorBase(HashMap<String, Object> map) {
 		super(map);

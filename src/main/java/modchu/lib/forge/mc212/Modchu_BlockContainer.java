@@ -13,7 +13,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class Modchu_BlockContainer extends modchu.lib.forge.mc212_221.Modchu_BlockContainer {
+public class Modchu_BlockContainer extends modchu.lib.forge.mc212_222.Modchu_BlockContainer {
 
 	public Modchu_BlockContainer(HashMap<String, Object> map) {
 		super(map);

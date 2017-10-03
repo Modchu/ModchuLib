@@ -8,7 +8,7 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 
-public class Modchu_RenderPlayer extends modchu.lib.forge.mc190_221.Modchu_RenderPlayer {
+public class Modchu_RenderPlayer extends modchu.lib.forge.mc190_222.Modchu_RenderPlayer {
 
 	public Modchu_RenderPlayer(HashMap<String, Object> map) {
 		super(map);

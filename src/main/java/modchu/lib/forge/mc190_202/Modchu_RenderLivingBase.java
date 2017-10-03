@@ -23,7 +23,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-public class Modchu_RenderLivingBase extends modchu.lib.forge.mc190_221.Modchu_RenderLivingBase {
+public class Modchu_RenderLivingBase extends modchu.lib.forge.mc190_222.Modchu_RenderLivingBase {
 
 	public Modchu_RenderLivingBase(HashMap<String, Object> map) {
 		super(map);

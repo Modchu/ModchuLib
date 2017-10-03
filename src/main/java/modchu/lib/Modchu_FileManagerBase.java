@@ -667,7 +667,8 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	public boolean addResourcesMod(Class c, String classFileSearchName, String addModResourcePackSearchName) {
 		if (c != null); else return false;
 		boolean debug = false;
-		boolean titleDebug = classFileSearchName.equals("modc_");
+		boolean titleDebug = classFileSearchName != null
+				&& classFileSearchName.equals("modc_");
 		boolean flag = !Modchu_Main.isServer
 				&& titleDebug;
 		if (searchResourcesList.contains(classFileSearchName)) return false;

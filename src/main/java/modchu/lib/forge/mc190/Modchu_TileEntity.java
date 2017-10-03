@@ -4,7 +4,7 @@ import modchu.lib.Modchu_ITileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class Modchu_TileEntity extends modchu.lib.forge.mc190_221.Modchu_TileEntity implements Modchu_ITileEntity {
+public class Modchu_TileEntity extends modchu.lib.forge.mc190_222.Modchu_TileEntity implements Modchu_ITileEntity {
 
 	public Modchu_TileEntity() {
 	}
