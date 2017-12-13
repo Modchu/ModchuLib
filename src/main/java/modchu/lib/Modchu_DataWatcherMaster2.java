@@ -40,6 +40,7 @@ public class Modchu_DataWatcherMaster2 extends Modchu_DataWatcherMasterBasis {
 			if (watchableobject1 != null) {
 				if (debug) Modchu_Debug.mDebug("Modchu_DataWatcherMaster2 updateWatchedObjectsFromList watchableobject1 != null set watchableobject.getDataValueId()="+id);
 				Modchu_AS.set(version > 169 ? "net.minecraft.entity.DataWatcher$WatchableObject" : "WatchableObject", "setObject", new Class[]{ Object.class }, watchableobject1, new Object[]{ o });
+				Modchu_AS.set(version > 169 ? "net.minecraft.entity.DataWatcher$WatchableObject" : "WatchableObject", "setWatched", new Class[]{ boolean.class }, watchableobject1, new Object[]{ true });
 				if (version > 169) Modchu_AS.set("Entity", version > 179 ? "onDataWatcherUpdate" : "func_145781_i", new Class[]{ int.class }, entity, new Object[]{ id });
 			} else {
 				if (debug) Modchu_Debug.mDebug("Modchu_DataWatcherMaster2 updateWatchedObjectsFromList watchableobject1 == null !! watchableobject.getDataValueId()="+id);
@@ -53,11 +54,19 @@ public class Modchu_DataWatcherMaster2 extends Modchu_DataWatcherMasterBasis {
 
 	@Override
 	public void addObject(int i, Object o) {
+		boolean debug = false;
 		super.addObject(i, o);
+		if (debug) {
+			Modchu_Debug.mDebug("Modchu_DataWatcherMaster2 addObject 1 i="+i+" o="+o);
+			Modchu_Debug.mDebug("Modchu_DataWatcherMaster2 addObject 2 tempWatchedObjectsMap="+tempWatchedObjectsMap);
+		}
 		if (tempWatchedObjectsMap.containsKey(i)) {
 			Object o1 = tempWatchedObjectsMap.get(i);
+			if (debug) Modchu_Debug.mDebug("Modchu_DataWatcherMaster2 addObject 3 o1="+o1);
 			updateObject(i, o1);
 			tempWatchedObjectsMap.remove(i);
+		} else {
+			if (debug) Modchu_Debug.mDebug("Modchu_DataWatcherMaster2 addObject 4 !tempWatchedObjectsMap.containsKey");
 		}
 	}
 

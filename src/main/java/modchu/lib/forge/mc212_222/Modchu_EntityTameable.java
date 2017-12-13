@@ -33,6 +33,7 @@ public abstract class Modchu_EntityTameable extends modchu.lib.forge.mc210_222.M
 	public void superMove(Object moverType, double par1, double par3, double par5) {
 		super.move((MoverType) moverType, par1, par3, par5);
 	}
+
 	@Override
 	public void turn(float par1, float par2) {
 		if (master != null) master.turn(par1, par2);

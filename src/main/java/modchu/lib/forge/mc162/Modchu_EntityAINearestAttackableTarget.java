@@ -21,6 +21,7 @@ public class Modchu_EntityAINearestAttackableTarget extends EntityAINearestAttac
 		//Modchu_Debug.lDebug("Modchu_EntityAINearestAttackableTarget init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAINearestAttackableTargetMaster ? (Modchu_IEntityAINearestAttackableTargetMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override

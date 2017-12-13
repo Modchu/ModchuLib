@@ -940,5 +940,6 @@ public interface Modchu_IASMaster {
 	public Object entityLivingOnInitialSpawn(Object entityLiving);
 	public Object entityLivingOnInitialSpawn(Object entityLiving, Object iEntityLivingData);
 	public Object entityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData);
+	public void modelRendererAddChild(Object modelRenderer, Object modelRenderer1);
 
 }

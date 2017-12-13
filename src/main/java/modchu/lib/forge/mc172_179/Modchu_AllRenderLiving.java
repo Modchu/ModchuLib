@@ -5,7 +5,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_EntityHelper;
 import modchu.lib.Modchu_IAllRenderLiving;
+import modchu.lib.Modchu_IEntityHelper;
 import modchu.lib.Modchu_Reflect;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -71,12 +73,14 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 
 	@Override
 	public void doRender(Entity entity, double d, double d1, double d2, float d3, float d4) {
-		//Modchu_Debug.mDebug("Modchu_RenderLiving doRender");
+		//Modchu_Debug.mDebug("Modchu_AllRenderLiving doRender");
 		Modchu_RenderLiving render = renderMapGet(entity);
 		if (render != null) render.doRender(entity, d, d1, d2, d3, d4);
 		else {
-			Modchu_Debug.mDebug("Modchu_AllRenderLiving doRender render == null !! entity="+entity);
-			Modchu_Debug.mDebug("Modchu_AllRenderLiving doRender render == null !! entity.getClass()="+entity.getClass());
+			Modchu_Debug.mDebug1("Modchu_AllRenderLiving doRender render == null !! entity="+entity);
+			Modchu_Debug.mDebug1("Modchu_AllRenderLiving doRender render == null !! entity.getClass()="+entity.getClass());
+			Modchu_IEntityHelper modchu_IEntityHelper = (Modchu_IEntityHelper) entity;
+			Modchu_EntityHelper.getInstance().unRegisterEntityDeadSetting(modchu_IEntityHelper);
 		}
 	}
 

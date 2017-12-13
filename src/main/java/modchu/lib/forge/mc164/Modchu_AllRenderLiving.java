@@ -5,7 +5,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_EntityHelper;
 import modchu.lib.Modchu_IAllRenderLiving;
+import modchu.lib.Modchu_IEntityHelper;
 import modchu.lib.Modchu_Main;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -22,7 +24,7 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 	public Modchu_AllRenderLiving(HashMap<String, Object> map) {
 		super(null, (Float)map.get("Float"));
 		renderManager = (RenderManager) Modchu_AS.get(Modchu_AS.renderManagerInstance);
-		Modchu_Debug.mDebug("Modchu_AllRenderLiving init");
+		//Modchu_Debug.mDebug("Modchu_AllRenderLiving init");
 	}
 
 	@Override
@@ -79,8 +81,10 @@ public class Modchu_AllRenderLiving extends RenderLiving implements Modchu_IAllR
 			//render.setShadowSize(0.0F);
 			render.doRender(entity, d, d1, d2, d3, d4);
 		} else {
-			//Modchu_Debug.mDebug("Modchu_AllRenderLiving doRender render == null !! entity="+entity);
-			//Modchu_Debug.mDebug("Modchu_AllRenderLiving doRender render == null !! entity.getClass()="+entity.getClass());
+			Modchu_Debug.mDebug1("Modchu_AllRenderLiving doRender render == null !! entity="+entity);
+			Modchu_Debug.mDebug1("Modchu_AllRenderLiving doRender render == null !! entity.getClass()="+entity.getClass());
+			Modchu_IEntityHelper modchu_IEntityHelper = (Modchu_IEntityHelper) entity;
+			Modchu_EntityHelper.getInstance().unRegisterEntityDeadSetting(modchu_IEntityHelper);
 		}
 	}
 

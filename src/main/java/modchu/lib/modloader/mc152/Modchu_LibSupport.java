@@ -3,7 +3,6 @@ package modchu.lib.modloader.mc152;
 import java.util.Map;
 import java.util.Random;
 
-import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IBaseModMaster;
 import modchu.lib.Modchu_Main;
 import modchu.lib.Modchu_Version;
@@ -28,7 +27,7 @@ public class Modchu_LibSupport {
 	public static boolean initFlag = false;
 
 	public static void init(Object o) {
-		Modchu_Debug.lDebug("Modchu_LibSupport init");
+		//Modchu_Debug.lDebug("Modchu_LibSupport init");
 		if (instance != null); else instance = new Modchu_LibSupport().new Modchu_LibSupportSub(o);
 		initFlag = true;
 	}
@@ -85,7 +84,7 @@ public class Modchu_LibSupport {
 
 		@Override
 		public void keyboardEvent(KeyBinding keyBinding) {
-			Modchu_Debug.lDebug("Modchu_LibSupportSub keyboardEvent");
+			//Modchu_Debug.lDebug("Modchu_LibSupportSub keyboardEvent");
 			if (master != null) master.keyboardEvent(keyBinding);
 		}
 

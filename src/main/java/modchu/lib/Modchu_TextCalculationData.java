@@ -769,7 +769,8 @@ public class Modchu_TextCalculationData implements Modchu_ITextCalculationDataFo
 		Modchu_TextCalculationData nextData = null;
 		Modchu_TextCalculationData nextData1 = null;
 		boolean flag = s.indexOf("(") > -1
-				&& s.indexOf(")") > -1;
+				&& s.indexOf(")") > -1
+				&& s.indexOf("=") < 0;
 		if (!flag) {
 			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculationData init_StringPeriod !flag s="+s);
 			return init_VariableStringListAfter(s, false, map);

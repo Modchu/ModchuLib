@@ -17,7 +17,7 @@ public interface Modchu_IEntityMaster {
 	public boolean isRiding2();
 	public void dismountRidingEntity2();
 	public int getRidingEntityID();
-	public void setRidingEntityId(int i);
+	public void setRidingEntityID(int i);
 	public int getTempIsRiding();
 	public void setTempIsRiding(int i);
 	//public boolean equals(Object p_equals_1_);

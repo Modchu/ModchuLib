@@ -19,6 +19,7 @@ public class Modchu_EntityAIWatchClosest extends EntityAIWatchClosest implements
 		//Modchu_Debug.lDebug("Modchu_EntityAIWatchClosest2 init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAIWatchClosestMaster ? (Modchu_IEntityAIWatchClosestMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override

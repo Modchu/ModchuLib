@@ -94,7 +94,7 @@ public class Modchu_LMMManager {
 			isLMMX ? "mmmlibx.lib.MMM_TextureManager" :
 			Modchu_Main.getMinecraftVersion() > 169 ? "mmm.lib.multiModel.MultiModelManager" :
 				"MMM_TextureManager";
-		return Modchu_Reflect.getFieldObject(s, "instance");
+		return Modchu_Reflect.getFieldObject(s, "instance", -1);
 	}
 
 	public static Class getModchuLmmModelClass() {
@@ -122,8 +122,8 @@ public class Modchu_LMMManager {
 
 	public static Object newModchu_LmmTextureBox(Object mtb) {
 		String Modchu_LmmTextureBoxString = Modchu_Main.getModchuCharacteristicClassName(Modchu_LMMManager.getModchuLmmTextureBoxString());
-		Class ModchuModel_TextureBoxBase = (Class)Modchu_Reflect.loadClass("modchu.model.ModchuModel_TextureBoxBase");
-		return Modchu_Reflect.newInstance(Modchu_LmmTextureBoxString, new Class[]{ ModchuModel_TextureBoxBase }, new Object[]{ Modchu_Reflect.invokeMethod(mtb.getClass(), "duplicate", mtb) });
+		Class ModchuModel_TextureBoxBase = (Class)Modchu_Reflect.loadClass("modchu.model.ModchuModel_TextureBoxBase", -1);
+		return ModchuModel_TextureBoxBase != null ? Modchu_Reflect.newInstance(Modchu_LmmTextureBoxString, new Class[]{ ModchuModel_TextureBoxBase }, new Object[]{ Modchu_Reflect.invokeMethod(mtb.getClass(), "duplicate", mtb) }) : null;
 	}
 
 	public static String getLMMTextureName(Object entity) {
@@ -131,10 +131,10 @@ public class Modchu_LMMManager {
 		if (!isLMR
 				&& !isLMMX
 				&& version > 169) {
-			Object multiModel = Modchu_Reflect.getFieldObject(entity.getClass(), "multiModel", entity);
+			Object multiModel = Modchu_Reflect.getFieldObject(entity.getClass(), "multiModel", entity, -1);
 			if (multiModel != null) return Modchu_CastHelper.String(Modchu_Reflect.getFieldObject(multiModel.getClass(), "modelName", multiModel));
 		} else {
-			Object textureData = Modchu_Reflect.getFieldObject(entity.getClass(), "textureData", entity);
+			Object textureData = Modchu_Reflect.getFieldObject(entity.getClass(), "textureData", entity, -1);
 			if (textureData != null) {
 				Object[] textureBox = Modchu_CastHelper.ObjectArray(Modchu_Reflect.getFieldObject(textureData.getClass(), "textureBox", textureData));
 				Class MMM_TextureBoxServer = getMMMTextureBoxServerClass();
@@ -195,7 +195,7 @@ public class Modchu_LMMManager {
 	public static Class getLMMGuiTextureSlotClass() {
 		return Modchu_Reflect.loadClass(isLMR ? "net.blacklab.lmr.client.gui.GuiTextureSlot" :
 			isLMMX ? "mmmlibx.lib.MMM_GuiTextureSlot" :
-			"MMM_GuiTextureSlot");
+			"MMM_GuiTextureSlot", -1);
 	}
 
 	public static Class getLMMAbstractModelBaseClass() {
@@ -227,7 +227,7 @@ public class Modchu_LMMManager {
 	public static Class getMMMEntitySelectClass() {
 		return Modchu_Reflect.loadClass(isLMR ? "net.blacklab.lmr.client.entity.EntityLittleMaidForTexSelect" :
 				isLMMX ? "mmmlibx.lib.MMM_EntitySelect" :
-			"MMM_EntitySelect");
+			"MMM_EntitySelect", -1);
 	}
 
 	public static Class getMMMTextureBoxClass() {
@@ -333,14 +333,14 @@ public class Modchu_LMMManager {
 		if (version < 170
 				| isLMMX
 				| isLMR) {
-			Object textureData = Modchu_Reflect.getFieldObject(owner.getClass(), "textureData", owner);
+			Object textureData = Modchu_Reflect.getFieldObject(owner.getClass(), "textureData", owner, -1);
 			if (textureData != null) {
 				Modchu_Reflect.setFieldObject(textureData.getClass(), "color", textureData, i);
+				return;
 			}
-		} else {
-			Object multiModel = Modchu_Reflect.getFieldObject(owner.getClass(), "multiModel", owner);
-			if (multiModel != null) Modchu_Reflect.setFieldObject(multiModel.getClass(), "color", multiModel, i);
 		}
+		Object multiModel = Modchu_Reflect.getFieldObject(owner.getClass(), "multiModel", owner, -1);
+		if (multiModel != null) Modchu_Reflect.setFieldObject(multiModel.getClass(), "color", multiModel, i);
 	}
 
 	public static Object[] getItems(Object owner) {

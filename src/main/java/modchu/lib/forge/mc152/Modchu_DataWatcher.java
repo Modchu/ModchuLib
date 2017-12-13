@@ -1,19 +1,19 @@
 package modchu.lib.forge.mc152;
 
-import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_IDataWatcher;
 import modchu.lib.Modchu_IDataWatcherMaster;
 import modchu.lib.Modchu_Main;
 import net.minecraft.entity.DataWatcher;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.WatchableObject;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet;
 
 public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatcher {
 	public Modchu_IDataWatcherMaster master;
@@ -28,6 +28,19 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		master = instance instanceof Modchu_IDataWatcherMaster ? (Modchu_IDataWatcherMaster) instance : null;
 		//Modchu_Debug.mDebug("Modchu_DataWatcher init master="+master);
+	}
+
+	@Override
+	public int getEntityDataManagerEntriesCount() {
+		Map<Integer, Object> watchedObjects = Modchu_AS.getMap("DataWatcher", "watchedObjects", this);
+		int dataWatcherWatchableObjectIdCount = 0;
+		for (Entry<Integer, Object> en : watchedObjects.entrySet()) {
+			int key = en.getKey();
+			Object o = en.getValue();
+			if (dataWatcherWatchableObjectIdCount < key) dataWatcherWatchableObjectIdCount = key;
+		}
+		dataWatcherWatchableObjectIdCount++;
+		return dataWatcherWatchableObjectIdCount;
 	}
 
 	@Override

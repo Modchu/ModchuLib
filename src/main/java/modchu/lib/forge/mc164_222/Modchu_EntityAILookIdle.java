@@ -19,6 +19,7 @@ public abstract class Modchu_EntityAILookIdle extends EntityAILookIdle implement
 		//Modchu_Debug.lDebug("Modchu_EntityAILookIdle2 init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAILookIdleMaster ? (Modchu_IEntityAILookIdleMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override

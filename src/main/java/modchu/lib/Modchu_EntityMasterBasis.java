@@ -15,6 +15,32 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	}
 
 	@Override
+	public void init() {
+	}
+
+	@Override
+	public Object getFreeVariable(String s) {
+		return Modchu_EntityHelper.getInstance().getData(base, s);
+	}
+
+	@Override
+	public void setFreeVariable(String s, Object o) {
+		Modchu_EntityHelper.getInstance().setData(base, s, o);
+	}
+
+	@Override
+	public String thisToString() {
+		return getClass().getName() + "@" + Integer.toHexString(super.hashCode());
+	}
+
+	@Override
+	public int getRidingEntityID() {
+		// TODO
+		Object o = base.getDataWatcherWatchableObject(16);
+		return o instanceof Integer ? (Integer) o : 0;
+	}
+
+	@Override
 	public int getTempIsRiding() {
 		return tempIsRiding;
 	}
@@ -1035,16 +1061,6 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	}
 
 	@Override
-	public Object getFreeVariable(String s) {
-		return base.superGetFreeVariable(s);
-	}
-
-	@Override
-	public void setFreeVariable(String s, Object o) {
-		base.superSetFreeVariable(s, o);
-	}
-
-	@Override
 	public boolean processInitialInteract(Object entityPlayer, Object itemStack, Object enumHand) {
 		return base.superProcessInitialInteract(entityPlayer, itemStack, enumHand);
 	}
@@ -1335,12 +1351,8 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	}
 
 	@Override
-	public void init() {
-	}
-
-	@Override
 	public void setMaxHealth(Object floatOrInt) {
-		base.superSetMaxHealth(floatOrInt);
+		base.supersetMaxHealth(floatOrInt);
 	}
 
 	@Override
@@ -1364,34 +1376,22 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	}
 
 	@Override
-	public String thisToString() {
-		return getClass().getName() + "@" + Integer.toHexString(super.hashCode());
-	}
-
-	@Override
 	public Object getRidingEntity2() {
-		return base.superGetRidingEntity2();
+		return base.superGetRidingEntity();
 	}
 
 	@Override
 	public boolean isRiding2() {
-		return base.superIsRiding2();
+		return base.superIsRiding();
 	}
 
 	@Override
 	public void dismountRidingEntity2() {
-		base.superDismountRidingEntity2();
+		base.superDismountRidingEntity();
 	}
 
 	@Override
-	public int getRidingEntityID() {
-		// TODO
-		Object o = base.getDataWatcherWatchableObject(16);
-		return o instanceof Integer ? (Integer) o : 0;
-	}
-
-	@Override
-	public void setRidingEntityId(int i) {
+	public void setRidingEntityID(int i) {
 		base.setDataWatcherWatchableObject(16, i);
 	}
 
@@ -1423,7 +1423,6 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	@Override
 	public void onInsideBlock(Object iBlockState) {
 		base.superOnInsideBlock(iBlockState);
-
 	}
 
 	@Override
@@ -1444,7 +1443,6 @@ public class Modchu_EntityMasterBasis implements Modchu_IEntityMaster {
 	@Override
 	public void setNoGravity(boolean noGravity) {
 		base.superSetNoGravity(noGravity);
-
 	}
 
 	@Override

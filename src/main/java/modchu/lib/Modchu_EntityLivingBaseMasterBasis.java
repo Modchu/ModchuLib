@@ -1,6 +1,7 @@
 package modchu.lib;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
@@ -8,46 +9,134 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingBaseMaster {
 	public Modchu_IEntityLivingBase base;
-	public ConcurrentHashMap<String, Object> freeVariableMap;
-	public static HashMap<Integer, HashMap> debugDataWatcherEntityMap = new HashMap();
-	public HashMap<Integer, Object> debugDataWatcherMap;
-	public int tempIsRiding;
-	public int damageInvincibleCount;
-	public int checkUUIDCount = 2;
 
 	public Modchu_EntityLivingBaseMasterBasis(HashMap<String, Object> map) {
 		base = (Modchu_IEntityTameable) map.get("base");
+		Modchu_EntityHelper.getInstance().setData(base, "checkUUIDCount", 2);
+	}
+
+	protected Object getOwner() {
+		return null;
+	}
+
+	@Override
+	public void setRidingEntityID(int i) {
+		base.setDataWatcherWatchableObject(16, i);
+	}
+
+	@Override
+	public boolean attackEntityFrom(Object par1DamageSource, float par2) {
+		return Modchu_EntityHelper.getInstance().attackEntityFrom(base, par1DamageSource, par2);
+	}
+
+	@Override
+	public boolean isRiding() {
+		return Modchu_EntityHelper.getInstance().isRiding(base);
+	}
+
+	@Override
+	public void onLivingUpdate() {
+		Modchu_EntityHelper.getInstance().onLivingUpdate(base);
+	}
+
+	@Override
+	public void onUpdate() {
+		Modchu_EntityHelper.getInstance().onUpdate(base);
+	}
+
+	@Override
+	public boolean isDamageInvincible() {
+		return Modchu_EntityHelper.getInstance().isDamageInvincible(base);
+	}
+
+	@Override
+	public String thisToString() {
+		return getClass().getName() + "@" + Integer.toHexString(super.hashCode());
+	}
+
+	@Override
+	public boolean startRiding(Object entity, boolean force) {
+		return Modchu_EntityHelper.getInstance().startRiding(base, entity, force);
+	}
+
+	@Override
+	public boolean canBeRidden(Object entity) {
+		return Modchu_EntityHelper.getInstance().canBeRidden(base, entity);
+	}
+
+	@Override
+	public Object getRidingEntity2() {
+		return Modchu_EntityHelper.getInstance().getRidingEntity2(base);
+	}
+
+	@Override
+	public boolean isRiding2() {
+		return Modchu_EntityHelper.getInstance().isRiding2(base);
+	}
+
+	@Override
+	public void sendDeathMessage(Object damageSource) {
+		Modchu_EntityHelper.getInstance().sendDeathMessage(base, damageSource);
+	}
+
+	@Override
+	public boolean canSendDeathMessage() {
+		return Modchu_EntityHelper.getInstance().canSendDeathMessage(base);
+	}
+
+	@Override
+	public void updateRidden2() {
+		Modchu_EntityHelper.getInstance().updateRidden2(base);
+	}
+
+	@Override
+	public int getRidingEntityID() {
+		return Modchu_EntityHelper.getInstance().getRidingEntityID(base);
+	}
+
+	@Override
+	public boolean attackEntityFrom(Object damageSource, int par2) {
+		return Modchu_EntityHelper.getInstance().attackEntityFrom(base, damageSource, par2);
 	}
 
 	@Override
 	public int getTempIsRiding() {
-		return tempIsRiding;
+		return Modchu_EntityHelper.getInstance().getTempIsRiding(base);
 	}
 
 	@Override
 	public void setTempIsRiding(int i) {
-		tempIsRiding = i;
+		Modchu_EntityHelper.getInstance().setTempIsRiding(base, i);
 	}
 
 	@Override
 	public int getDamageInvincibleCount() {
-		return damageInvincibleCount;
+		return Modchu_CastHelper.Int(Modchu_EntityHelper.getInstance().getData(base, "damageInvincibleCount"), 0);
 	}
 
 	@Override
 	public void setDamageInvincibleCount(int i) {
-		damageInvincibleCount = i;
+		Modchu_EntityHelper.getInstance().setData(base, "damageInvincibleCount", i);
 	}
 
 	@Override
 	public Object getFreeVariable(String s) {
-		return freeVariableMap != null ? freeVariableMap.get(s) : null;
+		return Modchu_EntityHelper.getInstance().getData(base, s);
 	}
 
 	@Override
 	public void setFreeVariable(String s, Object o) {
-		if (freeVariableMap != null); else freeVariableMap = new ConcurrentHashMap();
-		freeVariableMap.put(s, o);
+		Modchu_EntityHelper.getInstance().setData(base, s, o);
+	}
+
+	@Override
+	public String getSwimSound() {
+		return (String) base.superGetSwimSound();
+	}
+
+	@Override
+	public String getSplashSound() {
+		return (String) base.superGetSplashSound();
 	}
 
 	@Override
@@ -111,11 +200,6 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public void onUpdate() {
-		base.superOnUpdate();
-	}
-
-	@Override
 	public void onEntityUpdate() {
 		base.superOnEntityUpdate();
 	}
@@ -153,11 +237,6 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	@Override
 	public void move(Object moverType, double p_70091_1_, double p_70091_3_, double p_70091_5_) {
 		base.superMove(moverType, p_70091_1_, p_70091_3_, p_70091_5_);
-	}
-
-	@Override
-	public String getSwimSound() {
-		return (String) base.superGetSwimSound();
 	}
 
 	@Override
@@ -208,11 +287,6 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	@Override
 	public boolean handleWaterMovement() {
 		return base.superHandleWaterMovement();
-	}
-
-	@Override
-	public String getSplashSound() {
-		return (String) base.superGetSplashSound();
 	}
 
 	@Override
@@ -298,11 +372,6 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	@Override
 	public void setBeenAttacked() {
 		base.superSetBeenAttacked();
-	}
-
-	@Override
-	public boolean attackEntityFrom(Object damageSource, float p_70097_2_) {
-		return base.superAttackEntityFrom(damageSource, p_70097_2_);
 	}
 
 	@Override
@@ -483,11 +552,6 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	@Override
 	public boolean isBurning() {
 		return base.superIsBurning();
-	}
-
-	@Override
-	public boolean isRiding() {
-		return base.superIsRiding();
 	}
 
 	@Override
@@ -768,11 +832,6 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	@Override
 	public boolean pushOutOfBlocks(double par1, double par3, double par5) {
 		return base.superPushOutOfBlocks(par1, par3, par5);
-	}
-
-	@Override
-	public boolean attackEntityFrom(Object damageSource, int par2) {
-		return base.superAttackEntityFrom(damageSource, par2);
 	}
 
 	@Override
@@ -1276,11 +1335,6 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public void onLivingUpdate() {
-		base.superOnLivingUpdate();
-	}
-
-	@Override
 	public void collideWithEntity(Object entity) {
 		base.superCollideWithEntity(entity);
 	}
@@ -1731,16 +1785,6 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public boolean startRiding(Object entity, boolean force) {
-		return base.superStartRiding(entity, force);
-	}
-
-	@Override
-	public boolean canBeRidden(Object entity) {
-		return base.superCanBeRidden(entity);
-	}
-
-	@Override
 	public void removePassengers() {
 		base.superRemovePassengers();
 	}
@@ -2122,12 +2166,11 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 
 	@Override
 	public void init() {
-		base.superInit();
 	}
 
 	@Override
 	public void setMaxHealth(Object floatOrInt) {
-		base.superSetMaxHealth(floatOrInt);
+		base.supersetMaxHealth(floatOrInt);
 	}
 
 	@Override
@@ -2156,79 +2199,8 @@ public class Modchu_EntityLivingBaseMasterBasis implements Modchu_IEntityLivingB
 	}
 
 	@Override
-	public String thisToString() {
-		return getClass().getName() + "@" + Integer.toHexString(super.hashCode());
-	}
-
-	@Override
-	public Object getRidingEntity2() {
-		return base.superGetRidingEntity2();
-	}
-
-	@Override
-	public boolean isRiding2() {
-		return base.superIsRiding2();
-	}
-
-	@Override
 	public void dismountRidingEntity2() {
-		base.superDismountRidingEntity2();
-	}
-
-	@Override
-	public void sendDeathMessage(Object damageSource) {
-		base.superSendDeathMessage(damageSource);
-	}
-
-	@Override
-	public boolean canSendDeathMessage() {
-		return base.superCanSendDeathMessage();
-	}
-
-	@Override
-	public int getRidingEntityID() {
-		// TODO
-		Object o = base.getDataWatcherWatchableObject(16);
-		return o instanceof Integer ? (Integer) o : 0;
-	}
-
-	@Override
-	public void setRidingEntityId(int i) {
-		base.setDataWatcherWatchableObject(16, i);
-	}
-
-	@Override
-	public void updateRidden2() {
-		boolean debug = false;
-		Object entity = getRidingEntity2();
-		if (debug) {
-			Modchu_Debug.mDebug("Modchu_EntityLivingBaseMasterBasis updateRidden2 entity="+entity);
-			Modchu_Debug.mDebug("Modchu_EntityLivingBaseMasterBasis updateRidden2 isRiding2()="+isRiding2());
-		}
-		if (isRiding2()
-				&& Modchu_AS.getBoolean(Modchu_AS.entityIsDead, entity)) {
-			dismountRidingEntity2();
-		} else {
-			if (isRiding2()) {
-				double entityPosX = Modchu_AS.getDouble(Modchu_AS.entityPosX, entity);
-				double entityPosY = Modchu_AS.getDouble(Modchu_AS.entityPosY, entity);
-				double entityPosZ = Modchu_AS.getDouble(Modchu_AS.entityPosZ, entity);
-				setPosition(entityPosX, entityPosY + Modchu_AS.getDouble("Entity", "getMountedYOffset", entity) + getYOffset(), entityPosZ);
-				if (debug) {
-					double posX = Modchu_AS.getDouble(Modchu_AS.entityPosX, base);
-					double posY = Modchu_AS.getDouble(Modchu_AS.entityPosY, base);
-					double posZ = Modchu_AS.getDouble(Modchu_AS.entityPosZ, base);
-					Modchu_Debug.mDebug("Modchu_EntityLivingBaseMasterBasis updateRidden2 isRiding2");
-					Modchu_Debug.mdDebug("posX="+posX+" posY="+posY+" posZ="+posZ);
-					Modchu_Debug.mdDebug("entityPosX="+entityPosX+" entityPosY="+entityPosY+" entityPosZ="+entityPosZ, 1);
-				}
-			}
-		}
-	}
-
-	@Override
-	public boolean isDamageInvincible() {
-		return base.superIsDamageInvincible();
+		base.superDismountRidingEntity();
 	}
 
 	@Override

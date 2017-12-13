@@ -4,7 +4,10 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import modchu.lib.Modchu_AS;
 import modchu.lib.Modchu_IDataWatcher;
 import modchu.lib.Modchu_IDataWatcherMaster;
 import modchu.lib.Modchu_Main;
@@ -25,6 +28,19 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		master = instance instanceof Modchu_IDataWatcherMaster ? (Modchu_IDataWatcherMaster) instance : null;
 		//Modchu_Debug.mDebug("Modchu_DataWatcher init master="+master);
+	}
+
+	@Override
+	public int getEntityDataManagerEntriesCount() {
+		Map<Integer, Object> watchedObjects = Modchu_AS.getMap("DataWatcher", "watchedObjects", this);
+		int dataWatcherWatchableObjectIdCount = 0;
+		for (Entry<Integer, Object> en : watchedObjects.entrySet()) {
+			int key = en.getKey();
+			Object o = en.getValue();
+			if (dataWatcherWatchableObjectIdCount < key) dataWatcherWatchableObjectIdCount = key;
+		}
+		dataWatcherWatchableObjectIdCount++;
+		return dataWatcherWatchableObjectIdCount;
 	}
 
 	@Override
@@ -66,7 +82,8 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 
 	@Override
 	public short superGetWatchableObjectShort(int id) {
-		return super.getWatchableObjectShort(id);
+		Object o = Modchu_AS.get("DataWatcher", "getWatchedObject", new Class[]{ int.class }, this, new Object[] { id });
+		return modchu.lib.Modchu_CastHelper.Short(o);
 	}
 
 	@Override
@@ -185,13 +202,28 @@ public class Modchu_DataWatcher extends DataWatcher implements Modchu_IDataWatch
 
 	@Override
 	public void writeWatchableObjects(DataOutput dataOutput) throws IOException {
-		if (master != null) master.writeWatchableObjects(dataOutput);
-		else super.writeWatchableObjects(dataOutput);
+		if (master != null) {
+			try {
+				master.writeWatchableObjects(dataOutput);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				super.writeWatchableObjects(dataOutput);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public void superWriteWatchableObjects(Object dataOutput) throws IOException {
-		super.writeWatchableObjects((DataOutput) dataOutput);
+		try {
+			super.writeWatchableObjects((DataOutput) dataOutput);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	// ~179
 	@Override

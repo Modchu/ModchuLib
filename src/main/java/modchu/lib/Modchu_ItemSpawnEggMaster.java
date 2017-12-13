@@ -152,10 +152,15 @@ public class Modchu_ItemSpawnEggMaster extends Modchu_ItemMasterBasis {
 	public void registerIcons(Object iIconRegister) {
 		String name = Modchu_Main.getMinecraftVersion() < 160 ? "monsterPlacer" : "spawn_egg";
 		Modchu_Debug.mDebug("registerIcons name="+name);
+		int version = Modchu_Main.getMinecraftVersion();
+		Modchu_Main.registerIcons(base, iIconRegister, name);
+/*
 		Object itemIcon = Modchu_AS.get(Modchu_AS.iIconRegisterRegisterIcon, iIconRegister, name);
 		Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster registerIcons itemIcon="+itemIcon);
 		Modchu_AS.set(Modchu_AS.itemItemIcon, base, itemIcon);
+*/
 		//Modchu_AS.set(Modchu_AS.itemItemIcon, base, Modchu_AS.get(Modchu_AS.iIconRegisterRegisterIcon, iIconRegister, name));
+
 		theIcon = Modchu_AS.get(Modchu_AS.iIconRegisterRegisterIcon, iIconRegister, name + "_overlay");
 		Modchu_Debug.mDebug("Modchu_ItemSpawnEggMaster registerIcons theIcon="+theIcon);
 	}

@@ -18,7 +18,8 @@ public class Modchu_EntityAIPanicAllDamage extends Modchu_EntityAIPanicMasterBas
 				&& !Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, modchu_IEntityLiving);
 		boolean b = super.shouldExecute();
 		if (!b) {
-			if (modchu_IEntityLiving.isDamageInvincible()) {
+			if (modchu_IEntityLiving.isDamageInvincible()
+					&& !Modchu_AS.getBoolean(Modchu_AS.entityIsInWater, modchu_IEntityLiving)) {
 				if (debug1) Modchu_Debug.mdDebug("AIPanicAll");
 /*
 				// 水に移動

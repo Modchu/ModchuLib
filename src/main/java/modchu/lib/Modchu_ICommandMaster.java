@@ -7,9 +7,9 @@ public interface Modchu_ICommandMaster {
 	public String getCommandName();
 	public String getCommandUsage(Object iCommandSender);
 	public List getCommandAliases();
-	public void processCommand(Object iCommandSender, String[] astring);
-	public boolean canCommandSenderUseCommand(Object iCommandSender);
-	public List addTabCompletionOptions(Object iCommandSender, String[] astring);
+	public void execute(Object minecraftServer, Object iCommandSender, String[] astring);
+	public boolean checkPermission(Object minecraftServer, Object iCommandSender);
+	public List getTabCompletionOptions(Object minecraftServer, Object iCommandSender, String[] astring, Object blockPos);
 	public boolean isUsernameIndex(String[] astring, int i);
 
 }

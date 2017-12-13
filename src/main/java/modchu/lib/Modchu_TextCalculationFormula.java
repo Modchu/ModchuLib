@@ -368,11 +368,16 @@ public class Modchu_TextCalculationFormula implements Modchu_ITextCalculationDat
 		boolean debug = Modchu_TextCalculation.tempDebug;
 		Modchu_TextCalculationData data1 = null;
 		Modchu_TextCalculationData data2 = null;
+		String variableString = null;
 		if (o instanceof Modchu_TextCalculationData) {
 			data1 = (Modchu_TextCalculationData) o;
 			if (debug) Modchu_Debug.mDebug("Modchu_TextCalculationFormula setVariable o instanceof Modchu_TextCalculationData data1="+data1);
+			variableString = data1.getVariableString();
+		}
+		else if (o instanceof String) {
+			variableString = (String) o;
 		} else {
-			String ss ="Modchu_TextCalculationFormula setVariable !(o instanceof Modchu_TextCalculationData) error !! o="+o+" getDataString()="+getDataString()+" o1="+o1;
+			String ss ="Modchu_TextCalculationFormula setVariable o error !! o="+o+" getDataString()="+getDataString()+" o1="+o1;
 			Modchu_Debug.lDebug(ss);
 			Modchu_Main.setRuntimeException(ss);
 			return null;
@@ -408,7 +413,6 @@ public class Modchu_TextCalculationFormula implements Modchu_ITextCalculationDat
 */
 		}
 		//Modchu_Debug.mdDebug("setVariable o3="+o3, 2);
-		String variableString = data1.getVariableString();
 		if (variableString != null); else {
 			Modchu_ReflectData reflectData = data1.getReflectData();
 			if (reflectData != null) {
@@ -475,8 +479,10 @@ public class Modchu_TextCalculationFormula implements Modchu_ITextCalculationDat
 			return null;
 		}
 		Map map1 = null;
+		if (map != null)
 		for (Map map2 : map) {
-			if (map2.containsKey(variableString)) {
+			if (map2 != null
+					&& map2.containsKey(variableString)) {
 				o2 = map2.get(variableString);
 				map1 = map2;
 				if (debug) Modchu_Debug.mDebug("Modchu_TextCalculationFormula setVariable map2.get variableString="+variableString);

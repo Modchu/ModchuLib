@@ -568,9 +568,6 @@ public abstract class Modchu_Item extends Item implements Modchu_IItem {
 	@Override
 	public void superGetSubItems(int par1, Object creativeTabs, List par3List) {
 	}
-
-	public void registerIcons(Object iconRegister) {
-	}
 	// 164~
 	public float getStrVsBlock(ItemStack itemStack, Block block, int metadata) {
 		return 0.0F;

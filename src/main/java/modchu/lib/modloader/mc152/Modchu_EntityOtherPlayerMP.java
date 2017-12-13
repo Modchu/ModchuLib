@@ -7,8 +7,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 import modchu.lib.Modchu_AS;
+import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_DataWatcherMaster2;
 import modchu.lib.Modchu_Debug;
+import modchu.lib.Modchu_EntityHelper;
 import modchu.lib.Modchu_IEntityOtherPlayerMP;
 import modchu.lib.Modchu_IEntityOtherPlayerMPMaster;
 import modchu.lib.Modchu_Main;
@@ -62,12 +64,6 @@ import net.minecraft.src.World;
 
 public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements Modchu_IEntityOtherPlayerMP {
 	public Modchu_IEntityOtherPlayerMPMaster master;
-	public String entityName;
-	protected UUID entityUniqueID;
-	protected int maxHealth;
-	public boolean initFlag;
-	public int dataWatcherWatchableObjectIdFirst;
-	public int dataWatcherWatchableObjectIdCount = 11;
 
 	public Modchu_EntityOtherPlayerMP(HashMap<String, Object> map) {
 		super((World)map.get("Object"), (String)map.get("String"));
@@ -81,13 +77,18 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean isDamageInvincible() {
-		return master != null ? master.isDamageInvincible() : superIsDamageInvincible();
+	public void supersetMaxHealth(Object floatOrInt) {
+		Modchu_EntityHelper.getInstance().setData(this, "maxHealth", Modchu_CastHelper.Float(floatOrInt, 0.0F, false));
 	}
 
 	@Override
-	public boolean superIsDamageInvincible() {
-		return getDamageInvincibleCount() > 0;
+	public int getEntityDataManagerEntriesCount() {
+		return Modchu_EntityHelper.getInstance().getEntityDataManagerEntriesCount(this);
+	}
+
+	@Override
+	public boolean isDamageInvincible() {
+		return master != null ? master.isDamageInvincible() : false;
 	}
 
 	@Override
@@ -102,12 +103,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public boolean isInitFlag() {
-		return initFlag;
-	}
-
-	@Override
-	public void setInitFlag(boolean b) {
-		initFlag = b;
+		return master != null;
 	}
 
 	@Override
@@ -122,12 +118,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	public int getDataWatcherWatchableObjectIdFirst() {
-		return dataWatcherWatchableObjectIdFirst;
-	}
-
-	@Override
-	public void setDataWatcherWatchableObjectIdFirst(int i) {
-		dataWatcherWatchableObjectIdFirst = i;
+		return 13;
 	}
 
 	@Override
@@ -137,30 +128,15 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	@Override
 	public void sendDeathMessage(Object damageSource) {
 		if (master != null) master.sendDeathMessage(damageSource);
-		else superSendDeathMessage(damageSource);
-	}
-
-	@Override
-	public void superSendDeathMessage(Object damageSource) {
 	}
 
 	@Override
 	public boolean canSendDeathMessage() {
-		return master != null ? master.canSendDeathMessage() : superCanSendDeathMessage();
-	}
-
-	@Override
-	public boolean superCanSendDeathMessage() {
-		return false;
+		return master != null ? master.canSendDeathMessage() : false;
 	}
 
 	@Override
 	public Object getRidingEntity2() {
-		return superGetRidingEntity();
-	}
-
-	@Override
-	public Object superGetRidingEntity2() {
 		return superGetRidingEntity();
 	}
 
@@ -170,27 +146,8 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public boolean superIsRiding2() {
-		return superIsRiding();
-	}
-
-	@Override
 	public void dismountRidingEntity2() {
 		superDismountRidingEntity();
-	}
-
-	@Override
-	public void superDismountRidingEntity2() {
-		superDismountRidingEntity();
-	}
-
-	@Override
-	public int getDataWatcherWatchableObjectIdCount() {
-		return 13;
-	}
-
-	@Override
-	public void setDataWatcherWatchableObjectIdCount(int i) {
 	}
 
 	@Override
@@ -215,17 +172,8 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public Object superGetFreeVariable(String s) {
-		return null;
-	}
-
-	@Override
 	public void setFreeVariable(String s, Object o) {
 		if (master != null) master.setFreeVariable(s, o);
-	}
-
-	@Override
-	public void superSetFreeVariable(String s, Object o) {
 	}
 
 	@Override
@@ -330,8 +278,7 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 
 	@Override
 	protected void entityInit() {
-		if (master != null) master.entityInit();
-		else super.entityInit();
+		Modchu_EntityHelper.getInstance().entityInit(this);
 	}
 
 	@Override
@@ -5050,17 +4997,8 @@ public class Modchu_EntityOtherPlayerMP extends EntityOtherPlayerMP implements M
 	}
 
 	@Override
-	public void superInit() {
-	}
-
-	@Override
 	public boolean superInteract(Object entityPlayer) {
 		return super.interact((EntityPlayer) entityPlayer);
-	}
-
-	@Override
-	public void superSetMaxHealth(Object floatOrInt) {
-		maxHealth = (Integer) floatOrInt;
 	}
 
 	@Override

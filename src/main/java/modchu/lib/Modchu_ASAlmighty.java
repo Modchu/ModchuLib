@@ -3,6 +3,7 @@ package modchu.lib;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -4618,6 +4619,16 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			}
 			return false;
 		}
+		if (pIndex == modelRendererAddChild) {
+			if (pArg != null
+			&& pArg.length > 1
+			&& pArg[0] != null
+			&& pArg[1] != null) {
+				modelRendererAddChild(pArg[0], pArg[1]);
+				return true;
+			}
+			return false;
+		}
 		if (pIndex == entityLivingBasePrevHealth) {
 			if (pArg != null
 			&& pArg.length > 1
@@ -7428,7 +7439,17 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected void setEntityLivingBaseEntityAge(Object entity, int i) {
 		int version = Modchu_Main.getMinecraftVersion();
-		if (version > 159) Modchu_Reflect.setFieldObject("EntityLivingBase", version > 212 ? "field_75255_d" : "field_70708_bq", version > 212 ? "idleTime" : "entityAge", entity, i, 0);
+		if (version > 159) {
+			//Modchu_Debug.lDebug1("Modchu_ASAlmighty setEntityLivingBaseEntityAge entity="+entity);
+			Field field = Modchu_Reflect.getField("EntityLivingBase", version > 212 ? "field_75255_d" : "field_70708_bq", version > 212 ? "idleTime" : "entityAge", -1);
+			//Modchu_Debug.lDebug1("Modchu_ASAlmighty setEntityLivingBaseEntityAge field="+field);
+			if (field != null); else field =  Modchu_Reflect.getField("EntityLivingBase", "field_70708_bq", "entityAge");
+			if (field != null) {
+				Modchu_Reflect.setFieldObject(field, entity, i, 0);
+				//Modchu_Debug.lDebug1("Modchu_ASAlmighty setEntityLivingBaseEntityAge field != null ok.");
+			}
+			//Modchu_Reflect.setFieldObject("EntityLivingBase", version > 212 ? "field_75255_d" : "field_70708_bq", version > 212 ? "idleTime" : "entityAge", entity, i, 0);
+		}
 	}
 
 	protected Object entityBoundingBox() {
@@ -8453,7 +8474,8 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 	}
 
 	protected Object entityPlayerInventory(Object entityplayer) {
-		return Modchu_Reflect.getFieldObject("EntityPlayer", "field_71071_by", "inventory", entityplayer);
+		if (Modchu_Reflect.loadClass("EntityPlayer").isInstance(entityplayer)) return Modchu_Reflect.getFieldObject("EntityPlayer", "field_71071_by", "inventory", entityplayer);
+		return entityplayer;
 	}
 
 	protected Object entityPlayerInventoryGetCurrentItem() {
@@ -10623,11 +10645,23 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 			Modchu_Main.setRuntimeException(ss);
 			return null;
 		}
-		File file = (File) (Modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.getFieldObject(minecraft, "field_71412_D", minecraftGetMinecraft(), -1) :
-			Modchu_Reflect.invokeMethod(minecraft, "func_71380_b", minecraftGetMinecraft(), -1));
-		if (file != null) return file;
-		file = (File) (Modchu_Main.getMinecraftVersion() > 159 ? Modchu_Reflect.getFieldObject(minecraft, "mcDataDir", minecraftGetMinecraft()) :
-			Modchu_Reflect.invokeMethod(minecraft, "getMinecraftDir", minecraftGetMinecraft()));
+		int version = Modchu_Main.getMinecraftVersion();
+		File file = null;
+		if (version > 0) {
+			file = (File) (version > 159 ? Modchu_Reflect.getFieldObject(minecraft, "field_71412_D", minecraftGetMinecraft(), -1) :
+				Modchu_Reflect.invokeMethod(minecraft, "func_71380_b", minecraftGetMinecraft(), -1));
+			if (file != null) return file;
+			file = (File) (version > 159 ? Modchu_Reflect.getFieldObject(minecraft, "mcDataDir", minecraftGetMinecraft(), -1) :
+				Modchu_Reflect.invokeMethod(minecraft, "getMinecraftDir", minecraftGetMinecraft(), -1));
+		} else {
+			file = (File) (Modchu_Reflect.getFieldObject(minecraft, "field_71412_D", minecraftGetMinecraft(), -1));
+			if (file != null) return file;
+			file = (File) (Modchu_Reflect.invokeMethod(minecraft, "func_71380_b", minecraftGetMinecraft(), -1));
+			if (file != null) return file;
+			file = (File) (Modchu_Reflect.getFieldObject(minecraft, "mcDataDir", minecraftGetMinecraft(), -1));
+			if (file != null) return file;
+			file = (File) (Modchu_Reflect.invokeMethod(minecraft, "getMinecraftDir", minecraftGetMinecraft(), -1));
+		}
 		return file;
 	}
 
@@ -11166,6 +11200,10 @@ public class Modchu_ASAlmighty extends Modchu_ASBase {
 
 	protected void modelRendererRenderWithRotation(Object modelRenderer, float f) {
 		Modchu_Reflect.invokeMethod("ModelRenderer", "func_78791_b", "renderWithRotation", new Class[]{ float.class }, modelRenderer, new Object[]{ f });
+	}
+
+	protected void modelRendererAddChild(Object modelRenderer, Object modelRenderer1) {
+		Modchu_Reflect.invokeMethod("ModelRenderer", "func_78792_a", "addChild", new Class[]{ Modchu_Reflect.loadClass("ModelRenderer") }, modelRenderer, new Object[]{ modelRenderer1 });
 	}
 
 	protected Object[] modelBoxVertexPositions(Object modelBox) {

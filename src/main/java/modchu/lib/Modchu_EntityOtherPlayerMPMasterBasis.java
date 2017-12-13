@@ -20,6 +20,76 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
+	public Object getFreeVariable(String s) {
+		return Modchu_EntityHelper.getInstance().getData(base, s);
+	}
+
+	@Override
+	public void setFreeVariable(String s, Object o) {
+		Modchu_EntityHelper.getInstance().setData(base, s, o);
+	}
+
+	@Override
+	public String thisToString() {
+		return getClass().getName() + "@" + Integer.toHexString(super.hashCode());
+	}
+
+	@Override
+	public void sendDeathMessage(Object damageSource) {
+	}
+
+	@Override
+	public boolean canSendDeathMessage() {
+		return false;
+	}
+
+	@Override
+	public int getRidingEntityID() {
+		// TODO
+		Object o = base.getDataWatcherWatchableObject(16);
+		return o instanceof Integer ? (Integer) o : 0;
+	}
+
+	@Override
+	public void updateRidden2() {
+		boolean debug = false;
+		Object entity = getRidingEntity2();
+		if (debug) {
+			Modchu_Debug.mDebug("Modchu_EntityOtherPlayerMPMasterBasis updateRidden2 entity="+entity);
+			Modchu_Debug.mDebug("Modchu_EntityOtherPlayerMPMasterBasis updateRidden2 isRiding2()="+isRiding2());
+		}
+		if (isRiding2()
+				&& Modchu_AS.getBoolean(Modchu_AS.entityIsDead, entity)) {
+			dismountRidingEntity2();
+		} else {
+			if (isRiding2()) {
+				double entityPosX = Modchu_AS.getDouble(Modchu_AS.entityPosX, entity);
+				double entityPosY = Modchu_AS.getDouble(Modchu_AS.entityPosY, entity);
+				double entityPosZ = Modchu_AS.getDouble(Modchu_AS.entityPosZ, entity);
+				setPosition(entityPosX, entityPosY + Modchu_AS.getDouble("Entity", "getMountedYOffset", entity) + getYOffset(), entityPosZ);
+				if (debug) {
+					double posX = Modchu_AS.getDouble(Modchu_AS.entityPosX, base);
+					double posY = Modchu_AS.getDouble(Modchu_AS.entityPosY, base);
+					double posZ = Modchu_AS.getDouble(Modchu_AS.entityPosZ, base);
+					Modchu_Debug.mDebug("Modchu_EntityOtherPlayerMPMasterBasis updateRidden2 isRiding2");
+					Modchu_Debug.mdDebug("posX="+posX+" posY="+posY+" posZ="+posZ);
+					Modchu_Debug.mdDebug("entityPosX="+entityPosX+" entityPosY="+entityPosY+" entityPosZ="+entityPosZ, 1);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onInitialSpawn(Object o, Object o1) {
+		base.superOnInitialSpawn(o, o1);
+	}
+
+	@Override
+	public boolean isDamageInvincible() {
+		return Modchu_EntityHelper.getInstance().isDamageInvincible(base);
+	}
+
+	@Override
 	public int getTempIsRiding() {
 		return tempIsRiding;
 	}
@@ -1842,73 +1912,61 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	@Override
 	public void func_146093_a(Object tileEntityHopper) {
 		base.superFunc_146093_a(tileEntityHopper);
-
 	}
 
 	@Override
 	public void displayGUIHopperMinecart(Object entityMinecartHopper) {
 		base.superDisplayGUIHopperMinecart(entityMinecartHopper);
-
 	}
 
 	@Override
 	public void displayGUIEnchantment(int p_71002_1_, int p_71002_2_, int p_71002_3_, String p_71002_4_) {
 		base.superDisplayGUIEnchantment(p_71002_1_, p_71002_2_, p_71002_3_, p_71002_4_);
-
 	}
 
 	@Override
 	public void displayGUIAnvil(int p_82244_1_, int p_82244_2_, int p_82244_3_) {
 		base.superDisplayGUIAnvil(p_82244_1_, p_82244_2_, p_82244_3_);
-
 	}
 
 	@Override
 	public void displayGUIWorkbench(int p_71058_1_, int p_71058_2_, int p_71058_3_) {
 		base.superDisplayGUIWorkbench(p_71058_1_, p_71058_2_, p_71058_3_);
-
 	}
 
 	@Override
 	public void func_146101_a(Object tileEntityFurnace) {
 		base.superFunc_146101_a(tileEntityFurnace);
-
 	}
 
 	@Override
 	public void func_146102_a(Object tileEntityDispenser) {
 		base.superFunc_146102_a(tileEntityDispenser);
-
 	}
 
 	@Override
 	public void func_146100_a(Object tileEntity) {
 		base.superFunc_146100_a(tileEntity);
-
 	}
 
 	@Override
 	public void func_146095_a(Object commandBlockLogic) {
 		base.superFunc_146095_a(commandBlockLogic);
-
 	}
 
 	@Override
 	public void func_146098_a(Object tileEntityBrewingStand) {
 		base.superFunc_146098_a(tileEntityBrewingStand);
-
 	}
 
 	@Override
 	public void func_146104_a(Object tileEntityBeacon) {
 		base.superFunc_146104_a(tileEntityBeacon);
-
 	}
 
 	@Override
 	public void displayGUIMerchant(Object iMerchant, String p_71030_2_) {
 		base.superDisplayGUIMerchant(iMerchant, p_71030_2_);
-
 	}
 
 	@Override
@@ -1924,19 +1982,16 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	@Override
 	public void setHideCape(int p_82239_1_, boolean p_82239_2_) {
 		base.superSetHideCape(p_82239_1_, p_82239_2_);
-
 	}
 
 	@Override
 	public void setSpawnChunk(Object chunkCoordinates, boolean p_71063_2_) {
 		base.superSetSpawnChunk(chunkCoordinates, p_71063_2_);
-
 	}
 
 	@Override
 	public void fall(float p_70069_1_) {
 		base.superFall(p_70069_1_);
-
 	}
 
 	@Override
@@ -1982,13 +2037,11 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	@Override
 	public void updateFallState(double p_70064_1_, boolean p_70064_3_) {
 		base.superUpdateFallState(p_70064_1_, p_70064_3_);
-
 	}
 
 	@Override
 	public void dropRareDrop(int p_70600_1_) {
 		base.superDropRareDrop(p_70600_1_);
-
 	}
 
 	@Override
@@ -1999,7 +2052,6 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	@Override
 	public void updateAITasks() {
 		base.superUpdateAITasks();
-
 	}
 
 	@Override
@@ -2025,7 +2077,6 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	@Override
 	public void copyDataFrom(Object entity, boolean p_82141_2_) {
 		base.superCopyDataFrom(entity, p_82141_2_);
-
 	}
 
 	@Override
@@ -2046,7 +2097,6 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	@Override
 	public void sendChatToPlayer(Object chatMessageComponent) {
 		base.superSendChatToPlayer(chatMessageComponent);
-
 	}
 
 	@Override
@@ -2187,7 +2237,6 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	@Override
 	public void func_82162_bC() {
 		base.superFunc_82162_bC();
-
 	}
 
 	@Override
@@ -2499,16 +2548,6 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	@Override
 	public boolean canBeHitWithPotion() {
 		return base.superCanBeHitWithPotion();
-	}
-
-	@Override
-	public Object getFreeVariable(String s) {
-		return base.superGetFreeVariable(s);
-	}
-
-	@Override
-	public void setFreeVariable(String s, Object o) {
-		base.superSetFreeVariable(s, o);
 	}
 
 	@Override
@@ -2922,7 +2961,7 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 
 	@Override
 	public void setMaxHealth(Object floatOrInt) {
-		base.superSetMaxHealth(floatOrInt);
+		base.supersetMaxHealth(floatOrInt);
 	}
 
 	@Override
@@ -3086,84 +3125,23 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	}
 
 	@Override
-	public String thisToString() {
-		return getClass().getName() + "@" + Integer.toHexString(super.hashCode());
-	}
-
-	@Override
 	public Object getRidingEntity2() {
-		return base.superGetRidingEntity2();
+		return base.superGetRidingEntity();
 	}
 
 	@Override
 	public boolean isRiding2() {
-		return base.superIsRiding2();
+		return base.superIsRiding();
 	}
 
 	@Override
 	public void dismountRidingEntity2() {
-		base.superDismountRidingEntity2();
+		base.superDismountRidingEntity();
 	}
 
 	@Override
-	public void sendDeathMessage(Object damageSource) {
-		base.superSendDeathMessage(damageSource);
-	}
-
-	@Override
-	public boolean canSendDeathMessage() {
-		return base.superCanSendDeathMessage();
-	}
-
-	@Override
-	public int getRidingEntityID() {
-		// TODO
-		Object o = base.getDataWatcherWatchableObject(16);
-		return o instanceof Integer ? (Integer) o : 0;
-	}
-
-	@Override
-	public void setRidingEntityId(int i) {
+	public void setRidingEntityID(int i) {
 		base.setDataWatcherWatchableObject(16, i);
-	}
-
-	@Override
-	public void updateRidden2() {
-		boolean debug = false;
-		Object entity = getRidingEntity2();
-		if (debug) {
-			Modchu_Debug.mDebug("Modchu_EntityOtherPlayerMPMasterBasis updateRidden2 entity="+entity);
-			Modchu_Debug.mDebug("Modchu_EntityOtherPlayerMPMasterBasis updateRidden2 isRiding2()="+isRiding2());
-		}
-		if (isRiding2()
-				&& Modchu_AS.getBoolean(Modchu_AS.entityIsDead, entity)) {
-			dismountRidingEntity2();
-		} else {
-			if (isRiding2()) {
-				double entityPosX = Modchu_AS.getDouble(Modchu_AS.entityPosX, entity);
-				double entityPosY = Modchu_AS.getDouble(Modchu_AS.entityPosY, entity);
-				double entityPosZ = Modchu_AS.getDouble(Modchu_AS.entityPosZ, entity);
-				setPosition(entityPosX, entityPosY + Modchu_AS.getDouble("Entity", "getMountedYOffset", entity) + getYOffset(), entityPosZ);
-				if (debug) {
-					double posX = Modchu_AS.getDouble(Modchu_AS.entityPosX, base);
-					double posY = Modchu_AS.getDouble(Modchu_AS.entityPosY, base);
-					double posZ = Modchu_AS.getDouble(Modchu_AS.entityPosZ, base);
-					Modchu_Debug.mDebug("Modchu_EntityOtherPlayerMPMasterBasis updateRidden2 isRiding2");
-					Modchu_Debug.mdDebug("posX="+posX+" posY="+posY+" posZ="+posZ);
-					Modchu_Debug.mdDebug("entityPosX="+entityPosX+" entityPosY="+entityPosY+" entityPosZ="+entityPosZ, 1);
-				}
-			}
-		}
-	}
-
-	@Override
-	public void onInitialSpawn(Object o, Object o1) {
-		base.superOnInitialSpawn(o, o1);
-	}
-
-	@Override
-	public boolean isDamageInvincible() {
-		return base.superIsDamageInvincible();
 	}
 
 	@Override
@@ -3204,7 +3182,6 @@ public class Modchu_EntityOtherPlayerMPMasterBasis implements Modchu_IEntityOthe
 	@Override
 	public void onInsideBlock(Object iBlockState) {
 		base.superOnInsideBlock(iBlockState);
-
 	}
 
 	@Override

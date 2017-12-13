@@ -17,7 +17,7 @@ public class Modchu_TextCalculation {
 	public static boolean tempDebug = false;
 
 	public Modchu_TextCalculation() {
-		debugSetting = !Modchu_Main.isRelease();
+		//debugSetting = !Modchu_Main.isRelease();
 		//debugRun = !Modchu_Main.isRelease();
 		//debugCE = !Modchu_Main.isRelease();
 		//debugCERun = !Modchu_Main.isRelease();

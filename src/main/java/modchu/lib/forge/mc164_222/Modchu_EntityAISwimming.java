@@ -2,16 +2,10 @@ package modchu.lib.forge.mc164_222;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IContainerPlayerMaster;
-import modchu.lib.Modchu_IEntityAIBase;
-import modchu.lib.Modchu_IEntityAIBaseMaster;
-import modchu.lib.Modchu_IEntityAISit;
-import modchu.lib.Modchu_IEntityAISitMaster;
+import modchu.lib.Modchu_Debug;
 import modchu.lib.Modchu_IEntityAISwimming;
 import modchu.lib.Modchu_IEntityAISwimmingMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.passive.EntityTameable;
 
@@ -26,6 +20,7 @@ public abstract class Modchu_EntityAISwimming extends EntityAISwimming implement
 		//Modchu_Debug.lDebug("Modchu_EntityAISwimming init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAISwimmingMaster ? (Modchu_IEntityAISwimmingMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override
@@ -40,11 +35,12 @@ public abstract class Modchu_EntityAISwimming extends EntityAISwimming implement
 
 	@Override
 	public boolean shouldExecute() {
-		return master != null ? master.shouldExecute() : false;
+		//Modchu_Debug.mDebug("Modchu_EntityAISwimming shouldExecute master="+master);
+		return master != null ? master.shouldExecute() : superShouldExecute();
 	}
 
 	public boolean superShouldExecute() {
-		return false;
+		return isEnabled() ? super.shouldExecute() : false;
 	}
 
 	@Override

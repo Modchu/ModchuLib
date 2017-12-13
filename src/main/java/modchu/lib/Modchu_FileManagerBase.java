@@ -53,6 +53,8 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	protected List<String> searchResourcesList = new ArrayList();
 	protected List<File> loadModFileList = new LinkedList();
 	private List<Modchu_IResourcePack> modResourcePackList;
+	private List<String> oldResourceDirList;
+	private HashMap<Object, Modchu_IResourcePack> addResourcePackMap;
 	//protected Map<ZipInputStream, Map<String, ZipEntry>> zipZipEntryMapData;
 	protected static boolean initFlag;
 	public static HashMap<Object, List<String>> listData = new HashMap();
@@ -70,127 +72,129 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		initFlag = true;
 		// 初期化
 		Modchu_FileManager.setMinecraftDir(Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir));
+		Modchu_SearchFileManager.init();
 
-		// mincraft.jarを取得
-		// 開発中用のJar内に含まれていることの対策
 		Class c = Modchu_Main.isForge ? Modchu_Reflect.loadClass(Modchu_Main.getMinecraftVersion() > 179 ? "net.minecraftforge.fml.common.FMLModContainer" : "cpw.mods.fml.common.FMLModContainer") : Modchu_Reflect.loadClass("net.minecraft.src.BaseMod");
 		int i = 0;
-		try {
-			ProtectionDomain ls1 = c.getProtectionDomain();
-			//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init ls1="+ls1);
-			CodeSource ls2 = ls1.getCodeSource();
-			//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init ls2="+ls2);
-			URL ls3 = ls2.getLocation();
-			//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init ls3="+ls3);
-			URI ls4 = ls3.toURI();
-			//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init ls4="+ls4);
-			String s = ls4.toString();
-			int i1 = s.lastIndexOf(".class");
-			if (i1 > -1) {
-				//Class c1 = Modchu_Reflect.loadClass(ls4.toString());
-				//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init c.getName()="+c.getName());
-				String s1 = c.getName();
-				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init s1="+s1);
-				i1 = s.lastIndexOf(s1);
+		int version = Modchu_Main.getMinecraftVersion();
+		if (version < 164) {
+			// mincraft.jarを取得
+			// 開発中用のJar内に含まれていることの対策
+			try {
+				ProtectionDomain ls1 = c.getProtectionDomain();
+				//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init ls1="+ls1);
+				CodeSource ls2 = ls1.getCodeSource();
+				//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init ls2="+ls2);
+				URL ls3 = ls2.getLocation();
+				//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init ls3="+ls3);
+				URI ls4 = ls3.toURI();
+				//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init ls4="+ls4);
+				String s = ls4.toString();
+				int i1 = s.lastIndexOf(".class");
 				if (i1 > -1) {
-					s = s.substring(0, i1);
-				} else {
-					while (s1.indexOf(".") > -1) {
-						s1 = s1.replace(".", "/");
-					}
+					//Class c1 = Modchu_Reflect.loadClass(ls4.toString());
+					//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init c.getName()="+c.getName());
+					String s1 = c.getName();
+					if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init s1="+s1);
 					i1 = s.lastIndexOf(s1);
 					if (i1 > -1) {
 						s = s.substring(0, i1);
-						if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 0 s="+s);
 					} else {
-						if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 1 s="+s);
-						while (s.indexOf("/") > -1) {
-							s = s.replace("/", "\\");
+						while (s1.indexOf(".") > -1) {
+							s1 = s1.replace(".", "/");
 						}
-						if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 2 s="+s);
-						i1 = s.indexOf(s1);
+						i1 = s.lastIndexOf(s1);
 						if (i1 > -1) {
 							s = s.substring(0, i1);
+							if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 0 s="+s);
+						} else {
+							if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 1 s="+s);
+							while (s.indexOf("/") > -1) {
+								s = s.replace("/", "\\");
+							}
+							if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 2 s="+s);
+							i1 = s.indexOf(s1);
+							if (i1 > -1) {
+								s = s.substring(0, i1);
 /*
 							while (s.indexOf(".") > -1) {
 								s = s.replace(".", "\\");
 							}
 */
-						} else {
-							//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 4 else s="+s+" "+s1.replaceAll(".", "/").replaceAll("//", ""));
+							} else {
+								//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 4 else s="+s+" "+s1.replaceAll(".", "/").replaceAll("//", ""));
+							}
 						}
 					}
+					s = s.replace("file:/", "");
+					s = s.replace("file:\\", "");
+					while (s.indexOf("!") > -1) {
+						s = s.replace("!", "");
+					}
+					if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 5 s="+s);
+					File file = new File(s);
+					if (debug) {
+						Modchu_Debug.lDebug("Modchu_FileManagerBase init 6 file="+file);
+						Modchu_Debug.lDebug("Modchu_FileManagerBase init 6-1 file.exists()="+file.exists());
+					}
+					String path = file.getPath();
+					if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 6-2 path="+path);
+					Modchu_FileManager.addMinecraftJar(file);
+					if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 7");
+				} else {
+					Modchu_FileManager.addMinecraftJar(new File(ls4));
+					if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 1 ls4="+ls4);
 				}
-				s = s.replace("file:/", "");
-				s = s.replace("file:\\", "");
-				while (s.indexOf("!") > -1) {
-					s = s.replace("!", "");
+				i = 1;
+			} catch (Exception e) {
+				e.printStackTrace();
+				if (debug) Modchu_Debug.tDebug("Modchu_FileManagerBase init getMinecraftFile-Exception1.");
+			}
+
+			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 8 getMinecraftJarList ="+Modchu_FileManager.getMinecraftJarList());
+			if (Modchu_FileManager.getMinecraftJarList().isEmpty()) {
+				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 9-1 list.isEmpty()");
+				try {
+					ClassLoader lcl1 = c.getClassLoader();
+					if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 9-2");
+					String lcls1 = c.getName().concat(".class");
+					URL lclu1 = lcl1.getResource(lcls1);
+					JarURLConnection lclc1 = (JarURLConnection)lclu1.openConnection();
+					JarFile lclj1 = lclc1.getJarFile();
+					Modchu_FileManager.addMinecraftJar(new File(lclj1.getName()));
+					i = 2;
+				} catch (Exception exception) {
+					if (debug) Modchu_Debug.tDebug("Modchu_FileManagerBase init getMinecraftFile-Exception2.");
 				}
-				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 5 s="+s);
-				File file = new File(s);
-				if (debug) {
-					Modchu_Debug.lDebug("Modchu_FileManagerBase init 6 file="+file);
-					Modchu_Debug.lDebug("Modchu_FileManagerBase init 6-1 file.exists()="+file.exists());
+				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 9-end");
+			}
+			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 10");
+			if (Modchu_FileManager.getMinecraftJarList().isEmpty()) {
+				String ls = System.getProperty("java.class.path");
+				int li = ls.indexOf(';');
+				if (li > -1) {
+					ls = ls.substring(0, li);
 				}
-				String path = file.getPath();
-				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 6-2 path="+path);
-				Modchu_FileManager.addMinecraftJar(file);
-				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 7");
-			} else {
-				Modchu_FileManager.addMinecraftJar(new File(ls4));
-				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 1 ls4="+ls4);
+				li = ls.indexOf(':');
+				if (li > -1) {
+					ls = ls.substring(0, li);
+				}
+				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 11 ls="+ls);
+				Modchu_FileManager.addMinecraftJar(new File(ls));
+				i = 3;
 			}
-			i = 1;
-		} catch (Exception e) {
-			e.printStackTrace();
-			if (debug) Modchu_Debug.tDebug("Modchu_FileManagerBase init getMinecraftFile-Exception1.");
+			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 12 getMinecraftJarList ="+Modchu_FileManager.getMinecraftJarList());
 		}
-		if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 8");
-		List<File> list = Modchu_FileManager.getMinecraftJarList();
-		if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 9 list="+list);
-		if (list.isEmpty()) {
-			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 9-1 list.isEmpty()");
-			try {
-				ClassLoader lcl1 = c.getClassLoader();
-				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 9-2");
-				String lcls1 = c.getName().concat(".class");
-				URL lclu1 = lcl1.getResource(lcls1);
-				JarURLConnection lclc1 = (JarURLConnection)lclu1.openConnection();
-				JarFile lclj1 = lclc1.getJarFile();
-				Modchu_FileManager.addMinecraftJar(new File(lclj1.getName()));
-				i = 2;
-			} catch (Exception exception) {
-				if (debug) Modchu_Debug.tDebug("Modchu_FileManagerBase init getMinecraftFile-Exception2.");
-			}
-			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 9-end");
-		}
-		if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 10");
-		if (Modchu_FileManager.getMinecraftJarList().isEmpty()) {
-			String ls = System.getProperty("java.class.path");
-			int li = ls.indexOf(';');
-			if (li > -1) {
-				ls = ls.substring(0, li);
-			}
-			li = ls.indexOf(':');
-			if (li > -1) {
-				ls = ls.substring(0, li);
-			}
-			Modchu_FileManager.addMinecraftJar(new File(ls));
-			i = 3;
-		}
-		//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 11");
 		//File file = Modchu_FileManager.getMinecraftJarList().get(0);
-		//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 12 file="+file);
-		//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 13 minecraftJar="+file.getAbsolutePath()+" i="+i);
+		//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 13 file="+file);
+		//if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init 14 minecraftJar="+file.getAbsolutePath()+" i="+i);
 		if (!Modchu_Main.isServer) {
 			Modchu_FileManager.setAssetsDir(new File(Modchu_FileManager.getMinecraftDir(), "assets"));
 			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase init assetsDir="+Modchu_FileManager.getAssetsDir().getAbsolutePath());
-		} else {
-			// サーバー側では使われないはず。
 		}
 
 		if (!Modchu_Main.isRelease()
-				&& Modchu_Main.getMinecraftVersion() < 164) {
+				&& version < 164) {
 			Modchu_FileManager.addMinecraftJar(new File(Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir), "/bin/minecraft.jar"));
 			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase minecraft.jar file.exists()="+Modchu_FileManager.getMinecraftJarList().get(1).exists());
 		}
@@ -723,11 +727,18 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		if (i1 > -1
 				&& fname.endsWith(".class")) {
 			String cn = classNameProcessing(fname);
-			if (classMap.containsKey(cn)) return false;
+			if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase addModClass cn="+cn);
+			boolean b = checkModClassName(cn);
+			if (debug) {
+				Modchu_Debug.Debug("Modchu_FileManagerBase addModClass classMap.containsKey(cn)="+classMap.containsKey(cn));
+				Modchu_Debug.Debug("Modchu_FileManagerBase addModClass b="+b);
+			}
+			if (classMap.containsKey(cn)
+					| !b) return false;
 			Class c = Modchu_Reflect.loadClass(cn, -1);
 			if (c != null) {
 				if (Modifier.isAbstract(c.getModifiers())) {
-					if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase addModClass-skip cn="+cn);
+					if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase addModClass isAbstract skip cn="+cn);
 					return false;
 				}
 				if (!classMap.containsKey(cn)) {
@@ -743,10 +754,35 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 					return true;
 				}
 			} else {
-				if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase addModClass-class == null !! cn="+cn);
+				if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase addModClass class == null !! cn="+cn);
 			}
 		}
 		return false;
+	}
+
+	private boolean checkModClassName(String cn) {
+		boolean debug = false;
+		String temp = cn;
+		int i1 = temp.indexOf(".");
+		if (i1 < 0) {
+			i1 = temp.indexOf("\\");
+			if (i1 > -1) {
+				temp = temp.replace("\\", ".");
+			}
+		}
+		boolean b = false;
+		while (true) {
+			if (Modchu_Main.modEnabledMap.containsKey(temp)) {
+				b = Modchu_Main.modEnabledMap.get(temp);
+				if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase checkModClassName temp="+temp+" b="+b);
+				break;
+			}
+			i1 = temp.indexOf(".");
+			if (i1 < 0) break;
+			temp = temp.substring(i1 + 1);
+			if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase checkModClassName temp="+temp);
+		}
+		return b;
 	}
 
 	protected void addModResourcePack(Class c) {
@@ -761,40 +797,75 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		}
 		boolean debug = false;
 		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 1 c="+c);
-		Modchu_IResourcePack modchu_IResourcePack = (Modchu_IResourcePack) Modchu_Main.newModchuCharacteristicObject("Modchu_ResourcePack", Modchu_ModResourcePackMaster.class, c);
-		addModchuResourcePack(modchu_IResourcePack);
+		addModchuResourcePack_o(c);
 		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack end.");
 	}
 
-	protected void addModResourcePack(File file) {
+	public void addModResourcePack(File file) {
 		int version = Modchu_Main.getMinecraftVersion();
-		if (Modchu_Main.isServer
-				| version < 190) {
+		if (file == null
+				| Modchu_Main.isServer
+				| (version < 190
+						&& !file.isDirectory())) {
 			return;
 		}
-		boolean debug = true;
-		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 1 file="+file);
-		Modchu_IResourcePack modchu_IResourcePack = (Modchu_IResourcePack) Modchu_Main.newModchuCharacteristicObject("Modchu_ResourcePack", Modchu_ModResourcePackMaster.class, file);
-		addModchuResourcePack(modchu_IResourcePack);
+		boolean debug = false;
+		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack 1 file.getAbsolutePath()="+file.getAbsolutePath());
+		addModchuResourcePack_o(file);
 		if (debug) Modchu_Debug.mDebug("Modchu_FileManagerBase addModResourcePack end.");
 	}
 
-	protected void addModchuResourcePack(Modchu_IResourcePack modchu_IResourcePack) {
-		boolean debug = false;
+	protected void addModchuResourcePack_o(Object o) {
+		boolean debug = true;
+		int version = Modchu_Main.getMinecraftVersion();
+		if (o == null
+				| Modchu_Main.isServer) {
+			return;
+		}
+		if (version < 160) {
+			String s = null;
+			if (o instanceof File) s = ((File) o).getAbsolutePath();
+			else if (o instanceof ZipFile) s = ((ZipFile) o).getName();
+			else if (o instanceof String) Modchu_CastHelper.String(o);
+			if (s != null) {
+				if (oldResourceDirList != null); else oldResourceDirList = new LinkedList();
+				oldResourceDirList.add(s);
+				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase addModchuResourcePack_o oldResourceDirList.add s="+s);
+			}
+			return;
+		}
+		if (addResourcePackMap != null); else addResourcePackMap = new HashMap();
+		Object o1 = null;
+		if (o instanceof File) {
+			o1 = ((File) o).getAbsolutePath();
+		}
+		else if (o instanceof ZipFile) {
+			o1 = ((ZipFile) o).getName();
+		} else {
+			o1 = o;
+		}
+		if (addResourcePackMap.containsKey(o1)) return;
+		Modchu_IResourcePack modchu_IResourcePack = (Modchu_IResourcePack) Modchu_Main.newModchuCharacteristicObject("Modchu_ResourcePack", Modchu_ModResourcePackMaster.class, o instanceof File ? (File) o : o instanceof ZipFile ? (ZipFile) o : o);
 		if (modchu_IResourcePack != null) {
-			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase addModchuResourcePack 1 o="+modchu_IResourcePack);
+			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase addModchuResourcePack_o 1 o="+o);
 			List list = Modchu_AS.getList("Minecraft", "defaultResourcePacks", Modchu_AS.get(Modchu_AS.minecraftGetMinecraft));
 			if (list != null) {
-				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase addModchuResourcePack 2 list="+list);
+				if (debug) {
+					Modchu_Debug.lDebug("Modchu_FileManagerBase addModchuResourcePack_o 2 list="+list);
+					Object master = Modchu_Main.getModchuCharacteristicObjectMaster(modchu_IResourcePack);
+					Modchu_ModResourcePackMaster ModResourcePackMaster = (Modchu_ModResourcePackMaster) master;
+					Modchu_Debug.lDebug("Modchu_FileManagerBase addModchuResourcePack_o 3 ModResourcePackMaster.resourceFile="+ModResourcePackMaster.resourceFile);
+				}
 				list.add(modchu_IResourcePack);
 				Modchu_Main.refreshResourcesFlag = true;
 			} else {
-				String s = "Modchu_FileManagerBase addModchuResourcePack defaultResourcePacks null error !!";
+				String s = "Modchu_FileManagerBase addModchuResourcePack_o defaultResourcePacks null error !!";
 				if (debug) Modchu_Debug.lDebug(s);
 				Modchu_Main.setRuntimeException(s);
 			}
+			addResourcePackMap.put(o1, modchu_IResourcePack);
 		} else {
-			String s = "Modchu_FileManagerBase addModchuResourcePack null error !!";
+			String s = "Modchu_FileManagerBase addModchuResourcePack_o null error !!";
 			if (debug) Modchu_Debug.lDebug(s);
 			Modchu_Main.setRuntimeException(s);
 		}
@@ -808,7 +879,8 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	public InputStream getModInputStream(Object o) {
 		InputStream inputStream = null;
 		int version = Modchu_Main.getMinecraftVersion();
-		if (version < 160) {
+		if (version < 160
+				| !Modchu_Main.isForge) {
 			return o instanceof String ? getClass().getResourceAsStream((String) o) : null;
 		}
 		if (modResourcePackList != null); else {
@@ -844,36 +916,67 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		int i1 = mcDataDirAbsolutePath.lastIndexOf("\\.");
 		if (i1 == mcDataDirAbsolutePath.length() - 1) mcDataDirAbsolutePath = mcDataDirAbsolutePath.substring(0, i1);
 		List<File> list = Modchu_FileManager.getMinecraftJarList();
-		String minecraftJarPath = list.get(0).getAbsolutePath();
-		if (minecraftJarPath.indexOf("file:\\") > -1) minecraftJarPath = minecraftJarPath.substring(6);
-		String minecraftJarPath2 = list.get(0).getPath();
-		if (minecraftJarPath2.indexOf("file:\\") > -1) minecraftJarPath2 = minecraftJarPath2.substring(6);
+		fname = fname.replace(".class", "");
+		if (list != null
+				&& !list.isEmpty()) {
+			String minecraftJarPath = list.get(0).getAbsolutePath();
+			if (minecraftJarPath.indexOf("file:\\") > -1) minecraftJarPath = minecraftJarPath.substring(6);
+			String minecraftJarPath2 = list.get(0).getPath();
+			if (minecraftJarPath2.indexOf("file:\\") > -1) minecraftJarPath2 = minecraftJarPath2.substring(6);
+			//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing-minecraftJarPath="+minecraftJarPath);
+			//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing-minecraftJarPath2="+minecraftJarPath2);
+			//Modchu_Debug.Debug("classNameProcessing 2 fname="+fname);
+			if (fname.startsWith(minecraftJarPath)) fname = fname.substring(minecraftJarPath.length());
+			if (fname.startsWith(minecraftJarPath2)) fname = fname.substring(minecraftJarPath2.length());
+		}
 		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing-mcDataDirAbsolutePath="+mcDataDirAbsolutePath);
-		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing-minecraftJarPath="+minecraftJarPath);
-		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing-minecraftJarPath2="+minecraftJarPath2);
-		String cn = fname.replace(".class", "");
-		//Modchu_Debug.Debug("classNameProcessing 2 cn="+cn);
-		if (cn.indexOf(mcDataDirAbsolutePath) > -1) cn = cn.substring(mcDataDirAbsolutePath.length());
-		if (cn.indexOf(minecraftJarPath) > -1) cn = cn.substring(minecraftJarPath.length());
-		if (cn.indexOf(minecraftJarPath2) > -1) cn = cn.substring(minecraftJarPath2.length());
+		if (fname.startsWith(mcDataDirAbsolutePath)) fname = fname.substring(mcDataDirAbsolutePath.length());
 		String s0 = "\\bin\\";
-		i1 = cn.indexOf(s0);
-		if (i1 > -1) cn = cn.substring(i1 + s0.length());
+		i1 = fname.indexOf(s0);
+		if (i1 > -1) fname = fname.substring(i1 + s0.length());
 		s0 = ".bin.";
-		i1 = cn.indexOf(s0);
-		if (i1 > -1) cn = cn.substring(i1 + s0.length());
-		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing 3 cn="+cn);
+		i1 = fname.indexOf(s0);
+		if (i1 > -1) fname = fname.substring(i1 + s0.length());
+		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing 3 fname="+fname);
 		if ((Modchu_Main.getMinecraftVersion() > 159
 				| !Modchu_Main.isForge)
-				&& cn.indexOf(":/") < 0) cn = cn.replace("\\", ".").replace("/", ".");
+				&& fname.indexOf(":/") < 0) fname = fname.replace("\\", ".").replace("/", ".");
 		if (Modchu_Main.getMinecraftVersion() > 159
-				&& (cn.startsWith(".minecraft.")
-				| cn.startsWith("/minecraft/"))) cn = cn.substring(11);
-		if (cn.startsWith(".")
-				| cn.startsWith("/")
-				| cn.startsWith("\\")) cn = cn.substring(1);
-		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing 4 end. cn="+cn);
-		return cn;
+				&& (fname.startsWith(".minecraft.")
+				| fname.startsWith("/minecraft/"))) fname = fname.substring(11);
+		if (fname.startsWith(".")
+				| fname.startsWith("/")
+				| fname.startsWith("\\")) fname = fname.substring(1);
+		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing 4 end. fname="+fname);
+		return fname;
+	}
+
+	@Override
+	public String textureNameProcessing(String fname) {
+		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing 1 fname="+fname);
+		String mcDataDirAbsolutePath = Modchu_AS.getFile(Modchu_AS.minecraftMcDataDir).getAbsolutePath();
+		int i1 = mcDataDirAbsolutePath.lastIndexOf("\\.");
+		if (i1 == mcDataDirAbsolutePath.length() - 1) mcDataDirAbsolutePath = mcDataDirAbsolutePath.substring(0, i1);
+		List<File> list = Modchu_FileManager.getMinecraftJarList();
+		fname = fname.replace(".class", "");
+		if (list != null
+				&& !list.isEmpty()) {
+			String minecraftJarPath = list.get(0).getAbsolutePath();
+			if (minecraftJarPath.indexOf("file:\\") > -1) minecraftJarPath = minecraftJarPath.substring(6);
+			String minecraftJarPath2 = list.get(0).getPath();
+			if (minecraftJarPath2.indexOf("file:\\") > -1) minecraftJarPath2 = minecraftJarPath2.substring(6);
+			//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing-minecraftJarPath="+minecraftJarPath);
+			//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing-minecraftJarPath2="+minecraftJarPath2);
+			//Modchu_Debug.Debug("classNameProcessing 2 fname="+fname);
+			if (fname.startsWith(minecraftJarPath)) fname = fname.substring(minecraftJarPath.length());
+			if (fname.startsWith(minecraftJarPath2)) fname = fname.substring(minecraftJarPath2.length());
+		}
+		//Modchu_Debug.Debug("Modchu_FileManagerBase classNameProcessing-mcDataDirAbsolutePath="+mcDataDirAbsolutePath);
+		if (fname.indexOf(mcDataDirAbsolutePath) > -1) fname = fname.substring(mcDataDirAbsolutePath.length());
+		String path = new File(".").getAbsolutePath();
+		if (fname.startsWith(path)) fname = fname.substring(path.length());
+
+		return fname;
 	}
 
 	protected long getCRCValue(File file) {
@@ -1665,6 +1768,37 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	}
 
 	@Override
+	public LinkedList<File> getClassLoaderResourcesFileList(Class c) {
+		if (c != null); else return null;
+		HashMap<String, File> map = new HashMap();
+		URLClassLoader urlClassLoader = null;
+		try {
+			ClassLoader classloader = c.getClassLoader();
+			if (classloader instanceof URLClassLoader) {
+				urlClassLoader = (URLClassLoader) classloader;
+				for (URL entry : urlClassLoader.getURLs()) {
+					String path = entry.getPath();
+					File file = new File(entry.getFile());
+					String s1 = file.getPath();
+					//Modchu_Debug.mDebug("Modchu_FileManagerBase getClassLoaderResourcesFileList s1="+s1);
+					if (!map.containsKey(s1)) {
+						map.put(s1, file);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		LinkedList<File> list = new LinkedList();
+		for (Entry<String, File> en : map.entrySet()) {
+			File file = en.getValue();
+			list.add(file);
+		}
+		return list;
+	}
+
+	@Override
 	public LinkedList getClassLoaderResourcesList(Class c) {
 		LinkedList list = new LinkedList();
 		if (c != null); else return null;
@@ -1687,13 +1821,6 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
-		} finally {
-			if (Modchu_Main.getMinecraftVersion() > 159) {
-				try {
-					if (urlClassLoader != null) Modchu_Reflect.invokeMethod(URLClassLoader.class, "close", urlClassLoader);
-				} catch (Exception e) {
-				}
-			}
 		}
 		return list;
 	}
@@ -1843,6 +1970,11 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	@Override
 	public Map<String, Class> getClassMap() {
 		return classMap;
+	}
+
+	@Override
+	public List<String> getOldResourceDirList() {
+		return oldResourceDirList;
 	}
 
 }

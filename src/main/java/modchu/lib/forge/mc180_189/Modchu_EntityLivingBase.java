@@ -53,35 +53,22 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public abstract class Modchu_EntityLivingBase extends EntityLivingBase implements Modchu_IEntityLivingBase {
 	public Modchu_IEntityLivingBaseMaster master;
-	public String entityName;
-	protected UUID entityUniqueID;
-	protected int maxHealth;
-	public boolean initFlag;
-	public int dataWatcherWatchableObjectIdFirst;
-	public int dataWatcherWatchableObjectIdCount = 11;
 
 	public Modchu_EntityLivingBase(World world) {
 		super(world);
 		entityUniqueID = UUID.randomUUID();
 		ignoreFrustumCheck = true;
-		initFlag = false;
 		init((HashMap)null);
 	}
 
 	public Modchu_EntityLivingBase(HashMap<String, Object> map) {
 		this((World) map.get("Object"));
-		initFlag = false;
 		init(map);
 	}
 
 	@Override
 	public boolean isDamageInvincible() {
-		return master != null ? master.isDamageInvincible() : superIsDamageInvincible();
-	}
-
-	@Override
-	public boolean superIsDamageInvincible() {
-		return getDamageInvincibleCount() > 0;
+		return master != null ? master.isDamageInvincible() : false;
 	}
 
 	@Override
@@ -96,12 +83,7 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 
 	@Override
 	public boolean isInitFlag() {
-		return initFlag;
-	}
-
-	@Override
-	public void setInitFlag(boolean b) {
-		initFlag = b;
+		return master != null;
 	}
 
 	@Override
@@ -116,12 +98,7 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 
 	@Override
 	public int getDataWatcherWatchableObjectIdFirst() {
-		return dataWatcherWatchableObjectIdFirst;
-	}
-
-	@Override
-	public void setDataWatcherWatchableObjectIdFirst(int i) {
-		dataWatcherWatchableObjectIdFirst = i;
+		return 10;
 	}
 
 	@Override
@@ -131,30 +108,15 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 	@Override
 	public void sendDeathMessage(Object damageSource) {
 		if (master != null) master.sendDeathMessage(damageSource);
-		else superSendDeathMessage(damageSource);
-	}
-
-	@Override
-	public void superSendDeathMessage(Object damageSource) {
 	}
 
 	@Override
 	public boolean canSendDeathMessage() {
-		return master != null ? master.canSendDeathMessage() : superCanSendDeathMessage();
-	}
-
-	@Override
-	public boolean superCanSendDeathMessage() {
-		return false;
+		return master != null ? master.canSendDeathMessage() : false;
 	}
 
 	@Override
 	public Object getRidingEntity2() {
-		return superGetRidingEntity();
-	}
-
-	@Override
-	public Object superGetRidingEntity2() {
 		return superGetRidingEntity();
 	}
 
@@ -164,27 +126,13 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 	}
 
 	@Override
-	public boolean superIsRiding2() {
-		return superIsRiding();
-	}
-
-	@Override
 	public void dismountRidingEntity2() {
 		superDismountRidingEntity();
 	}
 
 	@Override
-	public void superDismountRidingEntity2() {
-		superDismountRidingEntity();
-	}
-
-	@Override
-	public int getDataWatcherWatchableObjectIdCount() {
-		return 9;
-	}
-
-	@Override
-	public void setDataWatcherWatchableObjectIdCount(int i) {
+	public int getEntityDataManagerEntriesCount() {
+		return Modchu_EntityHelper.getInstance().getEntityDataManagerEntriesCount(this);
 	}
 
 	@Override
@@ -259,13 +207,15 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 	}
 
 	private String getMasterClassName() {
+		int dataWatcherWatchableObjectIdFirst = getDataWatcherWatchableObjectIdFirst();
 		String s = Modchu_CastHelper.String(getDataWatcherWatchableObject(dataWatcherWatchableObjectIdFirst));
 		//Modchu_Debug.mDebug("Modchu_EntityLivingBase getMasterClassName s="+s);
 		return s;
 	}
 
 	private void setMasterClassName(String s) {
-		Modchu_Debug.mDebug("Modchu_EntityLivingBase setMasterClassName s="+s);
+		int dataWatcherWatchableObjectIdFirst = getDataWatcherWatchableObjectIdFirst();
+		//Modchu_Debug.mDebug("Modchu_EntityLivingBase setMasterClassName s="+s);
 		setDataWatcherWatchableObject(dataWatcherWatchableObjectIdFirst, s);
 	}
 
@@ -1318,11 +1268,7 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 	}
 
 	@Override
-	public void superInit() {
-	}
-
-	@Override
-	public void superSetMaxHealth(Object floatOrInt) {
+	public void supersetMaxHealth(Object floatOrInt) {
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(Modchu_CastHelper.Double(floatOrInt, 0.0D, false));
 	}
 
@@ -1727,26 +1673,18 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 	}
 
 	@Override
-	public Object superGetFreeVariable(String s) {
-		return null;
-	}
-
-	@Override
 	public void setFreeVariable(String s, Object o) {
 		master.setFreeVariable(s, o);
 	}
 
 	@Override
-	public void superSetFreeVariable(String s, Object o) {
-	}
-
-	@Override
 	protected void entityInit() {
-		if (master != null) master.entityInit();
+		Modchu_EntityHelper.getInstance().entityInit(this);
 	}
 
 	@Override
 	public void superEntityInit() {
+		super.entityInit();
 	}
 
 	@Override
@@ -1867,7 +1805,6 @@ public abstract class Modchu_EntityLivingBase extends EntityLivingBase implement
 	@Override
 	public void onUpdate() {
 		if (master != null) master.onUpdate();
-		else super.onUpdate();
 	}
 
 	@Override

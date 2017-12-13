@@ -10,13 +10,10 @@ public interface Modchu_IEntityLivingBase extends Modchu_IEntity {
 	public void setKnockbackResistance(double d);
 	public void setAttackDamage(double d);
 	public void sendDeathMessage(Object damageSource);
-	public void superSendDeathMessage(Object damageSource);
 	public boolean canSendDeathMessage();
-	public boolean superCanSendDeathMessage();
 	public int getDamageInvincibleCount();
 	public void setDamageInvincibleCount(int i);
 	public boolean isDamageInvincible();
-	public boolean superIsDamageInvincible();
 
 	public boolean superFunc_146066_aG();
 	public String superFunc_146067_o(int p_146067_1_);

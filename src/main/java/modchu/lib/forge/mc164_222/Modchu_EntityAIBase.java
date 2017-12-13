@@ -18,6 +18,7 @@ public abstract class Modchu_EntityAIBase extends EntityAIBase implements Modchu
 		//Modchu_Debug.lDebug("Modchu_EntityAIBase init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAIBaseMaster ? (Modchu_IEntityAIBaseMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override

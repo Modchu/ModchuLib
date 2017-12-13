@@ -3782,7 +3782,12 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc194_202.Modchu_ASMaster 
 
 	@Override
 	public void textureManagerBindTexture(Object textureManager, Object o) {
-		if (o != null) ((TextureManager) textureManager).bindTexture((ResourceLocation) o);
+		if (o != null) {
+			try {
+				((TextureManager) textureManager).bindTexture((ResourceLocation) o);
+			} catch (Exception e) {
+			}
+		}
 	}
 
 	@Override

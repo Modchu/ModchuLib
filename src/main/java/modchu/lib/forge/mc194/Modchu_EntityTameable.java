@@ -5,6 +5,7 @@ import java.util.Map;
 
 import modchu.lib.Modchu_IEntityDataManager;
 import modchu.lib.Modchu_IEntityTameable;
+import modchu.lib.Modchu_Main;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -46,7 +47,20 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc190_222.Modchu_Ent
 
 	@Override
 	public void setDataWatcherWatchableObject(int i, Object o) {
+		if (worldObj.isRemote) {
+			Modchu_Main.setRuntimeException("Modchu_EntityTameable setDataWatcherWatchableObject debug");
+			return;
+		}
 		((Modchu_IEntityDataManager) dataManager).setDataWatcherWatchableObject(i, o);
+	}
+
+	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
+		super.setPositionAndRotationDirect(par1, par3, par5, par7, par8, par9, true);
+	}
+
+	@Override
+	public void superSetPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9) {
+		super.setPositionAndRotationDirect(par1, par3, par5, par7, par8, par9, true);
 	}
 
 	@Override
@@ -638,10 +652,6 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc190_222.Modchu_Ent
 	@Override
 	public double superFollowLeashSpeed() {
 		return 0.0D;
-	}
-
-	@Override
-	public void superSetMoveForward(float p_191989_1_) {
 	}
 
 }

@@ -19,6 +19,7 @@ public class Modchu_EntityAISwimming extends EntityAISwimming implements Modchu_
 		//Modchu_Debug.lDebug("Modchu_EntityAISwimming init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAISwimmingMaster ? (Modchu_IEntityAISwimmingMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override

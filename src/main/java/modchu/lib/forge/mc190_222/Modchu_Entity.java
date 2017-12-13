@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import modchu.lib.Modchu_AS;
+import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_EntityDataManagerMaster2;
+import modchu.lib.Modchu_EntityHelper;
 import modchu.lib.Modchu_IEntity;
 import modchu.lib.Modchu_IEntityMaster;
 import modchu.lib.Modchu_Main;
@@ -51,11 +53,6 @@ import net.minecraftforge.common.capabilities.Capability;
 
 public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public Modchu_IEntityMaster master;
-	public float maxHealth;
-	public int ridingEntity2;
-	public boolean initFlag;
-	public int dataWatcherWatchableObjectIdFirst;
-	public int dataWatcherWatchableObjectIdCount = 6;
 
 	public Modchu_Entity(World world) {
 		super(world);
@@ -69,12 +66,7 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public boolean isInitFlag() {
-		return initFlag;
-	}
-
-	@Override
-	public void setInitFlag(boolean b) {
-		initFlag = b;
+		return master != null;
 	}
 
 	@Override
@@ -89,12 +81,7 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public int getDataWatcherWatchableObjectIdFirst() {
-		return dataWatcherWatchableObjectIdFirst;
-	}
-
-	@Override
-	public void setDataWatcherWatchableObjectIdFirst(int i) {
-		dataWatcherWatchableObjectIdFirst = i;
+		return 2;
 	}
 
 	@Override
@@ -118,52 +105,23 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public int getDataWatcherWatchableObjectIdCount() {
-		return dataWatcherWatchableObjectIdCount;
-	}
-
-	@Override
-	public void setDataWatcherWatchableObjectIdCount(int i) {
-		dataWatcherWatchableObjectIdCount = i;
+	public int getEntityDataManagerEntriesCount() {
+		return Modchu_EntityHelper.getInstance().getEntityDataManagerEntriesCount(this);
 	}
 
 	@Override
 	public Entity getRidingEntity2() {
-		return (Entity) (master != null ? master.getRidingEntity2() : superGetRidingEntity2());
-	}
-
-	@Override
-	public Entity superGetRidingEntity2() {
-		// TODO Riding2
-		if (ridingEntity2 != 0) {
-			World worldObj = (World) Modchu_AS.get(Modchu_AS.entityWorldObj, this);
-			return worldObj.getEntityByID(ridingEntity2);
-		}
-		return null;
+		return superGetRidingEntity();
 	}
 
 	@Override
 	public boolean isRiding2() {
-		// TODO Riding2
-		return master != null ? master.isRiding2() : superIsRiding2();
-	}
-
-	@Override
-	public boolean superIsRiding2() {
-		// TODO Riding2
-		return ridingEntity2 != 0;
+		return isRiding();
 	}
 
 	@Override
 	public void dismountRidingEntity2() {
-		// TODO Riding2
-		if (master != null) master.dismountRidingEntity2();
-		else superDismountRidingEntity2();
-	}
-
-	@Override
-	public void superDismountRidingEntity2() {
-		ridingEntity2 = 0;
+		superDismountRidingEntity();
 	}
 
 	@Override
@@ -172,17 +130,8 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public Object superGetFreeVariable(String s) {
-		return null;
-	}
-
-	@Override
 	public void setFreeVariable(String s, Object o) {
 		master.setFreeVariable(s, o);
-	}
-
-	@Override
-	public void superSetFreeVariable(String s, Object o) {
 	}
 
 	protected void init(HashMap<String, Object> map) {
@@ -202,7 +151,7 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	protected void entityInit() {
-		if (master != null) master.entityInit();
+		Modchu_EntityHelper.getInstance().entityInit(this);
 	}
 
 	@Override
@@ -334,7 +283,6 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 	@Override
 	public void onUpdate() {
 		if (master != null) master.onUpdate();
-		else super.onUpdate();
 	}
 
 	@Override
@@ -2564,12 +2512,7 @@ public abstract class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public void superInit() {
-	}
-
-	@Override
-	public void superSetMaxHealth(Object floatOrInt) {
-		maxHealth = (Float) floatOrInt;
+	public void supersetMaxHealth(Object floatOrInt) {
 	}
 
 	@Override

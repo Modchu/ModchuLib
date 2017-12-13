@@ -170,4 +170,14 @@ public class Modchu_ASMaster extends modchu.lib.forge.mc212_222.Modchu_ASMaster 
 		((TexturedQuad) texturedQuad).draw(((Tessellator) tessellator).getBuffer(), f);
 	}
 
+	@Override
+	public float entityLivingBaseMoveStrafing(Object entityLivingBase) {
+		return ((EntityLivingBase) entityLivingBase).moveStrafing;
+	}
+
+	@Override
+	public Object axisAlignedBBExpand(Object axisAlignedBB, double d, double d1, double d2) {
+		return ((AxisAlignedBB) axisAlignedBB).expand(d, d1, d2);
+	}
+
 }

@@ -3,6 +3,8 @@ package modchu.lib;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import java.util.Map;
 
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
@@ -15,7 +17,7 @@ public class Modchu_InitLogoLoadingScreenRenderer {
 	public static int subProgress;
 	public static Object scaledResolution = null;
 	public static Object framebuffer = null;
-	public static boolean drawInitLogoLoadingScreen = true;
+	public static boolean drawInitLogoLoadingScreen = false;
 	private static boolean tempSubProgressFlag;
 	private static Object tempResourceLocation;
 	private static int tempProgress;
@@ -66,16 +68,26 @@ public class Modchu_InitLogoLoadingScreenRenderer {
 				Modchu_GlStateManager.enableTexture2D();
 				boolean debug1 = false;
 				endDisplayUpdate(debug1 ? i == 1 : false);
-				if (framebuffer != null) {
-					Modchu_AS.set("Framebuffer", "framebufferClear", framebuffer);
-					Modchu_AS.set(Modchu_AS.framebufferBindFramebuffer, framebuffer, false);
-					//Modchu_GlStateManager.popMatrix();
-					//Modchu_GlStateManager.pushMatrix();
-					Modchu_AS.set(Modchu_AS.framebufferFramebufferRender, framebuffer, displayWidth, displayHeight);
-				}
+				framebufferClear();
 			}
 		}
 		//Modchu_GlStateManager.popMatrix();
+	}
+
+	public static void framebufferClear() {
+		if (framebuffer != null) {
+			Modchu_AS.set("Framebuffer", "framebufferClear", framebuffer);
+			Modchu_AS.set(Modchu_AS.framebufferBindFramebuffer, framebuffer, false);
+			//Modchu_GlStateManager.popMatrix();
+			//Modchu_GlStateManager.pushMatrix();
+			int displayWidth = Modchu_AS.getInt(Modchu_AS.minecraftDisplayWidth);
+			int displayHeight = Modchu_AS.getInt(Modchu_AS.minecraftDisplayHeight);
+			Modchu_AS.set(Modchu_AS.framebufferFramebufferRender, framebuffer, displayWidth, displayHeight);
+		} else {
+			Modchu_GlStateManager.clearColor(1F, 1F, 1F, 1F);
+			Modchu_GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			Modchu_GlStateManager.clear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+		}
 	}
 
 	public static void setLoadingProgress(int progress, Object resourceLocation) {
@@ -134,7 +146,16 @@ public class Modchu_InitLogoLoadingScreenRenderer {
 			try {
 
 				Object tessellator = Modchu_AS.get(Modchu_AS.tessellatorInstance);
-				Modchu_AS.set(Modchu_AS.renderEngineBindTexture, resourceLocation);
+				if (version > 169) {
+					Object textureManager = Modchu_AS.get(Modchu_AS.minecraftGetTextureManager);
+					if (textureManager != null) {
+						Modchu_AS.set(Modchu_AS.textureManagerBindTexture, textureManager, resourceLocation);
+					} else {
+						Modchu_Main.bindBufferedImage(resourceLocation);
+					}
+				} else {
+					Modchu_AS.set(Modchu_AS.renderEngineBindTexture, resourceLocation);
+				}
 				float f = 32.0F;
 				if (version > 180) {
 					Modchu_AS.set(Modchu_AS.tessellatorStartDrawingQuads, tessellator, 7, Modchu_AS.get("DefaultVertexFormats", version > 188 ? "POSITION_TEX_COLOR" : "field_181709_i"));

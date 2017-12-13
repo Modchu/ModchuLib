@@ -766,5 +766,6 @@ public interface Modchu_ASC {
 	public static final int mathHelperClamp_int = 16470;
 	public static final int itemSetRegistryName_int = 16471;
 	public static final int entityLivingOnInitialSpawn_int = 16472;
+	public static final int modelRendererAddChild_int = 16473;
 
 }

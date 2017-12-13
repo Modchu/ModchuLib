@@ -31,7 +31,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_EntityTameable implements Modchu_IEntityTameable {
+public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_EntityTameable {
 
 	public Modchu_EntityTameable(World world) {
 		super(world);
@@ -941,14 +941,6 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc180_189.Modchu_Ent
 	@Override
 	public double superFollowLeashSpeed() {
 		return 0.0D;
-	}
-
-	@Override
-	public void superSetMoveForward(float p_191989_1_) {
-	}
-
-	@Override
-	public void superTravel(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
 	}
 
 }

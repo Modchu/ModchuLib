@@ -4671,4 +4671,9 @@ public class Modchu_ASBasis implements Modchu_IASMaster {
 		return base.superEntityLivingOnInitialSpawn(entityLiving, difficultyInstance, iEntityLivingData);
 	}
 
+	@Override
+	public void modelRendererAddChild(Object modelRenderer, Object modelRenderer1) {
+		base.superModelRendererAddChild(modelRenderer, modelRenderer1);
+	}
+
 }

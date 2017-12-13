@@ -19,6 +19,7 @@ public abstract class Modchu_EntityAISit extends EntityAISit implements Modchu_I
 		//Modchu_Debug.lDebug("Modchu_EntityAISit init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAISitMaster ? (Modchu_IEntityAISitMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override

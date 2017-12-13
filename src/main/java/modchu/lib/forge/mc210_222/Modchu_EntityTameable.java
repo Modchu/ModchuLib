@@ -21,7 +21,7 @@ public abstract class Modchu_EntityTameable extends modchu.lib.forge.mc202_222.M
 
 	@Override
 	public boolean processInteract(EntityPlayer entityPlayer, EnumHand enumHand) {
-		Modchu_Debug.mDebug("Modchu_EntityTameable processInteract");
+		//Modchu_Debug.mDebug("Modchu_EntityTameable processInteract");
 		return master != null ? master.processInteract(entityPlayer, enumHand, null) : super.processInteract(entityPlayer, enumHand);
 	}
 

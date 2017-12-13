@@ -23,6 +23,7 @@ public interface Modchu_IFileManagerMaster {
 	public boolean addResourcesMod(Class c, String classFileSearchName, String addModResourcePackSearchName);
 	public boolean addModClass(File file, String fname, String classFileSearchName, String addModResourcePackSearchName);
 	public String classNameProcessing(String fname);
+	public String textureNameProcessing(String fname);
 	public ZipFile getZipFile(Class c);
 	public void copyZipResource(Class c, ZipFile zipFile, String s, File copydir);
 	public void copyZipResource(ZipFile zipFile, File baseDir, String s);
@@ -69,5 +70,8 @@ public interface Modchu_IFileManagerMaster {
 	public String getRelativePath(String s);
 	public Map<String, Class> getClassMap();
 	public InputStream getModInputStream(Object o);
+	public LinkedList<File> getClassLoaderResourcesFileList(Class c);
+	public void addModResourcePack(File file);
+	public List<String> getOldResourceDirList();
 
 }

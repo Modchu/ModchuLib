@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface Modchu_IEntityDataManager {
+	public int getEntityDataManagerEntriesCount();
+
 	public void entityDataManagerRegister(Class[] c1, int i, Object o);
 	public Object getDataWatcherWatchableObject(int i);
 	public void setDataWatcherWatchableObject(int i, Object o);

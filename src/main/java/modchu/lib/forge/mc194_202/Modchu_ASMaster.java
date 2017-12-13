@@ -8,6 +8,8 @@ import net.minecraft.client.model.TexturedQuad;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.AxisAlignedBB;
 
 public abstract class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_ASMaster {
 
@@ -82,6 +84,21 @@ public abstract class Modchu_ASMaster extends modchu.lib.forge.mc190_202.Modchu_
 	@Override
 	public void texturedQuadDraw(Object texturedQuad, Object tessellator, float f) {
 		((TexturedQuad) texturedQuad).draw(((Tessellator) tessellator).getBuffer(), f);
+	}
+
+	@Override
+	public float entityLivingBaseMoveForward(Object entityLivingBase) {
+		return ((EntityLivingBase) entityLivingBase).moveForward;
+	}
+
+	@Override
+	public float entityLivingBaseMoveStrafing(Object entityLivingBase) {
+		return ((EntityLivingBase) entityLivingBase).moveStrafing;
+	}
+
+	@Override
+	public Object axisAlignedBBExpand(Object axisAlignedBB, double d, double d1, double d2) {
+		return ((AxisAlignedBB) axisAlignedBB).expand(d, d1, d2);
 	}
 
 }

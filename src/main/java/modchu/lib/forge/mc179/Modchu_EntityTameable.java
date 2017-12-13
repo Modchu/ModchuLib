@@ -230,12 +230,4 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc172_179.Modchu_Ent
 		return 0.0D;
 	}
 
-	@Override
-	public void superSetMoveForward(float p_191989_1_) {
-	}
-
-	@Override
-	public void superTravel(float p_191986_1_, float p_191986_2_, float p_191986_3_) {
-	}
-
 }

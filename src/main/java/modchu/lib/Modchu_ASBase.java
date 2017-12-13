@@ -1028,5 +1028,6 @@ public abstract class Modchu_ASBase implements Modchu_ASC {
 	public static int mathHelperClamp = mathHelperClamp_int;
 	public static int itemSetRegistryName = itemSetRegistryName_int;
 	public static int entityLivingOnInitialSpawn = entityLivingOnInitialSpawn_int;
+	public static int modelRendererAddChild = modelRendererAddChild_int;
 
 }

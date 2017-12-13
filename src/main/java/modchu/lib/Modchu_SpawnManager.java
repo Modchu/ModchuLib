@@ -13,13 +13,26 @@ public class Modchu_SpawnManager {
 
 	public Object spawnCreature(String s, Object world, double par2, double par4, double par6) {
 		boolean debug = true;
-		if (debug) Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature s="+s);
+		if (debug) Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature s="+s);
 		if (s != null
 				& !s.isEmpty()); else return null;
 		if (!spawnClassNameMap.containsKey(s)) return null;
 		Object[] o = spawnClassNameMap.get(s);
 		String spawModchuClassName = (String) o[0];
 		HashMap<String, Object> spawnableMap = (HashMap<String, Object>) o[1];
+		if (!spawnableMap.containsKey("Class")) {
+			String ss = "Modchu_SpawnManager spawnCreature !containsKey(\"Class\") error !! s="+s+" spawnableMap="+spawnableMap;
+			Modchu_Debug.lDebug(ss);
+			Modchu_Main.setRuntimeException(ss);
+			return null;
+		}
+		Class c = (Class) spawnableMap.get("Class");
+		if (c == null) {
+			String ss = "Modchu_SpawnManager spawnCreature c == null error !! s="+s+" spawnableMap="+spawnableMap;
+			Modchu_Debug.lDebug(ss);
+			Modchu_Main.setRuntimeException(ss);
+			return null;
+		}
 		return spawnCreature(spawModchuClassName, spawnableMap, world, par2, par4, par6);
 	}
 
@@ -29,19 +42,19 @@ public class Modchu_SpawnManager {
 		try {
 			boolean isRemote = Modchu_AS.getBoolean(Modchu_AS.worldIsRemote, world);
 			spawnableMap.put("Object", world);
-			if (debug) Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature 1 isRemote="+isRemote);
+			if (debug) Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature 1 isRemote="+isRemote);
 			spawnableMap.put("spawnX", par2);
 			spawnableMap.put("spawnY", par4);
 			spawnableMap.put("spawnZ", par6);
-			if (debug) Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature spawnableMap="+spawnableMap);
+			if (debug) Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature spawnableMap="+spawnableMap);
 			entity = Modchu_Main.newModchuCharacteristicObject(spawModchuClassName, spawnableMap);
 			if (entity !=null); else {
 				Modchu_Main.setRuntimeException("Modchu_SpawnManager spawnCreature entity == null error !! spawModchuClassName="+spawModchuClassName+" spawnableMap="+spawnableMap);
 				return null;
 			}
 			if (debug) {
-				Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature 2 entity="+entity);
-				Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature master="+Modchu_Main.getModchuCharacteristicObjectMaster(entity));
+				Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature 2 entity="+entity);
+				Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature master="+Modchu_Main.getModchuCharacteristicObjectMaster(entity));
 			}
 			int version = Modchu_Main.getMinecraftVersion();
 			String s1 = version > 190 ? "Particle" : "EntityFX";
@@ -49,11 +62,11 @@ public class Modchu_SpawnManager {
 			if (Particle != null
 					&& Particle.isInstance(entity)) {
 				if (debug) {
-					Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature 3 "+s1+".isInstance");
-					Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature entity.master="+Modchu_Main.getModchuCharacteristicObjectMaster(entity));
+					Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature 3 "+s1+".isInstance");
+					Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature entity.master="+Modchu_Main.getModchuCharacteristicObjectMaster(entity));
 				}
 				Object effectRenderer = Modchu_AS.get("Minecraft", "effectRenderer", Modchu_AS.get(Modchu_AS.minecraftGetMinecraft));
-				if (debug) Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature effectRenderer="+effectRenderer);
+				if (debug) Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature effectRenderer="+effectRenderer);
 				if (effectRenderer != null) Modchu_AS.set("EffectRenderer", "addEffect", new Class[]{ Particle }, effectRenderer, new Object[]{ entity });
 			} else {
 				Modchu_AS.set(Modchu_AS.entitySetLocationAndAngles, entity, par2 + 0.5D, par4 + 1.0D, par6 + 0.5D, Modchu_AS.getFloat(Modchu_AS.mathHelperWrapAngleTo180_float, ((Random) Modchu_AS.get(Modchu_AS.worldRand, world)).nextFloat() * 360.0F), 0.0F);
@@ -66,19 +79,22 @@ public class Modchu_SpawnManager {
 				if (flag) {
 					if (version > 179) {
 						Object blockPos = Modchu_AS.get(Modchu_AS.newBlockPos, Modchu_AS.getDouble(Modchu_AS.entityPosX, entity), Modchu_AS.getDouble(Modchu_AS.entityPosY, entity), Modchu_AS.getDouble(Modchu_AS.entityPosZ, entity));
-						//Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature blockPos="+blockPos);
+						//Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature blockPos="+blockPos);
 						Object difficultyForLocation = Modchu_AS.get("World", "getDifficultyForLocation", new Class[]{ Modchu_Reflect.loadClass("BlockPos") }, world, new Object[]{ blockPos });
-						//Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature difficultyForLocation="+difficultyForLocation);
+						//Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature difficultyForLocation="+difficultyForLocation);
 						//Method method = Modchu_Reflect.getMethod("EntityLiving", "func_180482_a", version > 180 ? "onInitialSpawn" : "func_180482_a", new Class[]{ Modchu_Reflect.loadClass("DifficultyInstance"), Modchu_Reflect.loadClass("IEntityLivingData") });
-						//Modchu_Debug.mDebug("Modchu_SpawnManager spawnCreature method="+method);
+						//Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature method="+method);
 						//Modchu_Reflect.invoke(method, entity, new Object[]{ difficultyForLocation, null });
 						if (flag) Modchu_AS.get("EntityLiving", version > 180 ? "onInitialSpawn" : "func_180482_a", new Class[]{ Modchu_Reflect.loadClass("DifficultyInstance"), Modchu_Reflect.loadClass("IEntityLivingData") }, entity, new Object[]{ difficultyForLocation, null });
 					} else if (version > 159) {
 						Modchu_AS.set("EntityLiving", "onSpawnWithEgg", new Class[]{ Modchu_Reflect.loadClass(version > 169 ? "IEntityLivingData" : "EntityLivingData") }, entity, new Object[]{ null });
 					}
 				}
-				Modchu_AS.getBoolean(Modchu_AS.worldSpawnEntity, world, entity);
-				if (flag) Modchu_AS.set("EntityLiving", "playLivingSound", entity);
+				boolean b = Modchu_AS.getBoolean(Modchu_AS.worldSpawnEntity, world, entity);
+				if (b) {
+					if (debug) Modchu_Debug.lDebug("Modchu_SpawnManager spawnCreature worldSpawnEntity true.");
+					if (flag) Modchu_AS.set("EntityLiving", "playLivingSound", entity);
+				}
 			}
 		} catch (Exception e) {
 			String ss = "Modchu_SpawnManager spawnCreature Exception !!";

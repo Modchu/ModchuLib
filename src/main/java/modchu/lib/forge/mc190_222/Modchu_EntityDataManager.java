@@ -50,6 +50,26 @@ public class Modchu_EntityDataManager extends EntityDataManager implements Modch
 	}
 
 	@Override
+	public int getEntityDataManagerEntriesCount() {
+		Map<Integer, Object> entries = Modchu_AS.getMap("EntityDataManager", "entries", this);
+		//Modchu_Debug.mDebug("Modchu_EntityDataManager getEntityDataManagerEntriesCount entries="+entries);
+		int i = 0;
+		if (entries != null
+				&& !entries.isEmpty())
+		for (Entry<Integer, Object> en : entries.entrySet()) {
+			int key = en.getKey();
+			Object o = en.getValue();
+			if (i < key) i = key;
+		}
+		if (i < 1) {
+			String ss = "Modchu_EntityDataManager getEntityDataManagerEntriesCount error !!";
+			Modchu_Main.setRuntimeException(ss);
+		}
+		i++;
+		return i;
+	}
+
+	@Override
 	public void entityDataManagerRegister(Class[] c1, int i, Object o) {
 		boolean debug = false;
 		if (debug) Modchu_Debug.mDebug("Modchu_EntityDataManager entityDataManagerRegister 1 c1="+c1+" i="+i+" o="+o);
@@ -62,8 +82,14 @@ public class Modchu_EntityDataManager extends EntityDataManager implements Modch
 			if (debug) {
 				Modchu_Debug.mDebug("Modchu_EntityDataManager entityDataManagerRegister 4 dataParameterMap="+dataParameterMap);
 				DataParameter dataParameter1 = (DataParameter) getDataParameterMap(i);
+				int id = -1;
+				if (dataParameter1 != null) {
+					id = dataParameter1.getId();
+				} else {
+					id = getIdMap(i);
+					dataParameter1 = (DataParameter) getDataParameterMap(id);
+				}
 				Modchu_Debug.mDebug("Modchu_EntityDataManager entityDataManagerRegister 5 register ok. dataParameter1="+dataParameter1);
-				int id = dataParameter1 != null ? dataParameter1.getId() : -1;
 				Modchu_Debug.mDebug("Modchu_EntityDataManager entityDataManagerRegister 6 register ok. id="+id);
 				EntityDataManager.DataEntry dataentry = dataParameter1 != null ? getEntry(dataParameter1) : null;
 				Modchu_Debug.mDebug("Modchu_EntityDataManager entityDataManagerRegister 7 register ok. dataentry="+dataentry);
@@ -113,6 +139,10 @@ public class Modchu_EntityDataManager extends EntityDataManager implements Modch
 		DataParameter dataParameter = (DataParameter) getDataParameterMap(i);
 		if (debug) Modchu_Debug.mDebug("Modchu_EntityDataManager getDataWatcherGetWatchableObject dataParameter="+dataParameter);
 		if (dataParameter != null); else {
+			int id = getIdMap(i);
+			dataParameter = (DataParameter) getDataParameterMap(id);
+		}
+		if (dataParameter != null); else {
 			Modchu_Debug.mDebug("Modchu_EntityDataManager getDataWatcherGetWatchableObject dataParameter == null return. i="+i);
 			Modchu_Debug.mDebug("Modchu_EntityDataManager getDataWatcherGetWatchableObject dataParameter == null return. dataParameterMap="+dataParameterMap);
 			//Modchu_Main.setRuntimeException("Modchu_EntityDataManager getDataWatcherGetWatchableObject dataParameter == null return. i="+i);
@@ -157,6 +187,10 @@ public class Modchu_EntityDataManager extends EntityDataManager implements Modch
 		if (debug) {
 			Modchu_Debug.mDebug("Modchu_EntityDataManager setDataWatcherGetWatchableObject 2 i="+i);
 			Modchu_Debug.mDebug("Modchu_EntityDataManager setDataWatcherGetWatchableObject 3 dataParameter="+dataParameter);
+		}
+		if (dataParameter != null); else {
+			int id = getIdMap(i);
+			dataParameter = (DataParameter) getDataParameterMap(id);
 		}
 		if (dataParameter != null); else {
 			Modchu_Debug.mDebug("Modchu_EntityDataManager setDataWatcherGetWatchableObject 4 dataParameter == null return. baseEntity="+baseEntity+" i="+i);

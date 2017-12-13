@@ -214,7 +214,7 @@ public class Modchu_GuiContainer extends GuiContainer implements Modchu_IGuiCont
 
 	@Override
 	public void handleInput() {
-		Modchu_Debug.mDebug("handleInput Modchu_GuiContainer master="+master);
+		//Modchu_Debug.mDebug("Modchu_GuiContainer handleInput master="+master);
 		if (master != null) master.handleInput();
 		else super.handleInput();
 	}

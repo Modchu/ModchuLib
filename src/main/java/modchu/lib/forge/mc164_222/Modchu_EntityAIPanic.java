@@ -22,6 +22,7 @@ public abstract class Modchu_EntityAIPanic extends EntityAIPanic implements Modc
 		//Modchu_Debug.lDebug("Modchu_EntityAIPanic init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAIPanicMaster ? (Modchu_IEntityAIPanicMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override
@@ -36,11 +37,11 @@ public abstract class Modchu_EntityAIPanic extends EntityAIPanic implements Modc
 
 	@Override
 	public boolean shouldExecute() {
-		return master != null ? master.shouldExecute() : false;
+		return master != null ? master.shouldExecute() : superShouldExecute();
 	}
 
 	public boolean superShouldExecute() {
-		return false;
+		return isEnabled() ? super.shouldExecute() : false;
 	}
 
 	@Override

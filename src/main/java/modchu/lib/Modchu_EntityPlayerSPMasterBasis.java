@@ -9,34 +9,30 @@ import java.util.UUID;
 
 public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPMaster {
 	public Modchu_IEntityPlayerSP base;
-	public static HashMap<Integer, HashMap> debugDataWatcherEntityMap = new HashMap();
-	public HashMap<Integer, Object> debugDataWatcherMap;
-	public int tempIsRiding;
-	public int damageInvincibleCount;
-	public int checkUUIDCount = 2;
 
 	public Modchu_EntityPlayerSPMasterBasis(HashMap<String, Object> map) {
 		base = (Modchu_IEntityPlayerSP) map.get("base");
+		Modchu_EntityHelper.getInstance().setData(base, "checkUUIDCount", 2);
 	}
 
 	@Override
 	public int getTempIsRiding() {
-		return tempIsRiding;
+		return Modchu_EntityHelper.getInstance().getTempIsRiding(base);
 	}
 
 	@Override
 	public void setTempIsRiding(int i) {
-		tempIsRiding = i;
+		Modchu_EntityHelper.getInstance().setTempIsRiding(base, i);
 	}
 
 	@Override
 	public int getDamageInvincibleCount() {
-		return damageInvincibleCount;
+		return Modchu_CastHelper.Int(Modchu_EntityHelper.getInstance().getData(base, "damageInvincibleCount"), 0);
 	}
 
 	@Override
 	public void setDamageInvincibleCount(int i) {
-		damageInvincibleCount = i;
+		Modchu_EntityHelper.getInstance().setData(base, "damageInvincibleCount", i);
 	}
 
 	@Override
@@ -175,1202 +171,1202 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 
 	@Override
 	public boolean attackEntityFrom(Object damageSource, float par2) {
-		return base.superAttackEntityFrom(damageSource, par2);
+		return base.superattackEntityFrom(damageSource, par2);
 	}
 
 	@Override
 	public void heal(float par1) {
-		base.superHeal(par1);
+		base.superheal(par1);
 	}
 
 	@Override
 	public void onUpdate() {
-		base.superOnUpdate();
+		base.superonUpdate();
 	}
 
 	@Override
 	public Object dropItem(boolean par1) {
-		return base.superDropItem(par1);
+		return base.superdropItem(par1);
 	}
 
 	@Override
 	public Object dropItemAndGetStack(Object entityItem) {
-		return base.superDropItemAndGetStack(entityItem);
+		return base.superdropItemAndGetStack(entityItem);
 	}
 
 	@Override
 	public void sendChatMessage(String par1Str) {
-		base.superSendChatMessage(par1Str);
+		base.supersendChatMessage(par1Str);
 	}
 
 	@Override
 	public void swingArm() {
-		base.superSwingArm();
+		base.superswingArm();
 	}
 
 	@Override
 	public void respawnPlayer() {
-		base.superRespawnPlayer();
+		base.superrespawnPlayer();
 	}
 
 	@Override
 	public void damageEntity(Object damageSource, float par2) {
-		base.superDamageEntity(damageSource, par2);
+		base.superdamageEntity(damageSource, par2);
 	}
 
 	@Override
 	public void closeScreen() {
-		base.superCloseScreen();
+		base.supercloseScreen();
 	}
 
 	@Override
 	public void func_92015_f() {
-		base.superFunc_92015_f();
+		base.superfunc_92015_f();
 	}
 
 	@Override
 	public void setPlayerSPHealth(float par1) {
-		base.superSetPlayerSPHealth(par1);
+		base.supersetPlayerSPHealth(par1);
 	}
 
 	@Override
 	public void addStat(Object statBase, int par2) {
-		base.superAddStat(statBase, par2);
+		base.superaddStat(statBase, par2);
 	}
 
 	@Override
 	public void incrementStat(Object statBase, int par2) {
-		base.superIncrementStat(statBase, par2);
+		base.superincrementStat(statBase, par2);
 	}
 
 	@Override
 	public void sendPlayerAbilities() {
-		base.superSendPlayerAbilities();
+		base.supersendPlayerAbilities();
 	}
 
 	@Override
 	public void func_110318_g() {
-		base.superSendHorseJump();
+		base.supersendHorseJump();
 	}
 
 	@Override
 	public void func_110322_i() {
-		base.superFunc_110322_i();
+		base.superfunc_110322_i();
 	}
 
 	@Override
 	public void func_142020_c(String par1Str) {
-		base.superFunc_142020_c(par1Str);
+		base.superfunc_142020_c(par1Str);
 	}
 
 	@Override
 	public String func_142021_k() {
-		return base.superGetClientBrand();
+		return base.supergetClientBrand();
 	}
 
 	@Override
 	public void updateEntityActionState() {
-		base.superUpdateEntityActionState();
+		base.superupdateEntityActionState();
 	}
 
 	@Override
 	public float getFOVMultiplier() {
-		return base.superGetFOVMultiplier();
+		return base.supergetFOVMultiplier();
 	}
 
 	@Override
 	public void displayGUIEditSign(Object tileEntity) {
-		base.superDisplayGUIEditSign(tileEntity);
+		base.superdisplayGUIEditSign(tileEntity);
 	}
 
 	@Override
 	public void openBook(Object itemStack) {
-		base.superOpenBook(itemStack);
+		base.superopenBook(itemStack);
 	}
 
 	@Override
 	public void displayGUIChest(Object iInventory) {
-		base.superDisplayGUIChest(iInventory);
+		base.superdisplayGUIChest(iInventory);
 	}
 
 	@Override
 	public void displayGUIHopper(Object tileEntityHopper) {
-		base.superDisplayGUIHopper(tileEntityHopper);
+		base.superdisplayGUIHopper(tileEntityHopper);
 	}
 
 	@Override
 	public void displayGUIHopperMinecart(Object entityMinecartHopper) {
-		base.superDisplayGUIHopperMinecart(entityMinecartHopper);
+		base.superdisplayGUIHopperMinecart(entityMinecartHopper);
 	}
 
 	@Override
 	public void openGuiHorseInventory(Object entityHorse, Object iInventory) {
-		base.superOpenGuiHorseInventory(entityHorse, iInventory);
+		base.superopenGuiHorseInventory(entityHorse, iInventory);
 	}
 
 	@Override
 	public void displayGUIWorkbench(int par1, int par2, int par3) {
-		base.superDisplayGUIWorkbench(par1, par2, par3);
+		base.superdisplayGUIWorkbench(par1, par2, par3);
 	}
 
 	@Override
 	public void displayGUIEnchantment(int par1, int par2, int par3, String par4Str) {
-		base.superDisplayGUIEnchantment(par1, par2, par3, par4Str);
+		base.superdisplayGUIEnchantment(par1, par2, par3, par4Str);
 	}
 
 	@Override
 	public void displayGUIAnvil(int par1, int par2, int par3) {
-		base.superDisplayGUIAnvil(par1, par2, par3);
+		base.superdisplayGUIAnvil(par1, par2, par3);
 	}
 
 	@Override
 	public void displayGUIFurnace(Object tileEntityFurnace) {
-		base.superDisplayGUIFurnace(tileEntityFurnace);
+		base.superdisplayGUIFurnace(tileEntityFurnace);
 	}
 
 	@Override
 	public void displayGUIBrewingStand(Object tileEntityBrewingStand) {
-		base.superDisplayGUIBrewingStand(tileEntityBrewingStand);
+		base.superdisplayGUIBrewingStand(tileEntityBrewingStand);
 	}
 
 	@Override
 	public void displayGUIBeacon(Object tileEntityBeacon) {
-		base.superDisplayGUIBeacon(tileEntityBeacon);
+		base.superdisplayGUIBeacon(tileEntityBeacon);
 	}
 
 	@Override
 	public void displayGUIDispenser(Object tileEntityDispenser) {
-		base.superDisplayGUIDispenser(tileEntityDispenser);
+		base.superdisplayGUIDispenser(tileEntityDispenser);
 	}
 
 	@Override
 	public void displayGUIMerchant(Object iMerchant, String par2Str) {
-		base.superDisplayGUIMerchant(iMerchant, par2Str);
+		base.superdisplayGUIMerchant(iMerchant, par2Str);
 	}
 
 	@Override
 	public void onCriticalHit(Object entity) {
-		base.superOnCriticalHit(entity);
+		base.superonCriticalHit(entity);
 	}
 
 	@Override
 	public void onEnchantmentCritical(Object entity) {
-		base.superOnEnchantmentCritical(entity);
+		base.superonEnchantmentCritical(entity);
 	}
 
 	@Override
 	public void onItemPickup(Object entity, int par2) {
-		base.superOnItemPickup(entity, par2);
+		base.superonItemPickup(entity, par2);
 	}
 
 	@Override
 	public boolean isSneaking() {
-		return base.superIsSneaking();
+		return base.superisSneaking();
 	}
 
 	@Override
 	public void sendMessage(String par1Str) {
-		base.superSendMessage(par1Str);
+		base.supersendMessage(par1Str);
 	}
 
 	@Override
 	public void setSprinting(boolean par1) {
-		base.superSetSprinting(par1);
+		base.supersetSprinting(par1);
 	}
 
 	@Override
 	public void setXPStats(float par1, int par2, int par3) {
-		base.superSetXPStats(par1, par2, par3);
+		base.supersetXPStats(par1, par2, par3);
 	}
 
 	@Override
 	public void sendChatToPlayer(Object chatMessageComponent) {
-		base.superSendChatToPlayer(chatMessageComponent);
+		base.supersendChatToPlayer(chatMessageComponent);
 	}
 
 	@Override
 	public boolean canUseCommand(int par1, String par2Str) {
-		return base.superCanUseCommand(par1, par2Str);
+		return base.supercanUseCommand(par1, par2Str);
 	}
 
 	@Override
 	public Object getPlayerCoordinates() {
-		return base.superGetPlayerCoordinates();
+		return base.supergetPlayerCoordinates();
 	}
 
 	@Override
 	public Object getHeldItem() {
-		return base.superGetHeldItem();
+		return base.supergetHeldItem();
 	}
 
 	@Override
 	public void playSound(String par1Str, float par2, float par3) {
-		base.superPlaySound(par1Str, par2, par3);
+		base.superplaySound(par1Str, par2, par3);
 	}
 
 	@Override
 	public boolean isClientWorld() {
-		return base.superIsClientWorld();
+		return base.superisClientWorld();
 	}
 
 	@Override
 	public boolean isRidingHorse() {
-		return base.superIsRidingHorse();
+		return base.superisRidingHorse();
 	}
 
 	@Override
 	public float getHorseJumpPower() {
-		return base.superGetHorseJumpPower();
+		return base.supergetHorseJumpPower();
 	}
 
 	@Override
 	public void setupCustomSkin() {
-		base.superSetupCustomSkin();
+		base.supersetupCustomSkin();
 	}
 
 	@Override
 	public Object getTextureSkin() {
-		return base.superGetTextureSkin();
+		return base.supergetTextureSkin();
 	}
 
 	@Override
 	public Object getTextureCape() {
-		return base.superGetTextureCape();
+		return base.supergetTextureCape();
 	}
 
 	@Override
 	public Object getLocationSkin() {
-		return base.superGetLocationSkin();
+		return base.supergetLocationSkin();
 	}
 
 	@Override
 	public Object getLocationCape() {
-		return base.superGetLocationCape();
+		return base.supergetLocationCape();
 	}
 
 	@Override
 	public void applyEntityAttributes() {
-		base.superApplyEntityAttributes();
+		base.superapplyEntityAttributes();
 	}
 
 	@Override
 	public void entityInit() {
-		base.superEntityInit();
+		base.superentityInit();
 	}
 
 	@Override
 	public Object getItemInUse() {
-		return base.superGetItemInUse();
+		return base.supergetItemInUse();
 	}
 
 	@Override
 	public int getItemInUseCount() {
-		return base.superGetItemInUseCount();
+		return base.supergetItemInUseCount();
 	}
 
 	@Override
 	public boolean isHandActive() {
-		return base.superIsHandActive();
+		return base.superisHandActive();
 	}
 
 	@Override
 	public int getItemInUseDuration() {
-		return base.superGetItemInUseDuration();
+		return base.supergetItemInUseDuration();
 	}
 
 	@Override
 	public void stopUsingItem() {
-		base.superStopUsingItem();
+		base.superstopUsingItem();
 	}
 
 	@Override
 	public void clearItemInUse() {
-		base.superClearItemInUse();
+		base.superclearItemInUse();
 	}
 
 	@Override
 	public boolean isBlocking() {
-		return base.superIsBlocking();
+		return base.superisBlocking();
 	}
 
 	@Override
 	public int getMaxInPortalTime() {
-		return base.superGetMaxInPortalTime();
+		return base.supergetMaxInPortalTime();
 	}
 
 	@Override
 	public int getPortalCooldown() {
-		return base.superGetPortalCooldown();
+		return base.supergetPortalCooldown();
 	}
 
 	@Override
 	public void updateItemUse(Object itemStack, int par2) {
-		base.superUpdateItemUse(itemStack, par2);
+		base.superupdateItemUse(itemStack, par2);
 	}
 
 	@Override
 	public void onItemUseFinish() {
-		base.superOnItemUseFinish();
+		base.superonItemUseFinish();
 	}
 
 	@Override
 	public void handleStatusUpdate(byte par1) {
-		base.superHandleStatusUpdate(par1);
+		base.superhandleStatusUpdate(par1);
 	}
 
 	@Override
 	public boolean isMovementBlocked() {
-		return base.superIsMovementBlocked();
+		return base.superisMovementBlocked();
 	}
 
 	@Override
 	public boolean startRiding(Object entity) {
-		return base.superStartRiding(entity);
+		return base.superstartRiding(entity);
 	}
 
 	@Override
 	public int getScore() {
-		return base.superGetScore();
+		return base.supergetScore();
 	}
 
 	@Override
 	public void setScore(int par1) {
-		base.superSetScore(par1);
+		base.supersetScore(par1);
 	}
 
 	@Override
 	public void addScore(int par1) {
-		base.superAddScore(par1);
+		base.superaddScore(par1);
 	}
 
 	@Override
 	public void awardKillScore(Object entity, int par2, Object damageSource) {
-		base.superAwardKillScore(entity, par2, damageSource);
+		base.superawardKillScore(entity, par2, damageSource);
 	}
 
 	@Override
 	public Object dropPlayerItem(Object itemStack) {
-		return base.superDropPlayerItem(itemStack);
+		return base.superdropPlayerItem(itemStack);
 	}
 
 	@Override
 	public Object dropItem(Object itemStack, boolean par2) {
-		return base.superDropItem(itemStack, par2);
+		return base.superdropItem(itemStack, par2);
 	}
 
 	@Override
 	public float getCurrentPlayerStrVsBlock(Object block, boolean par2) {
-		return base.superGetCurrentPlayerStrVsBlock(block, par2);
+		return base.supergetCurrentPlayerStrVsBlock(block, par2);
 	}
 
 	@Override
 	public float getCurrentPlayerStrVsBlock(Object block, boolean par2, int meta) {
-		return base.superGetCurrentPlayerStrVsBlock(block, par2, meta);
+		return base.supergetCurrentPlayerStrVsBlock(block, par2, meta);
 	}
 
 	@Override
 	public boolean canHarvestBlock(Object block) {
-		return base.superCanHarvestBlock(block);
+		return base.supercanHarvestBlock(block);
 	}
 
 	@Override
 	public void readEntityFromNBT(Object nBTTagCompound) {
-		base.superReadEntityFromNBT(nBTTagCompound);
+		base.superreadEntityFromNBT(nBTTagCompound);
 	}
 
 	@Override
 	public void writeEntityToNBT(Object nBTTagCompound) {
-		base.superWriteEntityToNBT(nBTTagCompound);
+		base.superwriteEntityToNBT(nBTTagCompound);
 	}
 
 	@Override
 	public float getEyeHeight() {
-		return base.superGetEyeHeight();
+		return base.supergetEyeHeight();
 	}
 
 	@Override
 	public void damageArmor(float par1) {
-		base.superDamageArmor(par1);
+		base.superdamageArmor(par1);
 	}
 
 	@Override
 	public int getTotalArmorValue() {
-		return base.superGetTotalArmorValue();
+		return base.supergetTotalArmorValue();
 	}
 
 	@Override
 	public float getArmorVisibility() {
-		return base.superGetArmorVisibility();
+		return base.supergetArmorVisibility();
 	}
 
 	@Override
 	public boolean interactWith(Object entity) {
-		return base.superInteractWith(entity);
+		return base.superinteractWith(entity);
 	}
 
 	@Override
 	public Object getHeldItemMainhand() {
-		return base.superGetHeldItemMainhand();
+		return base.supergetHeldItemMainhand();
 	}
 
 	@Override
 	public void destroyCurrentEquippedItem() {
-		base.superDestroyCurrentEquippedItem();
+		base.superdestroyCurrentEquippedItem();
 	}
 
 	@Override
 	public void attackTargetEntityWithCurrentItem(Object entity) {
-		base.superAttackTargetEntityWithCurrentItem(entity);
+		base.superattackTargetEntityWithCurrentItem(entity);
 	}
 
 	@Override
 	public void setDead() {
-		base.superSetDead();
+		base.supersetDead();
 	}
 
 	@Override
 	public Object sleepInBedAt(int par1, int par2, int par3) {
-		return base.superSleepInBedAt(par1, par2, par3);
+		return base.supersleepInBedAt(par1, par2, par3);
 	}
 
 	@Override
 	public float getBedOrientationInDegrees() {
-		return base.superGetBedOrientationInDegrees();
+		return base.supergetBedOrientationInDegrees();
 	}
 
 	@Override
 	public boolean isPlayerSleeping() {
-		return base.superIsPlayerSleeping();
+		return base.superisPlayerSleeping();
 	}
 
 	@Override
 	public boolean isPlayerFullyAsleep() {
-		return base.superIsPlayerFullyAsleep();
+		return base.superisPlayerFullyAsleep();
 	}
 
 	@Override
 	public int getSleepTimer() {
-		return base.superGetSleepTimer();
+		return base.supergetSleepTimer();
 	}
 
 	@Override
 	public boolean getHideCape(int par1) {
-		return base.superGetHideCape(par1);
+		return base.supergetHideCape(par1);
 	}
 
 	@Override
 	public void setHideCape(int par1, boolean par2) {
-		base.superSetHideCape(par1, par2);
+		base.supersetHideCape(par1, par2);
 	}
 
 	@Override
 	public Object getBedLocation() {
-		return base.superGetBedLocation();
+		return base.supergetBedLocation();
 	}
 
 	@Override
 	public boolean isSpawnForced() {
-		return base.superIsSpawnForced();
+		return base.superisSpawnForced();
 	}
 
 	@Override
 	public Object getBedLocation(int dimension) {
-		return base.superGetBedLocation(dimension);
+		return base.supergetBedLocation(dimension);
 	}
 
 	@Override
 	public boolean isSpawnForced(int dimension) {
-		return base.superIsSpawnForced(dimension);
+		return base.superisSpawnForced(dimension);
 	}
 
 	@Override
 	public void setSpawnChunk(Object chunkCoordinates, boolean par2) {
-		base.superSetSpawnChunk(chunkCoordinates, par2);
+		base.supersetSpawnChunk(chunkCoordinates, par2);
 	}
 
 	@Override
 	public void setSpawnChunk(Object chunkCoordinates, boolean forced, int dimension) {
-		base.superSetSpawnChunk(chunkCoordinates, forced, dimension);
+		base.supersetSpawnChunk(chunkCoordinates, forced, dimension);
 	}
 
 	@Override
 	public void addStat(Object statBase) {
-		base.superAddStat(statBase);
+		base.superaddStat(statBase);
 	}
 
 	@Override
 	public void jump() {
-		base.superJump();
+		base.superjump();
 	}
 
 	@Override
 	public float getAIMoveSpeed() {
-		return base.superGetAIMoveSpeed();
+		return base.supergetAIMoveSpeed();
 	}
 
 	@Override
 	public void addMovementStat(double par1, double par3, double par5) {
-		base.superAddMovementStat(par1, par3, par5);
+		base.superaddMovementStat(par1, par3, par5);
 	}
 
 	@Override
 	public void fall(float par1) {
-		base.superFall(par1);
+		base.superfall(par1);
 	}
 
 	@Override
 	public void onKillEntity(Object entityLivingBase) {
-		base.superOnKillEntity(entityLivingBase);
+		base.superonKillEntity(entityLivingBase);
 	}
 
 	@Override
 	public void setInWeb() {
-		base.superSetInWeb();
+		base.supersetInWeb();
 	}
 
 	@Override
 	public Object getItemIcon(Object itemStack, int par2) {
-		return base.superGetItemIcon(itemStack, par2);
+		return base.supergetItemIcon(itemStack, par2);
 	}
 
 	@Override
 	public Object getItemStackFromSlot(Object par1) {
-		return base.superGetItemStackFromSlot(par1);
+		return base.supergetItemStackFromSlot(par1);
 	}
 
 	@Override
 	public void addExperience(int par1) {
-		base.superAddExperience(par1);
+		base.superaddExperience(par1);
 	}
 
 	@Override
 	public void addExperienceLevel(int par1) {
-		base.superAddExperienceLevel(par1);
+		base.superaddExperienceLevel(par1);
 	}
 
 	@Override
 	public int xpBarCap() {
-		return base.superXpBarCap();
+		return base.superxpBarCap();
 	}
 
 	@Override
 	public void addExhaustion(float par1) {
-		base.superAddExhaustion(par1);
+		base.superaddExhaustion(par1);
 	}
 
 	@Override
 	public Object getFoodStats() {
-		return base.superGetFoodStats();
+		return base.supergetFoodStats();
 	}
 
 	@Override
 	public boolean canEat(boolean par1) {
-		return base.superCanEat(par1);
+		return base.supercanEat(par1);
 	}
 
 	@Override
 	public boolean shouldHeal() {
-		return base.superShouldHeal();
+		return base.supershouldHeal();
 	}
 
 	@Override
 	public void setItemInUse(Object itemStack, int par2) {
-		base.superSetItemInUse(itemStack, par2);
+		base.supersetItemInUse(itemStack, par2);
 	}
 
 	@Override
 	public boolean isCurrentToolAdventureModeExempt(int par1, int par2, int par3) {
-		return base.superIsCurrentToolAdventureModeExempt(par1, par2, par3);
+		return base.superisCurrentToolAdventureModeExempt(par1, par2, par3);
 	}
 
 	@Override
 	public boolean canPlayerEdit(int par1, int par2, int par3, int par4, Object itemStack) {
-		return base.superCanPlayerEdit(par1, par2, par3, par4, itemStack);
+		return base.supercanPlayerEdit(par1, par2, par3, par4, itemStack);
 	}
 
 	@Override
 	public int getExperiencePoints(Object entityPlayer) {
-		return base.superGetExperiencePoints(entityPlayer);
+		return base.supergetExperiencePoints(entityPlayer);
 	}
 
 	@Override
 	public boolean isPlayer() {
-		return base.superIsPlayer();
+		return base.superisPlayer();
 	}
 
 	@Override
 	public String getEntityName() {
-		return base.superGetEntityName();
+		return base.supergetEntityName();
 	}
 
 	@Override
 	public boolean getAlwaysRenderNameTagForRender() {
-		return base.superGetAlwaysRenderNameTagForRender();
+		return base.supergetAlwaysRenderNameTagForRender();
 	}
 
 	@Override
 	public void clonePlayer(Object entityPlayer, boolean par2) {
-		base.superClonePlayer(entityPlayer, par2);
+		base.superclonePlayer(entityPlayer, par2);
 	}
 
 	@Override
 	public boolean canTriggerWalking() {
-		return base.superCanTriggerWalking();
+		return base.supercanTriggerWalking();
 	}
 
 	@Override
 	public void setGameType(Object enumGameType) {
-		base.superSetGameType(enumGameType);
+		base.supersetGameType(enumGameType);
 	}
 
 	@Override
 	public String getName() {
-		return base.superGetName();
+		return base.supergetName();
 	}
 
 	@Override
 	public Object getEntityWorld() {
-		return base.superGetEntityWorld();
+		return base.supergetEntityWorld();
 	}
 
 	@Override
 	public Object getInventoryEnderChest() {
-		return base.superGetInventoryEnderChest();
+		return base.supergetInventoryEnderChest();
 	}
 
 	@Override
 	public Object getCurrentItemOrArmor(int par1) {
-		return base.superGetCurrentItemOrArmor(par1);
+		return base.supergetCurrentItemOrArmor(par1);
 	}
 
 	@Override
 	public void setItemStackToSlot(int par1, Object itemStack) {
-		base.superSetItemStackToSlot(par1, itemStack);
+		base.supersetItemStackToSlot(par1, itemStack);
 	}
 
 	@Override
 	public boolean isInvisibleToPlayer(Object entityPlayer) {
-		return base.superIsInvisibleToPlayer(entityPlayer);
+		return base.superisInvisibleToPlayer(entityPlayer);
 	}
 
 	@Override
 	public Object[] getLastActiveItems() {
-		return base.superGetLastActiveItems();
+		return base.supergetLastActiveItems();
 	}
 
 	@Override
 	public boolean getHideCape() {
-		return base.superGetHideCape();
+		return base.supergetHideCape();
 	}
 
 	@Override
 	public boolean isPushedByWater() {
-		return base.superIsPushedByWater();
+		return base.superisPushedByWater();
 	}
 
 	@Override
 	public Object getWorldScoreboard() {
-		return base.superGetWorldScoreboard();
+		return base.supergetWorldScoreboard();
 	}
 
 	@Override
 	public Object getTeam() {
-		return base.superGetTeam();
+		return base.supergetTeam();
 	}
 
 	@Override
 	public String getTranslatedEntityName() {
-		return base.superGetTranslatedEntityName();
+		return base.supergetTranslatedEntityName();
 	}
 
 	@Override
 	public void setAbsorptionAmount(float par1) {
-		base.superSetAbsorptionAmount(par1);
+		base.supersetAbsorptionAmount(par1);
 	}
 
 	@Override
 	public float getAbsorptionAmount() {
-		return base.superGetAbsorptionAmount();
+		return base.supergetAbsorptionAmount();
 	}
 
 	@Override
 	public void openGui(Object mod, int modGuiId, Object world, int x, int y, int z) {
-		base.superOpenGui(mod, modGuiId, world, x, y, z);
+		base.superopenGui(mod, modGuiId, world, x, y, z);
 	}
 
 	@Override
 	public float getDefaultEyeHeight() {
-		return base.superGetDefaultEyeHeight();
+		return base.supergetDefaultEyeHeight();
 	}
 
 	@Override
 	public Object getDisplayName() {
-		return base.superGetDisplayName();
+		return base.supergetDisplayName();
 	}
 
 	@Override
 	public void refreshDisplayName() {
-		base.superRefreshDisplayName();
+		base.superrefreshDisplayName();
 	}
 
 	@Override
 	public void updateFallState(double par1, boolean par3) {
-		base.superUpdateFallState(par1, par3);
+		base.superupdateFallState(par1, par3);
 	}
 
 	@Override
 	public boolean canBreatheUnderwater() {
-		return base.superCanBreatheUnderwater();
+		return base.supercanBreatheUnderwater();
 	}
 
 	@Override
 	public void onEntityUpdate() {
-		base.superOnEntityUpdate();
+		base.superonEntityUpdate();
 	}
 
 	@Override
 	public boolean isChild() {
-		return base.superIsChild();
+		return base.superisChild();
 	}
 
 	@Override
 	public void onDeathUpdate() {
-		base.superOnDeathUpdate();
+		base.superonDeathUpdate();
 	}
 
 	@Override
 	public int decreaseAirSupply(int par1) {
-		return base.superDecreaseAirSupply(par1);
+		return base.superdecreaseAirSupply(par1);
 	}
 
 	@Override
 	public Random getRNG() {
-		return base.superGetRNG();
+		return base.supergetRNG();
 	}
 
 	@Override
 	public Object getRevengeTarget() {
-		return base.superGetRevengeTarget();
+		return base.supergetRevengeTarget();
 	}
 
 	@Override
 	public int func_142015_aE() {
-		return base.superFunc_142015_aE();
+		return base.superfunc_142015_aE();
 	}
 
 	@Override
 	public void setRevengeTarget(Object entityLivingBase) {
-		base.superSetRevengeTarget(entityLivingBase);
+		base.supersetRevengeTarget(entityLivingBase);
 	}
 
 	@Override
 	public Object getLastAttackedEntity() {
-		return base.superGetLastAttackedEntity();
+		return base.supergetLastAttackedEntity();
 	}
 
 	@Override
 	public int getLastAttackedEntityTime() {
-		return base.superGetLastAttackedEntityTime();
+		return base.supergetLastAttackedEntityTime();
 	}
 
 	@Override
 	public void setLastAttackedEntity(Object entity) {
-		base.superSetLastAttackedEntity(entity);
+		base.supersetLastAttackedEntity(entity);
 	}
 
 	@Override
 	public int getIdleTime() {
-		return base.superGetIdleTime();
+		return base.supergetIdleTime();
 	}
 
 	@Override
 	public void updatePotionEffects() {
-		base.superUpdatePotionEffects();
+		base.superupdatePotionEffects();
 	}
 
 	@Override
 	public void clearActivePotions() {
-		base.superClearActivePotions();
+		base.superclearActivePotions();
 	}
 
 	@Override
 	public Object getActivePotionEffects() {
-		return base.superGetActivePotionEffects();
+		return base.supergetActivePotionEffects();
 	}
 
 	@Override
 	public boolean isPotionActive(int par1) {
-		return base.superIsPotionActive(par1);
+		return base.superisPotionActive(par1);
 	}
 
 	@Override
 	public boolean isPotionActive(Object potion) {
-		return base.superIsPotionActive(potion);
+		return base.superisPotionActive(potion);
 	}
 
 	@Override
 	public Object getActivePotionEffect(Object potion) {
-		return base.superGetActivePotionEffect(potion);
+		return base.supergetActivePotionEffect(potion);
 	}
 
 	@Override
 	public void addPotionEffect(Object potionEffect) {
-		base.superAddPotionEffect(potionEffect);
+		base.superaddPotionEffect(potionEffect);
 	}
 
 	@Override
 	public boolean isPotionApplicable(Object potionEffect) {
-		return base.superIsPotionApplicable(potionEffect);
+		return base.superisPotionApplicable(potionEffect);
 	}
 
 	@Override
 	public boolean isEntityUndead() {
-		return base.superIsEntityUndead();
+		return base.superisEntityUndead();
 	}
 
 	@Override
 	public void removePotionEffectClient(int par1) {
-		base.superRemovePotionEffectClient(par1);
+		base.superremovePotionEffectClient(par1);
 	}
 
 	@Override
 	public void removePotionEffect(int par1) {
-		base.superRemovePotionEffect(par1);
+		base.superremovePotionEffect(par1);
 	}
 
 	@Override
 	public void onNewPotionEffect(Object potionEffect) {
-		base.superOnNewPotionEffect(potionEffect);
+		base.superonNewPotionEffect(potionEffect);
 	}
 
 	@Override
 	public void onChangedPotionEffect(Object potionEffect, boolean par2) {
-		base.superOnChangedPotionEffect(potionEffect, par2);
+		base.superonChangedPotionEffect(potionEffect, par2);
 	}
 
 	@Override
 	public void onFinishedPotionEffect(Object potionEffect) {
-		base.superOnFinishedPotionEffect(potionEffect);
+		base.superonFinishedPotionEffect(potionEffect);
 	}
 
 	@Override
 	public void renderBrokenItemStack(Object itemStack) {
-		base.superRenderBrokenItemStack(itemStack);
+		base.superrenderBrokenItemStack(itemStack);
 	}
 
 	@Override
 	public void dropEquipment(boolean par1, int par2) {
-		base.superDropEquipment(par1, par2);
+		base.superdropEquipment(par1, par2);
 	}
 
 	@Override
 	public void knockBack(Object entity, float par2, double par3, double par5) {
-		base.superKnockBack(entity, par2, par3, par5);
+		base.superknockBack(entity, par2, par3, par5);
 	}
 
 	@Override
 	public Object getDeathSound() {
-		return base.superGetDeathSound();
+		return base.supergetDeathSound();
 	}
 
 	@Override
 	public void dropRareDrop(int par1) {
-		base.superDropRareDrop(par1);
+		base.superdropRareDrop(par1);
 	}
 
 	@Override
 	public void dropFewItems(boolean par1, int par2) {
-		base.superDropFewItems(par1, par2);
+		base.superdropFewItems(par1, par2);
 	}
 
 	@Override
 	public boolean isOnLadder() {
-		return base.superIsOnLadder();
+		return base.superisOnLadder();
 	}
 
 	@Override
 	public boolean isEntityAlive() {
-		return base.superIsEntityAlive();
+		return base.superisEntityAlive();
 	}
 
 	@Override
 	public void performHurtAnimation() {
-		base.superPerformHurtAnimation();
+		base.superperformHurtAnimation();
 	}
 
 	@Override
 	public Object applyArmorCalculations(Object damageSource, float par2) {
-		return base.superApplyArmorCalculations(damageSource, par2);
+		return base.superapplyArmorCalculations(damageSource, par2);
 	}
 
 	@Override
 	public Object applyPotionDamageCalculations(Object damageSource, float par2) {
-		return base.superApplyPotionDamageCalculations(damageSource, par2);
+		return base.superapplyPotionDamageCalculations(damageSource, par2);
 	}
 
 	@Override
 	public Object func_110142_aN() {
-		return base.superFunc_110142_aN();
+		return base.superfunc_110142_aN();
 	}
 
 	@Override
 	public Object getAttackingEntity() {
-		return base.superGetAttackingEntity();
+		return base.supergetAttackingEntity();
 	}
 
 	@Override
 	public void outOfWorld() {
-		base.superOutOfWorld();
+		base.superoutOfWorld();
 	}
 
 	@Override
 	public void updateArmSwingProgress() {
-		base.superUpdateArmSwingProgress();
+		base.superupdateArmSwingProgress();
 	}
 
 	@Override
 	public Object getEntityAttribute(Object attribute) {
-		return base.superGetEntityAttribute(attribute);
+		return base.supergetEntityAttribute(attribute);
 	}
 
 	@Override
 	public Object getAttributeMap() {
-		return base.superGetAttributeMap();
+		return base.supergetAttributeMap();
 	}
 
 	@Override
 	public float getSoundVolume() {
-		return base.superGetSoundVolume();
+		return base.supergetSoundVolume();
 	}
 
 	@Override
 	public float getSoundPitch() {
-		return base.superGetSoundPitch();
+		return base.supergetSoundPitch();
 	}
 
 	@Override
 	public void setPositionAndUpdate(double par1, double par3, double par5) {
-		base.superSetPositionAndUpdate(par1, par3, par5);
+		base.supersetPositionAndUpdate(par1, par3, par5);
 	}
 
 	@Override
 	public void dismountEntity(Object entity) {
-		base.superDismountEntity(entity);
+		base.superdismountEntity(entity);
 	}
 
 	@Override
 	public boolean isAIEnabled() {
-		return base.superIsAIEnabled();
+		return base.superisAIEnabled();
 	}
 
 	@Override
 	public void setAIMoveSpeed(float par1) {
-		base.superSetAIMoveSpeed(par1);
+		base.supersetAIMoveSpeed(par1);
 	}
 
 	@Override
 	public boolean attackEntityAsMob(Object entity) {
-		return base.superAttackEntityAsMob(entity);
+		return base.superattackEntityAsMob(entity);
 	}
 
 	@Override
 	public float updateDistance(float par1, float par2) {
-		return base.superUpdateDistance(par1, par2);
+		return base.superupdateDistance(par1, par2);
 	}
 
 	@Override
 	public void updateAITasks() {
-		base.superUpdateAITasks();
+		base.superupdateAITasks();
 	}
 
 	@Override
 	public void collideWithNearbyEntities() {
-		base.superCollideWithNearbyEntities();
+		base.supercollideWithNearbyEntities();
 	}
 
 	@Override
 	public void collideWithEntity(Object entity) {
-		base.superCollideWithEntity(entity);
+		base.supercollideWithEntity(entity);
 	}
 
 	@Override
 	public void setPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9) {
-		base.superSetPositionAndRotationDirect(par1, par3, par5, par7, par8, par9);
+		base.supersetPositionAndRotationDirect(par1, par3, par5, par7, par8, par9);
 	}
 
 	@Override
 	public void handleJumpWater() {
-		base.superHandleJumpWater();
+		base.superhandleJumpWater();
 	}
 
 	@Override
 	public void setJumping(boolean par1) {
-		base.superSetJumping(par1);
+		base.supersetJumping(par1);
 	}
 
 	@Override
 	public boolean canEntityBeSeen(Object entity) {
-		return base.superCanEntityBeSeen(entity);
+		return base.supercanEntityBeSeen(entity);
 	}
 
 	@Override
 	public Object getLookVec() {
-		return base.superGetLookVec();
+		return base.supergetLookVec();
 	}
 
 	@Override
 	public Object getLook(float par1) {
-		return base.superGetLook(par1);
+		return base.supergetLook(par1);
 	}
 
 	@Override
 	public float getSwingProgress(float par1) {
-		return base.superGetSwingProgress(par1);
+		return base.supergetSwingProgress(par1);
 	}
 
 	@Override
 	public Object getPosition(float par1) {
-		return base.superGetPosition(par1);
+		return base.supergetPosition(par1);
 	}
 
 	@Override
 	public Object rayTrace(double par1, float par3) {
-		return base.superRayTrace(par1, par3);
+		return base.superrayTrace(par1, par3);
 	}
 
 	@Override
 	public boolean canBeCollidedWith() {
-		return base.superCanBeCollidedWith();
+		return base.supercanBeCollidedWith();
 	}
 
 	@Override
 	public boolean canBePushed() {
-		return base.superCanBePushed();
+		return base.supercanBePushed();
 	}
 
 	@Override
 	public void setBeenAttacked() {
-		base.superSetBeenAttacked();
+		base.supersetBeenAttacked();
 	}
 
 	@Override
 	public float getRotationYawHead() {
-		return base.superGetRotationYawHead();
+		return base.supergetRotationYawHead();
 	}
 
 	@Override
 	public void setRotationYawHead(float par1) {
-		base.superSetRotationYawHead(par1);
+		base.supersetRotationYawHead(par1);
 	}
 
 	@Override
 	public boolean isOnSameTeam(Object entityLivingBase) {
-		return base.superIsOnSameTeam(entityLivingBase);
+		return base.superisOnSameTeam(entityLivingBase);
 	}
 
 	@Override
 	public boolean isOnTeam(Object team) {
-		return base.superIsOnTeam(team);
+		return base.superisOnTeam(team);
 	}
 
 	@Override
 	public void curePotionEffects(Object itemStack) {
-		base.superCurePotionEffects(itemStack);
+		base.supercurePotionEffects(itemStack);
 	}
 
 	@Override
 	public boolean shouldRiderFaceForward(Object entityPlayer) {
-		return base.superShouldRiderFaceForward(entityPlayer);
+		return base.supershouldRiderFaceForward(entityPlayer);
 	}
 
 	@Override
 	public Object getDataManager() {
-		return base.superGetDataManager();
+		return base.supergetDataManager();
 	}
 
 	@Override
 	public void setRotation(float par1, float par2) {
-		base.superSetRotation(par1, par2);
+		base.supersetRotation(par1, par2);
 	}
 
 	@Override
 	public void setPosition(double par1, double par3, double par5) {
-		base.superSetPosition(par1, par3, par5);
+		base.supersetPosition(par1, par3, par5);
 	}
 
 	@Override
 	public void turn(float par1, float par2) {
-		base.superTurn(par1, par2);
+		base.superturn(par1, par2);
 	}
 
 	@Override
 	public void setOnFireFromLava() {
-		base.superSetOnFireFromLava();
+		base.supersetOnFireFromLava();
 	}
 
 	@Override
 	public void setFire(int par1) {
-		base.superSetFire(par1);
+		base.supersetFire(par1);
 	}
 
 	@Override
 	public void extinguish() {
-		base.superExtinguish();
+		base.superextinguish();
 	}
 
 	@Override
 	public boolean isOffsetPositionInLiquid(double par1, double par3, double par5) {
-		return base.superIsOffsetPositionInLiquid(par1, par3, par5);
+		return base.superisOffsetPositionInLiquid(par1, par3, par5);
 	}
 
 	@Override
 	public void move(Object moverType, double par1, double par3, double par5) {
-		base.superMove(moverType, par1, par3, par5);
+		base.supermove(moverType, par1, par3, par5);
 	}
 
 	@Override
 	public void doBlockCollisions() {
-		base.superDoBlockCollisions();
+		base.superdoBlockCollisions();
 	}
 
 	@Override
 	public void playStepSound(int par1, int par2, int par3, int par4) {
-		base.superPlayStepSound(par1, par2, par3, par4);
+		base.superplayStepSound(par1, par2, par3, par4);
 	}
 
 	@Override
 	public Object getCollisionBoundingBox() {
-		return base.superGetCollisionBoundingBox();
+		return base.supergetCollisionBoundingBox();
 	}
 
 	@Override
 	public void dealFireDamage(int par1) {
-		base.superDealFireDamage(par1);
+		base.superdealFireDamage(par1);
 	}
 
 	@Override
 	public boolean isWet() {
-		return base.superIsWet();
+		return base.superisWet();
 	}
 
 	@Override
 	public boolean isInWater() {
-		return base.superIsInWater();
+		return base.superisInWater();
 	}
 
 	@Override
 	public boolean handleWaterMovement() {
-		return base.superHandleWaterMovement();
+		return base.superhandleWaterMovement();
 	}
 
 	@Override
 	public boolean isInsideOfMaterial(Object material) {
-		return base.superIsInsideOfMaterial(material);
+		return base.superisInsideOfMaterial(material);
 	}
 
 	@Override
 	public boolean handleLavaMovement() {
-		return base.superHandleLavaMovement();
+		return base.superhandleLavaMovement();
 	}
 
 	@Override
@@ -1385,657 +1381,657 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 
 	@Override
 	public float getBrightness(float par1) {
-		return base.superGetBrightness(par1);
+		return base.supergetBrightness(par1);
 	}
 
 	@Override
 	public void setWorld(Object world) {
-		base.superSetWorld(world);
+		base.supersetWorld(world);
 	}
 
 	@Override
 	public void setPositionAndRotation(double par1, double par3, double par5, float par7, float par8) {
-		base.superSetPositionAndRotation(par1, par3, par5, par7, par8);
+		base.supersetPositionAndRotation(par1, par3, par5, par7, par8);
 	}
 
 	@Override
 	public void setLocationAndAngles(double par1, double par3, double par5, float par7, float par8) {
-		base.superSetLocationAndAngles(par1, par3, par5, par7, par8);
+		base.supersetLocationAndAngles(par1, par3, par5, par7, par8);
 	}
 
 	@Override
 	public float getDistanceToEntity(Object entity) {
-		return base.superGetDistanceToEntity(entity);
+		return base.supergetDistanceToEntity(entity);
 	}
 
 	@Override
 	public double getDistanceSq(double par1, double par3, double par5) {
-		return base.superGetDistanceSq(par1, par3, par5);
+		return base.supergetDistanceSq(par1, par3, par5);
 	}
 
 	@Override
 	public double getDistance(double par1, double par3, double par5) {
-		return base.superGetDistance(par1, par3, par5);
+		return base.supergetDistance(par1, par3, par5);
 	}
 
 	@Override
 	public double getDistanceSqToEntity(Object entity) {
-		return base.superGetDistanceSqToEntity(entity);
+		return base.supergetDistanceSqToEntity(entity);
 	}
 
 	@Override
 	public void onCollideWithPlayer(Object entityPlayer) {
-		base.superOnCollideWithPlayer(entityPlayer);
+		base.superonCollideWithPlayer(entityPlayer);
 	}
 
 	@Override
 	public void applyEntityCollision(Object entity) {
-		base.superApplyEntityCollision(entity);
+		base.superapplyEntityCollision(entity);
 	}
 
 	@Override
 	public void addVelocity(double par1, double par3, double par5) {
-		base.superAddVelocity(par1, par3, par5);
+		base.superaddVelocity(par1, par3, par5);
 	}
 
 	@Override
 	public boolean isInRangeToRenderVec3D(Object vec3) {
-		return base.superIsInRangeToRenderVec3D(vec3);
+		return base.superisInRangeToRenderVec3D(vec3);
 	}
 
 	@Override
 	public boolean isInRangeToRenderDist(double par1) {
-		return base.superIsInRangeToRenderDist(par1);
+		return base.superisInRangeToRenderDist(par1);
 	}
 
 	@Override
 	public boolean writeToNBTAtomically(Object nBTTagCompound) {
-		return base.superWriteToNBTAtomically(nBTTagCompound);
+		return base.superwriteToNBTAtomically(nBTTagCompound);
 	}
 
 	@Override
 	public boolean writeToNBTOptional(Object nBTTagCompound) {
-		return base.superWriteToNBTOptional(nBTTagCompound);
+		return base.superwriteToNBTOptional(nBTTagCompound);
 	}
 
 	@Override
 	public Object writeToNBT(Object nBTTagCompound) {
-		return base.superWriteToNBT(nBTTagCompound);
+		return base.superwriteToNBT(nBTTagCompound);
 	}
 
 	@Override
 	public void readFromNBT(Object nBTTagCompound) {
-		base.superReadFromNBT(nBTTagCompound);
+		base.superreadFromNBT(nBTTagCompound);
 	}
 
 	@Override
 	public boolean shouldSetPosAfterLoading() {
-		return base.superShouldSetPosAfterLoading();
+		return base.supershouldSetPosAfterLoading();
 	}
 
 	@Override
 	public void onChunkLoad() {
-		base.superOnChunkLoad();
+		base.superonChunkLoad();
 	}
 
 	@Override
 	public Object newDoubleNBTList(double... par1ArrayOfDouble) {
-		return base.superNewDoubleNBTList(par1ArrayOfDouble);
+		return base.supernewDoubleNBTList(par1ArrayOfDouble);
 	}
 
 	@Override
 	public Object newFloatNBTList(float... par1ArrayOfFloat) {
-		return base.superNewFloatNBTList(par1ArrayOfFloat);
+		return base.supernewFloatNBTList(par1ArrayOfFloat);
 	}
 
 	@Override
 	public float getShadowSize() {
-		return base.superGetShadowSize();
+		return base.supergetShadowSize();
 	}
 
 	@Override
 	public Object dropItem(int par1, int par2) {
-		return base.superDropItem(par1, par2);
+		return base.superdropItem(par1, par2);
 	}
 
 	@Override
 	public Object dropItemWithOffset(int par1, int par2, float par3) {
-		return base.superDropItemWithOffset(par1, par2, par3);
+		return base.superdropItemWithOffset(par1, par2, par3);
 	}
 
 	@Override
 	public Object entityDropItem(Object itemStack, float par2) {
-		return base.superEntityDropItem(itemStack, par2);
+		return base.superentityDropItem(itemStack, par2);
 	}
 
 	@Override
 	public boolean processInitialInteract(Object entityPlayer) {
-		return base.superProcessInitialInteract(entityPlayer);
+		return base.superprocessInitialInteract(entityPlayer);
 	}
 
 	@Override
 	public Object getCollisionBox(Object entity) {
-		return base.superGetCollisionBox(entity);
+		return base.supergetCollisionBox(entity);
 	}
 
 	@Override
 	public void updatePassenger() {
-		base.superUpdatePassenger();
+		base.superupdatePassenger();
 	}
 
 	@Override
 	public float getCollisionBorderSize() {
-		return base.superGetCollisionBorderSize();
+		return base.supergetCollisionBorderSize();
 	}
 
 	@Override
 	public void setPortal(Object bockPos) {
-		base.superSetPortal(bockPos);
+		base.supersetPortal(bockPos);
 	}
 
 	@Override
 	public void setVelocity(double par1, double par3, double par5) {
-		base.superSetVelocity(par1, par3, par5);
+		base.supersetVelocity(par1, par3, par5);
 	}
 
 	@Override
 	public boolean isBurning() {
-		return base.superIsBurning();
+		return base.superisBurning();
 	}
 
 	@Override
 	public boolean isRiding() {
-		return base.superIsRiding();
+		return base.superisRiding();
 	}
 
 	@Override
 	public void setSneaking(boolean par1) {
-		base.superSetSneaking(par1);
+		base.supersetSneaking(par1);
 	}
 
 	@Override
 	public boolean isSprinting() {
-		return base.superIsSprinting();
+		return base.superisSprinting();
 	}
 
 	@Override
 	public boolean isInvisible() {
-		return base.superIsInvisible();
+		return base.superisInvisible();
 	}
 
 	@Override
 	public void setInvisible(boolean par1) {
-		base.superSetInvisible(par1);
+		base.supersetInvisible(par1);
 	}
 
 	@Override
 	public boolean isEating() {
-		return base.superIsEating();
+		return base.superisEating();
 	}
 
 	@Override
 	public void setEating(boolean par1) {
-		base.superSetEating(par1);
+		base.supersetEating(par1);
 	}
 
 	@Override
 	public boolean getFlag(int par1) {
-		return base.superGetFlag(par1);
+		return base.supergetFlag(par1);
 	}
 
 	@Override
 	public void setFlag(int par1, boolean par2) {
-		base.superSetFlag(par1, par2);
+		base.supersetFlag(par1, par2);
 	}
 
 	@Override
 	public int getAir() {
-		return base.superGetAir();
+		return base.supergetAir();
 	}
 
 	@Override
 	public void setAir(int par1) {
-		base.superSetAir(par1);
+		base.supersetAir(par1);
 	}
 
 	@Override
 	public void onStruckByLightning(Object entityLightningBolt) {
-		base.superOnStruckByLightning(entityLightningBolt);
+		base.superonStruckByLightning(entityLightningBolt);
 	}
 
 	@Override
 	public Object[] getParts() {
-		return base.superGetParts();
+		return base.supergetParts();
 	}
 
 	@Override
 	public boolean isEntityEqual(Object entity) {
-		return base.superIsEntityEqual(entity);
+		return base.superisEntityEqual(entity);
 	}
 
 	@Override
 	public boolean canBeAttackedWithItem() {
-		return base.superCanBeAttackedWithItem();
+		return base.supercanBeAttackedWithItem();
 	}
 
 	@Override
 	public boolean hitByEntity(Object entity) {
-		return base.superHitByEntity(entity);
+		return base.superhitByEntity(entity);
 	}
 
 	@Override
 	public boolean isEntityInvulnerable() {
-		return base.superIsEntityInvulnerable();
+		return base.superisEntityInvulnerable();
 	}
 
 	@Override
 	public void copyLocationAndAnglesFrom(Object entity) {
-		base.superCopyLocationAndAnglesFrom(entity);
+		base.supercopyLocationAndAnglesFrom(entity);
 	}
 
 	@Override
 	public void copyDataFrom(Object entity, boolean par2) {
-		base.superCopyDataFrom(entity, par2);
+		base.supercopyDataFrom(entity, par2);
 	}
 
 	@Override
 	public Object changeDimension(int par1) {
-		return base.superChangeDimension(par1);
+		return base.superchangeDimension(par1);
 	}
 
 	@Override
 	public float getBlockExplosionResistance(Object explosion, Object world, int par3, int par4, int par5, Object block) {
-		return base.superGetBlockExplosionResistance(explosion, world, par3, par4, par5, block);
+		return base.supergetBlockExplosionResistance(explosion, world, par3, par4, par5, block);
 	}
 
 	@Override
 	public boolean shouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
-		return base.superShouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7);
+		return base.supershouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7);
 	}
 
 	@Override
 	public int getMaxSafePointTries() {
-		return base.superGetMaxSafePointTries();
+		return base.supergetMaxSafePointTries();
 	}
 
 	@Override
 	public Object getLastPortalVec() {
-		return base.superGetLastPortalVec();
+		return base.supergetLastPortalVec();
 	}
 
 	@Override
 	public boolean doesEntityNotTriggerPressurePlate() {
-		return base.superDoesEntityNotTriggerPressurePlate();
+		return base.superdoesEntityNotTriggerPressurePlate();
 	}
 
 	@Override
 	public void addEntityCrashInfo(Object crashReportCategory) {
-		base.superAddEntityCrashInfo(crashReportCategory);
+		base.superaddEntityCrashInfo(crashReportCategory);
 	}
 
 	@Override
 	public boolean canRenderOnFire() {
-		return base.superCanRenderOnFire();
+		return base.supercanRenderOnFire();
 	}
 
 	@Override
 	public UUID getUniqueID() {
-		return base.superGetUniqueID();
+		return base.supergetUniqueID();
 	}
 
 	@Override
 	public Object getEntityData() {
-		return base.superGetEntityData();
+		return base.supergetEntityData();
 	}
 
 	@Override
 	public boolean shouldRiderSit() {
-		return base.superShouldRiderSit();
+		return base.supershouldRiderSit();
 	}
 
 	@Override
 	public Object getPickedResult(Object movingObjectPosition) {
-		return base.superGetPickedResult(movingObjectPosition);
+		return base.supergetPickedResult(movingObjectPosition);
 	}
 
 	@Override
 	public UUID getPersistentID() {
-		return base.superGetPersistentID();
+		return base.supergetPersistentID();
 	}
 
 	@Override
 	public boolean shouldRenderInPass(int pass) {
-		return base.superShouldRenderInPass(pass);
+		return base.supershouldRenderInPass(pass);
 	}
 
 	@Override
 	public boolean isCreatureType(Object enumCreatureType, boolean forSpawnCount) {
-		return base.superIsCreatureType(enumCreatureType, forSpawnCount);
+		return base.superisCreatureType(enumCreatureType, forSpawnCount);
 	}
 
 	@Override
 	public String registerExtendedProperties(String identifier, Object iExtendedEntityProperties) {
-		return base.superRegisterExtendedProperties(identifier, iExtendedEntityProperties);
+		return base.superregisterExtendedProperties(identifier, iExtendedEntityProperties);
 	}
 
 	@Override
 	public Object getExtendedProperties(String identifier) {
-		return base.superGetExtendedProperties(identifier);
+		return base.supergetExtendedProperties(identifier);
 	}
 
 	@Override
 	public boolean canRiderInteract() {
-		return base.superCanRiderInteract();
+		return base.supercanRiderInteract();
 	}
 
 	@Override
 	public boolean shouldDismountInWater(Object entity) {
-		return base.superShouldDismountInWater(entity);
+		return base.supershouldDismountInWater(entity);
 	}
 
 	@Override
 	public void closeScreenNoPacket() {
-		base.superCloseScreenNoPacket();
+		base.supercloseScreenNoPacket();
 	}
 
 	@Override
 	public Object getStatFileWriter() {
-		return base.superGetStatFileWriter();
+		return base.supergetStatFileWriter();
 	}
 
 	@Override
 	public void func_146100_a(Object tileEntity) {
-		base.superFunc_146100_a(tileEntity);
+		base.superfunc_146100_a(tileEntity);
 	}
 
 	@Override
 	public void func_146095_a(Object commandBlockLogic) {
-		base.superFunc_146095_a(commandBlockLogic);
+		base.superfunc_146095_a(commandBlockLogic);
 	}
 
 	@Override
 	public void func_146093_a(Object tileEntityHopper) {
-		base.superFunc_146093_a(tileEntityHopper);
+		base.superfunc_146093_a(tileEntityHopper);
 	}
 
 	@Override
 	public void func_146104_a(Object tileEntityBeacon) {
-		base.superFunc_146104_a(tileEntityBeacon);
+		base.superfunc_146104_a(tileEntityBeacon);
 	}
 
 	@Override
 	public void func_146102_a(Object tileEntityDispenser) {
-		base.superFunc_146102_a(tileEntityDispenser);
+		base.superfunc_146102_a(tileEntityDispenser);
 	}
 
 	@Override
 	public void func_146098_a(Object tileEntityBrewingStand) {
-		base.superFunc_146098_a(tileEntityBrewingStand);
+		base.superfunc_146098_a(tileEntityBrewingStand);
 	}
 
 	@Override
 	public void func_146101_a(Object tileEntityFurnace) {
-		base.superFunc_146101_a(tileEntityFurnace);
+		base.superfunc_146101_a(tileEntityFurnace);
 	}
 
 	@Override
 	public void sendMessage(Object iChatComponent) {
-		base.superSendMessage(iChatComponent);
+		base.supersendMessage(iChatComponent);
 	}
 
 	@Override
 	public void sendStatusMessage(Object iChatComponent, boolean p_146105_2_) {
-		base.superSendStatusMessage(iChatComponent, p_146105_2_);
+		base.supersendStatusMessage(iChatComponent, p_146105_2_);
 	}
 
 	@Override
 	public Object getSplashSound() {
-		return base.superGetSplashSound();
+		return base.supergetSplashSound();
 	}
 
 	@Override
 	public Object getSwimSound() {
-		return base.superGetSwimSound();
+		return base.supergetSwimSound();
 	}
 
 	@Override
 	public float getBreakSpeed(Object block, boolean p_146096_2_, int meta) {
-		return base.superGetBreakSpeed(block, p_146096_2_, meta);
+		return base.supergetBreakSpeed(block, p_146096_2_, meta);
 	}
 
 	@Override
 	public float getBreakSpeed(Object block, boolean p_146096_2_, int meta, int x, int y, int z) {
-		return base.superGetBreakSpeed(block, p_146096_2_, meta, x, y, z);
+		return base.supergetBreakSpeed(block, p_146096_2_, meta, x, y, z);
 	}
 
 	@Override
 	public Object func_146097_a(Object itemStack, boolean p_146097_2_, boolean p_146097_3_) {
-		return base.superDropItem(itemStack, p_146097_2_, p_146097_3_);
+		return base.superdropItem(itemStack, p_146097_2_, p_146097_3_);
 	}
 
 	@Override
 	public Object getGameProfile() {
-		return base.superGetGameProfile();
+		return base.supergetGameProfile();
 	}
 
 	@Override
 	public String func_146067_o(int p_146067_1_) {
-		return base.superFunc_146067_o(p_146067_1_);
+		return base.superfunc_146067_o(p_146067_1_);
 	}
 
 	@Override
 	public boolean canDropLoot() {
-		return base.superCanDropLoot();
+		return base.supercanDropLoot();
 	}
 
 	@Override
 	public int getEntityId() {
-		return base.superGetEntityId();
+		return base.supergetEntityId();
 	}
 
 	@Override
 	public void setEntityId(int p_145769_1_) {
-		base.superSetEntityId(p_145769_1_);
+		base.supersetEntityId(p_145769_1_);
 	}
 
 	@Override
 	public void func_145780_a(int p_145780_1_, int p_145780_2_, int p_145780_3_, Object block) {
-		base.superFunc_145780_a(p_145780_1_, p_145780_2_, p_145780_3_, block);
+		base.superfunc_145780_a(p_145780_1_, p_145780_2_, p_145780_3_, block);
 	}
 
 	@Override
 	public boolean isInRangeToRender3d(double p_145770_1_, double p_145770_3_, double p_145770_5_) {
-		return base.superIsInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_);
+		return base.superisInRangeToRender3d(p_145770_1_, p_145770_3_, p_145770_5_);
 	}
 
 	@Override
 	public Object dropItem(Object item, int p_145779_2_) {
-		return base.superDropItem(item, p_145779_2_);
+		return base.superdropItem(item, p_145779_2_);
 	}
 
 	@Override
 	public float func_145772_a(Object explosion, Object world, int p_145772_3_, int p_145772_4_, int p_145772_5_, Object block) {
-		return base.superFunc_145772_a(explosion, world, p_145772_3_, p_145772_4_, p_145772_5_, block);
+		return base.superfunc_145772_a(explosion, world, p_145772_3_, p_145772_4_, p_145772_5_, block);
 	}
 
 	@Override
 	public boolean func_145774_a(Object explosion, Object world, int p_145774_3_, int p_145774_4_, int p_145774_5_, Object block, float p_145774_7_) {
-		return base.superFunc_145774_a(explosion, world, p_145774_3_, p_145774_4_, p_145774_5_, block, p_145774_7_);
+		return base.superfunc_145774_a(explosion, world, p_145774_3_, p_145774_4_, p_145774_5_, block, p_145774_7_);
 	}
 
 	@Override
 	public void onDataWatcherUpdate(int p_145781_1_) {
-		base.superOnDataWatcherUpdate(p_145781_1_);
+		base.superonDataWatcherUpdate(p_145781_1_);
 	}
 	// 179~
 	@Override
 	public boolean func_152122_n() {
-		return base.superHasPlayerInfo();
+		return base.superhasPlayerInfo();
 	}
 
 	@Override
 	public boolean func_152123_o() {
-		return base.superHasSkin();
+		return base.superhasSkin();
 	}
 
 	@Override
 	public void func_152121_a(Object type, Object resourceLocation) {
-		base.superFunc_152121_a(type, resourceLocation);
+		base.superfunc_152121_a(type, resourceLocation);
 	}
 
 	@Override
 	public void sendEnterCombat() {
-		base.superSendEnterCombat();
+		base.supersendEnterCombat();
 	}
 
 	@Override
 	public void sendEndCombat() {
-		base.superSendEndCombat();
+		base.supersendEndCombat();
 	}
 
 	@Override
 	public void onUpdateWalkingPlayer() {
-		base.superOnUpdateWalkingPlayer();
+		base.superonUpdateWalkingPlayer();
 	}
 
 	@Override
 	public void closeScreenAndDropStack() {
-		base.superCloseScreenAndDropStack();
+		base.supercloseScreenAndDropStack();
 	}
 
 	@Override
 	public boolean isUser() {
-		return base.superIsUser();
+		return base.superisUser();
 	}
 
 	@Override
 	public void sendHorseJump() {
-		base.superSendHorseJump();
+		base.supersendHorseJump();
 	}
 
 	@Override
 	public void sendHorseInventory() {
-		base.superSendHorseInventory();
+		base.supersendHorseInventory();
 	}
 
 	@Override
 	public void setClientBrand(String brand) {
-		base.superSetClientBrand(brand);
+		base.supersetClientBrand(brand);
 	}
 
 	@Override
 	public String getClientBrand() {
-		return base.superGetClientBrand();
+		return base.supergetClientBrand();
 	}
 
 	@Override
 	public Object getPosition() {
-		return base.superGetPosition();
+		return base.supergetPosition();
 	}
 
 	@Override
 	public boolean isServerWorld() {
-		return base.superIsServerWorld();
+		return base.superisServerWorld();
 	}
 
 	@Override
 	public void openEditSign(Object tileEntitySign) {
-		base.superOpenEditSign(tileEntitySign);
+		base.superopenEditSign(tileEntitySign);
 	}
 
 	@Override
 	public void displayGuiEditCommandCart(Object commandBlockLogic) {
-		base.superDisplayGuiEditCommandCart(commandBlockLogic);
+		base.superdisplayGuiEditCommandCart(commandBlockLogic);
 	}
 
 	@Override
 	public void displayGui(Object iInteractionObject) {
-		base.superDisplayGui(iInteractionObject);
+		base.superdisplayGui(iInteractionObject);
 	}
 
 	@Override
 	public void displayVillagerTradeGui(Object iMerchant) {
-		base.superDisplayVillagerTradeGui(iMerchant);
+		base.superdisplayVillagerTradeGui(iMerchant);
 	}
 
 	@Override
 	public boolean isCurrentViewEntity() {
-		return base.superIsCurrentViewEntity();
+		return base.superisCurrentViewEntity();
 	}
 
 	@Override
 	public boolean isSpectator() {
-		return base.superIsSpectator();
+		return base.superisSpectator();
 	}
 
 	@Override
 	public boolean hasPlayerInfo() {
-		return base.superHasPlayerInfo();
+		return base.superhasPlayerInfo();
 	}
 
 	@Override
 	public Object getPlayerInfo() {
-		return base.superGetPlayerInfo();
+		return base.supergetPlayerInfo();
 	}
 
 	@Override
 	public boolean hasSkin() {
-		return base.superHasSkin();
+		return base.superhasSkin();
 	}
 
 	@Override
 	public String getSkinType() {
-		return base.superGetSkinType();
+		return base.supergetSkinType();
 	}
 
 	@Override
 	public float getFovModifier() {
-		return base.superGetFovModifier();
+		return base.supergetFovModifier();
 	}
 
 	@Override
 	public Object dropItem(Object itemStack, boolean dropAround, boolean traceItem) {
-		return base.superDropItem(itemStack, dropAround, traceItem);
+		return base.superdropItem(itemStack, dropAround, traceItem);
 	}
 
 	@Override
 	public float getDigSpeed(Object block) {
-		return base.superGetToolDigEfficiency(block);
+		return base.supergetToolDigEfficiency(block);
 	}
 
 	@Override
 	public float getDigSpeed(Object iBlockState, Object blockPos) {
-		return base.superGetDigSpeed(iBlockState, blockPos);
+		return base.supergetDigSpeed(iBlockState, blockPos);
 	}
 
 	@Override
 	public Object trySleep(Object blockPos) {
-		return base.superTrySleep(blockPos);
+		return base.supertrySleep(blockPos);
 	}
 
 	@Override
 	public void setSpawnPoint(Object blockPos, boolean forced) {
-		base.superSetSpawnPoint(blockPos, forced);
+		base.supersetSpawnPoint(blockPos, forced);
 	}
 
 	@Override
 	public void takeStat(Object statBase) {
-		base.superTakeStat(statBase);
+		base.supertakeStat(statBase);
 	}
 
 	@Override
 	public void fall(float distance, float damageMultiplier) {
-		base.superFall(distance, damageMultiplier);
+		base.superfall(distance, damageMultiplier);
 	}
 
 	@Override
 	public Object getFallSound(int damageValue) {
-		return base.superGetFallSound(damageValue);
+		return base.supergetFallSound(damageValue);
 	}
 
 	@Override
 	public int getXPSeed() {
-		return base.superGetXPSeed();
+		return base.supergetXPSeed();
 	}
 
 	@Override
@@ -2045,1212 +2041,1212 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 
 	@Override
 	public boolean isAllowEdit() {
-		return base.superIsAllowEdit();
+		return base.superisAllowEdit();
 	}
 
 	@Override
 	public boolean canPlayerEdit(Object blockPos, Object enumFacing, Object itemStack) {
-		return base.superCanPlayerEdit(blockPos, enumFacing, itemStack);
+		return base.supercanPlayerEdit(blockPos, enumFacing, itemStack);
 	}
 
 	@Override
 	public Object[] getInventory() {
-		return base.superGetInventory();
+		return base.supergetInventory();
 	}
 
 	@Override
 	public boolean canOpen(Object lockCode) {
-		return base.superCanOpen(lockCode);
+		return base.supercanOpen(lockCode);
 	}
 
 	@Override
 	public boolean isWearing(Object enumPlayerModelParts) {
-		return base.superIsWearing(enumPlayerModelParts);
+		return base.superisWearing(enumPlayerModelParts);
 	}
 
 	@Override
 	public boolean sendCommandFeedback() {
-		return base.superSendCommandFeedback();
+		return base.supersendCommandFeedback();
 	}
 
 	@Override
 	public boolean replaceItemInInventory(int p_174820_1_, Object itemStack) {
-		return base.superReplaceItemInInventory(p_174820_1_, itemStack);
+		return base.superreplaceItemInInventory(p_174820_1_, itemStack);
 	}
 
 	@Override
 	public boolean hasReducedDebug() {
-		return base.superHasReducedDebug();
+		return base.superhasReducedDebug();
 	}
 
 	@Override
 	public void setReducedDebug(boolean reducedDebug) {
-		base.superSetReducedDebug(reducedDebug);
+		base.supersetReducedDebug(reducedDebug);
 	}
 
 	@Override
 	public String getDisplayNameString() {
-		return base.superGetDisplayNameString();
+		return base.supergetDisplayNameString();
 	}
 
 	@Override
 	public void onKillCommand() {
-		base.superOnKillCommand();
+		base.superonKillCommand();
 	}
 
 	@Override
 	public void updateFallState(double p_180433_1_, boolean p_180433_3_, Object block, Object blockPos) {
-		base.superUpdateFallState(p_180433_1_, p_180433_3_, block, blockPos);
+		base.superupdateFallState(p_180433_1_, p_180433_3_, block, blockPos);
 	}
 
 	@Override
 	public int getRevengeTimer() {
-		return base.superGetRevengeTimer();
+		return base.supergetRevengeTimer();
 	}
 
 	@Override
 	public void updatePotionMetadata() {
-		base.superUpdatePotionMetadata();
+		base.superupdatePotionMetadata();
 	}
 
 	@Override
 	public void resetPotionEffectMetadata() {
-		base.superResetPotionEffectMetadata();
+		base.superresetPotionEffectMetadata();
 	}
 
 	@Override
 	public void dropLoot() {
-		base.superDropLoot();
+		base.superdropLoot();
 	}
 
 	@Override
 	public Object getCombatTracker() {
-		return base.superGetCombatTracker();
+		return base.supergetCombatTracker();
 	}
 
 	@Override
 	public float getJumpUpwardsMotion() {
-		return base.superGetJumpUpwardsMotion();
+		return base.supergetJumpUpwardsMotion();
 	}
 
 	@Override
 	public void handleJumpLava() {
-		base.superHandleJumpLava();
+		base.superhandleJumpLava();
 	}
 
 	@Override
 	public void setPositionAndRotationDirect(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
-		base.superSetPositionAndRotationDirect(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
+		base.supersetPositionAndRotationDirect(p_180426_1_, p_180426_3_, p_180426_5_, p_180426_7_, p_180426_8_, p_180426_9_, p_180426_10_);
 	}
 
 	@Override
 	public void markPotionsDirty() {
-		base.superMarkPotionsDirty();
+		base.supermarkPotionsDirty();
 	}
 
 	@Override
 	public void playStepSound(Object blockPos, Object block) {
-		base.superPlayStepSound(blockPos, block);
+		base.superplayStepSound(blockPos, block);
 	}
 
 	@Override
 	public boolean isSilent() {
-		return base.superIsSilent();
+		return base.superisSilent();
 	}
 
 	@Override
 	public void setSilent(boolean isSilent) {
-		base.superSetSilent(isSilent);
+		base.supersetSilent(isSilent);
 	}
 
 	@Override
 	public void spawnRunningParticles() {
-		base.superSpawnRunningParticles();
+		base.superspawnRunningParticles();
 	}
 
 	@Override
 	public void createRunningParticles() {
-		base.superCreateRunningParticles();
+		base.supercreateRunningParticles();
 	}
 
 	@Override
 	public boolean isInLava() {
-		return base.superIsInLava();
+		return base.superisInLava();
 	}
 
 	@Override
 	public void moveToBlockPosAndAngles(Object blockPos, float p_174828_2_, float p_174828_3_) {
-		base.superMoveToBlockPosAndAngles(blockPos, p_174828_2_, p_174828_3_);
+		base.supermoveToBlockPosAndAngles(blockPos, p_174828_2_, p_174828_3_);
 	}
 
 	@Override
 	public double getDistanceSq(Object blockPos) {
-		return base.superGetDistanceSq(blockPos);
+		return base.supergetDistanceSq(blockPos);
 	}
 
 	@Override
 	public double getDistanceSqToCenter(Object blockPos) {
-		return base.superGetDistanceSqToCenter(blockPos);
+		return base.supergetDistanceSqToCenter(blockPos);
 	}
 
 	@Override
 	public Object getPositionEyes(float p_174824_1_) {
-		return base.superGetPositionEyes(p_174824_1_);
+		return base.supergetPositionEyes(p_174824_1_);
 	}
 
 	@Override
 	public Object dropItemWithOffset(Object item, int size, float p_145778_3_) {
-		return base.superDropItemWithOffset(item, size, p_145778_3_);
+		return base.superdropItemWithOffset(item, size, p_145778_3_);
 	}
 
 	@Override
 	public boolean isEntityInvulnerable(Object damageSource) {
-		return base.superIsEntityInvulnerable(damageSource);
+		return base.superisEntityInvulnerable(damageSource);
 	}
 
 	@Override
 	public void copyDataFromOld(Object entity) {
-		base.superCopyDataFromOld(entity);
+		base.supercopyDataFromOld(entity);
 	}
 
 	@Override
 	public float getExplosionResistance(Object explosion, Object world, Object blockPos, Object iBlockState) {
-		return base.superGetExplosionResistance(explosion, world, blockPos, iBlockState);
+		return base.supergetExplosionResistance(explosion, world, blockPos, iBlockState);
 	}
 
 	@Override
 	public boolean canExplosionDestroyBlock(Object explosion, Object world, Object blockPos, Object iBlockState, float p_174816_5_) {
-		return base.superCanExplosionDestroyBlock(explosion, world, blockPos, iBlockState, p_174816_5_);
+		return base.supercanExplosionDestroyBlock(explosion, world, blockPos, iBlockState, p_174816_5_);
 	}
 
 	@Override
 	public int getMaxFallHeight() {
-		return base.superGetMaxFallHeight();
+		return base.supergetMaxFallHeight();
 	}
 
 	@Override
 	public boolean hasCustomName() {
-		return base.superHasCustomName();
+		return base.superhasCustomName();
 	}
 
 	@Override
 	public Object getHorizontalFacing() {
-		return base.superGetHorizontalFacing();
+		return base.supergetHorizontalFacing();
 	}
 
 	@Override
 	public Object getHoverEvent() {
-		return base.superGetHoverEvent();
+		return base.supergetHoverEvent();
 	}
 
 	@Override
 	public boolean isSpectatedByPlayer(Object entityPlayerMP) {
-		return base.superIsSpectatedByPlayer(entityPlayerMP);
+		return base.superisSpectatedByPlayer(entityPlayerMP);
 	}
 
 	@Override
 	public Object getEntityBoundingBox() {
-		return base.superGetEntityBoundingBox();
+		return base.supergetEntityBoundingBox();
 	}
 
 	@Override
 	public void setEntityBoundingBox(Object axisAlignedBB) {
-		base.superSetEntityBoundingBox(axisAlignedBB);
+		base.supersetEntityBoundingBox(axisAlignedBB);
 	}
 
 	@Override
 	public boolean isOutsideBorder() {
-		return base.superIsOutsideBorder();
+		return base.superisOutsideBorder();
 	}
 
 	@Override
 	public void setOutsideBorder(boolean p_174821_1_) {
-		base.superSetOutsideBorder(p_174821_1_);
+		base.supersetOutsideBorder(p_174821_1_);
 	}
 
 	@Override
 	public Object getPositionVector() {
-		return base.superGetPositionVector();
+		return base.supergetPositionVector();
 	}
 
 	@Override
 	public Object getCommandSenderEntity() {
-		return base.superGetCommandSenderEntity();
+		return base.supergetCommandSenderEntity();
 	}
 
 	@Override
 	public void setCommandStat(Object type, int amount) {
-		base.superSetCommandStat(type, amount);
+		base.supersetCommandStat(type, amount);
 	}
 
 	@Override
 	public Object getCommandStats() {
-		return base.superGetCommandStats();
+		return base.supergetCommandStats();
 	}
 
 	@Override
 	public void setCommandStats(Object entity) {
-		base.superSetCommandStats(entity);
+		base.supersetCommandStats(entity);
 	}
 
 	@Override
 	public Object getNBTTagCompound() {
-		return base.superGetNBTTagCompound();
+		return base.supergetNBTTagCompound();
 	}
 
 	@Override
 	public void clientUpdateEntityNBT(Object nBTTagCompound) {
-		base.superClientUpdateEntityNBT(nBTTagCompound);
+		base.superclientUpdateEntityNBT(nBTTagCompound);
 	}
 
 	@Override
 	public boolean interactAt(Object entityPlayer, Object vec3) {
-		return base.superInteractAt(entityPlayer, vec3);
+		return base.superinteractAt(entityPlayer, vec3);
 	}
 
 	@Override
 	public boolean isImmuneToExplosions() {
-		return base.superIsImmuneToExplosions();
+		return base.superisImmuneToExplosions();
 	}
 
 	@Override
 	public void applyEnchantments(Object entityLivingBase, Object entity) {
-		base.superApplyEnchantments(entityLivingBase, entity);
+		base.superapplyEnchantments(entityLivingBase, entity);
 	}
 
 	@Override
 	public void heal(int par1) {
-		base.superHeal(par1);
+		base.superheal(par1);
 	}
 
 	@Override
 	public void damageEntity(Object damageSource, int par2) {
-		base.superDamageEntity(damageSource, par2);
+		base.superdamageEntity(damageSource, par2);
 	}
 
 	@Override
 	public boolean func_71066_bF() {
-		return base.superFunc_71066_bF();
+		return base.superfunc_71066_bF();
 	}
 
 	@Override
 	public void updateCloak() {
-		base.superUpdateCloak();
+		base.superupdateCloak();
 	}
 
 	@Override
 	public void sendChatToPlayer(String par1Str) {
-		base.superSendChatToPlayer(par1Str);
+		base.supersendChatToPlayer(par1Str);
 	}
 
 	@Override
 	public boolean canAttackPlayer(Object entityPlayer) {
-		return base.superCanAttackPlayer(entityPlayer);
+		return base.supercanAttackPlayer(entityPlayer);
 	}
 
 	@Override
 	public void alertWolves(Object entityLiving, boolean par2) {
-		base.superAlertWolves(entityLiving, par2);
+		base.superalertWolves(entityLiving, par2);
 	}
 
 	@Override
 	public void damageArmor(int par1) {
-		base.superDamageArmor(par1);
+		base.superdamageArmor(par1);
 	}
 
 	@Override
 	public void func_82162_bC() {
-		base.superFunc_82162_bC();
+		base.superfunc_82162_bC();
 	}
 
 	@Override
 	public boolean canCurrentToolHarvestBlock(int par1, int par2, int par3) {
-		return base.superCanCurrentToolHarvestBlock(par1, par2, par3);
+		return base.supercanCurrentToolHarvestBlock(par1, par2, par3);
 	}
 
 	@Override
 	public boolean func_94062_bN() {
-		return base.superFunc_94062_bN();
+		return base.superfunc_94062_bN();
 	}
 
 	@Override
 	public Object getTranslator() {
-		return base.superGetTranslator();
+		return base.supergetTranslator();
 	}
 
 	@Override
 	public String translateString(String par1Str, Object... par2ArrayOfObj) {
-		return base.superTranslateString(par1Str, par2ArrayOfObj);
+		return base.supertranslateString(par1Str, par2ArrayOfObj);
 	}
 
 	@Override
 	public int func_96121_ay() {
-		return base.superFunc_96121_ay();
+		return base.superfunc_96121_ay();
 	}
 
 	@Override
 	public Object getLastAttackingEntity() {
-		return base.superGetLastAttackingEntity();
+		return base.supergetLastAttackingEntity();
 	}
 
 	@Override
 	public void setLastAttackingEntity(Object entity) {
-		base.superSetLastAttackingEntity(entity);
+		base.supersetLastAttackingEntity(entity);
 	}
 
 	@Override
 	public boolean isWithinHomeDistance(int par1, int par2, int par3) {
-		return base.superIsWithinHomeDistance(par1, par2, par3);
+		return base.superisWithinHomeDistance(par1, par2, par3);
 	}
 
 	@Override
 	public void setHomeArea(int par1, int par2, int par3, int par4) {
-		base.superSetHomeArea(par1, par2, par3, par4);
+		base.supersetHomeArea(par1, par2, par3, par4);
 	}
 
 	@Override
 	public Object getHomePosition() {
-		return base.superGetHomePosition();
+		return base.supergetHomePosition();
 	}
 
 	@Override
 	public float getMaximumHomeDistance() {
-		return base.superGetMaximumHomeDistance();
+		return base.supergetMaximumHomeDistance();
 	}
 
 	@Override
 	public void detachHome() {
-		base.superDetachHome();
+		base.superdetachHome();
 	}
 
 	@Override
 	public boolean hasHome() {
-		return base.superHasHome();
+		return base.superhasHome();
 	}
 
 	@Override
 	public String getTexture() {
-		return base.superGetTexture();
+		return base.supergetTexture();
 	}
 
 	@Override
 	public void setEntityHealth(int par1) {
-		base.superSetEntityHealth(par1);
+		base.supersetEntityHealth(par1);
 	}
 
 	@Override
 	public Object applyArmorCalculations(Object damageSource, int par2) {
-		return base.superApplyArmorCalculations(damageSource, par2);
+		return base.superapplyArmorCalculations(damageSource, par2);
 	}
 
 	@Override
 	public Object applyPotionDamageCalculations(Object damageSource, int par2) {
-		return base.superApplyPotionDamageCalculations(damageSource, par2);
+		return base.superapplyPotionDamageCalculations(damageSource, par2);
 	}
 
 	@Override
 	public String getAmbientSound() {
-		return base.superGetLivingSound();
+		return base.supergetLivingSound();
 	}
 
 	@Override
 	public void knockBack(Object entity, int par2, double par3, double par5) {
-		base.superKnockBack(entity, par2, par3, par5);
+		base.superknockBack(entity, par2, par3, par5);
 	}
 
 	@Override
 	public void onChangedPotionEffect(Object potionEffect) {
-		base.superOnChangedPotionEffect(potionEffect);
+		base.superonChangedPotionEffect(potionEffect);
 	}
 
 	@Override
 	public float getSpeedModifier() {
-		return base.superGetSpeedModifier();
+		return base.supergetSpeedModifier();
 	}
 
 	@Override
 	public void func_94058_c(String par1Str) {
-		base.superFunc_94058_c(par1Str);
+		base.superfunc_94058_c(par1Str);
 	}
 
 	@Override
 	public String func_94057_bL() {
-		return base.superFunc_94057_bL();
+		return base.superfunc_94057_bL();
 	}
 
 	@Override
 	public boolean func_94056_bM() {
-		return base.superFunc_94056_bM();
+		return base.superfunc_94056_bM();
 	}
 
 	@Override
 	public void func_96120_a(int par1, float par2) {
-		base.superFunc_96120_a(par1, par2);
+		base.superfunc_96120_a(par1, par2);
 	}
 
 	@Override
 	public boolean addNotRiddenEntityID(Object nBTTagCompound) {
-		return base.superAddNotRiddenEntityID(nBTTagCompound);
+		return base.superaddNotRiddenEntityID(nBTTagCompound);
 	}
 
 	@Override
 	public boolean addEntityID(Object nBTTagCompound) {
-		return base.superAddEntityID(nBTTagCompound);
+		return base.superaddEntityID(nBTTagCompound);
 	}
 
 	@Override
 	public void unmountEntity(Object entity) {
-		base.superUnmountEntity(entity);
+		base.superunmountEntity(entity);
 	}
 
 	@Override
 	public float func_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block) {
-		return base.superFunc_82146_a(explosion, world, par3, par4, par5, block);
+		return base.superfunc_82146_a(explosion, world, par3, par4, par5, block);
 	}
 
 	@Override
 	public boolean func_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
-		return base.superFunc_96091_a(explosion, world, par3, par4, par5, par6, par7);
+		return base.superfunc_96091_a(explosion, world, par3, par4, par5, par6, par7);
 	}
 
 	@Override
 	public Object getItemStackFromSlot(int par1) {
-		return base.superGetItemStackFromSlot(par1);
+		return base.supergetItemStackFromSlot(par1);
 	}
 
 	@Override
 	public void setInPortal() {
-		base.superSetInPortal();
+		base.supersetInPortal();
 	}
 
 	@Override
 	public void setRenderYawOffset(float p_181013_1_) {
-		base.superSetRenderYawOffset(p_181013_1_);
+		base.supersetRenderYawOffset(p_181013_1_);
 	}
 
 	@Override
 	public void swingArm(Object enumHand) {
-		base.superSwingArm(enumHand);
+		base.superswingArm(enumHand);
 	}
 
 	@Override
 	public void updatePassenger(Object entity) {
-		base.superUpdatePassenger(entity);
+		base.superupdatePassenger(entity);
 	}
 
 	@Override
 	public void dropLoot(boolean p_184610_1_, int p_184610_2_, Object damageSource) {
-		base.superDropLoot(p_184610_1_, p_184610_2_, damageSource);
+		base.superdropLoot(p_184610_1_, p_184610_2_, damageSource);
 	}
 
 	@Override
 	public void frostWalk(Object blockPos) {
-		base.superFrostWalk(blockPos);
+		base.superfrostWalk(blockPos);
 	}
 
 	@Override
 	public void playEquipSound(Object itemStack) {
-		base.superPlayEquipSound(itemStack);
+		base.superplayEquipSound(itemStack);
 	}
 
 	@Override
 	public Object removeActivePotionEffect(Object potion) {
-		return base.superRemoveActivePotionEffect(potion);
+		return base.superremoveActivePotionEffect(potion);
 	}
 
 	@Override
 	public void removePotionEffect(Object potion) {
-		base.superRemovePotionEffect(potion);
+		base.superremovePotionEffect(potion);
 	}
 
 	@Override
 	public void playHurtSound(Object damageSource) {
-		base.superPlayHurtSound(damageSource);
+		base.superplayHurtSound(damageSource);
 	}
 
 	@Override
 	public void damageShield(float p_184590_1_) {
-		base.superDamageShield(p_184590_1_);
+		base.superdamageShield(p_184590_1_);
 	}
 
 	@Override
 	public Object getHeldItemOffhand() {
-		return base.superGetHeldItemOffhand();
+		return base.supergetHeldItemOffhand();
 	}
 
 	@Override
 	public Object getHeldItem(Object enumHand) {
-		return base.superGetHeldItem(enumHand);
+		return base.supergetHeldItem(enumHand);
 	}
 
 	@Override
 	public void setHeldItem(Object enumHand, Object itemStack) {
-		base.superSetHeldItem(enumHand, itemStack);
+		base.supersetHeldItem(enumHand, itemStack);
 	}
 
 	@Override
 	public Object getActiveHand() {
-		return base.superGetActiveHand();
+		return base.supergetActiveHand();
 	}
 
 	@Override
 	public void updateActiveHand() {
-		base.superUpdateActiveHand();
+		base.superupdateActiveHand();
 	}
 
 	@Override
 	public void setActiveHand(Object enumHand) {
-		base.superSetActiveHand(enumHand);
+		base.supersetActiveHand(enumHand);
 	}
 
 	@Override
 	public Object getActiveItemStack() {
-		return base.superGetActiveItemStack();
+		return base.supergetActiveItemStack();
 	}
 
 	@Override
 	public int getItemInUseMaxCount() {
-		return base.superGetItemInUseMaxCount();
+		return base.supergetItemInUseMaxCount();
 	}
 
 	@Override
 	public void stopActiveHand() {
-		base.superStopActiveHand();
+		base.superstopActiveHand();
 	}
 
 	@Override
 	public void resetActiveHand() {
-		base.superResetActiveHand();
+		base.superresetActiveHand();
 	}
 
 	@Override
 	public boolean isActiveItemStackBlocking() {
-		return base.superIsActiveItemStackBlocking();
+		return base.superisActiveItemStackBlocking();
 	}
 
 	@Override
 	public boolean isElytraFlying() {
-		return base.superIsElytraFlying();
+		return base.superisElytraFlying();
 	}
 
 	@Override
 	public int getTicksElytraFlying() {
-		return base.superGetTicksElytraFlying();
+		return base.supergetTicksElytraFlying();
 	}
 
 	@Override
 	public boolean attemptTeleport(double x, double y, double z) {
-		return base.superAttemptTeleport(x, y, z);
+		return base.superattemptTeleport(x, y, z);
 	}
 
 	@Override
 	public boolean canBeHitWithPotion() {
-		return base.superCanBeHitWithPotion();
+		return base.supercanBeHitWithPotion();
 	}
 
 	@Override
 	public Object getFreeVariable(String s) {
-		return base.superGetFreeVariable(s);
+		return Modchu_EntityHelper.getInstance().getData(base, s);
 	}
 
 	@Override
 	public void setFreeVariable(String s, Object o) {
-		base.superSetFreeVariable(s, o);
+		Modchu_EntityHelper.getInstance().setData(base, s, o);
 	}
 
 	@Override
 	public void playSound(Object soundEvent, float p_85030_2_, float p_85030_3_) {
-		base.superPlaySound(soundEvent, p_85030_2_, p_85030_3_);
+		base.superplaySound(soundEvent, p_85030_2_, p_85030_3_);
 	}
 
 	@Override
 	public void playStepSound(int par1, int par2, int par3, Object par4) {
-		base.superPlayStepSound(par1, par2, par3, par4);
+		base.superplayStepSound(par1, par2, par3, par4);
 	}
 
 	@Override
 	public boolean isInRangeToRender3d(Object vec3) {
-		return base.superIsInRangeToRender3d(vec3);
+		return base.superisInRangeToRender3d(vec3);
 	}
 
 	@Override
 	public boolean shouldExplodeBlock(Object explosion, Object world, int par3, int par4, int par5, Object par6, float par7) {
-		return base.superShouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7);
+		return base.supershouldExplodeBlock(explosion, world, par3, par4, par5, par6, par7);
 	}
 
 	@Override
 	public boolean processInitialInteract(Object entityPlayer, Object itemStack, Object enumHand) {
-		return base.superProcessInitialInteract(entityPlayer, itemStack, enumHand);
+		return base.superprocessInitialInteract(entityPlayer, itemStack, enumHand);
 	}
 
 	@Override
 	public Object getTags() {
-		return base.superGetTags();
+		return base.supergetTags();
 	}
 
 	@Override
 	public boolean addTag(String tag) {
-		return base.superAddTag(tag);
+		return base.superaddTag(tag);
 	}
 
 	@Override
 	public boolean removeTag(String tag) {
-		return base.superRemoveTag(tag);
+		return base.superremoveTag(tag);
 	}
 
 	@Override
 	public void setDropItemsWhenDead(boolean p_184174_1_) {
-		base.superSetDropItemsWhenDead(p_184174_1_);
+		base.supersetDropItemsWhenDead(p_184174_1_);
 	}
 
 	@Override
 	public void decrementTimeUntilPortal() {
-		base.superDecrementTimeUntilPortal();
+		base.superdecrementTimeUntilPortal();
 	}
 
 	@Override
 	public void resetPositionToBB() {
-		base.superResetPositionToBB();
+		base.superresetPositionToBB();
 	}
 
 	@Override
 	public void applyOrientationToEntity(Object entity) {
-		base.superApplyOrientationToEntity(entity);
+		base.superapplyOrientationToEntity(entity);
 	}
 
 	@Override
 	public boolean startRiding(Object entity, boolean force) {
-		return base.superStartRiding(entity, force);
+		return base.superstartRiding(entity, force);
 	}
 
 	@Override
 	public boolean canBeRidden(Object entity) {
-		return base.superCanBeRidden(entity);
+		return base.supercanBeRidden(entity);
 	}
 
 	@Override
 	public void removePassengers() {
-		base.superRemovePassengers();
+		base.superremovePassengers();
 	}
 
 	@Override
 	public void dismountRidingEntity() {
-		base.superDismountRidingEntity();
+		base.superdismountRidingEntity();
 	}
 
 	@Override
 	public void addPassenger(Object entity) {
-		base.superAddPassenger(entity);
+		base.superaddPassenger(entity);
 	}
 
 	@Override
 	public void removePassenger(Object entity) {
-		base.superRemovePassenger(entity);
+		base.superremovePassenger(entity);
 	}
 
 	@Override
 	public boolean canFitPassenger(Object entity) {
-		return base.superCanFitPassenger(entity);
+		return base.supercanFitPassenger(entity);
 	}
 
 	@Override
 	public Object getHeldEquipment() {
-		return base.superGetHeldEquipment();
+		return base.supergetHeldEquipment();
 	}
 
 	@Override
 	public Object getArmorInventoryList() {
-		return base.superGetArmorInventoryList();
+		return base.supergetArmorInventoryList();
 	}
 
 	@Override
 	public Object getEquipmentAndArmor() {
-		return base.superGetEquipmentAndArmor();
+		return base.supergetEquipmentAndArmor();
 	}
 
 	@Override
 	public void setItemStackToSlot(Object entityEquipmentSlot, Object itemStack) {
-		base.superSetItemStackToSlot(entityEquipmentSlot, itemStack);
+		base.supersetItemStackToSlot(entityEquipmentSlot, itemStack);
 	}
 
 	@Override
 	public boolean isBeingRidden() {
-		return base.superIsBeingRidden();
+		return base.superisBeingRidden();
 	}
 
 	@Override
 	public boolean isGlowing() {
-		return base.superIsGlowing();
+		return base.superisGlowing();
 	}
 
 	@Override
 	public void setGlowing(boolean p_184195_1_) {
-		base.superSetGlowing(p_184195_1_);
+		base.supersetGlowing(p_184195_1_);
 	}
 
 	@Override
 	public boolean isOnScoreboardTeam(Object team) {
-		return base.superIsOnScoreboardTeam(team);
+		return base.superisOnScoreboardTeam(team);
 	}
 
 	@Override
 	public void setEntityInvulnerable(boolean isInvulnerable) {
-		base.superSetEntityInvulnerable(isInvulnerable);
+		base.supersetEntityInvulnerable(isInvulnerable);
 	}
 
 	@Override
 	public boolean isNonBoss() {
-		return base.superIsNonBoss();
+		return base.superisNonBoss();
 	}
 
 	@Override
 	public void setUniqueId(UUID uniqueIdIn) {
-		base.superSetUniqueId(uniqueIdIn);
+		base.supersetUniqueId(uniqueIdIn);
 	}
 
 	@Override
 	public void notifyDataManagerChange(Object dataParameter) {
-		base.superNotifyDataManagerChange(dataParameter);
+		base.supernotifyDataManagerChange(dataParameter);
 	}
 
 	@Override
 	public Object getAdjustedHorizontalFacing() {
-		return base.superGetAdjustedHorizontalFacing();
+		return base.supergetAdjustedHorizontalFacing();
 	}
 
 	@Override
 	public Object getRenderBoundingBox() {
-		return base.superGetRenderBoundingBox();
+		return base.supergetRenderBoundingBox();
 	}
 
 	@Override
 	public Object getServer() {
-		return base.superGetServer();
+		return base.supergetServer();
 	}
 
 	@Override
 	public Object applyPlayerInteraction(Object entityPlayer, Object vec3d, Object itemStack, Object enumHand) {
-		return base.superApplyPlayerInteraction(entityPlayer, vec3d, itemStack, enumHand);
+		return base.superapplyPlayerInteraction(entityPlayer, vec3d, itemStack, enumHand);
 	}
 
 	@Override
 	public boolean hasCapability(Object capability, Object enumFacing) {
-		return base.superHasCapability(capability, enumFacing);
+		return base.superhasCapability(capability, enumFacing);
 	}
 
 	@Override
 	public void deserializeNBT(Object nBTTagCompound) {
-		base.superDeserializeNBT(nBTTagCompound);
+		base.superdeserializeNBT(nBTTagCompound);
 	}
 
 	@Override
 	public Object serializeNBT() {
-		return base.superSerializeNBT();
+		return base.superserializeNBT();
 	}
 
 	@Override
 	public void addTrackingPlayer(Object entityPlayerMP) {
-		base.superAddTrackingPlayer(entityPlayerMP);
+		base.superaddTrackingPlayer(entityPlayerMP);
 	}
 
 	@Override
 	public void removeTrackingPlayer(Object entityPlayerMP) {
-		base.superRemoveTrackingPlayer(entityPlayerMP);
+		base.superremoveTrackingPlayer(entityPlayerMP);
 	}
 
 	@Override
 	public float getRotatedYaw(Object rotation) {
-		return base.superGetRotatedYaw(rotation);
+		return base.supergetRotatedYaw(rotation);
 	}
 
 	@Override
 	public float getMirroredYaw(Object mirror) {
-		return base.superGetMirroredYaw(mirror);
+		return base.supergetMirroredYaw(mirror);
 	}
 
 	@Override
 	public boolean setPositionNonDirty() {
-		return base.superSetPositionNonDirty();
+		return base.supersetPositionNonDirty();
 	}
 
 	@Override
 	public Object getControllingPassenger() {
-		return base.superGetControllingPassenger();
+		return base.supergetControllingPassenger();
 	}
 
 	@Override
 	public Object getPassengers() {
-		return base.superGetPassengers();
+		return base.supergetPassengers();
 	}
 
 	@Override
 	public boolean isPassenger(Object entity) {
-		return base.superIsPassenger(entity);
+		return base.superisPassenger(entity);
 	}
 
 	@Override
 	public Object getRecursivePassengers() {
-		return base.superGetRecursivePassengers();
+		return base.supergetRecursivePassengers();
 	}
 
 	@Override
 	public Object getLowestRidingEntity() {
-		return base.superGetLowestRidingEntity();
+		return base.supergetLowestRidingEntity();
 	}
 
 	@Override
 	public boolean isRidingSameEntity(Object entity) {
-		return base.superIsRidingSameEntity(entity);
+		return base.superisRidingSameEntity(entity);
 	}
 
 	@Override
 	public boolean isRidingOrBeingRiddenBy(Object entity) {
-		return base.superIsRidingOrBeingRiddenBy(entity);
+		return base.superisRidingOrBeingRiddenBy(entity);
 	}
 
 	@Override
 	public boolean canPassengerSteer() {
-		return base.superCanPassengerSteer();
+		return base.supercanPassengerSteer();
 	}
 
 	@Override
 	public Object getRidingEntity() {
-		return base.superGetRidingEntity();
+		return base.supergetRidingEntity();
 	}
 
 	@Override
 	public Object getPushReaction() {
-		return base.superGetPushReaction();
+		return base.supergetPushReaction();
 	}
 
 	@Override
 	public Object getSoundCategory() {
-		return base.superGetSoundCategory();
+		return base.supergetSoundCategory();
 	}
 
 	@Override
 	public Object getCapability(Object capability, Object enumFacing) {
-		return base.superGetCapability(capability, enumFacing);
+		return base.supergetCapability(capability, enumFacing);
 	}
 
 	@Override
 	public Object getRecursivePassengersByType(Class entityClass) {
-		return base.superGetRecursivePassengersByType(entityClass);
+		return base.supergetRecursivePassengersByType(entityClass);
 	}
 
 	@Override
 	public void openBook(Object itemStack, Object enumHand) {
-		base.superOpenBook(itemStack, enumHand);
+		base.superopenBook(itemStack, enumHand);
 	}
 
 	@Override
 	public Object interact(Object entity, Object itemStack, Object enumHand) {
-		return base.superInteract(entity, itemStack, enumHand);
+		return base.superinteract(entity, itemStack, enumHand);
 	}
 
 	@Override
 	public void setServerBrand(String brand) {
-		base.superSetServerBrand(brand);
+		base.supersetServerBrand(brand);
 	}
 
 	@Override
 	public String getServerBrand() {
-		return base.superGetServerBrand();
+		return base.supergetServerBrand();
 	}
 
 	@Override
 	public int getPermissionLevel() {
-		return base.superGetPermissionLevel();
+		return base.supergetPermissionLevel();
 	}
 
 	@Override
 	public void setPermissionLevel(int p_184839_1_) {
-		base.superSetPermissionLevel(p_184839_1_);
+		base.supersetPermissionLevel(p_184839_1_);
 	}
 
 	@Override
 	public void displayGuiCommandBlock(Object tileEntityCommandBlock) {
-		base.superDisplayGuiCommandBlock(tileEntityCommandBlock);
+		base.superdisplayGuiCommandBlock(tileEntityCommandBlock);
 	}
 
 	@Override
 	public boolean isRowingBoat() {
-		return base.superIsRowingBoat();
+		return base.superisRowingBoat();
 	}
 
 	@Override
 	public boolean isCreative() {
-		return base.superIsCreative();
+		return base.superisCreative();
 	}
 
 	@Override
 	public boolean isPlayerInfoSet() {
-		return base.superIsPlayerInfoSet();
+		return base.superisPlayerInfoSet();
 	}
 
 	@Override
 	public Object getLocationElytra() {
-		return base.superGetLocationElytra();
+		return base.supergetLocationElytra();
 	}
 
 	@Override
 	public Object createCooldownTracker() {
-		return base.superCreateCooldownTracker();
+		return base.supercreateCooldownTracker();
 	}
 
 	@Override
 	public void updateSize() {
-		base.superUpdateSize();
+		base.superupdateSize();
 	}
 
 	@Override
 	public void spawnSweepParticles() {
-		base.superSpawnSweepParticles();
+		base.superspawnSweepParticles();
 	}
 
 	@Override
 	public boolean hasAchievement(Object achievement) {
-		return base.superHasAchievement(achievement);
+		return base.superhasAchievement(achievement);
 	}
 
 	@Override
 	public Object getPrimaryHand() {
-		return base.superGetPrimaryHand();
+		return base.supergetPrimaryHand();
 	}
 
 	@Override
 	public void setPrimaryHand(Object enumHandSide) {
-		base.superSetPrimaryHand(enumHandSide);
+		base.supersetPrimaryHand(enumHandSide);
 	}
 
 	@Override
 	public float getCooldownPeriod() {
-		return base.superGetCooldownPeriod();
+		return base.supergetCooldownPeriod();
 	}
 
 	@Override
 	public float getCooledAttackStrength(float adjustTicks) {
-		return base.superGetCooledAttackStrength(adjustTicks);
+		return base.supergetCooledAttackStrength(adjustTicks);
 	}
 
 	@Override
 	public void resetCooldown() {
-		base.superResetCooldown();
+		base.superresetCooldown();
 	}
 
 	@Override
 	public Object getCooldownTracker() {
-		return base.superGetCooldownTracker();
+		return base.supergetCooldownTracker();
 	}
 
 	@Override
 	public float getLuck() {
-		return base.superGetLuck();
+		return base.supergetLuck();
 	}
 
 	@Override
 	public void addPrefix(Object iTextComponent) {
-		base.superAddPrefix(iTextComponent);
+		base.superaddPrefix(iTextComponent);
 	}
 
 	@Override
 	public void addSuffix(Object iTextComponent) {
-		base.superAddSuffix(iTextComponent);
+		base.superaddSuffix(iTextComponent);
 	}
 
 	@Override
 	public Collection getPrefixes() {
-		return (Collection) (base.superGetPrefixes());
+		return (Collection) (base.supergetPrefixes());
 	}
 
 	@Override
 	public Collection getSuffixes() {
-		return (Collection) (base.superGetSuffixes());
+		return (Collection) (base.supergetSuffixes());
 	}
 
 	@Override
 	public boolean ignoreItemEntityData() {
-		return base.superIgnoreItemEntityData();
+		return base.superignoreItemEntityData();
 	}
 
 	@Override
 	public void setNoAI(boolean par1) {
-		base.superSetNoAI(par1);
+		base.supersetNoAI(par1);
 	}
 
 	@Override
 	public Object getCurrentArmor(int slotIn) {
-		return base.superGetCurrentArmor(slotIn);
+		return base.supergetCurrentArmor(slotIn);
 	}
 
 	@Override
 	public void setCurrentItemOrArmor(int p_70062_1_, Object itemStack) {
-		base.superSetCurrentItemOrArmor(p_70062_1_, itemStack);
+		base.supersetCurrentItemOrArmor(p_70062_1_, itemStack);
 	}
 
 	@Override
 	public void setMaxHealth(Object floatOrInt) {
-		base.superSetMaxHealth(floatOrInt);
+		base.supersetMaxHealth(floatOrInt);
 	}
 
 	@Override
 	public boolean getAlwaysRenderNameTag() {
-		return base.superGetAlwaysRenderNameTag();
+		return base.supergetAlwaysRenderNameTag();
 	}
 
 	@Override
 	public void setAlwaysRenderNameTag(boolean p_174805_1_) {
-		base.superSetAlwaysRenderNameTag(p_174805_1_);
+		base.supersetAlwaysRenderNameTag(p_174805_1_);
 	}
 
 	@Override
 	public String getCustomNameTag() {
-		return base.superGetCustomNameTag();
+		return base.supergetCustomNameTag();
 	}
 
 	@Override
 	public void setCustomNameTag(String p_96094_1_) {
-		base.superSetCustomNameTag(p_96094_1_);
+		base.supersetCustomNameTag(p_96094_1_);
 	}
 
 	@Override
 	public boolean canPickUpLoot() {
-		return base.superCanPickUpLoot();
+		return base.supercanPickUpLoot();
 	}
 
 	@Override
 	public Object getLookHelper() {
-		return base.superGetLookHelper();
+		return base.supergetLookHelper();
 	}
 
 	@Override
 	public Object getMoveHelper() {
-		return base.superGetMoveHelper();
+		return base.supergetMoveHelper();
 	}
 
 	@Override
 	public Object getNavigator() {
-		return base.superGetNavigator();
+		return base.supergetNavigator();
 	}
 
 	@Override
 	public Object getEntitySenses() {
-		return base.superGetEntitySenses();
+		return base.supergetEntitySenses();
 	}
 
 	@Override
 	public Object getJumpHelper() {
-		return base.superGetJumpHelper();
+		return base.supergetJumpHelper();
 	}
 
 	@Override
 	public void eatGrassBonus() {
-		base.superEatGrassBonus();
+		base.supereatGrassBonus();
 	}
 
 	@Override
 	public Object getAttackTarget() {
-		return base.superGetAttackTarget();
+		return base.supergetAttackTarget();
 	}
 
 	@Override
 	public void setAttackTarget(Object entityLiving) {
-		base.superSetAttackTarget(entityLiving);
+		base.supersetAttackTarget(entityLiving);
 	}
 
 	@Override
 	public boolean canAttackClass(Class par1Class) {
-		return base.superCanAttackClass(par1Class);
+		return base.supercanAttackClass(par1Class);
 	}
 
 	@Override
 	public boolean isWithinHomeDistanceCurrentPosition() {
-		return base.superIsWithinHomeDistanceCurrentPosition();
+		return base.superisWithinHomeDistanceCurrentPosition();
 	}
 
 	@Override
 	public int getTalkInterval() {
-		return base.superGetTalkInterval();
+		return base.supergetTalkInterval();
 	}
 
 	@Override
 	public void playLivingSound() {
-		base.superPlayLivingSound();
+		base.superplayLivingSound();
 	}
 
 	@Override
 	public void spawnExplosionParticle() {
-		base.superSpawnExplosionParticle();
+		base.superspawnExplosionParticle();
 	}
 
 	@Override
 	public void setMoveForward(float par1) {
-		base.superSetMoveForward(par1);
+		base.supersetMoveForward(par1);
 	}
 
 	@Override
 	public int getDropItemId() {
-		return base.superGetDropItemId();
+		return base.supergetDropItemId();
 	}
 
 	@Override
 	public void despawnEntity() {
-		base.superDespawnEntity();
+		base.superdespawnEntity();
 	}
 
 	@Override
 	public boolean canDespawn() {
-		return base.superCanDespawn();
+		return base.supercanDespawn();
 	}
 
 	@Override
 	public int getVerticalFaceSpeed() {
-		return base.superGetVerticalFaceSpeed();
+		return base.supergetVerticalFaceSpeed();
 	}
 
 	@Override
 	public void faceEntity(Object entity, float par2, float par3) {
-		base.superFaceEntity(entity, par2, par3);
+		base.superfaceEntity(entity, par2, par3);
 	}
 
 	@Override
 	public boolean getCanSpawnHere() {
-		return base.superGetCanSpawnHere();
+		return base.supergetCanSpawnHere();
 	}
 
 	@Override
 	public float getRenderSizeModifier() {
-		return base.superGetRenderSizeModifier();
+		return base.supergetRenderSizeModifier();
 	}
 
 	@Override
 	public int getMaxSpawnedInChunk() {
-		return base.superGetMaxSpawnedInChunk();
+		return base.supergetMaxSpawnedInChunk();
 	}
 
 	@Override
 	public boolean canBeSteered() {
-		return base.superCanBeSteered();
+		return base.supercanBeSteered();
 	}
 
 	@Override
 	public boolean isNoDespawnRequired() {
-		return base.superIsNoDespawnRequired();
+		return base.superisNoDespawnRequired();
 	}
 
 	@Override
 	public void setCanPickUpLoot(boolean par1) {
-		base.superSetCanPickUpLoot(par1);
+		base.supersetCanPickUpLoot(par1);
 	}
 
 	@Override
 	public boolean interact(Object entityPlayer) {
-		return base.superInteract(entityPlayer);
+		return base.superinteract(entityPlayer);
 	}
 
 	@Override
 	public String getCachedUniqueIdString() {
-		return base.superGetCachedUniqueIdString();
+		return base.supergetCachedUniqueIdString();
 	}
 
 	@Override
@@ -3260,27 +3256,26 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 
 	@Override
 	public Object getRidingEntity2() {
-		return base.superGetRidingEntity2();
+		return Modchu_EntityHelper.getInstance().getRidingEntity2(base);
 	}
 
 	@Override
 	public boolean isRiding2() {
-		return base.superIsRiding2();
+		return Modchu_EntityHelper.getInstance().isRiding2(base);
 	}
 
 	@Override
 	public void dismountRidingEntity2() {
-		base.superDismountRidingEntity2();
+		base.superdismountRidingEntity();
 	}
 
 	@Override
 	public void sendDeathMessage(Object damageSource) {
-		base.superSendDeathMessage(damageSource);
 	}
 
 	@Override
 	public boolean canSendDeathMessage() {
-		return base.superCanSendDeathMessage();
+		return false;
 	}
 
 	@Override
@@ -3291,7 +3286,7 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 	}
 
 	@Override
-	public void setRidingEntityId(int i) {
+	public void setRidingEntityID(int i) {
 		base.setDataWatcherWatchableObject(16, i);
 	}
 
@@ -3330,7 +3325,7 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 
 	@Override
 	public boolean isDamageInvincible() {
-		return base.superIsDamageInvincible();
+		return false;
 	}
 
 	@Override
@@ -3345,7 +3340,7 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 
 	@Override
 	public Object getTeleportDirection() {
-		return base.superGetTeleportDirection();
+		return base.supergetTeleportDirection();
 	}
 
 	@Override
@@ -3365,207 +3360,207 @@ public class Modchu_EntityPlayerSPMasterBasis implements Modchu_IEntityPlayerSPM
 
 	@Override
 	public void onInsideBlock(Object iBlockState) {
-		base.superOnInsideBlock(iBlockState);
+		base.superonInsideBlock(iBlockState);
 	}
 
 	@Override
 	public float playFlySound(float p_191954_1_) {
-		return base.superFunc_191954_d(p_191954_1_);
+		return base.superfunc_191954_d(p_191954_1_);
 	}
 
 	@Override
 	public boolean makeFlySound() {
-		return base.superFunc_191957_ae();
+		return base.superfunc_191957_ae();
 	}
 
 	@Override
 	public boolean hasNoGravity() {
-		return base.superHasNoGravity();
+		return base.superhasNoGravity();
 	}
 
 	@Override
 	public void setNoGravity(boolean noGravity) {
-		base.superSetNoGravity(noGravity);
+		base.supersetNoGravity(noGravity);
 	}
 
 	@Override
 	public boolean isOverWater() {
-		return base.superFunc_191953_am();
+		return base.superfunc_191953_am();
 	}
 
 	@Override
 	public Object getPitchYaw() {
-		return base.superGetPitchYaw();
+		return base.supergetPitchYaw();
 	}
 
 	@Override
 	public Object getForward() {
-		return base.superGetForward();
+		return base.supergetForward();
 	}
 
 	@Override
 	public boolean getIsInvulnerable() {
-		return base.superGetIsInvulnerable();
+		return base.supergetIsInvulnerable();
 	}
 
 	@Override
 	public boolean canTrample(Object world, Object block, Object blockPos, float fallDistance) {
-		return base.superCanTrample(world, block, blockPos, fallDistance);
+		return base.supercanTrample(world, block, blockPos, fallDistance);
 	}
 
 	@Override
 	public int getFireImmuneTicks() {
-		return base.superGetFireImmuneTicks();
+		return base.supergetFireImmuneTicks();
 	}
 
 	@Override
 	public Map getActivePotionMap() {
-		return base.superGetActivePotionMap();
+		return base.supergetActivePotionMap();
 	}
 
 	@Override
 	public void blockUsingShield(Object entityLivingBase) {
-		base.superBlockUsingShield(entityLivingBase);
+		base.superblockUsingShield(entityLivingBase);
 	}
 
 	@Override
 	public Object getLastDamageSource() {
-		return base.superGetLastDamageSource();
+		return base.supergetLastDamageSource();
 	}
 
 	@Override
 	public boolean hasItemInSlot(Object entityEquipmentSlot) {
-		return base.superHasItemInSlot(entityEquipmentSlot);
+		return base.superhasItemInSlot(entityEquipmentSlot);
 	}
 
 	@Override
 	public float getWaterSlowDown() {
-		return base.superGetWaterSlowDown();
+		return base.supergetWaterSlowDown();
 	}
 
 	@Override
 	public boolean attackable() {
-		return base.superAttackable();
+		return base.superattackable();
 	}
 
 	@Override
 	public void setPartying(Object blockPos, boolean p_191987_2_) {
-		base.superSetPartying(blockPos, p_191987_2_);
+		base.supersetPartying(blockPos, p_191987_2_);
 	}
 
 	@Override
 	public boolean processInitialInteract(Object entityPlayer, Object enumHand) {
-		return base.superProcessInitialInteract(entityPlayer, enumHand);
+		return base.superprocessInitialInteract(entityPlayer, enumHand);
 	}
 
 	@Override
 	public Object applyPlayerInteraction(Object entityPlayer, Object vec3d, Object enumHand) {
-		return base.superApplyPlayerInteraction(entityPlayer, vec3d, enumHand);
+		return base.superapplyPlayerInteraction(entityPlayer, vec3d, enumHand);
 	}
 
 	@Override
 	public Object getRecipeBook() {
-		return base.superGetRecipeBook();
+		return base.supergetRecipeBook();
 	}
 
 	@Override
 	public void removeRecipeHighlight(Object iRecipe) {
-		base.superFunc_193103_a(iRecipe);
+		base.superfunc_193103_a(iRecipe);
 	}
 
 	@Override
 	public void openEditStructure(Object tileEntityStructure) {
-		base.superOpenEditStructure(tileEntityStructure);
+		base.superopenEditStructure(tileEntityStructure);
 	}
 
 	@Override
 	public boolean isAutoJumpEnabled() {
-		return base.superIsAutoJumpEnabled();
+		return base.superisAutoJumpEnabled();
 	}
 
 	@Override
 	public void updateAutoJump(float p_189810_1_, float p_189810_2_) {
-		base.superUpdateAutoJump(p_189810_1_, p_189810_2_);
+		base.superupdateAutoJump(p_189810_1_, p_189810_2_);
 	}
 
 	@Override
 	public void destroyVanishingCursedItems() {
-		base.superDestroyVanishingCursedItems();
+		base.superdestroyVanishingCursedItems();
 	}
 
 	@Override
 	public void disableShield(boolean p_190777_1_) {
-		base.superDisableShield(p_190777_1_);
+		base.superdisableShield(p_190777_1_);
 	}
 
 	@Override
 	public void unlockRecipes(List p_192021_1_) {
-		base.superUnlockRecipes(p_192021_1_);
+		base.superunlockRecipes(p_192021_1_);
 	}
 
 	@Override
 	public void unlockRecipes(Object[] resourceLocation) {
-		base.superUnlockRecipes(resourceLocation);
+		base.superunlockRecipes(resourceLocation);
 	}
 
 	@Override
 	public void resetRecipes(List p_192022_1_) {
-		base.superFunc_192022_b(p_192022_1_);
+		base.superfunc_192022_b(p_192022_1_);
 	}
 
 	@Override
 	public boolean addItemStackToInventory(Object itemStack) {
-		return base.superAddItemStackToInventory(itemStack);
+		return base.superaddItemStackToInventory(itemStack);
 	}
 
 	@Override
 	public boolean addShoulderEntity(Object nBTTagCompound) {
-		return base.superAddShoulderEntity(nBTTagCompound);
+		return base.superaddShoulderEntity(nBTTagCompound);
 	}
 
 	@Override
 	public void spawnShoulderEntities() {
-		base.superSpawnShoulderEntities();
+		base.superspawnShoulderEntities();
 	}
 
 	@Override
 	public Object getLeftShoulderEntity() {
-		return base.superGetLeftShoulderEntity();
+		return base.supergetLeftShoulderEntity();
 	}
 
 	@Override
 	public void setLeftShoulderEntity(Object nBTTagCompound) {
-		base.superSetLeftShoulderEntity(nBTTagCompound);
+		base.supersetLeftShoulderEntity(nBTTagCompound);
 	}
 
 	@Override
 	public Object getRightShoulderEntity() {
-		return base.superGetRightShoulderEntity();
+		return base.supergetRightShoulderEntity();
 	}
 
 	@Override
 	public void setRightShoulderEntity(Object nBTTagCompound) {
-		base.superSetRightShoulderEntity(nBTTagCompound);
+		base.supersetRightShoulderEntity(nBTTagCompound);
 	}
 
 	@Override
 	public boolean canUseCommandBlock() {
-		return base.superCanUseCommandBlock();
+		return base.supercanUseCommandBlock();
 	}
 
 	@Override
 	public boolean hasSpawnDimension() {
-		return base.superHasSpawnDimension();
+		return base.superhasSpawnDimension();
 	}
 
 	@Override
 	public int getSpawnDimension() {
-		return base.superGetSpawnDimension();
+		return base.supergetSpawnDimension();
 	}
 
 	@Override
 	public void setSpawnDimension(Object integer) {
-		base.superSetSpawnDimension(integer);
+		base.supersetSpawnDimension(integer);
 	}
 
 }

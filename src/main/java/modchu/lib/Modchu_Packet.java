@@ -12,19 +12,19 @@ public class Modchu_Packet implements Modchu_IPacketConstant {
 	}
 
 	public static void registerPacket(Object instance, String channelName) {
-		Modchu_Debug.lDebug("Modchu_Packet registerPacket");
+		//Modchu_Debug.lDebug("Modchu_Packet registerPacket");
 		if (Modchu_Main.getMinecraftVersion() < 164
 				&& !Modchu_Main.isForge) return;
 		if (master != null); else {
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master init");
+			//Modchu_Debug.lDebug("Modchu_Packet registerPacket master init");
 			Class c = Modchu_Main.getModchuCharacteristicClass("Modchu_PacketMaster");
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master init c="+c);
+			//Modchu_Debug.lDebug("Modchu_Packet registerPacket master init c="+c);
 			if (c != null); else return;
 			Object o = Modchu_Reflect.newInstance(c, new Class[]{ HashMap.class }, new Object[]{ null });
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master init o="+o);
+			//Modchu_Debug.lDebug("Modchu_Packet registerPacket master init o="+o);
 			master = o != null
 					&& o instanceof Modchu_IPacketMaster ? (Modchu_IPacketMaster) o : null;
-			Modchu_Debug.lDebug("Modchu_Packet registerPacket master init master="+master);
+			//Modchu_Debug.lDebug("Modchu_Packet registerPacket master init master="+master);
 			Modchu_PacketManager.init();
 		}
 		if (master != null) master.registerPacket(instance, channelName);

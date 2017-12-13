@@ -108,6 +108,8 @@ public class Modchu_PacketMaster implements Modchu_IPacketMaster {
 			Modchu_Debug.mDebug("Modchu_PacketMaster sendToWorld entityplayer="+entityplayer);
 			sendTo(newPacket(o, channelName), entityplayer, channelName);
 		}
+		//String ss = "debug sendToWorld";
+		//Modchu_Main.setRuntimeException(ss);
 	}
 
 	@Override

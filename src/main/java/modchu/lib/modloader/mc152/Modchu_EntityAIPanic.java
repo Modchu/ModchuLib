@@ -19,6 +19,7 @@ public class Modchu_EntityAIPanic extends EntityAIPanic implements Modchu_IEntit
 		//Modchu_Debug.lDebug("Modchu_EntityAIPanic init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAIPanicMaster ? (Modchu_IEntityAIPanicMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override

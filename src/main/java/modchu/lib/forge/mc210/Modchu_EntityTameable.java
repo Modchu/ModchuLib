@@ -338,10 +338,6 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc210_222.Modchu_Ent
 	}
 
 	@Override
-	public void superSetMoveForward(float p_191989_1_) {
-	}
-
-	@Override
 	public Map superGetActivePotionMap() {
 		return null;
 	}

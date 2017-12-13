@@ -19,6 +19,7 @@ public abstract class Modchu_EntityAIRestrictOpenDoor extends EntityAIRestrictOp
 		//Modchu_Debug.lDebug("Modchu_EntityAIRestrictOpenDoor init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAIRestrictOpenDoorMaster ? (Modchu_IEntityAIRestrictOpenDoorMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override

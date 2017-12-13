@@ -19,6 +19,7 @@ public class Modchu_EntityAILeapAtTarget extends EntityAILeapAtTarget implements
 		//Modchu_Debug.lDebug("Modchu_EntityAILeapAtTarget init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAILeapAtTargetMaster ? (Modchu_IEntityAILeapAtTargetMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override

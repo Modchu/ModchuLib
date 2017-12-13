@@ -3,32 +3,7 @@ package modchu.lib;
 import java.util.HashMap;
 import java.util.UUID;
 
-public interface Modchu_IEntity {
-	public Object getFreeVariable(String s);
-	public void setFreeVariable(String s, Object o);
-	public Object superGetFreeVariable(String s);
-	public void superSetFreeVariable(String s, Object o);
-	public void superInit();
-	public void superSetMaxHealth(Object floatOrInt);
-	public void entityDataManagerRegister(Class[] c1, int i, Object o);
-	public Object getDataWatcherWatchableObject(int i);
-	public void setDataWatcherWatchableObject(int i, Object o);
-	public Object getRidingEntity2();
-	public Object superGetRidingEntity2();
-	public boolean isRiding2();
-	public boolean superIsRiding2();
-	public void dismountRidingEntity2();
-	public void superDismountRidingEntity2();
-	public int getDataWatcherWatchableObjectIdCount();
-	public void setDataWatcherWatchableObjectIdCount(int i);
-	public void dataParameterMapSetting(HashMap<Integer, Object> dataParameterMap);
-	public boolean isInitFlag();
-	public void setInitFlag(boolean b);
-	public int getTempIsRiding();
-	public void setTempIsRiding(int i);
-	public int getDataWatcherWatchableObjectIdFirst();
-	public void setDataWatcherWatchableObjectIdFirst(int i);
-
+public interface Modchu_IEntity extends Modchu_IEntityHelper {
 	public int superGetEntityId();
 	public void superSetEntityId(int p_145769_1_);
 	public void superEntityInit();

@@ -1,8 +1,6 @@
 package modchu.lib;
 
 public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster {
-	public boolean isOnLivingUpdateCancel();
-
 	public Object func_110172_bL();
 	public void attackEntity(Object entity, float f);
 	public Object createChild(Object entityanimal);
@@ -42,19 +40,10 @@ public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster
 	public Object getEntityToAttack();
 	public void setTarget(Object entity);
 	public boolean isWithinHomeDistanceFromPosition(Object blockPos);
-	public void updateLeashedState();
 	public void onLeashDistance(float par1);
 	public Object getDropItem();
-	public Object func_130225_q(int par1);
-	public void enchantEquipment();
-	public void enablePersistence();
-	public boolean hasCustomNameTag();
 	public void setDropChance(Object entityEquipmentSlotOrInt, float par2);
-	public void clearLeashed(boolean par1, boolean par2);
 	public boolean canBeLeashedTo();
-	public boolean getLeashed();
-	public Object getLeashedToEntity();
-	public void setLeashedToEntity(Object entity, boolean par2);
 	public boolean isNotColliding();
 	public void copyDataFrom(Object entity);
 	public Object getAISit();
@@ -64,11 +53,8 @@ public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster
 	public float getBlockPathWeight(Object blockPos);
 	//public String func_152113_b();
 	public void func_152115_b(String par1Str);
-	public String func_146067_o(int p_146067_1_);
 	public Object getLivingSound();
 	public boolean processInteract(Object entityPlayer);
-	public int getDropItemId();
-	public boolean isWithinHomeDistanceCurrentPosition();
 	// ~152
 	public int getHealthInt();
 	// 180~
@@ -97,14 +83,10 @@ public interface Modchu_IEntityTameableMaster extends Modchu_IEntityLivingMaster
 	public Object getPrimaryHand();
 	public void setLeftHanded(boolean p_184641_1_);
 	public boolean isLeftHanded();
-	public Object getTeleportDirection();
 
 	public Object getNewNavigator(Object world);
 	public void setTamedBy(Object entityPlayer);
 	public boolean holdingSpawnEggOfClass(Object itemStack, Class p_190669_2_);
 	public double followLeashSpeed();
-	public void setMoveForward(float p_191989_1_);
-	public Object getHurtSound(Object damageSource);
-	public void travel(float p_191986_1_, float p_191986_2_, float p_191986_3_);
 
 }

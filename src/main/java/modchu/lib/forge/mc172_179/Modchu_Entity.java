@@ -2,8 +2,11 @@ package modchu.lib.forge.mc172_179;
 
 import java.util.HashMap;
 import java.util.UUID;
+
 import modchu.lib.Modchu_AS;
+import modchu.lib.Modchu_CastHelper;
 import modchu.lib.Modchu_DataWatcherMaster2;
+import modchu.lib.Modchu_EntityHelper;
 import modchu.lib.Modchu_IEntity;
 import modchu.lib.Modchu_IEntityMaster;
 import modchu.lib.Modchu_Main;
@@ -32,10 +35,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	public Modchu_IEntityMaster master;
-	public float maxHealth;
-	public boolean initFlag;
-	public int dataWatcherWatchableObjectIdFirst;
-	public int dataWatcherWatchableObjectIdCount = 6;
 
 	public Modchu_Entity(World world) {
 		super(world);
@@ -49,12 +48,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public boolean isInitFlag() {
-		return initFlag;
-	}
-
-	@Override
-	public void setInitFlag(boolean b) {
-		initFlag = b;
+		return master != null;
 	}
 
 	@Override
@@ -69,12 +63,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 
 	@Override
 	public int getDataWatcherWatchableObjectIdFirst() {
-		return dataWatcherWatchableObjectIdFirst;
-	}
-
-	@Override
-	public void setDataWatcherWatchableObjectIdFirst(int i) {
-		dataWatcherWatchableObjectIdFirst = i;
+		return 2;
 	}
 
 	@Override
@@ -87,18 +76,8 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public Object superGetRidingEntity2() {
-		return superGetRidingEntity();
-	}
-
-	@Override
 	public boolean isRiding2() {
 		return isRiding();
-	}
-
-	@Override
-	public boolean superIsRiding2() {
-		return superIsRiding();
 	}
 
 	@Override
@@ -107,17 +86,8 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public void superDismountRidingEntity2() {
-		superDismountRidingEntity();
-	}
-
-	@Override
-	public int getDataWatcherWatchableObjectIdCount() {
-		return 5;
-	}
-
-	@Override
-	public void setDataWatcherWatchableObjectIdCount(int i) {
+	public int getEntityDataManagerEntriesCount() {
+		return Modchu_EntityHelper.getInstance().getEntityDataManagerEntriesCount(this);
 	}
 
 	protected void init(HashMap<String, Object> map) {
@@ -154,22 +124,13 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public Object superGetFreeVariable(String s) {
-		return null;
-	}
-
-	@Override
 	public void setFreeVariable(String s, Object o) {
 		master.setFreeVariable(s, o);
 	}
 
 	@Override
-	public void superSetFreeVariable(String s, Object o) {
-	}
-
-	@Override
 	protected void entityInit() {
-		if (master != null) master.entityInit();
+		Modchu_EntityHelper.getInstance().entityInit(this);
 	}
 
 	@Override
@@ -294,7 +255,6 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	@Override
 	public void onUpdate() {
 		if (master != null) master.onUpdate();
-		else super.onUpdate();
 	}
 
 	@Override
@@ -2176,11 +2136,7 @@ public class Modchu_Entity extends Entity implements Modchu_IEntity {
 	}
 
 	@Override
-	public void superInit() {
-	}
-
-	@Override
-	public void superSetMaxHealth(Object floatOrInt) {
+	public void supersetMaxHealth(Object floatOrInt) {
 	}
 
 	@Override

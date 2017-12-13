@@ -20,6 +20,7 @@ public class Modchu_EntityAIHurtByTarget extends EntityAIHurtByTarget implements
 		//Modchu_Debug.lDebug("Modchu_EntityAIHurtByTarget init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAIHurtByTargetMaster ? (Modchu_IEntityAIHurtByTargetMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override

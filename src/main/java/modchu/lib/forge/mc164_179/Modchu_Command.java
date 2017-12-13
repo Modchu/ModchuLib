@@ -48,17 +48,17 @@ public class Modchu_Command implements ICommand {
 
 	@Override
 	public void processCommand(ICommandSender iCommandSender, String[] astring) {
-		if (master != null) master.processCommand(iCommandSender, astring);
+		if (master != null) master.execute(null, iCommandSender, astring);
 	}
 
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender iCommandSender) {
-		return master != null ? master.canCommandSenderUseCommand(iCommandSender) : false;
+		return master != null ? master.checkPermission(null, iCommandSender) : false;
 	}
 
 	@Override
 	public List addTabCompletionOptions(ICommandSender iCommandSender, String[] astring) {
-		return master != null ? master.addTabCompletionOptions(iCommandSender, astring) : null;
+		return master != null ? master.getTabCompletionOptions(null, iCommandSender, astring, null) : null;
 	}
 
 	@Override

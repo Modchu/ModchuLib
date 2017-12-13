@@ -1,14 +1,117 @@
 package modchu.lib;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaster {
 	public Modchu_IEntityPlayer base;
 
 	public Modchu_EntityPlayerMasterBasis(HashMap<String, Object> map) {
 		base = (Modchu_IEntityPlayer) map.get("base");
+		Modchu_EntityHelper.getInstance().setData(base, "checkUUIDCount", 2);
+	}
+
+	@Override
+	public void setRidingEntityId(int i) {
+		base.setDataWatcherWatchableObject(16, i);
+	}
+
+	@Override
+	public boolean attackEntityFrom(Object par1DamageSource, float par2) {
+		return Modchu_EntityHelper.getInstance().attackEntityFrom(base, par1DamageSource, par2);
+	}
+
+	@Override
+	public boolean isRiding() {
+		return Modchu_EntityHelper.getInstance().isRiding(base);
+	}
+
+	@Override
+	public void onLivingUpdate() {
+		Modchu_EntityHelper.getInstance().onLivingUpdate(base);
+	}
+
+	@Override
+	public void onUpdate() {
+		Modchu_EntityHelper.getInstance().onUpdate(base);
+	}
+
+	@Override
+	public boolean isDamageInvincible() {
+		return Modchu_EntityHelper.getInstance().isDamageInvincible(base);
+	}
+
+	@Override
+	public boolean startRiding(Object entity, boolean force) {
+		return Modchu_EntityHelper.getInstance().startRiding(base, entity, force);
+	}
+
+	@Override
+	public boolean canBeRidden(Object entity) {
+		return Modchu_EntityHelper.getInstance().canBeRidden(base, entity);
+	}
+
+	@Override
+	public Object getRidingEntity2() {
+		return Modchu_EntityHelper.getInstance().getRidingEntity2(base);
+	}
+
+	@Override
+	public boolean isRiding2() {
+		return Modchu_EntityHelper.getInstance().isRiding2(base);
+	}
+
+	@Override
+	public void updateRidden2() {
+		Modchu_EntityHelper.getInstance().updateRidden2(base);
+	}
+
+	@Override
+	public int getRidingEntityID() {
+		return Modchu_EntityHelper.getInstance().getRidingEntityID(base);
+	}
+
+	@Override
+	public int getTempIsRiding() {
+		return Modchu_EntityHelper.getInstance().getTempIsRiding(base);
+	}
+
+	@Override
+	public void setTempIsRiding(int i) {
+		Modchu_EntityHelper.getInstance().setTempIsRiding(base, i);
+	}
+
+	@Override
+	public int getDamageInvincibleCount() {
+		return Modchu_CastHelper.Int(Modchu_EntityHelper.getInstance().getData(base, "damageInvincibleCount"), 0);
+	}
+
+	@Override
+	public void setDamageInvincibleCount(int i) {
+		Modchu_EntityHelper.getInstance().setData(base, "damageInvincibleCount", i);
+	}
+
+	@Override
+	public Object getFreeVariable(String s) {
+		return Modchu_EntityHelper.getInstance().getData(base, s);
+	}
+
+	@Override
+	public void setFreeVariable(String s, Object o) {
+		Modchu_EntityHelper.getInstance().setData(base, s, o);
+	}
+
+	@Override
+	public int getEntityId() {
+		return base.supergetEntityId();
+	}
+
+	@Override
+	public void setEntityId(int p_145769_1_) {
+		base.supersetEntityId(p_145769_1_);
 	}
 
 	@Override
@@ -72,11 +175,6 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void onUpdate() {
-		base.superonUpdate();
-	}
-
-	@Override
 	public int getMaxInPortalTime() {
 		return base.supergetMaxInPortalTime();
 	}
@@ -118,7 +216,13 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 
 	@Override
 	public boolean startRiding(Object entity) {
+		//Modchu_Debug.mDebug("Modchu_EntityPlayerMasterBasis superstartRiding old entity="+entity);
 		return base.superstartRiding(entity);
+	}
+
+	@Override
+	public void dismountRidingEntity2() {
+		base.superdismountRidingEntity();
 	}
 
 	@Override
@@ -134,11 +238,6 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	@Override
 	public void updateEntityActionState() {
 		base.superupdateEntityActionState();
-	}
-
-	@Override
-	public void onLivingUpdate() {
-		base.superonLivingUpdate();
 	}
 
 	@Override
@@ -163,7 +262,7 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 
 	@Override
 	public void awardKillScore(Object entity, int par2) {
-		base.superAwardKillScore(entity, par2);
+		base.superawardKillScore(entity, par2);
 	}
 
 	@Override
@@ -254,11 +353,6 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	@Override
 	public void resetHeight() {
 		base.superresetHeight();
-	}
-
-	@Override
-	public boolean attackEntityFrom(Object damageSource, float par2) {
-		return base.superattackEntityFrom(damageSource, par2);
 	}
 
 	@Override
@@ -412,7 +506,7 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public void addChatMessage(String par1Str) {
+	public void sendMessage(String par1Str) {
 		base.supersendMessage(par1Str);
 	}
 
@@ -1367,11 +1461,6 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	}
 
 	@Override
-	public boolean isRiding() {
-		return base.superisRiding();
-	}
-
-	@Override
 	public boolean isSneaking() {
 		return base.superisSneaking();
 	}
@@ -1569,6 +1658,326 @@ public class Modchu_EntityPlayerMasterBasis implements Modchu_IEntityPlayerMaste
 	@Override
 	public void setPositionCorrection(double par1, double par3, double par5) {
 		base.supersetPositionCorrection(par1, par3, par5);
+	}
+
+	@Override
+	public boolean func_71066_bF() {
+		return base.superfunc_71066_bF();
+	}
+
+	@Override
+	public void updateCloak() {
+		base.superupdateCloak();
+	}
+
+	@Override
+	public void copyPlayer(Object entityplayer) {
+		base.supercopyPlayer(entityplayer);
+	}
+
+	@Override
+	public void copyInventory(Object inventoryplayer) {
+		base.supercopyInventory(inventoryplayer);
+	}
+
+	@Override
+	public Float getHealth() {
+		return base.supergetHealth();
+	}
+
+	@Override
+	public boolean canPickUpLoot() {
+		return base.supercanPickUpLoot();
+	}
+
+	@Override
+	public Object getTranslator() {
+		return base.supergetTranslator();
+	}
+
+	@Override
+	public String translateString(String par1Str, Object... par2ArrayOfObj) {
+		return base.supertranslateString(par1Str, par2ArrayOfObj);
+	}
+
+	@Override
+	public int func_96121_ay() {
+		return base.superfunc_96121_ay();
+	}
+
+	@Override
+	public Object getLookHelper() {
+		return base.supergetLookHelper();
+	}
+
+	@Override
+	public Object getMoveHelper() {
+		return base.supergetMoveHelper();
+	}
+
+	@Override
+	public Object getJumpHelper() {
+		return base.supergetJumpHelper();
+	}
+
+	@Override
+	public Object getNavigator() {
+		return base.supergetNavigator();
+	}
+
+	@Override
+	public Object getEntitySenses() {
+		return base.supergetEntitySenses();
+	}
+
+	@Override
+	public Object getLastAttackingEntity() {
+		return base.supergetLastAttackingEntity();
+	}
+
+	@Override
+	public void setLastAttackingEntity(Object entity) {
+		base.supersetLastAttackingEntity(entity);
+	}
+
+	@Override
+	public Object getAttackTarget() {
+		return base.supergetAttackTarget();
+	}
+
+	@Override
+	public void setAttackTarget(Object entityLiving) {
+		base.supersetAttackTarget(entityLiving);
+	}
+
+	@Override
+	public void dropLoot() {
+		base.superdropLoot();
+	}
+
+	@Override
+	public void func_82162_bC() {
+		base.superfunc_82162_bC();
+	}
+
+	@Override
+	public boolean canCurrentToolHarvestBlock(int par1, int par2, int par3) {
+		return base.supercanCurrentToolHarvestBlock(par1, par2, par3);
+	}
+
+	@Override
+	public boolean func_94062_bN() {
+		return base.superfunc_94062_bN();
+	}
+
+	@Override
+	public void alertWolves(Object entityLiving, boolean par2) {
+		base.superalertWolves(entityLiving, par2);
+	}
+
+	@Override
+	public boolean canAttackClass(Class par1Class) {
+		return base.supercanAttackClass(par1Class);
+	}
+
+	@Override
+	public void eatGrassBonus() {
+		base.supereatGrassBonus();
+	}
+
+	@Override
+	public boolean isWithinHomeDistanceCurrentPosition() {
+		return base.superisWithinHomeDistanceCurrentPosition();
+	}
+
+	@Override
+	public boolean isWithinHomeDistance(int par1, int par2, int par3) {
+		return base.superisWithinHomeDistance(par1, par2, par3);
+	}
+
+	@Override
+	public void setHomeArea(int par1, int par2, int par3, int par4) {
+		base.supersetHomeArea(par1, par2, par3, par4);
+	}
+
+	@Override
+	public Object getHomePosition() {
+		return base.supergetHomePosition();
+	}
+
+	@Override
+	public float getMaximumHomeDistance() {
+		return base.supergetMaximumHomeDistance();
+	}
+
+	@Override
+	public void detachHome() {
+		base.superdetachHome();
+	}
+
+	@Override
+	public boolean hasHome() {
+		return base.superhasHome();
+	}
+
+	@Override
+	public String getTexture() {
+		return base.supergetTexture();
+	}
+
+	@Override
+	public int getTalkInterval() {
+		return base.supergetTalkInterval();
+	}
+
+	@Override
+	public void playLivingSound() {
+		base.superplayLivingSound();
+	}
+
+	@Override
+	public void spawnExplosionParticle() {
+		base.superspawnExplosionParticle();
+	}
+
+	@Override
+	public void setEntityHealth(int par1) {
+		base.supersetEntityHealth(par1);
+	}
+
+	@Override
+	public String getAmbientSound() {
+		return base.supergetAmbientSound();
+	}
+
+	@Override
+	public int getDropItemId() {
+		return base.supergetDropItemId();
+	}
+
+	@Override
+	public void setMoveForward(float par1) {
+		base.supersetMoveForward(par1);
+	}
+
+	@Override
+	public boolean canDespawn() {
+		return base.supercanDespawn();
+	}
+
+	@Override
+	public void despawnEntity() {
+		base.superdespawnEntity();
+	}
+
+	@Override
+	public int getVerticalFaceSpeed() {
+		return base.supergetVerticalFaceSpeed();
+	}
+
+	@Override
+	public void faceEntity(Object entity, float par2, float par3) {
+		base.superfaceEntity(entity, par2, par3);
+	}
+
+	@Override
+	public boolean getCanSpawnHere() {
+		return base.supergetCanSpawnHere();
+	}
+
+	@Override
+	public float getRenderSizeModifier() {
+		return base.supergetRenderSizeModifier();
+	}
+
+	@Override
+	public int getMaxSpawnedInChunk() {
+		return base.supergetMaxSpawnedInChunk();
+	}
+
+	@Override
+	public float getSpeedModifier() {
+		return base.supergetSpeedModifier();
+	}
+
+	@Override
+	public int getMaxFallHeight() {
+		return base.supergetMaxFallHeight();
+	}
+
+	@Override
+	public void onInitialSpawn(Object object, Object object2) {
+		base.superonInitialSpawn(object, object2);
+	}
+
+	@Override
+	public boolean canBeSteered() {
+		return base.supercanBeSteered();
+	}
+
+	@Override
+	public void func_94058_c(String par1Str) {
+		base.superfunc_94058_c(par1Str);
+	}
+
+	@Override
+	public String func_94057_bL() {
+		return base.superfunc_94057_bL();
+	}
+
+	@Override
+	public boolean func_94056_bM() {
+		return base.superfunc_94056_bM();
+	}
+
+	@Override
+	public void setNoAI(boolean par1) {
+		base.supersetNoAI(par1);
+	}
+
+	@Override
+	public void func_96120_a(int par1, float par2) {
+		base.superfunc_96120_a(par1, par2);
+	}
+
+	@Override
+	public void setCanPickUpLoot(boolean par1) {
+		base.supersetCanPickUpLoot(par1);
+	}
+
+	@Override
+	public boolean isNoDespawnRequired() {
+		return base.superisNoDespawnRequired();
+	}
+
+	@Override
+	public boolean addNotRiddenEntityID(Object nBTTagCompound) {
+		return base.superaddNotRiddenEntityID(nBTTagCompound);
+	}
+
+	@Override
+	public boolean addEntityID(Object nBTTagCompound) {
+		return base.superaddEntityID(nBTTagCompound);
+	}
+
+	@Override
+	public boolean interact(Object entityPlayer) {
+		return base.superinteract(entityPlayer);
+	}
+
+	@Override
+	public void unmountEntity(Object entity) {
+		base.superunmountEntity(entity);
+	}
+
+	@Override
+	public float func_82146_a(Object explosion, Object world, int par3, int par4, int par5, Object block) {
+		return base.superfunc_82146_a(explosion, world, par3, par4, par5, block);
+	}
+
+	@Override
+	public boolean func_96091_a(Object explosion, Object world, int par3, int par4, int par5, int par6, float par7) {
+		return base.superfunc_96091_a(explosion, world, par3, par4, par5, par6, par7);
 	}
 
 }

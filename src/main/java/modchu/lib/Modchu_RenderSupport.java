@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.IntBuffer;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -32,7 +33,7 @@ public class Modchu_RenderSupport {
 	}
 /*
 	public void bindTexture(Object resourceLocation) {
-		//Modchu_Debug.mDebug("Modchu_RenderEngine bindTexture resourceLocation="+resourceLocation);
+		//Modchu_Debug.mDebug("Modchu_RenderSupport bindTexture resourceLocation="+resourceLocation);
 		if (resourceLocation instanceof String) bindTexture(Modchu_CastHelper.String(resourceLocation));
 		else bindTexture(getResourceLocationString(resourceLocation));
 	}
@@ -42,24 +43,37 @@ public class Modchu_RenderSupport {
 	}
 */
 	public void bindBufferedImage(BufferedImage image) {
+		bindBufferedImage(image, null);
+	}
+
+	public void bindBufferedImage(BufferedImage image, Object resourceLocation) {
 		if (image != null); else {
-			Modchu_Debug.lDebug("Modchu_RenderEngine bindBufferedImage s == null !!");
+			//Modchu_Debug.lDebug("Modchu_RenderSupport bindBufferedImage s == null !!");
 			return;
 		}
 		int glTextureId = bindBufferedImageMap.containsKey(image) ? bindBufferedImageMap.get(image) : -1;
-		//Modchu_Debug.lDebug("Modchu_RenderEngine 1 glTextureId="+glTextureId);
+		//Modchu_Debug.lDebug("Modchu_RenderSupport 1 glTextureId="+glTextureId);
 		if (glTextureId == -1) {
 			int version = Modchu_Main.getMinecraftVersion();
-			glTextureId = version > 159 ? Modchu_AS.getInt("TextureUtil", Modchu_Main.isForge ? "glGenTextures" : "func_110996_a") : GL11.glGenTextures();
-			//Modchu_Debug.lDebug("Modchu_RenderEngine 2 glTextureId="+glTextureId);
 			boolean b = false;
 			if (version > 159) {
+				glTextureId = version > 159 ? Modchu_AS.getInt("TextureUtil", Modchu_Main.isForge ? "glGenTextures" : "func_110996_a") :
+					Modchu_AS.getInt("GLAllocation", "generateTextureNames");
+				//Modchu_Debug.lDebug("Modchu_RenderSupport 2 glTextureId="+glTextureId);
 				b = Modchu_AS.set("TextureUtil", "uploadTextureImageAllocate", new Class[]{ int.class, BufferedImage.class, boolean.class, boolean.class }, new Object[]{ glTextureId, image, false, false });
 			} else {
 				Object renderEngine = Modchu_AS.get(Modchu_AS.minecraftGetTextureManager);
-				b = Modchu_AS.set("RenderEngine", "setupTextureExt", new Class[]{ BufferedImage.class, int.class, boolean.class, boolean.class }, renderEngine, new Object[]{ image, glTextureId, false, false });
+				glTextureId = Modchu_AS.getInt("RenderEngine", "allocateAndSetupTexture", new Class[]{ BufferedImage.class }, renderEngine, new Object[]{ image });
+				if (glTextureId != -1
+						&& resourceLocation != null) {
+					HashMap textureMap = Modchu_AS.getHashMap("RenderEngine", "textureMap", renderEngine);
+					if (textureMap != null); else textureMap = new HashMap();
+					String s = resourceLocation.toString();
+					textureMap.put(s, glTextureId);
+					//Modchu_Debug.lDebug("Modchu_RenderSupport 3 resourceLocation.toString()="+resourceLocation.toString());
+				}
 			}
-			//Modchu_Debug.lDebug("Modchu_RenderEngine 3 b="+b);
+			//Modchu_Debug.lDebug("Modchu_RenderSupport 4 b="+b);
 			bindBufferedImageMap.put(image, glTextureId);
 		} else {
 			Modchu_GlStateManager.bindTexture(glTextureId);
@@ -74,22 +88,22 @@ public class Modchu_RenderSupport {
 	}
 
 	public int getTexture(String s) {
-		//Modchu_Debug.mDebug("Modchu_RenderEngine getTexture s="+s);
+		//Modchu_Debug.mDebug("Modchu_RenderSupport getTexture s="+s);
 		if (s != null
 				&& !s.isEmpty()); else return -1;
-		//Modchu_Debug.mDebug("Modchu_RenderEngine getTexture 1");
+		//Modchu_Debug.mDebug("Modchu_RenderSupport getTexture 1");
 		int i = textureMap.containsKey(s) ? textureMap.get(s) : -1;
 
 		if (i > -1) {
 			//if (i != boundTexture)
-			//Modchu_Debug.mDebug("Modchu_RenderEngine getTexture i > -1 return i="+i);
+			//Modchu_Debug.mDebug("Modchu_RenderSupport getTexture i > -1 return i="+i);
 			return i;
 		} else {
-			//Modchu_Debug.mDebug("Modchu_RenderEngine getTexture 2");
+			//Modchu_Debug.mDebug("Modchu_RenderSupport getTexture 2");
 			String s0 = s;
 			int generateDisplayList = Modchu_AS.getInt(Modchu_AS.gLAllocationGenerateDisplayLists, displayListsNumber);
 			//int generateDisplayList = textureMap.size();
-			//Modchu_Debug.mDebug("Modchu_RenderEngine getTexture generateDisplayList="+generateDisplayList);
+			//Modchu_Debug.mDebug("Modchu_RenderSupport getTexture generateDisplayList="+generateDisplayList);
 			try {
 				boolean var9 = s0.startsWith("%blur%");
 				if (var9) s0 = s0.substring(6);
@@ -97,7 +111,7 @@ public class Modchu_RenderSupport {
 				if (var6) s0 = s0.substring(7);
 
 				InputStream inputStream = getClass().getResourceAsStream(s0);
-				//Modchu_Debug.mDebug("Modchu_RenderEngine getTexture inputStream="+inputStream);
+				//Modchu_Debug.mDebug("Modchu_RenderSupport getTexture inputStream="+inputStream);
 				if (inputStream == null) {
 					setupTextureExt(missingTextureImage, generateDisplayList, var9, var6);
 				} else {
@@ -109,7 +123,7 @@ public class Modchu_RenderSupport {
 				setupTexture(missingTextureImage, generateDisplayList);
 				textureMap.put(s, generateDisplayList);
 			}
-			//Modchu_Debug.mDebug("Modchu_RenderEngine getTexture ok return.");
+			//Modchu_Debug.mDebug("Modchu_RenderSupport getTexture ok return.");
 			return generateDisplayList;
 		}
 	}
@@ -142,11 +156,11 @@ public class Modchu_RenderSupport {
 			GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
 		}
 
-		//Modchu_Debug.mDebug("Modchu_RenderEngine setupTextureExt bufferedImage="+bufferedImage);
+		//Modchu_Debug.mDebug("Modchu_RenderSupport setupTextureExt bufferedImage="+bufferedImage);
 		int width = bufferedImage.getWidth();
 		int height = bufferedImage.getHeight();
-		//Modchu_Debug.mDebug("Modchu_RenderEngine setupTextureExt width="+width);
-		//Modchu_Debug.mDebug("Modchu_RenderEngine setupTextureExt height="+height);
+		//Modchu_Debug.mDebug("Modchu_RenderSupport setupTextureExt width="+width);
+		//Modchu_Debug.mDebug("Modchu_RenderSupport setupTextureExt height="+height);
 		int[] var7 = new int[width * height];
 		var7 = bufferedImage.getRGB(0, 0, width, height, var7, 0, width);
 
@@ -181,14 +195,14 @@ public class Modchu_RenderSupport {
 		if (Modchu_Main.getMinecraftVersion() < 160) return Modchu_CastHelper.String(resourceLocation);
 		String resourceDomain = Modchu_AS.getString(Modchu_AS.resourceLocationGetResourceDomain, resourceLocation);
 		String resourcePath = Modchu_AS.getString(Modchu_AS.resourceLocationGetResourcePath, resourceLocation);
-		//Modchu_Debug.mDebug("Modchu_RenderEngine getResourceLocationString resourcePath="+resourcePath);
+		//Modchu_Debug.mDebug("Modchu_RenderSupport getResourceLocationString resourcePath="+resourcePath);
 		String s = Modchu_Main.getMinecraftVersion() > 169 ? resourcePath : Modchu_Main.lastIndexProcessing(resourcePath, ":");
 		if (s != null
 				&& s.indexOf("assets/") < 0) {
 			StringBuilder sb = new StringBuilder().append(resourceDomain != null ? "/assets/" +resourceDomain+"/" : "/assets/minecraft/");
 			s = sb.append(s).toString();
 		}
-		//Modchu_Debug.mDebug("Modchu_RenderEngine getResourceLocationString s="+s);
+		//Modchu_Debug.mDebug("Modchu_RenderSupport getResourceLocationString s="+s);
 		return s;
 	}
 

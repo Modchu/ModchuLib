@@ -3,6 +3,8 @@ package modchu.lib;
 import java.util.Random;
 
 public interface Modchu_IEntityLivingMaster extends Modchu_IEntityLivingBaseMaster {
+	public boolean isOnLivingUpdateCancel();
+
 	public Object getLookHelper();
 	public Object getMoveHelper();
 	public Object getJumpHelper();

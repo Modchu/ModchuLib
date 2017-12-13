@@ -2,15 +2,19 @@ package modchu.lib.forge.mc152;
 
 import java.util.HashMap;
 
+import modchu.lib.Modchu_AS;
+import modchu.lib.Modchu_EntityAISupport;
 import modchu.lib.Modchu_IEntityAIWander;
 import modchu.lib.Modchu_IEntityAIWanderMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.ai.EntityAIWander;
 
 public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEntityAIWander {
 	public Modchu_IEntityAIWanderMaster master;
+	public EntityCreature entity;
 	private boolean enabled;
+	private Object water;
 
 	public Modchu_EntityAIWander(HashMap<String, Object> map) {
 		super((EntityCreature)map.get("Object"), (Float)map.get("Float"));
@@ -19,6 +23,15 @@ public class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEnt
 		//Modchu_Debug.lDebug("Modchu_EntityAIWander init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAIWanderMaster ? (Modchu_IEntityAIWanderMaster) instance : null;
+		setEnabled(true);
+		entity = (EntityCreature) map.get("Object");
+		int version = Modchu_Main.getMinecraftVersion();
+		water = Modchu_AS.get("Material", version > 189 ? "WATER" : "water");
+	}
+
+	@Override
+	public boolean setMoveLandPotision() {
+		return Modchu_EntityAISupport.setMoveLandPotision(this, entity, water);
 	}
 
 	@Override

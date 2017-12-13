@@ -80,6 +80,10 @@ public class Modchu_FileManager {
 		return master != null ? master.classNameProcessing(fname) : base.classNameProcessing(fname);
 	}
 
+	public static String textureNameProcessing(String fname) {
+		return master != null ? master.textureNameProcessing(fname) : base.textureNameProcessing(fname);
+	}
+
 	public static ZipFile getZipFile(Class c) {
 		return master != null ? master.getZipFile(c) : base.getZipFile(c);
 	}
@@ -238,6 +242,10 @@ public class Modchu_FileManager {
 		return master != null ? master.getClassLoaderResourcesList(c) : base.getClassLoaderResourcesList(c);
 	}
 
+	public static LinkedList<File> getClassLoaderResourcesFileList(Class c) {
+		return master != null ? master.getClassLoaderResourcesFileList(c) : base.getClassLoaderResourcesFileList(c);
+	}
+
 	public static String[] getSystemClassPaths() {
 		return master != null ? master.getSystemClassPaths() : base.getSystemClassPaths();
 	}
@@ -302,6 +310,15 @@ public class Modchu_FileManager {
 
 	public static InputStream getModInputStream(Object o) {
 		return master != null ? master.getModInputStream(o) : base.getModInputStream(o);
+	}
+
+	public static void addModResourcePack(File file) {
+		if (master != null) master.addModResourcePack(file);
+		else base.addModResourcePack(file);
+	}
+
+	public static List<String> getOldResourceDirList() {
+		return master != null ? master.getOldResourceDirList() : base.getOldResourceDirList();
 	}
 
 }

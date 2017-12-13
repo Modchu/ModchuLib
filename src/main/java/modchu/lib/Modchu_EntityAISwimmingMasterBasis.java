@@ -2,7 +2,7 @@ package modchu.lib;
 
 import java.util.HashMap;
 
-public class Modchu_EntityAISwimmingMasterBasis implements Modchu_IEntityAIBaseMaster {
+public class Modchu_EntityAISwimmingMasterBasis implements Modchu_IEntityAISwimmingMaster {
 	public Modchu_IEntityAISwimming base;
 
 	public Modchu_EntityAISwimmingMasterBasis(HashMap<String, Object> map) {

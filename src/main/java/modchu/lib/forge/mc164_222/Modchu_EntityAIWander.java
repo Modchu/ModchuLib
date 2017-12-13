@@ -2,27 +2,36 @@ package modchu.lib.forge.mc164_222;
 
 import java.util.HashMap;
 
-import modchu.lib.Modchu_IContainerPlayerMaster;
-import modchu.lib.Modchu_IEntityAIBase;
-import modchu.lib.Modchu_IEntityAIBaseMaster;
+import modchu.lib.Modchu_AS;
+import modchu.lib.Modchu_EntityAISupport;
 import modchu.lib.Modchu_IEntityAIWander;
 import modchu.lib.Modchu_IEntityAIWanderMaster;
 import modchu.lib.Modchu_Main;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.ai.EntityAIWander;
 
 public abstract class Modchu_EntityAIWander extends EntityAIWander implements Modchu_IEntityAIWander {
 	public Modchu_IEntityAIWanderMaster master;
+	public EntityCreature entity;
 	private boolean enabled;
+	private Object water;
 
 	public Modchu_EntityAIWander(HashMap<String, Object> map) {
-		super((EntityCreature)map.get("Object"), (Float)map.get("Double"));
+		super((EntityCreature)map.get("Object"), (Double)map.get("Double"));
 		map.put("base", this);
 		Object instance = Modchu_Main.newModchuCharacteristicInstance(map);
 		//Modchu_Debug.lDebug("Modchu_EntityAIWander init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAIWanderMaster ? (Modchu_IEntityAIWanderMaster) instance : null;
+		entity = (EntityCreature) map.get("Object");
+		setEnabled(true);
+		int version = Modchu_Main.getMinecraftVersion();
+		water = Modchu_AS.get("Material", version > 189 ? "WATER" : "water");
+	}
+
+	@Override
+	public boolean setMoveLandPotision() {
+		return Modchu_EntityAISupport.setMoveLandPotision(this, entity, water);
 	}
 
 	@Override

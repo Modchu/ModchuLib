@@ -2804,7 +2804,7 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 
 	@Override
 	public void entitySetVelocity(Object entity, double d, double d1, double d2) {
-		((Entity) entity).setVelocity(d, d1, d2);
+		if (!Modchu_Main.isServer) ((Entity) entity).setVelocity(d, d1, d2);
 	}
 
 	@Override
@@ -2948,13 +2948,8 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 	}
 
 	@Override
-	public float entityLivingBaseMoveForward(Object entityplayer) {
-		return ((EntityLivingBase) entityplayer).moveForward;
-	}
-
-	@Override
-	public float entityLivingBaseMoveStrafing(Object entityplayer) {
-		return ((EntityLivingBase) entityplayer).moveStrafing;
+	public float entityLivingBaseMoveForward(Object entityLivingBase) {
+		return ((EntityLivingBase) entityLivingBase).moveForward;
 	}
 
 	@Override
@@ -3452,6 +3447,11 @@ public abstract class Modchu_ASMaster extends Modchu_ASBasis {
 		}
 		InventoryPlayer inventoryPlayer = (InventoryPlayer) entityplayerORInventory;
 		return inventoryPlayer.armorInventory;
+	}
+
+	@Override
+	public void modelRendererAddChild(Object modelRenderer, Object modelRenderer1) {
+		((ModelRenderer) modelRenderer).addChild((ModelRenderer) modelRenderer1);
 	}
 
 }

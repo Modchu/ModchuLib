@@ -19,6 +19,15 @@ public abstract class Modchu_EntityTameable extends modchu.lib.forge.mc190_222.M
 		super(map);
 	}
 
+	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
+		super.setPositionAndRotationDirect(par1, par3, par5, par7, par8, par9, true);
+	}
+
+	@Override
+	public void superSetPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9) {
+		super.setPositionAndRotationDirect(par1, par3, par5, par7, par8, par9, true);
+	}
+
 	@Override
 	protected void handleJumpWater() {
 		if (master != null) master.handleJumpWater();

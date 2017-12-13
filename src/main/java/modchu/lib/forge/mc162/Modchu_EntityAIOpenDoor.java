@@ -19,6 +19,7 @@ public class Modchu_EntityAIOpenDoor extends EntityAIOpenDoor implements Modchu_
 		//Modchu_Debug.lDebug("Modchu_EntityAIOpenDoor init instance="+instance);
 		master = instance != null
 				&& instance instanceof Modchu_IEntityAIOpenDoorMaster ? (Modchu_IEntityAIOpenDoorMaster) instance : null;
+		setEnabled(true);
 	}
 
 	@Override

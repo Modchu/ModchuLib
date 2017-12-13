@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 public interface Modchu_IDataWatcher {
+	public int getEntityDataManagerEntriesCount();
+
 	public <T> void superAddObject(int id, T object);
 	public void superAddObjectByDataType(int id, int type);
 	public byte superGetWatchableObjectByte(int id);

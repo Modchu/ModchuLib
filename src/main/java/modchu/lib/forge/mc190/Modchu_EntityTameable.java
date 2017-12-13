@@ -49,6 +49,15 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc190_222.Modchu_Ent
 		((Modchu_IEntityDataManager) dataWatcher).setDataWatcherWatchableObject(i, o);
 	}
 
+	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
+		super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9, true);
+	}
+
+	@Override
+	public void superSetPositionAndRotationDirect(double par1, double par3, double par5, float par7, float par8, int par9) {
+		super.setPositionAndRotation2(par1, par3, par5, par7, par8, par9, true);
+	}
+
 	@Override
 	protected void updateAITick() {
 		if (master != null) master.handleJumpWater();
@@ -630,10 +639,6 @@ public class Modchu_EntityTameable extends modchu.lib.forge.mc190_222.Modchu_Ent
 	@Override
 	public double superFollowLeashSpeed() {
 		return 0.0D;
-	}
-
-	@Override
-	public void superSetMoveForward(float p_191989_1_) {
 	}
 
 }

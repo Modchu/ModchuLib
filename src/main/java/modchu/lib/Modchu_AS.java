@@ -3533,7 +3533,7 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	@Override
 	protected Object getBlock(String s) {
-		Modchu_Debug.mDebug("Modchu_AS getBlock String master="+master);
+		//Modchu_Debug.mDebug("Modchu_AS getBlock String master="+master);
 		return master != null ? master.getBlock(s) : super.getBlock(s);
 	}
 
@@ -8689,6 +8689,14 @@ public class Modchu_AS extends Modchu_ASAlmighty {
 
 	public Object superEntityLivingOnInitialSpawn(Object entityLiving, Object difficultyInstance, Object iEntityLivingData) {
 		return super.entityLivingOnInitialSpawn(entityLiving, difficultyInstance, iEntityLivingData);
+	}
+
+	public void modelRendererAddChild(Object modelRenderer, Object modelRenderer1) {
+		if (master != null) master.modelRendererAddChild(modelRenderer, modelRenderer1);
+	}
+
+	public void superModelRendererAddChild(Object modelRenderer, Object modelRenderer1) {
+		super.modelRendererAddChild(modelRenderer, modelRenderer1);
 	}
 
 }
