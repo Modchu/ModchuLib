@@ -762,6 +762,8 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 
 	private boolean checkModClassName(String cn) {
 		boolean debug = false;
+		if (Modchu_Main.modEnabledMap != null
+				&& Modchu_Main.modEnabledMap.size() > 0); else return true;
 		String temp = cn;
 		int i1 = temp.indexOf(".");
 		if (i1 < 0) {
@@ -772,7 +774,8 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		}
 		boolean b = false;
 		while (true) {
-			if (Modchu_Main.modEnabledMap.containsKey(temp)) {
+			if (Modchu_Main.modEnabledMap != null
+					&& Modchu_Main.modEnabledMap.containsKey(temp)) {
 				b = Modchu_Main.modEnabledMap.get(temp);
 				if (debug) Modchu_Debug.Debug("Modchu_FileManagerBase checkModClassName temp="+temp+" b="+b);
 				break;
@@ -1869,6 +1872,8 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		String s = ".zip";
 		String s1 = ".jar";
 		List<File> list = getDirFileList(dirFile);
+		if (list != null
+				&& !list.isEmpty())
 		for (File file : list) {
 			String path = file.getPath();
 			if (path.lastIndexOf(s) < 0
@@ -1919,6 +1924,7 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 	@Override
 	public List<File> getDirFileList(File dir) {
 		boolean debug = false;
+		if (dir != null); else return null;
 		String path = dir.getName();
 		List<File> fileList1 = getFileList(path);
 		if (fileList1 != null
@@ -1926,17 +1932,25 @@ public class Modchu_FileManagerBase implements Modchu_IFileManagerMaster {
 		boolean versionNameCheck = path.equalsIgnoreCase(Modchu_Main.modsDir.getAbsolutePath());
 		fileList1 = new LinkedList();
 		if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getDirFileList path="+path);
-		for (File file : dir.listFiles()) {
+		File[] files = dir.listFiles();
+		if (files != null
+				&& files.length > 0); else return null;
+		for (File file : files) {
 			if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getDirFileList file.getAbsolutePath()="+file.getAbsolutePath());
-			if (file.isDirectory()
-					&& (versionNameCheck
+			boolean flag = false;
+			if (file.isDirectory()) {
+				if ((versionNameCheck
 					&& !Modchu_Main.ngVersionName(file.getName())
 					| !versionNameCheck)) {
-				fileList1.add(file);
-				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getDirFileList 1 list.add.");
+					flag = true;
+					if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getDirFileList 1 flag = true");
+				}
 			} else {
+				flag = true;
+				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getDirFileList 2 flag = true");
+			}
+			if (flag) {
 				fileList1.add(file);
-				if (debug) Modchu_Debug.lDebug("Modchu_FileManagerBase getDirFileList 2 list.add.");
 			}
 		}
 		fileList.put(path, fileList1);

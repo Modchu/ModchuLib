@@ -26,7 +26,7 @@ public abstract class Modchu_EntityAIWander extends EntityAIWander implements Mo
 		entity = (EntityCreature) map.get("Object");
 		setEnabled(true);
 		int version = Modchu_Main.getMinecraftVersion();
-		water = Modchu_AS.get("Material", version > 189 ? "WATER" : "water");
+		water = Modchu_AS.get("Material", version > 190 ? "WATER" : "water");
 	}
 
 	@Override
