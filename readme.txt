@@ -1,1 +1,2 @@
-v9からmasterのファイルだけでなくバージョン別のファイルソースも必要。
+jar file dowmload url
+https://www.curseforge.com/minecraft/mc-mods/modchu_modchulib
